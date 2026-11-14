@@ -67,10 +67,17 @@ Blender- oder Programmierkenntnisse.
 | Phase | Inhalt | Ergebnis |
 |---|---|---|
 | A (jetzt) | Kommandozeile, Claude als Operator, Objekt Wimmergasse | erstes Bildpaket, Prozess gelernt |
-| B | Web-Oberfläche Kern: Projekte, Intake, Shotlist, Render-Queue, Galerie, Freigabe | Team kann ohne Code arbeiten |
+| B (Kern steht, 14.11.2026) | Web-Oberfläche Kern: Projekte, Intake, Shotlist, Render-Queue, Galerie, Freigabe | Team kann ohne Code arbeiten |
 | C | Fassaden- und Dach-Editor mit Planüberlagerung, KI-Vorschlag aus Vektor-PDF | neues Objekt in einem Tag aufgenommen |
 | D | Innenräume: Grundriss zu Raum, Staging, BAB-Materialien, Ausblick aus dem Fenster | Wohnungsbilder |
 | E | Kamerafahrten, interaktive 360-Ansichten, Einbindung in Projekt-Websites | Bewegtbild und Web |
+
+**Stand Phase B (14.11.2026):** `immoviz.py studio` startet die lokale Oberfläche (FastAPI plus statisches
+HTML/CSS/JS im UNIO-Design, kein Build-Schritt, Code in `studio/`). Fertig: Projekte, Übersicht mit 10 Schritten
+(abgeleitet, von Hand überschreibbar), Intake-Checkliste, Shotlist-Matrix mit Thumbnails, Render-Queue (ein Job
+gleichzeitig, Vorschau ohne .blend), Galerie mit Freigabe und Kommentar, Kundenansicht mit nur freigegebenen Bildern.
+Offen für B: Anmeldung und geteilter Kundenlink, Upload im Intake, Higgsfield-Aufträge und Kosten in der Queue,
+Final-Rendering aus der Oberfläche, Export. Next.js laut Abschnitt 4 erst, wenn die Oberfläche öffentlich erreichbar wird.
 
 ## 6. Bildpaket je Objekt (Standard)
 
@@ -103,3 +110,24 @@ Nachbarabgleich gibt es kein Rendering für den Vertrieb.
 
 Erkenntnisse Wimmergasse 20 (14.11.2026): Höhen exakt laut Plan; Korrekturen an DG3 links (Terrasse statt
 Schräge), EG-Türen, Gelände (+0,79 m zur Ecke), Schrägparker, Granitpflaster, Seilleuchten, Nachbarfarben.
+
+## 8. Referenzen aus der Praxis (Instagram-Reels, 14.11.2026)
+
+**Reel 1, Plan zu Walkthrough (Claude, Blender, Seedance 2.5).** Vier Schritte: (1) echtes 3D-Modell aus dem Grundriss,
+grob reicht; (2) eine Kameralinie auf 1,5 m durch alle Räume über den Grundriss ziehen; (3) jeden Raum als Standbild
+"einfrieren" (Material-Callouts wie Sichtbeton, helle Kiefer, weißes Leinen, weiches Tageslicht), alle Räume im selben
+Stil, damit es wie ein Haus wirkt; (4) das Videomodell bekommt die Blender-Kamerafahrt als Bewegungsvorlage plus
+Start- und Endbild und folgt ihr. Kernaussage: Das Videomodell erfindet den Grundriss nie, Wände und Türen kommen aus
+dem Plan. Das ist genau unser Prinzip, nur für Innenräume in Bewegung.
+
+Übernahme bei uns (Phase E, neuer Befehl `walkthrough`): Kamerapfad je Wohnung in `wohnungen.yaml`
+(Punkte auf 1,5 m), Blender rendert die Fahrt als Clay-Video und Standbilder an jedem Raumwechsel, Higgsfield
+veredelt die Standbilder mit den Interior-Regeln (`mood_interior.md`), das Videomodell verbindet je zwei Standbilder
+mit der Clay-Fahrt als Bewegungsreferenz. Erster Kandidat: Top 35 (Dachgeschoss mit Terrassen).
+
+**Reel 2, Revit zu Projekt-Website (Claude, Revit MCP, Higgsfield).** Claude wählt aus dem 3D-Modell die besten
+Ansichten, erzeugt ein Schnittvideo (Gebäude wird Geschoss für Geschoss aufgeschnitten), schlägt Website-Entwürfe vor
+und baut sie: Luftbild bei Dämmerung, isometrischer Schnitt mit anklickbaren Wohnungen (Top-Nummer, Fläche, Preis),
+Straßenansicht. Übernahme bei uns (Phase E): Blender kann denselben Schnitt (Schnittebene je Geschoss, Wohnungen
+farbig aus den Grundrissen), daraus Schnittvideo und eine Projektseite im UNIO-Design mit Wohnungsauswahl.
+Revit brauchen wir nicht, unser Modell kommt aus `project.yaml`.

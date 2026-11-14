@@ -45,6 +45,38 @@ Blender läuft als Python-Modul ohne Oberfläche. Die erzeugte `.blend`-Datei l�
 
 Ergebnisse landen in `projects/<objekt>/renders/`.
 
+## Studio-Oberfläche
+
+Lokale Web-Oberfläche über dem Prototyp (Phase B laut `KONZEPT.md`), im UNIO-Design, hell und dunkel, bis 400 px Breite.
+
+```bash
+.venv-immoviz/bin/pip install fastapi uvicorn          # einmalig
+.venv-immoviz/bin/python immoviz/immoviz.py studio      # http://127.0.0.1:8765
+.venv-immoviz/bin/python immoviz/immoviz.py studio --dry-run   # Queue startet kein Blender (Test)
+```
+
+| Bildschirm | Inhalt |
+|---|---|
+| Projekte | alle Ordner unter `projects/` mit `project.yaml`, Fortschritt der 10 Schritte, letzte Bilder |
+| Übersicht | Status je Schritt, abgeleitet aus den Dateien; von Hand überschreibbar |
+| Intake | Checkliste aus diesem README mit Ampel und Notiz, Dateien in `quellen/`, Anfrage-Text an den Bauträger |
+| Shotlist | Matrix Motiv x Licht aus `cameras` und `lights`, Thumbnails, Knopf „Vorschau rendern“ |
+| Queue | ein Job gleichzeitig: `immoviz.py render <projekt> --cam <c> --light <l> --preview --no-blend`, Status und Log |
+| Galerie | alle Bilder und Videos unter `renders/`, Freigeben, Ablehnen, Kommentar |
+| Kundenansicht | `/kunde?p=<slug>`: nur freigegebene Bilder, Kunde kann Anmerkungen schreiben |
+
+Zuordnung in der Shotlist: Blender-Bilder nach `<slug>_<motiv>_<licht>_(vorschau|final)`, Higgsfield-Bilder in
+`renders/higgsfield/` zusätzlich über Motiv- und Lichtnamen im Dateinamen (z. B. `herbst_ecke_orbit`, `ecke_dunst_nbpro`).
+
+Datenhaltung je Projekt, `project.yaml` wird nur gelesen:
+
+- `status.json`: von Hand gesetzter Schrittstatus (alternativ optionales Feld `status: {4: annahme}` in `project.yaml`)
+- `intake.json`: Stand der Intake-Checkliste
+- `freigabe.json`: Freigabe, Ablehnung und Kommentare je Bild (Kundenkommentare mit `quelle: kunde`)
+
+Thumbnails und Job-Logs liegen in `immoviz/studio/.cache/` (nicht eingecheckt). Die Oberfläche hat noch keine
+Anmeldung: nur lokal oder im Büronetz betreiben, Kundenlink nicht öffentlich teilen.
+
 ## Neues Objekt anlegen
 
 1. Ordner `projects/<slug>/` mit `project.yaml`, `quellen/`, `data/`, `renders/` anlegen

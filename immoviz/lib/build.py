@@ -537,9 +537,19 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
 # ======================================================================= Anschliessende Nachbarn
 def build_neighbours(cfg, ctx, mats, coll, terrain):
     specs = cfg.get("neighbour_facades") or {}
+    facades = {n: K.Facade(n, tuple(v["a"]), tuple(v["b"])) for n, v in specs.items()}
+    massed = set()
     for name, sp in specs.items():
-        f = K.Facade(name, tuple(sp["a"]), tuple(sp["b"]))
+        f = facades[name]
         L = f.length
+        # Achsen und Geschosse duerfen als Regel angegeben werden: {n, margin} bzw. {z0, step, n, h, w}
+        if isinstance(sp.get("axes"), dict):
+            n_, m_ = sp["axes"]["n"], sp["axes"].get("margin", 1.2)
+            sp["axes"] = [m_ + (L - 2 * m_) * (k + 0.5) / n_ for k in range(n_)]
+        if isinstance(sp.get("rows"), dict):
+            r_ = sp["rows"]
+            first = [r_["eg"]] if r_.get("eg") else []
+            sp["rows"] = first + [{"z": r_["z0"] + k * r_["step"], "h": r_["h"], "w": r_["w"]} for k in range(r_["n"])]
         mx, my = (sp["a"][0] + sp["b"][0]) / 2, (sp["a"][1] + sp["b"][1]) / 2
         z0 = terrain(mx + f.n[0] * 2.5, my + f.n[1] * 2.5)
         H = sp["height"]
@@ -555,14 +565,18 @@ def build_neighbours(cfg, ctx, mats, coll, terrain):
         inner = K.MeshBuilder(f"nachbar_{name}_innen", ["innen_a"])
         rng = random.Random(len(name))
         # Baukoerper aller Teile, an der Fassade 0,6 m zurueckgeschnitten
+        same = [n for n, v in specs.items() if str(v["bezug"]) == str(sp["bezug"])]
         for b in ctx["buildings"]:
+            if str(sp["bezug"]) in massed:
+                break
             if str(b.get("bezug")) != str(sp["bezug"]) or b.get("klasse") != 11:
                 continue
-            poly, lines = K.clip_polygon(b["poly"], [[name, "d", ">=", 0.6]], {name: f})
+            poly, lines = K.clip_polygon(b["poly"], [[n, "d", ">=", 0.6] for n in same], facades)
             hb = b["height"]
             top_mat = "dach_flach"
             side = sp.get("upper_material") if (sp.get("upper_material") and hb > H + 1.0) else col
-            K.extrude(mass, poly, z0 - 1.5, z0 + hb, side, top_mat, "innen", lines, bottom=False)
+            K.extrude(mass, poly, z0 - 1.5, z0 + hb, side, top_mat, col, lines, bottom=False)
+        massed.add(str(sp["bezug"]))
         holes, wins = [], []
         for ri, r in enumerate(sp["rows"]):
             for ai, uc in enumerate(sp["axes"]):
@@ -582,8 +596,9 @@ def build_neighbours(cfg, ctx, mats, coll, terrain):
             K.schaufenster(fr, gl, f, d_["u"][0], d_["u"][1], z0 + d_["z"][0], z0 + d_["z"][1], 0.0)
         K.wall_with_holes(mass, f, 0.0, L, z0 - 1.5, z0 + H, 0.0, holes, col, reveal=0.28)
         for ri, ai, ua, ub, za, zb, sur in wins:
-            if sp.get("style") == "modern":
-                K.modern_window(fr, gl, f, ua, ub, za, zb, 0.0, frame_mat="rahmen_dunkel")
+            if sp.get("style") in ("modern", "plain"):
+                K.modern_window(fr, gl, f, ua, ub, za, zb, 0.0,
+                                frame_mat=sp.get("frame", "rahmen_dunkel" if sp.get("style") == "modern" else "fenster"))
             else:
                 K.kastenfenster(fr, gl, f, ua, ub, za, zb, 0.0)
             if sur:
@@ -616,6 +631,9 @@ def build_neighbours(cfg, ctx, mats, coll, terrain):
         K.box(mass, f, 0.0, L, 0.0, 0.65, z0 + H - 0.05, z0 + H, "dach_flach", skip_back=False)
         if sp.get("style") == "modern":
             K.box(mass, f, 0.0, L, -0.05, 0.6, z0 + H - 0.15, z0 + H + 0.15, "rahmen_dunkel")
+        for zb_, dep in sp.get("balcony_bands", []):
+            K.box(orn, f, -0.3, L + 0.3, -dep, 0.0, z0 + zb_ - 0.22, z0 + zb_, col + "_stuck")
+            K.box(orn, f, -0.3, L + 0.3, -dep, -dep + 0.12, z0 + zb_, z0 + zb_ + 1.0, col + "_stuck")
         for bal in sp.get("balconies", []):
             r = sp["rows"][bal["row"]]
             zf = z0 + r["z"] - 0.15

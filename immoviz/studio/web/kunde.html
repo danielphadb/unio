@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Visualisierungen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/app.css">
+<script>try{var t=localStorage.getItem("immoviz-theme");if(t&&t!=="auto")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+</head>
+<body class="kunde">
+<div class="wrap">
+  <div class="topbar">
+    <span class="brand"><span class="logo" aria-hidden="true"></span><span class="label">Visualisierung · Freigabe</span></span>
+    <div class="right"><button id="theme" class="small" type="button" aria-label="Farbthema wechseln"></button></div>
+  </div>
+  <main id="view" aria-live="polite"></main>
+  <footer><span>Unverbindliche Visualisierung. Änderungen vorbehalten.</span><span>UNIO · Raum. Technologie. Mensch.</span></footer>
+</div>
+<dialog id="dlg" aria-label="Bilddetail"></dialog>
+<script src="/common.js"></script>
+<script>
+(async () => {
+  const view = $("#view");
+  const slug = new URLSearchParams(location.search).get("p") || "";
+  if (!slug) { view.innerHTML = `<div class="empty-state"><span class="label">Hinweis</span><h2>Kein Projekt angegeben.</h2><p class="muted">Bitte den vollständigen Link verwenden.</p></div>`; return; }
+  let d;
+  try { d = await api(`/api/kunde/${encodeURIComponent(slug)}`); }
+  catch (e) { view.innerHTML = `<div class="empty-state"><span class="label">Hinweis</span><h2>Projekt nicht gefunden.</h2></div>`; return; }
+  document.title = `${d.name} · Visualisierungen`;
+  const imgs = d.medien.filter(m => m.typ === "bild"), vids = d.medien.filter(m => m.typ === "video");
+  const hero = imgs[0];
+  view.innerHTML = `
+    <div class="head" style="margin-bottom:var(--sp-7)">
+      <div class="intro"><h1>${esc(d.name)}</h1>
+        <div class="marg label"><span class="dot" aria-hidden="true"></span>${esc(d.adresse)}</div>
+        <p class="muted">Freigegebene Visualisierungen zur Abstimmung. Zu jedem Bild können Sie eine Anmerkung hinterlassen.</p></div>
+      <dl class="stamp"><div><dt>Bilder</dt><dd>${imgs.length}</dd></div><div><dt>Videos</dt><dd>${vids.length}</dd></div></dl>
+    </div>
+    ${!d.medien.length ? `<div class="empty-state"><span class="label">Noch leer</span><p class="muted">Sobald Bilder freigegeben sind, erscheinen sie hier.</p></div>` : `
+    ${hero ? `<section><div class="hero"><img src="${esc(hero.thumb)}" alt="Hauptmotiv"><div class="cap"><b>01 · Hauptmotiv.</b> Unverbindliche Visualisierung.</div></div></section>` : ""}
+    <section><div class="sechead"><div class="marg"><span class="num">01</span><span class="label">Bilder</span></div><h2>Visualisierungen</h2></div>
+      <div class="grid">${imgs.map((m, i) => `<figure><button type="button" class="media" data-i="${d.medien.indexOf(m)}" aria-label="Bild ${i + 1} öffnen"><img src="${esc(m.thumb)}" alt="Visualisierung ${i + 1}" loading="lazy"></button>
+        <figcaption><b>Bild ${pad(i + 1)}</b><span class="mono">${m.kommentare.length ? m.kommentare.length + " Anm." : ""}</span></figcaption></figure>`).join("")}</div></section>
+    ${vids.length ? `<section><div class="sechead"><div class="marg"><span class="num">02</span><span class="label">Bewegtbild</span></div><h2>Videos</h2></div>
+      <div class="grid">${vids.map(m => `<figure><video src="${esc(m.url)}" controls muted playsinline preload="metadata" style="width:100%;border-radius:12px;aspect-ratio:16/9;background:var(--placeholder)"></video></figure>`).join("")}</div></section>` : ""}`}`;
+  const dlg = $("#dlg");
+  $$("[data-i]").forEach(b => b.addEventListener("click", () => {
+    const m = d.medien[+b.dataset.i];
+    const draw = () => {
+      dlg.innerHTML = `<div style="position:relative"><button type="button" class="close small" data-close>Schließen</button><div class="dlg"><div class="view"><img src="${esc(m.url)}" alt=""></div>
+        <div class="side"><span class="label">Unverbindliche Visualisierung</span>
+          <form id="cf" style="display:grid;gap:8px"><label class="label" for="ct">Ihre Anmerkung</label><textarea id="ct"></textarea>
+          <input type="text" id="ca" placeholder="Ihr Name" aria-label="Ihr Name" style="font:400 14px var(--font-display);color:var(--text-body);background:transparent;border:0;box-shadow:inset 0 0 0 1px var(--hairline);border-radius:12px;padding:8px 12px">
+          <button class="primary" type="submit" style="justify-self:start">Anmerkung senden</button></form>
+          <ul class="comments">${m.kommentare.slice().reverse().map(k => `<li><span class="label">${esc(k.autor)} · ${esc(fmtTime(k.zeit))}</span><span>${esc(k.text)}</span></li>`).join("")}</ul></div></div></div>`;
+      $("[data-close]", dlg).addEventListener("click", () => dlg.close());
+      $("#cf", dlg).addEventListener("submit", async e => {
+        e.preventDefault();
+        const text = $("#ct").value.trim(); if (!text) return;
+        try { const r = await api(`/api/kunde/${encodeURIComponent(slug)}/kommentar`, { method: "POST", body: { rel: m.rel, kommentar: text, autor: $("#ca").value.trim() || "Kunde" } });
+          m.kommentare = r.kommentare; toast("Danke, Anmerkung gespeichert"); draw(); } catch (err) { toast(err.message); }
+      });
+    };
+    draw(); dlg.showModal();
+  }));
+})();
+</script>
+</body>
+</html>

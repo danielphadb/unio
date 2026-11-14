@@ -92,11 +92,11 @@ Bad: in der Mood nicht abgedeckt, Feinsteinzeug Greige oder Terrazzo in der Pale
 | S1 | top07_wohnkueche | Essplatz zum Kastenfenster | 28 mm, 1,35 m |
 | S2 | top07_wohnkueche_zurueck | Wohnen Gegenblick, offene Flügeltür | 28 mm, 1,25 m |
 | S3 | top07_zimmer | Schlafzimmer, Bett frontal vor Kassettenwand, Fenster seitlich | 32 mm, 1,10 m |
-| S4 | top12_kueche | Küche Nuss und Quarzit (Schrägblick, Nische nur 1,3 m tief) | 28 mm, 1,40 m |
+| S4 | top12_kueche | Küche frontal, Nuss und Quarzit (Kamera in der Kochnische) | 24 mm, 1,40 m |
 | S5 | top12_wohnen_loggia | Wohnraum mit Blick durch die Loggia-Tür | 28 mm, 1,35 m |
 | S6 | top35_dachschraege | Wohnküche unter der Schräge mit Terrassentüren | 24 mm, 1,30 m |
 | S7 | top35_wohnen_terrasse | Essplatz mit Terrassenblick über die Dächer | 28 mm, 1,35 m |
-| S8 | top35_kuecheninsel | Detail Kücheninsel, Ein-Punkt auf die Rückwand | 50 mm, 1,20 m |
+| S8 | top35_kuecheninsel | Kücheninsel, Ein-Punkt auf die Rückwand (50 mm zeigt in der Hülle nur Wand) | 35 mm, 1,20 m |
 
 Format: 3:2 quer, weil Blender-Hülle und Staging 1:1 übereinanderliegen müssen. Die Mood nennt 4:5 hoch als
 Standard; Hochformate werden als eigene Blender-Kameras ergänzt, nicht aus dem Querbild beschnitten.

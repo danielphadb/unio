@@ -5,6 +5,7 @@ Beispiele:
   python immoviz.py geo     projects/wimmergasse-20
   python immoviz.py render  projects/wimmergasse-20 --cam ecke --light golden_hour --preview
   python immoviz.py render  projects/wimmergasse-20 --cam ecke,drohne --light golden_hour,blaue_stunde
+  python immoviz.py studio  (Web-Oberfläche auf Port 8765)
 """
 from __future__ import annotations
 
@@ -39,7 +40,15 @@ def main():
     it.add_argument("--top", default="top07")
     it.add_argument("--final", action="store_true")
     it.add_argument("--cam", default="", help="nur diese Kameras, z. B. top07_zimmer,top12_kueche")
+    st = sub.add_parser("studio", help="Web-Oberfläche immoviz Studio starten (http://127.0.0.1:8765)")
+    st.add_argument("--host", default="127.0.0.1")
+    st.add_argument("--port", type=int, default=8765)
+    st.add_argument("--dry-run", action="store_true", help="Render-Queue führt nur Trockenläufe aus, kein Blender")
     a = ap.parse_args()
+    if a.cmd == "studio":
+        from studio.server import run
+        run(a.host, a.port, a.dry_run)
+        return
     pdir = Path(a.project).resolve()
 
     if a.cmd == "geo":

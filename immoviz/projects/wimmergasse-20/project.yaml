@@ -160,7 +160,7 @@ cameras:
   ecke:            {pos: [-13.0, -15.5, 1.65], target: [6.0, 7.0, 11.0], lens: 20, vertical: true}
   ecke_orbit:      {pos: [-7.57, -18.73, 1.65], target: [6.0, 7.0, 11.0], lens: 20, vertical: true}   # Endbild Video: 18 Grad um die Ecke gedreht
   ecke_tele:       {pos: [-24.0, -30.0, 1.65], target: [5.0, 6.0, 11.5], lens: 32, vertical: true}
-  drohne:          {pos: [-30.0, -36.0, 26.0], target: [6.0, 8.0, 14.0], lens: 32, vertical: true}
+  drohne:          {pos: [-40.0, -48.0, 40.0], target: [6.0, 8.0, 13.0], lens: 32, vertical: true}
   wimmergasse:     {pos: [-11.5, 42.0, 1.65], target: [0.0, 9.0, 10.5], lens: 24, vertical: true}
   stolberggasse:   {pos: [36.0, -15.0, 1.65], target: [6.0, 0.0, 11.0], lens: 24, vertical: true}
   dachgeschoss:    {pos: [-16.0, -19.0, 12.0], target: [3.0, 4.0, 21.0], lens: 35, vertical: true}
@@ -260,3 +260,120 @@ neighbour_facades:
       - {row: 4, axes: [1, 4, 7]}
       - {row: 5, axes: [2, 5, 8]}
     upper_material: zink        # zurueckgesetzter Dachaufbau bis 26,7 m dunkel
+
+  # ---- Gegenseite Wimmergasse (Street View 05/2024 bzw. 08/2023), Fassaden zeigen nach +x
+  gegenueber_w_ecke:            # Neubau-Eckhaus, beige, umlaufende Balkonbaender, Mansarde mit Gauben
+    bezug: "547116"
+    a: [-15.02, 3.24]
+    b: [-15.19, 22.06]
+    height: 16.19
+    color: "#CDBFA9"
+    stuck_color: "#DDD3C3"
+    style: modern
+    frame: rahmen_dunkel
+    axes: {n: 6, margin: 1.4}
+    rows: {eg: {z: 0.5, h: 2.6, w: 1.8}, z0: 3.9, step: 3.0, n: 4, h: 2.2, w: 1.5}
+    balcony_bands: [[3.6, 1.5], [6.6, 1.5], [9.6, 1.5], [12.6, 1.5]]
+    roof: {type: blech, rise: 3.2, depth: 3.5}
+  gegenueber_w_29:              # Gruenderzeit, greige, reicher Stuck, rosa Sockel, Tor am Nordende
+    bezug: "009481"
+    a: [-15.20, 26.27]
+    b: [-15.44, 39.33]
+    height: 15.97
+    color: "#B5A389"
+    stuck_color: "#C9BBA2"
+    style: gruenderzeit
+    axes: {n: 6, margin: 1.2}
+    rows:
+      - {z: 1.4, h: 1.9, w: 1.05, surround: fasche}
+      - {z: 4.6, h: 2.0, w: 1.05, surround: aedikula}
+      - {z: 7.7, h: 2.0, w: 1.05, surround: fasche_verdachung}
+      - {z: 10.7, h: 1.9, w: 1.05, surround: fasche_verdachung}
+      - {z: 13.6, h: 1.5, w: 0.95, surround: fasche}
+    gate: {axis: 5, w: 1.9, h: 3.6, color: "#8A6A45"}
+    cornices:
+      - [[3.75, 4.0, 0.08]]
+      - [[7.1, 7.35, 0.10]]
+      - [[15.0, 15.3, 0.15], [15.3, 15.97, 0.45]]
+    rustika: [0.6, 3.75, 0.45]
+    roof: {type: blech, rise: 3.8, depth: 5.5}
+  gegenueber_w_31:              # Neubau 1990er, weiss mit grauen Fensterbaendern, Garagentore
+    bezug: "547115"
+    a: [-15.50, 42.48]
+    b: [-15.73, 58.50]
+    height: 15.95
+    color: "#E7E5E0"
+    style: plain
+    axes: {n: 6, margin: 1.3}
+    rows: {eg: {z: 0.3, h: 2.9, w: 2.0}, z0: 4.1, step: 2.95, n: 4, h: 1.5, w: 1.7}
+    bands: [[4.0, 4.45, "#9C9A95"], [6.95, 7.4, "#9C9A95"], [9.9, 10.35, "#9C9A95"], [12.85, 13.3, "#9C9A95"]]
+    upper_material: zink
+  gegenueber_w_33:              # Gruenderzeit unsaniert, grau-beige, Lokale im EG
+    bezug: "009483"
+    a: [-15.69, 60.90]
+    b: [-15.81, 71.67]
+    height: 16.11
+    color: "#B4AD9E"
+    stuck_color: "#C2BBAC"
+    style: gruenderzeit
+    axes: {n: 5, margin: 1.1}
+    rows:
+      - {z: 0.7, h: 2.6, w: 1.3}
+      - {z: 4.5, h: 2.0, w: 1.05, surround: fasche_verdachung}
+      - {z: 7.6, h: 2.0, w: 1.05, surround: fasche_verdachung}
+      - {z: 10.6, h: 1.9, w: 1.05, surround: fasche}
+      - {z: 13.5, h: 1.5, w: 0.95, surround: fasche}
+    cornices:
+      - [[3.7, 3.95, 0.08]]
+      - [[15.2, 16.11, 0.4]]
+    roof: {type: blech, rise: 3.8, depth: 5.5}
+
+  # ---- Gegenseite Stolberggasse, Fassaden zeigen nach +y
+  gegenueber_s_ecke:            # Nachkriegsbau weiss, schlicht
+    bezug: "009453"
+    a: [16.12, -18.63]
+    b: [0.31, -18.63]
+    height: 17.3
+    color: "#E8E6E0"
+    style: plain
+    axes: {n: 6, margin: 1.2}
+    rows: {eg: {z: 1.4, h: 1.4, w: 1.4}, z0: 4.0, step: 2.75, n: 5, h: 1.45, w: 1.2}
+    roof: {type: blech, rise: 3.0, depth: 5.0}
+  gegenueber_s_lachs:           # Nachkriegsbau lachsrosa, Rundbogenfenster im 1. OG
+    bezug: "009446"
+    a: [36.91, -18.59]
+    b: [18.38, -18.62]
+    height: 18.07
+    color: "#C98F80"
+    style: plain
+    axes: {n: 9, margin: 1.0}
+    rows: {eg: {z: 1.3, h: 1.5, w: 1.2}, z0: 4.0, step: 2.8, n: 5, h: 1.5, w: 1.0}
+    roof: {type: blech, rise: 3.0, depth: 5.0}
+  gegenueber_s_weiss:           # Nachkriegsbau cremeweiss, sechs Geschosse
+    bezug: "212505"
+    a: [80.76, -19.17]
+    b: [37.00, -19.20]
+    height: 20.0
+    color: "#E6DFCF"
+    style: plain
+    axes: {n: 16, margin: 1.4}
+    rows: {eg: {z: 1.3, h: 1.4, w: 1.4}, z0: 3.9, step: 2.75, n: 6, h: 1.45, w: 1.2}
+  diagonal_w:                   # Eckhaus schraeg gegenueber, weiss, schlicht
+    bezug: "009479"
+    a: [-14.37, -37.93]
+    b: [-14.64, -18.69]
+    height: 15.87
+    color: "#E4E2DC"
+    style: plain
+    axes: {n: 7, margin: 1.2}
+    rows: {eg: {z: 1.3, h: 1.5, w: 1.3}, z0: 3.9, step: 2.9, n: 4, h: 1.5, w: 1.2}
+    roof: {type: blech, rise: 3.0, depth: 5.0}
+  diagonal_s:
+    bezug: "009479"
+    a: [-14.64, -18.69]
+    b: [-30.03, -18.71]
+    height: 15.87
+    color: "#E4E2DC"
+    style: plain
+    axes: {n: 6, margin: 1.2}
+    rows: {eg: {z: 1.3, h: 1.5, w: 1.3}, z0: 3.9, step: 2.9, n: 4, h: 1.5, w: 1.2}
