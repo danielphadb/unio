@@ -1,0 +1,52 @@
+# immoviz Stufe 6: Innenräume Wimmergasse 20
+# Koordinaten in Planpixeln (300 dpi) der jeweiligen Planseite. Umrechnung ins lokale System über corner_px.
+# Quellen: [GR] 20260424_Mappe_Wimmerg20.pdf (Buschina, 1:100, Vektor), [NWG] Nutzwertgutachten Korab 06.07.2026
+
+plaene:
+  og1:
+    pdf: /root/.claude/uploads/4efdce14-7e10-5b98-9dc3-fc44cf246a5c/93c5b7f4-20260424_Mappe_Wimmerg20.pdf
+    page: 4
+    dpi: 300
+    m_per_px: 0.0084667        # 1:100 bei 300 dpi
+    cell_px: 3                 # Rasterzelle 2,5 cm
+    corner_px: [4178, 2536]    # Gebäudeecke Wimmergasse/Stolberggasse (Außenkante)
+
+render:
+  preview_resolution: [1200, 800]
+  resolution: [2400, 1600]
+  samples: 64
+
+wohnungen:
+  top07:
+    plan: og1
+    titel: Top 7, 1. OG, Wimmergasse (NWG 47,73 m²)
+    region_px: [1600, 1380, 2650, 2560]
+    solid_px: [[1830, 1420, 2300, 1880]]    # Stiegenhaus, gehört nicht zur Wohnung
+    floor_z: 4.65              # Rohdecke +4,40 plus Aufbau, Annahme
+    height: 3.30               # lichte Raumhöhe Altbau, ANNAHME (Schnitt fehlt)
+    window: {sill: 0.92, top: 2.93}   # aus der Straßenansicht: Fenster 1.OG z 5,57 bis 7,58
+    bands:
+      - {type: fenster, px: [1550, 2440, 2700, 2600]}   # Straßenfassade Wimmergasse
+    light: herbst
+    exposure: 2.4
+    kameras:
+      wohnkueche:        {pos_px: [2105, 1940], target_px: [1700, 2470], lens: 22}
+      wohnkueche_zurueck: {pos_px: [1720, 2400], target_px: [2110, 1930], lens: 22}
+      zimmer:            {pos_px: [2565, 1945], target_px: [2200, 2470], lens: 22}
+
+  top12:
+    plan: og1
+    titel: Top 12, 1. OG, Stolberggasse mit Loggia (NWG 53,35 m²)
+    region_px: [2360, 560, 4210, 1200]
+    solid_px: [[2825, 630, 2910, 690]]      # Feuermauer, Schraffurlücke ist keine Öffnung
+    floor_z: 4.65
+    height: 3.30
+    window: {sill: 0.92, top: 2.93}
+    bands:
+      - {type: fenster, px: [4090, 560, 4220, 1200]}    # Straßenfassade Stolberggasse
+      - {type: glastuer, px: [2540, 640, 2660, 1010]}   # Ausgang zur Loggia
+    light: vormittag
+    exposure: 2.2
+    kameras:
+      wohnen_loggia: {pos_px: [3110, 1080], target_px: [2620, 790], lens: 22}
+      zimmer_ecke:   {pos_px: [3575, 1075], target_px: [4090, 760], lens: 22}

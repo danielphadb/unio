@@ -1,0 +1,316 @@
+"""Innenräume aus dem Vektor-Grundriss (Stufe 6).
+
+Ablauf je Wohnung:
+1. Planseite rastern (300 dpi), Wandmaske aus grau gefüllten und farbig markierten Wänden.
+2. Öffnungen finden: Lücken in Wandzügen, die ein Richtungs-Closing schließt und deren Tiefe
+   höchstens einer Wandstärke entspricht. Lage in einem Außenwand-Band = Fenster, sonst Tür.
+3. Wände als Quader extrudieren (Lauflängen-Rechtecke), Brüstungen und Stürze über Öffnungen,
+   Kastenfenster in Fensteröffnungen, Boden- und Deckenplatte.
+4. Die Hülle sitzt im lokalen Koordinatensystem des Projekts, die Außenwelt aus build_scene
+   liefert Sonne und echten Ausblick. Das Bestandsgebäude (Sammlung "Objekt") wird ausgeblendet.
+
+Plan-zu-Welt: x_lokal = (ecke_py - py) * s, y_lokal = (ecke_px - px) * s, s = Meter pro Pixel.
+"""
+from __future__ import annotations
+
+import math
+import subprocess
+from pathlib import Path
+
+import numpy as np
+import yaml
+from PIL import Image
+from scipy import ndimage
+
+from . import meshkit as K
+
+
+# ------------------------------------------------------------------ Plan lesen
+def raster_page(pdf: Path, page: int, dpi: int, cache: Path) -> np.ndarray:
+    out = cache / f"plan_p{page}_{dpi}.png"
+    if not out.exists():
+        cache.mkdir(parents=True, exist_ok=True)
+        subprocess.run(["pdftoppm", "-r", str(dpi), "-png", "-singlefile", "-f", str(page), "-l", str(page),
+                        str(pdf), str(out.with_suffix(""))], check=True)
+    return np.array(Image.open(out).convert("RGB")).astype(np.int16)
+
+
+def wall_mask(rgb: np.ndarray) -> np.ndarray:
+    r, g, b = rgb[..., 0], rgb[..., 1], rgb[..., 2]
+    mx, mn = rgb.max(-1), rgb.min(-1)
+    grey = (mx >= 120) & (mx <= 210) & ((mx - mn) < 25)
+    sat = (mx - mn) > 60
+    blue = (b > r + 40) & (b > g + 20)
+    purple = (r > 90) & (b > 90) & (g < 80)
+    return grey | (sat & ~blue & ~purple & (mx > 120))
+
+
+def to_cells(mask: np.ndarray, cell_px: int) -> np.ndarray:
+    h, w = (mask.shape[0] // cell_px) * cell_px, (mask.shape[1] // cell_px) * cell_px
+    m = mask[:h, :w].reshape(h // cell_px, cell_px, w // cell_px, cell_px).mean(axis=(1, 3))
+    return m > 0.5
+
+
+def run_length(a: np.ndarray, axis: int) -> np.ndarray:
+    """Länge des True-Laufs, zu dem jede Zelle gehört (entlang axis)."""
+    a = np.moveaxis(a, axis, -1)
+    out = np.zeros(a.shape, dtype=np.int32)
+    for idx in np.ndindex(a.shape[:-1]):
+        row = a[idx]
+        i, n = 0, len(row)
+        while i < n:
+            if row[i]:
+                j = i
+                while j < n and row[j]:
+                    j += 1
+                out[idx][i:j] = j - i
+                i = j
+            else:
+                i += 1
+    return np.moveaxis(out, -1, axis)
+
+
+def find_openings(walls: np.ndarray, cell_m: float, max_span=1.6, max_depth=0.8, min_len=0.5):
+    L = int(max_span / cell_m)
+    D = int(max_depth / cell_m)
+    found = []
+    for axis, struct in ((1, np.ones((1, L), bool)), (0, np.ones((L, 1), bool))):
+        closed = ndimage.binary_closing(walls, structure=struct)
+        gap = closed & ~walls
+        depth = run_length(walls | gap, 1 - axis)
+        cand = gap & (depth <= D)
+        lab, n = ndimage.label(cand)
+        for k in range(1, n + 1):
+            ys, xs = np.nonzero(lab == k)
+            span = (xs.max() - xs.min() + 1) if axis == 1 else (ys.max() - ys.min() + 1)
+            if span * cell_m < min_len:
+                continue
+            found.append({"axis": axis, "r0": ys.min(), "r1": ys.max() + 1, "c0": xs.min(), "c1": xs.max() + 1})
+    return found
+
+
+def rects_from_mask(m: np.ndarray):
+    """Zerlegt eine Maske in Rechtecke (Zeilenläufe, vertikal zusammengefasst)."""
+    rects, active = [], {}
+    for r in range(m.shape[0]):
+        row = m[r]
+        runs, c = [], 0
+        while c < len(row):
+            if row[c]:
+                c0 = c
+                while c < len(row) and row[c]:
+                    c += 1
+                runs.append((c0, c))
+            else:
+                c += 1
+        new_active = {}
+        for run in runs:
+            if run in active:
+                new_active[run] = active.pop(run)
+            else:
+                new_active[run] = r
+        for (c0, c1), r0 in active.items():
+            rects.append((r0, r, c0, c1))
+        active = new_active
+    for (c0, c1), r0 in active.items():
+        rects.append((r0, m.shape[0], c0, c1))
+    return rects
+
+
+# ------------------------------------------------------------------ Geometrie
+def box_xy(mb, x0, x1, y0, y1, z0, z1, mat):
+    x0, x1 = min(x0, x1), max(x0, x1)
+    y0, y1 = min(y0, y1), max(y0, y1)
+    P = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+    mb.poly([(x, y, z1) for x, y in P], None, mat, (0, 0, 1))
+    mb.poly([(x, y, z0) for x, y in P], None, mat, (0, 0, -1))
+    for i in range(4):
+        (ax, ay), (bx, by) = P[i], P[(i + 1) % 4]
+        mb.poly([(ax, ay, z0), (bx, by, z0), (bx, by, z1), (ax, ay, z1)],
+                [(0, z0), (math.hypot(bx - ax, by - ay), z0), (math.hypot(bx - ax, by - ay), z1), (0, z1)],
+                mat, (by - ay, -(bx - ax), 0))
+
+
+class Apartment:
+    def __init__(self, cfg: dict, plan_rgb: np.ndarray, proj: dict):
+        self.c = cfg
+        self.proj = proj
+        self.s = proj["m_per_px"]
+        self.cell_px = proj.get("cell_px", 3)
+        self.cell_m = self.s * self.cell_px
+        x0, y0, x1, y1 = cfg["region_px"]
+        self.ox, self.oy = x0, y0
+        sub = wall_mask(plan_rgb[y0:y1, x0:x1])
+        for sx0, sy0, sx1, sy1 in cfg.get("solid_px", []):
+            sub[sy0 - y0:sy1 - y0, sx0 - x0:sx1 - x0] = True
+        for sx0, sy0, sx1, sy1 in cfg.get("clear_px", []):
+            sub[sy0 - y0:sy1 - y0, sx0 - x0:sx1 - x0] = False
+        cells = to_cells(sub, self.cell_px)
+        cells = ndimage.binary_opening(cells, structure=np.ones((2, 2), bool))
+        lab, n = ndimage.label(cells)
+        sizes = ndimage.sum(cells, lab, range(1, n + 1))
+        keep = np.isin(lab, [i + 1 for i, sz in enumerate(sizes) if sz * self.cell_m ** 2 >= 0.03])
+        self.walls = keep
+        self.openings = find_openings(self.walls, self.cell_m)
+
+    # Planpixel der Zelle -> lokale Weltkoordinaten
+    def cell_xy(self, r, c):
+        px = self.ox + c * self.cell_px
+        py = self.oy + r * self.cell_px
+        return self.px_to_local(px, py)
+
+    def px_to_local(self, px, py):
+        ex, ey = self.proj["corner_px"]
+        return ((ey - py) * self.s, (ex - px) * self.s)
+
+    def classify(self, op):
+        cy = self.oy + (op["r0"] + op["r1"]) / 2 * self.cell_px
+        cx = self.ox + (op["c0"] + op["c1"]) / 2 * self.cell_px
+        for band in self.c.get("bands", []):
+            x0, y0, x1, y1 = band["px"]
+            if x0 <= cx <= x1 and y0 <= cy <= y1:
+                return band["type"]
+        return "tuer"
+
+    def build(self, mb_wall, mb_frame, mb_glass):
+        z0 = self.c["floor_z"]
+        h = self.c["height"]
+        z1 = z0 + h
+        for (r0, r1, c0, c1) in rects_from_mask(self.walls):
+            xa, ya = self.cell_xy(r0, c0)
+            xb, yb = self.cell_xy(r1, c1)
+            box_xy(mb_wall, xa, xb, ya, yb, z0, z1, "innen_wand")
+        win = self.c.get("window", {"sill": 0.92, "top": 2.93})
+        stats = {"fenster": 0, "tuer": 0, "glastuer": 0}
+        for op in self.openings:
+            kind = self.classify(op)
+            stats[kind] = stats.get(kind, 0) + 1
+            xa, ya = self.cell_xy(op["r0"], op["c0"])
+            xb, yb = self.cell_xy(op["r1"], op["c1"])
+            if kind == "tuer":
+                box_xy(mb_wall, xa, xb, ya, yb, z0 + 2.2, z1, "innen_wand")
+                continue
+            sill = 0.0 if kind == "glastuer" else win["sill"]
+            top = win["top"] if kind == "fenster" else min(win["top"], 2.6)
+            if sill > 0:
+                box_xy(mb_wall, xa, xb, ya, yb, z0, z0 + sill, "innen_wand")
+                # Fensterbrett innen
+                box_xy(mb_frame, xa, xb, ya, yb, z0 + sill - 0.03, z0 + sill, "fensterbrett")
+            box_xy(mb_wall, xa, xb, ya, yb, z0 + top, z1, "innen_wand")
+            self._window(mb_frame, mb_glass, xa, xb, ya, yb, z0 + sill, z0 + top, kind)
+        return stats
+
+    def _window(self, mf, mg, xa, xb, ya, yb, za, zb, kind):
+        """Kastenfenster: äußere und innere Ebene, je Rahmen, Mittelstulp, Kämpfer, Glas."""
+        x0, x1, y0, y1 = min(xa, xb), max(xa, xb), min(ya, yb), max(ya, yb)
+        along_x = (x1 - x0) >= (y1 - y0)
+        planes = (0.25, 0.8) if kind == "fenster" else (0.5,)
+        ft = 0.07
+        for t in planes:
+            if along_x:
+                yc = y0 + (y1 - y0) * t
+                f = lambda u0, u1, v0, v1, mat: box_xy(mf, x0 + u0, x0 + u1, yc - 0.03, yc + 0.03, za + v0, za + v1, mat)
+                L = x1 - x0
+                g = [(x0 + ft, yc, za + ft), (x1 - ft, yc, za + ft), (x1 - ft, yc, zb - ft), (x0 + ft, yc, zb - ft)]
+                n = (0, 1, 0)
+            else:
+                xc = x0 + (x1 - x0) * t
+                f = lambda u0, u1, v0, v1, mat: box_xy(mf, xc - 0.03, xc + 0.03, y0 + u0, y0 + u1, za + v0, za + v1, mat)
+                L = y1 - y0
+                g = [(xc, y0 + ft, za + ft), (xc, y1 - ft, za + ft), (xc, y1 - ft, zb - ft), (xc, y0 + ft, zb - ft)]
+                n = (1, 0, 0)
+            H = zb - za
+            f(0, L, 0, ft, "fenster")
+            f(0, L, H - ft, H, "fenster")
+            f(0, ft, 0, H, "fenster")
+            f(L - ft, L, 0, H, "fenster")
+            f(L / 2 - 0.035, L / 2 + 0.035, 0, H, "fenster")
+            if kind == "fenster" and H > 1.5:
+                f(0, L, H - 0.55, H - 0.55 + ft, "fenster")
+            mg.poly(g, None, "glas", n)
+
+    def slabs(self, mb):
+        x0, y0, x1, y1 = self.c["region_px"]
+        xa, ya = self.px_to_local(x0, y0)
+        xb, yb = self.px_to_local(x1, y1)
+        z0 = self.c["floor_z"]
+        box_xy(mb, xa, xb, ya, yb, z0 - 0.3, z0, "boden_parkett")
+        box_xy(mb, xa, xb, ya, yb, z0 + self.c["height"], z0 + self.c["height"] + 0.3, "decke")
+
+
+# ------------------------------------------------------------------ Szene
+def build_materials(bpy, mats):
+    from . import materials as M
+    mats["innen_wand"] = M.plaster(bpy, "innen_wand", (0.82, 0.8, 0.76), var=0.03, bump=0.05)
+    mats["decke"] = M.plaster(bpy, "decke", (0.85, 0.84, 0.81), var=0.02, bump=0.03)
+    mats["boden_parkett"] = M.oak(bpy, "boden_parkett", (0.42, 0.28, 0.16))
+    mats["fensterbrett"] = M.simple(bpy, "fensterbrett", (0.8, 0.79, 0.75), 0.3)
+    return mats
+
+
+def render_apartments(project_dir: Path, names: list[str], preview: bool = True):
+    import bpy
+    from . import build as B
+    from . import materials as M
+    W = yaml.safe_load((project_dir / "wohnungen.yaml").read_text())
+    cfg, ctx = B.load_project(project_dir)
+    scene = B.build_scene(cfg, ctx)
+    for c in bpy.data.collections:
+        if c.name == "Objekt":
+            c.hide_render = True
+    mats = {m.name: m for m in bpy.data.materials}
+    build_materials(bpy, mats)
+    coll = bpy.data.collections.new("Innen")
+    scene.collection.children.link(coll)
+    res = W["render"]["preview_resolution"] if preview else W["render"]["resolution"]
+    B.setup_render(scene, res, W["render"]["samples"])
+    out_dir = project_dir / "renders" / "innen"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    results = []
+    plan_cache = project_dir / "data" / "plan_cache"
+    for name in names:
+        a = W["wohnungen"][name]
+        P = W["plaene"][a["plan"]]
+        rgb = raster_page(Path(P["pdf"]), P["page"], P["dpi"], plan_cache)
+        apt = Apartment(a, rgb, P)
+        mw = K.MeshBuilder(f"{name}_waende", ["innen_wand"])
+        mf = K.MeshBuilder(f"{name}_rahmen", ["fenster"])
+        mg = K.MeshBuilder(f"{name}_glas", ["glas"])
+        stats = apt.build(mw, mf, mg)
+        apt.slabs(mw)
+        objs = [mb.to_object(bpy, mats, coll) for mb in (mw, mf, mg)]
+        for cam_name, cam in a["kameras"].items():
+            px, py = cam["pos_px"]
+            tx, ty = cam["target_px"]
+            x, y = apt.px_to_local(px, py)
+            X, Y = apt.px_to_local(tx, ty)
+            z = a["floor_z"] + cam.get("h", 1.45)
+            cfg["cameras"][f"{name}_{cam_name}"] = {"pos": [x, y, z], "target": [X, Y, z + cam.get("dz", 0.0)],
+                                                     "lens": cam.get("lens", 24), "vertical": True}
+            lname = cam.get("light", a.get("light", "golden_hour"))
+            B.setup_light(scene, cfg, ctx, lname)
+            scene.view_settings.exposure = cam.get("exposure", a.get("exposure", 2.0))
+            B.setup_camera(scene, cfg, f"{name}_{cam_name}")
+            path = out_dir / f"{name}_{cam_name}_vorschau.png"
+            scene.render.filepath = str(path)
+            bpy.ops.render.render(write_still=True)
+            results.append({"file": str(path), "wohnung": name, "kamera": cam_name, "oeffnungen": stats})
+        for o in objs:
+            o.hide_render = True
+    return results
+
+
+def debug_plan(project_dir: Path, name: str, out: Path):
+    """Kontrollbild: Wände schwarz, Fenster blau, Glastüren grün, Türen rot."""
+    W = yaml.safe_load((project_dir / "wohnungen.yaml").read_text())
+    a = W["wohnungen"][name]
+    P = W["plaene"][a["plan"]]
+    rgb = raster_page(Path(P["pdf"]), P["page"], P["dpi"], project_dir / "data" / "plan_cache")
+    apt = Apartment(a, rgb, P)
+    img = np.full(apt.walls.shape + (3,), 255, np.uint8)
+    img[apt.walls] = (0, 0, 0)
+    col = {"fenster": (40, 90, 255), "glastuer": (0, 170, 60), "tuer": (230, 40, 40)}
+    for op in apt.openings:
+        img[op["r0"]:op["r1"], op["c0"]:op["c1"]] = col[apt.classify(op)]
+    Image.fromarray(img).save(out)
+    return {k: sum(1 for o in apt.openings if apt.classify(o) == k) for k in col}

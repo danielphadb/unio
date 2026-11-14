@@ -32,6 +32,12 @@ def main():
     c = sub.add_parser("check", help="Orthogonal-Ansicht ueber die Strassenansicht legen (Planabgleich)")
     c.add_argument("project")
     c.add_argument("--facade", default=None)
+    sv = sub.add_parser("svcheck", help="Modell gegen Google Street View vergleichen (Schluessel in GOOGLE_MAPS_API_KEY)")
+    sv.add_argument("project")
+    it = sub.add_parser("interior", help="Innenräume aus dem Grundriss bauen und rendern (wohnungen.yaml)")
+    it.add_argument("project")
+    it.add_argument("--top", default="top07")
+    it.add_argument("--final", action="store_true")
     a = ap.parse_args()
     pdir = Path(a.project).resolve()
 
@@ -47,6 +53,10 @@ def main():
         t = time.time()
         res = render(pdir, a.cam.split(","), a.light.split(","), a.preview, not a.no_blend)
         print(json.dumps({"renders": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
+    elif a.cmd == "svcheck":
+        _svcheck(pdir)
+    elif a.cmd == "interior":
+        _interior(a, pdir)
     elif a.cmd == "check":
         from lib.build import load_project, build_scene, Hero
         from lib import check as C, meshkit as K
@@ -63,6 +73,29 @@ def main():
             w, h, ox, oy = C.render_ortho(scene, f, c["span"], c["z"], ppm, mp)
             out = C.overlay(pdir, cfg, name, mp, (ox, oy), (w, h), out_dir / f"{name}_abgleich.jpg")
             print("Abgleich:", out)
+
+
+def _svcheck(pdir):
+    import os
+    from lib.build import load_project, build_scene, setup_render, setup_light
+    from lib import check as C
+    key = os.environ.get("GOOGLE_MAPS_API_KEY")
+    if not key:
+        sys.exit("GOOGLE_MAPS_API_KEY fehlt")
+    cfg, ctx = load_project(pdir)
+    scene = build_scene(cfg, ctx)
+    setup_render(scene, (640, 640), 24)
+    setup_light(scene, cfg, ctx, cfg.get("streetview_light", "dunst_hell"))
+    import lib.build as B
+    res = C.streetview_compare(scene, cfg, ctx, pdir / "renders" / "streetview", key, getattr(B, "LAST_TERRAIN", None))
+    print(json.dumps(res, ensure_ascii=False))
+
+
+def _interior(a, pdir):
+    from lib.interior import render_apartments
+    t = time.time()
+    res = render_apartments(pdir, a.top.split(","), not a.final)
+    print(json.dumps({"renders": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1, default=str))
 
 
 if __name__ == "__main__":
