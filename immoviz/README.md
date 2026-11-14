@@ -104,6 +104,34 @@ gibt es nur die Wände von Top 35, die übrigen Flächen sind offen mit Außenw�
 Kote des 2. OG sind Annahmen. Deckungsgleiche Flächen werden in Cycles schwarz, daher sind gleich hohe Platten um
 Millimeter versetzt.
 
+## Projekt-Website (anklickbare Wohnungen im Schnitt)
+
+Statische Projektseite aus den vorhandenen Bildern, ohne Build-Schritt: Hero mit Hauptmotiv und Kennzahlen,
+"Das Haus" (Außenbilder, Jahreszeiten), "Wohnungen" (Schnittbild mit Geschoss-Umschalter, Wohnungen als
+SVG-Hotspots, Klick öffnet ein Seitenpanel, auf dem Handy ein Blatt von unten), "Bewegtbild", "Lage", Kontakt
+(Platzhalter) und der Hinweis "Unverbindliche Visualisierung". Gestaltung nach UNIO-Designsystem, Power Grotesk
+eingebettet, hell und dunkel, ab 360 px, Tastatur (Tab, Enter, Esc) und `prefers-reduced-motion`.
+
+```bash
+# Seite erzeugen: projects/<p>/website/index.html plus media/ (Bilder max 2000 px und 1000 px, Videos 1280 px H.264 crf 26)
+.venv-immoviz/bin/python immoviz/immoviz.py website immoviz/projects/wimmergasse-20
+# Hotspots aus der Schnittkamera neu berechnen (Blender ohne Rendering, Sekunden), danach Seite bauen
+.venv-immoviz/bin/python immoviz/immoviz.py website immoviz/projects/wimmergasse-20 --hotspots
+# Ansehen
+cd immoviz/projects/wimmergasse-20/website && python3 -m http.server 8000
+```
+
+- Inhalte in `projects/<p>/website.yaml` (Texte, Kennzahlen, Bildzuordnung, Wohnungsdaten). Was nicht bekannt ist
+  (Zimmer, Preise, Kontakt), steht dort als "auf Anfrage" oder Platzhalter und erscheint so auf der Seite.
+- Hotspots: `lib/hotspots.py` projiziert die Polygone aus `wohnungen.yaml` (`schnitt.wohnungen`, Aussparungen
+  `ohne` abgezogen) mit derselben Axonometrie-Kamera auf Bodenhöhe des Geschosses (FFB + 2 cm) in Pixel der
+  Schnittbilder (1920 x 1080). Ergebnis `renders/schnitt/hotspots.json` (`zustaende.<zustand>.<top>`: Punkte x, y),
+  Kontrolle `renders/schnitt/hotspots_check.jpg` (Umrisse in s01 und s04). Ändert sich die Kamera, `--hotspots`.
+- Neue Wohnung: Polygon und Zustand in `wohnungen.yaml` (`schnitt`), Daten und Bilder in `website.yaml`
+  (`wohnungen.<top>`, `zustand` = Schnittbild, in dem sie liegt).
+- Code: `lib/website.py` (Generator), `lib/website_template.html` (Seite mit CSS und JS). `website/` ist Ausgabe
+  und nicht im Repo.
+
 ## Studio-Oberfläche
 
 Lokale Web-Oberfläche über dem Prototyp (Phase B laut `KONZEPT.md`), im UNIO-Design, hell und dunkel, bis 400 px Breite.

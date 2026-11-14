@@ -88,9 +88,12 @@ wenn die Oberfläche öffentlich erreichbar wird.
 **Stand Phase E (14.11.2026):** `walkthrough` (Reel 1) und `schnitt` (Reel 2) laufen auf der Kommandozeile.
 `schnitt` rendert aus einer festen Axonometrie sechs Zustände (ganzes Haus, Schnitt im 3. DG, 3., 2., 1. OG, EG)
 im Modellbau-Look; Innenwände aus den Vektor-Grundrissen EG bis 3. OG, Dachgeschosse aus der Dachkubatur,
-Top 7, Top 12 und Top 35 in #FFAA09. Kontrolle je Geschoss über `check_<geschoss>.jpg`. Offen: Treppen und
-Grundrisse 1. bis 3. DG, Schnittvideo (Zustände überblenden oder Schnittebene animieren), Projektseite mit
-anklickbaren Wohnungen (Fläche, Preis aus dem Hub), 360-Ansichten.
+Top 7, Top 12 und Top 35 in #FFAA09. Kontrolle je Geschoss über `check_<geschoss>.jpg`. Neu: `website` erzeugt
+die Projektseite (Vorlage Das Wimmer, `website.yaml`) mit Schnittbild, Geschoss-Umschalter und anklickbaren
+Wohnungen; die Hotspots projiziert `lib/hotspots.py` mit der Schnittkamera aus den Wohnungspolygonen
+(`renders/schnitt/hotspots.json`). Offen: Treppen und Grundrisse 1. bis 3. DG, weitere Wohnungen im Schnitt,
+Zimmeranzahl, Preise und Kontakt (heute "auf Anfrage" bzw. Platzhalter, später aus dem Hub), Veröffentlichung
+der Seite, 360-Ansichten.
 
 ## 6. Bildpaket je Objekt (Standard)
 

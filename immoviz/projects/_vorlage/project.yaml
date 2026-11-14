@@ -1,0 +1,120 @@
+# immoviz Projektdatei: VORLAGE fuer ein neues Objekt (abgeleitet aus wimmergasse-20)
+#
+# Das Studio ("Neues Objekt") kopiert diese Datei nach projects/<slug>/project.yaml und setzt dabei
+# project, site.address, site.origin_gk, site.x_axis_deg, facades, altbau.facades und checks.
+# Alle anderen Zahlen sind BEISPIELWERTE aus einem Wiener Gruenderzeithaus und muessen aus den Plaenen
+# uebernommen werden (Fassaden- und Dach-Editor im Studio oder von Hand). Jede Zahl bekommt im
+# Kommentar ihre Quelle, z. B. [ANS] Strassenansicht, [GR] Grundriss, [OGD] Stadt Wien Open Data.
+#
+# Masseinheit Meter. z = 0 ist das Strassenniveau am Haustor (Kote in site.ground_wn).
+# u = Laufmeter entlang einer Fassade, von links nach rechts gesehen von der Strasse.
+# d = Abstand nach innen hinter der Fassadenflucht (d < 0 = vor der Fassade).
+#
+# Quellen (siehe quellen/README.md):
+#   [ANS]  Strassenansicht 1:100 (Vektor-PDF)
+#   [GR]   Grundrisse
+#   [OGD]  Stadt Wien Open Data: Baukoerpermodell, Baumkataster, Verkehrsflaechen
+
+project:
+  name: Neues Objekt
+  slug: vorlage
+  client: offen
+
+site:
+  address: Musterstrasse 1, 1050 Wien
+  origin_gk: [0.0, 340000.0]        # Gebaeudeecke in GK Ost (EPSG:31256) [OGD]
+  x_axis_deg: 0.0                   # Richtung der x-Achse (erste Fassade) gegen Ost, Grad [OGD]
+  radius_m: 420                     # Umgebung laden bis zu diesem Abstand
+  detail_radius_m: 120
+  hero_bezug: []                    # BEZUG-Nummern des Objekts im Baukoerpermodell (nach immoviz.py geo eintragen)
+  ground_wn: 30.00                  # BEISPIEL: Kote z = 0 in Meter ueber Wiener Null [ANS]
+
+# Fassadenfluchten im lokalen System. Fassade A laeuft vom Ursprung entlang +x, Fassade B (Ecke) von (0, L) zum
+# Ursprung. Das Gebaeude liegt dann im Bereich x > 0, y > 0, die Strassen davor.
+facades:
+  fassade_a: {a: [0.0, 0.0], b: [20.0, 0.0]}    # BEISPIEL Laenge 20 m
+
+# ---------------------------------------------------------------- Altbau (Regelgeschosse)
+altbau:
+  height: 16.0             # BEISPIEL: Hauptgesims Oberkante [ANS]
+  core_depth: 4.0          # Tiefe, ab der der Hauskern als Volumen gebaut wird
+  slabs: [4.40, 7.95, 11.60, 15.30]   # BEISPIEL: Deckenoberkanten [ANS]
+  rustika: {z: [0.75, 4.40], spacing: 0.62}   # BEISPIEL: Nutung im Erdgeschoss
+  sockel: 0.75
+  cornices:                 # BEISPIEL: Stufen [z von, z bis, Ausladung] [ANS]
+    - {name: kordon_1og, steps: [[4.49, 4.62, 0.08], [4.62, 5.00, 0.14]]}
+    - {name: hauptgesims, steps: [[15.30, 15.55, 0.12], [15.55, 15.80, 0.30], [15.80, 16.00, 0.55]], consoles: {z: [15.30, 15.75], w: 0.16, proj: 0.40}}
+  rows:                     # BEISPIEL: Fensterreihen fuer alle Fassaden (z Unterkante, h Hoehe, w Breite) [ANS]
+    eg:  {z: 1.80, h: 1.90, w: 1.00, type: kastenfenster, surround: fasche}
+    og1: {z: 5.50, h: 2.00, w: 1.05, type: kastenfenster, surround: fasche_verdachung}
+    og2: {z: 9.00, h: 1.85, w: 1.05, type: kastenfenster, surround: aedikula}
+    og3: {z: 12.40, h: 1.75, w: 1.05, type: kastenfenster, surround: fasche}
+  facades:                  # je Fassade: Achsen (Fenstermitten u), Stirnseiten, Erdgeschoss-Abweichungen
+    fassade_a:
+      axes: []              # im Fassaden-Editor ueber der Strassenansicht setzen [ANS]
+      endcaps: []           # u-Werte freier Stirnseiten (z. B. [0.0] an der Ecke ohne Nachbar)
+      eg: []                # z. B. {axes: [0], type: haustor, u: [0.6, 2.4], z: [0.0, 3.8]}
+
+# ---------------------------------------------------------------- Dachgeschosse (vereinfachte Kubatur)
+# BEISPIEL fuer einen zweigeschossigen Dachausbau. Werte aus Schnitt, Ansicht und DG-Grundrissen uebernehmen.
+dach:
+  material: zink
+  frame: rahmen_dunkel
+  walls:                    # senkrechte Dachwaende mit Fenstern: Fassade, u-Bereich, z-Bereich, Ruecksprung d
+    - {facade: fassade_a, u: [0.7, 19.3], z: [16.0, 19.2], d: 0.7, windows: []}
+  slopes: []                # Dachschraegen: {facade, u, z, d: [unten, oben], roof_windows: []}
+  railings:                 # Gelaender: {facade, u, z, d, h, type: glas}
+    - {facade: fassade_a, u: [0.7, 19.3], z: 19.2, d: 0.85, h: 1.10, type: glas}
+  volumes:                  # Innenvolumen, Clip-Regeln [Fassade, u|d, >=|<=, Wert]
+    - {z: [16.0, 19.2], clip: [[fassade_a, d, ">=", 0.7]]}
+  slabs:
+    - {z: 16.0, t: 0.30, clip: []}
+    - {z: 19.2, t: 0.30, clip: [[fassade_a, d, ">=", 0.7]]}
+  boxes: []                 # Kamine, Stiegenhaus ueber Dach
+
+# ---------------------------------------------------------------- Umgebung
+neighbours: {}              # Fassadenfarbe je Nachbargebaeude (BEZUG aus dem Baukoerpermodell)
+street:
+  parking_material: asphalt
+  cables: []
+
+# ---------------------------------------------------------------- Materialien (aus dem Farbkonzept)
+materials:
+  fassade: {color: "#E2CFA8", note: "BEISPIEL, an Farbmuster abgleichen"}
+  stuck: {color: "#EEE5D2"}
+  sockel: {color: "#B9AE98"}
+  fenster: {color: "#F4F1E8"}
+  zink: {color: "#3A3D40"}
+  rahmen_dunkel: {color: "#2B2D30"}
+  haustor: {color: "#6B4A2E"}
+
+# ---------------------------------------------------------------- Kameras und Licht
+cameras:
+  ecke:            {pos: [-13.0, -15.5, 1.65], target: [6.0, 7.0, 11.0], lens: 20, vertical: true}   # BEISPIEL, im Kamera-Editor setzen
+
+lights:
+  golden_hour: {date: "2026-09-20", time: "17:05", tz: 2, exposure: 0.1, interior: 0.0, aerosol: 2.0, season: spaetsommer}
+  herbst:      {date: "2026-10-18", time: "15:10", tz: 2, exposure: 0.0, interior: 0.1, aerosol: 2.5, season: herbst}
+  blaue_stunde: {date: "2026-10-15", time: "18:55", tz: 2, exposure: 1.6, interior: 1.0, season: herbst}
+
+render:
+  resolution: [2400, 1600]
+  samples: 160
+  preview_resolution: [1200, 800]
+  preview_samples: 32
+
+# ---------------------------------------------------------------- Planabgleich (immoviz.py check)
+# Im Fassaden-Editor kalibrieren: PDF waehlen, dann u = 0 / z = 0 im Plan anklicken (u0_px).
+checks:
+  fassade_a:
+    pdf: quellen/fassade_a_ansicht.pdf
+    page: 1
+    dpi: 130
+    scale: 100
+    u0_px: [0, 0]               # Pixel von u = 0 und z = 0 im gerenderten PDF
+    span: [-2.0, 22.0]
+    z: [-0.5, 26.5]
+    levels: []
+
+# ---------------------------------------------------------------- Nachbarn (Pflicht vor dem Vertrieb, siehe KONZEPT Abschnitt 7)
+neighbour_facades: {}

@@ -5,6 +5,7 @@ Beispiele:
   python immoviz.py geo     projects/wimmergasse-20
   python immoviz.py render  projects/wimmergasse-20 --cam ecke --light golden_hour --preview
   python immoviz.py render  projects/wimmergasse-20 --cam ecke,drohne --light golden_hour,blaue_stunde
+  python immoviz.py website projects/wimmergasse-20
   python immoviz.py studio  (Web-Oberfläche auf Port 8765)
 """
 from __future__ import annotations
@@ -50,6 +51,9 @@ def main():
     sc.add_argument("--preview", action="store_true")
     sc.add_argument("--zustand", default="", help="nur diese Zustände, z. B. s01,s04 (ohne Übersicht)")
     sc.add_argument("--nur-check", action="store_true", help="nur Kontrollbilder Plan und Wände, kein Rendering")
+    ws = sub.add_parser("website", help="Statische Projekt-Website mit anklickbaren Wohnungen im Schnitt (website.yaml)")
+    ws.add_argument("project")
+    ws.add_argument("--hotspots", action="store_true", help="Hotspots aus der Schnittkamera neu berechnen (Blender, ohne Rendering)")
     st = sub.add_parser("studio", help="Web-Oberfläche immoviz Studio starten (http://127.0.0.1:8765)")
     st.add_argument("--host", default="127.0.0.1")
     st.add_argument("--port", type=int, default=8765)
@@ -99,6 +103,14 @@ def main():
         else:
             res = SN.render_section(pdir, a.preview, [z for z in a.zustand.split(",") if z])
         print(json.dumps({"schnitt": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
+    elif a.cmd == "website":
+        from lib import website as WS
+        t = time.time()
+        if a.hotspots:
+            from lib import hotspots as HS
+            print(json.dumps(HS.write(pdir), ensure_ascii=False, indent=1))
+        res = WS.build_site(pdir)
+        print(json.dumps({"website": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
     elif a.cmd == "check":
         from lib.build import load_project, build_scene, Hero
         from lib import check as C, meshkit as K

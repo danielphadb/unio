@@ -1,0 +1,134 @@
+# Projekt-Website Das Wimmer (immoviz website). Ausgabe: website/ (nicht im Repo).
+# Bildpfade relativ zum Projektordner. Zahlen nur aus dem Nutzwertgutachten (NWG Korab, 06.07.2026);
+# was nicht bekannt ist, steht als "auf Anfrage" und ist auf der Seite so gekennzeichnet.
+
+projekt:
+  name: Das Wimmer
+  adresse: Wimmergasse 20, 1050 Wien
+  ecke: Wimmergasse, Ecke Stolberggasse
+  bezirk: Margareten
+  sprache: de
+  beschreibung: Altbau an der Ecke Wimmergasse und Stolberggasse in Wien Margareten. Wohnungen im Altbau und im Dachgeschoss.
+
+hero:
+  bild: renders/higgsfield/herbst_ecke_v3.jpg
+  alt: Das Eckhaus Wimmergasse 20 im Herbstlicht, gesehen von der Kreuzung
+  label: Wimmergasse 20, 1050 Wien
+  titel: Das Wimmer
+  untertitel: Wohnen im Altbau an der Ecke Wimmergasse und Stolberggasse.
+  einleitung: >-
+    Ein Wiener Eckhaus mit klarer Gliederung, Gesimsen und hohen Kastenfenstern, darüber ein Dachgeschoss
+    mit Terrassen. Die Visualisierungen zeigen die Wohnungen zeitgemäß eingerichtet.
+    Wählen Sie im Schnitt durch das Haus ein Geschoss und eine Wohnung.
+  kennzahlen:
+    - {label: Lage, wert: "1050 Wien, Margareten"}
+    - {label: Ecke, wert: "Wimmergasse | Stolberggasse"}
+    - {label: Fensterachsen, wert: "12 + 7"}
+    - {label: Wohnungen in der Auswahl, wert: "Top 7, Top 12, Top 35"}
+    - {label: Nutzflächen, wert: "47,73 bis 60,85 m²"}
+    - {label: Preise, wert: "auf Anfrage"}
+
+haus:
+  titel: Das Haus
+  text: >-
+    Das Haus zeigt sich zu beiden Straßen mit gegliederter Fassade, Verdachungen über den Fenstern der Beletage
+    und einem Eichentor. Die Bilder zeigen dasselbe Haus zu verschiedenen Jahreszeiten und Tageszeiten.
+  bilder:
+    - {datei: renders/higgsfield/blaue_stunde_ecke_v2.jpg, titel: Blaue Stunde, text: Die Ecke am Abend., alt: Das Eckhaus zur Blauen Stunde mit erleuchteten Fenstern, breite: 12}
+    - {datei: renders/higgsfield/herbst_beletage.jpg, titel: Beletage, text: Verdachungen über den Fenstern., alt: Fenster der Beletage mit Giebelverdachungen, breite: 4}
+    - {datei: renders/higgsfield/herbst_haustor.jpg, titel: Haustor, text: Eiche am Abend., alt: Das Eichentor am Abend, breite: 4}
+    - {datei: renders/higgsfield/herbst_terrasse_v2.jpg, titel: Dachterrasse, text: Ausblick über die Dächer., alt: Blick von der Dachterrasse über die Dächer, breite: 4}
+    - {datei: renders/higgsfield/fruehling_wimmergasse_v2.jpg, titel: Frühling, text: Straßenflucht Wimmergasse., alt: Die Wimmergasse im Frühling mit frischem Grün, breite: 6}
+    - {datei: renders/higgsfield/golden_ecke_v2.jpg, titel: Spätsommer, text: Ecke im Abendlicht., alt: Die Ecke im warmen Licht eines Spätsommerabends, breite: 6}
+    - {datei: renders/higgsfield/winter_ecke_v2.jpg, titel: Winter, text: Schnee auf Gesimsen und Dach., alt: Das Eckhaus im Winter mit Schnee auf den Gesimsen, breite: 12}
+
+wohnungen_abschnitt:
+  titel: Wohnungen
+  text: >-
+    Der Schnitt zeigt das Haus Geschoss für Geschoss. Farbig markierte Wohnungen lassen sich auswählen.
+    Weitere Wohnungen folgen.
+  hotspots: renders/schnitt/hotspots.json
+  start: s04                                  # Geschoss beim Laden
+  bilder_muster: renders/schnitt/{zustand}.jpg
+  mobil_ausschnitt: [380, 30, 1220, 1000]     # viewBox x, y, Breite, Höhe auf schmalen Bildschirmen
+
+wohnungen:
+  top07:
+    top: Top 7
+    geschoss: 1. Obergeschoss
+    zustand: s04
+    lage: Straßenseitig zur Wimmergasse
+    flaeche: "47,73 m²"
+    freiflaechen: keine Angabe
+    zimmer: auf Anfrage
+    preis: auf Anfrage
+    text: Wohnküche und Zimmer hinter den hohen Kastenfenstern der Wimmergasse.
+    bilder:
+      - {datei: renders/innen/top07_wohnkueche.jpg, text: Essplatz am Kastenfenster}
+      - {datei: renders/innen/top07_wohnkueche_zurueck.jpg, text: Wohnbereich mit offener Flügeltür}
+      - {datei: renders/innen/top07_zimmer.jpg, text: Zimmer}
+  top12:
+    top: Top 12
+    geschoss: 1. Obergeschoss
+    zustand: s04
+    lage: Stolberggasse, mit Loggia zum Hof
+    flaeche: "53,35 m²"
+    freiflaechen: Loggia, Fläche auf Anfrage
+    zimmer: auf Anfrage
+    preis: auf Anfrage
+    text: Wohnraum mit Ausgang zur Loggia und Kochnische.
+    bilder:
+      - {datei: renders/innen/top12_wohnen_loggia.jpg, text: Wohnraum mit Blick zur Loggia}
+      - {datei: renders/innen/top12_kueche.jpg, text: Küche}
+  top35:
+    top: Top 35
+    geschoss: 3. Dachgeschoss
+    zustand: s01
+    lage: Eckwohnung mit Terrassen zu beiden Straßen
+    flaeche: "60,85 m²"
+    freiflaechen: "Terrassen 6,93 m²"
+    zimmer: auf Anfrage
+    preis: auf Anfrage
+    text: Wohnküche unter der Dachschräge, Essplatz in der Glasecke, Terrassen zur Wimmergasse und zur Stolberggasse.
+    bilder:
+      - {datei: renders/innen/top35_wohnen_terrasse.jpg, text: Essplatz mit Blick auf die Terrasse}
+      - {datei: renders/innen/top35_dachschraege.jpg, text: Wohnküche unter der Dachschräge}
+      - {datei: renders/innen/top35_kuecheninsel.jpg, text: Kücheninsel}
+    video: {datei: renders/walkthrough/top35/top35_walkthrough.mp4, text: Rundgang durch Top 35}
+
+bewegtbild:
+  titel: Bewegtbild
+  text: Kamerafahrten um das Haus und ein Schnitt vom Dach bis zum Erdgeschoss.
+  videos:
+    - {datei: renders/schnitt/schnitt.mp4, titel: Schnitt durch das Haus, text: Geschoss für Geschoss vom Dach bis zum Erdgeschoss., gross: true}
+    - {datei: renders/walkthrough/top35/top35_walkthrough.mp4, titel: Rundgang Top 35, text: "Eingang, Küche, Essplatz in der Glasecke, Terrasse.", gross: true}
+    - {datei: renders/video/ecke_orbit.mp4, titel: Orbit, text: Um die Ecke.}
+    - {datei: renders/video/ecke_pushin.mp4, titel: Annäherung, text: Auf die Ecke zu.}
+    - {datei: renders/video/drohne_pullback.mp4, titel: Luftansicht, text: Über den Dächern von Margareten.}
+
+lage:
+  titel: Lage
+  bild: renders/higgsfield/drohne_dunst_v3.jpg
+  alt: Luftansicht des Hauses über den Dächern von Margareten
+  text:
+    - >-
+      Margareten ist der 5. Wiener Gemeindebezirk und liegt südlich der Innenstadt zwischen Wienzeile und Gürtel.
+      Gründerzeitliche Straßenzüge prägen das Bild, dazwischen Plätze, kleine Geschäfte und Lokale.
+    - >-
+      Das Haus steht an der Ecke Wimmergasse und Stolberggasse, mitten im Wohngebiet des Bezirks.
+  hinweis: Angaben zu Verkehrsanbindung und Nahversorgung folgen.
+
+kontakt:
+  titel: Kontakt
+  text: Für Auskünfte zu Wohnungen, Preisen und Besichtigungen.
+  platzhalter: true
+  name: Ansprechperson folgt
+  telefon: Telefon folgt
+  email: E-Mail folgt
+
+fuss:
+  hinweis: >-
+    Alle Bilder, Videos und Schnitte sind Visualisierungen auf Basis der Pläne
+    und können vom ausgeführten Zustand abweichen. Möblierung und Ausstattung sind Gestaltungsbeispiele und nicht
+    Teil des Angebots. Flächen laut Nutzwertgutachten, Änderungen vorbehalten.
+  quelle: "Umgebungsdaten: Stadt Wien, data.wien.gv.at (CC BY 4.0)."

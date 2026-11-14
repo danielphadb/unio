@@ -27,6 +27,7 @@ import json
 import math
 import os
 import re
+import shutil
 import subprocess
 import sys
 import threading
@@ -56,7 +57,8 @@ FORCE_DRY = os.environ.get("IMMOVIZ_STUDIO_DRY") == "1"
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 from lib.sun import sun_position  # noqa: E402
-from studio.yamledit import EditError, edit_section  # noqa: E402
+from studio.yamledit import EditError, edit_section, replace_blocks  # noqa: E402
+from studio.higgsfield import Higgsfield, HiggsfieldError, credits_estimate  # noqa: E402
 
 IMG_EXT = {".png", ".jpg", ".jpeg", ".webp"}
 VID_EXT = {".mp4", ".webm", ".mov"}
@@ -465,17 +467,25 @@ class Queue:
         else:
             cmd = [sys.executable, str(CLI), "render", str(pdir), "--cam", cam, "--light", light,
                    "--preview", "--no-blend"]
+        return self.add_job(slug, "render", cmd=cmd, dry=dry, cam=cam, light=light,
+                            befehl="python -c <Trockenlauf>" if dry else
+                            f"immoviz.py render projects/{slug} --cam {cam} --light {light} --preview --no-blend")
+
+    def add_job(self, slug: str, art: str, cmd: list | None = None, fn=None, dry: bool = False,
+                befehl: str = "", **extra) -> dict:
+        """Allgemeiner Job: Befehl (Unterprozess) oder Funktion fn(log) im Studio-Prozess (Higgsfield)."""
         jid = uuid.uuid4().hex[:10]
-        job = {"id": jid, "projekt": slug, "cam": cam, "light": light, "trockenlauf": dry,
-               "befehl": "python -c <Trockenlauf>" if dry else
-                         f"immoviz.py render projects/{slug} --cam {cam} --light {light} --preview --no-blend",
-               "status": "wartet", "erstellt": now_iso(), "gestartet": None, "beendet": None,
-               "rueckgabe": None, "fehler": None}
+        job = {"id": jid, "projekt": slug, "art": art, "cam": extra.pop("cam", art), "light": extra.pop("light", ""),
+               "trockenlauf": dry, "befehl": befehl, "status": "wartet", "erstellt": now_iso(), "gestartet": None,
+               "beendet": None, "rueckgabe": None, "fehler": None, **extra}
         with self.cv:
             self.jobs[jid] = job
             self.order.append(jid)
             self.logs[jid] = deque(maxlen=2000)
-            job["_cmd"] = cmd
+            if fn is not None:
+                job["_fn"] = fn
+            else:
+                job["_cmd"] = cmd
             self._save_public()
             self.cv.notify()
         return self.public(job)
@@ -510,7 +520,7 @@ class Queue:
     def _next(self):
         for jid in self.order:
             j = self.jobs[jid]
-            if j["status"] == "wartet" and "_cmd" in j:
+            if j["status"] == "wartet" and ("_cmd" in j or "_fn" in j):
                 return j
         return None
 
@@ -530,6 +540,29 @@ class Queue:
         jid = job["id"]
         logf = (self.dir / f"{jid}.log").open("w", encoding="utf-8")
         t0 = time.time()
+        if "_fn" in job:
+            def log(msg):
+                line = str(msg).rstrip("\n") + "\n"
+                self.logs[jid].append(line)
+                logf.write(line)
+                logf.flush()
+            try:
+                res = job["_fn"](log)
+                with self.cv:
+                    job["status"], job["rueckgabe"] = "fertig", 0
+                    if isinstance(res, dict):
+                        job["ergebnis"] = res
+            except Exception as e:  # noqa: BLE001
+                log(f"Fehler: {e}")
+                with self.cv:
+                    job["status"], job["fehler"], job["rueckgabe"] = "fehler", str(e)[:300], 1
+            finally:
+                logf.close()
+                with self.cv:
+                    job["beendet"] = now_iso()
+                    job["sekunden"] = round(time.time() - t0, 1)
+                    self._save_public()
+            return
         try:
             p = subprocess.Popen(job["_cmd"], cwd=str(REPO), stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                                  text=True, bufsize=1, env={**os.environ, "PYTHONUNBUFFERED": "1"})
@@ -578,7 +611,7 @@ def queue() -> Queue:
 # ------------------------------------------------------------------ API
 @app.get("/api/info")
 def api_info():
-    return {"name": "immoviz Studio", "phase": "B", "trockenlauf_erzwungen": FORCE_DRY,
+    return {"name": "immoviz Studio", "phase": "C", "trockenlauf_erzwungen": FORCE_DRY,
             "status_werte": STATUS_VALUES, "projektwurzel_standard": PROJECTS == ROOT / "projects"}
 
 
@@ -587,7 +620,7 @@ def api_projects():
     out = []
     if PROJECTS.is_dir():
         for p in sorted(PROJECTS.iterdir()):
-            if (p / "project.yaml").is_file():
+            if (p / "project.yaml").is_file() and not p.name.startswith(("_", ".")):
                 try:
                     out.append(project_summary(p))
                 except HTTPException as e:
@@ -651,12 +684,14 @@ def api_shotlist(slug: str):
 def api_gallery(slug: str):
     pdir = project_dir(slug)
     frei = read_json(pdir / "freigabe.json", {})
+    idx = hf_index(pdir)
     out = []
     for it in dedupe(media_items(pdir)):
         rel = it["rel"]
         grp = next((g for g, _, fn in GALLERY_GROUPS if fn(rel)), "sonstige")
         f = frei.get(rel) or {}
         out.append({"rel": rel, "name": it["name"], "typ": it["typ"], "gruppe": grp,
+                    "hf": idx.get(rel), "veredelbar": it["typ"] == "bild" and grp in ("aussen", "innen", "walkthrough"),
                     "url": file_url(slug, rel),
                     "thumb": thumb_url(slug, rel, 640) if it["typ"] == "bild" else None,
                     "varianten": it["varianten"], "bytes": it["bytes"],
@@ -1311,6 +1346,647 @@ def api_walkthrough(slug: str):
             "videos": [{"rel": v["rel"], "name": v["name"], "url": file_url(slug, v["rel"]), "bytes": v["bytes"]}
                        for v in vids if v["rel"].startswith(f"walkthrough/{top}/")]})
     return out
+
+
+# ------------------------------------------------------------------ Phase C: Fassaden-, Dach-Editor, Planabgleich
+ROW_TYPES = ("kastenfenster", "schaufenster", "haustor")
+SURROUNDS = ("fasche", "fasche_verdachung", "aedikula")
+EG_TYPES = ("haustor", "schaufenster", "kastenfenster")
+
+
+def _r(x) -> float:
+    return round(float(x), 3)
+
+
+def _f(v, feld: str, lo: float = -1000, hi: float = 1000) -> float:
+    return _r(_num(v, feld, lo, hi))
+
+
+def _pair(v, feld: str, lo: float = -1000, hi: float = 1000, steigend: bool = True) -> list[float]:
+    if not isinstance(v, (list, tuple)) or len(v) != 2:
+        raise HTTPException(400, f"{feld}: zwei Zahlen [von, bis] erwartet")
+    a, b = _f(v[0], feld, lo, hi), _f(v[1], feld, lo, hi)
+    if steigend and not a < b:
+        raise HTTPException(400, f"{feld}: 'von' muss kleiner als 'bis' sein")
+    return [a, b]
+
+
+def _fac_len(cfg: dict, name: str) -> float:
+    f = (cfg.get("facades") or {}).get(name) or {}
+    try:
+        (ax, ay), (bx, by) = f["a"], f["b"]
+        return round(math.hypot(bx - ax, by - ay), 3)
+    except (KeyError, TypeError, ValueError):
+        return 0.0
+
+
+def ppm_of(c: dict) -> float:
+    """Pixel je Meter wie lib/check.px_per_m (dort nicht importierbar, braucht bpy)."""
+    return float(c.get("dpi", 130)) / 0.0254 / float(c.get("scale", 100))
+
+
+def _pdf_path(pdir: Path, rel: str) -> Path:
+    q = (pdir / "quellen").resolve()
+    p = (pdir / str(rel or "")).resolve()
+    if not str(rel).lower().endswith(".pdf") or not p.is_relative_to(q) or not p.is_file():
+        raise HTTPException(404, f"Plan {rel} nicht gefunden (PDF unter quellen/)")
+    return p
+
+
+def plan_png(pdir: Path, rel: str, page: int, dpi: int) -> Path:
+    """PDF-Seite als PNG, gecacht unter data/plan_cache/<datei>_p<seite>_<dpi>.png (pdftoppm)."""
+    pdf = _pdf_path(pdir, rel)
+    if not 1 <= page <= 999 or not 30 <= dpi <= 600:
+        raise HTTPException(400, "Seite 1 bis 999, dpi 30 bis 600")
+    cache = pdir / "data" / "plan_cache"
+    stem = re.sub(r"[^A-Za-z0-9_-]+", "_", pdf.stem)[:80]
+    out = cache / f"{stem}_p{page}_{dpi}.png"
+    if out.is_file() and out.stat().st_mtime >= pdf.stat().st_mtime:
+        return out
+    cache.mkdir(parents=True, exist_ok=True)
+    tmp = cache / f".tmp_{uuid.uuid4().hex}"
+    try:
+        subprocess.run(["pdftoppm", "-r", str(dpi), "-png", "-f", str(page), "-l", str(page), "-singlefile",
+                        str(pdf), str(tmp)], check=True, capture_output=True, timeout=120)
+    except FileNotFoundError:
+        raise HTTPException(500, "pdftoppm fehlt (poppler-utils installieren)")
+    except subprocess.CalledProcessError as e:
+        raise HTTPException(400, f"PDF lässt sich nicht rendern: {e.stderr.decode(errors='replace')[:200]}")
+    Path(str(tmp) + ".png").replace(out)
+    return out
+
+
+@app.get("/api/projects/{slug}/planbild")
+def api_planbild(slug: str, pdf: str, page: int = 1, dpi: int = 130):
+    return FileResponse(plan_png(project_dir(slug), pdf, page, dpi), media_type="image/png",
+                        headers={"Cache-Control": "no-cache"})
+
+
+def fassaden_state(pdir: Path) -> dict:
+    cfg = load_cfg(pdir)
+    A = cfg.get("altbau") or {}
+    checks = cfg.get("checks") or {}
+    out = []
+    for name in (cfg.get("facades") or {}):
+        fs = (A.get("facades") or {}).get(name) or {}
+        out.append({"name": name, "laenge": _fac_len(cfg, name), "axes": fs.get("axes") or [],
+                    "endcaps": fs.get("endcaps") or [], "eg": fs.get("eg") or [], "check": checks.get(name)})
+    qd = pdir / "quellen"
+    pdfs = sorted(f"quellen/{f.name}" for f in qd.glob("*.pdf")) if qd.is_dir() else []
+    site = cfg.get("site") or {}
+    return {"fassaden": out, "rows": A.get("rows") or {}, "cornices": A.get("cornices") or [],
+            "slabs": A.get("slabs") or [], "height": A.get("height"), "sockel": A.get("sockel"),
+            "ground_wn": site.get("ground_wn"), "pdfs": pdfs, "row_types": ROW_TYPES, "surrounds": SURROUNDS,
+            "eg_types": EG_TYPES, "dach_z": sorted({_r(w["z"][0]) for w in ((cfg.get("dach") or {}).get("walls") or [])
+                                                    if isinstance(w, dict) and isinstance(w.get("z"), list)}
+                                                   | {_r(w["z"][1]) for w in ((cfg.get("dach") or {}).get("walls") or [])
+                                                      if isinstance(w, dict) and isinstance(w.get("z"), list)})}
+
+
+@app.get("/api/projects/{slug}/fassaden")
+def api_fassaden(slug: str):
+    return fassaden_state(project_dir(slug))
+
+
+def _v_rows(rows) -> dict:
+    if not isinstance(rows, dict) or not rows:
+        raise HTTPException(400, "rows: mindestens eine Geschosszeile")
+    out = {}
+    for name, r in rows.items():
+        _check_name(name)
+        if not isinstance(r, dict):
+            raise HTTPException(400, f"rows.{name}: Eintrag erwartet")
+        typ = r.get("type", "kastenfenster")
+        if typ not in ROW_TYPES:
+            raise HTTPException(400, f"rows.{name}.type: einer von {', '.join(ROW_TYPES)}")
+        sur = r.get("surround")
+        if sur not in (None, "", *SURROUNDS):
+            raise HTTPException(400, f"rows.{name}.surround: einer von {', '.join(SURROUNDS)} oder leer")
+        out[name] = {"z": _f(r.get("z"), f"rows.{name}.z", -5, 200), "h": _f(r.get("h"), f"rows.{name}.h", 0.1, 20),
+                     "w": _f(r.get("w"), f"rows.{name}.w", 0.1, 20), "type": typ, "surround": sur or None}
+    return out
+
+
+def _v_eg(eg, n_axes: int) -> list:
+    if not isinstance(eg, list):
+        raise HTTPException(400, "eg: Liste erwartet")
+    out, seen = [], set()
+    for i, g in enumerate(eg):
+        if not isinstance(g, dict):
+            raise HTTPException(400, f"eg[{i}]: Eintrag erwartet")
+        axes = g.get("axes")
+        if not isinstance(axes, list) or not axes or not all(isinstance(a, int) and not isinstance(a, bool) for a in axes):
+            raise HTTPException(400, f"eg[{i}].axes: Achsnummern erwartet")
+        for a in axes:
+            if not 0 <= a < n_axes:
+                raise HTTPException(400, f"eg[{i}]: Achse {a} gibt es nicht ({n_axes} Achsen)")
+            if a in seen:
+                raise HTTPException(400, f"eg: Achse {a} doppelt belegt")
+            seen.add(a)
+        typ = g.get("type")
+        if typ not in EG_TYPES:
+            raise HTTPException(400, f"eg[{i}].type: einer von {', '.join(EG_TYPES)}")
+        e = {"axes": sorted(axes), "type": typ}
+        if g.get("u") is not None:
+            e["u"] = _pair(g["u"], f"eg[{i}].u", -5, 500)
+        elif typ == "haustor":
+            raise HTTPException(400, f"eg[{i}]: Haustor braucht u von bis")
+        if g.get("z") is not None:
+            e["z"] = _pair(g["z"], f"eg[{i}].z", -5, 50)
+        if g.get("keller"):
+            e["keller"] = True
+        out.append(e)
+    return out
+
+
+def _v_cornices(cs) -> list:
+    if not isinstance(cs, list):
+        raise HTTPException(400, "cornices: Liste erwartet")
+    out = []
+    for i, c in enumerate(cs):
+        if not isinstance(c, dict):
+            raise HTTPException(400, f"cornices[{i}]: Eintrag erwartet")
+        name = _check_name(c.get("name") or f"gesims_{i + 1}")
+        steps = c.get("steps")
+        if not isinstance(steps, list) or not steps:
+            raise HTTPException(400, f"{name}: steps fehlen")
+        st = []
+        for s_ in steps:
+            if not isinstance(s_, (list, tuple)) or len(s_) != 3:
+                raise HTTPException(400, f"{name}: Stufe [z von, z bis, Ausladung] erwartet")
+            a, b = _pair(s_[:2], f"{name}.steps", -5, 200)
+            st.append([a, b, _f(s_[2], f"{name}.Ausladung", 0, 3)])
+        e = {"name": name, "steps": st}
+        if isinstance(c.get("consoles"), dict):
+            k = c["consoles"]
+            e["consoles"] = {"z": _pair(k.get("z"), f"{name}.consoles.z", -5, 200),
+                             "w": _f(k.get("w"), f"{name}.consoles.w", 0.01, 3),
+                             "proj": _f(k.get("proj"), f"{name}.consoles.proj", 0, 3)}
+        out.append(e)
+    return out
+
+
+def _v_check(c, pdir: Path) -> dict:
+    if not isinstance(c, dict):
+        raise HTTPException(400, "check: Eintrag erwartet")
+    _pdf_path(pdir, c.get("pdf"))
+    if not isinstance(c.get("u0_px"), (list, tuple)) or len(c["u0_px"]) != 2:
+        raise HTTPException(400, "u0_px: zwei Pixelwerte")
+    out = {"pdf": str(c["pdf"]), "page": int(_num(c.get("page", 1), "page", 1, 999)),
+           "dpi": int(_num(c.get("dpi", 130), "dpi", 30, 600)), "scale": int(_num(c.get("scale", 100), "scale", 1, 5000)),
+           "u0_px": [int(round(_num(v, "u0_px", -100000, 100000))) for v in c["u0_px"]],
+           "span": _pair(c.get("span"), "span", -200, 500), "z": _pair(c.get("z"), "z", -50, 300)}
+    lv = c.get("levels") or []
+    if not isinstance(lv, list):
+        raise HTTPException(400, "levels: Liste")
+    out["levels"] = sorted(_f(v, "levels", -50, 300) for v in lv)
+    return out
+
+
+@app.put("/api/projects/{slug}/fassaden/{name}")
+def api_fassade_set(slug: str, name: str, body: dict = Body(...)):
+    """{axes?, eg?, rows?, cornices?, check?}: ersetzt die betroffenen Bloecke in einem Schritt."""
+    pdir = project_dir(slug)
+    cfg = load_cfg(pdir)
+    if name not in (cfg.get("facades") or {}):
+        raise HTTPException(404, f"Fassade {name} nicht in facades")
+    L = _fac_len(cfg, name)
+    changes = []
+    fs = ((cfg.get("altbau") or {}).get("facades") or {}).get(name) or {}
+    n_axes = len(fs.get("axes") or [])
+    if "axes" in body:
+        ax = body["axes"]
+        if not isinstance(ax, list):
+            raise HTTPException(400, "axes: Liste")
+        ax = sorted(_f(u, "Achse", -1, L + 1) for u in ax)
+        if any(b - a < 0.2 for a, b in zip(ax, ax[1:])):
+            raise HTTPException(400, "Achsen näher als 20 cm")
+        changes.append((["altbau", "facades", name, "axes"], ax))
+        n_axes = len(ax)
+    if "eg" in body:
+        changes.append((["altbau", "facades", name, "eg"], _v_eg(body["eg"], n_axes)))
+    elif "axes" in body and any(a >= n_axes for g in fs.get("eg") or [] for a in g.get("axes", [])):
+        raise HTTPException(400, "EG-Overrides verweisen auf gelöschte Achsen, bitte mitspeichern")
+    if "rows" in body:
+        changes.append((["altbau", "rows"], _v_rows(body["rows"])))
+    if "cornices" in body:
+        changes.append((["altbau", "cornices"], _v_cornices(body["cornices"])))
+    if "check" in body:
+        changes.append((["checks", name], _v_check(body["check"], pdir)))
+    if not changes:
+        raise HTTPException(400, "Nichts zu speichern")
+    _replace(pdir, changes)
+    return fassaden_state(pdir)
+
+
+def _replace(pdir: Path, changes: list) -> None:
+    with _lock:
+        try:
+            replace_blocks(pdir / "project.yaml", changes, history=pdir / ".history")
+        except EditError as e:
+            raise HTTPException(400, str(e))
+        _cfg_cache.pop(str(pdir / "project.yaml"), None)
+
+
+# ---- Dach
+DACH_LISTS = {
+    "walls": {"facade": "fassade", "u": "pair", "z": "pair", "d": "num", "windows": "list", "loggias": "list",
+              "axes_from": "str", "w": "num", "rows": "list"},
+    "slopes": {"facade": "fassade", "u": "pair", "z": "pair", "d": "pair", "roof_windows": "list"},
+    "volumes": {"z": "pair", "clip": "list"},
+    "railings": {"facade": "fassade", "u": "pair", "z": "num", "d": "num", "h": "num", "type": "str"},
+    "slabs": {"z": "num", "t": "num", "clip": "list"},
+}
+DACH_REQUIRED = {"walls": ("facade", "u", "z", "d"), "slopes": ("facade", "u", "z", "d"), "volumes": ("z",),
+                 "railings": ("facade", "u", "z", "d", "h"), "slabs": ("z", "t")}
+
+
+def _jsonish(v, feld: str, depth: int = 0):
+    if depth > 6:
+        raise HTTPException(400, f"{feld}: zu tief verschachtelt")
+    if isinstance(v, bool) or v is None:
+        return v
+    if isinstance(v, (int, float)):
+        return _f(v, feld, -100000, 100000) if isinstance(v, float) else v
+    if isinstance(v, str):
+        if len(v) > 80:
+            raise HTTPException(400, f"{feld}: Text zu lang")
+        return v
+    if isinstance(v, list):
+        return [_jsonish(x, feld, depth + 1) for x in v]
+    if isinstance(v, dict):
+        return {str(k): _jsonish(x, feld, depth + 1) for k, x in v.items()}
+    raise HTTPException(400, f"{feld}: ungültiger Wert")
+
+
+def _v_dach(liste: str, items, cfg: dict) -> list:
+    if liste not in DACH_LISTS:
+        raise HTTPException(404, "Liste unbekannt")
+    if not isinstance(items, list):
+        raise HTTPException(400, "Liste erwartet")
+    facs = set((cfg.get("facades") or {}).keys())
+    schema = DACH_LISTS[liste]
+    out = []
+    for i, it in enumerate(items):
+        if not isinstance(it, dict):
+            raise HTTPException(400, f"{liste}[{i}]: Eintrag erwartet")
+        for k in DACH_REQUIRED[liste]:
+            if it.get(k) in (None, "", []):
+                raise HTTPException(400, f"{liste}[{i}]: {k} fehlt")
+        e = {}
+        for k, v in it.items():
+            if v is None or v == "":
+                continue
+            kind = schema.get(k)
+            feld = f"{liste}[{i}].{k}"
+            if kind == "fassade":
+                if v not in facs:
+                    raise HTTPException(400, f"{feld}: Fassade {v} unbekannt")
+                e[k] = v
+            elif kind == "pair":
+                e[k] = _pair(v, feld, -100, 300)
+            elif kind == "num":
+                e[k] = _f(v, feld, -100, 300)
+            elif kind == "str":
+                e[k] = str(v)[:40]
+            elif kind == "list":
+                if not isinstance(v, list):
+                    raise HTTPException(400, f"{feld}: Liste erwartet")
+                e[k] = _jsonish(v, feld)
+            else:
+                e[k] = _jsonish(v, feld)
+        out.append(e)
+    return out
+
+
+@app.get("/api/projects/{slug}/dach")
+def api_dach(slug: str):
+    pdir = project_dir(slug)
+    cfg = load_cfg(pdir)
+    D = cfg.get("dach") or {}
+    A = cfg.get("altbau") or {}
+    return {"listen": {k: D.get(k) or [] for k in DACH_LISTS}, "schema": DACH_LISTS, "pflicht": DACH_REQUIRED,
+            "fassaden": [{"name": n, "laenge": _fac_len(cfg, n),
+                          "axes": (((A.get("facades") or {}).get(n) or {}).get("axes") or [])}
+                         for n in (cfg.get("facades") or {})],
+            "height": A.get("height"), "slabs": A.get("slabs") or [], "boxes": D.get("boxes") or []}
+
+
+@app.put("/api/projects/{slug}/dach/{liste}")
+def api_dach_set(slug: str, liste: str, body: dict = Body(...)):
+    pdir = project_dir(slug)
+    cfg = load_cfg(pdir)
+    if not isinstance(cfg.get("dach"), dict):
+        raise HTTPException(400, "Abschnitt dach fehlt in project.yaml")
+    items = _v_dach(liste, body.get("eintraege"), cfg)
+    _replace(pdir, [(["dach", liste], items)])
+    return api_dach(slug)
+
+
+# ---- Planabgleich
+def abgleich_state(slug: str, pdir: Path) -> dict:
+    cfg = load_cfg(pdir)
+    out = []
+    for name, c in (cfg.get("checks") or {}).items():
+        cd = pdir / "renders" / "check"
+        e = {"fassade": name, "check": c}
+        for key, fn in (("abgleich", f"{name}_abgleich.jpg"), ("modell", f"{name}_modell.png")):
+            f = cd / fn
+            e[key] = {"url": file_url(slug, f"check/{fn}") + f"?v={int(f.stat().st_mtime)}",
+                      "datum": datetime.fromtimestamp(f.stat().st_mtime).strftime("%d.%m.%Y %H:%M")} if f.is_file() else None
+        try:
+            ppm = ppm_of(c)
+            e["groesse"] = [int(round((c["span"][1] - c["span"][0]) * ppm)), int(round((c["z"][1] - c["z"][0]) * ppm))]
+        except (KeyError, TypeError, ValueError):
+            e["groesse"] = None
+        e["plan"] = f"/api/projects/{slug}/abgleich/{name}/plan.png"
+        out.append(e)
+    jobs = [j for j in queue().list(slug) if j.get("art") == "check"][:5]
+    return {"fassaden": out, "jobs": jobs, "trockenlauf_erzwungen": FORCE_DRY}
+
+
+@app.get("/api/projects/{slug}/abgleich")
+def api_abgleich(slug: str):
+    return abgleich_state(slug, project_dir(slug))
+
+
+@app.get("/api/projects/{slug}/abgleich/{name}/plan.png")
+def api_abgleich_plan(slug: str, name: str):
+    """Planausschnitt in derselben Lage und Groesse wie das orthogonale Modellbild (lib/check.overlay)."""
+    pdir = project_dir(slug)
+    c = (load_cfg(pdir).get("checks") or {}).get(name)
+    if not c:
+        raise HTTPException(404, "Kein Planabgleich für diese Fassade")
+    src = plan_png(pdir, c["pdf"], int(c.get("page", 1)), int(c["dpi"]))
+    ppm = ppm_of(c)
+    w, h = int(round((c["span"][1] - c["span"][0]) * ppm)), int(round((c["z"][1] - c["z"][0]) * ppm))
+    ox = int(round(c["u0_px"][0] + c["span"][0] * ppm))
+    oy = int(round(c["u0_px"][1] - c["z"][1] * ppm))
+    from PIL import Image
+    with Image.open(src) as im:
+        crop = im.convert("RGB").crop((ox, oy, ox + w, oy + h))
+        buf = io.BytesIO()
+        crop.save(buf, "PNG", optimize=True)
+    return Response(buf.getvalue(), media_type="image/png", headers={"Cache-Control": "no-cache"})
+
+
+@app.post("/api/projects/{slug}/abgleich")
+def api_abgleich_start(slug: str, body: dict = Body(...)):
+    pdir = project_dir(slug)
+    name = str(body.get("fassade", ""))
+    cfg = load_cfg(pdir)
+    if name not in (cfg.get("checks") or {}):
+        raise HTTPException(400, f"Für {name} fehlt checks.{name} (im Fassaden-Editor kalibrieren)")
+    dry = bool(body.get("dry_run") or FORCE_DRY)
+    if dry:
+        cmd = [sys.executable, "-c", "import time;print('Trockenlauf: kein Blender, vorhandenes Abgleichsbild bleibt',"
+               " flush=True);time.sleep(1.5)"]
+    else:
+        cmd = [sys.executable, str(CLI), "check", str(pdir), "--facade", name]
+    return queue().add_job(slug, "check", cmd=cmd, dry=dry, cam="planabgleich", light=name,
+                           befehl=f"immoviz.py check projects/{slug} --facade {name}" + (" (Trockenlauf)" if dry else ""))
+
+
+# ---- Neues Objekt
+VORLAGE = ROOT / "projects" / "_vorlage"
+SLUG_RE = re.compile(r"[a-z0-9][a-z0-9-]{1,60}")
+
+
+@app.post("/api/projects")
+def api_project_new(body: dict = Body(...)):
+    """{slug, name, adresse, kunde, origin_gk: [x, y], x_axis_deg, fassade_a: {name, laenge},
+    fassade_b?: {name, laenge}, geo: bool, dry_run: bool}"""
+    slug = str(body.get("slug", "")).strip()
+    if not SLUG_RE.fullmatch(slug):
+        raise HTTPException(400, "Slug: Kleinbuchstaben, Ziffern und Bindestrich, z. B. hauptstrasse-12")
+    target = PROJECTS / slug
+    if target.exists():
+        raise HTTPException(409, f"Projekt {slug} gibt es schon")
+    tpl = VORLAGE / "project.yaml"
+    if not tpl.is_file():
+        raise HTTPException(500, "Vorlage projects/_vorlage/project.yaml fehlt")
+    name = str(body.get("name") or slug).strip()[:120]
+    adresse = str(body.get("adresse") or "").strip()[:200]
+    if not adresse:
+        raise HTTPException(400, "Adresse fehlt")
+    og = body.get("origin_gk")
+    if not isinstance(og, (list, tuple)) or len(og) != 2:
+        raise HTTPException(400, "Ursprung: GK-Koordinaten x und y (EPSG:31256)")
+    origin = [round(_num(og[0], "GK x", -200000, 200000), 2), round(_num(og[1], "GK y", 0, 1000000), 2)]
+    deg = round(_num(body.get("x_axis_deg"), "Fassadenrichtung", -360, 360), 2)
+    fa = body.get("fassade_a") or {}
+    fb = body.get("fassade_b") or None
+    na, la = _check_name(fa.get("name")), _f(fa.get("laenge"), "Länge Fassade A", 1, 500)
+    facades = {na: {"a": [0.0, 0.0], "b": [la, 0.0]}}
+    if fb and fb.get("name"):
+        nb, lb = _check_name(fb.get("name")), _f(fb.get("laenge"), "Länge Fassade B", 1, 500)
+        if nb == na:
+            raise HTTPException(400, "Fassaden brauchen verschiedene Namen")
+        facades = {nb: {"a": [0.0, lb], "b": [0.0, 0.0]}, **facades}
+    from ruamel.yaml.scalarstring import DoubleQuotedScalarString as DQ
+    tmp = PROJECTS / f".neu-{uuid.uuid4().hex[:8]}"
+    try:
+        tmp.mkdir(parents=True)
+        for d in ("quellen", "data", "renders"):
+            (tmp / d).mkdir()
+        shutil.copy2(tpl, tmp / "project.yaml")
+        if (VORLAGE / "prompts.yaml").is_file():
+            shutil.copy2(VORLAGE / "prompts.yaml", tmp / "prompts.yaml")
+        first = next(iter(facades))
+        changes = [
+            (["project", "name"], name), (["project", "slug"], slug),
+            (["project", "client"], str(body.get("kunde") or "").strip()[:120] or "offen"),
+            (["site", "address"], adresse), (["site", "origin_gk"], origin), (["site", "x_axis_deg"], deg),
+            (["facades"], facades),
+            (["altbau", "facades"], {n: {"axes": [], "endcaps": [], "eg": []} for n in facades}),
+            (["checks"], {first: {"pdf": DQ(f"quellen/{first}_ansicht.pdf"), "page": 1, "dpi": 130, "scale": 100,
+                                  "u0_px": [0, 0], "span": [-2.0, round(_fac_len({"facades": facades}, first) + 2, 2)],
+                                  "z": [-0.5, 26.5], "levels": []}}),
+        ]
+        replace_blocks(tmp / "project.yaml", changes)
+        tmp.rename(target)
+    except EditError as e:
+        shutil.rmtree(tmp, ignore_errors=True)
+        raise HTTPException(400, str(e))
+    except Exception:
+        shutil.rmtree(tmp, ignore_errors=True)
+        raise
+    job = None
+    if body.get("geo"):
+        dry = bool(body.get("dry_run") or FORCE_DRY)
+        cmd = [sys.executable, "-c", "import time;print('Trockenlauf: keine Abfrage bei Stadt Wien', flush=True);"
+               "time.sleep(1)"] if dry else [sys.executable, str(CLI), "geo", str(target)]
+        job = queue().add_job(slug, "geo", cmd=cmd, dry=dry, cam="umgebung", light="",
+                              befehl=f"immoviz.py geo projects/{slug}" + (" (Trockenlauf)" if dry else ""))
+    return {"slug": slug, "job": job}
+
+
+# ------------------------------------------------------------------ Higgsfield-Veredelung
+HF: Higgsfield | None = None
+
+
+def hf() -> Higgsfield:
+    global HF
+    if HF is None:
+        HF = Higgsfield(dry=FORCE_DRY)
+    return HF
+
+
+@app.get("/api/higgsfield")
+def api_hf_info():
+    return hf().info()
+
+
+def prompts_file(pdir: Path) -> Path:
+    f = pdir / "prompts.yaml"
+    return f if f.is_file() else VORLAGE / "prompts.yaml"
+
+
+@app.get("/api/projects/{slug}/prompts")
+def api_prompts(slug: str):
+    pdir = project_dir(slug)
+    f = prompts_file(pdir)
+    try:
+        data = yaml.safe_load(f.read_text(encoding="utf-8")) or {}
+    except (OSError, yaml.YAMLError) as e:
+        raise HTTPException(500, f"prompts.yaml nicht lesbar: {e}")
+    cfg = load_cfg(pdir)
+    lights = {k: (v or {}).get("season") for k, v in (cfg.get("lights") or {}).items()}
+    return {"datei": f.relative_to(PROJECTS).as_posix() if f.is_relative_to(PROJECTS) else "projects/_vorlage/prompts.yaml",
+            "eigene": f.parent == pdir, "bausteine": data, "lichter": lights}
+
+
+def hf_index(pdir: Path) -> dict:
+    return read_json(pdir / "renders" / "higgsfield" / "index.json", {})
+
+
+def _hf_target(pdir: Path, cam: str, light: str, ext: str) -> Path:
+    zeit = datetime.now().strftime("%Y%m%d-%H%M%S")
+    d = pdir / "renders" / "higgsfield"
+    out = d / f"{cam}_{light}_{zeit}{ext}"
+    i = 2
+    while out.exists():
+        out = d / f"{cam}_{light}_{zeit}-{i}{ext}"
+        i += 1
+    return out
+
+
+def _guess_cam_light(slug: str, pdir: Path, rel: str) -> tuple[str, str]:
+    cfg = load_cfg(pdir)
+    cams, lights = list((cfg.get("cameras") or {}).keys()), list((cfg.get("lights") or {}).keys())
+    stem = Path(rel).stem
+    hit = match_strict(slug, stem, cams, lights) or match_loose(stem, cams, lights)
+    if hit:
+        return hit[0], hit[1]
+    s = re.sub(r"[^a-z0-9_]+", "_", stem.lower()).strip("_")[:40] or "bild"
+    return s, "frei"
+
+
+def _hf_register(pdir: Path, out: Path, meta: dict) -> None:
+    with _lock:
+        idx = hf_index(pdir)
+        idx[f"higgsfield/{out.name}"] = meta
+        write_json(pdir / "renders" / "higgsfield" / "index.json", idx)
+
+
+@app.post("/api/projects/{slug}/veredeln")
+def api_veredeln(slug: str, body: dict = Body(...)):
+    """{rel, prompt, refs: [rel], aspect, resolution, cam?, light?}: Bild mit Referenzen veredeln (Queue-Job)."""
+    pdir = project_dir(slug)
+    rel = str(body.get("rel", ""))
+    src = safe_rel(pdir, rel)
+    if src.suffix.lower() not in IMG_EXT:
+        raise HTTPException(400, "Nur Bilder lassen sich veredeln")
+    prompt = str(body.get("prompt") or "").strip()
+    if len(prompt) < 20 or len(prompt) > 6000:
+        raise HTTPException(400, "Prompt: 20 bis 6000 Zeichen")
+    refs = [str(r) for r in (body.get("refs") or [])][:4]
+    ref_paths = [safe_rel(pdir, r) for r in refs]
+    if any(p.suffix.lower() not in IMG_EXT for p in ref_paths):
+        raise HTTPException(400, "Referenzen müssen Bilder sein")
+    aspect, res = str(body.get("aspect") or "3:2"), str(body.get("resolution") or "2k").lower()
+    from studio.higgsfield import ASPECTS, RESOLUTIONS
+    if aspect not in ASPECTS or res not in RESOLUTIONS:
+        raise HTTPException(400, "Format oder Auflösung ungültig")
+    cam, light = _guess_cam_light(slug, pdir, rel)
+    cam = _check_name(body.get("cam") or cam)
+    light = _check_name(body.get("light") or light)
+    client = hf()
+    credits = credits_estimate("bild", res)
+
+    def run(log):
+        log(f"Modus: {'Trockenlauf (Ergebnis = Eingangsbild)' if client.dry else 'live'}")
+        urls = []
+        for p in [src, *ref_paths]:
+            log(f"Upload {p.name}")
+            urls.append(client.upload(p))
+        job = client.generate_image(prompt, urls, aspect, res)
+        log(f"Auftrag {job.get('request_id')}")
+        st = client.wait(job, log)
+        if st["status"] != "completed" or not st["urls"]:
+            raise HiggsfieldError(f"Higgsfield: {st['status']} {st.get('fehler') or ''}".strip())
+        out = _hf_target(pdir, cam, light, ".jpg")
+        client.download(st["urls"][0], out)
+        meta = {"art": "bild", "quelle": rel, "refs": refs, "prompt": prompt, "aspect": aspect, "resolution": res,
+                "modell": "nano_banana_pro", "credits_geschaetzt": credits, "request_id": st["request_id"],
+                "trockenlauf": client.dry, "erstellt": now_iso()}
+        _hf_register(pdir, out, meta)
+        log(f"Gespeichert: renders/higgsfield/{out.name}")
+        return {"rel": f"higgsfield/{out.name}"}
+
+    return queue().add_job(slug, "higgsfield", fn=run, dry=client.dry, cam=cam, light=light, credits=credits,
+                           befehl=f"Higgsfield Bild {aspect} {res}: {rel}" + (" (Trockenlauf)" if client.dry else ""))
+
+
+@app.post("/api/projects/{slug}/video")
+def api_video(slug: str, body: dict = Body(...)):
+    """{start, end?, middle?: [rel], dauer: 5|10, prompt}: Bild-zu-Video (Kling) als Queue-Job."""
+    pdir = project_dir(slug)
+    start = str(body.get("start", ""))
+    sp = safe_rel(pdir, start)
+    end = str(body.get("end") or "")
+    ep = safe_rel(pdir, end) if end else None
+    middle = [str(m) for m in (body.get("middle") or [])][:4]
+    mps = [safe_rel(pdir, m) for m in middle]
+    if any(p.suffix.lower() not in IMG_EXT for p in [sp, *mps] + ([ep] if ep else [])):
+        raise HTTPException(400, "Start, Ende und Zwischenbilder müssen Bilder sein")
+    try:
+        dauer = int(body.get("dauer", 5))
+    except (TypeError, ValueError):
+        raise HTTPException(400, "Dauer 5 oder 10 Sekunden")
+    if dauer not in (5, 10):
+        raise HTTPException(400, "Dauer 5 oder 10 Sekunden")
+    prompt = str(body.get("prompt") or "").strip()
+    if len(prompt) < 10 or len(prompt) > 3000:
+        raise HTTPException(400, "Prompt: 10 bis 3000 Zeichen")
+    cam, light = _guess_cam_light(slug, pdir, start)
+    client = hf()
+    credits = credits_estimate("video", duration=dauer)
+
+    def run(log):
+        log(f"Modus: {'Trockenlauf (Standbild-Video aus dem Startbild)' if client.dry else 'live'}")
+        su = client.upload(sp)
+        eu = client.upload(ep) if ep else None
+        mu = [client.upload(p) for p in mps]
+        if not client.dry and (eu or mu):
+            log("Hinweis: Endbild und Zwischenbilder sind im dokumentierten Kling-Schema nicht vorgesehen, "
+                "gesendet wird nur das Startbild (siehe higgsfield/API.md)")
+        job = client.generate_video(su, eu, mu, dauer, prompt)
+        log(f"Auftrag {job.get('request_id')}")
+        st = client.wait(job, log, timeout=1800)
+        if st["status"] != "completed" or not st["urls"]:
+            raise HiggsfieldError(f"Higgsfield: {st['status']} {st.get('fehler') or ''}".strip())
+        out = _hf_target(pdir, cam, light, ".mp4")
+        client.download(st["urls"][-1], out, art="video", duration=dauer)
+        _hf_register(pdir, out, {"art": "video", "quelle": start, "ende": end or None, "mitte": middle,
+                                 "prompt": prompt, "dauer": dauer, "modell": "kling", "credits_geschaetzt": credits,
+                                 "request_id": st["request_id"], "trockenlauf": client.dry, "erstellt": now_iso()})
+        log(f"Gespeichert: renders/higgsfield/{out.name}")
+        return {"rel": f"higgsfield/{out.name}"}
+
+    return queue().add_job(slug, "video", fn=run, dry=client.dry, cam=cam, light=light, credits=credits,
+                           befehl=f"Higgsfield Video {dauer} s: {start}" + (f" bis {end}" if end else "")
+                           + (" (Trockenlauf)" if client.dry else ""))
 
 
 # ------------------------------------------------------------------ Zugriffsschutz
