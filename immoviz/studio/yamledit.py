@@ -470,12 +470,28 @@ def _emit(key_text: str | None, val, col: int, old, lines, old_start: int | None
                              ci["comment"] if ci else "", ci["first"] if ci else ""))
     else:
         ccol = next(iter(info.values()))["col"] if info else col + 2
+        # Zuordnung neuer zu alten Eintraegen: erst unveraenderte (gleicher Inhalt, bevorzugt gleiche Position),
+        # dann gleiche Position, sofern der alte Eintrag noch frei ist. So wandern Kommentare mit ihrem Eintrag.
+        olds = list(old) if isinstance(old, list) else []
+        match, used = {}, set()
         for i, v in enumerate(val):
-            ci = info.get(i)
+            cands = [i] if i < len(olds) else []
+            cands += [j for j in range(len(olds)) if j != i]
+            for j in cands:
+                if j not in used and j in info and _same(olds[j], v):
+                    match[i] = (j, True)
+                    used.add(j)
+                    break
+        for i, v in enumerate(val):
+            if i not in match and i < len(olds) and i not in used and i in info:
+                match[i] = (i, False)
+                used.add(i)
+        for i, v in enumerate(val):
+            j, same = match.get(i, (None, False))
+            ci = info.get(j) if j is not None else None
             if ci:
                 out.extend(x.rstrip("\n") for x in ci["lead"])
-            child_old = old[i] if isinstance(old, list) and i < len(old) else None
-            if ci and _same(child_old, v):
+            if ci and same:
                 out.extend(x.rstrip("\n") for x in lines[ci["start"]:ci["end"] + 1])
                 continue
             # Listeneintraege immer als Flow; war der alte Eintrag einzeilig, bleibt er einzeilig
