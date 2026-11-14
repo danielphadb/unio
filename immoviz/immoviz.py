@@ -38,6 +38,7 @@ def main():
     it.add_argument("project")
     it.add_argument("--top", default="top07")
     it.add_argument("--final", action="store_true")
+    it.add_argument("--cam", default="", help="nur diese Kameras, z. B. top07_zimmer,top12_kueche")
     a = ap.parse_args()
     pdir = Path(a.project).resolve()
 
@@ -94,7 +95,7 @@ def _svcheck(pdir):
 def _interior(a, pdir):
     from lib.interior import render_apartments
     t = time.time()
-    res = render_apartments(pdir, a.top.split(","), not a.final)
+    res = render_apartments(pdir, a.top.split(","), not a.final, [c for c in a.cam.split(",") if c])
     print(json.dumps({"renders": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1, default=str))
 
 

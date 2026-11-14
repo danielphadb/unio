@@ -158,8 +158,15 @@ class Apartment:
         self.walls[-b:, :] = True
         self.walls[:, :b] = True
         self.walls[:, -b:] = True
+        H, W = self.walls.shape
+        m = b + int(0.6 / self.cell_m)   # Öffnungen nahe am Rand bis zum Rand freihalten (Fenster in der Außenwand)
         for op in self.openings:
-            self.walls[op["r0"]:op["r1"], op["c0"]:op["c1"]] = False
+            r0, r1, c0, c1 = op["r0"], op["r1"], op["c0"], op["c1"]
+            r0 = 0 if r0 <= m else r0
+            r1 = H if r1 >= H - m else r1
+            c0 = 0 if c0 <= m else c0
+            c1 = W if c1 >= W - m else c1
+            self.walls[r0:r1, c0:c1] = False
 
     # Planpixel der Zelle -> lokale Weltkoordinaten
     def cell_xy(self, r, c):
@@ -328,12 +335,13 @@ def build_materials(bpy, mats):
     return mats
 
 
-def render_apartments(project_dir: Path, names: list[str], preview: bool = True):
+def render_apartments(project_dir: Path, names: list[str], preview: bool = True, cams: list[str] | None = None):
     import bpy
     from . import build as B
     from . import materials as M
     W = yaml.safe_load((project_dir / "wohnungen.yaml").read_text())
     cfg, ctx = B.load_project(project_dir)
+    cfg["lights"].update(W.get("lichter", {}))   # Innenraum-Lichtstimmungen, project.yaml bleibt unverändert
     scene = B.build_scene(cfg, ctx)
     objekt = bpy.data.collections.get("Objekt")
     mats = {m.name: m for m in bpy.data.materials}
@@ -366,6 +374,8 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True)
         apt.slabs(mw)
         objs = [mb.to_object(bpy, mats, coll) for mb in (mw, mf, mg)]
         for cam_name, cam in a["kameras"].items():
+            if cams and f"{name}_{cam_name}" not in cams:
+                continue
             px, py = cam.get("pos_px") or cam["pos"]
             tx, ty = cam.get("target_px") or cam["target"]
             x, y = apt.px_to_local(px, py)

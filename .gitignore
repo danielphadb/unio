@@ -10,3 +10,4 @@ immoviz/projects/*/renders/*.png
 immoviz/projects/*/quellen/*.pdf
 immoviz/projects/*/renders/streetview/
 immoviz/projects/*/data/plan_cache/
+immoviz/projects/*/mood/

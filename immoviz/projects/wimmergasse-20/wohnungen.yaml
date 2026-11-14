@@ -11,6 +11,11 @@ plaene:
     cell_px: 3                 # Rasterzelle 2,5 cm
     corner_px: [4178, 2536]    # Gebäudeecke Wimmergasse/Stolberggasse (Außenkante)
 
+# Innenraum-Lichtstimmungen (werden zu project.yaml lights ergänzt). Wimmergasse 1. OG bekommt wegen der
+# Häuser gegenüber erst ab ca. 50 Grad Sonnenhöhe direkte Sonne, daher Mai frühnachmittags.
+lichter:
+  mai_nachmittag: {date: "2026-05-20", time: "14:30", tz: 2, exposure: 0.0, interior: 0.0, aerosol: 1.5, season: fruehling}
+
 render:
   preview_resolution: [1200, 800]
   resolution: [2400, 1600]
@@ -27,12 +32,12 @@ wohnungen:
     window: {sill: 0.92, top: 2.93}   # aus der Straßenansicht: Fenster 1.OG z 5,57 bis 7,58
     bands:
       - {type: fenster, px: [1550, 2440, 2700, 2600]}   # Straßenfassade Wimmergasse
-    light: herbst
-    exposure: 2.4
-    kameras:
-      wohnkueche:        {pos_px: [2105, 1940], target_px: [1700, 2470], lens: 22}
-      wohnkueche_zurueck: {pos_px: [1720, 2400], target_px: [2110, 1930], lens: 22}
-      zimmer:            {pos_px: [2570, 2165], target_px: [2220, 2470], lens: 22}
+    light: mai_nachmittag
+    exposure: 1.6
+    kameras:   # Shotliste mood_interior.md: S1 Essplatz zum Fenster, S2 Wohnen Gegenblick, S3 Schlafzimmer
+      wohnkueche:        {pos_px: [2105, 1940], target_px: [1700, 2470], lens: 28, h: 1.35}
+      wohnkueche_zurueck: {pos_px: [1720, 2400], target_px: [2110, 1930], lens: 28, h: 1.25}
+      zimmer:            {pos_px: [2190, 2290], target_px: [2600, 2290], lens: 32, h: 1.10}
 
   top12:
     plan: og1
@@ -48,8 +53,10 @@ wohnungen:
     light: vormittag
     exposure: 2.2
     kameras:
-      wohnen_loggia: {pos_px: [3110, 1080], target_px: [2620, 790], lens: 22}
-      zimmer_ecke:   {pos_px: [3575, 1075], target_px: [4090, 760], lens: 22}
+      # S4 Küche: die Kochnische ist nur 1,3 m tief, frontal geht nicht, daher Schrägblick aus dem Wohnraum
+      kueche:        {pos_px: [2960, 1110], target_px: [3350, 950], lens: 28, h: 1.40}
+      wohnen_loggia: {pos_px: [3110, 1080], target_px: [2620, 790], lens: 28, h: 1.35}    # S5
+      zimmer_ecke:   {pos_px: [3575, 1075], target_px: [4090, 760], lens: 24}
 
   top35:
     plan: manuell
@@ -90,5 +97,6 @@ wohnungen:
     light: golden_hour
     exposure: 1.4
     kameras:
-      wohnen_terrasse: {pos: [7.6, 7.9], target: [2.0, 2.3], lens: 22}
-      dachschraege:    {pos: [2.7, 7.9], target: [7.2, 2.6], lens: 22}
+      wohnen_terrasse: {pos: [7.6, 7.9], target: [2.0, 2.3], lens: 28, h: 1.35}   # S7 Essplatz mit Terrassenblick
+      dachschraege:    {pos: [2.7, 7.9], target: [7.2, 2.6], lens: 24, h: 1.30}   # S6 Wohnküche unter der Schräge
+      kuecheninsel:    {pos: [4.0, 4.6], target: [8.0, 4.6], lens: 50, h: 1.20}   # S8 Detail, Küche an der Rückwand

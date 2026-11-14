@@ -17,7 +17,7 @@ Geschosse und Dachkanten mit den Plänen überein, was reine KI-Bilder nicht lei
 | 3 Licht und Kamera | Sonnenstand nach Datum und Uhrzeit, Kamerasets mit stürzenden Linien korrigiert | `project.yaml` | fertig |
 | 4 Rendering | Cycles, AgX-Farbmanagement, Vorschau und Final | `immoviz.py render` | fertig |
 | 5 Veredelung | Fotorealismus, Bäume, Leben, Upscaling, Kamerafahrten | Higgsfield, siehe `higgsfield/LEITFADEN.md` | aktiv |
-| 6 Innenräume | Grundriss zu Raum, Möblierung (Staging), Materialien aus BAB | geplant | offen |
+| 6 Innenräume | Grundriss zu Raum, Möblierung (Staging), Materialien aus BAB | `immoviz.py interior`, siehe `projects/<objekt>/WOHNUNGEN.md` | aktiv |
 | 7 Freigabe | Abgleich Plan, BAB, Bauträger; Kennzeichnung „unverbindliche Visualisierung“ | manuell | offen |
 
 ## Installation
