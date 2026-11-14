@@ -157,14 +157,14 @@ schnitt:
       titel: Top 35
       polygon: [[2.1, 2.1], [8.0, 2.1], [8.0, 8.5], [2.1, 8.5]]                 # Innenraum laut wohnungen.top35.walls
   kamera:                       # Axonometrie (orthografisch) von schräg oben auf die Ecke Wimmergasse/Stolberggasse
-    ziel: [8.0, 12.5, 6.0]
-    azimut: 225                 # Richtung Ziel -> Kamera im lokalen System (225 = über der Kreuzung)
-    hoehe: 40
-    breite: 42                  # sichtbare Breite in Metern
+    ziel: [7.0, 12.0, 10.0]
+    azimut: 205                 # Richtung Ziel -> Kamera im lokalen System (225 = Diagonale über der Kreuzung)
+    hoehe: 50
+    breite: 60                  # sichtbare Breite in Metern
     abstand: 200
   licht: vormittag
   exposure: -1.0               # Weißmodell in praller Sonne, sonst brennen die Weißtöne aus
-  farben: {wand: "#EDEAE4", boden: "#DDD7CD", schnitt: "#1B1A19", dach: "#B3ADA4", rahmen: "#F4F2ED"}
+  farben: {wand: "#EDEAE4", boden: "#D3CBBE", schnitt: "#1B1A19", dach: "#B3ADA4", rahmen: "#F4F2ED"}
   zustaende:
     - {name: s00, titel: Ganzes Haus, schnitt: null}
     - {name: s01, titel: 3. Dachgeschoss, geschoss: dg3, schnitt: 22.20, wohnungen: [top35]}

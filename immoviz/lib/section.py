@@ -343,13 +343,15 @@ def build_model_materials(bpy, S: dict) -> dict:
     farben = S.get("farben", {})
     c = lambda k, d: M.hex_rgb(farben.get(k, d))
     mats = {
-        "wand": M.plaster(bpy, "modell_wand", c("wand", "#E9E5DE"), var=0.012, bump=0.015),
-        "boden": M.plaster(bpy, "modell_boden", c("boden", "#F3F0EA"), var=0.01, bump=0.01),
-        "schnitt": M.simple(bpy, "modell_schnitt", c("schnitt", "#2E2C2A"), 0.9),
-        "dach": M.plaster(bpy, "modell_dach", c("dach", "#B9B3AA"), var=0.015, bump=0.015),
+        # ohne Bump: geschnittene Hero-Teile zeigen Rückseiten, Bump färbt diese schwarz
+        "wand": M.simple(bpy, "modell_wand", c("wand", "#EDEAE4"), 0.85),
+        "boden": M.simple(bpy, "modell_boden", c("boden", "#DDD7CD"), 0.8),
+        "schnitt": M.simple(bpy, "modell_schnitt", c("schnitt", "#1B1A19"), 0.95, **{"Specular IOR Level": 0.2}),
+        "dach": M.simple(bpy, "modell_dach", c("dach", "#B3ADA4"), 0.7),
         "rahmen": M.simple(bpy, "modell_rahmen", c("rahmen", "#F6F4EF"), 0.5),
-        "wohnung": M.simple(bpy, "modell_wohnung", M.hex_rgb(UNIO_ORANGE), 0.55,
-                            **{"Emission Color": (*M.hex_rgb(UNIO_ORANGE), 1.0), "Emission Strength": 0.15}),
+        # Grundfarbe abgedunkelt: in praller Sonne bleicht AgX das Signalorange sonst zu Pastell aus
+        "wohnung": M.simple(bpy, "modell_wohnung", tuple(v * S.get("orange_faktor", 0.55) for v in M.hex_rgb(UNIO_ORANGE)),
+                            0.6, **{"Specular IOR Level": 0.2}),
     }
     return mats
 
@@ -389,11 +391,11 @@ def build_state(bpy, cfg, ctx, W, S, floors, mats, lib, coll, state):
     eg = G[S["reihenfolge"][0]]
     c = _cut(S.get("sockel_unten", -0.5), eg["ffb"], zc)
     if c:
-        for pl in plates:
-            _extrude(mb, pl, c[0], c[1], M_["wand"], M_["schnitt"] if c[2] else M_["boden"])
+        for i, pl in enumerate(plates):   # Ergänzungen je 1 mm tiefer: deckungsgleiche Flächen werden in Cycles schwarz
+            _extrude(mb, pl, c[0], c[1] - 0.001 * i, M_["wand"], M_["schnitt"] if c[2] else M_["boden"])
     # massive Straßenwände mit den Öffnungen der Straßenansicht
     for fname in cfg["altbau"]["facades"]:
-        facade_wall(mb, F[fname], facade_holes(cfg, fname), S.get("sockel_unten", -0.5), cfg["altbau"]["height"],
+        facade_wall(mb, F[fname], facade_holes(cfg, fname), S.get("sockel_unten", -0.5), cfg["altbau"]["height"] - 0.006,
                     0.01, S.get("fassadenwand_m", 0.65), zc, M_)
     # Regelgeschosse: Wände und Decke darüber
     for key in S["reihenfolge"]:
@@ -405,8 +407,8 @@ def build_state(bpy, cfg, ctx, W, S, floors, mats, lib, coll, state):
         stats[key] = fl.build(mb, g["ffb"], uk, zc, g.get("fenster", {}), M_)
         c = _cut(uk, ok, zc)
         if c:
-            for pl in plates:
-                _extrude(mb, pl, c[0], c[1], M_["wand"], M_["schnitt"] if c[2] else M_["boden"])
+            for i, pl in enumerate(plates):
+                _extrude(mb, pl, c[0], c[1] - 0.001 * i, M_["wand"], M_["schnitt"] if c[2] else M_["boden"])
         if key == geschoss:
             for wk in state.get("wohnungen", []):
                 h = S["wohnungen"][wk]
@@ -431,8 +433,9 @@ def build_state(bpy, cfg, ctx, W, S, floors, mats, lib, coll, state):
                 continue
             if zc is None or i in keep:
                 c = _cut(v["z"][0], v["z"][1], zc)
-                if c:
-                    _extrude(mb, poly, c[0], c[1], M_["dach"], M_["schnitt"] if c[2] else M_["dach"])
+                if c:     # ungeschnitten 1 cm (plus Versatz je Volumen) unter die Deckenplatte, sonst deckungsgleich
+                    _extrude(mb, poly, c[0], c[1] if c[2] else c[1] - 0.01 - 0.002 * i, M_["dach"],
+                             M_["schnitt"] if c[2] else M_["dach"])
                 continue
             # entfernter Innenraum im Dach: nur Außenwände am Umriss (Hof, Feuermauer) stehen lassen
             c = _cut(v["z"][0], v["z"][1], zc)
@@ -447,9 +450,9 @@ def build_state(bpy, cfg, ctx, W, S, floors, mats, lib, coll, state):
                     continue
                 _edge_wall(mb, a, b, dg.get("aussenwand_m", 0.35), c[0], c[1], M_["wand"],
                            M_["schnitt"] if c[2] else M_["wand"])
-        for s in slabs:
+        for i, s in enumerate(slabs):     # überlappende Platten gleicher Höhe je 1,5 mm versetzt (Cycles-Schatten)
             poly, _ = K.clip_polygon(footprint, s["clip"], F)
-            c = _cut(s["z"] - s["t"], s["z"], zc)
+            c = _cut(s["z"] - s["t"], s["z"] - 0.0015 * i, zc)
             if poly and c:
                 _extrude(mb, poly, c[0], c[1], M_["dach"], M_["schnitt"] if c[2] else M_["boden"])
         if dg and zc is not None:

@@ -85,6 +85,13 @@ Offen für B: Team-Anmeldung (bis dahin nur lokal), Higgsfield-Aufträge und Kos
 Final-Rendering aus der Oberfläche, Export, Bearbeiten der Walkthrough-Pfade. Next.js laut Abschnitt 4 erst,
 wenn die Oberfläche öffentlich erreichbar wird.
 
+**Stand Phase E (14.11.2026):** `walkthrough` (Reel 1) und `schnitt` (Reel 2) laufen auf der Kommandozeile.
+`schnitt` rendert aus einer festen Axonometrie sechs Zustände (ganzes Haus, Schnitt im 3. DG, 3., 2., 1. OG, EG)
+im Modellbau-Look; Innenwände aus den Vektor-Grundrissen EG bis 3. OG, Dachgeschosse aus der Dachkubatur,
+Top 7, Top 12 und Top 35 in #FFAA09. Kontrolle je Geschoss über `check_<geschoss>.jpg`. Offen: Treppen und
+Grundrisse 1. bis 3. DG, Schnittvideo (Zustände überblenden oder Schnittebene animieren), Projektseite mit
+anklickbaren Wohnungen (Fläche, Preis aus dem Hub), 360-Ansichten.
+
 ## 6. Bildpaket je Objekt (Standard)
 
 Die objektbezogene Shotlist steht in `projects/<objekt>/mood_analyse.md` (für Das Wimmer: 15 Motive,

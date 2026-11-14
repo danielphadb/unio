@@ -66,6 +66,44 @@ die Bild-KI richtet ein, das Videomodell verbindet die Standbilder.
 
 Ergebnisse liegen unter `renders/walkthrough/<top>/` (k = Blender, staging_k = eingerichtet, Video als MP4).
 
+## Schnittansicht (Gebäude geschossweise aufgeschnitten)
+
+Vorbild ist das Revit-Reel aus KONZEPT.md, Abschnitt 8: eine feste Axonometrie-Kamera von schräg oben auf die Ecke,
+das Gebäude wird oberhalb einer Schnitthöhe entfernt, das Geschoss darunter ist von oben mit Innenwänden zu sehen.
+Modellbau-Ästhetik (warmweißes Modell, geschnittene Wände dunkel, Böden hell), echte Sonne, Umgebung wie bei `render`.
+Hervorgehobene Wohnungen liegen als Bodenfläche in UNIO-Signalfarbe #FFAA09 im Modell.
+
+```bash
+# nur Kontrollbilder Plan gegen extrahierte Wände (Sekunden)
+.venv-immoviz/bin/python immoviz/immoviz.py schnitt immoviz/projects/wimmergasse-20 --nur-check
+# Vorschau aller Zustände (640x400, 8 Samples), einzelne Zustände mit --zustand s01,s04
+.venv-immoviz/bin/python immoviz/immoviz.py schnitt immoviz/projects/wimmergasse-20 --preview
+# Final (1920x1080, 48 Samples, ca. 4 bis 5 Minuten je Bild auf 4 CPU-Kernen)
+.venv-immoviz/bin/python immoviz/immoviz.py schnitt immoviz/projects/wimmergasse-20
+```
+
+Ergebnisse unter `renders/schnitt/`: `s00.png` bis `s05.png`, `uebersicht.jpg` (alle Zustände mit Titel und
+Schnitthöhe), `check_<geschoss>.jpg` (Plan hell, Wände rot, Fenster blau, Türen grün, OGD-Umriss türkis,
+Umrissergänzung violett, Wohnungen orange).
+
+Konfiguration in `wohnungen.yaml` unter `schnitt:` (Code in `lib/section.py`):
+
+| Schlüssel | Inhalt |
+|---|---|
+| `geschosse` | je Geschoss Planseite, `corner_px` (Gebäudeecke im Raster, je Blatt prüfen), `ffb` (Kote), `decke` [UK, OK], Fensterbrüstung und -sturz; Dachgeschoss als `typ: dach` aus der Dachkubatur plus Wohnung aus `wohnungen` |
+| `umriss_plus` | Polygone, die der Plan als Gebäude zeigt, der OGD-Umriss aber nicht |
+| `fassadenwand_m` | Straßenwände massiv mit den Öffnungen aus `altbau.rows` (wie die Fassade), Planwände erst dahinter |
+| `wohnungen` | hervorgehobene Wohnungen: Geschoss, Polygon lokal (x Stolberggasse, y Wimmergasse), `ohne` für Aussparungen |
+| `kamera` | Ziel, Azimut, Höhenwinkel, sichtbare Breite (orthografisch) |
+| `zustaende` | Name, Titel, Geschoss, Schnitthöhe (FFB + 1,20 m), Wohnungen |
+| `licht`, `exposure`, `farben` | Lichtstimmung aus `project.yaml`, Belichtung, Modellfarben |
+
+Grenzen: Wände nur aus Vektorplänen mit grau gefüllten Wänden (wie `interior`); Treppen, Möbel und Schächte fehlen,
+der Boden läuft über das Stiegenhaus. 1. und 2. DG haben keinen Grundriss und bleiben geschlossene Volumen; im 3. DG
+gibt es nur die Wände von Top 35, die übrigen Flächen sind offen mit Außenwänden am Umriss. Deckenstärken und die
+Kote des 2. OG sind Annahmen. Deckungsgleiche Flächen werden in Cycles schwarz, daher sind gleich hohe Platten um
+Millimeter versetzt.
+
 ## Studio-Oberfläche
 
 Lokale Web-Oberfläche über dem Prototyp (Phase B laut `KONZEPT.md`), im UNIO-Design, hell und dunkel, bis 400 px Breite.
