@@ -16,3 +16,4 @@ immoviz/projects/*/renders/walkthrough/*/clay/
 immoviz/projects/*/.history/
 immoviz/projects/*/kundenlinks.json
 immoviz/projects/*/website/
+*.zip
