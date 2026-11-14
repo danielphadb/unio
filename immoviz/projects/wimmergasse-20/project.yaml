@@ -1,0 +1,159 @@
+# immoviz Projektdatei: Wimmergasse 20 / Stolberggasse 36, 1050 Wien ("Das Wimmer")
+#
+# Masseinheit Meter. z = 0 entspricht +29,13 WrN (Strassenniveau am Haustor laut Strassenansicht).
+# u = Laufmeter entlang einer Fassade, von links nach rechts gesehen von der Strasse.
+# d = Abstand nach innen hinter der Fassadenflucht (d < 0 = vor der Fassade).
+#
+# Quellen (siehe quellen/README.md):
+#   [ANS]  06_Wimmerg_Strassenansicht.pdf, Buschina & Partner, 1:100, 10.04.2026
+#   [GR]   20260424_Mappe_Wimmerg20.pdf, Grundrisse KG bis 3.OG, 24.04.2026
+#   [NWG]  Nutzwertgutachten Korab 06.07.2026, Beilagen Grundrisse 1. bis 3. DG und Dachaufsicht
+#   [FK]   Farbkonzept 15.04.2026 und Produktkatalog Allgemeinbereiche 22.07.2026
+#   [OGD]  Stadt Wien Open Data: Baukoerpermodell, Baumkataster, Verkehrsflaechen
+
+project:
+  name: Das Wimmer
+  slug: wimmergasse-20
+  client: UNIO / VPH Venture Property Holding
+
+site:
+  address: Wimmergasse 20, 1050 Wien
+  origin_gk: [1955.97, 338546.50]   # Gebaeudeecke Wimmergasse/Stolberggasse [OGD]
+  x_axis_deg: 36.39                 # x-Achse entlang Stolberggasse [OGD]
+  radius_m: 420
+  detail_radius_m: 120
+  hero_bezug: ["009427"]
+  ground_wn: 29.13
+
+# Fassadenfluchten im lokalen System (aus dem Baukoerpermodell, Abweichung zu [ANS] < 2 cm)
+facades:
+  wimmergasse:   {a: [-0.22, 25.44], b: [0.0, 0.0]}    # Laenge 25,44 m, u=0 am Nachbarn Nr. 22
+  stolberggasse: {a: [0.0, 0.0], b: [16.16, 0.0]}      # Laenge 16,16 m, u=0 an der Ecke
+
+# ---------------------------------------------------------------- Altbau (Regelgeschosse)
+altbau:
+  height: 16.27            # Hauptgesims Oberkante +45,40 WrN [ANS]
+  core_depth: 4.0          # Tiefe, ab der der Hauskern als Volumen gebaut wird
+  slabs: [4.40, 7.95, 11.60, 15.30]
+  rustika: {z: [0.75, 8.0], spacing: 0.62}   # nachtraegliche Nutenfraesung EG und 1.OG [ANS]
+  sockel: 0.75
+  cornices:                 # [ANS] DP01, DP02, Hauptgesims
+    - {name: kordon_dp01, steps: [[4.49, 4.62, 0.08], [4.62, 5.00, 0.14], [5.00, 5.18, 0.20]]}
+    - {name: kordon_dp02, steps: [[8.00, 8.85, 0.04], [8.85, 9.03, 0.18]]}
+    - {name: sohlbank_3og, steps: [[12.22, 12.38, 0.08]]}
+    - {name: hauptgesims, steps: [[14.70, 15.45, 0.03], [15.45, 15.60, 0.12], [15.60, 15.86, 0.25], [15.86, 16.05, 0.45], [16.05, 16.27, 0.62]], consoles: {z: [15.45, 15.86], w: 0.16, proj: 0.42}}
+  rows:                     # Fensterreihen [ANS]
+    eg:  {z: 1.86, h: 1.95, w: 0.95, type: kastenfenster, surround: fasche}
+    og1: {z: 5.57, h: 2.01, w: 1.05, type: kastenfenster, surround: fasche_verdachung}
+    og2: {z: 9.03, h: 1.85, w: 1.05, type: kastenfenster, surround: aedikula}
+    og3: {z: 12.41, h: 1.76, w: 1.05, type: kastenfenster, surround: fasche}
+  facades:
+    wimmergasse:
+      axes: [1.60, 3.65, 5.71, 7.76, 9.81, 11.86, 13.81, 15.87, 17.92, 19.97, 21.93, 23.98]   # 12 Achsen [ANS]
+      endcaps: [0.0]
+      eg:                      # Erdgeschoss abweichend von der Regelreihe [ANS]
+        - {axes: [0], type: haustor, u: [0.66, 2.44], z: [0.0, 3.81]}
+        - {axes: [1, 2, 3, 4, 5], type: kastenfenster, keller: true}
+        - {axes: [6, 7, 8, 9, 10, 11], type: schaufenster, z: [0.35, 3.81]}
+    stolberggasse:
+      axes: [2.08, 4.16, 6.24, 8.32, 10.40, 12.48, 14.56]   # 7 Achsen, gemessen im 1.OG-Grundriss [GR]
+      endcaps: [16.16]
+      eg:                      # ANNAHME: Lokal an der Ecke mit Schaufenstern, Rest Fenster. Ansicht Stolberggasse fehlt.
+        - {axes: [0, 1, 2], type: schaufenster, z: [0.35, 3.81]}
+        - {axes: [3, 4, 5, 6], type: kastenfenster, keller: true}
+
+# ---------------------------------------------------------------- Dachgeschosse (vereinfachte Kubatur)
+# DG1 + DG2 sichtbar von +45,40 bis +50,20 WrN (z 16,27 bis 21,07), DG3 bis +53,41 WrN (z 24,28) [ANS][NWG]
+# Fensterpositionen aus [ANS]. Tiefen und Ruecksprunge ANNAHME nach [NWG], zu pruefen mit Schnitt/Ansicht Stolberggasse.
+dach:
+  material: zink           # Stehfalz Titanzink anthrazit
+  frame: rahmen_dunkel
+  walls:
+    - {facade: wimmergasse, u: [7.0, 24.74], z: [16.27, 21.07], d: 0.7,
+       windows: [
+         {u: [8.25, 9.28], z: [16.40, 17.30]}, {u: [8.25, 9.28], z: [17.90, 20.20]},
+         {u: [11.30, 12.32], z: [16.40, 17.30]}, {u: [11.30, 12.32], z: [17.90, 20.20]},
+         {u: [17.23, 18.12], z: [16.40, 17.30]}, {u: [17.23, 18.12], z: [17.90, 20.20]},
+         {u: [18.30, 19.30], z: [16.40, 17.30]}, {u: [18.30, 19.30], z: [17.90, 20.20]},
+         {u: [20.36, 21.34], z: [16.40, 17.30]}, {u: [20.36, 21.34], z: [17.90, 20.20]},
+         {u: [21.43, 22.41], z: [16.40, 17.30]}, {u: [21.43, 22.41], z: [17.90, 20.20]},
+         {u: [22.51, 23.49], z: [16.40, 17.30]}, {u: [22.51, 23.49], z: [17.90, 20.20]},
+         {u: [23.58, 24.56], z: [16.40, 17.30]}, {u: [23.58, 24.56], z: [17.90, 20.20]}],
+       loggias: [{u: [13.00, 16.60], z: [16.27, 20.40], depth: 1.6, slab: 17.60, rail: [17.80, 18.90]}]}
+    - {facade: stolberggasse, u: [0.7, 16.16], z: [16.27, 21.07], d: 0.7, axes_from: altbau, w: 1.0,
+       rows: [[16.40, 17.30], [17.90, 20.20]]}
+    - {facade: wimmergasse, u: [16.9, 23.64], z: [21.07, 24.28], d: 1.8,
+       windows: [{u: [17.23, 18.55], z: [21.10, 23.35]}, {u: [18.65, 19.97], z: [21.10, 23.35]},
+                 {u: [20.36, 21.34], z: [21.10, 23.35]}, {u: [21.43, 22.41], z: [21.10, 23.35]},
+                 {u: [22.51, 23.49], z: [21.10, 23.35]}]}
+    - {facade: stolberggasse, u: [1.8, 5.4], z: [21.07, 24.28], d: 1.8,
+       windows: [{u: [2.2, 3.4], z: [21.10, 23.35]}, {u: [3.6, 4.8], z: [21.10, 23.35]}]}
+  slopes:
+    - {facade: wimmergasse, u: [0.0, 7.0], z: [16.27, 21.07], d: [0.7, 2.45],
+       roof_windows: [{u: [1.07, 2.38], z: [16.45, 17.50]}, {u: [1.07, 2.38], z: [18.40, 19.90]},
+                      {u: [5.02, 6.35], z: [16.45, 17.50]}, {u: [5.02, 6.35], z: [18.40, 19.90]}]}
+    - {facade: wimmergasse, u: [0.0, 10.45], z: [21.07, 24.28], d: [2.45, 4.6]}
+    - {facade: wimmergasse, u: [10.45, 16.9], z: [21.07, 24.28], d: [0.9, 3.4],
+       roof_windows: [{u: [11.18, 12.45], z: [21.60, 23.10]}, {u: [13.13, 14.50], z: [21.60, 23.10]},
+                      {u: [15.18, 16.55], z: [21.60, 23.10]}]}
+    - {facade: stolberggasse, u: [5.4, 16.16], z: [21.07, 24.28], d: [0.7, 4.1],
+       roof_windows: [{u: [7.4, 8.74], z: [21.60, 23.10]}, {u: [10.6, 11.94], z: [21.60, 23.10]},
+                      {u: [13.8, 15.14], z: [21.60, 23.10]}]}
+  railings:
+    - {facade: wimmergasse, u: [16.9, 24.59], z: 21.07, d: 0.85, h: 1.10, type: glas}
+    - {facade: stolberggasse, u: [0.85, 5.4], z: 21.07, d: 0.85, h: 1.10, type: glas}
+  # Innenvolumen und Decken (Clip-Regeln: [Fassade, u|d, >=|<=, Wert])
+  volumes:
+    - {z: [16.27, 21.07], clip: [[stolberggasse, d, ">=", 2.2], [wimmergasse, d, ">=", 2.45]]}
+    - {z: [16.27, 21.07], clip: [[stolberggasse, d, ">=", 2.2], [wimmergasse, d, ">=", 2.2], [wimmergasse, u, ">=", 7.0]]}
+    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 4.6], [wimmergasse, u, "<=", 10.45]]}
+    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.4], [wimmergasse, u, ">=", 10.45], [wimmergasse, u, "<=", 16.9], [stolberggasse, d, ">=", 4.1]]}
+    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.3], [wimmergasse, u, ">=", 16.9], [stolberggasse, u, "<=", 5.4], [stolberggasse, d, ">=", 3.3]]}
+    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.3], [wimmergasse, u, ">=", 16.9], [stolberggasse, u, ">=", 5.4], [stolberggasse, d, ">=", 4.1]]}
+  slabs:
+    - {z: 16.27, t: 0.30, clip: []}
+    - {z: 17.60, t: 0.25, clip: [[stolberggasse, d, ">=", 0.75], [wimmergasse, d, ">=", 0.75]]}
+    - {z: 21.07, t: 0.30, clip: [[stolberggasse, d, ">=", 0.7], [wimmergasse, d, ">=", 0.7], [wimmergasse, u, ">=", 7.0]]}
+    - {z: 21.07, t: 0.30, clip: [[stolberggasse, d, ">=", 0.7], [wimmergasse, d, ">=", 2.45]]}
+    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 4.6], [wimmergasse, u, "<=", 10.45]]}
+    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 3.4], [wimmergasse, u, ">=", 10.45], [wimmergasse, u, "<=", 16.9], [stolberggasse, d, ">=", 4.1]]}
+    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 1.8], [wimmergasse, u, ">=", 16.9], [stolberggasse, u, "<=", 5.4], [stolberggasse, d, ">=", 1.8]]}
+    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 1.8], [wimmergasse, u, ">=", 16.9], [stolberggasse, u, ">=", 5.4], [stolberggasse, d, ">=", 4.1]]}
+  boxes:   # Stiegenhaus und Aufzug ueber Dach [ANS], Kamine [NWG Dachaufsicht]
+    - {facade: wimmergasse, u: [3.9, 10.4], d: [4.6, 9.0], z: [24.28, 24.90], material: zink}
+    - {facade: wimmergasse, u: [9.0, 9.7], d: [9.5, 11.0], z: [24.28, 25.40], material: kamin}
+    - {facade: wimmergasse, u: [13.5, 14.2], d: [8.0, 9.4], z: [24.28, 25.40], material: kamin}
+    - {facade: stolberggasse, u: [9.5, 10.2], d: [7.5, 8.9], z: [24.28, 25.40], material: kamin}
+  solar: {facade: wimmergasse, u: [11.5, 20.5], d: [5.2, 10.5], z: 24.28, rows: 4}
+
+# ---------------------------------------------------------------- Materialien [FK]
+materials:
+  fassade: {color: "#E2CFA8", note: "Caparol Curcuma 60, Farbton laut Farbkonzept. Hex ist Naeherung, an Farbmuster abgleichen."}
+  stuck: {color: "#EEE5D2"}
+  sockel: {color: "#B9AE98"}
+  fenster: {color: "#F4F1E8", note: "RAL 9010 Reinweiss aussen"}
+  zink: {color: "#3A3D40"}
+  rahmen_dunkel: {color: "#2B2D30"}
+  haustor: {color: "#6B4A2E", note: "Massive Eiche nach historischem Vorbild 1880 [FK]"}
+
+# ---------------------------------------------------------------- Kameras und Licht
+cameras:
+  ecke:            {pos: [-13.0, -15.5, 1.65], target: [6.0, 7.0, 11.0], lens: 20, vertical: true}
+  ecke_tele:       {pos: [-24.0, -30.0, 1.65], target: [5.0, 6.0, 11.5], lens: 32, vertical: true}
+  drohne:          {pos: [-30.0, -36.0, 26.0], target: [6.0, 8.0, 14.0], lens: 32, vertical: true}
+  wimmergasse:     {pos: [-11.5, 42.0, 1.65], target: [0.0, 9.0, 10.5], lens: 24, vertical: true}
+  stolberggasse:   {pos: [36.0, -15.0, 1.65], target: [6.0, 0.0, 11.0], lens: 24, vertical: true}
+  dachgeschoss:    {pos: [-16.0, -19.0, 12.0], target: [3.0, 4.0, 21.0], lens: 35, vertical: true}
+
+lights:
+  golden_hour: {date: "2026-09-20", time: "17:05", tz: 2, exposure: 0.1, interior: 0.0, aerosol: 2.0}
+  dunst_hell:  {date: "2026-07-10", time: "15:30", tz: 2, exposure: -0.2, interior: 0.0, aerosol: 4.0, sky_strength: 0.5}   # Mood: Pazelhof, Instagram-6
+  sommermittag: {date: "2026-06-21", time: "12:30", tz: 2, exposure: -0.3, interior: 0.0}
+  vormittag:   {date: "2026-05-15", time: "10:30", tz: 2, exposure: -0.2, interior: 0.0}
+  blaue_stunde: {date: "2026-10-15", time: "18:55", tz: 2, exposure: 1.6, interior: 1.0}
+
+render:
+  resolution: [2400, 1600]
+  samples: 160
+  preview_resolution: [1200, 800]
+  preview_samples: 32

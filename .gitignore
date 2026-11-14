@@ -1,3 +1,9 @@
 .DS_Store
 .vercel
 node_modules/
+.venv-immoviz/
+immoviz/projects/*/renders/*.blend
+immoviz/projects/*/renders/*.blend1
+__pycache__/
+immoviz/projects/*/renders/**/*.png
+immoviz/projects/*/renders/*.png
