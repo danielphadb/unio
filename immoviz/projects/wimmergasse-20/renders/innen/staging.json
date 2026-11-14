@@ -1,0 +1,16 @@
+{
+ "modell": "nano_banana_pro (Backend meldet nano_banana_2), 2k, 3:2, Bild 1 = Blender-Hülle, Bild 2 und 3 = Kunden-Mood",
+ "stand": "2026-11-14",
+ "bilder": {
+  "top07_wohnkueche.jpg":         {"shot": "S1", "job": "09d3485a-22cb-4804-9a4d-b25202c358c0", "mood": ["i06", "i13"]},
+  "top07_wohnkueche_zurueck.jpg": {"shot": "S2", "job": "475da8c9-a278-49e5-807d-a055c7a5ec57", "mood": ["i14", "i06"]},
+  "top07_zimmer.jpg":             {"shot": "S3", "job": "bfad4f42-1e47-482f-9859-01048494f660", "mood": ["i06", "i16"]},
+  "top12_kueche.jpg":             {"shot": "S4", "job": "d5841c54-418f-4557-bb1a-75eaa79c4eba", "mood": ["i16", "i03"]},
+  "top12_wohnen_loggia.jpg":      {"shot": "S5", "job": "00b7a946-d540-4971-be2b-e41256af1385", "mood": ["i02", "i14"], "verworfen": ["d9740f43-0797-48e6-a0c4-64bf3ecf5010 (zusätzliche Balkontür erfunden)"]},
+  "top35_dachschraege.jpg":       {"shot": "S6", "job": "82c78dc9-c37a-4a54-9fa5-c0f441089379", "mood": ["i04", "i17"], "hinweis": "Dachfenster ca. 1 m nach links verschoben"},
+  "top35_dachschraege_variante.jpg": {"shot": "S6 Variante", "job": "158c1da0-852d-4a03-adc3-d4b57a04a88f", "hinweis": "Dachfenster an richtiger Stelle, aber kleines Zusatzfenster in der Schräge erfunden"},
+  "top35_wohnen_terrasse.jpg":    {"shot": "S7", "job": "eff57f16-45c9-4ab1-8512-d1b6418f6ab9", "mood": ["i02", "i01"]},
+  "top35_kuecheninsel.jpg":       {"shot": "S8", "job": "355f3d5d-424a-435b-9a64-98a80d39117f", "mood": ["i03", "i04"]},
+  "top12_zimmer_ecke_test.jpg":   {"shot": "Test vor Stilregeln", "job": "bc54207b-2e71-4b31-9660-79c6f7301bd9"}
+ }
+}
