@@ -29,6 +29,9 @@ def main():
     r.add_argument("--light", default="golden_hour")
     r.add_argument("--preview", action="store_true")
     r.add_argument("--no-blend", action="store_true")
+    c = sub.add_parser("check", help="Orthogonal-Ansicht ueber die Strassenansicht legen (Planabgleich)")
+    c.add_argument("project")
+    c.add_argument("--facade", default=None)
     a = ap.parse_args()
     pdir = Path(a.project).resolve()
 
@@ -44,6 +47,22 @@ def main():
         t = time.time()
         res = render(pdir, a.cam.split(","), a.light.split(","), a.preview, not a.no_blend)
         print(json.dumps({"renders": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
+    elif a.cmd == "check":
+        from lib.build import load_project, build_scene, Hero
+        from lib import check as C, meshkit as K
+        cfg, ctx = load_project(pdir)
+        scene = build_scene(cfg, ctx)
+        out_dir = pdir / "renders" / "check"
+        out_dir.mkdir(parents=True, exist_ok=True)
+        for name, c in cfg["checks"].items():
+            if a.facade and name != a.facade:
+                continue
+            f = K.Facade(name, tuple(cfg["facades"][name]["a"]), tuple(cfg["facades"][name]["b"]))
+            ppm = C.px_per_m(c["dpi"], c.get("scale", 100))
+            mp = out_dir / f"{name}_modell.png"
+            w, h, ox, oy = C.render_ortho(scene, f, c["span"], c["z"], ppm, mp)
+            out = C.overlay(pdir, cfg, name, mp, (ox, oy), (w, h), out_dir / f"{name}_abgleich.jpg")
+            print("Abgleich:", out)
 
 
 if __name__ == "__main__":

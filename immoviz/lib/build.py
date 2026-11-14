@@ -203,9 +203,99 @@ class Hero:
             mb.to_object(bpy, self.mats, coll)
 
 
+# ======================================================================= Gelaende
+def fit_terrain(ctx, ground_wn, anchors, radius=120.0):
+    """Ebene z = a + b*x + c*y aus Gebaeude-Sockelhoehen (OGD) und Plankoten (stark gewichtet)."""
+    import numpy as np
+    rows, vals, w = [], [], []
+    for b in ctx["buildings"]:
+        if b.get("ground") is None or b.get("klasse") != 11:
+            continue
+        p = b["poly"]
+        cx = sum(q[0] for q in p) / len(p)
+        cy = sum(q[1] for q in p) / len(p)
+        if math.hypot(cx, cy) < radius:
+            rows.append([1, cx, cy]); vals.append(b["ground"] - ground_wn); w.append(1.0)
+    for x, y, z in anchors or []:
+        rows.append([1, x, y]); vals.append(z); w.append(25.0)
+    if len(rows) < 3:
+        return lambda x, y: 0.0
+    A = np.array(rows) * np.array(w)[:, None]
+    coef, *_ = np.linalg.lstsq(A, np.array(vals) * np.array(w), rcond=None)
+    a, b, c = coef
+    return lambda x, y: float(a + b * x + c * y)
+
+
+def shift_z(mb, fn):
+    mb.verts = [(x, y, z + fn(x, y)) for x, y, z in mb.verts]
+
+
+# ======================================================================= Autos
+CAR_COLORS = ["auto_dunkelgrau", "auto_schwarz", "auto_weiss", "auto_silber", "auto_blau", "auto_dunkelgrau",
+              "auto_schwarz", "auto_weiss"]
+
+
+def park_cars(ctx, rng, terrain, radius):
+    cars = K.MeshBuilder("autos", ["auto_dunkelgrau"])
+    for s in ctx["surfaces"]:
+        if s["layer"] != "Ruhender Verkehr" or len(s["poly"]) < 3:
+            continue
+        poly = s["poly"]
+        cx = sum(p[0] for p in poly) / len(poly)
+        cy = sum(p[1] for p in poly) / len(poly)
+        if math.hypot(cx, cy) > radius:
+            continue
+        # Hauptrichtung = laengste Kante; Breite quer dazu
+        edges = [(poly[i], poly[(i + 1) % len(poly)]) for i in range(len(poly))]
+        (p1, p2) = max(edges, key=lambda e: math.dist(*e))
+        f = K.Facade("p", p1, p2)
+        uds = [f.ud(*p) for p in poly]
+        us = [u for u, _ in uds]
+        ds = [d for _, d in uds]
+        u0, u1, d0, d1 = min(us), max(us), min(ds), max(ds)
+        width = d1 - d0
+        if u1 - u0 < 4.0 or width < 1.7:
+            continue
+        angled = width > 4.2
+        step = 2.75 if angled else 5.7
+        n = int((u1 - u0 - (1.0 if angled else 0.3)) / step)
+        for k in range(n):
+            if rng.random() > 0.85:
+                continue
+            uc = u0 + (k + 0.5) * step + (0.5 if angled else 0.15)
+            dc = (d0 + d1) / 2
+            if not K.point_in_poly(*f.p(uc, dc, 0)[:2], poly):
+                continue
+            ang = math.radians(rng.choice([55, 58, 60]) if angled else 0) * (1 if rng.random() < 0.97 else -1)
+            col = rng.choice(CAR_COLORS)
+            L, W = rng.uniform(4.2, 4.8), rng.uniform(1.78, 1.9)
+            ca, sa = math.cos(ang), math.sin(ang)
+            # lokales Autosystem: Achse a entlang Fahrzeug, b quer
+            ax = (f.t[0] * ca - f.n[0] * sa, f.t[1] * ca - f.n[1] * sa)
+            bx = (-ax[1], ax[0])
+            ox, oy, _ = f.p(uc, dc, 0)
+            zg = terrain(ox, oy)
+            def blk(la, lb, wa, wb, z0, z1, mat):
+                P = lambda a_, b_, z_: (ox + ax[0] * a_ + bx[0] * b_, oy + ax[1] * a_ + bx[1] * b_, zg + z_)
+                c = [(la, wa), (lb, wa), (lb, wb), (la, wb)]
+                cars.poly([P(a_, b_, z1) for a_, b_ in c], None, mat, (0, 0, 1))
+                for i in range(4):
+                    (a1, b1), (a2, b2) = c[i], c[(i + 1) % 4]
+                    nx, ny = (b2 - b1), -(a2 - a1)
+                    cars.poly([P(a1, b1, z0), P(a2, b2, z0), P(a2, b2, z1), P(a1, b1, z1)], None, mat,
+                              (ax[0] * nx + bx[0] * ny, ax[1] * nx + bx[1] * ny, 0))
+            blk(-L / 2, L / 2, -W / 2, W / 2, 0.32, 0.95, col)
+            blk(-L / 2 + 0.9, L / 2 - 1.15, -W / 2 + 0.08, W / 2 - 0.08, 0.95, 1.45, "autoglas")
+            for wa in (-L / 2 + 0.75, L / 2 - 0.8):
+                for wb in (-W / 2 + 0.05, W / 2 - 0.25):
+                    blk(wa - 0.33, wa + 0.33, wb, wb + 0.2, 0.0, 0.62, "reifen")
+    return cars
+
+
 # ======================================================================= Umgebung
-def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None):
+def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, terrain=None, cfg=None):
     rng = random.Random(7)
+    terrain = terrain or (lambda x, y: 0.0)
     streets = []
     for s in ctx["surfaces"]:
         if s["layer"] in STREET_LAYERS and len(s["poly"]) >= 3:
@@ -233,13 +323,21 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None):
             continue
         if K.polygon_area(poly) < 0:
             poly = poly[::-1]
+        zg = terrain(cx, cy)
         h = b["height"]
         col = f"nachbar_{b['id'] % len(M.NEIGHBOUR_PALETTE)}"
-        K.extrude(walls, poly, 0.0, h, col, "nachbar_dach", bottom=False)
-        if dist > detail or h < 5.0 or b.get("klasse") != 11:
-            continue
+        nbc = (cfg or {}).get("neighbours", {}).get(str(b.get("bezug")))
+        if nbc:
+            col = f"nachbar_{b.get('bezug')}"
+            if col not in mats:
+                mats[col] = M.plaster(bpy, col, tuple(c * 0.85 for c in M.hex_rgb(nbc)), sockel=0.6)
+        nb_w, nb_win, nb_r = K.MeshBuilder("t", walls.materials), K.MeshBuilder("t", wins.materials), K.MeshBuilder("t", roofs.materials)
+        walls_, wins_, roofs_ = walls, wins, roofs
+        walls, wins, roofs = nb_w, nb_win, nb_r
+        K.extrude(walls, poly, -1.5, h, col, "nachbar_dach", bottom=False)
         n = len(poly)
-        for i in range(n):
+        detailed = not (dist > detail or h < 5.0 or b.get("klasse") != 11)
+        for i in (range(n) if detailed else []):
             p1, p2 = poly[i], poly[(i + 1) % n]
             L = math.dist(p1, p2)
             if L < 3.0:
@@ -285,13 +383,28 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None):
                 roofs.poly([(*a0, h), (*a1, h), (*t1, h + rh), (*t0, h + rh)], None, rm,
                            (a1[1] - a0[1], -(a1[0] - a0[0]), 0.5))
             roofs.poly([(x, y, h + rh) for x, y in top], None, rm, (0, 0, 1))
+        for mb_ in (walls, wins, roofs):
+            mb_.verts = [(x, y, z + zg) for x, y, z in mb_.verts]
+        walls_.merge(walls); wins_.merge(wins); roofs_.merge(roofs)
+        walls, wins, roofs = walls_, wins_, roofs_
     walls.to_object(bpy, mats, coll)
     wins.to_object(bpy, mats, coll)
     roofs.to_object(bpy, mats, coll)
 
     ground = K.MeshBuilder("umgebung_boden", ["asphalt"])
+    # Gelaenderaster (20 m) im Nahbereich, darunter eine tiefe Fernebene
+    g, R0 = 20.0, 320.0
+    nn = int(R0 / g)
+    for i in range(-nn, nn):
+        for j in range(-nn, nn):
+            x0, y0 = i * g, j * g
+            ground.poly([(x0, y0, -0.03), (x0 + g, y0, -0.03), (x0 + g, y0 + g, -0.03), (x0, y0 + g, -0.03)],
+                        None, "asphalt", (0, 0, 1))
+    far_ground = K.MeshBuilder("fernboden", ["asphalt"])
     r = 4000.0
-    ground.poly([(-r, -r, -0.02), (r, -r, -0.02), (r, r, -0.02), (-r, r, -0.02)], None, "asphalt", (0, 0, 1))
+    zf = min(terrain(R0 * math.cos(a), R0 * math.sin(a)) for a in [k * math.pi / 8 for k in range(16)]) - 0.3
+    far_ground.poly([(-r, -r, zf), (r, -r, zf), (r, r, zf), (-r, r, zf)], None, "asphalt", (0, 0, 1))
+    far_ground.to_object(bpy, mats, coll)
     # Fernzone: generische Wiener Blockrandbebauung bis 1,8 km, nur fuer Luft- und Dachansichten
     far = K.MeshBuilder("umgebung_fernzone", ["nachbar_0"])
     step = 78.0
@@ -317,9 +430,10 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None):
                 far.poly([(*a0, hh), (*a1, hh), (*t1, hh + rh), (*t0, hh + rh)], None, rm,
                          (a1[1] - a0[1], -(a1[0] - a0[0]), 0.5))
             far.poly([(x, y, hh + rh) for x, y in ins], None, "hof", (0, 0, 1))
+    shift_z(far, terrain)
     far.to_object(bpy, mats, coll)
     spec = {"Fahrbahn": ("asphalt", 0.0, 0.0), "Gehsteig": ("gehsteig", 0.0, 0.12),
-            "Gehweg, Radweg": ("gehsteig", 0.0, 0.12), "Ruhender Verkehr": ("parkstreifen", 0.004, 0.0),
+            "Gehweg, Radweg": ("gehsteig", 0.0, 0.12), "Ruhender Verkehr": ((cfg or {}).get("street", {}).get("parking_material", "parkstreifen"), 0.004, 0.0),
             "Zebrastreifen": ("zebra", 0.008, 0.0), "Innenhof": ("hof", 0.0, 0.05),
             "Befestigte Fläche": ("gehsteig", 0.0, 0.05), "Sonstige Verkehrsfläche": ("gehsteig", 0.0, 0.1)}
     for s in ctx["surfaces"]:
@@ -335,7 +449,20 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None):
         else:
             poly = s["poly"] if K.polygon_area(s["poly"]) > 0 else s["poly"][::-1]
             ground.poly([(x, y, z) for x, y in poly], [(x, y) for x, y in poly], mat, (0, 0, 1))
+    shift_z(ground, terrain)
     ground.to_object(bpy, mats, coll)
+    # Seilleuchten
+    cab = K.MeshBuilder("seilleuchten", ["seil"])
+    for x0, y0, x1, y1 in (cfg or {}).get("street", {}).get("cables", []):
+        f = K.Facade("c", (x0, y0), (x1, y1))
+        L_ = f.length
+        z0 = terrain((x0 + x1) / 2, (y0 + y1) / 2) + 7.5
+        K.box(cab, f, 0.0, L_, -0.008, 0.008, z0 - 0.008, z0 + 0.008, "seil", skip_back=False)
+        um = L_ / 2
+        K.box(cab, f, um - 0.006, um + 0.006, -0.006, 0.006, z0 - 0.55, z0, "seil", skip_back=False)
+        K.box(cab, f, um - 0.28, um + 0.28, -0.28, 0.28, z0 - 0.75, z0 - 0.55, "leuchte", skip_back=False)
+    cab.to_object(bpy, mats, coll)
+    park_cars(ctx, rng, terrain, min(radius, 200)).to_object(bpy, mats, coll)
 
     # Baeume aus dem Baumkataster. Kronen aus vielen kleinen Laubbueschen (Vorlage-Ikosaeder).
     tb = bmesh.new()
@@ -374,6 +501,8 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None):
                 j = rs * (1 + (rng.random() - 0.5) * 0.5)
                 cv.append((cx_ + vx * j, cy_ + vy * j, cz_ + vz * j * 0.8))
             cf.extend([[i + base_i for i in f] for f in ico_f])
+    cv = [(x, y, z + terrain(x, y)) for x, y, z in cv]
+    shift_z(trunks, terrain)
     me = bpy.data.meshes.new("baeume_kronen")
     me.from_pydata(cv, [], cf)
     me.materials.append(mats["laub"])
@@ -399,8 +528,15 @@ def build_scene(cfg, ctx):
     hero.dach()
     hero.emit(hero_coll)
     if ctx:
+        raw = fit_terrain(ctx, cfg["site"].get("ground_wn", 0.0), cfg["site"].get("terrain_anchors"))
+
+        def terrain(x, y, r=150.0):
+            d = math.hypot(x, y)
+            if d > r:
+                x, y = x * r / d, y * r / d
+            return raw(x, y)
         build_context(ctx, mats, ctx_coll, radius=cfg["site"].get("radius_m", 160) - 10,
-                      detail=cfg["site"].get("detail_radius_m", 110), hero_poly=hero.footprint)
+                      detail=cfg["site"].get("detail_radius_m", 110), hero_poly=hero.footprint, terrain=terrain, cfg=cfg)
     return scene
 
 
@@ -449,6 +585,7 @@ def setup_light(scene, cfg, ctx, name):
     nt.links.new(bg.outputs[0], out.inputs[0])
     scene.view_settings.exposure = L.get("exposure", 0.0)
     M.set_interior_emission(bpy, L.get("interior", 0.0))
+    M.set_season(bpy, L.get("season", "sommer"))
     return elev, az
 
 

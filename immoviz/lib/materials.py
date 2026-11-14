@@ -175,6 +175,23 @@ def interior(bpy, name, color, emit=(1.0, 0.62, 0.32)):
     return m
 
 
+def cobbles(bpy, name, color=(0.12, 0.115, 0.11)):
+    m = _new(bpy, name)
+    N = Nodes(m)
+    tc = N.new("ShaderNodeTexCoord")
+    br = N.new("ShaderNodeTexBrick", Scale=7.0)
+    br.inputs["Mortar Size"].default_value = 0.025
+    br.inputs["Color1"].default_value = (*color, 1)
+    br.inputs["Color2"].default_value = (*[c * 0.75 for c in color], 1)
+    br.inputs["Mortar"].default_value = (*[c * 0.4 for c in color], 1)
+    N.link(tc.outputs["Object"], br.inputs["Vector"])
+    p = N.principled(br.outputs["Color"], rough=0.75)
+    bmp = N.new("ShaderNodeBump", Strength=0.6, Distance=0.02)
+    N.link(br.outputs["Fac"], bmp.inputs["Height"])
+    N.link(bmp.outputs["Normal"], p.inputs["Normal"])
+    return m
+
+
 def foliage(bpy, name, color):
     m = _new(bpy, name)
     N = Nodes(m)
@@ -233,6 +250,9 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     L["gehsteig"] = plaster(bpy, "gehsteig", (0.16, 0.155, 0.15), var=0.1, bump=0.25)
     L["parkstreifen"] = plaster(bpy, "parkstreifen", (0.06, 0.06, 0.062), var=0.1)
     L["zebra"] = simple(bpy, "zebra", (0.7, 0.7, 0.68), 0.7)
+    L["pflaster"] = cobbles(bpy, "pflaster")
+    L["seil"] = simple(bpy, "seil", (0.02, 0.02, 0.02), 0.5)
+    L["leuchte"] = simple(bpy, "leuchte", (0.25, 0.26, 0.27), 0.4, 0.6, **{"Emission Color": (1.0, 0.75, 0.45, 1.0)})
     L["randstein"] = simple(bpy, "randstein", (0.33, 0.32, 0.31), 0.7)
     L["hof"] = plaster(bpy, "hof", (0.3, 0.29, 0.27))
     L["stamm"] = simple(bpy, "stamm", (0.09, 0.07, 0.05), 0.85)
@@ -243,6 +263,12 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     L["nachbar_rahmen"] = simple(bpy, "nachbar_rahmen", (0.75, 0.74, 0.7), 0.4)
     L["fenster_dunkel"] = simple(bpy, "fenster_dunkel", (0.012, 0.014, 0.016), 0.04, 0.0, **{"Specular IOR Level": 0.9})
     L["terrasse"] = plaster(bpy, "terrasse", (0.32, 0.31, 0.29), var=0.05, bump=0.1)
+    for name, col in (("auto_dunkelgrau", (0.05, 0.055, 0.06)), ("auto_schwarz", (0.012, 0.012, 0.014)),
+                      ("auto_weiss", (0.75, 0.75, 0.74)), ("auto_silber", (0.38, 0.39, 0.4)),
+                      ("auto_blau", (0.02, 0.04, 0.09))):
+        L[name] = simple(bpy, name, col, 0.18, 0.5, **{"Coat Weight": 1.0, "Coat Roughness": 0.03})
+    L["autoglas"] = simple(bpy, "autoglas", (0.01, 0.012, 0.014), 0.03, 0.0)
+    L["reifen"] = simple(bpy, "reifen", (0.015, 0.015, 0.015), 0.8)
     for i, h in enumerate(NEIGHBOUR_PALETTE):
         L[f"nachbar_{i}"] = plaster(bpy, f"nachbar_{i}", tuple(c * 0.82 for c in hex_rgb(h)), sockel=0.6)
     return L
@@ -256,3 +282,29 @@ def set_interior_emission(bpy, strength: float):
         for n in m.node_tree.nodes:
             if n.type == "BSDF_PRINCIPLED":
                 n.inputs["Emission Strength"].default_value = strength * k * 6.0
+
+
+SEASONS = {
+    # Laubfarbe (linear), Anteil Loecher in der Krone (0 = dicht), Krone sichtbar
+    "fruehling":   ((0.085, 0.19, 0.03), 0.47, True),
+    "sommer":      ((0.045, 0.10, 0.025), 0.40, True),
+    "spaetsommer": ((0.06, 0.10, 0.025), 0.42, True),
+    "herbst":      ((0.32, 0.15, 0.025), 0.50, True),
+    "winter":      ((0.05, 0.04, 0.03), 0.80, False),
+}
+
+
+def set_season(bpy, season: str):
+    col, holes, visible = SEASONS.get(season, SEASONS["sommer"])
+    m = bpy.data.materials.get("laub")
+    if m:
+        for n in m.node_tree.nodes:
+            if n.type == "MIX" and n.data_type == "RGBA":
+                ins = {s.identifier: s for s in n.inputs}
+                ins["A_Color"].default_value = (*[c * 0.55 for c in col], 1)
+                ins["B_Color"].default_value = (*[c * 1.5 for c in col], 1)
+            if n.type == "MATH" and n.operation == "GREATER_THAN":
+                n.inputs[1].default_value = holes
+    ob = bpy.data.objects.get("baeume_kronen")
+    if ob:
+        ob.hide_render = not visible

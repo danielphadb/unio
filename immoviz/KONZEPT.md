@@ -1,0 +1,84 @@
+# immoviz Studio: Konzept für das Visualisierungs-Tool mit eigener Oberfläche
+
+Stand 14.11.2026, Arbeitsstand für Ad Boutique und UNIO. Grundlage ist der Prototyp in diesem Ordner
+(Kommandozeile, erstes Objekt Wimmergasse 20).
+
+## 1. Ziel
+
+Aus Plänen, Ausstattung und Mood eines Objekts in wenigen Tagen ein vollständiges, maßhaltiges
+Bildpaket für den Vertrieb erzeugen: Totalen, Architekturdetails, Ausblicke, Jahreszeiten und Tageszeiten,
+dazu kurze Kamerafahrten. Jedes Bild ist gegen den Plan prüfbar.
+
+**Grundprinzip bleibt:** Blender liefert die Wahrheit (Geometrie, Kamera, Sonne), die Bild-KI liefert das
+Finish (Material, Atmosphäre, Leben). Die Oberfläche macht diesen Ablauf für das Team bedienbar, ohne
+Blender- oder Programmierkenntnisse.
+
+## 2. Ablauf für High-End-Renderings (10 Schritte)
+
+| # | Schritt | Ergebnis | Wer / was |
+|---|---|---|---|
+| 1 | **Intake**: Pläne (Ansichten, Schnitte, Grundrisse, möglichst Vektor-PDF/DWG), BAB, Farbkonzept, Fotos, Mood hochladen | Quellenliste mit Stand und Lücken | Team, Checkliste im Tool |
+| 2 | **Verortung**: Adresse eingeben, Gebäude im Luftbild anklicken, Fassaden wählen | Lokales Koordinatensystem, Umgebung (Gebäude, Gehsteige, Bäume, Gelände) | automatisch aus Stadt Wien Open Data |
+| 3 | **Fassaden aufnehmen**: Ansicht als Hintergrund, Achsen, Geschosse, Gesimse, Fenstertypen einzeichnen | Fassadenmodell je Straßenseite | Editor, KI-Vorschlag aus Vektor-PDF |
+| 4 | **Dach und Volumen**: Dachgeschosse, Rücksprünge, Terrassen, Schrägen aus Schnitt und DG-Grundrissen | Kubatur | Editor |
+| 5 | **Planabgleich**: Orthogonal-Ansicht des Modells über die Ansicht legen | Abweichungen in cm, Freigabe des Modells | automatisch (`check`) |
+| 6 | **Materialien**: Farbkonzept und BAB in Materialien übersetzen (Putz, Stuck, Fenster, Zink, Böden) | Materialbibliothek je Objekt | Bibliothek plus Farbwerte |
+| 7 | **Shotlist**: Kameras auf der Karte setzen, Motivtyp wählen, Licht und Jahreszeit je Motiv | Shot-Matrix | Vorlagen je Gebäudetyp |
+| 8 | **Rendering**: Vorschau (Sekunden bis Minuten), dann Final | maßhaltige Grundbilder | Render-Worker (Blender) |
+| 9 | **Veredelung**: Bild-KI mit Mood-Bausteinen, Varianten, Geometrie-Prüfung, 4K-Upscale, optional Video | fotorealistische Bilder | Higgsfield, automatische Achsenprüfung, Mensch gibt frei |
+| 10 | **Freigabe und Export**: Kunde kommentiert, Versionen, Export in Formate (Exposé, Web, Social, Bauzaun) | Bildpaket mit Kennzeichnung | Freigabe-Ansicht |
+
+## 3. Oberfläche (Bildschirme)
+
+1. **Projekte**: Kacheln je Objekt mit Fortschritt der 10 Schritte, letzte Bilder, offene Punkte.
+2. **Intake**: Upload-Bereich, automatische Erkennung des Dokumenttyps (Ansicht, Schnitt, Grundriss, BAB),
+   Checkliste mit Ampel, Quellen mit Datum. Fehlt etwas, erzeugt das Tool die Anfrage-Mail an den Bauträger.
+3. **Lage**: Luftbild der Stadt (oder Satellit außerhalb Wiens), Gebäude anklicken, Fassaden markieren,
+   Umgebung laden. Anzeige von Gehsteigen, Parkstreifen, Bäumen zur Kontrolle (wie der Luftbild-Abgleich).
+4. **Fassaden-Editor**: Plan-PDF im Maßstab als Hintergrund, Achsen per Klick, Geschosslinien an Höhenkoten
+   einrasten, Fenstertypen aus einer Bibliothek (Kastenfenster, Schaufenster, Tor, modern), Stuckelemente
+   (Gesims, Verdachung, Konsole) als Bausteine. Daneben live das 3D-Modell.
+5. **Dach-Editor**: Schnitt als Hintergrund, Dachgeschosse als Ebenen mit Rücksprung, Schrägen, Terrassen,
+   Geländer, Dachfenster.
+6. **Planabgleich**: Überlagerung Plan und Modell mit Schieberegler, Liste der Abweichungen, Freigabe-Knopf.
+7. **Material und Mood**: Farbfelder aus Farbkonzept, BAB-Positionen, Mood-Board aus der Referenzsammlung,
+   daraus abgeleitete Bildregeln.
+8. **Shotlist**: Karte mit Kamerakegeln, Liste der Motive (Totale, Detail, Luft, Ausblick, Abend), Matrix
+   Motiv x Licht x Jahreszeit, Vorschau-Thumbnail je Zelle.
+9. **Render- und KI-Queue**: Fortschritt, Kosten (Credits), automatische Prüfung (Achsen, Höhen), Varianten
+   nebeneinander, Favorit wählen.
+10. **Galerie und Freigabe**: Kunde sieht nur freigegebene Bilder, kann kommentieren, Versionen, Export.
+
+## 4. Technische Architektur
+
+| Baustein | Technik | Bemerkung |
+|---|---|---|
+| Oberfläche | Web-App (Next.js), im UNIO-Designsystem | läuft im Browser, auch für Kunden-Freigabe |
+| Backend | Python (FastAPI) | nutzt die bestehenden Module `geo_wien`, `build`, `check` |
+| Projektdaten | `project.yaml` je Objekt, versioniert | bleibt das Herzstück, Editor schreibt nur diese Datei |
+| Render-Worker | Blender 5.2 als Python-Modul, GPU | Mac Studio im Büro oder Cloud-GPU auf Abruf; Vorschau in Sekunden |
+| Bild-KI | Higgsfield API (Nano Banana Pro, Upscale, Video) | Prompt-Bausteine aus Mood und Lichtszenario |
+| Geodaten | Stadt Wien Open Data, Luftbild Wien; außerhalb Wiens basemap.at und Landesdienste | Google Street View nur als Referenz (Lizenz) |
+| Ablage | Google Drive (Projektordner) oder S3 | Pläne bleiben im Kundenordner |
+| Agency Hub | Protokoll je Schritt, Tasks für fehlende Unterlagen | über die bestehende Schnittstelle |
+
+## 5. Ausbaustufen
+
+| Phase | Inhalt | Ergebnis |
+|---|---|---|
+| A (jetzt) | Kommandozeile, Claude als Operator, Objekt Wimmergasse | erstes Bildpaket, Prozess gelernt |
+| B | Web-Oberfläche Kern: Projekte, Intake, Shotlist, Render-Queue, Galerie, Freigabe | Team kann ohne Code arbeiten |
+| C | Fassaden- und Dach-Editor mit Planüberlagerung, KI-Vorschlag aus Vektor-PDF | neues Objekt in einem Tag aufgenommen |
+| D | Innenräume: Grundriss zu Raum, Staging, BAB-Materialien, Ausblick aus dem Fenster | Wohnungsbilder |
+| E | Kamerafahrten, interaktive 360-Ansichten, Einbindung in Projekt-Websites | Bewegtbild und Web |
+
+## 6. Bildpaket je Objekt (Standard)
+
+Siehe `projects/<objekt>/mood_analyse.md` für die objektbezogene Shotlist. Standardumfang:
+
+- 4 Totalen: Ecke auf Augenhöhe, Straßenflucht, Gegenseite, Luft
+- 6 Architekturdetails: Beletage mit Verdachung, Eingang/Haustor, Gesims und Übergang zum Dachausbau,
+  Loggia/Terrasse, Erdgeschoss mit Leben, Material-Nahaufnahme
+- 2 Ausblicke: von der Dachterrasse, aus einer Regelgeschoss-Wohnung
+- Lichtvarianten: diesiger Tag, Golden Hour, Blaue Stunde
+- Jahreszeiten: Frühling (frisches Grün), Spätsommer, Herbst (goldenes Laub), Winter (kahle Bäume, warme Fenster)

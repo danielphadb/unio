@@ -7,3 +7,4 @@ immoviz/projects/*/renders/*.blend1
 __pycache__/
 immoviz/projects/*/renders/**/*.png
 immoviz/projects/*/renders/*.png
+immoviz/projects/*/quellen/*.pdf
