@@ -1,5 +1,6 @@
 /* immoviz Studio: Bildschirme Projekte, Übersicht, Intake, Shotlist, Queue, Galerie. Hash-Routing, kein Build-Schritt.
-   Kamera- und Licht-Editor stehen in editor.js. */
+   Kamera- und Licht-Editor stehen in editor.js, Fassaden, Dach, Abgleich und Neues Objekt in fassade.js,
+   Higgsfield-Dialoge in veredeln.js. */
 const view = $("#view");
 const pnav = $("#pnav");
 let timers = [];
@@ -10,10 +11,10 @@ function getPref(k, d) { try { const v = localStorage.getItem(k); return v === n
 function setPref(k, v) { try { localStorage.setItem(k, v); } catch (_) {} }
 
 const TABS = [
-  ["", "Übersicht"], ["intake", "Intake"], ["shotlist", "Shotlist"], ["kameras", "Kameras"], ["licht", "Licht"],
-  ["queue", "Queue"], ["galerie", "Galerie"],
+  ["", "Übersicht"], ["intake", "Intake"], ["fassaden", "Fassaden"], ["dach", "Dach"], ["abgleich", "Abgleich"],
+  ["shotlist", "Shotlist"], ["kameras", "Kameras"], ["licht", "Licht"], ["queue", "Queue"], ["galerie", "Galerie"],
 ];
-const STEP_LINK = { 1: "intake", 7: "shotlist", 8: "queue", 9: "galerie", 10: "galerie" };
+const STEP_LINK = { 1: "intake", 3: "fassaden", 4: "dach", 5: "abgleich", 7: "shotlist", 8: "queue", 9: "galerie", 10: "galerie" };
 
 function renderNav(slug, active) {
   if (!slug) { pnav.hidden = true; return; }
@@ -48,7 +49,7 @@ async function viewProjects() {
         <div><dt>Bilder gesamt</dt><dd>${ps.reduce((a, p) => a + (p.bilder || 0), 0)}</dd></div>
         <div><dt>Freigegeben</dt><dd>${ps.reduce((a, p) => a + (p.freigegeben || 0), 0)}</dd></div></dl>
     </div>
-    <section>${sechead("01", "Objekte", "Alle Objekte", "Neues Objekt: Ordner unter <span class=\"mono\">projects/</span> mit <span class=\"mono\">project.yaml</span> anlegen, siehe README.")}
+    <section>${sechead("01", "Objekte", "Alle Objekte", "Ein neues Objekt bekommt einen Ordner unter <span class=\"mono\">projects/</span> mit <span class=\"mono\">project.yaml</span> aus der Vorlage.", `<a class="btn primary" href="#/neu">Neues Objekt</a>`)}
     <div class="projects">${ps.map(p => p.fehler ? `<div class="pcard"><h3>${esc(p.name)}</h3><p class="muted">${esc(p.fehler)}</p></div>` : `
       <a class="pcard" href="#/p/${esc(p.slug)}">
         <div class="thumbs">${(p.letzte.length ? p.letzte.slice(0, 3) : [{}]).map(m => m.thumb ? `<img src="${esc(m.thumb)}" alt="" loading="lazy">` : `<img alt="">`).join("")}</div>
@@ -224,7 +225,8 @@ async function viewShotlist(slug) {
       const badges = [vor ? `<span class="b">V</span>` : "", fin ? `<span class="b">F</span>` : "", x.higgsfield.length ? `<span class="b hf">HF ${x.higgsfield.length}</span>` : "", frei ? `<span class="b ok">frei</span>` : ""].join("");
       return `<td><div class="cell">${first ? `<button type="button" class="ph media" data-rel="${esc(first.rel)}" aria-label="${esc(c.label + ", " + l.label)} ansehen"><img src="${esc(first.thumb)}" alt="" loading="lazy"><span class="badges">${badges}</span></button>`
         : `<span class="ph empty"><span class="label">leer</span></span>`}
-        ${active[k] ? `<span class="q">${active[k] === "laeuft" ? "rendert" : "in Queue"}</span>` : `<button type="button" class="small" data-cam="${esc(c.key)}" data-light="${esc(l.key)}">Vorschau rendern</button>`}</div></td>`;
+        ${active[k] ? `<span class="q">${active[k] === "laeuft" ? "rendert" : "in Queue"}</span>` : `<button type="button" class="small" data-cam="${esc(c.key)}" data-light="${esc(l.key)}">Vorschau rendern</button>`}
+        ${x.renders.length ? `<button type="button" class="small" data-ver="${esc(x.renders[0].rel)}">Veredeln</button>` : ""}</div></td>`;
     }).join("")}</tr>`).join("")}</tbody></table></div>
     ${s.unzugeordnet.length ? `<p class="muted">Nicht zugeordnete Higgsfield-Bilder: ${s.unzugeordnet.map(u => `<span class="mono">${esc(u.rel)}</span>`).join(", ")}</p>` : ""}
     <p class="muted" style="font-size:14px">Zuordnung: Blender-Bilder nach dem Muster <span class="mono">${esc(slug)}_&lt;motiv&gt;_&lt;licht&gt;_(vorschau|final)</span>, Higgsfield-Bilder zusätzlich nach Motiv- und Lichtnamen im Dateinamen.</p></section>`;
@@ -238,15 +240,20 @@ async function viewShotlist(slug) {
     const it = g.medien.find(m => m.rel === b.dataset.rel);
     if (it) openDetail(slug, it, () => viewShotlist(slug));
   }));
+  $$("button[data-ver]").forEach(b => b.addEventListener("click", () => {
+    const it = g.medien.find(m => m.rel === b.dataset.ver);
+    if (it) openVeredeln(slug, it, g);
+  }));
 }
 
 /* ------------------------------------------------------------ 05 Queue */
+const JOB_ART = { check: "Planabgleich", geo: "Umgebung", higgsfield: "Veredelung", video: "Video" };
 async function viewQueue(slug) {
   renderNav(slug, "queue");
   const [s, q] = await Promise.all([api(`/api/projects/${slug}/shotlist`), api(`/api/queue?projekt=${slug}`)]);
   document.title = `Queue · immoviz Studio`;
   const dry = q.trockenlauf_erzwungen || getPref("immoviz-dry", "0") === "1";
-  view.innerHTML = `<section>${sechead("01", "Render-Queue", "Warteschlange", "Ein Job gleichzeitig. Jeder Job rendert eine Vorschau ohne .blend-Datei; das Ergebnis erscheint danach automatisch in Shotlist und Galerie.")}
+  view.innerHTML = `<section>${sechead("01", "Render-Queue", "Warteschlange", "Ein Job gleichzeitig: Vorschau-Renderings (ohne .blend-Datei), Planabgleich, Umgebung laden und Higgsfield-Aufträge mit geschätzten Credits. Ergebnisse erscheinen danach automatisch in Shotlist und Galerie.")}
     ${q.trockenlauf_erzwungen ? `<div class="notice"><span class="dot"></span>Studio läuft im Trockenlauf-Modus: Jobs starten kein Blender.</div>` : ""}
     <form class="qform" id="qf">
       <label><span class="label">Motiv</span><select class="field" name="cam">${s.cameras.map(c => `<option value="${esc(c.key)}">${esc(c.label)}</option>`).join("")}</select></label>
@@ -262,7 +269,7 @@ async function viewQueue(slug) {
     if (!el) return;
     el.innerHTML = d.jobs.length ? d.jobs.map(j => `
       <li data-id="${esc(j.id)}">${tag(j.status)}
-        <div class="main"><span><b style="color:var(--text-strong);font-weight:500">${esc(j.cam)}</b> · ${esc(j.light)}${j.trockenlauf ? ` <span class="tag plain">Trockenlauf</span>` : ""}</span>
+        <div class="main"><span>${JOB_ART[j.art] ? `<span class="label">${JOB_ART[j.art]}</span> ` : ""}<b style="color:var(--text-strong);font-weight:500">${esc(j.cam)}</b>${j.light ? " · " + esc(j.light) : ""}${j.trockenlauf ? ` <span class="tag plain">Trockenlauf</span>` : ""}${j.credits ? ` <span class="tag plain">ca. ${esc(String(j.credits).replace(".", ","))} Credits</span>` : ""}${j.ergebnis && j.ergebnis.rel ? ` <a href="/files/${esc(slug)}/${esc(j.ergebnis.rel)}" target="_blank" rel="noopener">Ergebnis</a>` : ""}</span>
           <span class="mono muted">${esc(j.befehl)}</span>
           <span class="label">erstellt ${esc(fmtTime(j.erstellt))}${j.sekunden != null ? ` · ${j.sekunden} s` : ""}${j.fehler ? ` · ${esc(j.fehler)}` : ""}</span>
           <pre class="log" ${open.has(j.id) ? "" : "hidden"}></pre></div>
@@ -310,7 +317,7 @@ async function viewGallery(slug) {
   const count = k => k === "alle" ? g.medien.length : g.medien.filter(m => m.gruppe === k).length;
   const ok = g.medien.filter(m => m.status === "freigegeben").length;
   view.innerHTML = `<section>${sechead("01", "Galerie", "Bilder und Videos", `${g.medien.length} Medien, ${ok} freigegeben. Freigegebene Bilder erscheinen in der Kundenansicht.`,
-      `<a class="btn" href="/kunde?p=${encodeURIComponent(slug)}" target="_blank" rel="noopener">Kundenansicht ↗</a>`)}
+      `<button type="button" class="btn" id="mkvideo">Video erzeugen</button><a class="btn" href="/kunde?p=${encodeURIComponent(slug)}" target="_blank" rel="noopener">Kundenansicht ↗</a>`)}
     <div class="filters"><div class="chips" role="group" aria-label="Bereich">${groups.map(([k, l]) => `<button type="button" data-grp="${k}" aria-pressed="${k === grp}">${esc(l)} <span class="muted">${count(k)}</span></button>`).join("")}</div>
       <div class="chips" role="group" aria-label="Freigabe">${stats.map(([k, l]) => `<button type="button" data-st="${k}" aria-pressed="${k === st}">${esc(l)}</button>`).join("")}</div></div>
     <div class="grid" id="grid"></div></section>
@@ -337,6 +344,7 @@ async function viewGallery(slug) {
     }));
   };
   drawLinks(kl.links);
+  $("#mkvideo").addEventListener("click", () => openVideo(slug, g));
   $("#lf").addEventListener("submit", async e => {
     e.preventDefault();
     const f = new FormData(e.target);
@@ -360,9 +368,11 @@ async function viewGallery(slug) {
       <figure><button type="button" class="media" data-i="${g.medien.indexOf(m)}" aria-label="${esc(m.name)} öffnen">
         ${m.typ === "video" ? `<video src="${esc(m.url)}#t=0.5" muted preload="metadata" playsinline></video>` : `<img src="${esc(m.thumb)}" alt="${esc(m.name)}" loading="lazy">`}
         ${m.status !== "offen" ? `<span class="tag st ${STATUS[m.status][0]}">${esc(STATUS[m.status][1])}</span>` : ""}</button>
-        <figcaption><b title="${esc(m.rel)}">${esc(m.rel)}</b><span class="mono">${m.kommentare.filter(k => k.text).length ? "◦ " + m.kommentare.filter(k => k.text).length : ""}</span></figcaption></figure>`).join("")
+        <figcaption><b title="${esc(m.rel)}">${esc(m.rel)}</b><span class="mono">${m.kommentare.filter(k => k.text).length ? "◦ " + m.kommentare.filter(k => k.text).length : ""}</span></figcaption>
+        ${m.veredelbar ? `<button type="button" class="small ver" data-ver="${g.medien.indexOf(m)}">Veredeln</button>` : m.hf ? `<span class="label" style="overflow-wrap:anywhere">aus ${esc(m.hf.quelle || "")}</span>` : ""}</figure>`).join("")
       : `<div class="empty-state"><span class="label">Leer</span><p class="muted">Keine Medien für diesen Filter.</p></div>`;
     $$("#grid [data-i]").forEach(b => b.addEventListener("click", () => openDetail(slug, g.medien[+b.dataset.i], async () => { await loadGallery(slug); viewGallery(slug); })));
+    $$("#grid [data-ver]").forEach(b => b.addEventListener("click", () => openVeredeln(slug, g.medien[+b.dataset.ver], g)));
   };
   $$("[data-grp]").forEach(b => b.addEventListener("click", () => { setPref("immoviz-grp", b.dataset.grp); $$("[data-grp]").forEach(x => x.setAttribute("aria-pressed", x === b)); draw(); }));
   $$("[data-st]").forEach(b => b.addEventListener("click", () => { setPref("immoviz-st", b.dataset.st); $$("[data-st]").forEach(x => x.setAttribute("aria-pressed", x === b)); draw(); }));
@@ -396,7 +406,10 @@ function openDetail(slug, m, onChange) {
       <div class="side">
         <div style="display:grid;gap:6px"><span class="label">${esc(m.gruppe)} · ${esc(m.datum)}</span><h3 style="word-break:break-all">${esc(m.rel)}</h3>
           <div>${tag(m.status)}</div></div>
-        <div class="acts"><button type="button" class="${m.status === "freigegeben" ? "on" : ""}" data-set="freigegeben">Freigeben</button>
+        ${m.hf ? `<div class="hfmeta"><span class="label">Higgsfield · ${esc(m.hf.modell || "")}${m.hf.trockenlauf ? " · Trockenlauf" : ""} · ca. ${esc(String(m.hf.credits_geschaetzt ?? "").replace(".", ","))} Credits</span>
+          <span>Original: <a href="/files/${esc(slug)}/${esc(m.hf.quelle)}" target="_blank" rel="noopener">${esc(m.hf.quelle)}</a>${m.hf.refs && m.hf.refs.length ? ` · ${m.hf.refs.length} Referenzen` : ""}</span>
+          <details><summary class="label">Prompt</summary><p class="small" style="white-space:pre-wrap">${esc(m.hf.prompt)}</p></details></div>` : ""}
+        <div class="acts"><button type="button" class="${m.status === "freigegeben" ? "on" : ""}" data-set="freigegeben">Freigeben</button>${m.veredelbar ? `<button type="button" data-hfver>Veredeln</button>` : ""}${m.typ === "bild" ? `<button type="button" data-hfvid>Video</button>` : ""}
           <button type="button" class="${m.status === "abgelehnt" ? "on" : ""}" data-set="abgelehnt">Ablehnen</button>
           ${m.status !== "offen" ? `<button type="button" class="ghost" data-set="offen">Zurücksetzen</button>` : ""}</div>
         <form id="cf" style="display:grid;gap:8px">
@@ -408,6 +421,8 @@ function openDetail(slug, m, onChange) {
         <div class="label">Dateien: ${m.varianten.map(v => `<a href="/files/${esc(slug)}/${esc(v)}" target="_blank" rel="noopener">${esc(v.split(".").pop())}</a>`).join(" · ")}</div>
       </div></div></div>`;
     $("[data-close]", dlg).addEventListener("click", () => dlg.close());
+    $("[data-hfver]", dlg)?.addEventListener("click", () => { dlg.onclose = null; openVeredeln(slug, m, state.gallery); });
+    $("[data-hfvid]", dlg)?.addEventListener("click", () => { dlg.onclose = null; openVideo(slug, state.gallery, m.rel); });
     $$("[data-set]", dlg).forEach(b => b.addEventListener("click", () => send({ status: b.dataset.set, kommentar: $("#ctext").value })));
     $("#cf", dlg).addEventListener("submit", e => { e.preventDefault(); if ($("#ctext").value.trim()) send({ kommentar: $("#ctext").value }); });
   };
@@ -427,14 +442,19 @@ function openDetail(slug, m, onChange) {
 /* ------------------------------------------------------------ Router */
 async function route() {
   clearTimers();
+  window.onbeforeunload = null;
   if ($("#dlg").open) $("#dlg").close();
   const parts = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
   try {
+    if (parts[0] === "neu") return await viewNeu();
     if (parts[0] !== "p" || !parts[1]) return await viewProjects();
     const slug = decodeURIComponent(parts[1]);
     state.slug = slug;
     const page = (parts[2] || "").split("?")[0];
     if (page === "intake") return await viewIntake(slug);
+    if (page === "fassaden") return await viewFassaden(slug);
+    if (page === "dach") return await viewDach(slug);
+    if (page === "abgleich") return await viewAbgleich(slug);
     if (page === "shotlist") return await viewShotlist(slug);
     if (page === "kameras") return await viewKameras(slug);
     if (page === "licht") return await viewLicht(slug);
