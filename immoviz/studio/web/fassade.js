@@ -122,6 +122,8 @@ async function viewFassaden(slug) {
     const L = F.L, top = Math.max(d.height || 16, 1);
     let g = `<rect class="fp-bg" x="${vx}" y="${vy}" width="${vw}" height="${vh}"/>`;
     if (planImg && m.calibrated || planImg && mode === "kalib") g += `<image href="${esc(planImg.src)}" x="0" y="0" width="${planImg.naturalWidth}" height="${planImg.naturalHeight}" opacity="${opacity}" preserveAspectRatio="none"/>`;
+    const showOverlay = !(mode === "kalib" && !m.calibrated);  /* vor der Kalibrierung nur den Plan zeigen */
+    const g0 = g;
     // Hilfslinien an Höhenkoten
     const guides = [...new Set([0, d.height, ...(d.slabs || []), ...(c.levels || []), ...(d.dach_z || [])].filter(v => typeof v === "number").map(r2))];
     g += `<g class="fp-guide">${guides.map(z => `<line x1="${X(c.span[0])}" x2="${X(c.span[1])}" y1="${Y(z)}" y2="${Y(z)}" stroke-width="${s}"/>
@@ -163,6 +165,7 @@ async function viewFassaden(slug) {
         <circle data-k="a" data-i="${i}" data-part="move" cx="${X(a.u)}" cy="${Y(top + 1.2)}" r="${(on ? 7 : 5.5) * s}"/>
         <text x="${X(a.u)}" y="${Y(top + 1.2) - 9 * s}" font-size="${10 * s}" text-anchor="middle">${i + 1}</text></g>`;
     }).join("")}</g>`;
+    if (!showOverlay) g = g0;
     // Kalibrierpunkt
     if (mode === "kalib" || !m.calibrated) {
       const px = F.hasCheck || c.u0_px[0] || c.u0_px[1] ? c.u0_px : null;
@@ -620,7 +623,7 @@ async function viewAbgleich(slug) {
         `<label class="check"><input type="checkbox" id="adry" ${dry ? "checked" : ""} ${d.trockenlauf_erzwungen ? "disabled" : ""}> Trockenlauf</label><a class="btn" href="#/p/${esc(slug)}/fassaden">Fassaden-Editor</a>`)}
       ${d.trockenlauf_erzwungen ? `<div class="notice"><span class="dot"></span>Studio läuft im Trockenlauf-Modus: der Abgleich startet kein Blender, vorhandene Bilder bleiben.</div>` : ""}
       ${d.fassaden.length ? d.fassaden.map(f => {
-        const job = d.jobs.find(j => j.light === f.fassade);
+        const job = d.jobs.find(j => j.cam === f.fassade);
         const run = job && ["wartet", "laeuft"].includes(job.status);
         return `<div class="abg">
           <div class="wthead"><h3>${esc(f.fassade)}</h3><span class="kv">${job ? tag(job.status, job.status === "fertig" ? `zuletzt ${fmtTime(job.beendet)}` : null) : ""}${f.abgleich ? `<span class="tag plain">Bild ${esc(f.abgleich.datum)}</span>` : ""}

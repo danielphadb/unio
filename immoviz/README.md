@@ -134,7 +134,7 @@ cd immoviz/projects/wimmergasse-20/website && python3 -m http.server 8000
 
 ## Studio-Oberfläche
 
-Lokale Web-Oberfläche über dem Prototyp (Phase B laut `KONZEPT.md`), im UNIO-Design, hell und dunkel, bis 400 px Breite.
+Lokale Web-Oberfläche über dem Prototyp (Phase B und C laut `KONZEPT.md`), im UNIO-Design, hell und dunkel, bis 400 px Breite.
 
 ```bash
 .venv-immoviz/bin/pip install fastapi uvicorn ruamel.yaml   # einmalig
@@ -153,15 +153,33 @@ IMMOVIZ_PROJECTS=/pfad/zur/kopie/projects .venv-immoviz/bin/python immoviz/immov
 | Shotlist | Matrix Motiv x Licht aus `cameras` und `lights`, Thumbnails, Knopf „Vorschau rendern“ |
 | Kameras | Lageplan aus `data/context.json` (Objekt hervorgehoben, Gehsteige grau) mit allen Kameras und Blickkegel; Klick setzt Position, zweiter Klick das Ziel; anlegen, ändern, umbenennen, löschen |
 | Licht | Lichtstimmungen aus `lights` anlegen, ändern, löschen; Sonnenhöhe und Azimut live (`lib/sun.py`), Sonnenrichtung über dem Lageplan, Uhrzeit-Schieberegler |
-| Queue | ein Job gleichzeitig: `immoviz.py render <projekt> --cam <c> --light <l> --preview --no-blend`, Status und Log |
-| Galerie | alle Bilder und Videos unter `renders/`, Freigeben, Ablehnen, Kommentar; Videoplayer für `renders/video/` und `renders/walkthrough/<top>/`, Kamerapfade je Wohnung aus `wohnungen.yaml` (nur Anzeige); Kundenlinks erzeugen und widerrufen |
+| Neues Objekt | Formular (Slug, Adresse, GK-Ursprung, Fassadenrichtung, Fassaden): legt `projects/<slug>/` aus `projects/_vorlage/` an, optional `immoviz.py geo` über die Queue, siehe unten |
+| Fassaden | Straßenansicht aus `checks.<fassade>.pdf` als Hintergrund (pdftoppm, Cache `data/plan_cache/`), maßstäblich über `dpi`, `scale`, `u0_px`. Werkzeuge: Achsen (Klick setzt, Ziehen verschiebt, Entf löscht, Pfeiltasten 5 cm), Geschosse (`altbau.rows`, Band ziehen, Kanten ändern die Höhe), Gesimse (`altbau.cornices`, Ziehen verschiebt alle Stufen), Erdgeschoss (Override je Achse: Haustor, Schaufenster, Kastenfenster mit u- und z-Bereich, Keller), Plan kalibrieren (PDF, Seite, dpi, Maßstab, Klick auf u = 0 / z = 0, Ausschnitt, Höhenkoten). Raster 5 cm, Einrasten an Höhenkoten und vorhandenen Linien in 8 px Umkreis, Alt-Taste frei |
+| Dach | Listen `dach.walls`, `slopes`, `volumes`, `railings`, `slabs` mit Formular je Eintrag (Paare als zwei Zahlen, Fenster und Clip-Regeln als JSON), neu, duplizieren, löschen; Ansichtsskizze je Fassade (u gegen z) mit Altbau, Achsen, Wänden, Fenstern, Schrägen, Geländern, Volumen |
+| Abgleich | „Planabgleich prüfen“ startet `immoviz.py check <projekt> --facade <f>` über die Queue; Ergebnis als Plan und orthogonales Modell mit Schieberegler, dazu die rot/blaue Überlagerung aus `renders/check/` |
+| Queue | ein Job gleichzeitig: `immoviz.py render <projekt> --cam <c> --light <l> --preview --no-blend`, Planabgleich, `geo`, Higgsfield-Aufträge mit geschätzten Credits; Status und Log |
+| Galerie | alle Bilder und Videos unter `renders/`, Freigeben, Ablehnen, Kommentar; „Veredeln“ je Blender-Bild und „Video erzeugen“ (Higgsfield, siehe unten); Higgsfield-Bilder mit Verweis auf Original und Prompt; Videoplayer für `renders/video/` und `renders/walkthrough/<top>/`, Kamerapfade je Wohnung aus `wohnungen.yaml` (nur Anzeige); Kundenlinks erzeugen und widerrufen |
 | Kundenansicht | `/kunde?p=<slug>&t=<token>`: nur freigegebene Bilder und Videos, Kunde kann Anmerkungen schreiben. Ohne Token nur von localhost |
+
+Higgsfield-Veredelung (Knopf „Veredeln“ in Shotlist und Galerie): Prompt aus Bausteinen in `projects/<p>/prompts.yaml`
+(Geometrie-Sperre, Objekt, Licht und Jahreszeit je Lichtstimmung über `zuordnung`, Umgebung, Negativ; innen Altbau oder
+Dachgeschoss, Raum, Licht), vor dem Absenden editierbar; bis zu drei Referenzbilder aus der Galerie, Format, Auflösung,
+geschätzte Credits (Bild ca. 1,5, Video Kling 5 s ca. 16), Bestätigung. Ergebnis in
+`renders/higgsfield/<motiv>_<licht>_<zeit>.jpg`, Metadaten in `renders/higgsfield/index.json`. Video-Dialog: Start-,
+End- und Zwischenbilder aus der Galerie, Dauer 5 oder 10 s, Prompt. Im Kopf steht das Guthaben bzw. „Trockenlauf“.
+Schlüssel nur aus `HIGGSFIELD_API_KEY` und `HIGGSFIELD_API_SECRET`; ohne Schlüssel oder mit `--dry-run` Trockenlauf
+(Ergebnis = Eingangsbild). Stand der API und offene Punkte: `higgsfield/API.md`.
 
 Zuordnung in der Shotlist: Blender-Bilder nach `<slug>_<motiv>_<licht>_(vorschau|final)`, Higgsfield-Bilder in
 `renders/higgsfield/` zusätzlich über Motiv- und Lichtnamen im Dateinamen (z. B. `herbst_ecke_orbit`, `ecke_dunst_nbpro`).
 
 Datenhaltung je Projekt:
 
+- `project.yaml`, Fassaden-, Dach-Editor und Neues Objekt: ersetzen nur die betroffenen Blöcke (z. B.
+  `altbau.facades.<f>.axes`, `altbau.facades.<f>.eg`, `altbau.rows`, `altbau.cornices`, `checks.<f>`, `dach.<liste>`)
+  mit `yamledit.replace_blocks`. Alles außerhalb bleibt zeichengenau; im Block bleiben unveränderte Einträge
+  zeichengenau, Kommentare am Zeilenende und Kommentarzeilen wandern mit ihrem Eintrag, Zahlformate unveränderter Werte
+  bleiben (4.40). Gegenprüfung über die ganze Datei, Sicherung in `.history/`, Prüfung der Werte im Server.
 - `project.yaml`: Kamera- und Licht-Editor ändern nur den betroffenen Eintrag unter `cameras` bzw. `lights`
   (zeilengenau, Kommentare, Ausrichtung und alle anderen Zeilen bleiben, `studio/yamledit.py` mit ruamel.yaml).
   Vor dem Schreiben: Prüfung (Namen nur `[a-z0-9_]`, Zahlen in sinnvollen Grenzen, Pflichtfelder `pos`, `target`,
@@ -185,16 +203,25 @@ gibt es noch nicht. Thumbnails und Job-Logs liegen in `immoviz/studio/.cache/` (
 
 ## Neues Objekt anlegen
 
-1. Ordner `projects/<slug>/` mit `project.yaml`, `quellen/`, `data/`, `renders/` anlegen
-   (am besten `wimmergasse-20` kopieren).
-2. Gebäudeecke und Fassadenrichtung bestimmen: Adresse eintragen, `immoviz.py geo` ausführen,
-   im Baukörpermodell die Ecke und die Fassadenlinien ablesen (`site.origin_gk`, `x_axis_deg`, `facades`).
-3. Aus der Straßenansicht (1:100) übertragen: Fensterachsen je Fassade, Geschosshöhen, Fenstergrößen,
-   Gesimse. Jede Zahl bekommt im YAML-Kommentar ihre Quelle.
-4. Dachgeschoss aus Ansicht und DG-Grundrissen: Wände (`walls`), Schrägen (`slopes`), Volumen, Decken.
-5. Angebaute Nachbarn und Häuser gegenüber modellieren (Pflicht): `neighbour_facades` mit Fassadenlinie,
-   Höhe, Achsen, Geschossen, Erdgeschoss, Gesimsen, Balkonen, Dach und Farbe nach Street View.
-6. Vorschau rendern, gegen Plan und mit `svcheck` gegen Street View prüfen, nachschärfen. Erst dann Higgsfield.
+Ziel: ein Objekt in etwa einem Tag aufnehmen, ohne YAML von Hand zu schreiben. Im Studio (`immoviz.py studio`):
+
+1. **Projekte, „Neues Objekt“**: Slug, Name, Adresse, Gebäudeecke in GK Ost (`site.origin_gk`, aus dem Baukörpermodell
+   oder ViennaGIS), Fassadenrichtung (`site.x_axis_deg`, Fassade A gegen Ost), Fassade A (entlang +x) und optional
+   Fassade B an der Ecke (entlang +y zum Ursprung) mit Namen und Länge. Das Studio legt `projects/<slug>/` mit
+   `quellen/`, `data/`, `renders/`, `project.yaml` aus `projects/_vorlage/project.yaml` (Beispielwerte mit
+   Kommentaren, leere Achsen) und `prompts.yaml` an und startet auf Wunsch `immoviz.py geo` über die Queue.
+2. **Intake**: Straßenansichten (Vektor-PDF 1:100), Schnitt, Grundrisse hochladen.
+3. **Fassaden, „Plan kalibrieren“**: PDF, Seite, dpi und Maßstab wählen, im Plan auf u = 0 / z = 0 klicken, Ausschnitt
+   und Höhenkoten setzen. Danach **Achsen** über die Fensterachsen klicken, **Geschosse** an die Fenster ziehen
+   (Unterkante, Höhe, Breite, Typ, Umrahmung), **Gesimse** verschieben, **Erdgeschoss** je Achse festlegen. Jede
+   Fassade einzeln; Geschosszeilen und Gesimse gelten für alle Fassaden.
+4. **Dach**: Wände, Schrägen, Volumen, Geländer und Decken aus Schnitt und DG-Grundrissen eintragen, Skizze prüfen.
+5. **Abgleich**: „Planabgleich prüfen“, mit dem Schieberegler Achsen, Gesimse und Dachkanten gegen den Plan prüfen.
+6. Angebaute Nachbarn und Häuser gegenüber (`neighbour_facades`) weiterhin in `project.yaml` (noch ohne Editor),
+   Kameras und Licht im Studio, Vorschau rendern, mit `svcheck` gegen Street View prüfen. Erst dann Higgsfield.
+
+Ohne Studio: Ordner wie oben von Hand anlegen (am besten `_vorlage` kopieren), `site.origin_gk`, `x_axis_deg` und
+`facades` nach `immoviz.py geo` aus dem Baukörpermodell ablesen. Jede Zahl bekommt im YAML-Kommentar ihre Quelle.
 
 ## Datenquellen
 

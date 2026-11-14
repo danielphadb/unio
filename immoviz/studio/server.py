@@ -1743,7 +1743,7 @@ def api_abgleich_start(slug: str, body: dict = Body(...)):
                " flush=True);time.sleep(1.5)"]
     else:
         cmd = [sys.executable, str(CLI), "check", str(pdir), "--facade", name]
-    return queue().add_job(slug, "check", cmd=cmd, dry=dry, cam="planabgleich", light=name,
+    return queue().add_job(slug, "check", cmd=cmd, dry=dry, cam=name, light="",
                            befehl=f"immoviz.py check projects/{slug} --facade {name}" + (" (Trockenlauf)" if dry else ""))
 
 
@@ -1827,7 +1827,7 @@ def api_project_new(body: dict = Body(...)):
         dry = bool(body.get("dry_run") or FORCE_DRY)
         cmd = [sys.executable, "-c", "import time;print('Trockenlauf: keine Abfrage bei Stadt Wien', flush=True);"
                "time.sleep(1)"] if dry else [sys.executable, str(CLI), "geo", str(target)]
-        job = queue().add_job(slug, "geo", cmd=cmd, dry=dry, cam="umgebung", light="",
+        job = queue().add_job(slug, "geo", cmd=cmd, dry=dry, cam=slug, light="",
                               befehl=f"immoviz.py geo projects/{slug}" + (" (Trockenlauf)" if dry else ""))
     return {"slug": slug, "job": job}
 

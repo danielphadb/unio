@@ -81,9 +81,21 @@ Blickkegel aus der Brennweite), Licht-Editor mit live berechnetem Sonnenstand, b
 project.yaml (Kommentare bleiben, Prüfung, Sicherung in .history). Upload im Intake mit Zuordnung zu Punkten.
 Kundenlink mit Token (nur Hash gespeichert, Ablauf, Widerruf); ohne Token nur noch localhost, von außen nur
 Kundenansicht und freigegebene Dateien. Galerie mit Videoplayer und Kamerapfaden der Walkthroughs.
-Offen für B: Team-Anmeldung (bis dahin nur lokal), Higgsfield-Aufträge und Kosten in der Queue,
+Offen für B: Team-Anmeldung (bis dahin nur lokal),
 Final-Rendering aus der Oberfläche, Export, Bearbeiten der Walkthrough-Pfade. Next.js laut Abschnitt 4 erst,
 wenn die Oberfläche öffentlich erreichbar wird.
+
+**Stand Phase C (14.11.2026):** Fassaden-Editor (Straßenansicht aus `checks.<fassade>` als Hintergrund im Maßstab,
+Achsen, Geschosszeilen, Gesimse, Erdgeschoss-Overrides, Kalibrierung von `u0_px` per Klick, Raster 5 cm, Einrasten an
+Höhenkoten und Linien), Dach-Editor (Listen walls, slopes, volumes, railings, slabs mit Ansichtsskizze je Fassade),
+Planabgleich aus der Oberfläche über die Queue mit Schieberegler Plan/Modell, „Neues Objekt“ aus
+`projects/_vorlage/project.yaml` mit optionalem `geo`-Lauf. Gespeichert wird blockweise mit
+`yamledit.replace_blocks` (Kommentare und unveränderte Einträge bleiben, Sicherung in .history). Geprüft an Wimmergasse
+20: die gespeicherten Achsen liegen über den Fensterachsen der Ansicht. Higgsfield aus der Oberfläche (Veredeln je
+Blender-Bild, Video aus Start- und Endbild, Prompt aus `prompts.yaml`, Kosten in der Queue, Trockenlauf ohne Schlüssel);
+API-Stand und Lücken in `higgsfield/API.md` (Nano-Banana-Pro-Pfad und Kling mit Endbild nicht öffentlich dokumentiert).
+Offen für C: KI-Vorschlag der Achsen aus dem Vektor-PDF, Fenstertypen-Bibliothek und Stuckbausteine, Editor für
+`neighbour_facades`, Schnitt als Hintergrund im Dach-Editor, 3D-Vorschau neben dem Editor, Freigabe-Knopf im Abgleich.
 
 **Stand Phase E (14.11.2026):** `walkthrough` (Reel 1) und `schnitt` (Reel 2) laufen auf der Kommandozeile.
 `schnitt` rendert aus einer festen Axonometrie sechs Zustände (ganzes Haus, Schnitt im 3. DG, 3., 2., 1. OG, EG)
