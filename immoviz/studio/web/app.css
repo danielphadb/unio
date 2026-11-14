@@ -479,3 +479,4 @@ figure .ver{justify-self:start}
 .hfform>*,.hfform fieldset{min-width:0;min-inline-size:0;max-width:100%}
 .hfform legend{max-width:100%;overflow-wrap:anywhere}
 .hfform .mono{overflow-wrap:anywhere}
+.vpair{max-width:560px}.vpair figure{display:grid;gap:4px}.vpair figure:has(img[hidden])::before{content:"";aspect-ratio:3/2;border-radius:8px;background:var(--placeholder)}
