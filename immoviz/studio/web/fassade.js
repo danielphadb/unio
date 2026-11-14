@@ -61,7 +61,7 @@ async function viewFassaden(slug) {
         <p class="muted small" id="fhint"></p>
       </div>
       <div class="side">
-        <div class="edform" id="fform"></div>
+        <form class="edform" id="fform" autocomplete="off" onsubmit="return false"></form>
         <ul class="rows camlist" id="flist"></ul>
       </div>
     </div></section>`;
