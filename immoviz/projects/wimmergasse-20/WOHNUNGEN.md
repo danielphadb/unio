@@ -7,11 +7,28 @@ im Charakter des Wiener Altbaus.
 
 | Top | Lage | Fläche (NWG) | Hülle | Kameras | Staging |
 |---|---|---|---|---|---|
-| Top 7 | 1. OG, Straße Wimmergasse | 47,73 m² | automatisch aus Vektorplan | wohnkueche, wohnkueche_zurueck, zimmer | S1 bis S3 |
-| Top 12 | 1. OG, Stolberggasse mit Loggia | 53,35 m² | automatisch aus Vektorplan | kueche, wohnen_loggia, zimmer_ecke | S4, S5 |
-| Top 35 | 3. DG, Ecke, Terrassen | 60,85 m² + 6,93 m² Terrassen | von Hand aus der plangeprüften Dachkubatur | wohnen_terrasse, dachschraege, kuecheninsel | S6 bis S8 |
+| Top 7 | 1. OG, Straße Wimmergasse | 47,73 m² | automatisch aus Vektorplan | wohnkueche, wohnkueche_zurueck, zimmer | S1 bis S3 fertig |
+| Top 12 | 1. OG, Stolberggasse mit Loggia | 53,35 m² | automatisch aus Vektorplan | kueche, wohnen_loggia, zimmer_ecke | S4, S5 fertig |
+| Top 35 | 3. DG, Ecke, Terrassen | 60,85 m² + 6,93 m² Terrassen | von Hand aus der plangeprüften Dachkubatur | wohnen_terrasse, dachschraege, kuecheninsel | S6 bis S8 fertig |
 
 Staging nach `mood_interior.md` (Abschnitt 5 Prompt-Bausteine), je Bild Blender-Hülle plus zwei Mood-Referenzen.
+
+## Ergebnis Staging (14.11.2026)
+
+Alle Bilder in `renders/innen/`, 2528 x 1696 px, Job-IDs und Mood-Referenzen in `renders/innen/staging.json`.
+Blender-Grundlage jeweils `<name>_vorschau.png` daneben.
+
+| Nr | Datei | Prüfung gegen Hülle |
+|---|---|---|
+| S1 | `top07_wohnkueche.jpg` | Fensterachsen und Brüstung stimmen |
+| S2 | `top07_wohnkueche_zurueck.jpg` | Türöffnungen stimmen, Flügeltür offen |
+| S3 | `top07_zimmer.jpg` | stimmt, Fenster rechts am Bildrand |
+| S4 | `top12_kueche.jpg` | stimmt; Kochnische nur 1,8 m tief, daher eng geschnitten |
+| S5 | `top12_wohnen_loggia.jpg` | stimmt (erster Versuch verworfen: erfundene zweite Balkontür) |
+| S6 | `top35_dachschraege.jpg` | Glastüren und Tür stimmen, Dachfenster ca. 1 m nach links verschoben |
+| S6 Var. | `top35_dachschraege_variante.jpg` | Dachfenster an richtiger Stelle, aber kleines Zusatzfenster in der Schräge |
+| S7 | `top35_wohnen_terrasse.jpg` | Glasfront, Schräge, Ausblick stimmen |
+| S8 | `top35_kuecheninsel.jpg` | stimmt |
 
 ## Bedienung
 
@@ -106,10 +123,15 @@ Standard; Hochformate werden als eigene Blender-Kameras ergänzt, nicht aus dem 
 - Glastür zur Loggia (Top 12) wird als Tür erkannt, nicht als Glastür; Higgsfield setzt sie trotzdem richtig
 - Feine Fugen zwischen Wandquadern in der Blender-Vorschau (verschwinden im Staging)
 - Rauminhalt wie Küche und Bad gibt Blender nicht vor, die Lage kommt aus dem Plan nur über den Prompt
+- Higgsfield erfindet gelegentlich Öffnungen (S5 erster Versuch, S6) oder verschiebt Dachfenster; jedes Bild
+  wird deshalb gegen die Vorschau geprüft, ein Ausreißer kostet einen zweiten Lauf (2 Credits)
+- Top 35 DG-Küche und Insel sind frei gesetzt (kein DG3-Grundriss), Lage mit Bauträger abstimmen
 
 ## Offene Punkte
 
 - Hochformat-Kameras (4:5) für Social und Exposé
+- S6 neu mit Dachfenster-Maske oder als Final-Render (2400 x 1600) nachziehen
+- Finale Blender-Renderings (`--final`) als Grundlage für 4K-Upscale
 - Lichte Raumhöhe Regelgeschosse (Schnitt), Fensterbrüstungen und Türhöhen innen
 - DG3-Grundriss als Vektor für eine automatische Hülle von Top 35
 - Bestätigung der drei Tops und des Stils durch den Vertrieb
