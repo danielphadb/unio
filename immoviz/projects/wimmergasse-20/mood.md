@@ -8,7 +8,7 @@ Dateien werden nicht eingecheckt (fremde Bildrechte), nur als Referenz für Lich
 | ` -41.jpg` (1kpqnJMgeq58Q6pmA3yBgG6JFhgOcHsXN), Pazelhof Wien | Hauptreferenz Außen: heller Wiener Altbau mit Mansarde, diesiges Tageslicht, warmweißer Putz, Leben im Erdgeschoss |
 | ` -42.jpg` (1xgETY5CItbKE3klAgQiTTnycPDxLH_8-), Wiener Gasse | Straßenflucht auf Augenhöhe, weiches bedecktes Licht, Kopfsteinpflaster, Seilleuchten |
 | `Instagram-6.jpg` (1Ls2EVhj0hfx1nSyQwWoiQOmVQWdLA9kH) | Frontale, ruhige Komposition, gerade Vertikalen, gedeckte Farben, Passant in Bewegungsunschärfe |
-| `Gallery – TMRW.jpg` (1ITh4TX30NyK8Q8CfpWrN6Zr539u2fwD-) | Gegenlicht-Sonne durch Bäume, Grün im Vordergrund, belebter Platz |
+| `Gallery TMRW.jpg` (Dateiname mit Gedankenstrich) (1ITh4TX30NyK8Q8CfpWrN6Zr539u2fwD-) | Gegenlicht-Sonne durch Bäume, Grün im Vordergrund, belebter Platz |
 | `Guinness Quarter, FaulknerBrowns Architects.jpg` (1LViJtX5kTk75J1LwJpCsqEiqLx1KrW3W) | Lebendige Szene, Menschen und Kinder, heller Himmel mit Wolken |
 
 ## Abgeleitete Regeln
