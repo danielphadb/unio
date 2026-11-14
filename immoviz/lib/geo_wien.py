@@ -28,6 +28,7 @@ LAYERS = {
     "traffic1": "FMZKVERKEHR1OGD",
     "traffic2": "FMZKVERKEHR2OGD",
     "info": "GEBAEUDEINFOOGD",
+    "contours": "HOEHENLINIEOGD",   # Hoehenlinien 1 m, Hoehe ueber Wiener Null
 }
 
 # Klassen laut Baumkataster: Hoehe und Kronendurchmesser sind in Klassen angegeben
@@ -130,6 +131,16 @@ def build_context(cfg: dict, out_path: Path) -> dict:
                       "height": TREE_HEIGHT_M.get(p.get("BAUMHOEHE"), 8),
                       "crown": TREE_CROWN_M.get(p.get("KRONENDURCHMESSER"), 5)})
 
+    contours = []
+    for f in raw["contours"]:
+        h = f["properties"].get("HOEHE_WIEN")
+        g = f["geometry"]
+        lines = [g["coordinates"]] if g["type"] == "LineString" else g.get("coordinates", [])
+        for line in lines:
+            for k, (x, y, *_) in enumerate(line):
+                if k % 2 == 0:
+                    contours.append([*frame(x, y), h])
+
     info = [{"acd": f["properties"]["ACD"], "street": f["properties"]["STRNAML"],
              "nr": f["properties"]["VONN"], "floors": f["properties"]["GESCH_ANZ"],
              "type": f["properties"]["L_BAUTYP"], "period": f["properties"]["L_BAUJ"]}
@@ -137,7 +148,7 @@ def build_context(cfg: dict, out_path: Path) -> dict:
 
     ctx = {"frame": frame.to_dict(), "lat": lat, "lon": lon, "radius_m": radius,
            "source": "Datenquelle: Stadt Wien - data.wien.gv.at (CC BY 4.0)",
-           "hero": hero, "buildings": buildings, "surfaces": surfaces, "trees": trees, "info": info}
+           "hero": hero, "buildings": buildings, "contours": contours, "surfaces": surfaces, "trees": trees, "info": info}
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(ctx, ensure_ascii=False))
     return ctx

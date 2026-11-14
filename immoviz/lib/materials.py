@@ -218,8 +218,8 @@ def foliage(bpy, name, color):
 
 
 # Typische Wiener Gruenderzeit- und Nachkriegsfassaden (gedeckt, warm, nicht zu hell)
-NEIGHBOUR_PALETTE = ["#D9C7A3", "#CDBB9B", "#C9B9A6", "#D3B79A", "#BDB6A8", "#D8CBB2",
-                     "#C4A887", "#CFC3AE", "#B9AE9C", "#D6BFA5", "#C2B59E", "#D1C2A0"]
+NEIGHBOUR_PALETTE = ["#D6C29A", "#C7B28E", "#BFB2A2", "#CFA98A", "#B4ADA0", "#D2C3A6",
+                     "#B89A78", "#C9BDA6", "#A9A092", "#CDB396", "#B8AB92", "#CDBB94", "#9E8F7C", "#C8A08F"]
 
 
 def build_library(bpy, cfg_mats: dict) -> dict:
@@ -246,7 +246,7 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     L["innen_a"] = interior(bpy, "innen_a", (0.035, 0.032, 0.03))
     L["innen_b"] = interior(bpy, "innen_b", (0.30, 0.26, 0.21))
     L["innen_c"] = interior(bpy, "innen_c", (0.12, 0.10, 0.08))
-    L["asphalt"] = plaster(bpy, "asphalt", (0.045, 0.045, 0.047), var=0.12, bump=0.3)
+    L["asphalt"] = plaster(bpy, "asphalt", (0.028, 0.028, 0.03), var=0.12, bump=0.3)
     L["gehsteig"] = plaster(bpy, "gehsteig", (0.16, 0.155, 0.15), var=0.1, bump=0.25)
     L["parkstreifen"] = plaster(bpy, "parkstreifen", (0.06, 0.06, 0.062), var=0.1)
     L["zebra"] = simple(bpy, "zebra", (0.7, 0.7, 0.68), 0.7)
@@ -270,7 +270,7 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     L["autoglas"] = simple(bpy, "autoglas", (0.01, 0.012, 0.014), 0.03, 0.0)
     L["reifen"] = simple(bpy, "reifen", (0.015, 0.015, 0.015), 0.8)
     for i, h in enumerate(NEIGHBOUR_PALETTE):
-        L[f"nachbar_{i}"] = plaster(bpy, f"nachbar_{i}", tuple(c * 0.82 for c in hex_rgb(h)), sockel=0.6)
+        L[f"nachbar_{i}"] = plaster(bpy, f"nachbar_{i}", tuple(c * 0.66 for c in hex_rgb(h)), sockel=0.6)
     return L
 
 

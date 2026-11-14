@@ -15,6 +15,7 @@ from . import materials as M
 from . import meshkit as K
 from .sun import sun_position, sun_vector_local
 
+LAST_TERRAIN = None
 STREET_LAYERS = {"Fahrbahn", "Gehsteig", "Ruhender Verkehr", "Gehweg, Radweg", "Zebrastreifen",
                  "Sonstige Verkehrsfläche", "Befestigte Fläche", "Fahrbahnschwelle"}
 
@@ -226,6 +227,27 @@ def fit_terrain(ctx, ground_wn, anchors, radius=120.0):
     return lambda x, y: float(a + b * x + c * y)
 
 
+def contour_terrain(ctx, ground_wn):
+    """Gelaende aus Hoehenlinien: lineare Interpolation zwischen den zwei naechsten Hoehenstufen."""
+    import numpy as np
+    P = np.array(ctx.get("contours") or [])
+    if len(P) < 10:
+        return None
+    X, Y, H = P[:, 0], P[:, 1], P[:, 2] - ground_wn
+
+    def z(x, y):
+        d = np.hypot(X - x, Y - y)
+        i1 = int(np.argmin(d))
+        h1, d1 = H[i1], d[i1]
+        m = H != h1
+        if not m.any():
+            return float(h1)
+        j = np.where(m)[0][np.argmin(d[m])]
+        h2, d2 = H[j], d[j]
+        return float((h1 * d2 + h2 * d1) / (d1 + d2 + 1e-6))
+    return z
+
+
 def shift_z(mb, fn):
     mb.verts = [(x, y, z + fn(x, y)) for x, y, z in mb.verts]
 
@@ -330,7 +352,7 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
         if nbc:
             col = f"nachbar_{b.get('bezug')}"
             if col not in mats:
-                mats[col] = M.plaster(bpy, col, tuple(c * 0.85 for c in M.hex_rgb(nbc)), sockel=0.6)
+                mats[col] = M.plaster(bpy, col, tuple(c * 0.72 for c in M.hex_rgb(nbc)), sockel=0.6)
         nb_w, nb_win, nb_r = K.MeshBuilder("t", walls.materials), K.MeshBuilder("t", wins.materials), K.MeshBuilder("t", roofs.materials)
         walls_, wins_, roofs_ = walls, wins, roofs
         walls, wins, roofs = nb_w, nb_win, nb_r
@@ -393,7 +415,7 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
 
     ground = K.MeshBuilder("umgebung_boden", ["asphalt"])
     # Gelaenderaster (20 m) im Nahbereich, darunter eine tiefe Fernebene
-    g, R0 = 20.0, 320.0
+    g, R0 = 8.0, 200.0
     nn = int(R0 / g)
     for i in range(-nn, nn):
         for j in range(-nn, nn):
@@ -528,13 +550,21 @@ def build_scene(cfg, ctx):
     hero.dach()
     hero.emit(hero_coll)
     if ctx:
-        raw = fit_terrain(ctx, cfg["site"].get("ground_wn", 0.0), cfg["site"].get("terrain_anchors"))
+        raw = contour_terrain(ctx, cfg["site"].get("ground_wn", 0.0)) or \
+            fit_terrain(ctx, cfg["site"].get("ground_wn", 0.0), cfg["site"].get("terrain_anchors"))
 
-        def terrain(x, y, r=150.0):
+        cache = {}
+
+        def terrain(x, y, r=400.0):
             d = math.hypot(x, y)
             if d > r:
                 x, y = x * r / d, y * r / d
-            return raw(x, y)
+            key = (round(x / 2.0), round(y / 2.0))
+            if key not in cache:
+                cache[key] = raw(key[0] * 2.0, key[1] * 2.0)
+            return cache[key]
+        global LAST_TERRAIN
+        LAST_TERRAIN = terrain
         build_context(ctx, mats, ctx_coll, radius=cfg["site"].get("radius_m", 160) - 10,
                       detail=cfg["site"].get("detail_radius_m", 110), hero_poly=hero.footprint, terrain=terrain, cfg=cfg)
     return scene

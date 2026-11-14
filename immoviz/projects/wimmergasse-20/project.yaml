@@ -127,13 +127,13 @@ dach:
   solar: {facade: wimmergasse, u: [11.5, 20.5], d: [5.2, 10.5], z: 24.28, rows: 4}
 
 # ---------------------------------------------------------------- Umgebung nach Street View (Google, 05/2024) und Luftbild Wien 2024
-neighbours:   # Fassadenfarbe je Gebaeude (BEZUG aus dem Baukoerpermodell)
-  "547116": "#CDB79A"   # gegenueber Wimmergasse: Nachkriegsbau, beige mit braunen Baendern, Balkone
-  "009453": "#E9E7E1"   # gegenueber Stolberggasse West: weisser Bau
-  "009446": "#D6A497"   # gegenueber Stolberggasse Ost: rosa Gruenderzeitbau
-  "009479": "#B9B6AF"   # Suedwestecke: grauer Gruenderzeitbau mit Stuck
-  "547117": "#E8E6E1"   # Stolberggasse 34: modern, weiss, anthrazite Balkone
-  "009428": "#E2D5BB"   # Wimmergasse 22: cremefarben, Stuck
+neighbours:   # Fassadenfarbe je Gebaeude (BEZUG aus dem Baukoerpermodell), abgeglichen mit Street View 05/2024
+  "547116": "#B9A68A"   # gegenueber Wimmergasse: Nachkriegsbau, beige mit braunen Baendern, Balkone
+  "009453": "#DAD8D2"   # gegenueber Stolberggasse West: weisser Bau
+  "009446": "#C99486"   # gegenueber Stolberggasse Ost: rosa Gruenderzeitbau
+  "009479": "#A3A099"   # Suedwestecke: grauer Gruenderzeitbau mit Stuck
+  "547117": "#C3BBAF"   # Stolberggasse 34: grau-beige, dunkle Metallbalkone, dunkles Sockelband
+  "009428": "#D2BF94"   # Wimmergasse 22: cremegelb, reicher Stuck
 street:
   parking_material: pflaster   # Parkstreifen in beiden Gassen mit Granitpflaster
   cables:   # Seilleuchten quer ueber die Fahrbahn [x0, y0, x1, y1], Hoehe 7,5 m
@@ -177,7 +177,7 @@ lights:
   fruehling:   {date: "2026-04-28", time: "10:40", tz: 2, exposure: -0.1, interior: 0.0, aerosol: 1.5, season: fruehling}
   herbst:      {date: "2026-10-18", time: "15:10", tz: 2, exposure: 0.0, interior: 0.1, aerosol: 2.5, season: herbst}
   winter:      {date: "2026-12-12", time: "16:05", tz: 1, exposure: 0.8, interior: 0.8, aerosol: 3.0, season: winter}
-  dunst_hell:  {date: "2026-07-10", time: "15:30", tz: 2, exposure: -0.2, interior: 0.0, aerosol: 4.0, sky_strength: 0.5, season: sommer}   # Mood: Pazelhof, Instagram-6
+  dunst_hell:  {date: "2026-07-10", time: "15:30", tz: 2, exposure: -0.55, interior: 0.0, aerosol: 4.0, sky_strength: 0.5, season: sommer}   # Mood: Pazelhof, Instagram-6
   sommermittag: {date: "2026-06-21", time: "12:30", tz: 2, exposure: -0.3, interior: 0.0}
   vormittag:   {date: "2026-05-15", time: "10:30", tz: 2, exposure: -0.2, interior: 0.0}
   blaue_stunde: {date: "2026-10-15", time: "18:55", tz: 2, exposure: 1.6, interior: 1.0, season: herbst}
@@ -199,3 +199,14 @@ checks:
     span: [-2.0, 27.5]
     z: [-0.5, 26.5]
     levels: [16.27, 21.07, 24.28]
+
+# ---------------------------------------------------------------- Street-View-Abgleich (immoviz.py svcheck)
+# Bilder nur als interne Referenz (Google-Lizenz), landen in renders/streetview und werden nicht eingecheckt.
+streetview_checks:
+  ecke:             {pos: [-12.0, -14.0], target: [4.0, 4.0], pitch: 15, fov: 90}
+  wimmer_nach_so:   {pos: [-7.5, 45.0], target: [-7.5, -40.0], pitch: 3, fov: 90}     # Gefaelle Wimmergasse, Blick bergauf
+  wimmer_nach_nw:   {pos: [-7.5, -30.0], target: [-7.5, 60.0], pitch: 0, fov: 90}     # Blick bergab, Nachbar Nr. 22
+  nachbar_nord:     {pos: [-8.0, 28.0], target: [0.0, 32.0], pitch: 20, fov: 90}      # Wimmergasse 22
+  stolberg_nach_no: {pos: [-10.0, -9.0], target: [60.0, -9.0], pitch: 5, fov: 90}    # Stolberggasse 34
+  nachbar_ost:      {pos: [20.0, -9.0], target: [20.0, 5.0], pitch: 25, fov: 90}
+  gegenueber_sw:    {pos: [2.0, -4.0], target: [-25.0, -28.0], pitch: 15, fov: 90}

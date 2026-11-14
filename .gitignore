@@ -8,3 +8,4 @@ __pycache__/
 immoviz/projects/*/renders/**/*.png
 immoviz/projects/*/renders/*.png
 immoviz/projects/*/quellen/*.pdf
+immoviz/projects/*/renders/streetview/
