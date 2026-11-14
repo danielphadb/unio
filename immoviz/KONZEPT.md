@@ -74,7 +74,9 @@ Blender- oder Programmierkenntnisse.
 
 ## 6. Bildpaket je Objekt (Standard)
 
-Siehe `projects/<objekt>/mood_analyse.md` für die objektbezogene Shotlist. Standardumfang:
+Die objektbezogene Shotlist steht in `projects/<objekt>/mood_analyse.md` (für Das Wimmer: 15 Motive,
+Herbst als Hauptkampagne, Frühling und Winter als Varianten; Motive Ecke, Haustor und Abend in allen
+Jahreszeiten mit gleicher Kamera). Standardumfang:
 
 - 4 Totalen: Ecke auf Augenhöhe, Straßenflucht, Gegenseite, Luft
 - 6 Architekturdetails: Beletage mit Verdachung, Eingang/Haustor, Gesims und Übergang zum Dachausbau,
@@ -82,3 +84,15 @@ Siehe `projects/<objekt>/mood_analyse.md` für die objektbezogene Shotlist. Stan
 - 2 Ausblicke: von der Dachterrasse, aus einer Regelgeschoss-Wohnung
 - Lichtvarianten: diesiger Tag, Golden Hour, Blaue Stunde
 - Jahreszeiten: Frühling (frisches Grün), Spätsommer, Herbst (goldenes Laub), Winter (kahle Bäume, warme Fenster)
+
+## 7. Realitätsabgleich (fester Schritt vor jedem Rendering)
+
+| Prüfung | Quelle | Werkzeug |
+|---|---|---|
+| Höhen, Achsen, Gesimse | Straßenansicht des Architekten | `immoviz.py check` (Überlagerung im Maßstab 1:100) |
+| Gebäudeumrisse, Gehsteige, Parkstreifen, Bäume | Luftbild Stadt Wien (7,5 cm), Mehrzweckkarte | Luftbild-Überlagerung |
+| Gelände | Sockelhöhen Baukörpermodell plus Plankoten | Geländeebene im Modell |
+| Nachbarfassaden, Straßenmöbel, Pflaster, Leuchten, Blickachsen | Google Street View (nur Referenz, nicht im Bild) | Abruf je Kameraposition |
+
+Erkenntnisse Wimmergasse 20 (14.11.2026): Höhen exakt laut Plan; Korrekturen an DG3 links (Terrasse statt
+Schräge), EG-Türen, Gelände (+0,79 m zur Ecke), Schrägparker, Granitpflaster, Seilleuchten, Nachbarfarben.

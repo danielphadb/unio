@@ -23,6 +23,9 @@ Fensterachsen, Geschosshöhen, Gesimse und die Dachgeschoss-Kubatur dürfen sich
 
 ## Prompt-Bausteine
 
+Objektbezogene, aus der Mood-Sammlung abgeleitete Bausteine stehen in `projects/<objekt>/mood_analyse.md`
+(Abschnitt 5). Sie haben Vorrang vor den allgemeinen Bausteinen unten.
+
 Der Prompt besteht immer aus vier Teilen. Die Teile in `[...]` kommen aus `project.yaml`.
 
 **1. Auftrag und Treue (fix)**
