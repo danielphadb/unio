@@ -40,6 +40,11 @@ def main():
     it.add_argument("--top", default="top07")
     it.add_argument("--final", action="store_true")
     it.add_argument("--cam", default="", help="nur diese Kameras, z. B. top07_zimmer,top12_kueche")
+    wk = sub.add_parser("walkthrough", help="Kamerafahrt durch eine Wohnung: Standbilder je Wegpunkt und Clay-Fahrt")
+    wk.add_argument("project")
+    wk.add_argument("--top", default="top35")
+    wk.add_argument("--anim", action="store_true", help="zusätzlich Clay-Fahrt als MP4 (Bewegungsvorlage)")
+    wk.add_argument("--no-stills", action="store_true")
     st = sub.add_parser("studio", help="Web-Oberfläche immoviz Studio starten (http://127.0.0.1:8765)")
     st.add_argument("--host", default="127.0.0.1")
     st.add_argument("--port", type=int, default=8765)
@@ -67,6 +72,11 @@ def main():
         _svcheck(pdir)
     elif a.cmd == "interior":
         _interior(a, pdir)
+    elif a.cmd == "walkthrough":
+        from lib.interior import render_walkthrough
+        t = time.time()
+        res = render_walkthrough(pdir, a.top, stills=not a.no_stills, anim=a.anim)
+        print(json.dumps({"walkthrough": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
     elif a.cmd == "check":
         from lib.build import load_project, build_scene, Hero
         from lib import check as C, meshkit as K

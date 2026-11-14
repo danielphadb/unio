@@ -45,6 +45,27 @@ Blender läuft als Python-Modul ohne Oberfläche. Die erzeugte `.blend`-Datei l�
 
 Ergebnisse landen in `projects/<objekt>/renders/`.
 
+## Walkthrough (Kamerafahrt durch eine Wohnung)
+
+Methode nach dem Praxisbeispiel in KONZEPT.md, Abschnitt 8: Blender gibt Geometrie und Kamerapfad vor,
+die Bild-KI richtet ein, das Videomodell verbindet die Standbilder.
+
+1. Kamerapfad in `wohnungen.yaml` unter `<top>.walkthrough.punkte` (Position, Blickziel, Brennweite, Zeitpunkt).
+2. Standbilder je Wegpunkt rendern (und optional die Clay-Fahrt als Bewegungsvorlage):
+
+```bash
+.venv-immoviz/bin/python immoviz/immoviz.py walkthrough immoviz/projects/wimmergasse-20 --top top35 --anim
+```
+
+3. Ersten Wegpunkt in Higgsfield einrichten, mit festem Möbelplan im Prompt (was steht links, Mitte, rechts).
+4. Alle weiteren Wegpunkte mit dem eingerichteten ersten Bild als Referenz ("SAME apartment as image 2"),
+   damit Möbel und Materialien in jedem Bild gleich sind. Je Bild ausdrücklich sagen, welche Wände keine
+   Fenster haben, sonst erfindet das Modell welche.
+5. Kling 4.0, Modus `image-to-video`: `start_image` = Wegpunkt 1, `image_references` = mittlere Wegpunkte
+   in Reihenfolge, `end_image` = letzter Wegpunkt, Dauer gleich der Pfaddauer (bis 30 s).
+
+Ergebnisse liegen unter `renders/walkthrough/<top>/` (k = Blender, staging_k = eingerichtet, Video als MP4).
+
 ## Studio-Oberfläche
 
 Lokale Web-Oberfläche über dem Prototyp (Phase B laut `KONZEPT.md`), im UNIO-Design, hell und dunkel, bis 400 px Breite.

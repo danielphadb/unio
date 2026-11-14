@@ -410,3 +410,100 @@ def debug_plan(project_dir: Path, name: str, out: Path):
         img[op["r0"]:op["r1"], op["c0"]:op["c1"]] = col[apt.classify(op)]
     Image.fromarray(img).save(out)
     return {k: sum(1 for o in apt.openings if apt.classify(o) == k) for k in col}
+
+
+# ======================================================================= Walkthrough (Kamerafahrt durch eine Wohnung)
+def render_walkthrough(project_dir: Path, name: str, stills: bool = True, anim: bool = False,
+                       fps: int = 12, anim_res=(640, 360), anim_samples: int = 12):
+    """Kamerapfad aus wohnungen.yaml (<wohnung>.walkthrough): Wegpunkte auf Augenhöhe.
+    stills: je Wegpunkt ein Standbild (Grundlage für die Veredelung, später Keyframes im Videomodell).
+    anim:   Clay-Fahrt in niedriger Auflösung als Bewegungsvorlage (MP4)."""
+    import subprocess
+    import bpy
+    from . import build as B
+    W = yaml.safe_load((project_dir / "wohnungen.yaml").read_text())
+    cfg, ctx = B.load_project(project_dir)
+    cfg["lights"].update(W.get("lichter", {}))
+    a = W["wohnungen"][name]
+    wt = a["walkthrough"]
+    scene = B.build_scene(cfg, ctx)
+    objekt = bpy.data.collections.get("Objekt")
+    mats = {m.name: m for m in bpy.data.materials}
+    build_materials(bpy, mats)
+    coll = bpy.data.collections.new("Innen")
+    scene.collection.children.link(coll)
+    if objekt:
+        keep = set(a.get("objekt_sichtbar", []))
+        for o in objekt.objects:
+            o.hide_render = o.name not in keep
+    apt = ManualApartment(a) if a.get("plan") == "manuell" else None
+    if apt is None:
+        P = W["plaene"][a["plan"]]
+        apt = Apartment(a, raster_page(Path(P["pdf"]), P["page"], P["dpi"], project_dir / "data" / "plan_cache"), P)
+    mw = K.MeshBuilder(f"{name}_waende", ["innen_wand"])
+    mf = K.MeshBuilder(f"{name}_rahmen", ["fenster"])
+    mg = K.MeshBuilder(f"{name}_glas", ["glas"])
+    apt.build(mw, mf, mg)
+    apt.slabs(mw)
+    for mb in (mw, mf, mg):
+        mb.to_object(bpy, mats, coll)
+    B.setup_light(scene, cfg, ctx, wt.get("light", a.get("light", "golden_hour")))
+    scene.view_settings.exposure = wt.get("exposure", a.get("exposure", 1.4))
+
+    cam = bpy.data.cameras.new("walk")
+    cam.sensor_width = 36
+    cam.clip_end = 2000
+    ob = bpy.data.objects.new("walk", cam)
+    scene.collection.objects.link(ob)
+    scene.camera = ob
+    keys, yaw_prev = [], None
+    for k in wt["punkte"]:
+        x, y = apt.px_to_local(*k["pos"])
+        X, Y = apt.px_to_local(*k["target"])
+        z = a["floor_z"] + k.get("h", 1.5)
+        yaw = math.atan2(-(X - x), (Y - y))
+        if yaw_prev is not None:      # Drehrichtung stetig halten
+            while yaw - yaw_prev > math.pi:
+                yaw -= 2 * math.pi
+            while yaw - yaw_prev < -math.pi:
+                yaw += 2 * math.pi
+        yaw_prev = yaw
+        keys.append({"loc": (x, y, z), "yaw": yaw, "lens": k.get("lens", wt.get("lens", 24)), "t": k.get("t")})
+    out_dir = project_dir / "renders" / "walkthrough" / name
+    out_dir.mkdir(parents=True, exist_ok=True)
+    results = {"stills": [], "anim": None}
+    if stills:
+        B.setup_render(scene, tuple(wt.get("still_resolution", [1920, 1080])), wt.get("still_samples", 48))
+        for i, k in enumerate(keys):
+            ob.location = k["loc"]
+            ob.rotation_euler = (math.radians(90), 0, k["yaw"])
+            cam.lens = k["lens"]
+            p = out_dir / f"k{i:02d}.png"
+            scene.render.filepath = str(p)
+            bpy.ops.render.render(write_still=True)
+            results["stills"].append(str(p))
+    if anim:
+        secs = wt.get("sekunden", 20)
+        n = len(keys)
+        times = [k["t"] if k["t"] is not None else secs * i / (n - 1) for i, k in enumerate(keys)]
+        for k, t in zip(keys, times):
+            f = 1 + round(t * fps)
+            ob.location = k["loc"]
+            ob.rotation_euler = (math.radians(90), 0, k["yaw"])
+            cam.lens = k["lens"]
+            ob.keyframe_insert("location", frame=f)
+            ob.keyframe_insert("rotation_euler", frame=f)
+            cam.keyframe_insert("lens", frame=f)
+        scene.frame_start, scene.frame_end = 1, 1 + round(secs * fps)
+        scene.render.fps = fps
+        B.setup_render(scene, tuple(anim_res), anim_samples)
+        scene.render.image_settings.file_format = "PNG"
+        fdir = out_dir / "clay"
+        fdir.mkdir(exist_ok=True)
+        scene.render.filepath = str(fdir / "f")
+        bpy.ops.render.render(animation=True)
+        mp4 = out_dir / f"{name}_clay.mp4"
+        subprocess.run(["ffmpeg", "-v", "error", "-y", "-framerate", str(fps), "-i", str(fdir / "f%04d.png"),
+                        "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "20", str(mp4)], check=True)
+        results["anim"] = str(mp4)
+    return results
