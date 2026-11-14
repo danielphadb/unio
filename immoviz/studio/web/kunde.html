@@ -25,11 +25,18 @@
 <script>
 (async () => {
   const view = $("#view");
-  const slug = new URLSearchParams(location.search).get("p") || "";
+  const qs = new URLSearchParams(location.search);
+  const slug = qs.get("p") || "", token = qs.get("t") || "";
+  const tq = token ? `?t=${encodeURIComponent(token)}` : "";
   if (!slug) { view.innerHTML = `<div class="empty-state"><span class="label">Hinweis</span><h2>Kein Projekt angegeben.</h2><p class="muted">Bitte den vollständigen Link verwenden.</p></div>`; return; }
   let d;
-  try { d = await api(`/api/kunde/${encodeURIComponent(slug)}`); }
-  catch (e) { view.innerHTML = `<div class="empty-state"><span class="label">Hinweis</span><h2>Projekt nicht gefunden.</h2></div>`; return; }
+  try { d = await api(`/api/kunde/${encodeURIComponent(slug)}${tq}`); }
+  catch (e) {
+    const denied = e.status === 403;
+    view.innerHTML = `<div class="empty-state"><span class="label">${denied ? "Kein Zugang" : "Hinweis"}</span><h2>${denied ? "Dieser Link ist ungültig, abgelaufen oder wurde widerrufen." : "Projekt nicht gefunden."}</h2>
+      ${denied ? `<p class="muted">Bitte fordern Sie bei Ihrer Ansprechperson einen neuen Link an.</p>` : ""}</div>`;
+    return;
+  }
   document.title = `${d.name} · Visualisierungen`;
   const imgs = d.medien.filter(m => m.typ === "bild"), vids = d.medien.filter(m => m.typ === "video");
   const hero = imgs[0];
@@ -61,7 +68,7 @@
       $("#cf", dlg).addEventListener("submit", async e => {
         e.preventDefault();
         const text = $("#ct").value.trim(); if (!text) return;
-        try { const r = await api(`/api/kunde/${encodeURIComponent(slug)}/kommentar`, { method: "POST", body: { rel: m.rel, kommentar: text, autor: $("#ca").value.trim() || "Kunde" } });
+        try { const r = await api(`/api/kunde/${encodeURIComponent(slug)}/kommentar${tq}`, { method: "POST", body: { rel: m.rel, kommentar: text, autor: $("#ca").value.trim() || "Kunde" } });
           m.kommentare = r.kommentare; toast("Danke, Anmerkung gespeichert"); draw(); } catch (err) { toast(err.message); }
       });
     };

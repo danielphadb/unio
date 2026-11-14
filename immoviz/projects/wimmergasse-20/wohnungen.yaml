@@ -110,3 +110,65 @@ wohnungen:
         - {pos: [4.5, 5.0], target: [2.0, 2.0], lens: 24, t: 10}      # Drehung zur Glasecke
         - {pos: [3.5, 3.8], target: [2.0, 7.0], lens: 24, t: 15}      # entlang der Glasfront zur Wimmergasse
         - {pos: [2.7, 2.7], target: [-3.0, -2.5], lens: 24, t: 20}    # an der Glasecke, Blick über die Dächer
+
+# ---------------------------------------------------------------- Schnittansicht (immoviz.py schnitt)
+# Gebäude Geschoss für Geschoss aufgeschnitten, eine feste Axonometrie-Kamera, Modellbau-Ästhetik.
+# Höhen z über +29,13 WrN. FFB = Fußbodenoberkante laut Kote im Grundriss [GR], decke = [Unterkante, Oberkante]
+# der Decke darüber (Deckenstärke 0,35 m ANNAHME, Schnitt fehlt). Fenster: Brüstung und Sturz relativ zur FFB aus
+# der Straßenansicht (altbau.rows in project.yaml). Schnitthöhe je Geschoss: FFB + 1,20 m (wie Grundrissschnitt).
+schnitt:
+  plan_von: og1                # PDF wie plaene.og1
+  dpi: 300
+  m_per_px: 0.0084667
+  cell_px: 3
+  rand_m: 1.0                  # Planausschnitt um den Umriss
+  rand_hof_m: 0.25             # Wände bis so weit außerhalb des Umrisses (Hof, Feuermauern) zulassen
+  fassade_abstand_m: 0.03      # Wände erst hinter der Straßenflucht, davor steht die Hero-Fassade
+  fenster_zone_m: 1.0          # Öffnung näher am Umriss = Fenster, sonst Tür
+  sockel_unten: -0.5
+  reihenfolge: [eg, og1, og2, og3, dg3]
+  geschosse:
+    eg:  {page: 3, corner_px: [3925, 2420], ffb: 1.21, decke: [4.59, 4.94], fenster: {bruestung: 0.65, sturz: 2.60}}   # Kote ±0,00 = +30,34 WrN; Blatt gegenüber 1. OG verschoben
+    og1: {page: 4, corner_px: [4178, 2536], ffb: 4.94, decke: [7.99, 8.34], fenster: {bruestung: 0.63, sturz: 2.64}}   # +3,73 = +34,07 WrN
+    og2: {page: 5, corner_px: [4178, 2536], ffb: 8.34, decke: [11.40, 11.75], fenster: {bruestung: 0.69, sturz: 2.54}} # ANNAHME Mitte 1./3. OG, Plan zeigt kopierte Kote des 1. OG
+    og3: {page: 6, corner_px: [4178, 2536], ffb: 11.75, decke: [15.30, 15.97], fenster: {bruestung: 0.66, sturz: 2.42}} # +10,67 = +40,88 WrN; darüber DG-Decke bis 16,27
+    dg3:                        # kein Vektorplan: Dachkubatur aus project.yaml (dach) und Top 35 aus wohnungen.top35
+      typ: dach
+      ffb: 21.07
+      wohnung: top35
+      volumen_behalten: [0, 1, 2]   # dach.volumes: DG1, DG2, Stiegenhaus bleiben Volumen; Innenvolumen DG3 werden geöffnet
+      aussenwand_m: 0.35            # Außenwand am Umriss der geöffneten DG3-Volumen (Hof, Feuermauer)
+      ohne_glasfronten: true        # Glasfronten von Top 35 liefert die Dachkubatur
+  wohnungen:                    # Bodenflächen in UNIO-Signalfarbe, Polygon lokal (x Stolberggasse, y Wimmergasse)
+    top07:
+      geschoss: og1
+      titel: Top 7
+      polygon: [[-0.20, 12.94], [9.79, 12.94], [9.79, 21.83], [-0.20, 21.83]]   # aus wohnungen.top07.region_px
+      ohne: [[[5.55, 15.90], [9.45, 15.90], [9.45, 19.88], [5.55, 19.88]]]      # Stiegenhaus (solid_px)
+    top12:
+      geschoss: og1
+      titel: Top 12
+      polygon: [[11.31, -0.27], [16.73, -0.27], [16.73, 15.39], [11.31, 15.39]] # aus wohnungen.top12.region_px
+    top35:
+      geschoss: dg3
+      titel: Top 35
+      polygon: [[2.1, 2.1], [8.0, 2.1], [8.0, 8.5], [2.1, 8.5]]                 # Innenraum laut wohnungen.top35.walls
+  kamera:                       # Axonometrie (orthografisch) von schräg oben auf die Ecke Wimmergasse/Stolberggasse
+    ziel: [8.0, 12.5, 6.0]
+    azimut: 225                 # Richtung Ziel -> Kamera im lokalen System (225 = über der Kreuzung)
+    hoehe: 40
+    breite: 52                  # sichtbare Breite in Metern
+    abstand: 200
+  licht: vormittag
+  zustaende:
+    - {name: s00, titel: Ganzes Haus, schnitt: null}
+    - {name: s01, titel: 3. Dachgeschoss, geschoss: dg3, schnitt: 22.20, wohnungen: [top35]}
+    - {name: s02, titel: 3. Obergeschoss, geschoss: og3, schnitt: 12.95}
+    - {name: s03, titel: 2. Obergeschoss, geschoss: og2, schnitt: 9.54}
+    - {name: s04, titel: 1. Obergeschoss, geschoss: og1, schnitt: 6.14, wohnungen: [top07, top12]}
+    - {name: s05, titel: Erdgeschoss, geschoss: eg, schnitt: 2.41}
+  render:
+    preview_resolution: [640, 400]
+    preview_samples: 8
+    resolution: [1920, 1080]
+    samples: 48

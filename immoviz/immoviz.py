@@ -45,14 +45,21 @@ def main():
     wk.add_argument("--top", default="top35")
     wk.add_argument("--anim", action="store_true", help="zusätzlich Clay-Fahrt als MP4 (Bewegungsvorlage)")
     wk.add_argument("--no-stills", action="store_true")
+    sc = sub.add_parser("schnitt", help="Schnittansicht: Gebäude geschossweise aufgeschnitten (wohnungen.yaml schnitt)")
+    sc.add_argument("project")
+    sc.add_argument("--preview", action="store_true")
+    sc.add_argument("--zustand", default="", help="nur diese Zustände, z. B. s01,s04 (ohne Übersicht)")
+    sc.add_argument("--nur-check", action="store_true", help="nur Kontrollbilder Plan und Wände, kein Rendering")
     st = sub.add_parser("studio", help="Web-Oberfläche immoviz Studio starten (http://127.0.0.1:8765)")
     st.add_argument("--host", default="127.0.0.1")
     st.add_argument("--port", type=int, default=8765)
     st.add_argument("--dry-run", action="store_true", help="Render-Queue führt nur Trockenläufe aus, kein Blender")
+    st.add_argument("--projects", default=None,
+                    help="Projektwurzel (Standard immoviz/projects oder Umgebungsvariable IMMOVIZ_PROJECTS)")
     a = ap.parse_args()
     if a.cmd == "studio":
         from studio.server import run
-        run(a.host, a.port, a.dry_run)
+        run(a.host, a.port, a.dry_run, a.projects)
         return
     pdir = Path(a.project).resolve()
 
@@ -77,6 +84,21 @@ def main():
         t = time.time()
         res = render_walkthrough(pdir, a.top, stills=not a.no_stills, anim=a.anim)
         print(json.dumps({"walkthrough": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
+    elif a.cmd == "schnitt":
+        from lib import section as SN
+        t = time.time()
+        if a.nur_check:
+            import yaml
+            from lib.build import load_project
+            W = yaml.safe_load((pdir / "wohnungen.yaml").read_text())
+            S = W["schnitt"]
+            S["pdf"] = S.get("pdf") or W["plaene"][S.get("plan_von", "og1")]["pdf"]
+            cfg, ctx = load_project(pdir)
+            floors, fp = SN.load_floors(pdir, cfg, ctx, S)
+            res = SN.write_checks(pdir, S, floors, fp)
+        else:
+            res = SN.render_section(pdir, a.preview, [z for z in a.zustand.split(",") if z])
+        print(json.dumps({"schnitt": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
     elif a.cmd == "check":
         from lib.build import load_project, build_scene, Hero
         from lib import check as C, meshkit as K

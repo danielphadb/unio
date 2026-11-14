@@ -1,4 +1,5 @@
-/* immoviz Studio: Bildschirme Projekte, Übersicht, Intake, Shotlist, Queue, Galerie. Hash-Routing, kein Build-Schritt. */
+/* immoviz Studio: Bildschirme Projekte, Übersicht, Intake, Shotlist, Queue, Galerie. Hash-Routing, kein Build-Schritt.
+   Kamera- und Licht-Editor stehen in editor.js. */
 const view = $("#view");
 const pnav = $("#pnav");
 let timers = [];
@@ -9,7 +10,8 @@ function getPref(k, d) { try { const v = localStorage.getItem(k); return v === n
 function setPref(k, v) { try { localStorage.setItem(k, v); } catch (_) {} }
 
 const TABS = [
-  ["", "Übersicht"], ["intake", "Intake"], ["shotlist", "Shotlist"], ["queue", "Queue"], ["galerie", "Galerie"],
+  ["", "Übersicht"], ["intake", "Intake"], ["shotlist", "Shotlist"], ["kameras", "Kameras"], ["licht", "Licht"],
+  ["queue", "Queue"], ["galerie", "Galerie"],
 ];
 const STEP_LINK = { 1: "intake", 7: "shotlist", 8: "queue", 9: "galerie", 10: "galerie" };
 
@@ -107,13 +109,23 @@ async function viewIntake(slug) {
         <li data-id="${esc(x.id)}"><span class="n">${pad(i + 1)}</span>
           <div class="main"><span>${esc(x.text)}</span>
             <input type="text" value="${esc(x.notiz)}" placeholder="Notiz, z. B. Datei, Stand, fehlt noch" aria-label="Notiz zu Punkt ${i + 1}">
+            ${x.dateien.length ? `<span class="files">${x.dateien.map(n => `<span class="tag plain">${esc(n)}</span>`).join("")}</span>` : ""}
             ${x.aktualisiert ? `<span class="label">aktualisiert ${esc(fmtTime(x.aktualisiert))}</span>` : ""}</div>
           <div class="aside"><div class="seg" role="group" aria-label="Status Punkt ${i + 1}">${vals.map(([v, l]) => `<button type="button" class="v-${v}" data-v="${v}" aria-pressed="${x.status === v}">${l}</button>`).join("")}</div></div>
         </li>`).join("")}</ul>
       <div id="mailbox" hidden><textarea id="mailtext" rows="10" aria-label="Anfrage-Text"></textarea><p class="muted" style="margin-top:8px">Text in die Zwischenablage kopiert, falls der Browser das erlaubt.</p></div>
     </section>
-    <section>${sechead("02", "Quellen", "Dateien in quellen/", "Originale bleiben im Kundenordner (Drive). Hier liegt, was lokal für Planabgleich und Modell gebraucht wird.")}
-      <ul class="rows">${d.quellen.length ? d.quellen.map((q, i) => `<li><span class="n">${pad(i + 1)}</span><span class="main">${esc(q.name)}</span><span class="mono muted aside">${esc(q.datum)} · ${(q.bytes / 1e6).toFixed(1)} MB</span></li>`).join("") : `<li><span class="n">00</span><span class="main muted">Noch keine Dateien.</span></li>`}</ul>
+    <section>${sechead("02", "Quellen", "Dateien in quellen/", "Originale bleiben im Kundenordner (Drive). Hier liegt, was lokal für Planabgleich und Modell gebraucht wird. PDF-Dateien in quellen/ werden nicht eingecheckt.")}
+      <div class="upload">
+        <label class="drop" id="drop" tabindex="0"><input type="file" id="file" multiple accept="${esc(d.upload.endungen.join(","))}" hidden>
+          <span class="dot" aria-hidden="true"></span><b>Dateien hierher ziehen oder auswählen</b>
+          <span class="muted">${esc(d.upload.endungen.map(e => e.slice(1).toUpperCase()).join(", "))} · bis ${d.upload.max_mb} MB je Datei</span></label>
+        <label class="fl"><span class="label">Zuordnen zu</span><select class="field" id="upunkt"><option value="">ohne Zuordnung</option>${d.punkte.map((x, i) => `<option value="${esc(x.id)}">${pad(i + 1)} ${esc(x.text.length > 60 ? x.text.slice(0, 58) + "…" : x.text)}</option>`).join("")}</select></label>
+        <ul class="uplist" id="uplist" aria-live="polite"></ul>
+      </div>
+      <ul class="rows quellen">${d.quellen.length ? d.quellen.map((q, i) => `<li data-file="${esc(q.name)}"><span class="n">${pad(i + 1)}</span>
+        <span class="main"><span style="word-break:break-all">${esc(q.name)}</span><span class="mono muted">${esc(q.datum)} · ${(q.bytes / 1e6).toFixed(1)} MB</span></span>
+        <select class="field aside" aria-label="Intake-Punkt für ${esc(q.name)}"><option value="">ohne Zuordnung</option>${d.punkte.map((x, k) => `<option value="${esc(x.id)}" ${q.punkt === x.id ? "selected" : ""}>${pad(k + 1)} ${esc(x.text.length > 40 ? x.text.slice(0, 38) + "…" : x.text)}</option>`).join("")}</select></li>`).join("") : `<li><span class="n">00</span><span class="main muted">Noch keine Dateien.</span></li>`}</ul>
     </section>`;
   const save = async (li, status) => {
     const notiz = $("input", li).value;
@@ -127,12 +139,57 @@ async function viewIntake(slug) {
     }));
     $("input", li).addEventListener("change", () => save(li, $('.seg [aria-pressed="true"]', li)?.dataset.v || "offen"));
   });
+  $$(".quellen li[data-file] select").forEach(sel => sel.addEventListener("change", async () => {
+    try { await api(`/api/projects/${slug}/quellen/${encodeURIComponent(sel.closest("li").dataset.file)}`, { method: "PUT", body: { punkt: sel.value } }); toast("Zuordnung gespeichert"); viewIntake(slug); }
+    catch (e) { toast(e.message); }
+  }));
+  const maxB = d.upload.max_mb * 1e6, okExt = new Set(d.upload.endungen);
+  const sendFiles = async files => {
+    const punkt = $("#upunkt").value, list = $("#uplist");
+    let ok = 0;
+    for (const f of files) {
+      const li = document.createElement("li");
+      li.innerHTML = `<span class="name">${esc(f.name)}</span><span class="mono muted st">wartet</span><span class="bar"><i></i></span>`;
+      list.appendChild(li);
+      const ext = "." + (f.name.split(".").pop() || "").toLowerCase();
+      if (!okExt.has(ext)) { $(".st", li).textContent = "Dateityp nicht erlaubt"; li.classList.add("bad"); continue; }
+      if (f.size > maxB) { $(".st", li).textContent = `größer als ${d.upload.max_mb} MB`; li.classList.add("bad"); continue; }
+      try {
+        const r = await uploadFile(slug, f, punkt, p => { $(".st", li).textContent = Math.round(p * 100) + " %"; $(".bar i", li).style.width = (p * 100) + "%"; });
+        $(".bar i", li).style.width = "100%";
+        $(".st", li).textContent = r.datei !== f.name ? `gespeichert als ${r.datei}` : "gespeichert"; li.classList.add("ok"); ok++;
+      } catch (e) { $(".st", li).textContent = e.message; li.classList.add("bad"); }
+    }
+    if (ok) { toast(`${ok} Datei${ok > 1 ? "en" : ""} hochgeladen`); setTimeout(() => { if (location.hash.endsWith("/intake")) viewIntake(slug); }, 2500); }
+  };
+  const drop = $("#drop");
+  drop.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("#file").click(); } });
+  $("#file").addEventListener("change", e => sendFiles([...e.target.files]));
+  ["dragenter", "dragover"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add("over"); }));
+  ["dragleave", "drop"].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove("over"); }));
+  drop.addEventListener("drop", e => sendFiles([...(e.dataTransfer?.files || [])]));
   $("#mail").addEventListener("click", async () => {
     const offen = d.punkte.filter(x => x.status !== "vollstaendig");
     const p = await api(`/api/projects/${slug}`);
     const txt = `Betreff: Unterlagen für die Visualisierung ${p.name}\n\nGuten Tag,\n\nfür die maßhaltigen Visualisierungen von ${p.name} (${p.adresse}) fehlen uns noch folgende Unterlagen:\n\n${offen.map(x => "- " + x.text + (x.notiz ? " (" + x.notiz + ")" : "")).join("\n") || "- nichts, alles vollständig"}\n\nAm besten als Vektor-PDF oder DWG. Vielen Dank!\n\nBeste Grüße`;
     $("#mailbox").hidden = false; $("#mailtext").value = txt;
     try { await navigator.clipboard.writeText(txt); toast("Anfrage kopiert"); } catch (_) {}
+  });
+}
+
+function uploadFile(slug, file, punkt, onProgress) {
+  return new Promise((resolve, reject) => {
+    const x = new XMLHttpRequest();
+    x.open("PUT", `/api/projects/${slug}/quellen?name=${encodeURIComponent(file.name)}&punkt=${encodeURIComponent(punkt || "")}`);
+    x.setRequestHeader("Content-Type", "application/octet-stream");
+    x.upload.onprogress = e => { if (e.lengthComputable) onProgress(e.loaded / e.total); };
+    x.onload = () => {
+      let j = {};
+      try { j = JSON.parse(x.responseText); } catch (_) {}
+      if (x.status < 300) resolve(j); else reject(new Error(j.detail || x.statusText || "Upload fehlgeschlagen"));
+    };
+    x.onerror = () => reject(new Error("Netzwerkfehler"));
+    x.send(file);
   });
 }
 
@@ -153,11 +210,11 @@ async function viewShotlist(slug) {
   const filled = s.cells.filter(c => c.renders.length || c.higgsfield.length).length;
   const dry = q.trockenlauf_erzwungen || getPref("immoviz-dry", "0") === "1";
   view.innerHTML = `<section>${sechead("01", "Shotlist", "Motiv und Licht", `${s.cameras.length} Motive, ${s.lights.length} Lichtstimmungen, ${filled} von ${s.cells.length} Zellen mit Bild. Vorschau-Renderings laufen einzeln über die Queue.`,
-      `<label class="check"><input type="checkbox" id="dry" ${dry ? "checked" : ""} ${q.trockenlauf_erzwungen ? "disabled" : ""}> Trockenlauf</label><a class="btn" href="#/p/${esc(slug)}/queue">Zur Queue</a>`)}
+      `<label class="check"><input type="checkbox" id="dry" ${dry ? "checked" : ""} ${q.trockenlauf_erzwungen ? "disabled" : ""}> Trockenlauf</label><a class="btn" href="#/p/${esc(slug)}/kameras">Kameras</a><a class="btn" href="#/p/${esc(slug)}/licht">Licht</a><a class="btn" href="#/p/${esc(slug)}/queue">Zur Queue</a>`)}
     ${q.trockenlauf_erzwungen ? `<div class="notice"><span class="dot"></span>Studio läuft im Trockenlauf-Modus: Jobs starten kein Blender.</div>` : ""}
     <div class="legend label"><span><span class="tag plain">V</span> Vorschau</span><span><span class="tag plain">F</span> Final</span><span><span class="tag run">HF</span> Higgsfield</span><span>${tag("freigegeben", "frei")}</span></div>
     <div class="matrix-wrap"><table class="matrix"><thead><tr><th scope="col">Motiv</th>${s.lights.map(l => `<th scope="col">${esc(l.label)}<small>${esc([l.date && l.date.slice(5).split("-").reverse().join("."), l.time].filter(Boolean).join(" · "))}</small></th>`).join("")}</tr></thead>
-    <tbody>${s.cameras.map(c => `<tr><th scope="row">${esc(c.label)}<small>${c.lens ? c.lens + " mm" : ""}</small></th>${s.lights.map(l => {
+    <tbody>${s.cameras.map(c => `<tr><th scope="row"><a href="#/p/${esc(slug)}/kameras?k=${encodeURIComponent(c.key)}" title="Kamera bearbeiten">${esc(c.label)}</a><small>${c.lens ? c.lens + " mm" : ""}</small></th>${s.lights.map(l => {
       const k = c.key + "|" + l.key, x = cell[k];
       const first = x.higgsfield[0] || x.renders[0];
       const fin = x.renders.some(r => r.art === "final"), vor = x.renders.some(r => r.art === "vorschau");
@@ -243,7 +300,7 @@ async function loadGallery(slug) { state.gallery = await api(`/api/projects/${sl
 
 async function viewGallery(slug) {
   renderNav(slug, "galerie");
-  const g = await loadGallery(slug);
+  const [g, wt, kl] = await Promise.all([loadGallery(slug), api(`/api/projects/${slug}/walkthrough`), api(`/api/projects/${slug}/kundenlinks`)]);
   document.title = `Galerie · immoviz Studio`;
   const grp = getPref("immoviz-grp", "alle"), st = getPref("immoviz-st", "alle");
   const groups = [["alle", "Alle"], ...g.gruppen.map(x => [x.key, x.label])];
@@ -254,7 +311,46 @@ async function viewGallery(slug) {
       `<a class="btn" href="/kunde?p=${encodeURIComponent(slug)}" target="_blank" rel="noopener">Kundenansicht ↗</a>`)}
     <div class="filters"><div class="chips" role="group" aria-label="Bereich">${groups.map(([k, l]) => `<button type="button" data-grp="${k}" aria-pressed="${k === grp}">${esc(l)} <span class="muted">${count(k)}</span></button>`).join("")}</div>
       <div class="chips" role="group" aria-label="Freigabe">${stats.map(([k, l]) => `<button type="button" data-st="${k}" aria-pressed="${k === st}">${esc(l)}</button>`).join("")}</div></div>
-    <div class="grid" id="grid"></div></section>`;
+    <div class="grid" id="grid"></div></section>
+    ${motionSection(wt)}
+    <section>${sechead("04", "Freigabe", "Kundenlinks", "Ein Kundenlink zeigt nur freigegebene Bilder und Videos. Das Token wird nur einmal angezeigt und gehasht gespeichert. Links laufen ab und lassen sich widerrufen.")}
+      <form class="qform linkform" id="lf">
+        <label><span class="label">Gültig</span><select class="field" name="tage">${[[7, "7 Tage"], [14, "14 Tage"], [30, "30 Tage"], [90, "90 Tage"]].map(([v, l]) => `<option value="${v}" ${v === 30 ? "selected" : ""}>${l}</option>`).join("")}</select></label>
+        <label class="wide"><span class="label">Notiz</span><input class="field" type="text" name="notiz" maxlength="200" placeholder="z. B. Vertrieb VPH, Abstimmung Fassade"></label>
+        <button class="primary" type="submit">Kundenlink erzeugen</button>
+      </form>
+      <div id="newlink" hidden></div>
+      <ul class="rows links" id="links"></ul></section>`;
+  const drawLinks = links => {
+    $("#links").innerHTML = links.length ? links.map((l, i) => `<li><span class="n">${pad(i + 1)}</span>
+      <span class="main"><span><b style="color:var(--text-strong);font-weight:500">${esc(l.notiz || "ohne Notiz")}</b></span>
+        <span class="label">erstellt ${esc(fmtTime(l.erstellt))} · gültig bis ${esc(fmtTime(l.ablauf))}${l.zuletzt ? ` · zuletzt geöffnet ${esc(fmtTime(l.zuletzt))}` : ""}${l.widerrufen ? ` · widerrufen ${esc(fmtTime(l.widerrufen))}` : ""}</span></span>
+      <span class="aside" style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">${tag(l.status === "gueltig" ? "fertig" : l.status === "abgelaufen" ? "abgebrochen" : "fehler", l.status === "gueltig" ? "gültig" : l.status)}
+        ${l.status === "gueltig" ? `<button type="button" class="small" data-revoke="${esc(l.id)}">Widerrufen</button>` : ""}</span></li>`).join("")
+      : `<li><span class="n">00</span><span class="main muted">Noch keine Kundenlinks.</span></li>`;
+    $$("[data-revoke]").forEach(b => b.addEventListener("click", async () => {
+      if (!confirm("Kundenlink widerrufen? Der Kunde sieht danach nichts mehr.")) return;
+      try { await api(`/api/projects/${slug}/kundenlinks/${b.dataset.revoke}/widerrufen`, { method: "POST" }); drawLinks((await api(`/api/projects/${slug}/kundenlinks`)).links); toast("Widerrufen"); }
+      catch (e) { toast(e.message); }
+    }));
+  };
+  drawLinks(kl.links);
+  $("#lf").addEventListener("submit", async e => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    try {
+      const r = await api(`/api/projects/${slug}/kundenlinks`, { method: "POST", body: { tage: +f.get("tage"), notiz: f.get("notiz") } });
+      const url = location.origin + r.pfad;
+      const box = $("#newlink");
+      box.hidden = false;
+      box.innerHTML = `<div class="notice linkbox"><span class="dot"></span><div class="main"><b>Neuer Kundenlink, nur jetzt sichtbar</b>
+        <input class="field mono" type="text" readonly value="${esc(url)}" aria-label="Kundenlink"><span class="muted">Für Kunden außerhalb dieses Rechners den Rechnernamen durch die öffentliche Adresse des Studios ersetzen.</span></div>
+        <button type="button" class="small" id="copylink">Kopieren</button></div>`;
+      $("#copylink").addEventListener("click", async () => { try { await navigator.clipboard.writeText(url); toast("Link kopiert"); } catch (_) { $("#newlink input").select(); } });
+      e.target.reset();
+      drawLinks((await api(`/api/projects/${slug}/kundenlinks`)).links);
+    } catch (err) { toast(err.message); }
+  });
   const draw = () => {
     const G = getPref("immoviz-grp", "alle"), S = getPref("immoviz-st", "alle");
     const list = g.medien.filter(m => (G === "alle" || m.gruppe === G) && (S === "alle" || m.status === S));
@@ -269,6 +365,23 @@ async function viewGallery(slug) {
   $$("[data-grp]").forEach(b => b.addEventListener("click", () => { setPref("immoviz-grp", b.dataset.grp); $$("[data-grp]").forEach(x => x.setAttribute("aria-pressed", x === b)); draw(); }));
   $$("[data-st]").forEach(b => b.addEventListener("click", () => { setPref("immoviz-st", b.dataset.st); $$("[data-st]").forEach(x => x.setAttribute("aria-pressed", x === b)); draw(); }));
   draw();
+}
+
+function fmtMB(b) { return (b / 1e6).toLocaleString("de-AT", { maximumFractionDigits: 1 }) + " MB"; }
+function fmtXY(p) { return (p || []).map(v => Number(v).toLocaleString("de-AT", { maximumFractionDigits: 2 })).join(" / "); }
+
+function motionSection(wt) {
+  const player = v => `<figure class="player"><video src="${esc(v.url)}" controls playsinline preload="metadata"></video><figcaption><b title="${esc(v.rel)}">${esc(v.name)}</b><span class="mono">${fmtMB(v.bytes)}</span></figcaption></figure>`;
+  return `<section>${sechead("02", "Bewegtbild", "Videos", "Kamerafahrten außen aus renders/video und Walkthroughs je Wohnung aus renders/walkthrough.")}
+      ${wt.videos.length ? `<div class="grid videos">${wt.videos.map(player).join("")}</div>` : `<p class="muted">Noch keine Videos in renders/video.</p>`}</section>
+    <section>${sechead("03", "Walkthrough", "Kamerapfade je Wohnung", "Wegpunkte aus <span class=\"mono\">wohnungen.yaml</span> (walkthrough.punkte), Koordinaten in Metern im lokalen System, Höhe 1,5 m. Bearbeiten in der Datei.")}
+      ${wt.wohnungen.length ? wt.wohnungen.map(w => `<div class="wt">
+        <div class="wthead"><h3>${esc(w.titel)}</h3><span class="kv"><span class="tag plain">${esc(w.top)}</span>${w.sekunden ? `<span class="tag plain">${esc(w.sekunden)} s</span>` : ""}${w.licht ? `<span class="tag plain">${esc(w.licht)}</span>` : ""}</span></div>
+        ${w.videos.length ? `<div class="grid videos">${w.videos.map(player).join("")}</div>` : `<p class="muted">Noch kein Video in renders/walkthrough/${esc(w.top)}.</p>`}
+        <ol class="rows wtpts">${w.punkte.map(p => `<li><span class="n">${pad(p.nr)}</span>
+          <span class="main"><span>${esc(p.notiz || "Wegpunkt " + p.nr)}</span><span class="mono muted">t ${esc(p.t)} s · Position ${fmtXY(p.pos)} · Ziel ${fmtXY(p.target)} · ${esc(p.lens)} mm</span></span>
+          ${p.bild ? `<a class="aside thumbl" href="${esc(p.bild.url)}" target="_blank" rel="noopener"><img src="${esc(p.bild.thumb)}" alt="Standbild Wegpunkt ${p.nr}" loading="lazy"></a>` : `<span class="aside label">kein Standbild</span>`}</li>`).join("")}</ol></div>`).join("")
+      : `<p class="muted">Keine Wohnung mit walkthrough in wohnungen.yaml.</p>`}</section>`;
 }
 
 function openDetail(slug, m, onChange) {
@@ -318,9 +431,11 @@ async function route() {
     if (parts[0] !== "p" || !parts[1]) return await viewProjects();
     const slug = decodeURIComponent(parts[1]);
     state.slug = slug;
-    const page = parts[2] || "";
+    const page = (parts[2] || "").split("?")[0];
     if (page === "intake") return await viewIntake(slug);
     if (page === "shotlist") return await viewShotlist(slug);
+    if (page === "kameras") return await viewKameras(slug);
+    if (page === "licht") return await viewLicht(slug);
     if (page === "queue") return await viewQueue(slug);
     if (page === "galerie") return await viewGallery(slug);
     return await viewOverview(slug);
