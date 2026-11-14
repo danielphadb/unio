@@ -1792,8 +1792,19 @@ def api_project_new(body: dict = Body(...)):
         shutil.copy2(tpl, tmp / "project.yaml")
         if (VORLAGE / "prompts.yaml").is_file():
             shutil.copy2(VORLAGE / "prompts.yaml", tmp / "prompts.yaml")
-        first = next(iter(facades))
-        changes = [
+        first = na
+        tpl_cfg = yaml.safe_load(tpl.read_text(encoding="utf-8")) or {}
+        tpl_fac = next(iter(tpl_cfg.get("facades") or {}), None)
+
+        def swap(v):  # Fassadenname der Vorlage durch Fassade A ersetzen (dach-Listen)
+            if isinstance(v, dict):
+                return {k: swap(x) for k, x in v.items()}
+            if isinstance(v, list):
+                return [swap(x) for x in v]
+            return na if v == tpl_fac else v
+        dach_changes = [(["dach", k], swap(v)) for k, v in (tpl_cfg.get("dach") or {}).items()
+                        if isinstance(v, list) and v and tpl_fac and tpl_fac in json.dumps(v)]
+        changes = dach_changes + [
             (["project", "name"], name), (["project", "slug"], slug),
             (["project", "client"], str(body.get("kunde") or "").strip()[:120] or "offen"),
             (["site", "address"], adresse), (["site", "origin_gk"], origin), (["site", "x_axis_deg"], deg),

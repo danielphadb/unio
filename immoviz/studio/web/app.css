@@ -476,3 +476,6 @@ figure .ver{justify-self:start}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 .seg button[aria-pressed="true"] .muted{color:inherit;opacity:.7}
 .hfsrc .mono{color:var(--on-glass-muted)}
+.hfform>*,.hfform fieldset{min-width:0;min-inline-size:0;max-width:100%}
+.hfform legend{max-width:100%;overflow-wrap:anywhere}
+.hfform .mono{overflow-wrap:anywhere}

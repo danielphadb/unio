@@ -436,6 +436,8 @@ def _emit(key_text: str | None, val, col: int, old, lines, old_start: int | None
     """Zeilen fuer 'key: val' (oder '- val' bei key_text None) ab Spalte col, ohne Zeilenumbruch am Ende."""
     head = " " * col + (f"{key_text}:" if key_text is not None else "-")
     style = _wants_block(val, old)
+    if style is None and isinstance(val, dict) and val and len(head) + len(flow_text(val)) > WRAP:
+        style = "map"   # lange Mappings (z. B. checks.<fassade>) als Block
     if style is None:
         txt = flow_text(val) if not isinstance(val, (dict, list)) or val else ("{}" if isinstance(val, dict) else "[]")
         # Spaltenausrichtung wie vorher (z. B. 'eg:  {z: ...}')
