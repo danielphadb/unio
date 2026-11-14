@@ -71,32 +71,51 @@ Ergebnisse liegen unter `renders/walkthrough/<top>/` (k = Blender, staging_k = e
 Lokale Web-Oberfläche über dem Prototyp (Phase B laut `KONZEPT.md`), im UNIO-Design, hell und dunkel, bis 400 px Breite.
 
 ```bash
-.venv-immoviz/bin/pip install fastapi uvicorn          # einmalig
+.venv-immoviz/bin/pip install fastapi uvicorn ruamel.yaml   # einmalig
 .venv-immoviz/bin/python immoviz/immoviz.py studio      # http://127.0.0.1:8765
 .venv-immoviz/bin/python immoviz/immoviz.py studio --dry-run   # Queue startet kein Blender (Test)
+# Tests auf einer Kopie: andere Projektwurzel (Standard immoviz/projects)
+.venv-immoviz/bin/python immoviz/immoviz.py studio --dry-run --projects /pfad/zur/kopie/projects
+IMMOVIZ_PROJECTS=/pfad/zur/kopie/projects .venv-immoviz/bin/python immoviz/immoviz.py studio   # gleichwertig
 ```
 
 | Bildschirm | Inhalt |
 |---|---|
 | Projekte | alle Ordner unter `projects/` mit `project.yaml`, Fortschritt der 10 Schritte, letzte Bilder |
 | Übersicht | Status je Schritt, abgeleitet aus den Dateien; von Hand überschreibbar |
-| Intake | Checkliste aus diesem README mit Ampel und Notiz, Dateien in `quellen/`, Anfrage-Text an den Bauträger |
+| Intake | Checkliste aus diesem README mit Ampel und Notiz, Upload per Drag and Drop nach `quellen/` mit Zuordnung zu einem Punkt, Anfrage-Text an den Bauträger |
 | Shotlist | Matrix Motiv x Licht aus `cameras` und `lights`, Thumbnails, Knopf „Vorschau rendern“ |
+| Kameras | Lageplan aus `data/context.json` (Objekt hervorgehoben, Gehsteige grau) mit allen Kameras und Blickkegel; Klick setzt Position, zweiter Klick das Ziel; anlegen, ändern, umbenennen, löschen |
+| Licht | Lichtstimmungen aus `lights` anlegen, ändern, löschen; Sonnenhöhe und Azimut live (`lib/sun.py`), Sonnenrichtung über dem Lageplan, Uhrzeit-Schieberegler |
 | Queue | ein Job gleichzeitig: `immoviz.py render <projekt> --cam <c> --light <l> --preview --no-blend`, Status und Log |
-| Galerie | alle Bilder und Videos unter `renders/`, Freigeben, Ablehnen, Kommentar |
-| Kundenansicht | `/kunde?p=<slug>`: nur freigegebene Bilder, Kunde kann Anmerkungen schreiben |
+| Galerie | alle Bilder und Videos unter `renders/`, Freigeben, Ablehnen, Kommentar; Videoplayer für `renders/video/` und `renders/walkthrough/<top>/`, Kamerapfade je Wohnung aus `wohnungen.yaml` (nur Anzeige); Kundenlinks erzeugen und widerrufen |
+| Kundenansicht | `/kunde?p=<slug>&t=<token>`: nur freigegebene Bilder und Videos, Kunde kann Anmerkungen schreiben. Ohne Token nur von localhost |
 
 Zuordnung in der Shotlist: Blender-Bilder nach `<slug>_<motiv>_<licht>_(vorschau|final)`, Higgsfield-Bilder in
 `renders/higgsfield/` zusätzlich über Motiv- und Lichtnamen im Dateinamen (z. B. `herbst_ecke_orbit`, `ecke_dunst_nbpro`).
 
-Datenhaltung je Projekt, `project.yaml` wird nur gelesen:
+Datenhaltung je Projekt:
 
+- `project.yaml`: Kamera- und Licht-Editor ändern nur den betroffenen Eintrag unter `cameras` bzw. `lights`
+  (zeilengenau, Kommentare, Ausrichtung und alle anderen Zeilen bleiben, `studio/yamledit.py` mit ruamel.yaml).
+  Vor dem Schreiben: Prüfung (Namen nur `[a-z0-9_]`, Zahlen in sinnvollen Grenzen, Pflichtfelder `pos`, `target`,
+  `lens` bzw. `date`, `time`, `tz`; `season` aus fruehling, sommer, spaetsommer, herbst, winter), Gegenprüfung des
+  Ergebnisses (alle anderen Abschnitte unverändert) und Sicherung nach `.history/project.<zeitstempel>.yaml`
+  (nicht eingecheckt). Lichter, die `wohnungen.yaml` verwendet, lassen sich nicht löschen oder umbenennen.
+  Neue Kameras und Lichter erscheinen sofort in Shotlist und Queue.
 - `status.json`: von Hand gesetzter Schrittstatus (alternativ optionales Feld `status: {4: annahme}` in `project.yaml`)
-- `intake.json`: Stand der Intake-Checkliste
+- `intake.json`: Stand der Intake-Checkliste, unter `dateien` die Zuordnung hochgeladener Dateien zu Punkten
+- `quellen/`: Upload PDF, DWG, JPG, PNG, XLSX, DOCX bis 100 MB; Dateiname wird gesäubert (Umlaute, Sonderzeichen,
+  keine Pfade), bei gleichem Namen `_2`, `_3`; Inhalt muss zur Endung passen. `quellen/*.pdf` bleibt gitignored.
 - `freigabe.json`: Freigabe, Ablehnung und Kommentare je Bild (Kundenkommentare mit `quelle: kunde`)
+- `kundenlinks.json`: je Link nur SHA-256 des Tokens, Ablaufdatum, Notiz, Widerruf, letzter Zugriff. Das Token
+  steht nur einmal in der Oberfläche (Galerie, Abschnitt Kundenlinks).
 
-Thumbnails und Job-Logs liegen in `immoviz/studio/.cache/` (nicht eingecheckt). Die Oberfläche hat noch keine
-Anmeldung: nur lokal oder im Büronetz betreiben, Kundenlink nicht öffentlich teilen.
+Zugriff: Anfragen von localhost dürfen alles. Alle anderen Anfragen (auch über einen Proxy mit `X-Forwarded-For`)
+bekommen nur die Kundenansicht mit gültigem Token und die freigegebenen Dateien dieses Projekts, sonst 403.
+Für Kunden außerhalb also das Studio hinter einem HTTPS-Proxy betreiben und im Kundenlink den Rechnernamen
+durch die öffentliche Adresse ersetzen. Das Team arbeitet lokal (oder per SSH-Tunnel); eine Team-Anmeldung
+gibt es noch nicht. Thumbnails und Job-Logs liegen in `immoviz/studio/.cache/` (nicht eingecheckt).
 
 ## Neues Objekt anlegen
 

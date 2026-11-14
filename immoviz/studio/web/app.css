@@ -266,7 +266,7 @@ input[type=range]{width:100%;accent-color:var(--signal)}
 .sw.hero{background:var(--signal)}
 .sw.bau{background:var(--plan-bau);box-shadow:inset 0 0 0 1px var(--plan-bau-line)}
 .sw.geh{background:var(--plan-geh)}
-.sw.cam{background:var(--text-strong);border-radius:50%}
+.sw.cam{background:var(--text-strong);border-radius:50%;box-shadow:0 0 0 2px var(--plan-bau)}
 
 /* Lageplan (SVG im lokalen System, Meter) */
 :root{--plan-geh:rgba(11,10,9,.09);--plan-bau:rgba(11,10,9,.15);--plan-bau-line:rgba(11,10,9,.3)}
@@ -283,14 +283,15 @@ input[type=range]{width:100%;accent-color:var(--signal)}
 .pl-ring{fill:none;stroke:var(--hairline-strong);stroke-dasharray:3 4}
 .cam .cone{fill:var(--text-strong);fill-opacity:.07;stroke:var(--text-strong);stroke-opacity:.35;stroke-width:.8}
 .cam .dot{fill:var(--text-strong);stroke:var(--surface);stroke-width:1.5}
-.cam[data-cam]{cursor:pointer}
-.cam[data-cam]:hover .cone{fill-opacity:.14}
+.cam .cone,.cam .aim,.cam .tgt,.cam text{pointer-events:none}
+.cam .dot[data-cam]{cursor:pointer}
+.cam:hover .cone{fill-opacity:.14}
 .cam.sel{pointer-events:none}
-.cam.sel .cone{fill:var(--signal);fill-opacity:.28;stroke:var(--signal-deep);stroke-opacity:1;stroke-width:1.4}
-.cam.sel .dot{fill:var(--signal-deep);stroke:var(--surface);stroke-width:2}
-.cam .aim{stroke:var(--signal-deep);stroke-width:1.2;stroke-dasharray:4 3}
-.cam .tgt circle{fill:none;stroke:var(--signal-deep);stroke-width:1.5}
-.cam .tgt line{stroke:var(--signal-deep);stroke-width:1.5}
+.cam.sel .cone{fill:var(--text-strong);fill-opacity:.2;stroke:var(--text-strong);stroke-opacity:1;stroke-width:1.6}
+.cam.sel .dot{fill:var(--signal);stroke:var(--text-strong);stroke-width:2}
+.cam .aim{stroke:var(--text-strong);stroke-width:1.2;stroke-dasharray:4 3}
+.cam .tgt circle{fill:var(--signal);stroke:var(--text-strong);stroke-width:1.5}
+.cam .tgt line{stroke:var(--text-strong);stroke-width:1.5}
 .sunray line{stroke:var(--signal-deep);stroke-width:2.5}
 .sunray polygon{fill:var(--signal-deep)}
 .sunray circle{fill:var(--signal);stroke:var(--signal-deep);stroke-width:1.5}

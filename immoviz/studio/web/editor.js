@@ -100,11 +100,11 @@ async function viewKameras(slug) {
     const arc = [[px, py]];
     for (let i = 0; i <= 14; i++) { const a = a0 - half + 2 * half * i / 14; arc.push([px + L * Math.cos(a), py + L * Math.sin(a)]); }
     const lbl = c.key || c.name || "neu";
-    return `<g class="cam${sel ? " sel" : ""}" ${sel ? "" : `data-cam="${esc(c.key)}"`}><title>${esc(lbl)} · ${esc(c.lens)} mm</title>
+    return `<g class="cam${sel ? " sel" : ""}"><title>${esc(lbl)} · ${esc(c.lens)} mm</title>
       ${dist > 0.01 ? `<polygon class="cone" points="${svgPts(arc)}"/>` : ""}
       ${sel ? `<line class="aim" x1="${px}" y1="${-py}" x2="${tx}" y2="${-ty}"/>
         <g class="tgt"><circle cx="${tx}" cy="${-ty}" r="${1.4 * u}"/><line x1="${tx - 2.2 * u}" y1="${-ty}" x2="${tx + 2.2 * u}" y2="${-ty}"/><line x1="${tx}" y1="${-ty - 2.2 * u}" x2="${tx}" y2="${-ty + 2.2 * u}"/></g>` : ""}
-      <circle class="dot" cx="${px}" cy="${-py}" r="${(sel ? 1.5 : 1.05) * u}"/>
+      <circle class="dot" ${sel ? "" : `data-cam="${esc(c.key)}"`} cx="${px}" cy="${-py}" r="${(sel ? 1.5 : 1.05) * u}"/>
       ${sel ? `<text x="${px + 2.4 * u}" y="${-py + 2.4 * u}" font-size="${2.8 * u}">${esc(lbl)}</text>` : ""}</g>`;
   }
 

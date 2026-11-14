@@ -21,6 +21,8 @@ function renderNav(slug, active) {
   pnav.innerHTML = TABS.map(([k, l], i) =>
     `<a href="#/p/${esc(slug)}${k ? "/" + k : ""}" ${k === active ? 'aria-current="page"' : ""}><span class="n">${pad(i + 1)}</span>${esc(l)}</a>`
   ).join("") + `<a href="/kunde?p=${encodeURIComponent(slug)}" target="_blank" rel="noopener"><span class="n">${pad(TABS.length + 1)}</span>Kundenansicht ↗</a>`;
+  const cur = pnav.querySelector('[aria-current="page"]');
+  if (cur) pnav.scrollLeft = Math.max(0, cur.offsetLeft - 16);
 }
 
 function sechead(num, label, title, text, act = "") {

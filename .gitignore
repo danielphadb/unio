@@ -13,3 +13,5 @@ immoviz/projects/*/data/plan_cache/
 immoviz/projects/*/mood/
 immoviz/studio/.cache/
 immoviz/projects/*/renders/walkthrough/*/clay/
+immoviz/projects/*/.history/
+immoviz/projects/*/kundenlinks.json

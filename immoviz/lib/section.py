@@ -83,6 +83,64 @@ def _edge_wall(mb, a, b, t, z0, z1, side, top):
     _extrude(mb, [a, b, (b[0] + nx, b[1] + ny), (a[0] + nx, a[1] + ny)], z0, z1, side, top, bottom=False)
 
 
+def _fbox(mb, f, u0, u1, d0, d1, z0, z1, side, top):
+    """Quader in Fassadenkoordinaten (u entlang, d nach innen), Oberseite mit eigenem Material."""
+    if z1 - z0 < 1e-4 or u1 - u0 < 1e-4:
+        return
+    P = f.p
+    mb.poly([P(u0, d0, z1), P(u1, d0, z1), P(u1, d1, z1), P(u0, d1, z1)], None, top, (0, 0, 1))
+    al, out = f.along, f.out
+    for (ua, da), (ub, db), n in (((u0, d0), (u1, d0), out), ((u1, d1), (u0, d1), (-out[0], -out[1], 0)),
+                                  ((u0, d1), (u0, d0), (-al[0], -al[1], 0)), ((u1, d0), (u1, d1), al)):
+        L = math.hypot(ub - ua, db - da)
+        mb.poly([P(ua, da, z0), P(ub, db, z0), P(ub, db, z1), P(ua, da, z1)],
+                [(0, z0), (L, z0), (L, z1), (0, z1)], side, n)
+
+
+def facade_holes(cfg, fname):
+    """Öffnungen einer Straßenfassade wie in build.Hero.altbau: (ua, ub, za, zb)."""
+    A = cfg["altbau"]
+    fs = A["facades"][fname]
+    eg_map = {ax: g for g in fs.get("eg", []) for ax in g["axes"]}
+    holes = []
+    for rname, r in A["rows"].items():
+        for i, uc in enumerate(fs["axes"]):
+            w, za, zb = r["w"], r["z"], r["z"] + r["h"]
+            if rname == "eg" and i in eg_map:
+                g = eg_map[i]
+                if "z" in g:
+                    za, zb = g["z"]
+                if g["type"] == "haustor":
+                    holes.append((g["u"][0], g["u"][1], za, zb))
+                    continue
+                if g.get("keller"):
+                    holes.append((uc - 0.36, uc + 0.36, 0.80, 1.25))
+            holes.append((uc - w / 2, uc + w / 2, za, zb))
+    return holes
+
+
+def facade_wall(mb, f, holes, z_lo, z_hi, d0, d1, zc, M_):
+    """Massive Straßenwand mit den Fensteröffnungen der Ansicht, an zc gekappt."""
+    cuts = sorted({0.0, f.length} | {min(max(h[i], 0.0), f.length) for h in holes for i in (0, 1)})
+    for ua, ub in zip(cuts, cuts[1:]):
+        if ub - ua < 1e-4:
+            continue
+        um = (ua + ub) / 2
+        hz = sorted((h[2], h[3]) for h in holes if h[0] <= um <= h[1])
+        z = z_lo
+        solids = []
+        for a, b in hz:
+            if a > z:
+                solids.append((z, a))
+            z = max(z, b)
+        if z < z_hi:
+            solids.append((z, z_hi))
+        for a, b in solids:
+            c = _cut(a, b, zc)
+            if c:
+                _fbox(mb, f, ua, ub, d0, d1, c[0], c[1], M_["wand"], M_["schnitt"] if c[2] else M_["wand"])
+
+
 def _cut(z0, z1, zc):
     """Höhenbereich an der Schnitthöhe kappen: (z0, z1_neu, geschnitten) oder None."""
     if zc is None or z1 <= zc:
@@ -124,7 +182,7 @@ def clip_builder(mb: K.MeshBuilder, zc: float | None, name: str | None = None) -
 class PlanFloor:
     """Wände, Öffnungen und Gebäudemaske eines ganzen Geschosses aus der Vektor-Planseite."""
 
-    def __init__(self, key: str, g: dict, S: dict, footprint, facades: dict, cache: Path):
+    def __init__(self, key: str, g: dict, S: dict, footprint, facades: dict, cache: Path, extra=()):
         self.key, self.g = key, g
         self.s = S["m_per_px"]
         self.cell_px = S.get("cell_px", 3)
@@ -160,13 +218,15 @@ class PlanFloor:
         # Gebäudemaske aus dem Umriss, Rückseiten (Hof, Feuermauern) um rand_hof_m erweitert,
         # Straßenseiten hart an der Fassadenflucht (d >= 3 cm) begrenzt
         self.inside = self.poly_mask(footprint, (H, W))
+        for poly in extra:          # Ergänzung des OGD-Umrisses aus dem Plan (umriss_plus)
+            self.inside |= self.poly_mask(poly, (H, W))
         r = max(1, int(round(S.get("rand_hof_m", 0.25) / self.cell_m)))
         hull = ndimage.binary_dilation(self.inside, structure=np.ones((2 * r + 1, 2 * r + 1), bool))
         X, Y = self.cell_grid((H, W))
         for f in facades.values():
             d = -((X - f.a[0]) * f.n[0] + (Y - f.a[1]) * f.n[1])
             u = (X - f.a[0]) * f.t[0] + (Y - f.a[1]) * f.t[1]
-            hull &= ~((d < S.get("fassade_abstand_m", 0.03)) & (u > -1.0) & (u < f.length + 1.0))
+            hull &= ~((d < S.get("fassadenwand_m", 0.65)) & (u > -1.0) & (u < f.length + 1.0))
         self.hull = hull
         self.walls = cells & hull
         self.openings = find_openings(self.walls, self.cell_m)
@@ -232,7 +292,7 @@ class PlanFloor:
         return stats
 
     def floor_cells(self, poly, without=()):
-        m = self.poly_mask(poly, self.walls.shape) & ~self.walls & self.inside
+        m = self.poly_mask(poly, self.walls.shape) & ~self.walls & self.inside & self.hull
         for w in without:
             m &= ~self.poly_mask(w, self.walls.shape)
         return m
@@ -244,7 +304,7 @@ class PlanFloor:
             _box(mb, xa, xb, ya, yb, z0, z1, mat, mat)
 
     # Kontrollbild: Plan hell, Wände rot, Fenster blau, Türen grün, Umriss türkis, Wohnungen orange
-    def check_image(self, out: Path, footprint, highlights=()):
+    def check_image(self, out: Path, footprint, highlights=(), extra=()):
         base = (self.rgb.astype(np.float32) * 0.45 + 140).clip(0, 255).astype(np.uint8)
         img = Image.fromarray(base)
         H, W = self.walls.shape
@@ -265,11 +325,12 @@ class PlanFloor:
             ly = layer(om[k], col)
             img.paste(ly, (0, 0), ly)
         d = ImageDraw.Draw(img)
-        pts = []
-        for x, y in footprint:
-            c, r = self.local_to_cell(x, y)
-            pts.append((c * cp, r * cp))
-        d.line(pts + pts[:1], fill=(0, 170, 190), width=5)
+        for poly, col in [(footprint, (0, 170, 190))] + [(e, (150, 60, 200)) for e in extra]:
+            pts = []
+            for x, y in poly:
+                c, r = self.local_to_cell(x, y)
+                pts.append((c * cp, r * cp))
+            d.line(pts + pts[:1], fill=col, width=5)
         img = img.resize((img.width // 2, img.height // 2), Image.LANCZOS)
         out.parent.mkdir(parents=True, exist_ok=True)
         img.convert("RGB").save(out, quality=88)
@@ -317,6 +378,7 @@ def build_state(bpy, cfg, ctx, W, S, floors, mats, lib, coll, state):
     F = {k: K.Facade(k, tuple(v["a"]), tuple(v["b"])) for k, v in cfg["facades"].items()}
     footprint = max((b["poly"] for b in ctx["hero"]), key=lambda p: abs(K.polygon_area(p)))
     inner, _ = K.clip_polygon(footprint, [[k, "d", ">=", S.get("fassade_abstand_m", 0.03)] for k in F], F)
+    plates = [inner] + list(S.get("umriss_plus", []))
     M_ = {"wand": "modell_wand", "boden": "modell_boden", "schnitt": "modell_schnitt", "dach": "modell_dach",
           "wohnung": "modell_wohnung"}
     mb = K.MeshBuilder("schnitt_modell", list(M_.values()))
@@ -327,7 +389,12 @@ def build_state(bpy, cfg, ctx, W, S, floors, mats, lib, coll, state):
     eg = G[S["reihenfolge"][0]]
     c = _cut(S.get("sockel_unten", -0.5), eg["ffb"], zc)
     if c:
-        _extrude(mb, inner, c[0], c[1], M_["wand"], M_["schnitt"] if c[2] else M_["boden"])
+        for pl in plates:
+            _extrude(mb, pl, c[0], c[1], M_["wand"], M_["schnitt"] if c[2] else M_["boden"])
+    # massive Straßenwände mit den Öffnungen der Straßenansicht
+    for fname in cfg["altbau"]["facades"]:
+        facade_wall(mb, F[fname], facade_holes(cfg, fname), S.get("sockel_unten", -0.5), cfg["altbau"]["height"],
+                    0.01, S.get("fassadenwand_m", 0.65), zc, M_)
     # Regelgeschosse: Wände und Decke darüber
     for key in S["reihenfolge"]:
         g = G[key]
@@ -338,7 +405,8 @@ def build_state(bpy, cfg, ctx, W, S, floors, mats, lib, coll, state):
         stats[key] = fl.build(mb, g["ffb"], uk, zc, g.get("fenster", {}), M_)
         c = _cut(uk, ok, zc)
         if c:
-            _extrude(mb, inner, c[0], c[1], M_["wand"], M_["schnitt"] if c[2] else M_["boden"])
+            for pl in plates:
+                _extrude(mb, pl, c[0], c[1], M_["wand"], M_["schnitt"] if c[2] else M_["boden"])
         if key == geschoss:
             for wk in state.get("wohnungen", []):
                 h = S["wohnungen"][wk]
@@ -461,7 +529,7 @@ def load_floors(project_dir: Path, cfg, ctx, S):
     for key in S["reihenfolge"]:
         g = S["geschosse"][key]
         if g.get("typ") != "dach":
-            floors[key] = PlanFloor(key, g, S, footprint, F, cache)
+            floors[key] = PlanFloor(key, g, S, footprint, F, cache, S.get("umriss_plus", []))
     return floors, footprint
 
 
@@ -473,7 +541,7 @@ def write_checks(project_dir: Path, S, floors, footprint):
         for wk, h in S["wohnungen"].items():
             if h["geschoss"] == key:
                 hls.append(fl.floor_cells(h["polygon"], h.get("ohne", [])))
-        res[key] = fl.check_image(out_dir / f"check_{key}.jpg", footprint, hls)
+        res[key] = fl.check_image(out_dir / f"check_{key}.jpg", footprint, hls, S.get("umriss_plus", []))
     return res
 
 

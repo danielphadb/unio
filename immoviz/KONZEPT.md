@@ -67,7 +67,7 @@ Blender- oder Programmierkenntnisse.
 | Phase | Inhalt | Ergebnis |
 |---|---|---|
 | A (jetzt) | Kommandozeile, Claude als Operator, Objekt Wimmergasse | erstes Bildpaket, Prozess gelernt |
-| B (Kern steht, 14.11.2026) | Web-Oberfläche Kern: Projekte, Intake, Shotlist, Render-Queue, Galerie, Freigabe | Team kann ohne Code arbeiten |
+| B (Kern plus Editoren, 14.11.2026) | Web-Oberfläche: Projekte, Intake mit Upload, Shotlist, Kamera- und Licht-Editor, Render-Queue, Galerie, Freigabe mit Kundenlink | Team kann ohne Code arbeiten |
 | C | Fassaden- und Dach-Editor mit Planüberlagerung, KI-Vorschlag aus Vektor-PDF | neues Objekt in einem Tag aufgenommen |
 | D | Innenräume: Grundriss zu Raum, Staging, BAB-Materialien, Ausblick aus dem Fenster | Wohnungsbilder |
 | E | Kamerafahrten, interaktive 360-Ansichten, Einbindung in Projekt-Websites | Bewegtbild und Web |
@@ -76,8 +76,14 @@ Blender- oder Programmierkenntnisse.
 HTML/CSS/JS im UNIO-Design, kein Build-Schritt, Code in `studio/`). Fertig: Projekte, Übersicht mit 10 Schritten
 (abgeleitet, von Hand überschreibbar), Intake-Checkliste, Shotlist-Matrix mit Thumbnails, Render-Queue (ein Job
 gleichzeitig, Vorschau ohne .blend), Galerie mit Freigabe und Kommentar, Kundenansicht mit nur freigegebenen Bildern.
-Offen für B: Anmeldung und geteilter Kundenlink, Upload im Intake, Higgsfield-Aufträge und Kosten in der Queue,
-Final-Rendering aus der Oberfläche, Export. Next.js laut Abschnitt 4 erst, wenn die Oberfläche öffentlich erreichbar wird.
+Zweite Ausbaustufe B (14.11.2026): Kamera-Editor mit Lageplan aus context.json (Klick setzt Position und Ziel,
+Blickkegel aus der Brennweite), Licht-Editor mit live berechnetem Sonnenstand, beide schreiben zeilengenau in
+project.yaml (Kommentare bleiben, Prüfung, Sicherung in .history). Upload im Intake mit Zuordnung zu Punkten.
+Kundenlink mit Token (nur Hash gespeichert, Ablauf, Widerruf); ohne Token nur noch localhost, von außen nur
+Kundenansicht und freigegebene Dateien. Galerie mit Videoplayer und Kamerapfaden der Walkthroughs.
+Offen für B: Team-Anmeldung (bis dahin nur lokal), Higgsfield-Aufträge und Kosten in der Queue,
+Final-Rendering aus der Oberfläche, Export, Bearbeiten der Walkthrough-Pfade. Next.js laut Abschnitt 4 erst,
+wenn die Oberfläche öffentlich erreichbar wird.
 
 ## 6. Bildpaket je Objekt (Standard)
 

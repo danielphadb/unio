@@ -123,7 +123,10 @@ schnitt:
   cell_px: 3
   rand_m: 1.0                  # Planausschnitt um den Umriss
   rand_hof_m: 0.25             # Wände bis so weit außerhalb des Umrisses (Hof, Feuermauern) zulassen
-  fassade_abstand_m: 0.03      # Wände erst hinter der Straßenflucht, davor steht die Hero-Fassade
+  fassade_abstand_m: 0.03      # Decken erst hinter der Straßenflucht, davor steht die Hero-Fassade
+  fassadenwand_m: 0.65         # Straßenwände massiv aus der Straßenansicht (Öffnungen wie altbau.rows), Planwände erst dahinter
+  umriss_plus:                 # Plan zeigt Gebäude, OGD-Umriss nicht: Hoftrakt mit Loggia (Top 5/12/19/26) zwischen Hof und Feuermauer
+    - [[11.47, 11.30], [16.12, 11.30], [16.12, 15.30], [11.47, 15.30]]
   fenster_zone_m: 1.0          # Öffnung näher am Umriss = Fenster, sonst Tür
   sockel_unten: -0.5
   reihenfolge: [eg, og1, og2, og3, dg3]
@@ -143,12 +146,12 @@ schnitt:
     top07:
       geschoss: og1
       titel: Top 7
-      polygon: [[-0.20, 12.94], [9.79, 12.94], [9.79, 21.83], [-0.20, 21.83]]   # aus wohnungen.top07.region_px
+      polygon: [[-0.20, 12.94], [5.70, 12.94], [5.70, 13.62], [9.40, 13.62], [9.40, 21.50], [-0.20, 21.50]]   # region_px, an Gang und Top 6/8 auf die Wandachsen gekürzt
       ohne: [[[5.55, 15.90], [9.45, 15.90], [9.45, 19.88], [5.55, 19.88]]]      # Stiegenhaus (solid_px)
     top12:
       geschoss: og1
       titel: Top 12
-      polygon: [[11.31, -0.27], [16.73, -0.27], [16.73, 15.39], [11.31, 15.39]] # aus wohnungen.top12.region_px
+      polygon: [[11.31, -0.27], [16.73, -0.27], [16.73, 15.39], [13.40, 15.39], [13.40, 17.20], [11.85, 17.20], [11.85, 15.39], [11.31, 15.39]]   # region_px plus AR 1,26 m²
     top35:
       geschoss: dg3
       titel: Top 35
@@ -157,9 +160,11 @@ schnitt:
     ziel: [8.0, 12.5, 6.0]
     azimut: 225                 # Richtung Ziel -> Kamera im lokalen System (225 = über der Kreuzung)
     hoehe: 40
-    breite: 52                  # sichtbare Breite in Metern
+    breite: 42                  # sichtbare Breite in Metern
     abstand: 200
   licht: vormittag
+  exposure: -1.0               # Weißmodell in praller Sonne, sonst brennen die Weißtöne aus
+  farben: {wand: "#EDEAE4", boden: "#DDD7CD", schnitt: "#1B1A19", dach: "#B3ADA4", rahmen: "#F4F2ED"}
   zustaende:
     - {name: s00, titel: Ganzes Haus, schnitt: null}
     - {name: s01, titel: 3. Dachgeschoss, geschoss: dg3, schnitt: 22.20, wohnungen: [top35]}
