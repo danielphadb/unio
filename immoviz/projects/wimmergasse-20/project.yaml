@@ -210,3 +210,53 @@ streetview_checks:
   stolberg_nach_no: {pos: [-10.0, -9.0], target: [60.0, -9.0], pitch: 5, fov: 90}    # Stolberggasse 34
   nachbar_ost:      {pos: [20.0, -9.0], target: [20.0, 5.0], pitch: 25, fov: 90}
   gegenueber_sw:    {pos: [2.0, -4.0], target: [-25.0, -28.0], pitch: 15, fov: 90}
+
+# ---------------------------------------------------------------- Anschliessende Nachbarhaeuser (Street View 05/2024, Apple 3D, Baukoerpermodell)
+neighbour_facades:
+  wimmergasse_22:
+    bezug: "009428"
+    a: [-0.34, 41.71]          # Flucht Wimmergasse, u=0 im Norden, u=L am Nachbarn Nr. 20
+    b: [-0.22, 25.44]
+    height: 16.65
+    color: "#DCC983"            # gelb, Stuck heller
+    stuck_color: "#F2ECDC"
+    style: gruenderzeit
+    roof: {type: ziegel, rise: 4.3, depth: 5.8}
+    axes: [1.25, 3.35, 5.45, 7.55, 9.65, 11.75, 14.35]
+    rows:                       # z relativ zum Gehsteig vor dem Haus
+      - {z: 1.35, h: 1.90, w: 1.10, surround: fasche}
+      - {z: 4.60, h: 2.05, w: 1.10, surround: fasche_verdachung}
+      - {z: 7.85, h: 2.00, w: 1.10, surround: aedikula}
+      - {z: 10.95, h: 1.90, w: 1.10, surround: fasche_verdachung}
+      - {z: 13.85, h: 1.55, w: 1.00, surround: fasche}
+    gate: {axis: 6, w: 2.0, h: 3.7, color: "#2F5B4E"}   # gruenes Holztor
+    cornices:
+      - [[3.85, 4.05, 0.06], [4.05, 4.30, 0.14]]
+      - [[7.25, 7.55, 0.10]]
+      - [[10.40, 10.70, 0.10]]
+      - [[15.55, 15.80, 0.12], [15.80, 16.20, 0.30], [16.20, 16.65, 0.55]]
+    consoles: {z: [15.55, 16.2], w: 0.16, proj: 0.4}
+    rustika: [0.6, 3.85, 0.45]
+  stolberggasse_34:
+    bezug: "547117"
+    a: [16.16, 0.0]             # Flucht Stolberggasse, u=0 an unserem Haus
+    b: [43.48, 0.08]
+    height: 20.69
+    color: "#ECEAE5"
+    style: modern
+    bands: [[0.0, 3.9, "#4A3B33"], [3.9, 7.2, "#BDB4A8"]]   # dunkles EG-Band, grau-beiges 1. OG
+    axes: [1.5, 4.1, 6.7, 9.3, 11.9, 14.5, 17.1, 19.7, 22.3, 24.9]
+    rows:
+      - {z: 1.0, h: 2.1, w: 1.4}
+      - {z: 4.4, h: 2.1, w: 1.4}
+      - {z: 7.7, h: 2.0, w: 1.3}
+      - {z: 10.9, h: 2.0, w: 1.3}
+      - {z: 14.1, h: 2.0, w: 1.3}
+      - {z: 17.3, h: 2.0, w: 1.3}
+    door: {u: [1.0, 3.4], z: [0.0, 3.4]}
+    balconies:                  # schwarze gelochte Metallbalkone, versetzt
+      - {row: 2, axes: [1, 4, 7]}
+      - {row: 3, axes: [2, 5, 8]}
+      - {row: 4, axes: [1, 4, 7]}
+      - {row: 5, axes: [2, 5, 8]}
+    upper_material: zink        # zurueckgesetzter Dachaufbau bis 26,7 m dunkel

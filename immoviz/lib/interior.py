@@ -152,6 +152,14 @@ class Apartment:
         keep = np.isin(lab, [i + 1 for i, sz in enumerate(sizes) if sz * self.cell_m ** 2 >= 0.03])
         self.walls = keep
         self.openings = find_openings(self.walls, self.cell_m)
+        # Ausschnitt schliessen: Randwand, Fenster- und Türöffnungen bleiben frei
+        b = max(2, int(0.06 / self.cell_m))
+        self.walls[:b, :] = True
+        self.walls[-b:, :] = True
+        self.walls[:, :b] = True
+        self.walls[:, -b:] = True
+        for op in self.openings:
+            self.walls[op["r0"]:op["r1"], op["c0"]:op["c1"]] = False
 
     # Planpixel der Zelle -> lokale Weltkoordinaten
     def cell_xy(self, r, c):
@@ -238,6 +246,77 @@ class Apartment:
         box_xy(mb, xa, xb, ya, yb, z0 + self.c["height"], z0 + self.c["height"] + 0.3, "decke")
 
 
+
+# ------------------------------------------------------------------ Wohnungen ohne Vektorplan (aus der Dachkubatur)
+class ManualApartment:
+    """Raumhülle aus lokalen Koordinaten: Wände mit Öffnungen, Schrägen, Terrasse, Geländer."""
+
+    def __init__(self, cfg):
+        self.c = cfg
+
+    def build(self, mw, mf, mg):
+        z0 = self.c["floor_z"]
+        z1 = z0 + self.c["height"]
+        n = 0
+        z1_room = z1
+        for w in self.c["walls"]:
+            z1 = z0 + w["h"] if "h" in w else z1_room
+            x0, y0, x1, y1 = w["rect"]
+            along_y = (y1 - y0) >= (x1 - x0)
+            a, b = (y0, y1) if along_y else (x0, x1)
+            ops = sorted(w.get("openings", []), key=lambda o: o["span"][0])
+            cuts = [a] + [v for o in ops for v in o["span"]] + [b]
+            # volle Pfeiler zwischen Öffnungen
+            for i in range(0, len(cuts), 2):
+                s0, s1 = cuts[i], cuts[i + 1]
+                if s1 - s0 > 1e-3:
+                    if along_y:
+                        box_xy(mw, x0, x1, s0, s1, z0, z1, "innen_wand")
+                    else:
+                        box_xy(mw, s0, s1, y0, y1, z0, z1, "innen_wand")
+            for o in ops:
+                s0, s1 = o["span"]
+                zb, zt = z0 + o.get("z", [0.0, 2.2])[0], z0 + o.get("z", [0.0, 2.2])[1]
+                rect = (x0, x1, s0, s1) if along_y else (s0, s1, y0, y1)
+                if zb > z0:
+                    box_xy(mw, rect[0], rect[1], rect[2], rect[3], z0, zb, "innen_wand")
+                box_xy(mw, rect[0], rect[1], rect[2], rect[3], zt, z1, "innen_wand")
+                kind = o.get("type", "fenster")
+                if kind != "tuer":
+                    Apartment._window(self, mf, mg, rect[0], rect[1], rect[2], rect[3], zb, zt, kind)
+                n += 1
+        for sl in self.c.get("slopes", []):
+            (xa, xb), (ya, za), (yb, zb) = sl["x"], sl["from"], sl["to"]
+            mw.poly([(xa, ya, za), (xb, ya, za), (xb, yb, zb), (xa, yb, zb)], None, "decke", (0, 1, -1))
+            for dff in sl.get("roof_windows", []):
+                u0, u1 = dff["x"]
+                t0, t1 = dff["t"]
+                pa = (ya + (yb - ya) * t0, za + (zb - za) * t0)
+                pb = (ya + (yb - ya) * t1, za + (zb - za) * t1)
+                mg.poly([(u0, pa[0] - 0.01, pa[1] - 0.01), (u1, pa[0] - 0.01, pa[1] - 0.01),
+                         (u1, pb[0] - 0.01, pb[1] - 0.01), (u0, pb[0] - 0.01, pb[1] - 0.01)], None, "glas", (0, 1, -1))
+                for (q0, q1) in ((u0 - 0.06, u0), (u1, u1 + 0.06)):
+                    mf.poly([(q0, pa[0] - 0.02, pa[1] - 0.02), (q1, pa[0] - 0.02, pa[1] - 0.02),
+                             (q1, pb[0] - 0.02, pb[1] - 0.02), (q0, pb[0] - 0.02, pb[1] - 0.02)], None, "fenster", (0, 1, -1))
+        for t in self.c.get("terrace", []):
+            x0, y0, x1, y1 = t["rect"]
+            box_xy(mw, x0, x1, y0, y1, z0 - 0.3, z0 - 0.02, "terrasse_holz")
+        for r in self.c.get("railings", []):
+            x0, y0, x1, y1 = r["rect"]
+            box_xy(mg, x0, x1, y0, y1, z0, z0 + 1.08, "glas")
+            box_xy(mf, x0 - 0.01, x1 + 0.01, y0 - 0.01, y1 + 0.01, z0 + 1.06, z0 + 1.10, "rahmen_dunkel")
+        return {"oeffnungen": n}
+
+    def slabs(self, mb):
+        x0, y0, x1, y1 = self.c["slab_rect"]
+        z0 = self.c["floor_z"]
+        box_xy(mb, x0, x1, y0, y1, z0 - 0.3, z0, "boden_parkett")
+        box_xy(mb, x0, x1, y0, y1, z0 + self.c["height"], z0 + self.c["height"] + 0.3, "decke")
+
+    def px_to_local(self, x, y):
+        return (x, y)
+
+
 # ------------------------------------------------------------------ Szene
 def build_materials(bpy, mats):
     from . import materials as M
@@ -245,6 +324,7 @@ def build_materials(bpy, mats):
     mats["decke"] = M.plaster(bpy, "decke", (0.85, 0.84, 0.81), var=0.02, bump=0.03)
     mats["boden_parkett"] = M.oak(bpy, "boden_parkett", (0.42, 0.28, 0.16))
     mats["fensterbrett"] = M.simple(bpy, "fensterbrett", (0.8, 0.79, 0.75), 0.3)
+    mats["terrasse_holz"] = M.oak(bpy, "terrasse_holz", (0.3, 0.22, 0.15))
     return mats
 
 
@@ -255,9 +335,7 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True)
     W = yaml.safe_load((project_dir / "wohnungen.yaml").read_text())
     cfg, ctx = B.load_project(project_dir)
     scene = B.build_scene(cfg, ctx)
-    for c in bpy.data.collections:
-        if c.name == "Objekt":
-            c.hide_render = True
+    objekt = bpy.data.collections.get("Objekt")
     mats = {m.name: m for m in bpy.data.materials}
     build_materials(bpy, mats)
     coll = bpy.data.collections.new("Innen")
@@ -270,9 +348,17 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True)
     plan_cache = project_dir / "data" / "plan_cache"
     for name in names:
         a = W["wohnungen"][name]
-        P = W["plaene"][a["plan"]]
-        rgb = raster_page(Path(P["pdf"]), P["page"], P["dpi"], plan_cache)
-        apt = Apartment(a, rgb, P)
+        if objekt:
+            keep = set(a.get("objekt_sichtbar", []))
+            objekt.hide_render = False
+            for o in objekt.objects:
+                o.hide_render = o.name not in keep
+        if a.get("plan") == "manuell":
+            apt = ManualApartment(a)
+        else:
+            P = W["plaene"][a["plan"]]
+            rgb = raster_page(Path(P["pdf"]), P["page"], P["dpi"], plan_cache)
+            apt = Apartment(a, rgb, P)
         mw = K.MeshBuilder(f"{name}_waende", ["innen_wand"])
         mf = K.MeshBuilder(f"{name}_rahmen", ["fenster"])
         mg = K.MeshBuilder(f"{name}_glas", ["glas"])
@@ -280,8 +366,8 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True)
         apt.slabs(mw)
         objs = [mb.to_object(bpy, mats, coll) for mb in (mw, mf, mg)]
         for cam_name, cam in a["kameras"].items():
-            px, py = cam["pos_px"]
-            tx, ty = cam["target_px"]
+            px, py = cam.get("pos_px") or cam["pos"]
+            tx, ty = cam.get("target_px") or cam["target"]
             x, y = apt.px_to_local(px, py)
             X, Y = apt.px_to_local(tx, ty)
             z = a["floor_z"] + cam.get("h", 1.45)

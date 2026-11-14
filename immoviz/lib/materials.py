@@ -252,6 +252,7 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     L["zebra"] = simple(bpy, "zebra", (0.7, 0.7, 0.68), 0.7)
     L["pflaster"] = cobbles(bpy, "pflaster")
     L["seil"] = simple(bpy, "seil", (0.02, 0.02, 0.02), 0.5)
+    L["balkon_lochblech"] = simple(bpy, "balkon_lochblech", (0.015, 0.015, 0.016), 0.45, 0.6)
     L["leuchte"] = simple(bpy, "leuchte", (0.25, 0.26, 0.27), 0.4, 0.6, **{"Emission Color": (1.0, 0.75, 0.45, 1.0)})
     L["randstein"] = simple(bpy, "randstein", (0.33, 0.32, 0.31), 0.7)
     L["hof"] = plaster(bpy, "hof", (0.3, 0.29, 0.27))

@@ -334,9 +334,10 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     walls = K.MeshBuilder("umgebung_gebaeude", ["nachbar_0"])
     wins = K.MeshBuilder("umgebung_fenster", ["fenster_dunkel"])
     roofs = K.MeshBuilder("umgebung_daecher", ["nachbar_dach"])
+    special = {str(v["bezug"]) for v in (cfg or {}).get("neighbour_facades", {}).values()}
     for b in ctx["buildings"]:
         poly = b["poly"]
-        if len(poly) < 3 or b["height"] < 1.0:
+        if len(poly) < 3 or b["height"] < 1.0 or str(b.get("bezug")) in special:
             continue
         cx = sum(p[0] for p in poly) / len(poly)
         cy = sum(p[1] for p in poly) / len(poly)
@@ -533,6 +534,106 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     trunks.to_object(bpy, mats, coll)
 
 
+# ======================================================================= Anschliessende Nachbarn
+def build_neighbours(cfg, ctx, mats, coll, terrain):
+    specs = cfg.get("neighbour_facades") or {}
+    for name, sp in specs.items():
+        f = K.Facade(name, tuple(sp["a"]), tuple(sp["b"]))
+        L = f.length
+        mx, my = (sp["a"][0] + sp["b"][0]) / 2, (sp["a"][1] + sp["b"][1]) / 2
+        z0 = terrain(mx + f.n[0] * 2.5, my + f.n[1] * 2.5)
+        H = sp["height"]
+        col = f"nb_{name}"
+        rust = sp.get("rustika")
+        mats[col] = M.plaster(bpy, col, tuple(c * 0.74 for c in M.hex_rgb(sp["color"])),
+                              rustika=(rust[0] + z0, rust[1] + z0, rust[2]) if rust else None, sockel=z0 + 0.6)
+        mats[col + "_stuck"] = M.plaster(bpy, col + "_stuck", tuple(min(1, c * 0.8) for c in M.hex_rgb(sp.get("stuck_color", sp["color"]))), var=0.04, bump=0.1)
+        mass = K.MeshBuilder(f"nachbar_{name}", [col])
+        orn = K.MeshBuilder(f"nachbar_{name}_stuck", [col + "_stuck"])
+        fr = K.MeshBuilder(f"nachbar_{name}_rahmen", ["fenster"])
+        gl = K.MeshBuilder(f"nachbar_{name}_glas", ["glas"])
+        inner = K.MeshBuilder(f"nachbar_{name}_innen", ["innen_a"])
+        rng = random.Random(len(name))
+        # Baukoerper aller Teile, an der Fassade 0,6 m zurueckgeschnitten
+        for b in ctx["buildings"]:
+            if str(b.get("bezug")) != str(sp["bezug"]) or b.get("klasse") != 11:
+                continue
+            poly, lines = K.clip_polygon(b["poly"], [[name, "d", ">=", 0.6]], {name: f})
+            hb = b["height"]
+            top_mat = "dach_flach"
+            side = sp.get("upper_material") if (sp.get("upper_material") and hb > H + 1.0) else col
+            K.extrude(mass, poly, z0 - 1.5, z0 + hb, side, top_mat, "innen", lines, bottom=False)
+        holes, wins = [], []
+        for ri, r in enumerate(sp["rows"]):
+            for ai, uc in enumerate(sp["axes"]):
+                if ri == 0 and sp.get("gate", {}).get("axis") == ai:
+                    g = sp["gate"]
+                    holes.append((uc - g["w"] / 2, uc + g["w"] / 2, z0, z0 + g["h"]))
+                    continue
+                if ri == 0 and sp.get("door") and sp["door"]["u"][0] - 0.3 < uc < sp["door"]["u"][1] + 0.3:
+                    continue
+                ua, ub = uc - r["w"] / 2, uc + r["w"] / 2
+                za, zb = z0 + r["z"], z0 + r["z"] + r["h"]
+                holes.append((ua, ub, za, zb))
+                wins.append((ri, ai, ua, ub, za, zb, r.get("surround")))
+        if sp.get("door"):
+            d_ = sp["door"]
+            holes.append((d_["u"][0], d_["u"][1], z0 + d_["z"][0], z0 + d_["z"][1]))
+            K.schaufenster(fr, gl, f, d_["u"][0], d_["u"][1], z0 + d_["z"][0], z0 + d_["z"][1], 0.0)
+        K.wall_with_holes(mass, f, 0.0, L, z0 - 1.5, z0 + H, 0.0, holes, col, reveal=0.28)
+        for ri, ai, ua, ub, za, zb, sur in wins:
+            if sp.get("style") == "modern":
+                K.modern_window(fr, gl, f, ua, ub, za, zb, 0.0, frame_mat="rahmen_dunkel")
+            else:
+                K.kastenfenster(fr, gl, f, ua, ub, za, zb, 0.0)
+            if sur:
+                K.surround(orn, f, ua, ub, za, zb, sur, mat=col + "_stuck")
+            K.quad_plane(inner, f, ua - 0.4, ub + 0.4, za - 0.3, zb + 0.3, 2.0,
+                         rng.choice(["innen_a", "innen_b", "innen_c"]))
+        if sp.get("gate"):
+            g = sp["gate"]
+            uc = sp["axes"][g["axis"]]
+            mats[col + "_tor"] = M.oak(bpy, col + "_tor", M.hex_rgb(g["color"]))
+            gtmp = K.MeshBuilder("t", ["haustor"])
+            K.haustor(gtmp, gl, f, uc - g["w"] / 2, uc + g["w"] / 2, z0, z0 + g["h"], 0.0)
+            gtmp.materials = [col + "_tor" if m == "haustor" else m for m in gtmp.materials]
+            fr.merge(gtmp)
+        for steps in sp.get("cornices", []):
+            K.cornice(orn, f, 0.0, L, [[a + z0, b_ + z0, p] for a, b_, p in steps], col + "_stuck")
+        if sp.get("consoles"):
+            cs = sp["consoles"]
+            for uc in sp["axes"]:
+                for du in (-0.7, 0.7):
+                    if 0.2 < uc + du < L - 0.2:
+                        K.box(orn, f, uc + du - cs["w"] / 2, uc + du + cs["w"] / 2, -cs["proj"], 0.0,
+                              z0 + cs["z"][0], z0 + cs["z"][1], col + "_stuck")
+        for z_a, z_b, hexc in sp.get("bands", []):
+            bm = f"{col}_band_{hexc[1:]}"
+            mats[bm] = M.plaster(bpy, bm, tuple(c * 0.8 for c in M.hex_rgb(hexc)), var=0.04)
+            # Band als duenne Vorsatzschale mit denselben Oeffnungen
+            K.wall_with_holes(mass, f, 0.0, L, z0 + z_a, z0 + z_b, -0.015,
+                              [h for h in holes if h[3] > z0 + z_a and h[2] < z0 + z_b], bm, reveal=0.02)
+        K.box(mass, f, 0.0, L, 0.0, 0.65, z0 + H - 0.05, z0 + H, "dach_flach", skip_back=False)
+        if sp.get("style") == "modern":
+            K.box(mass, f, 0.0, L, -0.05, 0.6, z0 + H - 0.15, z0 + H + 0.15, "rahmen_dunkel")
+        for bal in sp.get("balconies", []):
+            r = sp["rows"][bal["row"]]
+            zf = z0 + r["z"] - 0.15
+            for ai in bal["axes"]:
+                uc = sp["axes"][ai]
+                ua, ub = uc - 1.15, uc + 1.15
+                K.box(fr, f, ua, ub, -1.3, 0.0, zf - 0.18, zf, "rahmen_dunkel")
+                K.box(fr, f, ua, ub, -1.32, -1.28, zf, zf + 1.05, "balkon_lochblech")
+                K.box(fr, f, ua - 0.02, ua + 0.02, -1.3, 0.0, zf, zf + 1.05, "balkon_lochblech")
+                K.box(fr, f, ub - 0.02, ub + 0.02, -1.3, 0.0, zf, zf + 1.05, "balkon_lochblech")
+        rf = sp.get("roof")
+        if rf:
+            rm = "dach_ziegel" if rf.get("type") == "ziegel" else "dach_blech"
+            K.slope(mass, f, 0.0, L, z0 + H, z0 + H + rf["rise"], -0.3, rf["depth"], rm, caps=(True, True))
+        for mb in (mass, orn, fr, gl, inner):
+            mb.to_object(bpy, mats, coll)
+
+
 # ======================================================================= Szene, Licht, Kamera
 def build_scene(cfg, ctx):
     bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -565,6 +666,7 @@ def build_scene(cfg, ctx):
             return cache[key]
         global LAST_TERRAIN
         LAST_TERRAIN = terrain
+        build_neighbours(cfg, ctx, mats, ctx_coll, terrain)
         build_context(ctx, mats, ctx_coll, radius=cfg["site"].get("radius_m", 160) - 10,
                       detail=cfg["site"].get("detail_radius_m", 110), hero_poly=hero.footprint, terrain=terrain, cfg=cfg)
     return scene

@@ -94,5 +94,12 @@ Jahreszeiten mit gleicher Kamera). Standardumfang:
 | Gelände | Sockelhöhen Baukörpermodell plus Plankoten | Geländeebene im Modell |
 | Nachbarfassaden, Straßenmöbel, Pflaster, Leuchten, Blickachsen | Google Street View (nur Referenz, nicht im Bild) | Abruf je Kameraposition |
 
+**Grundregel (Daniel, 14.11.2026):** Die Häuser in der direkten Umgebung werden immer mitmodelliert und müssen
+stimmen: mindestens beide angebauten Nachbarn je Straßenfront plus die Häuser gegenüber im Bildausschnitt der
+Hauptkameras. Je Nachbar: Traufhöhe und Baukörper aus dem Baukörpermodell, Achsen, Geschosse, Erdgeschoss
+(Tore, Portale, Lokale), Gesimse und Fensterumrahmungen, Balkone, Dachform und Farbe aus Street View. Eingetragen
+wird das unter `neighbour_facades` in `project.yaml`, geprüft mit `immoviz.py svcheck`. Ohne bestandenen
+Nachbarabgleich gibt es kein Rendering für den Vertrieb.
+
 Erkenntnisse Wimmergasse 20 (14.11.2026): Höhen exakt laut Plan; Korrekturen an DG3 links (Terrasse statt
 Schräge), EG-Türen, Gelände (+0,79 m zur Ecke), Schrägparker, Granitpflaster, Seilleuchten, Nachbarfarben.

@@ -32,7 +32,7 @@ wohnungen:
     kameras:
       wohnkueche:        {pos_px: [2105, 1940], target_px: [1700, 2470], lens: 22}
       wohnkueche_zurueck: {pos_px: [1720, 2400], target_px: [2110, 1930], lens: 22}
-      zimmer:            {pos_px: [2565, 1945], target_px: [2200, 2470], lens: 22}
+      zimmer:            {pos_px: [2570, 2165], target_px: [2220, 2470], lens: 22}
 
   top12:
     plan: og1
@@ -50,3 +50,45 @@ wohnungen:
     kameras:
       wohnen_loggia: {pos_px: [3110, 1080], target_px: [2620, 790], lens: 22}
       zimmer_ecke:   {pos_px: [3575, 1075], target_px: [4090, 760], lens: 22}
+
+  top35:
+    plan: manuell
+    titel: Top 35, 3. DG, Eckwohnung mit Terrassen (NWG 60,85 m² plus 6,93 m² Terrassen)
+    # Aus der plangeprüften Dachkubatur (project.yaml, dach.walls und slopes, Straßenansicht [ANS]).
+    # Lokale Koordinaten: x entlang Stolberggasse, y entlang Wimmergasse ab der Ecke.
+    floor_z: 21.07              # Oberkante Rohdecke DG3 +50,20 WrN
+    height: 2.65                # lichte Raumhöhe laut DG-Plan RH 2,52 bis 2,68
+    slab_rect: [1.8, 1.8, 8.8, 8.8]
+    walls:
+      - rect: [1.8, 1.8, 2.1, 8.5]          # Glasfront zur Wimmergasse (Terrasse)
+        openings:
+          - {span: [1.95, 2.93], z: [0.03, 2.28], type: glastuer}
+          - {span: [3.03, 4.01], z: [0.03, 2.28], type: glastuer}
+          - {span: [4.10, 5.08], z: [0.03, 2.28], type: glastuer}
+          - {span: [5.47, 6.79], z: [0.03, 2.28], type: glastuer}
+          - {span: [6.89, 8.21], z: [0.03, 2.28], type: glastuer}
+      - rect: [2.1, 1.8, 5.4, 2.1]          # Glasfront zur Stolberggasse
+        openings:
+          - {span: [2.2, 3.4], z: [0.03, 2.28], type: glastuer}
+          - {span: [3.6, 4.8], z: [0.03, 2.28], type: glastuer}
+      - {rect: [5.4, 1.8, 8.3, 2.1], h: 1.32}   # Kniestock unter der Dachschräge
+      - rect: [8.0, 2.1, 8.3, 8.8]
+        openings: [{span: [6.3, 7.2], z: [0.0, 2.1], type: tuer}]
+      - rect: [1.8, 8.5, 8.0, 8.8]
+        openings: [{span: [4.2, 5.1], z: [0.0, 2.1], type: tuer}]
+    slopes:
+      - x: [5.4, 8.0]
+        from: [2.1, 22.39]
+        to: [3.25, 23.72]
+        roof_windows: [{x: [6.2, 7.4], t: [0.12, 0.88]}]
+    terrace:
+      - {rect: [0.85, 0.85, 1.8, 8.5]}
+      - {rect: [1.8, 0.85, 5.4, 1.8]}
+    railings:
+      - {rect: [0.83, 0.85, 0.87, 8.5]}
+      - {rect: [0.85, 0.83, 5.4, 0.87]}
+    light: golden_hour
+    exposure: 1.4
+    kameras:
+      wohnen_terrasse: {pos: [7.6, 7.9], target: [2.0, 2.3], lens: 22}
+      dachschraege:    {pos: [2.7, 7.9], target: [7.2, 2.6], lens: 22}

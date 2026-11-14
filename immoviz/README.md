@@ -54,7 +54,9 @@ Ergebnisse landen in `projects/<objekt>/renders/`.
 3. Aus der Straßenansicht (1:100) übertragen: Fensterachsen je Fassade, Geschosshöhen, Fenstergrößen,
    Gesimse. Jede Zahl bekommt im YAML-Kommentar ihre Quelle.
 4. Dachgeschoss aus Ansicht und DG-Grundrissen: Wände (`walls`), Schrägen (`slopes`), Volumen, Decken.
-5. Vorschau rendern, gegen Plan prüfen, nachschärfen. Erst dann Higgsfield.
+5. Angebaute Nachbarn und Häuser gegenüber modellieren (Pflicht): `neighbour_facades` mit Fassadenlinie,
+   Höhe, Achsen, Geschossen, Erdgeschoss, Gesimsen, Balkonen, Dach und Farbe nach Street View.
+6. Vorschau rendern, gegen Plan und mit `svcheck` gegen Street View prüfen, nachschärfen. Erst dann Higgsfield.
 
 ## Datenquellen
 
