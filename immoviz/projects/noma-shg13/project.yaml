@@ -36,7 +36,8 @@ facades:
 
 # ---------------------------------------------------------------- Neubau (lib/neubau.py)
 # Gruppen: nb_shg (Strassenhaus), nb_shg_dach (Mansarde, Dachterrassen), nb_hof (EG-Hoftrakt, Gruendach, Wege),
-# nb_top3, nb_top4, nb_top4a (Pavillons 1. OG), nb_wue (Wuertzlerstrasse 10), nb_umgebung (Nachbargaerten, Zaun)
+# nb_top3, nb_top4, nb_top4a (Pavillons 1. OG), nb_wue (Wuertzlerstrasse 10), nb_umgebung (Nachbargaerten),
+# nb_garten (Gartenstreifen Sued mit Zaun und Straeuchern)
 neubau:
   fensterrahmen: rahmen_dunkel        # Kunststoff-Alu aussen anthrazit [BAB 3.5]
   rahmen:
@@ -75,6 +76,8 @@ neubau:
     - {gruppe: nb_top4a, rahmen: hof, poly: [[30.88, 0.0], [38.99, 0.0], [41.46, 6.62], [30.88, 6.62]], z: [3.38, 6.61], wand: nb_wand_hof, dach: dach_flach, ohne_kanten: [0, 2]}
     # --- Wuertzlerstrasse 10 [EIN S. 27, OGD]: 12,4 m breit, 15,00 m tief, Traufe +17,28, Mansarde bis +20,72
     - {gruppe: nb_wue, poly: [[9.1, -85.3], [21.3, -84.3], [20.6, -69.4], [8.0, -70.3]], z: [0.0, 17.28], wand: nb_wand_hof, dach: dach_flach, ohne_kanten: [2]}
+    # Runde 2: langer Betonkoerper im Nachbargarten (Orthofoto x -5 bis -2,4; Vorlage Hof_fin: weisser Betonkasten mit Gitter) [ANN Hoehe 0,6]
+    - {gruppe: nb_umgebung, poly: [[-5.0, -40.0], [-2.4, -40.0], [-2.4, -55.0], [-5.0, -55.0]], z: [0.0, 0.6], wand: nb_brandwand, dach: nb_brandwand}
   fassaden:
     # --- Strassenhaus Hoffassade y = -15,00, u = x - 0,80 [EIN S. 25: Fensterachsen abgelesen 1:100]
     - gruppe: nb_shg
@@ -226,7 +229,8 @@ neubau:
     - {gruppe: nb_hof, rahmen: hof, poly: [[0.0, 0.0], [11.95, 0.0], [11.95, 6.62], [0.0, 6.62]], z: 3.47, dicke: 0.09, mat: dach_flach}
     - {gruppe: nb_hof, rahmen: hof, poly: [[16.04, 0.0], [27.99, 0.0], [27.99, 6.62], [16.04, 6.62]], z: 3.47, dicke: 0.09, mat: dach_flach}
     # Gartenstreifen Sued (Gaerten EG-Apartments, Rasen, Zaun an der Grundgrenze) und Garten Nord 42,09 m2 [EIN S. 7/8]
-    - {gruppe: nb_hof, rahmen: hof, poly: [[-7.15, -3.49], [48.0, -3.49], [48.0, 0.0], [-7.15, 0.0]], z: 0.03, dicke: 0.03, mat: nb_rasen}
+    # Gartenstreifen eigene Gruppe nb_garten (Innenbild Apartment Top 1 blendet nb_hof aus); reicht unter dem Strassenhaus bis a = -11,7 [EIN S. 8]
+    - {gruppe: nb_garten, rahmen: hof, poly: [[-11.7, -3.49], [48.0, -3.49], [48.0, 0.0], [-11.7, 0.0]], z: 0.03, dicke: 0.03, mat: nb_rasen}
     - {gruppe: nb_hof, rahmen: hof, poly: [[0.64, 12.54], [17.6, 12.54], [17.6, 14.9], [0.64, 14.9]], z: 0.03, dicke: 0.03, mat: nb_rasen}
     # Nachbargaerten (Orthofoto 2024): Dachgarten auf dem Hofbau Schlachthausgasse 11 (OGD 4,8 m) und Garten im Hof dahinter
     - {gruppe: nb_umgebung, poly: [[-20.8, -15.3], [0.45, -15.3], [2.45, -29.6], [-20.8, -29.6]], z: 4.66, dicke: 0.06, mat: nb_rasen}
@@ -234,7 +238,7 @@ neubau:
     - {gruppe: nb_umgebung, poly: [[-17.0, -39.8], [-7.0, -39.8], [-7.0, -50.6], [-17.0, -50.6]], z: 0.18, dicke: 0.1, mat: nb_rasen}
     - {gruppe: nb_umgebung, poly: [[-20.0, -31.2], [-6.0, -31.2], [-6.0, -33.3], [-20.0, -33.3]], z: 0.18, dicke: 0.1, mat: nb_rasen}
     - {gruppe: nb_umgebung, poly: [[-4.2, -31.2], [2.4, -31.2], [2.5, -33.3], [-4.2, -33.3]], z: 0.18, dicke: 0.1, mat: nb_rasen}
-    - {gruppe: nb_umgebung, poly: [[-17.0, -50.6], [-3.0, -50.6], [-3.0, -61.5], [-17.0, -61.5]], z: 0.18, dicke: 0.1, mat: nb_rasen}
+    - {gruppe: nb_umgebung, poly: [[-20.0, -50.6], [-5.2, -50.6], [-5.2, -61.5], [-20.0, -61.5]], z: 0.18, dicke: 0.1, mat: nb_rasen}   # Runde 2: Suedteil Rasen unter Baeumen (Orthofoto, Vorlage Hof_fin)
   gelaender:
     # Stabgelaender pulverbeschichtet [BAB 3.12]: Terrassen Top 3/4 zum Nachbarhof, Dachterrassen, Erker
     - {gruppe: nb_hof, rahmen: hof, pts: [[11.95, 0.12], [16.04, 0.12]], z: 3.96, h: 1.0}
@@ -252,8 +256,8 @@ neubau:
     - {gruppe: nb_wue, pts: [[17.6, -70.9], [11.2, -71.4]], z: 11.62, h: 1.05, mat: nb_basalt}
     - {gruppe: nb_wue, pts: [[17.6, -70.9], [11.2, -71.4]], z: 14.61, h: 1.05, mat: nb_basalt}
     # Zaun an der Grundgrenze zum Nachbarhof: Sockel bis +0,50, Stabzaun bis +1,02 [EIN S. 7]
-    - {gruppe: nb_hof, rahmen: hof, pts: [[-7.15, -3.49], [48.0, -3.49]], z: 0.0, h: 0.50, typ: voll, mat: nb_attika}
-    - {gruppe: nb_hof, rahmen: hof, pts: [[-7.15, -3.49], [48.0, -3.49]], z: 0.50, h: 0.52}
+    - {gruppe: nb_garten, rahmen: hof, pts: [[-11.7, -3.49], [48.0, -3.49]], z: 0.0, h: 0.50, typ: voll, mat: nb_attika}
+    - {gruppe: nb_garten, rahmen: hof, pts: [[-11.7, -3.49], [48.0, -3.49]], z: 0.50, h: 0.52}
   pv:   # PV-Module auf den Pavillondaechern [EIN S. 22 Schnitt 1/3]
     - {gruppe: nb_top3, rahmen: hof, a: [0.5, 0.0], b: [11.45, 0.0], d: [0.6, 6.0], z: 6.61, reihen: 3, neigung: 12}
     - {gruppe: nb_top4, rahmen: hof, a: [16.54, 0.0], b: [27.49, 0.0], d: [0.6, 6.0], z: 6.61, reihen: 3, neigung: 12}
@@ -263,11 +267,11 @@ neubau:
     - {gruppe: nb_hof, rahmen: hof, pos: [15.4, 0.5], z: 3.96, r: 0.5, h: 0.8}
     - {gruppe: nb_hof, rahmen: hof, pos: [28.6, 0.6], z: 3.96, r: 0.55, h: 1.0}
     - {gruppe: nb_hof, rahmen: hof, pos: [30.1, 0.6], z: 3.96, r: 0.5, h: 0.9}
-    - {gruppe: nb_hof, rahmen: hof, pos: [2.0, -2.6], z: 0.0, r: 0.8, h: 1.4}
-    - {gruppe: nb_hof, rahmen: hof, pos: [9.0, -2.7], z: 0.0, r: 0.9, h: 1.6}
-    - {gruppe: nb_hof, rahmen: hof, pos: [19.5, -2.6], z: 0.0, r: 0.8, h: 1.5}
-    - {gruppe: nb_hof, rahmen: hof, pos: [25.0, -2.7], z: 0.0, r: 0.9, h: 1.3}
-    - {gruppe: nb_hof, rahmen: hof, pos: [34.0, -2.6], z: 0.0, r: 0.8, h: 1.5}
+    - {gruppe: nb_garten, rahmen: hof, pos: [2.0, -2.6], z: 0.0, r: 0.8, h: 1.4}
+    - {gruppe: nb_garten, rahmen: hof, pos: [9.0, -2.7], z: 0.0, r: 0.9, h: 1.6}
+    - {gruppe: nb_garten, rahmen: hof, pos: [19.5, -2.6], z: 0.0, r: 0.8, h: 1.5}
+    - {gruppe: nb_garten, rahmen: hof, pos: [25.0, -2.7], z: 0.0, r: 0.9, h: 1.3}
+    - {gruppe: nb_garten, rahmen: hof, pos: [34.0, -2.6], z: 0.0, r: 0.8, h: 1.5}
 
 # ---------------------------------------------------------------- Umgebung
 neighbours: {}
@@ -306,6 +310,13 @@ cameras:
   dachterrasse_stadt: {pos: [7.8, -8.0, 26.95], target: [-30.0, 75.0, 22.0], lens: 26, vertical: true}
   dachterrasse_hof:  {pos: [1.8, -4.2, 26.95], target: [13.0, -45.0, 18.0], lens: 24, vertical: true}
   hof_uebersicht:    {pos: [-12.0, -12.0, 22.0], target: [10.0, -40.0, 4.0], lens: 26, vertical: true}
+  # Runde 2 (Grosszuegigkeit): Gartenperspektiven mit viel Garten im Vordergrund, Terrassen diagonal aus der Ecke mit
+  # Fassade, Hebeschiebetuer, Terrasse und Garten zusammen im Bild
+  garten_top3_weit:  {pos: [-3.5, -19.0, 6.25], target: [8.0, -29.5, 5.0], lens: 20, vertical: true}     # Nachbar-Dachgarten +4,66, Augenhoehe 1,6
+  garten_top4_weit:  {pos: [-11.0, -41.5, 1.65], target: [9.0, -48.5, 4.8], lens: 20, vertical: true}    # Nachbargarten, Augenhoehe 1,6
+  terrasse_top3_eck: {pos: [13.13, -37.21, 4.95], target: [2.32, -33.65, 5.0], lens: 18, vertical: true}  # Hofrahmen a 15,75 / b 6,35 Richtung Nachbargarten
+  terrasse_top4_eck: {pos: [14.80, -51.97, 4.95], target: [4.11, -49.55, 5.0], lens: 18, vertical: true}  # Hofrahmen a 30,60 / b 6,35
+  hof_vorlage:       {pos: [18.3, -68.4, 10.4], target: [6.0, -25.0, 6.0], lens: 26, vertical: true}     # Kontrolle: Standpunkt der Vorlage SHG13_Hof_fin (Balkon Wuertzlerstr. 10)
 
 lights:
   spaetsommer:  {date: "2026-08-27", time: "16:20", tz: 2, exposure: 0.0, interior: 0.0, aerosol: 2.0, season: spaetsommer}   # Sonne 32,6 Grad, Azimut 246 Grad
@@ -322,33 +333,43 @@ render:
 # Direkt sichtbar laut `immoviz.py sichtbar` (Bildanteil >= 1 %, < 80 m) in den Hof- und Gartenkameras. Hoffassaden sind
 # in Street View nicht einsehbar: Geschosszahl aus der Traufhoehe [OGD], Raster und Farbe als Annahme [ANN], Daecher aus LOD2.
 neighbour_facades:
-  hof_ost_005379:               # Hoftrakt Schlachthausgasse 15 (Gruenderzeit), 13,6 % in garten_top3
-    bezug: "005379"
+  hof_ost_005379:               # Hoftrakt Schlachthausgasse 15, 13,6 % in garten_top3. Runde 2: lachsrot mit weiss gerahmten
+    bezug: "005379"               # Fenstern laut Vorlage SHG13_Hof_fin-4 (vorher beige, Annahme)
     a: [23.0, -25.0]
     b: [26.4, -44.9]
     height: 16.3
-    color: "#D9CFB8"
+    color: "#D4927A"
     style: plain
+    frame: stuck
     axes: {n: 8, margin: 1.2}
     rows: {eg: {z: 1.0, h: 1.7, w: 1.0}, z0: 4.4, step: 3.4, n: 3, h: 1.7, w: 1.0}
-  hof_ost_005380:               # Hoftrakt Wuertzlerstrasse (Gruenderzeit), 3 bis 4 % in den Gartenkameras
-    bezug: "005380"
+  hof_ost_005380:               # Hoftrakt Wuertzlerstrasse (Gruenderzeit), 3 bis 4 % in den Gartenkameras. Runde 2: weiss, weisse
+    bezug: "005380"               # Fensterrahmen, Ziegeldach laut Vorlage SHG13_Hof_fin (rechter Bildrand) und LOD2 (vorher beige)
     a: [26.5, -45.2]
     b: [29.9, -64.6]
     height: 15.9
-    color: "#D3C8AF"
+    color: "#ECE8DF"
     style: plain
+    frame: stuck
     axes: {n: 8, margin: 1.2}
     rows: {eg: {z: 1.0, h: 1.7, w: 1.0}, z0: 4.4, step: 3.4, n: 3, h: 1.7, w: 1.0}
-  hof_ost_005378:               # Schlachthausgasse 15, Hoffassade hinter dem Strassenhaus, 3 bis 6 %
-    bezug: "005378"
+  hof_ost_005378:               # Schlachthausgasse 15, Hoffassade hinter dem Strassenhaus, 3 bis 6 %. Runde 2: weiss, Fenster mit
+    bezug: "005378"               # Faschen und Verdachung, Ziegeldach laut Vorlage SHG13_Hof_fin-2 (rechter Bildrand), vorher beige glatt
     a: [21.2, -12.0]
     b: [22.8, -19.0]
     height: 21.6
-    color: "#E2DCCD"
+    color: "#EEEAE2"
+    stuck_color: "#F6F3EC"
     style: plain
+    frame: stuck
     axes: {n: 3, margin: 1.0}
-    rows: {eg: {z: 1.0, h: 1.7, w: 1.0}, z0: 4.3, step: 3.3, n: 5, h: 1.6, w: 1.0}
+    rows:
+      - {z: 1.0, h: 1.7, w: 1.0, surround: fasche}
+      - {z: 4.3, h: 1.6, w: 1.0, surround: fasche_verdachung}
+      - {z: 7.6, h: 1.6, w: 1.0, surround: fasche_verdachung}
+      - {z: 10.9, h: 1.6, w: 1.0, surround: fasche_verdachung}
+      - {z: 14.2, h: 1.6, w: 1.0, surround: fasche_verdachung}
+      - {z: 17.5, h: 1.6, w: 1.0, surround: fasche}
   hof_west_005363:              # Wohnblock Erdbergstrasse, Ostfassade zum Nachbargarten, 28 % in terrasse_top3_hof
     bezug: "005363"
     a: [-23.0, -53.3]
@@ -369,6 +390,16 @@ neighbour_facades:
     frame: fenster
     axes: {n: 3, margin: 1.2}
     rows: {eg: {z: 0.9, h: 1.6, w: 1.4}, z0: 3.9, step: 3.0, n: 5, h: 1.5, w: 1.4}
+  hof_nord_005362:              # Runde 2 neu: Hoffassade Schlachthausgasse 11 (Gruenderzeit, Traufe 21,8 [OGD]) ueber dem Hofbau mit
+    bezug: "005362_hof"           # Dachgarten; lachsrosa, weiss gerahmte Fenster laut Vorlagen SHG13_Hof_fin und _Hof_fin-2 (links von
+    a: [-25.5, -15.05]            # SHG13). Eigener Schluessel "005362_hof": nur Fassadenkarte 5 cm vor dem Baukoerper, damit der Block
+    b: [0.8, -15.05]              # 005362 (Hofbau mit Dachgarten, hohe Teile) nicht an der Fassadenlinie abgeschnitten wird. Achsraster Annahme
+    height: 21.8
+    color: "#D9A08A"
+    style: plain
+    frame: stuck
+    axes: {n: 11, margin: 1.4}
+    rows: {eg: {z: 1.2, h: 1.8, w: 1.1}, z0: 4.6, step: 3.4, n: 5, h: 1.8, w: 1.1}
   hof_sued_005387:              # Hofseite Wuertzlerstrasse 8, Nordfassade zum Hof, 1,4 bis 1,7 %
     bezug: "005387"
     a: [7.3, -64.6]

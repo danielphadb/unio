@@ -356,7 +356,44 @@ class ManualApartment:
             x0, y0, x1, y1 = r["rect"]
             box_xy(mg, x0, x1, y0, y1, z0, z0 + 1.08, "glas")
             box_xy(mf, x0 - 0.01, x1 + 0.01, y0 - 0.01, y1 + 0.01, z0 + 1.06, z0 + 1.10, "rahmen_dunkel")
+        self.einbauten(mw, mg)
         return {"oeffnungen": n}
+
+    def einbauten(self, mw, mg):
+        """Optional (wohnungen.yaml): feste Einbauten und Möbel als Platzhalter, damit Lage und Größe in der
+        Vorschau gesperrt sind. einbauten: [{rect: [x0, y0, x1, y1], z: [z0, z1] ueber FOK, mat}],
+        zylinder: [{c: [x, y], r, z: [z0, z1], mat, seg}]. Material "glas" landet im Glasobjekt."""
+        z0 = self.c["floor_z"]
+        for e in self.c.get("einbauten", []):
+            x0, y0, x1, y1 = e["rect"]
+            za, zb = e.get("z", [0.0, 0.9])
+            mat = e.get("mat", "innen_wand")
+            box_xy(mg if mat == "glas" else mw, x0, x1, y0, y1, z0 + za, z0 + zb, mat)
+        for c in self.c.get("zylinder", []):
+            cx, cy = c["c"]
+            r, seg = c["r"], c.get("seg", 24)
+            za, zb = z0 + c.get("z", [0.0, 0.75])[0], z0 + c.get("z", [0.0, 0.75])[1]
+            mat = c.get("mat", "innen_wand")
+            pts = [(cx + r * math.cos(2 * math.pi * k / seg), cy + r * math.sin(2 * math.pi * k / seg)) for k in range(seg)]
+            mw.poly([(x, y, zb) for x, y in pts], None, mat, (0, 0, 1))
+            mw.poly([(x, y, za) for x, y in pts], None, mat, (0, 0, -1))
+            for k in range(seg):
+                (ax, ay), (bx, by) = pts[k], pts[(k + 1) % seg]
+                mw.poly([(ax, ay, za), (bx, by, za), (bx, by, zb), (ax, ay, zb)], None, mat,
+                        ((ax + bx) / 2 - cx, (ay + by) / 2 - cy, 0))
+
+    def _dreh(self, x, y):
+        """Optional: Hülle in eigenen Koordinaten (z. B. Maße aus einem Möblierungsplan), gedreht um drehung_grad
+        und verschoben um ursprung_lokal. Ohne die Schlüssel unverändert."""
+        a = math.radians(self.c.get("drehung_grad", 0.0))
+        ox, oy = self.c.get("ursprung_lokal", (0.0, 0.0))
+        return (ox + x * math.cos(a) - y * math.sin(a), oy + x * math.sin(a) + y * math.cos(a))
+
+    def transform(self, mbs):
+        if not (self.c.get("drehung_grad") or self.c.get("ursprung_lokal")):
+            return
+        for mb in mbs:
+            mb.verts = [(*self._dreh(x, y), z) for x, y, z in mb.verts]
 
     def slabs(self, mb):
         x0, y0, x1, y1 = self.c["slab_rect"]
@@ -365,7 +402,7 @@ class ManualApartment:
         box_xy(mb, x0, x1, y0, y1, z0 + self.c["height"], z0 + self.c["height"] + 0.3, "decke")
 
     def px_to_local(self, x, y):
-        return (x, y)
+        return self._dreh(x, y)
 
 
 # ------------------------------------------------------------------ Szene
@@ -379,6 +416,44 @@ def build_materials(bpy, mats):
     return mats
 
 
+def build_custom_materials(bpy, mats, spec: dict | None):
+    """Optional (wohnungen.yaml materialien): {name: {farbe: "#hex", art: eiche|putz|glas|einfach, rauh, metall,
+    leuchten: Stärke}} für Einbauten, Wand- und Deckenfarben einzelner Wohnungen."""
+    from . import materials as M
+    for name, s in (spec or {}).items():
+        rgb = M.hex_rgb(s.get("farbe", "#cccccc"))
+        art = s.get("art", "einfach")
+        if art == "eiche":
+            mats[name] = M.oak(bpy, name, rgb)
+        elif art == "putz":
+            mats[name] = M.plaster(bpy, name, rgb, var=0.03, bump=0.05)
+        elif art == "glas":
+            mats[name] = M.glass(bpy, name, rgb, s.get("rauh", 0.0))
+        elif s.get("leuchten"):
+            mats[name] = M.simple(bpy, name, rgb, s.get("rauh", 0.5), **{"Emission Color": (*rgb, 1.0),
+                                                                         "Emission Strength": float(s["leuchten"])})
+        else:
+            mats[name] = M.simple(bpy, name, rgb, s.get("rauh", 0.5), s.get("metall", 0.0))
+    return mats
+
+
+def add_lamps(bpy, coll, apt, a: dict):
+    """Optional (wohnungen.yaml leuchten): [{pos: [x, y, z ueber FOK], w: Watt, farbe, r: Radius}] als Punktlichter."""
+    from . import materials as M
+    obs = []
+    for i, L in enumerate(a.get("leuchten", [])):
+        x, y = apt.px_to_local(*L["pos"][:2])
+        ld = bpy.data.lights.new(f"lampe_{i}", "POINT")
+        ld.energy = L.get("w", 40)
+        ld.color = M.hex_rgb(L.get("farbe", "#FFC98A"))
+        ld.shadow_soft_size = L.get("r", 0.08)
+        ob = bpy.data.objects.new(f"lampe_{i}", ld)
+        ob.location = (x, y, a["floor_z"] + L["pos"][2])
+        coll.objects.link(ob)
+        obs.append(ob)
+    return obs
+
+
 def render_apartments(project_dir: Path, names: list[str], preview: bool = True, cams: list[str] | None = None):
     import bpy
     from . import build as B
@@ -390,6 +465,7 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
     objekt = bpy.data.collections.get("Objekt")
     mats = {m.name: m for m in bpy.data.materials}
     build_materials(bpy, mats)
+    build_custom_materials(bpy, mats, W.get("materialien"))
     coll = bpy.data.collections.new("Innen")
     scene.collection.children.link(coll)
     res = W["render"]["preview_resolution"] if preview else W["render"]["resolution"]
@@ -420,7 +496,12 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
         apt.slabs(mw)
         if hasattr(apt, "transform"):
             apt.transform((mw, mf, mg))
+        ersatz = a.get("material_ersatz") or {}      # optional: z. B. {innen_wand: creme, decke: bordeaux}
+        if ersatz:
+            for mb in (mw, mf, mg):
+                mb.materials = [ersatz.get(m, m) for m in mb.materials]
         objs = [mb.to_object(bpy, mats, coll) for mb in (mw, mf, mg)]
+        objs += add_lamps(bpy, coll, apt, a)
         for cam_name, cam in a["kameras"].items():
             if cams and f"{name}_{cam_name}" not in cams:
                 continue

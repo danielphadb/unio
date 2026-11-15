@@ -1,7 +1,7 @@
 # NOMA, Schlachthausgasse 13 & Würtzlerstraße 10, 1030 Wien
 
 Zweites Objekt in immoviz. UNIO-Projekt, Bauträger Trattner & Söhne, Architektur Hawlik Gerginski.
-Stand 15.11.2026, erste Vorschauen und veredelte Bilder.
+Stand 15.11.2026, zweite Runde (Apartments Derenko, Top 3/4 nach den Vorlagen, Nachbarhäuser korrigiert).
 
 ## Auftrag des Kunden
 
@@ -13,7 +13,40 @@ Stand 15.11.2026, erste Vorschauen und veredelte Bilder.
 Pavillons aus dem gegenüberliegenden Nachbargarten auf Augenhöhe (dorthin zeigen Schlafzimmer- und Wohnzimmerfenster);
 Bilder auf den Terrassen von Top 3 und Top 4; Penthouse Top 26-2 innen (Wohnküche unter den Schrägen) und die
 Dachterrasse Top 26-3 (Blick über die Dächer zur Stadt, Blick über den Hof, blaue Stunde). Die "Noma Apartments"
-(Kurzzeitapartments im EG, Interior-Konzept Derenko) sind nicht Teil dieses Pakets.
+(Kurzzeitapartments im EG, Interior-Konzept Derenko) waren nicht Teil der ersten Runde; ab Runde 2 enthalten (siehe unten).
+
+## Runde 2 (15.11.2026)
+
+Feedback des Kunden: Apartments genau im Design von Derenko, Top 3 und 4 an den Vorlagen (bestehende
+Projektvisualisierungen) referenzieren, auch für die Moods, großzügige Blickwinkel, Häuser rundherum perfekt.
+
+- **Kurzzeitapartments:** die 16 Apartments im EG des Hoftrakts (BAB Apartments: 20 bis 35 m², eigener Eingang). Die
+  Verkaufspläne `06 Grundrisse/01.pdf` usw. gehören zu den Eigentumswohnungen (Top 1 dort = 1. OG, 47 m²), nicht zu den
+  Apartments. Muster ist **APT. 01** (28,84 m² laut [EIN S. 8], Derenko "Top 1 Variante 2"): erstes Apartment der
+  Südreihe, Eingang vom Gang, Fenster zum Gartenstreifen Süd.
+- **Apartment Top 1** als Blender-Hülle `wohnungen.yaml: apt01` nach dem Möblierungsplan 1:50 [INT S. 3]: 5,03 x 5,936 m,
+  Bad 2,515 x 1,80 m, Trennwand mit Rundung, Einbau-Garderobe mit Bank, Küchenzeile, Bett mit Holzverkleidung, runder Tisch,
+  Sideboard, Fenster 1,70 m (Parapet 0,90). Raumhöhe 3,38 m (Rohdecke +3,38, keine abgehängte Decke wegen
+  Betonkernaktivierung [BAB-A 3.10]). Gang als `gang` (Breite und Türraster Annahme, Decke +2,92 laut [EIN S. 8]).
+  Neue, additive Schlüssel in `lib/interior.py` (nur aktiv, wenn gesetzt): `drehung_grad`/`ursprung_lokal` für
+  ManualApartment, `einbauten`, `zylinder`, `leuchten`, `material_ersatz`, `materialien` (oberste Ebene).
+- **Derenko-Referenzen in Higgsfield:** nur die eigenen Ansichten S. 13 bis 16 (Ausschnitte) und die Farbbalken S. 6;
+  die Stimmungsbilder S. 5 bis 11 (fremde Herkunft, Hinweis S. 17) nur im Prompt beschrieben.
+- **Vorlagen Top 3/4:** Look und Mood in `mood_vorlagen.md`; als Stilreferenz hochgeladen (nicht im Repo):
+  `SHG13_Hof_fin`, `_Hof_fin-3`, `_Hof_fin-4`, `3Z HOF/Wohnzimmer`, `3Z HOF/Schlafzimmer`, `SHG13_TOP04_Loft_fin`.
+  Top 3 im Stil 3Z HOF, Top 4 im Stil Loft.
+- **Kameras (großzügig):** innen 16 bis 18 mm aus der Raumecke oder dem Vorraum (`wohnkueche_ecke`, `wohnkueche_vr`),
+  Terrassen diagonal aus der hinteren Ecke (`terrasse_top3_eck`, `terrasse_top4_eck`), Gärten mit Rasen im Vordergrund
+  (`garten_top3_weit`, `garten_top4_weit`), Kontrollkamera `hof_vorlage` am Standpunkt der Vorlage `SHG13_Hof_fin`.
+- **Nachbarhäuser:** siehe `umgebung_abgleich.md` Abschnitt 6 (005379 lachsrot, 005380 und 005378 weiß, neu SHG 11 Hof
+  lachsrosa, Nachbargarten mit Rasen und Betonkörper, Gartenstreifen als Gruppe `nb_garten`).
+- **Ergebnis:** 13 veredelte Bilder (5 Apartment inkl. Gang, je 2 innen Top 3/4, je 1 Terrasse, je 1 Garten), Jobs und
+  verworfene Versuche in `renders/higgsfield/staging.json` und `renders/innen/staging.json` (`runde_2`). 22 Aufträge,
+  6 verworfen (erfundene Glastür, Türlagen, Möbel an der falschen Wand). Guthaben 123,38 auf 85,38 Credits (38 verbraucht).
+
+Offene Punkte Runde 2: Lage APT. 01 im Gesamtgrundriss und Raumhöhe (Deckensprung +3,38/+3,57) mit dem Polierplan
+bestätigen; Gang (Breite, Türraster, Abschluss) ist Annahme; Hoffassaden 005387 (Würtzlerstraße 8) und 005382 ohne
+Bildquelle; Vorlagen zeigen Glas-Sheddächer auf den Pavillons, Modell bleibt beim Einreichplan.
 
 ## Quellen (`quellen/`, PDFs nicht im Repo)
 
@@ -23,7 +56,7 @@ Dachterrasse Top 26-3 (Blick über die Dächer zur Stadt, Blick über den Hof, b
 | VP | `VP_Top03.pdf`, `VP_Top04.pdf`, `VP_Top4A.pdf`, `VP_Top26_*.pdf`, `VP_Top23_*.pdf`, `VP_Top01.pdf` | Grundrisse Top 3/4 (Wandextraktion), Lage Top 4 und 4A, Dachterrassen |
 | BAB | `BAB_SHG13_hofseitig_DG_Lofts_2026-02-02.pdf` (gilt für Top 3, 4, 23 bis 26) | Wildeiche-Landhausdiele, Wände gebrochenes Weiß, Kunststoff-Alu-Fenster, Hebeschiebetüren, Raffstore, Terrassen Platten 50 x 50, Stabgeländer pulverbeschichtet |
 | BAB-S, BAB-A, BEM | straßenseitig, Apartments, Bemusterung | nur gesichtet |
-| INT | `Interior_Derenko_Noma_Apartments_2026-10-07.pdf` | gilt nur für die Kurzzeitapartments, hier nicht verwendet |
+| INT | `Interior_Derenko_Noma_Apartments_2026-10-07.pdf` | Kurzzeitapartments: Grundriss Top 1 S. 3, Lichtkonzept S. 12, Ansichten S. 13 bis 16 (Runde 2) |
 | VIS | Fremdvisualisierungen (nur Scratchpad, nicht im Repo, nicht hochgeladen) | Referenz für Farbe der Hoffassaden (hellgrün-grau), Gestaltung Hof und Dachterrasse |
 | OGD | Stadt Wien Open Data, Dachmodell LOD2, Orthofoto 2024 | Umgebung, siehe `umgebung_abgleich.md` |
 

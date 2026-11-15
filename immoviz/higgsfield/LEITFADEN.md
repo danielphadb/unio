@@ -7,7 +7,8 @@ Fensterachsen, Geschosshöhen, Gesimse und die Dachgeschoss-Kubatur dürfen sich
 ## Ablauf
 
 1. Rendering hochladen (`media_upload`, dann `curl -X PUT` und `media_confirm`).
-2. Bild erzeugen mit dem Rendering als Referenz (Modell siehe unten), Seitenverhältnis 3:2.
+2. Bild erzeugen mit dem Rendering als Referenz (Modell siehe unten), Seitenverhältnis 3:2. Budget je Bild ca. 2,5 Credits
+   (nano_banana_pro 2k) einplanen, mit `get_cost: true` vorab prüfbar.
 3. Ergebnis gegen das Rendering prüfen: Achsen zählen, Gesimse, Dachkante, Ecklösung.
    Weicht etwas ab, wird es verworfen und nicht „schön geredet“.
 4. Freigegebenes Bild auf 4K hochrechnen (`upscale_image`).
@@ -17,7 +18,7 @@ Fensterachsen, Geschosshöhen, Gesimse und die Dachgeschoss-Kubatur dürfen sich
 
 | Modell | Einsatz | Erfahrung |
 |---|---|---|
-| `nano_banana_pro` (`resolution: 2k`, Rolle `image_references`) | **Standard.** Hält Achsen, Gesimse, Dachkante und Kamera sehr eng, 2528 x 1696 px | Test 14.11.2026: 3 von 3 Bildern geometrisch korrekt |
+| `nano_banana_pro` (`resolution: 2k`, Rolle `image_references`) | **Standard.** Hält Achsen, Gesimse, Dachkante und Kamera sehr eng, 2528 x 1696 px. **Kosten ca. 2,5 Credits je Bild** (gemessen 15.11.2026, NOMA: 42 Credits für 17 Bilder) | Test 14.11.2026: 3 von 3 Bildern geometrisch korrekt |
 | `gpt_image_2_6` | Alternative. Unbedingt `quality: high` und `resolution: 2k` setzen, sonst 1K in niedriger Stufe | Test 14.11.2026: Geometrie korrekt, nur 1024 px wegen fehlender Parameter |
 | `upscale_image` (4k) | Endausgabe | flacher Preis |
 

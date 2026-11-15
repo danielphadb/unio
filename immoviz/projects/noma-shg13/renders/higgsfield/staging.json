@@ -42,5 +42,35 @@
    "job": "6765446c-2f7b-462c-8453-6327a4080f6c",
    "eingang": "noma-shg13_dachterrasse_hof_golden_hour_vorschau.png"
   }
+ },
+ "runde_2": {
+  "stand": "2026-11-15",
+  "regeln": "Geometrie, Fenster und Bäume gesperrt (LEITFADEN.md); als Stil- und Mood-Referenz hochgeladen: Projektvisualisierungen des Kunden SHG13_Hof_fin, _Hof_fin-3, _Hof_fin-4 (nicht im Repo, nicht veröffentlicht), siehe mood_vorlagen.md",
+  "bilder": {
+   "terrasse_top3_eck_spaetsommer.jpg": {
+    "job": "ef1c7c09-4f80-4ec4-8500-0e738c0d4a5c",
+    "eingang": "noma-shg13_terrasse_top3_eck_spaetsommer_vorschau.png",
+    "referenz": "Hof_fin-4, Hof_fin-3",
+    "moebel": "Loungeset Teak mit cremefarbenen Polstern, Couchtisch Teak, Outdoor-Teppich, Olivenbaum, Gräser, Hortensien, Kletterrosen, Wandleuchten Bronze"
+   },
+   "terrasse_top4_eck_spaetsommer.jpg": {
+    "job": "b56eb8b1-49ef-47cc-a4c5-385b23fa0d61",
+    "eingang": "noma-shg13_terrasse_top4_eck_spaetsommer_vorschau.png",
+    "referenz": "Hof_fin-4, Hof_fin-3",
+    "moebel": "Esstisch Teak für vier, Polster hellgrau (wie Vorlage Hof_fin-4), Olivenbaum, Hortensien, Kletterrosen"
+   },
+   "garten_top3_weit_spaetsommer.jpg": {
+    "job": "2f7f6b2d-e2eb-4f11-9117-d22eafd4f6ef",
+    "eingang": "noma-shg13_garten_top3_weit_spaetsommer_vorschau.png",
+    "referenz": "Hof_fin, Hof_fin-4",
+    "hinweis": "Nachbar-Dachgarten mit Rasen und Bank im Vordergrund"
+   },
+   "garten_top4_weit_spaetsommer.jpg": {
+    "job": "fb99e2f4-a2b2-4c49-959a-e661afa0f16f",
+    "eingang": "noma-shg13_garten_top4_weit_spaetsommer_vorschau.png",
+    "referenz": "Hof_fin, Hof_fin-4",
+    "hinweis": "Betonkörper als Sitzkante interpretiert"
+   }
+  }
  }
 }

@@ -38,5 +38,73 @@
     "653ed388-3c59-48ff-9d36-dfef857af451 (Glasfront in der geschlossenen Rückwand erfunden)"
    ]
   }
+ },
+ "runde_2": {
+  "stand": "2026-11-15",
+  "apartment_top1": {
+   "stil": "Derenko-Entwurf Noma Apartments (Präsentationsmappe 07.10.2026). Hochgeladen nur die eigenen Ansichten S. 13 bis 16 (Ausschnitte) und die Farbpalette S. 6 (nur Farbbalken); Stimmungsbilder S. 5 bis 11 nur im Prompt beschrieben",
+   "bilder": {
+    "apt01_kueche_hf.jpg": {
+     "job": "04d3a473-bed8-400d-87be-6e547e6f6add",
+     "referenz": "Ansichten S. 13 bis 16, Palette S. 6",
+     "verworfen": [
+      "51a6e5e2-af77-4f74-b2bd-b7d2f656f762 (Glastür in der geschlossenen Rückwand erfunden)"
+     ]
+    },
+    "apt01_gesamt_hf.jpg": {
+     "job": "5893a023-4f2a-45a4-8838-d64de0d56dfb",
+     "referenz": "04d3a473 (gleicher Raum), S. 13, S. 14, Palette"
+    },
+    "apt01_bett_hf.jpg": {
+     "job": "25568acf-26de-4123-b480-9ec6661a0c29",
+     "referenz": "04d3a473, S. 16, S. 15, Palette"
+    },
+    "apt01_bad_hf.jpg": {
+     "job": "4f8b9072-bc6b-469a-b1f9-60267187820c",
+     "referenz": "04d3a473, S. 15, Palette"
+    },
+    "gang_blick_hf.jpg": {
+     "job": "c4a1c6fc-de0f-4b4b-99ca-3af3afac5076",
+     "referenz": "bd8fceaa (Material), Palette",
+     "verworfen": [
+      "bd8fceaa-c326-4bbe-ac1a-d933f5270f42 (Tür links vorne erfunden, Türlage nicht wie im Modell)"
+     ]
+    }
+   },
+   "moebelplan": "nach Grundriss Derenko S. 3: Bett mittig vor der Badwand mit Holzverkleidung, Einbau-Garderobe und Küchenzeile an der Wand zu APT. 02, runder Tisch mit zwei Stühlen am Fenster, Sideboard Nuss an der Fensterwand"
+  },
+  "top03_top04": {
+   "stil": "Vorlagen des Kunden: Top 3 wie Wohnungstyp 3Z HOF (Wohnzimmer, Schlafzimmer), Top 4 wie Loft (SHG13_TOP04_Loft_fin); als Referenz hochgeladen, nicht im Repo",
+   "bilder": {
+    "top03_wohnkueche_ecke_hf.jpg": {
+     "job": "79482f9c-6d44-4539-849d-8472e86d24f3",
+     "referenz": "3Z HOF Wohnzimmer, 3Z HOF Schlafzimmer",
+     "moebelplan": "Küche Nuss mit Terrazzo an der Nordwand, runder Nusstisch mit vier Bouclé-Stühlen, Sofa Bouclé rosé an der Ostwand vorne, Couchtisch Travertin-Optik, Bücherregal Nuss, Stehleuchte Dreibein, Geigenfeige"
+    },
+    "top03_wohnkueche_vr_hf.jpg": {
+     "job": "253a65b6-cef1-43ac-828e-7e9a56618cbe",
+     "referenz": "79482f9c (gleicher Raum)",
+     "verworfen": [
+      "23fcb0a6-fd69-4254-b95f-687d6d037552 (Küche an die falsche Wand gesetzt)"
+     ]
+    },
+    "top04_wohnkueche_ecke_hf.jpg": {
+     "job": "07c102eb-0148-4c92-ae6e-a6200fee80de",
+     "referenz": "Loft",
+     "moebelplan": "Küche Eiche an der Nordwand, Insel Marmor grün-grau mit drei Barhockern Samt rost, Wandverkleidung Eiche mit TV an der Westwand, Sofa creme an der Ostwand",
+     "verworfen": [
+      "9b4c3aa3-54c9-428d-8705-6b796f052766 (Hebeschiebetür an die Seitenwand verlegt)"
+     ]
+    },
+    "top04_wohnkueche_vr_hf.jpg": {
+     "job": "dd210340-e2b4-4e2f-8bc5-ffce55c6e5e2",
+     "referenz": "07c102eb (gleicher Raum)",
+     "verworfen": [
+      "62cc7add-3433-41f7-9880-cf342fe0519c (Küche an der falschen Wand)",
+      "1cdee3f2-5979-489d-ba64-65335686e18e (TV-Wand an der falschen Wand)"
+     ]
+    }
+   }
+  }
  }
 }
