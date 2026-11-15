@@ -268,3 +268,95 @@ def visible_buildings(scene, cfg, ctx, cams, res=(240, 160), max_dist=80.0, min_
                          "direkt": share >= min_share and dmin <= max_dist})
         out[cn] = sorted(rows, key=lambda r: -r["anteil"])
     return out
+
+
+# ---------------------------------------------------------------- Pflichthaeuser (erste Haeuser je Richtung)
+def pflicht_haeuser(cfg, ctx, anzahl: int = 5, max_weg: float = 160.0):
+    """Pflichtliste fuer den Realitaetsabgleich: von der Kreuzung bzw. vom Objekt aus in jede Strassenrichtung
+    die ersten `anzahl` Haeuser je Strassenseite, unabhaengig vom Bildanteil in den Kameras.
+
+    Die Strassen ergeben sich aus den Fassadenfluchten des Objekts (cfg["facades"]). Je Strasse wird die
+    Mittellinie bestimmt (halber Abstand zum Gegenueber), dann wird sie in beide Richtungen abgegangen und quer
+    dazu nach dem ersten Baukoerper (Klasse 11, hoeher als 8 m) gesucht. Haeuser zaehlen je BEZUG einmal je
+    Richtung und Seite; das Objekt selbst zaehlt nicht. Ergebnis: Liste von Dicts mit strasse, richtung
+    (plus = in Laufrichtung der Fassade, minus = dagegen), seite (haus | gegenueber), rang, bezug, adresse,
+    von/bis (Meter ab Start der Flucht), front [a, b] (Flucht des Hauses, von der Strasse gesehen links nach
+    rechts), modelliert (Namen in neighbour_facades)."""
+    hero = {str(h) for h in cfg["site"].get("hero_bezug", [])}
+    blds = [b for b in ctx["buildings"] if b.get("klasse") == 11 and b["height"] > 8.0 and len(b["poly"]) >= 3]
+    for b in blds:
+        xs, ys = [p[0] for p in b["poly"]], [p[1] for p in b["poly"]]
+        b["_bb"] = (min(xs), max(xs), min(ys), max(ys))
+    info = {str(i.get("acd")): i for i in ctx.get("info", [])}
+    named = {}
+    for n, v in (cfg.get("neighbour_facades") or {}).items():
+        named.setdefault(str(v["bezug"]), []).append((n, v))
+
+    def at(x, y):
+        for b in blds:
+            x0, x1, y0, y1 = b["_bb"]
+            if x0 <= x <= x1 and y0 <= y <= y1 and K.point_in_poly(x, y, b["poly"]):
+                return b
+        return None
+
+    def quer(px, py, n, weit=16.0):
+        s = 0.5
+        while s <= weit:
+            b = at(px + n[0] * s, py + n[1] * s)
+            if b is not None:
+                return b, s
+            s += 0.5
+        return None, None
+
+    out = []
+    for sname, fv in cfg["facades"].items():
+        f = K.Facade(sname, tuple(fv["a"]), tuple(fv["b"]))
+        t, n = (f.along[0], f.along[1]), (f.n[0], f.n[1])       # n zeigt von der Fassade zur Strasse
+        mid = f.p(f.length / 2, 0.0, 0.0)
+        # Strassenbreite: mittlerer Abstand zum Gegenueber entlang der Objektfassade
+        ws = [quer(*f.p(u, 0.0, 0.0)[:2], n, 40.0)[1] for u in (2.0, f.length / 2, f.length - 2.0)]
+        ws = [w for w in ws if w]
+        breite = sorted(ws)[len(ws) // 2] if ws else 15.0
+        cx, cy = mid[0] + n[0] * breite / 2, mid[1] + n[1] * breite / 2
+        for richtung, sgn in (("plus", 1.0), ("minus", -1.0)):
+            for seite, ns in (("haus", (-n[0], -n[1])), ("gegenueber", n)):
+                folge, akt = [], None
+                s = 0.0
+                while s <= max_weg and len(folge) <= anzahl:
+                    px, py = cx + t[0] * s * sgn, cy + t[1] * s * sgn
+                    b, d = quer(px, py, ns)
+                    key = str(b.get("bezug")) if b is not None else None
+                    if key and key not in hero:
+                        hit = (px + ns[0] * d, py + ns[1] * d)
+                        if akt and akt["bezug"] == key:
+                            akt["bis"], akt["p1"] = s, hit
+                            akt["h"].append(b["height"])
+                        else:
+                            alt = next((e for e in folge if e["bezug"] == key), None)
+                            if alt:      # derselbe BEZUG nach einer Luecke (Einfahrt, Ruecksprung)
+                                akt = alt
+                                akt["bis"], akt["p1"] = s, hit
+                            else:
+                                akt = {"bezug": key, "von": s, "bis": s, "p0": hit, "p1": hit, "h": [b["height"]]}
+                                folge.append(akt)
+                    s += 0.5
+                folge = [e for e in folge if e["bis"] - e["von"] >= 3.0][:anzahl]
+                for rang, e in enumerate(folge, 1):
+                    i = info.get(e["bezug"], {})
+                    # von der Strasse gesehen links nach rechts: Normale der Flucht zeigt zur Strasse
+                    a_, b_ = e["p0"], e["p1"]
+                    fx, fy = b_[0] - a_[0], b_[1] - a_[1]
+                    if (-fy) * (-ns[0]) + fx * (-ns[1]) < 0:      # K.Facade: n = (dy, -dx) normiert, soll nach -ns zeigen
+                        a_, b_ = b_, a_
+                    hs = sorted(e["h"])
+                    out.append({"strasse": sname, "richtung": richtung, "seite": seite, "rang": rang,
+                                "bezug": e["bezug"],
+                                "adresse": f"{i.get('street', '')} {i.get('nr', '')}".strip() or None,
+                                "geschosse": i.get("floors"), "typ": i.get("type"), "bauzeit": i.get("period"),
+                                "von": round(e["von"], 1), "bis": round(e["bis"], 1),
+                                "front": [[round(a_[0], 2), round(a_[1], 2)], [round(b_[0], 2), round(b_[1], 2)]],
+                                "traufe": round(hs[len(hs) // 2], 2),
+                                "modelliert": [n_ for n_, _ in named.get(e["bezug"], [])]})
+    for b in blds:
+        b.pop("_bb", None)
+    return out
