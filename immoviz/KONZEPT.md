@@ -128,6 +128,9 @@ Jahreszeiten mit gleicher Kamera). Standardumfang:
 | Gebäudeumrisse, Gehsteige, Parkstreifen, Bäume | Luftbild Stadt Wien (7,5 cm), Mehrzweckkarte | Luftbild-Überlagerung |
 | Gelände | Sockelhöhen Baukörpermodell plus Plankoten | Geländeebene im Modell |
 | Nachbarfassaden, Straßenmöbel, Pflaster, Leuchten, Blickachsen | Google Street View (nur Referenz, nicht im Bild) | Abruf je Kameraposition |
+| Dächer der Umgebung | Dachmodell LOD2 Stadt Wien, Farbe aus dem Orthofoto | `immoviz.py daecher`, Draufsicht gegen Orthofoto |
+| Welche Häuser müssen stimmen | Sehstrahlen der Hauptkameras | `immoviz.py sichtbar` (Bildanteil je BEZUG) |
+| Bäume | Baumkataster, Street View belaubt, Orthofoto | `trees_override` in `project.yaml` |
 
 **Grundregel (Daniel, 14.11.2026):** Die Häuser in der direkten Umgebung werden immer mitmodelliert und müssen
 stimmen: mindestens beide angebauten Nachbarn je Straßenfront plus die Häuser gegenüber im Bildausschnitt der
@@ -135,6 +138,18 @@ Hauptkameras. Je Nachbar: Traufhöhe und Baukörper aus dem Baukörpermodell, Ac
 (Tore, Portale, Lokale), Gesimse und Fensterumrahmungen, Balkone, Dachform und Farbe aus Street View. Eingetragen
 wird das unter `neighbour_facades` in `project.yaml`, geprüft mit `immoviz.py svcheck`. Ohne bestandenen
 Nachbarabgleich gibt es kein Rendering für den Vertrieb.
+
+**Abstufung (Kunde, 15.11.2026):** Fassaden müssen nur dort stimmen, wo eine Kamera unmittelbar draufsieht
+(mindestens 1 % Bildanteil, näher als 80 m, berechnet mit `sichtbar`). Für alle weiteren Häuser genügt, dass die
+Dächer halbwegs stimmen; das leistet das Dachmodell LOD2 für rund 90 % der Gebäudefläche im Umkreis von 250 m.
+Gehsteige und Parkstreifen kommen aus den Verkehrsflächen der Stadt Wien und werden gegen das Orthofoto gelegt
+(Toleranz 0,5 m). Google-Daten (Street View, 3D Tiles) bleiben reine Referenz: nichts davon kommt ins Modell,
+ins Repo oder in ein Vermarktungsbild. Ablauf und Befund je Objekt stehen in `umgebung_abgleich.md`.
+
+Erkenntnisse Umgebungsabgleich Wimmergasse 20 (15.11.2026): drei direkt sichtbare Häuser fehlten als Fassade
+(Stolberggasse 32, Wimmergasse 24, Stolberggasse 40), zwei Häuser hatten eine unmodellierte zweite Straßenfront,
+vier hatten falsche Geschosszahl, Gliederung oder Farbe. Das Baumkataster führt alte Säulenhainbuchen zu klein;
+belaubte Street-View-Bilder sind für Baumgrößen verlässlicher als das unbelaubte Orthofoto.
 
 Erkenntnisse Wimmergasse 20 (14.11.2026): Höhen exakt laut Plan; Korrekturen an DG3 links (Terrasse statt
 Schräge), EG-Türen, Gelände (+0,79 m zur Ecke), Schrägparker, Granitpflaster, Seilleuchten, Nachbarfarben.

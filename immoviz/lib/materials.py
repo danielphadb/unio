@@ -195,9 +195,10 @@ def cobbles(bpy, name, color=(0.12, 0.115, 0.11)):
 def foliage(bpy, name, color):
     m = _new(bpy, name)
     N = Nodes(m)
-    tc = N.new("ShaderNodeTexCoord")
+    # Weltkoordinaten: Kronen sind skalierte Instanzen weniger Vorlagen, das Laubmuster bleibt so gleich fein
+    geo = N.new("ShaderNodeNewGeometry")
     noise = N.new("ShaderNodeTexNoise", Scale=3.2, Detail=10.0, Roughness=0.65)
-    N.link(tc.outputs["Object"], noise.inputs["Vector"])
+    N.link(geo.outputs["Position"], noise.inputs["Vector"])
     col = N.mix_rgb(noise.outputs["Fac"], tuple(c * 0.55 for c in color), tuple(c * 1.5 for c in color))
     diff = N.new("ShaderNodeBsdfDiffuse")
     N.link(col, diff.inputs["Color"])
@@ -261,6 +262,11 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     L["nachbar_dach"] = simple(bpy, "nachbar_dach", (0.06, 0.06, 0.062), 0.75, 0.2)
     L["dach_ziegel"] = plaster(bpy, "dach_ziegel", (0.20, 0.075, 0.045), var=0.15, bump=0.3)
     L["dach_blech"] = zinc(bpy, "dach_blech", (0.11, 0.115, 0.12))
+    # Dachklassen der Umgebung (lib/roofs.py: Neigung aus dem Dachmodell, Farbe aus dem Orthofoto)
+    L["dach_ziegel_dunkel"] = plaster(bpy, "dach_ziegel_dunkel", (0.085, 0.05, 0.04), var=0.15, bump=0.3)
+    L["dach_blech_hell"] = zinc(bpy, "dach_blech_hell", (0.30, 0.31, 0.32))
+    L["dach_kies"] = plaster(bpy, "dach_kies", (0.25, 0.24, 0.225), var=0.12, bump=0.25)
+    L["dach_gruen"] = plaster(bpy, "dach_gruen", (0.10, 0.13, 0.06), var=0.25, bump=0.3)
     L["nachbar_rahmen"] = simple(bpy, "nachbar_rahmen", (0.75, 0.74, 0.7), 0.4)
     L["fenster_dunkel"] = simple(bpy, "fenster_dunkel", (0.012, 0.014, 0.016), 0.04, 0.0, **{"Specular IOR Level": 0.9})
     L["terrasse"] = plaster(bpy, "terrasse", (0.32, 0.31, 0.29), var=0.05, bump=0.1)
@@ -306,6 +312,6 @@ def set_season(bpy, season: str):
                 ins["B_Color"].default_value = (*[c * 1.5 for c in col], 1)
             if n.type == "MATH" and n.operation == "GREATER_THAN":
                 n.inputs[1].default_value = holes
-    ob = bpy.data.objects.get("baeume_kronen")
-    if ob:
-        ob.hide_render = not visible
+    for ob in bpy.data.objects:
+        if ob.name.startswith("baeume_kronen"):
+            ob.hide_render = not visible

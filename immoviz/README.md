@@ -12,7 +12,7 @@ Geschosse und Dachkanten mit den Plänen überein, was reine KI-Bilder nicht lei
 | Stufe | Inhalt | Werkzeug | Stand |
 |---|---|---|---|
 | 0 Intake | Pläne, Ansichten, BAB, Farbkonzept, Mood sammeln, Quellen in `quellen/` dokumentieren | Checkliste unten | aktiv |
-| 1 Umgebung | Gebäudeblöcke, Straßen, Gehsteige, Bäume aus Stadt Wien Open Data | `immoviz.py geo` | fertig |
+| 1 Umgebung | Gebäudeblöcke, Straßen, Gehsteige, Bäume aus Stadt Wien Open Data, echte Dachflächen aus dem Dachmodell LOD2 | `immoviz.py geo`, `immoviz.py daecher` | fertig |
 | 2 Objekt außen | Fassaden, Fensterachsen, Gesimse, Dachgeschoss-Kubatur aus `project.yaml` | `lib/build.py` | fertig, wird je Objekt verfeinert |
 | 3 Licht und Kamera | Sonnenstand nach Datum und Uhrzeit, Kamerasets mit stürzenden Linien korrigiert | `project.yaml` | fertig |
 | 4 Rendering | Cycles, AgX-Farbmanagement, Vorschau und Final | `immoviz.py render` | fertig |
@@ -36,6 +36,12 @@ Blender läuft als Python-Modul ohne Oberfläche. Die erzeugte `.blend`-Datei l�
 # Umgebungsdaten laden (einmal pro Objekt)
 .venv-immoviz/bin/python immoviz/immoviz.py geo immoviz/projects/wimmergasse-20
 
+# Echte Dachflächen der Umgebung laden (einmal pro Objekt, nach geo): data/roofs.json
+.venv-immoviz/bin/python immoviz/immoviz.py daecher immoviz/projects/wimmergasse-20 --cache /tmp/immoviz-kacheln
+
+# Welche Nachbarhäuser sieht welche Kamera direkt (Bildanteil der Fassade je BEZUG)
+.venv-immoviz/bin/python immoviz/immoviz.py sichtbar immoviz/projects/wimmergasse-20
+
 # Schnelle Vorschau
 .venv-immoviz/bin/python immoviz/immoviz.py render immoviz/projects/wimmergasse-20 --cam ecke --light golden_hour --preview
 
@@ -44,6 +50,21 @@ Blender läuft als Python-Modul ohne Oberfläche. Die erzeugte `.blend`-Datei l�
 ```
 
 Ergebnisse landen in `projects/<objekt>/renders/`.
+
+## Umgebung: Dächer, Nachbarn, Bäume
+
+- **Dächer** (`lib/roofs.py`, Befehl `daecher`): Dachflächen aus dem Generalisierten Dachmodell LOD2 der Stadt Wien
+  (CityGML je Blatt 1:1000), dem Baukörper zugeordnet, Material aus Neigung und mittlerer Farbe im Orthofoto 2024
+  (Ziegel, Ziegel dunkel, Blech, Blech hell, Kies, Grün, Flach). `build_context` setzt sie auf alle Gebäude im
+  Radius, `build_neighbours` ersetzt damit die Angabe `roof` der Nachbarfassaden. Ohne `data/roofs.json` gibt es
+  Satteldächer mit First parallel zur Straße. Optional `site.roof_radius_m` (Standard `radius_m`).
+- **Direkt sichtbare Häuser** (Befehl `sichtbar`): Sehstrahlen je Kamera, Ergebnis je BEZUG mit Bildanteil und
+  Entfernung. Jedes Haus mit mindestens 1 % Bildanteil und unter 80 m braucht einen Eintrag in
+  `neighbour_facades` und eine frontale Ansicht in `streetview_checks`.
+- **Bäume** (`lib/trees.py`): Kronenvorlagen (rundlich, säulenförmig) als Instanzen, Größe aus dem Baumkataster.
+  Korrekturen in `trees_override` am Ende von `project.yaml`: Baum über die Position finden, `remove: true`,
+  `height`, `crown`, `form` (rund, saeule), `base`, oder `add: true` für fehlende Bäume.
+- Stand und Befund je Objekt: `projects/<objekt>/umgebung_abgleich.md`.
 
 ## Walkthrough (Kamerafahrt durch eine Wohnung)
 
@@ -226,8 +247,16 @@ Ohne Studio: Ordner wie oben von Hand anlegen (am besten `_vorlage` kopieren), `
 ## Datenquellen
 
 - Stadt Wien Open Data (CC BY 4.0): Baukörpermodell `FMZKBKMOGD`, Baumkataster `BAUMKATOGD`,
-  Verkehrsflächen `FMZKVERKEHR1/2OGD`, Gebäudeinformation `GEBAEUDEINFOOGD`, Adressdienst.
-- Google Maps wird nicht verbaut (Lizenz), nur als interne Referenz.
+  Verkehrsflächen `FMZKVERKEHR1/2OGD`, Gebäudeinformation `GEBAEUDEINFOOGD`, Höhenlinien `HOEHENLINIEOGD`, Adressdienst.
+- Stadt Wien MA 41 (CC BY 4.0): Generalisiertes Dachmodell LOD2 als CityGML je Blatt 1:1000
+  (`https://www.wien.gv.at/ma41datenviewer/downloads/geodaten/lod2_gml/<blatt>_lod2_gml.zip`, Blattnummer
+  RE = 100 + x/500, HO = y/500 - 600 in GK Ost, Datenstand 2016) und Orthofoto 2024 (WMTS
+  `https://mapsneu.wien.gv.at/wmts/lb2024/farbe/google3857/{z}/{row}/{col}.jpeg`) für Dachfarbe und Kontrolle.
+  Ebenfalls erreichbar, aber nicht genutzt: Oberflächenmodell `dom_tif/<blatt5000>_dom_tif.zip` (Stand 2015)
+  und Geländemodell `dgm_tif`.
+- Google Maps wird nicht verbaut (Lizenz), nur als interne Referenz: Street View über `svcheck`, Photorealistic
+  3D Tiles nur als Gegenprobe der Dachhöhen außerhalb des Repos. Der Schlüssel steht ausschließlich in der
+  Umgebungsvariable `GOOGLE_MAPS_API_KEY`.
 
 ## Intake-Checkliste je Objekt
 

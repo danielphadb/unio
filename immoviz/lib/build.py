@@ -13,6 +13,8 @@ from mathutils import Vector
 
 from . import materials as M
 from . import meshkit as K
+from . import roofs as R
+from . import trees as T
 from .sun import sun_position, sun_vector_local
 
 LAST_TERRAIN = None
@@ -24,6 +26,7 @@ def load_project(project_dir: Path):
     cfg = yaml.safe_load((project_dir / "project.yaml").read_text())
     ctx_path = project_dir / "data" / "context.json"
     ctx = json.loads(ctx_path.read_text()) if ctx_path.exists() else None
+    cfg["_project_dir"] = str(project_dir)      # fuer Zusatzdaten wie data/roofs.json
     return cfg, ctx
 
 
@@ -315,7 +318,7 @@ def park_cars(ctx, rng, terrain, radius):
 
 
 # ======================================================================= Umgebung
-def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, terrain=None, cfg=None):
+def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, terrain=None, cfg=None, roofdata=None):
     rng = random.Random(7)
     terrain = terrain or (lambda x, y: 0.0)
     streets = []
@@ -335,6 +338,7 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     wins = K.MeshBuilder("umgebung_fenster", ["fenster_dunkel"])
     roofs = K.MeshBuilder("umgebung_daecher", ["nachbar_dach"])
     special = {str(v["bezug"]) for v in (cfg or {}).get("neighbour_facades", {}).values()}
+    roof_by_id = (roofdata or {}).get("by_id", {})
     for b in ctx["buildings"]:
         poly = b["poly"]
         if len(poly) < 3 or b["height"] < 1.0 or str(b.get("bezug")) in special:
@@ -357,7 +361,11 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
         nb_w, nb_win, nb_r = K.MeshBuilder("t", walls.materials), K.MeshBuilder("t", wins.materials), K.MeshBuilder("t", roofs.materials)
         walls_, wins_, roofs_ = walls, wins, roofs
         walls, wins, roofs = nb_w, nb_win, nb_r
-        K.extrude(walls, poly, -1.5, h, col, "nachbar_dach", bottom=False)
+        # Echte Dachflaechen (Dachmodell LOD2): Wand nur bis zur tiefsten Dachkante, darueber Dach und Giebel
+        faces = roof_by_id.get(b["id"])
+        h_bkm = h
+        h = R.wall_top(h, faces)
+        K.extrude(walls, poly, -1.5, h, col, "nachbar_dach" if (faces or not roof_by_id) else "dach_kies", bottom=False)
         n = len(poly)
         detailed = not (dist > detail or h < 5.0 or b.get("klasse") != 11)
         for i in (range(n) if detailed else []):
@@ -391,21 +399,15 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
                     K.box(wins, f, uc - 0.025, uc + 0.025, -0.02, 0.0, za, zb, "nachbar_rahmen")
             K.box(walls, f, 0.0, L, -0.35, 0.0, h - 0.55, h, col)
             K.box(walls, f, 0.0, L, -0.08, 0.0, 3.6, 3.9, col)
-        if h > 8.0 and b.get("klasse") == 11:
-            # Walmdach-Naeherung: zum Schwerpunkt skalierte Traufe, 1:1 verbundene Dachflaechen
-            xs = [p[0] for p in poly]
-            ys = [p[1] for p in poly]
-            span = min(max(xs) - min(xs), max(ys) - min(ys))
-            k = max(0.35, 1 - 2 * 2.6 / max(span, 1))
-            rh = 2.2 + rng.random() * 1.6
-            top = [(cx + (x - cx) * k, cy + (y - cy) * k) for x, y in poly]
-            rm = "dach_ziegel" if rng.random() < 0.55 else "dach_blech"
-            for i in range(n):
-                a0, a1 = poly[i], poly[(i + 1) % n]
-                t0, t1 = top[i], top[(i + 1) % n]
-                roofs.poly([(*a0, h), (*a1, h), (*t1, h + rh), (*t0, h + rh)], None, rm,
-                           (a1[1] - a0[1], -(a1[0] - a0[0]), 0.5))
-            roofs.poly([(x, y, h + rh) for x, y in top], None, rm, (0, 0, 1))
+        if faces:
+            R.add_faces(roofs, walls, faces, 0.0, h, col)
+        elif not roof_by_id and h_bkm > 8.0 and b.get("klasse") == 11:
+            # Keine Dachdaten geladen (immoviz.py daecher): Satteldach, First parallel zur laengsten Strassenkante
+            se = [i for i in range(n) if math.dist(poly[i], poly[(i + 1) % n]) > 3.0 and on_street(
+                (poly[i][0] + poly[(i + 1) % n][0]) / 2 + (poly[(i + 1) % n][1] - poly[i][1]) / math.dist(poly[i], poly[(i + 1) % n]) * 2.5,
+                (poly[i][1] + poly[(i + 1) % n][1]) / 2 - (poly[(i + 1) % n][0] - poly[i][0]) / math.dist(poly[i], poly[(i + 1) % n]) * 2.5)]
+            R.heuristic_roof(roofs, walls, poly, h, 0.0, "dach_ziegel" if rng.random() < 0.55 else "dach_blech", col,
+                             street_edges=se or None, pitch_deg=36 + rng.random() * 6)
         for mb_ in (walls, wins, roofs):
             mb_.verts = [(x, y, z + zg) for x, y, z in mb_.verts]
         walls_.merge(walls); wins_.merge(wins); roofs_.merge(roofs)
@@ -487,58 +489,17 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     cab.to_object(bpy, mats, coll)
     park_cars(ctx, rng, terrain, min(radius, 200)).to_object(bpy, mats, coll)
 
-    # Baeume aus dem Baumkataster. Kronen aus vielen kleinen Laubbueschen (Vorlage-Ikosaeder).
-    tb = bmesh.new()
-    bmesh.ops.create_icosphere(tb, subdivisions=1, radius=1.0)
-    ico_v = [tuple(v.co) for v in tb.verts]
-    ico_f = [[v.index for v in f.verts] for f in tb.faces]
-    tb.free()
-    cv, cf = [], []
-    trunks = K.MeshBuilder("baeume_staemme", ["stamm"])
-    for t in ctx["trees"]:
-        x, y = t["pos"]
-        if math.hypot(x, y) > min(radius, 260):
-            continue
-        if hero_poly and K.point_in_poly(x, y, hero_poly):
-            continue
-        H, C = t["height"], t["crown"]
-        base = max(2.2, H - C * 0.95)
-        rr = 0.08 + C * 0.012
-        seg = 8
-        for k in range(seg):
-            a0, a1 = 2 * math.pi * k / seg, 2 * math.pi * (k + 1) / seg
-            p = [(x + rr * math.cos(a0), y + rr * math.sin(a0)), (x + rr * math.cos(a1), y + rr * math.sin(a1))]
-            trunks.poly([(*p[0], 0), (*p[1], 0), (*p[1], base + C * 0.3), (*p[0], base + C * 0.3)], None,
-                        "stamm", (math.cos((a0 + a1) / 2), math.sin((a0 + a1) / 2), 0))
-        cz = base + (H - base) / 2
-        rx, rz = C / 2, (H - base) / 2
-        for k in range(int(28 + C * 3)):
-            while True:
-                ox, oy, oz = (rng.random() * 2 - 1, rng.random() * 2 - 1, rng.random() * 2 - 1)
-                if 0.35 < ox * ox + oy * oy + oz * oz <= 1.0:
-                    break
-            rs = 0.45 + rng.random() * (0.25 + C * 0.06)
-            base_i = len(cv)
-            cx_, cy_, cz_ = x + ox * rx * 0.85, y + oy * rx * 0.85, cz + oz * rz * 0.85
-            for vx, vy, vz in ico_v:
-                j = rs * (1 + (rng.random() - 0.5) * 0.5)
-                cv.append((cx_ + vx * j, cy_ + vy * j, cz_ + vz * j * 0.8))
-            cf.extend([[i + base_i for i in f] for f in ico_f])
-    cv = [(x, y, z + terrain(x, y)) for x, y, z in cv]
-    shift_z(trunks, terrain)
-    me = bpy.data.meshes.new("baeume_kronen")
-    me.from_pydata(cv, [], cf)
-    me.materials.append(mats["laub"])
-    ob = bpy.data.objects.new("baeume_kronen", me)
-    coll.objects.link(ob)
-    trunks.to_object(bpy, mats, coll)
+    # Baeume aus dem Baumkataster, korrigiert ueber trees_override (Abgleich mit Street View und Orthofoto)
+    trees = T.apply_override(ctx["trees"], (cfg or {}).get("trees_override"))
+    T.build(trees, mats, coll, terrain, min(radius, 260), hero_poly)
 
 
 # ======================================================================= Anschliessende Nachbarn
-def build_neighbours(cfg, ctx, mats, coll, terrain):
+def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
     specs = cfg.get("neighbour_facades") or {}
+    roof_by_id = (roofs or {}).get("by_id", {})
     facades = {n: K.Facade(n, tuple(v["a"]), tuple(v["b"])) for n, v in specs.items()}
-    massed = set()
+    massed, has_roof = set(), set()
     for name, sp in specs.items():
         f = facades[name]
         L = f.length
@@ -564,6 +525,7 @@ def build_neighbours(cfg, ctx, mats, coll, terrain):
         gl = K.MeshBuilder(f"nachbar_{name}_glas", ["glas"])
         inner = K.MeshBuilder(f"nachbar_{name}_innen", ["innen_a"])
         rng = random.Random(len(name))
+        roof_mb = K.MeshBuilder(f"nachbar_{name}_dach", ["dach_blech"])
         # Baukoerper aller Teile, an der Fassade 0,6 m zurueckgeschnitten
         same = [n for n, v in specs.items() if str(v["bezug"]) == str(sp["bezug"])]
         for b in ctx["buildings"]:
@@ -575,6 +537,11 @@ def build_neighbours(cfg, ctx, mats, coll, terrain):
             hb = b["height"]
             top_mat = "dach_flach"
             side = sp.get("upper_material") if (sp.get("upper_material") and hb > H + 1.0) else col
+            faces = roof_by_id.get(b["id"])
+            if faces:      # echte Dachflaechen aus dem Dachmodell ersetzen die grobe roof-Angabe
+                has_roof.add(str(sp["bezug"]))
+                hb = R.wall_top(hb, faces)
+                R.add_faces(roof_mb, mass, faces, z0, hb, side)
             K.extrude(mass, poly, z0 - 1.5, z0 + hb, side, top_mat, col, lines, bottom=False)
         massed.add(str(sp["bezug"]))
         holes, wins = [], []
@@ -637,19 +604,27 @@ def build_neighbours(cfg, ctx, mats, coll, terrain):
         for bal in sp.get("balconies", []):
             r = sp["rows"][bal["row"]]
             zf = z0 + r["z"] - 0.15
+            bw, bd = bal.get("w", 2.3) / 2, bal.get("depth", 1.3)
             for ai in bal["axes"]:
                 uc = sp["axes"][ai]
-                ua, ub = uc - 1.15, uc + 1.15
+                ua, ub = max(0.0, uc - bw), min(L, uc + bw)
+                if bal.get("solid"):       # geschlossene Bruestung in Fassadenfarbe (Neubau), sonst Lochblech
+                    K.box(orn, f, ua, ub, -bd, 0.0, zf - 0.2, zf, col + "_stuck")
+                    K.box(orn, f, ua, ub, -bd, -bd + 0.12, zf, zf + 1.0, col + "_stuck")
+                    K.box(orn, f, ua, ua + 0.12, -bd, 0.0, zf, zf + 1.0, col + "_stuck")
+                    K.box(orn, f, ub - 0.12, ub, -bd, 0.0, zf, zf + 1.0, col + "_stuck")
+                    continue
                 K.box(fr, f, ua, ub, -1.3, 0.0, zf - 0.18, zf, "rahmen_dunkel")
                 K.box(fr, f, ua, ub, -1.32, -1.28, zf, zf + 1.05, "balkon_lochblech")
                 K.box(fr, f, ua - 0.02, ua + 0.02, -1.3, 0.0, zf, zf + 1.05, "balkon_lochblech")
                 K.box(fr, f, ub - 0.02, ub + 0.02, -1.3, 0.0, zf, zf + 1.05, "balkon_lochblech")
         rf = sp.get("roof")
-        if rf:
+        if rf and str(sp["bezug"]) not in has_roof:
             rm = "dach_ziegel" if rf.get("type") == "ziegel" else "dach_blech"
             K.slope(mass, f, 0.0, L, z0 + H, z0 + H + rf["rise"], -0.3, rf["depth"], rm, caps=(True, True))
-        for mb in (mass, orn, fr, gl, inner):
-            mb.to_object(bpy, mats, coll)
+        for mb in (mass, orn, fr, gl, inner, roof_mb):
+            if mb.faces:
+                mb.to_object(bpy, mats, coll)
 
 
 # ======================================================================= Szene, Licht, Kamera
@@ -684,9 +659,11 @@ def build_scene(cfg, ctx):
             return cache[key]
         global LAST_TERRAIN
         LAST_TERRAIN = terrain
-        build_neighbours(cfg, ctx, mats, ctx_coll, terrain)
+        roofs = R.load(Path(cfg["_project_dir"])) if cfg.get("_project_dir") else None
+        build_neighbours(cfg, ctx, mats, ctx_coll, terrain, roofs)
         build_context(ctx, mats, ctx_coll, radius=cfg["site"].get("radius_m", 160) - 10,
-                      detail=cfg["site"].get("detail_radius_m", 110), hero_poly=hero.footprint, terrain=terrain, cfg=cfg)
+                      detail=cfg["site"].get("detail_radius_m", 110), hero_poly=hero.footprint, terrain=terrain, cfg=cfg,
+                      roofdata=roofs)
     return scene
 
 

@@ -210,8 +210,24 @@ streetview_checks:
   stolberg_nach_no: {pos: [-10.0, -9.0], target: [60.0, -9.0], pitch: 5, fov: 90}    # Stolberggasse 34
   nachbar_ost:      {pos: [20.0, -9.0], target: [20.0, 5.0], pitch: 25, fov: 90}
   gegenueber_sw:    {pos: [2.0, -4.0], target: [-25.0, -28.0], pitch: 15, fov: 90}
+  # Direkt sichtbare Haeuser laut `immoviz.py sichtbar` (siehe umgebung_abgleich.md): je Haus frontal, schraeg ueber die Strassenblicke
+  f_stolberg_34:    {pos: [30.0, -9.0], target: [30.0, 0.0], pitch: 22, fov: 110}     # 547117 frontal
+  f_stolberg_32:    {pos: [53.0, -9.0], target: [53.0, 0.0], pitch: 22, fov: 110}     # 009425 frontal
+  s_stolberg_32:    {pos: [34.0, -11.0], target: [56.0, 0.0], pitch: 15, fov: 90}     # 009425 schraeg, wie Kamera ecke
+  f_wimmer_24:      {pos: [-7.5, 50.0], target: [0.0, 50.0], pitch: 22, fov: 110}     # 009429 frontal
+  f_wimmer_17:      {pos: [-7.5, 12.5], target: [-15.1, 12.5], pitch: 22, fov: 110}   # 547116 Front Wimmergasse
+  f_stolberg_38:    {pos: [-26.0, -9.0], target: [-26.0, 0.0], pitch: 22, fov: 110}   # 547116 Front Stolberggasse
+  f_wimmer_19:      {pos: [-7.5, 33.0], target: [-15.3, 33.0], pitch: 22, fov: 110}   # 009481 frontal
+  f_wimmer_18:      {pos: [8.0, -9.0], target: [8.0, -18.6], pitch: 22, fov: 110}     # 009453 Front Stolberggasse
+  f_wimmer_18_w:    {pos: [-7.5, -30.0], target: [0.3, -30.0], pitch: 22, fov: 110}   # 009453 Front Wimmergasse
+  f_wimmer_15:      {pos: [-7.5, -28.0], target: [-14.5, -28.0], pitch: 22, fov: 110} # 009479 Front Wimmergasse
+  f_stolberg_39:    {pos: [-22.0, -9.0], target: [-22.0, -18.7], pitch: 22, fov: 110} # 009479 Front Stolberggasse
+  s_stolberg_west:  {pos: [-12.0, -9.0], target: [-60.0, -4.0], pitch: 10, fov: 90}   # 547116 und 009458 schraeg, wie Kamera stolberggasse
+  f_stolberg_40:    {pos: [-55.0, -9.0], target: [-55.0, 1.0], pitch: 22, fov: 110}   # 009458 frontal
 
 # ---------------------------------------------------------------- Anschliessende Nachbarhaeuser (Street View 05/2024, Apple 3D, Baukoerpermodell)
+# Abgleich 15.11.2026 gegen Street View 05/2024 fuer alle direkt sichtbaren Haeuser, Befund je Haus in umgebung_abgleich.md.
+# Daecher: wo data/roofs.json (Dachmodell LOD2 Stadt Wien) Flaechen fuer den BEZUG hat, ersetzen sie die Angabe `roof`.
 neighbour_facades:
   wimmergasse_22:
     bezug: "009428"
@@ -244,7 +260,8 @@ neighbour_facades:
     height: 20.69
     color: "#ECEAE5"
     style: modern
-    bands: [[0.0, 3.9, "#4A3B33"], [3.9, 7.2, "#BDB4A8"]]   # dunkles EG-Band, grau-beiges 1. OG
+    bands: [[0.0, 3.45, "#B3A99B"], [3.45, 3.9, "#4A3B33"], [3.9, 7.2, "#BDB4A8"]]   # EG taupe, dunkles Band nur unter dem 1. OG, 1. OG grau-beige [SV 05/2024]
+    gate: {axis: 5, w: 3.0, h: 2.7, color: "#5A4032"}       # braunes Garagentor in Fassadenmitte [SV 05/2024]
     axes: [1.5, 4.1, 6.7, 9.3, 11.9, 14.5, 17.1, 19.7, 22.3, 24.9]
     rows:
       - {z: 1.0, h: 2.1, w: 1.4}
@@ -260,42 +277,101 @@ neighbour_facades:
       - {row: 4, axes: [1, 4, 7]}
       - {row: 5, axes: [2, 5, 8]}
     upper_material: zink        # zurueckgesetzter Dachaufbau bis 26,7 m dunkel
+  stolberggasse_32:             # Gruenderzeit, cremegelb, EG genutet und grauer, 4 Obergeschosse. Achsen hinter Baum geschaetzt [SV 05/2024]
+    bezug: "009425"
+    a: [43.49, 0.08]
+    b: [61.84, -0.01]
+    height: 21.44
+    color: "#D8C9A4"
+    stuck_color: "#E6DCC2"
+    style: gruenderzeit
+    axes: {n: 8, margin: 1.2}
+    rows:
+      - {z: 1.5, h: 2.0, w: 1.05, surround: fasche}
+      - {z: 5.3, h: 2.1, w: 1.05, surround: fasche_verdachung}
+      - {z: 9.1, h: 2.1, w: 1.05, surround: fasche_verdachung}
+      - {z: 12.9, h: 2.0, w: 1.05, surround: fasche}
+      - {z: 16.6, h: 1.8, w: 1.0, surround: fasche}
+    gate: {axis: 5, w: 1.6, h: 3.2, color: "#6A4630"}
+    cornices:
+      - [[4.3, 4.6, 0.10]]
+      - [[20.5, 20.8, 0.15], [20.8, 21.44, 0.45]]
+    rustika: [0.6, 4.3, 0.45]
+  wimmergasse_24:               # Gruenderzeit, Stuck abgeschlagen, hellgelb, EG + 3 OG, braunes Tor am Suedende [SV 05/2024]
+    bezug: "009429"
+    a: [-0.56, 57.73]
+    b: [-0.35, 42.51]
+    height: 16.62
+    color: "#E2D3A8"
+    stuck_color: "#EBE2C8"
+    style: gruenderzeit
+    axes: {n: 9, margin: 1.0}
+    rows:
+      - {z: 1.5, h: 2.0, w: 1.0, surround: fasche}
+      - {z: 5.2, h: 2.1, w: 1.0, surround: fasche}
+      - {z: 8.8, h: 2.0, w: 1.0, surround: fasche}
+      - {z: 12.2, h: 1.9, w: 1.0, surround: fasche}
+    gate: {axis: 8, w: 1.6, h: 3.3, color: "#6E4A32"}
+    cornices:
+      - [[4.2, 4.4, 0.08]]
+      - [[15.9, 16.62, 0.35]]
 
   # ---- Gegenseite Wimmergasse (Street View 05/2024 bzw. 08/2023), Fassaden zeigen nach +x
-  gegenueber_w_ecke:            # Neubau-Eckhaus, beige, umlaufende Balkonbaender, Mansarde mit Gauben
+  gegenueber_w_ecke:            # Neubau-Eckhaus Wimmergasse 17, taupe, EG Steinverkleidung, 1. OG franz. Fenster, darueber versetzte Balkone mit geschlossener Bruestung, Dachgeschoss Zink [SV 05/2024]
     bezug: "547116"
     a: [-15.02, 3.24]
     b: [-15.19, 22.06]
     height: 16.19
-    color: "#CDBFA9"
+    color: "#BFAF97"
     stuck_color: "#DDD3C3"
     style: modern
-    frame: rahmen_dunkel
+    frame: fenster
     axes: {n: 6, margin: 1.4}
-    rows: {eg: {z: 0.5, h: 2.6, w: 1.8}, z0: 3.9, step: 3.0, n: 4, h: 2.2, w: 1.5}
-    balcony_bands: [[3.6, 1.5], [6.6, 1.5], [9.6, 1.5], [12.6, 1.5]]
+    rows: {eg: {z: 0.5, h: 2.6, w: 1.8}, z0: 3.9, step: 3.0, n: 4, h: 2.0, w: 1.5}
+    bands: [[0.0, 3.5, "#D9D3C8"], [6.55, 6.75, "#4A4642"], [9.55, 9.75, "#4A4642"], [12.55, 12.75, "#4A4642"]]   # heller Steinsockel, dunkle Geschossfugen
+    balconies:                  # keine umlaufenden Baender: Balkonstapel in der Mitte und am Nordende
+      - {row: 2, axes: [2, 5], w: 3.6, solid: true}
+      - {row: 3, axes: [2, 5], w: 3.6, solid: true}
+      - {row: 4, axes: [2, 5], w: 3.6, solid: true}
     roof: {type: blech, rise: 3.2, depth: 3.5}
-  gegenueber_w_29:              # Gruenderzeit, greige, reicher Stuck, rosa Sockel, Tor am Nordende
+  gegenueber_w_ecke_s:          # dasselbe Haus, Front Stolberggasse 38: Lokale im EG, Eingang im Ruecksprung [SV 05/2024]
+    bezug: "547116"
+    a: [-37.92, 0.13]
+    b: [-16.24, 0.06]
+    height: 16.19
+    color: "#BFAF97"
+    stuck_color: "#DDD3C3"
+    style: modern
+    frame: fenster
+    axes: {n: 7, margin: 1.5}
+    rows: {eg: {z: 0.5, h: 2.6, w: 1.8}, z0: 3.9, step: 3.0, n: 4, h: 2.0, w: 1.5}
+    bands: [[0.0, 3.5, "#D9D3C8"], [6.55, 6.75, "#4A4642"], [9.55, 9.75, "#4A4642"], [12.55, 12.75, "#4A4642"]]
+    door: {u: [16.9, 19.0], z: [0.0, 2.9]}
+    balconies:
+      - {row: 2, axes: [1, 3, 5], w: 3.2, solid: true}
+      - {row: 3, axes: [1, 3, 5], w: 3.2, solid: true}
+      - {row: 4, axes: [1, 3, 5], w: 3.2, solid: true}
+    roof: {type: blech, rise: 3.2, depth: 3.5}
+  gegenueber_w_29:              # Wimmergasse 19: Gruenderzeit, greige, reicher Stuck, rosa Sockel, Tor am Nordende. EG + 3 OG, 8 Achsen [SV 05/2024, vorher 5 Reihen und 6 Achsen]
     bezug: "009481"
     a: [-15.20, 26.27]
     b: [-15.44, 39.33]
     height: 15.97
-    color: "#B5A389"
-    stuck_color: "#C9BBA2"
+    color: "#A8967C"
+    stuck_color: "#B9A88F"
     style: gruenderzeit
-    axes: {n: 6, margin: 1.2}
+    axes: {n: 8, margin: 0.9}
     rows:
-      - {z: 1.4, h: 1.9, w: 1.05, surround: fasche}
-      - {z: 4.6, h: 2.0, w: 1.05, surround: aedikula}
-      - {z: 7.7, h: 2.0, w: 1.05, surround: fasche_verdachung}
-      - {z: 10.7, h: 1.9, w: 1.05, surround: fasche_verdachung}
-      - {z: 13.6, h: 1.5, w: 0.95, surround: fasche}
-    gate: {axis: 5, w: 1.9, h: 3.6, color: "#8A6A45"}
+      - {z: 1.3, h: 2.3, w: 0.95, surround: fasche}
+      - {z: 5.3, h: 2.1, w: 0.95, surround: aedikula}
+      - {z: 8.8, h: 2.0, w: 0.95, surround: fasche_verdachung}
+      - {z: 12.1, h: 1.8, w: 0.95, surround: fasche_verdachung}
+    gate: {axis: 7, w: 1.5, h: 3.5, color: "#8A6A45"}
     cornices:
-      - [[3.75, 4.0, 0.08]]
-      - [[7.1, 7.35, 0.10]]
-      - [[15.0, 15.3, 0.15], [15.3, 15.97, 0.45]]
-    rustika: [0.6, 3.75, 0.45]
+      - [[4.3, 4.6, 0.10]]
+      - [[7.9, 8.15, 0.10]]
+      - [[14.9, 15.2, 0.15], [15.2, 15.97, 0.45]]
+    rustika: [0.9, 4.3, 0.45]
     roof: {type: blech, rise: 3.8, depth: 5.5}
   gegenueber_w_31:              # Neubau 1990er, weiss mit grauen Fensterbaendern, Garagentore
     bezug: "547115"
@@ -329,7 +405,7 @@ neighbour_facades:
     roof: {type: blech, rise: 3.8, depth: 5.5}
 
   # ---- Gegenseite Stolberggasse, Fassaden zeigen nach +y
-  gegenueber_s_ecke:            # Nachkriegsbau weiss, schlicht
+  gegenueber_s_ecke:            # Wimmergasse 18: Nachkriegsbau weiss, schlicht, EG + 4 OG [SV 05/2024, vorher 6 Reihen]
     bezug: "009453"
     a: [16.12, -18.63]
     b: [0.31, -18.63]
@@ -337,8 +413,17 @@ neighbour_facades:
     color: "#E8E6E0"
     style: plain
     axes: {n: 6, margin: 1.2}
-    rows: {eg: {z: 1.4, h: 1.4, w: 1.4}, z0: 4.0, step: 2.75, n: 5, h: 1.45, w: 1.2}
+    rows: {eg: {z: 1.6, h: 1.5, w: 1.4}, z0: 4.7, step: 3.05, n: 4, h: 1.5, w: 1.3}
     roof: {type: blech, rise: 3.0, depth: 5.0}
+  gegenueber_s_ecke_w:          # dasselbe Haus, Front Wimmergasse: drei Schaufenster und Rolltor im EG [SV 05/2024]
+    bezug: "009453"
+    a: [0.33, -19.12]
+    b: [0.62, -39.99]
+    height: 17.3
+    color: "#E8E6E0"
+    style: plain
+    axes: {n: 8, margin: 1.2}
+    rows: {eg: {z: 0.7, h: 2.5, w: 1.7}, z0: 4.7, step: 3.05, n: 4, h: 1.5, w: 1.3}
   gegenueber_s_lachs:           # Nachkriegsbau lachsrosa, Rundbogenfenster im 1. OG
     bezug: "009446"
     a: [36.91, -18.59]
@@ -358,22 +443,68 @@ neighbour_facades:
     style: plain
     axes: {n: 16, margin: 1.4}
     rows: {eg: {z: 1.3, h: 1.4, w: 1.4}, z0: 3.9, step: 2.75, n: 6, h: 1.45, w: 1.2}
-  diagonal_w:                   # Eckhaus schraeg gegenueber, weiss, schlicht
+  diagonal_w:                   # Wimmergasse 15, Eckhaus schraeg gegenueber: Gruenderzeit graugruen mit Stuck, EG genutet, EG + 3 OG [SV 05/2024, vorher weiss und schlicht mit 5 Reihen]
     bezug: "009479"
     a: [-14.37, -37.93]
     b: [-14.64, -18.69]
     height: 15.87
-    color: "#E4E2DC"
-    style: plain
-    axes: {n: 7, margin: 1.2}
-    rows: {eg: {z: 1.3, h: 1.5, w: 1.3}, z0: 3.9, step: 2.9, n: 4, h: 1.5, w: 1.2}
+    color: "#A9AC9C"
+    stuck_color: "#BBBEAF"
+    style: gruenderzeit
+    axes: {n: 9, margin: 1.1}
+    rows:
+      - {z: 1.4, h: 2.1, w: 1.05, surround: fasche}
+      - {z: 5.2, h: 2.1, w: 1.05, surround: fasche_verdachung}
+      - {z: 8.7, h: 2.0, w: 1.05, surround: fasche_verdachung}
+      - {z: 12.0, h: 1.8, w: 1.0, surround: fasche}
+    cornices:
+      - [[4.2, 4.5, 0.10]]
+      - [[14.8, 15.1, 0.15], [15.1, 15.87, 0.45]]
+    rustika: [0.7, 4.2, 0.45]
     roof: {type: blech, rise: 3.0, depth: 5.0}
-  diagonal_s:
+  diagonal_s:                   # dasselbe Haus, Front Stolberggasse
     bezug: "009479"
     a: [-14.64, -18.69]
     b: [-30.03, -18.71]
     height: 15.87
-    color: "#E4E2DC"
-    style: plain
-    axes: {n: 6, margin: 1.2}
-    rows: {eg: {z: 1.3, h: 1.5, w: 1.3}, z0: 3.9, step: 2.9, n: 4, h: 1.5, w: 1.2}
+    color: "#A9AC9C"
+    stuck_color: "#BBBEAF"
+    style: gruenderzeit
+    axes: {n: 7, margin: 1.1}
+    rows:
+      - {z: 1.4, h: 2.1, w: 1.05, surround: fasche}
+      - {z: 5.2, h: 2.1, w: 1.05, surround: fasche_verdachung}
+      - {z: 8.7, h: 2.0, w: 1.05, surround: fasche_verdachung}
+      - {z: 12.0, h: 1.8, w: 1.0, surround: fasche}
+    cornices:
+      - [[4.2, 4.5, 0.10]]
+      - [[14.8, 15.1, 0.15], [15.1, 15.87, 0.45]]
+    rustika: [0.7, 4.2, 0.45]
+  stolberggasse_40:             # 009458, Buerohaus mit silberner Lamellenfassade, EG verglast. Vereinfacht: helle Metallfarbe, schmale dunkle Schlitze [SV 05/2024]
+    bezug: "009458"
+    a: [-78.34, 0.29]
+    b: [-37.92, 0.34]
+    height: 18.85
+    color: "#C3C7C9"
+    style: modern
+    axes: {n: 10, margin: 2.0}
+    rows: {eg: {z: 0.2, h: 3.3, w: 3.4}, z0: 4.6, step: 3.5, n: 4, h: 2.7, w: 1.0}
+    upper_material: zink
+
+# ---------------------------------------------------------------- Baeume: Korrekturen zum Baumkataster (Abgleich 15.11.2026)
+# Geprueft wurden alle Katasterbaeume im Umkreis von 60 m gegen Street View 05/2024 (belaubt) und Orthofoto Wien 2024 (unbelaubt).
+# Ein Eintrag findet den Baum ueber seine Position (naechster Katasterbaum innerhalb tol, Standard 2 m).
+#   remove: true                     Baum steht nicht (mehr)
+#   height, crown, form, base       Hoehe, Kronendurchmesser, Form (rund | saeule), Stammhoehe bis zur Krone
+#   add: true                        Baum ergaenzen, der im Kataster fehlt
+# Die Saeulenhainbuchen der Stolberggasse sind alt und breit ausgewachsen, das Kataster fuehrt sie mit zu kleiner Hoehenklasse.
+trees_override:
+  - {pos: [8.5, -3.8], height: 13.5, crown: 9.5, form: rund, base: 3.2}   # Stolberggasse an der Ecke: breite dichte Krone bis ueber das 3. OG [SV 05/2024, Orthofoto]
+  - {pos: [-4.0, 24.3], remove: true}                                      # "Jungbaum wird gepflanzt": Baumscheibe vorhanden, kein Baum [SV 05/2024, Orthofoto]
+  - {pos: [-16.4, -15.0], height: 13.0, crown: 9.0, form: rund}            # Suedwestecke vor Wimmergasse 15, reicht bis zum Hauptgesims [SV 05/2024]
+  - {pos: [-36.7, -14.9], height: 12.0, crown: 8.0, form: rund}            # Stolberggasse Suedseite westlich der Kreuzung [SV 05/2024]
+  - {pos: [-35.9, -3.7], height: 9.0, crown: 4.5, form: rund}              # vor Stolberggasse 38, Krone breiter als Kataster [SV 05/2024]
+  - {pos: [33.5, -15.0], height: 13.0, crown: 8.0, form: rund}             # Stolberggasse Suedseite, bis 4. Geschoss [SV 05/2024]
+  - {pos: [47.7, -3.7], height: 13.0, crown: 9.0, form: rund}              # vor Stolberggasse 32, verdeckt die Fassade bis zum 3. OG [SV 05/2024]
+  - {pos: [47.4, -15.0], height: 12.0, crown: 8.0, form: rund}             # Stolberggasse Suedseite [SV 05/2024]
+  - {pos: [8.4, -14.9], height: 6.5, crown: 3.0, form: rund}               # Jungbaum vor Wimmergasse 18, schmale lichte Krone [SV 05/2024]

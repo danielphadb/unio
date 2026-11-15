@@ -3,6 +3,7 @@
 
 Beispiele:
   python immoviz.py geo     projects/wimmergasse-20
+  python immoviz.py daecher projects/wimmergasse-20
   python immoviz.py render  projects/wimmergasse-20 --cam ecke --light golden_hour --preview
   python immoviz.py render  projects/wimmergasse-20 --cam ecke,drohne --light golden_hour,blaue_stunde
   python immoviz.py website projects/wimmergasse-20
@@ -25,6 +26,10 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     g = sub.add_parser("geo", help="Umgebungsdaten der Stadt Wien laden (data/context.json)")
     g.add_argument("project")
+    dc = sub.add_parser("daecher", help="Dachmodell LOD2 der Stadt Wien laden (data/roofs.json), vorher geo ausführen")
+    dc.add_argument("project")
+    dc.add_argument("--cache", default=None, help="Ordner für geladene Kacheln (Standard: kein Cache)")
+    dc.add_argument("--ohne-orthofoto", action="store_true", help="Dachfarbe nicht aus dem Orthofoto ableiten")
     r = sub.add_parser("render", help="Szene bauen und rendern")
     r.add_argument("project")
     r.add_argument("--cam", default="ecke")
@@ -36,6 +41,9 @@ def main():
     c.add_argument("--facade", default=None)
     sv = sub.add_parser("svcheck", help="Modell gegen Google Street View vergleichen (Schluessel in GOOGLE_MAPS_API_KEY)")
     sv.add_argument("project")
+    si = sub.add_parser("sichtbar", help="Direkt sichtbare Nachbarhäuser je Kamera berechnen (Bildanteil der Fassaden)")
+    si.add_argument("project")
+    si.add_argument("--cam", default="ecke,ecke_orbit,wimmergasse,stolberggasse")
     it = sub.add_parser("interior", help="Innenräume aus dem Grundriss bauen und rendern (wohnungen.yaml)")
     it.add_argument("project")
     it.add_argument("--top", default="top07")
@@ -74,6 +82,15 @@ def main():
         ctx = build_context(cfg, pdir / "data" / "context.json")
         print(json.dumps({"gebaeude": len(ctx["buildings"]), "objekt_teile": len(ctx["hero"]),
                           "flaechen": len(ctx["surfaces"]), "baeume": len(ctx["trees"])}, ensure_ascii=False))
+    elif a.cmd == "daecher":
+        import yaml
+        from lib import roofs as R
+        cfg = yaml.safe_load((pdir / "project.yaml").read_text())
+        ctx = json.loads((pdir / "data" / "context.json").read_text())
+        t = time.time()
+        out = R.fetch(cfg, ctx, pdir / "data" / "roofs.json", Path(a.cache).resolve() if a.cache else None,
+                      ortho=not a.ohne_orthofoto)
+        print(json.dumps({**out["stats"], "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
     elif a.cmd == "render":
         from lib.build import render
         t = time.time()
@@ -81,6 +98,13 @@ def main():
         print(json.dumps({"renders": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
     elif a.cmd == "svcheck":
         _svcheck(pdir)
+    elif a.cmd == "sichtbar":
+        from lib.build import load_project, build_scene
+        from lib import check as C
+        cfg, ctx = load_project(pdir)
+        scene = build_scene(cfg, ctx)
+        res = C.visible_buildings(scene, cfg, ctx, a.cam.split(","))
+        print(json.dumps(res, ensure_ascii=False, indent=1))
     elif a.cmd == "interior":
         _interior(a, pdir)
     elif a.cmd == "walkthrough":

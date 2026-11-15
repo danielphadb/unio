@@ -167,3 +167,104 @@ def streetview_compare(scene, cfg, ctx, out_dir: Path, key: str, terrain=None):
         mp.unlink(missing_ok=True)
         results.append((name, "OK", meta.get("date")))
     return results
+
+
+# ---------------------------------------------------------------- Direkt sichtbare Nachbarhaeuser
+def visible_buildings(scene, cfg, ctx, cams, res=(240, 160), max_dist=80.0, min_share=0.01):
+    """Bestimmt je Kamera die Gebaeude, deren Fassade einen nennenswerten Bildanteil hat.
+
+    Strahlen durch ein grobes Pixelraster (scene.ray_cast); Baeume, Autos und Seilleuchten werden uebersprungen,
+    weil sie je nach Jahreszeit und Tag nichts verdecken. Ein Treffer zaehlt als Fassade, wenn die Flaeche steil
+    steht (Normalen-z < 0,5), sonst als Dach. Zuordnung zum Baukoerper ueber den Grundriss (BEZUG)."""
+    from mathutils import Vector
+    from .build import setup_camera
+    scene.render.resolution_x, scene.render.resolution_y = res[0] * 5, res[1] * 5
+    named = {str(v["bezug"]): [] for v in (cfg.get("neighbour_facades") or {}).values()}
+    for n, v in (cfg.get("neighbour_facades") or {}).items():
+        named[str(v["bezug"])].append(n)
+    hero = {str(h) for h in cfg["site"].get("hero_bezug", [])}
+    cell, grid = 20.0, {}
+    blds = ctx["buildings"] + ctx["hero"]
+    for k, b in enumerate(blds):
+        xs = [p[0] for p in b["poly"]]
+        ys = [p[1] for p in b["poly"]]
+        if min(map(abs, xs)) > 200 or min(map(abs, ys)) > 200:
+            continue
+        for i in range(int((min(xs) - 1) // cell), int((max(xs) + 1) // cell) + 1):
+            for j in range(int((min(ys) - 1) // cell), int((max(ys) + 1) // cell) + 1):
+                grid.setdefault((i, j), []).append(k)
+
+    def seg_dist(x, y, a, b):
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        t = max(0.0, min(1.0, ((x - a[0]) * dx + (y - a[1]) * dy) / (dx * dx + dy * dy + 1e-9)))
+        return math.hypot(x - a[0] - t * dx, y - a[1] - t * dy)
+
+    def building_at(x, y):
+        best, bd = None, 1.2
+        for k in grid.get((int(x // cell), int(y // cell)), []):
+            b = blds[k]
+            if b.get("klasse") != 11:
+                continue
+            p = b["poly"]
+            d = 0.0 if K.point_in_poly(x, y, p) else min(seg_dist(x, y, p[i], p[(i + 1) % len(p)]) for i in range(len(p)))
+            if d < bd or (d == bd and best and b["height"] > best["height"]):
+                best, bd = b, d
+        return best
+
+    skip = ("baeume", "autos", "seilleuchten", "KAM_", "umgebung_boden", "fernboden")
+    out = {}
+    for cn in cams:
+        ob = setup_camera(scene, cfg, cn)
+        bpy.context.view_layer.update()
+        dg = bpy.context.evaluated_depsgraph_get()
+        fr = [ob.matrix_world @ v for v in ob.data.view_frame(scene=scene)]   # rechts oben, rechts unten, links unten, links oben
+        tr, br, bl, tl = fr
+        o = ob.matrix_world.translation
+        acc, total = {}, res[0] * res[1]
+        for iy in range(res[1]):
+            fy = (iy + 0.5) / res[1]
+            for ix in range(res[0]):
+                fx = (ix + 0.5) / res[0]
+                p = tl + (tr - tl) * fx + (bl - tl) * fy
+                d = (p - o).normalized()
+                start, dist = Vector(o), 0.0
+                for _ in range(8):
+                    hit, loc, nrm, _i, hob, _m = scene.ray_cast(dg, start, d, distance=max_dist * 1.6 - dist)
+                    if not hit:
+                        break
+                    dist = (loc - o).length
+                    if hob.name.startswith(skip):
+                        if hob.name.startswith(("umgebung_boden", "fernboden")):
+                            hit = False
+                            break
+                        start = loc + d * 0.05
+                        continue
+                    break
+                else:
+                    hit = False
+                if not hit:
+                    continue
+                b = building_at(loc.x, loc.y)
+                if b is None:
+                    continue
+                key = str(b.get("bezug"))
+                a = acc.setdefault(key, {"fassade": 0, "dach": 0, "dist": [], "pos": [0.0, 0.0]})
+                kind = "fassade" if abs(nrm.z) < 0.5 else "dach"
+                a[kind] += 1
+                if kind == "fassade":
+                    a["dist"].append(dist)
+                    a["pos"][0] += loc.x
+                    a["pos"][1] += loc.y
+        rows = []
+        for key, a in acc.items():
+            if key in hero or not a["fassade"]:
+                continue
+            share = a["fassade"] / total
+            dmin = min(a["dist"])
+            rows.append({"bezug": key, "anteil": round(share, 4), "dach_anteil": round(a["dach"] / total, 4),
+                         "dist_min": round(dmin, 1), "dist_mittel": round(sum(a["dist"]) / len(a["dist"]), 1),
+                         "mitte": [round(a["pos"][0] / a["fassade"], 1), round(a["pos"][1] / a["fassade"], 1)],
+                         "modelliert": named.get(key, []),
+                         "direkt": share >= min_share and dmin <= max_dist})
+        out[cn] = sorted(rows, key=lambda r: -r["anteil"])
+    return out
