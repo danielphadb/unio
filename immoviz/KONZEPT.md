@@ -130,7 +130,9 @@ Jahreszeiten mit gleicher Kamera). Standardumfang:
 | Gelände | Sockelhöhen Baukörpermodell plus Plankoten | Geländeebene im Modell |
 | Nachbarfassaden, Straßenmöbel, Pflaster, Leuchten, Blickachsen | Google Street View (nur Referenz, nicht im Bild) | Abruf je Kameraposition |
 | Dächer der Umgebung | Dachmodell LOD2 Stadt Wien, Farbe aus dem Orthofoto | `immoviz.py daecher`, Draufsicht gegen Orthofoto |
-| Welche Häuser müssen stimmen | Sehstrahlen der Hauptkameras | `immoviz.py sichtbar` (Bildanteil je BEZUG) |
+| Welche Häuser müssen stimmen | Pflichtliste: in jede Straßenrichtung die ersten 4 bis 5 Häuser je Straßenseite, dazu Sehstrahlen der Hauptkameras | `immoviz.py sichtbar --pflicht` (Liste je Richtung und Seite), `immoviz.py sichtbar` (Bildanteil je BEZUG, Pflichthäuser markiert) |
+| Dachdeckung, Mansarden, Gauben, Dachfenster, Kamine, Brandwände | Schrägluftbild (nur ansehen), Street View | `roofs_override` in `project.yaml` (parametrisch, nichts abgepaust) |
+| Fernsicht bei Luft- und Terrassenmotiven: markante Gebäude, Hügelkette, Dachlandschaft im Hintergrund | Baukörpermodell (hohe Teile), Strukturdominanten, Höhenfestpunkte der Stadt Wien | `immoviz.py fernsicht` (`data/fern.json`, Liste je Kamera) |
 | Bäume | Baumkataster, Street View belaubt, Orthofoto | `trees_override` in `project.yaml` |
 
 **Grundregel (Daniel, 14.11.2026):** Die Häuser in der direkten Umgebung werden immer mitmodelliert und müssen
@@ -149,8 +151,26 @@ Stellplätzen, die das Prüfbild zeigt. Nach jeder Änderung an `street` oder `t
 `geo` wird das Prüfbild neu erzeugt und mit dem Projekt abgelegt. Beispiel Wimmergasse 20: Wimmergasse Hausseite
 Schrägparker (rund 55 Grad), gegenüber Längsparker, Stolberggasse beidseitig 90 Grad.
 
-**Abstufung (Kunde, 15.11.2026):** Fassaden müssen nur dort stimmen, wo eine Kamera unmittelbar draufsieht
-(mindestens 1 % Bildanteil, näher als 80 m, berechnet mit `sichtbar`). Für alle weiteren Häuser genügt, dass die
+**Feste Vorgabe Pflichthäuser (Kunde, 15.11.2026):** In jede Richtung müssen die ersten 4 bis 5 Häuser je
+Straßenseite passen. Gemeint sind von der Kreuzung bzw. vom Objekt aus alle Straßenrichtungen (bei einem Eckhaus
+vier), jeweils beide Straßenseiten, unabhängig davon, wie groß das Haus in einer Kamera erscheint. Je Haus:
+Traufhöhe, Geschosszahl, Achsenzahl grob, Erdgeschoss-Typ, Fassadenfarbe, Dachform und Dachmaterial, markante
+Aufbauten (Mansarde, Gauben), Balkone. `immoviz.py sichtbar <projekt> --pflicht` gibt die Liste aus (BEZUG,
+Adresse, Flucht, Traufhöhe, vorhandene Fassade) und nennt unter `ohne_fassade` jedes Pflichthaus, das noch keinen
+Eintrag in `neighbour_facades` hat; diese Liste muss leer sein. Jedes Pflichthaus bekommt eine frontale Ansicht in
+`streetview_checks`. Alles dahinter: nur das Dach halbwegs.
+
+**Feste Vorgabe Dächer und Fernsicht (Kunde, 15.11.2026):** In der Drohnenaufnahme sollen Dächer, Häuser in der
+Gasse, Parkplätze und Straße so realitätsgetreu wie möglich sein, und in die weitere Distanz gehören markante
+Gebäude und die Dachlandschaft dazu. Maße kommen weiter aus den Daten der Stadt Wien; ein Schrägluftbild (Apple
+Maps, Google) wird nur angesehen und liefert, was den Daten fehlt: Deckung und Farbton, Mansarden, Gauben,
+Dachfenster, Kamine, Brandwände, Fassadenfarben, Baumgrößen. Eingetragen wird das als Parameter in
+`roofs_override`. Bei Luft- und Terrassenmotiven gehört die Fernsicht zum Pflichtabgleich: `immoviz.py fernsicht`
+lädt die hohen Baukörper im Umkreis von 7,5 km und nennt je Kamera die markanten Gebäude im Sichtkegel; sie
+müssen im Bild als Silhouette an der richtigen Stelle stehen, die Liste gehört in `umgebung_abgleich.md`.
+
+**Abstufung (Kunde, 15.11.2026):** Über die Pflichthäuser hinaus müssen Fassaden dort stimmen, wo eine Kamera unmittelbar
+draufsieht (mindestens 1 % Bildanteil, näher als 80 m, berechnet mit `sichtbar`). Für alle weiteren Häuser genügt, dass die
 Dächer halbwegs stimmen; das leistet das Dachmodell LOD2 für rund 90 % der Gebäudefläche im Umkreis von 250 m.
 Gehsteige und Parkstreifen kommen aus den Verkehrsflächen der Stadt Wien und werden gegen das Orthofoto gelegt
 (Toleranz 0,5 m). Google-Daten (Street View, 3D Tiles) bleiben reine Referenz: nichts davon kommt ins Modell,

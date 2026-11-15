@@ -4,6 +4,7 @@
 Beispiele:
   python immoviz.py geo     projects/wimmergasse-20
   python immoviz.py daecher projects/wimmergasse-20
+  python immoviz.py fernsicht projects/wimmergasse-20 (markante Gebäude und Gelände für Drohne und Terrasse)
   python immoviz.py strasse projects/wimmergasse-20   (Prüfbild Parkplätze und Gehsteige gegen das Orthofoto)
   python immoviz.py render  projects/wimmergasse-20 --cam ecke --light golden_hour --preview
   python immoviz.py render  projects/wimmergasse-20 --cam ecke,drohne --light golden_hour,blaue_stunde
@@ -31,6 +32,12 @@ def main():
     dc.add_argument("project")
     dc.add_argument("--cache", default=None, help="Ordner für geladene Kacheln (Standard: kein Cache)")
     dc.add_argument("--ohne-orthofoto", action="store_true", help="Dachfarbe nicht aus dem Orthofoto ableiten")
+    fs = sub.add_parser("fernsicht", help="Fernsicht für Luft- und Terrassenmotive: hohe Gebäude, Geländepunkte "
+                                          "(data/fern.json) und Liste der markanten Gebäude je Kamera")
+    fs.add_argument("project")
+    fs.add_argument("--cam", default="drohne,ausblick_terrasse")
+    fs.add_argument("--neu", action="store_true", help="Daten neu laden, auch wenn data/fern.json vorhanden ist")
+    fs.add_argument("--anzahl", type=int, default=15, help="Einträge je Kamera")
     sg = sub.add_parser("strasse", help="Straßenabgleich: Parkordnung, Gehsteige und Bäume vor dem Objekt gegen das "
                                         "Orthofoto der Stadt Wien (renders/check/strasse_abgleich.jpg und .md)")
     sg.add_argument("project")
@@ -49,6 +56,10 @@ def main():
     si = sub.add_parser("sichtbar", help="Direkt sichtbare Nachbarhäuser je Kamera berechnen (Bildanteil der Fassaden)")
     si.add_argument("project")
     si.add_argument("--cam", default="ecke,ecke_orbit,wimmergasse,stolberggasse")
+    si.add_argument("--pflicht", action="store_true",
+                    help="nur die Pflichtliste ausgeben: in jede Straßenrichtung die ersten Häuser je Straßenseite "
+                         "(ohne Blender, unabhängig vom Bildanteil)")
+    si.add_argument("--anzahl", type=int, default=5, help="Häuser je Richtung und Straßenseite (Standard 5)")
     it = sub.add_parser("interior", help="Innenräume aus dem Grundriss bauen und rendern (wohnungen.yaml)")
     it.add_argument("project")
     it.add_argument("--top", default="top07")
@@ -96,6 +107,16 @@ def main():
         out = R.fetch(cfg, ctx, pdir / "data" / "roofs.json", Path(a.cache).resolve() if a.cache else None,
                       ortho=not a.ohne_orthofoto)
         print(json.dumps({**out["stats"], "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
+    elif a.cmd == "fernsicht":
+        import yaml
+        from lib import fern as FE
+        cfg = yaml.safe_load((pdir / "project.yaml").read_text())
+        fp = pdir / "data" / "fern.json"
+        fern = FE.fetch(cfg, fp) if (a.neu or not fp.exists()) else FE.load(pdir)
+        res = {"hohe_baukoerperteile": len(fern["hoch"]), "markante_gebaeude": len(fern["markant"]),
+               "gelaendepunkte": len(fern["gelaende"]),
+               "kameras": {c: FE.im_sichtkegel(cfg, fern, c)[:a.anzahl] for c in a.cam.split(",")}}
+        print(json.dumps(res, ensure_ascii=False, indent=1))
     elif a.cmd == "strasse":
         import os
         from lib import strasse as ST
@@ -118,8 +139,19 @@ def main():
         from lib.build import load_project, build_scene
         from lib import check as C
         cfg, ctx = load_project(pdir)
+        pflicht = C.pflicht_haeuser(cfg, ctx, a.anzahl)
+        if a.pflicht:
+            print(json.dumps({"pflicht": pflicht, "ohne_fassade": sorted({r["bezug"] for r in pflicht if not r["modelliert"]})},
+                             ensure_ascii=False, indent=1))
+            return
         scene = build_scene(cfg, ctx)
         res = C.visible_buildings(scene, cfg, ctx, a.cam.split(","))
+        # Pflichthäuser gelten unabhängig vom Bildanteil: in der Kameraliste markieren, fehlende Fassaden melden
+        pb = {r["bezug"] for r in pflicht}
+        for rows in res.values():
+            for r in rows:
+                r["pflicht"] = r["bezug"] in pb
+        res["pflicht_ohne_fassade"] = sorted({r["bezug"] for r in pflicht if not r["modelliert"]})
         print(json.dumps(res, ensure_ascii=False, indent=1))
     elif a.cmd == "interior":
         _interior(a, pdir)

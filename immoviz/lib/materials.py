@@ -115,6 +115,28 @@ def plaster(bpy, name, color, rustika=None, sockel=None, sockel_color=None, var=
     return m
 
 
+def ziegel(bpy, name, color, reihe=0.33, rough=0.85):
+    """Dachdeckung in Reihen (Ziegel, Schiefer): v der UV laeuft in Falllinie, je Reihe eine dunkle Fuge,
+    dazu fleckige Alterung. Die Daecher der Umgebung liefern dafuer UV in Metern (lib/roofs.py, add_faces)."""
+    m = _new(bpy, name)
+    N = Nodes(m)
+    tc, sep = N.uv()
+    noise = N.new("ShaderNodeTexNoise", Scale=0.35, Detail=5.0, Roughness=0.6)
+    N.link(tc.outputs["UV"], noise.inputs["Vector"])
+    fleck = N.new("ShaderNodeTexNoise", Scale=4.0, Detail=3.0, Roughness=0.7)
+    N.link(tc.outputs["UV"], fleck.inputs["Vector"])
+    base = N.mix_rgb(noise.outputs["Fac"], tuple(c * 0.72 for c in color), tuple(min(1.0, c * 1.2) for c in color))
+    base = N.mix_rgb(N.math("MULTIPLY", fleck.outputs["Fac"], 0.35), base, tuple(c * 0.6 for c in color))
+    fuge = N.math("LESS_THAN", N.math("FRACT", N.math("DIVIDE", sep.outputs["Y"], reihe)), 0.14)
+    base = N.mix_rgb(N.math("MULTIPLY", fuge, 0.45), base, tuple(c * 0.45 for c in color))
+    p = N.principled(base, rough=rough)
+    p.inputs["Specular IOR Level"].default_value = 0.3
+    bmp = N.new("ShaderNodeBump", Strength=0.5, Distance=0.02)
+    N.link(fuge, bmp.inputs["Height"])
+    N.link(bmp.outputs["Normal"], p.inputs["Normal"])
+    return m
+
+
 def simple(bpy, name, color, rough=0.5, metal=0.0, **kw):
     m = _new(bpy, name)
     N = Nodes(m)
@@ -267,6 +289,24 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     L["dach_blech_hell"] = zinc(bpy, "dach_blech_hell", (0.30, 0.31, 0.32))
     L["dach_kies"] = plaster(bpy, "dach_kies", (0.25, 0.24, 0.225), var=0.12, bump=0.25)
     L["dach_gruen"] = plaster(bpy, "dach_gruen", (0.10, 0.13, 0.06), var=0.25, bump=0.3)
+    # Dachdeckungen fuer roofs_override und die Ziegelmischung der Umgebung (lib/roofs.py, MAT und ZIEGEL_MIX).
+    # Bewusst sehr dunkel angesetzt (an den Renderings kalibriert, nicht physikalisch): bei der hellen Belichtung der
+    # Lichtstimmungen brennen Daecher mit ueblichen Albedowerten im AgX-Look zu Rosa aus.
+    L["dach_ziegel_rot"] = ziegel(bpy, "dach_ziegel_rot", (0.026, 0.0030, 0.0013))
+    L["dach_ziegel_rot_alt"] = ziegel(bpy, "dach_ziegel_rot_alt", (0.017, 0.0038, 0.0024))
+    L["dach_ziegel_orange"] = ziegel(bpy, "dach_ziegel_orange", (0.055, 0.0085, 0.0012))
+    L["dach_ziegel_braun"] = ziegel(bpy, "dach_ziegel_braun", (0.0105, 0.0042, 0.0028))
+    L["dach_schiefer_dunkel"] = ziegel(bpy, "dach_schiefer_dunkel", (0.006, 0.006, 0.007), reihe=0.25, rough=0.6)
+    L["dach_blech_dunkel"] = zinc(bpy, "dach_blech_dunkel", (0.014, 0.015, 0.017))
+    L["dach_blech_grau"] = zinc(bpy, "dach_blech_grau", (0.050, 0.053, 0.058))          # Standardblech der Umgebung
+    L["dach_blech_hellgrau"] = zinc(bpy, "dach_blech_hellgrau", (0.115, 0.122, 0.130))  # helles Blech, Alu, verzinkt
+    L["dach_kupfer"] = zinc(bpy, "dach_kupfer", (0.10, 0.19, 0.15))
+    L["brandwand"] = plaster(bpy, "brandwand", (0.62, 0.60, 0.56), var=0.12, bump=0.2)
+    # Fernsicht (lib/fern.py): hohe Gebaeude als Silhouette, Huegelkette im Dunst
+    L["fern_bau"] = simple(bpy, "fern_bau", (0.36, 0.35, 0.33), 0.9)
+    L["fern_turm"] = simple(bpy, "fern_turm", (0.22, 0.24, 0.27), 0.6)
+    L["fern_dach"] = simple(bpy, "fern_dach", (0.06, 0.065, 0.07), 0.8)
+    L["fern_wald"] = simple(bpy, "fern_wald", (0.20, 0.245, 0.27), 1.0)      # hell und blaugrau: steht im Dunst vor dem Himmel
     L["nachbar_rahmen"] = simple(bpy, "nachbar_rahmen", (0.75, 0.74, 0.7), 0.4)
     L["fenster_dunkel"] = simple(bpy, "fenster_dunkel", (0.012, 0.014, 0.016), 0.04, 0.0, **{"Specular IOR Level": 0.9})
     L["terrasse"] = plaster(bpy, "terrasse", (0.32, 0.31, 0.29), var=0.05, bump=0.1)

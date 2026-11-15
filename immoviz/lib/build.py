@@ -13,6 +13,7 @@ from mathutils import Vector
 
 from . import materials as M
 from . import meshkit as K
+from . import fern as FE
 from . import roofs as R
 from . import strasse as ST
 from . import trees as T
@@ -317,6 +318,8 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     roofs = K.MeshBuilder("umgebung_daecher", ["nachbar_dach"])
     special = {str(v["bezug"]) for v in (cfg or {}).get("neighbour_facades", {}).values()}
     roof_by_id = (roofdata or {}).get("by_id", {})
+    rov = R.Override((cfg or {}).get("roofs_override"))      # Dachkorrekturen von Hand (Material, Mansarde, Gauben ...)
+    mans = {}
     for b in ctx["buildings"]:
         poly = b["poly"]
         if len(poly) < 3 or b["height"] < 1.0 or str(b.get("bezug")) in special:
@@ -342,8 +345,19 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
         # Echte Dachflaechen (Dachmodell LOD2): Wand nur bis zur tiefsten Dachkante, darueber Dach und Giebel
         faces = roof_by_id.get(b["id"])
         h_bkm = h
+        ov = rov.find(b)
+        if ov and ov.get("mansarde") and b.get("klasse") == 11:
+            # Mansarddach laut roofs_override: Baukoerperteile an der Traufe kappen, Dach nach der Schleife
+            mm = ov["mansarde"] if isinstance(ov["mansarde"], dict) else {}
+            me = mans.setdefault(str(b.get("bezug")), {"ov": ov, "polys": [], "zg": zg, "col": col, "h": []})
+            me["h"].append((abs(K.polygon_area(poly)), h))
+            tr = mm.get("traufe") or max(me["h"])[1]
+            if h >= tr - 1.5:
+                me["polys"].append(poly)
+            h, faces = min(h, tr), None
         h = R.wall_top(h, faces)
-        K.extrude(walls, poly, -1.5, h, col, "nachbar_dach" if (faces or not roof_by_id) else "dach_kies", bottom=False)
+        flat_mat = R.MAT.get(ov.get("material_flach"), "dach_kies") if (ov and ov.get("material_flach")) else "dach_kies"
+        K.extrude(walls, poly, -1.5, h, col, "nachbar_dach" if (faces or not roof_by_id) else flat_mat, bottom=False)
         n = len(poly)
         detailed = not (dist > detail or h < 5.0 or b.get("klasse") != 11)
         for i in (range(n) if detailed else []):
@@ -378,7 +392,7 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
             K.box(walls, f, 0.0, L, -0.35, 0.0, h - 0.55, h, col)
             K.box(walls, f, 0.0, L, -0.08, 0.0, 3.6, 3.9, col)
         if faces:
-            R.add_faces(roofs, walls, faces, 0.0, h, col)
+            R.add_faces(roofs, walls, faces, 0.0, h, col, ov=ov, seed=sum(map(ord, str(b.get("bezug")))))
         elif not roof_by_id and h_bkm > 8.0 and b.get("klasse") == 11:
             # Keine Dachdaten geladen (immoviz.py daecher): Satteldach, First parallel zur laengsten Strassenkante
             se = [i for i in range(n) if math.dist(poly[i], poly[(i + 1) % n]) > 3.0 and on_street(
@@ -390,6 +404,9 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
             mb_.verts = [(x, y, z + zg) for x, y, z in mb_.verts]
         walls_.merge(walls); wins_.merge(wins); roofs_.merge(roofs)
         walls, wins, roofs = walls_, wins_, roofs_
+    for me in mans.values():
+        mm = me["ov"]["mansarde"] if isinstance(me["ov"]["mansarde"], dict) else {}
+        R.mansarde(roofs, walls, me["polys"], me["ov"], me["zg"], me["col"], traufe=mm.get("traufe") or max(me["h"])[1])
     walls.to_object(bpy, mats, coll)
     wins.to_object(bpy, mats, coll)
     roofs.to_object(bpy, mats, coll)
@@ -408,33 +425,18 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     zf = min(terrain(R0 * math.cos(a), R0 * math.sin(a)) for a in [k * math.pi / 8 for k in range(16)]) - 0.3
     far_ground.poly([(-r, -r, zf), (r, -r, zf), (r, r, zf), (-r, r, zf)], None, "asphalt", (0, 0, 1))
     far_ground.to_object(bpy, mats, coll)
-    # Fernzone: generische Wiener Blockrandbebauung bis 1,8 km, nur fuer Luft- und Dachansichten
+    # Fernzone (lib/fern.py): Blockraender mit Satteldaechern und gemischten Dachfarben auf grobem Gelaende, dazu die
+    # markanten hohen Gebaeude und die Huegelkette am Horizont aus data/fern.json (immoviz.py fernsicht)
     far = K.MeshBuilder("umgebung_fernzone", ["nachbar_0"])
-    step = 78.0
-    gi = int(1800 / step)
-    for i in range(-gi, gi + 1):
-        for j in range(-gi, gi + 1):
-            cx0, cy0 = i * step + rng.uniform(-6, 6), j * step + rng.uniform(-6, 6)
-            dd = math.hypot(cx0, cy0)
-            if dd < radius + 25 or dd > 1800:
-                continue
-            w, l = rng.uniform(52, 64), rng.uniform(52, 64)
-            hh = rng.uniform(15, 25)
-            col = f"nachbar_{rng.randrange(len(M.NEIGHBOUR_PALETTE))}"
-            outer = [(cx0 - w / 2, cy0 - l / 2), (cx0 + w / 2, cy0 - l / 2), (cx0 + w / 2, cy0 + l / 2), (cx0 - w / 2, cy0 + l / 2)]
-            K.extrude(far, outer, 0.0, hh, col, "nachbar_dach", bottom=False)
-            rm = "dach_ziegel" if rng.random() < 0.55 else "dach_blech"
-            ins = [(cx0 - w / 2 + 6, cy0 - l / 2 + 6), (cx0 + w / 2 - 6, cy0 - l / 2 + 6),
-                   (cx0 + w / 2 - 6, cy0 + l / 2 - 6), (cx0 - w / 2 + 6, cy0 + l / 2 - 6)]
-            rh = rng.uniform(3, 5)
-            for k in range(4):
-                a0, a1 = outer[k], outer[(k + 1) % 4]
-                t0, t1 = ins[k], ins[(k + 1) % 4]
-                far.poly([(*a0, hh), (*a1, hh), (*t1, hh + rh), (*t0, hh + rh)], None, rm,
-                         (a1[1] - a0[1], -(a1[0] - a0[0]), 0.5))
-            far.poly([(x, y, hh + rh) for x, y in ins], None, "hof", (0, 0, 1))
-    shift_z(far, terrain)
+    fern = FE.load(Path(cfg["_project_dir"])) if (cfg or {}).get("_project_dir") else None
+    far_ground = FE.gelaende(fern, terrain, radius)
+    FE.fernzone(far, rng, radius, far_ground, bis=float((cfg or {}).get("site", {}).get("fernzone_bis_m", 2400)))
     far.to_object(bpy, mats, coll)
+    if fern:
+        mk = K.MeshBuilder("fern_markant", ["fern_bau"])
+        FE.markante(mk, fern, far_ground)
+        FE.kulisse(mk, fern)
+        mk.to_object(bpy, mats, coll)
     spec = {"Fahrbahn": ("asphalt", 0.0, 0.0), "Gehsteig": ("gehsteig", 0.0, 0.12),
             "Gehweg, Radweg": ("gehsteig", 0.0, 0.12), "Ruhender Verkehr": ((cfg or {}).get("street", {}).get("parking_material", "parkstreifen"), 0.004, 0.0),
             "Zebrastreifen": ("zebra", 0.008, 0.0), "Innenhof": ("hof", 0.0, 0.05),
@@ -476,6 +478,7 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
 def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
     specs = cfg.get("neighbour_facades") or {}
     roof_by_id = (roofs or {}).get("by_id", {})
+    rov = R.Override(cfg.get("roofs_override"))
     facades = {n: K.Facade(n, tuple(v["a"]), tuple(v["b"])) for n, v in specs.items()}
     massed, has_roof = set(), set()
     for name, sp in specs.items():
@@ -506,6 +509,7 @@ def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
         roof_mb = K.MeshBuilder(f"nachbar_{name}_dach", ["dach_blech"])
         # Baukoerper aller Teile, an der Fassade 0,6 m zurueckgeschnitten
         same = [n for n, v in specs.items() if str(v["bezug"]) == str(sp["bezug"])]
+        mans_polys, mans_ov = [], None
         for b in ctx["buildings"]:
             if str(sp["bezug"]) in massed:
                 break
@@ -516,11 +520,25 @@ def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
             top_mat = "dach_flach"
             side = sp.get("upper_material") if (sp.get("upper_material") and hb > H + 1.0) else col
             faces = roof_by_id.get(b["id"])
+            ov = rov.find(b)
+            if ov and ov.get("mansarde"):      # Mansarddach laut roofs_override statt Stufenvolumen oder Dachmodell
+                mm = ov["mansarde"] if isinstance(ov["mansarde"], dict) else {}
+                tr = mm.get("traufe", H)
+                if hb >= tr - 1.5:
+                    mans_polys.append(b["poly"])
+                hb, faces, side, mans_ov = min(hb, tr), None, col, ov
+                has_roof.add(str(sp["bezug"]))
             if faces:      # echte Dachflaechen aus dem Dachmodell ersetzen die grobe roof-Angabe
                 has_roof.add(str(sp["bezug"]))
                 hb = R.wall_top(hb, faces)
-                R.add_faces(roof_mb, mass, faces, z0, hb, side)
+                R.add_faces(roof_mb, mass, faces, z0, hb, side, ov=ov, seed=sum(map(ord, str(sp["bezug"]))))
+            elif ov and ov.get("material_flach"):
+                top_mat = R.MAT.get(ov["material_flach"], ov["material_flach"])
             K.extrude(mass, poly, z0 - 1.5, z0 + hb, side, top_mat, col, lines, bottom=False)
+        if mans_ov:
+            mm = mans_ov["mansarde"] if isinstance(mans_ov["mansarde"], dict) else {}
+            R.mansarde(roof_mb, mass, mans_polys, mans_ov, z0, mm.get("brandwand_material", col),
+                       achse=(tuple(sp["a"]), tuple(sp["b"])), traufe=mm.get("traufe", H))
         massed.add(str(sp["bezug"]))
         holes, wins = [], []
         for ri, r in enumerate(sp["rows"]):
@@ -598,8 +616,16 @@ def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
                 K.box(fr, f, ub - 0.02, ub + 0.02, -1.3, 0.0, zf, zf + 1.05, "balkon_lochblech")
         rf = sp.get("roof")
         if rf and str(sp["bezug"]) not in has_roof:
-            rm = "dach_ziegel" if rf.get("type") == "ziegel" else "dach_blech"
+            rm = "dach_ziegel_rot" if rf.get("type") == "ziegel" else "dach_blech_grau"
+            ovb = rov.bezug(sp["bezug"])
+            if ovb and ovb.get("material"):
+                rm = R.MAT.get(ovb["material"], ovb["material"])
             K.slope(mass, f, 0.0, L, z0 + H, z0 + H + rf["rise"], -0.3, rf["depth"], rm, caps=(True, True))
+            if ovb:      # Gauben und Dachfenster laut roofs_override auch auf der angenommenen Dachschraege
+                P_ = f.p
+                R.details(roof_mb, [{"p": [P_(0.0, -0.3, H), P_(L, -0.3, H), P_(L, rf["depth"], H + rf["rise"]),
+                                           P_(0.0, rf["depth"], H + rf["rise"])], "s": 40.0, "m": rm}],
+                          {k: v for k, v in ovb.items() if k != "kamine"}, z0, rm)
         for mb in (mass, orn, fr, gl, inner, roof_mb):
             if mb.faces:
                 mb.to_object(bpy, mats, coll)
@@ -706,7 +732,7 @@ def setup_camera(scene, cfg, name):
     r = math.hypot(dx, dy)
     cam.lens = c.get("lens", 24)
     cam.sensor_width = 36
-    cam.clip_end = 2000
+    cam.clip_end = 30000      # Fernsicht: markante Gebaeude und Huegelkette liegen bis ueber 10 km entfernt
     yaw = math.atan2(-dx, dy)
     if c.get("vertical", True):
         ob.rotation_euler = (math.radians(90), 0, yaw)

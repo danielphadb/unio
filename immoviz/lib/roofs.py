@@ -379,11 +379,17 @@ def load(project_dir: Path) -> dict:
 
 
 # ---------------------------------------------------------------- Geometrie fuer Blender
-def add_faces(mb_roof, mb_wall, faces, z_off: float, wall_top: float, wall_mat: str, mat_override=None):
+def add_faces(mb_roof, mb_wall, faces, z_off: float, wall_top: float, wall_mat: str, mat_override=None, ov=None,
+              seed=0):
     """Baut Dachflaechen und die Waende darunter (Giebel, Brandwaende, Gaubenwangen) in zwei MeshBuilder.
 
     z_off: Hoehe des Baukoerper-Sockels in der Szene; wall_top: Oberkante der extrudierten Wand (relativ zum Sockel).
-    Freie Dachkanten bekommen eine senkrechte Flaeche bis wall_top, wenn sie darueber liegen."""
+    Freie Dachkanten bekommen eine senkrechte Flaeche bis wall_top, wenn sie darueber liegen.
+    ov: Eintrag aus roofs_override (Material, Gauben, Dachfenster, Kamine); seed: waehlt den Ziegelton je Gebaeude."""
+    ov = ov or {}
+    m_steil = MAT.get(ov.get("material"), ov.get("material")) if ov.get("material") else None
+    m_flach = MAT.get(ov.get("material_flach"), ov.get("material_flach")) if ov.get("material_flach") else None
+    haupt = None
     for r in faces:
         p = r["p"]
         pts = [(x, y, z + z_off) for x, y, z in p]
@@ -391,7 +397,11 @@ def add_faces(mb_roof, mb_wall, faces, z_off: float, wall_top: float, wall_mat: 
         o = math.radians(r.get("o", 0.0))
         sl = math.cos(math.radians(min(r.get("s", 0.0), 80.0)))
         uv = [(x * math.cos(o) - y * math.sin(o), (x * math.sin(o) + y * math.cos(o)) / max(sl, 0.2)) for x, y, _ in p]
-        mb_roof.poly(pts, uv, mat_override or r["m"], (0, 0, 1))
+        steil = r.get("s", 0.0) >= FLACH_BIS_GRAD
+        mat = mat_override or (m_steil if steil else m_flach) or material(r["m"], seed)
+        if steil and haupt is None:
+            haupt = mat
+        mb_roof.poly(pts, uv, mat, (0, 0, 1))
         for i in r.get("e", []):
             a, b = p[i], p[(i + 1) % len(p)]
             if max(a[2], b[2]) <= wall_top + 0.08:
@@ -402,6 +412,8 @@ def add_faces(mb_roof, mb_wall, faces, z_off: float, wall_top: float, wall_mat: 
                 continue
             quad = [(a[0], a[1], za + z_off), (b[0], b[1], zb + z_off), (b[0], b[1], b[2] + z_off), (a[0], a[1], a[2] + z_off)]
             mb_wall.poly(quad, [(0, za), (L, zb), (L, b[2]), (0, a[2])], wall_mat)
+    if ov:
+        details(mb_roof, faces, ov, z_off, m_steil or haupt or "dach_blech")
 
 
 def wall_top(height: float, faces) -> float:
@@ -475,3 +487,278 @@ def heuristic_roof(mb_roof, mb_wall, poly, h: float, z_off: float, mat: str, wal
             if max(z(pa[1]), z(pb[1])) <= h + 0.05:
                 continue
             mb_wall.poly([world(*pa, h), world(*pb, h), world(*pb, z(pb[1])), world(*pa, z(pa[1]))], None, wall_mat)
+
+
+# ---------------------------------------------------------------- roofs_override (project.yaml)
+# Was dem Dachmodell fehlt (Deckung, Farbe, Mansarden, Gauben, Dachfenster, Kamine), steht je Gebaeude von Hand in
+# project.yaml unter roofs_override. Alles wird parametrisch gebaut, nichts aus einem Referenzbild uebernommen.
+MAT = {"ziegel": "dach_ziegel_rot", "ziegel_rot": "dach_ziegel_rot", "ziegel_orange": "dach_ziegel_orange",
+       "ziegel_braun": "dach_ziegel_braun", "schiefer_dunkel": "dach_schiefer_dunkel", "blech": "dach_blech_grau",
+       "blech_hell": "dach_blech_hellgrau", "blech_dunkel": "dach_blech_dunkel", "kies": "dach_kies",
+       "ziegel_rot_alt": "dach_ziegel_rot_alt", "gruen": "dach_gruen", "flach": "dach_flach", "kupfer": "dach_kupfer"}
+# Mischung der Ziegeltoene der Umgebung (Wiener Dachlandschaft: rot, orange, nachgedunkelt braun)
+ZIEGEL_MIX = ("dach_ziegel_rot", "dach_ziegel_rot", "dach_ziegel_braun", "dach_ziegel_orange", "dach_ziegel_braun",
+              "dach_ziegel_rot", "dach_ziegel_rot_alt")
+
+
+def material(klasse: str, seed=0) -> str:
+    """Blender-Material zu einer Dachklasse aus roofs.json; Ziegel wechselt je Gebaeude den Ton."""
+    if klasse == "dach_ziegel":
+        return ZIEGEL_MIX[int(seed) % len(ZIEGEL_MIX)]
+    if klasse == "dach_ziegel_dunkel":
+        return "dach_ziegel_braun"
+    # Blech: die alten Materialien dach_blech und dach_blech_hell rendern fast weiss, daher die kalibrierten Toene
+    return {"dach_blech": "dach_blech_grau", "dach_blech_hell": "dach_blech_hellgrau"}.get(klasse, klasse)
+
+
+class Override:
+    """Nachschlagen der Eintraege aus roofs_override: ueber `pos` (Punkt im Grundriss) oder `bezug`."""
+
+    def __init__(self, entries):
+        self.by_bezug, self.by_pos = {}, []
+        for e in entries or []:
+            if e.get("pos"):
+                self.by_pos.append(e)
+            elif e.get("bezug") is not None:
+                self.by_bezug[str(e["bezug"])] = e
+
+    def find(self, b):
+        for e in self.by_pos:
+            if _pip(e["pos"][0], e["pos"][1], b["poly"]):
+                return e
+        return self.by_bezug.get(str(b.get("bezug")))
+
+    def bezug(self, bezug):
+        return self.by_bezug.get(str(bezug))
+
+
+def _plane(p):
+    """Ebene einer Dachflaeche: Normale (nz > 0), waagrechte Richtung h, Bergrichtung g, Steigung tan."""
+    nx = ny = nz = 0.0
+    for i in range(len(p)):
+        a, b = p[i], p[(i + 1) % len(p)]
+        nx += (a[1] - b[1]) * (a[2] + b[2])
+        ny += (a[2] - b[2]) * (a[0] + b[0])
+        nz += (a[0] - b[0]) * (a[1] + b[1])
+    ln = math.sqrt(nx * nx + ny * ny + nz * nz) or 1.0
+    nx, ny, nz = nx / ln, ny / ln, nz / ln
+    if nz < 0:
+        nx, ny, nz = -nx, -ny, -nz
+    hl = math.hypot(nx, ny)
+    if hl < 1e-4 or nz < 1e-4:
+        return None
+    g = (-nx / hl, -ny / hl)           # waagrechte Richtung bergauf
+    h = (-g[1], g[0])                  # entlang der Hoehenlinie
+    return {"n": (nx, ny, nz), "g": g, "h": h, "tan": hl / nz, "p0": p[0]}
+
+
+class _Face:
+    """Dachflaeche mit Koordinaten (a entlang der Hoehenlinie, c bergauf, beides waagrecht gemessen)."""
+
+    def __init__(self, r, z_off):
+        self.r, self.pl = r, _plane(r["p"])
+        self.ok = self.pl is not None
+        if not self.ok:
+            return
+        g, h = self.pl["g"], self.pl["h"]
+        self.ac = [(x * h[0] + y * h[1], x * g[0] + y * g[1]) for x, y, _ in r["p"]]
+        self.a0, self.a1 = min(q[0] for q in self.ac), max(q[0] for q in self.ac)
+        self.c0, self.c1 = min(q[1] for q in self.ac), max(q[1] for q in self.ac)
+        self.z_off = z_off
+        self.area = _area3(r["p"])
+
+    def inside(self, a, c):
+        return _pip(a, c, self.ac)
+
+    def pt(self, a, c, lift=0.0, dz=0.0):
+        g, h, n = self.pl["g"], self.pl["h"], self.pl["n"]
+        x, y = a * h[0] + c * g[0], a * h[1] + c * g[1]
+        x0, y0, z0 = self.pl["p0"]
+        z = z0 - (n[0] * (x - x0) + n[1] * (y - y0)) / n[2]
+        return (x + n[0] * lift, y + n[1] * lift, z + n[2] * lift + dz + self.z_off)
+
+
+def _seite_ok(face, seiten):
+    """Filter nach Dachseite: '+x', '-x', '+y', '-y' = Richtung, in die die Flaeche abfaellt (lokales System)."""
+    if not seiten:
+        return True
+    gx, gy = -face.pl["g"][0], -face.pl["g"][1]
+    best = max((("+x", gx), ("-x", -gx), ("+y", gy), ("-y", -gy)), key=lambda t: t[1])[0]
+    return best in seiten
+
+
+def _hauptflaechen(faces, z_off, min_grad=12.0, seiten=None):
+    fs = [f for f in (_Face(r, z_off) for r in faces if r.get("s", 0) >= min_grad) if f.ok]
+    if not fs:
+        return []
+    amax = max(f.area for f in fs)
+    return [f for f in fs if f.area >= 0.35 * amax and f.a1 - f.a0 >= 4.0 and _seite_ok(f, seiten)]
+
+
+def _dachfenster(mb, f, a, c, w=0.8, l=1.2):
+    """Dachflaechenfenster: dunkler Rahmen und Glas, wenige Zentimeter ueber der Dachhaut."""
+    k = 1.0 / math.sqrt(1.0 + f.pl["tan"] ** 2)       # waagrechte Laenge je Meter in Falllinie
+    lc = l * k
+    if not all(f.inside(a + da, c + dc) for da in (-w / 2, w / 2) for dc in (0.0, lc)):
+        return False
+    n = f.pl["n"]
+    for e, lift, mat in ((0.0, 0.05, "rahmen_dunkel"), (0.07, 0.08, "fenster_dunkel")):
+        mb.poly([f.pt(a - w / 2 + e, c + e * k, lift), f.pt(a + w / 2 - e, c + e * k, lift),
+                 f.pt(a + w / 2 - e, c + lc - e * k, lift), f.pt(a - w / 2 + e, c + lc - e * k, lift)], None, mat, n)
+    return True
+
+
+def _gaube(mb, f, a, c, w, hg, mat_dach):
+    """Schleppgaube: senkrechte Front mit Fenster, Deckel waagrecht nach hinten bis zur Dachflaeche, zwei Wangen."""
+    tan = f.pl["tan"]
+    if tan < 0.25:
+        return False
+    run = hg / tan
+    if not all(f.inside(a + da, c + dc) for da in (-w / 2, w / 2) for dc in (0.0, run)):
+        return False
+    g, h = f.pl["g"], f.pl["h"]
+    fl, fr = f.pt(a - w / 2, c), f.pt(a + w / 2, c)
+    tl, tr = (fl[0], fl[1], fl[2] + hg), (fr[0], fr[1], fr[2] + hg)
+    ov = 0.12                                              # Deckel steht vorne leicht ueber
+    dl = (tl[0] - g[0] * ov, tl[1] - g[1] * ov, tl[2] + 0.06)
+    dr = (tr[0] - g[0] * ov, tr[1] - g[1] * ov, tr[2] + 0.06)
+    bl, br = f.pt(a - w / 2, c + run, dz=0.06), f.pt(a + w / 2, c + run, dz=0.06)
+    out = (-g[0], -g[1], 0.0)
+    mb.poly([fl, fr, tr, tl], None, "fenster", out)
+    e = 0.12
+
+    def fp(u, z):       # Punkt auf der Front, 2 cm davor
+        return (fl[0] + h[0] * u - g[0] * 0.02, fl[1] + h[1] * u - g[1] * 0.02, fl[2] + z)
+    mb.poly([fp(e, e), fp(w - e, e), fp(w - e, hg - e), fp(e, hg - e)], None, "fenster_dunkel", out)
+    mb.poly([dl, dr, br, bl], None, mat_dach, (0, 0, 1))
+    mb.poly([fl, tl, bl], None, mat_dach, (-h[0], -h[1], 0))
+    mb.poly([fr, tr, br], None, mat_dach, (h[0], h[1], 0))
+    return True
+
+
+def _quader(mb, o, ex, ey, lx, ly, z0, z1, mat, mat_top=None):
+    """Quader mit Grundflaeche o + ex*[0, lx] + ey*[0, ly] (Kamin, Brandwand)."""
+    c = [(o[0], o[1]), (o[0] + ex[0] * lx, o[1] + ex[1] * lx),
+         (o[0] + ex[0] * lx + ey[0] * ly, o[1] + ex[1] * lx + ey[1] * ly), (o[0] + ey[0] * ly, o[1] + ey[1] * ly)]
+    cx, cy = sum(q[0] for q in c) / 4, sum(q[1] for q in c) / 4
+    for i in range(4):
+        p, q = c[i], c[(i + 1) % 4]
+        mx, my = (p[0] + q[0]) / 2 - cx, (p[1] + q[1]) / 2 - cy
+        mb.poly([(p[0], p[1], z0), (q[0], q[1], z0), (q[0], q[1], z1), (p[0], p[1], z1)], None, mat, (mx, my, 0))
+    mb.poly([(x, y, z1) for x, y in c], None, mat_top or mat, (0, 0, 1))
+
+
+def details(mb, faces, ov, z_off, mat_dach):
+    """Gauben, Dachfenster und Kamine laut roofs_override auf den Hauptflaechen eines Dachs verteilen.
+
+    gauben:      {anzahl: je Dachseite, breite, hoehe, reihen, seiten: ['-x', ...]} oder nur eine Zahl
+    dachfenster: {anzahl: je Dachseite, reihen, seiten} oder nur eine Zahl
+    kamine:      Anzahl je Gebaeude, nahe am First der groessten Dachflaechen"""
+    if not ov or not faces:
+        return
+    ga, df, ka = ov.get("gauben"), ov.get("dachfenster"), ov.get("kamine")
+    ga = {"anzahl": ga} if isinstance(ga, (int, float)) else ga
+    df = {"anzahl": df} if isinstance(df, (int, float)) else df
+    if ga and ga.get("anzahl"):
+        w, hg, rows = ga.get("breite", 1.3), ga.get("hoehe", 1.4), int(ga.get("reihen", 1))
+        for f in _hauptflaechen(faces, z_off, 20.0, ga.get("seiten")):
+            n = int(ga["anzahl"])
+            run = hg / f.pl["tan"]
+            for k in range(rows):
+                c = f.c0 + (f.c1 - f.c0) * (ga.get("lage", 0.18) + k * 0.80 / rows)
+                c = min(c, f.c1 - run - 0.3)
+                for i in range(n):
+                    _gaube(mb, f, f.a0 + (f.a1 - f.a0) * (i + 0.5) / n, c, w, hg, ga.get("material") and MAT.get(ga["material"], ga["material"]) or mat_dach)
+    if df and df.get("anzahl"):
+        rows = int(df.get("reihen", 1))
+        for f in _hauptflaechen(faces, z_off, 12.0, df.get("seiten")):
+            n = int(df["anzahl"])
+            for k in range(rows):
+                c = f.c0 + (f.c1 - f.c0) * (df.get("lage", 0.45) + k * 0.5 / rows)
+                off = 0.5 if (ga and ga.get("anzahl")) else 0.0      # zwischen die Gauben setzen
+                for i in range(n):
+                    _dachfenster(mb, f, f.a0 + (f.a1 - f.a0) * (i + 0.5 + off) / n, c)
+    if ka:
+        fs = sorted(_hauptflaechen(faces, z_off, 12.0), key=lambda f: -f.area)[:2]
+        if fs:
+            per = [int(ka) - int(ka) // 2, int(ka) // 2] if len(fs) > 1 else [int(ka)]
+            for f, n in zip(fs, per):
+                for i in range(n):
+                    a = f.a0 + (f.a1 - f.a0) * (i + 0.5) / n
+                    c = f.c1 - 0.9
+                    if not f.inside(a, c) or not f.inside(a + 1.1, c):
+                        c = (f.c0 + f.c1) / 2
+                        if not f.inside(a, c) or not f.inside(a + 1.1, c):
+                            continue
+                    base = f.pt(a, c)
+                    top = max(q[2] for q in f.r["p"]) + f.z_off + 0.9
+                    _quader(mb, (base[0], base[1]), f.pl["h"], f.pl["g"], 1.1, 0.5, base[2] - 0.4, top, "kamin", "dach_flach")
+
+
+def mansarde(mb_roof, mb_wall, polys, ov, z_off, wall_mat, achse=None, traufe=None):
+    """Mansarddach ueber dem Umriss-Rechteck eines Gebaeudes (alle Baukoerperteile eines BEZUG).
+
+    mansarde: true oder {traufe, hoehe, neigung, tiefe, material_oben, brandwand: [a, b], kamin: a|b|beide}
+    Steile Flaechen zur Strasse und zum Hof, oben ein flaches Dach, an beiden Enden Brandwaende. `achse` ist die
+    Strassenflucht (a, b) wie in neighbour_facades; ohne Angabe die laengste Kante der Grundrisse."""
+    m = ov.get("mansarde")
+    m = {} if m is True else dict(m)
+    pts = [q for p in polys for q in p]
+    if len(pts) < 3:
+        return
+    if achse is None:
+        achse = max(((p[i], p[(i + 1) % len(p)]) for p in polys for i in range(len(p))), key=lambda e: math.dist(*e))
+    (ax, ay), (bx, by) = achse
+    L = math.hypot(bx - ax, by - ay)
+    t = ((bx - ax) / L, (by - ay) / L)
+    n = (t[1], -t[0])                       # zur Strasse
+    ud = [((x - ax) * t[0] + (y - ay) * t[1], -((x - ax) * n[0] + (y - ay) * n[1])) for x, y in pts]
+    u0, u1 = min(q[0] for q in ud), max(q[0] for q in ud)
+    d0 = m.get("vorne", 0.0)
+    d1 = d0 + m["tiefe"] if m.get("tiefe") else max(q[1] for q in ud)
+    T = m.get("traufe", traufe)
+    hm, ang = m.get("hoehe", 4.5), m.get("neigung", 70.0)
+    run = hm / math.tan(math.radians(ang))
+    if d1 - d0 < 2 * run + 1.0:
+        return
+    mat = MAT.get(ov.get("material", "schiefer_dunkel"), ov.get("material"))
+    mat_top = MAT.get(m.get("material_oben", "blech_dunkel"), m.get("material_oben"))
+
+    def P(u, d, z):
+        return (ax + t[0] * u - n[0] * d, ay + t[1] * u - n[1] * d, z)
+
+    faces = []
+    for da, db, o in ((d0, d0 + run, 0.0), (d1, d1 - run, 180.0)):
+        quad = [P(u0, da, T), P(u1, da, T), P(u1, db, T + hm), P(u0, db, T + hm)]
+        faces.append({"p": quad, "s": ang, "o": o, "m": mat, "e": []})
+    top = {"p": [P(u0, d0 + run, T + hm), P(u1, d0 + run, T + hm), P(u1, d1 - run, T + hm), P(u0, d1 - run, T + hm)],
+           "s": 0.0, "o": 0.0, "m": mat_top, "e": []}
+    sl = math.hypot(run, hm)
+    for f in faces:
+        mb_roof.poly([(x, y, z + z_off) for x, y, z in f["p"]], [(u0, 0.0), (u1, 0.0), (u1, sl), (u0, sl)], f["m"], (0, 0, 1))
+    mb_roof.poly([(x, y, z + z_off) for x, y, z in top["p"]], None, mat_top, (0, 0, 1))
+    # Attika-Kante am oberen Knick
+    for da in (d0 + run, d1 - run - 0.25):
+        _quader(mb_roof, P(u0, da + 0.25, 0)[:2], t, n, u1 - u0, 0.25, T + hm - 0.05 + z_off, T + hm + 0.18 + z_off, mat_top)
+    # Brandwaende an beiden Enden: Profil des Dachs, 0,45 m ueberstehend, 0,3 m stark
+    ue = m.get("brandwand_ueber", 0.45)
+    wm = m.get("brandwand_material", wall_mat)
+    for uu, sgn in ((u0, 1.0), (u1, -1.0)):
+        prof = [(d0 - 0.05, T - 0.3), (d1 + 0.05, T - 0.3), (d1 + 0.05, T + ue), (d1 - run, T + hm + ue),
+                (d0 + run, T + hm + ue), (d0 - 0.05, T + ue)]
+        ua, ub = uu, uu + 0.3 * sgn
+        for u_, nn in ((ua, -sgn), (ub, sgn)):
+            mb_wall.poly([P(u_, d, z + z_off) for d, z in prof], [(d, z) for d, z in prof], wm, (t[0] * nn, t[1] * nn, 0))
+        for i in range(len(prof)):
+            (da, za), (db, zb) = prof[i], prof[(i + 1) % len(prof)]
+            mx, mz = (da + db) / 2 - (d0 + d1) / 2, (za + zb) / 2 - (T + hm / 2)
+            mb_wall.poly([P(ua, da, za + z_off), P(ub, da, za + z_off), P(ub, db, zb + z_off), P(ua, db, zb + z_off)],
+                         None, wm, (-n[0] * mx, -n[1] * mx, mz))
+    # Kamine an den Brandwaenden (parametrisch: a = Anfang der Flucht, b = Ende)
+    km = m.get("kamin")
+    for key, uu in (("a", u0 + 0.3), ("b", u1 - 0.3 - 0.7)):
+        if km in (key, "beide"):
+            for dk in (d0 + run + 0.4, (d0 + d1) / 2):
+                o = P(uu, dk + 1.6, 0)
+                _quader(mb_wall, o[:2], t, n, 0.7, 1.6, T + hm - 0.2 + z_off, T + hm + 1.7 + z_off, "kamin", "dach_flach")
+    details(mb_roof, faces, ov, z_off, mat)

@@ -42,6 +42,12 @@ Blender läuft als Python-Modul ohne Oberfläche. Die erzeugte `.blend`-Datei l�
 # Straßenabgleich (fester Schritt vor jedem Vertriebsbild): Parkordnung, Gehsteige, Bäume gegen das Orthofoto
 .venv-immoviz/bin/python immoviz/immoviz.py strasse immoviz/projects/wimmergasse-20
 
+# Pflichtliste: in jede Straßenrichtung die ersten Häuser je Straßenseite (ohne Blender)
+.venv-immoviz/bin/python immoviz/immoviz.py sichtbar immoviz/projects/wimmergasse-20 --pflicht
+
+# Fernsicht für Drohne und Terrasse: data/fern.json und markante Gebäude je Kamera
+.venv-immoviz/bin/python immoviz/immoviz.py fernsicht immoviz/projects/wimmergasse-20
+
 # Welche Nachbarhäuser sieht welche Kamera direkt (Bildanteil der Fassade je BEZUG)
 .venv-immoviz/bin/python immoviz/immoviz.py sichtbar immoviz/projects/wimmergasse-20
 
@@ -61,6 +67,20 @@ Ergebnisse landen in `projects/<objekt>/renders/`.
   (Ziegel, Ziegel dunkel, Blech, Blech hell, Kies, Grün, Flach). `build_context` setzt sie auf alle Gebäude im
   Radius, `build_neighbours` ersetzt damit die Angabe `roof` der Nachbarfassaden. Ohne `data/roofs.json` gibt es
   Satteldächer mit First parallel zur Straße. Optional `site.roof_radius_m` (Standard `radius_m`).
+- **Dachkorrekturen** (`roofs_override` am Ende von `project.yaml`, Auswertung in `lib/roofs.py`): je Gebäude
+  (`bezug` oder `pos: [x, y]`) `material` (ziegel_rot, ziegel_rot_alt, ziegel_orange, ziegel_braun, schiefer_dunkel,
+  blech, blech_hell, blech_dunkel, kupfer, kies, gruen, flach), `material_flach`, `mansarde` (true oder `traufe`,
+  `hoehe`, `neigung`, `tiefe`, `material_oben`, `kamin`, `brandwand_material`; ersetzt Stufenvolumen bzw. Dachmodell
+  durch ein Mansarddach mit Brandwänden), `gauben` und `dachfenster` (Anzahl je Dachseite, optional `reihen`,
+  `breite`, `hoehe`, `lage`, `seiten`), `kamine` (Anzahl). Alles parametrische Geometrie; ein Schrägluftbild dient
+  nur zum Ansehen. Ohne Eintrag wechselt der Ziegelton je Gebäude (rot, orange, braun).
+- **Pflichthäuser** (Befehl `sichtbar --pflicht`, `lib/check.py`): in jede Straßenrichtung die ersten 5 Häuser je
+  Straßenseite (`--anzahl`), unabhängig vom Bildanteil. `ohne_fassade` muss leer sein.
+- **Fernsicht** (Befehl `fernsicht`, `lib/fern.py`): lädt hohe Baukörper (ab 33 m, Umkreis 7,5 km), Namen,
+  Strukturdominanten und Höhenfestpunkte nach `data/fern.json` und listet je Kamera die markanten Gebäude im
+  Sichtkegel. Im Modell: Fernzone als Blockränder mit Satteldächern auf grobem Gelände (bis `site.fernzone_bis_m`,
+  Standard 2400 m), hohe Gebäude als Silhouette, Hügelkette als Kulisse. Optional `site.fern_radius_m`,
+  `site.fern_min_hoehe_m`.
 - **Direkt sichtbare Häuser** (Befehl `sichtbar`): Sehstrahlen je Kamera, Ergebnis je BEZUG mit Bildanteil und
   Entfernung. Jedes Haus mit mindestens 1 % Bildanteil und unter 80 m braucht einen Eintrag in
   `neighbour_facades` und eine frontale Ansicht in `streetview_checks`.
