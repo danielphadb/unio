@@ -11,7 +11,7 @@ Bausteine (je Eintrag optional `gruppe`, Standard "neubau"; jede Gruppe wird zu 
              {a, b, z: [z0, z1], u: [u0, u1], d, wand, laibung, fenster: [{u, z, typ}], reihen: [{z, u: [[u0, u1], ...], typ}]}
              typ: fenster | tuer | hst (Hebeschiebetuer) | fix. Hinter jeder Oeffnung eine Innenraumkarte.
 - boxen:     Quader an einer Linie {a, b, u, d, z, mat}
-- gelaender: Polylinie {pts, z, h, typ: stab | glas | voll, mat}
+- gelaender: Polylinie {pts, z, h, typ: stab | glas | voll, mat}; Punkte [x, y, z] mit eigener Fusshoehe (Rampen)
 - flaechen:  Platte aus Polygon {poly, z, dicke, mat}
 - schraegen: beliebiges ebenes Polygon {pts: [[x, y, z], ...], mat}
 - dachfenster: Fenster in einer schraegen Flaeche {pts: [4 Punkte im Uhrzeigersinn von unten links], mat}
@@ -162,6 +162,19 @@ class Neubau:
     def gelaender(self, gl):
         G = self.g(gl)
         pts = gl["pts"]
+        if any(len(p) > 2 for p in pts):
+            # Punkte mit eigener Fusshoehe [x, y, z] (z. B. entlang einer Rampe): Abschnitte von hoechstens
+            # 0,25 m mit konstanter Hoehe, bei 5 % Gefaelle sind die Stufen (1 cm) nicht sichtbar
+            z0 = gl.get("z", 0.0)
+            P = [(p[0], p[1], p[2] if len(p) > 2 else z0) for p in pts]
+            for (xa, ya, za), (xb, yb, zb) in zip(P[:-1], P[1:]):
+                n = max(1, int(math.ceil(math.hypot(xb - xa, yb - ya) / 0.25)))
+                for k in range(n):
+                    t0, t1 = k / n, (k + 1) / n
+                    sub = dict(gl, pts=[[xa + (xb - xa) * t0, ya + (yb - ya) * t0], [xa + (xb - xa) * t1, ya + (yb - ya) * t1]],
+                               z=za + (zb - za) * (t0 + t1) / 2)
+                    self.gelaender(sub)
+            return
         z, h = gl["z"], gl.get("h", 1.0)
         typ, mat = gl.get("typ", "stab"), gl.get("mat", "nb_metall")
         for (pa, pb) in zip(pts[:-1], pts[1:]):

@@ -363,7 +363,8 @@ class ManualApartment:
     def einbauten(self, mw, mg):
         """Optional (wohnungen.yaml): feste Einbauten und Möbel als Platzhalter, damit Lage und Größe in der
         Vorschau gesperrt sind. einbauten: [{rect: [x0, y0, x1, y1], z: [z0, z1] ueber FOK, mat}],
-        zylinder: [{c: [x, y], r, z: [z0, z1], mat, seg}]. Material "glas" landet im Glasobjekt."""
+        zylinder: [{c: [x, y], r, z: [z0, z1], mat, seg}], boegen: [{c, r: [ri, ro], winkel: [a0, a1], z, mat}].
+        Material "glas" landet im Glasobjekt."""
         z0 = self.c["floor_z"]
         for e in self.c.get("einbauten", []):
             x0, y0, x1, y1 = e["rect"]
@@ -382,6 +383,38 @@ class ManualApartment:
                 (ax, ay), (bx, by) = pts[k], pts[(k + 1) % seg]
                 mw.poly([(ax, ay, za), (bx, by, za), (bx, by, zb), (ax, ay, zb)], None, mat,
                         ((ax + bx) / 2 - cx, (ay + by) / 2 - cy, 0))
+        for b in self.c.get("boegen", []):
+            self._bogen(mg if b.get("mat") == "glas" else mw, b, z0)
+
+    @staticmethod
+    def _bogen(mb, b, z0):
+        """Optional (wohnungen.yaml boegen): Kreisringsektor als echter Bogen, z. B. gerundete Wandecke.
+        {c: [x, y], r: [r_innen, r_aussen], winkel: [a0, a1] in Grad (0 = +x, 90 = +y), z: [z0, z1], mat, seg}.
+        Enden offen (schließen an gerade Wandstücke an), mit kappen: true geschlossen."""
+        cx, cy = b["c"]
+        ri, ro = b["r"]
+        a0, a1 = (math.radians(v) for v in b.get("winkel", [0, 90]))
+        seg = b.get("seg", max(8, int(abs(a1 - a0) / math.radians(4))))
+        za, zb = z0 + b.get("z", [0.0, 2.5])[0], z0 + b.get("z", [0.0, 2.5])[1]
+        mat = b.get("mat", "innen_wand")
+        ang = [a0 + (a1 - a0) * k / seg for k in range(seg + 1)]
+        P = lambda r, a: (cx + r * math.cos(a), cy + r * math.sin(a))
+        for t0, t1 in zip(ang[:-1], ang[1:]):
+            tm = (t0 + t1) / 2
+            (i0, i1), (o0, o1) = (P(ri, t0), P(ri, t1)), (P(ro, t0), P(ro, t1))
+            ring = [i0, o0, o1, i1]
+            mb.poly([(x, y, zb) for x, y in ring], None, mat, (0, 0, 1))
+            mb.poly([(x, y, za) for x, y in ring], None, mat, (0, 0, -1))
+            L0, L1 = ro * t0, ro * t1      # Abwicklung als UV, damit Holz und Putz nicht verzerren
+            mb.poly([(*o0, za), (*o1, za), (*o1, zb), (*o0, zb)], [(L0, za), (L1, za), (L1, zb), (L0, zb)],
+                    mat, (math.cos(tm), math.sin(tm), 0))
+            mb.poly([(*i0, za), (*i1, za), (*i1, zb), (*i0, zb)], [(ri * t0, za), (ri * t1, za), (ri * t1, zb), (ri * t0, zb)],
+                    mat, (-math.cos(tm), -math.sin(tm), 0))
+        if b.get("kappen"):
+            for a, s in ((a0, -1), (a1, 1)):
+                (ix, iy), (ox, oy) = P(ri, a), P(ro, a)
+                n = (-math.sin(a) * s * (1 if a1 > a0 else -1), math.cos(a) * s * (1 if a1 > a0 else -1), 0)
+                mb.poly([(ix, iy, za), (ox, oy, za), (ox, oy, zb), (ix, iy, zb)], None, mat, n)
 
     def _dreh(self, x, y):
         """Optional: Hülle in eigenen Koordinaten (z. B. Maße aus einem Möblierungsplan), gedreht um drehung_grad

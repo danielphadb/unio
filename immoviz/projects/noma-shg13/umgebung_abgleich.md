@@ -134,3 +134,50 @@ modelliert (das Prüfwerkzeug zeigt deshalb "modelliert: []"). Alle anderen Häu
 
 Offen: Höhen von Kasten, Hütte, Erkerdächern und Bäumen sind geschätzt; Balkonlage an Schlachthausgasse 11 auf rund 2 m;
 der Bestand auf dem Noma-Grundstück (Werkstatt) verdeckt im Luftbild den künftigen Grünstreifen.
+
+## 8. Runde 4: nummerierte Nachbarübersicht für den Kunden
+
+Prüfbild `umgebung_nummern.jpg` (Scratchpad, nicht im Repo): Draufsicht des Modells mit Nummern und je Gebäude ein
+Modellausschnitt. Der Kunde kann je Nummer markieren, was falsch ist, und liefern, was fehlt.
+
+**Hausnummern korrigiert** (Adressregister Stadt Wien `ADRESSENOGD` je BEZUG, 15.11.2026): Die Abschnitte 3, 6 und 7 und
+Kommentare in `project.yaml` benennen einige Nachbarn falsch. Richtig ist: 005378 = Schlachthausgasse 11 / Schnirchgasse 2
+(Eckhaus Ost, nicht "Schlachthausgasse 15"), 005379 = Schnirchgasse 4, 005380 = Schnirchgasse 6, 005362 = Schlachthausgasse
+15/17 / Erdbergstraße 121 (Westnachbar mit Hofbau und Dachgarten, nicht "Schlachthausgasse 11"), 005387 = Würtzlerstraße 12
+(nicht 8), 005382 = Schnirchgasse 8 / Würtzlerstraße 8. Die BEZUG-Schlüssel in `project.yaml` stimmen, nur die Namen in
+Kommentaren und Texten waren vertauscht.
+
+**Quellen und Rangfolge:** Einreichplan/Vermessung > Orthofoto 2024 und Dachmodell LOD2 (OGD) > Apple-Maps-3D-Ansichten
+des Kunden (`renders/streetview/referenz_apple_kunde/apple_8` bis `12`, gitignored, nur Ansicht) > Projektvisualisierungen
+(`08 Visualisierungen`, künstlerisch, zeigen den geplanten Zustand; Apple zeigt noch den Bestand auf dem Noma-Grundstück).
+Nichts davon ist im Modell als Textur oder Geometrie übernommen. Visualisierungen: Ext1 = `SHG13_Exterior1_fin` (und
+`-2`), Ext2 = `SHG13_Exterior2_fin`, Hof = `SHG13_Hof_fin`, Hof2/3/4 = `SHG13_Hof_fin-2/-3/-4`, DT = `SHG13_TOP23_DT_fin`,
+`dt people`, `dg people`, `Dachview`, `Dachterrasse` (Dachbilder sind KI-Montagen mit erfundener Fernsicht, für Nachbarn
+nicht verwertbar), Innenbilder TOP07WK/TOP8_WK/TOP23_WK/TOP04_Loft (Fensterblick nur unscharf: weiße Gründerzeitfassaden
+mit roten Ziegeldächern gegenüber, keine verwertbaren Details).
+
+| Nr | BEZUG | Adresse (OGD) | Lage | Modell heute | Quellen | Sicherheit | Was fehlt / bitte liefern |
+|---|---|---|---|---|---|---|---|
+| 1 | 005378 | Schlachthausgasse 11 / Schnirchgasse 2 | Eckhaus Ost, Feuermauer zum Straßenhaus | Hoffassade weiß mit Faschen (`hof_ost_005378`), 21,6 m; Runde 4: Dach flach/Kies statt Blech (Dachterrassen) | LOD2, Apple 9/10/11 (weißer Bau, Flachdach mit Terrassen und Aufbauten), Visualisierung Ext1/Ext2 (Straßenfront gelb mit Stuck und Apotheke, links von Noma), Hof_fin-2/-3 (rechter Rand, weiß) | mittel | Hofansicht mit Geschoßzahl und Fensterachsen, Dachaufbauten; Straßenfassade gelb nicht modelliert (nur für Straßenmotive) |
+| 2 | 005379 | Schnirchgasse 4 | Hoftrakt Ost gegenüber Top 3 | weiß, Erkerturm mit Zeltdach; Runde 4: Ziegel rotbraun mit 4 Gauben zum Hof und 3 Kaminen (LOD2 Ziegel) | Apple 10 (achteckiges Zeltdach, rotbraune Ziegel, Gauben), Google 3D (Runde 3), Hof_fin-4 | hoch | Fensterraster und Erkerhöhe aus einem Hoffoto |
+| 3 | 005380 | Schnirchgasse 6 | Hoftrakt Ost gegenüber Top 4 | weiß, Erkerturm; Runde 4: Ziegel rotbraun mit 3 Gauben (vorher Ziegel dunkel) | Apple 10 (zweiter Erker mit spitzem Walm, Ziegeldach mit Gauben), Hof_fin (rechter Rand) | mittel | Erkerdach im Modell Zeltdach statt spitzem Walm; Fensterraster |
+| 4 | 005382 | Schnirchgasse 8 / Würtzlerstraße 8 | Eckhaus Südost | weiß, Stuckrahmen (`hof_nord_005382`); Runde 4: Ziegel rot, 2 Kamine | Apple 10 (Ecke mit rotem Ziegeldach), LOD2 | mittel | Hoffassade nur geschätzt |
+| 5 | 005387 | Würtzlerstraße 12 (vorher fälschlich "Würtzlerstraße 8") | Süd, gegenüber Nachbargarten | hell weiß-grau (`hof_sued_005387`); Runde 4: Dach Blech hell (flach mit Aufbauten) | Apple 9/10 (heller Bau mit Dachaufbauten), Google 3D | mittel | Geschoßzahl und Fenster der Nordfassade |
+| 6 | 520711 | ohne Adresse (Nebengebäude im Nachbarhof Süd) | Südende Nachbargarten | Baukörper 3,6 m, flach | LOD2, Apple 10 (niedriger Bau mit rotem Dach an der Südgrenze, unscharf) | niedrig | Dachform und Farbe |
+| 7 | 005365 | Erdbergstraße 127 / Würtzlerstraße 14 | Eckhaus Südwest | nur Baukörper und LOD2-Dach (Blech) | LOD2, Apple 9/12 (graue Mansarde); Chatbild des Kunden laut Sichtung: Eckhaus mit terrakotta Fassadenfeldern (nicht als Datei vorhanden, nicht übernommen) | niedrig | Hoffassade, Farbe (terrakotta?) |
+| 8 | 005364 | Erdbergstraße 125 | West, Südteil | `hof_west_005364` modern hellgrau | Google 3D (Runde 3), Apple 12 (weißer hoher Block) | mittel | Fensterbänder und Balkone |
+| 9 | 005363 | Erdbergstraße 123 | West, gegenüber Terrassen | `hof_west_005363` weiß mit Fensterbändern | Hof_fin (links), Apple 12 (weißer Block mit Balkonstapel) | mittel | Balkonstapel und graue Felder nicht modelliert |
+| 10 | 005362 | Schlachthausgasse 15/17 / Erdbergstraße 121 (vorher fälschlich "Schlachthausgasse 11") | Westnachbar mit Hofbau und Dachgarten | drei Karten apricot/weiß/apricot, 7 Geschoße, Balkone; Runde 4: graue Blechmansarde mit 8 Gauben zum Hof | Apple 9/10/11 (lachs/apricot, weißer Mittelteil, graue Mansarde mit Gauben und Terrassen, Dachgarten mit Bäumen und Lichtkuppeln), Ext1 (Straßenfront orange-rot mit weißem Glaserker, rechts von Noma), Hof_fin/-2 | hoch | Straßenfront (orange-rot, Glaserker) nur für Straßenmotive; Balkonlage ±2 m |
+| 11 | 004967 | Schlachthausgasse 10 | gegenüber | nur Baukörper und LOD2-Dach | LOD2, Apple 9/10 (Gründerzeit weiß/creme, Ziegeldach) | niedrig | Straßenfassade (nur für Straßen- und Dachmotive relevant) |
+| 12 | 004968 | Schlachthausgasse 12 | gegenüber | dto. | LOD2, Apple 9/10 | niedrig | dto. |
+| 13 | 004966 | Schlachthausgasse 8 | gegenüber | dto. | LOD2, Apple 9/10 | niedrig | dto. |
+| 14 | 004969 | Erdbergstraße 119 / Schlachthausgasse 14 | gegenüber Ecke | dto. | LOD2, Apple 9 | niedrig | dto. |
+| 15 | 172417 | Schlachthausgasse 3 / Schnirchgasse 1-7 | Gemeindebau-Riegel jenseits der Schnirchgasse | weißer Baukörper 32 m, LOD2-Dach hell | LOD2, Apple 9/10 (9 bis 10 Geschoße, rote Balkonbänder, Baumgruppe davor) | mittel | rote Balkonbänder und Fensterraster nicht modelliert |
+| 16 | 229182 | Schnirchgasse 10 / Würtzlerstraße 1 (Rundbau) | Südost | runder Baukörper aus OGD/LOD2 | LOD2, Apple 8/9 (Bürorundturm mit Ringgeschoßen) | mittel | Ringgeschoße als Fassade |
+| 17 | 504164 | Würtzlerstraße 18 (Wohnanlage, gegenüber) | Süd jenseits der Würtzlerstraße | nur Baukörper | LOD2 | niedrig | Fassaden (nur für Dachmotive relevant) |
+
+Apple zeigt auf dem Noma-Grundstück noch den Bestand (langer Hoftrakt mit braunem Ziegeldach, Gastgarten mit Glasdach und weißen Schirmen, graue Blechdächer); das Modell zeigt den Neubau laut Einreichplan. Nicht als Datei vorhanden sind die vier Chatbilder des Kunden (Sichtung durch den Koordinator): Ihre Angaben (terrakotta Eckhaus, dunkles Bürogebäude mit Rasterfassade, Gemeindebau mit roten Balkonbändern) sind oben als "zu prüfen" vermerkt und nicht ins Modell übernommen.
+
+
+Offen für alle Nummern: Fotos aus dem Hof (Hoffassaden, Erker, Feuermauern) und ein Schrägluftbild in höherer Auflösung;
+Geschoßhöhen der Nachbarn sind aus der Traufhöhe (LOD2) gemittelt.

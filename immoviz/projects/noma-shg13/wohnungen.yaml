@@ -165,15 +165,17 @@ wohnungen:
       wohnkueche_gauben:   {pos: [6.9, -8.3], target: [2.6, -15.5], lens: 24, h: 1.40}   # Kueche rechts, Gaubengruppe, Schraege links
       wohnkueche_terrasse: {pos: [1.4, -8.6], target: [9.2, -15.6], lens: 24, h: 1.35}  # Gegenblick zu Terrassentuer und Schraege
 
-  # ------------------------------------------------------------------ Noma Apartments (Kurzzeitapartments, EG Hoftrakt)
-  # Apartment Top 1 (APT. 01, 28,84 m2 laut [EIN S. 8]) im Derenko-Entwurf [INT S. 3, 12 bis 16], Variante 2 vom 17.06.2026.
   # Eigene Koordinaten aus dem Moeblierungsplan 1:50 [INT S. 3]: X = von der Wand zum Strassenhaus nach rechts (0 bis 5,03),
   # Y = von der Fensterwand (Gartenstreifen Sued) Richtung Gang (0 bis 5,936). Lage: Hofrahmen a = -10,70 bis -5,67,
   # b = 0,35 bis 6,29 (erstes Apartment der Suedreihe, Tuer "01" laut [EIN S. 8]); drehung_grad und ursprung_lokal
   # setzen die Huelle in das Projektsystem (Ausblick auf Gartenstreifen, Zaun und Hofbau Schlachthausgasse 11).
   # Raumhoehe 3,38 m: FOK +-0,00, Rohdeckenunterkante +3,38 (Deckensprung auf +3,57 unter dem Strassenhaus nicht
   # modelliert), keine abgehaengte Decke (Betonkernaktivierung laut [BAB-A 3.10]). Fenster 1,70 m breit [INT S. 3],
-  # Parapet 0,90 (FPH 0,90 laut [EIN S. 8]), Sturz 2,60 [ANN]. Einbauten und Moebel als Platzhalter nach [INT S. 3, 13 bis 16].
+  # Parapet 0,90 (FPH 0,90 laut [EIN S. 8]). Einbauten und Moebel nach [INT S. 3, 12 bis 16].
+  # Runde 4 (Kunde 15.11.: Kueche zu klein, kein Stuck, Rot falsch, Ecke Bett/Gang): Hoehen der Wandeinbauten ueber das
+  # Verhaeltnis zur Raumhoehe aus den Ansichten S. 13 bis 16, ergonomische Hoehen nach Standard; kein Stuck, nur
+  # schlichte Vorhangvoute mit LED an der Fensterwand [S. 12 D, S. 14]; Trennwand als Wand mit Viertelkreis-Rundung.
+  # Kueche Variante 1 nach [INT S. 13, Stand 07.10.] und Derenko-Skizze S. 3: Hochschrank am Fensterende, Zeile 3 x 600.
   apt01:
     plan: manuell
     titel: Noma Apartment Top 1, EG Hoftrakt, 28,84 m2, Interior Derenko [EIN S. 8, INT]
@@ -185,124 +187,141 @@ wohnungen:
     slab_rect: [-0.25, -0.35, 5.28, 6.19]
     walls:
       - rect: [-0.25, -0.35, 5.28, 0.0]                      # Fensterwand zum Gartenstreifen
-        openings: [{span: [3.03, 4.73], z: [0.90, 2.40], type: fenster}]   # Korrektur 15.11.: Hoehe 1,50 laut EIN S. 8 (FPH 0,90), Breite 1,70 laut INT S. 3
+        openings: [{span: [3.03, 4.73], z: [0.90, 2.40], type: fenster}]   # Hoehe 1,50 laut EIN S. 8 (FPH 0,90), Breite 1,70 laut INT S. 3
       - rect: [-0.25, 0.0, 0.0, 5.936]                       # Wand zum Strassenhaus
       - rect: [5.03, 0.0, 5.28, 5.936]                       # Wand zu APT. 02
       - rect: [-0.25, 5.936, 5.28, 6.186]                    # Gangwand mit Eingangstuer 90 x 200 [BAB-A 3.4]
         openings: [{span: [3.33, 4.23], z: [0.0, 2.05], type: tuer}]
-      - rect: [0.0, 4.036, 3.15, 4.136]                      # Badwand, Richtung Eingang verlaengert (Trennwand) [INT S. 3]
-      - rect: [3.05, 3.30, 3.25, 4.036]                      # Trennwand mit Rundung, Bett rueckt nach rechts [INT S. 3], Korrektur 15.11.: Ende y 3,30 statt 3,60 (Derenko-Plan S. 3)
+      - rect: [0.0, 4.036, 2.99, 4.136]                      # Badwand, Richtung Eingang verlaengert bis Beginn der Rundung (Trennwand) [INT S. 3]
+      - rect: [3.17, 3.30, 3.27, 3.856]                      # Runde 4: Trennwand-Arm Richtung Fenster, 10 cm, raumhoch, Ende y 3,30 [INT S. 3, S. 16]
       - rect: [2.515, 4.136, 2.615, 5.936]                   # Badwand Ost mit Badtuer 80 x 200
         openings: [{span: [4.236, 5.036], z: [0.0, 2.0], type: tuer}]
+    boegen:
+      - {c: [2.99, 3.856], r: [0.18, 0.28], winkel: [0, 90], z: [0, 3.38], mat: innen_wand}   # Runde 4: Trennwand-Rundung als Viertelkreis, R innen 0,18 / aussen 0,28 [INT S. 3]
+      - {c: [2.99, 3.856], r: [0.134, 0.18], winkel: [0, 90], z: [0, 1.47], mat: eiche_derenko}   # Eichenverkleidung laeuft um die Rundung [INT S. 12: LED-Linie D]
+      - {c: [2.99, 3.856], r: [0.13, 0.18], winkel: [0, 90], z: [1.47, 1.49], mat: led}
     zylinder:
-      - {c: [4.96, 2.70], r: 0.015, z: [0.92, 1.22], mat: messing}   # Armatur Messing [INT S. 13]
-      - {c: [3.15, 3.30], r: 0.10, z: [0.0, 3.38], mat: innen_wand}       # Rundung Trennwand
-      - {c: [3.82, 0.916], r: 0.45, z: [0.72, 0.75], mat: hellblau}       # runder Tisch hellblau [INT S. 13/14]
-      - {c: [3.82, 0.916], r: 0.17, z: [0.0, 0.72], mat: hellblau}
-      - {c: [3.70, 0.95], r: 0.13, z: [1.62, 1.75], mat: bordeaux_lack}   # drei Pendelleuchten bordeaux
-      - {c: [3.98, 0.80], r: 0.13, z: [1.48, 1.61], mat: bordeaux_lack}
-      - {c: [3.85, 1.10], r: 0.13, z: [1.75, 1.88], mat: bordeaux_lack}
-      - {c: [1.85, 5.68], r: 0.20, z: [0.88, 1.02], mat: keramik_weiss}   # Aufsatzbecken
+      - {c: [4.96, 2.538], r: 0.015, z: [0.9, 1.2], mat: messing}   # Armatur Messing [INT S. 13]
+      - {c: [3.82, 0.916], r: 0.45, z: [0.72, 0.75], mat: hellblau}   # runder Tisch hellblau, Platte 0,75 [INT S. 13/14]
+      - {c: [3.82, 0.916], r: 0.17, z: [0, 0.72], mat: hellblau}
+      - {c: [3.98, 0.8], r: 0.165, z: [1.62, 1.68], mat: bordeaux_lack}   # Pendel bordeaux, Krempe 0,33, Unterkante 1.62 [INT S. 12 B, S. 13/14]
+      - {c: [3.98, 0.8], r: 0.055, z: [1.68, 1.88], mat: bordeaux_lack}
+      - {c: [3.7, 0.95], r: 0.165, z: [1.85, 1.91], mat: bordeaux_lack}
+      - {c: [3.7, 0.95], r: 0.055, z: [1.91, 2.11], mat: bordeaux_lack}
+      - {c: [3.85, 1.1], r: 0.165, z: [2, 2.06], mat: bordeaux_lack}
+      - {c: [3.85, 1.1], r: 0.055, z: [2.06, 2.26], mat: bordeaux_lack}
+      - {c: [1.85, 5.68], r: 0.2, z: [0.88, 1.02], mat: keramik_weiss}   # Aufsatzbecken
+      - {c: [2.72, 3.75], r: 0.18, z: [0, 0.45], mat: bordeaux_lack}   # Runde 4: Nachttisch-Hocker bordeaux rechts [INT S. 15/16]
     einbauten:
-      - {rect: [0.0, 0.0, 5.03, 5.936], z: [0.004, 0.012], mat: boden_parkett}   # Bodenbelag ueber dem Gelaende (FOK +-0,00 = Gelaende)
+      - {rect: [0, 0, 5.03, 5.936], z: [0.004, 0.012], mat: boden_parkett}   # Bodenbelag ueber dem Gelaende (FOK +-0,00 = Gelaende)
       # Tueren: Eingang Eiche gestemmt [INT S. 16], Badtuer bordeaux [INT S. 10]
-      - {rect: [3.38, 5.976, 4.18, 6.016], z: [0.0, 2.03], mat: tuer_eiche}
-      - {rect: [2.545, 4.28, 2.585, 4.99], z: [0.0, 1.98], mat: bordeaux_lack}
-      # Stuckleiste umlaufend [INT S. 13 bis 16]
-      - {rect: [0.0, 0.0, 5.03, 0.10], z: [3.24, 3.38], mat: stuck}
-      - {rect: [0.0, 0.0, 0.10, 4.036], z: [3.24, 3.38], mat: stuck}
-      - {rect: [4.93, 0.0, 5.03, 5.936], z: [3.24, 3.38], mat: stuck}
-      - {rect: [2.615, 5.836, 4.93, 5.936], z: [3.24, 3.38], mat: stuck}
-      - {rect: [0.0, 3.936, 2.95, 4.036], z: [3.24, 3.38], mat: stuck}
-      - {rect: [0.0, 0.10, 4.93, 0.12], z: [3.20, 3.24], mat: led_schwach}  # indirekte Beleuchtung unter der Leiste [INT S. 12 D]
-      - {rect: [0.10, 0.12, 0.12, 3.936], z: [3.20, 3.24], mat: led_schwach}
-      # Bettwand: Holzverkleidung bis 1,25 mit Lichtleiste, olivgruenes Polster, Nachtkaestchen, Gelenkleuchten [INT S. 15/16]
-      - {rect: [0.0, 3.99, 2.95, 4.036], z: [0.0, 1.25], mat: eiche_derenko}
-      - {rect: [0.0, 3.985, 2.95, 4.0], z: [1.25, 1.27], mat: led}
-      - {rect: [0.0, 1.67, 0.04, 3.99], z: [0.0, 1.25], mat: eiche_derenko}
-      - {rect: [0.0, 1.67, 0.045, 3.99], z: [1.25, 1.27], mat: led}
-      - {rect: [0.65, 3.95, 2.45, 3.99], z: [0.45, 1.15], mat: oliv_polster}   # Korrektur 15.11.: Bett 1,80 breit, Mitte x 1,55 [INT S. 3]
-      - {rect: [0.65, 1.88, 2.45, 3.95], z: [0.0, 0.30], mat: bett_stoff}
-      - {rect: [0.70, 1.93, 2.40, 3.93], z: [0.30, 0.55], mat: bettwaesche}
-      - {rect: [0.15, 3.55, 0.60, 3.95], z: [0.42, 0.58], mat: eiche_derenko}
-      - {rect: [2.50, 3.55, 2.93, 3.95], z: [0.42, 0.58], mat: eiche_derenko}
-      - {rect: [0.33, 3.78, 0.43, 3.98], z: [1.00, 1.08], mat: schwarz}
-      - {rect: [2.68, 3.78, 2.78, 3.98], z: [1.00, 1.08], mat: schwarz}
-      - {rect: [1.00, 4.01, 2.20, 4.036], z: [1.55, 2.35], mat: bild_abstrakt}
-      - {rect: [0.65, 1.33, 2.45, 1.71], z: [0.0, 0.45], mat: bank_streifen}   # Korrektur 15.11.: Bank in Bettbreite, y 1,33 bis 1,71 [INT S. 3]
-      # Einbau-Garderobe [INT S. 13]: Haengeteil, Nische mit Bank (Polster oliv), Lichtnischen
-      - {rect: [4.445, 5.286, 5.03, 5.306], z: [0.0, 2.75], mat: eiche_derenko}
-      - {rect: [4.445, 5.866, 5.03, 5.886], z: [0.0, 2.75], mat: eiche_derenko}
-      - {rect: [4.445, 5.306, 5.03, 5.866], z: [2.35, 2.75], mat: eiche_derenko}
-      - {rect: [4.445, 5.306, 5.03, 5.866], z: [1.95, 1.98], mat: eiche_derenko}
-      - {rect: [4.445, 4.529, 5.03, 4.549], z: [0.0, 2.75], mat: eiche_derenko}
-      - {rect: [4.445, 4.549, 5.03, 5.286], z: [0.0, 0.40], mat: eiche_derenko}
-      - {rect: [4.465, 4.569, 5.01, 5.266], z: [0.40, 0.50], mat: oliv_polster}
-      - {rect: [4.445, 4.549, 5.03, 5.286], z: [1.95, 2.75], mat: eiche_derenko}
-      - {rect: [4.445, 4.549, 5.03, 5.286], z: [1.93, 1.95], mat: led}
-      - {rect: [4.445, 4.038, 5.03, 4.058], z: [0.0, 2.75], mat: eiche_derenko}   # Korrektur 15.11.: Garderobe 1898 ab Gangwand, Ende y 4,038 [INT S. 3]
-      - {rect: [4.445, 4.008, 5.03, 4.529], z: [2.70, 2.75], mat: eiche_derenko}
-      - {rect: [4.445, 4.008, 5.03, 4.529], z: [0.40, 0.42], mat: eiche_derenko}
-      - {rect: [4.445, 4.008, 5.03, 4.529], z: [0.90, 0.92], mat: eiche_derenko}
-      - {rect: [4.445, 4.008, 5.03, 4.529], z: [1.40, 1.42], mat: eiche_derenko}
-      - {rect: [4.445, 4.008, 5.03, 4.529], z: [1.90, 1.92], mat: eiche_derenko}
-      - {rect: [4.445, 4.008, 5.03, 4.529], z: [2.30, 2.32], mat: eiche_derenko}
-      - {rect: [4.45, 4.008, 4.47, 4.529], z: [0.42, 2.30], mat: led_schwach}
-      # Kuechenzeile Eiche [INT S. 13]: Unterschraenke, Marmor-Arbeitsplatte, Fliesenspiegel, offene Borde mit Licht, Hochschrank
-      - {rect: [4.445, 1.922, 5.03, 3.438], z: [0.10, 0.88], mat: eiche_derenko}
-      - {rect: [4.50, 1.922, 5.03, 3.438], z: [0.0, 0.10], mat: schwarz}
-      - {rect: [4.415, 1.922, 5.03, 3.438], z: [0.88, 0.92], mat: marmor}
-      - {rect: [5.01, 1.922, 5.03, 3.438], z: [0.92, 1.50], mat: fliese_muster}
-      - {rect: [4.78, 1.922, 5.03, 3.438], z: [1.55, 1.58], mat: eiche_derenko}
-      - {rect: [4.78, 1.922, 5.03, 3.438], z: [1.53, 1.55], mat: led}
-      - {rect: [4.78, 1.922, 5.03, 3.438], z: [1.95, 1.98], mat: eiche_derenko}
-      - {rect: [4.78, 1.922, 5.03, 3.438], z: [1.93, 1.95], mat: led}
-      - {rect: [4.445, 3.438, 5.03, 4.038], z: [0.0, 2.75], mat: eiche_derenko}   # Korrektur 15.11.: Hochschrank 600 neben der Garderobe [INT S. 13]
-      - {rect: [4.435, 3.498, 4.445, 3.978], z: [1.30, 1.62], mat: schwarz}
-      - {rect: [4.62, 2.48, 4.96, 2.92], z: [0.915, 0.925], mat: spiegel}   # Spuele, Mitte 0,74 vom Hochschrank [INT S. 13]
-      - {rect: [4.52, 2.00, 4.98, 2.30], z: [0.92, 0.926], mat: schwarz}   # Kochfeld Richtung Fenster (Annahme)
-      # Essplatz [INT S. 13/14]: zwei Polsterstuehle olivgruen
-      - {rect: [3.02, 0.58, 3.48, 1.04], z: [0.40, 0.48], mat: oliv_polster}
+      - {rect: [3.38, 5.976, 4.18, 6.016], z: [0, 2.03], mat: tuer_eiche}
+      - {rect: [2.545, 4.28, 2.585, 4.99], z: [0, 1.98], mat: bordeaux_lack}
+      # Runde 4: kein Stuck (Kunde). Nur schlichte Vorhangvoute an der Fensterwand, glatte Blende 14 cm, LED zum Vorhang [INT S. 12 D, S. 14]
+      - {rect: [0, 0.18, 5.03, 0.2], z: [3.24, 3.379], mat: creme_decke}
+      - {rect: [0.02, 0.02, 5.01, 0.05], z: [3.34, 3.36], mat: led_schwach}
+      # Bettwand: Eichenverkleidung bis 1.47 mit Lichtleiste (S. 15/16), Polster oliv ueber die ganze Wand (S. 16), Leuchten C
+      - {rect: [0, 3.99, 2.99, 4.036], z: [0, 1.47], mat: eiche_derenko}   # Runde 4: Oberkante 1,47 statt 1,25 [INT S. 15/16]
+      - {rect: [0, 3.986, 2.99, 4], z: [1.47, 1.49], mat: led}
+      - {rect: [3.124, 3.3, 3.17, 3.856], z: [0, 1.47], mat: eiche_derenko}   # Verkleidung am Trennwand-Arm [INT S. 12]
+      - {rect: [3.12, 3.3, 3.134, 3.856], z: [1.47, 1.49], mat: led}
+      - {rect: [0, 1.67, 0.046, 3.99], z: [0, 1.47], mat: eiche_derenko}   # Seitenwand ab y 1,67 [INT S. 15]
+      - {rect: [0.036, 1.67, 0.05, 3.99], z: [1.47, 1.49], mat: led}
+      - {rect: [0.05, 3.95, 2.95, 3.99], z: [0.45, 1.07], mat: oliv_polster}   # Runde 4: Polster ueber die Bettwand, Oberkante 1,07 [INT S. 16]
+      - {rect: [0.65, 1.88, 2.45, 3.95], z: [0, 0.32], mat: bett_stoff}   # Bett 1,80 x 2,07 [INT S. 3]
+      - {rect: [0.68, 1.9, 2.42, 3.93], z: [0.32, 0.58], mat: bettwaesche}   # Oberkante Matratze 0,58 [INT S. 15/16]
+      - {rect: [0.06, 3.55, 0.58, 3.95], z: [0.3, 0.48], mat: eiche_derenko}   # Runde 4: Nachttisch links schwebend Eiche [INT S. 16]
+      - {rect: [0.45, 3.97, 0.53, 3.99], z: [1.18, 1.3], mat: schwarz}   # Gelenkleuchten C [INT S. 12, S. 16]
+      - {rect: [2.55, 3.97, 2.63, 3.99], z: [1.18, 1.3], mat: schwarz}
+      - {rect: [0.55, 3.8, 0.68, 3.88], z: [0.93, 1.03], mat: schwarz}
+      - {rect: [2.42, 3.8, 2.55, 3.88], z: [0.93, 1.03], mat: schwarz}
+      - {rect: [0.62, 3.96, 1.9, 3.985], z: [1.51, 2.47], mat: bild_abstrakt}   # Runde 4: Bild 1,28 x 0,96, links der Bettmitte [INT S. 16]
+      - {rect: [0.65, 1.33, 2.45, 1.71], z: [0, 0.46], mat: bank_streifen}   # Bank in Bettbreite, y 1,33 bis 1,71 [INT S. 3]
+      # Einbau-Garderobe [INT S. 3: 500 / 750 / 500, 585 tief; S. 13: Haengeteil, Nische mit Bank, offene Faecher]
+      - {rect: [4.445, 5.866, 5.03, 5.886], z: [0, 2.75], mat: eiche_derenko}   # Seitenwaende, Oberkante 2,75 (S. 13: 0,814 der Raumhoehe)
+      - {rect: [4.445, 5.286, 5.03, 5.306], z: [0, 2.75], mat: eiche_derenko}
+      - {rect: [4.445, 4.529, 5.03, 4.549], z: [0, 2.75], mat: eiche_derenko}
+      - {rect: [4.445, 4.038, 5.03, 4.058], z: [0, 2.75], mat: eiche_derenko}
+      - {rect: [4.445, 4.058, 5.03, 5.866], z: [2.64, 2.75], mat: eiche_derenko}   # Deckboden
+      - {rect: [4.5, 4.038, 5.03, 5.886], z: [0, 0.08], mat: schwarz}   # Sockel zurueckgesetzt
+      - {rect: [4.445, 5.306, 5.03, 5.866], z: [0.08, 0.12], mat: eiche_derenko}   # Haengeteil: Boden, Fach 2,07, Stange 1,92 [S. 13]
+      - {rect: [4.445, 5.306, 5.03, 5.866], z: [2.07, 2.1], mat: eiche_derenko}
+      - {rect: [4.445, 5.306, 5.03, 5.866], z: [2.05, 2.07], mat: led}
+      - {rect: [4.72, 5.306, 4.74, 5.866], z: [1.91, 1.93], mat: messing}
+      - {rect: [4.445, 4.549, 5.03, 5.286], z: [0, 0.4], mat: eiche_derenko}   # Nische mit Bank, Polster oliv, Faecher 2,04 und 2,33, Hakenleiste 1,78 [S. 13]
+      - {rect: [4.465, 4.569, 5.01, 5.266], z: [0.4, 0.48], mat: oliv_polster}
+      - {rect: [4.445, 4.549, 5.03, 5.286], z: [2.04, 2.07], mat: eiche_derenko}
+      - {rect: [4.445, 4.549, 5.03, 5.286], z: [2.02, 2.04], mat: led}
+      - {rect: [4.445, 4.549, 5.03, 5.286], z: [2.33, 2.36], mat: eiche_derenko}
+      - {rect: [5, 4.7, 5.03, 5.14], z: [1.76, 1.8], mat: messing}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [0.08, 0.12], mat: eiche_derenko}   # offene Faecher: Boeden 0,10 / 0,60 / 1,09 / 1,56 / 2,07 [S. 13, Verhaeltnis zur Raumhoehe]
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [0.58, 0.61], mat: eiche_derenko}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [0.565, 0.58], mat: led_schwach}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [1.07, 1.1], mat: eiche_derenko}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [1.055, 1.07], mat: led_schwach}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [1.54, 1.57], mat: eiche_derenko}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [1.525, 1.54], mat: led_schwach}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [2.05, 2.08], mat: eiche_derenko}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [2.035, 2.05], mat: led_schwach}
+      # Kuechenzeile Eiche [INT S. 3 Skizze Derenko, S. 13]: Hochschrank 600 + 3 x 600 + Wange 16 = 2,416 (Grundlage 2,116), 585 tief,
+      # Arbeitsplatte 0,90, Fliesenspiegel bis 1,53,
+      # drei offene Borde mit Licht (1,53 / 1,88 / 2,27), Hochschrank 600 bis 2,75 mit Mikrowelle 1,58 bis 1,93
+      - {rect: [4.445, 2.238, 5.03, 4.038], z: [0.1, 0.86], mat: eiche_derenko}
+      - {rect: [4.5, 2.238, 5.03, 4.038], z: [0, 0.1], mat: schwarz}
+      - {rect: [4.415, 2.238, 5.03, 4.038], z: [0.86, 0.9], mat: marmor}   # Runde 4: Oberkante Arbeitsplatte 0,90 (Standard, S. 13/16)
+      - {rect: [5.01, 2.238, 5.03, 4.038], z: [0.9, 1.53], mat: fliese_muster}   # Karofliese bis zum unteren Bord [INT S. 13]
+      - {rect: [4.78, 2.238, 5.03, 4.038], z: [1.53, 1.57], mat: eiche_derenko}
+      - {rect: [4.78, 2.238, 5.03, 4.038], z: [1.518, 1.53], mat: led}
+      - {rect: [4.78, 2.238, 5.03, 4.038], z: [1.88, 1.92], mat: eiche_derenko}
+      - {rect: [4.78, 2.238, 5.03, 4.038], z: [1.868, 1.88], mat: led}
+      - {rect: [4.78, 2.238, 5.03, 4.038], z: [2.27, 2.31], mat: eiche_derenko}
+      - {rect: [4.78, 2.238, 5.03, 4.038], z: [2.258, 2.27], mat: led}
+      - {rect: [4.445, 1.622, 5.03, 2.238], z: [0, 2.75], mat: eiche_derenko}   # Hochschrank 600 am Fensterende, mit Wange [INT S. 13 Stand 07.10.]
+      - {rect: [4.435, 1.682, 4.445, 2.178], z: [1.58, 1.93], mat: schwarz}   # Mikrowelle (S. 13: 0,467 bis 0,58 der Raumhoehe)
+      - {rect: [4.62, 2.318, 4.96, 2.758], z: [0.895, 0.905], mat: spiegel}   # Spuele im 600er neben dem Hochschrank, Armatur 0,30 vom Hochschrank [INT S. 13]
+      - {rect: [4.52, 3.588, 4.98, 3.888], z: [0.9, 0.906], mat: schwarz}   # Kochfeld ueber dem Schubladenelement neben der Garderobe [INT S. 3, S. 13]
+      # Essplatz [INT S. 13/14]: zwei Polsterstuehle olivgruen, Pendelkabel
+      - {rect: [3.02, 0.58, 3.48, 1.04], z: [0.4, 0.48], mat: oliv_polster}
       - {rect: [2.98, 0.58, 3.06, 1.04], z: [0.48, 0.86], mat: oliv_polster}
-      - {rect: [4.16, 0.86, 4.40, 1.32], z: [0.40, 0.48], mat: oliv_polster}
+      - {rect: [4.16, 0.86, 4.4, 1.32], z: [0.4, 0.48], mat: oliv_polster}
       - {rect: [4.36, 0.86, 4.42, 1.32], z: [0.48, 0.86], mat: oliv_polster}
-      - {rect: [3.695, 0.945, 3.705, 0.955], z: [1.75, 3.38], mat: schwarz}
-      - {rect: [3.975, 0.795, 3.985, 0.805], z: [1.61, 3.38], mat: schwarz}
-      - {rect: [3.845, 1.095, 3.855, 1.105], z: [1.88, 3.38], mat: schwarz}
+      - {rect: [3.975, 0.795, 3.985, 0.805], z: [1.88, 3.38], mat: schwarz}
+      - {rect: [3.695, 0.945, 3.705, 0.955], z: [2.11, 3.38], mat: schwarz}
+      - {rect: [3.845, 1.095, 3.855, 1.105], z: [2.26, 3.38], mat: schwarz}
       # TV-Sideboard Nuss schwebend mit Bilderrahmen-TV [INT S. 14/15]
-      - {rect: [0.41, 0.0, 2.21, 0.485], z: [0.30, 0.80], mat: nuss}   # Korrektur 15.11.: Tiefe 485 [INT S. 3]
-      - {rect: [0.65, 0.0, 1.95, 0.035], z: [1.25, 2.05], mat: tv_bild}
-      # Vorhaenge Leinen mit bordeauxfarbenem Saum [INT S. 14]
-      - {rect: [2.62, 0.04, 3.02, 0.16], z: [0.35, 3.18], mat: leinen}
-      - {rect: [2.61, 0.03, 3.03, 0.17], z: [0.0, 0.35], mat: bordeaux_stoff}
-      - {rect: [4.74, 0.04, 5.02, 0.16], z: [0.35, 3.18], mat: leinen}
-      - {rect: [4.73, 0.03, 5.025, 0.17], z: [0.0, 0.35], mat: bordeaux_stoff}
-      # Bad [INT S. 10, 15]: Feinsteinzeug beige, bordeauxrote Decke mit Fries, Waschtisch Holz gerillt, Messing
-      - {rect: [0.0, 4.136, 2.515, 5.936], z: [0.012, 0.018], mat: fliese_beige}
-      - {rect: [0.0, 4.136, 0.012, 5.936], z: [0.0, 1.20], mat: fliese_beige}
-      - {rect: [0.0, 5.924, 2.515, 5.936], z: [0.0, 1.20], mat: fliese_beige}
-      - {rect: [0.0, 4.136, 2.515, 4.148], z: [0.0, 1.20], mat: fliese_beige}
-      - {rect: [0.0, 4.136, 0.014, 5.036], z: [0.0, 2.10], mat: fliese_beige}   # Korrektur 15.11.: Dusche 900 an der Westwand, Fischgraetfliese bis 2,10 [INT S. 3, S. 15]
-      - {rect: [0.0, 4.136, 0.85, 4.150], z: [0.0, 2.10], mat: fliese_beige}
-      - {rect: [0.85, 4.150, 0.86, 4.936], z: [0.0, 2.10], mat: glas}
-      - {rect: [0.0, 4.136, 2.515, 5.936], z: [3.37, 3.38], mat: bordeaux_decke}
-      - {rect: [0.0, 4.136, 0.016, 5.936], z: [2.83, 3.38], mat: bordeaux_decke}   # Korrektur 15.11.: Wandband 0,55 m unter der Decke [INT S. 15]
-      - {rect: [0.0, 5.92, 2.515, 5.936], z: [2.83, 3.38], mat: bordeaux_decke}
-      - {rect: [0.0, 4.136, 2.515, 4.152], z: [2.83, 3.38], mat: bordeaux_decke}
-      - {rect: [2.499, 4.136, 2.515, 5.936], z: [2.83, 3.38], mat: bordeaux_decke}
-      - {rect: [0.0, 5.27, 0.55, 5.67], z: [0.38, 0.78], mat: keramik_weiss}   # Korrektur 15.11.: WC 265 und 400 ab Gangwand [INT S. 3]
-      - {rect: [0.0, 5.35, 0.016, 5.59], z: [1.00, 1.15], mat: messing}
+      - {rect: [0.41, 0, 2.21, 0.485], z: [0.42, 0.94], mat: nuss}   # Runde 4: Unterkante 0,42, Oberkante 0,94 [INT S. 14/15]
+      - {rect: [0.59, 0, 2.06, 0.035], z: [1.36, 2.24], mat: tv_bild}   # Runde 4: 1,47 x 0,88 [INT S. 14]
+      # Vorhaenge Leinen mit bordeauxfarbenem Saum bis 0,46, bis unter die Voute [INT S. 14]
+      - {rect: [2.41, 0.04, 3.03, 0.16], z: [0.46, 3.24], mat: leinen}   # Runde 4: Breite 0,62 [S. 14]
+      - {rect: [2.4, 0.03, 3.04, 0.17], z: [0, 0.46], mat: bordeaux_stoff}
+      - {rect: [4.62, 0.04, 5.01, 0.16], z: [0.46, 3.24], mat: leinen}
+      - {rect: [4.61, 0.03, 5.02, 0.17], z: [0, 0.46], mat: bordeaux_stoff}
+      # Bad [INT S. 10, 15]: Feinsteinzeug beige, Decke und Band bordeaux (Palette), Waschtisch Holz gerillt, Messing
+      - {rect: [0, 4.136, 2.515, 5.936], z: [0.012, 0.018], mat: fliese_beige}
+      - {rect: [0, 4.136, 0.012, 5.936], z: [0, 1.2], mat: fliese_beige}
+      - {rect: [0, 5.924, 2.515, 5.936], z: [0, 1.2], mat: fliese_beige}
+      - {rect: [0, 4.136, 2.515, 4.148], z: [0, 1.2], mat: fliese_beige}
+      - {rect: [0, 4.136, 0.014, 5.036], z: [0, 2.32], mat: fliese_beige}   # Dusche 900 an der Westwand, Fliese bis 2,32 (S. 15: 0,687 der Raumhoehe)
+      - {rect: [0, 4.136, 0.85, 4.15], z: [0, 2.32], mat: fliese_beige}
+      - {rect: [0.85, 4.15, 0.86, 4.936], z: [0, 2.1], mat: glas}
+      - {rect: [0, 4.136, 2.515, 5.936], z: [3.37, 3.38], mat: bordeaux_decke}
+      - {rect: [0, 4.136, 0.016, 5.936], z: [2.75, 3.38], mat: bordeaux_decke}   # Runde 4: Wandband 0,63 (S. 15: 0,188 der Raumhoehe), kein Profil
+      - {rect: [0, 5.92, 2.515, 5.936], z: [2.75, 3.38], mat: bordeaux_decke}
+      - {rect: [0, 4.136, 2.515, 4.152], z: [2.75, 3.38], mat: bordeaux_decke}
+      - {rect: [2.499, 4.136, 2.515, 5.936], z: [2.75, 3.38], mat: bordeaux_decke}
+      - {rect: [0, 5.27, 0.55, 5.67], z: [0.38, 0.78], mat: keramik_weiss}   # WC 265 und 400 ab Gangwand [INT S. 3]
+      - {rect: [0, 5.35, 0.016, 5.59], z: [1, 1.15], mat: messing}
       - {rect: [1.55, 5.45, 2.15, 5.936], z: [0.45, 0.85], mat: eiche_derenko}
       - {rect: [1.53, 5.43, 2.17, 5.936], z: [0.85, 0.88], mat: fliese_beige}
-      - {rect: [1.83, 5.86, 1.87, 5.92], z: [0.88, 1.20], mat: messing}
-      - {rect: [1.58, 5.915, 2.12, 5.925], z: [1.25, 2.10], mat: spiegel}
-      - {rect: [0.38, 4.15, 0.44, 4.20], z: [0.90, 2.20], mat: messing}
+      - {rect: [1.83, 5.86, 1.87, 5.92], z: [0.88, 1.2], mat: messing}
+      - {rect: [1.58, 5.915, 2.12, 5.925], z: [1.25, 2.1], mat: spiegel}
+      - {rect: [0.38, 4.15, 0.44, 4.2], z: [0.9, 2.2], mat: messing}
     leuchten:
-      - {pos: [3.70, 0.95, 1.58], w: 12}
-      - {pos: [3.98, 0.80, 1.44], w: 12}
-      - {pos: [3.85, 1.10, 1.71], w: 12}
-      - {pos: [0.38, 3.70, 1.00], w: 6}
-      - {pos: [2.73, 3.70, 1.00], w: 6}
+      - {pos: [3.98, 0.8, 1.59], w: 12}
+      - {pos: [3.7, 0.95, 1.82], w: 12}
+      - {pos: [3.85, 1.1, 1.97], w: 12}
+      - {pos: [0.62, 3.84, 0.95], w: 6}
+      - {pos: [2.48, 3.84, 0.95], w: 6}
       - {pos: [1.60, 2.60, 3.25], w: 20}
       - {pos: [3.70, 3.00, 3.25], w: 20}
       - {pos: [3.80, 5.00, 3.25], w: 15}
@@ -385,8 +404,9 @@ wohnungen:
       blick: {pos: [0.30, 0.42], target: [24.0, 0.85], lens: 18, h: 1.45}        # vom Gangende zur Glastuer
 
   # Variante 2 (Kunde 15.11.2026: zusaetzlich zu Runde 2): Derenko-Mappe Stand 28.10.2026 [INT2], Unterschiede in
-  # interior_v2.md. Grundriss, Moebel und Kameras wie apt01; geaendert: Bettwand bordeaux, Stuckleiste bordeaux
-  # im Bett- und Eingangsbereich, Kuechenspiegel bordeauxrote Rillenfliese. Zusatzkamera kueche_fliesen.
+  # interior_v2.md. Grundriss, Moebel und Kameras wie apt01; geaendert: Bettwand bordeaux (Bordeaux Rot der Palette),
+  # Kuechenspiegel bordeauxrote Rillenfliese, Hochschrank neben der Garderobe [INT2 S. 13]. Zusatzkamera kueche_fliesen.
+  # Runde 4 (Kunde 15.11.: Kueche zu klein, kein Stuck, Rot falsch, Ecke Bett/Gang): siehe interior_v2.md Abschnitt 6.
   apt01_v2:
     plan: manuell
     titel: Noma Apartment Top 1, Variante 2 nach Interior Derenko Stand 28.10.2026 [EIN S. 8, INT2]
@@ -398,129 +418,146 @@ wohnungen:
     slab_rect: [-0.25, -0.35, 5.28, 6.19]
     walls:
       - rect: [-0.25, -0.35, 5.28, 0.0]                      # Fensterwand zum Gartenstreifen
-        openings: [{span: [3.03, 4.73], z: [0.90, 2.40], type: fenster}]   # Korrektur 15.11.: Hoehe 1,50 laut EIN S. 8 (FPH 0,90), Breite 1,70 laut INT S. 3
+        openings: [{span: [3.03, 4.73], z: [0.90, 2.40], type: fenster}]   # Hoehe 1,50 laut EIN S. 8 (FPH 0,90), Breite 1,70 laut INT S. 3
       - rect: [-0.25, 0.0, 0.0, 5.936]                       # Wand zum Strassenhaus
       - rect: [5.03, 0.0, 5.28, 5.936]                       # Wand zu APT. 02
       - rect: [-0.25, 5.936, 5.28, 6.186]                    # Gangwand mit Eingangstuer 90 x 200 [BAB-A 3.4]
         openings: [{span: [3.33, 4.23], z: [0.0, 2.05], type: tuer}]
-      - rect: [0.0, 4.036, 3.15, 4.136]                      # Badwand, Richtung Eingang verlaengert (Trennwand) [INT S. 3]
-      - rect: [3.05, 3.30, 3.25, 4.036]                      # Trennwand mit Rundung, Bett rueckt nach rechts [INT S. 3], Korrektur 15.11.: Ende y 3,30 statt 3,60 (Derenko-Plan S. 3)
+      - rect: [0.0, 4.036, 2.99, 4.136]                      # Badwand, Richtung Eingang verlaengert bis Beginn der Rundung (Trennwand) [INT S. 3]
+      - rect: [3.17, 3.30, 3.27, 3.856]                      # Runde 4: Trennwand-Arm Richtung Fenster, 10 cm, raumhoch, Ende y 3,30 [INT S. 3, S. 16]
       - rect: [2.515, 4.136, 2.615, 5.936]                   # Badwand Ost mit Badtuer 80 x 200
         openings: [{span: [4.236, 5.036], z: [0.0, 2.0], type: tuer}]
+    boegen:
+      - {c: [2.99, 3.856], r: [0.18, 0.28], winkel: [0, 90], z: [0, 3.38], mat: innen_wand}   # Runde 4: Trennwand-Rundung als Viertelkreis, R innen 0,18 / aussen 0,28 [INT S. 3]
+      - {c: [2.99, 3.856], r: [0.134, 0.18], winkel: [0, 90], z: [0, 1.47], mat: eiche_derenko}   # Eichenverkleidung laeuft um die Rundung [INT S. 12: LED-Linie D]
+      - {c: [2.99, 3.856], r: [0.13, 0.18], winkel: [0, 90], z: [1.47, 1.49], mat: led}
+      - {c: [2.99, 3.856], r: [0.176, 0.18], winkel: [0, 90], z: [1.47, 3.379], mat: bordeaux_wand}   # V2: Bettwand-Farbe auch auf der Rundung [INT2 S. 16]
     zylinder:
-      - {c: [4.96, 2.70], r: 0.015, z: [0.92, 1.22], mat: messing}   # Armatur Messing [INT S. 13]
-      - {c: [3.15, 3.30], r: 0.10, z: [0.0, 3.38], mat: innen_wand}       # Rundung Trennwand
-      - {c: [3.82, 0.916], r: 0.45, z: [0.72, 0.75], mat: hellblau}       # runder Tisch hellblau [INT S. 13/14]
-      - {c: [3.82, 0.916], r: 0.17, z: [0.0, 0.72], mat: hellblau}
-      - {c: [3.70, 0.95], r: 0.13, z: [1.62, 1.75], mat: bordeaux_lack}   # drei Pendelleuchten bordeaux
-      - {c: [3.98, 0.80], r: 0.13, z: [1.48, 1.61], mat: bordeaux_lack}
-      - {c: [3.85, 1.10], r: 0.13, z: [1.75, 1.88], mat: bordeaux_lack}
-      - {c: [1.85, 5.68], r: 0.20, z: [0.88, 1.02], mat: keramik_weiss}   # Aufsatzbecken
+      - {c: [4.96, 2.538], r: 0.015, z: [0.9, 1.2], mat: messing}   # Armatur Messing [INT S. 13]
+      - {c: [3.82, 0.916], r: 0.45, z: [0.72, 0.75], mat: hellblau}   # runder Tisch hellblau, Platte 0,75 [INT S. 13/14]
+      - {c: [3.82, 0.916], r: 0.17, z: [0, 0.72], mat: hellblau}
+      - {c: [3.98, 0.8], r: 0.165, z: [1.62, 1.68], mat: bordeaux_lack}   # Pendel bordeaux, Krempe 0,33, Unterkante 1.62 [INT S. 12 B, S. 13/14]
+      - {c: [3.98, 0.8], r: 0.055, z: [1.68, 1.88], mat: bordeaux_lack}
+      - {c: [3.7, 0.95], r: 0.165, z: [1.85, 1.91], mat: bordeaux_lack}
+      - {c: [3.7, 0.95], r: 0.055, z: [1.91, 2.11], mat: bordeaux_lack}
+      - {c: [3.85, 1.1], r: 0.165, z: [2, 2.06], mat: bordeaux_lack}
+      - {c: [3.85, 1.1], r: 0.055, z: [2.06, 2.26], mat: bordeaux_lack}
+      - {c: [1.85, 5.68], r: 0.2, z: [0.88, 1.02], mat: keramik_weiss}   # Aufsatzbecken
+      - {c: [2.72, 3.75], r: 0.18, z: [0, 0.45], mat: bordeaux_lack}   # Runde 4: Nachttisch-Hocker bordeaux rechts [INT S. 15/16]
     einbauten:
-      - {rect: [0.0, 0.0, 5.03, 5.936], z: [0.004, 0.012], mat: boden_parkett}   # Bodenbelag ueber dem Gelaende (FOK +-0,00 = Gelaende)
+      - {rect: [0, 0, 5.03, 5.936], z: [0.004, 0.012], mat: boden_parkett}   # Bodenbelag ueber dem Gelaende (FOK +-0,00 = Gelaende)
       # Tueren: Eingang Eiche gestemmt [INT S. 16], Badtuer bordeaux [INT S. 10]
-      - {rect: [3.38, 5.976, 4.18, 6.016], z: [0.0, 2.03], mat: tuer_eiche}
-      - {rect: [2.545, 4.28, 2.585, 4.99], z: [0.0, 1.98], mat: bordeaux_lack}
-      # Stuckleiste umlaufend [INT S. 13 bis 16]
-      - {rect: [0.0, 0.0, 5.03, 0.10], z: [3.24, 3.38], mat: stuck}
-      - {rect: [0.0, 0.0, 0.10, 2.10], z: [3.24, 3.38], mat: stuck}
-      - {rect: [0.0, 2.10, 0.10, 4.036], z: [3.24, 3.38], mat: stuck_bordeaux}     # V2: Leiste ueber dem Bettbereich bordeaux [INT2 S. 15]
-      - {rect: [4.93, 0.0, 5.03, 1.922], z: [3.24, 3.38], mat: stuck}
-      - {rect: [4.93, 1.922, 5.03, 5.936], z: [3.24, 3.38], mat: stuck_bordeaux}   # V2: Leiste ueber Garderobe und Kueche bordeaux bis Ende Kuechenzeile [INT2 S. 13]
-      - {rect: [2.615, 5.836, 4.93, 5.936], z: [3.24, 3.38], mat: stuck_bordeaux}  # V2: Leiste ueber der Eingangstuer bordeaux [INT2 S. 16]
-      - {rect: [0.0, 3.936, 2.95, 4.036], z: [3.24, 3.38], mat: stuck_bordeaux}    # V2 [INT2 S. 16]
-      # V2: Bettwand ueber der Holzverkleidung bordeaux gestrichen, auch an der Seitenwand ab y = 2,10 [INT2 S. 15/16]
-      - {rect: [0.0, 4.030, 2.95, 4.036], z: [1.25, 3.24], mat: bordeaux_wand}
-      - {rect: [0.0, 2.10, 0.006, 4.030], z: [1.25, 3.24], mat: bordeaux_wand}
-      - {rect: [0.0, 0.10, 4.93, 0.12], z: [3.20, 3.24], mat: led_schwach}  # indirekte Beleuchtung unter der Leiste [INT S. 12 D]
-      - {rect: [0.10, 0.12, 0.12, 3.936], z: [3.20, 3.24], mat: led_schwach}
-      # Bettwand: Holzverkleidung bis 1,25 mit Lichtleiste, olivgruenes Polster, Nachtkaestchen, Gelenkleuchten [INT S. 15/16]
-      - {rect: [0.0, 3.99, 2.95, 4.036], z: [0.0, 1.25], mat: eiche_derenko}
-      - {rect: [0.0, 3.985, 2.95, 4.0], z: [1.25, 1.27], mat: led}
-      - {rect: [0.0, 1.67, 0.04, 3.99], z: [0.0, 1.25], mat: eiche_derenko}
-      - {rect: [0.0, 1.67, 0.045, 3.99], z: [1.25, 1.27], mat: led}
-      - {rect: [0.65, 3.95, 2.45, 3.99], z: [0.45, 1.15], mat: oliv_polster}   # Korrektur 15.11.: Bett 1,80 breit, Mitte x 1,55 [INT S. 3]
-      - {rect: [0.65, 1.88, 2.45, 3.95], z: [0.0, 0.30], mat: bett_stoff}
-      - {rect: [0.70, 1.93, 2.40, 3.93], z: [0.30, 0.55], mat: bettwaesche}
-      - {rect: [0.15, 3.55, 0.60, 3.95], z: [0.42, 0.58], mat: eiche_derenko}
-      - {rect: [2.50, 3.55, 2.93, 3.95], z: [0.42, 0.58], mat: eiche_derenko}
-      - {rect: [0.33, 3.78, 0.43, 3.98], z: [1.00, 1.08], mat: schwarz}
-      - {rect: [2.68, 3.78, 2.78, 3.98], z: [1.00, 1.08], mat: schwarz}
-      - {rect: [1.00, 4.01, 2.20, 4.036], z: [1.55, 2.35], mat: bild_abstrakt}
-      - {rect: [0.65, 1.33, 2.45, 1.71], z: [0.0, 0.45], mat: bank_streifen}   # Korrektur 15.11.: Bank in Bettbreite, y 1,33 bis 1,71 [INT S. 3]
-      # Einbau-Garderobe [INT S. 13]: Haengeteil, Nische mit Bank (Polster oliv), Lichtnischen
-      - {rect: [4.445, 5.286, 5.03, 5.306], z: [0.0, 2.75], mat: eiche_derenko}
-      - {rect: [4.445, 5.866, 5.03, 5.886], z: [0.0, 2.75], mat: eiche_derenko}
-      - {rect: [4.445, 5.306, 5.03, 5.866], z: [2.35, 2.75], mat: eiche_derenko}
-      - {rect: [4.445, 5.306, 5.03, 5.866], z: [1.95, 1.98], mat: eiche_derenko}
-      - {rect: [4.445, 4.529, 5.03, 4.549], z: [0.0, 2.75], mat: eiche_derenko}
-      - {rect: [4.445, 4.549, 5.03, 5.286], z: [0.0, 0.40], mat: eiche_derenko}
-      - {rect: [4.465, 4.569, 5.01, 5.266], z: [0.40, 0.50], mat: oliv_polster}
-      - {rect: [4.445, 4.549, 5.03, 5.286], z: [1.95, 2.75], mat: eiche_derenko}
-      - {rect: [4.445, 4.549, 5.03, 5.286], z: [1.93, 1.95], mat: led}
-      - {rect: [4.445, 4.038, 5.03, 4.058], z: [0.0, 2.75], mat: eiche_derenko}   # Korrektur 15.11.: Garderobe 1898 ab Gangwand, Ende y 4,038 [INT S. 3]
-      - {rect: [4.445, 4.008, 5.03, 4.529], z: [2.70, 2.75], mat: eiche_derenko}
-      - {rect: [4.445, 4.008, 5.03, 4.529], z: [0.40, 0.42], mat: eiche_derenko}
-      - {rect: [4.445, 4.008, 5.03, 4.529], z: [0.90, 0.92], mat: eiche_derenko}
-      - {rect: [4.445, 4.008, 5.03, 4.529], z: [1.40, 1.42], mat: eiche_derenko}
-      - {rect: [4.445, 4.008, 5.03, 4.529], z: [1.90, 1.92], mat: eiche_derenko}
-      - {rect: [4.445, 4.008, 5.03, 4.529], z: [2.30, 2.32], mat: eiche_derenko}
-      - {rect: [4.45, 4.008, 4.47, 4.529], z: [0.42, 2.30], mat: led_schwach}
-      # Kuechenzeile Eiche [INT S. 13]: Unterschraenke, Marmor-Arbeitsplatte, Fliesenspiegel, offene Borde mit Licht, Hochschrank
-      - {rect: [4.445, 1.922, 5.03, 3.438], z: [0.10, 0.88], mat: eiche_derenko}
-      - {rect: [4.50, 1.922, 5.03, 3.438], z: [0.0, 0.10], mat: schwarz}
-      - {rect: [4.415, 1.922, 5.03, 3.438], z: [0.88, 0.92], mat: marmor}
-      - {rect: [5.01, 1.922, 5.03, 3.438], z: [0.92, 1.53], mat: fliese_bordeaux}   # V2: Rillenfliese bordeaux glasiert bis zum Bord [INT2 S. 13]
-      - {rect: [4.78, 1.922, 5.03, 3.438], z: [1.55, 1.58], mat: eiche_derenko}
-      - {rect: [4.78, 1.922, 5.03, 3.438], z: [1.53, 1.55], mat: led}
-      - {rect: [4.78, 1.922, 5.03, 3.438], z: [1.95, 1.98], mat: eiche_derenko}
-      - {rect: [4.78, 1.922, 5.03, 3.438], z: [1.93, 1.95], mat: led}
-      - {rect: [4.445, 3.438, 5.03, 4.038], z: [0.0, 2.75], mat: eiche_derenko}   # Korrektur 15.11.: Hochschrank 600 neben der Garderobe [INT S. 13]
-      - {rect: [4.435, 3.498, 4.445, 3.978], z: [1.30, 1.62], mat: schwarz}
-      - {rect: [4.62, 2.48, 4.96, 2.92], z: [0.915, 0.925], mat: spiegel}   # Spuele, Mitte 0,74 vom Hochschrank [INT S. 13]
-      - {rect: [4.52, 2.00, 4.98, 2.30], z: [0.92, 0.926], mat: schwarz}   # Kochfeld Richtung Fenster (Annahme)
-      # Essplatz [INT S. 13/14]: zwei Polsterstuehle olivgruen
-      - {rect: [3.02, 0.58, 3.48, 1.04], z: [0.40, 0.48], mat: oliv_polster}
+      - {rect: [3.38, 5.976, 4.18, 6.016], z: [0, 2.03], mat: tuer_eiche}
+      - {rect: [2.545, 4.28, 2.585, 4.99], z: [0, 1.98], mat: bordeaux_lack}
+      # Runde 4: kein Stuck (Kunde). Nur schlichte Vorhangvoute an der Fensterwand, glatte Blende 14 cm, LED zum Vorhang [INT S. 12 D, S. 14]
+      - {rect: [0, 0.18, 5.03, 0.2], z: [3.24, 3.379], mat: creme_decke}
+      - {rect: [0.02, 0.02, 5.01, 0.05], z: [3.34, 3.36], mat: led_schwach}
+      # Bettwand: Eichenverkleidung bis 1.47 mit Lichtleiste (S. 15/16), Polster oliv ueber die ganze Wand (S. 16), Leuchten C
+      - {rect: [0, 3.99, 2.99, 4.036], z: [0, 1.47], mat: eiche_derenko}   # Runde 4: Oberkante 1,47 statt 1,25 [INT S. 15/16]
+      - {rect: [0, 3.986, 2.99, 4], z: [1.47, 1.49], mat: led}
+      - {rect: [3.124, 3.3, 3.17, 3.856], z: [0, 1.47], mat: eiche_derenko}   # Verkleidung am Trennwand-Arm [INT S. 12]
+      - {rect: [3.12, 3.3, 3.134, 3.856], z: [1.47, 1.49], mat: led}
+      - {rect: [0, 1.67, 0.046, 3.99], z: [0, 1.47], mat: eiche_derenko}   # Seitenwand ab y 1,67 [INT S. 15]
+      - {rect: [0.036, 1.67, 0.05, 3.99], z: [1.47, 1.49], mat: led}
+      # V2: Bettwand ueber der Verkleidung bis zur Decke Bordeaux Rot (Palette S. 6), Seitenwand ab y 2,09 [INT2 S. 15/16]
+      - {rect: [0, 4.03, 2.99, 4.036], z: [1.47, 3.379], mat: bordeaux_wand}
+      - {rect: [3.164, 3.3, 3.17, 3.856], z: [1.47, 3.379], mat: bordeaux_wand}
+      - {rect: [0, 2.09, 0.006, 4.03], z: [1.47, 3.379], mat: bordeaux_wand}
+      - {rect: [0.05, 3.95, 2.95, 3.99], z: [0.45, 1.07], mat: oliv_polster}   # Runde 4: Polster ueber die Bettwand, Oberkante 1,07 [INT S. 16]
+      - {rect: [0.65, 1.88, 2.45, 3.95], z: [0, 0.32], mat: bett_stoff}   # Bett 1,80 x 2,07 [INT S. 3]
+      - {rect: [0.68, 1.9, 2.42, 3.93], z: [0.32, 0.58], mat: bettwaesche}   # Oberkante Matratze 0,58 [INT S. 15/16]
+      - {rect: [0.06, 3.55, 0.58, 3.95], z: [0.3, 0.48], mat: eiche_derenko}   # Runde 4: Nachttisch links schwebend Eiche [INT S. 16]
+      - {rect: [0.45, 3.97, 0.53, 3.99], z: [1.18, 1.3], mat: schwarz}   # Gelenkleuchten C [INT S. 12, S. 16]
+      - {rect: [2.55, 3.97, 2.63, 3.99], z: [1.18, 1.3], mat: schwarz}
+      - {rect: [0.55, 3.8, 0.68, 3.88], z: [0.93, 1.03], mat: schwarz}
+      - {rect: [2.42, 3.8, 2.55, 3.88], z: [0.93, 1.03], mat: schwarz}
+      - {rect: [0.62, 3.96, 1.9, 3.985], z: [1.51, 2.47], mat: bild_abstrakt}   # Runde 4: Bild 1,28 x 0,96, links der Bettmitte [INT S. 16]
+      - {rect: [0.65, 1.33, 2.45, 1.71], z: [0, 0.46], mat: bank_streifen}   # Bank in Bettbreite, y 1,33 bis 1,71 [INT S. 3]
+      # Einbau-Garderobe [INT S. 3: 500 / 750 / 500, 585 tief; S. 13: Haengeteil, Nische mit Bank, offene Faecher]
+      - {rect: [4.445, 5.866, 5.03, 5.886], z: [0, 2.75], mat: eiche_derenko}   # Seitenwaende, Oberkante 2,75 (S. 13: 0,814 der Raumhoehe)
+      - {rect: [4.445, 5.286, 5.03, 5.306], z: [0, 2.75], mat: eiche_derenko}
+      - {rect: [4.445, 4.529, 5.03, 4.549], z: [0, 2.75], mat: eiche_derenko}
+      - {rect: [4.445, 4.038, 5.03, 4.058], z: [0, 2.75], mat: eiche_derenko}
+      - {rect: [4.445, 4.058, 5.03, 5.866], z: [2.64, 2.75], mat: eiche_derenko}   # Deckboden
+      - {rect: [4.5, 4.038, 5.03, 5.886], z: [0, 0.08], mat: schwarz}   # Sockel zurueckgesetzt
+      - {rect: [4.445, 5.306, 5.03, 5.866], z: [0.08, 0.12], mat: eiche_derenko}   # Haengeteil: Boden, Fach 2,07, Stange 1,92 [S. 13]
+      - {rect: [4.445, 5.306, 5.03, 5.866], z: [2.07, 2.1], mat: eiche_derenko}
+      - {rect: [4.445, 5.306, 5.03, 5.866], z: [2.05, 2.07], mat: led}
+      - {rect: [4.72, 5.306, 4.74, 5.866], z: [1.91, 1.93], mat: messing}
+      - {rect: [4.445, 4.549, 5.03, 5.286], z: [0, 0.4], mat: eiche_derenko}   # Nische mit Bank, Polster oliv, Faecher 2,04 und 2,33, Hakenleiste 1,78 [S. 13]
+      - {rect: [4.465, 4.569, 5.01, 5.266], z: [0.4, 0.48], mat: oliv_polster}
+      - {rect: [4.445, 4.549, 5.03, 5.286], z: [2.04, 2.07], mat: eiche_derenko}
+      - {rect: [4.445, 4.549, 5.03, 5.286], z: [2.02, 2.04], mat: led}
+      - {rect: [4.445, 4.549, 5.03, 5.286], z: [2.33, 2.36], mat: eiche_derenko}
+      - {rect: [5, 4.7, 5.03, 5.14], z: [1.76, 1.8], mat: messing}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [0.08, 0.12], mat: eiche_derenko}   # offene Faecher: Boeden 0,10 / 0,60 / 1,09 / 1,56 / 2,07 [S. 13, Verhaeltnis zur Raumhoehe]
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [0.58, 0.61], mat: eiche_derenko}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [0.565, 0.58], mat: led_schwach}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [1.07, 1.1], mat: eiche_derenko}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [1.055, 1.07], mat: led_schwach}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [1.54, 1.57], mat: eiche_derenko}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [1.525, 1.54], mat: led_schwach}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [2.05, 2.08], mat: eiche_derenko}
+      - {rect: [4.445, 4.058, 5.03, 4.529], z: [2.035, 2.05], mat: led_schwach}
+      # Kuechenzeile Eiche [INT S. 3 Skizze Derenko, S. 13]: Hochschrank 600 + 3 x 600 + Wange 16 = 2,416 (Grundlage 2,116), 585 tief,
+      # Arbeitsplatte 0,90, Fliesenspiegel bis 1,53,
+      # drei offene Borde mit Licht (1,53 / 1,88 / 2,27), Hochschrank 600 bis 2,75 mit Mikrowelle 1,58 bis 1,93
+      - {rect: [4.445, 1.622, 5.03, 3.438], z: [0.1, 0.86], mat: eiche_derenko}
+      - {rect: [4.5, 1.622, 5.03, 3.438], z: [0, 0.1], mat: schwarz}
+      - {rect: [4.415, 1.622, 5.03, 3.438], z: [0.86, 0.9], mat: marmor}   # Runde 4: Oberkante Arbeitsplatte 0,90 (Standard, S. 13/16)
+      - {rect: [5.01, 1.622, 5.03, 3.438], z: [0.9, 1.53], mat: fliese_bordeaux}   # V2: Rillenfliese bordeaux bis zum unteren Bord [INT2 S. 13]
+      - {rect: [4.78, 1.622, 5.03, 3.453], z: [1.53, 1.57], mat: eiche_derenko}
+      - {rect: [4.78, 1.622, 5.03, 3.438], z: [1.518, 1.53], mat: led}
+      - {rect: [4.78, 1.622, 5.03, 3.453], z: [1.88, 1.92], mat: eiche_derenko}
+      - {rect: [4.78, 1.622, 5.03, 3.438], z: [1.868, 1.88], mat: led}
+      - {rect: [4.78, 1.622, 5.03, 3.453], z: [2.27, 2.31], mat: eiche_derenko}
+      - {rect: [4.78, 1.622, 5.03, 3.438], z: [2.258, 2.27], mat: led}
+      - {rect: [4.445, 3.438, 5.03, 4.038], z: [0, 2.75], mat: eiche_derenko}   # Hochschrank 600 neben der Garderobe [INT2 S. 13]
+      - {rect: [4.435, 3.498, 4.445, 3.978], z: [1.58, 1.93], mat: schwarz}   # Mikrowelle (S. 13: 0,467 bis 0,58 der Raumhoehe)
+      - {rect: [4.62, 2.318, 4.96, 2.758], z: [0.895, 0.905], mat: spiegel}   # Spuele im mittleren 600er, Mitte 0,90 vom Hochschrank [INT2 S. 13]
+      - {rect: [4.52, 1.788, 4.98, 2.088], z: [0.9, 0.906], mat: schwarz}   # Kochfeld im 600er am Fensterende (Annahme, S. 13 zeigt keins)
+      # Essplatz [INT S. 13/14]: zwei Polsterstuehle olivgruen, Pendelkabel
+      - {rect: [3.02, 0.58, 3.48, 1.04], z: [0.4, 0.48], mat: oliv_polster}
       - {rect: [2.98, 0.58, 3.06, 1.04], z: [0.48, 0.86], mat: oliv_polster}
-      - {rect: [4.16, 0.86, 4.40, 1.32], z: [0.40, 0.48], mat: oliv_polster}
+      - {rect: [4.16, 0.86, 4.4, 1.32], z: [0.4, 0.48], mat: oliv_polster}
       - {rect: [4.36, 0.86, 4.42, 1.32], z: [0.48, 0.86], mat: oliv_polster}
-      - {rect: [3.695, 0.945, 3.705, 0.955], z: [1.75, 3.38], mat: schwarz}
-      - {rect: [3.975, 0.795, 3.985, 0.805], z: [1.61, 3.38], mat: schwarz}
-      - {rect: [3.845, 1.095, 3.855, 1.105], z: [1.88, 3.38], mat: schwarz}
+      - {rect: [3.975, 0.795, 3.985, 0.805], z: [1.88, 3.38], mat: schwarz}
+      - {rect: [3.695, 0.945, 3.705, 0.955], z: [2.11, 3.38], mat: schwarz}
+      - {rect: [3.845, 1.095, 3.855, 1.105], z: [2.26, 3.38], mat: schwarz}
       # TV-Sideboard Nuss schwebend mit Bilderrahmen-TV [INT S. 14/15]
-      - {rect: [0.41, 0.0, 2.21, 0.485], z: [0.30, 0.80], mat: nuss}   # Korrektur 15.11.: Tiefe 485 [INT S. 3]
-      - {rect: [0.65, 0.0, 1.95, 0.035], z: [1.25, 2.05], mat: tv_bild}
-      # Vorhaenge Leinen mit bordeauxfarbenem Saum [INT S. 14]
-      - {rect: [2.62, 0.04, 3.02, 0.16], z: [0.35, 3.18], mat: leinen}
-      - {rect: [2.61, 0.03, 3.03, 0.17], z: [0.0, 0.35], mat: bordeaux_stoff}
-      - {rect: [4.74, 0.04, 5.02, 0.16], z: [0.35, 3.18], mat: leinen}
-      - {rect: [4.73, 0.03, 5.025, 0.17], z: [0.0, 0.35], mat: bordeaux_stoff}
-      # Bad [INT S. 10, 15]: Feinsteinzeug beige, bordeauxrote Decke mit Fries, Waschtisch Holz gerillt, Messing
-      - {rect: [0.0, 4.136, 2.515, 5.936], z: [0.012, 0.018], mat: fliese_beige}
-      - {rect: [0.0, 4.136, 0.012, 5.936], z: [0.0, 1.20], mat: fliese_beige}
-      - {rect: [0.0, 5.924, 2.515, 5.936], z: [0.0, 1.20], mat: fliese_beige}
-      - {rect: [0.0, 4.136, 2.515, 4.148], z: [0.0, 1.20], mat: fliese_beige}
-      - {rect: [0.0, 4.136, 0.014, 5.036], z: [0.0, 2.10], mat: fliese_beige}   # Korrektur 15.11.: Dusche 900 an der Westwand, Fischgraetfliese bis 2,10 [INT S. 3, S. 15]
-      - {rect: [0.0, 4.136, 0.85, 4.150], z: [0.0, 2.10], mat: fliese_beige}
-      - {rect: [0.85, 4.150, 0.86, 4.936], z: [0.0, 2.10], mat: glas}
-      - {rect: [0.0, 4.136, 2.515, 5.936], z: [3.37, 3.38], mat: bordeaux_decke}
-      - {rect: [0.0, 4.136, 0.016, 5.936], z: [2.83, 3.38], mat: bordeaux_decke}   # Korrektur 15.11.: Wandband 0,55 m unter der Decke [INT S. 15]
-      - {rect: [0.0, 5.92, 2.515, 5.936], z: [2.83, 3.38], mat: bordeaux_decke}
-      - {rect: [0.0, 4.136, 2.515, 4.152], z: [2.83, 3.38], mat: bordeaux_decke}
-      - {rect: [2.499, 4.136, 2.515, 5.936], z: [2.83, 3.38], mat: bordeaux_decke}
-      - {rect: [0.0, 5.27, 0.55, 5.67], z: [0.38, 0.78], mat: keramik_weiss}   # Korrektur 15.11.: WC 265 und 400 ab Gangwand [INT S. 3]
-      - {rect: [0.0, 5.35, 0.016, 5.59], z: [1.00, 1.15], mat: messing}
+      - {rect: [0.41, 0, 2.21, 0.485], z: [0.42, 0.94], mat: nuss}   # Runde 4: Unterkante 0,42, Oberkante 0,94 [INT S. 14/15]
+      - {rect: [0.59, 0, 2.06, 0.035], z: [1.36, 2.24], mat: tv_bild}   # Runde 4: 1,47 x 0,88 [INT S. 14]
+      # Vorhaenge Leinen mit bordeauxfarbenem Saum bis 0,46, bis unter die Voute [INT S. 14]
+      - {rect: [2.41, 0.04, 3.03, 0.16], z: [0.46, 3.24], mat: leinen}   # Runde 4: Breite 0,62 [S. 14]
+      - {rect: [2.4, 0.03, 3.04, 0.17], z: [0, 0.46], mat: bordeaux_stoff}
+      - {rect: [4.62, 0.04, 5.01, 0.16], z: [0.46, 3.24], mat: leinen}
+      - {rect: [4.61, 0.03, 5.02, 0.17], z: [0, 0.46], mat: bordeaux_stoff}
+      # Bad [INT S. 10, 15]: Feinsteinzeug beige, Decke und Band bordeaux (Palette), Waschtisch Holz gerillt, Messing
+      - {rect: [0, 4.136, 2.515, 5.936], z: [0.012, 0.018], mat: fliese_beige}
+      - {rect: [0, 4.136, 0.012, 5.936], z: [0, 1.2], mat: fliese_beige}
+      - {rect: [0, 5.924, 2.515, 5.936], z: [0, 1.2], mat: fliese_beige}
+      - {rect: [0, 4.136, 2.515, 4.148], z: [0, 1.2], mat: fliese_beige}
+      - {rect: [0, 4.136, 0.014, 5.036], z: [0, 2.32], mat: fliese_beige}   # Dusche 900 an der Westwand, Fliese bis 2,32 (S. 15: 0,687 der Raumhoehe)
+      - {rect: [0, 4.136, 0.85, 4.15], z: [0, 2.32], mat: fliese_beige}
+      - {rect: [0.85, 4.15, 0.86, 4.936], z: [0, 2.1], mat: glas}
+      - {rect: [0, 4.136, 2.515, 5.936], z: [3.37, 3.38], mat: bordeaux_decke}
+      - {rect: [0, 4.136, 0.016, 5.936], z: [2.75, 3.38], mat: bordeaux_decke}   # Runde 4: Wandband 0,63 (S. 15: 0,188 der Raumhoehe), kein Profil
+      - {rect: [0, 5.92, 2.515, 5.936], z: [2.75, 3.38], mat: bordeaux_decke}
+      - {rect: [0, 4.136, 2.515, 4.152], z: [2.75, 3.38], mat: bordeaux_decke}
+      - {rect: [2.499, 4.136, 2.515, 5.936], z: [2.75, 3.38], mat: bordeaux_decke}
+      - {rect: [0, 5.27, 0.55, 5.67], z: [0.38, 0.78], mat: keramik_weiss}   # WC 265 und 400 ab Gangwand [INT S. 3]
+      - {rect: [0, 5.35, 0.016, 5.59], z: [1, 1.15], mat: messing}
       - {rect: [1.55, 5.45, 2.15, 5.936], z: [0.45, 0.85], mat: eiche_derenko}
       - {rect: [1.53, 5.43, 2.17, 5.936], z: [0.85, 0.88], mat: fliese_beige}
-      - {rect: [1.83, 5.86, 1.87, 5.92], z: [0.88, 1.20], mat: messing}
-      - {rect: [1.58, 5.915, 2.12, 5.925], z: [1.25, 2.10], mat: spiegel}
-      - {rect: [0.38, 4.15, 0.44, 4.20], z: [0.90, 2.20], mat: messing}
+      - {rect: [1.83, 5.86, 1.87, 5.92], z: [0.88, 1.2], mat: messing}
+      - {rect: [1.58, 5.915, 2.12, 5.925], z: [1.25, 2.1], mat: spiegel}
+      - {rect: [0.38, 4.15, 0.44, 4.2], z: [0.9, 2.2], mat: messing}
     leuchten:
-      - {pos: [3.70, 0.95, 1.58], w: 12}
-      - {pos: [3.98, 0.80, 1.44], w: 12}
-      - {pos: [3.85, 1.10, 1.71], w: 12}
-      - {pos: [0.38, 3.70, 1.00], w: 6}
-      - {pos: [2.73, 3.70, 1.00], w: 6}
+      - {pos: [3.98, 0.8, 1.59], w: 12}
+      - {pos: [3.7, 0.95, 1.82], w: 12}
+      - {pos: [3.85, 1.1, 1.97], w: 12}
+      - {pos: [0.62, 3.84, 0.95], w: 6}
+      - {pos: [2.48, 3.84, 0.95], w: 6}
       - {pos: [1.60, 2.60, 3.25], w: 20}
       - {pos: [3.70, 3.00, 3.25], w: 20}
       - {pos: [3.80, 5.00, 3.25], w: 15}
@@ -606,13 +643,12 @@ wohnungen:
 materialien:
   creme_wand: {farbe: "#E6DAC4", art: putz}           # Warmes Creme
   creme_decke: {farbe: "#EEE6D6", art: putz}
-  stuck: {farbe: "#EFE7D8", art: einfach, rauh: 0.7}
   eiche_derenko: {farbe: "#A8743F", art: eiche}       # Eiche furniert, Cognac Braun
   tuer_eiche: {farbe: "#8F5F34", art: eiche}
   nuss: {farbe: "#6A4329", art: eiche}
   oliv_polster: {farbe: "#6C7347", rauh: 0.95}        # Olivgruen
-  bordeaux_lack: {farbe: "#5C1820", rauh: 0.35}       # Bordeaux Rot
-  bordeaux_decke: {farbe: "#6B3426", art: putz}       # Korrektur 15.11.: rostiges Bordeaux matt, Band S. 15 gemessen #6B3426 (vorher #641C24, zu dunkel und zu lila)
+  bordeaux_lack: {farbe: "#5C1727", rauh: 0.3}       # Bordeaux Rot, Palette S. 6 (Vektorfarbe RGB 0,361 / 0,090 / 0,153), Lack: Pendel, Badtuer, Hocker
+  bordeaux_decke: {farbe: "#5C1727", rauh: 0.9}      # Runde 4: Bordeaux Rot der Palette S. 6, matt (Bad Decke und Band, Gangdecke); vorher #6B3426 aus beleuchteter Ansicht
   bordeaux_stoff: {farbe: "#5A1A20", rauh: 0.9}
   hellblau: {farbe: "#B4C3CB", rauh: 0.4}             # Himmelblau
   marmor: {farbe: "#ECE8E2", rauh: 0.2}
@@ -633,7 +669,6 @@ materialien:
   terrazzo: {farbe: "#D9CEC0", rauh: 0.35}
   sockel_beige: {farbe: "#C9B79C", art: putz}
   hecke: {farbe: "#3C5A28", rauh: 0.9}
-  bordeaux_wand: {farbe: "#7A463B", art: putz}       # V2 Bettwand, gedecktes Bordeaux [INT2 S. 15/16, Farbmessung]
-  stuck_bordeaux: {farbe: "#7A463B", art: einfach, rauh: 0.7}
+  bordeaux_wand: {farbe: "#5C1727", rauh: 0.9}       # Runde 4: V2 Bettwand, Bordeaux Rot der Palette S. 6, matt; vorher #7A463B aus beleuchteter Ansicht
   fliese_bordeaux: {farbe: "#5D1F1B", rauh: 0.12}    # V2 Rillenfliese bordeaux glasiert [INT2 S. 13]
   zementfliese: {farbe: "#C7A395", rauh: 0.45}       # V2 Gang: Musterfliese rot-creme-blaugrau, Mischton [INT2 S. 1]

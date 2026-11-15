@@ -88,6 +88,14 @@ Neu veredelt mit Suffix `_k` (alte Bilder bleiben): `apt01_kueche_k`, `_gesamt_k
 Offen: **Lage APT. 01 bestätigen; liegt es unter einem Pavillon, gilt 3,14**; Fensterbreite 1,70 oder 1,60; Kochfeld
 (S. 3 und S. 13 widersprechen sich); `gang` (Variante 1) ist im Modell mit der neuen Deckenfarbe, aber nicht neu veredelt.
 
+**Runde 4 Apartments (15.11.2026), nur Modell und Blender-Vorschau:** Kundenfeedback "Küchen teilweise zu klein im
+Maßstab, Stuck an der Deckenkante gibt es nicht, rote Farbe und Ecke Bett zum Gang nicht richtig". Details und Tabelle
+Soll/Ist in `interior_v2.md` Abschnitt 6. Küchenzeile nach Derenko (Skizze S. 3, Ansicht S. 13) Hochschrank + 3 x 600 =
+2,416 m statt 2,116 (Grundlage), drei offene Borde bis 2,31, Mikrowelle 1,58 bis 1,93, Arbeitsplatte 0,90; in `apt01`
+Hochschrank wieder am Fensterende wie [INT] S. 13. Kein Stuck mehr, nur glatte Vorhangvoute mit LED an der Fensterwand
+(Lichtkonzept S. 12 D). Alle Bordeaux-Flächen in der Palettenfarbe #5C1727. Trennwand als raumhohe Wand mit echtem
+Viertelkreis (R 0,18/0,28, neuer Schlüssel `boegen` in `lib/interior.py`), Eichenverkleidung 1,47 läuft um die Rundung.
+
 ## Runde 3 (15.11.2026): Top 3 und Top 4, bessere Winkel
 
 Feedback des Kunden: "Gerade für 3 und 4 noch bessere Winkel mit den Terrassen und auch von den Einheiten (von außen) selbst
@@ -134,6 +142,58 @@ Umgebung mit Google prüfen, Gebäude im Innenhof korrigieren, Feeling der Vorla
 
 Schlafzimmer mit Hofblick nicht umgesetzt: die Schlafzimmerfenster zeigen zum Nachbar-Dachgarten bzw. Nachbargarten
 (bereits in Runde 1 als `schlafzimmer` vorhanden), Budget für die Wiederholungen verwendet.
+
+## Runde 4 (15.11.2026): EG und 1. OG nach Einreichplan, Verbindungsweg, Geländer
+
+Feedback des Kunden: "Erster Stock und Erdgeschoss stimmen noch nicht, der Verbindungsweg zwischen den beiden Häusern ist
+falsch und im ersten Stock auch zum Teil Handläufe an Stellen, wo keine sein sollten." Nur Modell, keine Veredelung.
+
+**Seitenzählung:** ab Runde 4 gilt die PDF-Seite der Planungsmappe (EIN S. 16 = gedruckte Blattnummer 15). Ältere
+Verweise in `project.yaml` (z. B. "S. 15" für den Pavillongrundriss, "S. 22" für Schnitt 1, "S. 25" für die Hofansicht)
+meinen die gedruckte Blattnummer.
+
+- **Methode:** Vektorpläne mit PyMuPDF ausgewertet (Außendämmung magenta als Außenkante, Linien, Beschriftungen), alle
+  Blätter in den Hofrahmen entzerrt: S. 16 über die Pavillonecken (Maßstab 1:100 auf 0,2 % bestätigt, Außenkante
+  11,97 x 6,64 = Maßkette), S. 15 = S. 16 verschoben (Schnittmarken A-05/A-07), S. 8/9 über die bestehende Abbildung
+  im Projektkopf, S. 18 über die Schrägwand am Hoftraktende (4,29 Grad gedreht). Ansichten S. 26/28 über Fassadenkanten
+  (F 18,79 / 12,44) und ±0,00.
+- **EG Hoftrakt** (`nb_hof`, vorher ein Quader b 0 bis 15 mit Gründach über allem): zwei Apartmentreihen mit Mittelgang,
+  Nordreihe bis zur Grundgrenze (Feuermauer b 14,86), drei offene Höfe (Gärten 42,09 / 31,17 / 29,91 m²) mit Fenstern,
+  Gangtüren und Blumentrögen, Ostende schräg wie Top 4A, Gangausgang zum Hof Ost. Südfassade: 10 Fenster 1,60 x 1,50
+  (FPH 0,90) an den Lücken der Außendämmung statt Raster 10,56.
+- **Gartenstreifen** (`nb_garten`): Rasen an der Fassade, Rasensteinpflaster bis zum Zaun, drei Blumentröge (4,20 /
+  4,20 / 3,40 m) statt eines durchgehenden Trogs, Zaun auf STB-Sockel. EG-Rücksprung unter dem Straßenhaus mit Tür zu
+  Müllraum und Kellerstiege (Fahrradraum im KG) ergänzt.
+- **Hof Ost** (EIN S. 18): Weg vom Gangausgang, Kinderspielplatz mit Sandkiste und Sonnensegel, Spielhügel (+1,16) hinter
+  Stützmauer mit Geländer h 1,00, Garten BFL, Gitterrost der Brandrauchentlüftung, zwei Pflichtbäume r 2,50 m.
+- **Verbindungsweg Straßenhaus zu den Pavillons** (vorher eben +3,50 ab der Fassade, also 0,46 m Stufe an der
+  Stiegenhaustür, Breite 1,50 auf b 6,62 bis 8,12): Podest +3,96 vor der Stiegenhaustür (EI30-C 0,90 x 2,57) zwischen den
+  Terrassen Top 2 und Top 5, Rampe 5 % von a -3,90 bis zur Rinne bei a 5,60, dann eben +3,50 entlang der Pavillon-Nordseiten
+  über dem EG-Gang bis Top 4A; lichte Breite 1,34, Feinsteinzeug 50/50, nicht überdacht, keine Stufen. Zwischen den
+  Pavillons verbreitert bis zur Terrassentrennung. Drei Stufen hinunter auf Gründach 61,26 (Wartung) und zwei Steigleitern
+  "Dachausstieg über Leiter" an Top 3 Ost und Top 4 West.
+- **Dächer 1. OG:** Gründach +3,96 (West, Attika +4,16), Gründach +3,06 über der Nordreihe (Attika +3,26 [ANN]),
+  Terrassen +3,50 ohne Pflanztrog (Top 3: 20,91 m², Top 4: 15,45 m²), Terrassen Top 2 und Top 5 auf +3,96 an der
+  Straßenhaus-Hoffassade (vorher Gründach), Terrasse Top 4A auf Stelzlagern. Pavillon-Attika umlaufend (vorher nur Süd
+  und Nord).
+- **Pavillons:** Top 4 auf a 15,90 (Abstand 3,93 laut EIN S. 16, vorher 16,04), Top 4A um 0,11 nach Westen; Badfenster
+  Nord FPH 1,70, 1,42 x 0,78 (vorher Brüstung 0,90).
+- **Geländer:** nur noch, wo der Plan sie zeigt (Tabelle im Bericht Runde 4 und in `project.yaml` je Eintrag G1 bis G10,
+  Z1 bis Z2). Entfernt: Geländer auf dem nicht vorhandenen Pflanztrog der Terrassen Top 3/4.
+- **Fassaden:** Straßenhaus-Hoffassade 1. OG nach Ansicht S. 26 (8 Öffnungen, vorher zwei 2,20 m breite Türen),
+  Sockelzone bis UK Erker in Baumit 1024 (dunkler); Würtzlerstraße 10 Hofseite nach S. 28 (EG: Hauseingang 1,40 m,
+  drei Lüftungsgitter; 1. bis 5. OG: je zwei Balkontüren und zwei Fenster im Balkonfeld statt einer Mitteltür).
+- **Nachbarn:** Dachdeckung von sechs Nachbarn nach den Apple-Ansichten des Kunden (`roofs_override`), nummerierte
+  Übersicht und Hausnummern-Korrektur in `umgebung_abgleich.md` Abschnitt 8.
+- **Neu in `lib/neubau.py` (additiv):** Geländerpunkte mit eigener Fußhöhe `[x, y, z]` für Rampen.
+- **Prüfbilder** (Scratchpad, nicht im Repo): Draufsichten EG/1. OG/Dach halbtransparent über den entzerrten Planseiten,
+  Clay-Bilder in Augenhöhe auf dem Weg, den Terrassen, im Hof und im Gartenstreifen, Ansichten neben S. 26/28,
+  Kontaktbogen `kontaktbogen_modell_eg_1og.jpg`.
+
+Offene Punkte Runde 4: Top 4A und der Wegabschnitt bis zur 4A-Terrasse folgen dem VP (im EIN noch Gründach mit Stufe);
+Badfenster Top 3/4 (EIN FPH 1,70, VP zeigt "PH"); Attikahöhe über Gründach +3,06; Geländer an der Nordkante der
+Terrasse Top 2 und zwischen Weg-Podest und den Terrassen Top 2/5 im Plan nicht eindeutig (nicht modelliert);
+Spielhügel als Plateau vereinfacht; Gartenstreifen-Teilung (Rasen/Rasensteinpflaster) aus den Linien abgeleitet.
 
 ## Quellen (`quellen/`, PDFs nicht im Repo)
 
