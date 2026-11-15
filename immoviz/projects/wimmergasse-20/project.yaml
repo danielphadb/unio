@@ -171,7 +171,7 @@ cameras:
   ecke:            {pos: [-13.0, -15.5, 1.65], target: [6.0, 7.0, 11.0], lens: 20, vertical: true}
   ecke_orbit:      {pos: [-7.57, -18.73, 1.65], target: [6.0, 7.0, 11.0], lens: 20, vertical: true}   # Endbild Video: 18 Grad um die Ecke gedreht
   ecke_tele:       {pos: [-24.0, -30.0, 1.65], target: [5.0, 6.0, 11.5], lens: 32, vertical: true}
-  drohne:          {pos: [-40.0, -48.0, 40.0], target: [6.0, 8.0, 13.0], lens: 32, vertical: true}
+  drohne:          {pos: [-40.0, -48.0, 38.0], target: [6.0, 8.0, 24.0], lens: 32, vertical: true}
   wimmergasse:     {pos: [-11.5, 42.0, 1.65], target: [0.0, 9.0, 10.5], lens: 24, vertical: true}
   stolberggasse:   {pos: [36.0, -15.0, 1.65], target: [6.0, 0.0, 11.0], lens: 24, vertical: true}
   dachgeschoss:    {pos: [-16.0, -19.0, 12.0], target: [3.0, 4.0, 21.0], lens: 35, vertical: true}

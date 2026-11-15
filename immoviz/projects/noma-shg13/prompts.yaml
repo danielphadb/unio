@@ -1,0 +1,131 @@
+# Prompt-Bausteine fuer die Higgsfield-Veredelung (Studio, Knopf "Veredeln").
+# VORLAGE (allgemein). Objektbezogen anpassen: mood_analyse.md und mood_interior.md des Objekts, higgsfield/LEITFADEN.md.
+# Das Studio setzt den Prompt zusammen: Geometrie-Sperre + Objekt + Licht/Jahreszeit + Umgebung + Negativ
+# (innen: Geometrie innen + Wohnungstyp + Raum + Licht innen + Negativ innen). Der Text ist vor dem Absenden
+# editierbar. Englisch, weil die Bildmodelle damit am verlaesslichsten arbeiten.
+
+geometrie:
+  aussen: >-
+    Turn image 1, a 3D render, into a high-end architectural photograph. Keep the building geometry exactly as in
+    image 1: same number of window axes, same window positions, same storey heights, same cornices, same roofline
+    and the same camera perspective. Do not add, remove or move any windows, balconies or floors.
+  innen: >-
+    Use image 1 as the exact base. Keep the camera position, perspective, focal length and framing identical. Do not
+    move, resize, add or remove any walls, windows, doors, ceiling heights, sloped ceilings or openings. Window and
+    door frames keep their position and proportions. Only add furniture, materials, textiles, lighting fixtures and
+    decoration. Use the other images only as style and material reference, not for room geometry.
+
+objekt: >-
+  [OBJEKT BESCHREIBEN] A renovated Viennese apartment building, [facade colour and material], [window type and colour],
+  [stucco and cornices], [roof extension material], located on a quiet street in Vienna.
+
+aussen:
+  golden_hour:
+    titel: Golden Hour
+    text: >-
+      Late afternoon golden hour, low warm sun grazing the facade from the side so every cornice and stucco ornament
+      casts a soft shadow. Pale creamy sky, gentle haze, warm highlights on the beige plaster and a few windows
+      already glowing softly from inside. Photographic realism, shot on a full-frame camera with a shift lens,
+      subtle film grain, lifted shadows, no oversaturation.
+  dunst:
+    titel: Diesig, weiches Morgenlicht
+    text: >-
+      Soft hazy morning light, milky pale-blue sky, almost no hard shadows, the facade rendered in calm, even tones
+      of sand and ivory. Air feels fresh and quiet, light mist softening the far end of the street. Muted natural
+      colours, gentle contrast, editorial architectural photography.
+  bedeckt:
+    titel: Bedeckt
+    text: >-
+      Bright overcast day, diffuse white sky acting as a giant softbox, true material colours of plaster, white
+      window frames and dark zinc. Calm, documentary atmosphere like a real estate photograph by an architectural
+      photographer, slightly desaturated greens, crisp but not harsh detail.
+  blaue_stunde:
+    titel: Blaue Stunde
+    text: >-
+      Blue hour just after sunset, deep blue to soft violet sky, street lamps and the ground floor shop glowing warm
+      at 2700 Kelvin. Around a third of the windows lit from inside with visible curtains and lamps, the stucco
+      facade gently lit by warm spill light. Quiet evening mood, slight reflections on the pavement, cinematic but
+      natural.
+  fruehling:
+    titel: Frühling
+    text: >-
+      Bright spring morning, soft clean light, crisp shadows, fresh light-green leaves on the street trees, a few
+      blossoms, clear air.
+  herbst:
+    titel: Herbst nach Regen
+    text: >-
+      Autumn afternoon right after rain, wet cobblestones and sidewalk reflecting the facade and warm shop windows,
+      yellow leaves scattered on the ground and on the trees. Overcast sky with a soft break of light, people in
+      coats, one umbrella. Moody yet warm, muted palette of beige, ochre and slate grey.
+  winter:
+    titel: Winter, Schnee
+    text: >-
+      Calm winter late afternoon, bare trees, a thin layer of fresh snow on the cornices, window sills and the zinc
+      roof, soft grey sky. Warm golden light glowing from many windows and the entrance, contrasting with the cool
+      white street. Cosy, quiet, festive without decorations, photographic realism.
+
+umgebung: >-
+  Realistic Vienna street scene in the 5th district: mature street trees with detailed leaves, a few parked cars, two
+  or three pedestrians, natural asphalt and pavement textures. Vertical lines perfectly straight, natural colours, no
+  HDR look, magazine quality, photorealistic.
+
+innen:
+  altbau:
+    titel: Altbau Regelgeschoss
+    text: >-
+      Viennese Gruenderzeit apartment, warm off-white walls (#E2DCD2) with full-height classical wall panel moulding,
+      ornate plaster cornice, oak herringbone parquet in medium warm tone, floor-length natural linen curtains in sand
+      (#C2B197) in front of the box windows, walnut furniture, contemporary warm interior with Vienna modernism accents.
+  dachgeschoss:
+    titel: Dachgeschoss
+    text: >-
+      Contemporary rooftop apartment, smooth warm lime-plaster walls in off-white to greige, no wall panelling and no
+      stucco, wide-plank light oak floor, one walnut slatted accent wall, low linen sofa, travertine coffee table,
+      paper lantern pendant, large potted olive tree on the terrace.
+  essplatz:
+    titel: Essplatz
+    text: >-
+      Oval solid walnut dining table with a pedestal base, upholstered boucle or Viennese cane chairs, one sculptural
+      pendant light above the table, a single large ceramic vase with olive branches, one large abstract artwork in
+      earthy tones on the main wall.
+  kueche:
+    titel: Küche
+    text: >-
+      Walnut kitchen with shaker panel fronts or handleless fronts, full-height taupe quartzite backsplash, solid stone
+      island, brushed brass tap, nearly empty worktop with two ceramic pieces, subtle under-cabinet LED strip.
+  wohnen:
+    titel: Wohnen
+    text: >-
+      Low rounded cream boucle sofa, large flat-woven cream rug, travertine or walnut side table, stack of art books,
+      one paper lantern or opal glass light, calm and uncluttered.
+  licht:
+    titel: Licht innen
+    text: >-
+      Natural daylight from the windows only, late afternoon, warm sun, crisp sun patches and long light stripes across
+      the floor and wall, soft deep shadows, balanced exposure with readable view outside, photorealistic
+      architectural interior photography, vertical lines straight.
+
+negativ:
+  aussen: >-
+    Avoid: oversaturated blue sky, harsh midday sun, HDR look, plastic CGI surfaces, distorted vertical lines, posing
+    models looking into the camera, futuristic glass towers, palm trees, text, watermark or logos, extra floors,
+    distorted windows, fantasy architecture.
+  innen: >-
+    No people, no animals, no clutter, no cool grey tones, no pure white, no recessed downlight grid, no glossy
+    surfaces, no changed architecture, no extra windows, no wide-angle distortion, no text, no watermark.
+
+video: >-
+  Slow, steady camera move as if on a gimbal, keep the building geometry, windows and cornices exactly as in the
+  start image, subtle natural motion only: leaves moving in a light breeze, a few pedestrians walking, soft changing
+  light. No cuts, no zoom jumps, no new buildings.
+
+# Lichtstimmung aus project.yaml (lights) -> Baustein unter aussen. Fehlt ein Eintrag, entscheidet season.
+zuordnung:
+  golden_hour: golden_hour
+  dunst_hell: dunst
+  blaue_stunde: blaue_stunde
+  fruehling: fruehling
+  herbst: herbst
+  winter: winter
+  sommermittag: bedeckt
+  vormittag: fruehling

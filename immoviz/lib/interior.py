@@ -26,8 +26,15 @@ from . import meshkit as K
 
 
 # ------------------------------------------------------------------ Plan lesen
-def raster_page(pdf: Path, page: int, dpi: int, cache: Path) -> np.ndarray:
-    out = cache / f"plan_p{page}_{dpi}.png"
+def plan_pdf(project_dir: Path, P: dict) -> Path:
+    """PDF-Pfad aus wohnungen.yaml: absolut oder relativ zum Projektordner (z. B. quellen/plan.pdf)."""
+    p = Path(P["pdf"])
+    return p if p.is_absolute() else Path(project_dir) / p
+
+
+def raster_page(pdf: Path, page: int, dpi: int, cache: Path, tag: str | None = None) -> np.ndarray:
+    # tag (wohnungen.yaml plaene.<x>.cache): eigener Cachename, wenn mehrere PDFs dieselbe Seitenzahl haben
+    out = cache / (f"plan_{tag}_p{page}_{dpi}.png" if tag else f"plan_p{page}_{dpi}.png")
     if not out.exists():
         cache.mkdir(parents=True, exist_ok=True)
         subprocess.run(["pdftoppm", "-r", str(dpi), "-png", "-singlefile", "-f", str(page), "-l", str(page),
@@ -43,6 +50,13 @@ def wall_mask(rgb: np.ndarray) -> np.ndarray:
     blue = (b > r + 40) & (b > g + 20)
     purple = (r > 90) & (b > 90) & (g < 80)
     return grey | (sat & ~blue & ~purple & (mx > 120))
+
+
+def color_mask(rgb: np.ndarray, hexcol: str, tol: int = 30) -> np.ndarray:
+    """Wände in einer Volltonfarbe (z. B. Verkaufspläne mit dunkelgrünen Wänden), Abstand je Kanal <= tol."""
+    h = hexcol.lstrip("#")
+    c = np.array([int(h[i:i + 2], 16) for i in (0, 2, 4)])
+    return np.abs(rgb - c).max(-1) <= tol
 
 
 def to_cells(mask: np.ndarray, cell_px: int) -> np.ndarray:
@@ -140,7 +154,8 @@ class Apartment:
         self.cell_m = self.s * self.cell_px
         x0, y0, x1, y1 = cfg["region_px"]
         self.ox, self.oy = x0, y0
-        sub = wall_mask(plan_rgb[y0:y1, x0:x1])
+        sub = wall_mask(plan_rgb[y0:y1, x0:x1]) if not proj.get("wand_farbe") else \
+            color_mask(plan_rgb[y0:y1, x0:x1], proj["wand_farbe"], proj.get("wand_toleranz", 30))
         for sx0, sy0, sx1, sy1 in cfg.get("solid_px", []):
             sub[sy0 - y0:sy1 - y0, sx0 - x0:sx1 - x0] = True
         for sx0, sy0, sx1, sy1 in cfg.get("clear_px", []):
@@ -151,7 +166,13 @@ class Apartment:
         sizes = ndimage.sum(cells, lab, range(1, n + 1))
         keep = np.isin(lab, [i + 1 for i, sz in enumerate(sizes) if sz * self.cell_m ** 2 >= 0.03])
         self.walls = keep
-        self.openings = find_openings(self.walls, self.cell_m)
+        self.openings = find_openings(self.walls, self.cell_m, max_span=cfg.get("oeffnung_max_m", 1.6))
+        # oeffnungen_px: Oeffnungen von Hand (Planpixel), wenn die Lueckensuche sie nicht findet
+        for o in cfg.get("oeffnungen_px", []):
+            ox0, oy0, ox1, oy1 = o["px"]
+            self.openings.append({"axis": 1 if (ox1 - ox0) >= (oy1 - oy0) else 0, "type": o.get("type", "fenster"),
+                                  "r0": (oy0 - y0) // self.cell_px, "r1": (oy1 - y0) // self.cell_px,
+                                  "c0": (ox0 - x0) // self.cell_px, "c1": (ox1 - x0) // self.cell_px})
         # Ausschnitt schliessen: Randwand, Fenster- und Türöffnungen bleiben frei
         b = max(2, int(0.06 / self.cell_m))
         self.walls[:b, :] = True
@@ -172,13 +193,31 @@ class Apartment:
     def cell_xy(self, r, c):
         px = self.ox + c * self.cell_px
         py = self.oy + r * self.cell_px
-        return self.px_to_local(px, py)
+        return self._raw(px, py)
 
-    def px_to_local(self, px, py):
+    def _raw(self, px, py):
         ex, ey = self.proj["corner_px"]
         return ((ey - py) * self.s, (ex - px) * self.s)
 
+    def _dreh(self, x, y):
+        """Optional: Plan gegen das lokale System gedreht (drehung_grad) und verschoben (ursprung_lokal)."""
+        a = math.radians(self.proj.get("drehung_grad", 0.0))
+        ox, oy = self.proj.get("ursprung_lokal", (0.0, 0.0))
+        return (ox + x * math.cos(a) - y * math.sin(a), oy + x * math.sin(a) + y * math.cos(a))
+
+    def px_to_local(self, px, py):
+        return self._dreh(*self._raw(px, py))
+
+    def transform(self, mbs):
+        """Gebaute Hülle (im Plansystem) ins lokale System drehen; ohne drehung_grad/ursprung_lokal unverändert."""
+        if not (self.proj.get("drehung_grad") or self.proj.get("ursprung_lokal")):
+            return
+        for mb in mbs:
+            mb.verts = [(*self._dreh(x, y), z) for x, y, z in mb.verts]
+
     def classify(self, op):
+        if op.get("type"):
+            return op["type"]
         cy = self.oy + (op["r0"] + op["r1"]) / 2 * self.cell_px
         cx = self.ox + (op["c0"] + op["c1"]) / 2 * self.cell_px
         for band in self.c.get("bands", []):
@@ -196,6 +235,7 @@ class Apartment:
             xb, yb = self.cell_xy(r1, c1)
             box_xy(mb_wall, xa, xb, ya, yb, z0, z1, "innen_wand")
         win = self.c.get("window", {"sill": 0.92, "top": 2.93})
+        self.modern = self.c.get("fenster_stil") == "modern"
         stats = {"fenster": 0, "tuer": 0, "glastuer": 0}
         for op in self.openings:
             kind = self.classify(op)
@@ -220,6 +260,8 @@ class Apartment:
         x0, x1, y0, y1 = min(xa, xb), max(xa, xb), min(ya, yb), max(ya, yb)
         along_x = (x1 - x0) >= (y1 - y0)
         planes = (0.25, 0.8) if kind == "fenster" else (0.5,)
+        if getattr(self, "modern", False) or self.c.get("fenster_stil") == "modern":
+            planes = (0.6,)              # Neubau: eine Ebene, Kunststoff-Alu, kein Kämpfer
         ft = 0.07
         for t in planes:
             if along_x:
@@ -239,15 +281,17 @@ class Apartment:
             f(0, L, H - ft, H, "fenster")
             f(0, ft, 0, H, "fenster")
             f(L - ft, L, 0, H, "fenster")
-            f(L / 2 - 0.035, L / 2 + 0.035, 0, H, "fenster")
-            if kind == "fenster" and H > 1.5:
+            if not (self.c.get("fenster_stil") == "modern" and L < 1.2):
+                f(L / 2 - 0.035, L / 2 + 0.035, 0, H, "fenster")
+            if kind == "fenster" and H > 1.5 and self.c.get("fenster_stil") != "modern":
                 f(0, L, H - 0.55, H - 0.55 + ft, "fenster")
             mg.poly(g, None, "glas", n)
 
     def slabs(self, mb):
-        x0, y0, x1, y1 = self.c["region_px"]
-        xa, ya = self.px_to_local(x0, y0)
-        xb, yb = self.px_to_local(x1, y1)
+        # slab_px: Boden/Decke nur ueber der Wohnung, wenn region_px fuer die Oeffnungssuche groesser gewaehlt ist
+        x0, y0, x1, y1 = self.c.get("slab_px", self.c["region_px"])
+        xa, ya = self._raw(x0, y0)
+        xb, yb = self._raw(x1, y1)
         z0 = self.c["floor_z"]
         box_xy(mb, xa, xb, ya, yb, z0 - 0.3, z0, "boden_parkett")
         box_xy(mb, xa, xb, ya, yb, z0 + self.c["height"], z0 + self.c["height"] + 0.3, "decke")
@@ -359,19 +403,23 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
         if objekt:
             keep = set(a.get("objekt_sichtbar", []))
             objekt.hide_render = False
+            aus = tuple(a.get("objekt_ausblenden", []))
             for o in objekt.objects:
-                o.hide_render = o.name not in keep
+                # objekt_ausblenden (Präfixe): alles andere bleibt sichtbar, z. B. Nachbartrakte im Ausblick
+                o.hide_render = o.name.startswith(aus) if aus else o.name not in keep
         if a.get("plan") == "manuell":
             apt = ManualApartment(a)
         else:
             P = W["plaene"][a["plan"]]
-            rgb = raster_page(Path(P["pdf"]), P["page"], P["dpi"], plan_cache)
+            rgb = raster_page(plan_pdf(project_dir, P), P["page"], P["dpi"], plan_cache, P.get("cache"))
             apt = Apartment(a, rgb, P)
         mw = K.MeshBuilder(f"{name}_waende", ["innen_wand"])
         mf = K.MeshBuilder(f"{name}_rahmen", ["fenster"])
         mg = K.MeshBuilder(f"{name}_glas", ["glas"])
         stats = apt.build(mw, mf, mg)
         apt.slabs(mw)
+        if hasattr(apt, "transform"):
+            apt.transform((mw, mf, mg))
         objs = [mb.to_object(bpy, mats, coll) for mb in (mw, mf, mg)]
         for cam_name, cam in a["kameras"].items():
             if cams and f"{name}_{cam_name}" not in cams:
@@ -401,7 +449,7 @@ def debug_plan(project_dir: Path, name: str, out: Path):
     W = yaml.safe_load((project_dir / "wohnungen.yaml").read_text())
     a = W["wohnungen"][name]
     P = W["plaene"][a["plan"]]
-    rgb = raster_page(Path(P["pdf"]), P["page"], P["dpi"], project_dir / "data" / "plan_cache")
+    rgb = raster_page(plan_pdf(project_dir, P), P["page"], P["dpi"], project_dir / "data" / "plan_cache", P.get("cache"))
     apt = Apartment(a, rgb, P)
     img = np.full(apt.walls.shape + (3,), 255, np.uint8)
     img[apt.walls] = (0, 0, 0)
@@ -434,17 +482,20 @@ def render_walkthrough(project_dir: Path, name: str, stills: bool = True, anim: 
     scene.collection.children.link(coll)
     if objekt:
         keep = set(a.get("objekt_sichtbar", []))
+        aus = tuple(a.get("objekt_ausblenden", []))
         for o in objekt.objects:
-            o.hide_render = o.name not in keep
+            o.hide_render = o.name.startswith(aus) if aus else o.name not in keep
     apt = ManualApartment(a) if a.get("plan") == "manuell" else None
     if apt is None:
         P = W["plaene"][a["plan"]]
-        apt = Apartment(a, raster_page(Path(P["pdf"]), P["page"], P["dpi"], project_dir / "data" / "plan_cache"), P)
+        apt = Apartment(a, raster_page(plan_pdf(project_dir, P), P["page"], P["dpi"], project_dir / "data" / "plan_cache", P.get("cache")), P)
     mw = K.MeshBuilder(f"{name}_waende", ["innen_wand"])
     mf = K.MeshBuilder(f"{name}_rahmen", ["fenster"])
     mg = K.MeshBuilder(f"{name}_glas", ["glas"])
     apt.build(mw, mf, mg)
     apt.slabs(mw)
+    if hasattr(apt, "transform"):
+        apt.transform((mw, mf, mg))
     for mb in (mw, mf, mg):
         mb.to_object(bpy, mats, coll)
     B.setup_light(scene, cfg, ctx, wt.get("light", a.get("light", "golden_hour")))

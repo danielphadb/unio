@@ -1,0 +1,136 @@
+# immoviz Stufe 6: Innenraeume NOMA Schlachthausgasse 13 (Top 3, Top 4, Top 26-2)
+# Top 3 und Top 4: Waende aus den Verkaufsplaenen [VP] (Vektor-PDF, 300 dpi, dunkelgruene Wandfuellung).
+#   Massstab ueber die Pavillonmasse kalibriert: 11,95 m = 2355 px, 6,62 m = 1306 px -> 0,005072 m/px (rund 1:60).
+#   Die Massleiste 0 bis 5 m auf dem Blatt entspricht in Wahrheit rund 6 m und wird NICHT verwendet.
+#   Lage: Plan steht 6,44 Grad gedreht zum Lokalsystem (drehung_grad), Planecke = Suedwestecke aussen (ursprung_lokal),
+#   aus [EIN S. 9] (1.OG Schlachthausgasse, 1:100, Pavillon Top 3 angeschnitten) und [VP Top 3] (Abstand Top 4 = 16,04 m).
+# Top 26-2: kein verwertbarer Massstab im Verkaufsplan, daher von Hand (ManualApartment) aus [EIN S. 13] (2.DG, 1:100),
+#   Koordinaten lokal (x entlang Schlachthausgasse, y Richtung Strasse), Raumhoehen aus den RH-Linien des Plans.
+# Fensterhoehen Pavillons: Bruestung 0,90 (PH laut VP), Sturz 2,40 ueber FOK (160/150 laut [EIN S. 15]).
+
+plaene:
+  vp_top3:
+    pdf: quellen/VP_Top03.pdf
+    cache: vp_top03
+    page: 1
+    dpi: 300
+    m_per_px: 0.005072
+    cell_px: 3                       # Rasterzelle 1,5 cm
+    corner_px: [1589, 2410]          # Suedwestecke aussen (Plan unten links)
+    wand_farbe: "#4E604C"            # Wandfuellung im Verkaufsplan
+    wand_toleranz: 30
+    drehung_grad: 6.44
+    ursprung_lokal: [5.058, -22.272]
+  vp_top4:
+    pdf: quellen/VP_Top04.pdf
+    cache: vp_top04
+    page: 1
+    dpi: 300
+    m_per_px: 0.005072
+    cell_px: 3
+    corner_px: [1636, 2410]
+    wand_farbe: "#4E604C"
+    wand_toleranz: 30
+    drehung_grad: 6.44
+    ursprung_lokal: [6.858, -38.210]  # Top 3 plus 16,04 m entlang der Pavillonreihe [VP Top 3]
+
+# Innenraum-Lichtstimmungen (ergaenzen project.yaml lights)
+lichter:
+  spaetsommer_mittag: {date: "2026-08-27", time: "13:15", tz: 2, exposure: 0.0, interior: 0.0, aerosol: 2.0, season: spaetsommer}   # Sonne ca. 50 Grad aus Sued, fuer die Hofgauben Top 26
+
+render:
+  preview_resolution: [1200, 800]
+  resolution: [2400, 1600]
+  samples: 48
+
+wohnungen:
+  top03:
+    plan: vp_top3
+    titel: Top 3, 1. OG Hof, 62,80 m2, Terrasse 20,91 m2 [VP]
+    region_px: [1380, 900, 4150, 2620]   # grosszuegig, damit Oeffnungen am Rand gefunden werden
+    slab_px: [1589, 1105, 3943, 2410]     # Boden und Decke nur innerhalb der Aussenwaende
+    clear_px: [[1380, 900, 1480, 2620]]   # Seitenleiste des Verkaufsplans (gleiche Farbe wie die Waende)
+    oeffnungen_px:                         # Nordwand: Lueckensuche scheitert am schmalen Vorraum dahinter
+      - {px: [1784, 1105, 2066, 1180], type: fenster}    # Bad, a 0,99 bis 2,42 (oben links im Plan)
+      - {px: [2912, 1105, 3109, 1180], type: tuer}       # Eingangstuer, a 6,71 bis 7,71
+    floor_z: 3.50                    # FOK +3,50 [EIN S. 22]
+    height: 2.51                     # DUK +6,01 [EIN S. 22]
+    window: {sill: 0.90, top: 2.40}
+    fenster_stil: modern
+    oeffnung_max_m: 2.3              # Hebeschiebetuer 2,0 m
+    bands:                           # erste passende Zone entscheidet
+      - {type: tuer, px: [2890, 1085, 3140, 1200]}       # Eingangstuer Nordwand
+      - {type: fenster, px: [1560, 1085, 3970, 1200]}    # Nordwand (Bad)
+      - {type: fenster, px: [1560, 2320, 3970, 2440]}    # Suedwand zum Nachbargarten
+      - {type: glastuer, px: [3880, 1200, 3975, 2330]}   # Ostwand Hebeschiebetuer zur Terrasse
+    objekt_ausblenden: [nb_top3]     # eigene Aussenhuelle aus, Rest (Top 4, Hoftrakt, Strassenhaus) bleibt im Ausblick
+    light: spaetsommer
+    exposure: 0.7
+    kameras:
+      wohnkueche:     {pos_px: [3200, 2290], target_px: [3940, 1480], lens: 24, h: 1.40}    # Essplatz, Blick zu Kueche und Terrasse
+      wohnkueche_sued: {pos_px: [3820, 1250], target_px: [3330, 2400], lens: 24, h: 1.35}   # von der Kueche zum Suedfenster, Sofa
+      schlafzimmer:   {pos_px: [2240, 1740], target_px: [1950, 2400], lens: 24, h: 1.20}    # SZ 13,73 m2 zum Fenster
+  top04:
+    plan: vp_top4
+    titel: Top 4, 1. OG Hof, 62,80 m2, Terrasse 15,45 m2 [VP]
+    region_px: [1427, 900, 4197, 2620]
+    slab_px: [1636, 1105, 3990, 2410]
+    clear_px: [[1427, 900, 1520, 2620]]
+    oeffnungen_px:
+      - {px: [1834, 1105, 2111, 1180], type: fenster}
+      - {px: [2965, 1105, 3162, 1180], type: tuer}
+    floor_z: 3.50
+    height: 2.51
+    window: {sill: 0.90, top: 2.40}
+    fenster_stil: modern
+    oeffnung_max_m: 2.3
+    bands:
+      - {type: tuer, px: [2940, 1085, 3190, 1200]}
+      - {type: fenster, px: [1600, 1085, 4015, 1200]}
+      - {type: fenster, px: [1600, 2320, 4015, 2440]}
+      - {type: glastuer, px: [3925, 1200, 4020, 2330]}
+    objekt_ausblenden: [nb_top4]
+    light: spaetsommer
+    exposure: 0.7
+    kameras:
+      wohnkueche:     {pos_px: [3250, 2290], target_px: [3985, 1480], lens: 24, h: 1.40}
+      wohnkueche_sued: {pos_px: [3865, 1250], target_px: [3380, 2400], lens: 24, h: 1.35}
+      schlafzimmer:   {pos_px: [2290, 1740], target_px: [1950, 2400], lens: 24, h: 1.20}
+
+  top26_2:
+    plan: manuell
+    titel: Top 26-2, 2. DG, Wohnkueche 46,47 m2 unter den Schraegen, Terrasse 6,08 m2 [VP, EIN S. 13]
+    floor_z: 21.82                   # FOK 2. DG +21,82 [EIN S. 22]
+    height: 2.80                     # RDUK +24,69, lichte Hoehe 2,80 [ANN]
+    fenster_stil: modern
+    slab_rect: [0.40, -15.70, 10.35, -7.50]
+    walls:
+      - rect: [0.40, -15.70, 0.55, -7.50]                    # Feuermauer Suedwest (Kuechenzeile)
+      - rect: [0.55, -7.72, 7.75, -7.60]                     # Wand zu Bad, WC und Zimmer
+        openings: [{span: [1.15, 2.05], z: [0.0, 2.10], type: tuer}]
+      - rect: [7.75, -10.75, 7.87, -7.60]                    # Wand zum Gang
+        openings: [{span: [-9.70, -8.80], z: [0.0, 2.10], type: tuer}]
+      - rect: [8.00, -10.65, 10.05, -8.55]                   # Liftschacht
+      - rect: [10.20, -15.68, 10.35, -10.65]                 # Trennwand zu Top 23
+      - {rect: [0.55, -15.68, 1.85, -15.38], h: 1.10}        # Kniestock unter der Hofschraege
+      - rect: [1.85, -15.68, 5.05, -15.38]                   # Gaubengruppe Hof, drei Fenstertueren 0,94 x 2,52 [EIN S. 13]
+        openings:
+          - {span: [1.98, 2.89], z: [0.0, 2.52], type: glastuer}
+          - {span: [3.03, 3.95], z: [0.0, 2.52], type: glastuer}
+          - {span: [4.02, 4.95], z: [0.0, 2.52], type: glastuer}
+      - {rect: [5.05, -15.68, 7.75, -15.38], h: 1.10}
+      - rect: [7.75, -15.68, 10.20, -15.38]                  # Austritt zur Terrasse 6,08 m2
+        openings: [{span: [8.30, 9.20], z: [0.0, 2.30], type: glastuer}]
+    slopes:                                                  # RH 1,50 / 2,10 / 2,50 m laut Plan, Neigung rund 54 Grad
+      - {x: [0.55, 1.85], from: [-15.38, 22.92], to: [-14.06, 24.62]}
+      - {x: [5.05, 7.75], from: [-15.38, 22.92], to: [-14.06, 24.62]}
+    terrace:
+      - {rect: [7.75, -17.30, 9.70, -15.68]}
+    railings:
+      - {rect: [7.75, -17.32, 9.70, -17.28]}
+    objekt_ausblenden: [nb_shg_dach]  # Mansardenflaechen liegen vereinfacht innerhalb der Wohnung
+    light: spaetsommer_mittag
+    exposure: 1.3
+    kameras:
+      wohnkueche_gauben:   {pos: [6.9, -8.3], target: [2.6, -15.5], lens: 24, h: 1.40}   # Kueche rechts, Gaubengruppe, Schraege links
+      wohnkueche_terrasse: {pos: [1.4, -8.6], target: [9.2, -15.6], lens: 24, h: 1.35}  # Gegenblick zu Terrassentuer und Schraege

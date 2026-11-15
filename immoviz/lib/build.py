@@ -60,6 +60,8 @@ class Hero:
         K.quad_plane(self.inner, f, ua - 0.5, ub + 0.5, za - 0.4, zb + 0.3, d, mat)
 
     def altbau(self):
+        if "altbau" not in self.cfg:       # Neubau ohne Gruenderzeitfassade (lib/neubau.py)
+            return
         A = self.cfg["altbau"]
         H = A["height"]
         rows = A["rows"]
@@ -132,8 +134,10 @@ class Hero:
 
     # ------------------------------------------------------------ Dachgeschosse
     def dach(self):
+        if "dach" not in self.cfg:         # Neubau: Dach steht in `neubau` (lib/neubau.py)
+            return
         D = self.cfg["dach"]
-        A = self.cfg["altbau"]
+        A = self.cfg.get("altbau", {})
         dm = D.get("material", "zink")
         for w in D.get("walls", []):
             f = self.F[w["facade"]]
@@ -635,8 +639,9 @@ def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
 def build_scene(cfg, ctx):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     cm = dict(cfg["materials"])
-    alt = cfg["altbau"]
-    cm["_altbau"] = {"rustika": (*alt["rustika"]["z"], alt["rustika"]["spacing"]), "sockel": alt["sockel"]}
+    alt = cfg.get("altbau")
+    if alt:
+        cm["_altbau"] = {"rustika": (*alt["rustika"]["z"], alt["rustika"]["spacing"]), "sockel": alt["sockel"]}
     mats = M.build_library(bpy, cm)
     scene = bpy.context.scene
     hero_coll = bpy.data.collections.new("Objekt")
@@ -647,6 +652,9 @@ def build_scene(cfg, ctx):
     hero.altbau()
     hero.dach()
     hero.emit(hero_coll)
+    if cfg.get("neubau"):                  # moderne Baukoerper (Neubau, Hoftrakt), nur wenn angegeben
+        from . import neubau as NB
+        NB.build(cfg, mats, hero_coll)
     if ctx:
         raw = contour_terrain(ctx, cfg["site"].get("ground_wn", 0.0)) or \
             fit_terrain(ctx, cfg["site"].get("ground_wn", 0.0), cfg["site"].get("terrain_anchors"))

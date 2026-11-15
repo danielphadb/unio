@@ -41,7 +41,8 @@ def apply_override(trees: list[dict], override) -> list[dict]:
         x, y = o["pos"]
         if o.get("add"):
             out.append({"pos": [x, y], "species": o.get("species", ""), "height": o.get("height", 8),
-                        "crown": o.get("crown", 5), "form": o.get("form")})
+                        "crown": o.get("crown", 5), "form": o.get("form"),
+                        **{k: o[k] for k in ("base", "z") if k in o}})     # z: Fusspunkt ueber +-0 (z. B. Dachgarten)
             continue
         tol = o.get("tol", 2.0)
         cand = [(math.hypot(t["pos"][0] - x, t["pos"][1] - y), i) for i, t in enumerate(out)]
@@ -134,7 +135,7 @@ def build(trees, mats, coll, terrain, radius: float, hero_poly=None):
         else:
             base = t.get("base", max(2.0, min(H * 0.42, H - C * 0.95)))
         base = min(base, H - 1.0)
-        zg = terrain(x, y)
+        zg = float(t["z"]) if "z" in t else terrain(x, y)
         me = rng.choice(tmpl[form])
         ob = bpy.data.objects.new("baeume_kronen", me)
         ob.location = (x, y, zg + base)

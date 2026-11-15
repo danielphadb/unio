@@ -1,0 +1,380 @@
+# immoviz Projektdatei: NOMA, Schlachthausgasse 13 & Wuertzlerstrasse 10, 1030 Wien
+#
+# Masseinheit Meter. z = 0 entspricht +-0,00 = +4,15 m ueber Wiener Null (FOK EG Strassenhaus laut [EIN] S. 22/25).
+# Lokales System: Ursprung = Westecke Strassenhaus an der Schlachthausgasse (Grenze zu Nr. 11), x entlang der
+# Schlachthausgasse nach Nordost, y = Richtung Strasse. Das Grundstueck liegt bei y < 0 und reicht bis zur
+# Wuertzlerstrasse (y ca. -85). Die Seiten 8, 9 und 13 der Einreichmappe liegen deckungsgleich in diesem System:
+# x = (3075 - py) * 0,0084667, y = (1158 - px) * 0,0084667 (Pixel bei 300 dpi, Liftschacht in allen Blaettern gleich).
+#
+# Hofrahmen `hof` (Abschnitt neubau.rahmen): Ursprung = Suedwestecke Pavillon Top 3 aussen [EIN S. 9], a entlang der
+# Pavillonreihe Richtung Wuertzlerstrasse, b quer nach Nordost. Die Pavillons stehen 6,44 Grad gedreht zum Strassenhaus.
+#
+# Quellen (siehe README.md im Projektordner):
+#   [EIN]  SHG13 Planungsmappe Einreichung, Vorabzug 04.03.2026, Hawlik Gerginski (Seite der Mappe, 1:100/1:200)
+#   [VP]   Verkaufsplaene NOMA (UNIO hero), A3 je Top. Massstab rund 1:60, die Massleiste 0 bis 5 m stimmt NICHT
+#          (kalibriert ueber Pavillonlaenge 11,95 m und Tiefe 6,62 m laut [EIN S. 15])
+#   [BAB]  Bau- und Ausstattungsbeschreibung hofseitig + DG + Lofts, 02.02.2026
+#   [OGD]  Stadt Wien Open Data: Baukoerpermodell, Baumkataster, Verkehrsflaechen, Dachmodell LOD2, Orthofoto 2024
+#   [ANN]  Annahme (im README begruendet)
+
+project:
+  name: NOMA Schlachthausgasse 13
+  slug: noma-shg13
+  client: UNIO / Trattner & Soehne (Architektur Hawlik Gerginski)
+
+site:
+  address: Schlachthausgasse 13      # ohne ", 1030 Wien": mit Postleitzahl liefert der Adressdienst nur die Strassenmitte
+  origin_gk: [5681.857, 339675.845]  # Westecke Strassenfront (Grenze zu Schlachthausgasse 11) [OGD BKM 4003912165]
+  x_axis_deg: 37.32                  # Strassenfront Schlachthausgasse, 18,48 m [OGD], deckt sich mit F 18,48 [EIN S. 9]
+  radius_m: 420
+  detail_radius_m: 120
+  hero_bezug: ["005373", "504165"]   # Bestand auf dem Grundstueck (Werkstatt, Hofbauten) und Wuertzlerstr. 10 (Flugdach)
+  ground_wn: 4.15                    # +-0,00 = +4,15 ue. WN [EIN S. 22/25]
+
+facades:
+  schlachthausgasse: {a: [18.48, 0.0], b: [0.0, 0.0]}     # Strassenfront, Gebaeude links (y < 0) [EIN S. 9]
+
+# ---------------------------------------------------------------- Neubau (lib/neubau.py)
+# Gruppen: nb_shg (Strassenhaus), nb_shg_dach (Mansarde, Dachterrassen), nb_hof (EG-Hoftrakt, Gruendach, Wege),
+# nb_top3, nb_top4, nb_top4a (Pavillons 1. OG), nb_wue (Wuertzlerstrasse 10), nb_umgebung (Nachbargaerten, Zaun)
+neubau:
+  fensterrahmen: rahmen_dunkel        # Kunststoff-Alu aussen anthrazit [BAB 3.5]
+  rahmen:
+    hof: {ursprung: [5.058, -22.272], drehung: -83.56}    # Pavillon Top 3 Suedwestecke, Achse 6,44 Grad zum Strassenhaus [EIN S. 9]
+  material:
+    nb_wand_hof: {color: "#A9B092", art: putz}            # Hoffassade hellgruen-grau (Baumit 1026 laut [EIN S. 25/27]) [ANN Farbwert]
+    nb_basalt: {color: "#3A3D3F", art: metall, rough: 0.5, metal: 0.3}   # RAL 7012 Basaltgrau: Erker, Gelaender [EIN S. 25]
+    nb_mansarde: {color: "#55595C", art: zink}            # Mansarde Blech dunkelgrau [EIN S. 25: RAL 7012] [ANN]
+    nb_brandwand: {color: "#B9B3A8", art: putz}
+    nb_strasse: {color: "#C9C0A8", art: putz}             # Strassenfassade, erhaltene Gruenderzeitfassade EG/1.OG [BAB S. 2] [ANN Farbe]
+  koerper:
+    # --- Strassenhaus Schlachthausgasse 13 [EIN S. 9, 22, 25]: 15,00 m tief, Traufe +21,00, Strassen- und Hofseite als Fassade
+    - {gruppe: nb_shg, poly: [[0.0, 0.0], [18.48, 0.0], [19.55, -15.0], [0.80, -15.0]], z: [0.0, 21.0], wand: nb_brandwand,
+       dach: dach_flach, ohne_kanten: [0, 2]}
+    # Erker Hofseite: Balkonstapel u 2,8 bis 15,3 vor der Hoffassade, 1,12 m tief, UK +6,94 bis +18,93 [EIN S. 22/25]
+    - {gruppe: nb_shg, poly: [[3.6, -15.0], [3.9, -15.0], [3.9, -16.12], [3.6, -16.12]], z: [6.60, 20.04], wand: nb_basalt, dach: nb_basalt}
+    - {gruppe: nb_shg, poly: [[15.8, -15.0], [16.1, -15.0], [16.1, -16.12], [15.8, -16.12]], z: [6.60, 20.04], wand: nb_basalt, dach: nb_basalt}
+    # Gauben Hofseite 2. DG (je drei Fenster 0,94 x 2,52) Top 26 West, Top 23 Ost, Front buendig mit dem Erker [EIN S. 13]
+    - {gruppe: nb_shg_dach, poly: [[1.85, -15.0], [5.05, -15.0], [5.05, -16.12], [1.85, -16.12]], z: [21.0, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [2]}
+    - {gruppe: nb_shg_dach, poly: [[14.55, -15.0], [17.75, -15.0], [17.75, -16.12], [14.55, -16.12]], z: [21.0, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [2]}
+    # Gauben Strassenseite 2. DG (Top 26: AR, Bad, SZ; Top 23: zwei) [EIN S. 13]
+    - {gruppe: nb_shg_dach, poly: [[8.75, -0.35], [9.85, -0.35], [9.85, -1.6], [8.75, -1.6]], z: [21.3, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [0]}
+    - {gruppe: nb_shg_dach, poly: [[4.55, -0.35], [5.65, -0.35], [5.65, -1.6], [4.55, -1.6]], z: [21.3, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [0]}
+    - {gruppe: nb_shg_dach, poly: [[2.15, -0.35], [3.25, -0.35], [3.25, -1.6], [2.15, -1.6]], z: [21.3, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [0]}
+    - {gruppe: nb_shg_dach, poly: [[12.70, -0.35], [13.80, -0.35], [13.80, -1.6], [12.70, -1.6]], z: [21.3, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [0]}
+    - {gruppe: nb_shg_dach, poly: [[15.85, -0.35], [16.95, -0.35], [16.95, -1.6], [15.85, -1.6]], z: [21.3, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [0]}
+    # Liftueberfahrt und Dachausstiege [EIN S. 14, VP Top 26-3]
+    - {gruppe: nb_shg_dach, poly: [[8.0, -8.55], [10.05, -8.55], [10.05, -10.65], [8.0, -10.65]], z: [25.0, 26.75], wand: nb_mansarde, dach: nb_rasen}
+    # --- Hoftrakt EG (Apartments) bis zur Rueckfassade Wuertzlerstrasse, Gruendach-Unterkante [EIN S. 8, 15, 23]
+    - {gruppe: nb_hof, rahmen: hof, poly: [[-7.15, 0.0], [48.0, 0.0], [48.0, 13.9], [17.6, 14.6], [17.6, 12.54], [0.64, 12.54], [0.64, 15.09], [-5.46, 15.09]],
+       z: [0.0, 3.38], wand: nb_wand_hof, dach: dach_flach, ohne_kanten: [0]}
+    # --- Pavillons 1. OG: FOK +3,50, DUK +6,01, OK Attika +6,78 [EIN S. 22 Schnitt 1]; Laenge 11,95, Tiefe 6,62 [EIN S. 15, VP]
+    - {gruppe: nb_top3, rahmen: hof, poly: [[0.0, 0.0], [11.95, 0.0], [11.95, 6.62], [0.0, 6.62]], z: [3.38, 6.61], wand: nb_wand_hof, dach: dach_flach, ohne_kanten: [0, 1, 2, 3]}
+    - {gruppe: nb_top4, rahmen: hof, poly: [[16.04, 0.0], [27.99, 0.0], [27.99, 6.62], [16.04, 6.62]], z: [3.38, 6.61], wand: nb_wand_hof, dach: dach_flach, ohne_kanten: [0, 1, 2, 3]}
+    # Top 4A: Ostwand schraeg laut [VP Top 4A] (Plan 2382..4474 px oben, 2382..3987 px unten bei 0,005072 m/px)
+    - {gruppe: nb_top4a, rahmen: hof, poly: [[30.88, 0.0], [38.99, 0.0], [41.46, 6.62], [30.88, 6.62]], z: [3.38, 6.61], wand: nb_wand_hof, dach: dach_flach, ohne_kanten: [0, 2]}
+    # --- Wuertzlerstrasse 10 [EIN S. 27, OGD]: 12,4 m breit, 15,00 m tief, Traufe +17,28, Mansarde bis +20,72
+    - {gruppe: nb_wue, poly: [[9.1, -85.3], [21.3, -84.3], [20.6, -69.4], [8.0, -70.3]], z: [0.0, 17.28], wand: nb_wand_hof, dach: dach_flach, ohne_kanten: [2]}
+  fassaden:
+    # --- Strassenhaus Hoffassade y = -15,00, u = x - 0,80 [EIN S. 25: Fensterachsen abgelesen 1:100]
+    - gruppe: nb_shg
+      a: [0.80, -15.0]
+      b: [19.55, -15.0]
+      z: [3.38, 21.0]
+      wand: nb_wand_hof
+      reihen:
+        - {z: [4.88, 6.33], u: [[1.05, 2.05], [16.65, 17.65]]}                      # 1. OG FOK +3,98
+        - {z: [3.98, 6.33], u: [[5.7, 7.9], [9.3, 11.5]], typ: tuer}
+        - {z: [4.88, 6.33], u: [[3.9, 4.9], [13.0, 14.0]]}
+        - {z: [8.32, 9.77], u: [[1.05, 2.05], [16.65, 17.65], [3.9, 4.9], [13.0, 14.0]]}   # 2. OG FOK +7,42
+        - {z: [7.42, 9.77], u: [[5.7, 7.9], [9.3, 11.5]], typ: tuer}
+        - {z: [11.20, 12.65], u: [[1.05, 2.05], [16.65, 17.65], [3.9, 4.9], [13.0, 14.0]]} # 3. OG FOK +10,30
+        - {z: [10.30, 12.65], u: [[5.7, 7.9], [9.3, 11.5]], typ: tuer}
+        - {z: [14.08, 15.53], u: [[1.05, 2.05], [16.65, 17.65], [3.9, 4.9], [13.0, 14.0]]} # 4. OG FOK +13,18
+        - {z: [13.18, 15.53], u: [[5.7, 7.9], [9.3, 11.5]], typ: tuer}
+        - {z: [16.96, 18.41], u: [[1.05, 2.05], [16.65, 17.65], [3.9, 4.9], [13.0, 14.0]]} # 5. OG FOK +16,06
+        - {z: [16.06, 18.41], u: [[5.7, 7.9], [9.3, 11.5]], typ: tuer}
+        - {z: [19.10, 20.80], u: [[1.05, 2.05], [16.65, 17.65]]}                    # 1. DG FOK +18,94 in der Fassade
+        - {z: [18.94, 20.80], u: [[3.9, 4.9], [5.7, 7.9], [9.3, 11.5], [13.0, 14.0]], typ: tuer}
+    # Strassenfassade y = 0 (nur Kulisse fuer Luftbilder), u = 18,48 - x, 7 Achsen [ANN, Ansicht S. 24 nicht ausgewertet]
+    - gruppe: nb_shg
+      a: [18.48, 0.0]
+      b: [0.0, 0.0]
+      z: [0.0, 21.0]
+      wand: nb_strasse
+      reihen:
+        - {z: [1.2, 3.4], u: [[1.0, 2.2], [3.65, 4.85], [6.3, 7.5], [8.95, 10.15], [11.6, 12.8], [14.25, 15.45]]}
+        - {z: [4.9, 6.9], u: [[1.0, 2.2], [3.65, 4.85], [6.3, 7.5], [8.95, 10.15], [11.6, 12.8], [14.25, 15.45], [16.6, 17.6]]}
+        - {z: [8.3, 9.8], u: [[1.0, 2.2], [3.65, 4.85], [6.3, 7.5], [8.95, 10.15], [11.6, 12.8], [14.25, 15.45], [16.6, 17.6]]}
+        - {z: [11.2, 12.7], u: [[1.0, 2.2], [3.65, 4.85], [6.3, 7.5], [8.95, 10.15], [11.6, 12.8], [14.25, 15.45], [16.6, 17.6]]}
+        - {z: [14.1, 15.6], u: [[1.0, 2.2], [3.65, 4.85], [6.3, 7.5], [8.95, 10.15], [11.6, 12.8], [14.25, 15.45], [16.6, 17.6]]}
+        - {z: [17.0, 18.5], u: [[1.0, 2.2], [3.65, 4.85], [6.3, 7.5], [8.95, 10.15], [11.6, 12.8], [14.25, 15.45], [16.6, 17.6]]}
+        - {z: [19.1, 20.6], u: [[1.0, 2.2], [3.65, 4.85], [6.3, 7.5], [8.95, 10.15], [11.6, 12.8], [14.25, 15.45], [16.6, 17.6]]}
+    # Gaubenfronten Hofseite 2. DG FOK +21,82, Fenster 0,94 x 2,52 [EIN S. 13]
+    - {gruppe: nb_shg_dach, a: [1.85, -16.12], b: [5.05, -16.12], z: [21.0, 24.45], wand: nb_mansarde, karte_tiefe: 2.0,
+       fenster: [{u: [0.13, 1.04], z: [21.82, 24.34], typ: tuer}, {u: [1.18, 2.10], z: [21.82, 24.34], typ: tuer}, {u: [2.17, 3.10], z: [21.82, 24.34], typ: tuer}]}
+    - {gruppe: nb_shg_dach, a: [14.55, -16.12], b: [17.75, -16.12], z: [21.0, 24.45], wand: nb_mansarde, karte_tiefe: 2.0,
+       fenster: [{u: [0.13, 1.04], z: [21.82, 24.34], typ: tuer}, {u: [1.18, 2.10], z: [21.82, 24.34], typ: tuer}, {u: [2.17, 3.10], z: [21.82, 24.34], typ: tuer}]}
+    # Gaubenfronten Strassenseite (y = -0,35, hinter der Traufe)
+    - {gruppe: nb_shg_dach, a: [9.85, -0.35], b: [8.75, -0.35], z: [21.3, 24.45], wand: nb_mansarde, fenster: [{u: [0.08, 1.02], z: [21.82, 24.34], typ: tuer}]}
+    - {gruppe: nb_shg_dach, a: [5.65, -0.35], b: [4.55, -0.35], z: [21.3, 24.45], wand: nb_mansarde, fenster: [{u: [0.08, 1.02], z: [21.82, 24.34], typ: tuer}]}
+    - {gruppe: nb_shg_dach, a: [3.25, -0.35], b: [2.15, -0.35], z: [21.3, 24.45], wand: nb_mansarde, fenster: [{u: [0.08, 1.02], z: [21.82, 24.34], typ: tuer}]}
+    - {gruppe: nb_shg_dach, a: [13.80, -0.35], b: [12.70, -0.35], z: [21.3, 24.45], wand: nb_mansarde, fenster: [{u: [0.08, 1.02], z: [21.82, 24.34], typ: tuer}]}
+    - {gruppe: nb_shg_dach, a: [16.95, -0.35], b: [15.85, -0.35], z: [21.3, 24.45], wand: nb_mansarde, fenster: [{u: [0.08, 1.02], z: [21.82, 24.34], typ: tuer}]}
+    # --- Hoftrakt EG Suedfassade zum Gartenstreifen (Gaerten der Apartments): Fenstertueren im Raster 5 m [EIN S. 7/8, ANN Lage]
+    - gruppe: nb_hof
+      rahmen: hof
+      a: [-7.15, 0.0]
+      b: [48.0, 0.0]
+      z: [0.0, 4.16]
+      wand: nb_wand_hof
+      reihen:
+        - {z: [0.0, 2.40], typ: tuer, u: [[3.2, 4.4], [8.2, 9.4], [13.2, 14.4], [18.2, 19.4], [23.2, 24.4], [28.2, 29.4], [33.2, 34.4], [38.2, 39.4], [43.2, 44.4], [48.2, 49.4]]}
+        - {z: [0.90, 2.40], u: [[5.6, 7.2], [10.6, 12.2], [15.6, 17.2], [20.6, 22.2], [25.6, 27.2], [30.6, 32.2], [35.6, 37.2], [40.6, 42.2], [45.6, 47.2], [50.6, 52.2]]}
+    # --- Pavillon Top 3 (Hofrahmen): Fenster aus [VP Top 3] (Brüstung 0,90, Sturz 2,40 ueber FOK +3,50 laut 160/150 [EIN S. 15])
+    - {gruppe: nb_top3, rahmen: hof, a: [0.0, 0.0], b: [11.95, 0.0], z: [3.38, 6.78], wand: nb_wand_hof,          # Sued: SZ, SZ, WZ
+       fenster: [{u: [1.47, 3.07], z: [4.40, 5.90]}, {u: [5.29, 6.89], z: [4.40, 5.90]}, {u: [8.56, 10.16], z: [4.40, 5.90]}]}
+    - {gruppe: nb_top3, rahmen: hof, a: [11.95, 6.62], b: [0.0, 6.62], z: [3.38, 6.78], wand: nb_wand_hof,        # Nord: Eingang, Bad (u = 11,95 - a)
+       fenster: [{u: [4.24, 5.24], z: [3.50, 5.70], typ: tuer}, {u: [9.53, 10.96], z: [4.40, 5.90]}]}
+    - {gruppe: nb_top3, rahmen: hof, a: [11.95, 0.0], b: [11.95, 6.62], z: [3.38, 6.78], wand: nb_wand_hof,       # Ost: Hebeschiebetuer zur Terrasse
+       fenster: [{u: [3.32, 5.33], z: [3.50, 5.90], typ: hst}]}
+    - {gruppe: nb_top3, rahmen: hof, a: [0.0, 6.62], b: [0.0, 0.0], z: [3.38, 6.78], wand: nb_wand_hof}           # West: geschlossen
+    # --- Pavillon Top 4 [VP Top 4]
+    - {gruppe: nb_top4, rahmen: hof, a: [16.04, 0.0], b: [27.99, 0.0], z: [3.38, 6.78], wand: nb_wand_hof,
+       fenster: [{u: [1.17, 2.77], z: [4.40, 5.90]}, {u: [5.44, 7.04], z: [4.40, 5.90]}, {u: [8.83, 10.43], z: [4.40, 5.90]}]}
+    - {gruppe: nb_top4, rahmen: hof, a: [27.99, 6.62], b: [16.04, 6.62], z: [3.38, 6.78], wand: nb_wand_hof,
+       fenster: [{u: [4.21, 5.21], z: [3.50, 5.70], typ: tuer}, {u: [9.53, 10.95], z: [4.40, 5.90]}]}
+    - {gruppe: nb_top4, rahmen: hof, a: [27.99, 0.0], b: [27.99, 6.62], z: [3.38, 6.78], wand: nb_wand_hof,
+       fenster: [{u: [3.22, 5.23], z: [3.50, 5.90], typ: hst}]}
+    - {gruppe: nb_top4, rahmen: hof, a: [16.04, 6.62], b: [16.04, 0.0], z: [3.38, 6.78], wand: nb_wand_hof}
+    # --- Top 4A [VP Top 4A]: Sued SZ und WZ, Nord Bad, Eingang, Hebeschiebetuer zur Terrasse
+    - {gruppe: nb_top4a, rahmen: hof, a: [30.88, 0.0], b: [38.99, 0.0], z: [3.38, 6.78], wand: nb_wand_hof,
+       fenster: [{u: [1.84, 3.44], z: [4.40, 5.90]}, {u: [5.83, 7.43], z: [4.40, 5.90]}]}
+    - {gruppe: nb_top4a, rahmen: hof, a: [41.46, 6.62], b: [30.88, 6.62], z: [3.38, 6.78], wand: nb_wand_hof,
+       fenster: [{u: [3.83, 5.83], z: [3.50, 5.90], typ: hst}, {u: [6.93, 7.94], z: [3.50, 5.70], typ: tuer}, {u: [8.23, 9.66], z: [4.40, 5.90]}]}
+    # --- Wuertzlerstrasse 10 Hoffassade, u von Ost [EIN S. 27]: Balkonstapel u 3,0 bis 9,4, Geschosse 2,88 m
+    - gruppe: nb_wue
+      a: [20.6, -69.4]
+      b: [8.0, -70.3]
+      z: [0.0, 17.28]
+      wand: nb_wand_hof
+      reihen:
+        - {z: [0.0, 2.40], u: [[5.0, 6.6]], typ: tuer}
+        - {z: [3.88, 5.38], u: [[1.27, 2.36], [9.98, 11.07], [3.4, 4.4], [7.3, 8.6]]}
+        - {z: [2.98, 5.38], u: [[5.0, 6.6]], typ: tuer}
+        - {z: [6.76, 8.26], u: [[1.27, 2.36], [9.98, 11.07], [3.4, 4.4], [7.3, 8.6]]}
+        - {z: [5.86, 8.26], u: [[5.0, 6.6]], typ: tuer}
+        - {z: [9.64, 11.14], u: [[1.27, 2.36], [9.98, 11.07], [3.4, 4.4], [7.3, 8.6]]}
+        - {z: [8.74, 11.14], u: [[5.0, 6.6]], typ: tuer}
+        - {z: [12.52, 14.02], u: [[1.27, 2.36], [9.98, 11.07], [3.4, 4.4], [7.3, 8.6]]}
+        - {z: [11.62, 14.02], u: [[5.0, 6.6]], typ: tuer}
+        - {z: [15.51, 16.90], u: [[1.27, 2.36], [9.98, 11.07], [3.4, 4.4], [7.3, 8.6]]}
+  boxen:
+    # Erker-/Balkonplatten Strassenhaus Hofseite (Plattenkante RAL 7012, 0,34 m) [EIN S. 22/25]
+    - {gruppe: nb_shg, a: [3.6, -15.0], b: [16.1, -15.0], d: [-1.12, 0.0], z: [6.60, 6.94], mat: nb_basalt}
+    - {gruppe: nb_shg, a: [3.6, -15.0], b: [16.1, -15.0], d: [-1.12, 0.0], z: [9.96, 10.30], mat: nb_basalt}
+    - {gruppe: nb_shg, a: [3.6, -15.0], b: [16.1, -15.0], d: [-1.12, 0.0], z: [12.84, 13.18], mat: nb_basalt}
+    - {gruppe: nb_shg, a: [3.6, -15.0], b: [16.1, -15.0], d: [-1.12, 0.0], z: [15.72, 16.06], mat: nb_basalt}
+    - {gruppe: nb_shg, a: [3.6, -15.0], b: [16.1, -15.0], d: [-1.12, 0.0], z: [18.60, 18.94], mat: nb_basalt}
+    - {gruppe: nb_shg, a: [3.6, -15.0], b: [16.1, -15.0], d: [-1.12, 0.0], z: [7.08, 7.42], mat: nb_basalt}
+    # Traufgesims Strassenhaus
+    - {gruppe: nb_shg, a: [0.8, -15.0], b: [19.55, -15.0], d: [-0.25, 0.0], z: [20.85, 21.10], mat: nb_basalt}
+    - {gruppe: nb_shg, a: [0.0, 0.0], b: [18.48, 0.0], d: [-0.3, 0.0], z: [20.75, 21.10], mat: nb_strasse}
+    # Attika Hoftrakt (+4,16) entlang der Suedkante und Attika Pavillons (+6,78)
+    - {gruppe: nb_hof, rahmen: hof, a: [-7.15, 0.0], b: [48.0, 0.0], d: [-0.02, 0.30], z: [3.38, 4.16], mat: nb_attika}
+    - {gruppe: nb_top3, rahmen: hof, a: [0.0, 0.0], b: [11.95, 0.0], d: [-0.03, 0.25], z: [6.61, 6.80], mat: nb_attika}
+    - {gruppe: nb_top3, rahmen: hof, a: [11.95, 6.62], b: [0.0, 6.62], d: [-0.03, 0.25], z: [6.61, 6.80], mat: nb_attika}
+    - {gruppe: nb_top4, rahmen: hof, a: [16.04, 0.0], b: [27.99, 0.0], d: [-0.03, 0.25], z: [6.61, 6.80], mat: nb_attika}
+    - {gruppe: nb_top4, rahmen: hof, a: [27.99, 6.62], b: [16.04, 6.62], d: [-0.03, 0.25], z: [6.61, 6.80], mat: nb_attika}
+    - {gruppe: nb_top4a, rahmen: hof, a: [30.88, 0.0], b: [38.99, 0.0], d: [-0.03, 0.25], z: [6.61, 6.80], mat: nb_attika}
+    # Raffstorekaesten Pavillons (BAB 3.6: Raffstore an allen Fenstern Top 3/4), als schmale Blende
+    - {gruppe: nb_top3, rahmen: hof, a: [0.0, 0.0], b: [11.95, 0.0], d: [-0.05, 0.0], z: [5.92, 6.08], mat: nb_attika}
+    - {gruppe: nb_top4, rahmen: hof, a: [16.04, 0.0], b: [27.99, 0.0], d: [-0.05, 0.0], z: [5.92, 6.08], mat: nb_attika}
+    # Wuertzlerstrasse: Balkonplatten im Balkonstapel u 3,0 bis 9,4, 1,3 m tief [EIN S. 27]
+    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [3.0, 9.4], d: [-1.3, 0.0], z: [2.64, 2.98], mat: nb_basalt}
+    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [3.0, 9.4], d: [-1.3, 0.0], z: [5.52, 5.86], mat: nb_basalt}
+    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [3.0, 9.4], d: [-1.3, 0.0], z: [8.40, 8.74], mat: nb_basalt}
+    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [3.0, 9.4], d: [-1.3, 0.0], z: [11.28, 11.62], mat: nb_basalt}
+    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [3.0, 9.4], d: [-1.3, 0.0], z: [14.27, 14.61], mat: nb_basalt}
+  schraegen:
+    # Mansarde Strassenhaus (Traufe +21,00, Oberkante +24,75, 2. DG FOK +21,82) [EIN S. 13, 22, 25]; Neigung vereinfacht
+    - {gruppe: nb_shg_dach, pts: [[0.0, 0.0, 21.0], [18.48, 0.0, 21.0], [18.67, -2.6, 24.75], [0.14, -2.6, 24.75]], mat: nb_mansarde}
+    - {gruppe: nb_shg_dach, pts: [[19.55, -15.0, 21.0], [0.80, -15.0, 21.0], [0.71, -13.4, 24.75], [19.43, -13.4, 24.75]], mat: nb_mansarde}
+    - {gruppe: nb_shg_dach, pts: [[0.0, 0.0, 21.0], [0.14, -2.6, 24.75], [0.71, -13.4, 24.75], [0.80, -15.0, 21.0]], mat: nb_brandwand}
+    - {gruppe: nb_shg_dach, pts: [[18.48, 0.0, 21.0], [19.55, -15.0, 21.0], [19.43, -13.4, 24.75], [18.67, -2.6, 24.75]], mat: nb_brandwand}
+    # Wuertzlerstrasse Mansarde bis OK Attika +20,72 [EIN S. 27]
+    - {gruppe: nb_wue, pts: [[20.6, -69.4, 17.28], [8.0, -70.3, 17.28], [8.1, -71.9, 20.72], [20.7, -71.0, 20.72]], mat: nb_mansarde}
+    - {gruppe: nb_wue, pts: [[9.1, -85.3, 17.28], [21.3, -84.3, 17.28], [21.2, -82.7, 20.72], [9.2, -83.7, 20.72]], mat: nb_mansarde}
+    - {gruppe: nb_wue, pts: [[8.1, -71.9, 20.72], [20.7, -71.0, 20.72], [21.2, -82.7, 20.72], [9.2, -83.7, 20.72]], mat: nb_kies}
+  flaechen:
+    # Flachdach Strassenhaus und Dachterrassen Top 26-3 (West) und Top 23-3 (Ost): Deck +25,30, Gelaender +26,40 [VP 26/23 Dachterrasse, EIN S. 14]
+    - {gruppe: nb_shg_dach, poly: [[0.14, -2.6], [18.67, -2.6], [19.43, -13.4], [0.71, -13.4]], z: 25.10, dicke: 0.35, mat: nb_kies, seite: nb_attika}
+    - {gruppe: nb_shg_dach, poly: [[1.2, -3.6], [8.6, -3.6], [8.6, -8.4], [1.2, -8.4]], z: 25.30, dicke: 0.2, mat: nb_platten}     # DT Top 26-3, 35 m2
+    - {gruppe: nb_shg_dach, poly: [[10.4, -3.6], [17.9, -3.6], [17.9, -10.0], [10.4, -10.0]], z: 25.30, dicke: 0.2, mat: nb_platten}   # DT Top 23-3, 48 m2
+    - {gruppe: nb_shg_dach, poly: [[1.0, -9.0], [7.6, -9.0], [7.7, -12.9], [1.0, -12.9]], z: 25.20, dicke: 0.1, mat: nb_rasen}       # Gruendach
+    # Hoftrakt: Gruendach +3,96, Terrassen und Weg Feinsteinzeug +3,50 [EIN S. 15, 22]
+    - {gruppe: nb_hof, rahmen: hof, poly: [[-7.15, 0.0], [0.0, 0.0], [0.0, 6.62], [-6.6, 6.62]], z: 3.96, dicke: 0.58, mat: nb_rasen, seite: nb_attika}
+    - {gruppe: nb_hof, rahmen: hof, poly: [[-6.6, 6.62], [30.4, 6.62], [30.4, 8.12], [-6.4, 8.12]], z: 3.50, dicke: 0.12, mat: nb_platten}     # Weg 46,80 m2
+    - {gruppe: nb_hof, rahmen: hof, poly: [[-6.4, 8.12], [30.4, 8.12], [30.4, 10.2], [37.0, 10.2], [37.0, 6.62], [48.0, 6.62], [48.0, 13.9], [17.6, 14.6], [17.6, 12.54], [0.64, 12.54], [0.64, 15.09], [-5.46, 15.09]],
+       z: 3.96, dicke: 0.58, mat: nb_rasen, seite: nb_attika}
+    - {gruppe: nb_hof, rahmen: hof, poly: [[11.95, 1.0], [16.04, 1.0], [16.04, 6.62], [11.95, 6.62]], z: 3.50, dicke: 0.12, mat: nb_platten}   # Terrasse Top 3 (VP 20,91 m2)
+    - {gruppe: nb_hof, rahmen: hof, poly: [[11.95, 0.0], [16.04, 0.0], [16.04, 1.0], [11.95, 1.0]], z: 3.96, dicke: 0.58, mat: nb_rasen, seite: nb_attika}   # Pflanztrog
+    - {gruppe: nb_hof, rahmen: hof, poly: [[27.99, 1.2], [30.88, 1.2], [30.88, 6.62], [27.99, 6.62]], z: 3.50, dicke: 0.12, mat: nb_platten}   # Terrasse Top 4 (VP 15,45 m2)
+    - {gruppe: nb_hof, rahmen: hof, poly: [[27.99, 0.0], [30.88, 0.0], [30.88, 1.2], [27.99, 1.2]], z: 3.96, dicke: 0.58, mat: nb_rasen, seite: nb_attika}
+    - {gruppe: nb_hof, rahmen: hof, poly: [[30.4, 6.62], [37.0, 6.62], [37.0, 10.2], [30.4, 10.2]], z: 3.50, dicke: 0.12, mat: nb_platten}    # Terrasse Top 4A (VP 21,64 m2)
+    - {gruppe: nb_hof, rahmen: hof, poly: [[38.99, 0.0], [48.0, 0.0], [48.0, 6.62], [41.46, 6.62]], z: 3.96, dicke: 0.58, mat: nb_rasen, seite: nb_attika}
+    - {gruppe: nb_hof, rahmen: hof, poly: [[0.0, 0.0], [11.95, 0.0], [11.95, 6.62], [0.0, 6.62]], z: 3.47, dicke: 0.09, mat: dach_flach}
+    - {gruppe: nb_hof, rahmen: hof, poly: [[16.04, 0.0], [27.99, 0.0], [27.99, 6.62], [16.04, 6.62]], z: 3.47, dicke: 0.09, mat: dach_flach}
+    # Gartenstreifen Sued (Gaerten EG-Apartments, Rasen, Zaun an der Grundgrenze) und Garten Nord 42,09 m2 [EIN S. 7/8]
+    - {gruppe: nb_hof, rahmen: hof, poly: [[-7.15, -3.49], [48.0, -3.49], [48.0, 0.0], [-7.15, 0.0]], z: 0.03, dicke: 0.03, mat: nb_rasen}
+    - {gruppe: nb_hof, rahmen: hof, poly: [[0.64, 12.54], [17.6, 12.54], [17.6, 14.9], [0.64, 14.9]], z: 0.03, dicke: 0.03, mat: nb_rasen}
+    # Nachbargaerten (Orthofoto 2024): Dachgarten auf dem Hofbau Schlachthausgasse 11 (OGD 4,8 m) und Garten im Hof dahinter
+    - {gruppe: nb_umgebung, poly: [[-20.8, -15.3], [0.45, -15.3], [2.45, -29.6], [-20.8, -29.6]], z: 4.66, dicke: 0.06, mat: nb_rasen}
+    - {gruppe: nb_umgebung, poly: [[-21.0, -30.3], [2.4, -30.3], [4.6, -62.0], [-21.0, -62.0]], z: 0.15, dicke: 0.1, mat: gehsteig}
+    - {gruppe: nb_umgebung, poly: [[-17.0, -39.8], [-7.0, -39.8], [-7.0, -50.6], [-17.0, -50.6]], z: 0.18, dicke: 0.1, mat: nb_rasen}
+    - {gruppe: nb_umgebung, poly: [[-20.0, -31.2], [-6.0, -31.2], [-6.0, -33.3], [-20.0, -33.3]], z: 0.18, dicke: 0.1, mat: nb_rasen}
+    - {gruppe: nb_umgebung, poly: [[-4.2, -31.2], [2.4, -31.2], [2.5, -33.3], [-4.2, -33.3]], z: 0.18, dicke: 0.1, mat: nb_rasen}
+    - {gruppe: nb_umgebung, poly: [[-17.0, -50.6], [-3.0, -50.6], [-3.0, -61.5], [-17.0, -61.5]], z: 0.18, dicke: 0.1, mat: nb_rasen}
+  gelaender:
+    # Stabgelaender pulverbeschichtet [BAB 3.12]: Terrassen Top 3/4 zum Nachbarhof, Dachterrassen, Erker
+    - {gruppe: nb_hof, rahmen: hof, pts: [[11.95, 0.12], [16.04, 0.12]], z: 3.96, h: 1.0}
+    - {gruppe: nb_hof, rahmen: hof, pts: [[27.99, 0.12], [30.88, 0.12]], z: 3.96, h: 1.0}
+    - {gruppe: nb_shg_dach, pts: [[1.2, -3.6], [8.6, -3.6], [8.6, -8.4], [1.2, -8.4], [1.2, -3.6]], z: 25.30, h: 1.10}
+    - {gruppe: nb_shg_dach, pts: [[10.4, -3.6], [17.9, -3.6], [17.9, -10.0], [10.4, -10.0], [10.4, -3.6]], z: 25.30, h: 1.10}
+    - {gruppe: nb_shg, pts: [[3.9, -16.08], [15.8, -16.08]], z: 7.42, h: 1.10, mat: nb_basalt}
+    - {gruppe: nb_shg, pts: [[3.9, -16.08], [15.8, -16.08]], z: 10.30, h: 1.10, mat: nb_basalt}
+    - {gruppe: nb_shg, pts: [[3.9, -16.08], [15.8, -16.08]], z: 13.18, h: 1.10, mat: nb_basalt}
+    - {gruppe: nb_shg, pts: [[3.9, -16.08], [15.8, -16.08]], z: 16.06, h: 1.10, mat: nb_basalt}
+    - {gruppe: nb_shg, pts: [[3.9, -16.08], [15.8, -16.08]], z: 18.94, h: 1.10, mat: nb_basalt}
+    - {gruppe: nb_wue, pts: [[17.6, -70.9], [11.2, -71.4]], z: 2.98, h: 1.05, mat: nb_basalt}
+    - {gruppe: nb_wue, pts: [[17.6, -70.9], [11.2, -71.4]], z: 5.86, h: 1.05, mat: nb_basalt}
+    - {gruppe: nb_wue, pts: [[17.6, -70.9], [11.2, -71.4]], z: 8.74, h: 1.05, mat: nb_basalt}
+    - {gruppe: nb_wue, pts: [[17.6, -70.9], [11.2, -71.4]], z: 11.62, h: 1.05, mat: nb_basalt}
+    - {gruppe: nb_wue, pts: [[17.6, -70.9], [11.2, -71.4]], z: 14.61, h: 1.05, mat: nb_basalt}
+    # Zaun an der Grundgrenze zum Nachbarhof: Sockel bis +0,50, Stabzaun bis +1,02 [EIN S. 7]
+    - {gruppe: nb_hof, rahmen: hof, pts: [[-7.15, -3.49], [48.0, -3.49]], z: 0.0, h: 0.50, typ: voll, mat: nb_attika}
+    - {gruppe: nb_hof, rahmen: hof, pts: [[-7.15, -3.49], [48.0, -3.49]], z: 0.50, h: 0.52}
+  pv:   # PV-Module auf den Pavillondaechern [EIN S. 22 Schnitt 1/3]
+    - {gruppe: nb_top3, rahmen: hof, a: [0.5, 0.0], b: [11.45, 0.0], d: [0.6, 6.0], z: 6.61, reihen: 3, neigung: 12}
+    - {gruppe: nb_top4, rahmen: hof, a: [16.54, 0.0], b: [27.49, 0.0], d: [0.6, 6.0], z: 6.61, reihen: 3, neigung: 12}
+  straeucher:   # Bepflanzung Pflanztroege und Gartenstreifen [ANN, Gestaltung laut Hofvisualisierung]
+    - {gruppe: nb_hof, rahmen: hof, pos: [12.6, 0.5], z: 3.96, r: 0.55, h: 0.9}
+    - {gruppe: nb_hof, rahmen: hof, pos: [14.0, 0.5], z: 3.96, r: 0.6, h: 1.1}
+    - {gruppe: nb_hof, rahmen: hof, pos: [15.4, 0.5], z: 3.96, r: 0.5, h: 0.8}
+    - {gruppe: nb_hof, rahmen: hof, pos: [28.6, 0.6], z: 3.96, r: 0.55, h: 1.0}
+    - {gruppe: nb_hof, rahmen: hof, pos: [30.1, 0.6], z: 3.96, r: 0.5, h: 0.9}
+    - {gruppe: nb_hof, rahmen: hof, pos: [2.0, -2.6], z: 0.0, r: 0.8, h: 1.4}
+    - {gruppe: nb_hof, rahmen: hof, pos: [9.0, -2.7], z: 0.0, r: 0.9, h: 1.6}
+    - {gruppe: nb_hof, rahmen: hof, pos: [19.5, -2.6], z: 0.0, r: 0.8, h: 1.5}
+    - {gruppe: nb_hof, rahmen: hof, pos: [25.0, -2.7], z: 0.0, r: 0.9, h: 1.3}
+    - {gruppe: nb_hof, rahmen: hof, pos: [34.0, -2.6], z: 0.0, r: 0.8, h: 1.5}
+
+# ---------------------------------------------------------------- Umgebung
+neighbours: {}
+street:
+  parking_material: asphalt
+  cables: []
+
+# Baeume ausserhalb des Baumkatasters (Hof- und Gartenbaeume, aus dem Orthofoto 2024 abgelesen, Hoehe geschaetzt) [ANN]
+trees_override:
+  - {add: true, pos: [-11.6, -25.2], height: 11, crown: 7.5, z: 4.66}    # Dachgarten Nachbar, grosser Laubbaum
+  - {add: true, pos: [-15.2, -26.4], height: 6, crown: 3.5, z: 4.66}     # Dachgarten, kleiner Baum (gelb im Orthofoto)
+  - {add: true, pos: [-16.0, -22.8], height: 7, crown: 5.0, z: 4.66}     # Dachgarten
+  - {add: true, pos: [-6.0, -26.2], height: 5, crown: 3.0, z: 4.66}      # Dachgarten, Strauchbaum
+  - {add: true, pos: [-9.0, -56.0], height: 12, crown: 8.0}              # Garten im Hof dahinter
+  - {add: true, pos: [-14.5, -57.5], height: 10, crown: 6.0}
+  - {add: true, pos: [3.2, -53.6], height: 10, crown: 6.0}               # Gartenstreifen Sued, Bestandsbaum (Orthofoto, EG-Plan)
+
+materials:
+  fassade: {color: "#C8CCB4", note: "Hoffassade hellgruen-grau (Baumit 1026 laut Ansicht), Naeherung"}
+  stuck: {color: "#E4E1D2"}
+  sockel: {color: "#9C9F92"}
+  fenster: {color: "#3B3D3F", note: "Kunststoff-Alu, aussen anthrazit [BAB 3.5], Naeherung"}
+  zink: {color: "#4A4D50"}
+  rahmen_dunkel: {color: "#2F3133", note: "RAL 7012 Basaltgrau (Erker, Gelaender) [EIN S. 25]"}
+  haustor: {color: "#5A4632"}
+
+# ---------------------------------------------------------------- Kameras und Licht
+# Gartenperspektiven: Augenhoehe 1,6 m im Nachbargarten. Top 3 liegt am Dachgarten des Nachbarhofbaus (OK +4,66),
+# Top 4 am Garten im Hof dahinter (Erdgeschossniveau). Terrassen: Augenhoehe 1,5 m ueber FOK +3,50.
+cameras:
+  garten_top3:       {pos: [-1.2, -21.0, 6.26], target: [6.0, -29.6, 5.1], lens: 24, vertical: true}
+  garten_top4:       {pos: [-13.5, -47.5, 1.78], target: [7.6, -44.0, 4.6], lens: 30, vertical: true}
+  terrasse_top3:     {pos: [8.2, -37.6, 5.05], target: [17.7, -26.9, 5.3], lens: 22, vertical: true}   # Terrassenecke Sued, Blick ueber Hebeschiebetuer und Gruendach
+  terrasse_top3_hof: {pos: [12.9, -35.7, 5.0], target: [-13.3, -38.4, 5.6], lens: 28, vertical: true}
+  terrasse_top4:     {pos: [10.0, -52.4, 5.05], target: [19.2, -40.8, 5.3], lens: 22, vertical: true}
+  dachterrasse_stadt: {pos: [7.8, -8.0, 26.95], target: [-30.0, 75.0, 22.0], lens: 26, vertical: true}
+  dachterrasse_hof:  {pos: [1.8, -4.2, 26.95], target: [13.0, -45.0, 18.0], lens: 24, vertical: true}
+  hof_uebersicht:    {pos: [-12.0, -12.0, 22.0], target: [10.0, -40.0, 4.0], lens: 26, vertical: true}
+
+lights:
+  spaetsommer:  {date: "2026-08-27", time: "16:20", tz: 2, exposure: 0.0, interior: 0.0, aerosol: 2.0, season: spaetsommer}   # Sonne 32,6 Grad, Azimut 246 Grad
+  golden_hour:  {date: "2026-08-27", time: "18:40", tz: 2, exposure: 0.3, interior: 0.2, aerosol: 2.5, season: spaetsommer}   # Sonne 10 Grad, Azimut 274 Grad
+  blaue_stunde: {date: "2026-08-27", time: "20:15", tz: 2, exposure: 1.8, interior: 1.0, aerosol: 2.0, season: spaetsommer}   # Sonne -5,4 Grad
+
+render:
+  resolution: [2400, 1600]
+  samples: 128
+  preview_resolution: [1200, 800]
+  preview_samples: 32
+
+# ---------------------------------------------------------------- Nachbarfassaden zum Hof (Grundregel KONZEPT Abschnitt 7)
+# Direkt sichtbar laut `immoviz.py sichtbar` (Bildanteil >= 1 %, < 80 m) in den Hof- und Gartenkameras. Hoffassaden sind
+# in Street View nicht einsehbar: Geschosszahl aus der Traufhoehe [OGD], Raster und Farbe als Annahme [ANN], Daecher aus LOD2.
+neighbour_facades:
+  hof_ost_005379:               # Hoftrakt Schlachthausgasse 15 (Gruenderzeit), 13,6 % in garten_top3
+    bezug: "005379"
+    a: [23.0, -25.0]
+    b: [26.4, -44.9]
+    height: 16.3
+    color: "#D9CFB8"
+    style: plain
+    axes: {n: 8, margin: 1.2}
+    rows: {eg: {z: 1.0, h: 1.7, w: 1.0}, z0: 4.4, step: 3.4, n: 3, h: 1.7, w: 1.0}
+  hof_ost_005380:               # Hoftrakt Wuertzlerstrasse (Gruenderzeit), 3 bis 4 % in den Gartenkameras
+    bezug: "005380"
+    a: [26.5, -45.2]
+    b: [29.9, -64.6]
+    height: 15.9
+    color: "#D3C8AF"
+    style: plain
+    axes: {n: 8, margin: 1.2}
+    rows: {eg: {z: 1.0, h: 1.7, w: 1.0}, z0: 4.4, step: 3.4, n: 3, h: 1.7, w: 1.0}
+  hof_ost_005378:               # Schlachthausgasse 15, Hoffassade hinter dem Strassenhaus, 3 bis 6 %
+    bezug: "005378"
+    a: [21.2, -12.0]
+    b: [22.8, -19.0]
+    height: 21.6
+    color: "#E2DCCD"
+    style: plain
+    axes: {n: 3, margin: 1.0}
+    rows: {eg: {z: 1.0, h: 1.7, w: 1.0}, z0: 4.3, step: 3.3, n: 5, h: 1.6, w: 1.0}
+  hof_west_005363:              # Wohnblock Erdbergstrasse, Ostfassade zum Nachbargarten, 28 % in terrasse_top3_hof
+    bezug: "005363"
+    a: [-23.0, -53.3]
+    b: [-24.4, -41.7]
+    height: 19.9
+    color: "#E4E1D8"
+    style: modern
+    frame: fenster
+    axes: {n: 4, margin: 1.0}
+    rows: {eg: {z: 0.9, h: 1.6, w: 1.4}, z0: 3.9, step: 3.0, n: 5, h: 1.5, w: 1.4}
+  hof_west_005363_b:            # Ruecksprung desselben Blocks
+    bezug: "005363"
+    a: [-30.2, -37.4]
+    b: [-30.7, -28.6]
+    height: 20.1
+    color: "#E4E1D8"
+    style: modern
+    frame: fenster
+    axes: {n: 3, margin: 1.2}
+    rows: {eg: {z: 0.9, h: 1.6, w: 1.4}, z0: 3.9, step: 3.0, n: 5, h: 1.5, w: 1.4}
+  hof_sued_005387:              # Hofseite Wuertzlerstrasse 8, Nordfassade zum Hof, 1,4 bis 1,7 %
+    bezug: "005387"
+    a: [7.3, -64.6]
+    b: [-8.6, -63.9]
+    height: 17.8
+    color: "#DCD3C0"
+    style: plain
+    axes: {n: 6, margin: 1.2}
+    rows: {eg: {z: 1.0, h: 1.7, w: 1.0}, z0: 4.2, step: 3.2, n: 4, h: 1.6, w: 1.0}
