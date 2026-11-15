@@ -86,12 +86,18 @@ Wichtige Befunde aus den Plänen:
 | `terrasse_top3_hof` | Terrasse Top 3, Blick zum Nachbargarten |
 | `dachterrasse_stadt` | Dachterrasse Top 26-3, Blick WNW über die Dächer, Stephansdom in Bildmitte |
 | `dachterrasse_hof` | Dachterrasse Top 26-3, Blick SO über Gründach Richtung Erdberg |
-| `hof_uebersicht` | erhöhter Blick über den Hof (Kontrolle) |
+| `hof_uebersicht` | erhöhter Blick über den Hof (nur Kontrolle, nicht gerendert) |
 | innen `top03_*`, `top04_*` | `wohnkueche` (Essplatz Richtung Küche und Terrasse), `wohnkueche_sued` (zum Südfenster), `schlafzimmer` |
 | innen `top26_2_*` | `wohnkueche_gauben` (Gaubengruppe, Schräge), `wohnkueche_terrasse` (Gegenblick zum Terrassenaustritt) |
 
-Ergebnisse: Blender-Vorschauen in `renders/` und `renders/innen/`, veredelt in `renders/higgsfield/` (außen) und
-`renders/innen/*_hf.jpg` (innen), Job-IDs und Prompts in `renders/higgsfield/staging.json` bzw. `renders/innen/staging.json`.
+Ergebnisse: Blender-Vorschauen in `renders/` und `renders/innen/` (PNG, nicht im Repo), veredelt in
+`renders/higgsfield/` (außen, 8 Bilder) und `renders/innen/*_hf.jpg` (innen, 8 Bilder), Job-IDs, Möbelpläne und
+Referenzen in `renders/higgsfield/staging.json` bzw. `renders/innen/staging.json`.
+
+Higgsfield: nano_banana_pro 2k, 17 Aufträge (16 übernommen, 1 verworfen: erfundene Glasfront in Top 26-2),
+42 Credits verbraucht (rund 2,5 je Bild, nicht 1,5 wie im Leitfaden geschätzt). Zweite Ansichten desselben Raums
+(Top 3/4 Südfenster, Top 26-2 Gegenblick, Dachterrasse blaue Stunde, Terrasse Top 3 Hofblick) mit dem ersten
+veredelten Bild als Referenz.
 
 ## Offene Punkte
 

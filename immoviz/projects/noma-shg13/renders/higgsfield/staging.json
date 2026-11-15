@@ -1,0 +1,46 @@
+{
+ "modell": "nano_banana_pro (Backend meldet nano_banana_2), resolution 2k, 3:2, Rolle image_references; Bild 1 = Blender-Vorschau",
+ "stand": "2026-11-15",
+ "regeln": "Geometrie, Fenster und Bäume gesperrt (higgsfield/LEITFADEN.md); keine Fremdvisualisierungen hochgeladen",
+ "bilder": {
+  "garten_top4_spaetsommer.jpg": {
+   "job": "00ac2921-dd6d-402e-9546-b03f59af4199",
+   "eingang": "noma-shg13_garten_top4_spaetsommer_vorschau.png",
+   "licht": "spaetsommer"
+  },
+  "garten_top3_spaetsommer.jpg": {
+   "job": "a37b77ef-210c-4c6e-ab54-0fe6a76cb9a6",
+   "eingang": "noma-shg13_garten_top3_spaetsommer_vorschau.png",
+   "licht": "spaetsommer"
+  },
+  "terrasse_top3_spaetsommer.jpg": {
+   "job": "3fca231d-fa07-49a1-9ed7-403581dc9f06",
+   "eingang": "noma-shg13_terrasse_top3_spaetsommer_vorschau.png",
+   "moebel": "Loungesofa Teak rechts der Hebeschiebetür, Beistelltisch, zwei Olivenbäume"
+  },
+  "terrasse_top3_hof_spaetsommer.jpg": {
+   "job": "4f6ab322-96cf-4965-8b30-d31ead1e01e3",
+   "eingang": "noma-shg13_terrasse_top3_hof_spaetsommer_vorschau.png",
+   "referenz": "3fca231d (gleiche Terrasse)"
+  },
+  "terrasse_top4_spaetsommer.jpg": {
+   "job": "41320da5-4e04-46a2-a895-4f7f64c832f0",
+   "eingang": "noma-shg13_terrasse_top4_spaetsommer_vorschau.png",
+   "moebel": "Esstisch Eiche für vier, Olivenbaum"
+  },
+  "dachterrasse_stadt_golden_hour.jpg": {
+   "job": "c82a3287-72d3-4898-9f16-dfe8b443849a",
+   "eingang": "noma-shg13_dachterrasse_stadt_golden_hour_vorschau.png",
+   "fernsicht": "Stephansdom in Bildmitte laut fern.json"
+  },
+  "dachterrasse_stadt_blaue_stunde.jpg": {
+   "job": "34e377d6-a1bc-4bc1-ab73-fc16815e82af",
+   "eingang": "noma-shg13_dachterrasse_stadt_blaue_stunde_vorschau.png",
+   "referenz": "c82a3287 (Möbel und Kamera)"
+  },
+  "dachterrasse_hof_golden_hour.jpg": {
+   "job": "6765446c-2f7b-462c-8453-6327a4080f6c",
+   "eingang": "noma-shg13_dachterrasse_hof_golden_hour_vorschau.png"
+  }
+ }
+}

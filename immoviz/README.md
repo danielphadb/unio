@@ -321,6 +321,18 @@ Ziel: ein Objekt in etwa einem Tag aufnehmen, ohne YAML von Hand zu schreiben. I
 Ohne Studio: Ordner wie oben von Hand anlegen (am besten `_vorlage` kopieren), `site.origin_gk`, `x_axis_deg` und
 `facades` nach `immoviz.py geo` aus dem Baukörpermodell ablesen. Jede Zahl bekommt im YAML-Kommentar ihre Quelle.
 
+## Neubauten und Hoftrakte (`neubau`, erstes Objekt NOMA Schlachthausgasse 13)
+
+Objekte ohne Gründerzeitfassade beschreiben ihre Baukörper in `project.yaml` unter `neubau` (Code `lib/neubau.py`,
+nur aktiv, wenn der Abschnitt vorhanden ist; `altbau` und `dach` sind dann optional): `koerper` (Prismen mit
+`ohne_kanten`), `fassaden` (Wand mit Fenstern an einer Linie a nach b, `reihen` wie bei Fensterachsen), `boxen`,
+`gelaender` (Stab, Glas, voll), `flaechen` (Gründach, Terrassen, Rasen), `schraegen` (Mansarde), `pv`, `straeucher`.
+Jeder Eintrag gehört zu einer `gruppe` (eigene Blender-Objekte), `rahmen: <name>` rechnet Koordinaten eines gedrehten
+Hilfsrahmens (`neubau.rahmen`) ins Lokalsystem. Innenräume blenden mit `objekt_ausblenden: [<gruppe>]` nur die eigene
+Hülle aus. Verkaufspläne mit Volltonwänden: in `wohnungen.yaml` unter `plaene` `wand_farbe`, `drehung_grad`,
+`ursprung_lokal`, `cache`; je Wohnung `slab_px`, `oeffnungen_px`, `oeffnung_max_m`, `fenster_stil: modern`.
+Bäume auf Dachgärten: `trees_override` mit `z`. Beispiel und Befunde: `projects/noma-shg13/README.md`.
+
 ## Datenquellen
 
 - Stadt Wien Open Data (CC BY 4.0): Baukörpermodell `FMZKBKMOGD`, Baumkataster `BAUMKATOGD`,

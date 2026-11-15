@@ -1,0 +1,42 @@
+{
+ "modell": "nano_banana_pro (Backend meldet nano_banana_2), resolution 2k, 3:2, Rolle image_references; Bild 1 = Blender-Vorschau",
+ "stand": "2026-11-15",
+ "stil": "Annahme aus BAB hofseitig/DG (Wildeiche-Landhausdiele, Wände gebrochenes Weiß) und Fremdvisualisierungen: helle Eiche, warme Töne; Derenko-Konzept nicht verwendet",
+ "bilder": {
+  "top03_wohnkueche_hf.jpg": {
+   "job": "14ef9620-0c01-400e-981a-8f4c0d4413da",
+   "moebelplan": "links Küchenzeile Eiche, Mitte runder Eichentisch für vier, rechts Sofa Leinen sand, Pflanze an der Hebeschiebetür"
+  },
+  "top03_wohnkueche_sued_hf.jpg": {
+   "job": "b57ccf08-5353-4c23-a576-88230266b47d",
+   "referenz": "14ef9620 (gleicher Raum)"
+  },
+  "top03_schlafzimmer_hf.jpg": {
+   "job": "955119c8-76a8-453d-b67b-59cc45874174",
+   "moebelplan": "Doppelbett Bouclé-Kopfteil, Nachttische Eiche, Bank unter dem Fenster"
+  },
+  "top04_wohnkueche_hf.jpg": {
+   "job": "80dddbe4-3de2-48ef-bc43-f438983988cb",
+   "moebelplan": "links Küche salbeigrau, Mitte Travertintisch, rechts Sofa Bouclé creme, Olivenbaum"
+  },
+  "top04_wohnkueche_sued_hf.jpg": {
+   "job": "2370825e-5e81-4517-8b6c-87892ffe26b5",
+   "referenz": "80dddbe4 (gleicher Raum)"
+  },
+  "top04_schlafzimmer_hf.jpg": {
+   "job": "d38551e9-71de-49c2-933d-a628722dabe2",
+   "moebelplan": "Bett Eichenrahmen, Bettwäsche salbeigrün, Rattansessel am Fenster"
+  },
+  "top26_2_wohnkueche_gauben_hf.jpg": {
+   "job": "c71b2125-8a86-4fed-9f20-be77bba11613",
+   "moebelplan": "runder Esstisch Eiche für sechs vor der Gaubengruppe, Küche mit Insel rechts, Sofa Bouclé links vorne, Olivenbaum"
+  },
+  "top26_2_wohnkueche_terrasse_hf.jpg": {
+   "job": "eb931a83-7eab-43e0-9c54-2508b68c5a49",
+   "referenz": "c71b2125 (gleicher Raum)",
+   "verworfen": [
+    "653ed388-3c59-48ff-9d36-dfef857af451 (Glasfront in der geschlossenen Rückwand erfunden)"
+   ]
+  }
+ }
+}
