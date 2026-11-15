@@ -126,6 +126,7 @@ Jahreszeiten mit gleicher Kamera). Standardumfang:
 |---|---|---|
 | Höhen, Achsen, Gesimse | Straßenansicht des Architekten | `immoviz.py check` (Überlagerung im Maßstab 1:100) |
 | Gebäudeumrisse, Gehsteige, Parkstreifen, Bäume | Luftbild Stadt Wien (7,5 cm), Mehrzweckkarte | Luftbild-Überlagerung |
+| **Straße vor dem Haus**: Parkordnung (längs, schräg, senkrecht), Stellplätze, Gehsteigbreite, Bordstein, Baumscheiben | Orthofoto Stadt Wien 2024 (5 cm je Pixel), Verkehrsflächen, Baumkataster | `immoviz.py strasse` (Prüfbild `renders/check/strasse_abgleich.jpg`, Tabelle `.md`), Parkordnung in `street.parking` |
 | Gelände | Sockelhöhen Baukörpermodell plus Plankoten | Geländeebene im Modell |
 | Nachbarfassaden, Straßenmöbel, Pflaster, Leuchten, Blickachsen | Google Street View (nur Referenz, nicht im Bild) | Abruf je Kameraposition |
 | Dächer der Umgebung | Dachmodell LOD2 Stadt Wien, Farbe aus dem Orthofoto | `immoviz.py daecher`, Draufsicht gegen Orthofoto |
@@ -138,6 +139,15 @@ Hauptkameras. Je Nachbar: Traufhöhe und Baukörper aus dem Baukörpermodell, Ac
 (Tore, Portale, Lokale), Gesimse und Fensterumrahmungen, Balkone, Dachform und Farbe aus Street View. Eingetragen
 wird das unter `neighbour_facades` in `project.yaml`, geprüft mit `immoviz.py svcheck`. Ohne bestandenen
 Nachbarabgleich gibt es kein Rendering für den Vertrieb.
+
+**Grundregel Straßenabgleich (Kunde, 15.11.2026):** Parkplätze und Gehsteige vor dem jeweiligen Gebäude werden bei
+jedem Objekt geprüft. Kein Rendering für den Vertrieb ohne Straßenabgleich: `immoviz.py strasse <projekt>` ausführen,
+im Prüfbild kontrollieren, ob die eingezeichneten Stellplätze auf den Autos im Orthofoto liegen (Richtung und
+Raster), ob Bordstein und Gehsteig decken und ob die Baumscheiben stimmen. Die Parkordnung je Streifen steht in
+`street.parking` (`laengs`, `schraeg` mit Winkel, `senkrecht`); die Autos im Rendering stehen auf genau den
+Stellplätzen, die das Prüfbild zeigt. Nach jeder Änderung an `street` oder `trees_override` und nach jedem neuen
+`geo` wird das Prüfbild neu erzeugt und mit dem Projekt abgelegt. Beispiel Wimmergasse 20: Wimmergasse Hausseite
+Schrägparker (rund 55 Grad), gegenüber Längsparker, Stolberggasse beidseitig 90 Grad.
 
 **Abstufung (Kunde, 15.11.2026):** Fassaden müssen nur dort stimmen, wo eine Kamera unmittelbar draufsieht
 (mindestens 1 % Bildanteil, näher als 80 m, berechnet mit `sichtbar`). Für alle weiteren Häuser genügt, dass die

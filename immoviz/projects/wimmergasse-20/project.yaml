@@ -136,6 +136,16 @@ neighbours:   # Fassadenfarbe je Gebaeude (BEZUG aus dem Baukoerpermodell), abge
   "009428": "#D2BF94"   # Wimmergasse 22: cremegelb, reicher Stuck
 street:
   parking_material: pflaster   # Parkstreifen in beiden Gassen mit Granitpflaster
+  # Parkordnung je Parkstreifen, geprüft am Orthofoto 2024 (immoviz.py strasse, renders/check/strasse_abgleich.jpg).
+  # Die erste passende Regel gilt, ohne Regel entscheidet die Streifenbreite. art: laengs | schraeg | senkrecht | keine.
+  # strasse = Name aus facades (Streifen parallel zur Flucht), seite: haus | gegenueber, optional bereich: [x0, y0, x1, y1].
+  parking:
+    # Wimmergasse Ostseite (vor dem Haus und suedlich der Kreuzung): Schraegparker, markierte Linien, rund 55 Grad.
+    # Negativer Winkel: Einbahn Richtung Sueden, das bordsteinseitige Ende zeigt zur Kreuzung.
+    - {name: Wimmergasse Hausseite, strasse: wimmergasse, seite: haus, art: schraeg, winkel: -55, raster: 2.35}
+    - {name: Wimmergasse gegenueber, strasse: wimmergasse, seite: gegenueber, art: laengs}
+    # Stolberggasse beidseitig 90 Grad zum Randstein, oestlich und westlich der Kreuzung
+    - {name: Stolberggasse beidseitig, strasse: stolberggasse, art: senkrecht, raster: 2.6}
   cables:   # Seilleuchten quer ueber die Fahrbahn [x0, y0, x1, y1], Hoehe 7,5 m
     - [0.0, 0.5, -15.0, -17.5]        # Kreuzung diagonal
     - [0.0, 36.0, -15.0, 36.0]

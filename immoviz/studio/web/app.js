@@ -247,7 +247,7 @@ async function viewShotlist(slug) {
 }
 
 /* ------------------------------------------------------------ 05 Queue */
-const JOB_ART = { check: "Planabgleich", geo: "Umgebung", higgsfield: "Veredelung", video: "Video" };
+const JOB_ART = { check: "Planabgleich", strasse: "Straßenabgleich", geo: "Umgebung", higgsfield: "Veredelung", video: "Video" };
 async function viewQueue(slug) {
   renderNav(slug, "queue");
   const [s, q] = await Promise.all([api(`/api/projects/${slug}/shotlist`), api(`/api/queue?projekt=${slug}`)]);

@@ -10,6 +10,7 @@ immoviz/projects/*/renders/*.png
 immoviz/projects/*/quellen/*.pdf
 immoviz/projects/*/renders/streetview/
 immoviz/projects/*/data/plan_cache/
+immoviz/projects/*/data/ortho_cache/
 immoviz/projects/*/mood/
 immoviz/studio/.cache/
 immoviz/projects/*/renders/walkthrough/*/clay/

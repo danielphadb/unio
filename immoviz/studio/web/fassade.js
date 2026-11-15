@@ -617,7 +617,10 @@ async function viewAbgleich(slug) {
   const draw = async () => {
     const d = await api(`/api/projects/${slug}/abgleich`);
     if (!location.hash.includes("/abgleich")) return false;
-    const active = d.jobs.filter(j => ["wartet", "laeuft"].includes(j.status));
+    const st = d.strasse || { bild: null, fassaden: [], jobs: [] };
+    const sjob = st.jobs[0];
+    const srun = sjob && ["wartet", "laeuft"].includes(sjob.status);
+    const active = d.jobs.concat(st.jobs).filter(j => ["wartet", "laeuft"].includes(j.status));
     const dry = d.trockenlauf_erzwungen || getPref("immoviz-dry", "0") === "1";
     view.innerHTML = `<section>${sechead("01", "Planabgleich", "Modell gegen Straßenansicht", "Rendert das Modell orthogonal im Planmaßstab (<span class=\"mono\">immoviz.py check</span>) und legt es über die Ansicht. Der Schieberegler blendet zwischen Plan und Modell. Läuft über die Render-Queue.",
         `<label class="check"><input type="checkbox" id="adry" ${dry ? "checked" : ""} ${d.trockenlauf_erzwungen ? "disabled" : ""}> Trockenlauf</label><a class="btn" href="#/p/${esc(slug)}/fassaden">Fassaden-Editor</a>`)}
@@ -637,7 +640,20 @@ async function viewAbgleich(slug) {
           : f.abgleich ? `<img class="abgimg" src="${esc(f.abgleich.url)}" alt="Abgleich ${esc(f.fassade)}">` : `<p class="muted">Noch kein Abgleich. Fassade im Fassaden-Editor kalibrieren, dann prüfen.</p>`}
         </div>`;
       }).join("") : `<div class="empty-state"><span class="label">Leer</span><p class="muted">Keine Fassade mit <span class="mono">checks</span> in project.yaml. Im Fassaden-Editor unter „Plan kalibrieren“ anlegen.</p></div>`}
-      ${active.length ? `<p class="muted">${active.length} Abgleich-Job läuft, die Ansicht aktualisiert sich.</p>` : ""}</section>`;
+      ${active.length ? `<p class="muted">${active.length} Abgleich-Job läuft, die Ansicht aktualisiert sich.</p>` : ""}</section>
+      <section>${sechead("02", "Straßenabgleich", "Parkplätze und Gehsteige vor dem Haus", "Legt Bordsteine, Gehsteige, Stellplätze in der eingestellten Parkordnung und Bäume aus dem Modell über das Orthofoto der Stadt Wien (<span class=\"mono\">immoviz.py strasse</span>). Kein Rendering für den Vertrieb ohne diese Prüfung. Parkordnung ändern: <span class=\"mono\">street.parking</span> in project.yaml.")}
+        <div class="abg">
+          <div class="wthead"><h3>Prüfbild</h3><span class="kv">${sjob ? tag(sjob.status, sjob.status === "fertig" ? `zuletzt ${fmtTime(sjob.beendet)}` : null) : ""}${st.bild ? `<span class="tag plain">Bild ${esc(st.bild.datum)}</span>` : ""}
+            <button type="button" class="primary small" data-strasse ${srun ? "disabled" : ""}>${srun ? "läuft" : "Straße prüfen"}</button></span></div>
+          ${st.fassaden.length ? `<p class="muted">${st.fassaden.map(f => `${esc(f.fassade)}: Gehsteig ${f.gehsteig.map(m => m.breite == null ? "offen" : String(m.breite).replace(".", ",")).join(" / ")} m, Hausseite ${f.parken_haus.length ? f.parken_haus.map(p => `${esc(p.art)} (${p.plaetze} Plätze)`).join(", ") : "kein Parkstreifen"}, Baumscheiben ${f.baumscheiben}`).join("<br>")}</p>` : ""}
+          ${st.bild ? `<a href="${esc(st.bild.url)}" target="_blank" rel="noopener"><img class="abgimg" src="${esc(st.bild.url)}" alt="Straßenabgleich: Orthofoto mit Überlagerung aus dem Modell"></a><p class="muted">Orthofoto und Geodaten: Stadt Wien, data.wien.gv.at (CC BY 4.0).</p>` : `<p class="muted">Noch kein Prüfbild. „Straße prüfen“ startet den Abgleich über die Queue.</p>`}
+        </div></section>`;
+    $("[data-strasse]")?.addEventListener("click", async e => {
+      const b = e.currentTarget;
+      b.disabled = true;
+      try { const j = await api(`/api/projects/${slug}/strasse`, { method: "POST", body: { dry_run: getPref("immoviz-dry", "0") === "1" } }); toast(j.trockenlauf ? "Trockenlauf eingereiht" : "Straßenabgleich eingereiht"); draw(); }
+      catch (err) { toast(err.message); b.disabled = false; }
+    });
     $("#adry")?.addEventListener("change", e => setPref("immoviz-dry", e.target.checked ? "1" : "0"));
     $$("[data-run]").forEach(b => b.addEventListener("click", async () => {
       b.disabled = true;

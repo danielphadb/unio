@@ -4,6 +4,7 @@
 Beispiele:
   python immoviz.py geo     projects/wimmergasse-20
   python immoviz.py daecher projects/wimmergasse-20
+  python immoviz.py strasse projects/wimmergasse-20   (Prüfbild Parkplätze und Gehsteige gegen das Orthofoto)
   python immoviz.py render  projects/wimmergasse-20 --cam ecke --light golden_hour --preview
   python immoviz.py render  projects/wimmergasse-20 --cam ecke,drohne --light golden_hour,blaue_stunde
   python immoviz.py website projects/wimmergasse-20
@@ -30,6 +31,10 @@ def main():
     dc.add_argument("project")
     dc.add_argument("--cache", default=None, help="Ordner für geladene Kacheln (Standard: kein Cache)")
     dc.add_argument("--ohne-orthofoto", action="store_true", help="Dachfarbe nicht aus dem Orthofoto ableiten")
+    sg = sub.add_parser("strasse", help="Straßenabgleich: Parkordnung, Gehsteige und Bäume vor dem Objekt gegen das "
+                                        "Orthofoto der Stadt Wien (renders/check/strasse_abgleich.jpg und .md)")
+    sg.add_argument("project")
+    sg.add_argument("--ohne-streetview", action="store_true", help="Street-View-Vergleich auch mit Schlüssel auslassen")
     r = sub.add_parser("render", help="Szene bauen und rendern")
     r.add_argument("project")
     r.add_argument("--cam", default="ecke")
@@ -91,6 +96,17 @@ def main():
         out = R.fetch(cfg, ctx, pdir / "data" / "roofs.json", Path(a.cache).resolve() if a.cache else None,
                       ortho=not a.ohne_orthofoto)
         print(json.dumps({**out["stats"], "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
+    elif a.cmd == "strasse":
+        import os
+        from lib import strasse as ST
+        t = time.time()
+        res = ST.pruefen(pdir)
+        key = os.environ.get("GOOGLE_MAPS_API_KEY")      # nur im Speicher, wird nie geschrieben
+        if key and not a.ohne_streetview:
+            res["streetview"] = ST.streetview(pdir, key)
+        else:
+            res["streetview"] = "ausgelassen" if key else "ausgelassen, GOOGLE_MAPS_API_KEY nicht gesetzt"
+        print(json.dumps({**res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
     elif a.cmd == "render":
         from lib.build import render
         t = time.time()

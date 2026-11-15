@@ -14,6 +14,7 @@ from mathutils import Vector
 from . import materials as M
 from . import meshkit as K
 from . import roofs as R
+from . import strasse as ST
 from . import trees as T
 from .sun import sun_position, sun_vector_local
 
@@ -260,60 +261,37 @@ CAR_COLORS = ["auto_dunkelgrau", "auto_schwarz", "auto_weiss", "auto_silber", "a
               "auto_schwarz", "auto_weiss"]
 
 
-def park_cars(ctx, rng, terrain, radius):
+def park_cars(ctx, rng, terrain, radius, cfg=None):
+    """Stellt Autos auf die Stellplaetze aus lib/strasse.py (Parkordnung laut street.parking, sonst Automatik)."""
     cars = K.MeshBuilder("autos", ["auto_dunkelgrau"])
-    for s in ctx["surfaces"]:
-        if s["layer"] != "Ruhender Verkehr" or len(s["poly"]) < 3:
+    plaetze = [(ab, p) for s in ST.stellplaetze(ctx, cfg, radius) for ab in s["abschnitte"] for p in ab["plaetze"]]
+    for ab, platz in plaetze:
+        if rng.random() > ab["belegung"]:
             continue
-        poly = s["poly"]
-        cx = sum(p[0] for p in poly) / len(poly)
-        cy = sum(p[1] for p in poly) / len(poly)
-        if math.hypot(cx, cy) > radius:
-            continue
-        # Hauptrichtung = laengste Kante; Breite quer dazu
-        edges = [(poly[i], poly[(i + 1) % len(poly)]) for i in range(len(poly))]
-        (p1, p2) = max(edges, key=lambda e: math.dist(*e))
-        f = K.Facade("p", p1, p2)
-        uds = [f.ud(*p) for p in poly]
-        us = [u for u, _ in uds]
-        ds = [d for _, d in uds]
-        u0, u1, d0, d1 = min(us), max(us), min(ds), max(ds)
-        width = d1 - d0
-        if u1 - u0 < 4.0 or width < 1.7:
-            continue
-        angled = width > 4.2
-        step = 2.75 if angled else 5.7
-        n = int((u1 - u0 - (1.0 if angled else 0.3)) / step)
-        for k in range(n):
-            if rng.random() > 0.85:
-                continue
-            uc = u0 + (k + 0.5) * step + (0.5 if angled else 0.15)
-            dc = (d0 + d1) / 2
-            if not K.point_in_poly(*f.p(uc, dc, 0)[:2], poly):
-                continue
-            ang = math.radians(rng.choice([55, 58, 60]) if angled else 0) * (1 if rng.random() < 0.97 else -1)
-            col = rng.choice(CAR_COLORS)
-            L, W = rng.uniform(4.2, 4.8), rng.uniform(1.78, 1.9)
-            ca, sa = math.cos(ang), math.sin(ang)
-            # lokales Autosystem: Achse a entlang Fahrzeug, b quer
-            ax = (f.t[0] * ca - f.n[0] * sa, f.t[1] * ca - f.n[1] * sa)
-            bx = (-ax[1], ax[0])
-            ox, oy, _ = f.p(uc, dc, 0)
-            zg = terrain(ox, oy)
-            def blk(la, lb, wa, wb, z0, z1, mat):
-                P = lambda a_, b_, z_: (ox + ax[0] * a_ + bx[0] * b_, oy + ax[1] * a_ + bx[1] * b_, zg + z_)
-                c = [(la, wa), (lb, wa), (lb, wb), (la, wb)]
-                cars.poly([P(a_, b_, z1) for a_, b_ in c], None, mat, (0, 0, 1))
-                for i in range(4):
-                    (a1, b1), (a2, b2) = c[i], c[(i + 1) % 4]
-                    nx, ny = (b2 - b1), -(a2 - a1)
-                    cars.poly([P(a1, b1, z0), P(a2, b2, z0), P(a2, b2, z1), P(a1, b1, z1)], None, mat,
-                              (ax[0] * nx + bx[0] * ny, ax[1] * nx + bx[1] * ny, 0))
-            blk(-L / 2, L / 2, -W / 2, W / 2, 0.32, 0.95, col)
-            blk(-L / 2 + 0.9, L / 2 - 1.15, -W / 2 + 0.08, W / 2 - 0.08, 0.95, 1.45, "autoglas")
-            for wa in (-L / 2 + 0.75, L / 2 - 0.8):
-                for wb in (-W / 2 + 0.05, W / 2 - 0.25):
-                    blk(wa - 0.33, wa + 0.33, wb, wb + 0.2, 0.0, 0.62, "reifen")
+        col = rng.choice(CAR_COLORS)
+        L, W = rng.uniform(4.2, 4.8), rng.uniform(1.78, 1.9)
+        # lokales Autosystem: Achse a entlang Fahrzeug, b quer; leichte Streuung wie auf der Strasse
+        dw = math.radians(rng.uniform(-2.5, 2.5))
+        ax = platz["achse"]
+        ax = (ax[0] * math.cos(dw) - ax[1] * math.sin(dw), ax[0] * math.sin(dw) + ax[1] * math.cos(dw))
+        bx = (-ax[1], ax[0])
+        vor = rng.uniform(-0.15, 0.15)
+        ox, oy = platz["pos"][0] + ax[0] * vor, platz["pos"][1] + ax[1] * vor
+        zg = terrain(ox, oy)
+        def blk(la, lb, wa, wb, z0, z1, mat):
+            P = lambda a_, b_, z_: (ox + ax[0] * a_ + bx[0] * b_, oy + ax[1] * a_ + bx[1] * b_, zg + z_)
+            c = [(la, wa), (lb, wa), (lb, wb), (la, wb)]
+            cars.poly([P(a_, b_, z1) for a_, b_ in c], None, mat, (0, 0, 1))
+            for i in range(4):
+                (a1, b1), (a2, b2) = c[i], c[(i + 1) % 4]
+                nx, ny = (b2 - b1), -(a2 - a1)
+                cars.poly([P(a1, b1, z0), P(a2, b2, z0), P(a2, b2, z1), P(a1, b1, z1)], None, mat,
+                          (ax[0] * nx + bx[0] * ny, ax[1] * nx + bx[1] * ny, 0))
+        blk(-L / 2, L / 2, -W / 2, W / 2, 0.32, 0.95, col)
+        blk(-L / 2 + 0.9, L / 2 - 1.15, -W / 2 + 0.08, W / 2 - 0.08, 0.95, 1.45, "autoglas")
+        for wa in (-L / 2 + 0.75, L / 2 - 0.8):
+            for wb in (-W / 2 + 0.05, W / 2 - 0.25):
+                blk(wa - 0.33, wa + 0.33, wb, wb + 0.2, 0.0, 0.62, "reifen")
     return cars
 
 
@@ -487,7 +465,7 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
         K.box(cab, f, um - 0.006, um + 0.006, -0.006, 0.006, z0 - 0.55, z0, "seil", skip_back=False)
         K.box(cab, f, um - 0.28, um + 0.28, -0.28, 0.28, z0 - 0.75, z0 - 0.55, "leuchte", skip_back=False)
     cab.to_object(bpy, mats, coll)
-    park_cars(ctx, rng, terrain, min(radius, 200)).to_object(bpy, mats, coll)
+    park_cars(ctx, rng, terrain, min(radius, 200), cfg).to_object(bpy, mats, coll)
 
     # Baeume aus dem Baumkataster, korrigiert ueber trees_override (Abgleich mit Street View und Orthofoto)
     trees = T.apply_override(ctx["trees"], (cfg or {}).get("trees_override"))

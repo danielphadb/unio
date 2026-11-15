@@ -354,7 +354,7 @@ def derive_steps(slug: str, pdir: Path) -> list[dict]:
     fac = ((cfg.get("altbau") or {}).get("facades") or {})
     auto[3] = ("fertig", f"{len(fac)} Fassaden in project.yaml") if fac else ("offen", "keine Fassaden erfasst")
     auto[4] = ("fertig", "Dach in project.yaml") if cfg.get("dach") else ("offen", "kein Dach erfasst")
-    chk = [r for r in rels if r.startswith("check/") and "abgleich" in r]
+    chk = [r for r in rels if r.startswith("check/") and "abgleich" in r and not r.startswith("check/strasse_")]
     sv = [r for r in rels if r.startswith("streetview/") and "vergleich" in r]
     if chk and sv:
         auto[5] = ("fertig", f"{len(chk)} Planabgleich, {len(sv)} Street-View-Vergleiche")
@@ -1702,7 +1702,18 @@ def abgleich_state(slug: str, pdir: Path) -> dict:
         e["plan"] = f"/api/projects/{slug}/abgleich/{name}/plan.png"
         out.append(e)
     jobs = [j for j in queue().list(slug) if j.get("art") == "check"][:5]
-    return {"fassaden": out, "jobs": jobs, "trockenlauf_erzwungen": FORCE_DRY}
+    # Straßenabgleich (immoviz.py strasse): Prüfbild Parkplätze und Gehsteige gegen das Orthofoto
+    sf = pdir / "renders" / "check" / "strasse_abgleich.jpg"
+    sj = pdir / "renders" / "check" / "strasse_abgleich.json"
+    strasse = {"bild": None, "fassaden": [], "jobs": [j for j in queue().list(slug) if j.get("art") == "strasse"][:3]}
+    if sf.is_file():
+        strasse["bild"] = {"url": file_url(slug, "check/strasse_abgleich.jpg") + f"?v={int(sf.stat().st_mtime)}",
+                           "datum": datetime.fromtimestamp(sf.stat().st_mtime).strftime("%d.%m.%Y %H:%M")}
+    try:
+        strasse["fassaden"] = json.loads(sj.read_text()).get("fassaden", []) if sj.is_file() else []
+    except (OSError, ValueError):
+        strasse["fassaden"] = []
+    return {"fassaden": out, "jobs": jobs, "strasse": strasse, "trockenlauf_erzwungen": FORCE_DRY}
 
 
 @app.get("/api/projects/{slug}/abgleich")
@@ -1745,6 +1756,22 @@ def api_abgleich_start(slug: str, body: dict = Body(...)):
         cmd = [sys.executable, str(CLI), "check", str(pdir), "--facade", name]
     return queue().add_job(slug, "check", cmd=cmd, dry=dry, cam=name, light="",
                            befehl=f"immoviz.py check projects/{slug} --facade {name}" + (" (Trockenlauf)" if dry else ""))
+
+
+@app.post("/api/projects/{slug}/strasse")
+def api_strasse_start(slug: str, body: dict = Body(...)):
+    """Straßenabgleich über die Queue: kein Blender, nur Orthofoto der Stadt Wien und Überlagerung aus dem Modell."""
+    pdir = project_dir(slug)
+    if not (pdir / "data" / "context.json").is_file():
+        raise HTTPException(400, "data/context.json fehlt (zuerst Umgebung laden)")
+    dry = bool(body.get("dry_run") or FORCE_DRY)
+    if dry:
+        cmd = [sys.executable, "-c", "import time;print('Trockenlauf: kein Abruf, vorhandenes Prüfbild bleibt',"
+               " flush=True);time.sleep(1.5)"]
+    else:
+        cmd = [sys.executable, str(CLI), "strasse", str(pdir), "--ohne-streetview"]
+    return queue().add_job(slug, "strasse", cmd=cmd, dry=dry, cam="strasse", light="",
+                           befehl=f"immoviz.py strasse projects/{slug}" + (" (Trockenlauf)" if dry else ""))
 
 
 # ---- Neues Objekt

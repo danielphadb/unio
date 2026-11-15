@@ -39,6 +39,9 @@ Blender läuft als Python-Modul ohne Oberfläche. Die erzeugte `.blend`-Datei l�
 # Echte Dachflächen der Umgebung laden (einmal pro Objekt, nach geo): data/roofs.json
 .venv-immoviz/bin/python immoviz/immoviz.py daecher immoviz/projects/wimmergasse-20 --cache /tmp/immoviz-kacheln
 
+# Straßenabgleich (fester Schritt vor jedem Vertriebsbild): Parkordnung, Gehsteige, Bäume gegen das Orthofoto
+.venv-immoviz/bin/python immoviz/immoviz.py strasse immoviz/projects/wimmergasse-20
+
 # Welche Nachbarhäuser sieht welche Kamera direkt (Bildanteil der Fassade je BEZUG)
 .venv-immoviz/bin/python immoviz/immoviz.py sichtbar immoviz/projects/wimmergasse-20
 
@@ -65,6 +68,58 @@ Ergebnisse landen in `projects/<objekt>/renders/`.
   Korrekturen in `trees_override` am Ende von `project.yaml`: Baum über die Position finden, `remove: true`,
   `height`, `crown`, `form` (rund, saeule), `base`, oder `add: true` für fehlende Bäume.
 - Stand und Befund je Objekt: `projects/<objekt>/umgebung_abgleich.md`.
+
+## Straßenabgleich: Parkplätze und Gehsteige vor dem Haus
+
+Fester Prüfschritt je Objekt (`lib/strasse.py`, Befehl `strasse`). Kein Rendering für den Vertrieb ohne dieses Prüfbild.
+
+```bash
+.venv-immoviz/bin/python immoviz/immoviz.py strasse immoviz/projects/wimmergasse-20
+```
+
+Braucht kein Blender und dauert wenige Sekunden. Ergebnis in `projects/<objekt>/renders/check/`:
+
+- `strasse_abgleich.jpg`: Orthofoto der Stadt Wien 2024 (Umkreis 60 m um das Objekt, 5 cm je Pixel, ins lokale
+  System gedreht) mit Überlagerung aus dem Modell: Umriss des Objekts, Bordsteinlinien, Gehsteigflächen,
+  Parkstreifen mit Stellplätzen als Rechtecke (Farbe je Parkordnung), Bäume als Kreise in Kronengröße,
+  Baumscheiben laut Kataster, Gehsteigbreiten, Maßstab, Nordpfeil, Legende, Quellenangabe.
+- `strasse_abgleich.md` und `.json`: je Fassade die Gehsteigbreite im Modell (Fassade bis Bordstein, fünf
+  Messstellen), Parkordnung und Zahl der Stellplätze auf der Hausseite und gegenüber, Baumscheiben; dazu alle
+  Parkstreifen im Ausschnitt mit Breite, Parkordnung, Raster und angewandter Regel.
+
+Geprüft wird am Bild: Liegen die Rechtecke auf den Autos (Richtung, Raster)? Decken Bordstein und Gehsteig
+(Toleranz 0,5 m)? Stimmen Baumscheiben und Kronen? Die Autos im Rendering (`park_cars` in `lib/build.py`) stehen
+auf genau diesen Stellplätzen.
+
+**Parkordnung einstellen** in `project.yaml` unter `street.parking`. Die erste passende Regel gilt:
+
+```yaml
+street:
+  parking:
+    - {name: Wimmergasse Hausseite, strasse: wimmergasse, seite: haus, art: schraeg, winkel: -55, raster: 2.35}
+    - {name: Wimmergasse gegenueber, strasse: wimmergasse, seite: gegenueber, art: laengs}
+    - {name: Stolberggasse beidseitig, strasse: stolberggasse, art: senkrecht, raster: 2.6}
+    - {name: Ladezone, bereich: [10.0, -6.0, 16.0, -2.0], art: keine}      # Rechteck im lokalen System
+```
+
+| Schlüssel | Bedeutung |
+|---|---|
+| `strasse`, `seite` | Name einer Fassade aus `facades`: alle Streifen parallel zu dieser Flucht. `seite: haus` (bis 8 m vor der Flucht) oder `gegenueber` (8 bis 30 m); die Grenze ändert `grenze` |
+| `bereich` oder `polygon` | Rechteck `[x0, y0, x1, y1]` bzw. Polygon im lokalen System; ein langer Streifen kann so in Abschnitte mit verschiedener Parkordnung zerfallen. Mehrere Angaben in einer Regel müssen alle zutreffen |
+| `art` | `laengs`, `schraeg`, `senkrecht` oder `keine` (kein Parken, z. B. Ladezone) |
+| `winkel` | nur `schraeg`: Grad zur Bordsteinlinie (Standard 60). Positiv: schräg in Fahrtrichtung bei Rechtsverkehr. Negativ: umgekehrt, z. B. Einbahn mit Parkstreifen links |
+| `raster` | Stellplatzbreite in m (Standard 2,5), bei `laengs` die Stellplatzlänge (Standard 5,7) |
+| `belegung` | Anteil belegter Plätze im Rendering (Standard 0,85); das Prüfbild zeigt immer alle Plätze |
+
+Ohne Regel entscheidet die Breite des Streifens: unter 3,4 m längs, 3,4 bis 4,0 m schräg 45 Grad, 4,0 bis 4,8 m
+schräg 60 Grad, darüber senkrecht. Baumscheiben laut Baumkataster und Aussparungen im Streifen bleiben frei.
+Optional `street.parking_check: {umkreis_m: 60, m_je_pixel: 0.05}`. Die Orthofoto-Kacheln werden in
+`data/ortho_cache/` zwischengespeichert (nicht im Repo). Orthofoto und Geodaten: Stadt Wien, data.wien.gv.at
+(CC BY 4.0), das Prüfbild darf ins Repo.
+
+Ist `GOOGLE_MAPS_API_KEY` gesetzt, holt `strasse` zusätzlich je Fassade zwei Street-View-Bilder entlang des
+Gehsteigs und legt sie neben ein Modell-Rendering derselben Ansicht (`renders/streetview/strasse_<fassade>_a|b_vergleich.jpg`,
+nicht im Repo, nur interne Referenz; braucht Blender). `--ohne-streetview` lässt das aus.
 
 ## Walkthrough (Kamerafahrt durch eine Wohnung)
 
@@ -177,7 +232,7 @@ IMMOVIZ_PROJECTS=/pfad/zur/kopie/projects .venv-immoviz/bin/python immoviz/immov
 | Neues Objekt | Formular (Slug, Adresse, GK-Ursprung, Fassadenrichtung, Fassaden): legt `projects/<slug>/` aus `projects/_vorlage/` an, optional `immoviz.py geo` über die Queue, siehe unten |
 | Fassaden | Straßenansicht aus `checks.<fassade>.pdf` als Hintergrund (pdftoppm, Cache `data/plan_cache/`), maßstäblich über `dpi`, `scale`, `u0_px`. Werkzeuge: Achsen (Klick setzt, Ziehen verschiebt, Entf löscht, Pfeiltasten 5 cm), Geschosse (`altbau.rows`, Band ziehen, Kanten ändern die Höhe), Gesimse (`altbau.cornices`, Ziehen verschiebt alle Stufen), Erdgeschoss (Override je Achse: Haustor, Schaufenster, Kastenfenster mit u- und z-Bereich, Keller), Plan kalibrieren (PDF, Seite, dpi, Maßstab, Klick auf u = 0 / z = 0, Ausschnitt, Höhenkoten). Raster 5 cm, Einrasten an Höhenkoten und vorhandenen Linien in 8 px Umkreis, Alt-Taste frei |
 | Dach | Listen `dach.walls`, `slopes`, `volumes`, `railings`, `slabs` mit Formular je Eintrag (Paare als zwei Zahlen, Fenster und Clip-Regeln als JSON), neu, duplizieren, löschen; Ansichtsskizze je Fassade (u gegen z) mit Altbau, Achsen, Wänden, Fenstern, Schrägen, Geländern, Volumen |
-| Abgleich | „Planabgleich prüfen“ startet `immoviz.py check <projekt> --facade <f>` über die Queue; Ergebnis als Plan und orthogonales Modell mit Schieberegler, dazu die rot/blaue Überlagerung aus `renders/check/` |
+| Abgleich | „Planabgleich prüfen“ startet `immoviz.py check <projekt> --facade <f>` über die Queue; Ergebnis als Plan und orthogonales Modell mit Schieberegler, dazu die rot/blaue Überlagerung aus `renders/check/`. Darunter „Straße prüfen“: startet `immoviz.py strasse <projekt> --ohne-streetview` über die Queue und zeigt das Prüfbild mit Gehsteigbreiten und Parkordnung je Fassade |
 | Queue | ein Job gleichzeitig: `immoviz.py render <projekt> --cam <c> --light <l> --preview --no-blend`, Planabgleich, `geo`, Higgsfield-Aufträge mit geschätzten Credits; Status und Log |
 | Galerie | alle Bilder und Videos unter `renders/`, Freigeben, Ablehnen, Kommentar; „Veredeln“ je Blender-Bild und „Video erzeugen“ (Higgsfield, siehe unten); Higgsfield-Bilder mit Verweis auf Original und Prompt; Videoplayer für `renders/video/` und `renders/walkthrough/<top>/`, Kamerapfade je Wohnung aus `wohnungen.yaml` (nur Anzeige); Kundenlinks erzeugen und widerrufen |
 | Kundenansicht | `/kunde?p=<slug>&t=<token>`: nur freigegebene Bilder und Videos, Kunde kann Anmerkungen schreiben. Ohne Token nur von localhost |
@@ -238,6 +293,8 @@ Ziel: ein Objekt in etwa einem Tag aufnehmen, ohne YAML von Hand zu schreiben. I
    Fassade einzeln; Geschosszeilen und Gesimse gelten für alle Fassaden.
 4. **Dach**: Wände, Schrägen, Volumen, Geländer und Decken aus Schnitt und DG-Grundrissen eintragen, Skizze prüfen.
 5. **Abgleich**: „Planabgleich prüfen“, mit dem Schieberegler Achsen, Gesimse und Dachkanten gegen den Plan prüfen.
+   Danach „Straße prüfen“: Parkordnung, Gehsteige und Bäume vor dem Haus gegen das Orthofoto, Korrekturen in
+   `street.parking` und `trees_override`.
 6. Angebaute Nachbarn und Häuser gegenüber (`neighbour_facades`) weiterhin in `project.yaml` (noch ohne Editor),
    Kameras und Licht im Studio, Vorschau rendern, mit `svcheck` gegen Street View prüfen. Erst dann Higgsfield.
 

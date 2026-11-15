@@ -111,14 +111,21 @@ je Pixel), für die Kreuzung, die Wimmergasse vor dem Haus und die Stolberggasse
 - Bordsteinkanten, Gehsteigbreiten und Hauskanten liegen innerhalb von etwa 0,3 m auf dem Orthofoto. Keine
   Abweichung über 0,5 m gefunden.
 - Die vier Gehsteigvorziehungen an der Kreuzung sind in den Wiener Daten enthalten und stimmen in Form und Lage.
-- Parkordnung: Wimmergasse auf der Hausseite schräg, gegenüber längs; Stolberggasse beidseitig schräg bzw.
-  senkrecht. Das Modell leitet das aus der Breite der Parkstreifen ab und trifft es.
+- Parkordnung (Nachprüfung 15.11.2026 mit `immoviz.py strasse`, Prüfbild `renders/check/strasse_abgleich.jpg`):
+  Wimmergasse Ostseite (vor dem Haus und südlich der Kreuzung) Schrägparker mit markierten Linien, rund 55 Grad,
+  das bordsteinseitige Ende zeigt nach Süden; Wimmergasse Westseite längs; Stolberggasse beidseitig senkrecht
+  (90 Grad), östlich und westlich der Kreuzung. Die frühere Ableitung aus der Streifenbreite traf das nicht
+  (Stolberggasse wurde längs bzw. schräg gestellt, Wimmergasse in der falschen Schrägrichtung). Jetzt als Regeln in
+  `street.parking` eingetragen, die Autos stehen auf den Stellplätzen des Prüfbilds.
+- Gehsteigbreite im Modell vor dem Haus (Fassade bis Bordstein): Wimmergasse 1,96 bis 2,02 m, Stolberggasse 1,96
+  bis 2,00 m. Vor dem Haus: Wimmergasse 7 Schrägplätze und eine Baumscheibe ohne Baum, Stolberggasse 4 Plätze
+  senkrecht und eine Baumscheibe mit Baum.
 - Baumscheiben liegen als Aussparungen in den Parkstreifen an den richtigen Stellen.
 - Nicht modelliert (Street View): rot-weiße Poller an den Vorziehungen, Verkehrszeichen, Fahrradbügel an der
   Westecke, Sperrflächenmarkierung vor den Vorziehungen. Gehsteigbelag an den Vorziehungen ist Betonpflaster,
   im Modell einheitlich.
 
-Korrekturen an `street` waren nicht nötig.
+Korrekturen an den Flächen waren nicht nötig; ergänzt wurde die Parkordnung (`street.parking`).
 
 ## 6. Bäume
 
