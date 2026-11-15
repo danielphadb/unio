@@ -44,3 +44,17 @@ nur zum Abgleich.
 - Top 3 mit der Möblierung "3Z HOF", Top 4 mit der Möblierung "Loft". Grundriss, Fenster und Türen kommen aus Blender und bleiben gesperrt
   (die Vorlagen zeigen ältere Grundrisse und Glasdächer auf den Pavillons, die nicht übernommen werden).
 - Hochgeladen als Stilreferenz: `Hof_fin-4` und `Hof_fin-3` (außen), `3Z HOF/Wohnzimmer` und `Schlafzimmer` (Top 3), `TOP04_Loft_fin` (Top 4).
+
+## Runde 3: Feeling, noch einmal genau angesehen (15.11.2026)
+
+Gesichtet: `SHG13_Hof_fin`, `_Hof_fin-3`, `_Hof_fin-4`, `3Z HOF/Wohnzimmer`, `3Z HOF/Schlafzimmer`, `SHG13_TOP04_Loft_fin`.
+
+| Merkmal | Befund | Umsetzung im Prompt |
+|---|---|---|
+| Licht | Spätsommer-Nachmittag, Sonne tief von hinten seitlich, Gegenlicht mit weichem Überstrahlen, Lichtkanten an Blättern; innen scharf gezeichnete Blattschatten und Lamellenstreifen auf Boden und Wand | "late summer afternoon, low warm sun from the side/back, soft backlight glow, dappled leaf shadows" |
+| Farbstimmung | warm-neutral: Salbeigrün der Fassade, warmes Weiß, Holz honig bis Nuss, Terrakotta- und Rostakzente; Schatten neutral, nie blau; Himmel blass, fast weiß | "warm neutral grade, pale hazy sky, no saturated blue" |
+| Vegetation | sehr dicht und üppig: Gräser und Stauden in den Trögen, Kletterrosen rot an der Fassade, Olivenbaum im Kübel, Hortensien; Rasen satt mit leichter Sonnenfarbe; Baumkronen als Rahmen im Vordergrund (Hof_fin-3 rechts) | Bepflanzung üppig, aber nur in Trögen, Kübeln und auf dem Gründach; keine neuen Bäume (Bäume gesperrt, Lage laut Modell) |
+| Dichte der Ausstattung | Terrasse voll möbliert (Esstisch mit vier bis sechs Stühlen, Kübelpflanzen, Lampen), wenig Deko, keine Unordnung | Möbelplan je Bild fest ausgeschrieben |
+| Kamera | Augenhöhe bis leicht erhöht, gerade Senkrechte, viel Raum vor dem Objekt, Objekt nie formatfüllend; innen Durchblick mit angeschnittenem Vordergrund (Lamellen, Insel, Bett) | Kameras Runde 3: Ecke, Diagonale, Vordergrund angeschnitten |
+| Menschen | sehr wenige, klein, ruhig (Paar am Balkon) | höchstens zwei Personen klein im Hintergrund, meist keine |
+| Abweichung zur Realität | Vorlagen zeigen Glas-Sheddächer auf den Pavillons und Bäume im Nachbargarten, die es nicht gibt (Orthofoto/Google, siehe umgebung_abgleich.md Abschnitt 7); Nachbarn rechts dort lachsfarben, real weiß | Modell bleibt maßgeblich: Flachdach mit PV, Nachbarbäume nur laut Luftbild, Hoftrakte Schlachthausgasse 15 weiß |

@@ -72,5 +72,73 @@
     "hinweis": "Betonkörper als Sitzkante interpretiert"
    }
   }
+ },
+ "runde_3": {
+  "stand": "2026-11-15",
+  "auftrag": "Kunde: bessere, grosszuegigere Winkel fuer Top 3/4 (Einheit aussen, Terrasse, Innen mit Aussicht); Zusatz: Gaerten, Baeume und Hofgebaeude nach Luftbild/Google korrigiert (umgebung_abgleich.md Abschnitt 7), erst danach veredelt",
+  "modell": "nano_banana_pro 2k 3:2, 2 Credits je Auftrag, Bild 1 = Blender-Vorschau nach der Umgebungskorrektur",
+  "referenzen": {
+   "vorlage_hof_fin": "3628a1c6-e4dc-4e8c-8b9b-9ca205a571a6",
+   "vorlage_hof_fin3": "cbf0a95b-1d3d-46e2-a90b-11099b8d9b95",
+   "vorlage_hof_fin4": "c82cc51e-a000-4f6b-8207-0bdead3a5edc",
+   "terrasse_top3_eck (Moebel Top 3)": "ef1c7c09-4f80-4ec4-8500-0e738c0d4a5c",
+   "terrasse_top4_eck (Moebel Top 4)": "b56eb8b1-49ef-47cc-a4c5-385b23fa0d61"
+  },
+  "bilder": {
+   "top3_aussen_gruendach_spaetsommer.jpg": {
+    "job": "aebe23d1-e064-4172-939f-30dac234daac",
+    "eingang": "noma-shg13_top3_aussen_gruendach_spaetsommer_vorschau.png (media b2814626)",
+    "referenz": "Hof_fin-4, terrasse_top3_eck",
+    "moebel": "Loungeset Teak, Polster creme, Couchtisch Teak, Outdoor-Teppich, Olivenbaum, Graeser, Hortensien, Kletterrosen, Wandleuchten Bronze",
+    "verworfen": [
+     "b110f721-ee6c-46d1-a2bf-077a52b66cb9 (zweite Eingangstuer an der Nordfassade erfunden)"
+    ]
+   },
+   "top4_aussen_gruendach_spaetsommer.jpg": {
+    "job": "948508d8-b795-49aa-9dfa-d18d903b3dd0",
+    "eingang": "noma-shg13_top4_aussen_gruendach_spaetsommer_vorschau.png (media 5f21537a)",
+    "referenz": "Hof_fin-4, terrasse_top4_eck",
+    "moebel": "Esstisch Teak fuer vier, Polster hellgrau, Olivenbaum, Hortensien, Kletterrosen",
+    "verworfen": [
+     "04901d56-8bc8-4cd4-a304-cdccbc0f4913 (Gelaender am Weg vor der Nordfassade erfunden)"
+    ]
+   },
+   "pavillons_drohne_sued_spaetsommer.jpg": {
+    "job": "1153c7ec-ae0b-4a55-b7c9-a7976f6f417b",
+    "eingang": "noma-shg13_pavillons_drohne_sued_spaetsommer_vorschau.png (media 94dd9011)",
+    "referenz": "Hof_fin, Hof_fin-4",
+    "vorbehalt": "EG-Fensterreihe gleichmaessig statt paarweise wie im Modell (Raster selbst Annahme); vor Vertrieb pruefen",
+    "verworfen": [
+     "a47d6305-55ab-469b-a0ae-e4b32918e58b (zweite Fensterreihe im EG erfunden)"
+    ]
+   },
+   "top3_terrasse_garten_spaetsommer.jpg": {
+    "job": "70eec952-7e67-443f-b002-60de25602cca",
+    "eingang": "noma-shg13_top3_terrasse_garten_spaetsommer_vorschau.png (media 4210fe08)",
+    "referenz": "terrasse_top3_eck, Hof_fin-3",
+    "moebel": "Loungeset Teak wie terrasse_top3_eck, Olivenbaum, Pflanztrog mit Graesern, Lavendel, Hortensien"
+   },
+   "top4_terrasse_garten_spaetsommer.jpg": {
+    "job": "caf5b8e1-b6da-445d-9cfd-e68aaf25d0b5",
+    "eingang": "noma-shg13_top4_terrasse_garten_spaetsommer_vorschau.png (media 7998d869)",
+    "referenz": "terrasse_top4_eck, Hof_fin-3",
+    "moebel": "Esstisch Teak fuer vier wie terrasse_top4_eck, Olivenbaum, Hortensien"
+   },
+   "garten_top3_weit_r3_spaetsommer.jpg": {
+    "job": "782fbc60-e4fa-4760-ba87-82d98f42c91f",
+    "eingang": "noma-shg13_garten_top3_weit_spaetsommer_vorschau.png nach Korrektur (media 3603a9a0; alte Vorschau _runde2.png)",
+    "referenz": "Hof_fin",
+    "ersetzt": "garten_top3_weit_spaetsommer.jpg (Runde 2, bleibt erhalten)",
+    "verworfen": [
+     "f7b8b2dc-1686-42af-86c6-75c878b8c1f4 (Baum vor dem Pavillon verkleinert und versetzt, Ausschnitt verändert)"
+    ]
+   },
+   "garten_top4_weit_r3_spaetsommer.jpg": {
+    "job": "7ec59481-14c5-4c1b-92ec-854724a5dc2a",
+    "eingang": "noma-shg13_garten_top4_weit_spaetsommer_vorschau.png nach Korrektur (media 2cddb240; alte Vorschau _runde2.png)",
+    "referenz": "Hof_fin, Hof_fin-4",
+    "ersetzt": "garten_top4_weit_spaetsommer.jpg (Runde 2, bleibt erhalten)"
+   }
+  }
  }
 }

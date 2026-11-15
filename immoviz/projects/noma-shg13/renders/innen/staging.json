@@ -106,5 +106,155 @@
     }
    }
   }
+ },
+ "apt01_v2": {
+  "stand": "2026-11-15",
+  "stil": "Variante 2 nach Derenko-Mappe Stand 28.10.2026 (zusaetzlich zu Runde 2): Bettwand bordeaux, Stuckleiste bordeaux im Bett- und Eingangsbereich, Kuechenspiegel bordeauxrote Rillenfliese; Gang mit Musterfliesen nach Titelbild S. 1. Unterschiede in interior_v2.md",
+  "modell": "nano_banana_pro (Backend meldet nano_banana_2), resolution 2k, 3:2, Rolle image_references; Bild 1 = Blender-Vorschau apt01_v2 bzw. gang_v2, Bild 2 = Bild aus Runde 2 mit gleicher Kamera",
+  "referenzen_hochgeladen": {
+   "derenko_v2_ansicht_s13": "a1e3e820-c24d-4c6b-9726-48d906537ca9",
+   "derenko_v2_ansicht_s14": "356845f0-a7aa-417d-89de-fbbb7ea96846",
+   "derenko_v2_ansicht_s15": "283b2c67-25ac-4b17-aaf5-9da732442c2a",
+   "derenko_v2_ansicht_s16": "491db2d3-a60b-4ca0-9c15-41acee41c564",
+   "derenko_v2_titel_s1": "60cb863c-c7e7-441c-b3d7-97e7553242a8",
+   "derenko_v2_stimmung_schlafzimmer_s8": "f1f91935-35be-462f-b2be-f9e422c8520c",
+   "derenko_v2_stimmung_kueche_s9": "d6473512-b09d-4b4d-94e3-a4ce92dc9d64",
+   "derenko_v2_stimmung_bad_s10": "501fde0b-a300-432a-8898-23a711e55c34",
+   "derenko_v2_stimmung_gang_s11": "1e3012e4-5961-4854-93f5-ddc21b684cfc",
+   "farbpalette_s6 (Runde 2, unveraendert)": "5c61bd49-4c0d-482a-8553-ddd7be43932d",
+   "hinweis": "nur Derenkos eigene Ansichten (Ausschnitte), Farbbalken, grosse Stimmungsbilder links S. 8 bis 11 und Titelbild; Fremdfotos S. 2, 5, 7 und rechte Spalten nicht hochgeladen; nichts davon im Repo"
+  },
+  "bilder": {
+   "apt01v2_kueche_hf.jpg": {
+    "job": "944f0301-f004-49b2-ac10-bef8946e4807",
+    "referenz": "Vorschau, 04d3a473 (Runde 2), S. 16, S. 13, Stimmung S. 8, Palette",
+    "anker": true
+   },
+   "apt01v2_gesamt_hf.jpg": {
+    "job": "dc4a9fad-1430-469f-bf02-9b1a68e3c35d",
+    "referenz": "Vorschau, 5893a023 (Runde 2), Anker 944f0301, S. 13, S. 16, Palette"
+   },
+   "apt01v2_bett_hf.jpg": {
+    "job": "90ef7cd8-01b9-4068-a5e0-cd6e252c219a",
+    "referenz": "Vorschau, 25568acf (Runde 2), Anker 944f0301, S. 16, S. 15, Stimmung S. 8"
+   },
+   "apt01v2_bad_hf.jpg": {
+    "job": "3ba2eac5-31e2-4add-bdff-4f66c59244d8",
+    "referenz": "4f8b9072 (Runde 2), Vorschau, Stimmung S. 10, S. 15",
+    "hinweis": "Bad laut Mappe unveraendert; verfeinert nach S. 10/15 (Fischgraet-Fliese in der Dusche, kleines Bild ueber dem WC)",
+    "verworfen": [
+     "60c4f02c-6bcf-413a-a905-7844b1022af5 (Kamera frontal statt diagonal, Raum breiter, WC und Waschtisch an eine Wand gerueckt)"
+    ]
+   },
+   "apt01v2_kueche_fliesen_hf.jpg": {
+    "job": "8325aaa9-4cbe-4258-ad6b-e2be88c44b44",
+    "referenz": "Vorschau kueche_fliesen, Anker 944f0301, dc4a9fad, S. 13, Stimmung S. 9 (nur Licht und Holzton)",
+    "hinweis": "Zusatzblick, kein Gegenstueck in Runde 2; Perspektive etwas frontaler als die Blender-Kamera"
+   },
+   "gang_v2_blick_hf.jpg": {
+    "job": "d32bd471-c40b-4f08-9f7d-9c3c56b2952a",
+    "referenz": "Vorschau gang_v2, gang_blick_hf.jpg aus Runde 2 (neu hochgeladen 5e35dba6, Job c4a1c6fc war nicht abrufbar), Titelbild S. 1, Stimmung S. 11, Palette",
+    "hinweis": "Boden Musterfliese nach Titelbild S. 1 als Variante (Annahme), sonst wie S. 11"
+   }
+  },
+  "moebelplan": "wie Runde 2 (Grundriss Derenko S. 3 unveraendert)",
+  "credits": "14 (7 Auftraege zu je 2 Credits, davon 1 verworfen); Guthaben 85,38 auf 71,38"
+ },
+ "korrektur_apt01": {
+  "stand": "2026-11-15",
+  "anlass": "Kundenfrage Groessen und Kueche, rote Decke; Pruefung gegen INT S. 3, S. 13, S. 15, EIN S. 8, S. 23 (Tabelle in interior_v2.md Abschnitt 5)",
+  "modell": "apt01 und apt01_v2 korrigiert: Hochschrank y 3,438 bis 4,038 neben der Garderobe, Zeile y 1,922 bis 3,438, Fenster z 0,90 bis 2,40, Bett 1,80, Bank, Trennwand bis y 3,30, Sideboard 485 tief, WC und Dusche nach S. 3, Bad-Band 0,55 m, bordeaux_decke #6B3426 (auch Gang)",
+  "bilder": {
+   "apt01_kueche_k_hf.jpg": {
+    "job": "e5302092-82a4-47d5-9c00-d41e04bd943b",
+    "referenz": "Vorschau apt01_kueche_k, 04d3a473 (Stilanker), Derenko S. 13 alt, Palette"
+   },
+   "apt01_gesamt_k_hf.jpg": {
+    "job": "8183601b-f30c-4ef2-b953-d5cd1d489b7c",
+    "referenz": "Vorschau, 5893a023, e5302092",
+    "verworfen": [
+     "3e1da1dd-202d-431b-ab37-dcfad8754d27 (Hochschrank frei im Raum statt an der Wand)"
+    ]
+   },
+   "apt01_bad_k_hf.jpg": {
+    "job": "786110ac-c34e-43d5-8717-f69391688a94",
+    "referenz": "Vorschau apt01_bad_k, 3ba2eac5, S. 15, S. 10",
+    "hinweis": "gleiches Bild auch als apt01v2_bad_k_hf.jpg, Bad in beiden Mappen gleich"
+   },
+   "apt01v2_kueche_k_hf.jpg": {
+    "job": "71b5825c-9a0f-450c-bbde-32268eac5a7c",
+    "referenz": "Vorschau apt01v2_kueche_k, e5302092 (Anordnung), 944f0301 (Farben), S. 13",
+    "verworfen": [
+     "a1ea95c6-0044-487c-bb30-369dee7dacd3 (Hochschrank mitten in der Zeile, Zeile auf beiden Seiten)"
+    ]
+   },
+   "apt01v2_gesamt_k_hf.jpg": {
+    "job": "482f8259-912f-418e-99d1-9c8342c11dea",
+    "referenz": "Vorschau, dc4a9fad, 71b5825c"
+   },
+   "apt01v2_bad_k_hf.jpg": {
+    "job": "786110ac-c34e-43d5-8717-f69391688a94",
+    "hinweis": "identisch mit apt01_bad_k_hf.jpg"
+   },
+   "apt01v2_kueche_fliesen_k_hf.jpg": {
+    "job": "e77fdfcc-ab3c-4e33-b87a-e00c3e598b4d",
+    "referenz": "Vorschau apt01v2_kueche_fliesen_k, 71b5825c, 8325aaa9, S. 13"
+   },
+   "gang_v2_blick_k_hf.jpg": {
+    "job": "417132d4-95a5-44ba-9e57-24872ca5f3fb",
+    "referenz": "Vorschau gang_v2 (Geometrie unveraendert), d32bd471, S. 11",
+    "hinweis": "nur Deckenfarbe rostiges Bordeaux statt Weinrot"
+   }
+  },
+  "credits": "18 (9 Auftraege zu je 2 Credits, davon 2 verworfen)"
+ },
+ "runde_3": {
+  "stand": "2026-11-15",
+  "regeln": "Moebelplan je Raum fest wie Runde 2 (top03 3Z HOF, top04 Loft), Referenz die veredelten Ecke-Bilder; Terrassenbilder mit echter Innenhuelle hinter der offenen HST (wohnungen.yaml top03_terrasse/top04_terrasse); rand_offen: keine Randwand mehr vor HST und Fenstern",
+  "bilder": {
+   "top03_terrasse_hst_hf.jpg": {
+    "job": "8bde954e-8250-43e4-aacc-4d5d545b5c46",
+    "eingang": "top03_terrasse_hst_vorschau.png (media ded9dfa4)",
+    "referenz": "79482f9c (top03_wohnkueche_ecke_hf), ef1c7c09 (terrasse_top3_eck)",
+    "moebelplan": "innen: runder Nusstisch mit Boucle-Stuehlen hinter der Tuer, Kueche Nuss/Terrazzo rechts; Terrasse: Loungeset Teak rechts der Tuer, Olivenbaum, Pflanztroege",
+    "hinweis": "Gelaender am Nordende der Terrasse ergaenzt (im Modell offen, Stufe zum Gruendach)",
+    "verworfen": [
+     "c3de2bb3-2221-4823-bff1-b4e613205751 (HST stark vergroessert, Ausschnitt gezoomt)"
+    ]
+   },
+   "top04_terrasse_hst_hf.jpg": {
+    "job": "99760578-4829-46de-908a-146be0924961",
+    "eingang": "top04_terrasse_hst_vorschau.png (media ee50d168)",
+    "referenz": "07c102eb (top04_wohnkueche_ecke_hf), b56eb8b1 (terrasse_top4_eck)",
+    "moebelplan": "innen: Insel Marmor gruen-grau mit Barhockern Samt rost, Kueche Eiche; Terrasse: Esstisch Teak fuer vier rechts, Olivenbaum",
+    "verworfen": [
+     "f52cc55e-1f5f-4c8d-95a4-ca7342c5de6c (HST vergroessert als Drehfluegel, Erker mit Spitzhelm)"
+    ]
+   },
+   "top03_wohnkueche_aussicht_hf.jpg": {
+    "job": "a7232f02-dd6a-4e8c-ba8b-9bbc92620a73",
+    "eingang": "top03_wohnkueche_aussicht_vorschau.png (media 37af6c47)",
+    "referenz": "79482f9c, 3Z HOF Wohnzimmer 1b690c60",
+    "moebelplan": "Kueche Nuss/Terrazzo an der Nordwand (links), runder Nusstisch mit vier Boucle-Stuehlen, HST mit Leinenvorhang, Geigenfeige, Sofa Boucle rose mit Couchtisch Travertin, Regal Nuss, Stehleuchte Dreibein",
+    "vorbehalt": "Higgsfield setzt die Kueche auf die Wand der HST (Ostwand) statt an die Nordwand; nicht fuer den Vertrieb ohne Pruefung. Vorschlag: Kamera wohnkueche_rueckwand (Vorschau vorhanden)",
+    "verworfen": [
+     "4eca443c-6083-4d5f-a924-484dacdb3eaf (gleicher Fehler, Raumecke verschoben)"
+    ]
+   },
+   "top04_wohnkueche_aussicht_hf.jpg": {
+    "job": "6ad90df0-7652-46ca-9226-e44b5aef4271",
+    "eingang": "top04_wohnkueche_aussicht_vorschau.png (media f1c9b5ea)",
+    "referenz": "07c102eb, Loft aaa66ef5",
+    "moebelplan": "Kueche Eiche an der Nordwand (links), Insel Marmor gruen-grau mit drei Barhockern Samt rost, HST, Monstera, Sofa creme mit Decke Cognac",
+    "vorbehalt": "erster Versuch behalten: Kueche auf der Ostwand neben der HST statt an der Nordwand; nicht fuer den Vertrieb ohne Pruefung. Vorschlag: Kamera wohnkueche_rueckwand",
+    "verworfen": [
+     "eaf2f647-7846-4f20-b207-d8ab57adf7d7 (zweiter Versuch: Eckfenster neben der HST erfunden)"
+    ]
+   }
+  },
+  "vorschlag_ohne_veredelung": [
+   "top03_wohnkueche_rueckwand_vorschau.png",
+   "top04_wohnkueche_rueckwand_vorschau.png"
+  ]
  }
 }

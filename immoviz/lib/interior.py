@@ -175,10 +175,11 @@ class Apartment:
                                   "c0": (ox0 - x0) // self.cell_px, "c1": (ox1 - x0) // self.cell_px})
         # Ausschnitt schliessen: Randwand, Fenster- und Türöffnungen bleiben frei
         b = max(2, int(0.06 / self.cell_m))
-        self.walls[:b, :] = True
-        self.walls[-b:, :] = True
-        self.walls[:, :b] = True
-        self.walls[:, -b:] = True
+        if not cfg.get("rand_offen"):    # optional: keine Randwand am Ausschnitt (Plan zeigt die Aussenwaende vollstaendig)
+            self.walls[:b, :] = True
+            self.walls[-b:, :] = True
+            self.walls[:, :b] = True
+            self.walls[:, -b:] = True
         H, W = self.walls.shape
         m = b + int(0.6 / self.cell_m)   # Öffnungen nahe am Rand bis zum Rand freihalten (Fenster in der Außenwand)
         for op in self.openings:

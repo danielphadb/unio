@@ -48,6 +48,93 @@ Offene Punkte Runde 2: Lage APT. 01 im Gesamtgrundriss und Raumhöhe (Deckenspru
 bestätigen; Gang (Breite, Türraster, Abschluss) ist Annahme; Hoffassaden 005387 (Würtzlerstraße 8) und 005382 ohne
 Bildquelle; Vorlagen zeigen Glas-Sheddächer auf den Pavillons, Modell bleibt beim Einreichplan.
 
+## Apartments Variante 2 (15.11.2026)
+
+Kundenwunsch: "Für die Apartments bei Noma auch noch Varianten mit diesem Interior-Design machen, zusätzlich und
+nicht statt den bisherigen." Grundlage ist die neue Derenko-Mappe Projekt 26127, Stand 28.10.2026 ([INT2], 17 Seiten A3,
+nur im Scratchpad, nicht im Repo). Runde 2 bleibt unverändert bestehen.
+
+- **Unterschiede zur Mappe vom 07.10.2026** (Tabelle in `interior_v2.md`): Grundriss Top 1, Farbpalette, Stimmungsbilder,
+  Lichtkonzept, Möbel, Textilien und Bad unverändert. Neu ist mehr Bordeaux: Bettwand über der Eichenverkleidung bis zur
+  Decke gedecktes Bordeaux (auch auf der Seitenwand im Bettbereich), Stuckleiste bordeaux im Bett- und Eingangsbereich,
+  Küchenspiegel als glasierte bordeauxrote Rillenfliese statt Karo-Musterfliese. Gang S. 11 unverändert; das Titelbild
+  S. 1 zeigt einen Flur mit rot-creme-blaugrauen Musterfliesen, für `gang_v2` als Bodenvariante übernommen (Annahme).
+- **Modell:** `wohnungen.yaml: apt01_v2` (Kopie von `apt01` mit Bordeaux-Wand, Bordeaux-Leiste, Rillenfliese und
+  Zusatzkamera `kueche_fliesen`) und `gang_v2` (Boden `zementfliese`), neue Materialien `bordeaux_wand`,
+  `stuck_bordeaux`, `fliese_bordeaux`, `zementfliese`. `apt01`, `gang` und `lib/` unverändert.
+- **Higgsfield:** gleiche Kameras wie Runde 2. Referenzen je Bild: Blender-Vorschau, das Bild aus Runde 2 mit gleicher
+  Kamera, das erste gelungene Bild (`apt01v2_kueche`) als Anker, Derenkos Ansichten S. 13 bis 16 (Ausschnitte),
+  Farbbalken S. 6, große Stimmungsbilder S. 8 bis 11 und Titelbild S. 1. Fremdfotos (S. 2, 5, 7, rechte Spalten) nicht
+  hochgeladen.
+- **Ergebnis:** `renders/innen/apt01v2_kueche_hf.jpg`, `_gesamt_hf.jpg`, `_bett_hf.jpg`, `_bad_hf.jpg`,
+  `_kueche_fliesen_hf.jpg` (Zusatzblick auf die neue Küche) und `gang_v2_blick_hf.jpg`, Vorschauen daneben, Job-IDs in
+  `renders/innen/staging.json` (`apt01_v2`). 7 Aufträge zu je 2 Credits, 1 verworfen (Bad: Kamera frontal statt
+  diagonal), 14 Credits (Guthaben 85,38 auf 71,38).
+
+Offene Punkte Variante 2: Deckenfläche im Eingangsbereich bordeaux oder nur die Leiste; Format und Produkt der
+Rillenfliese; Gangboden Terrazzo (S. 11) oder Musterfliese (S. 1); Stimmungsbild S. 9 zeigt noch die alte Karofliese.
+
+**Korrektur Maße (15.11.2026), gilt für `apt01` und `apt01_v2`:** Prüfung gegen Grundriss und Ansichten Derenko
+[INT S. 3, 13, 15] und Einreichung [EIN S. 8, 23], Tabelle Plan gegen Modell in `interior_v2.md` Abschnitt 5.
+Küche war vertauscht: richtig ist vom Eingang zum Fenster Garderobe, Hochschrank mit Mikrowelle (y 3,438 bis 4,038),
+Zeile mit Spüle und Fliesenspiegel (y 1,922 bis 3,438, gesamt 2,116 m, 1,92 m frei zur Fensterwand). Fenster 1,70 breit,
+Höhe 0,90 bis 2,40 (EIN S. 8: 1,60 x 1,50, FPH 0,90). Bett 1,80 breit, Bank in Bettbreite, Trennwand bis y 3,30,
+Sideboard 485 tief, WC und Dusche nach S. 3. Bad: Decke und 0,55 m Wandband in rostigem Bordeaux #6B3426 matt
+(vorher #641C24, im Bild fast schwarz-lila), nur schlankes Profil; gleiche Farbe im Gang. **Raumhöhe bleibt 3,38:**
+laut EIN S. 23 haben die ersten Apartments am Straßenhaus RDUK +3,38, unter den Pavillons +3,14, unter Terrassen +2,92.
+Neu veredelt mit Suffix `_k` (alte Bilder bleiben): `apt01_kueche_k`, `_gesamt_k`, `_bad_k`, `apt01v2_kueche_k`,
+`_gesamt_k`, `_bad_k` (gleiches Bild wie Variante 1, das Bad ist in beiden Mappen gleich), `_kueche_fliesen_k`,
+`gang_v2_blick_k`. 9 Aufträge, 2 verworfen (Hochschrank frei im Raum, Hochschrank mitten in der Zeile), 18 Credits.
+Offen: **Lage APT. 01 bestätigen; liegt es unter einem Pavillon, gilt 3,14**; Fensterbreite 1,70 oder 1,60; Kochfeld
+(S. 3 und S. 13 widersprechen sich); `gang` (Variante 1) ist im Modell mit der neuen Deckenfarbe, aber nicht neu veredelt.
+
+## Runde 3 (15.11.2026): Top 3 und Top 4, bessere Winkel
+
+Feedback des Kunden: "Gerade für 3 und 4 noch bessere Winkel mit den Terrassen und auch von den Einheiten (von außen) selbst
+bzw. auch von innen für die Aussicht auf die Terrasse und z.B. den Innenhof." Zusatz: Garten-, Baum- und Hofdaten der
+Umgebung mit Google prüfen, Gebäude im Innenhof korrigieren, Feeling der Vorlagen nochmals ansehen.
+
+- **Umgebung zuerst korrigiert** (Details `umgebung_abgleich.md` Abschnitt 7, Feeling `mood_vorlagen.md`): zwei nicht
+  existierende Bäume im Nachbargarten entfernt, Bäume am Dachgarten neu gesetzt, drei Bäume ergänzt; Nachbargarten mit
+  Rasen, Spielfläche, Hütte, weißem Kasten und Beet nach Orthofoto/Luftbild; Grünstreifen Noma laut EIN S. 8 (Rasen,
+  Blumentrog 70 cm, EG-Fenster statt Fenstertüren); Hoftrakte Schlachthausgasse 15 weiß statt lachsrot, zwei Erkertürme
+  mit Zeltdach; Hoffassade Schlachthausgasse 11 mit weißem Balkonstapel; neue Karten 005364 und 005382. Google (Static
+  Maps Satellit, Photorealistic 3D Tiles) nur als interne Referenz im Scratchpad, nichts davon im Modell.
+- **Standpunkte Einheit außen** (geprüft an der Blender-Vorschau): Gründach nordöstlich des Pavillons in Augenhöhe
+  gewählt (ganze Nordfassade, Ecke, Hebeschiebetür und Terrasse in einem Bild). Verworfen: Straßenhaus 3./4. OG (sieht
+  nur Dächer, Terrassen verdeckt, weil die HST vom Straßenhaus wegzeigt), Nachbargarten EG (nur EG-Wand und
+  Pavillon-Oberteil), Drohne Nord 13,5 m (PV-Dach füllt das Bild). Übersicht: Drohne 14 m über dem Nachbargarten.
+- **Terrassen:** (a) von der Außenecke zurück auf die offene HST mit echter Innenhülle (neue Einträge
+  `wohnungen.yaml: top03_terrasse`, `top04_terrasse`, Hülle 2 cm versetzt gegen deckungsgleiche Flächen), (b) aus der
+  Ecke neben der HST Richtung Nachbargarten mit Lounge bzw. Essplatz. Blick NNO in den Innenhof verworfen (Schlitz
+  zwischen zwei Wänden, 4,1 bzw. 2,9 m breit).
+- **Innen mit Aussicht:** Kamera `wohnkueche_aussicht` (Südwestecke, 20 mm, 1,5 m) durch die HST. Neuer Schlüssel
+  `rand_offen` in `lib/interior.py` (additiv): ohne ihn stand am Rand des Planausschnitts eine Wand 1 m vor HST und
+  Südfenstern, die auch die Ausblicke der Runde 2 verdeckt hat.
+- **Ergebnis:** 11 veredelte Bilder (Liste und Job-IDs in `renders/higgsfield/staging.json` und
+  `renders/innen/staging.json`, Block `runde_3`). 19 Aufträge zu je 2 Credits = 38 Credits, 8 verworfen (erfundene Tür,
+  Geländer, zweite Fensterreihe, vergrößerte HST, Eckfenster, Küche an der falschen Wand, verkleinerter Baum).
+- **Vorbehalte:** `pavillons_drohne_sued` (EG-Fensterraster gleichmäßig statt paarweise), `top03/top04_wohnkueche_aussicht_hf`
+  (Küche auf der HST-Wand statt an der Nordwand, nach zwei Versuchen). Vorschlag ohne Veredelung: Kamera
+  `wohnkueche_rueckwand` (Vorschau in `renders/innen/`), Küche dort eindeutig als linke Seitenwand.
+
+| Motiv | Kamera | Ergebnis |
+|---|---|---|
+| Top 3 von außen | `top3_aussen_gruendach` | `renders/higgsfield/top3_aussen_gruendach_spaetsommer.jpg` |
+| Top 4 von außen | `top4_aussen_gruendach` | `renders/higgsfield/top4_aussen_gruendach_spaetsommer.jpg` |
+| Übersicht beide Pavillons | `pavillons_drohne_sued` | `renders/higgsfield/pavillons_drohne_sued_spaetsommer.jpg` (Vorbehalt) |
+| Terrasse Top 3, zurück auf die HST | `top03_terrasse.hst` | `renders/innen/top03_terrasse_hst_hf.jpg` |
+| Terrasse Top 4, zurück auf die HST | `top04_terrasse.hst` | `renders/innen/top04_terrasse_hst_hf.jpg` |
+| Terrasse Top 3, Lounge, Nachbargarten | `top3_terrasse_garten` | `renders/higgsfield/top3_terrasse_garten_spaetsommer.jpg` |
+| Terrasse Top 4, Essplatz, Nachbargarten | `top4_terrasse_garten` | `renders/higgsfield/top4_terrasse_garten_spaetsommer.jpg` |
+| Top 3 innen, Blick auf Terrasse und Hof | `top03.wohnkueche_aussicht` | `renders/innen/top03_wohnkueche_aussicht_hf.jpg` (Vorbehalt) |
+| Top 4 innen, Blick auf Terrasse und Hof | `top04.wohnkueche_aussicht` | `renders/innen/top04_wohnkueche_aussicht_hf.jpg` (Vorbehalt) |
+| Garten Top 3 nach Umgebungskorrektur | `garten_top3_weit` | `renders/higgsfield/garten_top3_weit_r3_spaetsommer.jpg` |
+| Garten Top 4 nach Umgebungskorrektur | `garten_top4_weit` | `renders/higgsfield/garten_top4_weit_r3_spaetsommer.jpg` |
+
+Schlafzimmer mit Hofblick nicht umgesetzt: die Schlafzimmerfenster zeigen zum Nachbar-Dachgarten bzw. Nachbargarten
+(bereits in Runde 1 als `schlafzimmer` vorhanden), Budget für die Wiederholungen verwendet.
+
 ## Quellen (`quellen/`, PDFs nicht im Repo)
 
 | Kürzel | Datei | Verwendet für |

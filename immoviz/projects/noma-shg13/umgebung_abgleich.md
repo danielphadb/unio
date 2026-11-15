@@ -97,3 +97,40 @@ im Hof gibt es nicht (Abfrage ZERO_RESULTS). Google 3D Tiles nicht verwendet.
 Kontrollbild: `renders/noma-shg13_hof_vorlage_spaetsommer_vorschau.png` gegen `SHG13_Hof_fin.jpg`: Reihenfolge und Farben
 der Nachbarn (links lachsrosa SHG 11, Mitte SHG 13 mit Balkonstapel, rechts lachsrote und weiße Hoftrakte) stimmen jetzt.
 Die Vorlagen zeigen auf den Pavillons noch Glas-Sheddächer; das Modell bleibt beim Einreichplan (Flachdach mit PV).
+
+## 7. Runde 3: Gärten, Bäume und Hofgebäude gegen Luftbild und Google 3D
+
+Kundenhinweis: Gärten, Bäume, Grünstreifen und Hofgebäude stimmen zum Teil nicht. Abgleich am 15.11.2026 mit drei Quellen:
+Orthofoto Wien 2024 (OGD, entzerrt, maßgeblich für Lage und Fläche), Google-Luftbild (Static Maps, Zoom 20, Sommer, für
+Vegetation; leichte Gebäudeneigung) und Google Photorealistic 3D Tiles (Schrägsichten, für Fassadenfarbe, Geschosse,
+Erker und Dachformen). Google nur als interne Referenz: Bilder im Scratchpad, nichts davon im Modell oder im Repo;
+Geometrie selbst modelliert. Prüfbild Orthofoto | Modell-Draufsicht | Google: Scratchpad
+`noma/r3/google/pruefbild_ortho_modell_google.jpg`, Schrägsichten `noma/r3/g3d/`.
+
+| Bereich | Befund (Quelle) | Vorher im Modell | Korrektur in project.yaml |
+|---|---|---|---|
+| Nachbargarten Süd, Bäume | Keine Bäume im Südteil, dort Beet/Mulch mit Holzpergola und niedrigem Kasten (Orthofoto 2024 kahl ohne Kronen, Google Sommer) | zwei große Bäume 12 m und 10 m bei -9/-56 und -14,5/-57,5 | beide entfernt; Beetfläche `nb_mulch` x -17,3 bis -4,3 / y -53,7 bis -59,5, Kasten 1,75 x 3,7 m |
+| Nachbargarten, Bestandsbaum Südost | Laubbaum, Krone rund 6,5 bis 7 m (Orthofoto kahl, Google belaubt) | 3,2/-53,6, Krone 6 | 2,8/-55,0, Krone 7, Höhe 10 [ANN] |
+| Nachbargarten, Baum am Zaun | kleiner Laubbaum östlich des weißen Kastens (Google, Orthofoto) | fehlte | neu 1,0/-40,5, Krone 4, Höhe 6 [ANN] |
+| Nachbargarten, Rasen | Rasen x -19,8 bis -4,3 / y -40 bis -53,7, Rasenstreifen am Westrand bis y -59,5 (Orthofoto, Google) | x -17 bis -7 / y -39,8 bis -50,6 und "Rasen unter Bäumen" im Südteil | Rasen neu begrenzt, Südteil Beet, Westrand Rasen mit Hecke (3 Sträucher) |
+| Nachbargarten, Spielplatz | dunkle Fallschutzfläche x -19,6 bis -9,75 / y -33,6 bis -39,75 mit Holzspielturm, graue Blechhütte 2,0 x 3,6 m, Sandkiste (Google, Orthofoto) | Pflaster | `nb_fallschutz`, Hütte `nb_huette` 2,15 m [ANN Höhe]; Spielturm nur im Prompt |
+| Nachbargarten, weißer Kasten | 3 x 8 m, helles Dach, x -4 bis -1 / y -37,5 bis -45,5; anschließend niedrige Mauer bis y -53,5 (Orthofoto, Google, Vorlage Hof_fin) | ein Betonkörper 2,6 x 15 m, 0,6 m hoch, x -5 bis -2,4 | Kasten 1,35 m `nb_weiss` plus Mauer 0,75 m [ANN Höhen] |
+| Dachgarten Schlachthausgasse 11 (+4,66) | großer Laubbaum südlich (Krone 7,5), Zierbaum gelb, Baum Nordwest, Baum Mitte, runde Krone am Ostrand; zwei Lichtkuppeln (Orthofoto, Google) | Bäume teils 2 bis 3 m versetzt, ein Baum auf den Lichtkuppeln, Ostrand ohne Baum | 5 Bäume neu gesetzt (siehe `trees_override`), Rasen unverändert |
+| Hof Schlachthausgasse 15 / Würtzlerstraße | Laubbaum Krone rund 6 m bei 25/-62 (Google, Orthofoto) | fehlte | neu, Höhe 9 [ANN] |
+| Grünstreifen Süd (Noma) | [EIN S. 8]: Rasen mit 2 % Gefälle, Blumentrog 70 cm ü. FOK, 0,50 m breit entlang der EG-Fassade, je Apartment ein Fenster 1,60 x 1,50 (FPH 0,90), keine Fenstertüren; Zaun mit Sockel. Heute Bestand (Werkstatt), daher nicht im Luftbild prüfbar | fünf Kugelbüsche [ANN], Fenstertüren im Raster 5 m | Kugelbüsche entfernt, Blumentrog ab APT. 02, Fenster statt Türen (Lage APT. 02/05 aus EIN S. 8, weitere im Raster 10,56 [ANN]) |
+| 005379 Hoftrakt Schlachthausgasse 15 | weiß, weiß gerahmte Fenster, Ziegeldach, polygonaler Erkerturm mit dunklem Zeltdach bei y -31 bis -38 (Google 3D, Orthofoto: Dach 6 m breit) | lachsrot (Runde 2 nach Vorlage Hof_fin-4, falsch), Erker vom Kartenschnitt entfernt | Farbe `#ECE9E2`; Erkerturm als Körper mit Fensterfront und Zeltdach (Spitze +19,3 [ANN]) |
+| 005380 Hoftrakt Würtzlerstraße | weiß, Erkerturm mit Zeltdach bei y -52 bis -58 (Google 3D) | weiß, Erker fehlte | Erkerturm ergänzt (Spitze +18,9 [ANN]) |
+| 005362 Hoffassade Schlachthausgasse 11 | kein Gründerzeithaus: 7 Geschosse, glatte Fenster, West- und Ostteil apricot, Mitte weiß mit Balkonstapel und vollen Brüstungen (Google 3D) | durchgehend lachsrosa, 6 Geschosse, weiß gerahmt | drei Karten (apricot / weiß / apricot), 7 Geschosse, Balkone x -18 bis -8 ab 2. OG [ANN Lage +-2 m] |
+| 005387 Würtzlerstraße 8 Hofseite | heller, weiß-grau (Google 3D) | beige `#DCD3C0` | `#E6E2DA` |
+| 005364 Erdbergstraße (Südwestecke) | moderner Block, hellgrau, Fensterbänder (Google 3D); 1,2 bis 3,1 % in den neuen Kameras | nur Baukörper | neu `hof_west_005364` |
+| 005382 Eckhaus Würtzlerstraße | weißer Altbau hinter 005380 (Google 3D); 1,7 bis 4,6 % | nur Baukörper | neu `hof_nord_005382` |
+
+Direkt sichtbar in den Kameras der Runde 3 (`immoviz.py sichtbar`, Bildanteil >= 1 %): top3_aussen_gruendach 005362 7,4 %,
+005363 4,3 %; top4_aussen_gruendach 005362 5,8 %, 005363 5,5 %, 005364 1,2 %; pavillons_drohne_sued 005379 9,0 %, 005380 8,1 %,
+005378 6,2 %, 005382 4,6 %, 005362 1,5 %; top3_terrasse_hst 005379 21,6 %, 005378 4,6 %; top4_terrasse_hst 005380 14,0 %,
+005379 6,6 %; top3_terrasse_garten 005363 7,2 %, 005364 3,1 %; top4_terrasse_garten 005387 3,6 %, 005364 2,8 %; garten_top3_weit
+und garten_top4_weit wie in Abschnitt 6 plus 005382 1,7 bis 1,8 %. 005362 ist über den eigenen Schlüssel `005362_hof`
+modelliert (das Prüfwerkzeug zeigt deshalb "modelliert: []"). Alle anderen Häuser >= 1 % haben jetzt einen Eintrag.
+
+Offen: Höhen von Kasten, Hütte, Erkerdächern und Bäumen sind geschätzt; Balkonlage an Schlachthausgasse 11 auf rund 2 m;
+der Bestand auf dem Noma-Grundstück (Werkstatt) verdeckt im Luftbild den künftigen Grünstreifen.
