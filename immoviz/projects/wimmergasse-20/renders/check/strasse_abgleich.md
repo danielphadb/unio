@@ -16,26 +16,26 @@ Messstellen bei 10, 30, 50, 70 und 90 % der Fassadenlänge. Größere Werte am F
 
 | Streifen (Mitte lokal) | Abschnitt von | bis | Breite | Parkordnung | Raster | Plätze | Belegung | Regel |
 |---|---|---|---|---|---|---|---|---|
-| -4.2 / 44.8 | -5.35 / 116.89 | -3.96 / 0.65 | 3,96 m | schräg 55 Grad | 2,87 m | 36 | 85 % | Wimmergasse Hausseite |
-| -54.5 / -14.6 | -48.48 / -14.66 | -58.48 / -14.69 | 3,90 m | senkrecht (90 Grad) | 2,60 m | 3 | 85 % | Stolberggasse beidseitig |
-| -11.8 / 11.7 | -11.92 / 18.19 | -11.73 / 5.44 | 1,76 m | längs | 5,70 m | 2 | 85 % | Wimmergasse gegenueber |
-| 3.4 / -13.9 | 0.4 / -14.66 | 7.15 / -14.67 | 3,83 m | senkrecht (90 Grad) | 2,60 m | 2 | 85 % | Stolberggasse beidseitig |
-| 38.3 / -14.2 | 59.44 / -14.68 | 48.94 / -14.69 | 3,77 m | senkrecht (90 Grad) | 2,60 m | 4 | 85 % | Stolberggasse beidseitig |
-| 38.3 / -14.2 | 45.94 / -14.7 | 34.94 / -14.71 | 3,77 m | senkrecht (90 Grad) | 2,60 m | 4 | 85 % | Stolberggasse beidseitig |
-| 38.3 / -14.2 | 31.94 / -14.71 | 16.69 / -14.73 | 3,77 m | senkrecht (90 Grad) | 2,60 m | 5 | 85 % | Stolberggasse beidseitig |
-| -40.8 / -14.7 | -38.26 / -14.81 | -45.76 / -14.87 | 3,51 m | senkrecht (90 Grad) | 2,60 m | 2 | 85 % | Stolberggasse beidseitig |
-| -22.3 / -14.0 | -18.33 / -14.64 | -31.83 / -14.67 | 3,84 m | senkrecht (90 Grad) | 2,60 m | 5 | 85 % | Stolberggasse beidseitig |
-| -11.0 / -35.3 | -11.3 / -18.79 | -10.82 / -59.29 | 1,94 m | längs | 5,70 m | 7 | 85 % | Wimmergasse gegenueber |
-| -3.8 / -31.8 | -3.89 / -18.51 | -3.33 / -57.51 | 4,26 m | schräg 55 Grad | 2,87 m | 10 | 85 % | Wimmergasse Hausseite |
-| -38.0 / -5.1 | -58.61 / -4.06 | -37.11 / -4.02 | 4,04 m | senkrecht (90 Grad) | 2,60 m | 8 | 85 % | Stolberggasse beidseitig |
-| -38.0 / -5.1 | -34.36 / -4.02 | -18.36 / -3.99 | 4,04 m | senkrecht (90 Grad) | 2,60 m | 6 | 85 % | Stolberggasse beidseitig |
-| -12.5 / 48.7 | -12.25 / 41.95 | -12.43 / 54.95 | 1,79 m | längs | 5,70 m | 2 | 85 % | Wimmergasse gegenueber |
-| -12.3 / 29.6 | -11.99 / 22.96 | -12.21 / 38.71 | 1,79 m | längs | 5,70 m | 2 | 85 % | Wimmergasse gegenueber |
-| -12.6 / 64.5 | -12.47 / 57.94 | -12.65 / 70.94 | 1,79 m | längs | 5,70 m | 2 | 85 % | Wimmergasse gegenueber |
-| 8.5 / -4.7 | 0.51 / -3.94 | 7.01 / -3.91 | 3,79 m | senkrecht (90 Grad) | 2,60 m | 2 | 85 % | Stolberggasse beidseitig |
-| 8.5 / -4.7 | 10.01 / -3.9 | 28.76 / -3.81 | 3,79 m | senkrecht (90 Grad) | 2,60 m | 7 | 85 % | Stolberggasse beidseitig |
-| 57.4 / -4.8 | 33.62 / -3.8 | 46.12 / -3.88 | 3,77 m | senkrecht (90 Grad) | 2,60 m | 4 | 85 % | Stolberggasse beidseitig |
-| 57.4 / -4.8 | 49.12 / -3.9 | 63.12 / -3.99 | 3,77 m | senkrecht (90 Grad) | 2,60 m | 5 | 85 % | Stolberggasse beidseitig |
+| -4,2 / 44,8 | -5,3 / 116,9 | -4,0 / 0,7 | 3,96 m | schräg 55 Grad | 2,87 m | 36 | 85 % | Wimmergasse Hausseite |
+| -54,5 / -14,6 | -48,5 / -14,7 | -58,5 / -14,7 | 3,90 m | senkrecht (90 Grad) | 2,60 m | 3 | 85 % | Stolberggasse beidseitig |
+| -11,8 / 11,7 | -11,9 / 18,2 | -11,7 / 5,4 | 1,76 m | längs | 5,70 m | 2 | 85 % | Wimmergasse gegenueber |
+| 3,4 / -13,9 | 0,4 / -14,7 | 7,2 / -14,7 | 3,83 m | senkrecht (90 Grad) | 2,60 m | 2 | 85 % | Stolberggasse beidseitig |
+| 38,3 / -14,2 | 59,4 / -14,7 | 48,9 / -14,7 | 3,77 m | senkrecht (90 Grad) | 2,60 m | 4 | 85 % | Stolberggasse beidseitig |
+| 38,3 / -14,2 | 45,9 / -14,7 | 34,9 / -14,7 | 3,77 m | senkrecht (90 Grad) | 2,60 m | 4 | 85 % | Stolberggasse beidseitig |
+| 38,3 / -14,2 | 31,9 / -14,7 | 16,7 / -14,7 | 3,77 m | senkrecht (90 Grad) | 2,60 m | 5 | 85 % | Stolberggasse beidseitig |
+| -40,8 / -14,7 | -38,3 / -14,8 | -45,8 / -14,9 | 3,51 m | senkrecht (90 Grad) | 2,60 m | 2 | 85 % | Stolberggasse beidseitig |
+| -22,3 / -14,0 | -18,3 / -14,6 | -31,8 / -14,7 | 3,84 m | senkrecht (90 Grad) | 2,60 m | 5 | 85 % | Stolberggasse beidseitig |
+| -11,0 / -35,3 | -11,3 / -18,8 | -10,8 / -59,3 | 1,94 m | längs | 5,70 m | 7 | 85 % | Wimmergasse gegenueber |
+| -3,8 / -31,8 | -3,9 / -18,5 | -3,3 / -57,5 | 4,26 m | schräg 55 Grad | 2,87 m | 10 | 85 % | Wimmergasse Hausseite |
+| -38,0 / -5,1 | -58,6 / -4,1 | -37,1 / -4,0 | 4,04 m | senkrecht (90 Grad) | 2,60 m | 8 | 85 % | Stolberggasse beidseitig |
+| -38,0 / -5,1 | -34,4 / -4,0 | -18,4 / -4,0 | 4,04 m | senkrecht (90 Grad) | 2,60 m | 6 | 85 % | Stolberggasse beidseitig |
+| -12,5 / 48,7 | -12,2 / 42,0 | -12,4 / 55,0 | 1,79 m | längs | 5,70 m | 2 | 85 % | Wimmergasse gegenueber |
+| -12,3 / 29,6 | -12,0 / 23,0 | -12,2 / 38,7 | 1,79 m | längs | 5,70 m | 2 | 85 % | Wimmergasse gegenueber |
+| -12,6 / 64,5 | -12,5 / 57,9 | -12,7 / 70,9 | 1,79 m | längs | 5,70 m | 2 | 85 % | Wimmergasse gegenueber |
+| 8,5 / -4,7 | 0,5 / -3,9 | 7,0 / -3,9 | 3,79 m | senkrecht (90 Grad) | 2,60 m | 2 | 85 % | Stolberggasse beidseitig |
+| 8,5 / -4,7 | 10,0 / -3,9 | 28,8 / -3,8 | 3,79 m | senkrecht (90 Grad) | 2,60 m | 7 | 85 % | Stolberggasse beidseitig |
+| 57,4 / -4,8 | 33,6 / -3,8 | 46,1 / -3,9 | 3,77 m | senkrecht (90 Grad) | 2,60 m | 4 | 85 % | Stolberggasse beidseitig |
+| 57,4 / -4,8 | 49,1 / -3,9 | 63,1 / -4,0 | 3,77 m | senkrecht (90 Grad) | 2,60 m | 5 | 85 % | Stolberggasse beidseitig |
 
 ## Prüfen
 

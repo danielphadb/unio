@@ -23,8 +23,8 @@ Konfiguration in project.yaml:
 
 Ohne passende Regel entscheidet die Breite des Streifens (`automatik`).
 
-Quelle Orthofoto: Stadt Wien, data.wien.gv.at (CC BY 4.0). Das Modul braucht kein Blender (bpy wird nur für den
-optionalen Street-View-Teil geladen).
+Quelle Orthofoto: Stadt Wien, data.wien.gv.at (CC BY 4.0). Prüfbild und Tabelle entstehen ohne
+Rendering; eine Szene wird nur für den optionalen Street-View-Teil gebaut.
 """
 from __future__ import annotations
 

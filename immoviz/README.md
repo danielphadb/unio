@@ -12,7 +12,7 @@ Geschosse und Dachkanten mit den Plänen überein, was reine KI-Bilder nicht lei
 | Stufe | Inhalt | Werkzeug | Stand |
 |---|---|---|---|
 | 0 Intake | Pläne, Ansichten, BAB, Farbkonzept, Mood sammeln, Quellen in `quellen/` dokumentieren | Checkliste unten | aktiv |
-| 1 Umgebung | Gebäudeblöcke, Straßen, Gehsteige, Bäume aus Stadt Wien Open Data, echte Dachflächen aus dem Dachmodell LOD2 | `immoviz.py geo`, `immoviz.py daecher` | fertig |
+| 1 Umgebung | Gebäudeblöcke, Straßen, Gehsteige, Bäume aus Stadt Wien Open Data, echte Dachflächen aus dem Dachmodell LOD2 | `immoviz.py geo`, `immoviz.py daecher`, Prüfung mit `immoviz.py strasse` | fertig |
 | 2 Objekt außen | Fassaden, Fensterachsen, Gesimse, Dachgeschoss-Kubatur aus `project.yaml` | `lib/build.py` | fertig, wird je Objekt verfeinert |
 | 3 Licht und Kamera | Sonnenstand nach Datum und Uhrzeit, Kamerasets mit stürzenden Linien korrigiert | `project.yaml` | fertig |
 | 4 Rendering | Cycles, AgX-Farbmanagement, Vorschau und Final | `immoviz.py render` | fertig |
