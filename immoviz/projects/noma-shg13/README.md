@@ -96,6 +96,43 @@ Hochschrank wieder am Fensterende wie [INT] S. 13. Kein Stuck mehr, nur glatte V
 (Lichtkonzept S. 12 D). Alle Bordeaux-Flächen in der Palettenfarbe #5C1727. Trennwand als raumhohe Wand mit echtem
 Viertelkreis (R 0,18/0,28, neuer Schlüssel `boegen` in `lib/interior.py`), Eichenverkleidung 1,47 läuft um die Rundung.
 
+## Apartments Runde 6 (16.11.2026): APT. 06 unter dem Pavillon, Entscheidungen des Kunden
+
+Grundlage: Abstimmungsseite des Kunden vom 16.11.2026 (Küchenzeile 2,42 bleibt, beide Kochfeld-Varianten ohne Laden
+direkt unter dem Kochfeld, Bordeaux #5C1727, Einbauhöhen absolut, Fenster 1,60 x 1,50, Apartment sicher unter einem
+Pavillon, Gang Terrazzo, Zimmer/Gang/Bad je eigener Boden). Details und Tabellen in `interior_v2.md` Abschnitt 7.
+
+- **Apartment:** APT. 06 [EIN S. 15], Südreihe, 28,91 m², ganz unter Pavillon Top 3 (Trennwände a 5,49 / 10,98, Pavillon
+  a 0 bis 11,95), Kote im Zimmer "ROK 3,34 RUK 3,14", Schnitt [EIN S. 23] RDUK +3,14: **Raumhöhe 3,14**. Gleicher Typ wie
+  APT. 01 / Derenko Top 1, aber **gespiegelt** (Bad im Osten). Fenster zum Gartenstreifen (kein Lichthof).
+- **Modell:** neue Einträge `wohnungen.yaml: apt06_v1` (Mappe 07.10.) und `apt06_v2` (Mappe 28.10.), Derenko-Top-1
+  gespiegelt, jedes Element mit Feld `quelle` (`pruefen`: 0 % ohne Quelle, 0 % ANN in allen apt06-Kameras). `apt01`,
+  `apt01_v2` bleiben als Referenz. Höhen absolut (Hochschrank und Garderobe 2,62, Borde 1,45 / 1,79 / 2,16, Verkleidung
+  1,40), Fenster 1,60 an der Derenko-Lage (siehe offene Punkte), Küchenfronten mit Fugen und hellblauer Griffleiste,
+  unter dem Kochfeld Drehtür. Böden: Zimmer Eiche Fischgrät, Bad Fliese bis unter das Türblatt, gangseitige Laibung der
+  Eingangstür Terrazzo. `gang_v2` auf Terrazzo umgestellt (gleich `gang`), Quellen an den Gangwänden ergänzt.
+  Pavillon `nb_top3` in den apt06-Bildern ausgeblendet (Unterkante +3,38 ragte in die Decke der Rechenhöhe).
+- **Freigabe:** `freigabe.yaml` neu angelegt, `modell_freigegeben: ja` für `apt06_v1_gesamt|kueche|bett|bad`,
+  `apt06_v2_gesamt|kueche|bett|bad|kueche_fliesen`, `gang_blick`, `gang_v2_blick` (Kunde, Abstimmungsseite 16.11.2026).
+  Hinweis: Seit es die Datei gibt, sind alle anderen Kameras ohne Eintrag gesperrt (REGELN F2), auch die Außenkameras.
+- **Selbstprüfung:** Wandabwicklungen S. 13 bis 16 aus dem Modell (orthografisch, zum Vergleich gespiegelt) neben Derenko:
+  `scratchpad/noma/r6/apt/abwicklungen_r6.jpg`; Derenko zeichnet den Raum 3,22 bis 3,27 hoch, Modell 3,14, Einbauhöhen
+  fluchten.
+- **Veredelung:** nano_banana_pro 2k, Referenzen Blender-Vorschau, Derenkos Ansichten S. 13 bis 16 (gespiegelt wie
+  APT. 06) und Farbbalken S. 6, frühere eigene Bilder nur als Material-/Lichtreferenz. Ab dem zweiten Versuch Vorschau mit
+  Weißabgleich (Geometrie unverändert; die AgX-Vorschau ist so orange, dass die KI Bordeaux zu Holz/Creme machte) und
+  Blickplan mit der Reihenfolge der Küchenelemente. Ergebnis `renders/innen/apt06_v1_{gesamt,kueche,bett,bad}_r6_hf.jpg`,
+  `apt06_v2_{gesamt,kueche,bett,bad,kueche_fliesen}_r6_hf.jpg`, `gang_blick_r6_hf.jpg`, `gang_v2_blick_r6_hf.jpg`
+  (Bad und Gang je ein Bild für beide Varianten, Modell identisch). 24 Aufträge, 15 verworfen, **48 Credits**.
+  Vorbehalte (staging.json `runde_6`): V1 gesamt Mikrowelle im Oberschrank statt im Hochschrank; V2 gesamt
+  Küchenreihenfolge im Anschnitt vertauscht und Garderobe fehlt; V2 Bett Garderobe mit Türen; Bad Fensteranschnitt am
+  rechten Rand und Lichtvoute. Vergleichsbogen V1 | V2: `scratchpad/noma/r6/apartments_r6.jpg`.
+
+Offene Punkte Runde 6: **Fensterlage** (Einreichplan zeichnet bei APT. 01 und 06 das Fenster unter der Badseite, Derenkos
+Grundlage gegenüber vor der Küchenwand; Modell folgt Derenko, Fassade in `project.yaml` dem EIN); Kochfeld V2 (S. 3 zeigt
+es dort, wo laut S. 13 der Hochschrank steht); lichte Breite APT. 06 laut Maßkette 5,06 (Modell 5,03 wie Derenko);
+Gang-Türraster weiter Annahme; vier Bilder mit Vorbehalt nicht für den Vertrieb ohne Prüfung bzw. Retusche.
+
 ## Runde 3 (15.11.2026): Top 3 und Top 4, bessere Winkel
 
 Feedback des Kunden: "Gerade für 3 und 4 noch bessere Winkel mit den Terrassen und auch von den Einheiten (von außen) selbst

@@ -309,3 +309,44 @@ gestrichen (kein Profil).
 Im Modell als Fugen (4 mm) und hellblaue Griffleiste über alle Fronten [INT S. 13 Detail Küche]:
 V1 vom Eingang zum Fenster: Garderobe, 600 Kochfeld mit Drehtür, 600 Tür, 600 Spüle, Hochschrank 600 mit Mikrowelle.
 V2: Garderobe, Hochschrank 600 mit Mikrowelle über drei Laden, 600 Kochfeld mit Drehtür, 600 Spüle, 600 Tür.
+
+### 7.6 Blender-Vorschau, Selbstprüfung, Freigabe
+
+- Vorschauen neu (1200 x 800): `renders/innen/apt06_v1_{gesamt,kueche,bett,bad}_vorschau.png`,
+  `apt06_v2_{gesamt,kueche,bett,bad,kueche_fliesen}_vorschau.png`, `gang_blick_vorschau.png`, `gang_v2_blick_vorschau.png`
+  (`gang` und `gang_v2` jetzt identisch; Bad V1 und V2 identisch bis auf Rauschen).
+- Wandabwicklungen S. 13 bis 16 neu aus dem Modell (orthografisch, gespiegelt neben Derenko, Boden fluchtend):
+  `scratchpad/noma/r6/apt/abwicklung_s1x_v1|v2.jpg`, Übersicht `abwicklungen_r6.jpg`. Befund: Hochschrank, Garderobe,
+  Borde, Verkleidung und Bild fluchten mit Derenkos Zeichnung (dort Raum 3,22 bis 3,27 hoch, Modell 3,14); Fenster schmäler
+  (1,60 statt 1,70) wie vom Kunden gewünscht; in V2 liegt das Kochfeld neben dem Hochschrank, in V1 neben der Garderobe.
+- `pruefen`: alle apt06-Kameras 0 % ohne Quelle, 0 % Annahmen; Gang-Kameras 100 % ANN (Türraster 5 m vereinfacht).
+- Freigabe in `freigabe.yaml` (neu) für die 11 Innenkameras, von "Kunde, Abstimmungsseite 16.11.2026".
+
+### 7.7 Veredelung (Higgsfield, nano_banana_pro 2k)
+
+| Bild | Job | Nachkontrolle | Befund |
+|---|---|---|---|
+| `apt06_v1_gesamt_r6_hf.jpg` | cd62f753 | 778 | Kochfeld neben der Garderobe, Spüle, Hochschrank am Fenster richtig; Vorbehalt: Mikrowelle im Oberschrank neben der Garderobe |
+| `apt06_v1_kueche_r6_hf.jpg` | 978532d6 | 653 | richtig (Drehtür unter dem Kochfeld, Mikrowelle im Hochschrank, Bettwand mit Verkleidung) |
+| `apt06_v1_bett_r6_hf.jpg` | 3c6704c7 | 312 (ok) | richtig |
+| `apt06_v1_bad_r6_hf.jpg` = `apt06_v2_bad_r6_hf.jpg` | 2cd285d8 | 1524 | Vorbehalt: Fensteranschnitt hinter der Duschwand am rechten Rand, Lichtvoute an der Bandkante |
+| `apt06_v2_gesamt_r6_hf.jpg` | dac3ba88 | 968 | Vorbehalt: Küchenreihenfolge im Anschnitt vertauscht, Garderobe im Vordergrund fehlt (drei Versuche, alle mit diesem Fehler) |
+| `apt06_v2_kueche_r6_hf.jpg` | 80ab326c | 461 | richtig (Bordeaux-Wand, Kochfeld mit Tür neben dem Hochschrank, Laden unter dem Hochschrank); Bild über dem Bett fehlt |
+| `apt06_v2_bett_r6_hf.jpg` | 34a81645 | 636 | Vorbehalt: Garderobe hinter der Trennwand mit Türen statt offen |
+| `apt06_v2_kueche_fliesen_r6_hf.jpg` | 8483dfd3 | 520 | richtig |
+| `gang_blick_r6_hf.jpg` = `gang_v2_blick_r6_hf.jpg` | 3b537e50 | 1043 | richtig (Terrazzo, Sockel ohne Profil) |
+
+24 Aufträge, 15 verworfen (Gründe in `renders/innen/staging.json`, Block `runde_6`), 48 Credits. Lehre für das Regelwerk:
+Die AgX-Vorschau der Apartments ist so warm, dass die KI Bordeaux-Flächen als Holz oder Creme liest; ein Weißabgleich der
+Vorschau (nur Farbe, Geometrie gleich) hat Wand- und Deckenfarben gehalten. Kleine Einbauten, die in der Vorschau nur
+angeschnitten sind (Küchenzeile in `gesamt`), ordnet die KI frei an; ein gelungenes Bild derselben Küche als Anker (V3)
+hat bei V1 geholfen.
+
+### 7.8 Offene Punkte
+
+- **Fensterlage:** EIN S. 8/15 zeichnet bei APT. 01 und APT. 06 das Fenster unter der Badseite (APT. 06 a 8,27 bis 9,87),
+  Derenkos Grundlage gegenüber 0,30 vor der Küchenwand. Modell innen nach Derenko (jüngerer Stand, Entwurf hängt daran),
+  Fassade in `project.yaml` nach EIN. Mit Architekt und Derenko klären.
+- Kochfeld V2: S. 3 zeigt es neben der Garderobe, dort steht laut S. 13 der Hochschrank; Modell: erstes Element danach.
+- Lichte Breite APT. 06 laut Maßkette 5,06 (Modell 5,03 wie Derenko Top 1).
+- Bilder mit Vorbehalt (V1 gesamt, V2 gesamt, V2 Bett, Bad) nicht für den Vertrieb ohne Prüfung oder Retusche.
