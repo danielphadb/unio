@@ -355,5 +355,85 @@
   },
   "credits": "48 (24 Auftraege zu je 2 Credits, 9 uebernommen (davon 4 mit Vorbehalt), 15 verworfen; Guthaben 8911,38 auf 8863,38)",
   "vergleichsbogen": "scratchpad noma/r6/apartments_r6.jpg"
+ },
+ "runde_7": {
+  "stand": "2026-11-16",
+  "regeln": "Grossmoebel als Platzhalter laut VP (wohnungen.yaml einbauten/zylinder in Planpixeln, neu in lib/interior.py Apartment.einbauten_px), Moebelplan je Kamera; Terrassenbilder mit Ausstattungsebene; Abendbilder mit Innenlicht (leuchten) und Aussenleuchten (Materialart leuchte)",
+  "bilder": {
+   "top03_terrasse_hst_r7_hf.jpg": {
+    "job": "a88fd42a-2955-4423-abf4-92a417a6404f",
+    "eingang": "top03_terrasse_hst_vorschau_r7.png (media 9fe32d63), Kamera neu Ecke NO",
+    "referenz": "205f7268 (Anker)",
+    "nachkontrolle": 28,
+    "hinweis": "zweiter Olivenbaum im Topf links ergaenzt (Ausstattung)",
+    "verworfen": [
+     "9569bf72-aa80-4494-a665-d7f532bce207 (Ausschnitt zurueckgezoomt)"
+    ]
+   },
+   "top04_terrasse_hst_r7_hf.jpg": {
+    "job": "f8ea28ac-e316-4669-a7e3-3f60908f5123",
+    "eingang": "top04_terrasse_hst_vorschau_r7.png (media d0d9667e)",
+    "referenz": "459e52b4 (Anker), Hof_fin-3",
+    "nachkontrolle": 86,
+    "hinweis": "Olivenbaum rund 1 m Richtung HST verschoben"
+   },
+   "top03_terrasse_abend_r7_hf.jpg": {
+    "neu": true,
+    "job": "7b7ba294-de52-488c-8193-468fc35f0b6a",
+    "eingang": "top03_terrasse_abend_vorschau_r7.png (media d00d8294), blaue_stunde",
+    "referenz": "a88fd42a (Tagbild als Anker)",
+    "nachkontrolle": 81,
+    "hinweis": "zweiter Olivenbaum aus dem Anker uebernommen"
+   },
+   "top04_terrasse_abend_r7_hf.jpg": {
+    "neu": true,
+    "job": "74bee23f-24c0-423d-8978-433e0396a7c3",
+    "eingang": "top04_terrasse_abend_vorschau_r7.png (media 55167e00), blaue_stunde",
+    "referenz": "f8ea28ac (Tagbild als Anker)",
+    "nachkontrolle": 182
+   },
+   "top03_wohnkueche_rueckwand_r7_hf.jpg": {
+    "job": "07ab68db-7f0a-4ecc-9924-d306a2ed6195",
+    "eingang": "top03_wohnkueche_rueckwand_vorschau_r7.png (media 2d50db34), Kamera vor dem Sideboard",
+    "referenz": "aefb68bf (eigener Vorversuch als Anker)",
+    "moebelplan": "Kueche Nuss/Terrazzo Nordwand links, runder Esstisch vorne links, Sofa rose an der Ostwand rechts",
+    "nachkontrolle": 292,
+    "hinweis": "Ausschnitt rund 5 % weiter als die Vorschau (Massstab 1,05)",
+    "verworfen": [
+     "a403d48b-504e-4d0d-9e24-959d0cc64f22 (Ausschnitt deutlich weiter, Raum tiefer, Hochschrank ergaenzt)",
+     "aefb68bf-daab-4c8f-a19c-4f9c58eb5be9 (Hochschrank links ergaenzt)"
+    ]
+   },
+   "top04_wohnkueche_rueckwand_r7_hf.jpg": {
+    "job": "c7e4868b-746b-4b43-93b2-a73a373c7532",
+    "eingang": "top04_wohnkueche_rueckwand_vorschau_r7.png (media 42ab3f0e)",
+    "referenz": "3adc2507 (Kueche aus hst_aussicht), Loft aaa66ef5",
+    "moebelplan": "Kueche Eiche/Marmor Nordwand links, runder Esstisch vorne links, Sofa creme rechts",
+    "nachkontrolle": 791,
+    "verworfen": [
+     "3c0b8072-5386-478d-9625-13678ed71ca0 (Kueche als Sideboard umgedeutet)"
+    ]
+   },
+   "top03_hst_aussicht_r7_hf.jpg": {
+    "neu": true,
+    "job": "695b2ee5-03f3-4822-8d18-2e9c19418bd3",
+    "eingang": "top03_hst_aussicht_vorschau_r7.png (media 5a69389b)",
+    "referenz": "3Z HOF 1b690c60, 205f7268",
+    "nachkontrolle": 471,
+    "hinweis": "Leinenvorhang ergaenzt"
+   },
+   "top04_hst_aussicht_r7_hf.jpg": {
+    "neu": true,
+    "job": "3adc2507-745e-41aa-9101-74be7b089dac",
+    "eingang": "top04_hst_aussicht_vorschau_r7.png (media 9721a442)",
+    "referenz": "Loft aaa66ef5, 459e52b4",
+    "nachkontrolle": 126,
+    "hinweis": "zwei Wandleuchten innen neben der HST ergaenzt"
+   }
+  },
+  "nur_vorschau": [
+   "top26_2_wohnkueche_dachfenster_vorschau_r7.png",
+   "top26_2_wohnkueche_terrasse_vorschau_r7.png"
+  ]
  }
 }

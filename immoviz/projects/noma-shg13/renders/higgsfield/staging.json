@@ -140,5 +140,133 @@
     "ersetzt": "garten_top4_weit_spaetsommer.jpg (Runde 2, bleibt erhalten)"
    }
   }
+ },
+ "runde_7": {
+  "stand": "2026-11-16",
+  "auftrag": "Kunde, Abstimmungsseite 16.11.2026: Top 3/4 Aussen, Terrassen, Gaerten und EG/1. OG freigegeben, weitere Blickwinkel erwuenscht; Pflanztroege teilweise, Holzpergola/Rankgitter an der Wand gegenueber der HST als Ausstattung (nicht Planung)",
+  "modell": "nano_banana_pro 2k 3:2 (hof_fin 16:9, Drohne 4k), Rolle image_references, Backend meldet nano_banana_2; Bild 1 = Blender-Vorschau mit Ausstattungsebene (project.yaml neubau.ausstattung)",
+  "freigabe": "freigabe.yaml, von 'Kunde, Abstimmungsseite 16.11.2026'",
+  "prompts": "Regelblock aus immoviz.py prompt; Ausstattung im Prompt ausdruecklich erlaubt (nur an den Bloecken aus Bild 1); Prompttexte im Scratchpad noma/r7/prompts/, Generator noma/r7/tools/prompts.py",
+  "referenzen": {
+   "vorlage_hof_fin": "3628a1c6-e4dc-4e8c-8b9b-9ca205a571a6 (Mood, Geometrie gilt nicht)",
+   "vorlage_hof_fin3": "cbf0a95b-1d3d-46e2-a90b-11099b8d9b95",
+   "vorlage_hof_fin4": "c82cc51e-a000-4f6b-8207-0bdead3a5edc",
+   "anker_terrasse_top3": "205f7268 (top3_terrasse_garten)",
+   "anker_terrasse_top4": "459e52b4 (top4_terrasse_garten)"
+  },
+  "erkenntnis": "Ferne Blickwinkel (Gruendach, Garten, Drohne, hof_fin) mit ausfuehrlicher Ausstattungsbeschreibung und Terrassen-Vorlagen als Referenz: Higgsfield erfindet Terrassen, Pergolen, Moebel und Parkplaetze an anderen Stellen und entfernt Baeume. Abhilfe: kurzer Ausstattungssatz (nur so klein wie in Bild 1, sonst nichts hinzufuegen), Baumsatz, nur Hof_fin als Mood-Referenz",
+  "bilder": {
+   "top3_aussen_gruendach_spaetsommer_r7.jpg": {
+    "job": "00864ebe-7aa6-491c-a018-1a7b0c3b6227",
+    "eingang": "noma-shg13_top3_aussen_gruendach_spaetsommer_vorschau_r7.png (media da5cf227)",
+    "referenz": "Hof_fin",
+    "nachkontrolle": 1,
+    "verworfen": [
+     "eb13f1ab-2fc1-4905-9647-3dd736e18994 (Terrasse mit Moebeln auf dem Gruendach erfunden)",
+     "64f177c2-1bbe-4ad3-aa6e-ac2a65c07b77 (Baumkronen an den Bildraendern ergaenzt, Rankgitter neben der HST)"
+    ]
+   },
+   "top4_aussen_gruendach_spaetsommer_r7.jpg": {
+    "job": "527fe5a5-589a-4dac-adc6-02731032ecf6",
+    "eingang": "..._vorschau_r7.png (media fc2d8094)",
+    "referenz": "Hof_fin",
+    "nachkontrolle": 9,
+    "hinweis": "zwei Rankgitter mit Trog an der Ostfassade Top 4 neben der HST ergaenzt (Ausstattung, nicht im Modell)",
+    "verworfen": [
+     "a568f114-c822-4cc0-bd7e-96a3b123ba29 (Essplatz und Pergola auf Terrasse 4A, Rankgitter an der Nordfassade)",
+     "4ddf702b-0b83-4a57-91fb-3b8845585aca (Baum am rechten Rand ergaenzt)"
+    ]
+   },
+   "pavillons_drohne_sued_spaetsommer_r7.jpg": {
+    "job": "01b1eac3-cdc7-4a33-9ac9-8d3e556dd05a",
+    "aufloesung": "4k 5056 x 3392",
+    "eingang": "..._vorschau_r7.png (media 34ac39ef)",
+    "referenz": "Hof_fin",
+    "nachkontrolle": 182,
+    "verworfen": [
+     "b3ebc584-e3dc-4265-9e4f-713e8456818e (Baeume entfernt, Parkplatz mit Autos und EG-Terrasse erfunden)",
+     "bbe9af2f-5d96-4c92-8106-ef0c0f998ec9 (Baumkrone unten links erfunden)"
+    ]
+   },
+   "weg_pavillons_spaetsommer_r7.jpg": {
+    "neu": true,
+    "job": "d78706a7-b4a1-49cf-8fc6-62ed808af476",
+    "eingang": "..._vorschau_r7.png (media cc4b39a4)",
+    "referenz": "205f7268 (Anker), Hof_fin-3",
+    "nachkontrolle": 137,
+    "verworfen": [
+     "9251a636-68a2-481a-a494-619ff974866d (grosser Baum oben rechts durch Dach mit PV ersetzt, zweiter Olivenbaum vor der HST)"
+    ]
+   },
+   "top3_terrasse_garten_spaetsommer_r7.jpg": {
+    "job": "205f7268-057d-4ec0-9413-3b2c5422a9bf",
+    "eingang": "..._vorschau_r7.png (media 61518bb2), Kamera b 5,3 innerhalb G3",
+    "referenz": "Hof_fin-3, Hof_fin-4",
+    "nachkontrolle": 478,
+    "hinweis": "zweiter Olivenbaum im Topf vorne rechts vor der HST und PV auf einem fernen Nachbardach ergaenzt (Ausstattung bzw. Hintergrund)",
+    "verworfen": [
+     "fe618c81-afab-40f3-a626-ec268dec861a (Hintergrund ersetzt: Baeume weg, Pavillon erfunden)"
+    ]
+   },
+   "top4_terrasse_garten_spaetsommer_r7.jpg": {
+    "job": "459e52b4-8da3-488f-a661-c047bd0d8063",
+    "eingang": "..._vorschau_r7.png (media f82c3920)",
+    "referenz": "Hof_fin-3, Hof_fin-4",
+    "nachkontrolle": 570
+   },
+   "top3_pergola_detail_spaetsommer_r7.jpg": {
+    "neu": true,
+    "job": "2bee1aba-67b2-4719-a5f2-a2c8927f366d",
+    "eingang": "..._vorschau_r7.png (media 0d8cb2df)",
+    "referenz": "61182039 (Anker top4_pergola_detail)",
+    "nachkontrolle": 171,
+    "verworfen": [
+     "a6ae9d28-ae57-4e24-b625-e1b187dc5289 (Fenster in der geschlossenen Westwand Top 4)",
+     "e3935fff-20a2-4417-973b-2e2216a562f8 (Glastuer hinter dem Sofa in der geschlossenen Wand)"
+    ]
+   },
+   "top4_pergola_detail_spaetsommer_r7.jpg": {
+    "neu": true,
+    "job": "61182039-43e9-491d-85f4-b7dccc1f42ad",
+    "eingang": "..._vorschau_r7.png (media 9eaf9637)",
+    "referenz": "Hof_fin-3, Hof_fin-4",
+    "nachkontrolle": 204
+   },
+   "garten_top3_weit_spaetsommer_r7.jpg": {
+    "job": "2c10b4b7-e46b-4ac0-841f-155a0e09aaaf",
+    "eingang": "..._vorschau_r7.png (media 550744b4)",
+    "referenz": "Hof_fin",
+    "nachkontrolle": 254,
+    "vorbehalt": "kleiner Essplatz vor der Suedfassade Top 3 und Strauch unten rechts erfunden; nach drei Versuchen kein fehlerfreies Bild, nicht fuer den Vertrieb (Runde 3 bleibt gueltig fuer den Garten)",
+    "verworfen": [
+     "5f7dd683-9188-44d2-be65-9eb767324ace (Lounge und Pergola am Westende, Rankgitter an der Suedfassade)",
+     "f3105ddd-3213-47b2-852a-cc74868b8f5a (Baum vor dem Pavillon entfernt)"
+    ]
+   },
+   "garten_top4_weit_spaetsommer_r7.jpg": {
+    "job": "b38d61b0-4e87-4a88-b63a-e63bc401712c",
+    "eingang": "..._vorschau_r7.png (media 979951cb)",
+    "referenz": "Hof_fin",
+    "nachkontrolle": 24,
+    "vorbehalt": "Rasen im Vordergrund gepflastert, Rankgitter und Olivenbaum an der EG-Fassade ergaenzt; nicht fuer den Vertrieb",
+    "verworfen": [
+     "111e06dd-86d4-43c3-885e-1e9e818dfe3a (Pergola und Lounge im Garten erfunden)",
+     "939bf314-9210-4d3f-81a4-d89458e9fc94 (Pergola/Essplatz im Hof, Rasen gepflastert)"
+    ]
+   },
+   "hof_fin_spaetsommer_r7.jpg": {
+    "neu": true,
+    "job": "a886decf-934f-4110-a92f-92525c56ba35",
+    "eingang": "noma-shg13_hof_fin_spaetsommer_vorschau_r7.png (media 85ce9ecb), gematchte Kamera hof_fin",
+    "referenz": "Vorlage SHG13_Hof_fin (Licht, Stimmung; Neubau nach Plan)",
+    "nachkontrolle": 248,
+    "vorbehalt": "Pflichtbaum vorne rechts kleiner dargestellt, dadurch Terrasse 4A sichtbar und dort Ausstattung ergaenzt; nach drei Versuchen gleicher Fehler, nicht fuer den Vertrieb",
+    "verworfen": [
+     "38aca29e-6268-4ca1-82ff-99ba3b1714f0 (Baum vorne rechts entfernt, Terrasse mit Pergola erfunden)",
+     "fa35361d-896a-42e9-92a9-769b4ae44a64 (Baum verkleinert, Pergola-Terrasse freigelegt)"
+    ]
+   }
+  },
+  "credits": "84 (39 Auftraege: 35 x 2k zu 2, 4 x 4k zu 4); im selben Konto liefen 14:38 bis 14:52 Uhr weitere 47,5 Credits aus einer anderen Sitzung (nicht Runde 7)"
  }
 }

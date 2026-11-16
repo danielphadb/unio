@@ -55,4 +55,22 @@ kameras:
     von: Kunde, Chat 16.11.2026
     notiz: Aussenmotive zur Veredelung beauftragt (Runde 5, aktuelles Modell nach
       Google-Abgleich)
+  ecke_erhoeht:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Chat 16.11.2026
+    notiz: 'Runde 6: neuer Blickwinkel nach Referenzabgleich (mood_analyse.md Abschnitt
+      6), Vorschau geprueft'
+  fassade_frontal:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Chat 16.11.2026
+    notiz: 'Runde 6: neuer Blickwinkel nach Referenzabgleich (mood_analyse.md Abschnitt
+      6), Vorschau geprueft'
+  eg_lokal:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Chat 16.11.2026
+    notiz: 'Runde 6: neuer Blickwinkel nach Referenzabgleich (mood_analyse.md Abschnitt
+      6), Vorschau geprueft'
 stand: '2026-11-16'

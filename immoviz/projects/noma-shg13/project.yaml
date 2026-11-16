@@ -588,8 +588,9 @@ neubau:
     # bis OK +25,43 bei y -10,59 (4,40 tief), Strassenseite bis y -5,44; Dacheinschnitt x 7,07 bis 13,33 (6,26 = 1/3 der Front) mit Terrasse 2. DG +21,81 vor der
     # Wand y -13,00; zwei Treppen (17 Stg.) aufs Flachdach. Vorher: Mansarde 67 Grad mit zwei Kastengauben (Runde 1, vereinfacht)
     - {gruppe: nb_shg_dach, pts: [[18.48, 0, 21], [0, 0, 21], [0.29, -5.44, 25.43], [18.868, -5.44, 25.43]], mat: nb_mansarde, quelle: "EIN S. 14 (5,44), S. 23/25 (Traufe +21,00)"}   # Strassenseite
-    - {gruppe: nb_shg_dach, pts: [[0.8, -15, 21], [7.07, -15, 21], [7.07, -10.59, 25.43], [0.565, -10.59, 25.43]], mat: nb_mansarde, quelle: "EIN S. 14 (4,40), S. 13 (RH 1,50/2,10/2,50), S. 26 (OK Attika +25,47)"}   # Hof West
-    - {gruppe: nb_shg_dach, pts: [[13.33, -15, 21], [19.55, -15, 21], [19.235, -10.59, 25.43], [13.33, -10.59, 25.43]], mat: nb_mansarde, quelle: "EIN S. 14, S. 13, S. 26"}   # Hof Ost
+    # Runde 7: die beiden Hofschraegen als Gruppe nb_shg_dach_hof (eigenes Objekt), damit das Innenbild Top 26-2 sie ausblenden kann (Licht durch die Dachflaechenfenster)
+    - {gruppe: nb_shg_dach_hof, pts: [[0.8, -15, 21], [7.07, -15, 21], [7.07, -10.59, 25.43], [0.565, -10.59, 25.43]], mat: nb_mansarde, quelle: "EIN S. 14 (4,40), S. 13 (RH 1,50/2,10/2,50), S. 26 (OK Attika +25,47)"}   # Hof West
+    - {gruppe: nb_shg_dach_hof, pts: [[13.33, -15, 21], [19.55, -15, 21], [19.235, -10.59, 25.43], [13.33, -10.59, 25.43]], mat: nb_mansarde, quelle: "EIN S. 14, S. 13, S. 26"}   # Hof Ost
     - {gruppe: nb_shg_dach, pts: [[0, 0, 21], [0.29, -5.44, 25.43], [0.565, -10.59, 25.43], [0.8, -15, 21]], mat: nb_brandwand, quelle: "EIN S. 23 (Schnitt 1)"}   # Giebel West
     - {gruppe: nb_shg_dach, pts: [[18.48, 0, 21], [19.55, -15, 21], [19.235, -10.59, 25.43], [18.868, -5.44, 25.43]], mat: nb_brandwand, quelle: "EIN S. 23 (Schnitt 1)"}   # Giebel Ost
     - {gruppe: nb_shg_dach, pts: [[7.07, -14.19, 21.81], [7.07, -13, 21.81], [7.07, -13, 23]], mat: nb_mansarde, quelle: "EIN S. 13/26 (Dacheinschnitt)"}   # Wange unten x 7.07

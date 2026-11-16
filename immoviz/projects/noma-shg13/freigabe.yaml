@@ -127,4 +127,58 @@ kameras:
     von: Kunde, Abstimmungsseite 16.11.2026
     notiz: 'Runde 7: Top 3/4 Aussen, Terrassen, Gaerten freigegeben, EG/1. OG freigegeben;
       Ausstattung (Troege, Pergola, Moebel, Leuchten) laut Kundenwunsch'
+  weg_pavillons:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Terrassen und Innenraeume, EG/1. OG freigegeben; Ausstattung
+      laut Kundenwunsch; Grossmoebel als Platzhalter laut VP'
+  top03_terrasse_hst:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Terrassen und Innenraeume, EG/1. OG freigegeben; Ausstattung
+      laut Kundenwunsch; Grossmoebel als Platzhalter laut VP'
+  top04_terrasse_hst:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Terrassen und Innenraeume, EG/1. OG freigegeben; Ausstattung
+      laut Kundenwunsch; Grossmoebel als Platzhalter laut VP'
+  top03_terrasse_abend:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Terrassen und Innenraeume, EG/1. OG freigegeben; Ausstattung
+      laut Kundenwunsch; Grossmoebel als Platzhalter laut VP'
+  top04_terrasse_abend:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Terrassen und Innenraeume, EG/1. OG freigegeben; Ausstattung
+      laut Kundenwunsch; Grossmoebel als Platzhalter laut VP'
+  top03_wohnkueche_rueckwand:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Terrassen und Innenraeume, EG/1. OG freigegeben; Ausstattung
+      laut Kundenwunsch; Grossmoebel als Platzhalter laut VP'
+  top04_wohnkueche_rueckwand:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Terrassen und Innenraeume, EG/1. OG freigegeben; Ausstattung
+      laut Kundenwunsch; Grossmoebel als Platzhalter laut VP'
+  top03_hst_aussicht:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Terrassen und Innenraeume, EG/1. OG freigegeben; Ausstattung
+      laut Kundenwunsch; Grossmoebel als Platzhalter laut VP'
+  top04_hst_aussicht:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Terrassen und Innenraeume, EG/1. OG freigegeben; Ausstattung
+      laut Kundenwunsch; Grossmoebel als Platzhalter laut VP'
 stand: '2026-11-16'

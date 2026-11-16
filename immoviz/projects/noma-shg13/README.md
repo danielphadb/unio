@@ -329,6 +329,84 @@ straßenseitigen Dachfläche) neu setzen; Wendeltreppe unten, Höhen von Dachaus
 Würtzlerstraße (Tiefe) sind Annahmen; Liftüberfahrt S. 14 +26,37 gegen S. 23/26 +26,26; Farbe Oberteil Nr. 15 (Apple
 zeigt einen bläulich-hellen Ton, Vorgabe "dunkleres Oberteil").
 
+## Runde 7 (16.11.2026): Ausstattung, Top 3/4 neu veredelt, weitere Blickwinkel
+
+Feedback des Kunden (Abstimmungsseite): Top 3/4 Außen, Terrassen und Gärten freigegeben ("gerne weitere ergänzen"), EG/1. OG
+freigegeben; Pflanztröge teilweise als Ausstattung, die Wand gegenüber der Hebeschiebetür mit Holzpergola oder Ähnlichem
+verschönern ("so schön wie möglich, sodass die Leute sich vorstellen könnten, wie es sein kann").
+
+- **Ausstattung als eigene Ebene** (`project.yaml: neubau.ausstattung`, Gruppen `ausstattung_top3` / `ausstattung_top4`, jede
+  Zeile `quelle: "Ausstattung, Kundenwunsch 16.11.2026"`, nicht Teil der Planung, keine Geländer, keine Wände). Je Terrasse:
+  Holz-Rankgitter (2,50 hoch, b 0,45 bis 5,25) an der Wand gegenüber der HST (Top 3: Westwand Top 4 bei a 15,90; Top 4:
+  Westwand 4A bei a 30,77), Wandpergola 1,30 tief mit zwei Pfosten 9/9 und Lattendach, zwei Pflanztröge Faserzement
+  anthrazit (gegenüber der HST und in der Südecke) mit Bepflanzung und Kletterpflanzen am Gitter, Olivenbaum im Terrakottatopf,
+  drei Wandleuchten Bronze (zwei an der HST, eine an der Pergolawand). Top 3 Lounge (Sofa unter der Pergola, Couchtisch, zwei
+  Sessel, Teppich), Top 4 Essplatz (Tisch 0,90 x 1,60, vier Stühle, halb unter der Pergola). Blick aus der Wohnküche durch die
+  HST geprüft (Kamera `hst_aussicht`): Trog, Gitter mit Kletterpflanzen und Pergola mittig im Ausblick. Erzeugt mit
+  Scratchpad `noma/r7/tools/ausstattung_yaml.py`.
+- **Neu in `lib`** (additiv): `neubau.py` Schlüssel `ausstattung` (Typen quader, zylinder, pflanze, gitter, tisch, sitz,
+  leuchte) und Materialart `leuchte`; `materials.py` schaltet `aus_leuchte*` mit dem Innenlicht des Lichts (blaue Stunde an,
+  tagsüber aus); `interior.py` Großmöbel in Planpixeln für VP-Wohnungen (`einbauten: [{px: ...}]`, `zylinder: [{c_px: ...}]`)
+  und Schrägen mit echten Ausschnitten für `roof_windows` (vorher nur Glas vor einer geschlossenen Fläche).
+- **Großmöbel Top 3/4 als Platzhalter laut VP** (Küchenzeile Nordwand 3,63 m, runder Esstisch, Sofa Ostwand, Couchtisch,
+  Sideboard), Möbelplan je Kamera in `wohnungen.yaml`. Damit steht die Küche in `wohnkueche_rueckwand` an der Nordwand (Runde 3:
+  Küche an der HST-Wand). Kamera `wohnkueche_rueckwand` vor das Sideboard verschoben (stand im Möbel).
+- **Korrektur:** Innenhülle Top 4 lag 0,14 m neben der Fassade (VP-Ursprung bei a 16,04, Pavillon seit Runde 4 bei a 15,90);
+  `vp_top4` / `vp_top4_aussen` auf a 15,90.
+- **Kameras:** Terrassenkameras `top3/4_terrasse_garten` auf b 5,3 innerhalb des Geländers G3/G5 (vorher auf dem Weg),
+  Terrassen-HST-Kameras in die Ecke Nord-Ost (Süd-Ost ist jetzt Sofa bzw. Stuhl und Trog). Neu: `top3/4_pergola_detail`,
+  `weg_pavillons` (vom Verbindungsweg zwischen den Pavillons über die Terrasse Top 3: links Pergolawand Top 4, rechts HST Top 3),
+  `top03/04_terrasse.abend` (blaue Stunde, Leuchten an, Innenlicht), `top03/04.hst_aussicht`; `hof_fin` veredelt (gematchte
+  Kamera, direkt mit `SHG13_Hof_fin` vergleichbar). Verworfen an der Vorschau: Weg a -1,5 und Podest a -3,0 entlang der
+  Pavillons (nur die Nordwand Top 3 sichtbar, Top 4 verdeckt).
+- **Dachterrasse Top 26-3:** `dachterrasse_stadt` (6,4 / -10,0, Ecke Süd-Ost) und `dachterrasse_hof` (1,7 / -6,0, Ecke
+  Nord-West) auf die Terrassenfläche +25,32 gesetzt, Augenhöhe 1,60 (vorher im Gründach bzw. auf der straßenseitigen
+  Dachfläche). Nur Vorschau (`renders/noma-shg13_dachterrasse_*_golden_hour_vorschau_r7.png`).
+- **Top 26-2** an das Dach nach Runde 6 angepasst (EIN S. 13/14/26): Kniestock 0,86 an der Dachdämmung y -12,42, Schräge 45 Grad
+  aus den RH-Linien bis +24,62, drei Dachflächenfenster 0,94 x 2,52 (x 1,96 bis 5,02) als Ausschnitte, HST 260/230 in der Wand
+  zum Dacheinschnitt, Treppeneinhausung x 5,63 bis 7,07 [ANN], Großmöbel nach EIN S. 13; Kameras `wohnkueche_dachfenster` und
+  `wohnkueche_terrasse` (statt `wohnkueche_gauben`). Hofschrägen als Gruppe `nb_shg_dach_hof` (Innenbild blendet sie aus).
+  Nur Vorschau.
+- **Freigabe:** 19 Kameras in `freigabe.yaml` (Kunde, Abstimmungsseite 16.11.2026), bestehende Einträge unverändert.
+- **Veredelung:** nano_banana_pro 2k (Drohne 4k), Regelblock aus `immoviz.py prompt`, Ausstattung im Prompt erlaubt und
+  beschrieben, Vorlagen nur als Mood-Referenz. 39 Aufträge, 84 Credits, 19 Bilder übernommen (Liste, Job-IDs, verworfene
+  Versuche in `renders/higgsfield/staging.json` und `renders/innen/staging.json`, Block `runde_7`).
+- **Erkenntnis:** Bei fernen Blickwinkeln (Gründach, Gärten, Drohne, `hof_fin`) erfindet Higgsfield mit ausführlicher
+  Ausstattungsbeschreibung und Terrassen-Vorlagen als Referenz Terrassen, Pergolen und Möbel an anderen Stellen, ersetzt Rasen durch
+  Pflaster und verkleinert Bäume. Abhilfe: nur ein kurzer Satz zur Ausstattung ("so klein wie in Bild 1, sonst nichts"), eigener
+  Baumsatz, nur `Hof_fin` als Referenz. Ein Küchenblock ohne Geräte wird als Sideboard gelesen: Küche im Prompt mit Spüle, Kochfeld,
+  Backofen beschreiben. Die Nachkontrolle meldete die meisten Erfindungen nicht (Drohne mit Parkplatz: Score 294 "ok").
+
+| Motiv | Bild | Hinweis |
+|---|---|---|
+| Top 3 von außen | `renders/higgsfield/top3_aussen_gruendach_spaetsommer_r7.jpg` | |
+| Top 4 von außen | `renders/higgsfield/top4_aussen_gruendach_spaetsommer_r7.jpg` | Rankgitter neben der HST ergänzt |
+| Drohne beide Pavillons (4K) | `renders/higgsfield/pavillons_drohne_sued_spaetsommer_r7.jpg` | |
+| Verbindungsweg (neu) | `renders/higgsfield/weg_pavillons_spaetsommer_r7.jpg` | |
+| Terrasse Top 3, Lounge | `renders/higgsfield/top3_terrasse_garten_spaetsommer_r7.jpg` | zweiter Olivenbaum vor der HST |
+| Terrasse Top 4, Essplatz | `renders/higgsfield/top4_terrasse_garten_spaetsommer_r7.jpg` | |
+| Detail Pergola Top 3 (neu) | `renders/higgsfield/top3_pergola_detail_spaetsommer_r7.jpg` | |
+| Detail Pergola Top 4 (neu) | `renders/higgsfield/top4_pergola_detail_spaetsommer_r7.jpg` | |
+| Terrasse Top 3 zur HST | `renders/innen/top03_terrasse_hst_r7_hf.jpg` | zweiter Olivenbaum |
+| Terrasse Top 4 zur HST | `renders/innen/top04_terrasse_hst_r7_hf.jpg` | |
+| Abend Top 3 (neu) | `renders/innen/top03_terrasse_abend_r7_hf.jpg` | |
+| Abend Top 4 (neu) | `renders/innen/top04_terrasse_abend_r7_hf.jpg` | |
+| Top 3 innen, Küche Nordwand | `renders/innen/top03_wohnkueche_rueckwand_r7_hf.jpg` | Ausschnitt 5 % weiter |
+| Top 4 innen, Küche Nordwand | `renders/innen/top04_wohnkueche_rueckwand_r7_hf.jpg` | |
+| Top 3 innen durch die HST (neu) | `renders/innen/top03_hst_aussicht_r7_hf.jpg` | |
+| Top 4 innen durch die HST (neu) | `renders/innen/top04_hst_aussicht_r7_hf.jpg` | Wandleuchten innen ergänzt |
+| Garten Top 3 weit | `renders/higgsfield/garten_top3_weit_spaetsommer_r7.jpg` | **Vorbehalt**: Essplatz vor der Südfassade erfunden |
+| Garten Top 4 weit | `renders/higgsfield/garten_top4_weit_spaetsommer_r7.jpg` | **Vorbehalt**: Rasen gepflastert, Rankgitter an der EG-Fassade |
+| Hof aus `hof_fin` (neu) | `renders/higgsfield/hof_fin_spaetsommer_r7.jpg` | **Vorbehalt**: Pflichtbaum vorne rechts kleiner |
+
+Kontaktbogen intern: Scratchpad `noma/r7/kontaktbogen_r7.jpg`. Vorschauen mit Suffix `_vorschau_r7.png` in `renders/` und
+`renders/innen/`.
+
+Offene Punkte Runde 7: drei Bilder mit Vorbehalt (nach je drei Versuchen), für Gärten gilt weiter Runde 3; Ausstattung (Lage
+der Tröge, Pergola, Leuchten) vom Kunden bestätigen lassen; die Pergola Top 3 steht an der Wand von Top 4 (Eigentum/Widmung
+klären); Top 26-2 Kniestock und Treppeneinhausung aus dem Plan abgeleitet [ANN], Schnitt mit Dachaufbau anfordern;
+`hof_fin`-Pflichtbaum (Plan) verdeckt in der Vorlagenperspektive die Pavillons.
+
 ## Quellen (`quellen/`, PDFs nicht im Repo)
 
 | Kürzel | Datei | Verwendet für |

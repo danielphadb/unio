@@ -356,7 +356,23 @@ class ManualApartment:
                 n += 1
         for sl in self.c.get("slopes", []):
             (xa, xb), (ya, za), (yb, zb) = sl["x"], sl["from"], sl["to"]
-            mw.poly([(xa, ya, za), (xb, ya, za), (xb, yb, zb), (xa, yb, zb)], None, "decke", (0, 1, -1))
+            if sl.get("roof_windows") and sl.get("ausschneiden", True):
+                # Runde 7 Noma: Schraege um die Dachflaechenfenster ausschneiden (vorher volle Flaeche, Fenster nur als
+                # Glas davor, also kein Licht). Streifen entlang x, in den Fensterbreiten nur unter t0 und ueber t1.
+                P = lambda x, t: (x, ya + (yb - ya) * t, za + (zb - za) * t)
+                rw = sorted(sl["roof_windows"], key=lambda d: d["x"][0])
+                cuts, x0 = [], xa
+                for d in rw:
+                    cuts.append((x0, d["x"][0], [(0.0, 1.0)]))
+                    cuts.append((d["x"][0], d["x"][1], [(0.0, d["t"][0]), (d["t"][1], 1.0)]))
+                    x0 = d["x"][1]
+                cuts.append((x0, xb, [(0.0, 1.0)]))
+                for u0, u1, ts in cuts:
+                    for t0, t1 in ts:
+                        if u1 - u0 > 1e-3 and t1 - t0 > 1e-3:
+                            mw.poly([P(u0, t0), P(u1, t0), P(u1, t1), P(u0, t1)], None, "decke", (0, 1, -1))
+            else:
+                mw.poly([(xa, ya, za), (xb, ya, za), (xb, yb, zb), (xa, yb, zb)], None, "decke", (0, 1, -1))
             for dff in sl.get("roof_windows", []):
                 u0, u1 = dff["x"]
                 t0, t1 = dff["t"]

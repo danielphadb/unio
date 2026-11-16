@@ -183,6 +183,10 @@ cameras:
   detail_loggia:   {pos: [-13.0, 8.0, 14.0], target: [0.0, 10.7, 18.5], lens: 70, vertical: true}   # Loggia DG2
   detail_lokal:    {pos: [-6.5, -5.5, 1.55], target: [0.0, 3.0, 2.2], lens: 32, vertical: true}     # Schaufenster an der Ecke
   ausblick_terrasse: {pos: [1.3, 4.0, 22.7], target: [-60.0, -25.0, 17.0], lens: 22, vertical: true} # Blick von der DG3-Terrasse
+  # Runde 6 (16.11.2026, mood_analyse.md Abschnitt 6): neue Blickwinkel aus Shotlist und Referenzen, an der Vorschau geprueft
+  ecke_erhoeht:    {pos: [-14.3, -18.4, 4.0], target: [5.0, 5.0, 13.0], lens: 24, vertical: true, clip_start: 0.3}   # uebereck leicht erhoeht vor dem 1. OG von Wimmergasse 15 (009479, Ecke x -14,6 / y -18,7), Krone 16,4/-15 rahmt links oben
+  fassade_frontal: {pos: [-15.4, 15.0, 7.5], target: [0.0, 15.0, 14.0], lens: 26, vertical: true, format: [4, 5], clip_start: 0.6}   # frontal aus dem 2. OG gegenueber (547116, Flucht x -15,2), Hochformat 4:5, Dachausbau und Beletage
+  eg_lokal:        {pos: [-5.0, -6.5, 1.6], target: [2.0, 3.0, 3.2], lens: 30, vertical: true}   # Ecklokal auf Augenhoehe von der Kreuzung
 
 lights:
   golden_hour: {date: "2026-09-20", time: "17:05", tz: 2, exposure: 0.1, interior: 0.0, aerosol: 2.0, season: spaetsommer}
@@ -193,6 +197,7 @@ lights:
   sommermittag: {date: "2026-06-21", time: "12:30", tz: 2, exposure: -0.3, interior: 0.0}
   vormittag:   {date: "2026-05-15", time: "10:30", tz: 2, exposure: -0.2, interior: 0.0}
   blaue_stunde: {date: "2026-10-15", time: "18:55", tz: 2, exposure: 1.6, interior: 1.0, season: herbst}
+  morgen_herbst: {date: "2026-10-08", time: "08:40", tz: 2, exposure: 0.0, interior: 0.1, aerosol: 4.0, season: herbst}   # Runde 6: tiefe Sonne aus Suedost, Gegenlicht die Wimmergasse hinunter
 
 render:
   resolution: [2400, 1600]
