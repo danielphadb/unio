@@ -256,5 +256,104 @@
    "top03_wohnkueche_rueckwand_vorschau.png",
    "top04_wohnkueche_rueckwand_vorschau.png"
   ]
+ },
+ "runde_6": {
+  "stand": "2026-11-16",
+  "auftrag": "Kunde, Abstimmungsseite 16.11.2026: APT. 06 unter Pavillon Top 3 (Raumhoehe 3,14), Hoehen absolut, Fenster 1,60, Kochfeld ohne Laden darunter, Gang Terrazzo; Varianten apt06_v1 (Mappe 07.10.) und apt06_v2 (Mappe 28.10.)",
+  "modell": "nano_banana_pro 2k (Backend meldet nano_banana_2), 3:2, Rolle image_references; Freigabe freigabe.yaml (Kunde, Abstimmungsseite 16.11.2026)",
+  "prompts": "scratchpad noma/r6/apt/prompts/*.txt (Runde 1 und 2), Runde 3 im Auftrag: Regelblock aus immoviz.py prompt, Moebelplan aus wohnungen.yaml, Blickplan mit Reihenfolge der Kuechenelemente",
+  "bilder": {
+   "apt06_v1_gesamt_r6_hf.jpg": {
+    "job": "cd62f753-2ff0-4eee-b463-030b339eb551",
+    "referenz": "Vorschau farbkorrigiert, c0aceec4 (Anker Kueche), Palette",
+    "nachkontrolle": 778,
+    "vorbehalt": "Mikrowelle im Oberschrank neben der Garderobe statt im Hochschrank am Fensterende; runde Deckenleuchte ergaenzt",
+    "verworfen": [
+     "434585bd-9ae0-4426-adb3-2e38306181d4 (Spuele und Kochfeld vertauscht, Kochfeld nicht neben der Garderobe)",
+     "2d52dc89-ca04-4ea3-a483-1b3fbfdc9ba6 (Spuele und Kochfeld weiterhin vertauscht)"
+    ]
+   },
+   "apt06_v1_kueche_r6_hf.jpg": {
+    "job": "978532d6-d30d-4b10-86b2-a8c04d661355",
+    "referenz": "Vorschau farbkorrigiert, c0aceec4 (Kueche), 3c6704c7 (Bettwand), Palette",
+    "nachkontrolle": 653,
+    "verworfen": [
+     "4553f782-6ddd-4277-abe1-aeafbad22a16 (Lade direkt unter dem Kochfeld, Mikrowelle fehlt)",
+     "c0aceec4-edc9-470d-93a4-a4a551f2aa5c (Kueche richtig, aber Eichenverkleidung der Bettwand fehlt, Trennwand als Saeule; als Anker weiterverwendet)"
+    ]
+   },
+   "apt06_v1_bett_r6_hf.jpg": {
+    "job": "3c6704c7-9b1d-4f4c-a3db-598534be8756",
+    "referenz": "Vorschau, Derenko INT S. 13/14/15/16 gespiegelt, Palette S. 6, frueheres eigenes Bild gespiegelt (nur Material/Licht)",
+    "nachkontrolle": 312,
+    "verworfen": [
+     "47da69ab-386a-4ba5-b826-98765313cdf1 (Fenster mit Vorhang an der geschlossenen Seitenwand rechts erfunden)",
+     "cfaa0f4a-6e9e-4d1d-82bd-c0bbf1acdbb3 (Ausschnitt gezoomt, Trennwand als Saeule, Tisch und Vorhang ergaenzt)"
+    ]
+   },
+   "apt06_v1_bad_r6_hf.jpg": {
+    "job": "2cd285d8-139d-4231-a6a7-a916b3d5234b",
+    "referenz": "Vorschau farbkorrigiert (Weissabgleich, Geometrie unveraendert), eine Derenko-Ansicht gespiegelt, Palette S. 6",
+    "nachkontrolle": 1524,
+    "vorbehalt": "am rechten Rand (rund 2 % der Bildbreite) schimmert hinter der Duschwand ein Fenster durch, das Bad hat keines; Lichtvoute an der Unterkante des Bandes (nicht im Plan). Nicht fuer den Vertrieb ohne Retusche",
+    "alternative": "594ad353-b4e7-4a78-b60a-94ecaf281de0 (ohne Fenster, aber frontal statt diagonal)",
+    "verworfen": [
+     "7d61118b-4e2f-469c-a1ad-98dd819aef07 (Kamera geaendert, Blick ins Zimmer mit Bett und Kueche)",
+     "594ad353-b4e7-4a78-b60a-94ecaf281de0 (frontal statt diagonal)"
+    ]
+   },
+   "apt06_v2_bad_r6_hf.jpg": {
+    "hinweis": "identisch mit apt06_v1_bad_r6_hf.jpg (Bad in beiden Mappen gleich, Vorschau-Differenz 0,06 Grauwerte)"
+   },
+   "apt06_v2_gesamt_r6_hf.jpg": {
+    "job": "dac3ba88-d13a-499e-a83c-6141220f63c7",
+    "referenz": "Vorschau farbkorrigiert (Weissabgleich, Geometrie unveraendert), eine Derenko-Ansicht gespiegelt, Palette S. 6",
+    "nachkontrolle": 968,
+    "vorbehalt": "Kuechenreihenfolge im Anschnitt vertauscht (Spuele vorne, Hochschrank mit Mikrowelle am Fensterende statt neben der Garderobe), offene Garderobe im Vordergrund fehlt; Trennwand, Badtuer, Fenster und Rillenfliese richtig. Nicht fuer den Vertrieb ohne Pruefung",
+    "verworfen": [
+     "406a240e-965d-4544-a4ce-8df564ecf828 (Kamera und Raum geaendert, Trennwand entfernt)",
+     "0cae3857-0a8b-4693-987f-a9184abb95d5 (Kuechenreihenfolge vertauscht, Garderobe am Fenster)"
+    ]
+   },
+   "apt06_v2_kueche_r6_hf.jpg": {
+    "job": "80ab326c-871c-4882-860f-91f54fa29400",
+    "referenz": "Vorschau farbkorrigiert (Weissabgleich, Geometrie unveraendert), eine Derenko-Ansicht gespiegelt, Palette S. 6",
+    "nachkontrolle": 461,
+    "hinweis": "Bild ueber dem Bett fehlt, Arbeitsplatte Holz statt hellem Stein (Kleinigkeiten)",
+    "verworfen": [
+     "9bfdf748-82b4-424f-8e20-ec36f86d6e90 (Bettwand creme statt bordeaux)"
+    ]
+   },
+   "apt06_v2_bett_r6_hf.jpg": {
+    "job": "34a81645-59c1-44c8-8080-f0204aaf078b",
+    "referenz": "Vorschau farbkorrigiert (Weissabgleich, Geometrie unveraendert), eine Derenko-Ansicht gespiegelt, Palette S. 6",
+    "nachkontrolle": 636,
+    "vorbehalt": "Garderobe hinter der Trennwand mit Tueren statt offen",
+    "verworfen": [
+     "39b9f2ae-ad72-48e2-b428-8954978e2419 (Bettwand creme statt bordeaux, Fenster rechts erfunden, Trennwand als Saeule)",
+     "eb67fa08-3a8d-43ee-852c-8a4a67400384 (Decke bordeaux statt creme; Score 331, aber Farbfehler)"
+    ]
+   },
+   "apt06_v2_kueche_fliesen_r6_hf.jpg": {
+    "job": "8483dfd3-2df1-4563-9112-41e4d4878aa1",
+    "referenz": "Vorschau farbkorrigiert (Weissabgleich, Geometrie unveraendert), eine Derenko-Ansicht gespiegelt, Palette S. 6",
+    "nachkontrolle": 520,
+    "verworfen": [
+     "b6ef49bb-a27e-49d7-9e1a-8b286972f407 (frontal mit zwei erfundenen Fenstern)",
+     "2b0f69b7-8f08-4e1f-a5df-3f340a37c5c5 (Vorhang am rechten Rand erfunden)"
+    ]
+   },
+   "gang_blick_r6_hf.jpg": {
+    "job": "3b537e50-60cd-4e99-873b-c6f367a1a9d2",
+    "referenz": "Vorschau gang_blick, gang_blick_hf.jpg (Material/Licht)",
+    "nachkontrolle": 1043,
+    "hinweis": "Terrazzo, Sockel nur gestrichen (kein Profil), Decke Bordeaux #5C1727"
+   },
+   "gang_v2_blick_r6_hf.jpg": {
+    "hinweis": "identisch mit gang_blick_r6_hf.jpg (gang_v2 = gang, Terrazzo laut Kunde, Vorschau-Differenz 0)"
+   }
+  },
+  "credits": "48 (24 Auftraege zu je 2 Credits, 9 uebernommen (davon 4 mit Vorbehalt), 15 verworfen; Guthaben 8911,38 auf 8863,38)",
+  "vergleichsbogen": "scratchpad noma/r6/apartments_r6.jpg"
  }
 }
