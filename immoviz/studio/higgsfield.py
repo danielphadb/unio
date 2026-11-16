@@ -230,3 +230,34 @@ class Higgsfield:
         subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-loop", "1", "-i", str(src), "-t", str(int(duration)),
                         "-r", "10", "-vf", "scale=960:-2,format=yuv420p", "-c:v", "libx264", "-preset", "veryfast",
                         "-f", "mp4", str(out)], check=True)
+
+
+# ------------------------------------------------------------------ Freigabe-Gate und Prompt-Regeln (REGELN.md)
+def freigabe_pruefen(pdir: Path, rel: str, dry: bool, force: bool = False, kamera: str | None = None) -> dict:
+    """Vor jeder Veredelung: ist das Modell dieser Kamera laut projects/<p>/freigabe.yaml freigegeben?
+    Trockenlauf oder fehlende freigabe.yaml: nur Warnung. Sonst gesperrt (HiggsfieldError), ausser force=True.
+    Liefert {erlaubt, kamera, warnung, grund}."""
+    import sys
+    root = Path(__file__).resolve().parent.parent
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+    from lib import freigabe as FG
+    kam = kamera or FG.kamera_aus_datei(pdir, rel)
+    try:
+        return FG.pruefen(pdir, kam, trockenlauf=dry, force=force)
+    except FG.NichtFreigegeben as e:
+        raise HiggsfieldError(str(e)) from e
+
+
+def prompt_mit_regeln(pdir: Path, rel: str, prompt: str, kamera: str | None = None) -> tuple[str, list[str]]:
+    """Zentrale Prompt-Regeln (higgsfield/prompt_regeln.yaml) anhaengen, falls noch nicht im Prompt.
+    Liefert (prompt, warnungen), z. B. Warnung "Moebelplan fehlt" bei Innenbildern."""
+    import sys
+    root = Path(__file__).resolve().parent.parent
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+    from lib import freigabe as FG
+    kam = kamera or FG.kamera_aus_datei(pdir, rel)
+    art = "innen" if str(rel).startswith(("innen/", "walkthrough/")) else "aussen"
+    R = FG.prompt_regeln(pdir, kam, art)
+    return FG.anhaengen(prompt, R), R["warnungen"]

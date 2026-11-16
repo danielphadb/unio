@@ -6,11 +6,18 @@ Fensterachsen, Geschosshöhen, Gesimse und die Dachgeschoss-Kubatur dürfen sich
 
 ## Ablauf
 
+0. Vorab (REGELN.md, Phasen Freigabe und Veredelung): `immoviz.py prompt --projekt <p> --cam <kamera>` prüft die
+   Modellfreigabe der Kamera in `freigabe.yaml` und gibt den Regelblock aus, der an den Prompt angehängt wird.
+   Ist die Kamera nicht freigegeben, keine Credits ausgeben (Ausnahme nur bewusst mit `--force`).
 1. Rendering hochladen (`media_upload`, dann `curl -X PUT` und `media_confirm`).
 2. Bild erzeugen mit dem Rendering als Referenz (Modell siehe unten), Seitenverhältnis 3:2. Budget je Bild ca. 2,5 Credits
    (nano_banana_pro 2k) einplanen, mit `get_cost: true` vorab prüfbar.
-3. Ergebnis gegen das Rendering prüfen: Achsen zählen, Gesimse, Dachkante, Ecklösung.
-   Weicht etwas ab, wird es verworfen und nicht „schön geredet“.
+3. Ergebnis gegen das Rendering prüfen: zuerst automatisch mit
+   `immoviz.py nachkontrolle --vorschau <blender.png> --veredelt <ergebnis.jpg>` (Markierungsbild daneben: rot neue
+   gerade Kanten, blau fehlende, orange neue Rechtecke wie Türen oder Glasfronten; Status "zur Pruefung" ab Score
+   400), dann Sichtprüfung der markierten Stellen: Achsen zählen, Gesimse, Dachkante, Ecklösung, Küche und
+   Großmöbel an der Planwand, Bäume unverändert. Bei mehreren Varianten alle angeben, die Rangfolge nennt die
+   beste zuerst. Weicht etwas ab, wird es verworfen und nicht „schön geredet“.
 4. Freigegebenes Bild auf 4K hochrechnen (`upscale_image`).
 5. Optional: kurze Kamerafahrt mit dem freigegebenen Bild als Startbild (`generate_video`).
 
@@ -21,6 +28,27 @@ Fensterachsen, Geschosshöhen, Gesimse und die Dachgeschoss-Kubatur dürfen sich
 | `nano_banana_pro` (`resolution: 2k`, Rolle `image_references`) | **Standard.** Hält Achsen, Gesimse, Dachkante und Kamera sehr eng, 2528 x 1696 px. **Kosten ca. 2,5 Credits je Bild** (gemessen 15.11.2026, NOMA: 42 Credits für 17 Bilder) | Test 14.11.2026: 3 von 3 Bildern geometrisch korrekt |
 | `gpt_image_2_6` | Alternative. Unbedingt `quality: high` und `resolution: 2k` setzen, sonst 1K in niedriger Stufe | Test 14.11.2026: Geometrie korrekt, nur 1024 px wegen fehlender Parameter |
 | `upscale_image` (4k) | Endausgabe | flacher Preis |
+
+## Prompt-Regeln (automatisch angehängt)
+
+Zentral in `higgsfield/prompt_regeln.yaml`, gültig für alle Projekte: Geometrie-Sperre (keine neuen Türen, Fenster,
+Glasfronten), Kamerasperre (kein Zoom), keine neuen Geländer, Glasdächer, Tröge, `TREES ARE LOCKED`, Nachbarn
+gesperrt, Parkordnung (aus dem geprüften Straßenabgleich `renders/check/strasse_abgleich.json`, sonst
+`street.parking`), Möbelplan-Pflicht innen (`wohnungen.yaml`: `kameras.<k>.moebelplan`, sonst aus
+`renders/innen/staging.json`), keine Stuckleisten, wenn der Plan keinen Stuck zeigt (Freigabe dafür: `stuck: true`
+an der Wohnung oder Einbauten mit Stuckmaterial), Farben und Raumhöhe. Jede Regel nennt den Fehler, der sie
+ausgelöst hat.
+
+So kommen sie an den Prompt:
+
+- **Studio** (Knopf „Veredeln“): Der Server hängt den Block beim Absenden an, falls die Marke `IMMOVIZ RULES` noch
+  nicht im Prompt steht, und schreibt Warnungen (z. B. „Möbelplan fehlt“) ins Job-Log. Vorher prüft er die Freigabe
+  der Kamera (`freigabe.yaml`): nicht freigegeben ergibt HTTP 409, außer im Trockenlauf, ohne `freigabe.yaml`
+  (Altbestand, nur Warnung) oder mit dem Häkchen „force“ (wird in `index.json` protokolliert).
+- **MCP/Kommandozeile**: `immoviz.py prompt --projekt <p> --cam <kamera>` gibt Freigabe, Warnungen und den Block aus;
+  der Block kommt ans Ende des Prompts. Exit 1, wenn die Kamera gesperrt ist.
+
+Neue Fehlerklasse: Regel in `prompt_regeln.yaml` ergänzen (mit `grund`) und in REGELN.md eintragen.
 
 ## Prompt-Bausteine
 

@@ -1,0 +1,12 @@
+# kameramatch: Punktpaare fuer die Vorlage SHG13_Hof_fin-2.jpg (Strassenhaus Hoffassade oben mit Nachbarn, nicht im Repo)
+# Passpunkte am Strassenhaus: Balkonplatten-Enden des Erkerstapels x 3,6 und 16,1, Vorderkante y -16,12, UK 1. DG +18,60 und
+# 5. OG +15,72 [EIN S. 22/25], Fassadenkante West x 0,80 und Fensterachse rechts (Mitte x 17,95) nur als senkrechte Kanten.
+# Dachgeschoss und Fensterhoehen der Vorlage weichen vom Einreichplan ab (aelterer Entwurf), daher keine Punkte dort.
+groesse: [1920, 1284]
+punkte:
+  - {name: shg_balkon_1dg_ost, px: [1348.3, 832.3], xyz: [16.1, -16.12, 18.60]}
+  - {name: shg_balkon_5og_ost, px: [1348.3, 1067.0], xyz: [16.1, -16.12, 15.72]}
+  - {name: shg_balkon_1dg_west, px: [281.3, 910.0], xyz: [3.6, -16.12, 18.60]}
+  - {name: shg_balkon_5og_west, px: [281.3, 1116.3], xyz: [3.6, -16.12, 15.72]}
+  - {name: shg_kante_west, px: [151.0, 1000], xyz: [0.80, -15.0, 15.0], nur_u: true}
+  - {name: shg_fensterachse_ost, px: [1485.3, 900], xyz: [17.95, -15.0, 15.0], nur_u: true}

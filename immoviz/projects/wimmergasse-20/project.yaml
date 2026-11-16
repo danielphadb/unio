@@ -1024,10 +1024,12 @@ trees_override:
   - {pos: [8.4, -14.9], height: 6.5, crown: 3.0, form: rund}               # Jungbaum vor Wimmergasse 18, schmale lichte Krone [SV 05/2024]
   # Hofbaeume (nicht im Baumkataster, das nur Strassenbaeume fuehrt): im Schraegluftbild und im Orthofoto dicht begruente Hoefe
   # hinter dem Objekt. Lage aus dem Orthofoto grob, Groesse geschaetzt.
-  - {add: true, pos: [25.0, 52.0], height: 15.0, crown: 11.0, form: rund}   # Hof zwischen Wimmergasse 24 und dem Hofgebaeude 009426
-  - {add: true, pos: [36.0, 60.0], height: 13.0, crown: 9.0, form: rund}
-  - {add: true, pos: [18.0, 63.0], height: 12.0, crown: 8.0, form: rund}
-  - {add: true, pos: [25.0, 27.0], height: 12.0, crown: 8.0, form: rund}    # Hof hinter Stolberggasse 34
+  # Lage und Groesse nachgemessen im 3D-Abgleich 16.11.2026 (Hoehenbild der Kronen, nur Parameter): der Baum hinter
+  # Stolberggasse 34 (25 / 27) existiert nicht, die uebrigen standen 4 bis 8 m daneben und waren zu hoch.
+  - {add: true, pos: [44.0, 67.0], height: 14.0, crown: 9.5, form: rund}   # Hof zwischen Wimmergasse 24 und dem Hofgebaeude 009426
+  - {add: true, pos: [18.0, 67.0], height: 12.5, crown: 8.0, form: rund}
+  - {add: true, pos: [21.0, 52.0], height: 9.5, crown: 7.5, form: rund}
+  - {add: true, pos: [40.0, 54.0], height: 7.5, crown: 7.0, form: rund}
 
 # ---------------------------------------------------------------- Daecher: Korrekturen zum Dachmodell (Abgleich 15.11.2026)
 # Das Dachmodell LOD2 der Stadt Wien liefert Form und Hoehe, das Orthofoto nur eine grobe Farbklasse. Was fehlt
@@ -1048,24 +1050,68 @@ roofs_override:
   # ---- Stolberggasse, Hausseite
   - bezug: "547117"            # Stolberggasse 34: schwarzes Mansarddach ueber 2 Geschosse, zwei Reihen Gauben und Dachfenster, helle Brandwand mit Kamin zum Objekt
     material: schiefer_dunkel
-    mansarde: {traufe: 20.69, hoehe: 6.0, neigung: 68, material_oben: blech_dunkel, kamin: a, brandwand_material: brandwand}
+    # 3D-Abgleich 16.11.2026 (immoviz.py referenz): Oberkante 27,0 bis 27,4 m stimmt, die Mansardflaechen sind flacher
+    # als angenommen (Hoehenbild: Haelfte der Strassentrakt-Flaeche unter 24,2 m), Neigung 68 auf 52 Grad, Traufe 0,4 m tiefer
+    mansarde: {traufe: 20.3, hoehe: 6.4, neigung: 52, material_oben: blech_dunkel, kamin: a, brandwand_material: brandwand}
     gauben: {anzahl: 5, reihen: 2, breite: 1.7, hoehe: 1.5}
     dachfenster: {anzahl: 5, reihen: 2, lage: 0.2}
   - {bezug: "009425", material: ziegel_orange, kamine: 3}                                   # Stolberggasse 32: leuchtend oranges Ziegeldach
-  - {bezug: "009415", material: ziegel_rot, gauben: {anzahl: 4, seiten: ["-y"]}, kamine: 3}   # Ecke Ramperstorffergasse: rotes Ziegeldach mit Gauben
+  - {bezug: "009415", material: ziegel_rot, gauben: {anzahl: 4, seiten: ["-y"]}, kamine: 3, aufbauten: [{pos: [74.2, 9.6], l: 9.3, b: 1.7, z0: 19.8, z1: 26.0, drehung: 97}]}   # Ecke Ramperstorffergasse: rotes Ziegeldach mit Gauben
   # ---- Wimmergasse, Hausseite Richtung Nordwest
   - {bezug: "009428", material: blech_hell, dachfenster: {anzahl: 5, reihen: 2, seiten: ["-x"]}}   # Wimmergasse 22: hellgraues Blechdach mit Dachflaechenfenstern
   - {bezug: "009429", material: ziegel_braun, kamine: 2}                                    # Wimmergasse 24: braunes Ziegeldach
-  - {bezug: "009430", material: schiefer_dunkel, gauben: {anzahl: 4, seiten: ["-x"]}, dachfenster: {anzahl: 4, lage: 0.6, seiten: ["-x"]}}   # Wimmergasse 26: dunkles Schieferdach mit Gauben
+  - {bezug: "009430", material: schiefer_dunkel, gauben: {anzahl: 4, seiten: ["-x"]}, dachfenster: {anzahl: 4, lage: 0.6, seiten: ["-x"]},   # Wimmergasse 26: dunkles Schieferdach mit Gauben
+     dach: {form: sattel, traufe: 17.2, first: 23.4, richtung: laengs, min_hoehe: 15.0},
+     aufbauten: [{pos: [7.9, 69.6], l: 7.1, b: 1.8, z0: 19.9, z1: 21.9, drehung: 88}, {pos: [10.9, 63.6], l: 5.8, b: 2.1, z0: 17.5, z1: 22.9, drehung: 80}]}   # 3D-Abgleich: neues Dach nach 2016, Traufe 15,7 m, First 21,3 m ueber Strasse statt 18,8 m (Dachmodell)
   - {bezug: "009431", material: ziegel_braun, kamine: 2}                                    # Wimmergasse 28
   - {bezug: "009432", material: ziegel_braun, kamine: 2}                                    # Wimmergasse 30
   # ---- Gegenseite Wimmergasse
-  - {bezug: "547116", material: blech, material_flach: blech, dachfenster: {anzahl: 6}}     # Wimmergasse 17: graues Blechdach mit Dachfenstern (kein Dachmodell, Schraege laut neighbour_facades)
+  # Wimmergasse 17: graues Blechdach mit Dachfenstern, kein Dachmodell. 3D-Abgleich 16.11.2026: statt Schraege 16,2 bis
+  # 19,2 m ein steiles Dachgeschoss mit flachem Dach, Hoehenbild Hauptteil 18,2 / 19,9 / 20,4 m (10/50/90 %)
+  - {bezug: "547116", material: blech, material_flach: blech, dachfenster: {anzahl: 6},
+     dach: {form: mansarde, traufe: 16.2, first: 20.1, neigung: 55, min_hoehe: 15.5}}
   - {bezug: "009481", material: ziegel_rot, kamine: 2}                                      # Wimmergasse 19: rotes Ziegeldach
   - {bezug: "009458", material: blech_dunkel}                                               # Buerohaus Stolberggasse 40: dunkelgraues Blech
   # ---- Gegenseite Stolberggasse und Wimmergasse Richtung Suedost
   - {bezug: "009453", material: ziegel_rot_alt, gauben: {anzahl: 2, breite: 1.6, seiten: ["-x"]}, kamine: 2}   # Wimmergasse 18: rotbraunes Ziegeldach mit Gauben
   - {bezug: "009452", material: blech_hell, dachfenster: {anzahl: 3}}                       # Wimmergasse 16: hellgraues Blech mit Dachfenstern
-  - {bezug: "009479", material: ziegel_rot, dachfenster: {anzahl: 2}, kamine: 4}            # Wimmergasse 15: rotes Ziegeldach, mehrere Kamine
+  - {bezug: "009479", material: ziegel_rot, dachfenster: {anzahl: 2}, kamine: 4, aufbauten: [{pos: [-25.4, -33.6], l: 4.5, b: 1.6, z0: 15.6, z1: 17.4, drehung: 85}]}            # Wimmergasse 15: rotes Ziegeldach, mehrere Kamine
   # ---- Hof hinter dem Objekt
   - {bezug: "009426", material: ziegel_rot, kamine: 2}                                      # weisses Hofgebaeude mit rotem Walmdach (Tuermchen nicht modelliert)
+  # ---- 3D-Abgleich Kamera drohne (immoviz.py referenz, 16.11.2026): Dachausbauten nach dem Dachmodell 2016
+  # Wimmergasse 21 (Neubau, gegenueber): Dachgeschoss ueber dem Strassentrakt, Hoehenbild 18,5 bis 19,9 m statt 15,2 m
+  - {pos: [-17.0, 52.0], material: blech, material_flach: blech, dach: {form: mansarde, traufe: 16.9, first: 20.9, neigung: 72}}
+  - {pos: [-26.0, 44.0], material: blech, material_flach: blech, dach: {form: mansarde, traufe: 16.9, first: 19.9, neigung: 72}}
+  # Siebenbrunnengasse 21 (grosser weisser Bau im Hintergrund): zweigeschossige Mansarde mit flachem Dach bei 28,3 bis 29,0 m
+  # Gewerbebau Stolberggasse 26 (Pflichthaus Nordost 5): zurueckgesetztes Dachgeschoss, Hoehenbild 27,0 / 28,5 m statt 24,0 m
+  # Hoehenbild 24,5 / 27,0 / 28,5 m (10/50/90 %): Dachgeschoss rundum zurueckgesetzt (drei Varianten gemessen, diese am besten)
+  - {pos: [135.0, 30.0], dach: {form: mansarde, traufe: 25.5, first: 29.6, neigung: 62}, material: blech_dunkel, material_flach: kies}
+  # Gaubenbaender und Aufbauten aus dem Vorschlag in renders/check/abgleich_drohne.md (Messwerte, parametrisch)
+  - {bezug: "009395", aufbauten: [{pos: [105.6, 13.6], l: 6.3, b: 1.3, z0: 21.8, z1: 23.7, drehung: 90}]}      # Ramperstorffergasse 18
+  - {bezug: "009446", aufbauten: [{pos: [24.4, -28.7], l: 18.0, b: 2.4, z0: 19.9, z1: 22.7, drehung: 2}]}      # Stolberggasse 35
+  - {pos: [143.0, 80.0], material: blech_hell, material_flach: blech_hell, dach: {form: mansarde, traufe: 29.3, first: 32.6, neigung: 65},
+     gauben: {anzahl: 10, reihen: 2, breite: 1.5, hoehe: 1.4}}
+
+# ---------------------------------------------------------------- Fernsicht: Gipfel und Turmhelme (3D-Abgleich 16.11.2026)
+# Die Kulisse aus den Hoehenfestpunkten lag am Wienerwald rund 0,6 Grad zu tief (Festpunkte liegen an Strassen, nicht auf
+# den Kuppen), der Bisamberg fehlte. Gipfelhoehen aus oeffentlichen Angaben (m ue. A.), Lage auf rund 200 m genau.
+fern_gipfel:
+  - {name: Hermannskogel, lat: 48.2708, lon: 16.2947, hoehe: 542, radius: 1300, abfall: 90}
+  - {name: Kahlenberg, lat: 48.2746, lon: 16.3334, hoehe: 484, radius: 1000, abfall: 70}
+  - {name: Leopoldsberg, lat: 48.2778, lon: 16.3497, hoehe: 425, radius: 700, abfall: 90}
+  - {name: Dreimarkstein, lat: 48.2559, lon: 16.2852, hoehe: 454, radius: 1000, abfall: 60}
+  - {name: Exelberg, lat: 48.2480, lon: 16.2440, hoehe: 516, radius: 1200, abfall: 80}
+  - {name: Gallitzinberg, lat: 48.2160, lon: 16.2650, hoehe: 449, radius: 1000, abfall: 90}
+  - {name: Bisamberg, lat: 48.3210, lon: 16.3700, hoehe: 358, radius: 2200, abfall: 110}
+# Turmhelme: das Baukoerpermodell fuehrt den Suedturm von St. Stephan als Prisma bis zur Spitze und den Rathausturm
+# nur bis zu den Fialen. Hoehen: Stephansdom 136,4 m, Rathausturm 98 m ueber Gelaende.
+fern_spitzen:
+  - {bezug: "169932", name: Stephansdom Suedturm, basis: 54.0, breite: 14.0}
+  - {name: Rathausturm, pos: [1661.5, 2281.5], koerper_von: 40.0, basis: 58.8, spitze: 93.7, breite: 7.0}
+# Kirchtuerme, deren Helme im Baukoerpermodell fehlen: Spitzenhoehe als Messwert aus dem 3D-Abgleich (Kamera drohne),
+# Form parametrisch (Pyramide), Lage aus dem Baukoerpermodell
+  - {name: Altlerchenfelder Kirche Turm links, pos: [518.0, 2628.0], basis: 55.4, spitze: 66.5, breite: 6.0}
+  - {name: Altlerchenfelder Kirche Turm rechts, pos: [536.5, 2648.5], basis: 55.4, spitze: 66.5, breite: 6.0}
+  - {name: Breitenfelder Kirche, pos: [655.0, 3207.0], basis: 56.9, spitze: 69.9, breite: 8.0}
+  - {name: Piaristenkirche Maria Treu Turm Nord, pos: [1141.0, 2665.0], basis: 53.9, spitze: 60.5, breite: 7.0}
+  - {name: Piaristenkirche Maria Treu Turm Sued, pos: [1128.0, 2642.0], basis: 53.9, spitze: 60.5, breite: 7.0}

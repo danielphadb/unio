@@ -1,0 +1,100 @@
+# Prompt-Regeln fuer die Higgsfield-Veredelung (zentral fuer alle Projekte).
+#
+# Diese Bausteine werden AUTOMATISCH an jeden Veredelungs-Prompt angehaengt:
+#   - Studio: Dialog "Veredeln" haengt sie an den zusammengesetzten Prompt, der Server prueft beim Absenden
+#     nochmals und haengt sie an, falls sie fehlen (Erkennung ueber die Marke unten).
+#   - Kommandozeile/MCP: immoviz.py prompt --projekt <p> --cam <kamera> gibt den Block aus, der an den Prompt kommt.
+# Text Englisch (Bildmodelle folgen Englisch am verlaesslichsten), Begruendung Deutsch.
+#
+# Felder je Regel:
+#   id     eindeutiger Name
+#   gilt   [aussen], [innen] oder beides
+#   wenn   optionale Bedingung: parkordnung | moebelplan | stuck_im_plan, mit "nicht " davor verneint
+#   pflicht true: fehlt die Bedingung, gibt es eine Warnung (z. B. Moebelplan fehlt)
+#   text   Baustein; Platzhalter {parkordnung} und {moebelplan} werden aus dem Projekt gefuellt
+#   grund  welcher Fehler damit verhindert wird (REGELN.md)
+
+marke: IMMOVIZ RULES
+
+regeln:
+  - id: geometrie_sperre
+    gilt: [aussen, innen]
+    grund: "Veredelung erfand Tueren, Fenster, Glasfronten, Eckfenster, Erker, zweite Fensterreihen (Noma R1 bis R3, Wimmergasse top12)"
+    text: >-
+      GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and
+      storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or
+      move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.
+
+  - id: ausschnitt
+    gilt: [aussen, innen]
+    grund: "Bilder kamen gezoomt, frontal statt diagonal oder mit anderer Brennweite zurueck (Noma HST, Bad, Garten)"
+    text: >-
+      CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop,
+      no change of perspective.
+
+  - id: keine_neuen_bauteile
+    gilt: [aussen]
+    grund: "erfundene Gelaender am Weg, Glas-Sheddaecher aus Vorlagen, Pflanztroege ohne Plan (Noma R3/R4)"
+    text: >-
+      No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1.
+      Railings only where image 1 shows them.
+
+  - id: baeume_gesperrt
+    gilt: [aussen]
+    grund: "Baeume verkleinert, versetzt oder erfunden (Noma garten_top3_weit, Nachbargarten)"
+    text: >-
+      TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add,
+      remove, move or shrink trees. Planting only in existing planters, beds and green roofs.
+
+  - id: nachbarn
+    gilt: [aussen]
+    grund: "Nachbarfarben und Fensterraster aus Vorlagen uebernommen (Noma R2: lachsrot statt weiss)"
+    text: >-
+      Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and
+      materials only, never for building geometry or colours of neighbours.
+
+  - id: parkordnung
+    gilt: [aussen]
+    wenn: parkordnung
+    grund: "Parkordnung falsch (Wimmergasse: Schraegparker, Stolberggasse 90 Grad)"
+    text: >-
+      PARKING LAYOUT (fixed, checked against the aerial photo): {parkordnung}. Parked cars only in these bays and in
+      this orientation, as in image 1.
+
+  - id: moebelplan
+    gilt: [innen]
+    wenn: moebelplan
+    pflicht: true
+    warnung: "Moebelplan fehlt: in wohnungen.yaml unter kameras.<k>.moebelplan eintragen (links / Mitte / rechts, welche Wand)"
+    grund: "Kueche, TV-Wand, Hochschrank an der falschen Wand (Noma top03/top04, apt01)"
+    text: >-
+      FURNITURE PLAN (fixed): {moebelplan}. Large items (kitchen, tall cabinets, island, wardrobe, bed, sideboard) stay
+      exactly at the walls and positions of image 1; nothing large stands free in the room unless image 1 shows it.
+
+  - id: grossmoebel_ohne_plan
+    gilt: [innen]
+    wenn: nicht moebelplan
+    text: >-
+      Large built-in furniture only where image 1 shows a volume for it. Do not put a kitchen or wardrobe on a wall
+      that is empty in image 1.
+
+  - id: kein_stuck
+    gilt: [innen]
+    wenn: nicht stuck_im_plan
+    grund: "Stuck an der Deckenkante und Wandpaneele erfunden (Noma apt01 Runde 4, Wimmergasse top07)"
+    text: >-
+      NO STUCCO: smooth ceilings and plain wall-to-ceiling junctions. No cornices, crown mouldings, ceiling roses,
+      wall panel mouldings or decorative profiles.
+
+  - id: farben
+    gilt: [innen, aussen]
+    grund: "Farben aus beleuchteten Ansichten gemessen, im Bild zu hell und zu orange (Noma Bordeaux)"
+    text: >-
+      Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the
+      hue of walls, facades and painted surfaces.
+
+  - id: raumhoehe
+    gilt: [innen]
+    grund: "Raumhoehe und Proportionen veraendert"
+    text: >-
+      Keep ceiling height, room depth and room width of image 1. No extra room behind walls.

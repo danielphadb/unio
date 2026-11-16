@@ -320,3 +320,89 @@ Offen:
 - Zwischen 2,4 km und den Hügeln steht außer den hohen Gebäuden nichts; bei flachem Blick fällt das kaum auf, bei
   steilem Blick aus großer Höhe schon.
 
+
+## 11. Abgleich Drohnenansicht gegen die 3D-Referenz (16.11.2026)
+
+Kundenwunsch: Dächer und Aussicht der Kamera `drohne` realitätsnäher, 1:1 im Google-Maps-Blickwinkel abgetestet.
+Neu dafür das Werkzeug `immoviz.py referenz <projekt> --kamera <name>` (`lib/referenz.py`, `lib/referenz_google.js`,
+Beschreibung in `immoviz/README.md`): derselbe Blick aus den Google Photorealistic 3D Tiles (CesiumJS in Chromium),
+Tiefenbilder von Referenz und Modell, Auswertung je Gebäude. Google bleibt Referenz: keine Geometrie, keine Textur;
+Bilder nur in `renders/streetview/referenz_google/` (nicht im Repo). Ergebnis je Lauf in `renders/check/abgleich_drohne.md`
+(Liste je Gebäude) und `renders/check/abgleich_drohne.jpg` (Modell mit Ampel, ohne Google-Inhalt).
+
+**Kalibrierung.** Höhe: Wiener Null liegt 200,64 m über dem Ellipsoid (Median über 181 000 Fahrbahnpunkte im Umkreis
+120 m, Streuung 0,9 m). Mit 156,68 m für Wiener Null über Adria ergibt das eine Undulation von 43,96 m; EGM2008 nennt
+für die Wimmergasse 44,82 m, die 3D-Kacheln liegen also rund 0,9 m tiefer als die Landeshöhen. Der früher angenommene
+Wert 46 bis 47 m hätte die Referenzkamera 2 bis 3 m zu tief gesetzt. Lage: die Kacheln sind gegen die Stadtvermessung
+um 0,32 m in x und 0,00 m in y versetzt (Kreuzkorrelation der Hauskanten), die Referenzkamera steht entsprechend
+versetzt. Kamera: Brennweite, Sensor 36 mm, 1200 x 800 und Shift wie Blender; Überblendung und Kanten zeigen
+deckungsgleiche Straßenfluchten und Traufen der nahen Häuser.
+
+**Systematischer Fehler gefunden und behoben.** Die Dächer standen im Mittel 0,6 m zu hoch. Ursache: Baukörper und
+Dachflächen standen auf dem Gelände am Schwerpunkt (Höhenlinien), die Höhen aus Baukörpermodell und Dachmodell sind
+aber relativ zur Sockelkote T_KOTE angegeben; das Gelände lag dort im Mittel 0,44 m, bis über 1 m höher. Seit
+16.11.2026 stehen alle Baukörper und Dächer auf ihrer Sockelkote (`site.hoehen_absolut`, Standard an; bei mehr als
+3 m Unterschied gilt das Gelände). Bei den Nachbarfassaden hängen Fenster und Tore weiter am Gehsteig, Traufe,
+Hauptgesims und Dach am Sockel; jeder Baukörperteil eines BEZUG auf seiner eigenen Kote (009458 umfasst einen ganzen
+Block mit Koten von +0,8 bis -3,9 m und stand bis 3 m zu hoch). Danach liegt der Median der Dachabweichung der
+Pflichthäuser bei rund 0,1 m.
+
+**Korrekturen (alle parametrisch in `project.yaml`, Messwerte aus dem Höhenbild der Referenz, gegengeprüft mit
+Baukörpermodell und Dachmodell LOD2).**
+
+| Haus | BEZUG | Befund | Korrektur |
+|---|---|---|---|
+| alle Häuser | | Dächer im Mittel 0,6 m zu hoch (Sockel) | Höhen absolut auf T_KOTE, je Baukörperteil (`lib/build.py`) |
+| Wimmergasse 17 (Eck, gegenüber) | 547116 | statt Schräge 16,2 bis 19,2 m ein steiles Dachgeschoss mit flachem Dach (18,2 / 19,9 / 20,4 m) | `dach: {form: mansarde, traufe 16,2, first 20,1, neigung 55}` |
+| Stolberggasse 34 | 547117 | Oberkante stimmt, Mansardflächen flacher, Traufe 0,4 m tiefer | `mansarde` Neigung 68 auf 52 Grad, Traufe 20,3 m |
+| Wimmergasse 26 | 009430 | neues Dach nach 2016: Traufe 15,7 m, First 21,3 m statt 18,8 m; Gaubenbänder | `dach: sattel 17,2 / 23,4 m` (relativ zum Sockel), zwei Gaubenbänder als `aufbauten` |
+| Wimmergasse 21 (Neubau) | 547115 | Dachgeschoss über dem Straßentrakt (18,5 bis 19,9 m statt 15,2 m) | zwei Teile mit `dach: mansarde` |
+| Gewerbebau Stolberggasse 26 | Z78185 | Dachgeschoss 27 bis 28,5 m fehlte | `dach: mansarde 25,5 / 29,6 m`; drei Varianten gemessen, diese am besten |
+| Siebenbrunnengasse 21 (Hintergrund) | 009403 | zweigeschossige Mansarde mit Gauben statt Flachdach | `dach: mansarde 29,3 / 32,6 m`, 2 x 10 Gauben |
+| Ramperstorffergasse 17, Wimmergasse 15, Ramperstorffergasse 18, Stolberggasse 35 | 009415, 009479, 009395, 009446 | Gaubenbänder fehlten | je ein Quader in `aufbauten` |
+| Spengergasse 20 (ganzer Block) | 009458 | bis 3 m zu hoch (ein Sockel für alle Teile) | Fehler im Code behoben |
+| Hofbäume | | Baum hinter Stolberggasse 34 existiert nicht, die übrigen 4 bis 8 m daneben und zu hoch | `trees_override`: Lage und Größe neu |
+| Fernsicht Wienerwald, Bisamberg | | Hügelkette 0,6 Grad zu tief, Bisamberg fehlte | `fern_gipfel` (7 Gipfel mit Höhe ü. A.), Kulisse in 1,5-Grad-Sektoren |
+| Rathausturm, Stephansdom, Altlerchenfelder Kirche, Breitenfelder Kirche, Maria Treu | | Turmhelme fehlten bzw. als Prisma | `fern_spitzen` (Pyramiden) |
+| Wimmergasse 19, 22, Stolberggasse 32 | 009481, 009428, 009425 | Versuche mit Satteldach bzw. Aufbau verschlechterten die Werte | zurückgenommen, Dachmodell bleibt |
+
+**Ergebnis Kamera `drohne` (Pflichthäuser im Bild).** Abweichung Modell minus Referenz in m: Traufe / First /
+obere Dachkante im Bild / mittlere Abweichung der Dachfläche. Vorher-Werte noch mit der ersten Fassung der Messung
+(First inklusive Kamine, Traufe am ganzen freien Rand), daher beim First rund 0,3 bis 0,5 m ungünstiger.
+
+| Haus | BEZUG | vorher | nachher | Kanten unter 0,5 m |
+|---|---|---|---|---|
+| Wimmergasse 17 | 547116 | -0,4 / -0,7 / -1,0 / 2,48 | +0,6 / -0,3 / +0,2 / 0,76 | knapp nein (Traufe) |
+| Wimmergasse 18 | 009453 | +0,1 / -0,7 / -0,4 / 0,25 | +0,1 / -0,1 / -0,5 / 0,27 | ja |
+| Stolberggasse 34 | 547117 | +1,3 / -1,3 / +0,8 / 1,58 | +0,1 / -1,1 / +0,2 / 0,87 | nein (First: Brandwand und Kamine der Referenz) |
+| Wimmergasse 22 | 009428 | +0,8 / 0,0 / +0,4 / 0,78 | +0,2 / -0,4 / -0,2 / 0,54 | ja |
+| Stolberggasse 32 | 009425 | +1,7 / +0,7 / +1,2 / 1,40 | +0,4 / 0,0 / +0,1 / 0,42 | ja |
+| Ramperstorffergasse 17 | 009415 | +0,9 / +0,3 / +0,8 / 0,86 | 0,0 / +0,2 / 0,0 / 0,35 | ja |
+| Wimmergasse 26 | 009430 | -0,9 / -0,7 / -1,8 / 2,03 | +0,5 / 0,0 / +0,3 / 0,69 | ja |
+| Wimmergasse 24 | 009429 | +0,6 / -0,3 / +0,5 / 0,63 | +0,1 / -0,3 / +1,2 / 0,21 | Dach ja; Bildkante gemessen am Giebel des Nachbarn |
+| Gewerbebau Stolberggasse 26 | Z78185 | +1,7 / -0,4 / -1,1 / 1,54 | -0,2 / -1,4 / -1,6 / 1,19 | nein, halbwegs |
+| Ramperstorffergasse 18 | 009395 | +1,7 / +0,7 / +1,4 / 1,64 | +0,1 / -0,4 / -0,3 / 0,19 | ja |
+| Wimmergasse 28 | 009431 | +0,6 / -0,1 / +0,5 / 0,57 | -0,1 / 0,0 / +0,2 / 0,30 | ja |
+| Wimmergasse 19 | 009481 | +0,4 / -0,4 / -0,2 / 0,37 | +0,1 / -0,9 / -0,2 / 0,25 | nein (First des Dachmodells 2016) |
+| Wimmergasse 30 | 009432 | +4,1 / -0,2 / +0,1 / 0,94 | +3,9 / -0,3 / -0,1 / 0,69 | Dach ja; Traufwert vom niedrigen Hoftrakt |
+| Wimmergasse 21 | 547115 | -0,3 / -0,8 / -1,3 / 1,64 | -0,6 / +0,1 / +0,4 / 1,04 | knapp nein |
+| Wimmergasse 15 | 009479 | +1,1 / -0,1 / +0,4 / 0,74 | +0,6 / -0,1 / -0,1 / 0,27 | knapp nein (Traufe) |
+| Stolberggasse 35 | 009446 | +1,1 / +0,7 / +0,8 / 1,04 | 0,0 / -0,1 / -0,3 / 0,43 | ja |
+
+Gesamt: mittlere Dachabweichung der Pflichthäuser 1,16 m auf 0,53 m, obere Dachkante im Bild im Mittel 0,79 m auf
+0,38 m, Horizontlinie 7,3 px auf 5,2 px, Kanten der Referenz mit Modellkante in 2 px 69 % auf 71 % (die übrigen sind
+überwiegend Fenster, Balkone und Texturkanten der Referenz). 8 von 16 Pflichthäusern im Bild liegen mit Traufe, First
+und Dachkante unter 0,5 m, drei weitere nur wegen Messartefakten darüber, fünf zwischen 0,6 und 1,6 m.
+Fernsicht: Rathausturm jetzt 87,8 m (Referenz 79,7 m, die schlanke Spitze ist in den Kacheln abgeschnitten),
+Altlerchenfelder Kirche 64,3 m (Referenz 66,5 m), Breitenfelder Kirche 64,2 m (69,9 m), Maria Treu 60,3 m (60,5 m).
+
+**Blickwinkel.** Zwei Probekameras (`--test-kamera`, nicht in `project.yaml`): `drohne_sued` (Standpunkt -15 / -80 / 40 m,
+Ziel 3 / 10 / 21 m, 35 mm) blickt die Wimmergasse entlang auf die Ecke; Straßenschlucht, Schrägparker und die ganze
+Hügelkette stehen im Bild, Kantendeckung 70 % bzw. 72 %, Horizont 4,9 px. `drohne_flach` (-50 / -60 / 30 m, 28 mm)
+zeigt viel Dachfläche im Vordergrund und wirkt gedrungen. Empfehlung: `drohne_sued` als zweites Luftmotiv aufnehmen,
+`drohne` bleibt die Totale. Vergleich im Scratchpad (`drohne_blickwinkel.jpg`).
+
+**Offen.** Gauben und Dachfenster der Pflichthäuser stimmen in Zahl und Lage nur grob (die Liste meldet sie als
+fehlende Aufbauten bis 40 m²); Wimmergasse 9 (009533, nicht im Bild) hat einen Dachausbau nach 2016 (First 2,9 m
+höher); Hügelkette als flache Kulisse ohne Dunst; Wimmergasse 19 und Stolberggasse 34 First wie beschrieben.
+Der Vorschlagsteil in `renders/check/abgleich_drohne.md` listet die übrigen fehlenden Aufbauten als `aufbauten`-Quader.

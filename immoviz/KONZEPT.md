@@ -134,6 +134,7 @@ Jahreszeiten mit gleicher Kamera). Standardumfang:
 | Dachdeckung, Mansarden, Gauben, Dachfenster, Kamine, Brandwände | Schrägluftbild (nur ansehen), Street View | `roofs_override` in `project.yaml` (parametrisch, nichts abgepaust) |
 | Fernsicht bei Luft- und Terrassenmotiven: markante Gebäude, Hügelkette, Dachlandschaft im Hintergrund | Baukörpermodell (hohe Teile), Strukturdominanten, Höhenfestpunkte der Stadt Wien | `immoviz.py fernsicht` (`data/fern.json`, Liste je Kamera) |
 | Bäume | Baumkataster, Street View belaubt, Orthofoto | `trees_override` in `project.yaml` |
+| **Jede Außenkamera gegen die 3D-Referenz**: Dachkanten, Traufen, Firste, Dachaufbauten, Silhouetten, Horizont und Fernsicht im exakt gleichen Blickwinkel | Google Photorealistic 3D Tiles (nur intern), kalibriert auf die Fahrbahn (Höhe) und die Hauskanten (Lage) | `immoviz.py referenz <projekt> --kamera <name>` (`renders/check/abgleich_<kamera>.md` und `.jpg`) |
 
 **Grundregel (Daniel, 14.11.2026):** Die Häuser in der direkten Umgebung werden immer mitmodelliert und müssen
 stimmen: mindestens beide angebauten Nachbarn je Straßenfront plus die Häuser gegenüber im Bildausschnitt der
@@ -141,6 +142,30 @@ Hauptkameras. Je Nachbar: Traufhöhe und Baukörper aus dem Baukörpermodell, Ac
 (Tore, Portale, Lokale), Gesimse und Fensterumrahmungen, Balkone, Dachform und Farbe aus Street View. Eingetragen
 wird das unter `neighbour_facades` in `project.yaml`, geprüft mit `immoviz.py svcheck`. Ohne bestandenen
 Nachbarabgleich gibt es kein Rendering für den Vertrieb.
+
+**Grundregel 3D-Referenzabgleich (Kunde, 16.11.2026):** Jede Außenkamera wird vor der Veredelung gegen die
+3D-Referenz abgeglichen: `immoviz.py referenz <projekt> --kamera <name>` rendert denselben Blick (Standpunkt,
+Brennweite, Bildformat, Shift) aus den Google Photorealistic 3D Tiles und vergleicht Gebäude für Gebäude.
+Schwellwerte: Traufe, First und obere Dachkante im Bild der Pflichthäuser (erste 4 bis 5 Häuser je Richtung)
+höchstens 0,5 m daneben, alle übrigen Häuser im Bild höchstens 1,5 m; keine fehlenden Dachaufbauten über 2 m² und
+1 m Höhe bei den Pflichthäusern; Horizontlinie im Mittel unter 5 px bei 1200 px Bildbreite; markante Gebäude der
+Fernsicht an der richtigen Stelle. Korrigiert wird parametrisch (`roofs_override` mit `dach`, `dz`, `aufbauten`,
+`mansarde`; `neighbour_facades`; `fern_gipfel`, `fern_spitzen`), Maße bleiben aus den Daten der Stadt Wien, Google
+liefert nur Messwerte. Danach `--nur-modell` wiederholen, bis die Liste in `renders/check/abgleich_<kamera>.md` für
+die Pflichthäuser leer ist. Bilder mit Google-Inhalt bleiben in `renders/streetview/referenz_google/` (nicht im
+Repo); das Prüfbild in `renders/check/` zeigt nur das Modell mit Ampel.
+
+**Grundregel Referenzvisualisierungen (Kunde, 16.11.2026):** Liegen Referenzvisualisierungen vor, zuerst Kamera
+matchen, dann Nachbarn an der Überlagerung angleichen. `immoviz.py kameramatch <projekt> --bild <vorlage> --punkte
+<punkte.yaml> --kamera <name>` löst die Kamera aus Passpunkten am Neubau (Plan) und trägt sie in `project.yaml` ein;
+gematcht ist sie erst bei einem mittleren Reprojektionsfehler unter 1 % der Bildbreite. Dann werden die Nachbarn
+Element für Element an Überlagerung und Drahtmodell angeglichen (Baukörperkanten, Feuermauern, Traufhöhen,
+Geschosse, Fensterachsen, Balkone, Erker, Dachformen, Farben aus mittleren Flächen, Vegetation), bis die Modellkanten
+der Nachbarn aus jeder Vorlagenkamera weniger als 1 % der Bildbreite neben der Vorlage liegen. Die Vorlage hat
+Vorrang für die Nachbarn, die sie zeigt; der Neubau bleibt beim Einreichplan. Widersprüche Vorlage gegen Plan oder
+OGD werden im Umgebungsabgleich dokumentiert. Ohne Kameramatch wird nicht „nach Augenmaß“ angeglichen: bei NOMA
+stand die Kontrollkamera `hof_vorlage` 10 m neben dem Standpunkt der Vorlage (26 statt 19 mm), alle Nachbarn lagen
+dadurch scheinbar falsch.
 
 **Grundregel Straßenabgleich (Kunde, 15.11.2026):** Parkplätze und Gehsteige vor dem jeweiligen Gebäude werden bei
 jedem Objekt geprüft. Kein Rendering für den Vertrieb ohne Straßenabgleich: `immoviz.py strasse <projekt>` ausführen,
@@ -204,3 +229,38 @@ und baut sie: Luftbild bei Dämmerung, isometrischer Schnitt mit anklickbaren Wo
 Straßenansicht. Übernahme bei uns (Phase E): Blender kann denselben Schnitt (Schnittebene je Geschoss, Wohnungen
 farbig aus den Grundrissen), daraus Schnittvideo und eine Projektseite im UNIO-Design mit Wohnungsauswahl.
 Revit brauchen wir nicht, unser Modell kommt aus `project.yaml`.
+
+## 9. Korrekturschleife (Stand 16.11.2026)
+
+Ziel: Fehler aus den Runden bei NOMA und Wimmergasse (falsche Parkordnung, erfundene Bäume, Geländer und Tröge,
+Weg ohne Rampe, geschätzte Fensterraster, falscher Maßstab, vertauschte Küche, Stuck ohne Plan, Farben aus
+beleuchteten Ansichten, Veredelung erfindet Türen und Fenster, Credits vor der Modellfreigabe) nicht mehr beim
+Kunden finden, sondern vorher automatisch. Verbindliches Regelwerk mit Begründung je Regel: `REGELN.md`.
+
+```
+Plan auswerten (Vektor vor Pixel, Feld quelle je Element)
+  -> Modell (Blender, Großmöbel als Platzhalter)
+  -> automatische Prüfungen
+       pruefen      Quellen je Element, Anteil Annahmen je Bild, Rang der Quelle, Farbe aus Pixeln
+       sichtbar     Pflichthäuser und direkt sichtbare Nachbarn
+       strasse      Parkordnung, Gehsteige, Baumscheiben gegen Orthofoto
+       referenz     Kamera gegen Google 3D (paralleler Ausbau, siehe Abschnitt 7)
+       kameramatch  Kamera gegen Vorlage des Kunden (paralleler Ausbau)
+  -> Prüfbogen an den Kunden (Vorschau je Kamera, offene Annahmen, Nachbarübersicht)
+  -> Freigabe je Kamera in freigabe.yaml (immoviz.py freigabe)
+  -> Veredelung (Studio oder MCP; Gate und Regelblock aus higgsfield/prompt_regeln.yaml, immoviz.py prompt)
+  -> nachkontrolle (Struktur-Diff Vorschau gegen Ergebnis, Markierungsbild, Score, Varianten-Rangfolge)
+  -> Kunde
+```
+
+| Schritt | Befehl | Ergebnis | blockiert |
+|---|---|---|---|
+| Quellen | `immoviz.py pruefen --projekt <p>` | Liste ohne Quelle, Anteil ANN je Bild, Hinweise (Geländer ohne Plan, Farbe gemessen) | Exit 1 bei fehlenden Quellen; `--streng` verlangt das Feld `quelle` |
+| Freigabe | `immoviz.py freigabe --projekt <p> --cam <k> --setzen ja --von <Name>` | `freigabe.yaml` mit Datum und Person | Studio: HTTP 409 für nicht freigegebene Kameras, außer Trockenlauf, Altbestand ohne Datei oder `force` |
+| Veredelung | `immoviz.py prompt --projekt <p> --cam <k>` bzw. Studio | Regelblock am Prompt, Warnung bei fehlendem Möbelplan | Exit 1, wenn gesperrt |
+| Nachkontrolle | `immoviz.py nachkontrolle --vorschau <png> --veredelt <jpg> [...]` | `<bild>_nachkontrolle.jpg`, JSON mit Score, Befunden, Öffnungskandidaten | Status "zur Pruefung" ab Score 400 |
+
+Was die Schleife spart: Bei NOMA wurden 18 von 74 Aufträgen verworfen und mehrere übernommene Bilder durch spätere
+Modellkorrekturen (Runde 4) überholt. Mit Quellenpflicht und Freigabe vor dem ersten Credit wären die Fehler
+der Runden 2 bis 4 (Geländer, Trog, Weg, Küche, Stuck, Nachbarfarben, Bäume) im Prüfbogen aufgefallen; die
+Nachkontrolle markiert erfundene Öffnungen, bevor der Kunde sie sieht (Testprotokoll in REGELN.md).

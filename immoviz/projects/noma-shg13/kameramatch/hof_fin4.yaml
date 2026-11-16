@@ -1,0 +1,18 @@
+# kameramatch: Punktpaare fuer die Vorlage SHG13_Hof_fin-4.jpg (Pavillon Top 4 mit Terrasse von oben, nicht im Repo)
+# Passpunkte am Pavillon Top 4 (Attika +6,78, Hebeschiebetuer Suedost u 3,22 bis +5,90, Tuer Nordost u 4,21 bis +5,70 [VP Top 4]),
+# Top 3 (Attika, vom Glasdach Top 4 verdeckt: nur Kontrolle). Dazu der weisse Kasten im Nachbargarten mit der Lage aus der
+# Vorlage SHG13_Hof_fin (Strahlschnitt mit der gematchten Kamera hof_fin, Boden z 0): beide Vorlagen stammen aus demselben
+# Architektenmodell, der Kasten steht dort 6 m westlich der Lage im Orthofoto.
+groesse: [1920, 1166]
+punkte:
+  - {name: top4_attika_so_sw, px: [952.7, 373.9], xyz: [27.85, 0.0, 6.78], rahmen: hof}
+  - {name: top4_attika_so_no, px: [1550.5, 447.8], xyz: [27.85, 6.62, 6.78], rahmen: hof}
+  - {name: top4_hst_ol, px: [1249.0, 518.9], xyz: [27.85, 3.22, 5.90], rahmen: hof, gewicht: 0.5}
+  - {name: top4_tuer_no_ol, px: [1824.4, 497.0], xyz: [23.64, 6.62, 5.70], rahmen: hof, gewicht: 0.5}
+  - {name: top4_tuer_no_or, px: [1864.5, 492.0], xyz: [22.64, 6.62, 5.70], rahmen: hof, gewicht: 0.5}
+  - {name: top3_attika_so_sw, px: [1665.6, 248.7], xyz: [11.95, 0.0, 6.78], rahmen: hof, kontrolle: true}
+  - {name: kasten_so_oben, px: [603.0, 515.8], xyz: [-9.94, -40.82, 1.21]}
+  - {name: kasten_so_unten, px: [603.0, 578.7], xyz: [-9.94, -40.82, 0.0]}
+  - {name: kasten_no_oben, px: [723.0, 494.2], xyz: [-10.26, -37.78, 1.03]}
+  - {name: kasten_no_unten, px: [723.0, 549.4], xyz: [-10.26, -37.78, 0.0]}
+  - {name: kasten_sw_unten, px: [560.1, 565.7], xyz: [-10.94, -41.02, 0.0], gewicht: 0.5}

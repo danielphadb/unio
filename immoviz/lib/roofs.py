@@ -762,3 +762,220 @@ def mansarde(mb_roof, mb_wall, polys, ov, z_off, wall_mat, achse=None, traufe=No
                 o = P(uu, dk + 1.6, 0)
                 _quader(mb_wall, o[:2], t, n, 0.7, 1.6, T + hm - 0.2 + z_off, T + hm + 1.7 + z_off, "kamin", "dach_flach")
     details(mb_roof, faces, ov, z_off, mat)
+
+
+# ---------------------------------------------------------------- Korrekturen aus dem 3D-Abgleich (immoviz.py referenz)
+# Wo das Dachmodell (Stand 2016) vom Bestand abweicht, korrigiert roofs_override die Dachflaechen selbst:
+#   dz         alle Dachflaechen des Dachmodells um dz Meter heben oder senken (Aufstockung, Messfehler)
+#   dach       parametrisches Dach statt Dachmodell: {form: sattel | walm | pult | flach | mansarde, traufe, first,
+#              richtung: laengs | quer | <Grad im lokalen System>, neigung (optional, sonst bis zum First)}
+#              Hoehen relativ zum Sockel des Baukoerpers wie im Baukoerpermodell. mansarde = steiles Band rundum
+#              (Dachgeschoss) mit flachem Dach, auch fuer L-foermige Grundrisse; walm nur fuer Rechtecke.
+#              min_hoehe: nur Baukoerperteile ab dieser Hoehe (Standard 6 m).
+#   aufbauten  Liste von Quadern auf dem Dach: {pos: [x, y], l, b, z1 (Oberkante ueber Sockel), z0 (Standard
+#              z1 - 3), drehung (Grad lokal, Standard Richtung der laengsten Grundrisskante), material, art}
+#              fuer Lifttuerme, Stiegenhausaufbauten, Dachterrassen-Aufbauten, Gaubenbaender.
+# Alles parametrisch; die 3D-Referenz liefert nur die Messwerte, keine Geometrie.
+
+def _laengste_richtung(poly):
+    a, b = max(((poly[i], poly[(i + 1) % len(poly)]) for i in range(len(poly))), key=lambda e: math.dist(*e))
+    L = math.dist(a, b) or 1.0
+    return ((b[0] - a[0]) / L, (b[1] - a[1]) / L)
+
+
+def _clip_v(pts, lo, hi):
+    """Polygon (u, v) auf den Streifen lo <= v <= hi beschneiden."""
+    for bound, keep in ((lo, 1), (hi, -1)):
+        out = []
+        for i in range(len(pts)):
+            p, q = pts[i], pts[(i + 1) % len(pts)]
+            dp, dq = (p[1] - bound) * keep, (q[1] - bound) * keep
+            if dp >= 0:
+                out.append(p)
+            if (dp >= 0) != (dq >= 0):
+                t = dp / (dp - dq)
+                out.append((p[0] + (q[0] - p[0]) * t, bound))
+        pts = out
+        if len(pts) < 3:
+            return []
+    return pts
+
+
+def _on_boundary(x, y, poly, tol=0.05):
+    for i in range(len(poly)):
+        a, b = poly[i], poly[(i + 1) % len(poly)]
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        t = max(0.0, min(1.0, ((x - a[0]) * dx + (y - a[1]) * dy) / (dx * dx + dy * dy + 1e-12)))
+        if math.hypot(x - a[0] - t * dx, y - a[1] - t * dy) < tol:
+            return True
+    return False
+
+
+def param_faces(poly, d, height=None):
+    """Dachflaechen im Format von roofs.json (p relativ zum Sockel, s Neigung, o Orientierung, m Klasse, e freie
+    Kanten) fuer ein parametrisches Dach ueber einem Grundriss. Siehe roofs_override `dach`."""
+    form = d.get("form", "sattel")
+    T = float(d.get("traufe", height or 15.0))
+    F = float(d.get("first", T + 4.0))
+    if _area2(poly) < 0:
+        poly = poly[::-1]
+    r = d.get("richtung", "laengs")
+    if isinstance(r, (int, float)):
+        t = (math.cos(math.radians(r)), math.sin(math.radians(r)))
+    else:
+        t = _laengste_richtung(poly)
+        if r == "quer":
+            t = (-t[1], t[0])
+    nrm = (-t[1], t[0])
+    uv = [(x * t[0] + y * t[1], x * nrm[0] + y * nrm[1]) for x, y in poly]
+    u0, u1 = min(p[0] for p in uv), max(p[0] for p in uv)
+    v0, v1 = min(p[1] for p in uv), max(p[1] for p in uv)
+
+    def world(u, v, z):
+        return [round(u * t[0] + v * nrm[0], 3), round(u * t[1] + v * nrm[1], 3), round(z, 3)]
+
+    def face(pts_uv, zf, s, o, m):
+        p = [world(u, v, zf(u, v)) for u, v in pts_uv]
+        e = [i for i in range(len(p)) if _on_boundary((p[i][0] + p[(i + 1) % len(p)][0]) / 2,
+                                                         (p[i][1] + p[(i + 1) % len(p)][1]) / 2, poly)]
+        return {"p": p, "s": s, "o": o, "m": m, "e": e}
+    rise = max(0.0, F - T)
+    if form == "flach" or rise < 0.2:
+        return [face(uv, lambda u, v: T, 0.0, 0.0, "dach_flach")]
+    out = []
+    if form == "pult":
+        w = max(v1 - v0, 0.5)
+        s = math.degrees(math.atan2(rise, w))
+        return [face(uv, lambda u, v: T + (v - v0) / w * rise, s, 0.0, "dach_ziegel")]
+    half = (v1 - v0) / 2
+    tan = math.tan(math.radians(d["neigung"])) if d.get("neigung") else rise / max(half, 0.5)
+    run = min(half, rise / max(tan, 1e-3))
+    s = math.degrees(math.atan(tan))
+    if form == "mansarde":
+        # steiles Band rundum (Dachgeschoss, Mansarde) und flaches Dach: Grundriss um `run` nach innen versetzt,
+        # funktioniert fuer beliebige (auch L-foermige) Grundrisse, solange run klein gegen die Trakttiefe ist
+        poly = _vereinfachen(poly)
+        inner = None
+        for f_ in (1.0, 0.7, 0.5):          # bei engen Grundrissen das Band schmaler machen statt kippen lassen
+            inner = _inset(poly, run * f_)
+            if inner:
+                break
+        if inner:
+            n = len(poly)
+            for i in range(n):
+                j = (i + 1) % n
+                p_ = [[*poly[i], T], [*poly[j], T], [*inner[j], F], [*inner[i], F]]
+                ex, ey = poly[j][0] - poly[i][0], poly[j][1] - poly[i][1]
+                if math.hypot(ex, ey) < 0.05:
+                    continue
+                o = (math.degrees(math.atan2(-ex, ey)) + 360) % 360
+                out.append({"p": [[round(a, 3) for a in q] for q in p_], "s": s, "o": o, "m": "dach_ziegel",
+                            "e": [0]})
+            out.append({"p": [[round(x, 3), round(y, 3), F] for x, y in inner], "s": 0.0, "o": 0.0, "m": "dach_flach",
+                        "e": []})
+            return out
+        form = "walm"
+    if form == "walm":
+        # Walmdach ueber dem Umriss-Rechteck: zwei Trapeze, zwei Dreiecke (Grundriss nahezu rechteckig)
+        ru = min(run, (u1 - u0) / 2)
+        z = lambda u, v: T + min(rise, min(v - v0, v1 - v) * tan, min(u - u0, u1 - u) * tan)
+        rect = {"a": (u0, v0), "b": (u1, v0), "c": (u1, v1), "d": (u0, v1)}
+        ia, ib = (u0 + ru, v0 + run), (u1 - ru, v0 + run)
+        ic, id_ = (u1 - ru, v1 - run), (u0 + ru, v1 - run)
+        out.append(face([rect["a"], rect["b"], ib, ia], z, s, 0.0, "dach_ziegel"))
+        out.append(face([rect["c"], rect["d"], id_, ic], z, s, 180.0, "dach_ziegel"))
+        out.append(face([rect["b"], rect["c"], ic, ib], z, s, 90.0, "dach_ziegel"))
+        out.append(face([rect["d"], rect["a"], ia, id_], z, s, 270.0, "dach_ziegel"))
+        if ib[0] - ia[0] > 0.1 and id_[1] - ia[1] > 0.1:
+            out.append(face([ia, ib, ic, id_], z, 0.0, 0.0, "dach_flach"))
+        return out
+    z = lambda u, v: T + min(rise, max(0.0, min(v - v0, v1 - v)) * tan)
+    for lo, hi, o in ((v0, v0 + run, 0.0), (v0 + run, v1 - run, None), (v1 - run, v1, 180.0)):
+        if hi - lo < 0.05:
+            continue
+        part = _clip_v(list(uv), lo, hi)
+        if part:
+            out.append(face(part, z, 0.0 if o is None else s, o or 0.0, "dach_flach" if o is None else "dach_ziegel"))
+    return out
+
+
+def _vereinfachen(poly, min_len=0.9, min_winkel=12.0):
+    """Kurze Kanten und fast gerade Ecken entfernen (Baukoerper-Grundrisse haben viele Zwischenpunkte)."""
+    pts = list(poly)
+    changed = True
+    while changed and len(pts) > 4:
+        changed = False
+        for i in range(len(pts)):
+            a, b, c = pts[i - 1], pts[i], pts[(i + 1) % len(pts)]
+            e1 = (b[0] - a[0], b[1] - a[1]); e2 = (c[0] - b[0], c[1] - b[1])
+            l1, l2 = math.hypot(*e1), math.hypot(*e2)
+            if l1 < 1e-6 or l2 < 1e-6:
+                pts.pop(i); changed = True; break
+            cosw = (e1[0] * e2[0] + e1[1] * e2[1]) / (l1 * l2)
+            if cosw > math.cos(math.radians(min_winkel)) or min(l1, l2) < min_len:
+                pts.pop(i); changed = True; break
+    return pts
+
+
+def _inset(poly, d):
+    """Polygon (gegen den Uhrzeigersinn) um d nach innen versetzen, Ecken auf Gehrung; None, wenn es kippt
+    (eine Kante dreht sich um oder die Flaeche faellt unter 20 %)."""
+    n = len(poly)
+    out = []
+    for i in range(n):
+        a, b, c = poly[i - 1], poly[i], poly[(i + 1) % n]
+        e1 = (b[0] - a[0], b[1] - a[1]); l1 = math.hypot(*e1) or 1e-9
+        e2 = (c[0] - b[0], c[1] - b[1]); l2 = math.hypot(*e2) or 1e-9
+        n1 = (-e1[1] / l1, e1[0] / l1); n2 = (-e2[1] / l2, e2[0] / l2)      # nach innen bei CCW
+        k = 1.0 + n1[0] * n2[0] + n1[1] * n2[1]
+        if k < 0.3:
+            k = 0.3
+        out.append((b[0] + d * (n1[0] + n2[0]) / k, b[1] + d * (n1[1] + n2[1]) / k))
+    if _area2(out) < 0.2 * _area2(poly):
+        return None
+    for i in range(n):
+        a, b = poly[i], poly[(i + 1) % n]
+        p, q = out[i], out[(i + 1) % n]
+        if (b[0] - a[0]) * (q[0] - p[0]) + (b[1] - a[1]) * (q[1] - p[1]) <= 0:
+            return None
+    return out
+
+
+def _area2(poly):
+    return sum(poly[i][0] * poly[(i + 1) % len(poly)][1] - poly[(i + 1) % len(poly)][0] * poly[i][1]
+               for i in range(len(poly))) / 2
+
+
+def faces_korrigiert(b, faces, ov):
+    """Dachflaechen eines Baukoerpers nach roofs_override: `dach` ersetzt, `dz` verschiebt das Dachmodell."""
+    if not ov:
+        return faces
+    if ov.get("dach") and (b.get("klasse") == 11 or b.get("klasse") is None):
+        d = ov["dach"]
+        if b["height"] >= float(d.get("min_hoehe", 6.0)):
+            return param_faces(b["poly"], d, b["height"])
+    if ov.get("dz") and faces:
+        dz = float(ov["dz"])
+        return [{**r, "p": [[x, y, z + dz] for x, y, z in r["p"]]} for r in faces]
+    return faces
+
+
+def aufbauten(mb_roof, mb_wall, ov, z_off, wall_mat, poly=None):
+    """Quader auf dem Dach laut roofs_override `aufbauten` (Liftturm, Stiegenhaus, Dachterrassen-Aufbau)."""
+    for a in (ov or {}).get("aufbauten") or []:
+        z1 = float(a["z1"])
+        z0 = float(a.get("z0", z1 - 3.0))
+        if a.get("drehung") is not None:
+            t = (math.cos(math.radians(a["drehung"])), math.sin(math.radians(a["drehung"])))
+        elif poly:
+            t = _laengste_richtung(poly)
+        else:
+            t = (1.0, 0.0)
+        n = (-t[1], t[0])
+        L, B = float(a.get("l", 3.0)), float(a.get("b", 3.0))
+        cx, cy = a["pos"]
+        o = (cx - t[0] * L / 2 - n[0] * B / 2, cy - t[1] * L / 2 - n[1] * B / 2)
+        m_ = a.get("material") or (ov or {}).get("material")      # Standard: Deckung des Daches, sonst Wandfarbe
+        mat = MAT.get(m_, m_) if m_ else wall_mat
+        _quader(mb_wall, o, t, n, L, B, z0 + z_off, z1 + z_off, mat, a.get("material_oben") and
+                MAT.get(a["material_oben"], a["material_oben"]) or "dach_flach")

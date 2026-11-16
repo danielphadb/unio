@@ -9,6 +9,8 @@ Beispiele:
   python immoviz.py render  projects/wimmergasse-20 --cam ecke --light golden_hour --preview
   python immoviz.py render  projects/wimmergasse-20 --cam ecke,drohne --light golden_hour,blaue_stunde
   python immoviz.py website projects/wimmergasse-20
+  python immoviz.py kameramatch projects/noma-shg13 --bild vorlage.jpg --punkte punkte.yaml --kamera hof_fin
+  GOOGLE_MAPS_API_KEY=... python immoviz.py referenz projects/wimmergasse-20 --kamera drohne  (Abgleich gegen Google 3D, nur intern)
   python immoviz.py studio  (Web-Oberfläche auf Port 8765)
 """
 from __future__ import annotations
@@ -78,17 +80,80 @@ def main():
     ws = sub.add_parser("website", help="Statische Projekt-Website mit anklickbaren Wohnungen im Schnitt (website.yaml)")
     ws.add_argument("project")
     ws.add_argument("--hotspots", action="store_true", help="Hotspots aus der Schnittkamera neu berechnen (Blender, ohne Rendering)")
+    km = sub.add_parser("kameramatch", help="Kamera einer Referenzvisualisierung aus Punktpaaren lösen (Bildpixel <-> "
+                                            "lokale 3D-Koordinaten), in project.yaml eintragen und Überlagerung rendern")
+    km.add_argument("project")
+    km.add_argument("--bild", required=True, help="Referenzvisualisierung (bleibt außerhalb des Repos)")
+    km.add_argument("--punkte", required=True, help="YAML mit Punktpaaren {name, px: [u, v], xyz: [x, y, z], rahmen}")
+    km.add_argument("--kamera", required=True, help="Name der Kamera in project.yaml (wird angelegt oder ersetzt)")
+    km.add_argument("--light", default=None, help="Licht für die Modellvorschau (Standard: erstes Licht)")
+    km.add_argument("--breite", type=int, default=1200, help="Breite der Modellvorschau in Pixel")
+    km.add_argument("--samples", type=int, default=None)
+    km.add_argument("--out", default=None, help="Ordner für Modellbild und Überlagerung (Standard renders/kameramatch)")
+    km.add_argument("--nur-loesen", action="store_true", help="nur Kamera lösen, nichts schreiben, nicht rendern")
+    km.add_argument("--ohne-render", action="store_true", help="Kamera schreiben, aber keine Überlagerung rendern")
+    km.add_argument("--nur-render", action="store_true", help="Kamera aus project.yaml nehmen, nur Überlagerung neu")
+    km.add_argument("--maske", default=None, help="Graustufenmaske (weiß = Bereich) für die Kantenabweichung")
+    rf = sub.add_parser("referenz", help="Kamera gegen Google Photorealistic 3D Tiles abgleichen (nur interne Referenz, "
+                                         "Schluessel in GOOGLE_MAPS_API_KEY): Abgleichbild und Befund je Gebaeude")
+    rf.add_argument("project", nargs="?", default=None)
+    rf.add_argument("--projekt", default=None, help="Projektordner (statt des Positionsarguments)")
+    rf.add_argument("--kamera", default="drohne", help="Kamera(s) aus project.yaml, mit Komma getrennt")
+    rf.add_argument("--licht", default="dunst_hell", help="Licht der Modellvorschau")
+    rf.add_argument("--samples", type=int, default=24)
+    rf.add_argument("--nur-modell", action="store_true", help="vorhandene Google-Bilder wiederverwenden (schnelle Iteration)")
+    rf.add_argument("--google-neu", action="store_true", help="Google-Ansichten neu rendern")
+    rf.add_argument("--kalibrieren", action="store_true", help="Höhe und Lage der 3D-Kacheln neu bestimmen")
+    rf.add_argument("--sse", type=float, default=4.0, help="Detailstufe der Kacheln (Bildschirmfehler in Pixel, kleiner = feiner)")
+    rf.add_argument("--tag", default="", help="Zusatz für Dateinamen, z. B. _vorher")
+    rf.add_argument("--test-kamera", action="append", default=[],
+                    help="zusätzliche Probekamera name:x,y,z:x,y,z:lens (Standpunkt, Ziel, Brennweite), nicht in project.yaml")
     st = sub.add_parser("studio", help="Web-Oberfläche immoviz Studio starten (http://127.0.0.1:8765)")
     st.add_argument("--host", default="127.0.0.1")
     st.add_argument("--port", type=int, default=8765)
     st.add_argument("--dry-run", action="store_true", help="Render-Queue führt nur Trockenläufe aus, kein Blender")
     st.add_argument("--projects", default=None,
                     help="Projektwurzel (Standard immoviz/projects oder Umgebungsvariable IMMOVIZ_PROJECTS)")
+    # Korrekturschleife (REGELN.md): Quellen, Freigabe-Gate, Prompt-Regeln, Nachkontrolle nach der Veredelung
+    pq = sub.add_parser("pruefen", help="Quellen-Prüfung: jedes Geländer, Trog, Weg, Fenster, Stuck, Baum, Nachbar, "
+                                        "Farbe braucht eine Quelle (Feld quelle oder [Kürzel] im Kommentar); ANN je Bild")
+    pq.add_argument("--projekt", required=True)
+    pq.add_argument("--json", action="store_true", help="vollständiges Ergebnis als JSON")
+    pq.add_argument("--streng", action="store_true", help="Kommentar zählt nicht, nur das Feld quelle (neue Projekte)")
+    nk = sub.add_parser("nachkontrolle", help="Veredeltes Bild gegen die Blender-Vorschau: neue/fehlende Öffnungen, "
+                                              "Kanten, Ausschnitt; Markierungsbild und Score")
+    nk.add_argument("--vorschau", required=True)
+    nk.add_argument("--veredelt", required=True, nargs="+", help="ein Bild oder mehrere Varianten (Rangfolge)")
+    nk.add_argument("--aus", default=None, help="Markierungsbild (bei Varianten: Ordner); Standard neben dem Bild")
+    nk.add_argument("--schwelle", type=float, default=None, help="Score ab dem 'zur Pruefung' gilt (Standard 400)")
+    fg = sub.add_parser("freigabe", help="Modellfreigabe je Kamera (freigabe.yaml): anzeigen, setzen, vor der "
+                                         "Veredelung prüfen")
+    fg.add_argument("--projekt", required=True)
+    fg.add_argument("--cam", default="", help="Kamera(s), mit Komma getrennt (innen <wohnung>_<kamera>)")
+    fg.add_argument("--setzen", choices=["ja", "nein"], default=None)
+    fg.add_argument("--von", default="", help="wer freigibt (Pflicht bei --setzen ja)")
+    fg.add_argument("--notiz", default="")
+    fg.add_argument("--pruefbogen", default="", help="Pfad zum Prüfbogen, der dem Kunden vorlag")
+    fg.add_argument("--pruefen", action="store_true", help="Gate wie vor der Veredelung (Exit 1, wenn gesperrt)")
+    fg.add_argument("--trockenlauf", action="store_true")
+    fg.add_argument("--force", action="store_true", help="Sperre bewusst übergehen (wird ausgegeben)")
+    pr = sub.add_parser("prompt", help="Vor einem Higgsfield-Auftrag (MCP oder Studio): Freigabe prüfen und den "
+                                       "Regelblock aus higgsfield/prompt_regeln.yaml ausgeben")
+    pr.add_argument("--projekt", required=True)
+    pr.add_argument("--cam", required=True, help="Kamera (innen <wohnung>_<kamera>)")
+    pr.add_argument("--art", choices=["aussen", "innen"], default=None, help="Standard: innen, wenn die Kamera "
+                                                                              "aus wohnungen.yaml stammt")
+    pr.add_argument("--force", action="store_true")
     a = ap.parse_args()
     if a.cmd == "studio":
         from studio.server import run
         run(a.host, a.port, a.dry_run, a.projects)
         return
+    if a.cmd == "referenz":
+        _referenz(a)
+        return
+    if a.cmd in ("pruefen", "nachkontrolle", "freigabe", "prompt"):
+        sys.exit(_korrekturschleife(a))
     pdir = Path(a.project).resolve()
 
     if a.cmd == "geo":
@@ -183,6 +248,8 @@ def main():
             print(json.dumps(HS.write(pdir), ensure_ascii=False, indent=1))
         res = WS.build_site(pdir)
         print(json.dumps({"website": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
+    elif a.cmd == "kameramatch":
+        _kameramatch(a, pdir)
     elif a.cmd == "check":
         from lib.build import load_project, build_scene, Hero
         from lib import check as C, meshkit as K
@@ -201,6 +268,22 @@ def main():
             print("Abgleich:", out)
 
 
+def _referenz(a):
+    """Abgleich gegen die 3D-Referenz (lib/referenz.py). Schlüssel nur aus der Umgebung."""
+    from lib import referenz as RF
+    pdir = Path(a.projekt or a.project or ".").resolve()
+    extra = {}
+    for spec in a.test_kamera:
+        n, pos, ziel, lens = spec.split(":")
+        extra[n] = {"pos": [float(v) for v in pos.split(",")], "target": [float(v) for v in ziel.split(",")],
+                    "lens": float(lens), "vertical": True}
+    cams = [c for c in a.kamera.split(",") if c] + [n for n in extra if n not in a.kamera.split(",")]
+    t = time.time()
+    res = RF.abgleich(pdir, cams, google_neu=a.google_neu, nur_modell=a.nur_modell, kalib_neu=a.kalibrieren,
+                      licht=a.licht, sse=a.sse, extra_cams=extra, tag=a.tag, samples=a.samples)
+    print(json.dumps({**res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
+
+
 def _svcheck(pdir):
     import os
     from lib.build import load_project, build_scene, setup_render, setup_light
@@ -217,11 +300,127 @@ def _svcheck(pdir):
     print(json.dumps(res, ensure_ascii=False))
 
 
+def _kameramatch(a, pdir):
+    """Kamera aus Punktpaaren lösen, eintragen, Modell rendern und mit der Vorlage überlagern."""
+    import yaml
+    from PIL import Image
+    from lib import kameramatch as KM
+    cfg = yaml.safe_load((pdir / "project.yaml").read_text())
+    bild = Path(a.bild).resolve()
+    W, H = Image.open(bild).size
+    P = KM.lade_punkte(Path(a.punkte), cfg)
+    gw = P.get("groesse") or [W, H]
+    for p in P["punkte"]:          # Pixel in der Messgröße der Punktdatei auf die Bildgröße umrechnen
+        p["px"] = [p["px"][0] * W / gw[0], p["px"][1] * W / gw[0]]
+    res = {"kamera": a.kamera, "bild": bild.name, "groesse": [W, H], "punkte": len(P["punkte"])}
+    if a.nur_render:
+        c = cfg["cameras"][a.kamera]
+        import math as _m
+        dx, dy = c["target"][0] - c["pos"][0], c["target"][1] - c["pos"][1]
+        par = {"pos": c["pos"], "yaw": _m.atan2(-dx, dy), "lens": c["lens"], "shift": c.get("shift", [0, 0])}
+    else:
+        par = KM.loese(P["punkte"], W, H, pos_fest=P.get("pos_fest"))
+        frei = KM.loese(P["punkte"], W, H, frei=True, pos_fest=P.get("pos_fest"))
+        rows_f = KM.fehler(frei, [p for p in P["punkte"] if not p["kontrolle"]], W, H)
+        res["frei_mit_kippung"] = {"mittel_px": round(sum(r["fehler_px"] for r in rows_f) / len(rows_f), 2),
+                                   "kippung_grad": round(_deg(frei["pitch"]), 2), "roll_grad": round(_deg(frei["roll"]), 2)}
+    rows = KM.fehler(par, P["punkte"], W, H)
+    akt = [r for r in rows if not r["kontrolle"]]
+    mittel = sum(r["fehler_px"] for r in akt) / len(akt)
+    res.update({"mittel_px": round(mittel, 2), "max_px": max(r["fehler_px"] for r in akt),
+                "mittel_prozent_breite": round(100 * mittel / W, 2), "gematcht": mittel < KM.SCHWELLE * W,
+                "kamera_yaml": KM.kamera_eintrag(par, W, H), "fehler_je_punkt": rows})
+    ctxp = pdir / "data" / "context.json"
+    if not a.nur_render:
+        cl = KM.clip_start(par, json.loads(ctxp.read_text()) if ctxp.exists() else None, W, H)
+        if cl:
+            res["kamera_yaml"]["clip_start"] = cl
+            res["hinweis"] = f"Standpunkt liegt in einem Nachbarbaukoerper, clip_start {cl} m"
+    if not (a.nur_loesen or a.nur_render):
+        kom = (f"kameramatch {bild.name}, {len(akt)} Punkte, Fehler {mittel:.1f} px = {100 * mittel / W:.2f} % "
+               f"Bildbreite{'' if res['gematcht'] else ' NICHT gematcht'}")
+        KM.schreibe_kamera(pdir / "project.yaml", a.kamera, res["kamera_yaml"], kom)
+    out = Path(a.out).resolve() if a.out else pdir / "renders" / "kameramatch"
+    if not a.nur_loesen and ctxp.exists():      # Drahtmodell der Baukoerper ueber der Vorlage (ohne Blender)
+        out.mkdir(parents=True, exist_ok=True)
+        res["drahtmodell"] = str(KM.drahtmodell(cfg, json.loads(ctxp.read_text()), par, bild,
+                                                out / f"{a.kamera}_drahtmodell.png"))
+    if not (a.nur_loesen or a.ohne_render):
+        out.mkdir(parents=True, exist_ok=True)
+        light = a.light or next(iter(cfg["lights"]))
+        mp = KM.render_modell(pdir, a.kamera, light, a.breite, a.samples or cfg["render"].get("preview_samples", 32),
+                              out / f"{a.kamera}_modell.png")
+        res["modell"] = str(mp)
+        res["ueberlagerung"] = str(out / f"{a.kamera}_ueberlagerung.png")
+        nm = None
+        if ctxp.exists():
+            from PIL import Image as _I
+            nm = KM.nachbar_maske(cfg, json.loads(ctxp.read_text()), par, W, H, _I.open(mp).width)
+        res["kantenabweichung"] = KM.ueberlagerung(bild, mp, Path(res["ueberlagerung"]), rows, maske_path=a.maske,
+                                                   maske=nm)
+    print(json.dumps(res, ensure_ascii=False, indent=1))
+
+
+def _deg(r):
+    import math as _m
+    return _m.degrees(r)
+
+
 def _interior(a, pdir):
     from lib.interior import render_apartments
     t = time.time()
     res = render_apartments(pdir, a.top.split(","), not a.final, [c for c in a.cam.split(",") if c])
     print(json.dumps({"renders": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1, default=str))
+
+
+def _korrekturschleife(a) -> int:
+    """Befehle pruefen, nachkontrolle, freigabe, prompt (REGELN.md). Rueckgabe = Exit-Code (0 ok, 1 Befund)."""
+    if a.cmd == "pruefen":
+        from lib import quellen as Q
+        return Q.main_cli(a.projekt, a.json, a.streng)
+    if a.cmd == "nachkontrolle":
+        from lib import nachkontrolle as NK
+        return NK.main_cli(a.vorschau, a.veredelt, a.aus, a.schwelle if a.schwelle is not None else NK.SCHWELLE)
+    from lib import freigabe as FG
+    pdir = Path(a.projekt).resolve()
+    if a.cmd == "freigabe":
+        kams = [k for k in a.cam.split(",") if k]
+        if a.setzen:
+            if a.setzen == "ja" and not a.von:
+                sys.exit("--von fehlt: wer gibt frei (z. B. \"Kunde, Mail 16.11.\")")
+            FG.setzen(pdir, kams, a.setzen == "ja", a.von, a.notiz, a.pruefbogen)
+        if a.pruefen:
+            res, code = [], 0
+            for k in kams or FG.kameras(pdir):
+                try:
+                    res.append(FG.pruefen(pdir, k, a.trockenlauf, a.force))
+                except FG.NichtFreigegeben as e:
+                    res.append({"kamera": k, "erlaubt": False, "grund": str(e)})
+                    code = 1
+            print(json.dumps(res, ensure_ascii=False, indent=1))
+            return code
+        print(json.dumps(FG.uebersicht(pdir), ensure_ascii=False, indent=1))
+        return 0
+    # prompt: Gate plus Regelblock (fuer Auftraege ueber MCP, die nicht durch das Studio laufen)
+    art = a.art or ("aussen" if a.cam in _aussen_kameras(pdir) else "innen")
+    try:
+        gate = FG.pruefen(pdir, a.cam, False, a.force)
+    except FG.NichtFreigegeben as e:
+        print(json.dumps({"kamera": a.cam, "erlaubt": False, "grund": str(e)}, ensure_ascii=False, indent=1))
+        return 1
+    R = FG.prompt_regeln(pdir, a.cam, art)
+    print(json.dumps({"kamera": a.cam, "art": art, "freigabe": gate.get("warnung") or gate.get("grund"),
+                      "warnungen": R["warnungen"], "regeln": R["regeln"]}, ensure_ascii=False, indent=1))
+    print("\n--- an den Prompt anhängen ---\n" + R["text"])
+    return 0
+
+
+def _aussen_kameras(pdir: Path) -> list[str]:
+    import yaml
+    try:
+        return list((yaml.safe_load((pdir / "project.yaml").read_text(encoding="utf-8")) or {}).get("cameras") or {})
+    except OSError:
+        return []
 
 
 if __name__ == "__main__":

@@ -59,6 +59,7 @@ if str(ROOT) not in sys.path:
 from lib.sun import sun_position  # noqa: E402
 from studio.yamledit import EditError, edit_section, replace_blocks  # noqa: E402
 from studio.higgsfield import Higgsfield, HiggsfieldError, credits_estimate  # noqa: E402
+from studio.higgsfield import freigabe_pruefen, prompt_mit_regeln  # noqa: E402
 
 IMG_EXT = {".png", ".jpg", ".jpeg", ".webp"}
 VID_EXT = {".mp4", ".webm", ".mov"}
@@ -1464,6 +1465,8 @@ def _v_rows(rows) -> dict:
             raise HTTPException(400, f"rows.{name}.surround: einer von {', '.join(SURROUNDS)} oder leer")
         out[name] = {"z": _f(r.get("z"), f"rows.{name}.z", -5, 200), "h": _f(r.get("h"), f"rows.{name}.h", 0.1, 20),
                      "w": _f(r.get("w"), f"rows.{name}.w", 0.1, 20), "type": typ, "surround": sur or None}
+        if r.get("quelle"):                      # REGELN.md: Quelle je Element (immoviz.py pruefen)
+            out[name]["quelle"] = str(r["quelle"])[:120]
     return out
 
 
@@ -1517,6 +1520,8 @@ def _v_cornices(cs) -> list:
             a, b = _pair(s_[:2], f"{name}.steps", -5, 200)
             st.append([a, b, _f(s_[2], f"{name}.Ausladung", 0, 3)])
         e = {"name": name, "steps": st}
+        if c.get("quelle"):                      # REGELN.md: Quelle je Element (immoviz.py pruefen)
+            e["quelle"] = str(c["quelle"])[:120]
         if isinstance(c.get("consoles"), dict):
             k = c["consoles"]
             e["consoles"] = {"z": _pair(k.get("z"), f"{name}.consoles.z", -5, 200),
@@ -1819,6 +1824,8 @@ def api_project_new(body: dict = Body(...)):
         shutil.copy2(tpl, tmp / "project.yaml")
         if (VORLAGE / "prompts.yaml").is_file():
             shutil.copy2(VORLAGE / "prompts.yaml", tmp / "prompts.yaml")
+        if (VORLAGE / "freigabe.yaml").is_file():
+            shutil.copy2(VORLAGE / "freigabe.yaml", tmp / "freigabe.yaml")
         first = na
         tpl_cfg = yaml.safe_load(tpl.read_text(encoding="utf-8")) or {}
         tpl_fac = next(iter(tpl_cfg.get("facades") or {}), None)
@@ -1891,7 +1898,8 @@ def api_prompts(slug: str):
     cfg = load_cfg(pdir)
     lights = {k: (v or {}).get("season") for k, v in (cfg.get("lights") or {}).items()}
     return {"datei": f.relative_to(PROJECTS).as_posix() if f.is_relative_to(PROJECTS) else "projects/_vorlage/prompts.yaml",
-            "eigene": f.parent == pdir, "bausteine": data, "lichter": lights}
+            "eigene": f.parent == pdir, "bausteine": data, "lichter": lights,
+            "regeln_datei": "higgsfield/prompt_regeln.yaml"}
 
 
 def hf_index(pdir: Path) -> dict:
@@ -1951,9 +1959,19 @@ def api_veredeln(slug: str, body: dict = Body(...)):
     light = _check_name(body.get("light") or light)
     client = hf()
     credits = credits_estimate("bild", res)
+    # REGELN.md: Veredelung nur fuer freigegebene Kameras (freigabe.yaml), zentrale Prompt-Regeln immer anhaengen
+    force = bool(body.get("force"))
+    try:
+        gate = freigabe_pruefen(pdir, rel, client.dry, force)
+    except HiggsfieldError as e:
+        raise HTTPException(409, str(e))
+    prompt, regel_warnungen = prompt_mit_regeln(pdir, rel, prompt)
 
     def run(log):
         log(f"Modus: {'Trockenlauf (Ergebnis = Eingangsbild)' if client.dry else 'live'}")
+        log(f"Freigabe: {gate.get('warnung') or gate.get('grund')}")
+        for w in regel_warnungen:
+            log(f"WARNUNG: {w}")
         urls = []
         for p in [src, *ref_paths]:
             log(f"Upload {p.name}")
@@ -1967,7 +1985,8 @@ def api_veredeln(slug: str, body: dict = Body(...)):
         client.download(st["urls"][0], out)
         meta = {"art": "bild", "quelle": rel, "refs": refs, "prompt": prompt, "aspect": aspect, "resolution": res,
                 "modell": "nano_banana_pro", "credits_geschaetzt": credits, "request_id": st["request_id"],
-                "trockenlauf": client.dry, "erstellt": now_iso()}
+                "trockenlauf": client.dry, "erstellt": now_iso(), "kamera_freigabe": gate.get("grund"),
+                "force": force, "nachkontrolle": "offen (immoviz.py nachkontrolle)"}
         _hf_register(pdir, out, meta)
         log(f"Gespeichert: renders/higgsfield/{out.name}")
         return {"rel": f"higgsfield/{out.name}"}
@@ -2000,9 +2019,14 @@ def api_video(slug: str, body: dict = Body(...)):
     cam, light = _guess_cam_light(slug, pdir, start)
     client = hf()
     credits = credits_estimate("video", duration=dauer)
+    try:
+        gate = freigabe_pruefen(pdir, start, client.dry, bool(body.get("force")))
+    except HiggsfieldError as e:
+        raise HTTPException(409, str(e))
 
     def run(log):
         log(f"Modus: {'Trockenlauf (Standbild-Video aus dem Startbild)' if client.dry else 'live'}")
+        log(f"Freigabe: {gate.get('warnung') or gate.get('grund')}")
         su = client.upload(sp)
         eu = client.upload(ep) if ep else None
         mu = [client.upload(p) for p in mps]

@@ -1,0 +1,8 @@
+# Modellfreigabe je Kamera (REGELN.md, Phase Freigabe). Veredelung (Higgsfield-Credits) nur fuer Kameras mit
+# modell_freigegeben: ja. Ablauf: Blender-Vorschau und Pruefbogen an den Kunden, Freigabe hier eintragen:
+#   immoviz.py freigabe --projekt projects/<slug> --cam ecke --setzen ja --von "Kunde, Mail 16.11." --pruefbogen <pfad>
+# Kameranamen: aussen wie in project.yaml (cameras), innen <wohnung>_<kamera> wie in renders/innen/.
+# Studio und immoviz.py prompt sperren nicht freigegebene Kameras (Ausnahme: Trockenlauf, force wird protokolliert).
+stand: null
+kameras:
+  ecke: {modell_freigegeben: nein, datum: null, von: null, pruefbogen: null, notiz: "Beispiel: erst nach Pruefbogen auf ja"}

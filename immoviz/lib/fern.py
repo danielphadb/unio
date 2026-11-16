@@ -241,9 +241,31 @@ def fernzone(mb, rng, radius: float, ground, bis: float = 1800.0, step: float = 
                      (x0 + t, y1 - t, zg + 0.2)], None, "hof", (0, 0, 1))
 
 
-def markante(mb, fern, ground):
+def markante(mb, fern, ground, spitzen=None):
     """Hohe Baukoerper jenseits des Radius als Silhouette: Grundriss und Oberkante aus dem Baukoerpermodell
-    (Hoehen absolut ueber Wiener Null), nach unten bis unter das grobe Gelaende gezogen."""
+    (Hoehen absolut ueber Wiener Null), nach unten bis unter das grobe Gelaende gezogen.
+
+    spitzen (project.yaml `fern_spitzen`): Turmhelme, die das Baukoerpermodell als Prisma fuehrt oder ganz
+    weglaesst: [{bezug, name, basis, spitze, breite}]. Der hoechste Teil des BEZUG endet bei `basis` (z lokal),
+    darauf steht eine Pyramide bis `spitze` (Standard: Oberkante laut Daten) mit quadratischer Grundflaeche
+    `breite` (Standard 70 % der kleineren Ausdehnung). Werte aus oeffentlichen Hoehenangaben, nicht aus Bildern."""
+    sp = {str(e["bezug"]): e for e in (spitzen or []) if e.get("bezug") is not None and not e.get("pos")}
+    for e in spitzen or []:      # frei stehender Helm an einer Lage (Turm, den das Baukoerpermodell nur in Teilen fuehrt)
+        if e.get("pos"):
+            x, y = e["pos"]
+            w = float(e.get("breite", 6.0))
+            sq = [(x - w / 2, y - w / 2), (x + w / 2, y - w / 2), (x + w / 2, y + w / 2), (x - w / 2, y + w / 2)]
+            if e.get("koerper_von") is not None:
+                z0_, z1_ = float(e["koerper_von"]), float(e["basis"])
+                for i in range(4):
+                    (x1, y1), (x2, y2) = sq[i], sq[(i + 1) % 4]
+                    mb.poly([(x1, y1, z0_), (x2, y2, z0_), (x2, y2, z1_), (x1, y1, z1_)], None, "fern_turm",
+                            (y2 - y1, -(x2 - x1), 0))
+            _pyramide(mb, sq, float(e["basis"]), float(e["spitze"]), w, "fern_turm")
+    top_teil = {}
+    for h in (fern or {}).get("hoch", []):
+        if str(h["bezug"]) in sp and (str(h["bezug"]) not in top_teil or h["z1"] > top_teil[str(h["bezug"])]["z1"]):
+            top_teil[str(h["bezug"])] = h
     for h in (fern or {}).get("hoch", []):
         poly = h["poly"]
         a = 0.0
@@ -258,19 +280,74 @@ def markante(mb, fern, ground):
         z1 = h["z1"]
         hoehe = h["z1"] - h["z0"]
         mat = "fern_turm" if hoehe > 60 else "fern_bau"
+        e = sp.get(str(h["bezug"]))
+        if e and top_teil.get(str(h["bezug"])) is h:
+            basis = float(e.get("basis", z1))
+            spitze = float(e.get("spitze", z1))
+            z1 = min(z1, basis)
+            _pyramide(mb, poly, basis, spitze, e.get("breite"), "fern_turm")
         for i in range(len(poly)):
             (x1, y1), (x2, y2) = poly[i], poly[(i + 1) % len(poly)]
             mb.poly([(x1, y1, z0), (x2, y2, z0), (x2, y2, z1), (x1, y1, z1)], None, mat, (y2 - y1, -(x2 - x1), 0))
         mb.poly([(x, y, z1) for x, y in poly], None, "fern_dach", (0, 0, 1))
 
 
-def kulisse(mb, fern, min_dist: float = 3500.0, min_ueber: float = 55.0, bin_grad: float = 3.0):
+def _pyramide(mb, poly, z0, z1, breite=None, mat="fern_turm"):
+    """Turmhelm als vierseitige Pyramide ueber dem Schwerpunkt, ausgerichtet an der laengsten Kante."""
+    if z1 <= z0 + 0.5:
+        return
+    cx = sum(p[0] for p in poly) / len(poly)
+    cy = sum(p[1] for p in poly) / len(poly)
+    a, b = max(((poly[i], poly[(i + 1) % len(poly)]) for i in range(len(poly))), key=lambda e: math.dist(*e))
+    L = math.dist(a, b) or 1.0
+    t = ((b[0] - a[0]) / L, (b[1] - a[1]) / L)
+    n = (-t[1], t[0])
+    ext_t = max(p[0] * t[0] + p[1] * t[1] for p in poly) - min(p[0] * t[0] + p[1] * t[1] for p in poly)
+    ext_n = max(p[0] * n[0] + p[1] * n[1] for p in poly) - min(p[0] * n[0] + p[1] * n[1] for p in poly)
+    w = float(breite) if breite else 0.7 * min(ext_t, ext_n)
+    c = [(cx + (t[0] * sx + n[0] * sy) * w / 2, cy + (t[1] * sx + n[1] * sy) * w / 2)
+         for sx, sy in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
+    for i in range(4):
+        p, q = c[i], c[(i + 1) % 4]
+        mb.poly([(p[0], p[1], z0), (q[0], q[1], z0), (cx, cy, z1)], None, mat,
+                ((p[0] + q[0]) / 2 - cx, (p[1] + q[1]) / 2 - cy, 0.3))
+    mb.poly([(x, y, z0) for x, y in c], None, mat, (0, 0, -1))
+
+
+def gipfel(cfg) -> list:
+    """Hoehenpunkte markanter Gipfel fuer die Kulisse aus project.yaml `fern_gipfel`:
+    [{name, lat, lon, hoehe (m ue. A.), radius (m, Standard 1200), abfall (m, Standard 80)}]. Die Hoehenfestpunkte
+    der Stadt liegen an Strassen, nicht auf den Kuppen; ohne diese Punkte lag der Wienerwald im Abgleich gegen die
+    3D-Referenz rund 0,6 Grad zu tief, der Bisamberg (ausserhalb Wiens) fehlte. Liefert [x, y, z] lokal."""
+    eintraege = (cfg or {}).get("fern_gipfel") or []
+    if not eintraege:
+        return []
+    from pyproj import Transformer
+    from .geo_wien import LocalFrame
+    site = cfg["site"]
+    frame = LocalFrame(*site["origin_gk"], site["x_axis_deg"])
+    tr = Transformer.from_crs("EPSG:4326", "EPSG:31256", always_xy=True)
+    g0 = float(site.get("ground_wn", 0.0))
+    out = []
+    for e in eintraege:
+        x, y = frame(*tr.transform(e["lon"], e["lat"]))
+        z = float(e["hoehe"]) - 156.68 - g0          # m ue. A. -> Wiener Null -> lokal
+        r, ab = float(e.get("radius", 1200)), float(e.get("abfall", 80))
+        out.append([x, y, z])
+        for k in range(12):
+            w = k * math.pi / 6
+            for f, d in ((0.5, ab / 3), (1.0, ab)):
+                out.append([x + math.cos(w) * r * f, y + math.sin(w) * r * f, z - d])
+    return out
+
+
+def kulisse(mb, fern, min_dist: float = 3500.0, min_ueber: float = 55.0, bin_grad: float = 1.5, extra=None):
     """Huegelkette am Horizont (Wienerwald, Wienerberg, Laaer Berg) als Kulisse aus den Hoehenfestpunkten.
 
     Je Richtungssektor zaehlt der Punkt mit dem groessten Hoehenwinkel; die Kette wird geglaettet und als
     senkrechtes Band in der Entfernung dieser Punkte gebaut. Grob (Festpunkte liegen an Strassen, nicht auf den
     Gipfeln), genuegt aber fuer die Silhouette. Liefert die Sektoren (Kompass, Entfernung, Hoehe) fuer die Doku."""
-    pts = (fern or {}).get("gelaende") or []
+    pts = list((fern or {}).get("gelaende") or []) + list(extra or [])
     n = int(360 / bin_grad)
     best = [None] * n
     for x, y, z in pts:
@@ -285,7 +362,7 @@ def kulisse(mb, fern, min_dist: float = 3500.0, min_ueber: float = 55.0, bin_gra
     # glaetten: Mittel mit den Nachbarsektoren, Luecken bleiben Luecken
     sm = []
     for k in range(n):
-        nb = [best[(k + o) % n] for o in (-1, 0, 1) if best[(k + o) % n]]
+        nb = [best[(k + o) % n] for o in (-2, -1, 0, 1, 2) if best[(k + o) % n]]      # 1,5-Grad-Sektoren, ueber 7,5 Grad geglaettet
         sm.append((sum(b[0] for b in nb) / len(nb), sum(b[1] for b in nb) / len(nb)) if best[k] and nb else None)
     for k in range(n):
         a, b = sm[k], sm[(k + 1) % n]

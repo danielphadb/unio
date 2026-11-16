@@ -141,6 +141,121 @@ Ist `GOOGLE_MAPS_API_KEY` gesetzt, holt `strasse` zusätzlich je Fassade zwei St
 Gehsteigs und legt sie neben ein Modell-Rendering derselben Ansicht (`renders/streetview/strasse_<fassade>_a|b_vergleich.jpg`,
 nicht im Repo, nur interne Referenz; braucht Blender). `--ohne-streetview` lässt das aus.
 
+## 3D-Referenzabgleich je Kamera (`referenz`, Google Photorealistic 3D Tiles, nur intern)
+
+Fester Prüfschritt für jede Außenkamera vor der Veredelung (`lib/referenz.py`, `lib/referenz_google.js`). Das Werkzeug
+rendert denselben Blick wie die Blender-Kamera aus den Google Photorealistic 3D Tiles und vergleicht Gebäude für
+Gebäude. Google bleibt reine Referenz: keine Geometrie, keine Textur, kein Bild davon kommt ins Modell, ins Repo
+oder in ein Vermarktungsbild. Korrigiert wird von Hand in `roofs_override`, `neighbour_facades`, `fern_gipfel` und
+`fern_spitzen`, gegengeprüft mit den Daten der Stadt Wien.
+
+```bash
+# Schlüssel nur als Umgebungsvariable im Befehl, nie in Dateien
+GOOGLE_MAPS_API_KEY=... .venv-immoviz/bin/python immoviz/immoviz.py referenz immoviz/projects/wimmergasse-20 --kamera drohne
+# nach Korrekturen am Modell: Google-Bilder wiederverwenden, nur Blender neu (rund 1,5 Minuten)
+GOOGLE_MAPS_API_KEY=... .venv-immoviz/bin/python immoviz/immoviz.py referenz --projekt immoviz/projects/wimmergasse-20 --kamera drohne --nur-modell
+# Probekamera ohne Eintrag in project.yaml (name:Standpunkt:Ziel:Brennweite)
+... referenz immoviz/projects/wimmergasse-20 --kamera drohne --test-kamera drohne_w:-75,-20,45:6,10,20:30
+```
+
+Ablauf:
+
+1. **Kalibrierung** (einmal je Projekt, `--kalibrieren` erzwingt sie neu): Draufsicht der Kacheln als
+   Orthogonalkamera (360 x 360 m, 0,25 m je Pixel, Farb- und Tiefenbild) gegen die Draufsicht des Modells.
+   Höhe: Median der Differenz auf allen Fahrbahnflächen im Umkreis 120 m ergibt die ellipsoidische Höhe von
+   Wiener Null (156,68 m ü. A. plus Geoidundulation; EGM2008 nennt für Wien 44,8 m, gemessen wurden 43,96 m, also
+   eine Kachelabweichung von rund 0,9 m, die die Kalibrierung mit erfasst). Lage: Kreuzkorrelation der Hauskanten
+   (Gradient der Höhenbilder). Ergebnis in `renders/streetview/referenz_google/kalibrierung.json`.
+2. **Google-Ansicht**: CesiumJS 1.120 (feste CDN-URL) in Chromium über Playwright (Node, `require('playwright')`,
+   Chrome mit SwiftShader). Kamera aus dem lokalen System über GK Ost (EPSG:31256), WGS84 und ECEF; Brennweite und
+   Sensor 36 mm wie Blender (Öffnung der längeren Bildseite), senkrechte Korrektur (Shift) der Blender-Kamera als
+   symmetrisch höheres Bild gerendert und zugeschnitten. Je Ansicht Farbbild und Tiefenbild (Custom Shader, Abstand
+   entlang der Blickachse in Zentimetern als 24 Bit).
+3. **Modell**: dieselbe Kamera in Blender (Vorschau, Licht `--licht`, Standard `dunst_hell`) und ein Tiefenbild
+   (Ersatzmaterial mit „View Z Depth“, 1 Sample), dazu die Draufsicht des Modells als Höhenbild.
+4. **Auswertung**: beide Tiefenbilder werden in 3D-Punkte zurückgerechnet und über die Grundrisse des
+   Baukörpermodells den Gebäuden (BEZUG) zugeordnet. Je Gebäude: Traufe (20-%-Wert am freien Dachrand), First
+   (99-%-Wert), Firstrichtung (Hauptachse der höchsten Dachzone), fehlende oder zu hohe Flächen (Aufbau fehlt,
+   Volumen fehlt, Modell zu hoch) aus der Draufsicht; IoU der Gebäudemaske und Abweichung der oberen Dachkante
+   (Pixel und Meter) im Kamerabild; Horizontlinie; höchster Punkt der markanten Gebäude der Fernsicht.
+
+Ausgabe:
+
+| Datei | Inhalt | Repo |
+|---|---|---|
+| `renders/check/abgleich_<kamera>.md` | Kalibrierung, Kantendeckung, Horizont, Tabelle und Liste je Gebäude („Gebäude 3: Traufe 1,2 m zu hoch, Firstrichtung falsch, Aufbau fehlt“), Fernsicht | ja |
+| `renders/check/abgleich_<kamera>.jpg` | Modellbild mit Ampel je Gebäude (grün in Toleranz, gelb bis 1,5 m, rot darüber) und Nummern wie in der Liste, ohne Google-Inhalt | ja |
+| `renders/streetview/referenz_google/abgleich_<kamera>_bogen.jpg` | Google, Modell, Überblendung 50 %, Kanten (rot Referenz, cyan Modell, weiß deckungsgleich) | nein (gitignored) |
+| `renders/streetview/referenz_google/*` | Google-Farb- und Tiefenbilder, Draufsichten, Kalibrierung, JSON je Lauf | nein |
+
+Schwellwerte: Dachkanten (Traufe, First, Dachkante im Bild) der Pflichthäuser unter 0,5 m, übrige Häuser im Bild
+unter 1,5 m; die Kanten sind geometrisch (Tiefensprünge und Flächenknicke), nicht aus den Texturen. Optionen:
+`--tag _vorher` hängt an Bogen, Kantenbild und JSON einen Zusatz an (Vorher/Nachher), `--sse` setzt die Detailstufe
+der Kacheln (Standard 4 Pixel), `--google-neu` rendert die Google-Ansichten neu. Laufzeit Wimmergasse 20, Kamera
+`drohne`: Draufsicht und Kalibrierung unter 1 Minute, Google-Ansicht rund 3,5 Minuten (Chrome mit SwiftShader, ohne
+GPU), Blender rund 1 Minute; mit `--nur-modell` rund 1,5 Minuten je Durchgang. Voraussetzungen: Node mit Playwright, Chrome unter
+`/usr/bin/google-chrome` (oder `IMMOVIZ_CHROME`), Python-Pakete `pyproj` und `scipy` im venv.
+
+Dachkorrekturen aus dem Abgleich (`roofs_override`, Code `lib/roofs.py`): `dz` (Dachmodell heben oder senken),
+`dach` (parametrisches Dach statt Dachmodell: `form` sattel, walm, pult, flach oder mansarde, `traufe`, `first`,
+`richtung`, `neigung`, `min_hoehe`), `aufbauten` (Quader für Liftturm, Stiegenhaus, Dachterrasse: `pos`, `l`, `b`,
+`z0`, `z1`, `drehung`, `material`). Fernsicht: `fern_gipfel` (Gipfel mit Höhe ü. A. für die Hügelkette) und
+`fern_spitzen` (Turmhelme auf markanten Gebäuden). Seit dem Abgleich stehen Baukörper und Dächer auf der
+Sockelhöhe des Baukörpermodells (T_KOTE) statt auf dem Gelände am Schwerpunkt (`site.hoehen_absolut`, Standard an):
+das Gelände lag dort im Mittel 0,44 m, bis 1 m höher, alle Dächer standen entsprechend zu hoch.
+
+## Kamera einer Referenzvisualisierung matchen (`kameramatch`)
+
+Liegen Visualisierungen des Architekten oder Bauträgers vor (Kundenwunsch „Häuser wie im Original“), wird zuerst
+deren Kamera gelöst und dann das Modell an der Überlagerung angeglichen (`lib/kameramatch.py`). Die Vorlage selbst
+bleibt außerhalb des Repos; im Repo liegen nur die Punktdatei und der Kameraeintrag.
+
+```bash
+.venv-immoviz/bin/python immoviz/immoviz.py kameramatch immoviz/projects/noma-shg13 \
+    --bild <vorlage.jpg> --punkte immoviz/projects/noma-shg13/kameramatch/hof_fin.yaml --kamera hof_fin
+# nur lösen und Fehler ansehen (nichts schreiben, kein Blender)
+... kameramatch ... --nur-loesen
+# nach Änderungen am Modell: Kamera aus project.yaml, nur Modellbild und Überlagerung neu (rund 2 Minuten)
+... kameramatch ... --nur-render
+```
+
+Punktdatei (YAML): `groesse` (Pixelgröße, in der gemessen wurde) und `punkte`, je Punkt `name`, `px: [u, v]`
+(Bildpixel der Vorlage) und `xyz: [x, y, z]` (lokales Projektsystem; mit `rahmen: hof` als a, b, z im Hilfsrahmen
+aus `neubau.rahmen`). Optional `gewicht`, `kontrolle: true` (nur Fehler anzeigen, nicht im Ausgleich) und
+`nur_u: true` (senkrechte Kante, Höhe unbekannt: nur die Bildspalte zählt). `standpunkt_wie: <kamera>` übernimmt
+den Standpunkt einer gematchten Kamera (Ausschnitt derselben Visualisierung mit längerer Brennweite). Passpunkte
+nur an Bauteilen, die laut Plan feststehen (Attikaecken, Balkonplatten, Fensterecken, Fassadenkanten des Neubaus),
+mindestens sechs mit voller Lage, über Bildbreite und Tiefe verteilt; Nachbarn sind das, was angeglichen wird,
+und liefern keine Passpunkte.
+
+Lösung: Kameramodell wie Blender (`setup_camera`, Sensor 36 mm an der längeren Bildseite). Startwerte aus OpenCV
+`solvePnP` (SQPnP, dann iterativ) über 48 Brennweiten von 8 bis 400 mm, Ausgleich mit scipy `least_squares`
+(robust, soft L1) für Standpunkt, Blickrichtung, Brennweite und Shift bei waagrechter Kamera (Architektur-
+visualisierungen haben senkrechte Kanten, also Shift statt Kippung). Zur Kontrolle wird die freie Lösung mit
+Kippung und Rollwinkel mitgerechnet (`frei_mit_kippung`): ist sie kaum besser, stimmt die Annahme. Ein schwacher
+Zug zu kleinem Shift verhindert bei fast ebenen Punktwolken (Fassadenausschnitt im Tele) Scheinlösungen.
+**Gematcht ist eine Kamera erst, wenn der mittlere Reprojektionsfehler unter 1 % der Bildbreite liegt.**
+
+Ergebnis:
+
+| Ausgabe | Inhalt | Repo |
+|---|---|---|
+| `project.yaml` `cameras.<name>` | `pos`, `target` (waagrecht), `lens`, `shift: [x, y]`, `format: [b, h]` (Seitenverhältnis der Vorlage), `clip_start`, falls der Standpunkt in einem Nachbarbaukörper liegt (Vorlagen blenden nahe Nachbarteile oft aus), Kommentar mit Fehler | ja |
+| Konsole (JSON) | Reprojektionsfehler je Punkt in Pixeln, Mittel, Maximum, Prozent der Bildbreite, `gematcht`, Kantenabweichung gesamt und bei Nachbarn | |
+| `renders/kameramatch/<name>_modell.png` | Blender-Vorschau aus der gematchten Kamera im Format der Vorlage | nein (PNG) |
+| `renders/kameramatch/<name>_ueberlagerung.png` | drei Felder: Vorlage und Modell 50 % überblendet; Kanten (Vorlage rot, Modell blau, deckungsgleich violett); Passpunkte (Vorlage grün, Modell gelb) | nein (enthält die Vorlage) |
+| `renders/kameramatch/<name>_drahtmodell.png` | Baukörper des Baukörpermodells (BEZUG) und Nachbarfassaden (schwarz, mit Namen) als Drahtmodell über der Vorlage, ohne Blender: zeigt Element für Element, wo die Vorlage von OGD und Modell abweicht | nein (enthält die Vorlage) |
+
+Angleichen an der Überlagerung: Höhen und Lagen aus der Vorlage misst man mit dem Strahlschnitt (Pixelstrahl der
+gematchten Kamera geschnitten mit der Ebene einer Nachbarfassade oder einer Höhe), Farben aus mittleren,
+unbeleuchteten Flächen der Vorlage (nicht aus Schatten oder Spitzlichtern). Eingetragen wird parametrisch in
+`neighbour_facades` (Lage, Höhe, Achsen, Reihen, Farbe), `roofs_override` (`dz`, `dach`, Material, Gauben) und
+`neubau` (Gruppe `nb_umgebung` für Erker, Paneele, Gartenobjekte). Der Neubau bleibt beim Einreichplan; jeder
+Widerspruch Vorlage gegen Plan oder OGD wird im Umgebungsabgleich des Projekts dokumentiert. Die
+Kantenabweichung ist die Entfernung der Modellkanten zur nächsten Vorlagenkante (Median, Prozent der Bildbreite),
+„bei Nachbarn“ nur im Bildbereich der Nachbarbaukörper; Vegetation und Texturen der Vorlage machen sie zu einem
+groben Maß, maßgeblich ist der Blick auf die Überlagerung.
+
 ## Walkthrough (Kamerafahrt durch eine Wohnung)
 
 Methode nach dem Praxisbeispiel in KONZEPT.md, Abschnitt 8: Blender gibt Geometrie und Kamerapfad vor,
@@ -344,7 +459,7 @@ Bäume auf Dachgärten: `trees_override` mit `z`. Beispiel und Befunde: `project
   Ebenfalls erreichbar, aber nicht genutzt: Oberflächenmodell `dom_tif/<blatt5000>_dom_tif.zip` (Stand 2015)
   und Geländemodell `dgm_tif`.
 - Google Maps wird nicht verbaut (Lizenz), nur als interne Referenz: Street View über `svcheck`, Photorealistic
-  3D Tiles nur als Gegenprobe der Dachhöhen außerhalb des Repos. Der Schlüssel steht ausschließlich in der
+  3D Tiles über `referenz` (Bilder nur in `renders/streetview/referenz_google/`, nicht im Repo). Der Schlüssel steht ausschließlich in der
   Umgebungsvariable `GOOGLE_MAPS_API_KEY`.
 
 ## Intake-Checkliste je Objekt
@@ -355,3 +470,22 @@ Bäume auf Dachgärten: `trees_override` mit `z`. Beispiel und Befunde: `project
 - [ ] Fotos vom Bestand (Fassade, Details, Ausblicke), falls vorhanden
 - [ ] Mood-Referenzen: 15 bis 20 Bilder „so soll es wirken“, 3 bis 5 „so nicht“
 - [ ] Kameras und Lichtstimmungen mit dem Vertrieb abgestimmt
+
+## Korrekturschleife: Regeln, Freigabe, Nachkontrolle
+
+Verbindliches Regelwerk mit Begründung je Regel in `REGELN.md`, Ablauf in `KONZEPT.md` Abschnitt 9. Ohne Blender,
+Sekunden je Aufruf:
+
+```bash
+.venv-immoviz/bin/python immoviz/immoviz.py pruefen --projekt immoviz/projects/noma-shg13        # Quellen je Element
+.venv-immoviz/bin/python immoviz/immoviz.py freigabe --projekt immoviz/projects/noma-shg13       # Modellfreigabe je Kamera
+.venv-immoviz/bin/python immoviz/immoviz.py prompt --projekt immoviz/projects/noma-shg13 --cam garten_top4_weit
+.venv-immoviz/bin/python immoviz/immoviz.py nachkontrolle --vorschau <vorschau.png> --veredelt <bild.jpg>
+```
+
+- Neue Elemente in `project.yaml` und `wohnungen.yaml` bekommen ein Feld `quelle` (`"EIN S. 16"`, `"OGD Orthofoto"`,
+  `"ANN Raster 5 m"`), Beispiele in `projects/_vorlage/project.yaml`. Kommentare mit `[Kürzel]` zählen für den
+  Altbestand als Warnung.
+- `freigabe.yaml` je Projekt (Vorlage in `projects/_vorlage/`): Veredelung im Studio nur für freigegebene Kameras.
+- Prompt-Regeln für alle Projekte: `higgsfield/prompt_regeln.yaml`, werden automatisch angehängt (LEITFADEN).
+- Code: `lib/quellen.py`, `lib/freigabe.py`, `lib/nachkontrolle.py` (numpy, scipy, Pillow).

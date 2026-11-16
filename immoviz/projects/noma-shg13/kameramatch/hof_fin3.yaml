@@ -1,0 +1,21 @@
+# kameramatch: Punktpaare fuer die Vorlage SHG13_Hof_fin-3.jpg (Ausschnitt Strassenhaus 1./2. OG mit Terrasse, nicht im Repo)
+# Passpunkte nur am Neubau: Strassenhaus Hoffassade y -15,00 (Fenster rechte Achse u 16,56 bis 17,74 [EIN S. 26], Balkonplatte
+# 2. OG UK +7,08 [EIN S. 22/25]) und Pavillon Top 3 (Attika +6,78, Badfenster Nord FPH 1,70 bis +5,98, Runde 4).
+# Das Fenster 1. OG sitzt in der Vorlage rund 0,2 m hoeher als im Plan: nur seine senkrechten Kanten zaehlen.
+groesse: [1920, 1292]
+# Tele-Ausschnitt: Standpunkt und Brennweite sind entlang einer Linie gleich gut (6,3 bis 7,2 px von (22, -49) bis
+# (28, -67), Hoehe 6,5). Ohne Vorgabe wandert die Loesung in die Nachbarhaeuser (50 m, 175 mm). Standpunkt aus einer
+# Rastersuche ueber den freien Hof (x 14 bis 32, y -70 bis -36, z 4,5 bis 12, nur ausserhalb der Baukoerper):
+standpunkt: [24.0, -55.0, 6.5]
+punkte:
+  - {name: shg_fenster_2og_ol, px: [1167.3, 81.1], xyz: [17.36, -15.0, 9.77]}
+  - {name: shg_fenster_2og_or, px: [1324.3, 81.1], xyz: [18.54, -15.0, 9.77]}
+  - {name: shg_fenster_2og_ul, px: [1167.3, 283.7], xyz: [17.36, -15.0, 8.32]}
+  - {name: shg_fenster_2og_ur, px: [1324.3, 283.7], xyz: [18.54, -15.0, 8.32]}
+  - {name: shg_fenster_1og_l, px: [1167.3, 620], xyz: [17.36, -15.0, 5.5], nur_u: true}
+  - {name: shg_fenster_1og_r, px: [1325.6, 620], xyz: [18.54, -15.0, 5.5], nur_u: true}
+  - {name: shg_balkon_2og_ost, px: [1042.5, 452.8], xyz: [16.1, -16.12, 7.08], kontrolle: true}   # Pflanztrog am Plattenende, in der Vorlage breiter als im Plan
+  - {name: top3_attika_nw_no, px: [125.1, 480.3], xyz: [0.0, 6.62, 6.78], rahmen: hof}
+  - {name: top3_badfenster_or, px: [79.8, 608.8], xyz: [1.0, 6.62, 5.98], rahmen: hof, gewicht: 0.5}
+  - {name: top3_badfenster_ol, px: [33.0, 625.3], xyz: [2.42, 6.62, 5.98], rahmen: hof, gewicht: 0.5}
+  - {name: top3_badfenster_ur, px: [79.8, 705.0], xyz: [1.0, 6.62, 5.20], rahmen: hof, gewicht: 0.5}

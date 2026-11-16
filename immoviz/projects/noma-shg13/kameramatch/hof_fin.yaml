@@ -1,0 +1,26 @@
+# kameramatch: Punktpaare fuer die Vorlage SHG13_Hof_fin.jpg (Projektvisualisierung, nicht im Repo)
+# px = Pixel in der Vorlage (1920 x 1080), xyz = lokale Koordinaten (Projektsystem) bzw. a, b, z im Hofrahmen.
+# Nur Neubau-Punkte laut Einreichplan (Pavillon-Attika +6,78 [EIN S. 23], Balkonplatten Strassenhaus [EIN S. 22/25]),
+# Nachbarn sind das, was angeglichen wird, und liefern deshalb keine Passpunkte.
+groesse: [1920, 1080]
+punkte:
+  - {name: top4_attika_so_sw, px: [951, 549], xyz: [27.85, 0.0, 6.78], rahmen: hof}
+  - {name: top4_attika_so_no, px: [1167, 577], xyz: [27.85, 6.62, 6.78], rahmen: hof}
+  - {name: top4_attika_nw_no, px: [1347, 529], xyz: [15.9, 6.62, 6.78], rahmen: hof}
+  - {name: top3_attika_nw_no, px: [1472, 497.5], xyz: [0.0, 6.62, 6.78], rahmen: hof}       # Rueckecke Top 3 (Vorderecke von Top 4 verdeckt)
+  - {name: top3_attika_so_sw, px: [1208, 506], xyz: [11.95, 0.0, 6.78], rahmen: hof, gewicht: 0.5}   # knapp neben dem Glasdach Top 4
+  - {name: shg_balkon_1dg_ost, px: [1642.5, 228.8], xyz: [16.1, -16.12, 18.60]}
+  - {name: shg_balkon_5og_ost, px: [1642.5, 294.7], xyz: [16.1, -16.12, 15.72]}
+  - {name: shg_balkon_4og_ost, px: [1642.5, 359.2], xyz: [16.1, -16.12, 12.84]}
+  - {name: shg_balkon_3og_ost, px: [1642.5, 424.5], xyz: [16.1, -16.12, 9.96]}
+  - {name: shg_balkon_2og_ost, px: [1642.5, 491.0], xyz: [16.1, -16.12, 7.08]}
+  - {name: shg_kante_west, px: [1313, 400], xyz: [0.80, -15.0, 10.0], nur_u: true}
+  - {name: shg_kante_ost, px: [1728, 400], xyz: [19.55, -15.0, 10.0], nur_u: true, kontrolle: true}   # vom weissen Nachbarn teils verdeckt
+  # Wuertzlerstrasse 10, Balkonstapel Hofseite u 3,0 bis 9,4, 1,3 m tief [EIN S. 27/28]: rechte Vorderkante der Platten
+  # (UK 5,52 / 8,40 / 11,28) und Bruestungsoberkanten (+1,39 ueber UK); in der Vorlage geschlossene Bruestung
+  - {name: wue_balkon_4og_uk, px: [326, 382.5], xyz: [17.51, -68.32, 11.28]}
+  - {name: wue_balkon_4og_ok, px: [326, 237], xyz: [17.51, -68.32, 12.67], gewicht: 0.5}
+  - {name: wue_balkon_3og_uk, px: [326, 675], xyz: [17.51, -68.32, 8.40]}
+  - {name: wue_balkon_3og_ok, px: [326, 526.5], xyz: [17.51, -68.32, 9.79], gewicht: 0.5}
+  - {name: wue_balkon_2og_ok, px: [326, 817], xyz: [17.51, -68.32, 6.91], gewicht: 0.5}
+  - {name: wue_balkon_2og_uk, px: [326, 976.5], xyz: [17.51, -68.32, 5.52]}

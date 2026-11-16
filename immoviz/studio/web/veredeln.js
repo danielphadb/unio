@@ -75,6 +75,8 @@ async function openVeredeln(slug, item, gallery) {
       <div class="duo"><label class="fl"><span class="label">Format</span><select class="field" name="aspect">${(info?.aspekte || ["3:2"]).map(a => `<option ${a === "3:2" ? "selected" : ""}>${a}</option>`).join("")}</select></label>
         <label class="fl"><span class="label">Auflösung</span><select class="field" name="res">${(info?.aufloesungen || ["2k"]).map(a => `<option value="${a}">${a.toUpperCase()}</option>`).join("")}</select></label></div>
       <div id="hfcost"></div>
+      <p class="muted small">Regeln aus <span class="mono">${esc(P.regeln_datei || "higgsfield/prompt_regeln.yaml")}</span> (Geometrie-Sperre, Bäume gesperrt, Möbelplan, kein Stuck ohne Plan, Parkordnung) hängt der Server beim Absenden automatisch an.</p>
+      <label class="check"><input type="checkbox" name="force"> Ohne Modellfreigabe (freigabe.yaml) senden: force, wird protokolliert</label>
       <label class="check"><input type="checkbox" name="ok" required> Kosten bestätigt, Auftrag absenden</label>
       <div class="acts"><button type="submit" class="primary">Veredeln</button><button type="button" data-close>Abbrechen</button></div>
       <p class="muted small">Ergebnis: <span class="mono">renders/higgsfield/&lt;motiv&gt;_&lt;licht&gt;_&lt;zeit&gt;.jpg</span>, Prompt und Original in <span class="mono">index.json</span>. Geometrie danach gegen das Blender-Bild prüfen.</p>
@@ -101,7 +103,7 @@ async function openVeredeln(slug, item, gallery) {
   f.addEventListener("submit", async e => {
     e.preventDefault();
     try {
-      const j = await api(`/api/projects/${slug}/veredeln`, { method: "POST", body: { rel: item.rel, prompt: f.prompt.value, refs: st.refs, aspect: f.aspect.value, resolution: f.res.value } });
+      const j = await api(`/api/projects/${slug}/veredeln`, { method: "POST", body: { rel: item.rel, prompt: f.prompt.value, refs: st.refs, aspect: f.aspect.value, resolution: f.res.value, force: f.force.checked } });
       dlg.close(); toast(j.trockenlauf ? "Trockenlauf in der Queue" : "Veredelung in der Queue"); hfInfo(true);
     } catch (err) { toast(err.message); }
   });
@@ -129,6 +131,7 @@ async function openVideo(slug, gallery, startRel) {
       <label class="fl"><span class="label">Prompt (editierbar)</span><textarea class="field" name="prompt" rows="5" required minlength="10" maxlength="3000">${esc(String(P.bausteine?.video || "").replace(/\s+/g, " ").trim())}</textarea></label>
       <div id="hvcost"></div>
       <p class="muted small">Laut offizieller Doku nimmt das dokumentierte Kling-Modell nur ein Startbild; Endbild und Zwischenbilder werden im Live-Modus derzeit nicht gesendet (siehe higgsfield/API.md).</p>
+      <label class="check"><input type="checkbox" name="force"> Ohne Modellfreigabe (freigabe.yaml) senden: force, wird protokolliert</label>
       <label class="check"><input type="checkbox" name="ok" required> Kosten bestätigt, Auftrag absenden</label>
       <div class="acts"><button type="submit" class="primary">Video erzeugen</button><button type="button" data-close>Abbrechen</button></div>
     </form></div>`;
@@ -145,7 +148,7 @@ async function openVideo(slug, gallery, startRel) {
     e.preventDefault();
     const middle = [...f.middle.selectedOptions].map(o => o.value).filter(Boolean);
     try {
-      const j = await api(`/api/projects/${slug}/video`, { method: "POST", body: { start: f.start.value, end: f.end.value || null, middle, dauer: +f.dauer.value, prompt: f.prompt.value } });
+      const j = await api(`/api/projects/${slug}/video`, { method: "POST", body: { start: f.start.value, end: f.end.value || null, middle, dauer: +f.dauer.value, prompt: f.prompt.value, force: f.force.checked } });
       dlg.close(); toast(j.trockenlauf ? "Video-Trockenlauf in der Queue" : "Video in der Queue"); hfInfo(true);
     } catch (err) { toast(err.message); }
   });

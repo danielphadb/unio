@@ -323,7 +323,7 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     special = {str(v["bezug"]) for v in (cfg or {}).get("neighbour_facades", {}).values()}
     roof_by_id = (roofdata or {}).get("by_id", {})
     rov = R.Override((cfg or {}).get("roofs_override"))      # Dachkorrekturen von Hand (Material, Mansarde, Gauben ...)
-    mans = {}
+    mans, auf_done = {}, set()
     for b in ctx["buildings"]:
         poly = b["poly"]
         if len(poly) < 3 or b["height"] < 1.0 or str(b.get("bezug")) in special:
@@ -335,7 +335,8 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
             continue
         if K.polygon_area(poly) < 0:
             poly = poly[::-1]
-        zg = terrain(cx, cy)
+        zt = terrain(cx, cy)
+        zg = _sockel(cfg, b, zt)      # Hoehen absolut: Sockel laut Baukoerpermodell statt Gelaende am Schwerpunkt
         h = b["height"]
         col = f"nachbar_{b['id'] % len(M.NEIGHBOUR_PALETTE)}"
         nbc = (cfg or {}).get("neighbours", {}).get(str(b.get("bezug")))
@@ -350,6 +351,7 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
         faces = roof_by_id.get(b["id"])
         h_bkm = h
         ov = rov.find(b)
+        faces = R.faces_korrigiert(b, faces, ov)      # roofs_override: dach (parametrisch) bzw. dz (3D-Abgleich)
         if ov and ov.get("mansarde") and b.get("klasse") == 11:
             # Mansarddach laut roofs_override: Baukoerperteile an der Traufe kappen, Dach nach der Schleife
             mm = ov["mansarde"] if isinstance(ov["mansarde"], dict) else {}
@@ -361,7 +363,7 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
             h, faces = min(h, tr), None
         h = R.wall_top(h, faces)
         flat_mat = R.MAT.get(ov.get("material_flach"), "dach_kies") if (ov and ov.get("material_flach")) else "dach_kies"
-        K.extrude(walls, poly, -1.5, h, col, "nachbar_dach" if (faces or not roof_by_id) else flat_mat, bottom=False)
+        K.extrude(walls, poly, min(-1.5, zt - zg - 1.5), h, col, "nachbar_dach" if (faces or not roof_by_id) else flat_mat, bottom=False)
         n = len(poly)
         detailed = not (dist > detail or h < 5.0 or b.get("klasse") != 11)
         for i in (range(n) if detailed else []):
@@ -397,6 +399,9 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
             K.box(walls, f, 0.0, L, -0.08, 0.0, 3.6, 3.9, col)
         if faces:
             R.add_faces(roofs, walls, faces, 0.0, h, col, ov=ov, seed=sum(map(ord, str(b.get("bezug")))))
+        if ov and ov.get("aufbauten") and id(ov) not in auf_done:      # Liftturm, Stiegenhaus, Dachterrasse
+            auf_done.add(id(ov))
+            R.aufbauten(roofs, walls, ov, 0.0, col, poly)
         elif not roof_by_id and h_bkm > 8.0 and b.get("klasse") == 11:
             # Keine Dachdaten geladen (immoviz.py daecher): Satteldach, First parallel zur laengsten Strassenkante
             se = [i for i in range(n) if math.dist(poly[i], poly[(i + 1) % n]) > 3.0 and on_street(
@@ -438,8 +443,8 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     far.to_object(bpy, mats, coll)
     if fern:
         mk = K.MeshBuilder("fern_markant", ["fern_bau"])
-        FE.markante(mk, fern, far_ground)
-        FE.kulisse(mk, fern)
+        FE.markante(mk, fern, far_ground, (cfg or {}).get("fern_spitzen"))     # Turmhelme laut project.yaml
+        FE.kulisse(mk, fern, extra=FE.gipfel(cfg))                            # Gipfel laut project.yaml
         mk.to_object(bpy, mats, coll)
     spec = {"Fahrbahn": ("asphalt", 0.0, 0.0), "Gehsteig": ("gehsteig", 0.0, 0.12),
             "Gehweg, Radweg": ("gehsteig", 0.0, 0.12), "Ruhender Verkehr": ((cfg or {}).get("street", {}).get("parking_material", "parkstreifen"), 0.004, 0.0),
@@ -478,6 +483,17 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     T.build(trees, mats, coll, terrain, min(radius, 260), hero_poly)
 
 
+def _sockel(cfg, b, z_gelaende):
+    """Sockelhoehe eines Baukoerpers im lokalen System: T_KOTE laut Baukoerpermodell, damit Traufe und Dach (O_KOTE,
+    Dachmodell LOD2) absolut stimmen. Das Gelaende am Schwerpunkt lag im Mittel 0,44 m (bis 1 m) ueber T_KOTE, alle
+    Daecher standen entsprechend zu hoch (Abgleich gegen die 3D-Referenz, immoviz.py referenz). Abschaltbar mit
+    site.hoehen_absolut: false; bei mehr als 3 m Unterschied gilt das Gelaende."""
+    if b is None or b.get("ground") is None or not cfg.get("site", {}).get("hoehen_absolut", True):
+        return z_gelaende
+    zb = b["ground"] - cfg["site"].get("ground_wn", 0.0)
+    return zb if abs(zb - z_gelaende) < 3.0 else z_gelaende
+
+
 # ======================================================================= Anschliessende Nachbarn
 def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
     specs = cfg.get("neighbour_facades") or {}
@@ -498,7 +514,18 @@ def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
             sp["rows"] = first + [{"z": r_["z0"] + k * r_["step"], "h": r_["h"], "w": r_["w"]} for k in range(r_["n"])]
         mx, my = (sp["a"][0] + sp["b"][0]) / 2, (sp["a"][1] + sp["b"][1]) / 2
         z0 = terrain(mx + f.n[0] * 2.5, my + f.n[1] * 2.5)
-        H = sp["height"]
+        H0 = sp["height"]
+        # Hoehen absolut (Baukoerpermodell: O_KOTE = Sockel + Hoehe): Traufe, Gesims und Dach haengen am Sockel des
+        # Baukoerpers, Fenster und Tore am Gehsteig z0. dz gleicht den Unterschied aus (3D-Abgleich 16.11.2026).
+        # Bezugsteil fuer Traufe und Gesims: der Baukoerperteil hinter der Fassadenmitte (sonst der naechste)
+        teile = [b for b in ctx["buildings"] if str(b.get("bezug")) == str(sp["bezug"]) and b.get("klasse") == 11]
+        pm = (mx - f.n[0] * 2.0, my - f.n[1] * 2.0)
+        vorne = next((b for b in teile if K.point_in_poly(pm[0], pm[1], b["poly"])), None) or min(
+            teile, key=lambda b: math.dist(pm, (sum(q[0] for q in b["poly"]) / len(b["poly"]),
+                                                sum(q[1] for q in b["poly"]) / len(b["poly"]))), default=None)
+        zr = _sockel(cfg, vorne, z0)
+        dz = zr - z0
+        H = H0 + dz
         col = f"nb_{name}"
         rust = sp.get("rustika")
         mats[col] = M.plaster(bpy, col, tuple(c * 0.74 for c in M.hex_rgb(sp["color"])),
@@ -513,7 +540,7 @@ def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
         roof_mb = K.MeshBuilder(f"nachbar_{name}_dach", ["dach_blech"])
         # Baukoerper aller Teile, an der Fassade 0,6 m zurueckgeschnitten
         same = [n for n, v in specs.items() if str(v["bezug"]) == str(sp["bezug"])]
-        mans_polys, mans_ov = [], None
+        mans_polys, mans_ov, auf_done = [], None, set()
         for b in ctx["buildings"]:
             if str(sp["bezug"]) in massed:
                 break
@@ -525,9 +552,19 @@ def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
             side = sp.get("upper_material") if (sp.get("upper_material") and hb > H + 1.0) else col
             faces = roof_by_id.get(b["id"])
             ov = rov.find(b)
+            # parametrisches Dach (roofs_override `dach`) ueber dem an der Fassadenkarte beschnittenen Grundriss, sonst
+            # steht es vor der Karte ueber (kameramatch NOMA: Vorsprung von unten gesehen)
+            faces = R.faces_korrigiert({**b, "poly": poly} if (ov and ov.get("dach") and len(poly) >= 3) else b, faces, ov)
+            # jeder Baukoerperteil auf seinem eigenen Sockel (ein BEZUG kann einen ganzen Block umfassen)
+            cxb = sum(q[0] for q in b["poly"]) / len(b["poly"])
+            cyb = sum(q[1] for q in b["poly"]) / len(b["poly"])
+            zb_ = zr if b is vorne else _sockel(cfg, b, terrain(cxb, cyb))
+            if ov and ov.get("aufbauten") and id(ov) not in auf_done:
+                auf_done.add(id(ov))
+                R.aufbauten(roof_mb, mass, ov, zr, side, b["poly"])
             if ov and ov.get("mansarde"):      # Mansarddach laut roofs_override statt Stufenvolumen oder Dachmodell
                 mm = ov["mansarde"] if isinstance(ov["mansarde"], dict) else {}
-                tr = mm.get("traufe", H)
+                tr = mm.get("traufe", H0)
                 if hb >= tr - 1.5:
                     mans_polys.append(b["poly"])
                 hb, faces, side, mans_ov = min(hb, tr), None, col, ov
@@ -535,14 +572,14 @@ def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
             if faces:      # echte Dachflaechen aus dem Dachmodell ersetzen die grobe roof-Angabe
                 has_roof.add(str(sp["bezug"]))
                 hb = R.wall_top(hb, faces)
-                R.add_faces(roof_mb, mass, faces, z0, hb, side, ov=ov, seed=sum(map(ord, str(sp["bezug"]))))
+                R.add_faces(roof_mb, mass, faces, zb_, hb, side, ov=ov, seed=sum(map(ord, str(sp["bezug"]))))
             elif ov and ov.get("material_flach"):
                 top_mat = R.MAT.get(ov["material_flach"], ov["material_flach"])
-            K.extrude(mass, poly, z0 - 1.5, z0 + hb, side, top_mat, col, lines, bottom=False)
+            K.extrude(mass, poly, min(z0, zb_) - 1.5, zb_ + hb, side, top_mat, col, lines, bottom=False)
         if mans_ov:
             mm = mans_ov["mansarde"] if isinstance(mans_ov["mansarde"], dict) else {}
-            R.mansarde(roof_mb, mass, mans_polys, mans_ov, z0, mm.get("brandwand_material", col),
-                       achse=(tuple(sp["a"]), tuple(sp["b"])), traufe=mm.get("traufe", H))
+            R.mansarde(roof_mb, mass, mans_polys, mans_ov, zr, mm.get("brandwand_material", col),
+                       achse=(tuple(sp["a"]), tuple(sp["b"])), traufe=mm.get("traufe", H0))
         massed.add(str(sp["bezug"]))
         holes, wins = [], []
         for ri, r in enumerate(sp["rows"]):
@@ -581,14 +618,16 @@ def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
             gtmp.materials = [col + "_tor" if m == "haustor" else m for m in gtmp.materials]
             fr.merge(gtmp)
         for steps in sp.get("cornices", []):
-            K.cornice(orn, f, 0.0, L, [[a + z0, b_ + z0, p] for a, b_, p in steps], col + "_stuck")
+            K.cornice(orn, f, 0.0, L, [[a + z0 + (dz if a >= H0 - 3.0 else 0.0), b_ + z0 + (dz if a >= H0 - 3.0 else 0.0), p]
+                                       for a, b_, p in steps], col + "_stuck")
         if sp.get("consoles"):
             cs = sp["consoles"]
             for uc in sp["axes"]:
                 for du in (-0.7, 0.7):
                     if 0.2 < uc + du < L - 0.2:
                         K.box(orn, f, uc + du - cs["w"] / 2, uc + du + cs["w"] / 2, -cs["proj"], 0.0,
-                              z0 + cs["z"][0], z0 + cs["z"][1], col + "_stuck")
+                              z0 + cs["z"][0] + (dz if cs["z"][0] >= H0 - 3.0 else 0.0),
+                              z0 + cs["z"][1] + (dz if cs["z"][0] >= H0 - 3.0 else 0.0), col + "_stuck")
         for z_a, z_b, hexc in sp.get("bands", []):
             bm = f"{col}_band_{hexc[1:]}"
             mats[bm] = M.plaster(bpy, bm, tuple(c * 0.8 for c in M.hex_rgb(hexc)), var=0.04)
@@ -741,6 +780,17 @@ def setup_camera(scene, cfg, name):
     cam.lens = c.get("lens", 24)
     cam.sensor_width = 36
     cam.clip_end = 30000      # Fernsicht: markante Gebaeude und Huegelkette liegen bis ueber 10 km entfernt
+    # Optional (kameramatch): `format: [b, h]` = Seitenverhaeltnis der Referenzvisualisierung, Breite bleibt
+    # (nur aktiv mit `format`; die naechste Kamera ohne `format` bekommt die vorherige Aufloesung zurueck)
+    if c.get("format"):
+        if "_res_basis" not in scene:
+            scene["_res_basis"] = [scene.render.resolution_x, scene.render.resolution_y]
+        fw, fh = c["format"]
+        bx = scene["_res_basis"][0]
+        scene.render.resolution_x, scene.render.resolution_y = bx, max(2, round(bx * fh / fw))
+    elif "_res_basis" in scene:
+        scene.render.resolution_x, scene.render.resolution_y = scene["_res_basis"]
+        del scene["_res_basis"]
     yaw = math.atan2(-dx, dy)
     if c.get("vertical", True):
         ob.rotation_euler = (math.radians(90), 0, yaw)
@@ -749,6 +799,10 @@ def setup_camera(scene, cfg, name):
         cam.shift_x = 0
     else:
         ob.rotation_euler = (math.radians(90) + math.atan2(dz, r), 0, yaw)
+    if c.get("shift"):        # gematchte Kamera: Shift ausdruecklich (Einheit wie Blender, Anteil der laengeren Bildseite)
+        cam.shift_x, cam.shift_y = c["shift"]
+    if c.get("clip_start"):   # Standpunkt der Vorlage in einem Nachbarbaukoerper: Wand wegschneiden
+        cam.clip_start = c["clip_start"]
     ob.location = (px, py, pz)
     scene.camera = ob
     return ob

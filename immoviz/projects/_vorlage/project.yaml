@@ -3,8 +3,14 @@
 # Das Studio ("Neues Objekt") kopiert diese Datei nach projects/<slug>/project.yaml und setzt dabei
 # project, site.address, site.origin_gk, site.x_axis_deg, facades, altbau.facades und checks.
 # Alle anderen Zahlen sind BEISPIELWERTE aus einem Wiener Gruenderzeithaus und muessen aus den Plaenen
-# uebernommen werden (Fassaden- und Dach-Editor im Studio oder von Hand). Jede Zahl bekommt im
-# Kommentar ihre Quelle, z. B. [ANS] Strassenansicht, [GR] Grundriss, [OGD] Stadt Wien Open Data.
+# uebernommen werden (Fassaden- und Dach-Editor im Studio oder von Hand).
+#
+# QUELLEN (REGELN.md, Pruefung mit: immoviz.py pruefen --projekt projects/<slug>): jedes Gelaender, jeder Trog,
+# Weg, jede Fensterzeile, jedes Gesims/Profil, jeder Baum, jede Nachbarfassade und jede Farbe bekommt ein Feld
+#   quelle: "<Kuerzel> S. <PDF-Seite>"        z. B. quelle: "ANS S. 1", "EIN S. 16; VP Top 3", "OGD Orthofoto"
+#   quelle: "ANN <Begruendung>"               Annahme, z. B. "ANN Raster 5 m" (erscheint im Pruefbogen als offen)
+# Rangfolge: Plan/Vermessung > OGD > Kunde > Google/Apple (nur intern) > Visualisierungen. Masse und Farben aus
+# PDF-Vektoren lesen, nicht aus Pixeln. Kommentare mit [Kuerzel] zaehlen nur fuer den Altbestand (Warnung).
 #
 # Masseinheit Meter. z = 0 ist das Strassenniveau am Haustor (Kote in site.ground_wn).
 # u = Laufmeter entlang einer Fassade, von links nach rechts gesehen von der Strasse.
@@ -42,13 +48,13 @@ altbau:
   rustika: {z: [0.75, 4.40], spacing: 0.62}   # BEISPIEL: Nutung im Erdgeschoss
   sockel: 0.75
   cornices:                 # BEISPIEL: Stufen [z von, z bis, Ausladung] [ANS]
-    - {name: kordon_1og, steps: [[4.49, 4.62, 0.08], [4.62, 5.00, 0.14]]}
-    - {name: hauptgesims, steps: [[15.30, 15.55, 0.12], [15.55, 15.80, 0.30], [15.80, 16.00, 0.55]], consoles: {z: [15.30, 15.75], w: 0.16, proj: 0.40}}
+    - {name: kordon_1og, steps: [[4.49, 4.62, 0.08], [4.62, 5.00, 0.14]], quelle: "ANS S. 1"}
+    - {name: hauptgesims, steps: [[15.30, 15.55, 0.12], [15.55, 15.80, 0.30], [15.80, 16.00, 0.55]], consoles: {z: [15.30, 15.75], w: 0.16, proj: 0.40}, quelle: "ANS S. 1"}
   rows:                     # BEISPIEL: Fensterreihen fuer alle Fassaden (z Unterkante, h Hoehe, w Breite) [ANS]
-    eg:  {z: 1.80, h: 1.90, w: 1.00, type: kastenfenster, surround: fasche}
-    og1: {z: 5.50, h: 2.00, w: 1.05, type: kastenfenster, surround: fasche_verdachung}
-    og2: {z: 9.00, h: 1.85, w: 1.05, type: kastenfenster, surround: aedikula}
-    og3: {z: 12.40, h: 1.75, w: 1.05, type: kastenfenster, surround: fasche}
+    eg:  {z: 1.80, h: 1.90, w: 1.00, type: kastenfenster, surround: fasche, quelle: "ANS S. 1"}
+    og1: {z: 5.50, h: 2.00, w: 1.05, type: kastenfenster, surround: fasche_verdachung, quelle: "ANS S. 1"}
+    og2: {z: 9.00, h: 1.85, w: 1.05, type: kastenfenster, surround: aedikula, quelle: "ANS S. 1"}
+    og3: {z: 12.40, h: 1.75, w: 1.05, type: kastenfenster, surround: fasche, quelle: "ANS S. 1"}
   facades:                  # je Fassade: Achsen (Fenstermitten u), Stirnseiten, Erdgeschoss-Abweichungen
     fassade_a:
       axes: []              # im Fassaden-Editor ueber der Strassenansicht setzen [ANS]
@@ -61,10 +67,10 @@ dach:
   material: zink
   frame: rahmen_dunkel
   walls:                    # senkrechte Dachwaende mit Fenstern: Fassade, u-Bereich, z-Bereich, Ruecksprung d
-    - {facade: fassade_a, u: [0.7, 19.3], z: [16.0, 19.2], d: 0.7, windows: []}
+    - {facade: fassade_a, u: [0.7, 19.3], z: [16.0, 19.2], d: 0.7, windows: [], quelle: "GR S. 5; ANS S. 1"}
   slopes: []                # Dachschraegen: {facade, u, z, d: [unten, oben], roof_windows: []}
   railings:                 # Gelaender: {facade, u, z, d, h, type: glas}
-    - {facade: fassade_a, u: [0.7, 19.3], z: 19.2, d: 0.85, h: 1.10, type: glas}
+    - {facade: fassade_a, u: [0.7, 19.3], z: 19.2, d: 0.85, h: 1.10, type: glas, quelle: "GR S. 6"}   # nur, wo der Plan ein Gelaender zeigt
   volumes:                  # Innenvolumen, Clip-Regeln [Fassade, u|d, >=|<=, Wert]
     - {z: [16.0, 19.2], clip: [[fassade_a, d, ">=", 0.7]]}
   slabs:
@@ -79,14 +85,14 @@ street:
   cables: []
 
 # ---------------------------------------------------------------- Materialien (aus dem Farbkonzept)
-materials:
-  fassade: {color: "#E2CFA8", note: "BEISPIEL, an Farbmuster abgleichen"}
-  stuck: {color: "#EEE5D2"}
-  sockel: {color: "#B9AE98"}
-  fenster: {color: "#F4F1E8"}
-  zink: {color: "#3A3D40"}
-  rahmen_dunkel: {color: "#2B2D30"}
-  haustor: {color: "#6B4A2E"}
+materials:                  # Farbe aus Farbkonzept/Farbcode (Vektor), nie aus beleuchteten Ansichten gemessen
+  fassade: {color: "#E2CFA8", note: "BEISPIEL, an Farbmuster abgleichen", quelle: "ANN bis Farbkonzept vorliegt"}
+  stuck: {color: "#EEE5D2", quelle: "ANN"}
+  sockel: {color: "#B9AE98", quelle: "ANN"}
+  fenster: {color: "#F4F1E8", quelle: "RAL 9010 laut BAB"}
+  zink: {color: "#3A3D40", quelle: "ANN"}
+  rahmen_dunkel: {color: "#2B2D30", quelle: "ANN"}
+  haustor: {color: "#6B4A2E", quelle: "ANN"}
 
 # ---------------------------------------------------------------- Kameras und Licht
 cameras:
@@ -117,4 +123,5 @@ checks:
     levels: []
 
 # ---------------------------------------------------------------- Nachbarn (Pflicht vor dem Vertrieb, siehe KONZEPT Abschnitt 7)
-neighbour_facades: {}
+neighbour_facades: {}       # je Eintrag quelle: "SV 05/2024" oder "OGD BKM; Kunde Foto" (nie Visualisierungen)
+trees_override: []          # Korrekturen je Baum mit quelle: "OGD Orthofoto" / "SV 05/2024 belaubt"
