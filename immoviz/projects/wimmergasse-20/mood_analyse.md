@@ -308,3 +308,27 @@ Weitere für einzelne Motive: BSB01.jpg (EG-Ecke, Bewegungsunschärfe), ✨️.j
 3. Blender-Vorschau: Baumkronen gelappt statt Kugel (gleiche Lage, Höhe und Kronengröße), Autos mit Karosserieform statt Kisten.
 4. Prompt-Bausteine "Atmosphäre und Belebung": 3 bis 8 Passanten in Bewegung (teils Bewegungsunschärfe, keine Gesichter erkennbar), warmes Licht in 20 bis 30 % der Fenster, Vorhänge und Lampen hinter dem Glas, Spiegelungen, leichter Dunst, angehobene Schatten, feine Körnung; keine lesbare Schrift, keine Logos, Kennzeichen leer, keine Verkehrsschilder.
 5. Verfahren und Modell an einem Motiv testen (Abschnitt 6.4).
+
+### 6.4 Verfahren und Modell (Test am Motiv Ecke Herbst)
+
+Gleicher Prompt, gleiche Vorschau, Nachkontrolle plus Sichtprüfung:
+
+| Modell / Verfahren | Ergebnis | Entscheidung |
+|---|---|---|
+| gpt_image_2_6, quality high, 4k (3504 x 2336) | Geometrie exakt (Score 53), Eckbaum in Modellgröße, warmes Streiflicht, Putzstruktur, Vorhänge und Lampen in den Fenstern, Passanten mit Hund und Radfahrer, Schrägparker richtig | **gewählt** |
+| nano_banana_pro, 4k (bisheriger Standard) | Eckbaum deutlich schmaler, flaches Licht, kaum Leben | nein |
+| minimax_h3_image, 4k (5024 px) | brauchbar, aber Schrägparker teils längs, Fassade ockerstichig, weniger Putzdetail | nein |
+| seedream_v4_5, high | Ausschnitt verschoben, Kugelbaum bleibt, Straßenschild mit Schrift | verworfen |
+| zweistufig (Stufe B mit Ergebnis als Bild 1) | gpt_image_2_6: kaum sichtbarer Gewinn; nano_banana_pro: anderes Gebäude; minimax: Ausschnitt verschoben | nein |
+| upscale_image 4k | weicher und flauer als das Original | nein |
+
+Verfahren Runde 6: einstufig gpt_image_2_6 (high, 4k) mit der Blender-Vorschau als einzigem Bild 1, gezielte Retusche nur bei Befund. Die Blender-Vorschau wurde verbessert, ohne geprüfte Geometrie zu ändern: gelappte Baumkronen statt Kugeln (gleiche Lage, Höhe und Kronengröße), Autos mit Karosserieform statt Kisten.
+
+### 6.5 Ergebnis Runde 6
+
+- **Licht und Atmosphäre:** Streiflicht und Gegenlicht nach Himmelsrichtung, Dunst und Luftperspektive, angehobene Schatten, warm-neutrales Grading, Himmel cremig statt gesättigt.
+- **Fassade:** Putzstruktur, plastischer Stuck mit Schattenkanten, Fenster mit Spiegelungen, Vorhängen und warmem Innenlicht; warme Lokale im EG.
+- **Belebung:** 3 bis 8 Passanten je Straßenbild, Radfahrer und einzelne Figuren mit Bewegungsunschärfe, keine erkennbaren Gesichter; Kennzeichen leer, keine Verkehrsschilder und keine Schrift.
+- **Vegetation:** Eckbaum mit lockerer, natürlicher Krone in voller Modellbreite (Vorbehalt Golden Hour aus Runde 5 behoben).
+- **Neue Blickwinkel:** Ecke übereck aus dem 1. OG gegenüber mit Laub als Rahmen (Golden Hour und Abend mit warmen Fenstern), Ecklokal mit Café-Leben (Golden Hour und Abend), Wimmergasse im Morgen-Gegenlicht, Fassade frontal im Hochformat (diesig). Verworfene Standpunkte mit Grund in `renders/higgsfield/staging.json` (runde_6).
+- **Offen:** Referenzbilder als Stilreferenz hochladen (vom Kunden erlaubt, in Runde 6 von der Sitzungsberechtigung blockiert); Ausgabe 3504 px (gpt_image_2_6), für Großformat Nachweis nötig, dass Upscaling sichtbar hilft (Test negativ).
