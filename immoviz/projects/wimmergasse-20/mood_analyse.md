@@ -1,6 +1,8 @@
 # Mood-Analyse: Das Wimmer (Wimmergasse 20, 1050 Wien)
 
-Grundlage: Referenzordner in Google Drive (ID `1wOPgEK7o7V55qFRLjhspc_xi70PVLrod`), 76 Bilder direkt im Ordner (Unterordner "Renderbox..." ignoriert). Alle Bilder wurden einzeln angesehen. Die Bilder sind fremdes Referenzmaterial: Sie dienen nur als Stil-Vorlage und werden weder weitergegeben noch als Input-Bild in Bild-KI hochgeladen.
+Grundlage: Referenzordner in Google Drive (ID `1wOPgEK7o7V55qFRLjhspc_xi70PVLrod`), 76 Bilder direkt im Ordner (Unterordner "Renderbox..." ignoriert). Alle Bilder wurden einzeln angesehen. Die Bilder sind fremdes Referenzmaterial: Sie dienen nur als Stil-Vorlage und werden weder weitergegeben noch veröffentlicht oder ins Repo gelegt.
+
+Hinweis Upload (Stand 16.11.2026): Der Kunde (Daniel, Chat 16.11.2026, weitergegeben über den Koordinator) erlaubt jetzt, die Referenzbilder als Stil- und Mood-Referenz zu Higgsfield hochzuladen (höchstens 2 je Auftrag, Blender-Vorschau bleibt Bild 1 und bestimmt die Geometrie, Prompt-Satz "style reference only, do not copy buildings, layout or objects from reference images", Drive-ID je Bild in staging.json). In Runde 6 wurde der Upload trotzdem nicht ausgeführt: Die Berechtigungsprüfung der Arbeitssitzung hat das Hochladen fremder Bilder blockiert, weil die Freigabe nicht direkt vom Nutzer in der Sitzung kam. Bis zur direkten Bestätigung werden die Referenzen weiter nur angesehen und im Prompt beschrieben.
 
 Objekt: renoviertes Gründerzeit-Eckhaus, sandbeiger Putz, weiße Kastenfenster, Stuck, Dachausbau in anthrazitem Zink.
 
@@ -255,3 +257,54 @@ Bausteine je Lichtstimmung. Vor jeden Baustein den Objekt-Block setzen, danach M
 
 **Negativ-Baustein (immer anhängen):**
 > Avoid: oversaturated blue sky, harsh midday sun, HDR look, plastic CGI surfaces, distorted vertical lines, posing models looking into the camera, futuristic glass towers, palm trees, text or logos.
+
+---
+
+## 6. Qualitätsabgleich Runde 5 gegen Referenzen
+
+Stand 16.11.2026, Kundenwunsch (Chat 16.11.2026): "vom Mood der Renderings und von der Qualität noch einmal den Referenzordner checken, etwas drauflegen und ggf. andere Winkel probieren". Referenzordner neu geladen (Drive-Ordner `1wOPgEK7o7V55qFRLjhspc_xi70PVLrod`, 25 Außenbilder in voller Auflösung, nur im Scratchpad), direkt neben die 13 Außenbilder der Runde 5 (`renders/higgsfield/*_r5.jpg`) gelegt. Vergleichsbogen nur intern (Scratchpad, nicht im Repo).
+
+### 6.1 Die zehn stärksten Außenreferenzen
+
+| # | Datei (Drive-ID) | warum stark | was wir übernehmen |
+|---:|---|---|---|
+| 5 | -41.jpg, Pazelhof (`1kpqnJMgeq58Q6pmA3yBgG6JFhgOcHsXN`) | Wiener Eckhaus füllt rund 70 % des Bildes, Augenhöhe, diesiges Licht, Stuck plastisch, Boden nur ein schmaler Streifen | Bildaufbau: Haus groß, wenig Straße, Himmel cremig |
+| 13 | Жилой комплекс ... (`1XDg3qnaVXqZoFxDCr_Z5u7VGCzbIirDt`) | tiefes Streiflicht mit langen Schatten über das Pflaster, rotes und gelbes Laub als Rahmen, Laub am Boden, warmes Innenlicht im EG | Herbstlicht, Schatten am Boden, Laubrahmung, Hochformat |
+| 1 | Gallery - TMRW.jpg (`1ITh4TX30NyK8Q8CfpWrN6Zr539u2fwD-`) | Gegenlicht durch Baumkronen, Sonnenstern, Dunst, viele Menschen in mehreren Bildebenen | Gegenlicht und Luftperspektive, Menschen in Vorder-, Mittel- und Hintergrund |
+| 62 | Tom Darmon Architecture.jpg (`1FomBmnfcEP-wz5c4nDObjsfolmCP7I0R`) | blaue Stunde, nasser Asphalt mit Spiegelungen, warmes EG, Laub oben als Rahmen, Radfahrer und Fußgänger | Abendmotiv: Spiegelungen, warmes Innenlicht, Rahmung |
+| 38 | Luxus Immobilien in Wien ... CROWND (`1l3rh3H2o_HWBU0Rec7IXmPAb3Rz8FMXS`) | Wiener Gründerzeit mit Dachausbau, leicht erhöhter Standpunkt, gerade Vertikalen | erhöhter Blick übereck, Dachausbau als Krone |
+| 2 | Instagram-6.jpg (`1Ls2EVhj0hfx1nSyQwWoiQOmVQWdLA9kH`) | frontal und ruhig, diesig, Passant mit Bewegungsunschärfe, Innenräume hinter den Fenstern sichtbar (Vorhänge, Menschen) | Frontalmotiv, Leben hinter den Fenstern, Bewegungsunschärfe |
+| 44 | Sergison Bates architects.jpg (`156jgBu3AKXxNFwg_VhiuYGhDlKvpdKY-`) | gelbe Straßenbäume vor der Fassade, Licht nach Regen nur im unteren Teil, viele Passanten, angeschnittene Figur vorne, Schaufenster hell | Herbststraße mit Leben, Vordergrundfigur |
+| 29 | Instagram-2.jpg (`1nUiGlB_K0ZQpW9AJU9Lm9YQ9aNuMhZHh`) | Lokal mit Gästen und Kellner, warmes Innenlicht, Autos unscharf im Vordergrund, Tele-Kompression | EG-Leben, Bewegungsunschärfe, Wärme |
+| 33 | -33.jpg (`1ZpfADIR4CArzhSi9mpVST2RUYsntOXOH`) | Ast als Rahmen oben, nasser Boden mit Laub, dramatischer, aber entsättigter Himmel | Vordergrundrahmung, Bodenreflexe |
+| 39 | -31.jpg (`125EcNmi47RtNqtlrAoPITalSzd5nbkQz`) | Kronen links und rechts rahmen das Haus, gedämpfte Filmpalette, Vorhänge in den Fenstern | Farbgrading, Rahmung, Fensterinnenleben |
+
+Weitere für einzelne Motive: BSB01.jpg (EG-Ecke, Bewegungsunschärfe), ✨️.jpg (Gasse mit Café), -42.jpg (Wiener Gasse), -11.jpg (Haustür mit Laternen), -32.jpg (Hauptgesims), "Mountain Hotel ..." und Lime Tower.jpg (Rückenfigur Terrasse), "K&+ Architecture ..." (Winter).
+
+### 6.2 Was Runde 5 gegenüber den Referenzen fehlt
+
+| Merkmal | Referenzen | Runde 5 | Ursache |
+|---|---|---|---|
+| Bildaufbau | Haus füllt 60 bis 75 % der Fläche, 28 bis 50 mm, oft Hochformat, Boden höchstens 15 % | Eckmotive mit 20 mm: Haus rund 40 % der Fläche, untere 30 bis 35 % leere Kreuzung, Haus mittig und klein | Kameras `ecke`, `ecke_orbit` sehr weitwinklig und tief |
+| Vordergrundrahmung | 6 von 10: Ast, Laub, Person oder Auto unscharf im Vordergrund | keine | Kamera auf freier Kreuzung |
+| Lichtführung | Streif- oder Gegenlicht, Schatten auf dem Pflaster, Lichtstrahlen | Herbst und Golden Hour: Sonne im Rücken der Kamera, Wimmergassen-Fassade frontal angestrahlt, flach | Ecke von Südwesten gesehen, Sonne steht im Südwesten |
+| Atmosphäre, Tiefe | Dunst, Luftperspektive, ferne Straße heller und weicher | ferne Straße genauso scharf und kontrastreich wie das Haus | Prompt verlangte "sharp, crisp detail everywhere" |
+| Himmel, Farbgrading | cremig bis milchig, Schatten angehoben, warm-neutral, Grün oliv, leichte Körnung | gesättigtes Blau (Herbst, Blaue Stunde), Orangeverlauf (Golden Hour), sehr sauber digital | Prompt, kein Grading-Baustein |
+| Fassade, Putz | Putzstruktur und Stuck mit Schattenkanten, leichte Patina | Putz fast weiß überstrahlt, Stuck verwaschen, wenig Mikrokontrast | Frontlicht, KI-Glätte bei 2k |
+| Fenster | Spiegelungen von Himmel und Bäumen, Vorhänge, Lampen, Menschen innen | Glas grau oder schwarz, ohne Innenleben (außer Blaue Stunde) | Vorschau ohne Innenleben, Prompt ohne Hinweis |
+| Innenlicht | warme Fenster und Lokale auch tagsüber in Herbst und Dämmerung | nur Blaue Stunde und Winter | Lichtszenario und Prompt |
+| Menschen | 3 bis 20, verschiedene Größen, in Bewegung, angeschnitten, Radfahrer | 1 bis 3 winzige Passanten | Prompt "a few pedestrians" |
+| Bewegungsunschärfe | Passanten, Autos, Radfahrer | keine | Prompt |
+| Vegetation | lockere, unregelmäßige Kronen mit Durchblicken, Farbverlauf grün-gelb-orange | Eckbaum als symmetrische Kugel, gleichmäßig gelb; in Golden Hour 30 % schmaler | Kugelkrone in der Blender-Vorschau |
+| Boden | Pflaster, nasse Stellen, Licht- und Schattenflecken, Laub | glatter, gleichmäßiger Asphalt, wenig Laub | Vorschau, Prompt |
+| Autos | dezent, teils unscharf, Klassiker | gleichförmige Reihen moderner Kompaktwagen, teils Typenschriftzüge | Kisten in der Vorschau |
+| Schärfe, Auflösung | ruhige Fotoschärfe | 2528 px mit KI-Glätte (Bodenbilder), Drohnen nativ 4k | Auflösung 2k |
+| Details | Haustür, Gesims, Fenster mit Licht und Tiefe | Detailbilder flach frontal, Haustor ohne Stimmung | Kamera und Licht |
+
+### 6.3 Folgerungen für Runde 6
+
+1. Neue Kameras mit 28 bis 35 mm, teils Hochformat 4:5, Haus groß im Bild, Boden knapp; bestehende Weitwinkelmotive bleiben als Serie, bekommen aber Belebung, Licht und Grading.
+2. Licht nach Himmelsrichtung wählen: Streiflicht auf der Stolberggassen-Fassade im Herbst, Gegenlicht die Wimmergasse hinunter am Herbstmorgen, Abend mit warmen Fenstern.
+3. Blender-Vorschau: Baumkronen gelappt statt Kugel (gleiche Lage, Höhe und Kronengröße), Autos mit Karosserieform statt Kisten.
+4. Prompt-Bausteine "Atmosphäre und Belebung": 3 bis 8 Passanten in Bewegung (teils Bewegungsunschärfe, keine Gesichter erkennbar), warmes Licht in 20 bis 30 % der Fenster, Vorhänge und Lampen hinter dem Glas, Spiegelungen, leichter Dunst, angehobene Schatten, feine Körnung; keine lesbare Schrift, keine Logos, Kennzeichen leer, keine Verkehrsschilder.
+5. Verfahren und Modell an einem Motiv testen (Abschnitt 6.4).

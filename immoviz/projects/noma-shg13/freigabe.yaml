@@ -67,4 +67,64 @@ kameras:
     von: Kunde, Abstimmungsseite 16.11.2026
     notiz: 'Runde 6: APT. 06 unter Pavillon Top 3, Raumhoehe 3,14, Hoehen absolut,
       Fenster 1,60, Kochfeld ohne Laden, Gang Terrazzo'
+  top3_aussen_gruendach:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Aussen, Terrassen, Gaerten freigegeben, EG/1. OG freigegeben;
+      Ausstattung (Troege, Pergola, Moebel, Leuchten) laut Kundenwunsch'
+  top4_aussen_gruendach:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Aussen, Terrassen, Gaerten freigegeben, EG/1. OG freigegeben;
+      Ausstattung (Troege, Pergola, Moebel, Leuchten) laut Kundenwunsch'
+  pavillons_drohne_sued:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Aussen, Terrassen, Gaerten freigegeben, EG/1. OG freigegeben;
+      Ausstattung (Troege, Pergola, Moebel, Leuchten) laut Kundenwunsch'
+  top3_terrasse_garten:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Aussen, Terrassen, Gaerten freigegeben, EG/1. OG freigegeben;
+      Ausstattung (Troege, Pergola, Moebel, Leuchten) laut Kundenwunsch'
+  top4_terrasse_garten:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Aussen, Terrassen, Gaerten freigegeben, EG/1. OG freigegeben;
+      Ausstattung (Troege, Pergola, Moebel, Leuchten) laut Kundenwunsch'
+  garten_top3_weit:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Aussen, Terrassen, Gaerten freigegeben, EG/1. OG freigegeben;
+      Ausstattung (Troege, Pergola, Moebel, Leuchten) laut Kundenwunsch'
+  garten_top4_weit:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Aussen, Terrassen, Gaerten freigegeben, EG/1. OG freigegeben;
+      Ausstattung (Troege, Pergola, Moebel, Leuchten) laut Kundenwunsch'
+  top3_pergola_detail:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Aussen, Terrassen, Gaerten freigegeben, EG/1. OG freigegeben;
+      Ausstattung (Troege, Pergola, Moebel, Leuchten) laut Kundenwunsch'
+  top4_pergola_detail:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Aussen, Terrassen, Gaerten freigegeben, EG/1. OG freigegeben;
+      Ausstattung (Troege, Pergola, Moebel, Leuchten) laut Kundenwunsch'
+  hof_fin:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 7: Top 3/4 Aussen, Terrassen, Gaerten freigegeben, EG/1. OG freigegeben;
+      Ausstattung (Troege, Pergola, Moebel, Leuchten) laut Kundenwunsch'
 stand: '2026-11-16'

@@ -980,8 +980,8 @@ cameras:
   # Runde 7 (Kunde: weitere Blickwinkel, Ausstattung): Detail Pergola und Pflanzen je Terrasse, Blick vom Verbindungsweg
   top3_pergola_detail:    {pos: [11.48, -34.63, 5.0], target: [9.03, -37.82, 4.6], lens: 24, vertical: true}     # Terrasse Top 3 vor der HST (a 13,0 / b 5,0) zur Pergola an der Wand a 15,90
   top4_pergola_detail:    {pos: [13.43, -49.66, 5.0], target: [10.4, -52.63, 4.6], lens: 22, vertical: true}     # Terrasse Top 4 (a 28,15 / b 5,25) zur Pergola an der Wand a 30,77
-  weg_pavillons:          {pos: [12.19, -19.96, 5.44], target: [11.67, -41.65, 4.8], lens: 22, vertical: true}   # Verbindungsweg a -1,5 / b 7,35 auf der Rampe (FOK rund +3,84), Blick entlang beider Pavillons
-  weg_pavillons_b:        {pos: [11.98, -18.47, 5.52], target: [9.61, -35.85, 4.6], lens: 20, vertical: true}    # Variante: Podest-Ende a -3,0 / b 7,3, diagonal
+  weg_pavillons:          {pos: [14.12, -35.24, 5.1], target: [3.62, -36.27, 4.4], lens: 20, vertical: true}    # Verbindungsweg zwischen den Pavillons (a 13,9 / b 7,55, Weg +3,50), Blick ueber die Terrasse Top 3: links Pergolawand Top 4, rechts HST Top 3
+  # verworfen Runde 7 (Vorschau): Weg a -1,5 und Podest a -3,0 entlang der Pavillons (nur Nordwand Top 3 sichtbar, Top 4 verdeckt)
   # Runde 5: Kameras der Vorlagen SHG13_Hof_fin, -2, -3, -4 aus `immoviz.py kameramatch` (Punkte in kameramatch/*.yaml)
   hof_fin: {pos: [28.451, -70.713, 11.12], target: [5.037, -51.957, 11.12], lens: 19.09, shift: [0.0678, -0.0742], format: [1920, 1080], clip_start: 2.7, vertical: true}   # kameramatch SHG13_Hof_fin.jpg, 17 Punkte, Fehler 4.9 px = 0.26 % Bildbreite
   hof_fin2: {pos: [9.337, -29.774, 14.279], target: [1.172, -0.907, 14.279], lens: 19.42, shift: [0.2861, 0.2989], format: [1920, 1284], vertical: true}   # kameramatch SHG13_Hof_fin-2.jpg, 6 Punkte, Fehler 6.5 px = 0.34 % Bildbreite

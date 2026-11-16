@@ -89,8 +89,8 @@ wohnungen:
       wohnkueche_ecke: {pos_px: [3185, 2300], target_px: [3860, 1230], lens: 18, h: 1.40}   # Runde 2: Suedwestecke, diagonal zu Kueche und Hebeschiebetuer
       wohnkueche_vr:   {pos_px: [2950, 1250], target_px: [3870, 2330], lens: 18, h: 1.40}   # Runde 2: aus dem Vorraum durch die Oeffnung zu HST und Suedfenster
       wohnkueche_aussicht: {pos_px: [3180, 2318], target_px: [3945, 1557], lens: 20, h: 1.50}  # Runde 3: Suedwestecke, Blick durch die HST auf Terrasse und Innenhof
-      wohnkueche_rueckwand: {pos_px: [3275, 2000], target_px: [3945, 1480], lens: 20, h: 1.50}  # Runde 3 Vorschlag, Runde 7: vor dem Sideboard (vorher 3170/1980, im Moebel), Kueche links als Seitenwand
-      hst_aussicht: {pos_px: [3240, 1560], target_px: [3945, 1560], lens: 20, h: 1.45}   # Runde 7: von der Kueche gerade durch die HST auf Terrasse, Pergola und Rankgitter
+      wohnkueche_rueckwand: {pos_px: [3275, 2000], target_px: [3945, 1480], lens: 20, h: 1.50, exposure: 1.3, moebelplan: "links (Nordwand): Kuechenzeile Nuss mit Terrazzo-Platte ueber die ganze Wand bis in die Ecke, keine Oberschraenke; geradeaus (Ostwand): Hebeschiebetuer zur Terrasse; vorne links: runder Esstisch Nuss mit vier Boucle-Stuehlen; rechts an der Ostwand: Sofa Boucle rose, davor Couchtisch Travertin"}  # Runde 3 Vorschlag, Runde 7: vor dem Sideboard (vorher 3170/1980, im Moebel), Kueche links als Seitenwand
+      hst_aussicht: {pos_px: [3240, 1560], target_px: [3945, 1560], lens: 20, h: 1.45, exposure: 1.3, moebelplan: "links (Nordwand): Kuechenzeile Nuss mit Terrazzo-Platte; Mitte geradeaus: Hebeschiebetuer mit Blick auf Pflanztrog, Rankgitter und Pergola; rechts an der Ostwand: Sofa Boucle rose; vorne rechts angeschnitten: runder Esstisch Nuss"}   # Runde 7: von der Kueche gerade durch die HST auf Terrasse, Pergola und Rankgitter
   top04: &top04
     plan: vp_top4
     titel: Top 4, 1. OG Hof, 62,80 m2, Terrasse 15,45 m2 [VP]
@@ -131,8 +131,8 @@ wohnungen:
       wohnkueche_ecke: {pos_px: [3232, 2300], target_px: [3907, 1230], lens: 18, h: 1.40}
       wohnkueche_vr:   {pos_px: [2997, 1250], target_px: [3917, 2330], lens: 18, h: 1.40}
       wohnkueche_aussicht: {pos_px: [3227, 2318], target_px: [3992, 1577], lens: 20, h: 1.50}  # Runde 3
-      wohnkueche_rueckwand: {pos_px: [3322, 2000], target_px: [3992, 1480], lens: 20, h: 1.50}  # Runde 3 Vorschlag, Runde 7: vor dem Sideboard
-      hst_aussicht: {pos_px: [3287, 1560], target_px: [3992, 1560], lens: 20, h: 1.45}   # Runde 7
+      wohnkueche_rueckwand: {pos_px: [3322, 2000], target_px: [3992, 1480], lens: 20, h: 1.50, moebelplan: "links (Nordwand): Kuechenzeile Eiche mit Marmorplatte gruen-grau ueber die ganze Wand bis in die Ecke, keine Oberschraenke; geradeaus (Ostwand): Hebeschiebetuer zur Terrasse; vorne links: runder Esstisch Eiche mit vier Samtstuehlen rost; rechts an der Ostwand: Sofa creme, davor Couchtisch Eiche"}  # Runde 3 Vorschlag, Runde 7: vor dem Sideboard
+      hst_aussicht: {pos_px: [3287, 1560], target_px: [3992, 1560], lens: 20, h: 1.45, moebelplan: "links (Nordwand): Kuechenzeile Eiche mit Marmorplatte; Mitte geradeaus: Hebeschiebetuer mit Blick auf Pflanztrog, Rankgitter und Pergola; rechts an der Ostwand: Sofa creme; vorne rechts angeschnitten: runder Esstisch Eiche"}   # Runde 7
   # Runde 3: Terrassenbilder mit Innenraum hinter der offenen Hebeschiebetuer. Aussenhuelle bleibt sichtbar, nur die
   # Innenraumkarte und das Aussenglas der Pavillons sind aus; Innenhuelle aus dem VP (2 cm versetzt, siehe plaene).
   # Kamera auf der Terrasse in Plan-Pixeln (Hofrahmen a = (px - corner_x) * 0,005072, b = (2410 - py) * 0,005072).
@@ -141,53 +141,63 @@ wohnungen:
     plan: vp_top3_aussen
     objekt_ausblenden: [nb_top3_innen, nb_top3_glas]
     kameras:
-      hst: {pos_px: [4606, 1345], target_px: [3945, 1897], lens: 18, h: 1.50, exposure: 0.0}   # Runde 7: Ecke NO (a 15,3 / b 5,4), vorher SO (4684/2144), dort steht jetzt das Sofa
-      abend: {pos_px: [4606, 1345], target_px: [3945, 1897], lens: 18, h: 1.50, light: blaue_stunde, exposure: 1.2}   # Runde 7: Abendbild, Leuchten an
+      hst: {pos_px: [4606, 1345], target_px: [3945, 1897], lens: 18, h: 1.50, exposure: 0.0, moebelplan: "Terrasse: links Pergola mit Sofa (angeschnitten) und zwei Sessel, rechts Hebeschiebetuer offen; innen hinter der Tuer Kueche an der Nordwand (rechts), Esstisch und Sofa wie Platzhalter"}   # Runde 7: Ecke NO (a 15,3 / b 5,4), vorher SO (4684/2144), dort steht jetzt das Sofa
+      abend: {pos_px: [4606, 1345], target_px: [3945, 1897], lens: 18, h: 1.50, light: blaue_stunde, exposure: 1.2, moebelplan: "Terrasse: links Pergola mit Sofa (angeschnitten) und zwei Sessel, rechts Hebeschiebetuer offen; innen hinter der Tuer Kueche an der Nordwand (rechts), Esstisch und Sofa wie Platzhalter"}   # Runde 7: Abendbild, Leuchten an
   top04_terrasse:
     <<: *top04
     plan: vp_top4_aussen
     objekt_ausblenden: [nb_top4_innen, nb_top4_glas]
     kameras:
-      hst: {pos_px: [4505, 1335], target_px: [3992, 1937], lens: 18, h: 1.50, exposure: 0.0}   # Runde 7: Ecke NO (a 30,45 / b 5,45), vorher a 30,6 / b 1,5 (jetzt Stuhl und Trog)
-      abend: {pos_px: [4505, 1335], target_px: [3992, 1937], lens: 18, h: 1.50, light: blaue_stunde, exposure: 1.2}   # Runde 7: Abendbild
+      hst: {pos_px: [4505, 1335], target_px: [3992, 1937], lens: 18, h: 1.50, exposure: 0.0, moebelplan: "Terrasse: links Esstisch fuer vier unter der Pergola, rechts Hebeschiebetuer offen; innen hinter der Tuer Kueche an der Nordwand (rechts), Esstisch und Sofa wie Platzhalter"}   # Runde 7: Ecke NO (a 30,45 / b 5,45), vorher a 30,6 / b 1,5 (jetzt Stuhl und Trog)
+      abend: {pos_px: [4505, 1335], target_px: [3992, 1937], lens: 18, h: 1.50, light: blaue_stunde, exposure: 1.2, moebelplan: "Terrasse: links Esstisch fuer vier unter der Pergola, rechts Hebeschiebetuer offen; innen hinter der Tuer Kueche an der Nordwand (rechts), Esstisch und Sofa wie Platzhalter"}   # Runde 7: Abendbild
 
   top26_2:
     plan: manuell
-    titel: Top 26-2, 2. DG, Wohnkueche 46,47 m2 unter den Schraegen, Terrasse 6,08 m2 [VP, EIN S. 13]
-    floor_z: 21.82                   # FOK 2. DG +21,82 [EIN S. 22]
-    height: 2.80                     # RDUK +24,69, lichte Hoehe 2,80 [ANN]
+    titel: Top 26-2, 2. DG, Wohnkueche 46,47 m2 unter der Hofschraege, Terrasse 6,08 m2 im Dacheinschnitt [EIN S. 13]
+    # Runde 7: an das Dach nach Runde 6 angepasst (vorher Gaubengruppe mit drei Fenstertueren 0,94 x 2,52 hinter der BFL, Runde 1).
+    # EIN S. 13/14/26: Hofseite 45 Grad, drei Dachflaechenfenster 0,94 x 2,52 (x 1,96 bis 5,02), Kniestock an der Dachdaemmung
+    # y -12,42, RH-Linien 1,50 / 2,10 / 2,50 bei y -11,78 / -11,19 / -10,77 (Neigung 45 Grad), Dacheinschnitt x 7,07 bis 10,12
+    # mit HST 260/230 in der Wand y -12,66 bis -12,97, Treppe 17 Stg. aufs Dach x 5,63 bis 7,07 (eingehaust, ANN).
+    floor_z: 21.82                   # FOK 2. DG +21,82 [EIN S. 13, S. 23]
+    height: 2.80                     # Flachteil 2,80 [ANN, RH 2,50 liegt noch in der Schraege]
     fenster_stil: modern
-    slab_rect: [0.40, -15.70, 10.35, -7.50]
+    slab_rect: [0.40, -12.97, 10.35, -7.50]
     walls:
-      - rect: [0.40, -15.70, 0.55, -7.50]                    # Feuermauer Suedwest (Kuechenzeile)
+      - {rect: [0.40, -12.60, 0.55, -7.50], quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}                    # Feuermauer Suedwest (Kuechenzeile)
       - rect: [0.55, -7.72, 7.75, -7.60]                     # Wand zu Bad, WC und Zimmer
         openings: [{span: [1.15, 2.05], z: [0.0, 2.10], type: tuer}]
       - rect: [7.75, -10.75, 7.87, -7.60]                    # Wand zum Gang
         openings: [{span: [-9.70, -8.80], z: [0.0, 2.10], type: tuer}]
       - rect: [8.00, -10.65, 10.05, -8.55]                   # Liftschacht
-      - rect: [10.20, -15.68, 10.35, -10.65]                 # Trennwand zu Top 23
-      - {rect: [0.55, -15.68, 1.85, -15.38], h: 1.10}        # Kniestock unter der Hofschraege
-      - rect: [1.85, -15.68, 5.05, -15.38]                   # Gaubengruppe Hof, drei Fenstertueren 0,94 x 2,52 [EIN S. 13]
-        openings:
-          - {span: [1.98, 2.89], z: [0.0, 2.52], type: glastuer}
-          - {span: [3.03, 3.95], z: [0.0, 2.52], type: glastuer}
-          - {span: [4.02, 4.95], z: [0.0, 2.52], type: glastuer}
-      - {rect: [5.05, -15.68, 7.75, -15.38], h: 1.10}
-      - rect: [7.75, -15.68, 10.20, -15.38]                  # Austritt zur Terrasse 6,08 m2
-        openings: [{span: [8.30, 9.20], z: [0.0, 2.30], type: glastuer}]
-    slopes:                                                  # RH 1,50 / 2,10 / 2,50 m laut Plan, Neigung rund 54 Grad
-      - {x: [0.55, 1.85], from: [-15.38, 22.92], to: [-14.06, 24.62]}
-      - {x: [5.05, 7.75], from: [-15.38, 22.92], to: [-14.06, 24.62]}
-    terrace:
-      - {rect: [7.75, -17.30, 9.70, -15.68]}
-    railings:
-      - {rect: [7.75, -17.32, 9.70, -17.28]}
-    objekt_ausblenden: [nb_shg_dach]  # Mansardenflaechen liegen vereinfacht innerhalb der Wohnung
+      - {rect: [10.20, -12.97, 10.35, -10.65], quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}                 # Trennwand zu Top 23
+      - {rect: [0.55, -12.60, 5.63, -12.42], h: 0.86, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}          # Kniestock unter der Hofschraege (Daemmung innen, OK = Schraege)
+      - {rect: [5.63, -12.60, 7.07, -11.40], quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}                   # Einhausung der Treppe aufs Dach [ANN Lage aus S. 13]
+      - rect: [7.07, -12.97, 10.20, -12.66]                  # Wand zum Dacheinschnitt mit HST 260/230 FPH 0,00
+        quelle: "EIN S. 13 (260/230), S. 26 (Glas vektoriell)"
+        openings: [{span: [7.45, 10.05], z: [0.0, 2.30], type: glastuer}]
+    slopes:                                                  # Hofschraege 45 Grad aus den RH-Linien [EIN S. 13]
+      - x: [0.55, 5.63]
+        from: [-12.42, 22.68]
+        to: [-10.48, 24.62]
+        quelle: "EIN S. 13 (RH 1,50/2,10/2,50), S. 14/26 (Dachflaechenfenster 94/252)"
+        roof_windows:
+          - {x: [1.96, 2.94], t: [0.02, 0.80]}
+          - {x: [3.00, 3.98], t: [0.02, 0.80]}
+          - {x: [4.04, 5.02], t: [0.02, 0.80]}
+    # Grossmoebel als Platzhalter laut EIN S. 13 (Moeblierung): Zeile an der Feuermauer, Insel mit Kochfeld, runder Tisch, Sofa
+    einbauten:
+      - {rect: [0.55, -10.26, 1.15, -7.98], z: [0.0, 0.92], mat: t34_eiche, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
+      - {rect: [2.07, -10.01, 3.05, -8.23], z: [0.0, 0.92], mat: t34_marmor, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
+      - {rect: [4.28, -10.13, 6.65, -9.24], z: [0.0, 0.42], mat: t34_sofa_creme, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
+      - {rect: [4.28, -9.44, 6.65, -9.24], z: [0.42, 0.80], mat: t34_sofa_creme, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
+    zylinder:
+      - {c: [3.47, -11.32], r: 0.6, z: [0.0, 0.75], mat: t34_eiche, seg: 32, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
+    objekt_ausblenden: [nb_shg_dach_innen]   # Runde 7: Dach nach Plan bleibt sichtbar (Schraege, Dachflaechenfenster, Terrasse), nur Innenkarten aus
     light: spaetsommer_mittag
     exposure: 1.3
     kameras:
-      wohnkueche_gauben:   {pos: [6.9, -8.3], target: [2.6, -15.5], lens: 24, h: 1.40}   # Kueche rechts, Gaubengruppe, Schraege links
-      wohnkueche_terrasse: {pos: [1.4, -8.6], target: [9.2, -15.6], lens: 24, h: 1.35}  # Gegenblick zu Terrassentuer und Schraege
+      wohnkueche_dachfenster: {pos: [7.2, -9.0], target: [2.5, -12.0], lens: 20, h: 1.45}   # Runde 7: neben dem Sofa, Dachflaechenfenster links, Kueche rechts
+      wohnkueche_terrasse: {pos: [1.6, -8.0], target: [8.7, -12.8], lens: 20, h: 1.40}     # Runde 7: Gegenblick zu HST und Terrasse im Dacheinschnitt
 
   # Eigene Koordinaten aus dem Moeblierungsplan 1:50 [INT S. 3]: X = von der Wand zum Strassenhaus nach rechts (0 bis 5,03),
   # Y = von der Fensterwand (Gartenstreifen Sued) Richtung Gang (0 bis 5,936). Lage: Hofrahmen a = -10,70 bis -5,67,
