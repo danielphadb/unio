@@ -329,6 +329,12 @@ def set_interior_emission(bpy, strength: float):
         for n in m.node_tree.nodes:
             if n.type == "BSDF_PRINCIPLED":
                 n.inputs["Emission Strength"].default_value = strength * k * 6.0
+    # Optional (neubau.ausstattung, Materialart leuchte): Aussenleuchten an, sobald das Licht Innenlicht verlangt
+    for m in bpy.data.materials:
+        if m.name.startswith("aus_leuchte") and m.node_tree:
+            for n in m.node_tree.nodes:
+                if n.type == "BSDF_PRINCIPLED":
+                    n.inputs["Emission Strength"].default_value = strength * 40.0
 
 
 SEASONS = {

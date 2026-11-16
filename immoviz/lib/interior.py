@@ -254,7 +254,24 @@ class Apartment:
                 box_xy(mb_frame, xa, xb, ya, yb, z0 + sill - 0.03, z0 + sill, "fensterbrett")
             box_xy(mb_wall, xa, xb, ya, yb, z0 + top, z1, "innen_wand")
             self._window(mb_frame, mb_glass, xa, xb, ya, yb, z0 + sill, z0 + top, kind)
+        self.einbauten_px(mb_wall, mb_glass)
         return stats
+
+    def einbauten_px(self, mw, mg):
+        """Optional (wohnungen.yaml, Runde 7 Noma): Grossmoebel als Platzhalter in Planpixeln, damit Higgsfield Kueche,
+        Tisch und Sofa nicht an andere Waende verschiebt (REGELN R1). einbauten: [{px: [x0, y0, x1, y1], z, mat}],
+        zylinder: [{c_px: [x, y], r (m), z, mat}]. Gleiche Felder wie bei ManualApartment, nur Lage in Planpixeln."""
+        conv = {"floor_z": self.c["floor_z"], "einbauten": [], "zylinder": []}
+        for e in self.c.get("einbauten", []):
+            if "px" not in e:
+                continue
+            (xa, ya), (xb, yb) = self._raw(*e["px"][:2]), self._raw(*e["px"][2:])
+            conv["einbauten"].append(dict(e, rect=[min(xa, xb), min(ya, yb), max(xa, xb), max(ya, yb)]))
+        for c in self.c.get("zylinder", []):
+            if "c_px" in c:
+                conv["zylinder"].append(dict(c, c=list(self._raw(*c["c_px"]))))
+        if conv["einbauten"] or conv["zylinder"]:
+            ManualApartment(conv).einbauten(mw, mg)
 
     def _window(self, mf, mg, xa, xb, ya, yb, za, zb, kind):
         """Kastenfenster: äußere und innere Ebene, je Rahmen, Mittelstulp, Kämpfer, Glas."""

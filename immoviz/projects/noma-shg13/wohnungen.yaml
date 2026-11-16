@@ -32,12 +32,12 @@ plaene:
     wand_farbe: "#4E604C"
     wand_toleranz: 30
     drehung_grad: 6.44
-    ursprung_lokal: [6.858, -38.210]  # Top 3 plus 16,04 m entlang der Pavillonreihe [VP Top 3]
+    ursprung_lokal: [6.8412, -38.0717]  # Runde 7: Top 4 bei a 15,90 wie project.yaml (Runde 4, EIN S. 16); vorher 16,04 [VP Top 3], Innenhuelle lag 0,14 m neben der Fassade
   # Runde 3: gleiche Plaene fuer Terrassenbilder mit Innenraum hinter der offenen HST (top03_terrasse, top04_terrasse).
   # Huelle 2 cm entlang der Pavillonachse nach Westen versetzt, damit die Ostwand innen hinter der Aussenfassade liegt
   # (sonst deckungsgleiche Flaechen, Cycles-Artefakte). Versatz -0,02 * (0,1122, -0,9937).
   vp_top3_aussen: {<<: *vp_top3, ursprung_lokal: [5.0558, -22.2521]}
-  vp_top4_aussen: {<<: *vp_top4, ursprung_lokal: [6.8558, -38.1901]}
+  vp_top4_aussen: {<<: *vp_top4, ursprung_lokal: [6.8390, -38.0518]}   # Runde 7: a 15,90, 2 cm versetzt
 
 # Innenraum-Lichtstimmungen (ergaenzen project.yaml lights)
 lichter:
@@ -70,6 +70,16 @@ wohnungen:
       - {type: glastuer, px: [3880, 1200, 3975, 2330]}   # Ostwand Hebeschiebetuer zur Terrasse
     objekt_ausblenden: [nb_top3]     # eigene Aussenhuelle aus, Rest (Top 4, Hoftrakt, Strassenhaus) bleibt im Ausblick
     rand_offen: true                 # Runde 3: keine Randwand am Ausschnitt (stand 1 m vor HST und Suedfenstern im Ausblick)
+    # Runde 7 (REGELN R1): Grossmoebel laut VP als Platzhalter (Planpixel), damit Kueche, Tisch und Sofa im Bild gesperrt sind
+    einbauten:
+      - {px: [3157, 1173, 3873, 1290], z: [0.0, 0.88], mat: t34_nuss, quelle: "VP Top 3 (Moeblierung Kueche/WZ)"}      # Kuechenzeile Nordwand 3,63 m, Tiefe 0,60
+      - {px: [3157, 1173, 3873, 1295], z: [0.88, 0.92], mat: t34_terrazzo, quelle: "VP Top 3 (Moeblierung Kueche/WZ)"}    # Arbeitsplatte
+      - {px: [3679, 1850, 3815, 2322], z: [0.0, 0.42], mat: t34_sofa_rose, quelle: "VP Top 3 (Moeblierung Kueche/WZ)"}        # Sofa an der Ostwand (Sitz)
+      - {px: [3815, 1850, 3855, 2322], z: [0.0, 0.80], mat: t34_sofa_rose, quelle: "VP Top 3 (Moeblierung Kueche/WZ)"}        # Sofa Ruecken
+      - {px: [3523, 1968, 3638, 2202], z: [0.0, 0.40], mat: t34_nuss_hell, quelle: "VP Top 3 (Moeblierung Kueche/WZ)"}       # Couchtisch
+      - {px: [3154, 1850, 3230, 2340], z: [0.0, 0.50], mat: t34_nuss, quelle: "VP Top 3 (Moeblierung Kueche/WZ)"}      # Sideboard an der Trennwand
+    zylinder:
+      - {c_px: [3413, 1689], r: 0.45, z: [0.0, 0.75], mat: t34_nuss_hell, seg: 32, quelle: "VP Top 3 (Moeblierung Kueche/WZ)"}    # runder Esstisch D 0,90
     light: spaetsommer
     exposure: 0.7
     kameras:
@@ -79,7 +89,8 @@ wohnungen:
       wohnkueche_ecke: {pos_px: [3185, 2300], target_px: [3860, 1230], lens: 18, h: 1.40}   # Runde 2: Suedwestecke, diagonal zu Kueche und Hebeschiebetuer
       wohnkueche_vr:   {pos_px: [2950, 1250], target_px: [3870, 2330], lens: 18, h: 1.40}   # Runde 2: aus dem Vorraum durch die Oeffnung zu HST und Suedfenster
       wohnkueche_aussicht: {pos_px: [3180, 2318], target_px: [3945, 1557], lens: 20, h: 1.50}  # Runde 3: Suedwestecke, Blick durch die HST auf Terrasse und Innenhof
-      wohnkueche_rueckwand: {pos_px: [3170, 1980], target_px: [3945, 1480], lens: 20, h: 1.50}  # Runde 3, Vorschlag (nicht veredelt): von der Rueckwand, Kueche links klar als Seitenwand
+      wohnkueche_rueckwand: {pos_px: [3275, 2000], target_px: [3945, 1480], lens: 20, h: 1.50}  # Runde 3 Vorschlag, Runde 7: vor dem Sideboard (vorher 3170/1980, im Moebel), Kueche links als Seitenwand
+      hst_aussicht: {pos_px: [3240, 1560], target_px: [3945, 1560], lens: 20, h: 1.45}   # Runde 7: von der Kueche gerade durch die HST auf Terrasse, Pergola und Rankgitter
   top04: &top04
     plan: vp_top4
     titel: Top 4, 1. OG Hof, 62,80 m2, Terrasse 15,45 m2 [VP]
@@ -101,6 +112,16 @@ wohnungen:
       - {type: glastuer, px: [3925, 1200, 4020, 2330]}
     objekt_ausblenden: [nb_top4]
     rand_offen: true                 # Runde 3: keine Randwand am Ausschnitt (stand 1 m vor HST und Suedfenstern im Ausblick)
+    # Runde 7 (REGELN R1): Grossmoebel laut VP als Platzhalter (Planpixel), damit Kueche, Tisch und Sofa im Bild gesperrt sind
+    einbauten:
+      - {px: [3204, 1173, 3920, 1290], z: [0.0, 0.88], mat: t34_eiche, quelle: "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"}      # Kuechenzeile Nordwand 3,63 m, Tiefe 0,60
+      - {px: [3204, 1173, 3920, 1295], z: [0.88, 0.92], mat: t34_marmor, quelle: "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"}    # Arbeitsplatte
+      - {px: [3726, 1850, 3862, 2322], z: [0.0, 0.42], mat: t34_sofa_creme, quelle: "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"}        # Sofa an der Ostwand (Sitz)
+      - {px: [3862, 1850, 3902, 2322], z: [0.0, 0.80], mat: t34_sofa_creme, quelle: "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"}        # Sofa Ruecken
+      - {px: [3570, 1968, 3685, 2202], z: [0.0, 0.40], mat: t34_eiche, quelle: "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"}       # Couchtisch
+      - {px: [3201, 1850, 3277, 2340], z: [0.0, 0.50], mat: t34_eiche, quelle: "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"}      # Sideboard an der Trennwand
+    zylinder:
+      - {c_px: [3460, 1689], r: 0.45, z: [0.0, 0.75], mat: t34_eiche, seg: 32, quelle: "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"}    # runder Esstisch D 0,90
     light: spaetsommer
     exposure: 0.7
     kameras:
@@ -110,7 +131,8 @@ wohnungen:
       wohnkueche_ecke: {pos_px: [3232, 2300], target_px: [3907, 1230], lens: 18, h: 1.40}
       wohnkueche_vr:   {pos_px: [2997, 1250], target_px: [3917, 2330], lens: 18, h: 1.40}
       wohnkueche_aussicht: {pos_px: [3227, 2318], target_px: [3992, 1577], lens: 20, h: 1.50}  # Runde 3
-      wohnkueche_rueckwand: {pos_px: [3217, 1980], target_px: [3992, 1500], lens: 20, h: 1.50}  # Runde 3, Vorschlag (nicht veredelt)
+      wohnkueche_rueckwand: {pos_px: [3322, 2000], target_px: [3992, 1480], lens: 20, h: 1.50}  # Runde 3 Vorschlag, Runde 7: vor dem Sideboard
+      hst_aussicht: {pos_px: [3287, 1560], target_px: [3992, 1560], lens: 20, h: 1.45}   # Runde 7
   # Runde 3: Terrassenbilder mit Innenraum hinter der offenen Hebeschiebetuer. Aussenhuelle bleibt sichtbar, nur die
   # Innenraumkarte und das Aussenglas der Pavillons sind aus; Innenhuelle aus dem VP (2 cm versetzt, siehe plaene).
   # Kamera auf der Terrasse in Plan-Pixeln (Hofrahmen a = (px - corner_x) * 0,005072, b = (2410 - py) * 0,005072).
@@ -119,13 +141,15 @@ wohnungen:
     plan: vp_top3_aussen
     objekt_ausblenden: [nb_top3_innen, nb_top3_glas]
     kameras:
-      hst: {pos_px: [4684, 2144], target_px: [3945, 1444], lens: 18, h: 1.50, exposure: 0.0}   # Terrassenaussenecke SO (a 15,7 / b 1,35)
+      hst: {pos_px: [4606, 1345], target_px: [3945, 1897], lens: 18, h: 1.50, exposure: 0.0}   # Runde 7: Ecke NO (a 15,3 / b 5,4), vorher SO (4684/2144), dort steht jetzt das Sofa
+      abend: {pos_px: [4606, 1345], target_px: [3945, 1897], lens: 18, h: 1.50, light: blaue_stunde, exposure: 1.2}   # Runde 7: Abendbild, Leuchten an
   top04_terrasse:
     <<: *top04
     plan: vp_top4_aussen
     objekt_ausblenden: [nb_top4_innen, nb_top4_glas]
     kameras:
-      hst: {pos_px: [4507, 2114], target_px: [3992, 1464], lens: 18, h: 1.50, exposure: 0.0}   # (a 30,6 / b 1,5)
+      hst: {pos_px: [4505, 1335], target_px: [3992, 1937], lens: 18, h: 1.50, exposure: 0.0}   # Runde 7: Ecke NO (a 30,45 / b 5,45), vorher a 30,6 / b 1,5 (jetzt Stuhl und Trog)
+      abend: {pos_px: [4505, 1335], target_px: [3992, 1937], lens: 18, h: 1.50, light: blaue_stunde, exposure: 1.2}   # Runde 7: Abendbild
 
   top26_2:
     plan: manuell
@@ -1027,4 +1051,11 @@ materialien:
   hecke: {farbe: "#3C5A28", rauh: 0.9, quelle: "ANN Hecke vor der Glastuer"}
   bordeaux_wand: {farbe: "#5C1727", rauh: 0.9, quelle: "INT2 S. 6 Palette Bordeaux Rot #5C1727 Vektor"}       # Runde 4: V2 Bettwand, Bordeaux Rot der Palette S. 6, matt; vorher #7A463B aus beleuchteter Ansicht
   fliese_bordeaux: {farbe: "#5D1F1B", rauh: 0.12, quelle: "INT2 S. 13 Materialtafel Rillenfliese, Produktfarbe #5D1F1B"}    # V2 Rillenfliese bordeaux glasiert [INT2 S. 13]
+  t34_nuss: {farbe: "#5B3A26", art: eiche, quelle: "ANN Staging-Farbwert (Look Vorlagen 3Z HOF / Loft), Runde 7"}
+  t34_nuss_hell: {farbe: "#7A5232", art: eiche, quelle: "ANN Staging-Farbwert (Look Vorlagen 3Z HOF / Loft), Runde 7"}
+  t34_eiche: {farbe: "#B48A5C", art: eiche, quelle: "ANN Staging-Farbwert (Look Vorlagen 3Z HOF / Loft), Runde 7"}
+  t34_terrazzo: {farbe: "#DCD4C8", rauh: 0.35, quelle: "ANN Staging-Farbwert (Look Vorlagen 3Z HOF / Loft), Runde 7"}
+  t34_marmor: {farbe: "#8F9A8C", rauh: 0.25, quelle: "ANN Staging-Farbwert (Look Vorlagen 3Z HOF / Loft), Runde 7"}
+  t34_sofa_rose: {farbe: "#D6BCAE", rauh: 0.95, quelle: "ANN Staging-Farbwert (Look Vorlagen 3Z HOF / Loft), Runde 7"}
+  t34_sofa_creme: {farbe: "#E2D9C7", rauh: 0.95, quelle: "ANN Staging-Farbwert (Look Vorlagen 3Z HOF / Loft), Runde 7"}
   zementfliese: {farbe: "#C7A395", rauh: 0.45, quelle: "INT2 S. 1 Titelbild; seit Runde 6 nicht mehr verwendet"}       # V2 Gang: Musterfliese rot-creme-blaugrau, Mischton [INT2 S. 1]

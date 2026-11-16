@@ -17,7 +17,15 @@ Bausteine (je Eintrag optional `gruppe`, Standard "neubau"; jede Gruppe wird zu 
 - dachfenster: Fenster in einer schraegen Flaeche {pts: [4 Punkte im Uhrzeigersinn von unten links], mat}
 - pv:        Modulreihen {a, b, u, d, z, reihen, neigung}
 - straeucher: Kugelbuesche {pos, z, r, h}
-- material:  zusaetzliche Materialien {name: {color, art: putz | einfach | metall | holz | platten | rasen | kies, rough}}
+- material:  zusaetzliche Materialien {name: {color, art: putz | einfach | metall | holz | platten | rasen | kies | leuchte,
+             rough}}; art leuchte = Emission, Staerke folgt dem Licht (`interior` wie die Fenster, materials.py)
+- ausstattung: optionale Ebene NICHT aus der Planung (Moebel, Pflanztroege, Pergola, Rankgitter, Leuchten), klar
+             getrennt von den Planelementen; jede Zeile mit `quelle` (z. B. "Ausstattung, Kundenwunsch ..."), Gruppe
+             `ausstattung_*`. Typen (Koordinaten im Hilfsrahmen `rahmen`, z absolut):
+             quader {box: [a0, b0, a1, b1], z, mat, seite} | zylinder {c, r, z, mat, seg} |
+             pflanze {c, z, r oder [ra, rb], h, mat} | gitter {von, bis, z, vorne: [da, db], v, h, breite, dicke, mat} |
+             tisch {box, z, h, mat} | sitz {box, z, lehne: a+ | a- | b+ | b-, sitz, hoehe, arme, mat, polster} |
+             leuchte {c, z, vorne: [da, db], mat, licht}
 """
 from __future__ import annotations
 
@@ -61,6 +69,8 @@ def _mat_lib(bpy, mats: dict, spec: dict):
             mats[name] = M.zinc(bpy, name, c)
         elif art == "platten":
             mats[name] = _platten(bpy, name, c, s.get("raster", 0.5))
+        elif art == "leuchte":     # Ausstattung: Emission, Staerke setzt materials.set_interior_emission je Licht
+            mats[name] = M.simple(bpy, name, c, 0.5, **{"Emission Color": (*c, 1.0), "Emission Strength": 0.0})
         elif art in ("rasen", "kies"):
             mats[name] = M.plaster(bpy, name, c, var=0.25 if art == "rasen" else 0.15, bump=0.6 if art == "rasen" else 0.35)
         else:
@@ -268,6 +278,116 @@ class Neubau:
             mb.mats.append(mb.mat(s.get("mat", "nb_busch")))
         bm.free()
 
+    # ------------------------------------------------------------ Ausstattung (optional, nicht Teil der Planung)
+    def _trafo(self, item):
+        rn = item.get("rahmen")
+        if not rn:
+            return lambda a, b: (a, b)
+        R = self.N["rahmen"][rn]
+        th = math.radians(R.get("drehung", 0.0))
+        ox, oy = R.get("ursprung", (0.0, 0.0))
+        c, s_ = math.cos(th), math.sin(th)
+        return lambda a, b: (ox + a * c - b * s_, oy + a * s_ + b * c)
+
+    @staticmethod
+    def _q(mb, T, a0, b0, a1, b1, z0, z1, mat, seite=None):
+        a0, a1 = min(a0, a1), max(a0, a1)
+        b0, b1 = min(b0, b1), max(b0, b1)
+        K.extrude(mb, [T(a0, b0), T(a1, b0), T(a1, b1), T(a0, b1)], z0, z1, seite or mat, mat, bottom=True)
+
+    def ausstattung(self, e):
+        G = self.g(e)
+        mb, T, typ = G["masse"], self._trafo(e), e.get("typ", "quader")
+        mat = e.get("mat", "aus_teak")
+        if typ == "quader":
+            a0, b0, a1, b1 = e["box"]
+            teil = "gruen" if mat.startswith(("nb_busch", "aus_laub")) else "masse"
+            self._q(G[teil], T, a0, b0, a1, b1, e["z"][0], e["z"][1], mat, e.get("seite"))
+        elif typ == "zylinder":
+            (ca, cb), r, seg = e["c"], e["r"], e.get("seg", 20)
+            pts = [T(ca + r * math.cos(2 * math.pi * k / seg), cb + r * math.sin(2 * math.pi * k / seg)) for k in range(seg)]
+            K.extrude(mb, pts, e["z"][0], e["z"][1], mat, e.get("deckel", mat), bottom=True)
+        elif typ == "pflanze":
+            import bmesh
+            bm = bmesh.new()
+            bmesh.ops.create_icosphere(bm, subdivisions=2, radius=1.0)
+            ca, cb = e["c"]
+            r = e.get("r", 0.4)
+            ra, rb = (r, r) if not isinstance(r, list) else r
+            h, z0 = e.get("h", 0.8), e["z"]
+            rng = random.Random(int(ca * 100 + cb * 7 + z0 * 13))
+            gm = G["gruen"]
+            base = len(gm.verts)
+            for v in bm.verts:
+                k = 1.0 + rng.uniform(-0.15, 0.15)
+                x, y = T(ca + v.co.x * ra * k, cb + v.co.y * rb * k)
+                gm.verts.append((x, y, z0 + h / 2 + v.co.z * h / 2 * k))
+            for fc in bm.faces:
+                gm.faces.append([base + v.index for v in fc.verts])
+                gm.uvs.append([(gm.verts[base + v.index][0], gm.verts[base + v.index][1]) for v in fc.verts])
+                gm.mats.append(gm.mat(e.get("mat", "aus_laub")))
+            bm.free()
+        elif typ == "gitter":      # Rankgitter: senkrechte Latten auf der Linie, waagrechte davor (Richtung vorne)
+            (pa, pb), (qa, qb) = e["von"], e["bis"]
+            da, db = e.get("vorne", [0.0, 0.0])
+            z0, z1 = e["z"]
+            w, t = e.get("breite", 0.045), e.get("dicke", 0.03)
+            L = math.hypot(qa - pa, qb - pb)
+            ua, ub = (qa - pa) / L, (qb - pb) / L
+            n = max(1, int(L / e.get("v", 0.5)))
+            for k in range(n + 1):
+                s = w / 2 + (L - w) * k / n
+                ca, cb = pa + ua * s, pb + ub * s
+                self._q(mb, T, ca - ua * w / 2, cb - ub * w / 2, ca + ua * w / 2 + da * t, cb + ub * w / 2 + db * t,
+                        z0, z1, mat)
+            nh = max(1, int((z1 - z0) / e.get("h", 0.3)))
+            for k in range(nh + 1):
+                zz = z0 + 0.05 + (z1 - z0 - 0.1) * k / nh
+                o0a, o0b = pa + da * t, pb + db * t
+                self._q(mb, T, o0a, o0b, qa + da * 2 * t, qb + db * 2 * t, zz - w / 2, zz + w / 2, mat)
+        elif typ == "tisch":
+            a0, b0, a1, b1 = e["box"]
+            z0, h, bein = e["z"], e.get("h", 0.74), e.get("bein", 0.05)
+            self._q(mb, T, a0, b0, a1, b1, z0 + h - 0.04, z0 + h, mat)
+            ia, ib = 0.06, 0.06
+            for (x, y) in ((a0 + ia, b0 + ib), (a1 - ia - bein, b0 + ib), (a0 + ia, b1 - ib - bein), (a1 - ia - bein, b1 - ib - bein)):
+                self._q(mb, T, x, y, x + bein, y + bein, z0, z0 + h - 0.04, mat)
+        elif typ == "sitz":        # Sessel, Stuhl oder Sofa: Gestell, Polster, Lehne an der Seite `lehne`
+            a0, b0, a1, b1 = e["box"]
+            z0, sh, hh = e["z"], e.get("sitz", 0.42), e.get("hoehe", 0.75)
+            pol = e.get("polster", "aus_polster")
+            lt = e.get("lehne_tiefe", 0.16)
+            self._q(mb, T, a0, b0, a1, b1, z0 + 0.06, z0 + sh - 0.12, mat)            # Rahmen
+            for (x, y) in ((a0, b0), (a1 - 0.05, b0), (a0, b1 - 0.05), (a1 - 0.05, b1 - 0.05)):
+                self._q(mb, T, x, y, x + 0.05, y + 0.05, z0, z0 + 0.06, mat)          # Fuesse
+            self._q(mb, T, a0 + 0.02, b0 + 0.02, a1 - 0.02, b1 - 0.02, z0 + sh - 0.12, z0 + sh, pol)
+            sd = e["lehne"]
+            L = {"a+": (a1 - lt, b0, a1, b1), "a-": (a0, b0, a0 + lt, b1),
+                 "b+": (a0, b1 - lt, a1, b1), "b-": (a0, b0, a1, b0 + lt)}[sd]
+            self._q(mb, T, *L, z0 + sh, z0 + hh, pol)
+            if e.get("arme"):
+                aw, ah = 0.10, z0 + sh + 0.2
+                if sd in ("a+", "a-"):
+                    self._q(mb, T, a0, b0, a1, b0 + aw, z0 + sh - 0.12, ah, mat)
+                    self._q(mb, T, a0, b1 - aw, a1, b1, z0 + sh - 0.12, ah, mat)
+                else:
+                    self._q(mb, T, a0, b0, a0 + aw, b1, z0 + sh - 0.12, ah, mat)
+                    self._q(mb, T, a1 - aw, b0, a1, b1, z0 + sh - 0.12, ah, mat)
+        elif typ == "leuchte":     # Wandleuchte: Gehaeuse an der Wand, Lichtaustritt oben und unten
+            ca, cb = e["c"]
+            da, db = e.get("vorne", [0.0, 0.0])
+            z0, z1 = e["z"]
+            w = e.get("breite", 0.09)
+            pa, pb = -db, da                      # entlang der Wand
+            A = (ca - pa * w / 2, cb - pb * w / 2)
+            B = (ca + pa * w / 2 + da * 0.11, cb + pb * w / 2 + db * 0.11)
+            self._q(mb, T, A[0], A[1], B[0], B[1], z0, z1, mat)
+            lm = e.get("licht", "aus_leuchte")
+            A2 = (ca - pa * w * 0.35 + da * 0.02, cb - pb * w * 0.35 + db * 0.02)
+            B2 = (ca + pa * w * 0.35 + da * 0.09, cb + pb * w * 0.35 + db * 0.09)
+            self._q(mb, T, A2[0], A2[1], B2[0], B2[1], z0 - 0.012, z0, lm)
+            self._q(mb, T, A2[0], A2[1], B2[0], B2[1], z1, z1 + 0.012, lm)
+
     # ------------------------------------------------------------ Hilfsrahmen
     def lokal(self, item):
         """Eintrag mit `rahmen: <name>`: Koordinaten (a, b) im Hilfsrahmen ins lokale System umrechnen.
@@ -292,7 +412,8 @@ class Neubau:
     # ------------------------------------------------------------ Ablauf
     def build(self, coll):
         import bpy
-        N = {k: ([self.lokal(i) for i in v] if isinstance(v, list) else v) for k, v in self.N.items()}
+        N = {k: ([self.lokal(i) for i in v] if isinstance(v, list) and k != "ausstattung" else v)
+             for k, v in self.N.items()}
         for k in N.get("koerper", []):
             self.koerper(k)
         for fs in N.get("fassaden", []):
@@ -311,6 +432,8 @@ class Neubau:
             self.pv(p)
         for s in N.get("straeucher", []):
             self.strauch(s)
+        for e in N.get("ausstattung", []) or []:      # Ausstattung (nicht Planung), Rahmen wird hier umgerechnet
+            self.ausstattung(e)
         objs = []
         for name, parts in self.G.items():
             for t, mb in parts.items():
