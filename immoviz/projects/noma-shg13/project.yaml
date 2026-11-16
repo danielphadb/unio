@@ -62,6 +62,7 @@ neubau:
     nb_segel: {color: "#F2F0EA", art: einfach, rough: 0.8}          # Sonnensegel [EIN S. 18]
     # Runde 5 (kameramatch Hof_fin): Paneelstreifen Erdbergstrasse 123 (Vorlage graubraun #ACA0A6 im Schatten)
     nb_paneel: {color: "#B9ADB2", art: putz}
+    nb_weiss_005378: {color: "#F5F1EB", faktor: 0.74, art: putz}   # wie hof_ost_005378 (Nachbarkarten rechnen Farbe x 0,74)
   koerper:
     # --- Strassenhaus Schlachthausgasse 13 [EIN S. 9, 22, 25]: 15,00 m tief, Traufe +21,00, Strassen- und Hofseite als Fassade
     - {gruppe: nb_shg, poly: [[0.0, 0.0], [18.48, 0.0], [19.55, -15.0], [0.80, -15.0]], z: [0.0, 21.0], wand: nb_brandwand,
@@ -98,6 +99,10 @@ neubau:
 #   # dunkel [Google 3D, Orthofoto: Dach 6 m breit; BKM-Erker wird von der Fassadenkarte abgeschnitten]. Vorderkante mit Fenstern unten
 #   - {gruppe: nb_umgebung, poly: [[24.3, -30.4], [23.2, -31.0], [22.6, -32.4], [22.6, -36.0], [23.2, -37.4], [25.6, -38.0]], z: [0.0, 16.3], wand: nb_weiss, dach: nb_mansarde, ohne_kanten: [2, 5]}
 #   - {gruppe: nb_umgebung, poly: [[28.2, -51.8], [25.4, -52.4], [24.4, -53.4], [24.4, -56.6], [25.4, -57.4], [28.6, -57.8]], z: [0.0, 15.9], wand: nb_weiss, dach: nb_mansarde, ohne_kanten: [2, 5]}
+    # Runde 5 (kameramatch Hof_fin und Hof_fin-3): Schlachthausgasse 11 (005378) reicht in den Vorlagen mit einer Suedfassade bei
+    # y -15,5 bis an die Ostkante des Strassenhauses (x 19,6); OGD laesst dort eine 1,6 m breite Nische offen (Hoffassade erst ab
+    # x 21,2). Vorlage hat Vorrang (Nachbar): Baukoerper weiss bis zur Traufe 19,0 (Suedfassade 18,3 bis 19,1 gemessen), Ziegeldach flach angedeutet
+    - {gruppe: nb_umgebung, poly: [[19.6, -15.5], [22.0, -15.5], [21.2, -8.4], [19.6, -8.4]], z: [0.0, 19.0], wand: nb_weiss_005378, dach: dach_ziegel_rot_alt, ohne_kanten: [0, 1, 2]}
     # Runde 4: EG Hoftrakt nach EIN S. 8/15 (Aussenkanten Daemmung): Suedreihe b 0 bis Gang, Nordreihe bis zur Grundgrenze b 14,86, drei offene Hoefe (Gaerten 42,09 / 31,17 / 29,91 m2), Ostende schraeg (Top 4A darueber), Gangausgang bei a 37,65. Dachaufbauten siehe flaechen
     - {gruppe: nb_hof, rahmen: hof, poly: [[-7.318, 0.0], [38.8, 0.0], [41.36, 6.62], [37.65, 6.62], [37.65, 8.09], [36.14, 8.09], [36.14, 12.48], [30.84, 12.48], [30.84, 14.86], [25.52, 14.86], [25.52, 8.09], [21.72, 8.09], [21.72, 12.48], [16.42, 12.48], [16.42, 14.86], [10.6, 14.86], [10.6, 8.09], [5.82, 8.09], [5.82, 12.48], [0.5, 12.48], [0.5, 14.86], [-5.641, 14.86]], z: [0.0, 2.92], wand: nb_wand_hof, dach: dach_flach, ohne_kanten: [0, 3, 5, 7, 9, 10, 11, 13, 16, 17, 19, 21]}
     # Runde 4: Pavillons FOK +3,50, DUK +6,01, Attika +6,78 [EIN S. 23]; Top 4 bei a 15,90 (Abstand 3,93 laut EIN S. 16, vorher 16,04)
@@ -192,6 +197,18 @@ neubau:
 #       - {z: [4.4, 6.1], u: [[0.5, 1.5], [1.8, 2.8]]}
 #       - {z: [7.8, 9.5], u: [[0.5, 1.5], [1.8, 2.8]]}
 #       - {z: [11.2, 12.9], u: [[0.5, 1.5], [1.8, 2.8]]}
+    # Runde 5: Suedfassade Schlachthausgasse 11 neben dem Strassenhaus (Vorlagen Hof_fin, Hof_fin-3): zwei Fensterachsen (Rahmen dunkel: der Schluessel `rahmen` ist im Neubau der Hilfsrahmen)
+    - gruppe: nb_umgebung
+      a: [19.6, -15.5]
+      b: [22.0, -15.5]
+      z: [0.0, 19.0]
+      wand: nb_weiss_005378
+      reihen:
+        - {z: [1.2, 3.2], u: [[0.35, 1.05], [1.45, 2.15]]}
+        - {z: [5.3, 8.0], u: [[0.35, 1.05], [1.45, 2.15]]}
+        - {z: [8.4, 11.1], u: [[0.35, 1.05], [1.45, 2.15]]}
+        - {z: [11.5, 14.2], u: [[0.35, 1.05], [1.45, 2.15]]}
+        - {z: [14.6, 17.3], u: [[0.35, 1.05], [1.45, 2.15]]}
     # --- Wuertzlerstrasse 10 Hoffassade, u von Ost [EIN S. 27]: Balkonstapel u 3,0 bis 9,4, Geschosse 2,88 m
     - gruppe: nb_wue
       a: [20.6, -69.4]
@@ -605,8 +622,8 @@ neighbour_facades:
   hof_ost_005378:               # Schlachthausgasse 11 / Schnirchgasse 2 (Nr. 1), Hofseite neben dem Strassenhaus. Runde 5 nach kameramatch
     bezug: "005378"               # Hof_fin: Traufe 19,0 statt 21,6 [OGD], Ziegel-Walm bis +23 (Vorlage; Apple zeigt Flachdach mit Terrassen),
     a: [21.2, -12.0]              # weiss, Fenster weiss gerahmt mit Faschen, Reihen am Strahlschnitt gemessen (Fenster 8,4 bis 11,0 und
-    b: [22.8, -19.0]              # 14,6 bis 17,4)
-    height: 19.0
+    b: [22.8, -19.0]              # 14,6 bis 17,4). Traufe an der Hofecke 20,2 gemessen, an der Suedfassade 18,3 bis 19,1
+    height: 20.0
     color: "#F5F1EB"              # Vorlage Mitteltoene #F7F2EC
     stuck_color: "#FAF8F3"
     style: plain
@@ -700,12 +717,14 @@ neighbour_facades:
 # Projektvisualisierungen; Reihenfolge der Quellen: Einreichplan > Orthofoto/LOD2 > Apple > Visualisierung. Geometrie aus
 # LOD2 bleibt, korrigiert werden Deckung, Gauben und Kamine (umgebung_abgleich.md Abschnitt 8, Nummern in Klammern).
 roofs_override:
-  # (1) Schlachthausgasse 11 / Schnirchgasse 2. Runde 5: Vorlage Hof_fin zeigt Traufe 19,0 und Ziegeldach bis rund +23 (Strahlschnitt);
+  # (1) Schlachthausgasse 11 / Schnirchgasse 2. Runde 5: Vorlage Hof_fin zeigt Traufe 19 bis 20 und Ziegeldach bis rund +23 (Strahlschnitt);
   # vorher Flachdach Kies nach Apple 9/10/11 (Bestand). Vorlage hat Vorrang (Kundenwunsch), Widerspruch in umgebung_abgleich.md 9
-  - {bezug: "005378", material: ziegel_rot_alt, dach: {form: mansarde, traufe: 19.0, first: 23.0, neigung: 50}}
+  - {bezug: "005378", material: ziegel_rot_alt, dach: {form: mansarde, traufe: 20.0, first: 23.5, neigung: 50}}
   - {bezug: "005379", material: ziegel_rot_alt, gauben: {anzahl: 4, seiten: ["-x"]}, kamine: 3,
      dach: {form: mansarde, traufe: 18.6, first: 23.0, neigung: 50}}   # Runde 5: Traufe 18,6 laut Vorlage Hof_fin (LOD2 16,3), Dach parametrisch   # (2) Schnirchgasse 4: rotbraunes Ziegeldach mit Gauben zum Hof (Apple 10)
-  - {bezug: "005380", material: ziegel_rot_alt, gauben: {anzahl: 3, seiten: ["-x"]}, kamine: 2}   # (3) Schnirchgasse 6: dto. (Apple 10, LOD2 vorher Ziegel dunkel)
+  - {bezug: "005380", material: ziegel_rot_alt, gauben: {anzahl: 3, seiten: ["-x"]}, kamine: 2,
+     dach: {form: mansarde, traufe: 15.9, first: 20.3, neigung: 50}}   # Runde 5: parametrisch ueber dem beschnittenen Grundriss
+     # (3) Schnirchgasse 6 (Apple 10, LOD2 vorher Ziegel dunkel); die LOD2-Flaechen des entfernten Erkers standen 2,3 m vor der Karte ueber
   - {bezug: "005382", material: ziegel_rot, kamine: 2}                                   # (4) Schnirchgasse 8 / Wuertzlerstrasse 8: rotes Ziegeldach (Apple 10)
   - {bezug: "005387", material: blech_hell}                                              # (5) Wuertzlerstrasse 12: helles Flachdach mit Aufbauten (Apple 9/10)
   - {bezug: "005362", material: blech_hell, gauben: {anzahl: 8, breite: 1.2, seiten: ["-y"]}}   # Runde 5: helles Blech wie Vorlage Hof_fin (vorher grau)  # (10) Schlachthausgasse 15/17: graue Blechmansarde mit Gauben zum Hof (Apple 10/11, Visualisierung Hof_fin-2)

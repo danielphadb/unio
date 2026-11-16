@@ -223,7 +223,7 @@ Punktdatei (YAML): `groesse` (Pixelgröße, in der gemessen wurde) und `punkte`,
 (Bildpixel der Vorlage) und `xyz: [x, y, z]` (lokales Projektsystem; mit `rahmen: hof` als a, b, z im Hilfsrahmen
 aus `neubau.rahmen`). Optional `gewicht`, `kontrolle: true` (nur Fehler anzeigen, nicht im Ausgleich) und
 `nur_u: true` (senkrechte Kante, Höhe unbekannt: nur die Bildspalte zählt). `standpunkt_wie: <kamera>` übernimmt
-den Standpunkt einer gematchten Kamera (Ausschnitt derselben Visualisierung mit längerer Brennweite). Passpunkte
+den Standpunkt einer gematchten Kamera (Ausschnitt derselben Visualisierung mit längerer Brennweite). `standpunkt: [x, y, z]` gibt ihn fest vor: bei fast ebenen Punkten im Tele (Fassadenausschnitt) sind Standpunkt und Brennweite entlang einer Linie gleich gut; dann den Standpunkt per Rastersuche im freien Raum (außerhalb der Baukörper) wählen und eintragen. Passpunkte
 nur an Bauteilen, die laut Plan feststehen (Attikaecken, Balkonplatten, Fensterecken, Fassadenkanten des Neubaus),
 mindestens sechs mit voller Lage, über Bildbreite und Tiefe verteilt; Nachbarn sind das, was angeglichen wird,
 und liefern keine Passpunkte.

@@ -1,0 +1,58 @@
+# Modellfreigabe je Kamera (REGELN.md, Phase Freigabe). Veredelung (Credits) nur fuer Kameras mit
+# modell_freigegeben: ja. Gesetzt mit immoviz.py freigabe oder von Hand.
+kameras:
+  ecke:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Chat 16.11.2026
+    notiz: Aussenmotive zur Veredelung beauftragt (Runde 5, aktuelles Modell nach
+      Google-Abgleich)
+  ecke_orbit:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Chat 16.11.2026
+    notiz: Aussenmotive zur Veredelung beauftragt (Runde 5, aktuelles Modell nach
+      Google-Abgleich)
+  wimmergasse:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Chat 16.11.2026
+    notiz: Aussenmotive zur Veredelung beauftragt (Runde 5, aktuelles Modell nach
+      Google-Abgleich)
+  drohne:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Chat 16.11.2026
+    notiz: Aussenmotive zur Veredelung beauftragt (Runde 5, aktuelles Modell nach
+      Google-Abgleich)
+  drohne_sued:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Chat 16.11.2026
+    notiz: Aussenmotive zur Veredelung beauftragt (Runde 5, aktuelles Modell nach
+      Google-Abgleich)
+  ausblick_terrasse:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Chat 16.11.2026
+    notiz: Aussenmotive zur Veredelung beauftragt (Runde 5, aktuelles Modell nach
+      Google-Abgleich)
+  detail_beletage:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Chat 16.11.2026
+    notiz: Aussenmotive zur Veredelung beauftragt (Runde 5, aktuelles Modell nach
+      Google-Abgleich)
+  detail_haustor:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Chat 16.11.2026
+    notiz: Aussenmotive zur Veredelung beauftragt (Runde 5, aktuelles Modell nach
+      Google-Abgleich)
+  stolberggasse:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Chat 16.11.2026
+    notiz: Aussenmotive zur Veredelung beauftragt (Runde 5, aktuelles Modell nach
+      Google-Abgleich)
+stand: '2026-11-16'

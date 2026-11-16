@@ -137,7 +137,11 @@ class Neubau:
         holes = [(a, b, c, e) for a, b, c, e, _ in ops]
         K.wall_with_holes(G["masse"], f, u0, u1, z0, z1, d, holes, fs.get("wand", "fassade"),
                           reveal=fs.get("laibung", 0.22), reveal_mat=fs.get("laibung_mat"))
-        fm = fs.get("rahmen", self.fmat)
+        # `rahmen` ist doppelt belegt: Name eines Hilfsrahmens (N["rahmen"]) oder Fensterrahmen-Material.
+        # Eindeutig ist `rahmen_mat`; ein Hilfsrahmen-Name wird nie als Material verwendet.
+        fm = fs.get("rahmen_mat") or fs.get("rahmen")
+        if not fm or fm in (self.N.get("rahmen") or {}):
+            fm = self.fmat
         for ua, ub, za, zb, typ in ops:
             dr = d + fs.get("laibung", 0.22) - 0.12
             if typ == "dunkel":

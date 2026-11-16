@@ -172,8 +172,9 @@ cameras:
   ecke_orbit:      {pos: [-7.57, -18.73, 1.65], target: [6.0, 7.0, 11.0], lens: 20, vertical: true}   # Endbild Video: 18 Grad um die Ecke gedreht
   ecke_tele:       {pos: [-24.0, -30.0, 1.65], target: [5.0, 6.0, 11.5], lens: 32, vertical: true}
   drohne:          {pos: [-40.0, -48.0, 38.0], target: [6.0, 8.0, 24.0], lens: 32, vertical: true}
+  drohne_sued:     {pos: [-15.0, -80.0, 40.0], target: [3.0, 10.0, 21.0], lens: 35, vertical: true}   # zweites Luftmotiv, Blick die Wimmergasse entlang auf die Ecke (umgebung_abgleich.md 11, Probekamera im Referenzabgleich)
   wimmergasse:     {pos: [-11.5, 42.0, 1.65], target: [0.0, 9.0, 10.5], lens: 24, vertical: true}
-  stolberggasse:   {pos: [36.0, -15.0, 1.65], target: [6.0, 0.0, 11.0], lens: 24, vertical: true}
+  stolberggasse:   {pos: [36.0, -9.3, 1.65], target: [6.0, 0.0, 11.0], lens: 24, vertical: true}   # 16.11.2026 von y -15,0 in die Fahrbahnmitte: stand im Senkrechtparker (Parkstreifen y -14,7 bis -10,9) und 2,5 m neben dem Baum 33,5/-15 (umgebung_abgleich.md 7)
   dachgeschoss:    {pos: [-16.0, -19.0, 12.0], target: [3.0, 4.0, 21.0], lens: 35, vertical: true}
   # Detailmotive (Architektur)
   detail_beletage: {pos: [-13.0, 11.5, 8.6], target: [0.0, 11.5, 10.4], lens: 70, vertical: true}    # Aedikula 2.OG, Blick aus Fenster gegenueber

@@ -181,3 +181,82 @@ Apple zeigt auf dem Noma-Grundstück noch den Bestand (langer Hoftrakt mit braun
 
 Offen für alle Nummern: Fotos aus dem Hof (Hoffassaden, Erker, Feuermauern) und ein Schrägluftbild in höherer Auflösung;
 Geschoßhöhen der Nachbarn sind aus der Traufhöhe (LOD2) gemittelt.
+
+## 9. Runde 5: Innenhof nach den Vorlagen (Kameramatch, 16.11.2026)
+
+Kundenfeedback: "Bei Noma bitte noch einmal den Innenhof ansehen, bitte von der originalen Visualisierung die Häuser
+links und rechts übernehmen, ... sowohl rechts als auch links die Ecke ist hier noch nicht richtig."
+
+**Ursache:** Die Kontrollkamera `hof_vorlage` (Runde 2) war geschätzt und stand rund 10 m neben dem Standpunkt der
+Vorlage (26 statt 19 mm). Aus der falschen Kamera wirkten Nachbarn verschoben, und Angleichungen nach Augenmaß
+(z. B. 005379 lachsrot in Runde 2) gingen in die falsche Richtung. Neues Werkzeug `immoviz.py kameramatch`
+(README immoviz): Kamera aus Passpunkten am Neubau lösen, dann Nachbarn an Überlagerung, Drahtmodell und
+Strahlschnitt (Pixelstrahl der gematchten Kamera geschnitten mit einer Fassadenebene) angleichen.
+
+**Gematchte Kameras** (Punktdateien `kameramatch/*.yaml`, Vorlagen nur im Scratchpad):
+
+| Vorlage | Kamera | Passpunkte | Reprojektionsfehler Mittel / Max | Standpunkt, Brennweite |
+|---|---|---|---|---|
+| `SHG13_Hof_fin` (1920 x 1080) | `hof_fin` | 17 (Attika Top 3/4, Balkonplatten Straßenhaus 2. OG bis 1. DG, Balkone Würtzlerstraße 10, Fassadenkante) | 4,9 px = 0,26 % / 10,8 px | 28,45 / -70,71 / +11,12, 19,1 mm, Shift 0,068 / -0,074; steht im Eckhaus Schnirchgasse 8 (005382), `clip_start` 2,7 m |
+| `SHG13_Hof_fin-2` (1920 x 1284) | `hof_fin2` | 6 (Balkonplatten-Enden West/Ost, Fassadenkante, Fensterachse) | 6,5 px = 0,34 % / 16,8 px | 9,34 / -29,77 / +14,28, 19,4 mm, Shift 0,29 / 0,30 (Ausschnitt) |
+| `SHG13_Hof_fin-3` (1920 x 1292) | `hof_fin3` | 10 (Fenster 1./2. OG rechte Achse, Attika und Badfenster Top 3) | 6,5 px = 0,34 % / 29,3 px (Badfenster Top 3, Vorlage abweichend) | 24,0 / -55,0 / +6,5 (Rastersuche im freien Hof, Tele fast eben), 102,6 mm |
+| `SHG13_Hof_fin-4` (1920 x 1166) | `hof_fin4` | 10 (Attika, HST und Tür Top 4, weißer Kasten) | 12,9 px = 0,67 % / 42 px | 27,58 / -68,48 / +11,0, 52,1 mm: fast derselbe Standpunkt wie `hof_fin` (Ausschnitt mit längerer Brennweite) |
+
+Die freie Lösung mit Kippung und Rollwinkel ist bei `hof_fin` nicht besser (4,7 px, Kippung -0,7 Grad): die Vorlage ist
+eine waagrechte Kamera mit Shift. `hof_vorlage` bleibt als alter Eintrag, gilt aber als ersetzt.
+
+**Geänderte Nachbarn** (Nummern wie Abschnitt 8; Vorlage hat Vorrang für die Nachbarn, Neubau bleibt beim Einreichplan):
+
+| Nr | Haus | vorher (Runde 4) | nachher (Runde 5, Messung an der Vorlage) |
+|---|---|---|---|
+| 1 | 005378 Schlachthausgasse 11 / Schnirchgasse 2 | Hoffassade 21,6 m, Flachdach Kies (Apple) | Hoffassade Traufe 20,0 (Hofecke 20,2 gemessen), Ziegel-Mansarddach bis +23,5 (parametrisch), weiß `#F5F1EB`, Fensterreihen 5,3 / 8,4 / 11,5 / 14,6 (h 2,7) mit Faschen; neuer Baukörper mit Südfassade bei y -15,5 bis an die Ostkante des Straßenhauses (x 19,6), Traufe 19,0 (18,3 bis 19,1 gemessen), zwei Fensterachsen (die Vorlagen zeigen dort keine Nische) |
+| 2 | 005379 Schnirchgasse 4 | Traufe 16,3 (LOD2), Erkerturm mit Zeltdach, `#ECE9E2` | Traufe 18,6 (Strahlschnitt an drei Stellen 18,5 bis 18,6), Ziegel-Mansarddach parametrisch bis +23 mit 4 Gauben, Erkerturm entfernt, weiß `#F4F1EC`, Fensterreihen Schritt 3,3 |
+| 3 | 005380 Schnirchgasse 6 | Erkerturm mit Zeltdach, LOD2-Dach | Erkerturm entfernt (er stand 10 m vor der Kamera und verdeckte die ganze rechte Bildhälfte, die Vorlage zeigt ihn nicht), Dach parametrisch über dem an der Karte beschnittenen Grundriss |
+| 5 | 005387 Würtzlerstraße 12, Hoftrakt | Nordfassade y -64,6 bis -63,9, 17,8 m | Nordfassade 1,9 m nach Süden (y -65,8 / -65,1), 19,5 m, Baukörper +1,7 (`dz`); die Vorlage zeigt die Nordostecke dort und die Ostwand über 18,7 m |
+| 8 | 005364 Erdbergstraße 125 | modern hellgrau, LOD2-Dach | weiß mit weiß gerahmten Fenstern, Reihen Schritt 3,4 (Oberkanten 18,7 / 15,3 gemessen), dunkle Blechmansarde 20,8 bis 25 (Traufe 20,8 = OGD), Fassade endet bei y -55,8 |
+| 9 | 005363 Erdbergstraße 123 | Ostfassade 19,9 m ab y -53,3, 4 Achsen, Raster 3,0 | 24,8 m (8 Geschosse + DG, Geschoss 2,9 m, gemessen 7,6 / 10,5 / 13,4 / 16,3 / 18,9), beginnt bei y -55,8, Fensterachsen 1,85 / 7,0 / 9,9 / 12,8, graubraune Paneelstreifen `#B9ADB2` zwischen den Fensterbändern, Baukörper +4,9 (`dz`); Rücksprung 23,4 statt 20,1 |
+| 10 | 005362 Schlachthausgasse 15/17 | apricot `#DDA38A`, 6 OG im Raster 3,0, graue Blechmansarde | lachs `#D8957F` (Vorlage `#CD9987` Mitteltöne), Fensteroberkanten 6,6 bis 20,4 im Raster 2,75 (Traufe 21,4 bis 22,2 gemessen = OGD 21,8), Ostteil 3 Achsen, Mansarde helles Blech wie die Vorlage |
+| | Nachbargarten | weißer Kasten 3 x 8 m bei x -4 bis -1 (Orthofoto) | Kasten 1,0 x 3,2 m, 1,2 m hoch bei x -10,9 bis -9,9 / y -41 bis -37,8 (in `Hof_fin` und `Hof_fin-4` gleich gemessen) |
+| | Bäume | Dachgarten 10 m und 6 m | Dachgarten 15 m (Krone 9) und 9 m (Krone 6); zwei neue Laubbäume im Westteil des Nachbargartens (-14,7 / -43,5, 12 m; -13,8 / -33,6, 14 m), Stammfuß am Strahlschnitt |
+
+**Kontrolle an Messpunkten in `hof_fin`** (Vorlagenpixel gegen projizierte Modellkante, 1920 px Breite):
+
+| Kante | vorher (Runde 4) | nachher |
+|---|---|---|
+| 005363 Oberkante Ostfassade | 97 px = 5,0 % | 2 px = 0,1 % |
+| 005363 Rücksprung Oberkante | 46 px = 2,4 % | 0 px |
+| 005379 Traufe | 86 px = 4,5 % | 1 px = 0,1 % |
+| 005378 Traufe Hofecke | 34 px = 1,8 % | rund 3 px = 0,2 % (Traufe 20,0) |
+| 005387 Nordostecke (Bildspalte) | 57 px = 2,9 % | 3 px = 0,2 % |
+| 005362 Traufe Ost, 005364 Traufe | je 7 px = 0,4 % | je 7 px = 0,4 % (OGD stimmte schon) |
+
+Die automatische Kantenabweichung (Modellkanten zur nächsten Vorlagenkante im Bildbereich der Nachbarn) liegt vorher
+und nachher bei 0,1 bis 0,2 % Median: Laub, Fenster und Texturen der Vorlage liefern überall nahe Kanten, das Maß
+trennt deshalb nicht; maßgeblich sind Messpunkte und Überlagerung.
+
+Farben aus mittleren Flächen der Vorlage (30. bis 80. Helligkeitsperzentil, ohne Fenster und Spitzlichter),
+für Fassaden im Schatten (Ostseiten links) auf den unbeleuchteten Weißton zurückgerechnet.
+
+**Widersprüche Vorlage gegen Plan und OGD** (dokumentiert, Neubau nicht geändert):
+
+- Neubau, Vorlage älterer Entwurf: Glas-Sheddächer auf den Pavillons (Plan: Flachdach mit PV), kein Pavillon Top 4A
+  (dort Gründach), Straßenhaus-Dachgeschoss mit Dachterrassen und Treppen statt Mansarde mit Gauben, linker Teil eine
+  Traufe tiefer; Hoffassade endet in `Hof_fin` rund 1 m vor x 19,55 (in `Hof_fin-3` deckt sie sich mit dem Plan);
+  Pflanztröge an den Balkonenden breiter; Würtzlerstraße 10: Balkone als geschlossene Kästen, rund 2,3 m tief statt
+  1,30 m (oder Hoffassade 1 m weiter südlich), die Ostwand erscheint deshalb in der Vorlage schmal, im Modell breit.
+- Pflichtbäume im Hof Ost (EIN S. 18): die Vorlage zeigt einen großen Baum bei rund (4 / -62) statt (8,4 / -63,6) und
+  keinen Baum bei (20,1 / -60,2); im Modell bleiben Lage und Kronen laut Plan, der Baum bei (20,1 / -60,2) steht in
+  `hof_fin` groß im Vordergrund.
+- Nachbarn gegen OGD/Orthofoto/Apple (der Vorlage gefolgt): Traufen 005379 +2,3 m, 005378 -1,6 m mit Ziegeldach statt
+  Flachdach, 005363 +4,9 m, Nordfassade 005387 1,9 m südlicher, Nische 005378 neben dem Straßenhaus geschlossen,
+  Erkertürme 005379/005380 entfernt (Google 3D und Apple zeigen sie), weißer Kasten und zwei Bäume im Nachbargarten
+  anders als im Orthofoto. Für Vertriebsbilder, die den Bestand zeigen sollen, ist diese Abweichung bewusst.
+
+**Nebenbefund schwarzes Dach Schlachthausgasse 15/17** (offen aus Runde 4): kein Problem der Fassadenkarte bei
+y -15,05, sondern das Flachdach des hohen Teils von 005362 (+26,75): der dunkle Deckel des Baukörpers lag deckungsgleich
+mit der Dachfläche aus LOD2 und gewann stellenweise. Behoben in `lib/build.py`/`lib/meshkit.py` (Deckel unter einem
+Dach aus dem Dachmodell 5 cm tiefer, gilt für alle Projekte). Seit der Änderung des Wimmergasse-Agenten stehen alle
+Nachbarn auf der Sockelkote T_KOTE; die Vorher-Bilder des Prüfbogens sind mit diesem Stand gerechnet.
+
+Prüfbogen (intern, enthält die Vorlagen): Scratchpad `noma/r5/hof_abgleich.jpg`, je Vorlage Vorlage | Modell vorher |
+Modell nachher | Kantenüberlagerung nachher.

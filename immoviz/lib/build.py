@@ -363,7 +363,10 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
             h, faces = min(h, tr), None
         h = R.wall_top(h, faces)
         flat_mat = R.MAT.get(ov.get("material_flach"), "dach_kies") if (ov and ov.get("material_flach")) else "dach_kies"
-        K.extrude(walls, poly, min(-1.5, zt - zg - 1.5), h, col, "nachbar_dach" if (faces or not roof_by_id) else flat_mat, bottom=False)
+        # Deckel unter dem Dachmodell 5 cm tiefer: bei Flachdaechern lag der dunkle Deckel deckungsgleich mit der
+        # Dachflaeche und gewann stellenweise (schwarzes Dach Schlachthausgasse 15/17, NOMA Runde 4/5)
+        K.extrude(walls, poly, min(-1.5, zt - zg - 1.5), h, col, "nachbar_dach" if (faces or not roof_by_id) else flat_mat,
+                  bottom=False, top_dz=-0.05 if faces else 0.0)
         n = len(poly)
         detailed = not (dist > detail or h < 5.0 or b.get("klasse") != 11)
         for i in (range(n) if detailed else []):
@@ -397,11 +400,11 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
                     K.box(wins, f, uc - 0.025, uc + 0.025, -0.02, 0.0, za, zb, "nachbar_rahmen")
             K.box(walls, f, 0.0, L, -0.35, 0.0, h - 0.55, h, col)
             K.box(walls, f, 0.0, L, -0.08, 0.0, 3.6, 3.9, col)
-        if faces:
-            R.add_faces(roofs, walls, faces, 0.0, h, col, ov=ov, seed=sum(map(ord, str(b.get("bezug")))))
         if ov and ov.get("aufbauten") and id(ov) not in auf_done:      # Liftturm, Stiegenhaus, Dachterrasse
             auf_done.add(id(ov))
             R.aufbauten(roofs, walls, ov, 0.0, col, poly)
+        if faces:
+            R.add_faces(roofs, walls, faces, 0.0, h, col, ov=ov, seed=sum(map(ord, str(b.get("bezug")))))
         elif not roof_by_id and h_bkm > 8.0 and b.get("klasse") == 11:
             # Keine Dachdaten geladen (immoviz.py daecher): Satteldach, First parallel zur laengsten Strassenkante
             se = [i for i in range(n) if math.dist(poly[i], poly[(i + 1) % n]) > 3.0 and on_street(

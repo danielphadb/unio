@@ -195,6 +195,32 @@ Badfenster Top 3/4 (EIN FPH 1,70, VP zeigt "PH"); Attikahöhe über Gründach +3
 Terrasse Top 2 und zwischen Weg-Podest und den Terrassen Top 2/5 im Plan nicht eindeutig (nicht modelliert);
 Spielhügel als Plateau vereinfacht; Gartenstreifen-Teilung (Rasen/Rasensteinpflaster) aus den Linien abgeleitet.
 
+## Runde 5 (16.11.2026): Innenhof nach den Vorlagen, Kameramatch
+
+Feedback des Kunden: "Bei Noma bitte noch einmal den Innenhof ansehen, bitte von der originalen Visualisierung die
+Häuser links und rechts übernehmen, ... sowohl rechts als auch links die Ecke ist hier noch nicht richtig." Nur Modell,
+keine Veredelung.
+
+- **Ursache:** Die Kontrollkamera `hof_vorlage` war geschätzt und stand 10 m neben dem Standpunkt der Vorlage.
+  Neues Werkzeug `immoviz.py kameramatch` (README immoviz): Kamera aus Passpunkten am Neubau lösen (Pavillon-Attika,
+  Balkonplatten, Fenster, Fassadenkanten), dann Nachbarn an Überlagerung und Drahtmodell angleichen.
+- **Kameras** `hof_fin`, `hof_fin2`, `hof_fin3`, `hof_fin4` (Vorlagen `SHG13_Hof_fin`, `-2`, `-3`, `-4`), alle gematcht
+  (mittlerer Fehler 0,26 / 0,34 / 0,34 / 0,67 % der Bildbreite), Punktdateien in `kameramatch/`. Der Standpunkt von
+  `SHG13_Hof_fin` liegt im Eckhaus Schnirchgasse 8 (`clip_start`), `-4` ist ein Ausschnitt fast vom selben Standpunkt.
+- **Nachbarn nach der Vorlage** (Tabelle in `umgebung_abgleich.md` Abschnitt 9): rechte Ecke 005378 Traufe 19,0 mit
+  Ziegeldach und geschlossener Nische neben dem Straßenhaus, 005379 Traufe 18,6, beide Erkertürme entfernt; linke Seite
+  005363 auf 24,8 m mit Paneelstreifen, 005364 weiß mit dunkler Mansarde, 005387 Nordfassade 1,9 m südlicher, 005362
+  lachs mit Geschossraster 2,75 und heller Mansarde; Nachbargarten: Kasten und zwei Bäume nach der Vorlage, Bäume am
+  Dachgarten größer.
+- **Neubau unverändert** (Einreichplan vor Vorlage): Sheddächer, fehlender Pavillon 4A, Dachgeschoss Straßenhaus,
+  Balkontiefe Würtzlerstraße 10 und Lage der Pflichtbäume weichen in der Vorlage ab (älterer Entwurf).
+- **Behoben:** schwarzes Flachdach Schlachthausgasse 15/17 (Deckel deckungsgleich mit dem LOD2-Dach, `lib/build.py`).
+- Prüfbogen intern (Scratchpad `noma/r5/hof_abgleich.jpg`): Vorlage | Modell vorher | Modell nachher | Kanten.
+
+Offene Punkte Runde 5: Auswahl der Vorlage für Bestandsbilder (die Nachbarn folgen jetzt der Vorlage, nicht in allem
+dem Bestand laut Orthofoto/Apple); Pflichtbaum (20,1 / -60,2) steht in `hof_fin` groß im Vordergrund (Plan);
+`hof_fin2` beruht nur auf Punkten der Straßenhausfassade (Shift 0,3), Nachbarn dort nur grob prüfbar.
+
 ## Quellen (`quellen/`, PDFs nicht im Repo)
 
 | Kürzel | Datei | Verwendet für |

@@ -387,8 +387,9 @@ def clip_polygon(poly, rules, facades: dict):
 
 
 def extrude(mb: MeshBuilder, poly, z0, z1, mat_side="putz_hof", mat_top="dach_flach",
-            mat_cut=None, cut_lines=(), bottom=True, uv_scale=1.0):
-    """Extrudiert ein 2D-Polygon. Flaechen auf Clip-Linien bekommen mat_cut."""
+            mat_cut=None, cut_lines=(), bottom=True, uv_scale=1.0, top_dz=0.0):
+    """Extrudiert ein 2D-Polygon. Flaechen auf Clip-Linien bekommen mat_cut. top_dz senkt den Deckel ab (unter einem
+    deckungsgleichen Flachdach aus dem Dachmodell, sonst Z-Fighting)."""
     if len(poly) < 3:
         return
     if polygon_area(poly) < 0:
@@ -407,7 +408,7 @@ def extrude(mb: MeshBuilder, poly, z0, z1, mat_side="putz_hof", mat_top="dach_fl
         mb.poly([(x1, y1, z0), (x2, y2, z0), (x2, y2, z1), (x1, y1, z1)],
                 [(run, z0), (run + L, z0), (run + L, z1), (run, z1)], m, nrm)
         run += L
-    mb.poly([(x, y, z1) for x, y in poly], [(x, y) for x, y in poly], mat_top, (0, 0, 1))
+    mb.poly([(x, y, z1 + top_dz) for x, y in poly], [(x, y) for x, y in poly], mat_top, (0, 0, 1))
     if bottom:
         mb.poly([(x, y, z0) for x, y in poly], [(x, y) for x, y in poly], mat_top, (0, 0, -1))
 
