@@ -221,6 +221,77 @@ Offene Punkte Runde 5: Auswahl der Vorlage für Bestandsbilder (die Nachbarn fol
 dem Bestand laut Orthofoto/Apple); Pflichtbaum (20,1 / -60,2) steht in `hof_fin` groß im Vordergrund (Plan);
 `hof_fin2` beruht nur auf Punkten der Straßenhausfassade (Shift 0,3), Nachbarn dort nur grob prüfbar.
 
+## Runde 6 (16.11.2026): Obergeschoße und Dach nach Einreichplan, Nr. 15
+
+Feedback des Kunden zu den Hof-Ansichten (`hof_fin` bis `hof_fin4`): "Das Modell stimmt so leider gar nicht. Balkone sind
+falsch und Dach auch, wie kommt es zu dem? In den Plänen ist es anders und in der Visualisierung auch." Dazu Nr. 15: "das
+Haus sieht in echt anders aus." Nur Modell, keine Veredelung.
+
+**Ursache:** Straßenhaus ab 2. OG, Dach und die Balkone Würtzlerstraße 10 stammten aus Runde 1 (vereinfacht, ohne
+Vektorauswertung, Seitenzählung nach Blattnummer) und wurden in Runde 4/5 nicht gegen Grundrisse, Schnitte und Ansichten
+geprüft; Runde 5 hat die Abweichung zur Vorlage als "älteren Entwurf" eingeordnet, statt das Modell zu prüfen. Die
+Passpunkte der Kameras an den Balkonplatten nutzten die falschen Modellkoordinaten.
+
+**Methode:** Vektorauswertung (PyMuPDF) von EIN S. 10 (2. OG), S. 11 (RG 3. bis 5. OG), S. 12 (1. DG), S. 13 (2. DG),
+S. 14 (Dachdraufsicht), S. 19 bis 22 (Würtzlerstraße RG, 1. DG, 2. DG, Dach), S. 23 (Schnitte, Koten) und der Ansichten
+S. 26/28 (Glas, Rahmen, Platten, Geländer als Rechtecke in Metern). Grundrisse liegen im Projektsystem (Abbildung im Kopf
+von `project.yaml`, für S. 10 bis 14 über BFL und Brandwände bestätigt), Würtzlerstraße in Fassadenkoordinaten (u ab
+Ostende, d vor der BFL). Prüfbilder: orthogonale Modellansicht im Maßstab neben S. 26/28.
+
+| Bauteil | vorher (Runde 1) | nachher (Plan) | Quelle |
+|---|---|---|---|
+| Straßenhaus Erker 2. OG bis 5. OG | kein Erker, Fenster an der BFL | Erker x 5,87 bis 14,11, 1,40 vor der BFL, UK +6,94, OK +18,93; Front mit Fenster 276/145 und 233/145 (FPH 0,90), zwei Türen 100/232 je Geschoß | S. 10/11, S. 23, S. 26 |
+| Straßenhaus Balkonplatten | 1,12 tief, x 3,6 bis 16,1, zwei Stützen | 2,40 vor der BFL (1,00 vor dem Erker), Enden schräg (3,85/4,12 und 16,19/15,91), Platte 0,34, UK 7,06 / 9,94 / 12,82 / 15,70 / 18,59 | S. 11/12, S. 26 |
+| Loggien | keine | x 3,85 bis 5,87 und 14,11 bis 16,19 zwischen BFL und Erker, Fenster 118/145, Wand "BA" 0,75 am Ende | S. 10/11 |
+| Geländer Balkone | Stab über die ganze Länge | Stab x 5,06 bis 15,11 (OK 8,42 / 11,30 / 14,28 / 17,16 / 20,04), geschlossene Felder RAL 7012 x 4,10 bis 5,06 und 15,11 bis 16,07, Trennwand h 2,30/2,32 bei x 10,12 | S. 26, S. 11/12, BAB |
+| 1. DG Hofseite | Fenster im Raster | an der BFL: 118/196 mit französischem Geländer GLH 1,12, 118/136 FPH 0,60, Hebeschiebetüren 260/230 und 248/230; Terrasse auf dem Erker | S. 12, S. 26 |
+| Dach | Mansarde 67 Grad, zwei Kastengauben hofseitig, fünf Gauben straßenseitig, Flachdach +25,10 | Hofseite 45 Grad von +21,00 (BFL) bis +25,43 (4,40 tief), Straßenseite bis y -5,44; 2 x 3 Dachflächenfenster 0,94 x 2,52 hofseitig, 5 straßenseitig | S. 13/14, S. 23, S. 26 |
+| Dacheinschnitt 2. DG | keiner | x 7,07 bis 13,33 (1/3 der Front), Terrasse +21,81 vor der Wand y -13,00 (2,00 tief), Hebeschiebetüren 260/230 und 248/230, Geländer OK +22,92, Trennwand h 2,32 | S. 13, S. 26 |
+| Treppen aufs Dach | keine | zwei Treppen 17 Stg. 20/24 in der Dachfläche (x 5,65 bis 6,55 und 13,85 bis 14,75) mit Geländer; Wendel unten als Podest vereinfacht (ANN) | S. 13/14, S. 26 |
+| Dachterrassen | Platten +25,30 an anderer Lage | Top 26-3 x 1,08 bis 7,0 und Top 23-3 x 10,95 bis 18,3 (mit Fortsetzung bis y -12,9), Kies an den Enden, Gründach mit Liftüberfahrt (+26,26), Dachausstieg, Außengeräte; Geländer OK +26,40 nur wo S. 14/26 sie zeigen | S. 14, S. 26 |
+| Würtzlerstraße 10 Balkone | 1,30 tief, Fenster an der BFL, 5 Platten | Erker u 2,99 bis 9,42, 0,64 vor der BFL (UK +2,40) mit Türen 100/227 und Fenstern 135/140; Platten 2,54 tief (1,38 + 1,12) auf 1. OG bis 2. DG (6 Stück, UK 2,52 bis 16,93); Stab u 3,98 bis 8,46, geschlossene Felder RAL 7012 an den Enden, seitlich Stab, Trennwände h 2,53 und 2,30 | S. 19/20/21, S. 23, S. 28 |
+| Würtzlerstraße 10 Dach | Mansarde 1,6 tief | 45 Grad von +17,28 bis +20,72 (3,42 tief), Mittelteil u 3,77 bis 7,91 als Wand mit zwei Türen 100/232, je zwei Dachflächenfenster, PV (Feld 1 laut S. 22, Felder 2/3 Lage aus S. 28, Tiefe ANN) | S. 21/22, S. 28 |
+
+Alle neuen Einträge haben das Feld `quelle`; `pruefen`: `hof_fin` und `hof_fin2` ohne Elemente ohne Quelle (vorher 15 %
+und 24 %). Die verbleibenden 11 fehlenden Quellen liegen in `wohnungen.yaml` (top26_2, apt01) und in alten
+`materials`, nicht in Runde 6.
+
+**Abgleich mit den Vorlagenkameras** (`kameramatch --nur-render`, Überlagerungen im Scratchpad `noma/r6/km/`): Übereinstimmung
+von Plan und Vorlage und deckungsgleich im Modell: Erker mit Balkonband (Plattenhöhen, Fensterachsen 2. bis 5. OG, Fehler
+der Fensterpasspunkte 1 bis 5 px), geschlossene dunkle Endfelder, Stabgeländer, 1. DG-Balkon über die Erkerbreite,
+französische Fenster außen, Dacheinschnitt mit Terrasse und großen Verglasungen, zwei Treppen aufs Dach, Dachterrassen
+mit Geländer, 45-Grad-Dachflächen seitlich, Würtzlerstraße-Balkone als tiefe Platten.
+
+**Widersprüche Plan gegen Vorlage (Plan gilt, Modell nach Plan):**
+
+- Dachflächenfenster: Vorlage `Hof_fin-2` zwei große Fenster je Seite, Plan drei Fenster 0,94 x 2,52 je Seite (S. 13/14/26).
+- Dachhöhe: Vorlage zeigt Dach und Dachgeländer rund 1 m höher als OK Geländer +26,40 (S. 26); Balkonband und 1. DG decken sich.
+- 1. DG Mitte: Vorlage drei Öffnungen, Plan zwei Hebeschiebetüren 260/230 und 248/230 (S. 12/26).
+- Plattenenden: Vorlage bepflanzte Tröge, breiter und weiter vor (Kontrollpunkt `hof_fin3` 136 px), Plan geschlossene Felder
+  RAL 7012 0,96 breit (S. 26) und Wand BA (S. 11); keine Bepflanzung modelliert.
+- Würtzlerstraße 10: Vorlage geschlossene Brüstungskästen rund 2,3 m tief, Plan 2,54 tief mit Stabgeländer und
+  geschlossenen Endfeldern (S. 19/28); Tiefe jetzt nahe an der Vorlage (vorher 1,30).
+- Kameras: Mit plangerechten Passpunkten (Plattenecke 15,91/-17,41 statt 16,1/-16,12, Würtzlerstraße d -2,54) wird `hof_fin`
+  kaum besser (4,95 auf 4,45 px, Standpunkt 3 m versetzt), `hof_fin2` schlechter (6,45 auf 8,54 px): die Plattenenden der
+  Vorlage weichen vom Plan ab. Kameras bleiben wie Runde 5 (sonst verschieben sich die Nachbarn), korrigierte Punktdateien im
+  Scratchpad `noma/r6/km_punkte/`.
+- Unverändert aus Runde 5: Glas-Sheddächer, fehlender Pavillon 4A, Lage der Pflichtbäume.
+
+**Nr. 15 Gemeindebau** (Schlachthausgasse 3 / Schnirchgasse 1-7, BEZUG 172417), umgebung_abgleich.md Abschnitt 10:
+Westfassade als Karte `west_172417` (EG + 9 OG, Höhe 29,57 aus BKM/LOD2, 28 Achsen zu 3,02 m, weiß mit hellgrau-blauem
+Oberteil ab +19,6), vier Balkonstapel rotbraun (9 je Stapel, 3,0 x 1,25, volle Brüstung) in den Achsen 4, 11, 18, 25
+gegenüber den vier Stiegenkernen am Dach (LOD2), zwei Markisen, sieben Bäume zwischen Parkplatz und Fassade (Lage
+Orthofoto 2024, Größe Apple 9/8). Parkplatz bleibt OGD-Fläche ohne Autos.
+
+Prüfbögen (Scratchpad): `noma/r6/neubau_obergeschosse.jpg` (intern, mit Vorlagen und Apple),
+`noma/r6/neubau_obergeschosse_ohne_fremd.jpg` (nur Modellbilder und Planausschnitte, für die Abstimmungsseite).
+
+Offene Punkte Runde 6: `wohnungen.yaml: top26_2` (Innenraum 2. DG, Runde 1) folgt noch der alten Gaube und nicht dem
+Dacheinschnitt; Kameras `dachterrasse_stadt` (steht im Gründach neben dem Lift) und `dachterrasse_hof` (steht auf der
+straßenseitigen Dachfläche) neu setzen; Wendeltreppe unten, Höhen von Dachausstieg und Außengeräten, PV-Felder 2/3
+Würtzlerstraße (Tiefe) sind Annahmen; Liftüberfahrt S. 14 +26,37 gegen S. 23/26 +26,26; Farbe Oberteil Nr. 15 (Apple
+zeigt einen bläulich-hellen Ton, Vorgabe "dunkleres Oberteil").
+
 ## Quellen (`quellen/`, PDFs nicht im Repo)
 
 | Kürzel | Datei | Verwendet für |
@@ -269,7 +340,7 @@ Wichtige Befunde aus den Plänen:
 - **Raumhöhen:** Pavillons 2,51 m (FOK +3,50 bis DUK +6,01 laut Schnitt). Top 26-2: 2,80 m im Flachteil, Kniestock
   1,10 m, Schrägen rund 54 Grad aus den RH-Linien 1,50 / 2,10 / 2,50 m. Fenster Pavillons Brüstung 0,90, Sturz 2,40.
 - **Fassadenfarben:** Hof hellgrün-grau (Baumit 1026 laut Ansicht, Farbwert geschätzt), Erker und Geländer RAL 7012.
-- **Mansarde Straßenhaus** vereinfacht (eine Neigung je Seite), Straßenfassade nur als Kulisse.
+- **Mansarde Straßenhaus** vereinfacht (eine Neigung je Seite), Straßenfassade nur als Kulisse. Ab Runde 6 Dach nach Plan.
 - **EG-Hoftrakt:** Lage der Fenstertüren zum Gartenstreifen im Raster 5 m geschätzt.
 - Gartenbäume und Rasenflächen der Nachbarn aus dem Orthofoto, Höhen geschätzt.
 
@@ -309,7 +380,7 @@ veredelten Bild als Referenz.
 
 - Freigabe der Auslegung "anderer Garten" mit dem Kunden; der Nachbargarten ist fremder Grund (nur Blickpunkt).
 - Stand der Pläne: Einreichung ist Vorabzug 04.03.2026, VP sind jünger (Top 4 und 4A abweichend). Aktuellen Polierplan anfordern.
-- Mansarde und Gauben Straßenhaus genauer aus Ansicht S. 24/26 und Schnitt 2 aufnehmen (heute vereinfacht).
+- Mansarde und Gauben Straßenhaus genauer aus Ansicht S. 24/26 und Schnitt 2 aufnehmen: erledigt in Runde 6 (Dach nach S. 13/14/23/26).
 - Hoffassaden der Nachbarn und Höhe des Nachbar-Dachgartens prüfen (Foto aus dem Hof oder Schrägluftbild).
 - 12 Pflichthäuser an der Schlachthausgasse ohne Fassadeneintrag (nur für ein späteres Straßenmotiv nötig).
 - Möblierung der Innenbilder ist Staging; Küchenlage laut VP, Fronten und Geräte laut Bemusterung noch abgleichen.

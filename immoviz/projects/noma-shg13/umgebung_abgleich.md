@@ -172,7 +172,7 @@ mit roten Ziegeldächern gegenüber, keine verwertbaren Details).
 | 12 | 004968 | Schlachthausgasse 12 | gegenüber | dto. | LOD2, Apple 9/10 | niedrig | dto. |
 | 13 | 004966 | Schlachthausgasse 8 | gegenüber | dto. | LOD2, Apple 9/10 | niedrig | dto. |
 | 14 | 004969 | Erdbergstraße 119 / Schlachthausgasse 14 | gegenüber Ecke | dto. | LOD2, Apple 9 | niedrig | dto. |
-| 15 | 172417 | Schlachthausgasse 3 / Schnirchgasse 1-7 | Gemeindebau-Riegel jenseits der Schnirchgasse | weißer Baukörper 32 m, LOD2-Dach hell | LOD2, Apple 9/10 (9 bis 10 Geschoße, rote Balkonbänder, Baumgruppe davor) | mittel | rote Balkonbänder und Fensterraster nicht modelliert |
+| 15 | 172417 | Schlachthausgasse 3 / Schnirchgasse 1-7 | Gemeindebau-Riegel jenseits der Schnirchgasse | Runde 6: Westfassade `west_172417` EG + 9 OG, 28 Achsen, vier rotbraune Balkonstapel, Oberteil abgesetzt, Baumgruppe (Abschnitt 10) | LOD2/BKM (29,57 m, Stiegenkerne), Apple 8/9, Orthofoto 2024 | mittel | Ostfassade, Markisen-Lage, Farbe Oberteil |
 | 16 | 229182 | Schnirchgasse 10 / Würtzlerstraße 1 (Rundbau) | Südost | runder Baukörper aus OGD/LOD2 | LOD2, Apple 8/9 (Bürorundturm mit Ringgeschoßen) | mittel | Ringgeschoße als Fassade |
 | 17 | 504164 | Würtzlerstraße 18 (Wohnanlage, gegenüber) | Süd jenseits der Würtzlerstraße | nur Baukörper | LOD2 | niedrig | Fassaden (nur für Dachmotive relevant) |
 
@@ -260,3 +260,22 @@ Nachbarn auf der Sockelkote T_KOTE; die Vorher-Bilder des Prüfbogens sind mit d
 
 Prüfbogen (intern, enthält die Vorlagen): Scratchpad `noma/r5/hof_abgleich.jpg`, je Vorlage Vorlage | Modell vorher |
 Modell nachher | Kantenüberlagerung nachher.
+
+## 10. Runde 6: Nr. 15 Gemeindebau Schlachthausgasse 3 / Schnirchgasse 1-7 (BEZUG 172417)
+
+Kundenfeedback: "15 das Haus sieht in echt anders aus." Vorher stand nur der Baukörper aus dem BKM (85 x 11 m, 29,57 m)
+mit Standardfenstern. Quellen: BKM/LOD2 (Höhe, vier Stiegenkerne am Dach bei y -21 / -42 / -63 / -84), Apple 8/9 des
+Kunden (nur intern: Geschoße, Achsen, Balkonstapel, Farben), Orthofoto 2024 (Bäume, Parkplatz).
+
+| Merkmal | Modell Runde 6 | Quelle |
+|---|---|---|
+| Geschoße, Höhe | EG + 9 OG, Fensterreihen ab +1,0 und +3,9 im Raster 2,80, Oberkante 29,57 | BKM/LOD2, Apple 9 (neun Balkone je Stapel) |
+| Achsen | 28 Achsen zu 3,02 m über die Westfassade (Karte 5 cm vor dem Baukörper, `bezug: 172417_west`) | Apple 9 (3 Achsen bis zum ersten Stapel, je 6 dazwischen) |
+| Balkonstapel | vier Stapel in den Achsen 4, 11, 18, 25 (u 10,6 / 31,7 / 52,8 / 73,9), je 9 Balkone 3,0 x 1,25 mit voller rotbrauner Brüstung 1,0 | Apple 9/8; Lage deckt sich auf rund 1 m mit den Stiegenkernen (LOD2) |
+| Farben | Fassade weiß/hellgrau `#E8E6E1`, Oberteil ab +19,6 hellgrau-blau `#A9AEB6`, Balkone rotbraun, Markisen orange-beige (zwei) | Apple 9 (Farbwerte geschätzt, im Sonnenlicht gerechnet) |
+| Dach | Flachdach mit den vier Stiegenkernen aus LOD2 | LOD2, Apple 9 |
+| Umfeld | sieben Laubbäume 15 bis 17 m zwischen Parkplatz und Fassade (`trees_override`), Parkplatz als OGD-Fläche | Orthofoto 2024 (Lage), Apple 9/8 (Größe) |
+
+Offen: Ostfassade (nicht modelliert, aus den Hofkameras nicht sichtbar), genaue Lage der Markisen, Farbe des Oberteils
+(Apple zeigt die oberen drei Geschoße bläulich-hell, Vorgabe war "dunkleres Oberteil"; im Modell leicht dunkler abgesetzt).
+

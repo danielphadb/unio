@@ -46,7 +46,7 @@ neubau:
     nb_wand_hof: {color: "#A9B092", art: putz}            # Hoffassade hellgruen-grau (Baumit 1026 laut [EIN S. 25/27]) [ANN Farbwert]
     nb_basalt: {color: "#3A3D3F", art: metall, rough: 0.5, metal: 0.3}   # RAL 7012 Basaltgrau: Erker, Gelaender [EIN S. 25]
     nb_mansarde: {color: "#55595C", art: zink}            # Mansarde Blech dunkelgrau [EIN S. 25: RAL 7012] [ANN]
-    nb_brandwand: {color: "#B9B3A8", art: putz}
+    nb_brandwand: {color: "#B9B3A8", art: putz, quelle: "ANN Feuermauer/Giebel grau verputzt (Farbe im Plan nicht angegeben)"}
     nb_strasse: {color: "#C9C0A8", art: putz}             # Strassenfassade, erhaltene Gruenderzeitfassade EG/1.OG [BAB S. 2] [ANN Farbe]
     # Runde 3 (Abgleich Orthofoto 2024 und Google-Luftbild, umgebung_abgleich.md Abschnitt 7)
     nb_fallschutz: {color: "#3B3532", art: einfach, rough: 0.95}    # Spielflaeche Fallschutz dunkel, Nachbargarten
@@ -64,7 +64,7 @@ neubau:
     nb_paneel: {color: "#B9ADB2", art: putz}
     nb_weiss_005378: {color: "#F5F1EB", faktor: 0.74, art: putz}   # wie hof_ost_005378 (Nachbarkarten rechnen Farbe x 0,74)
     # Runde 6: Nr. 15 Gemeindebau, Balkone rotbraun und Markisen (Apple 9/8, Farbwerte geschaetzt aus dem Schatten zurueckgerechnet)
-    nb_balkon_15: {color: "#7A4538", art: putz, quelle: "Apple 9 (Balkonbruestungen rotbraun) ANN Farbwert"}
+    nb_balkon_15: {color: "#3A1E17", art: putz, quelle: "Apple 9 (Balkonbruestungen rotbraun) ANN Farbwert, dunkel angesetzt, im Sonnenlicht rotbraun"}
     nb_markise_15: {color: "#C98B5E", art: einfach, rough: 0.8, quelle: "Apple 9 (Markise orange-beige) ANN Farbwert"}
   koerper:
     # --- Strassenhaus Schlachthausgasse 13 [EIN S. 9, 22, 25]: 15,00 m tief, Traufe +21,00, Strassen- und Hofseite als Fassade
@@ -1021,7 +1021,7 @@ neighbour_facades:
     frame: stuck
     axes: [1.51, 4.52, 7.54, 10.56, 13.57, 16.59, 19.6, 22.62, 25.64, 28.65, 31.67, 34.68, 37.7, 40.72, 43.73, 46.75, 49.76, 52.78, 55.8, 58.81, 61.83, 64.84, 67.86, 70.88, 73.89, 76.91, 79.92, 82.94]
     rows: {eg: {z: 1.0, h: 1.5, w: 1.2}, z0: 3.9, step: 2.8, n: 9, h: 1.45, w: 1.2}
-    bands: [[19.6, 29.6, "#C3C8CF"]]
+    bands: [[19.6, 29.6, "#A9AEB6"]]
     quelle: "Apple 9/8 (Geschosse, Achsen, Balkonstapel, Farben), BKM/LOD2 (Hoehe 29,57, Stiegenkerne), Orthofoto 2024"
 
 # ---------------------------------------------------------------- Dachkorrekturen (lib/roofs.py), Runde 4
