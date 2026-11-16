@@ -222,3 +222,90 @@ Vorher: Wandstück x 3,05 bis 3,25 plus Zylinder r 0,10 bis zur Decke (wirkte al
 Prüfbilder (Scratchpad, nicht im Repo): `r4/kontaktbogen_apartments_modell.jpg` (Draufsicht über Grundriss S. 3, Kameras
 gegen Ansichten, Wandabwicklungen S. 13 bis 16), `r4/abwicklung_s1x_v1|v2.jpg`, `r4/farbtafel_bordeaux.jpg`.
 Blender-Vorschauen neu: `renders/innen/apt01_*_vorschau.png`, `apt01_v2_*_vorschau.png`.
+
+## 7. Runde 6 (16.11.2026): Entscheidungen des Kunden und Umsetzung (`apt06_v1`, `apt06_v2`)
+
+Grundlage: Abstimmungsseite des Kunden vom 16.11.2026 zu den offenen Fragen aus Abschnitt 5 und 6. `apt01` und `apt01_v2`
+bleiben als Referenz unverändert; neu sind `apt06_v1` (Mappe 07.10.) und `apt06_v2` (Mappe 28.10.) in `wohnungen.yaml`,
+jedes Element mit Feld `quelle` (erzeugt mit `scratchpad/noma/r6/apt/gen_apt06.py`).
+
+### 7.1 Entscheidungen
+
+| Frage | Entscheidung Kunde | Umsetzung |
+|---|---|---|
+| Küchenzeile 2,42 oder 2,116 | 2,42 wie Derenko | Hochschrank 600 + 3 x 600 + Wange = 2,416 (unverändert) |
+| Kochfeld | beide Derenko-Varianten darstellen, keine Laden direkt unter dem Kochfeld | V1: Kochfeld im 600er neben der Garderobe [INT S. 13 und S. 3], darunter glatte Drehtür statt der drei Laden aus S. 13. V2: S. 13 zeigt kein Kochfeld, S. 3 zeigt es neben der Garderobe, dort steht laut S. 13 aber der Hochschrank; daher im ersten 600er nach dem Hochschrank, darunter Drehtür (S. 13 zeigt dort eine Tür). Laden nur im Block unter dem V2-Hochschrank (S. 13) |
+| Bordeaux | Palette #5C1727 | bleibt (Wand, Decke, Lack) |
+| Einbauhöhen | absolut, Hochschrank 2,62 | Anteil an der Raumhöhe in den Ansichten x 3,22 (gezeichnete Raumhöhe, 2,75 / 3,38 x 3,22 = 2,62); siehe 7.3 |
+| Fensterbreite | 1,60 wie Einreichplan, Höhe 1,50, Parapet 0,90 | Fenster 1,60 x 1,50, FPH 0,90 |
+| Lage | Apartment sicher unter einem Pavillon, niedrigere Rohdecke | **APT. 06**, Raumhöhe 3,14 (7.2) |
+| Gang | Terrazzo in beiden Varianten; Zimmer, Gang und Bad mit eigenem Boden | `gang` und `gang_v2` Terrazzo; Übergänge 7.4 |
+
+### 7.2 Gewähltes Apartment: APT. 06
+
+- **Lage** [EIN S. 15, entzerrt im Hofrahmen über S. 16]: Südreihe des EG-Hoftrakts, Eingang Tür 06 vom Mittelgang,
+  Wohnungstrennwände bei a 5,49 und 10,98, Pavillon Top 3 darüber reicht von a 0 bis 11,95 (rund 1,0 m Abstand im
+  Osten, 5,5 m im Westen). Im Zimmer steht die Kote **"ROK 3,34 RUK 3,14"**, die Deckensprünge 3,14 / 2,92 liegen auf
+  den Trennwänden zu APT. 05 (West) und APT. 07 (Osten, unter der Terrasse, RUK 2,92). Schnitt [EIN S. 23]: unter dem
+  Pavillon RDUK +3,14, keine abgehängte Decke [BAB-A 3.10]. **Raumhöhe 3,14.**
+- Andere Kandidaten: APT. 11 (unter Top 4, RUK 3,14) ist der kleinere Typ (25,73 m², Breite 4,52); APT. 08 (Typ 28,91,
+  unter Top 4) liegt mit der Westwand nur 0,1 m innerhalb der Pavillonkante, also nicht "sicher" darunter; APT. 05 hat
+  keinen eigenen Kotenvermerk und liegt teils auf S. 8.
+- **Typ:** APT. 06 hat 28,91 m² (Zimmer 20,04, VR 4,53, Bad 4,34), lichte Breite 5,06 laut Maßkette (Derenko 5,03),
+  Tiefe 5,94. Es ist das **Spiegelbild von APT. 01** und damit von Derenko Top 1: Bad (2,54 breit) an der Ostwand zu
+  APT. 07, Badtür im Bad-Westwand nahe dem Bad-Südende, Eingangstür 0,82 bis 1,76 von der Westwand (Derenko gespiegelt
+  0,80 bis 1,70). Umsetzung: Derenko-Top-1 gespiegelt, x_neu = 5,03 - x_Derenko; Küche und Garderobe an der Westwand
+  (zu APT. 05), Bett an der Bad-Wand, Trennwand-Rundung zur Zimmermitte.
+- **Fenster:** zum Gartenstreifen (Süd), kein Lichthof. Breite 1,60 x 1,50, FPH 0,90 (Kunde, EIN). **Lage nach Derenko
+  [INT S. 3]**, 0,30 von der Küchenwand (a 6,03 bis 7,63). Widerspruch: Der Einreichplan zeichnet das Fenster bei
+  APT. 01 und APT. 06 unter der Badseite (APT. 06: a 8,27 bis 9,87, also 0,90 bis 2,50 von der Badwand); dort steht in
+  Derenkos Entwurf das TV-Sideboard mit Bilderrahmen-TV [INT S. 14]. Derenkos Grundlage ist jünger (Oktober 2026) als
+  der Vorabzug der Einreichung (März 2026), der ganze Entwurf (Essplatz am Fenster, TV-Wand, Vorhänge) hängt an dieser
+  Lage. Offene Frage an Planer/Derenko (7.6). Die Außenfassade in `project.yaml` bleibt beim Einreichplan.
+- **Ausblick:** Gartenstreifen Süd mit Rasen, Blumentrog und Zaun (`nb_garten`), dahinter Hofbau Schlachthausgasse 11.
+- Im Modell: `ursprung_lokal` [6,0479, -27,9216] (Hofrahmen a 5,725, b 0,35), `drehung_grad` -83,56, `floor_z` 0,30 wie
+  `apt01` (Rechenhöhe). Pavillon `nb_top3` ausgeblendet (seine Unterkante +3,38 ragt sonst 6 cm in die Decke der
+  Rechenhöhe und zeichnete dunkle Balken an die Decke).
+
+### 7.3 Höhen absolut (Raumhöhe 3,14)
+
+Derenko zeichnet den Raum in S. 13 bis 16 rund 3,22 hoch (Abschnitt 6). Absolute Höhe = Anteil an der gezeichneten
+Raumhöhe x 3,22; ergonomische Höhen (Arbeitsplatte 0,90, Bett, Bank, Tisch, Sideboard 0,42 bis 0,94) bleiben.
+
+| Element | Runde 4 (Anteil x 3,38) | Runde 6 (absolut) |
+|---|---|---|
+| Raumhöhe | 3,38 | **3,14** |
+| Hochschrank, Garderobe Oberkante | 2,75 | **2,62**, Deckboden 2,52 |
+| Mikrowelle | 1,58 bis 1,93 | 1,50 bis 1,84 |
+| Fliesenspiegel, Borde (UK) | bis 1,53; 1,53 / 1,88 / 2,27 | bis 1,45; **1,45 / 1,79 / 2,16** |
+| Garderobe Fächer offen | 0,60 / 1,09 / 1,56 / 2,07 | 0,55 / 1,02 / 1,47 / 1,95 |
+| Garderobe Nische Fächer, Hakenleiste | 2,04 / 2,33, 1,78 | 1,94 / 2,22, 1,70 |
+| Garderobe Hängeteil Fach, Stange | 2,07, 1,92 | 1,97, 1,83 |
+| Bettverkleidung Eiche (LED-Fuge darüber) | 1,47 | **1,40** |
+| Polster Kopfteil OK | 1,07 | 1,02 |
+| Bild über dem Bett | 1,51 bis 2,47 | 1,44 bis 2,35 |
+| TV-Bilderrahmen | 1,36 bis 2,24 | 1,30 bis 2,13 |
+| Pendel UK | 1,62 / 1,85 / 2,00 | 1,54 / 1,76 / 1,91 |
+| Vorhangvoute (glatt) | 3,24 bis 3,38 | 3,00 bis 3,14 |
+| Bad Wandband bordeaux | 2,75 bis 3,38 | 2,61 bis 3,14 |
+| Duschfliese | 2,32 | 2,21 |
+| V2 Bettwand bordeaux | ab 1,47 | ab 1,42 (über der LED-Fuge) |
+
+### 7.4 Böden und Übergänge
+
+| Bereich | Boden | Quelle |
+|---|---|---|
+| Zimmer und Vorraum | Eiche Fischgrät | INT S. 13, S. 15; EIN S. 15 "Zimmer Parkett", "VR Parkett" |
+| Bad | Feinsteinzeug beige | INT S. 10, S. 15; EIN S. 15 "Bad/WC Fliesen" |
+| Gang | Terrazzo (V1 und V2) | INT S. 11; Kunde 16.11. |
+
+Übergänge: Eingangstür: Parkett bis unter das Türblatt, gangseitige Laibung Terrazzo; Badtür: Fliese bis unter das
+Türblatt (Mitte der Badwand), danach Parkett. Gang: Laibungen der Wohnungstüren Terrazzo (`material_ersatz` auch in
+`gang_v2`). Musterfliese aus dem Titelbild S. 1 (`zementfliese`) wird nicht mehr verwendet; der Sockel im Gang ist nur
+gestrichen (kein Profil).
+
+### 7.5 Küchenfronten
+
+Im Modell als Fugen (4 mm) und hellblaue Griffleiste über alle Fronten [INT S. 13 Detail Küche]:
+V1 vom Eingang zum Fenster: Garderobe, 600 Kochfeld mit Drehtür, 600 Tür, 600 Spüle, Hochschrank 600 mit Mikrowelle.
+V2: Garderobe, Hochschrank 600 mit Mikrowelle über drei Laden, 600 Kochfeld mit Drehtür, 600 Spüle, 600 Tür.

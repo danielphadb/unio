@@ -63,24 +63,71 @@ neubau:
     # Runde 5 (kameramatch Hof_fin): Paneelstreifen Erdbergstrasse 123 (Vorlage graubraun #ACA0A6 im Schatten)
     nb_paneel: {color: "#B9ADB2", art: putz}
     nb_weiss_005378: {color: "#F5F1EB", faktor: 0.74, art: putz}   # wie hof_ost_005378 (Nachbarkarten rechnen Farbe x 0,74)
+    # Runde 6: Nr. 15 Gemeindebau, Balkone rotbraun und Markisen (Apple 9/8, Farbwerte geschaetzt aus dem Schatten zurueckgerechnet)
+    nb_balkon_15: {color: "#7A4538", art: putz, quelle: "Apple 9 (Balkonbruestungen rotbraun) ANN Farbwert"}
+    nb_markise_15: {color: "#C98B5E", art: einfach, rough: 0.8, quelle: "Apple 9 (Markise orange-beige) ANN Farbwert"}
   koerper:
     # --- Strassenhaus Schlachthausgasse 13 [EIN S. 9, 22, 25]: 15,00 m tief, Traufe +21,00, Strassen- und Hofseite als Fassade
     - {gruppe: nb_shg, poly: [[0.0, 0.0], [18.48, 0.0], [19.55, -15.0], [0.80, -15.0]], z: [0.0, 21.0], wand: nb_brandwand,
        dach: dach_flach, ohne_kanten: [0, 2]}
-    # Erker Hofseite: Balkonstapel u 2,8 bis 15,3 vor der Hoffassade, 1,12 m tief, UK +6,94 bis +18,93 [EIN S. 22/25]
-    - {gruppe: nb_shg, poly: [[3.6, -15.0], [3.9, -15.0], [3.9, -16.12], [3.6, -16.12]], z: [6.60, 20.04], wand: nb_basalt, dach: nb_basalt}
-    - {gruppe: nb_shg, poly: [[15.8, -15.0], [16.1, -15.0], [16.1, -16.12], [15.8, -16.12]], z: [6.60, 20.04], wand: nb_basalt, dach: nb_basalt}
-    # Gauben Hofseite 2. DG (je drei Fenster 0,94 x 2,52) Top 26 West, Top 23 Ost, Front buendig mit dem Erker [EIN S. 13]
-    - {gruppe: nb_shg_dach, poly: [[1.85, -15.0], [5.05, -15.0], [5.05, -16.12], [1.85, -16.12]], z: [21.0, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [2]}
-    - {gruppe: nb_shg_dach, poly: [[14.55, -15.0], [17.75, -15.0], [17.75, -16.12], [14.55, -16.12]], z: [21.0, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [2]}
-    # Gauben Strassenseite 2. DG (Top 26: AR, Bad, SZ; Top 23: zwei) [EIN S. 13]
-    - {gruppe: nb_shg_dach, poly: [[8.75, -0.35], [9.85, -0.35], [9.85, -1.6], [8.75, -1.6]], z: [21.3, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [0]}
-    - {gruppe: nb_shg_dach, poly: [[4.55, -0.35], [5.65, -0.35], [5.65, -1.6], [4.55, -1.6]], z: [21.3, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [0]}
-    - {gruppe: nb_shg_dach, poly: [[2.15, -0.35], [3.25, -0.35], [3.25, -1.6], [2.15, -1.6]], z: [21.3, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [0]}
-    - {gruppe: nb_shg_dach, poly: [[12.70, -0.35], [13.80, -0.35], [13.80, -1.6], [12.70, -1.6]], z: [21.3, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [0]}
-    - {gruppe: nb_shg_dach, poly: [[15.85, -0.35], [16.95, -0.35], [16.95, -1.6], [15.85, -1.6]], z: [21.3, 24.45], wand: nb_mansarde, dach: nb_mansarde, ohne_kanten: [0]}
-    # Liftueberfahrt und Dachausstiege [EIN S. 14, VP Top 26-3]
-    - {gruppe: nb_shg_dach, poly: [[8.0, -8.55], [10.05, -8.55], [10.05, -10.65], [8.0, -10.65]], z: [25.0, 26.75], wand: nb_mansarde, dach: nb_rasen}
+    # --- Runde 6: Strassenhaus Hofseite 2. OG bis 1. DG nach EIN S. 10/11/12 (Grundrisse, Vektor), S. 23 (Schnitt 1, Koten), S. 26 (Ansicht Hof, Vektor).
+    # Erker x 5,87 bis 14,11, 1,40 vor der BFL (y -16,41), UK +6,94; Balkonplatte 2,40 vor der BFL (y -17,41), Enden schraeg (3,85 bis 4,12 / 16,19 bis 15,91);
+    # Loggien zwischen BFL und Erker (x 3,85 bis 5,87 / 14,11 bis 16,19). Vorher: Platten 1,12 tief ueber die ganze Breite, zwei Stuetzen, kein Erker (Runde 1)
+    - {gruppe: nb_shg, poly: [[5.87, -15], [5.87, -16.41], [14.11, -16.41], [14.11, -15]], z: [6.94, 18.61], wand: nb_wand_hof, dach: nb_wand_hof, boden: true, ohne_kanten: [1, 3], quelle: "EIN S. 11 (Erker 8,24 x 1,40), S. 23 (UK Erker +6,94, OK +18,93), S. 26"}
+    - {gruppe: nb_shg, poly: [[3.85, -15], [16.19, -15], [15.91, -17.41], [4.12, -17.41]], z: [7.06, 7.4], wand: nb_basalt, dach: nb_basalt, boden: true, quelle: "EIN S. 11/12 (Umriss), S. 26 (Platte 7.06 bis 7.4, RAL 7012)"}   # Balkonplatte 2. OG
+    - {gruppe: nb_shg, poly: [[3.85, -15], [16.19, -15], [15.91, -17.41], [4.12, -17.41]], z: [9.94, 10.28], wand: nb_basalt, dach: nb_basalt, boden: true, quelle: "EIN S. 11/12 (Umriss), S. 26 (Platte 9.94 bis 10.28, RAL 7012)"}   # Balkonplatte 3. OG
+    - {gruppe: nb_shg, poly: [[3.85, -15], [16.19, -15], [15.91, -17.41], [4.12, -17.41]], z: [12.82, 13.16], wand: nb_basalt, dach: nb_basalt, boden: true, quelle: "EIN S. 11/12 (Umriss), S. 26 (Platte 12.82 bis 13.16, RAL 7012)"}   # Balkonplatte 4. OG
+    - {gruppe: nb_shg, poly: [[3.85, -15], [16.19, -15], [15.91, -17.41], [4.12, -17.41]], z: [15.7, 16.04], wand: nb_basalt, dach: nb_basalt, boden: true, quelle: "EIN S. 11/12 (Umriss), S. 26 (Platte 15.7 bis 16.04, RAL 7012)"}   # Balkonplatte 5. OG
+    - {gruppe: nb_shg, poly: [[3.85, -15], [16.19, -15], [15.91, -17.41], [4.12, -17.41]], z: [18.59, 18.93], wand: nb_basalt, dach: nb_basalt, boden: true, quelle: "EIN S. 11/12 (Umriss), S. 26 (Platte 18.59 bis 18.93, RAL 7012)"}   # Balkonplatte 1. DG
+    - {gruppe: nb_shg, poly: [[3.76, -15], [3.94, -15], [4.02, -15.74], [3.84, -15.76]], z: [7.4, 9.94], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 10/11 (Wand BA am Loggiaende), S. 26 (Kante)"}   # 2. OG
+    - {gruppe: nb_shg, poly: [[16.1, -15], [16.28, -15], [16.19, -15.76], [16.01, -15.74]], z: [7.4, 9.94], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 10/11 (Wand BA am Loggiaende), S. 26 (Kante)"}   # 2. OG
+    - {gruppe: nb_shg, poly: [[10.12, -16.41], [10.22, -16.41], [10.22, -17.38], [10.12, -17.38]], z: [7.4, 9.7], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 11 (Trennwand h 2,30)"}   # 2. OG
+    - {gruppe: nb_shg, poly: [[3.76, -15], [3.94, -15], [4.02, -15.74], [3.84, -15.76]], z: [10.28, 12.82], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 10/11 (Wand BA am Loggiaende), S. 26 (Kante)"}   # 3. OG
+    - {gruppe: nb_shg, poly: [[16.1, -15], [16.28, -15], [16.19, -15.76], [16.01, -15.74]], z: [10.28, 12.82], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 10/11 (Wand BA am Loggiaende), S. 26 (Kante)"}   # 3. OG
+    - {gruppe: nb_shg, poly: [[10.12, -16.41], [10.22, -16.41], [10.22, -17.38], [10.12, -17.38]], z: [10.28, 12.58], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 11 (Trennwand h 2,30)"}   # 3. OG
+    - {gruppe: nb_shg, poly: [[3.76, -15], [3.94, -15], [4.02, -15.74], [3.84, -15.76]], z: [13.16, 15.7], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 10/11 (Wand BA am Loggiaende), S. 26 (Kante)"}   # 4. OG
+    - {gruppe: nb_shg, poly: [[16.1, -15], [16.28, -15], [16.19, -15.76], [16.01, -15.74]], z: [13.16, 15.7], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 10/11 (Wand BA am Loggiaende), S. 26 (Kante)"}   # 4. OG
+    - {gruppe: nb_shg, poly: [[10.12, -16.41], [10.22, -16.41], [10.22, -17.38], [10.12, -17.38]], z: [13.16, 15.46], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 11 (Trennwand h 2,30)"}   # 4. OG
+    - {gruppe: nb_shg, poly: [[3.76, -15], [3.94, -15], [4.02, -15.74], [3.84, -15.76]], z: [16.04, 18.59], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 10/11 (Wand BA am Loggiaende), S. 26 (Kante)"}   # 5. OG
+    - {gruppe: nb_shg, poly: [[16.1, -15], [16.28, -15], [16.19, -15.76], [16.01, -15.74]], z: [16.04, 18.59], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 10/11 (Wand BA am Loggiaende), S. 26 (Kante)"}   # 5. OG
+    - {gruppe: nb_shg, poly: [[10.12, -16.41], [10.22, -16.41], [10.22, -17.38], [10.12, -17.38]], z: [16.04, 18.34], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 11 (Trennwand h 2,30)"}   # 5. OG
+    - {gruppe: nb_shg, poly: [[10.12, -15], [10.22, -15], [10.22, -17.38], [10.12, -17.38]], z: [18.93, 21.25], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 12 (Trennwand h 2,32)"}   # 1. DG
+    # Runde 6: Dach Strassenhaus [EIN S. 13, 14, 23, 26], Liftueberfahrt und Dachausstieg [EIN S. 14]
+    - {gruppe: nb_shg_dach, poly: [[7.07, -15], [13.33, -15], [13.33, -13], [7.07, -13]], z: [21.0, 21.81], wand: nb_wand_hof, dach: nb_platten, ohne_kanten: [0, 2], quelle: "EIN S. 13 (Terrasse +21,81, 5,93 + 6,08 m2)"}   # Terrasse 2. DG
+    - {gruppe: nb_shg_dach, poly: [[0.29, -5.44], [18.868, -5.44], [19.235, -10.59], [13.33, -10.59], [13.33, -13], [7.07, -13], [7.07, -10.59], [0.565, -10.59]], z: [24.95, 25.30], wand: nb_attika, dach: nb_kies, quelle: "EIN S. 14 (OK Dach +25,28/+25,30), S. 23"}   # Flachdach
+    - {gruppe: nb_shg_dach, poly: [[7.81, -8.37], [10.24, -8.37], [10.24, -10.85], [7.81, -10.85]], z: [25.30, 26.26], wand: nb_wand_hof, dach: dach_flach, quelle: "EIN S. 14 (Liftueberfahrt), S. 23/26 (OK Attika +26,26; S. 14 nennt +26,37)"}
+    - {gruppe: nb_shg_dach, poly: [[9.35, -5.5], [10.75, -5.5], [10.75, -6.5], [9.35, -6.5]], z: [25.30, 25.75], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 14 (Dachausstieg STGH-DRE 1,56 m2), Hoehe ANN 0,45"}
+    - {gruppe: nb_shg_dach, poly: [[7.39, -5.76], [7.77, -5.76], [7.77, -6.75], [7.39, -6.75]], z: [25.30, 26.10], wand: nb_huette, dach: nb_huette, quelle: "EIN S. 14 (Aussengeraete), Hoehe ANN 0,80"}
+    - {gruppe: nb_shg_dach, poly: [[7.39, -7], [7.77, -7], [7.77, -8], [7.39, -8]], z: [25.30, 26.10], wand: nb_huette, dach: nb_huette, quelle: "EIN S. 14 (Aussengeraete), Hoehe ANN 0,80"}
+    - {gruppe: nb_shg_dach, poly: [[9.36, -11.7], [10.28, -11.7], [10.28, -12.14], [9.36, -12.14]], z: [25.30, 26.10], wand: nb_huette, dach: nb_huette, quelle: "EIN S. 14 (Aussengeraete), Hoehe ANN 0,80"}
+    - {gruppe: nb_shg_dach, poly: [[8.15, -11.7], [9.04, -11.7], [9.04, -12.14], [8.15, -12.14]], z: [25.30, 26.10], wand: nb_huette, dach: nb_huette, quelle: "EIN S. 14 (Aussengeraete), Hoehe ANN 0,80"}
+    - {gruppe: nb_shg_dach, poly: [[10.12, -13], [10.22, -13], [10.22, -14.97], [10.12, -14.97]], z: [21.81, 24.13], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 13 (Trennwand h 2,32)"}
+    # --- Runde 6: Wuertzlerstrasse 10 Hofseite nach EIN S. 19/20 (RG, 1. DG), S. 21 (2. DG), S. 22 (Dach), S. 23 (Schnitt 2), S. 28 (Ansicht, Vektor);
+    # u ab Ostende (20,6/-69,4), d < 0 vor der BFL. Erker u 2,99 bis 9,42, 0,64 vor der BFL, UK +2,40; Platte bis d -2,54 (2,50 laut Mass 1,38 + 1,12);
+    # Mansarde 45 Grad (3,42 tief) mit Mittelteil u 3,77 bis 7,91 als Wand. Vorher: Platten 1,30 tief, Fenster an der BFL, Mansarde 1,6 tief
+    - {gruppe: nb_wue, poly: [[17.618, -69.613], [11.204, -70.071], [11.158, -69.433], [17.572, -68.975]], z: [2.40, 16.95], wand: nb_wand_hof, dach: nb_wand_hof, boden: true, ohne_kanten: [0, 2], quelle: "EIN S. 19/20 (Erker 6,44 x 0,64), S. 23 (UK Erker +2,40)"}
+    - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: [2.52, 2.86], wand: nb_basalt, dach: nb_basalt, boden: true, quelle: "EIN S. 19/20/21 (6,44 x 2,54), S. 28 (Platte 2.52 bis 2.86)"}   # Balkonplatte 1. OG
+    - {gruppe: nb_wue, poly: [[17.572, -68.975], [17.402, -68.987], [17.365, -68.468], [17.535, -68.456]], z: [2.86, 5.39], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20 (Trennwand h 2,53)"}   # 1. OG
+    - {gruppe: nb_wue, poly: [[11.328, -69.421], [11.158, -69.433], [11.121, -68.914], [11.291, -68.902]], z: [2.86, 5.39], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20 (Trennwand h 2,53)"}   # 1. OG
+    - {gruppe: nb_wue, poly: [[14.419, -69.18], [14.319, -69.187], [14.192, -67.411], [14.292, -67.404]], z: [2.86, 5.16], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20/21 (Trennwand h 2,30)"}   # 1. OG
+    - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: [5.4, 5.74], wand: nb_basalt, dach: nb_basalt, boden: true, quelle: "EIN S. 19/20/21 (6,44 x 2,54), S. 28 (Platte 5.4 bis 5.74)"}   # Balkonplatte 2. OG
+    - {gruppe: nb_wue, poly: [[17.572, -68.975], [17.402, -68.987], [17.365, -68.468], [17.535, -68.456]], z: [5.74, 8.27], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20 (Trennwand h 2,53)"}   # 2. OG
+    - {gruppe: nb_wue, poly: [[11.328, -69.421], [11.158, -69.433], [11.121, -68.914], [11.291, -68.902]], z: [5.74, 8.27], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20 (Trennwand h 2,53)"}   # 2. OG
+    - {gruppe: nb_wue, poly: [[14.419, -69.18], [14.319, -69.187], [14.192, -67.411], [14.292, -67.404]], z: [5.74, 8.04], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20/21 (Trennwand h 2,30)"}   # 2. OG
+    - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: [8.28, 8.62], wand: nb_basalt, dach: nb_basalt, boden: true, quelle: "EIN S. 19/20/21 (6,44 x 2,54), S. 28 (Platte 8.28 bis 8.62)"}   # Balkonplatte 3. OG
+    - {gruppe: nb_wue, poly: [[17.572, -68.975], [17.402, -68.987], [17.365, -68.468], [17.535, -68.456]], z: [8.62, 11.15], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20 (Trennwand h 2,53)"}   # 3. OG
+    - {gruppe: nb_wue, poly: [[11.328, -69.421], [11.158, -69.433], [11.121, -68.914], [11.291, -68.902]], z: [8.62, 11.15], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20 (Trennwand h 2,53)"}   # 3. OG
+    - {gruppe: nb_wue, poly: [[14.419, -69.18], [14.319, -69.187], [14.192, -67.411], [14.292, -67.404]], z: [8.62, 10.92], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20/21 (Trennwand h 2,30)"}   # 3. OG
+    - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: [11.16, 11.5], wand: nb_basalt, dach: nb_basalt, boden: true, quelle: "EIN S. 19/20/21 (6,44 x 2,54), S. 28 (Platte 11.16 bis 11.5)"}   # Balkonplatte 4. OG
+    - {gruppe: nb_wue, poly: [[17.572, -68.975], [17.402, -68.987], [17.365, -68.468], [17.535, -68.456]], z: [11.5, 14.03], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20 (Trennwand h 2,53)"}   # 4. OG
+    - {gruppe: nb_wue, poly: [[11.328, -69.421], [11.158, -69.433], [11.121, -68.914], [11.291, -68.902]], z: [11.5, 14.03], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20 (Trennwand h 2,53)"}   # 4. OG
+    - {gruppe: nb_wue, poly: [[14.419, -69.18], [14.319, -69.187], [14.192, -67.411], [14.292, -67.404]], z: [11.5, 13.8], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20/21 (Trennwand h 2,30)"}   # 4. OG
+    - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: [14.05, 14.39], wand: nb_basalt, dach: nb_basalt, boden: true, quelle: "EIN S. 19/20/21 (6,44 x 2,54), S. 28 (Platte 14.05 bis 14.39)"}   # Balkonplatte 1. DG
+    - {gruppe: nb_wue, poly: [[17.572, -68.975], [17.402, -68.987], [17.365, -68.468], [17.535, -68.456]], z: [14.39, 16.92], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20 (Trennwand h 2,53)"}   # 1. DG
+    - {gruppe: nb_wue, poly: [[11.328, -69.421], [11.158, -69.433], [11.121, -68.914], [11.291, -68.902]], z: [14.39, 16.92], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20 (Trennwand h 2,53)"}   # 1. DG
+    - {gruppe: nb_wue, poly: [[14.419, -69.18], [14.319, -69.187], [14.192, -67.411], [14.292, -67.404]], z: [14.39, 16.69], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20/21 (Trennwand h 2,30)"}   # 1. DG
+    - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: [16.93, 17.27], wand: nb_basalt, dach: nb_basalt, boden: true, quelle: "EIN S. 19/20/21 (6,44 x 2,54), S. 28 (Platte 16.93 bis 17.27)"}   # Balkonplatte 2. DG
+    - {gruppe: nb_wue, poly: [[14.464, -69.818], [14.364, -69.825], [14.192, -67.411], [14.292, -67.404]], z: [17.27, 19.57], wand: nb_attika, dach: nb_attika, quelle: "EIN S. 19/20/21 (Trennwand h 2,30)"}   # 2. DG
     # --- Wuertzlerstrasse 10 [EIN S. 27, OGD]: 12,4 m breit, 15,00 m tief, Traufe +17,28, Mansarde bis +20,72
     - {gruppe: nb_wue, poly: [[9.1, -85.3], [21.3, -84.3], [20.6, -69.4], [8.0, -70.3]], z: [0.0, 17.28], wand: nb_wand_hof, dach: dach_flach, ohne_kanten: [2]}
     # Runde 3 (Orthofoto 2024 entzerrt, Google-Luftbild): weisser Kasten mit hellem Dach x -4,0 bis -1,0 / y -37,5 bis -45,5
@@ -131,22 +178,15 @@ neubau:
         - {u: [11.87, 13.05], z: [4.88, 6.33]}
         - {u: [13.53, 14.53], z: [3.98, 6.30], typ: tuer}
         - {u: [16.56, 17.74], z: [4.88, 6.33]}
-    - gruppe: nb_shg
-      a: [0.80, -15.0]
-      b: [19.55, -15.0]
-      z: [7.06, 21.0]
-      wand: nb_wand_hof
-      reihen:
-        - {z: [8.32, 9.77], u: [[1.05, 2.05], [16.65, 17.65], [3.9, 4.9], [13.0, 14.0]]}   # 2. OG FOK +7,42
-        - {z: [7.42, 9.77], u: [[5.7, 7.9], [9.3, 11.5]], typ: tuer}
-        - {z: [11.20, 12.65], u: [[1.05, 2.05], [16.65, 17.65], [3.9, 4.9], [13.0, 14.0]]} # 3. OG FOK +10,30
-        - {z: [10.30, 12.65], u: [[5.7, 7.9], [9.3, 11.5]], typ: tuer}
-        - {z: [14.08, 15.53], u: [[1.05, 2.05], [16.65, 17.65], [3.9, 4.9], [13.0, 14.0]]} # 4. OG FOK +13,18
-        - {z: [13.18, 15.53], u: [[5.7, 7.9], [9.3, 11.5]], typ: tuer}
-        - {z: [16.96, 18.41], u: [[1.05, 2.05], [16.65, 17.65], [3.9, 4.9], [13.0, 14.0]]} # 5. OG FOK +16,06
-        - {z: [16.06, 18.41], u: [[5.7, 7.9], [9.3, 11.5]], typ: tuer}
-        - {z: [19.10, 20.80], u: [[1.05, 2.05], [16.65, 17.65]]}                    # 1. DG FOK +18,94 in der Fassade
-        - {z: [18.94, 20.80], u: [[3.9, 4.9], [5.7, 7.9], [9.3, 11.5], [13.0, 14.0]], typ: tuer}
+    # Runde 6: Hoffassade an der BFL 2. OG bis 1. DG [EIN S. 10/11/12 Grundrisse, S. 26 Ansicht vektoriell], u = x - 0,80; drei Abschnitte, Mitte bis +21,82 (Terrasse 2. DG)
+    - {gruppe: nb_shg, a: [0.80, -15.0], b: [19.55, -15.0], u: [0.0, 6.27], z: [7.06, 21.0], wand: nb_wand_hof, quelle: "EIN S. 11 (118/145 FPH 0,90), S. 12 (118/196, 118/136 FPH 0,60), S. 26", fenster: [{u: [1, 2.18], z: [8.32, 9.77]}, {u: [3.86, 5.04], z: [8.32, 9.77]}, {u: [1, 2.18], z: [11.2, 12.65]}, {u: [3.86, 5.04], z: [11.2, 12.65]}, {u: [1, 2.18], z: [14.08, 15.53]}, {u: [3.86, 5.04], z: [14.08, 15.53]}, {u: [1, 2.18], z: [16.96, 18.41]}, {u: [3.86, 5.04], z: [16.96, 18.41]}, {u: [1, 2.18], z: [18.94, 20.9], typ: tuer}, {u: [4.37, 5.55], z: [19.54, 20.9]}]}
+    - {gruppe: nb_shg, a: [0.80, -15.0], b: [19.55, -15.0], u: [6.27, 12.53], z: [7.06, 21.82], wand: nb_wand_hof, quelle: "EIN S. 12 (260/230, 248/230 FPH 0,00), S. 26", fenster: [{u: [6.63, 9.23], z: [18.94, 21.24], typ: hst}, {u: [9.58, 12.06], z: [18.94, 21.24], typ: hst}]}
+    - {gruppe: nb_shg, a: [0.80, -15.0], b: [19.55, -15.0], u: [12.53, 18.75], z: [7.06, 21.0], wand: nb_wand_hof, quelle: "EIN S. 11/12, S. 26", fenster: [{u: [13.34, 14.52], z: [8.32, 9.77]}, {u: [16.49, 17.67], z: [8.32, 9.77]}, {u: [13.34, 14.52], z: [11.2, 12.65]}, {u: [16.49, 17.67], z: [11.2, 12.65]}, {u: [13.34, 14.52], z: [14.08, 15.53]}, {u: [16.49, 17.67], z: [14.08, 15.53]}, {u: [13.34, 14.52], z: [16.96, 18.41]}, {u: [16.49, 17.67], z: [16.96, 18.41]}, {u: [12.64, 13.82], z: [19.54, 20.9]}, {u: [16.49, 17.67], z: [18.94, 20.9], typ: tuer}]}
+    - {gruppe: nb_shg, a: [5.87, -16.41], b: [14.11, -16.41], z: [6.94, 18.61], wand: nb_wand_hof, quelle: "EIN S. 10/11 (Fenster 276/145 und 233/145 FPH 0,90, Tueren 100/232), S. 26 (Glas vektoriell)", fenster: [{u: [0.45, 3.21], z: [8.32, 9.77]}, {u: [3.23, 4.23], z: [7.42, 9.74], typ: tuer}, {u: [4.61, 5.61], z: [7.42, 9.74], typ: tuer}, {u: [5.66, 7.93], z: [8.32, 9.77]}, {u: [0.45, 3.21], z: [11.2, 12.65]}, {u: [3.23, 4.23], z: [10.3, 12.62], typ: tuer}, {u: [4.61, 5.61], z: [10.3, 12.62], typ: tuer}, {u: [5.66, 7.93], z: [11.2, 12.65]}, {u: [0.45, 3.21], z: [14.08, 15.53]}, {u: [3.23, 4.23], z: [13.18, 15.5], typ: tuer}, {u: [4.61, 5.61], z: [13.18, 15.5], typ: tuer}, {u: [5.66, 7.93], z: [14.08, 15.53]}, {u: [0.45, 3.21], z: [16.96, 18.41]}, {u: [3.23, 4.23], z: [16.06, 18.38], typ: tuer}, {u: [4.61, 5.61], z: [16.06, 18.38], typ: tuer}, {u: [5.66, 7.93], z: [16.96, 18.41]}]}
+    - {gruppe: nb_shg_dach, a: [7.07, -13.0], b: [13.33, -13.0], z: [21.81, 25.43], wand: nb_wand_hof, quelle: "EIN S. 13 (Wand 2,00 hinter der BFL, Tueren 260/230 und 248/230), S. 26 (Glas 21,92 bis 24,02)", fenster: [{u: [0.38, 2.98], z: [21.82, 24.12], typ: hst}, {u: [3.32, 5.8], z: [21.82, 24.12], typ: hst}]}
+    # Runde 6: Wuertzlerstrasse 10 Erkerfront d -0,64, u' = u - 2,99 [EIN S. 19/20: Tueren 100/227, Fenster 135/140; S. 28 Rahmen vektoriell]
+    - {gruppe: nb_wue, a: [17.572, -68.975], b: [11.158, -69.433], z: [2.40, 16.95], wand: nb_wand_hof, quelle: "EIN S. 19/20 (100/227, 135/140), S. 28", fenster: [{u: [0.41, 1.41], z: [2.88, 5.15], typ: tuer}, {u: [1.43, 2.81], z: [3.73, 5.2]}, {u: [3.65, 5.03], z: [3.73, 5.2]}, {u: [5.05, 6.05], z: [2.88, 5.15], typ: tuer}, {u: [0.41, 1.41], z: [5.76, 8.03], typ: tuer}, {u: [1.43, 2.81], z: [6.61, 8.08]}, {u: [3.65, 5.03], z: [6.61, 8.08]}, {u: [5.05, 6.05], z: [5.76, 8.03], typ: tuer}, {u: [0.41, 1.41], z: [8.64, 10.91], typ: tuer}, {u: [1.43, 2.81], z: [9.49, 10.96]}, {u: [3.65, 5.03], z: [9.49, 10.96]}, {u: [5.05, 6.05], z: [8.64, 10.91], typ: tuer}, {u: [0.41, 1.41], z: [11.52, 13.79], typ: tuer}, {u: [1.43, 2.81], z: [12.37, 13.84]}, {u: [3.65, 5.03], z: [12.37, 13.84]}, {u: [5.05, 6.05], z: [11.52, 13.79], typ: tuer}, {u: [0.41, 1.41], z: [14.4, 16.67], typ: tuer}, {u: [1.43, 2.81], z: [15.25, 16.72]}, {u: [3.65, 5.03], z: [15.25, 16.72]}, {u: [5.05, 6.05], z: [14.4, 16.67], typ: tuer}]}
+    - {gruppe: nb_wue, a: [16.84, -69.669], b: [12.71, -69.964], z: [17.27, 20.72], wand: nb_wand_hof, quelle: "EIN S. 21 (Tueren 100/232), S. 28 (Wand u 3,77 bis 7,91, Glas bis +19,50)", fenster: [{u: [0.64, 1.64], z: [17.28, 19.6], typ: tuer}, {u: [2.49, 3.49], z: [17.28, 19.6], typ: tuer}]}
     # Runde 4: EG-Ruecksprung (Durchgang) unter dem Strassenhaus am Gartenstreifen [EIN S. 8, S. 26]: Rueckwand bei a = -10,17
     # (Hofrahmen) mit Tuer EI30-C 0,90 x 2,00 zu Muellraum und Kellerstiege (Fahrradraum KG), Decke DUK +3,50
     - {gruppe: nb_shg, rahmen: hof, a: [-10.17, -3.42], b: [-10.17, 0.0], z: [0.0, 3.50], wand: nb_wand_hof_eg, fenster: [{u: [0.53, 1.48], z: [0.0, 2.0], typ: tuer}]}
@@ -164,17 +204,6 @@ neubau:
         - {z: [14.1, 15.6], u: [[1.0, 2.2], [3.65, 4.85], [6.3, 7.5], [8.95, 10.15], [11.6, 12.8], [14.25, 15.45], [16.6, 17.6]]}
         - {z: [17.0, 18.5], u: [[1.0, 2.2], [3.65, 4.85], [6.3, 7.5], [8.95, 10.15], [11.6, 12.8], [14.25, 15.45], [16.6, 17.6]]}
         - {z: [19.1, 20.6], u: [[1.0, 2.2], [3.65, 4.85], [6.3, 7.5], [8.95, 10.15], [11.6, 12.8], [14.25, 15.45], [16.6, 17.6]]}
-    # Gaubenfronten Hofseite 2. DG FOK +21,82, Fenster 0,94 x 2,52 [EIN S. 13]
-    - {gruppe: nb_shg_dach, a: [1.85, -16.12], b: [5.05, -16.12], z: [21.0, 24.45], wand: nb_mansarde, karte_tiefe: 2.0,
-       fenster: [{u: [0.13, 1.04], z: [21.82, 24.34], typ: tuer}, {u: [1.18, 2.10], z: [21.82, 24.34], typ: tuer}, {u: [2.17, 3.10], z: [21.82, 24.34], typ: tuer}]}
-    - {gruppe: nb_shg_dach, a: [14.55, -16.12], b: [17.75, -16.12], z: [21.0, 24.45], wand: nb_mansarde, karte_tiefe: 2.0,
-       fenster: [{u: [0.13, 1.04], z: [21.82, 24.34], typ: tuer}, {u: [1.18, 2.10], z: [21.82, 24.34], typ: tuer}, {u: [2.17, 3.10], z: [21.82, 24.34], typ: tuer}]}
-    # Gaubenfronten Strassenseite (y = -0,35, hinter der Traufe)
-    - {gruppe: nb_shg_dach, a: [9.85, -0.35], b: [8.75, -0.35], z: [21.3, 24.45], wand: nb_mansarde, fenster: [{u: [0.08, 1.02], z: [21.82, 24.34], typ: tuer}]}
-    - {gruppe: nb_shg_dach, a: [5.65, -0.35], b: [4.55, -0.35], z: [21.3, 24.45], wand: nb_mansarde, fenster: [{u: [0.08, 1.02], z: [21.82, 24.34], typ: tuer}]}
-    - {gruppe: nb_shg_dach, a: [3.25, -0.35], b: [2.15, -0.35], z: [21.3, 24.45], wand: nb_mansarde, fenster: [{u: [0.08, 1.02], z: [21.82, 24.34], typ: tuer}]}
-    - {gruppe: nb_shg_dach, a: [13.80, -0.35], b: [12.70, -0.35], z: [21.3, 24.45], wand: nb_mansarde, fenster: [{u: [0.08, 1.02], z: [21.82, 24.34], typ: tuer}]}
-    - {gruppe: nb_shg_dach, a: [16.95, -0.35], b: [15.85, -0.35], z: [21.3, 24.45], wand: nb_mansarde, fenster: [{u: [0.08, 1.02], z: [21.82, 24.34], typ: tuer}]}
     # Runde 5: Erkerfronten 005379/005380 entfernt (siehe Erkertuerme)
 #   # Runde 3: Erkerfronten 005379/005380 mit zwei Fensterachsen, Geschosse wie die Nachbarkarten [Google 3D] [ANN Raster]
 #   - gruppe: nb_umgebung
@@ -221,23 +250,13 @@ neubau:
         - {z: [0.0, 2.15], u: [[6.10, 7.50]], typ: tuer}
         - {z: [0.18, 2.05], u: [[4.53, 5.53]], typ: dunkel}
         - {z: [0.0, 2.05], u: [[8.50, 8.99], [10.75, 11.75]], typ: dunkel}
-        # Runde 4: 1. bis 5. OG nach Ansicht EIN S. 28 (Glasflaechen vektoriell, FOK 2,88 je Geschoss): je Geschoss Balkontueren
+        # Runde 4: 1. bis 5. OG nach Ansicht EIN S. 28 (Glasflaechen vektoriell, FOK 2,88 je Geschoss): je Geschoss Balkontueren  [Runde 6: Balkontueren und Fenster im Balkonfeld liegen in der Erkerfront 0,64 vor der BFL, siehe unten; hier nur die Randfenster]
         # u 3,40 bis 4,40 und 8,04 bis 9,04, Fenster 1,45 x 1,47 (FPH 0,85) dazwischen, Randfenster 1,10 x 1,40 (vorher Tuer in der Mitte)
         - {z: [3.75, 5.15], u: [[1.35, 2.45], [9.99, 11.09]]}
-        - {z: [3.73, 5.20], u: [[4.35, 5.80], [6.64, 8.09]]}
-        - {z: [2.88, 5.15], u: [[3.40, 4.40], [8.04, 9.04]], typ: tuer}
         - {z: [6.63, 8.03], u: [[1.35, 2.45], [9.99, 11.09]]}
-        - {z: [6.61, 8.08], u: [[4.35, 5.80], [6.64, 8.09]]}
-        - {z: [5.76, 8.03], u: [[3.40, 4.40], [8.04, 9.04]], typ: tuer}
         - {z: [9.51, 10.91], u: [[1.35, 2.45], [9.99, 11.09]]}
-        - {z: [9.49, 10.96], u: [[4.35, 5.80], [6.64, 8.09]]}
-        - {z: [8.64, 10.91], u: [[3.40, 4.40], [8.04, 9.04]], typ: tuer}
         - {z: [12.39, 13.79], u: [[1.35, 2.45], [9.99, 11.09]]}
-        - {z: [12.37, 13.84], u: [[4.35, 5.80], [6.64, 8.09]]}
-        - {z: [11.52, 13.79], u: [[3.40, 4.40], [8.04, 9.04]], typ: tuer}
         - {z: [15.27, 16.67], u: [[1.35, 2.45], [9.99, 11.09]]}
-        - {z: [15.25, 16.72], u: [[4.35, 5.80], [6.64, 8.09]]}
-        - {z: [14.40, 16.67], u: [[3.40, 4.40], [8.04, 9.04]], typ: tuer}
     # Runde 4: EG-Suedfassade zum Gartenstreifen ab der Ruecksprungwand unter dem Strassenhaus (a -10,17) [EIN S. 8/15]: 10 Fenster 1,60 x 1,50, FPH 0,90, Lage aus den Luecken der Aussendaemmung (vorher Raster 10,56 geschaetzt)
     - {gruppe: nb_hof, rahmen: hof, a: [-10.17, 0.0], b: [38.80, 0.0], z: [0.0, 2.92], wand: nb_wand_hof, fenster: [{u: [0.86, 2.46], z: [0.90, 2.40]}, {u: [7.85, 9.45], z: [0.90, 2.40]}, {u: [11.4, 13.0], z: [0.90, 2.40]}, {u: [18.45, 20.05], z: [0.90, 2.40]}, {u: [22.0, 23.6], z: [0.90, 2.40]}, {u: [29.05, 30.65], z: [0.90, 2.40]}, {u: [34.05, 35.65], z: [0.90, 2.40]}, {u: [37.2, 38.8], z: [0.90, 2.40]}, {u: [43.62, 45.22], z: [0.90, 2.40]}, {u: [46.47, 48.07], z: [0.90, 2.40]}]}
     # Hofwand Kante 3 [EIN S. 15]
@@ -265,13 +284,196 @@ neubau:
     - {gruppe: nb_top4a, rahmen: hof, a: [30.77, 0.0], b: [38.80, 0.0], z: [3.38, 6.78], wand: nb_wand_hof, fenster: [{u: [1.84, 3.44], z: [4.40, 5.90]}, {u: [5.83, 7.43], z: [4.40, 5.90]}]}
     - {gruppe: nb_top4a, rahmen: hof, a: [41.36, 6.62], b: [30.77, 6.62], z: [3.38, 6.78], wand: nb_wand_hof, fenster: [{u: [3.83, 5.83], z: [3.50, 5.90], typ: hst}, {u: [6.93, 7.94], z: [3.50, 5.70], typ: tuer}, {u: [8.23, 9.66], z: [4.40, 5.90]}]}
   boxen:
-    # Erker-/Balkonplatten Strassenhaus Hofseite (Plattenkante RAL 7012, 0,34 m) [EIN S. 22/25]
-    - {gruppe: nb_shg, a: [3.6, -15.0], b: [16.1, -15.0], d: [-1.12, 0.0], z: [6.60, 6.94], mat: nb_basalt}
-    - {gruppe: nb_shg, a: [3.6, -15.0], b: [16.1, -15.0], d: [-1.12, 0.0], z: [9.96, 10.30], mat: nb_basalt}
-    - {gruppe: nb_shg, a: [3.6, -15.0], b: [16.1, -15.0], d: [-1.12, 0.0], z: [12.84, 13.18], mat: nb_basalt}
-    - {gruppe: nb_shg, a: [3.6, -15.0], b: [16.1, -15.0], d: [-1.12, 0.0], z: [15.72, 16.06], mat: nb_basalt}
-    - {gruppe: nb_shg, a: [3.6, -15.0], b: [16.1, -15.0], d: [-1.12, 0.0], z: [18.60, 18.94], mat: nb_basalt}
-    - {gruppe: nb_shg, a: [3.6, -15.0], b: [16.1, -15.0], d: [-1.12, 0.0], z: [7.08, 7.42], mat: nb_basalt}
+    # Runde 6: Treppen 17 Stg. 20,0/24,0 vom 2. DG (+21,82) aufs Flachdach (+25,30) in der Dachflaeche [EIN S. 13/14, S. 26]; Wendel unten als Podest vereinfacht [ANN]
+    - {gruppe: nb_shg_dach, a: [5.65, -15.0], b: [7.07, -15.0], d: [0.0, 0.45], z: [21.0, 21.81], mat: nb_platten, quelle: "EIN S. 13 (Antritt an der Terrasse), Podest ANN"}
+    - {gruppe: nb_shg_dach, a: [5.65, -14.55], b: [6.55, -14.55], d: [0.0, 0.212], z: [21.15, 22.025], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -14.338], b: [6.55, -14.338], d: [0.0, 0.212], z: [21.362, 22.229], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -14.126], b: [6.55, -14.126], d: [0.0, 0.212], z: [21.574, 22.434], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -13.915], b: [6.55, -13.915], d: [0.0, 0.212], z: [21.785, 22.639], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -13.703], b: [6.55, -13.703], d: [0.0, 0.212], z: [21.997, 22.844], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -13.491], b: [6.55, -13.491], d: [0.0, 0.212], z: [22.209, 23.048], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -13.279], b: [6.55, -13.279], d: [0.0, 0.212], z: [22.421, 23.253], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -13.068], b: [6.55, -13.068], d: [0.0, 0.212], z: [22.632, 23.458], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -12.856], b: [6.55, -12.856], d: [0.0, 0.212], z: [22.844, 23.662], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -12.644], b: [6.55, -12.644], d: [0.0, 0.212], z: [23.056, 23.867], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -12.432], b: [6.55, -12.432], d: [0.0, 0.212], z: [23.268, 24.072], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -12.221], b: [6.55, -12.221], d: [0.0, 0.212], z: [23.479, 24.276], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -12.009], b: [6.55, -12.009], d: [0.0, 0.212], z: [23.691, 24.481], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -11.797], b: [6.55, -11.797], d: [0.0, 0.212], z: [23.903, 24.686], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -11.585], b: [6.55, -11.585], d: [0.0, 0.212], z: [24.115, 24.891], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -11.374], b: [6.55, -11.374], d: [0.0, 0.212], z: [24.326, 25.095], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [5.65, -11.162], b: [6.55, -11.162], d: [0.0, 0.212], z: [24.538, 25.3], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.33, -15.0], b: [14.75, -15.0], d: [0.0, 0.45], z: [21.0, 21.81], mat: nb_platten, quelle: "EIN S. 13 (Antritt an der Terrasse), Podest ANN"}
+    - {gruppe: nb_shg_dach, a: [13.85, -14.55], b: [14.75, -14.55], d: [0.0, 0.212], z: [21.15, 22.025], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -14.338], b: [14.75, -14.338], d: [0.0, 0.212], z: [21.362, 22.229], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -14.126], b: [14.75, -14.126], d: [0.0, 0.212], z: [21.574, 22.434], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -13.915], b: [14.75, -13.915], d: [0.0, 0.212], z: [21.785, 22.639], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -13.703], b: [14.75, -13.703], d: [0.0, 0.212], z: [21.997, 22.844], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -13.491], b: [14.75, -13.491], d: [0.0, 0.212], z: [22.209, 23.048], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -13.279], b: [14.75, -13.279], d: [0.0, 0.212], z: [22.421, 23.253], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -13.068], b: [14.75, -13.068], d: [0.0, 0.212], z: [22.632, 23.458], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -12.856], b: [14.75, -12.856], d: [0.0, 0.212], z: [22.844, 23.662], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -12.644], b: [14.75, -12.644], d: [0.0, 0.212], z: [23.056, 23.867], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -12.432], b: [14.75, -12.432], d: [0.0, 0.212], z: [23.268, 24.072], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -12.221], b: [14.75, -12.221], d: [0.0, 0.212], z: [23.479, 24.276], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -12.009], b: [14.75, -12.009], d: [0.0, 0.212], z: [23.691, 24.481], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -11.797], b: [14.75, -11.797], d: [0.0, 0.212], z: [23.903, 24.686], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -11.585], b: [14.75, -11.585], d: [0.0, 0.212], z: [24.115, 24.891], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -11.374], b: [14.75, -11.374], d: [0.0, 0.212], z: [24.326, 25.095], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    - {gruppe: nb_shg_dach, a: [13.85, -11.162], b: [14.75, -11.162], d: [0.0, 0.212], z: [24.538, 25.3], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
+    # Runde 6: Attika/Ortgang Dach Strassenhaus OK +25,43 bis +25,47 [EIN S. 26]
+    - {gruppe: nb_shg_dach, a: [0.29, -5.44], b: [18.868, -5.44], d: [0.0, 0.2], z: [25.28, 25.47], mat: nb_attika, quelle: "EIN S. 26 (OK Attika +25,47)"}
+    - {gruppe: nb_shg_dach, a: [19.235, -10.59], b: [13.33, -10.59], d: [0.0, 0.2], z: [25.28, 25.47], mat: nb_attika, quelle: "EIN S. 26 (OK Attika +25,47)"}
+    - {gruppe: nb_shg_dach, a: [7.07, -10.59], b: [0.565, -10.59], d: [0.0, 0.2], z: [25.28, 25.47], mat: nb_attika, quelle: "EIN S. 26 (OK Attika +25,47)"}
+    - {gruppe: nb_shg_dach, a: [13.33, -13], b: [7.07, -13], d: [0.0, 0.2], z: [25.28, 25.47], mat: nb_attika, quelle: "EIN S. 26 (OK Attika +25,47)"}
+    # Traufe Hofseite nur ausserhalb des Dacheinschnitts [EIN S. 26]
+    - {gruppe: nb_shg, a: [0.8, -15.0], b: [7.07, -15.0], d: [-0.25, 0.0], z: [20.85, 21.10], mat: nb_basalt, quelle: "EIN S. 26 (Traufe +21,00)"}
+    - {gruppe: nb_shg, a: [13.33, -15.0], b: [19.55, -15.0], d: [-0.25, 0.0], z: [20.85, 21.10], mat: nb_basalt, quelle: "EIN S. 26 (Traufe +21,00)"}
+    # Runde 6: Nr. 15 Gemeindebau 172417, vier Balkonstapel EG+1 bis 9. OG (9 je Stapel), 3,0 breit, 1,25 tief, Bruestung voll 1,0 rotbraun [Apple 9/8, Lage LOD2-Stiegenkerne]
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, 0.0], z: [2.82, 3], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, -1.15], z: [3, 4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 9.156], d: [-1.15, 0.0], z: [3, 4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [11.956, 12.056], d: [-1.15, 0.0], z: [3, 4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, 0.0], z: [5.62, 5.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, -1.15], z: [5.8, 6.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 9.156], d: [-1.15, 0.0], z: [5.8, 6.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [11.956, 12.056], d: [-1.15, 0.0], z: [5.8, 6.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, 0.0], z: [8.42, 8.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, -1.15], z: [8.6, 9.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 9.156], d: [-1.15, 0.0], z: [8.6, 9.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [11.956, 12.056], d: [-1.15, 0.0], z: [8.6, 9.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, 0.0], z: [11.22, 11.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, -1.15], z: [11.4, 12.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 9.156], d: [-1.15, 0.0], z: [11.4, 12.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [11.956, 12.056], d: [-1.15, 0.0], z: [11.4, 12.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, 0.0], z: [14.02, 14.2], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, -1.15], z: [14.2, 15.2], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 9.156], d: [-1.15, 0.0], z: [14.2, 15.2], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [11.956, 12.056], d: [-1.15, 0.0], z: [14.2, 15.2], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, 0.0], z: [16.82, 17], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, -1.15], z: [17, 18], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 9.156], d: [-1.15, 0.0], z: [17, 18], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [11.956, 12.056], d: [-1.15, 0.0], z: [17, 18], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, 0.0], z: [19.62, 19.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, -1.15], z: [19.8, 20.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 9.156], d: [-1.15, 0.0], z: [19.8, 20.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [11.956, 12.056], d: [-1.15, 0.0], z: [19.8, 20.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, 0.0], z: [22.42, 22.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, -1.15], z: [22.6, 23.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 9.156], d: [-1.15, 0.0], z: [22.6, 23.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [11.956, 12.056], d: [-1.15, 0.0], z: [22.6, 23.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, 0.0], z: [25.22, 25.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 12.056], d: [-1.25, -1.15], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [9.056, 9.156], d: [-1.15, 0.0], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [11.956, 12.056], d: [-1.15, 0.0], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, 0.0], z: [2.82, 3], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, -1.15], z: [3, 4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 30.268], d: [-1.15, 0.0], z: [3, 4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [33.068, 33.168], d: [-1.15, 0.0], z: [3, 4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, 0.0], z: [5.62, 5.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, -1.15], z: [5.8, 6.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 30.268], d: [-1.15, 0.0], z: [5.8, 6.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [33.068, 33.168], d: [-1.15, 0.0], z: [5.8, 6.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, 0.0], z: [8.42, 8.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, -1.15], z: [8.6, 9.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 30.268], d: [-1.15, 0.0], z: [8.6, 9.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [33.068, 33.168], d: [-1.15, 0.0], z: [8.6, 9.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, 0.0], z: [11.22, 11.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, -1.15], z: [11.4, 12.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 30.268], d: [-1.15, 0.0], z: [11.4, 12.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [33.068, 33.168], d: [-1.15, 0.0], z: [11.4, 12.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, 0.0], z: [14.02, 14.2], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, -1.15], z: [14.2, 15.2], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 30.268], d: [-1.15, 0.0], z: [14.2, 15.2], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [33.068, 33.168], d: [-1.15, 0.0], z: [14.2, 15.2], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, 0.0], z: [16.82, 17], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, -1.15], z: [17, 18], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 30.268], d: [-1.15, 0.0], z: [17, 18], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [33.068, 33.168], d: [-1.15, 0.0], z: [17, 18], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, 0.0], z: [19.62, 19.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, -1.15], z: [19.8, 20.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 30.268], d: [-1.15, 0.0], z: [19.8, 20.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [33.068, 33.168], d: [-1.15, 0.0], z: [19.8, 20.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, 0.0], z: [22.42, 22.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, -1.15], z: [22.6, 23.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 30.268], d: [-1.15, 0.0], z: [22.6, 23.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [33.068, 33.168], d: [-1.15, 0.0], z: [22.6, 23.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, 0.0], z: [25.22, 25.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 33.168], d: [-1.25, -1.15], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [30.168, 30.268], d: [-1.15, 0.0], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [33.068, 33.168], d: [-1.15, 0.0], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, 0.0], z: [2.82, 3], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, -1.15], z: [3, 4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 51.38], d: [-1.15, 0.0], z: [3, 4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [54.18, 54.28], d: [-1.15, 0.0], z: [3, 4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, 0.0], z: [5.62, 5.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, -1.15], z: [5.8, 6.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 51.38], d: [-1.15, 0.0], z: [5.8, 6.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [54.18, 54.28], d: [-1.15, 0.0], z: [5.8, 6.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, 0.0], z: [8.42, 8.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, -1.15], z: [8.6, 9.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 51.38], d: [-1.15, 0.0], z: [8.6, 9.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [54.18, 54.28], d: [-1.15, 0.0], z: [8.6, 9.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, 0.0], z: [11.22, 11.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, -1.15], z: [11.4, 12.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 51.38], d: [-1.15, 0.0], z: [11.4, 12.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [54.18, 54.28], d: [-1.15, 0.0], z: [11.4, 12.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, 0.0], z: [14.02, 14.2], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, -1.15], z: [14.2, 15.2], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 51.38], d: [-1.15, 0.0], z: [14.2, 15.2], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [54.18, 54.28], d: [-1.15, 0.0], z: [14.2, 15.2], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, 0.0], z: [16.82, 17], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, -1.15], z: [17, 18], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 51.38], d: [-1.15, 0.0], z: [17, 18], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [54.18, 54.28], d: [-1.15, 0.0], z: [17, 18], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, 0.0], z: [19.62, 19.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, -1.15], z: [19.8, 20.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 51.38], d: [-1.15, 0.0], z: [19.8, 20.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [54.18, 54.28], d: [-1.15, 0.0], z: [19.8, 20.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, 0.0], z: [22.42, 22.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, -1.15], z: [22.6, 23.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 51.38], d: [-1.15, 0.0], z: [22.6, 23.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [54.18, 54.28], d: [-1.15, 0.0], z: [22.6, 23.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, 0.0], z: [25.22, 25.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 54.28], d: [-1.25, -1.15], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [51.28, 51.38], d: [-1.15, 0.0], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [54.18, 54.28], d: [-1.15, 0.0], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, 0.0], z: [2.82, 3], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, -1.15], z: [3, 4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 72.492], d: [-1.15, 0.0], z: [3, 4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [75.292, 75.392], d: [-1.15, 0.0], z: [3, 4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, 0.0], z: [5.62, 5.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, -1.15], z: [5.8, 6.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 72.492], d: [-1.15, 0.0], z: [5.8, 6.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [75.292, 75.392], d: [-1.15, 0.0], z: [5.8, 6.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, 0.0], z: [8.42, 8.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, -1.15], z: [8.6, 9.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 72.492], d: [-1.15, 0.0], z: [8.6, 9.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [75.292, 75.392], d: [-1.15, 0.0], z: [8.6, 9.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, 0.0], z: [11.22, 11.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, -1.15], z: [11.4, 12.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 72.492], d: [-1.15, 0.0], z: [11.4, 12.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [75.292, 75.392], d: [-1.15, 0.0], z: [11.4, 12.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, 0.0], z: [14.02, 14.2], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, -1.15], z: [14.2, 15.2], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 72.492], d: [-1.15, 0.0], z: [14.2, 15.2], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [75.292, 75.392], d: [-1.15, 0.0], z: [14.2, 15.2], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, 0.0], z: [16.82, 17], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, -1.15], z: [17, 18], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 72.492], d: [-1.15, 0.0], z: [17, 18], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [75.292, 75.392], d: [-1.15, 0.0], z: [17, 18], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, 0.0], z: [19.62, 19.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, -1.15], z: [19.8, 20.8], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 72.492], d: [-1.15, 0.0], z: [19.8, 20.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [75.292, 75.392], d: [-1.15, 0.0], z: [19.8, 20.8], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, 0.0], z: [22.42, 22.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, -1.15], z: [22.6, 23.6], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 72.492], d: [-1.15, 0.0], z: [22.6, 23.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [75.292, 75.392], d: [-1.15, 0.0], z: [22.6, 23.6], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, 0.0], z: [25.22, 25.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Balkonstapel)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, -1.15], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 72.492], d: [-1.15, 0.0], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
+    - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [75.292, 75.392], d: [-1.15, 0.0], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
     # Runde 3: Balkonstapel Hoffassade Schlachthausgasse 11 (Mitte, weiss), ab 2. OG ueber dem Hofbau [Google 3D] [ANN Lage, Tiefe]
     - {gruppe: nb_umgebung, a: [-18.0, -15.05], b: [-8.0, -15.05], d: [-1.3, 0.0], z: [5.8, 6.0], mat: nb_weiss}
     - {gruppe: nb_umgebung, a: [-18.0, -15.05], b: [-8.0, -15.05], d: [-1.3, 0.0], z: [8.8, 9.0], mat: nb_weiss}
@@ -279,7 +481,6 @@ neubau:
     - {gruppe: nb_umgebung, a: [-18.0, -15.05], b: [-8.0, -15.05], d: [-1.3, 0.0], z: [14.8, 15.0], mat: nb_weiss}
     - {gruppe: nb_umgebung, a: [-18.0, -15.05], b: [-8.0, -15.05], d: [-1.3, 0.0], z: [17.8, 18.0], mat: nb_weiss}
     # Traufgesims Strassenhaus
-    - {gruppe: nb_shg, a: [0.8, -15.0], b: [19.55, -15.0], d: [-0.25, 0.0], z: [20.85, 21.10], mat: nb_basalt}
     - {gruppe: nb_shg, a: [0.0, 0.0], b: [18.48, 0.0], d: [-0.3, 0.0], z: [20.75, 21.10], mat: nb_strasse}
     # Runde 5: Paneelstreifen (Bruestungen) Erdbergstrasse 123 zwischen den Fensterbaendern, zwei Achsgruppen (Vorlage Hof_fin)
     - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [0.75, 2.95], d: [-0.04, 0.0], z: [4.7, 6.1], mat: nb_paneel}
@@ -296,12 +497,6 @@ neubau:
     - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [5.9, 13.9], d: [-0.04, 0.0], z: [19.2, 20.6], mat: nb_paneel}
     - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [0.75, 2.95], d: [-0.04, 0.0], z: [22.1, 23.5], mat: nb_paneel}
     - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [5.9, 13.9], d: [-0.04, 0.0], z: [22.1, 23.5], mat: nb_paneel}
-    # Wuertzlerstrasse: Balkonplatten im Balkonstapel u 3,0 bis 9,4, 1,3 m tief [EIN S. 27]
-    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [3.0, 9.4], d: [-1.3, 0.0], z: [2.64, 2.98], mat: nb_basalt}
-    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [3.0, 9.4], d: [-1.3, 0.0], z: [5.52, 5.86], mat: nb_basalt}
-    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [3.0, 9.4], d: [-1.3, 0.0], z: [8.40, 8.74], mat: nb_basalt}
-    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [3.0, 9.4], d: [-1.3, 0.0], z: [11.28, 11.62], mat: nb_basalt}
-    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [3.0, 9.4], d: [-1.3, 0.0], z: [14.27, 14.61], mat: nb_basalt}
     # Runde 4: Rinne (Rigol) am Rampenfuss und vor den Hebeschiebetueren [EIN S. 16]
     - {gruppe: nb_hof, rahmen: hof, a: [5.6, 6.62], b: [5.6, 7.98], d: [0.0, 0.18], z: [3.50, 3.505], mat: nb_metall}
     # Attiken [EIN S. 24 Schnitt 3: OK Attika +4,16 ueber DOK +3,96]; Nordreihe +3,06 mit Attika +3,26 [ANN]
@@ -375,11 +570,28 @@ neubau:
   schraegen:
     # Runde 4: Decke des EG-Ruecksprungs unter dem Strassenhaus (Unterseite DUK +3,50, Normale nach unten) [EIN S. 8]
     - {gruppe: nb_shg, rahmen: hof, pts: [[-10.17, -3.42, 3.50], [-10.17, 0.0, 3.50], [-7.32, 0.0, 3.50], [-7.70, -3.42, 3.50]], mat: nb_wand_hof_eg}
-    # Mansarde Strassenhaus (Traufe +21,00, Oberkante +24,75, 2. DG FOK +21,82) [EIN S. 13, 22, 25]; Neigung vereinfacht
-    - {gruppe: nb_shg_dach, pts: [[0.0, 0.0, 21.0], [18.48, 0.0, 21.0], [18.67, -2.6, 24.75], [0.14, -2.6, 24.75]], mat: nb_mansarde}
-    - {gruppe: nb_shg_dach, pts: [[19.55, -15.0, 21.0], [0.80, -15.0, 21.0], [0.71, -13.4, 24.75], [19.43, -13.4, 24.75]], mat: nb_mansarde}
-    - {gruppe: nb_shg_dach, pts: [[0.0, 0.0, 21.0], [0.14, -2.6, 24.75], [0.71, -13.4, 24.75], [0.80, -15.0, 21.0]], mat: nb_brandwand}
-    - {gruppe: nb_shg_dach, pts: [[18.48, 0.0, 21.0], [19.55, -15.0, 21.0], [19.43, -13.4, 24.75], [18.67, -2.6, 24.75]], mat: nb_brandwand}
+    # Runde 6: Dach Strassenhaus nach EIN S. 13 (2. DG), S. 14 (Dachdraufsicht), S. 23 (Schnitt 1), S. 26 (Ansicht): Hofseite 45 Grad von der Traufe +21,00 an der BFL
+    # bis OK +25,43 bei y -10,59 (4,40 tief), Strassenseite bis y -5,44; Dacheinschnitt x 7,07 bis 13,33 (6,26 = 1/3 der Front) mit Terrasse 2. DG +21,81 vor der
+    # Wand y -13,00; zwei Treppen (17 Stg.) aufs Flachdach. Vorher: Mansarde 67 Grad mit zwei Kastengauben (Runde 1, vereinfacht)
+    - {gruppe: nb_shg_dach, pts: [[18.48, 0, 21], [0, 0, 21], [0.29, -5.44, 25.43], [18.868, -5.44, 25.43]], mat: nb_mansarde, quelle: "EIN S. 14 (5,44), S. 23/25 (Traufe +21,00)"}   # Strassenseite
+    - {gruppe: nb_shg_dach, pts: [[0.8, -15, 21], [7.07, -15, 21], [7.07, -10.59, 25.43], [0.565, -10.59, 25.43]], mat: nb_mansarde, quelle: "EIN S. 14 (4,40), S. 13 (RH 1,50/2,10/2,50), S. 26 (OK Attika +25,47)"}   # Hof West
+    - {gruppe: nb_shg_dach, pts: [[13.33, -15, 21], [19.55, -15, 21], [19.235, -10.59, 25.43], [13.33, -10.59, 25.43]], mat: nb_mansarde, quelle: "EIN S. 14, S. 13, S. 26"}   # Hof Ost
+    - {gruppe: nb_shg_dach, pts: [[0, 0, 21], [0.29, -5.44, 25.43], [0.565, -10.59, 25.43], [0.8, -15, 21]], mat: nb_brandwand, quelle: "EIN S. 23 (Schnitt 1)"}   # Giebel West
+    - {gruppe: nb_shg_dach, pts: [[18.48, 0, 21], [19.55, -15, 21], [19.235, -10.59, 25.43], [18.868, -5.44, 25.43]], mat: nb_brandwand, quelle: "EIN S. 23 (Schnitt 1)"}   # Giebel Ost
+    - {gruppe: nb_shg_dach, pts: [[7.07, -14.19, 21.81], [7.07, -13, 21.81], [7.07, -13, 23]], mat: nb_mansarde, quelle: "EIN S. 13/26 (Dacheinschnitt)"}   # Wange unten x 7.07
+    - {gruppe: nb_shg_dach, pts: [[7.07, -13, 23], [7.07, -13, 25.43], [7.07, -10.59, 25.43]], mat: nb_mansarde, quelle: "EIN S. 13/26 (Dacheinschnitt)"}   # Wange oben x 7.07
+    - {gruppe: nb_shg_dach, pts: [[13.33, -14.19, 21.81], [13.33, -13, 21.81], [13.33, -13, 23]], mat: nb_mansarde, quelle: "EIN S. 13/26 (Dacheinschnitt)"}   # Wange unten x 13.33
+    - {gruppe: nb_shg_dach, pts: [[13.33, -13, 23], [13.33, -13, 25.43], [13.33, -10.59, 25.43]], mat: nb_mansarde, quelle: "EIN S. 13/26 (Dacheinschnitt)"}   # Wange oben x 13.33
+    # Runde 6: Mansarde Wuertzlerstrasse 10 Hofseite 45 Grad, Traufe +17,28 an der BFL bis OK Attika +20,72 bei d 3,42 [EIN S. 21/22, S. 28], Mittelteil u 3,77 bis 7,91 als Wand
+    - {gruppe: nb_wue, pts: [[20.6, -69.4, 17.28], [16.84, -69.669, 17.28], [17.083, -73.08, 20.72], [20.844, -72.811, 20.72]], mat: nb_mansarde, quelle: "EIN S. 22 (3,42), S. 28 (Traufe +17,28, Attika +20,72, RAL 7005)"}
+    - {gruppe: nb_wue, pts: [[12.71, -69.964, 17.28], [8, -70.3, 17.28], [8.244, -73.711, 20.72], [12.954, -73.375, 20.72]], mat: nb_mansarde, quelle: "EIN S. 22, S. 28"}
+    - {gruppe: nb_wue, pts: [[16.84, -69.669, 17.28], [16.84, -69.669, 20.72], [17.083, -73.08, 20.72]], mat: nb_wand_hof, quelle: "EIN S. 21/28 (Mittelteil)"}
+    - {gruppe: nb_wue, pts: [[12.71, -69.964, 17.28], [12.71, -69.964, 20.72], [12.954, -73.375, 20.72]], mat: nb_wand_hof, quelle: "EIN S. 21/28 (Mittelteil)"}
+    - {gruppe: nb_wue, pts: [[20.6, -69.4, 17.28], [20.844, -72.811, 20.72], [20.844, -72.811, 17.28]], mat: nb_brandwand, quelle: "EIN S. 23 (Schnitt 2)"}
+    - {gruppe: nb_wue, pts: [[8, -70.3, 17.28], [8.244, -73.711, 20.72], [8.244, -73.711, 17.28]], mat: nb_brandwand, quelle: "EIN S. 23 (Schnitt 2)"}
+    - {gruppe: nb_wue, pts: [[8.244, -73.711, 20.72], [12.954, -73.375, 20.72], [12.71, -69.964, 20.72], [16.84, -69.669, 20.72], [17.083, -73.08, 20.72], [20.844, -72.811, 20.72], [21.2, -82.7, 20.72], [9.2, -83.7, 20.72]], mat: nb_kies, quelle: "EIN S. 22 (Flachdach)"}
+    - {gruppe: nb_umgebung, pts: [[87.415, -45.009, 22.35], [87.085, -42.128, 22.35], [85.794, -42.275, 21.8], [86.124, -45.157, 21.8]], mat: nb_markise_15, quelle: "Apple 9 (Markise)"}   # Nr. 15 Markise
+    - {gruppe: nb_umgebung, pts: [[89.815, -65.984, 27.95], [89.485, -63.103, 27.95], [88.194, -63.25, 27.4], [88.524, -66.132, 27.4]], mat: nb_markise_15, quelle: "Apple 9 (Markise)"}   # Nr. 15 Markise
     # Runde 5: Zeltdaecher der Erkertuerme entfernt (siehe oben)
 #   # Runde 3: Zeltdaecher der Erkertuerme 005379 (Spitze +19,3) und 005380 (+18,9) [Google 3D] [ANN Hoehe]
 #   - {gruppe: nb_umgebung, pts: [[24.3, -30.4, 16.3], [23.2, -31.0, 16.3], [23.9, -34.2, 19.3]], mat: nb_mansarde}
@@ -392,20 +604,27 @@ neubau:
 #   - {gruppe: nb_umgebung, pts: [[24.4, -53.4, 15.9], [24.4, -56.6, 15.9], [25.8, -55.0, 18.9]], mat: nb_mansarde}
 #   - {gruppe: nb_umgebung, pts: [[24.4, -56.6, 15.9], [25.4, -57.4, 15.9], [25.8, -55.0, 18.9]], mat: nb_mansarde}
 #   - {gruppe: nb_umgebung, pts: [[25.4, -57.4, 15.9], [28.6, -57.8, 15.9], [25.8, -55.0, 18.9]], mat: nb_mansarde}
-    # Wuertzlerstrasse Mansarde bis OK Attika +20,72 [EIN S. 27]
-    - {gruppe: nb_wue, pts: [[20.6, -69.4, 17.28], [8.0, -70.3, 17.28], [8.1, -71.9, 20.72], [20.7, -71.0, 20.72]], mat: nb_mansarde}
     - {gruppe: nb_wue, pts: [[9.1, -85.3, 17.28], [21.3, -84.3, 17.28], [21.2, -82.7, 20.72], [9.2, -83.7, 20.72]], mat: nb_mansarde}
-    - {gruppe: nb_wue, pts: [[8.1, -71.9, 20.72], [20.7, -71.0, 20.72], [21.2, -82.7, 20.72], [9.2, -83.7, 20.72]], mat: nb_kies}
     # Runde 4: Rampe 5 % des Verbindungswegs (Oberflaeche) [EIN S. 9/16]
     - {gruppe: nb_hof, rahmen: hof, pts: [[-3.9, 6.62, 3.96], [5.6, 6.62, 3.5], [5.6, 8.09, 3.5], [-3.9, 8.09, 3.96]], mat: nb_platten}
     - {gruppe: nb_hof, rahmen: hof, pts: [[-3.9, 8.09, 3.49], [5.6, 8.09, 3.49], [5.6, 8.09, 3.5], [-3.9, 8.09, 3.96]], mat: nb_wand_hof}
     - {gruppe: nb_garten, rahmen: hof, pts: [[41.3, 8.1, 2.8], [43.05, 8.4, 2.2], [42.2, 9.95, 2.6]], mat: nb_segel}
   flaechen:
-    # Flachdach Strassenhaus und Dachterrassen Top 26-3 (West) und Top 23-3 (Ost): Deck +25,30, Gelaender +26,40 [VP 26/23 Dachterrasse, EIN S. 14]
-    - {gruppe: nb_shg_dach, poly: [[0.14, -2.6], [18.67, -2.6], [19.43, -13.4], [0.71, -13.4]], z: 25.10, dicke: 0.35, mat: nb_kies, seite: nb_attika}
-    - {gruppe: nb_shg_dach, poly: [[1.2, -3.6], [8.6, -3.6], [8.6, -8.4], [1.2, -8.4]], z: 25.30, dicke: 0.2, mat: nb_platten}     # DT Top 26-3, 35 m2
-    - {gruppe: nb_shg_dach, poly: [[10.4, -3.6], [17.9, -3.6], [17.9, -10.0], [10.4, -10.0]], z: 25.30, dicke: 0.2, mat: nb_platten}   # DT Top 23-3, 48 m2
-    - {gruppe: nb_shg_dach, poly: [[1.0, -9.0], [7.6, -9.0], [7.7, -12.9], [1.0, -12.9]], z: 25.20, dicke: 0.1, mat: nb_rasen}       # Gruendach
+    - {gruppe: nb_shg, poly: [[3.85, -15], [16.19, -15], [15.91, -17.41], [4.12, -17.41]], z: 7.412, dicke: 0.01, mat: nb_platten, seite: nb_basalt, quelle: "BAB (Terrassen Platten 50 x 50), EIN S. 11/12"}   # Belag Balkon 2. OG
+    - {gruppe: nb_shg, poly: [[3.85, -15], [16.19, -15], [15.91, -17.41], [4.12, -17.41]], z: 10.292, dicke: 0.01, mat: nb_platten, seite: nb_basalt, quelle: "BAB (Terrassen Platten 50 x 50), EIN S. 11/12"}   # Belag Balkon 3. OG
+    - {gruppe: nb_shg, poly: [[3.85, -15], [16.19, -15], [15.91, -17.41], [4.12, -17.41]], z: 13.172, dicke: 0.01, mat: nb_platten, seite: nb_basalt, quelle: "BAB (Terrassen Platten 50 x 50), EIN S. 11/12"}   # Belag Balkon 4. OG
+    - {gruppe: nb_shg, poly: [[3.85, -15], [16.19, -15], [15.91, -17.41], [4.12, -17.41]], z: 16.052, dicke: 0.01, mat: nb_platten, seite: nb_basalt, quelle: "BAB (Terrassen Platten 50 x 50), EIN S. 11/12"}   # Belag Balkon 5. OG
+    - {gruppe: nb_shg, poly: [[3.85, -15], [16.19, -15], [15.91, -17.41], [4.12, -17.41]], z: 18.942, dicke: 0.01, mat: nb_platten, seite: nb_basalt, quelle: "BAB (Terrassen Platten 50 x 50), EIN S. 11/12"}   # Belag Balkon 1. DG
+    # Runde 6: Dachterrassen Top 26-3 (34,94 m2) und Top 23-3 (47,33 m2), Kies an den Enden, Gruendach mit Lift in der Mitte [EIN S. 14]
+    - {gruppe: nb_shg_dach, poly: [[1.08, -5.6], [7, -5.6], [7, -10.5], [1.08, -10.5]], z: 25.32, dicke: 0.02, mat: nb_platten, quelle: "EIN S. 14 (Terrasse 34,94 m2)"}
+    - {gruppe: nb_shg_dach, poly: [[10.95, -5.6], [18.3, -5.6], [18.3, -10.5], [13.28, -10.5], [13.28, -12.9], [10.95, -12.9]], z: 25.32, dicke: 0.02, mat: nb_platten, quelle: "EIN S. 14 (Terrasse 47,33 m2)"}
+    - {gruppe: nb_shg_dach, poly: [[7.1, -5.6], [10.9, -5.6], [10.9, -12.9], [7.1, -12.9]], z: 25.33, dicke: 0.03, mat: nb_rasen, quelle: "EIN S. 14 (Gruendach, Liftueberfahrt, Aussengeraete)"}
+    - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: 2.872, dicke: 0.01, mat: nb_platten, seite: nb_basalt, quelle: "EIN S. 19 (Betonplatten)"}   # Belag 1. OG
+    - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: 5.752, dicke: 0.01, mat: nb_platten, seite: nb_basalt, quelle: "EIN S. 19 (Betonplatten)"}   # Belag 2. OG
+    - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: 8.632, dicke: 0.01, mat: nb_platten, seite: nb_basalt, quelle: "EIN S. 19 (Betonplatten)"}   # Belag 3. OG
+    - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: 11.512, dicke: 0.01, mat: nb_platten, seite: nb_basalt, quelle: "EIN S. 19 (Betonplatten)"}   # Belag 4. OG
+    - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: 14.402, dicke: 0.01, mat: nb_platten, seite: nb_basalt, quelle: "EIN S. 19 (Betonplatten)"}   # Belag 1. DG
+    - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: 17.282, dicke: 0.01, mat: nb_platten, seite: nb_basalt, quelle: "EIN S. 19 (Betonplatten)"}   # Belag 2. DG
     # Nachbargaerten (Orthofoto 2024): Dachgarten auf dem Hofbau Schlachthausgasse 11 (OGD 4,8 m) und Garten im Hof dahinter
     - {gruppe: nb_umgebung, poly: [[-20.8, -15.3], [0.45, -15.3], [2.45, -29.6], [-20.8, -29.6]], z: 4.66, dicke: 0.06, mat: nb_rasen}
     - {gruppe: nb_umgebung, poly: [[-21.0, -30.3], [2.4, -30.3], [4.6, -62.0], [-21.0, -62.0]], z: 0.15, dicke: 0.1, mat: gehsteig}
@@ -459,18 +678,72 @@ neubau:
     - {gruppe: nb_garten, rahmen: hof, poly: [[38.8, 0.0], [38.8, -1.22], [40.6, -1.22], [40.6, -3.32], [48.0, -3.32], [48.0, 6.3], [42.8, 5.95], [41.36, 6.62]], z: 0.03, dicke: 0.03, mat: nb_rasen}
     - {gruppe: nb_garten, rahmen: hof, poly: [[39.25, 0.55], [40.7, 0.55], [42.45, 5.1], [41.15, 5.1]], z: 0.04, dicke: 0.04, mat: nb_rost}
   gelaender:
-    - {gruppe: nb_shg_dach, pts: [[1.2, -3.6], [8.6, -3.6], [8.6, -8.4], [1.2, -8.4], [1.2, -3.6]], z: 25.30, h: 1.10}
-    - {gruppe: nb_shg_dach, pts: [[10.4, -3.6], [17.9, -3.6], [17.9, -10.0], [10.4, -10.0], [10.4, -3.6]], z: 25.30, h: 1.10}
-    - {gruppe: nb_shg, pts: [[3.9, -16.08], [15.8, -16.08]], z: 7.42, h: 1.10, mat: nb_basalt}
-    - {gruppe: nb_shg, pts: [[3.9, -16.08], [15.8, -16.08]], z: 10.30, h: 1.10, mat: nb_basalt}
-    - {gruppe: nb_shg, pts: [[3.9, -16.08], [15.8, -16.08]], z: 13.18, h: 1.10, mat: nb_basalt}
-    - {gruppe: nb_shg, pts: [[3.9, -16.08], [15.8, -16.08]], z: 16.06, h: 1.10, mat: nb_basalt}
-    - {gruppe: nb_shg, pts: [[3.9, -16.08], [15.8, -16.08]], z: 18.94, h: 1.10, mat: nb_basalt}
-    - {gruppe: nb_wue, pts: [[17.6, -70.9], [11.2, -71.4]], z: 2.98, h: 1.05, mat: nb_basalt}
-    - {gruppe: nb_wue, pts: [[17.6, -70.9], [11.2, -71.4]], z: 5.86, h: 1.05, mat: nb_basalt}
-    - {gruppe: nb_wue, pts: [[17.6, -70.9], [11.2, -71.4]], z: 8.74, h: 1.05, mat: nb_basalt}
-    - {gruppe: nb_wue, pts: [[17.6, -70.9], [11.2, -71.4]], z: 11.62, h: 1.05, mat: nb_basalt}
-    - {gruppe: nb_wue, pts: [[17.6, -70.9], [11.2, -71.4]], z: 14.61, h: 1.05, mat: nb_basalt}
+    - {gruppe: nb_shg, pts: [[5.06, -17.36], [15.11, -17.36]], z: 7.4, h: 1.02, mat: nb_basalt, quelle: "EIN S. 26 (Stabgelaender, OK 8.42), S. 11/12 (Lage), BAB (Stabgelaender)"}   # 2. OG
+    - {gruppe: nb_shg, pts: [[4.1, -17.36], [5.06, -17.36]], z: 7.4, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (geschlossenes Feld RAL 7012 x 4,10 bis 5,06)"}   # 2. OG
+    - {gruppe: nb_shg, pts: [[15.11, -17.36], [15.93, -17.36]], z: 7.4, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (geschlossenes Feld RAL 7012 x 15,11 bis 16,07)"}   # 2. OG
+    - {gruppe: nb_shg, pts: [[4.03, -15.78], [4.11, -17.36]], z: 7.4, h: 1.02, mat: nb_basalt, quelle: "EIN S. 11 (schraeges Plattenende, GLH 1,02), S. 26"}   # 2. OG
+    - {gruppe: nb_shg, pts: [[16.18, -15.78], [15.92, -17.36]], z: 7.4, h: 1.02, mat: nb_basalt, quelle: "EIN S. 11 (schraeges Plattenende, GLH 1,02), S. 26"}   # 2. OG
+    - {gruppe: nb_shg, pts: [[5.06, -17.36], [15.11, -17.36]], z: 10.28, h: 1.02, mat: nb_basalt, quelle: "EIN S. 26 (Stabgelaender, OK 11.3), S. 11/12 (Lage), BAB (Stabgelaender)"}   # 3. OG
+    - {gruppe: nb_shg, pts: [[4.1, -17.36], [5.06, -17.36]], z: 10.28, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (geschlossenes Feld RAL 7012 x 4,10 bis 5,06)"}   # 3. OG
+    - {gruppe: nb_shg, pts: [[15.11, -17.36], [15.93, -17.36]], z: 10.28, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (geschlossenes Feld RAL 7012 x 15,11 bis 16,07)"}   # 3. OG
+    - {gruppe: nb_shg, pts: [[4.03, -15.78], [4.11, -17.36]], z: 10.28, h: 1.02, mat: nb_basalt, quelle: "EIN S. 11 (schraeges Plattenende, GLH 1,02), S. 26"}   # 3. OG
+    - {gruppe: nb_shg, pts: [[16.18, -15.78], [15.92, -17.36]], z: 10.28, h: 1.02, mat: nb_basalt, quelle: "EIN S. 11 (schraeges Plattenende, GLH 1,02), S. 26"}   # 3. OG
+    - {gruppe: nb_shg, pts: [[5.06, -17.36], [15.11, -17.36]], z: 13.16, h: 1.12, mat: nb_basalt, quelle: "EIN S. 26 (Stabgelaender, OK 14.28), S. 11/12 (Lage), BAB (Stabgelaender)"}   # 4. OG
+    - {gruppe: nb_shg, pts: [[4.1, -17.36], [5.06, -17.36]], z: 13.16, h: 1.12, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (geschlossenes Feld RAL 7012 x 4,10 bis 5,06)"}   # 4. OG
+    - {gruppe: nb_shg, pts: [[15.11, -17.36], [15.93, -17.36]], z: 13.16, h: 1.12, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (geschlossenes Feld RAL 7012 x 15,11 bis 16,07)"}   # 4. OG
+    - {gruppe: nb_shg, pts: [[4.03, -15.78], [4.11, -17.36]], z: 13.16, h: 1.12, mat: nb_basalt, quelle: "EIN S. 11 (schraeges Plattenende, GLH 1,02), S. 26"}   # 4. OG
+    - {gruppe: nb_shg, pts: [[16.18, -15.78], [15.92, -17.36]], z: 13.16, h: 1.12, mat: nb_basalt, quelle: "EIN S. 11 (schraeges Plattenende, GLH 1,02), S. 26"}   # 4. OG
+    - {gruppe: nb_shg, pts: [[5.06, -17.36], [15.11, -17.36]], z: 16.04, h: 1.12, mat: nb_basalt, quelle: "EIN S. 26 (Stabgelaender, OK 17.16), S. 11/12 (Lage), BAB (Stabgelaender)"}   # 5. OG
+    - {gruppe: nb_shg, pts: [[4.1, -17.36], [5.06, -17.36]], z: 16.04, h: 1.12, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (geschlossenes Feld RAL 7012 x 4,10 bis 5,06)"}   # 5. OG
+    - {gruppe: nb_shg, pts: [[15.11, -17.36], [15.93, -17.36]], z: 16.04, h: 1.12, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (geschlossenes Feld RAL 7012 x 15,11 bis 16,07)"}   # 5. OG
+    - {gruppe: nb_shg, pts: [[4.03, -15.78], [4.11, -17.36]], z: 16.04, h: 1.12, mat: nb_basalt, quelle: "EIN S. 11 (schraeges Plattenende, GLH 1,02), S. 26"}   # 5. OG
+    - {gruppe: nb_shg, pts: [[16.18, -15.78], [15.92, -17.36]], z: 16.04, h: 1.12, mat: nb_basalt, quelle: "EIN S. 11 (schraeges Plattenende, GLH 1,02), S. 26"}   # 5. OG
+    - {gruppe: nb_shg, pts: [[5.06, -17.36], [15.11, -17.36]], z: 18.93, h: 1.11, mat: nb_basalt, quelle: "EIN S. 26 (Stabgelaender, OK 20.04), S. 11/12 (Lage), BAB (Stabgelaender)"}   # 1. DG
+    - {gruppe: nb_shg, pts: [[4.1, -17.36], [5.06, -17.36]], z: 18.93, h: 1.11, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (geschlossenes Feld RAL 7012 x 4,10 bis 5,06)"}   # 1. DG
+    - {gruppe: nb_shg, pts: [[15.11, -17.36], [15.93, -17.36]], z: 18.93, h: 1.11, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (geschlossenes Feld RAL 7012 x 15,11 bis 16,07)"}   # 1. DG
+    - {gruppe: nb_shg, pts: [[3.86, -15.05], [4.11, -17.36]], z: 18.93, h: 1.11, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (Feld x 3,83 bis 4,10 bis OK +20,03), S. 12"}
+    - {gruppe: nb_shg, pts: [[16.18, -15.05], [15.92, -17.36]], z: 18.93, h: 1.11, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (Feld x 16,07 bis 16,35 bis OK +20,03), S. 12"}
+    - {gruppe: nb_shg, pts: [[1.8, -15.07], [2.98, -15.07]], z: 18.94, h: 1.12, mat: nb_basalt, quelle: "EIN S. 12 (Fenster 118/196 FPH 0,00, GLH 1,12), S. 26"}
+    - {gruppe: nb_shg, pts: [[17.29, -15.07], [18.47, -15.07]], z: 18.94, h: 1.12, mat: nb_basalt, quelle: "EIN S. 12 (Fenster 118/196 FPH 0,00, GLH 1,12), S. 26"}
+    - {gruppe: nb_shg_dach, pts: [[5.68, -14.55, 21.82], [5.68, -10.95, 25.30]], h: 1.0, mat: nb_basalt, quelle: "EIN S. 13/14 (GLH 1,12 an der Treppe), S. 26 (Pfosten)"}
+    - {gruppe: nb_shg_dach, pts: [[6.52, -14.55, 21.82], [6.52, -10.95, 25.30]], h: 1.0, mat: nb_basalt, quelle: "EIN S. 13/14, S. 26"}
+    - {gruppe: nb_shg_dach, pts: [[13.88, -14.55, 21.82], [13.88, -10.95, 25.30]], h: 1.0, mat: nb_basalt, quelle: "EIN S. 13/14 (GLH 1,12 an der Treppe), S. 26 (Pfosten)"}
+    - {gruppe: nb_shg_dach, pts: [[14.72, -14.55, 21.82], [14.72, -10.95, 25.30]], h: 1.0, mat: nb_basalt, quelle: "EIN S. 13/14, S. 26"}
+    # Runde 6: Gelaender Dach (GLH 1,12, OK +26,40), Terrasse 2. DG (OK +22,92) [EIN S. 13, 14, 26]
+    - {gruppe: nb_shg_dach, pts: [[1.08, -10.47], [5.62, -10.47]], z: 25.30, h: 1.10, mat: nb_basalt, quelle: "EIN S. 14, S. 26 (x 1,3 bis 5,68)"}
+    - {gruppe: nb_shg_dach, pts: [[6.58, -10.47], [7, -10.47], [7, -5.62], [1.08, -5.62], [1.08, -10.47]], z: 25.30, h: 1.10, mat: nb_basalt, quelle: "EIN S. 14 (GLH 1,12), S. 26"}
+    - {gruppe: nb_shg_dach, pts: [[13.88, -10.47], [13.36, -10.47], [13.36, -12.93], [10.98, -12.93], [10.98, -5.62], [18.27, -5.62], [18.27, -10.47], [14.72, -10.47]], z: 25.30, h: 1.10, mat: nb_basalt, quelle: "EIN S. 14 (GLH 1,12), S. 26 (x 10,83 bis 13,82 und 14,72 bis 18,27)"}
+    - {gruppe: nb_shg_dach, pts: [[7.1, -14.95], [13.3, -14.95]], z: 21.82, h: 1.10, mat: nb_basalt, quelle: "EIN S. 26 (OK Gelaender +22,92), S. 13"}
+    - {gruppe: nb_wue, pts: [[16.455, -67.23], [11.986, -67.549]], z: 2.86, h: 1.02, mat: nb_basalt, quelle: "EIN S. 28 (Stab, OK Bruestung 3.88), S. 19 (GLH 1,12), BAB (Stabgelaender)"}   # 1. OG
+    - {gruppe: nb_wue, pts: [[17.402, -67.162], [16.455, -67.23]], z: 2.86, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 28 (geschlossenes Feld RAL 7012 u 3,00 bis 3,98)"}   # 1. OG
+    - {gruppe: nb_wue, pts: [[11.986, -67.549], [11.069, -67.615]], z: 2.86, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 28 (geschlossenes Feld RAL 7012 u 8,46 bis 9,44)"}   # 1. OG
+    - {gruppe: nb_wue, pts: [[17.373, -67.164], [17.465, -68.461]], z: 2.86, h: 1.02, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 1. OG
+    - {gruppe: nb_wue, pts: [[11.089, -67.613], [11.181, -68.91]], z: 2.86, h: 1.02, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 1. OG
+    - {gruppe: nb_wue, pts: [[16.455, -67.23], [11.986, -67.549]], z: 5.74, h: 1.02, mat: nb_basalt, quelle: "EIN S. 28 (Stab, OK Bruestung 6.76), S. 19 (GLH 1,12), BAB (Stabgelaender)"}   # 2. OG
+    - {gruppe: nb_wue, pts: [[17.402, -67.162], [16.455, -67.23]], z: 5.74, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 28 (geschlossenes Feld RAL 7012 u 3,00 bis 3,98)"}   # 2. OG
+    - {gruppe: nb_wue, pts: [[11.986, -67.549], [11.069, -67.615]], z: 5.74, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 28 (geschlossenes Feld RAL 7012 u 8,46 bis 9,44)"}   # 2. OG
+    - {gruppe: nb_wue, pts: [[17.373, -67.164], [17.465, -68.461]], z: 5.74, h: 1.02, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 2. OG
+    - {gruppe: nb_wue, pts: [[11.089, -67.613], [11.181, -68.91]], z: 5.74, h: 1.02, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 2. OG
+    - {gruppe: nb_wue, pts: [[16.455, -67.23], [11.986, -67.549]], z: 8.62, h: 1.02, mat: nb_basalt, quelle: "EIN S. 28 (Stab, OK Bruestung 9.64), S. 19 (GLH 1,12), BAB (Stabgelaender)"}   # 3. OG
+    - {gruppe: nb_wue, pts: [[17.402, -67.162], [16.455, -67.23]], z: 8.62, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 28 (geschlossenes Feld RAL 7012 u 3,00 bis 3,98)"}   # 3. OG
+    - {gruppe: nb_wue, pts: [[11.986, -67.549], [11.069, -67.615]], z: 8.62, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 28 (geschlossenes Feld RAL 7012 u 8,46 bis 9,44)"}   # 3. OG
+    - {gruppe: nb_wue, pts: [[17.373, -67.164], [17.465, -68.461]], z: 8.62, h: 1.02, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 3. OG
+    - {gruppe: nb_wue, pts: [[11.089, -67.613], [11.181, -68.91]], z: 8.62, h: 1.02, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 3. OG
+    - {gruppe: nb_wue, pts: [[16.455, -67.23], [11.986, -67.549]], z: 11.5, h: 1.02, mat: nb_basalt, quelle: "EIN S. 28 (Stab, OK Bruestung 12.52), S. 19 (GLH 1,12), BAB (Stabgelaender)"}   # 4. OG
+    - {gruppe: nb_wue, pts: [[17.402, -67.162], [16.455, -67.23]], z: 11.5, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 28 (geschlossenes Feld RAL 7012 u 3,00 bis 3,98)"}   # 4. OG
+    - {gruppe: nb_wue, pts: [[11.986, -67.549], [11.069, -67.615]], z: 11.5, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 28 (geschlossenes Feld RAL 7012 u 8,46 bis 9,44)"}   # 4. OG
+    - {gruppe: nb_wue, pts: [[17.373, -67.164], [17.465, -68.461]], z: 11.5, h: 1.02, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 4. OG
+    - {gruppe: nb_wue, pts: [[11.089, -67.613], [11.181, -68.91]], z: 11.5, h: 1.02, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 4. OG
+    - {gruppe: nb_wue, pts: [[16.455, -67.23], [11.986, -67.549]], z: 14.39, h: 1.12, mat: nb_basalt, quelle: "EIN S. 28 (Stab, OK Bruestung 15.51), S. 19 (GLH 1,12), BAB (Stabgelaender)"}   # 1. DG
+    - {gruppe: nb_wue, pts: [[17.402, -67.162], [16.455, -67.23]], z: 14.39, h: 1.12, typ: voll, mat: nb_basalt, quelle: "EIN S. 28 (geschlossenes Feld RAL 7012 u 3,00 bis 3,98)"}   # 1. DG
+    - {gruppe: nb_wue, pts: [[11.986, -67.549], [11.069, -67.615]], z: 14.39, h: 1.12, typ: voll, mat: nb_basalt, quelle: "EIN S. 28 (geschlossenes Feld RAL 7012 u 8,46 bis 9,44)"}   # 1. DG
+    - {gruppe: nb_wue, pts: [[17.373, -67.164], [17.465, -68.461]], z: 14.39, h: 1.12, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 1. DG
+    - {gruppe: nb_wue, pts: [[11.089, -67.613], [11.181, -68.91]], z: 14.39, h: 1.12, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 1. DG
+    - {gruppe: nb_wue, pts: [[16.455, -67.23], [11.986, -67.549]], z: 17.27, h: 1.12, mat: nb_basalt, quelle: "EIN S. 28 (Stab, OK Bruestung 18.39), S. 19 (GLH 1,12), BAB (Stabgelaender)"}   # 2. DG
+    - {gruppe: nb_wue, pts: [[17.402, -67.162], [16.455, -67.23]], z: 17.27, h: 1.12, typ: voll, mat: nb_basalt, quelle: "EIN S. 28 (geschlossenes Feld RAL 7012 u 3,00 bis 3,98)"}   # 2. DG
+    - {gruppe: nb_wue, pts: [[11.986, -67.549], [11.069, -67.615]], z: 17.27, h: 1.12, typ: voll, mat: nb_basalt, quelle: "EIN S. 28 (geschlossenes Feld RAL 7012 u 8,46 bis 9,44)"}   # 2. DG
+    - {gruppe: nb_wue, pts: [[17.373, -67.164], [17.544, -69.568]], z: 17.27, h: 1.12, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 2. DG
+    - {gruppe: nb_wue, pts: [[11.089, -67.613], [11.26, -70.017]], z: 17.27, h: 1.12, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 2. DG
     # Runde 3: volle Bruestungen der Balkone Schlachthausgasse 11 (weiss) [Google 3D]
     - {gruppe: nb_umgebung, pts: [[-18.0, -16.33], [-8.0, -16.33]], z: 6.0, h: 1.0, typ: voll, mat: nb_weiss}
     - {gruppe: nb_umgebung, pts: [[-18.0, -16.33], [-8.0, -16.33]], z: 9.0, h: 1.0, typ: voll, mat: nb_weiss}
@@ -508,6 +781,25 @@ neubau:
   pv:   # PV-Module auf den Pavillondaechern [EIN S. 22 Schnitt 1/3]
     - {gruppe: nb_top3, rahmen: hof, a: [0.5, 0.0], b: [11.45, 0.0], d: [0.6, 6.0], z: 6.61, reihen: 3, neigung: 12}
     - {gruppe: nb_top4, rahmen: hof, a: [16.4, 0.0], b: [27.35, 0.0], d: [0.6, 6.0], z: 6.61, reihen: 3, neigung: 12}
+    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [1.35, 3.55], d: [3.7, 5.5], z: 20.72, reihen: 2, neigung: 35, quelle: "EIN S. 22 (Feld 10 Stk.), S. 28 (Lage u, OK +21,53)"}
+    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [4.74, 6.94], d: [3.7, 5.5], z: 20.72, reihen: 2, neigung: 35, quelle: "EIN S. 28 (Lage u, Hoehe), Tiefe ANN wie Feld 1"}
+    - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [8.54, 9.63], d: [3.7, 5.5], z: 20.72, reihen: 2, neigung: 35, quelle: "EIN S. 28 (Lage u, Hoehe), Tiefe ANN wie Feld 1"}
+  dachfenster:   # Runde 6: Dachflaechenfenster 0,94 x 2,52 Strassenhaus und Wuertzlerstrasse 10 [EIN S. 13/14, 21/22, Ansichten S. 26/28]
+    - {gruppe: nb_shg_dach, pts: [[1.96, -13.82, 22.18], [2.94, -13.82, 22.18], [2.94, -11.94, 24.06], [1.96, -11.94, 24.06]], quelle: "EIN S. 13/14 (94/252), S. 26 (Rahmen vektoriell)"}
+    - {gruppe: nb_shg_dach, pts: [[3, -13.82, 22.18], [3.98, -13.82, 22.18], [3.98, -11.94, 24.06], [3, -11.94, 24.06]], quelle: "EIN S. 13/14 (94/252), S. 26 (Rahmen vektoriell)"}
+    - {gruppe: nb_shg_dach, pts: [[4.04, -13.82, 22.18], [5.02, -13.82, 22.18], [5.02, -11.94, 24.06], [4.04, -11.94, 24.06]], quelle: "EIN S. 13/14 (94/252), S. 26 (Rahmen vektoriell)"}
+    - {gruppe: nb_shg_dach, pts: [[15.3, -13.82, 22.18], [16.28, -13.82, 22.18], [16.28, -11.94, 24.06], [15.3, -11.94, 24.06]], quelle: "EIN S. 13/14 (94/252), S. 26 (Rahmen vektoriell)"}
+    - {gruppe: nb_shg_dach, pts: [[16.34, -13.82, 22.18], [17.32, -13.82, 22.18], [17.32, -11.94, 24.06], [16.34, -11.94, 24.06]], quelle: "EIN S. 13/14 (94/252), S. 26 (Rahmen vektoriell)"}
+    - {gruppe: nb_shg_dach, pts: [[17.38, -13.82, 22.18], [18.36, -13.82, 22.18], [18.36, -11.94, 24.06], [17.38, -11.94, 24.06]], quelle: "EIN S. 13/14 (94/252), S. 26 (Rahmen vektoriell)"}
+    - {gruppe: nb_shg_dach, pts: [[2.76, -1.13, 21.92], [1.82, -1.13, 21.92], [1.82, -3, 23.44], [2.76, -3, 23.44]], quelle: "EIN S. 13/14 (Strassenseite 94/252)"}
+    - {gruppe: nb_shg_dach, pts: [[5.6, -1.13, 21.92], [4.66, -1.13, 21.92], [4.66, -3, 23.44], [5.6, -3, 23.44]], quelle: "EIN S. 13/14 (Strassenseite 94/252)"}
+    - {gruppe: nb_shg_dach, pts: [[9.65, -1.13, 21.92], [8.71, -1.13, 21.92], [8.71, -3, 23.44], [9.65, -3, 23.44]], quelle: "EIN S. 13/14 (Strassenseite 94/252)"}
+    - {gruppe: nb_shg_dach, pts: [[13.87, -1.13, 21.92], [12.93, -1.13, 21.92], [12.93, -3, 23.44], [13.87, -3, 23.44]], quelle: "EIN S. 13/14 (Strassenseite 94/252)"}
+    - {gruppe: nb_shg_dach, pts: [[16.74, -1.13, 21.92], [15.8, -1.13, 21.92], [15.8, -3, 23.44], [16.74, -3, 23.44]], quelle: "EIN S. 13/14 (Strassenseite 94/252)"}
+    - {gruppe: nb_wue, pts: [[19.603, -70.173, 17.98], [18.625, -70.243, 17.98], [18.759, -72.118, 19.86], [19.736, -72.048, 19.86]], quelle: "EIN S. 21 (94/252), S. 28 (Rahmen vektoriell)"}
+    - {gruppe: nb_wue, pts: [[18.565, -70.247, 17.98], [17.687, -70.31, 17.98], [17.821, -72.185, 19.86], [18.699, -72.122, 19.86]], quelle: "EIN S. 21 (94/252), S. 28 (Rahmen vektoriell)"}
+    - {gruppe: nb_wue, pts: [[11.972, -70.718, 17.98], [10.994, -70.788, 17.98], [11.128, -72.663, 19.86], [12.106, -72.593, 19.86]], quelle: "EIN S. 21 (94/252), S. 28 (Rahmen vektoriell)"}
+    - {gruppe: nb_wue, pts: [[10.935, -70.792, 17.98], [9.957, -70.862, 17.98], [10.091, -72.737, 19.86], [11.069, -72.667, 19.86]], quelle: "EIN S. 21 (94/252), S. 28 (Rahmen vektoriell)"}
   straeucher:   # Bepflanzung Pflanztroege [ANN, Gestaltung laut Hofvisualisierung]. Runde 3: Kugelbuesche im Gartenstreifen entfernt
     # (EIN S. 8 zeigt Rasen mit Gefaelle und den Blumentrog), dafuer Hecke am Westrand des Nachbargartens (Google-Luftbild)
     - {gruppe: nb_umgebung, pos: [-18.7, -51.5], z: 0.15, r: 0.9, h: 1.7}
@@ -539,6 +831,14 @@ trees_override:
   - {add: true, pos: [-14.7, -43.5], height: 12, crown: 7.0}
   - {add: true, pos: [-13.8, -33.6], height: 14, crown: 8.0}
   # entfernt: zwei grosse Baeume im Suedteil des Nachbargartens (-9/-56 und -14,5/-57,5), weder im Orthofoto noch im Luftbild
+  # Runde 6: Baumgruppe vor Nr. 15 (Gemeindebau) zwischen Parkplatz und Westfassade: Lage aus dem Orthofoto 2024 (kahle Kronen, Schatten), Groesse aus Apple 9/8
+  - {add: true, pos: [73.0, -36.0], height: 17, crown: 11.0, quelle: "Orthofoto 2024 (Lage), Apple 9/8 (Hoehe, Krone)"}
+  - {add: true, pos: [79.0, -45.0], height: 16, crown: 9.0, quelle: "Orthofoto 2024 (Lage), Apple 9/8 (Hoehe, Krone)"}
+  - {add: true, pos: [69.5, -46.0], height: 15, crown: 9.0, quelle: "Orthofoto 2024 (Lage), Apple 9/8 (Hoehe, Krone)"}
+  - {add: true, pos: [73.5, -56.5], height: 17, crown: 11.0, quelle: "Orthofoto 2024 (Lage), Apple 9/8 (Hoehe, Krone)"}
+  - {add: true, pos: [79.5, -64.0], height: 15, crown: 9.0, quelle: "Orthofoto 2024 (Lage), Apple 9/8 (Hoehe, Krone)"}
+  - {add: true, pos: [71.0, -68.0], height: 16, crown: 10.0, quelle: "Orthofoto 2024 (Lage), Apple 9/8 (Hoehe, Krone)"}
+  - {add: true, pos: [76.0, -79.0], height: 15, crown: 9.0, quelle: "Orthofoto 2024 (Lage), Apple 9/8 (Hoehe, Krone)"}
 
 materials:
   fassade: {color: "#C8CCB4", note: "Hoffassade hellgruen-grau (Baumit 1026 laut Ansicht), Naeherung"}
@@ -711,6 +1011,18 @@ neighbour_facades:
     style: plain
     axes: {n: 6, margin: 1.2}
     rows: {eg: {z: 1.0, h: 1.7, w: 1.0}, z0: 4.2, step: 3.2, n: 4, h: 1.6, w: 1.0}
+  west_172417:                  # Runde 6 (Kunde: "15 das Haus sieht in echt anders aus"): Gemeindebau Schlachthausgasse 3 / Schnirchgasse 1-7 (Nr. 15),
+    bezug: "172417_west"          # Westfassade zur Schnirchgasse als Karte 5 cm vor dem Baukoerper (Baukoerper und Dach bleiben aus BKM/LOD2).
+    a: [83.65, -12.106]           # Hoehe 29,57 = BKM/LOD2 (EG + 9 OG), 28 Achsen zu 3.016 m, Balkonstapel in den Achsen 4, 11, 18, 25 (gegenueber
+    b: [93.25, -96.006]           # den vier Stiegenkernen am Dach, LOD2), weiss mit hellgrau-blauem Oberteil ab +19,8 (7. bis 9. OG)
+    height: 29.57
+    color: "#E8E6E1"
+    style: plain
+    frame: stuck
+    axes: [1.51, 4.52, 7.54, 10.56, 13.57, 16.59, 19.6, 22.62, 25.64, 28.65, 31.67, 34.68, 37.7, 40.72, 43.73, 46.75, 49.76, 52.78, 55.8, 58.81, 61.83, 64.84, 67.86, 70.88, 73.89, 76.91, 79.92, 82.94]
+    rows: {eg: {z: 1.0, h: 1.5, w: 1.2}, z0: 3.9, step: 2.8, n: 9, h: 1.45, w: 1.2}
+    bands: [[19.6, 29.6, "#C3C8CF"]]
+    quelle: "Apple 9/8 (Geschosse, Achsen, Balkonstapel, Farben), BKM/LOD2 (Hoehe 29,57, Stiegenkerne), Orthofoto 2024"
 
 # ---------------------------------------------------------------- Dachkorrekturen (lib/roofs.py), Runde 4
 # Abgleich mit den Apple-Maps-3D-Schraegansichten des Kunden (apple_8 bis 12, nur interne Referenz, gitignored) und den

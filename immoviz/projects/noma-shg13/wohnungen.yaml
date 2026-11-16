@@ -351,14 +351,18 @@ wohnungen:
     slab_rect: [-0.2, -0.2, 24.2, 1.65]
     walls:
       - rect: [-0.2, -0.2, 24.2, 0.0]
+        quelle: "EIN S. 8, S. 15 Gang Suedwand; ANN Tuerraster 5 m (vereinfacht)"
         openings: [{span: [2.0, 2.9], z: [0, 2.1], type: tuer}, {span: [7.0, 7.9], z: [0, 2.1], type: tuer}, {span: [12.0, 12.9], z: [0, 2.1], type: tuer}, {span: [17.0, 17.9], z: [0, 2.1], type: tuer}]
       - rect: [-0.2, 1.45, 24.2, 1.65]
+        quelle: "EIN S. 8, S. 15 Gang Nordwand; ANN Breite 1,45 und Tuerraster 5 m"
         openings: [{span: [4.5, 5.4], z: [0, 2.1], type: tuer}, {span: [9.5, 10.4], z: [0, 2.1], type: tuer}, {span: [14.5, 15.4], z: [0, 2.1], type: tuer}, {span: [19.5, 20.4], z: [0, 2.1], type: tuer}]
       - rect: [-0.2, 0.0, 0.0, 1.45]
+        quelle: "ANN Gangende West"
       - rect: [24.0, 0.0, 24.2, 1.45]
+        quelle: "EIN S. 15 Gangausgang zum Hof Ost; ANN Lage der Glastuer"
         openings: [{span: [0.25, 1.20], z: [0.0, 2.40], type: glastuer}]
     einbauten:
-      - {rect: [0.0, 0.0, 24.0, 1.45], z: [0.004, 0.012], mat: terrazzo}
+      - {rect: [0.0, 0.0, 24.0, 1.45], z: [0.004, 0.012], mat: terrazzo, quelle: "INT S. 11 Terrazzo; Kunde 16.11."}   # Gangboden Terrazzo
       - {rect: [2.0, -0.14, 2.9, -0.10], z: [0, 2.08], mat: tuer_eiche}
       - {rect: [7.0, -0.14, 7.9, -0.10], z: [0, 2.08], mat: tuer_eiche}
       - {rect: [12.0, -0.14, 12.9, -0.10], z: [0, 2.08], mat: tuer_eiche}
@@ -578,7 +582,7 @@ wohnungen:
   # Gang Variante 2: Gestaltung [INT2 S. 11] unveraendert gegenueber 07.10.; Boden als Variante nach dem Titelbild [INT2 S. 1]
   gang_v2:
     plan: manuell
-    titel: Gang Noma Apartments EG, Variante 2 mit Musterfliesen nach Titelbild [EIN S. 8, INT2 S. 1, S. 11]
+    titel: Gang Noma Apartments EG, Variante 2, Terrazzo wie Variante 1 (Kunde 16.11.) [EIN S. 8, INT2 S. 11]
     floor_z: 0.0
     height: 2.92
     fenster_stil: modern
@@ -587,14 +591,18 @@ wohnungen:
     slab_rect: [-0.2, -0.2, 24.2, 1.65]
     walls:
       - rect: [-0.2, -0.2, 24.2, 0.0]
+        quelle: "EIN S. 8, S. 15 Gang Suedwand; ANN Tuerraster 5 m (vereinfacht)"
         openings: [{span: [2.0, 2.9], z: [0, 2.1], type: tuer}, {span: [7.0, 7.9], z: [0, 2.1], type: tuer}, {span: [12.0, 12.9], z: [0, 2.1], type: tuer}, {span: [17.0, 17.9], z: [0, 2.1], type: tuer}]
       - rect: [-0.2, 1.45, 24.2, 1.65]
+        quelle: "EIN S. 8, S. 15 Gang Nordwand; ANN Breite 1,45 und Tuerraster 5 m"
         openings: [{span: [4.5, 5.4], z: [0, 2.1], type: tuer}, {span: [9.5, 10.4], z: [0, 2.1], type: tuer}, {span: [14.5, 15.4], z: [0, 2.1], type: tuer}, {span: [19.5, 20.4], z: [0, 2.1], type: tuer}]
       - rect: [-0.2, 0.0, 0.0, 1.45]
+        quelle: "ANN Gangende West"
       - rect: [24.0, 0.0, 24.2, 1.45]
+        quelle: "EIN S. 15 Gangausgang zum Hof Ost; ANN Lage der Glastuer"
         openings: [{span: [0.25, 1.20], z: [0.0, 2.40], type: glastuer}]
     einbauten:
-      - {rect: [0.0, 0.0, 24.0, 1.45], z: [0.004, 0.012], mat: zementfliese}   # V2: Musterfliese rot-creme-blaugrau statt Terrazzo [INT2 S. 1, Annahme]
+      - {rect: [0.0, 0.0, 24.0, 1.45], z: [0.004, 0.012], mat: terrazzo, quelle: "INT2 S. 11 Terrazzo; Kunde 16.11. Gang Terrazzo in beiden Varianten"}   # Runde 6: Terrazzo statt Musterfliese (vorher zementfliese nach Titelbild S. 1)
       - {rect: [2.0, -0.14, 2.9, -0.10], z: [0, 2.08], mat: tuer_eiche}
       - {rect: [7.0, -0.14, 7.9, -0.10], z: [0, 2.08], mat: tuer_eiche}
       - {rect: [12.0, -0.14, 12.9, -0.10], z: [0, 2.08], mat: tuer_eiche}
@@ -632,43 +640,391 @@ wohnungen:
       - {pos: [17.5, 0.72, 2.75], w: 25}
       - {pos: [20.0, 0.72, 2.75], w: 25}
       - {pos: [22.5, 0.72, 2.75], w: 25}
-    material_ersatz: {innen_wand: creme_wand, decke: bordeaux_decke, boden_parkett: zementfliese}
+    material_ersatz: {innen_wand: creme_wand, decke: bordeaux_decke, boden_parkett: terrazzo}   # Runde 6: auch Laibungen der Wohnungstueren Terrazzo
     objekt_ausblenden: [nb_hof, nb_top3, nb_top4, nb_shg]
     light: spaetsommer
     exposure: 1.6
     kameras:
       blick: {pos: [0.30, 0.42], target: [24.0, 0.85], lens: 18, h: 1.45}        # vom Gangende zur Glastuer
 
+  # Runde 6 (Kunde, Abstimmungsseite 16.11.2026): Muster-Apartment unter dem Pavillon Top 3 statt APT. 01 am Strassenhaus.
+  # APT. 06 [EIN S. 15]: Suedreihe, 28,91 m2 (Typ wie APT. 01 / Derenko Top 1), Hofrahmen a 5,49 bis 10,98 ganz unter Top 3
+  # (a 0 bis 11,95), Koten im Zimmer "ROK 3,34 RUK 3,14", Deckenspruenge 3,14/2,92 an den Trennwaenden zu APT. 05 und 07,
+  # Schnitt [EIN S. 23]: Apartment unter dem Pavillon RDUK +3,14. Grundriss spiegelbildlich zu APT. 01 (Bad im Osten), daher
+  # Derenko-Top-1 gespiegelt (x_neu = 5,03 - x_Derenko). Fenster zum Gartenstreifen, Breite 1,60 (Kunde), Lage nach INT S. 3.
+  # Hoehen der Einbauten absolut (Kunde): Anteil in den Ansichten x 3,22; Hochschrank und Garderobe 2,62. Kochfeld ohne Laden.
+  # apt01 / apt01_v2 bleiben als Referenz. Erzeugt mit scratchpad/noma/r6/apt/gen_apt06.py, Details interior_v2.md Abschnitt 7.
+  apt06_v1:
+    plan: manuell
+    titel: "Noma Apartment APT. 06 (Typ Derenko Top 1 gespiegelt), Variante 1 nach Mappe 07.10.2026 [EIN S. 15, S. 23, INT]"
+    quelle: "EIN S. 15 APT. 06 28,91 m2, ROK 3,34 RUK 3,14; EIN S. 23 RDUK +3,14 unter dem Pavillon; INT S. 3"
+    floor_z: 0.30                         # Rechenhoehe wie apt01 (Gelaendemodell ueber +-0,00)
+    height: 3.14                         # RDUK +3,14 unter Pavillon Top 3 [EIN S. 15, S. 23], keine abgehaengte Decke [BAB-A 3.10]
+    fenster_stil: modern
+    drehung_grad: -83.56                  # Hofrahmen
+    ursprung_lokal: [6.0479, -27.9216]    # Hofrahmen a = 5,725, b = 0,35: Innenecke Fensterwand / Wand zu APT. 05 [EIN S. 15]
+    slab_rect: [-0.25, -0.35, 5.28, 6.19]
+    walls:
+      - rect: [-0.25, -0.35, 5.28, 0]   # Fensterwand zum Gartenstreifen
+        quelle: "EIN S. 15 Aussenwand 0,35; INT S. 3"
+        openings: [{span: [0.3, 1.9], z: [0.9, 2.4], type: fenster, quelle: "Kunde 16.11. Breite 1,60 wie EIN S. 15 (160/150, FPH 0,90); Lage INT S. 3 (300 zur Kuechenwand)"}]
+      - rect: [5.03, 0, 5.28, 5.936]   # Wand zu APT. 07 (Badseite)
+        quelle: EIN S. 15 Wohnungstrennwand APT. 06/07
+      - rect: [-0.25, 0, 0, 5.936]   # Wand zu APT. 05 (Kuechenseite)
+        quelle: EIN S. 15 Wohnungstrennwand APT. 05/06
+      - rect: [-0.25, 5.936, 5.28, 6.186]   # Gangwand mit Eingangstuer
+        quelle: "EIN S. 15 Gangwand, Tuer 06 (90/200)"
+        openings: [{span: [0.8, 1.7], z: [0, 2.05], type: tuer, quelle: EIN S. 15 Tuer 06 90/200; INT S. 3}]
+      - rect: [2.04, 4.036, 5.03, 4.136]   # Badwand Richtung Eingang verlaengert
+        quelle: INT S. 3 Badwand bis zur Rundung; EIN S. 15 IW04a
+      - rect: [1.76, 3.3, 1.86, 3.856]   # Trennwand-Arm raumhoch
+        quelle: "INT S. 3, S. 16 Trennwand-Arm"
+      - rect: [2.415, 4.136, 2.515, 5.936]   # Badwand mit Badtuer
+        quelle: "INT S. 3 Bad 2,515; EIN S. 15 Bad 2,54"
+        openings: [{span: [4.236, 5.036], z: [0, 2], type: tuer, quelle: INT S. 3 Badtuer 800; EIN S. 15 80/200}]
+    boegen:
+      - {c: [2.04, 3.856], r: [0.18, 0.28], winkel: [90, 180], z: [0, 3.14], mat: innen_wand, quelle: "INT S. 3, S. 16 Trennwand-Rundung R 0,18 / 0,28"}
+      - {c: [2.04, 3.856], r: [0.134, 0.18], winkel: [90, 180], z: [0, 1.4], mat: eiche_derenko, quelle: INT S. 12 Verkleidung um die Rundung}
+      - {c: [2.04, 3.856], r: [0.13, 0.18], winkel: [90, 180], z: [1.4, 1.42], mat: led, quelle: INT S. 12 Leuchte D}
+    zylinder:
+      - {c: [0.07, 2.538], r: 0.015, z: [0.9, 1.2], mat: messing, quelle: INT S. 13 Armatur Messing}
+      - {c: [1.21, 0.916], r: 0.45, z: [0.72, 0.75], mat: hellblau, quelle: "INT S. 3 Tisch Ø 0,90; INT S. 13/14 hellblau"}
+      - {c: [1.21, 0.916], r: 0.17, z: [0, 0.72], mat: hellblau, quelle: INT S. 13/14}
+      - {c: [1.05, 0.8], r: 0.165, z: [1.54, 1.6], mat: bordeaux_lack, quelle: "INT S. 12 B Pendel, UK Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {c: [1.05, 0.8], r: 0.055, z: [1.6, 1.8], mat: bordeaux_lack, quelle: INT S. 12 B}
+      - {c: [1.33, 0.95], r: 0.165, z: [1.76, 1.82], mat: bordeaux_lack, quelle: "INT S. 12 B Pendel, UK Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {c: [1.33, 0.95], r: 0.055, z: [1.82, 2.02], mat: bordeaux_lack, quelle: INT S. 12 B}
+      - {c: [1.18, 1.1], r: 0.165, z: [1.91, 1.97], mat: bordeaux_lack, quelle: "INT S. 12 B Pendel, UK Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {c: [1.18, 1.1], r: 0.055, z: [1.97, 2.17], mat: bordeaux_lack, quelle: INT S. 12 B}
+      - {c: [3.18, 5.68], r: 0.2, z: [0.88, 1.02], mat: keramik_weiss, quelle: INT S. 10 Aufsatzbecken}
+      - {c: [2.31, 3.75], r: 0.18, z: [0, 0.45], mat: bordeaux_lack, quelle: INT S. 15/16 Hocker bordeaux}
+    einbauten:
+      - {rect: [0, 0, 5.03, 5.936], z: [0.004, 0.012], mat: boden_parkett, quelle: "INT S. 13, S. 15 Eiche Fischgraet; EIN S. 15 Zimmer und VR Parkett"}   # Zimmer und Vorraum: Eiche Fischgraet (Bad liegt darueber)
+      - {rect: [0.8, 5.936, 1.7, 5.996], z: [0.004, 0.012], mat: boden_parkett, quelle: EIN S. 15 VR Parkett; ANN Belagswechsel unter dem Tuerblatt}   # Eingangstuer: Parkett bis unter das Tuerblatt
+      - {rect: [0.8, 5.996, 1.7, 6.186], z: [0.004, 0.012], mat: terrazzo, quelle: INT S. 11 Gang Terrazzo; Kunde 16.11.; EIN S. 15 Gang Fliesen}   # Gangseite der Laibung: Terrazzo wie der Gang
+      - {rect: [2.465, 4.236, 2.515, 5.036], z: [0.012, 0.018], mat: fliese_beige, quelle: "INT S. 10, S. 15; ANN Belagswechsel unter dem Tuerblatt"}   # Badtuer: Fliese bis unter das Tuerblatt, danach Parkett
+      - {rect: [0.85, 5.976, 1.65, 6.016], z: [0, 2.03], mat: tuer_eiche, quelle: INT S. 16; BAB-A 3.4 Tuer 90 x 200}   # Eingangstuer Eiche gestemmt
+      - {rect: [2.445, 4.28, 2.485, 4.99], z: [0, 1.98], mat: bordeaux_lack, quelle: "INT S. 10, S. 15 Badtuer bordeaux; INT S. 3 Tuer 80"}
+      - {rect: [0, 0.18, 5.03, 0.2], z: [3, 3.139], mat: creme_decke, quelle: "INT S. 12 Leuchte D, S. 14; Kunde 15.11. kein Stuck"}   # Vorhangvoute glatt, 14 cm, ohne Profil
+      - {rect: [0.02, 0.02, 5.01, 0.05], z: [3.1, 3.12], mat: led_schwach, quelle: INT S. 12 Leuchte D}
+      - {rect: [2.04, 3.99, 5.03, 4.036], z: [0, 1.4], mat: eiche_derenko, quelle: "INT S. 15/16 Verkleidung Anteil 0,435 x 3,22; Kunde 16.11. Hoehen absolut"}   # Bettwandverkleidung Eiche bis 1,40
+      - {rect: [2.04, 3.986, 5.03, 4], z: [1.4, 1.42], mat: led, quelle: "INT S. 12 Leuchte D, S. 15"}
+      - {rect: [1.86, 3.3, 1.906, 3.856], z: [0, 1.4], mat: eiche_derenko, quelle: "INT S. 12, S. 16 Verkleidung am Trennwand-Arm"}
+      - {rect: [1.896, 3.3, 1.91, 3.856], z: [1.4, 1.42], mat: led, quelle: INT S. 12 Leuchte D}
+      - {rect: [4.984, 1.67, 5.03, 3.99], z: [0, 1.4], mat: eiche_derenko, quelle: "INT S. 15 Verkleidung Seitenwand ab y 1,67"}
+      - {rect: [4.98, 1.67, 4.994, 3.99], z: [1.4, 1.42], mat: led, quelle: INT S. 15}
+      - {rect: [2.08, 3.95, 4.98, 3.99], z: [0.45, 1.02], mat: oliv_polster, quelle: "INT S. 16 Polster Anteil 0,318 x 3,22; Kunde 16.11. Hoehen absolut"}   # Polster oliv ueber die ganze Bettwand
+      - {rect: [2.58, 1.88, 4.38, 3.95], z: [0, 0.32], mat: bett_stoff, quelle: "INT S. 3 Bett 1,80 x 2,07"}   # Bett 1,80 x 2,07
+      - {rect: [2.61, 1.9, 4.35, 3.93], z: [0.32, 0.58], mat: bettwaesche, quelle: "INT S. 15/16 Matratze OK 0,58 absolut"}
+      - {rect: [4.45, 3.55, 4.97, 3.95], z: [0.3, 0.48], mat: eiche_derenko, quelle: INT S. 16 Nachttisch schwebend}
+      - {rect: [4.5, 3.97, 4.58, 3.99], z: [1.12, 1.24], mat: schwarz, quelle: "INT S. 12 Leuchte C, S. 16"}
+      - {rect: [2.4, 3.97, 2.48, 3.99], z: [1.12, 1.24], mat: schwarz, quelle: "INT S. 12 Leuchte C, S. 16"}
+      - {rect: [4.35, 3.8, 4.48, 3.88], z: [0.93, 1.03], mat: schwarz, quelle: INT S. 12 Leuchte C}
+      - {rect: [2.48, 3.8, 2.61, 3.88], z: [0.93, 1.03], mat: schwarz, quelle: INT S. 12 Leuchte C}
+      - {rect: [3.13, 3.96, 4.41, 3.985], z: [1.44, 2.35], mat: bild_abstrakt, quelle: "INT S. 16 Bild Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [2.58, 1.33, 4.38, 1.71], z: [0, 0.46], mat: bank_streifen, quelle: INT S. 3 Bank in Bettbreite}
+      - {rect: [0, 5.866, 0.585, 5.886], z: [0, 2.62], mat: eiche_derenko, quelle: "INT S. 3, S. 13 Garderobe; Kunde 16.11. Hoehen absolut 2,62"}   # Garderobe Seitenwand, OK 2,62
+      - {rect: [0, 5.286, 0.585, 5.306], z: [0, 2.62], mat: eiche_derenko, quelle: "INT S. 3, S. 13 Garderobe; Kunde 16.11. Hoehen absolut 2,62"}   # Garderobe Seitenwand, OK 2,62
+      - {rect: [0, 4.529, 0.585, 4.549], z: [0, 2.62], mat: eiche_derenko, quelle: "INT S. 3, S. 13 Garderobe; Kunde 16.11. Hoehen absolut 2,62"}   # Garderobe Seitenwand, OK 2,62
+      - {rect: [0, 4.038, 0.585, 4.058], z: [0, 2.62], mat: eiche_derenko, quelle: "INT S. 3, S. 13 Garderobe; Kunde 16.11. Hoehen absolut 2,62"}   # Garderobe Seitenwand, OK 2,62
+      - {rect: [0, 4.058, 0.585, 5.866], z: [2.52, 2.62], mat: eiche_derenko, quelle: "INT S. 3, S. 13 Garderobe; Kunde 16.11. Hoehen absolut 2,62"}   # Garderobe Deckboden (Anteil 0,782 x 3,22)
+      - {rect: [0, 4.038, 0.53, 5.886], z: [0, 0.08], mat: schwarz, quelle: INT S. 13 Sockel zurueckgesetzt}
+      - {rect: [0, 5.306, 0.585, 5.866], z: [0.08, 0.12], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe Haengeteil Boden
+      - {rect: [0, 5.306, 0.585, 5.866], z: [1.97, 2], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe Haengeteil Fach
+      - {rect: [0, 5.306, 0.585, 5.866], z: [1.955, 1.97], mat: led, quelle: INT S. 12 Leuchte D}
+      - {rect: [0.29, 5.306, 0.31, 5.866], z: [1.82, 1.84], mat: messing, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [0, 4.549, 0.585, 5.286], z: [0, 0.4], mat: eiche_derenko, quelle: INT S. 13 Garderobe Nische mit Bank}
+      - {rect: [0.02, 4.569, 0.565, 5.266], z: [0.4, 0.48], mat: oliv_polster, quelle: "INT S. 13 Sitzpolster oliv; ANN Sitzhoehe 0,48"}
+      - {rect: [0, 4.549, 0.585, 5.286], z: [1.94, 1.97], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe Nische Fach
+      - {rect: [0, 4.549, 0.585, 5.286], z: [1.925, 1.94], mat: led, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 4.549, 0.585, 5.286], z: [2.22, 2.25], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe Nische Fach
+      - {rect: [0, 4.7, 0.03, 5.14], z: [1.68, 1.72], mat: messing, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [0, 4.058, 0.585, 4.529], z: [0.08, 0.12], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe offene Faecher
+      - {rect: [0, 4.058, 0.585, 4.529], z: [0.55, 0.58], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe offenes Fach
+      - {rect: [0, 4.058, 0.585, 4.529], z: [0.535, 0.55], mat: led_schwach, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 4.058, 0.585, 4.529], z: [1.02, 1.05], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe offenes Fach
+      - {rect: [0, 4.058, 0.585, 4.529], z: [1.005, 1.02], mat: led_schwach, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 4.058, 0.585, 4.529], z: [1.47, 1.5], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe offenes Fach
+      - {rect: [0, 4.058, 0.585, 4.529], z: [1.455, 1.47], mat: led_schwach, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 4.058, 0.585, 4.529], z: [1.95, 1.98], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe offenes Fach
+      - {rect: [0, 4.058, 0.585, 4.529], z: [1.935, 1.95], mat: led_schwach, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 2.238, 0.585, 4.038], z: [0.1, 0.86], mat: eiche_derenko, quelle: "INT S. 13 Kuechenzeile; INT S. 3 Skizze 2,42; Kunde 16.11."}   # Kuechenzeile Unterschraenke 3 x 600
+      - {rect: [0, 2.238, 0.53, 4.038], z: [0, 0.1], mat: schwarz, quelle: INT S. 13 Sockel mit LED}
+      - {rect: [0, 2.238, 0.615, 4.038], z: [0.86, 0.9], mat: marmor, quelle: "INT S. 13 Arbeitsplatte, OK 0,90 [INT S. 16]"}
+      - {rect: [0, 2.238, 0.02, 4.038], z: [0.9, 1.45], mat: fliese_muster, quelle: INT S. 13 Karofliese bis zum unteren Bord; Kunde 16.11. Hoehen absolut}   # Fliesenspiegel Karo bis 1,45
+      - {rect: [0, 1.622, 0.585, 2.238], z: [0, 2.62], mat: eiche_derenko, quelle: "INT S. 13 Hochschrank am Fensterende; Kunde 16.11. Hoehen absolut 2,62"}   # Hochschrank 600, OK 2,62
+      - {rect: [0.585, 1.682, 0.595, 2.178], z: [1.5, 1.84], mat: schwarz, quelle: "INT S. 13 Mikrowelle Anteil 0,467 bis 0,58 x 3,22"}
+      - {rect: [0.07, 2.318, 0.41, 2.758], z: [0.895, 0.905], mat: spiegel, quelle: "INT S. 13 Spuele 0,30 neben dem Hochschrank"}
+      - {rect: [0.05, 3.588, 0.51, 3.888], z: [0.9, 0.906], mat: schwarz, quelle: INT S. 13 und S. 3 Kochfeld neben der Garderobe; Kunde 16.11. darunter Drehtuer statt Laden}   # Kochfeld 2 Zonen im 600er neben der Garderobe, darunter glatte Drehtuer (keine Laden)
+      - {rect: [0.585, 2.836, 0.589, 2.84], z: [0.1, 0.86], mat: schwarz, quelle: INT S. 13 Frontteilung 600}
+      - {rect: [0.585, 3.436, 0.589, 3.44], z: [0.1, 0.86], mat: schwarz, quelle: INT S. 13 Frontteilung 600}
+      - {rect: [0.585, 2.238, 0.589, 2.242], z: [0, 2.62], mat: schwarz, quelle: INT S. 13 Fuge Hochschrank}
+      - {rect: [0.585, 1.622, 0.589, 2.238], z: [0.86, 0.864], mat: schwarz, quelle: INT S. 13 Fuge Hochschrank}
+      - {rect: [0.585, 1.622, 0.59, 4.038], z: [0.8, 0.812], mat: hellblau, quelle: INT S. 13 Detail Kueche Griffleiste hellblau}   # Griffleiste hellblau ueber alle Fronten
+      - {rect: [0, 2.238, 0.25, 4.038], z: [1.45, 1.49], mat: eiche_derenko, quelle: "INT S. 13 Bord Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # offenes Bord
+      - {rect: [0, 2.238, 0.25, 4.038], z: [1.438, 1.45], mat: led, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 2.238, 0.25, 4.038], z: [1.79, 1.83], mat: eiche_derenko, quelle: "INT S. 13 Bord Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # offenes Bord
+      - {rect: [0, 2.238, 0.25, 4.038], z: [1.778, 1.79], mat: led, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 2.238, 0.25, 4.038], z: [2.16, 2.2], mat: eiche_derenko, quelle: "INT S. 13 Bord Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # offenes Bord
+      - {rect: [0, 2.238, 0.25, 4.038], z: [2.148, 2.16], mat: led, quelle: INT S. 12 Leuchte D}
+      - {rect: [1.55, 0.58, 2.01, 1.04], z: [0.4, 0.48], mat: oliv_polster, quelle: INT S. 13/14 Stuhl oliv}
+      - {rect: [1.97, 0.58, 2.05, 1.04], z: [0.48, 0.86], mat: oliv_polster, quelle: INT S. 13/14 Stuhl oliv}
+      - {rect: [0.63, 0.86, 0.87, 1.32], z: [0.4, 0.48], mat: oliv_polster, quelle: INT S. 13/14 Stuhl oliv}
+      - {rect: [0.61, 0.86, 0.67, 1.32], z: [0.48, 0.86], mat: oliv_polster, quelle: INT S. 13/14 Stuhl oliv}
+      - {rect: [1.045, 0.795, 1.055, 0.805], z: [1.8, 3.14], mat: schwarz, quelle: INT S. 12 B Pendelkabel}
+      - {rect: [1.325, 0.945, 1.335, 0.955], z: [2.02, 3.14], mat: schwarz, quelle: INT S. 12 B Pendelkabel}
+      - {rect: [1.175, 1.095, 1.185, 1.105], z: [2.17, 3.14], mat: schwarz, quelle: INT S. 12 B Pendelkabel}
+      - {rect: [2.82, 0, 4.62, 0.485], z: [0.42, 0.94], mat: nuss, quelle: "INT S. 3 Sideboard 1800 x 485; INT S. 14/15 absolut 0,42 bis 0,94"}   # TV-Sideboard Nuss schwebend
+      - {rect: [2.97, 0, 4.44, 0.035], z: [1.3, 2.13], mat: tv_bild, quelle: "INT S. 14 TV-Rahmen Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [1.9, 0.04, 2.52, 0.16], z: [0.46, 3], mat: leinen, quelle: "INT S. 14 Vorhang 0,62 neben dem Fenster"}
+      - {rect: [1.89, 0.03, 2.53, 0.17], z: [0, 0.46], mat: bordeaux_stoff, quelle: INT S. 14 Saum bordeaux}
+      - {rect: [0.02, 0.04, 0.41, 0.16], z: [0.46, 3], mat: leinen, quelle: INT S. 14 Vorhang}
+      - {rect: [0.01, 0.03, 0.42, 0.17], z: [0, 0.46], mat: bordeaux_stoff, quelle: INT S. 14 Saum bordeaux}
+      - {rect: [2.515, 4.136, 5.03, 5.936], z: [0.012, 0.018], mat: fliese_beige, quelle: "INT S. 10, S. 15 Feinsteinzeug beige"}   # Badboden Fliese
+      - {rect: [5.018, 4.136, 5.03, 5.936], z: [0, 1.2], mat: fliese_beige, quelle: "INT S. 10, S. 15 Feinsteinzeug beige"}
+      - {rect: [2.515, 5.924, 5.03, 5.936], z: [0, 1.2], mat: fliese_beige, quelle: "INT S. 10, S. 15 Feinsteinzeug beige"}
+      - {rect: [2.515, 4.136, 5.03, 4.148], z: [0, 1.2], mat: fliese_beige, quelle: "INT S. 10, S. 15 Feinsteinzeug beige"}
+      - {rect: [5.016, 4.136, 5.03, 5.036], z: [0, 2.21], mat: fliese_beige, quelle: "INT S. 15 Duschfliese Anteil 0,687 x 3,22; INT S. 3 Dusche 900"}
+      - {rect: [4.18, 4.136, 5.03, 4.15], z: [0, 2.21], mat: fliese_beige, quelle: INT S. 15}
+      - {rect: [4.17, 4.15, 4.18, 4.936], z: [0, 2.1], mat: glas, quelle: "INT S. 3 Duschtrennwand; ANN Hoehe 2,10"}
+      - {rect: [2.515, 4.136, 5.03, 5.936], z: [3.13, 3.14], mat: bordeaux_decke, quelle: "INT S. 15 Baddecke bordeaux; INT S. 6 Palette #5C1727"}
+      - {rect: [5.014, 4.136, 5.03, 5.936], z: [2.61, 3.14], mat: bordeaux_decke, quelle: "INT S. 15 Band Anteil 0,188, Unterkante 0,812 x 3,22; Kunde 16.11. Hoehen absolut"}   # Badband bordeaux ab 2,61
+      - {rect: [2.515, 5.92, 5.03, 5.936], z: [2.61, 3.14], mat: bordeaux_decke, quelle: "INT S. 15 Band Anteil 0,188, Unterkante 0,812 x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [2.515, 4.136, 5.03, 4.152], z: [2.61, 3.14], mat: bordeaux_decke, quelle: "INT S. 15 Band Anteil 0,188, Unterkante 0,812 x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [2.515, 4.136, 2.531, 5.936], z: [2.61, 3.14], mat: bordeaux_decke, quelle: "INT S. 15 Band Anteil 0,188, Unterkante 0,812 x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [4.48, 5.27, 5.03, 5.67], z: [0.38, 0.78], mat: keramik_weiss, quelle: INT S. 3 WC 265 und 400 ab Gangwand}
+      - {rect: [5.014, 5.35, 5.03, 5.59], z: [1, 1.15], mat: messing, quelle: INT S. 10 Druecker Messing}
+      - {rect: [2.88, 5.45, 3.48, 5.936], z: [0.45, 0.85], mat: eiche_derenko, quelle: INT S. 3 Waschtisch 600 x 485; INT S. 10 Holz gerillt}
+      - {rect: [2.86, 5.43, 3.5, 5.936], z: [0.85, 0.88], mat: fliese_beige, quelle: INT S. 10}
+      - {rect: [3.16, 5.86, 3.2, 5.92], z: [0.88, 1.2], mat: messing, quelle: INT S. 10 Armatur Messing}
+      - {rect: [2.91, 5.915, 3.45, 5.925], z: [1.25, 2.1], mat: spiegel, quelle: INT S. 10 Spiegel}
+      - {rect: [4.59, 4.15, 4.65, 4.2], z: [0.9, 2.2], mat: messing, quelle: INT S. 10 Brausestange Messing}
+    leuchten:
+      - {pos: [1.05, 0.8, 1.51], w: 12, quelle: INT S. 12 B Pendel}
+      - {pos: [1.33, 0.95, 1.73], w: 12, quelle: INT S. 12 B Pendel}
+      - {pos: [1.18, 1.1, 1.88], w: 12, quelle: INT S. 12 B Pendel}
+      - {pos: [4.41, 3.84, 0.95], w: 6, quelle: INT S. 12 C}
+      - {pos: [2.55, 3.84, 0.95], w: 6, quelle: INT S. 12 C}
+      - {pos: [3.43, 2.6, 3.01], w: 20, quelle: INT S. 12 A Deckenspot}
+      - {pos: [1.33, 3, 3.01], w: 20, quelle: INT S. 12 A Deckenspot}
+      - {pos: [1.23, 5, 3.01], w: 15, quelle: INT S. 12 A Deckenspot}
+      - {pos: [0.28, 4.9, 1.8], w: 5, quelle: INT S. 12 E Garderobenspot}
+      - {pos: [3.83, 5, 2.96], w: 25, quelle: INT S. 12 A Bad}
+      - {pos: [4.58, 4.55, 2.96], w: 15, quelle: INT S. 12 A Dusche}
+    material_ersatz: {innen_wand: creme_wand, decke: creme_decke}
+    objekt_ausblenden: [nb_hof, nb_shg, nb_top3]   # Hoftrakt, Strassenhaus und Pavillon Top 3 aus (Pavillon-Unterkante +3,38 ragt sonst in die Decke der Rechenhoehe), Gartenstreifen (nb_garten) bleibt
+    light: spaetsommer
+    exposure: 1.4
+    kameras:
+      gesamt: {pos: [0.88, 5.8], target: [1.83, 0.2], lens: 16, h: 1.45, moebelplan: "right side along the wall: built-in oak wardrobe up to 2.62 m (open shelves with LED, niche with olive-green seat cushion and coat hooks, hanging section with rail), then oak kitchen run along the wall, from the entrance towards the window: wardrobe, base unit with a small 2-zone induction hob and a plain hinged door below it (no drawers under the hob), base unit with door, base unit with sink and brass tap, oak tall cabinet 2.62 m with built-in microwave at the window end; splashback of square cream, light-blue and terracotta tiles up to the lowest shelf, three open oak shelves with LED strips, thin light-blue handle groove along the fronts. Back centre: window wall with the window right of centre, linen curtains, round light-blue pedestal table with two olive-green chairs and three bordeaux pendant lamps. Left: partition wall with rounded corner, behind it the double bed 1.80 m against the bed wall with oak wall panelling up to 1.40 m, LED line on top and an olive upholstered headboard band; seen from the foot of the bed a floating oak night shelf on the right and a round bordeaux stool on the left, striped bench at the foot end, abstract painting above the bed; wall above the panelling warm cream. Left foreground: bordeaux bathroom door. Floor in the room: oak herringbone parquet."}   # Eingang, Blick zu Fenster und Essplatz, Kueche rechts, Trennwand und Bett links
+      bett: {pos: [2.67, 0.3], target: [3.68, 4], lens: 18, h: 1.3, moebelplan: "centre: double bed 1.80 m against the bed wall with oak wall panelling up to 1.40 m, LED line on top and an olive upholstered headboard band; seen from the foot of the bed a floating oak night shelf on the right and a round bordeaux stool on the left, striped bench at the foot end, abstract painting above the bed; wall above the panelling warm cream. Left: partition wall with rounded corner and oak panelling, wardrobe behind it. Right: side wall with oak panelling. Camera stands at the TV sideboard by the window. Floor in the room: oak herringbone parquet."}   # zwischen Sideboard und Vorhang, Bettwand
+      kueche: {pos: [4.73, 0.65], target: [0.33, 3.2], lens: 18, h: 1.4, moebelplan: "view from the TV sideboard across the room: back wall oak kitchen run along the wall, from the entrance towards the window: wardrobe, base unit with a small 2-zone induction hob and a plain hinged door below it (no drawers under the hob), base unit with door, base unit with sink and brass tap, oak tall cabinet 2.62 m with built-in microwave at the window end; splashback of square cream, light-blue and terracotta tiles up to the lowest shelf, three open oak shelves with LED strips, thin light-blue handle groove along the fronts; back right the built-in oak wardrobe up to 2.62 m (open shelves with LED, niche with olive-green seat cushion and coat hooks, hanging section with rail). Front left the round light-blue table with two olive-green chairs and three bordeaux pendants, window with linen curtain on the left. Right: partition wall with rounded corner. Floor in the room: oak herringbone parquet."}   # vor dem Sideboard, Kuechenzeile und Esstisch
+      bad: {pos: [2.61, 4.25], target: [4.13, 5.9], lens: 16, h: 1.5, dz: 0.8, moebelplan: "bathroom: grooved oak vanity with round countertop basin and brass tap on the back wall, mirror above; WC on the right wall; walk-in shower with glass screen and beige tiles up to 2.21 m in the right foreground; ceiling and upper wall band matte bordeaux #5C1727. Floor: beige porcelain tiles (no wood, no herringbone in the bathroom)"}   # Badtuer, Waschtisch, WC, Dusche, Decke
+
+  apt06_v2:
+    plan: manuell
+    titel: "Noma Apartment APT. 06 (Typ Derenko Top 1 gespiegelt), Variante 2 nach Mappe 28.10.2026 [EIN S. 15, S. 23, INT2]"
+    quelle: "EIN S. 15 APT. 06 28,91 m2, ROK 3,34 RUK 3,14; EIN S. 23 RDUK +3,14 unter dem Pavillon; INT S. 3"
+    floor_z: 0.30                         # Rechenhoehe wie apt01 (Gelaendemodell ueber +-0,00)
+    height: 3.14                         # RDUK +3,14 unter Pavillon Top 3 [EIN S. 15, S. 23], keine abgehaengte Decke [BAB-A 3.10]
+    fenster_stil: modern
+    drehung_grad: -83.56                  # Hofrahmen
+    ursprung_lokal: [6.0479, -27.9216]    # Hofrahmen a = 5,725, b = 0,35: Innenecke Fensterwand / Wand zu APT. 05 [EIN S. 15]
+    slab_rect: [-0.25, -0.35, 5.28, 6.19]
+    walls:
+      - rect: [-0.25, -0.35, 5.28, 0]   # Fensterwand zum Gartenstreifen
+        quelle: "EIN S. 15 Aussenwand 0,35; INT S. 3"
+        openings: [{span: [0.3, 1.9], z: [0.9, 2.4], type: fenster, quelle: "Kunde 16.11. Breite 1,60 wie EIN S. 15 (160/150, FPH 0,90); Lage INT S. 3 (300 zur Kuechenwand)"}]
+      - rect: [5.03, 0, 5.28, 5.936]   # Wand zu APT. 07 (Badseite)
+        quelle: EIN S. 15 Wohnungstrennwand APT. 06/07
+      - rect: [-0.25, 0, 0, 5.936]   # Wand zu APT. 05 (Kuechenseite)
+        quelle: EIN S. 15 Wohnungstrennwand APT. 05/06
+      - rect: [-0.25, 5.936, 5.28, 6.186]   # Gangwand mit Eingangstuer
+        quelle: "EIN S. 15 Gangwand, Tuer 06 (90/200)"
+        openings: [{span: [0.8, 1.7], z: [0, 2.05], type: tuer, quelle: EIN S. 15 Tuer 06 90/200; INT S. 3}]
+      - rect: [2.04, 4.036, 5.03, 4.136]   # Badwand Richtung Eingang verlaengert
+        quelle: INT S. 3 Badwand bis zur Rundung; EIN S. 15 IW04a
+      - rect: [1.76, 3.3, 1.86, 3.856]   # Trennwand-Arm raumhoch
+        quelle: "INT S. 3, S. 16 Trennwand-Arm"
+      - rect: [2.415, 4.136, 2.515, 5.936]   # Badwand mit Badtuer
+        quelle: "INT S. 3 Bad 2,515; EIN S. 15 Bad 2,54"
+        openings: [{span: [4.236, 5.036], z: [0, 2], type: tuer, quelle: INT S. 3 Badtuer 800; EIN S. 15 80/200}]
+    boegen:
+      - {c: [2.04, 3.856], r: [0.18, 0.28], winkel: [90, 180], z: [0, 3.14], mat: innen_wand, quelle: "INT S. 3, S. 16 Trennwand-Rundung R 0,18 / 0,28"}
+      - {c: [2.04, 3.856], r: [0.134, 0.18], winkel: [90, 180], z: [0, 1.4], mat: eiche_derenko, quelle: INT S. 12 Verkleidung um die Rundung}
+      - {c: [2.04, 3.856], r: [0.13, 0.18], winkel: [90, 180], z: [1.4, 1.42], mat: led, quelle: INT S. 12 Leuchte D}
+      - {c: [2.04, 3.856], r: [0.176, 0.18], winkel: [90, 180], z: [1.42, 3.139], mat: bordeaux_wand, quelle: INT2 S. 16}
+    zylinder:
+      - {c: [0.07, 2.538], r: 0.015, z: [0.9, 1.2], mat: messing, quelle: INT S. 13 Armatur Messing}
+      - {c: [1.21, 0.916], r: 0.45, z: [0.72, 0.75], mat: hellblau, quelle: "INT S. 3 Tisch Ø 0,90; INT S. 13/14 hellblau"}
+      - {c: [1.21, 0.916], r: 0.17, z: [0, 0.72], mat: hellblau, quelle: INT S. 13/14}
+      - {c: [1.05, 0.8], r: 0.165, z: [1.54, 1.6], mat: bordeaux_lack, quelle: "INT S. 12 B Pendel, UK Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {c: [1.05, 0.8], r: 0.055, z: [1.6, 1.8], mat: bordeaux_lack, quelle: INT S. 12 B}
+      - {c: [1.33, 0.95], r: 0.165, z: [1.76, 1.82], mat: bordeaux_lack, quelle: "INT S. 12 B Pendel, UK Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {c: [1.33, 0.95], r: 0.055, z: [1.82, 2.02], mat: bordeaux_lack, quelle: INT S. 12 B}
+      - {c: [1.18, 1.1], r: 0.165, z: [1.91, 1.97], mat: bordeaux_lack, quelle: "INT S. 12 B Pendel, UK Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {c: [1.18, 1.1], r: 0.055, z: [1.97, 2.17], mat: bordeaux_lack, quelle: INT S. 12 B}
+      - {c: [3.18, 5.68], r: 0.2, z: [0.88, 1.02], mat: keramik_weiss, quelle: INT S. 10 Aufsatzbecken}
+      - {c: [2.31, 3.75], r: 0.18, z: [0, 0.45], mat: bordeaux_lack, quelle: INT S. 15/16 Hocker bordeaux}
+    einbauten:
+      - {rect: [0, 0, 5.03, 5.936], z: [0.004, 0.012], mat: boden_parkett, quelle: "INT2 S. 13, S. 15 Eiche Fischgraet; EIN S. 15 Zimmer und VR Parkett"}   # Zimmer und Vorraum: Eiche Fischgraet (Bad liegt darueber)
+      - {rect: [0.8, 5.936, 1.7, 5.996], z: [0.004, 0.012], mat: boden_parkett, quelle: EIN S. 15 VR Parkett; ANN Belagswechsel unter dem Tuerblatt}   # Eingangstuer: Parkett bis unter das Tuerblatt
+      - {rect: [0.8, 5.996, 1.7, 6.186], z: [0.004, 0.012], mat: terrazzo, quelle: INT S. 11 Gang Terrazzo; Kunde 16.11.; EIN S. 15 Gang Fliesen}   # Gangseite der Laibung: Terrazzo wie der Gang
+      - {rect: [2.465, 4.236, 2.515, 5.036], z: [0.012, 0.018], mat: fliese_beige, quelle: "INT S. 10, S. 15; ANN Belagswechsel unter dem Tuerblatt"}   # Badtuer: Fliese bis unter das Tuerblatt, danach Parkett
+      - {rect: [0.85, 5.976, 1.65, 6.016], z: [0, 2.03], mat: tuer_eiche, quelle: INT S. 16; BAB-A 3.4 Tuer 90 x 200}   # Eingangstuer Eiche gestemmt
+      - {rect: [2.445, 4.28, 2.485, 4.99], z: [0, 1.98], mat: bordeaux_lack, quelle: "INT S. 10, S. 15 Badtuer bordeaux; INT S. 3 Tuer 80"}
+      - {rect: [0, 0.18, 5.03, 0.2], z: [3, 3.139], mat: creme_decke, quelle: "INT S. 12 Leuchte D, S. 14; Kunde 15.11. kein Stuck"}   # Vorhangvoute glatt, 14 cm, ohne Profil
+      - {rect: [0.02, 0.02, 5.01, 0.05], z: [3.1, 3.12], mat: led_schwach, quelle: INT S. 12 Leuchte D}
+      - {rect: [2.04, 3.99, 5.03, 4.036], z: [0, 1.4], mat: eiche_derenko, quelle: "INT S. 15/16 Verkleidung Anteil 0,435 x 3,22; Kunde 16.11. Hoehen absolut"}   # Bettwandverkleidung Eiche bis 1,40
+      - {rect: [2.04, 3.986, 5.03, 4], z: [1.4, 1.42], mat: led, quelle: "INT S. 12 Leuchte D, S. 15"}
+      - {rect: [1.86, 3.3, 1.906, 3.856], z: [0, 1.4], mat: eiche_derenko, quelle: "INT S. 12, S. 16 Verkleidung am Trennwand-Arm"}
+      - {rect: [1.896, 3.3, 1.91, 3.856], z: [1.4, 1.42], mat: led, quelle: INT S. 12 Leuchte D}
+      - {rect: [4.984, 1.67, 5.03, 3.99], z: [0, 1.4], mat: eiche_derenko, quelle: "INT S. 15 Verkleidung Seitenwand ab y 1,67"}
+      - {rect: [4.98, 1.67, 4.994, 3.99], z: [1.4, 1.42], mat: led, quelle: INT S. 15}
+      - {rect: [2.04, 4.03, 5.03, 4.036], z: [1.42, 3.139], mat: bordeaux_wand, quelle: "INT2 S. 15/16 Bettwand bordeaux; INT2 S. 6 Palette #5C1727"}   # V2 Bettwand ueber der Verkleidung bis zur Decke
+      - {rect: [1.86, 3.3, 1.866, 3.856], z: [1.42, 3.139], mat: bordeaux_wand, quelle: INT2 S. 16}
+      - {rect: [5.024, 2.09, 5.03, 4.03], z: [1.42, 3.139], mat: bordeaux_wand, quelle: "INT2 S. 15 Seitenwand ab rund 2,10 von der Fensterwand"}
+      - {rect: [2.08, 3.95, 4.98, 3.99], z: [0.45, 1.02], mat: oliv_polster, quelle: "INT S. 16 Polster Anteil 0,318 x 3,22; Kunde 16.11. Hoehen absolut"}   # Polster oliv ueber die ganze Bettwand
+      - {rect: [2.58, 1.88, 4.38, 3.95], z: [0, 0.32], mat: bett_stoff, quelle: "INT S. 3 Bett 1,80 x 2,07"}   # Bett 1,80 x 2,07
+      - {rect: [2.61, 1.9, 4.35, 3.93], z: [0.32, 0.58], mat: bettwaesche, quelle: "INT S. 15/16 Matratze OK 0,58 absolut"}
+      - {rect: [4.45, 3.55, 4.97, 3.95], z: [0.3, 0.48], mat: eiche_derenko, quelle: INT S. 16 Nachttisch schwebend}
+      - {rect: [4.5, 3.97, 4.58, 3.99], z: [1.12, 1.24], mat: schwarz, quelle: "INT S. 12 Leuchte C, S. 16"}
+      - {rect: [2.4, 3.97, 2.48, 3.99], z: [1.12, 1.24], mat: schwarz, quelle: "INT S. 12 Leuchte C, S. 16"}
+      - {rect: [4.35, 3.8, 4.48, 3.88], z: [0.93, 1.03], mat: schwarz, quelle: INT S. 12 Leuchte C}
+      - {rect: [2.48, 3.8, 2.61, 3.88], z: [0.93, 1.03], mat: schwarz, quelle: INT S. 12 Leuchte C}
+      - {rect: [3.13, 3.96, 4.41, 3.985], z: [1.44, 2.35], mat: bild_abstrakt, quelle: "INT S. 16 Bild Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [2.58, 1.33, 4.38, 1.71], z: [0, 0.46], mat: bank_streifen, quelle: INT S. 3 Bank in Bettbreite}
+      - {rect: [0, 5.866, 0.585, 5.886], z: [0, 2.62], mat: eiche_derenko, quelle: "INT S. 3, S. 13 Garderobe; Kunde 16.11. Hoehen absolut 2,62"}   # Garderobe Seitenwand, OK 2,62
+      - {rect: [0, 5.286, 0.585, 5.306], z: [0, 2.62], mat: eiche_derenko, quelle: "INT S. 3, S. 13 Garderobe; Kunde 16.11. Hoehen absolut 2,62"}   # Garderobe Seitenwand, OK 2,62
+      - {rect: [0, 4.529, 0.585, 4.549], z: [0, 2.62], mat: eiche_derenko, quelle: "INT S. 3, S. 13 Garderobe; Kunde 16.11. Hoehen absolut 2,62"}   # Garderobe Seitenwand, OK 2,62
+      - {rect: [0, 4.038, 0.585, 4.058], z: [0, 2.62], mat: eiche_derenko, quelle: "INT S. 3, S. 13 Garderobe; Kunde 16.11. Hoehen absolut 2,62"}   # Garderobe Seitenwand, OK 2,62
+      - {rect: [0, 4.058, 0.585, 5.866], z: [2.52, 2.62], mat: eiche_derenko, quelle: "INT S. 3, S. 13 Garderobe; Kunde 16.11. Hoehen absolut 2,62"}   # Garderobe Deckboden (Anteil 0,782 x 3,22)
+      - {rect: [0, 4.038, 0.53, 5.886], z: [0, 0.08], mat: schwarz, quelle: INT S. 13 Sockel zurueckgesetzt}
+      - {rect: [0, 5.306, 0.585, 5.866], z: [0.08, 0.12], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe Haengeteil Boden
+      - {rect: [0, 5.306, 0.585, 5.866], z: [1.97, 2], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe Haengeteil Fach
+      - {rect: [0, 5.306, 0.585, 5.866], z: [1.955, 1.97], mat: led, quelle: INT S. 12 Leuchte D}
+      - {rect: [0.29, 5.306, 0.31, 5.866], z: [1.82, 1.84], mat: messing, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [0, 4.549, 0.585, 5.286], z: [0, 0.4], mat: eiche_derenko, quelle: INT S. 13 Garderobe Nische mit Bank}
+      - {rect: [0.02, 4.569, 0.565, 5.266], z: [0.4, 0.48], mat: oliv_polster, quelle: "INT S. 13 Sitzpolster oliv; ANN Sitzhoehe 0,48"}
+      - {rect: [0, 4.549, 0.585, 5.286], z: [1.94, 1.97], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe Nische Fach
+      - {rect: [0, 4.549, 0.585, 5.286], z: [1.925, 1.94], mat: led, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 4.549, 0.585, 5.286], z: [2.22, 2.25], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe Nische Fach
+      - {rect: [0, 4.7, 0.03, 5.14], z: [1.68, 1.72], mat: messing, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [0, 4.058, 0.585, 4.529], z: [0.08, 0.12], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe offene Faecher
+      - {rect: [0, 4.058, 0.585, 4.529], z: [0.55, 0.58], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe offenes Fach
+      - {rect: [0, 4.058, 0.585, 4.529], z: [0.535, 0.55], mat: led_schwach, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 4.058, 0.585, 4.529], z: [1.02, 1.05], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe offenes Fach
+      - {rect: [0, 4.058, 0.585, 4.529], z: [1.005, 1.02], mat: led_schwach, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 4.058, 0.585, 4.529], z: [1.47, 1.5], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe offenes Fach
+      - {rect: [0, 4.058, 0.585, 4.529], z: [1.455, 1.47], mat: led_schwach, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 4.058, 0.585, 4.529], z: [1.95, 1.98], mat: eiche_derenko, quelle: "INT S. 13 Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # Garderobe offenes Fach
+      - {rect: [0, 4.058, 0.585, 4.529], z: [1.935, 1.95], mat: led_schwach, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 1.622, 0.585, 3.438], z: [0.1, 0.86], mat: eiche_derenko, quelle: "INT2 S. 13 Kuechenzeile; INT S. 3 Skizze 2,42; Kunde 16.11."}   # Kuechenzeile Unterschraenke 3 x 600
+      - {rect: [0, 1.622, 0.53, 4.038], z: [0, 0.1], mat: schwarz, quelle: INT2 S. 13 Sockel mit LED}
+      - {rect: [0, 1.622, 0.615, 4.038], z: [0.86, 0.9], mat: marmor, quelle: "INT2 S. 13 Arbeitsplatte laeuft unter dem Hochschrank durch, OK 0,90"}
+      - {rect: [0, 1.622, 0.02, 3.438], z: [0.9, 1.45], mat: fliese_bordeaux, quelle: INT2 S. 13 Rillenfliese bordeaux bis zum unteren Bord; Kunde 16.11. Hoehen absolut}   # Fliesenspiegel Rillenfliese bis 1,45
+      - {rect: [0, 3.438, 0.585, 4.038], z: [0.1, 0.86], mat: eiche_derenko, quelle: INT2 S. 13 Ladenblock unter dem Hochschrank}   # Hochschrank unten: Ladenblock 600 (3 Laden)
+      - {rect: [0, 3.438, 0.585, 4.038], z: [0.9, 2.62], mat: eiche_derenko, quelle: "INT2 S. 13 Hochschrank neben der Garderobe; Kunde 16.11. Hoehen absolut 2,62"}   # Hochschrank 600 ueber der Arbeitsplatte, OK 2,62
+      - {rect: [0.585, 3.498, 0.595, 3.978], z: [1.5, 1.84], mat: schwarz, quelle: "INT2 S. 13 Mikrowelle Anteil 0,467 bis 0,58 x 3,22"}
+      - {rect: [0.07, 2.318, 0.41, 2.758], z: [0.895, 0.905], mat: spiegel, quelle: INT2 S. 13 Spuele im mittleren 600er}
+      - {rect: [0.05, 2.988, 0.51, 3.288], z: [0.9, 0.906], mat: schwarz, quelle: "INT2 S. 3 Kochfeld neben der Garderobe, dort steht laut S. 13 der Hochschrank: erstes Element danach; Kunde 16.11. darunter Drehtuer"}   # Kochfeld 2 Zonen im 600er neben dem Hochschrank, darunter glatte Drehtuer (keine Laden)
+      - {rect: [0.585, 2.236, 0.589, 2.24], z: [0.1, 0.86], mat: schwarz, quelle: INT2 S. 13 Frontteilung 600}
+      - {rect: [0.585, 2.836, 0.589, 2.84], z: [0.1, 0.86], mat: schwarz, quelle: INT2 S. 13 Frontteilung 600}
+      - {rect: [0.585, 3.436, 0.589, 3.44], z: [0.1, 2.62], mat: schwarz, quelle: INT2 S. 13 Fuge Hochschrank}
+      - {rect: [0.585, 3.438, 0.589, 4.038], z: [0.398, 0.402], mat: schwarz, quelle: INT2 S. 13 Ladenfronten unter dem Hochschrank}
+      - {rect: [0.585, 3.438, 0.589, 4.038], z: [0.638, 0.642], mat: schwarz, quelle: INT2 S. 13 Ladenfronten unter dem Hochschrank}
+      - {rect: [0.585, 1.622, 0.59, 4.038], z: [0.8, 0.812], mat: hellblau, quelle: INT2 S. 13 Detail Kueche Griffleiste hellblau}   # Griffleiste hellblau ueber alle Fronten
+      - {rect: [0, 1.622, 0.25, 3.453], z: [1.45, 1.49], mat: eiche_derenko, quelle: "INT2 S. 13 Bord Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # offenes Bord
+      - {rect: [0, 1.622, 0.25, 3.438], z: [1.438, 1.45], mat: led, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 1.622, 0.25, 3.453], z: [1.79, 1.83], mat: eiche_derenko, quelle: "INT2 S. 13 Bord Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # offenes Bord
+      - {rect: [0, 1.622, 0.25, 3.438], z: [1.778, 1.79], mat: led, quelle: INT S. 12 Leuchte D}
+      - {rect: [0, 1.622, 0.25, 3.453], z: [2.16, 2.2], mat: eiche_derenko, quelle: "INT2 S. 13 Bord Anteil x 3,22; Kunde 16.11. Hoehen absolut"}   # offenes Bord
+      - {rect: [0, 1.622, 0.25, 3.438], z: [2.148, 2.16], mat: led, quelle: INT S. 12 Leuchte D}
+      - {rect: [1.55, 0.58, 2.01, 1.04], z: [0.4, 0.48], mat: oliv_polster, quelle: INT S. 13/14 Stuhl oliv}
+      - {rect: [1.97, 0.58, 2.05, 1.04], z: [0.48, 0.86], mat: oliv_polster, quelle: INT S. 13/14 Stuhl oliv}
+      - {rect: [0.63, 0.86, 0.87, 1.32], z: [0.4, 0.48], mat: oliv_polster, quelle: INT S. 13/14 Stuhl oliv}
+      - {rect: [0.61, 0.86, 0.67, 1.32], z: [0.48, 0.86], mat: oliv_polster, quelle: INT S. 13/14 Stuhl oliv}
+      - {rect: [1.045, 0.795, 1.055, 0.805], z: [1.8, 3.14], mat: schwarz, quelle: INT S. 12 B Pendelkabel}
+      - {rect: [1.325, 0.945, 1.335, 0.955], z: [2.02, 3.14], mat: schwarz, quelle: INT S. 12 B Pendelkabel}
+      - {rect: [1.175, 1.095, 1.185, 1.105], z: [2.17, 3.14], mat: schwarz, quelle: INT S. 12 B Pendelkabel}
+      - {rect: [2.82, 0, 4.62, 0.485], z: [0.42, 0.94], mat: nuss, quelle: "INT S. 3 Sideboard 1800 x 485; INT S. 14/15 absolut 0,42 bis 0,94"}   # TV-Sideboard Nuss schwebend
+      - {rect: [2.97, 0, 4.44, 0.035], z: [1.3, 2.13], mat: tv_bild, quelle: "INT S. 14 TV-Rahmen Anteil x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [1.9, 0.04, 2.52, 0.16], z: [0.46, 3], mat: leinen, quelle: "INT S. 14 Vorhang 0,62 neben dem Fenster"}
+      - {rect: [1.89, 0.03, 2.53, 0.17], z: [0, 0.46], mat: bordeaux_stoff, quelle: INT S. 14 Saum bordeaux}
+      - {rect: [0.02, 0.04, 0.41, 0.16], z: [0.46, 3], mat: leinen, quelle: INT S. 14 Vorhang}
+      - {rect: [0.01, 0.03, 0.42, 0.17], z: [0, 0.46], mat: bordeaux_stoff, quelle: INT S. 14 Saum bordeaux}
+      - {rect: [2.515, 4.136, 5.03, 5.936], z: [0.012, 0.018], mat: fliese_beige, quelle: "INT S. 10, S. 15 Feinsteinzeug beige"}   # Badboden Fliese
+      - {rect: [5.018, 4.136, 5.03, 5.936], z: [0, 1.2], mat: fliese_beige, quelle: "INT S. 10, S. 15 Feinsteinzeug beige"}
+      - {rect: [2.515, 5.924, 5.03, 5.936], z: [0, 1.2], mat: fliese_beige, quelle: "INT S. 10, S. 15 Feinsteinzeug beige"}
+      - {rect: [2.515, 4.136, 5.03, 4.148], z: [0, 1.2], mat: fliese_beige, quelle: "INT S. 10, S. 15 Feinsteinzeug beige"}
+      - {rect: [5.016, 4.136, 5.03, 5.036], z: [0, 2.21], mat: fliese_beige, quelle: "INT S. 15 Duschfliese Anteil 0,687 x 3,22; INT S. 3 Dusche 900"}
+      - {rect: [4.18, 4.136, 5.03, 4.15], z: [0, 2.21], mat: fliese_beige, quelle: INT S. 15}
+      - {rect: [4.17, 4.15, 4.18, 4.936], z: [0, 2.1], mat: glas, quelle: "INT S. 3 Duschtrennwand; ANN Hoehe 2,10"}
+      - {rect: [2.515, 4.136, 5.03, 5.936], z: [3.13, 3.14], mat: bordeaux_decke, quelle: "INT S. 15 Baddecke bordeaux; INT S. 6 Palette #5C1727"}
+      - {rect: [5.014, 4.136, 5.03, 5.936], z: [2.61, 3.14], mat: bordeaux_decke, quelle: "INT S. 15 Band Anteil 0,188, Unterkante 0,812 x 3,22; Kunde 16.11. Hoehen absolut"}   # Badband bordeaux ab 2,61
+      - {rect: [2.515, 5.92, 5.03, 5.936], z: [2.61, 3.14], mat: bordeaux_decke, quelle: "INT S. 15 Band Anteil 0,188, Unterkante 0,812 x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [2.515, 4.136, 5.03, 4.152], z: [2.61, 3.14], mat: bordeaux_decke, quelle: "INT S. 15 Band Anteil 0,188, Unterkante 0,812 x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [2.515, 4.136, 2.531, 5.936], z: [2.61, 3.14], mat: bordeaux_decke, quelle: "INT S. 15 Band Anteil 0,188, Unterkante 0,812 x 3,22; Kunde 16.11. Hoehen absolut"}
+      - {rect: [4.48, 5.27, 5.03, 5.67], z: [0.38, 0.78], mat: keramik_weiss, quelle: INT S. 3 WC 265 und 400 ab Gangwand}
+      - {rect: [5.014, 5.35, 5.03, 5.59], z: [1, 1.15], mat: messing, quelle: INT S. 10 Druecker Messing}
+      - {rect: [2.88, 5.45, 3.48, 5.936], z: [0.45, 0.85], mat: eiche_derenko, quelle: INT S. 3 Waschtisch 600 x 485; INT S. 10 Holz gerillt}
+      - {rect: [2.86, 5.43, 3.5, 5.936], z: [0.85, 0.88], mat: fliese_beige, quelle: INT S. 10}
+      - {rect: [3.16, 5.86, 3.2, 5.92], z: [0.88, 1.2], mat: messing, quelle: INT S. 10 Armatur Messing}
+      - {rect: [2.91, 5.915, 3.45, 5.925], z: [1.25, 2.1], mat: spiegel, quelle: INT S. 10 Spiegel}
+      - {rect: [4.59, 4.15, 4.65, 4.2], z: [0.9, 2.2], mat: messing, quelle: INT S. 10 Brausestange Messing}
+    leuchten:
+      - {pos: [1.05, 0.8, 1.51], w: 12, quelle: INT S. 12 B Pendel}
+      - {pos: [1.33, 0.95, 1.73], w: 12, quelle: INT S. 12 B Pendel}
+      - {pos: [1.18, 1.1, 1.88], w: 12, quelle: INT S. 12 B Pendel}
+      - {pos: [4.41, 3.84, 0.95], w: 6, quelle: INT S. 12 C}
+      - {pos: [2.55, 3.84, 0.95], w: 6, quelle: INT S. 12 C}
+      - {pos: [3.43, 2.6, 3.01], w: 20, quelle: INT S. 12 A Deckenspot}
+      - {pos: [1.33, 3, 3.01], w: 20, quelle: INT S. 12 A Deckenspot}
+      - {pos: [1.23, 5, 3.01], w: 15, quelle: INT S. 12 A Deckenspot}
+      - {pos: [0.28, 4.9, 1.8], w: 5, quelle: INT S. 12 E Garderobenspot}
+      - {pos: [3.83, 5, 2.96], w: 25, quelle: INT S. 12 A Bad}
+      - {pos: [4.58, 4.55, 2.96], w: 15, quelle: INT S. 12 A Dusche}
+    material_ersatz: {innen_wand: creme_wand, decke: creme_decke}
+    objekt_ausblenden: [nb_hof, nb_shg, nb_top3]   # Hoftrakt, Strassenhaus und Pavillon Top 3 aus (Pavillon-Unterkante +3,38 ragt sonst in die Decke der Rechenhoehe), Gartenstreifen (nb_garten) bleibt
+    light: spaetsommer
+    exposure: 1.4
+    kameras:
+      gesamt: {pos: [0.88, 5.8], target: [1.83, 0.2], lens: 16, h: 1.45, moebelplan: "right side along the wall: built-in oak wardrobe up to 2.62 m (open shelves with LED, niche with olive-green seat cushion and coat hooks, hanging section with rail), then oak kitchen run along the wall, from the entrance towards the window: wardrobe, oak tall cabinet 2.62 m with built-in microwave and three drawers below the worktop, base unit with a small 2-zone induction hob and a plain hinged door below it (no drawers under the hob), base unit with sink and brass tap, base unit with door; splashback of glossy bordeaux vertical fluted tiles up to the lowest shelf, three open oak shelves with LED strips, thin light-blue handle groove along the fronts. Back centre: window wall with the window right of centre, linen curtains, round light-blue pedestal table with two olive-green chairs and three bordeaux pendant lamps. Left: partition wall with rounded corner, behind it the double bed 1.80 m against the bed wall with oak wall panelling up to 1.40 m, LED line on top and an olive upholstered headboard band; seen from the foot of the bed a floating oak night shelf on the right and a round bordeaux stool on the left, striped bench at the foot end, abstract painting above the bed; wall above the panelling painted matte bordeaux #5C1727 up to the ceiling. Left foreground: bordeaux bathroom door. Floor in the room: oak herringbone parquet."}   # Eingang, Blick zu Fenster und Essplatz, Kueche rechts, Trennwand und Bett links
+      bett: {pos: [2.67, 0.3], target: [3.68, 4], lens: 18, h: 1.3, moebelplan: "centre: double bed 1.80 m against the bed wall with oak wall panelling up to 1.40 m, LED line on top and an olive upholstered headboard band; seen from the foot of the bed a floating oak night shelf on the right and a round bordeaux stool on the left, striped bench at the foot end, abstract painting above the bed; wall above the panelling painted matte bordeaux #5C1727 up to the ceiling. Left: partition wall with rounded corner and oak panelling, wardrobe behind it. Right: side wall with oak panelling. Camera stands at the TV sideboard by the window. Floor in the room: oak herringbone parquet."}   # zwischen Sideboard und Vorhang, Bettwand
+      kueche: {pos: [4.73, 0.65], target: [0.33, 3.2], lens: 18, h: 1.4, moebelplan: "view from the TV sideboard across the room: back wall oak kitchen run along the wall, from the entrance towards the window: wardrobe, oak tall cabinet 2.62 m with built-in microwave and three drawers below the worktop, base unit with a small 2-zone induction hob and a plain hinged door below it (no drawers under the hob), base unit with sink and brass tap, base unit with door; splashback of glossy bordeaux vertical fluted tiles up to the lowest shelf, three open oak shelves with LED strips, thin light-blue handle groove along the fronts; back right the built-in oak wardrobe up to 2.62 m (open shelves with LED, niche with olive-green seat cushion and coat hooks, hanging section with rail). Front left the round light-blue table with two olive-green chairs and three bordeaux pendants, window with linen curtain on the left. Right: partition wall with rounded corner. Floor in the room: oak herringbone parquet."}   # vor dem Sideboard, Kuechenzeile und Esstisch
+      bad: {pos: [2.61, 4.25], target: [4.13, 5.9], lens: 16, h: 1.5, dz: 0.8, moebelplan: "bathroom: grooved oak vanity with round countertop basin and brass tap on the back wall, mirror above; WC on the right wall; walk-in shower with glass screen and beige tiles up to 2.21 m in the right foreground; ceiling and upper wall band matte bordeaux #5C1727. Floor: beige porcelain tiles (no wood, no herringbone in the bathroom)"}   # Badtuer, Waschtisch, WC, Dusche, Decke
+      kueche_fliesen: {pos: [2.33, 2.25], target: [0, 3.55], lens: 18, h: 1.4, moebelplan: "frontal view of the kitchen: oak kitchen run along the wall, from the entrance towards the window: wardrobe, oak tall cabinet 2.62 m with built-in microwave and three drawers below the worktop, base unit with a small 2-zone induction hob and a plain hinged door below it (no drawers under the hob), base unit with sink and brass tap, base unit with door; splashback of glossy bordeaux vertical fluted tiles up to the lowest shelf, three open oak shelves with LED strips, thin light-blue handle groove along the fronts; wardrobe at the back right; dining table cut off on the left. Floor in the room: oak herringbone parquet."}   # Kuechenzeile mit Fliesenspiegel, Garderobe hinten
+
 # Materialien der Apartments (Farbwerte aus der Farbpalette [INT S. 6] und den Ansichten [INT S. 13 bis 16], Naeherung)
 materialien:
-  creme_wand: {farbe: "#E6DAC4", art: putz}           # Warmes Creme
-  creme_decke: {farbe: "#EEE6D6", art: putz}
-  eiche_derenko: {farbe: "#A8743F", art: eiche}       # Eiche furniert, Cognac Braun
-  tuer_eiche: {farbe: "#8F5F34", art: eiche}
-  nuss: {farbe: "#6A4329", art: eiche}
-  oliv_polster: {farbe: "#6C7347", rauh: 0.95}        # Olivgruen
-  bordeaux_lack: {farbe: "#5C1727", rauh: 0.3}       # Bordeaux Rot, Palette S. 6 (Vektorfarbe RGB 0,361 / 0,090 / 0,153), Lack: Pendel, Badtuer, Hocker
-  bordeaux_decke: {farbe: "#5C1727", rauh: 0.9}      # Runde 4: Bordeaux Rot der Palette S. 6, matt (Bad Decke und Band, Gangdecke); vorher #6B3426 aus beleuchteter Ansicht
-  bordeaux_stoff: {farbe: "#5A1A20", rauh: 0.9}
-  hellblau: {farbe: "#B4C3CB", rauh: 0.4}             # Himmelblau
-  marmor: {farbe: "#ECE8E2", rauh: 0.2}
-  fliese_muster: {farbe: "#D3C8B8", rauh: 0.3}
-  fliese_beige: {farbe: "#CBBDA6", rauh: 0.45}
-  leinen: {farbe: "#E6DECF", rauh: 0.95}
-  bett_stoff: {farbe: "#CDC2AF", rauh: 0.9}
-  bettwaesche: {farbe: "#F0ECE5", rauh: 0.9}
-  bank_streifen: {farbe: "#AFBEC5", rauh: 0.9}
-  schwarz: {farbe: "#1C1C1C", rauh: 0.4}
-  messing: {farbe: "#B8913F", rauh: 0.3, metall: 1.0}
-  keramik_weiss: {farbe: "#F3F2EE", rauh: 0.15}
-  spiegel: {farbe: "#DADADA", rauh: 0.03, metall: 1.0}
-  tv_bild: {farbe: "#8A3B2A", rauh: 0.6}
-  bild_abstrakt: {farbe: "#A9876A", rauh: 0.7}
-  led: {farbe: "#FFD09A", leuchten: 6}
-  led_schwach: {farbe: "#FFD09A", leuchten: 2.5}
-  terrazzo: {farbe: "#D9CEC0", rauh: 0.35}
-  sockel_beige: {farbe: "#C9B79C", art: putz}
-  hecke: {farbe: "#3C5A28", rauh: 0.9}
-  bordeaux_wand: {farbe: "#5C1727", rauh: 0.9}       # Runde 4: V2 Bettwand, Bordeaux Rot der Palette S. 6, matt; vorher #7A463B aus beleuchteter Ansicht
-  fliese_bordeaux: {farbe: "#5D1F1B", rauh: 0.12}    # V2 Rillenfliese bordeaux glasiert [INT2 S. 13]
-  zementfliese: {farbe: "#C7A395", rauh: 0.45}       # V2 Gang: Musterfliese rot-creme-blaugrau, Mischton [INT2 S. 1]
+  creme_wand: {farbe: "#E6DAC4", art: putz, quelle: "INT S. 6 Palette Warmes Creme"}           # Warmes Creme
+  creme_decke: {farbe: "#EEE6D6", art: putz, quelle: "INT S. 6 Palette Warmes Creme, heller"}
+  eiche_derenko: {farbe: "#A8743F", art: eiche, quelle: "INT S. 13 Materialtafel Eiche furniert; INT S. 6 Cognac Braun"}       # Eiche furniert, Cognac Braun
+  tuer_eiche: {farbe: "#8F5F34", art: eiche, quelle: "INT S. 16 Eingangstuer Eiche"}
+  nuss: {farbe: "#6A4329", art: eiche, quelle: "INT S. 14 Sideboard Nuss"}
+  oliv_polster: {farbe: "#6C7347", rauh: 0.95, quelle: "INT S. 6 Palette Olivgruen; INT S. 13 Stoffmuster"}        # Olivgruen
+  bordeaux_lack: {farbe: "#5C1727", rauh: 0.3, quelle: "INT S. 6 Palette Bordeaux Rot #5C1727 Vektor"}       # Bordeaux Rot, Palette S. 6 (Vektorfarbe RGB 0,361 / 0,090 / 0,153), Lack: Pendel, Badtuer, Hocker
+  bordeaux_decke: {farbe: "#5C1727", rauh: 0.9, quelle: "INT S. 6 Palette Bordeaux Rot #5C1727 Vektor"}      # Runde 4: Bordeaux Rot der Palette S. 6, matt (Bad Decke und Band, Gangdecke); vorher #6B3426 aus beleuchteter Ansicht
+  bordeaux_stoff: {farbe: "#5A1A20", rauh: 0.9, quelle: "INT S. 14 Vorhangsaum bordeaux; ANN Farbwert nahe Palette"}
+  hellblau: {farbe: "#B4C3CB", rauh: 0.4, quelle: "INT S. 6 Palette Himmelblau"}             # Himmelblau
+  marmor: {farbe: "#ECE8E2", rauh: 0.2, quelle: "INT S. 13 Materialtafel Arbeitsplatte"}
+  fliese_muster: {farbe: "#D3C8B8", rauh: 0.3, quelle: "INT S. 13 Karofliese (Mischton); ANN Farbwert"}
+  fliese_beige: {farbe: "#CBBDA6", rauh: 0.45, quelle: "INT S. 10, S. 15 Feinsteinzeug beige; ANN Farbwert"}
+  leinen: {farbe: "#E6DECF", rauh: 0.95, quelle: "INT S. 14 Leinen; ANN Farbwert"}
+  bett_stoff: {farbe: "#CDC2AF", rauh: 0.9, quelle: "INT S. 15/16; ANN Farbwert"}
+  bettwaesche: {farbe: "#F0ECE5", rauh: 0.9, quelle: "INT S. 15/16; ANN Farbwert"}
+  bank_streifen: {farbe: "#AFBEC5", rauh: 0.9, quelle: "INT S. 15 Bank gestreift; ANN Farbwert"}
+  schwarz: {farbe: "#1C1C1C", rauh: 0.4, quelle: "INT S. 12 Leuchten schwarz"}
+  messing: {farbe: "#B8913F", rauh: 0.3, metall: 1.0, quelle: "INT S. 10, S. 13 Messing"}
+  keramik_weiss: {farbe: "#F3F2EE", rauh: 0.15, quelle: "INT S. 10 Keramik weiss"}
+  spiegel: {farbe: "#DADADA", rauh: 0.03, metall: 1.0, quelle: "INT S. 10 Spiegel"}
+  tv_bild: {farbe: "#8A3B2A", rauh: 0.6, quelle: "INT S. 14 Bilderrahmen-TV; ANN Motiv"}
+  bild_abstrakt: {farbe: "#A9876A", rauh: 0.7, quelle: "INT S. 13, S. 16 Bild; ANN Motiv"}
+  led: {farbe: "#FFD09A", leuchten: 6, quelle: "INT S. 12 Leuchte D LED warmweiss"}
+  led_schwach: {farbe: "#FFD09A", leuchten: 2.5, quelle: "INT S. 12 Leuchte D"}
+  terrazzo: {farbe: "#D9CEC0", rauh: 0.35, quelle: "INT S. 11 Gang Terrazzo; Kunde 16.11.; ANN Farbwert"}
+  sockel_beige: {farbe: "#C9B79C", art: putz, quelle: "INT S. 11 Sockelzone beige; ANN Farbwert"}
+  hecke: {farbe: "#3C5A28", rauh: 0.9, quelle: "ANN Hecke vor der Glastuer"}
+  bordeaux_wand: {farbe: "#5C1727", rauh: 0.9, quelle: "INT2 S. 6 Palette Bordeaux Rot #5C1727 Vektor"}       # Runde 4: V2 Bettwand, Bordeaux Rot der Palette S. 6, matt; vorher #7A463B aus beleuchteter Ansicht
+  fliese_bordeaux: {farbe: "#5D1F1B", rauh: 0.12, quelle: "INT2 S. 13 Materialtafel Rillenfliese, Produktfarbe #5D1F1B"}    # V2 Rillenfliese bordeaux glasiert [INT2 S. 13]
+  zementfliese: {farbe: "#C7A395", rauh: 0.45, quelle: "INT2 S. 1 Titelbild; seit Runde 6 nicht mehr verwendet"}       # V2 Gang: Musterfliese rot-creme-blaugrau, Mischton [INT2 S. 1]

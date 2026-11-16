@@ -1,0 +1,70 @@
+# Modellfreigabe je Kamera (REGELN.md, Phase Freigabe). Veredelung (Credits) nur fuer Kameras mit
+# modell_freigegeben: ja. Gesetzt mit immoviz.py freigabe oder von Hand.
+kameras:
+  apt06_v1_gesamt:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 6: APT. 06 unter Pavillon Top 3, Raumhoehe 3,14, Hoehen absolut,
+      Fenster 1,60, Kochfeld ohne Laden, Gang Terrazzo'
+  apt06_v1_kueche:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 6: APT. 06 unter Pavillon Top 3, Raumhoehe 3,14, Hoehen absolut,
+      Fenster 1,60, Kochfeld ohne Laden, Gang Terrazzo'
+  apt06_v1_bett:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 6: APT. 06 unter Pavillon Top 3, Raumhoehe 3,14, Hoehen absolut,
+      Fenster 1,60, Kochfeld ohne Laden, Gang Terrazzo'
+  apt06_v1_bad:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 6: APT. 06 unter Pavillon Top 3, Raumhoehe 3,14, Hoehen absolut,
+      Fenster 1,60, Kochfeld ohne Laden, Gang Terrazzo'
+  apt06_v2_gesamt:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 6: APT. 06 unter Pavillon Top 3, Raumhoehe 3,14, Hoehen absolut,
+      Fenster 1,60, Kochfeld ohne Laden, Gang Terrazzo'
+  apt06_v2_kueche:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 6: APT. 06 unter Pavillon Top 3, Raumhoehe 3,14, Hoehen absolut,
+      Fenster 1,60, Kochfeld ohne Laden, Gang Terrazzo'
+  apt06_v2_bett:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 6: APT. 06 unter Pavillon Top 3, Raumhoehe 3,14, Hoehen absolut,
+      Fenster 1,60, Kochfeld ohne Laden, Gang Terrazzo'
+  apt06_v2_bad:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 6: APT. 06 unter Pavillon Top 3, Raumhoehe 3,14, Hoehen absolut,
+      Fenster 1,60, Kochfeld ohne Laden, Gang Terrazzo'
+  apt06_v2_kueche_fliesen:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 6: APT. 06 unter Pavillon Top 3, Raumhoehe 3,14, Hoehen absolut,
+      Fenster 1,60, Kochfeld ohne Laden, Gang Terrazzo'
+  gang_blick:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 6: APT. 06 unter Pavillon Top 3, Raumhoehe 3,14, Hoehen absolut,
+      Fenster 1,60, Kochfeld ohne Laden, Gang Terrazzo'
+  gang_v2_blick:
+    modell_freigegeben: ja
+    datum: '2026-11-16'
+    von: Kunde, Abstimmungsseite 16.11.2026
+    notiz: 'Runde 6: APT. 06 unter Pavillon Top 3, Raumhoehe 3,14, Hoehen absolut,
+      Fenster 1,60, Kochfeld ohne Laden, Gang Terrazzo'
+stand: '2026-11-16'
