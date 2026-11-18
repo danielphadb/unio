@@ -1,0 +1,148 @@
+{
+ "autos": 575,
+ "befunde_anzahl": 0,
+ "raeder": {
+  "mittel_cm": -0.0,
+  "max_schwebt_cm": 2.9,
+  "max_sinkt_cm": 2.9,
+  "ueber_grenze": 0
+ },
+ "ueberschneidungen": 0,
+ "hindernisse": 0,
+ "hindernis_punkte": 235,
+ "grenzen_cm": {
+  "schwebt": 3.0,
+  "sinkt": 3.0
+ },
+ "massstab": [
+  {
+   "modell": "2020 Audi Q3 Sportback",
+   "laenge": 4.5,
+   "breite": 2.07,
+   "hoehe": 1.53,
+   "radstand": 2.69,
+   "spur": 1.66
+  },
+  {
+   "modell": "Aston Martin Valour",
+   "laenge": 4.51,
+   "breite": 2.11,
+   "hoehe": 1.27,
+   "radstand": 2.72,
+   "spur": 1.74
+  },
+  {
+   "modell": "Audi A7 55 TFSI",
+   "laenge": 4.97,
+   "breite": 2.11,
+   "hoehe": 1.43,
+   "radstand": 2.95,
+   "spur": 1.57
+  },
+  {
+   "modell": "Audi e-tron GT quattro Black",
+   "laenge": 4.99,
+   "breite": 2.15,
+   "hoehe": 1.35,
+   "radstand": 2.93,
+   "spur": 1.66
+  },
+  {
+   "modell": "Audi rs6 avant 2024",
+   "laenge": 5.0,
+   "breite": 2.05,
+   "hoehe": 1.48,
+   "radstand": 3.02,
+   "spur": 1.69
+  },
+  {
+   "modell": "BMW M4 Competition",
+   "laenge": 4.79,
+   "breite": 2.11,
+   "hoehe": 1.44,
+   "radstand": 2.87,
+   "spur": 1.6
+  },
+  {
+   "modell": "Bmw",
+   "laenge": 5.12,
+   "breite": 2.21,
+   "hoehe": 1.38,
+   "radstand": 2.97,
+   "spur": 1.7
+  },
+  {
+   "modell": "Bmw 5-series",
+   "laenge": 5.06,
+   "breite": 2.05,
+   "hoehe": 1.52,
+   "radstand": 3.05,
+   "spur": 1.7
+  },
+  {
+   "modell": "Car 006 - audi rs6 avant 2020",
+   "laenge": 5.0,
+   "breite": 2.06,
+   "hoehe": 1.43,
+   "radstand": 2.9,
+   "spur": 1.69
+  },
+  {
+   "modell": "Ferrari Dodici Cilindri",
+   "laenge": 4.73,
+   "breite": 2.18,
+   "hoehe": 1.3,
+   "radstand": 2.73,
+   "spur": 1.75
+  },
+  {
+   "modell": "Hyundai veloster sport car",
+   "laenge": 4.24,
+   "breite": 1.97,
+   "hoehe": 1.36,
+   "radstand": 2.67,
+   "spur": 1.61
+  },
+  {
+   "modell": "Mercedes Benz EQS 2021",
+   "laenge": 5.22,
+   "breite": 2.18,
+   "hoehe": 1.54,
+   "radstand": 3.24,
+   "spur": 1.68
+  },
+  {
+   "modell": "Mercedes amg gt 63",
+   "laenge": 5.05,
+   "breite": 2.02,
+   "hoehe": 1.45,
+   "radstand": 2.95,
+   "spur": 1.62
+  },
+  {
+   "modell": "Porsche 911 turbo s 992 2021",
+   "laenge": 4.54,
+   "breite": 1.9,
+   "hoehe": 1.2,
+   "radstand": 2.47,
+   "spur": 1.62
+  },
+  {
+   "modell": "Tesla Model S (2016)",
+   "laenge": 4.98,
+   "breite": 2.0,
+   "hoehe": 1.4,
+   "radstand": 3.04,
+   "spur": 1.67
+  },
+  {
+   "modell": "Volvo S90",
+   "laenge": 4.96,
+   "breite": 1.92,
+   "hoehe": 1.42,
+   "radstand": 2.94,
+   "spur": 1.63
+  }
+ ],
+ "befunde": []
+}

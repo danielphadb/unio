@@ -101,7 +101,7 @@ korrigiert, nie per Prompt. Was die KI dazuerfindet, wird verworfen, nicht schö
 |---|---|---|---|
 | F1 | Erst Prüfbogen an den Kunden: Blender-Vorschau je Kamera, Draufsicht über Plan, offene Annahmen (Anteil ANN je Bild aus `pruefen`), Nachbarübersicht | N Runde 2 und 3 veredelt, Runde 4 korrigierte danach EG, Weg, Geländer, Küche, Stuck: Credits für veraltete Bilder | manuell: Prüfbogen; auto: `pruefen` liefert die Zahlen |
 | F2 | Veredelung nur für Kameras mit `modell_freigegeben: ja` in `freigabe.yaml` (Datum, von wem) | dto. | auto: Studio sperrt (HTTP 409), `immoviz.py freigabe --projekt <p> --cam <k> --pruefen`; Ausnahme `--force`/`force: true`, wird protokolliert |
-| F3 | Vor der Freigabe: `pruefen` ohne Rot (keine Elemente ohne Quelle im Bild), `strasse`, `sichtbar --pflicht` bestanden | alle Runden | auto |
+| F3 | Vor der Freigabe: `pruefen` ohne Rot (keine Elemente ohne Quelle im Bild), `strasse`, `sichtbar --pflicht` und `autos-pruefen` (ohne Befund) bestanden | alle Runden; W 18.11.2026: Autos schwebten bis 1 m bzw. standen halb auf dem Bordstein und in Pollern | auto |
 
 ## 7. Veredelung
 
@@ -140,6 +140,7 @@ PY=.venv-immoviz/bin/python
 $PY immoviz/immoviz.py pruefen --projekt immoviz/projects/<p>            # Quellen je Element, ANN je Bild (Text, --json)
 $PY immoviz/immoviz.py strasse immoviz/projects/<p>                      # Parkordnung, Gehsteige, Baumscheiben
 $PY immoviz/immoviz.py sichtbar immoviz/projects/<p> --pflicht           # Pflichthäuser
+$PY immoviz/immoviz.py autos-pruefen immoviz/projects/<p>               # Autos: Räder auf Fahrbahn, Bucht, Poller, Maßstab
 $PY immoviz/immoviz.py freigabe --projekt immoviz/projects/<p>           # Stand je Kamera
 $PY immoviz/immoviz.py freigabe --projekt immoviz/projects/<p> --cam ecke --setzen ja --von "Kunde, Mail 16.11."
 $PY immoviz/immoviz.py prompt --projekt immoviz/projects/<p> --cam ecke  # Gate plus Regelblock für MCP/Higgsfield

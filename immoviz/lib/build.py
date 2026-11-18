@@ -790,6 +790,10 @@ def build_scene(cfg, ctx):
         build_context(ctx, mats, ctx_coll, radius=cfg["site"].get("radius_m", 160) - 10,
                       detail=cfg["site"].get("detail_radius_m", 110), hero_poly=hero.footprint, terrain=terrain, cfg=cfg,
                       roofdata=roofs)
+    # Autos (Bibliothek) mit der fertigen Szene nachsetzen: Boden unter jedem Rad, Poller, Schilder, Staemme
+    if LAST_TERRAIN is not None and any(c.name.startswith("auto_") for c in bpy.data.collections):
+        from .assets import autos_bibliothek as AB
+        AB.aufraeumen(scene, LAST_TERRAIN)
     return scene
 
 

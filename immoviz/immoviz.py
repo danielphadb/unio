@@ -28,6 +28,30 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
 
+def _autos_pruefen(a) -> int:
+    """Baut die Szene (ohne Rendern) und prueft die Bibliotheksautos. Exit 1 bei Befunden."""
+    from lib import build as B
+    from lib.assets import autos_bibliothek as AB
+    pdir = Path(a.project).resolve()
+    cfg, ctx = B.load_project(pdir)
+    scene = B.build_scene(cfg, ctx)
+    res = AB.pruefen(scene, B.LAST_TERRAIN)
+    ziel = pdir / "renders" / "check"
+    ziel.mkdir(parents=True, exist_ok=True)
+    (ziel / "autos_pruefung.json").write_text(json.dumps(res, ensure_ascii=False, indent=1))
+    r = res["raeder"]
+    zeilen = [f"# Autos pruefen: {pdir.name}", "",
+              f"{res['autos']} Autos, {res['befunde_anzahl']} Befunde. Radaufstand gegen die Oberflaeche (je Rad ein "
+              f"Strahl von oben): Mittel {r['mittel_cm']} cm, hoechstens {r['max_schwebt_cm']} cm schwebend, "
+              f"{r['max_sinkt_cm']} cm eingesunken, {r['ueber_grenze']} Raeder ausserhalb +-{res['grenzen_cm']['schwebt']:.0f} cm. "
+              f"Ueberschneidungen {res['ueberschneidungen']}, in Hindernissen {res['hindernisse']} "
+              f"({res['hindernis_punkte']} Hindernisse erkannt).", ""]
+    zeilen += [f"- {b['auto']} bei {b['pos'][0]}/{b['pos'][1]}: {'; '.join(b['befund'])}" for b in res["befunde"][:200]]
+    (ziel / "autos_pruefung.md").write_text("\n".join(zeilen) + "\n")
+    print(json.dumps({k: v for k, v in res.items() if k != "befunde"}, ensure_ascii=False, indent=1))
+    return 1 if res["befunde_anzahl"] else 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -57,6 +81,9 @@ def main():
     ab = sub.add_parser("autos-bibliothek", help="assets/autos/bibliothek.blend bauen: Front +X, echte Länge, "
                                                  "eigener Lack, ohne Logos")
     ab.add_argument("--nur", default=None, help="nur diese Modelle (Anfang der id), mit Komma")
+    aup = sub.add_parser("autos-pruefen", help="Autos der Szene pruefen: Radaufstand je Rad gegen Fahrbahn/Gehsteig, "
+                                              "Bucht, Ueberschneidungen, Hindernisse (renders/check/autos_pruefung.*)")
+    aup.add_argument("project")
     tx = sub.add_parser("texturen", help="Optionale CC0-Texturen (Poly Haven) nach immoviz/assets/texturen/ laden "
                                          "(gitignored, Quelle und Lizenz in immoviz/assets/LIZENZEN.md)")
     tx.add_argument("--aufloesung", default="2k")
@@ -215,6 +242,8 @@ def main():
         from lib.assets import autos_bibliothek as AB
         print(json.dumps(AB.bibliothek_bauen(a.nur.split(",") if a.nur else None), ensure_ascii=False, indent=1))
         return
+    if a.cmd == "autos-pruefen":
+        sys.exit(_autos_pruefen(a))
     if a.cmd == "texturen":
         from lib.assets import texturen as TX
         print(json.dumps({"geladen": TX.laden(a.aufloesung), "ordner": str(TX.ORDNER)}, ensure_ascii=False, indent=1))

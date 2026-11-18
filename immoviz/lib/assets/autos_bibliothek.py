@@ -19,6 +19,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
 import re
 import urllib.parse
 import urllib.request
@@ -221,6 +222,36 @@ def _lack_aus_flaeche(bpy, obs):
     return None
 
 
+RAD = re.compile(r"tire|tyre|reifen|pneu|wheel|whell|rim|felge|rubber", re.I)
+
+
+def _raeder(bpy, obs, groesse) -> list[float]:
+    """Aufstandspunkte der vier Raeder (VL, VR, HL, HR; x, y, z im Modell, Front +X): je Viertel die tiefsten Punkte
+    der Reifen- und Felgenobjekte; ohne erkannte Raeder die tiefsten Punkte des ganzen Modells je Viertel."""
+    import numpy as np
+    rad = [o for o in obs if (RAD.search(o.name) or any(sl.material and RAD.search(sl.material.name)
+                                                          for sl in getattr(o, "material_slots", [])))
+           and not re.search(r"steer|lenk", o.name, re.I)]
+    out = []
+    for quelle in (rad, obs):
+        P = _punkte(bpy, quelle) if quelle else None
+        if P is None:
+            continue
+        out = []
+        for sx, sy in ((1, 1), (1, -1), (-1, 1), (-1, -1)):
+            q = P[(np.sign(P[:, 0]) == sx) & (np.sign(P[:, 1]) == sy) & (np.abs(P[:, 0]) > 0.2 * groesse.x)]
+            if len(q) < 30:
+                out = []
+                break
+            z = float(np.quantile(q[:, 2], 0.002))
+            tief = q[q[:, 2] <= z + 0.01]
+            out += [round(float(tief[:, 0].mean()), 3), round(float(tief[:, 1].mean()), 3), round(z, 4)]
+        if out:
+            return out
+    L, W = groesse.x, groesse.y
+    return [r for sx, sy in ((1, 1), (1, -1), (-1, 1), (-1, -1)) for r in (sx * 0.3 * L, sy * 0.42 * W, 0.0)]
+
+
 def _modell_aufbereiten(bpy, e: dict, mats: dict, ziel_coll, log: list):
     from mathutils import Matrix, Vector
     f = modell_ordner(e) / "modell.blend"
@@ -402,6 +433,7 @@ def _modell_aufbereiten(bpy, e: dict, mats: dict, ziel_coll, log: list):
     lo2, hi2 = _robuste_box(bpy, behalten)
     g = hi2 - lo2
     coll["laenge"], coll["breite"], coll["hoehe"] = round(g.x, 3), round(g.y, 3), round(g.z, 3)
+    coll["raeder"] = _raeder(bpy, behalten, g)
     coll["gewicht"] = float(e.get("gewicht", 1.0))
     coll["name"] = e["name"]
     coll["lizenz"] = e.get("lizenz", "")
@@ -442,6 +474,73 @@ def bibliothek_bauen(nur: list[str] | None = None) -> list[dict]:
 
 
 # ------------------------------------------------------------------ Einsetzen (build_scene)
+VERSCHUB = (0.0, 0.25, -0.25, 0.5, -0.5)   # m entlang der Bucht, falls ein Rad auf einer Kante liegt
+RAD_REST = 0.03            # m: so weit darf ein Rad hoechstens schweben oder einsinken
+NEIGUNG_QUER_MAX = 4.0     # Grad: steiler quer = zwei Raeder auf dem Bordstein, keine Strassenneigung
+NEIGUNG_LAENGS_MAX = 6.0   # Grad laengs (Wiener Gassen bis rund 8 %, also 4,6 Grad)
+BODEN_SUCHE = 1.2          # Strahl ab so weit ueber dem Gelaende nach unten (unter Baumkronen und Leuchten)
+BODEN_TOLERANZ = 0.6       # Treffer weiter als das vom Gelaende entfernt zaehlen nicht (Stamm, Poller, Dach)
+
+
+def _radpunkte(c) -> list[tuple[float, float, float]]:
+    r = list(c.get("raeder") or [])
+    if len(r) != 12:
+        L, W = c["laenge"], c["breite"]
+        r = [v for sx, sy in ((1, 1), (1, -1), (-1, 1), (-1, -1)) for v in (sx * 0.3 * L, sy * 0.42 * W, 0.0)]
+    return [tuple(r[i:i + 3]) for i in range(0, 12, 3)]
+
+
+def boden_hoehe(scene, dg, x, y, z_gelaende):
+    """Hoehe der sichtbaren Oberflaeche (Fahrbahn, Parkstreifen, Gehsteig, Bordstein) unter (x, y) per Strahl von
+    oben; liefert (z, Objektname) oder (Gelaende, None), wenn nichts Passendes getroffen wird."""
+    from mathutils import Vector
+    z = z_gelaende + BODEN_SUCHE
+    unten = z_gelaende - BODEN_TOLERANZ - 0.5
+    for _ in range(8):                  # bereits platzierte Autos (Spiegel, Raeder, Ueberhaenge) durchstossen
+        ok, loc, _n, _i, ob, _m = scene.ray_cast(dg, Vector((x, y, z)), Vector((0, 0, -1)), distance=max(0.01, z - unten))
+        if not ok:
+            break
+        if ob.name.startswith("auto"):
+            z = loc.z - 0.002
+            continue
+        if abs(loc.z - z_gelaende) <= BODEN_TOLERANZ:
+            return loc.z, ob.name
+        z = loc.z - 0.002              # etwas zu Hohes (Poller, Stamm): weiter nach unten
+    return z_gelaende, None
+
+
+def auf_boden_setzen(ob, c, terrain, scene, dg, yaw):
+    """Auto auf die vier Aufstandspunkte setzen: Hoehe und Neigung (Laengs- und Querneigung) aus der Oberflaeche
+    unter den Raedern, damit kein Rad schwebt und keines einsinkt (auch auf geneigten Gassen)."""
+    rp = _radpunkte(c)
+    cy, sy = math.cos(yaw), math.sin(yaw)
+    x0, y0 = ob.location.x, ob.location.y
+    h, treffer = [], []
+    for (px, py, _pz) in rp:
+        wx, wy = x0 + cy * px - sy * py, y0 + sy * px + cy * py
+        z, name = boden_hoehe(scene, dg, wx, wy, terrain(wx, wy))
+        h.append(z)
+        treffer.append(name or "gelaende")
+    ob["boden_h"] = [round(v, 3) for v in h]
+    ob["boden_obj"] = ",".join(treffer)
+    (xf, yl), (xr, yr) = ((rp[0][0] + rp[1][0]) / 2, (rp[0][1] + rp[2][1]) / 2), \
+        ((rp[2][0] + rp[3][0]) / 2, (rp[1][1] + rp[3][1]) / 2)
+    hv, hh = (h[0] + h[1]) / 2, (h[2] + h[3]) / 2
+    hl, hr = (h[0] + h[2]) / 2, (h[1] + h[3]) / 2
+    nick = math.atan2(hv - hh, max(xf - xr, 0.5))          # Front hoeher: Nase hoch
+    roll = math.atan2(hl - hr, max(yl - yr, 0.5))          # links hoeher
+    ob.rotation_euler = (roll, -nick, yaw)
+    # Hoehe: Mittel der Aufstandspunkte nach der Neigung
+    from mathutils import Euler, Vector
+    R = Euler(ob.rotation_euler, "XYZ").to_matrix()
+    dz = [hi - (R @ Vector(p)).z for hi, p in zip(h, rp)]
+    ob.location.z = sum(dz) / 4.0
+    rest = max(abs(d - ob.location.z) for d in dz)     # Restfehler: wie weit ein Rad schwebt oder einsinkt
+    if abs(roll) > math.radians(NEIGUNG_QUER_MAX) or abs(nick) > math.radians(NEIGUNG_LAENGS_MAX):
+        rest = max(rest, 1.0)                           # Rad auf Bordstein oder Stufe: keine Strassenneigung
+    return rest
+
+
 def build(ctx, terrain, radius, cfg, coll) -> int:
     """Setzt die Bibliotheksmodelle als Collection-Instanzen auf die Stellplaetze. Liefert die Zahl der Autos.
     Eigener Zufall je Projekt: dieselben Autos an denselben Plaetzen in jedem Bild (Kamerafahrten)."""
@@ -466,7 +565,10 @@ def build(ctx, terrain, radius, cfg, coll) -> int:
     sub = bpy.data.collections.new("Autos")
     coll.children.link(sub)
     plaetze = [(ab, p) for s in ST.stellplaetze(ctx, cfg, radius) for ab in s["abschnitte"] for p in ab["plaetze"]]
-    n = 0
+    scene = bpy.context.scene
+    bpy.context.view_layer.update()
+    dg = bpy.context.evaluated_depsgraph_get()            # Strassen und Gehsteige stehen schon, Autos noch nicht
+    n = frei = 0
     for ab, platz in plaetze:
         if rng.random() > ab["belegung"]:
             continue
@@ -488,7 +590,270 @@ def build(ctx, terrain, radius, cfg, coll) -> int:
         ob.instance_collection = c
         ob.color = (*rng.choices([f for f, _ in FARBEN], [w for _, w in FARBEN])[0], 1.0)
         ob.location = (ox, oy, terrain(ox, oy))
-        ob.rotation_euler = (0, 0, math.atan2(ax[1], ax[0]))
+        yaw = math.atan2(ax[1], ax[0])
+        if os.environ.get("IMMOVIZ_AUTOS_BODEN", "").lower() in ("aus", "0", "nein"):
+            ob.rotation_euler = (0, 0, yaw)                # alte Platzierung (Gelaende am Mittelpunkt), nur Vergleich
+        else:
+            # in der Bucht bis 0,5 m verschieben, bis alle vier Raeder aufliegen; sonst Bucht frei lassen
+            best = None
+            for d in VERSCHUB:
+                ob.location = (ox + ax[0] * d, oy + ax[1] * d, terrain(ox + ax[0] * d, oy + ax[1] * d))
+                rest = auf_boden_setzen(ob, c, terrain, scene, dg, yaw)
+                if best is None or rest < best[0]:
+                    best = (rest, d)
+                if rest <= RAD_REST:
+                    break
+            if best[0] > RAD_REST:
+                bpy.data.objects.remove(ob)
+                frei += 1
+                continue
+            if best[1] != d:
+                ob.location = (ox + ax[0] * best[1], oy + ax[1] * best[1], 0.0)
+                auf_boden_setzen(ob, c, terrain, scene, dg, yaw)
+        ob["platz_art"], ob["platz_laenge"], ob["platz_breite"] = platz["art"], platz["laenge"], platz["breite"]
         sub.objects.link(ob)
         n += 1
+    if frei:
+        print(f"[immoviz] Autos: {n} gesetzt, {frei} Buchten frei gelassen (Untergrund zu uneben, Rad > "
+              f"{RAD_REST * 100:.0f} cm)", flush=True)
     return n
+
+
+# ------------------------------------------------------------------ Pruefung (immoviz.py autos-pruefen)
+HINDERNIS = re.compile(r"poller|moebel|leuchte|laterne|mast|schild|zeichen|ampel|hydrant|bank|fahrrad|muell|stamm|"
+                       r"baeume_holz|tree", re.I)
+GRENZE_SCHWEBT = 0.03      # m: Rad hoeher als die Oberflaeche
+GRENZE_SINKT = 0.03        # m: Rad tiefer als die Oberflaeche
+
+
+def _ecken(ob, c, schrumpf=0.0):
+    L, W = c["laenge"] / 2 - schrumpf, c["breite"] / 2 - schrumpf
+    a = ob.rotation_euler.z
+    ca, sa = math.cos(a), math.sin(a)
+    x, y = ob.location.x, ob.location.y
+    return [(x + ca * u - sa * v, y + sa * u + ca * v) for u, v in ((L, W), (L, -W), (-L, -W), (-L, W))]
+
+
+def _ueberlappen(p, q) -> bool:
+    for poly in (p, q):
+        for i in range(len(poly)):
+            x1, y1 = poly[i]
+            x2, y2 = poly[(i + 1) % len(poly)]
+            nx, ny = y2 - y1, x1 - x2
+            a = [nx * x + ny * y for x, y in p]
+            b = [nx * x + ny * y for x, y in q]
+            if max(a) < min(b) or max(b) < min(a):
+                return False
+    return True
+
+
+def _hindernis_punkte(scene, terrain=None):
+    """Stehende Hindernisse als Punkte mit Radius: Poller, Maste, Schilder, Baumstaemme (Instanzen und Einzelobjekte;
+    zusammengefasste Meshes werden in Inseln zerlegt)."""
+    import numpy as np
+    pts = []
+    for ob in scene.objects:
+        if not HINDERNIS.search(ob.name) or ob.name.startswith("auto"):
+            continue
+        if ob.instance_type == "COLLECTION" or ob.type == "EMPTY" or ob.name.startswith("baeume_holz"):
+            pts.append((ob.location.x, ob.location.y, 0.35, ob.name))     # Stamm bzw. Instanz als Punkt
+            continue
+        if ob.type != "MESH" or not len(ob.data.vertices):
+            continue
+        v = np.empty(len(ob.data.vertices) * 3)
+        ob.data.vertices.foreach_get("co", v)
+        v = v.reshape(-1, 3)
+        M = np.array(ob.matrix_world)
+        w = v @ M[:3, :3].T + M[:3, 3]
+        # Inseln im Grundriss (Raster 0,25 m): je Insel Mittelpunkt und Radius
+        zellen = {}
+        for (x, y), zz in zip(np.round(w[:, :2] / 0.25).astype(int), w[:, 2]):
+            zellen[(x, y)] = min(zellen.get((x, y), 1e9), zz)
+        gesehen = set()
+        for z0 in zellen:
+            if z0 in gesehen:
+                continue
+            stapel, insel = [z0], []
+            gesehen.add(z0)
+            while stapel:
+                cx, cy = stapel.pop()
+                insel.append((cx, cy))
+                for dx in (-1, 0, 1):
+                    for dy in (-1, 0, 1):
+                        nb = (cx + dx, cy + dy)
+                        if nb in zellen and nb not in gesehen:
+                            gesehen.add(nb)
+                            stapel.append(nb)
+            a = np.array(insel) * 0.25
+            if len(insel) > 40:          # flaechig (Bankreihe, Kronen): nicht als Punkt
+                continue
+            mx, my = a.mean(0)
+            zmin = min(zellen[k] for k in insel)
+            if terrain is not None and zmin > terrain(float(mx), float(my)) + 1.6:
+                continue                 # haengt ueber der Strasse (Seilleuchten, Schilder hoch oben)
+            pts.append((float(mx), float(my), float(max(0.15, np.abs(a - (mx, my)).max() + 0.125)), ob.name))
+    return pts
+
+
+def pruefen(scene, terrain=None) -> dict:
+    """Prueft alle Bibliotheksautos der Szene: Radaufstand gegen die Oberflaeche (Strahl je Rad), Bucht (Laenge und
+    Breite), Ueberschneidung untereinander, Hindernisse in der Grundflaeche (Poller, Maste, Schilder, Staemme)."""
+    import bpy
+    terrain = terrain or (lambda x, y: 0.0)
+    autos = [o for o in scene.objects if o.instance_type == "COLLECTION" and o.instance_collection is not None
+             and o.instance_collection.name.startswith("auto_")]
+    for o in autos:
+        o.hide_viewport = True                       # Strahlen sollen die Oberflaeche treffen, nicht Autos
+    bpy.context.view_layer.update()
+    dg = bpy.context.evaluated_depsgraph_get()
+    befunde, raeder_abw = [], []
+    from mathutils import Vector
+    for o in autos:
+        c = o.instance_collection
+        from mathutils import Euler, Matrix
+        # aus Position und Drehung (die Weltmatrix versteckter Objekte wird von Blender nicht aktualisiert)
+        M = Matrix.Translation(o.location) @ Euler(o.rotation_euler, "XYZ").to_matrix().to_4x4()
+        abw = []
+        for p in _radpunkte(c):
+            w = M @ Vector(p)
+            zb, name = boden_hoehe(scene, dg, w.x, w.y, terrain(w.x, w.y))
+            abw.append(round(w.z - zb, 3))
+        raeder_abw += abw
+        f = []
+        if max(abw) > GRENZE_SCHWEBT:
+            f.append(f"schwebt bis {max(abw) * 100:.0f} cm")
+        if min(abw) < -GRENZE_SINKT:
+            f.append(f"sinkt bis {-min(abw) * 100:.0f} cm ein")
+        if abs(o.rotation_euler.x) > math.radians(NEIGUNG_QUER_MAX) or \
+                abs(o.rotation_euler.y) > math.radians(NEIGUNG_LAENGS_MAX):
+            f.append(f"zu schief ({math.degrees(o.rotation_euler.x):.1f} Grad quer, "
+                     f"{math.degrees(-o.rotation_euler.y):.1f} Grad laengs), steht auf Kante")
+        art = o.get("platz_art")
+        if art == "laengs" and c["laenge"] > o.get("platz_laenge", 99) - 0.1:
+            f.append(f"zu lang fuer die Bucht ({c['laenge']:.2f} m, Bucht {o['platz_laenge']:.2f} m)")
+        if art in ("schraeg", "senkrecht") and c["breite"] > o.get("platz_breite", 99):
+            f.append(f"zu breit fuer die Bucht ({c['breite']:.2f} m, Bucht {o['platz_breite']:.2f} m)")
+        if f:
+            befunde.append({"auto": c.get("name"), "pos": [round(o.location.x, 2), round(o.location.y, 2)],
+                            "befund": f, "raeder_cm": [round(a * 100, 1) for a in abw]})
+    for o in autos:
+        o.hide_viewport = False
+    # Ueberschneidungen
+    ecken = [_ecken(o, o.instance_collection, 0.02) for o in autos]
+    n_ueber = 0
+    for i in range(len(autos)):
+        for j in range(i + 1, len(autos)):
+            if (autos[i].location - autos[j].location).length < 7 and _ueberlappen(ecken[i], ecken[j]):
+                n_ueber += 1
+                befunde.append({"auto": autos[i].instance_collection.get("name"),
+                                "pos": [round(autos[i].location.x, 2), round(autos[i].location.y, 2)],
+                                "befund": [f"ueberschneidet {autos[j].instance_collection.get('name')}"]})
+    # Hindernisse
+    hind = _hindernis_punkte(scene, terrain)
+    n_hind = 0
+    for o, e in zip(autos, ecken):
+        for hx, hy, r, name in hind:
+            if (o.location.x - hx) ** 2 + (o.location.y - hy) ** 2 > 36:
+                continue
+            kreis = [(hx + r * math.cos(k * math.pi / 4), hy + r * math.sin(k * math.pi / 4)) for k in range(8)]
+            if _ueberlappen(e, kreis):
+                n_hind += 1
+                befunde.append({"auto": o.instance_collection.get("name"),
+                                "pos": [round(o.location.x, 2), round(o.location.y, 2)],
+                                "befund": [f"steht in Hindernis {name} ({hx:.1f}/{hy:.1f})"]})
+    # Massstab je Modell (Pkw: Laenge 3,5 bis 5,4 m, Breite mit Spiegeln 1,6 bis 2,3 m, Hoehe 1,1 bis 2,0 m,
+    # Radstand 2,3 bis 3,3 m, Spur 1,35 bis 1,85 m)
+    massstab = []
+    for c in {o.instance_collection for o in autos}:
+        rp = _radpunkte(c)
+        radstand = (rp[0][0] + rp[1][0]) / 2 - (rp[2][0] + rp[3][0]) / 2
+        spur = (rp[0][1] + rp[2][1]) / 2 - (rp[1][1] + rp[3][1]) / 2
+        werte = {"laenge": (c["laenge"], 3.5, 5.4), "breite": (c["breite"], 1.6, 2.3), "hoehe": (c["hoehe"], 1.1, 2.0),
+                 "radstand": (radstand, 2.3, 3.3), "spur": (spur, 1.35, 1.85)}
+        falsch = [f"{k} {v:.2f} m (erwartet {lo}-{hi})" for k, (v, lo, hi) in werte.items() if not lo <= v <= hi]
+        massstab.append({"modell": c.get("name"), **{k: round(v, 2) for k, (v, _l, _h) in werte.items()}})
+        if falsch:
+            befunde.append({"auto": c.get("name"), "pos": [0, 0], "befund": ["Massstab: " + "; ".join(falsch)]})
+    import numpy as np
+    a = np.array(raeder_abw) if raeder_abw else np.zeros(1)
+    return {"autos": len(autos), "befunde_anzahl": len(befunde),
+            "raeder": {"mittel_cm": round(float(a.mean()) * 100, 1), "max_schwebt_cm": round(float(a.max()) * 100, 1),
+                       "max_sinkt_cm": round(float(-a.min()) * 100, 1),
+                       "ueber_grenze": int(((a > GRENZE_SCHWEBT) | (a < -GRENZE_SINKT)).sum())},
+            "ueberschneidungen": n_ueber, "hindernisse": n_hind, "hindernis_punkte": len(hind),
+            "grenzen_cm": {"schwebt": GRENZE_SCHWEBT * 100, "sinkt": GRENZE_SINKT * 100},
+            "massstab": sorted(massstab, key=lambda m: m["modell"] or ""),
+            "befunde": befunde}
+
+
+def aufraeumen(scene, terrain) -> dict:
+    """Nachlauf am Ende von build_scene (Strassenmoebel und Baeume stehen jetzt): jedes Bibliotheksauto neu auf die
+    Oberflaeche setzen; steht es in einem Hindernis (Poller, Schild, Stamm) oder liegt ein Rad mehr als RAD_REST
+    daneben, in der Bucht um VERSCHUB verschieben (ohne ein anderes Auto zu beruehren); sonst Bucht frei lassen."""
+    import bpy
+    autos = [o for o in scene.objects if o.instance_type == "COLLECTION" and o.instance_collection is not None
+             and o.instance_collection.name.startswith("auto_")]
+    if not autos:
+        return {}
+    for o in autos:
+        o.hide_viewport = True
+    bpy.context.view_layer.update()
+    dg = bpy.context.evaluated_depsgraph_get()
+    hind = _hindernis_punkte(scene, terrain)
+    raster = {}
+    for h in hind:
+        raster.setdefault((int(h[0] // 4), int(h[1] // 4)), []).append(h)
+    nachbarn = {}
+    for o in autos:
+        nachbarn.setdefault((int(o.location.x // 8), int(o.location.y // 8)), []).append(o)
+
+    def kreise(x, y):
+        out = []
+        for i in (-1, 0, 1):
+            for j in (-1, 0, 1):
+                for hx, hy, r, _n in raster.get((int(x // 4) + i, int(y // 4) + j), []):
+                    out.append([(hx + r * math.cos(k * math.pi / 4), hy + r * math.sin(k * math.pi / 4)) for k in range(8)])
+        return out
+
+    def andere(o):
+        x, y = o.location.x, o.location.y
+        return [q for i in (-1, 0, 1) for j in (-1, 0, 1) for q in nachbarn.get((int(x // 8) + i, int(y // 8) + j), [])
+                if q is not o and q.name in scene.objects]
+
+    verschoben = entfernt = 0
+    weg = []
+    for o in autos:
+        c = o.instance_collection
+        yaw = o.rotation_euler.z
+        ax = (math.cos(yaw), math.sin(yaw))
+        x0, y0 = o.location.x, o.location.y
+        best = None
+        for d in VERSCHUB:
+            o.location = (x0 + ax[0] * d, y0 + ax[1] * d, 0.0)
+            rest = auf_boden_setzen(o, c, terrain, scene, dg, yaw)
+            e = _ecken(o, c, 0.02)
+            stoss = any(_ueberlappen(e, k) for k in kreise(o.location.x, o.location.y)) or \
+                any(_ueberlappen(e, _ecken(q, q.instance_collection, 0.02)) for q in andere(o))
+            wert = (stoss, rest > RAD_REST, rest)
+            if best is None or wert < best[0]:
+                best = (wert, d)
+            if not stoss and rest <= RAD_REST:
+                break
+        (stoss, schief, _r), d = best
+        if stoss or schief:
+            weg.append(o)
+            continue
+        if d != 0.0:
+            verschoben += 1
+        o.location = (x0 + ax[0] * d, y0 + ax[1] * d, 0.0)
+        auf_boden_setzen(o, c, terrain, scene, dg, yaw)
+    for o in weg:
+        bpy.data.objects.remove(o)
+        entfernt += 1
+    for o in scene.objects:
+        if o.instance_type == "COLLECTION" and o.instance_collection is not None \
+                and o.instance_collection.name.startswith("auto_"):
+            o.hide_viewport = False
+    print(f"[immoviz] Autos nachgesetzt: {len(autos) - entfernt} stehen, {verschoben} in der Bucht verschoben, "
+          f"{entfernt} entfernt (Hindernis oder Untergrund)", flush=True)
+    return {"autos": len(autos) - entfernt, "verschoben": verschoben, "entfernt": entfernt}
