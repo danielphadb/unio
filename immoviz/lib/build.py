@@ -879,6 +879,14 @@ def setup_camera(scene, cfg, name):
         scene.collection.objects.link(ob)
     px, py, pz = c["pos"]
     tx, ty, tz = c["target"]
+    # `augenhoehe: 1.6` = Kamerahoehe ueber dem Gelaende am Standpunkt (statt absoluter z-Wert). Strassenkameras
+    # standen sonst dort, wo das Gelaende ueber +-0 liegt, nur rund 0,5 m ueber dem Gehsteig.
+    if c.get("augenhoehe") is not None and LAST_TERRAIN is not None:
+        zg = LAST_TERRAIN(px, py)
+        dz_t = tz - pz
+        pz = zg + float(c["augenhoehe"])
+        if c.get("ziel_mitfuehren", False):
+            tz = pz + dz_t
     dx, dy, dz = tx - px, ty - py, tz - pz
     r = math.hypot(dx, dy)
     cam.lens = c.get("lens", 24)

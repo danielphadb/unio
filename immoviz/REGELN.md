@@ -93,6 +93,7 @@ korrigiert, nie per Prompt. Was die KI dazuerfindet, wird verworfen, nicht schö
 | K2 | Nicht direkt neben Stämmen, Pfeilern oder Wänden; Kamera nicht in Möbeln | W Kamera 2,5 m neben Baumstamm (W 7) | manuell |
 | K3 | Bei Vorlagen-Wunsch Standpunkt der Vorlage nachbauen und vergleichen | N `hof_vorlage` | auto: `kameramatch` (paralleler Ausbau) |
 | K4 | Innenkameras diagonal mit Durchblick, Kameraname = Bildname (`<wohnung>_<kamera>`) | N Bad frontal statt diagonal verworfen | manuell |
+| K5 | Straßenkameras mit `augenhoehe: 1.6` (Höhe über Gelände am Standpunkt), nie mit absolutem z; Kamerahöhe über Gelände im Bericht nennen | W `ecke` stand nur 0,5 m über dem Gehsteig, `ecke_tele` auf Bodenhöhe, `wimmergasse` 2,1 m (19.11.2026) | auto: `setup_camera` rechnet `augenhoehe` aus dem Gelände |
 
 ## 6. Freigabe (vor jedem Credit)
 
