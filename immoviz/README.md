@@ -630,6 +630,47 @@ Klasse des Platzhalter-Empties); steht etwas unter `nicht_zugeordnet`, Muster in
    Bild, F1; mittlerer Kantenabstand; Gradientenkorrelation; Farbabweichung dE), dieselben Kanten je Klasse, Anteil
    der geschützten Fläche. Exit 1, wenn Kanten-F1 nachher unter 0,95.
 
+**Schutz mit Toleranz** (`schutz ... --modus toleranz`, seit 18.11.2026, Standard bleibt `voll` bis zur Freigabe):
+statt den ganzen Schutzbereich aus dem Render zu nehmen, bleibt die KI je Bauteil, wenn sie geometrisch passt.
+
+1. Elastische Feinausrichtung nach der Homographie (`fein_ausrichten`): die Bild-KI verzieht die Fassade örtlich
+   (gpt_image_2_6, 4k: Median 2 px, 90 % unter 6,5 px). Optischer Fluss (OpenCV DIS) auf ausgeglichenen Graubildern,
+   kantengewichtet geglättet (6 px), höchstens 10 px, außerhalb des Bauteilbereichs auslaufend.
+2. Komponenten (`komponenten_bilden`): je Fenster (Glas plus Rahmen; Glasfronten gekachelt), Geländerfeld,
+   Leuchte, Straßenmöbel; Gebäudeflächen als Segmente zwischen Tiefen- und Normalensprüngen (`kanten.png`), als
+   Dachfläche (Normale aus der Render-Tiefe näher als 50 Grad an "oben" = Bodennormale), Gesims (flach und lang) oder
+   Fassadenfeld, alle Flächen in Kacheln von 256 px.
+3. Je Komponente (4k-Pixel, `TOL` in `lib/kompositing.py`): Kantenabstand Render zu KI (Mittel, höchstens 1,5 px),
+   Kanten-F1 der Bauteilkanten (Bilder geglättet, damit Putzkorn und Ornament der KI nicht zählen, mindestens 0,9,
+   Toleranz 2 px), örtlicher Versatz (Gradienten-Korrelation, nur bei zweidimensionaler Struktur, höchstens 1,5 px),
+   flache Felder: starke KI-Kanten ohne Render-Kante (erfundene Bauteile). Fenster zusätzlich: Lage und Fläche des
+   Glases (gleiches Farbmodell Rahmen gegen Glas auf Render und KI), Sprossen und Riegel (Anzahl und Lage), Innenleben:
+   Glas mit großer Helligkeitsabweichung (mehr als 30 % der Pixel über 22 L) oder hellem Fleck (Lampe, Küche) wird
+   allein zurückgesetzt. Fensterreihen: ab der Hälfte zurückgesetzter Fenster die ganze Reihe.
+4. Zusammensetzen: zurückgesetzte Komponenten aus dem Render (Farbabgleich neu, feine Statistik an der Grenze zur
+   behaltenen KI), Naht nach außen in die KI (Fenster 2 px, Flächen 16 px), alles innerhalb der Schutzmaske.
+5. Ausgabe `<ki>_toleranz.jpg` (oder `--out`) mit `_pruefung.jpg`, `.json` (Abschnitt `toleranz`: Anteile je Typ,
+   Gründe, Fensterreihen, `ki_behalten_prozent_schutz`; `ausrichtung.fein`), `_komponenten.jpg` (grün KI behalten,
+   rot Render, orange nur Glas Render) und `_komponenten.json` (Kennzahlen je Komponente). Exit 1 unter Kanten-F1 0,90.
+
+Test 18.11.2026 (Cloud, R7-KI-Rohbilder gpt_image_2_6, Render und Ebenen aus `r7_basis`, rund 60 s je Bild auf 4
+CPU-Kernen; Bogen Runde 6 | Runde 7 | Runde 7 Toleranz im Scratchpad `pipeline/toleranz_test.jpg`, Ergebnisse in
+`renders/higgsfield/r7_toleranz/`):
+
+| Bild | KI behalten (Schutzbereich) | Fenster KI / Render / nur Glas | Fassadenfelder KI / Render | Kanten-F1 vorher / nachher |
+|---|---|---|---|---|
+| ecke golden_hour | 19,5 % | 16 / 96 / 7 | 304 / 290 | 0,85 / 0,97 |
+| ecke herbst | 20,3 % | 15 / 93 / 5 | 296 / 302 | 0,86 / 0,97 |
+| ecke_erhoeht golden_hour | 17,3 % | 17 / 111 / 6 | 269 / 344 | 0,83 / 0,97 |
+| drohne golden_hour | 7,8 % | 7 / 119 / 6 | 121 / 107 | 0,81 / 0,98 |
+
+Befund: Die freien KI-Bilder weichen auch nach der Feinausrichtung bei den meisten Fenstern ab (Sprossen und Riegel
+anders, Rahmenprofile, Vorhänge, Lampen und Möbel hinter Glas), deshalb kommen 85 bis 95 % der Fenster weiter aus dem
+Render. Behalten werden vor allem glatte Fassadenfelder, Dachflächen, Gesimsbänder und Seile; dort zeigt das Bild
+Putz und Licht der KI. Gewinn gegenüber Runde 7 sichtbar, aber begrenzt; an Kachelgrenzen zwischen KI- und
+Render-Putz bleiben weiche Übergänge sichtbar. Der größere Hebel ist eine KI, die die Geometrie von vornherein hält
+(`ki-lokal`, unten); deren Ergebnis läuft durch denselben Toleranz-Schritt.
+
 `--ohne autos` (bzw. `--klassen`) nimmt Klassen aus dem Schutz, z. B. solange die Autos in Blender nur Platzhalter
 sind. Grenzen: KI-Bäume vor geschützten Flächen werden abgeschnitten, wo der Blender-Baum kleiner ist (Abhilfe:
 Bäume im Modell richtig groß); Personen vor geschützten Autos bleiben nur mit `--ohne autos` ganz; Teile einer Person,
@@ -686,47 +727,6 @@ look:                                    # in project.yaml; Leitbilder bleiben a
 ```
 
 Test 18.11.2026: Leitbilder 05, 13, 39 (Wimmergasse), Abstand Lab-Mittel zum Leitbild 5,7 auf 1,7.
-**Schutz mit Toleranz** (`schutz ... --modus toleranz`, seit 18.11.2026, Standard bleibt `voll` bis zur Freigabe):
-statt den ganzen Schutzbereich aus dem Render zu nehmen, bleibt die KI je Bauteil, wenn sie geometrisch passt.
-
-1. Elastische Feinausrichtung nach der Homographie (`fein_ausrichten`): die Bild-KI verzieht die Fassade örtlich
-   (gpt_image_2_6, 4k: Median 2 px, 90 % unter 6,5 px). Optischer Fluss (OpenCV DIS) auf ausgeglichenen Graubildern,
-   kantengewichtet geglättet (6 px), höchstens 10 px, außerhalb des Bauteilbereichs auslaufend.
-2. Komponenten (`komponenten_bilden`): je Fenster (Glas plus Rahmen; Glasfronten gekachelt), Geländerfeld,
-   Leuchte, Straßenmöbel; Gebäudeflächen als Segmente zwischen Tiefen- und Normalensprüngen (`kanten.png`), als
-   Dachfläche (Normale aus der Render-Tiefe näher als 50 Grad an "oben" = Bodennormale), Gesims (flach und lang) oder
-   Fassadenfeld, alle Flächen in Kacheln von 256 px.
-3. Je Komponente (4k-Pixel, `TOL` in `lib/kompositing.py`): Kantenabstand Render zu KI (Mittel, höchstens 1,5 px),
-   Kanten-F1 der Bauteilkanten (Bilder geglättet, damit Putzkorn und Ornament der KI nicht zählen, mindestens 0,9,
-   Toleranz 2 px), örtlicher Versatz (Gradienten-Korrelation, nur bei zweidimensionaler Struktur, höchstens 1,5 px),
-   flache Felder: starke KI-Kanten ohne Render-Kante (erfundene Bauteile). Fenster zusätzlich: Lage und Fläche des
-   Glases (gleiches Farbmodell Rahmen gegen Glas auf Render und KI), Sprossen und Riegel (Anzahl und Lage), Innenleben:
-   Glas mit großer Helligkeitsabweichung (mehr als 30 % der Pixel über 22 L) oder hellem Fleck (Lampe, Küche) wird
-   allein zurückgesetzt. Fensterreihen: ab der Hälfte zurückgesetzter Fenster die ganze Reihe.
-4. Zusammensetzen: zurückgesetzte Komponenten aus dem Render (Farbabgleich neu, feine Statistik an der Grenze zur
-   behaltenen KI), Naht nach außen in die KI (Fenster 2 px, Flächen 16 px), alles innerhalb der Schutzmaske.
-5. Ausgabe `<ki>_toleranz.jpg` (oder `--out`) mit `_pruefung.jpg`, `.json` (Abschnitt `toleranz`: Anteile je Typ,
-   Gründe, Fensterreihen, `ki_behalten_prozent_schutz`; `ausrichtung.fein`), `_komponenten.jpg` (grün KI behalten,
-   rot Render, orange nur Glas Render) und `_komponenten.json` (Kennzahlen je Komponente). Exit 1 unter Kanten-F1 0,90.
-
-Test 18.11.2026 (Cloud, R7-KI-Rohbilder gpt_image_2_6, Render und Ebenen aus `r7_basis`, rund 60 s je Bild auf 4
-CPU-Kernen; Bogen Runde 6 | Runde 7 | Runde 7 Toleranz im Scratchpad `pipeline/toleranz_test.jpg`, Ergebnisse in
-`renders/higgsfield/r7_toleranz/`):
-
-| Bild | KI behalten (Schutzbereich) | Fenster KI / Render / nur Glas | Fassadenfelder KI / Render | Kanten-F1 vorher / nachher |
-|---|---|---|---|---|
-| ecke golden_hour | 19,5 % | 16 / 96 / 7 | 304 / 290 | 0,85 / 0,97 |
-| ecke herbst | 20,3 % | 15 / 93 / 5 | 296 / 302 | 0,86 / 0,97 |
-| ecke_erhoeht golden_hour | 17,3 % | 17 / 111 / 6 | 269 / 344 | 0,83 / 0,97 |
-| drohne golden_hour | 7,8 % | 7 / 119 / 6 | 121 / 107 | 0,81 / 0,98 |
-
-Befund: Die freien KI-Bilder weichen auch nach der Feinausrichtung bei den meisten Fenstern ab (Sprossen und Riegel
-anders, Rahmenprofile, Vorhänge, Lampen und Möbel hinter Glas), deshalb kommen 85 bis 95 % der Fenster weiter aus dem
-Render. Behalten werden vor allem glatte Fassadenfelder, Dachflächen, Gesimsbänder und Seile; dort zeigt das Bild
-Putz und Licht der KI. Gewinn gegenüber Runde 7 sichtbar, aber begrenzt; an Kachelgrenzen zwischen KI- und
-Render-Putz bleiben weiche Übergänge sichtbar. Der größere Hebel ist eine KI, die die Geometrie von vornherein hält
-(`ki-lokal`, unten); deren Ergebnis läuft durch denselben Toleranz-Schritt.
-
 
 ## Lokaler KI-Schritt (`ki-lokal`, Mac)
 

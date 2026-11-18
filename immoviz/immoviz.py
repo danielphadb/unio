@@ -13,10 +13,10 @@ Beispiele:
   GOOGLE_MAPS_API_KEY=... python immoviz.py referenz projects/wimmergasse-20 --kamera drohne  (Abgleich gegen Google 3D, nur intern)
   python immoviz.py render  projects/wimmergasse-20 --cam ecke --light golden_hour --ebenen   (plus Masken, Tiefe, Schutzmaske)
   python immoviz.py schutz  --render <render.png> --ki <veredelt.jpg> --ebenen <ordner>       (Gebäude aus Blender zurück)
-  python immoviz.py grading --bild <bild.jpg> --leitbild <referenz.jpg> --staerke 0.6         (Look an Leitbild)
   python immoviz.py schutz  ... --modus toleranz      (je Bauteil: KI behalten, wenn geometrisch in der Toleranz)
-  python immoviz.py studio  (Web-Oberfläche auf Port 8765)
+  python immoviz.py grading --bild <bild.jpg> --leitbild <referenz.jpg> --staerke 0.6         (Look an Leitbild)
   python immoviz.py ki-lokal --render <render> --ebenen <ordner> --staerke 0.3   (Mac: SDXL + ControlNet, Tiefe/Kanten)
+  python immoviz.py studio  (Web-Oberfläche auf Port 8765)
 """
 from __future__ import annotations
 
@@ -183,27 +183,6 @@ def main():
                          "Bild); ki = Autos aus dem KI-Bild; beide = zwei Fassungen _modelle und _ki plus Vergleich")
     sz.add_argument("--ohne-vordergrund", action="store_true", help="KI-Personen und -Autos vor der Fassade nicht "
                                                                    "erhalten (alles Geschützte aus dem Render)")
-    gd = sub.add_parser("grading", help="Farbangleich an Leitbilder (Lab-Statistik, Histogramm begrenzt) plus "
-                                        "Vignette, Glow, Filmkorn")
-    gd.add_argument("--bild", required=True)
-    gd.add_argument("--leitbild", nargs="*", default=None, help="Referenzbild(er), lokal, nie im Repo; ohne Angabe "
-                                                               "aus project.yaml look.leitbilder (--projekt)")
-    gd.add_argument("--projekt", default=None, help="Projektordner für look: in project.yaml")
-    gd.add_argument("--staerke", type=float, default=None, help="0 bis 1 (Standard look.staerke bzw. 0,6)")
-    gd.add_argument("--vignette", type=float, default=None)
-    gd.add_argument("--glow", type=float, default=None)
-    gd.add_argument("--korn", type=float, default=None)
-    gd.add_argument("--maske", default=None, help="optional: Schutzmaske (schutz.png), dort nur halbe Stärke")
-    gd.add_argument("--out", default=None, help="Ergebnis (Standard <bild>_grading.jpg); Prüfbild und JSON daneben")
-    fg = sub.add_parser("freigabe", help="Modellfreigabe je Kamera (freigabe.yaml): anzeigen, setzen, vor der "
-                                         "Veredelung prüfen")
-    fg.add_argument("--projekt", required=True)
-    fg.add_argument("--cam", default="", help="Kamera(s), mit Komma getrennt (innen <wohnung>_<kamera>)")
-    fg.add_argument("--setzen", choices=["ja", "nein"], default=None)
-    fg.add_argument("--von", default="", help="wer freigibt (Pflicht bei --setzen ja)")
-    fg.add_argument("--notiz", default="")
-    fg.add_argument("--pruefbogen", default="", help="Pfad zum Prüfbogen, der dem Kunden vorlag")
-    fg.add_argument("--pruefen", action="store_true", help="Gate wie vor der Veredelung (Exit 1, wenn gesperrt)")
     sz.add_argument("--modus", choices=["voll", "toleranz"], default="voll",
                     help="voll (Standard): ganzer Schutzbereich aus dem Render; toleranz: Schutzbereich in Bauteile "
                          "zerlegen (Fenster, Gelaenderfeld, Leuchte, Gesims, Dach, Fassadenfeld), KI behalten, wo sie "
@@ -233,6 +212,27 @@ def main():
     kl.add_argument("--nur-inpaint", action="store_true", help="ohne anschliessendes Verfeinern")
     kl.add_argument("--arbeitsbreite", type=int, default=None, help="kleiner rechnen (Test), Ergebnis in Render-Groesse")
     kl.add_argument("--out", default=None)
+    gd = sub.add_parser("grading", help="Farbangleich an Leitbilder (Lab-Statistik, Histogramm begrenzt) plus "
+                                        "Vignette, Glow, Filmkorn")
+    gd.add_argument("--bild", required=True)
+    gd.add_argument("--leitbild", nargs="*", default=None, help="Referenzbild(er), lokal, nie im Repo; ohne Angabe "
+                                                               "aus project.yaml look.leitbilder (--projekt)")
+    gd.add_argument("--projekt", default=None, help="Projektordner für look: in project.yaml")
+    gd.add_argument("--staerke", type=float, default=None, help="0 bis 1 (Standard look.staerke bzw. 0,6)")
+    gd.add_argument("--vignette", type=float, default=None)
+    gd.add_argument("--glow", type=float, default=None)
+    gd.add_argument("--korn", type=float, default=None)
+    gd.add_argument("--maske", default=None, help="optional: Schutzmaske (schutz.png), dort nur halbe Stärke")
+    gd.add_argument("--out", default=None, help="Ergebnis (Standard <bild>_grading.jpg); Prüfbild und JSON daneben")
+    fg = sub.add_parser("freigabe", help="Modellfreigabe je Kamera (freigabe.yaml): anzeigen, setzen, vor der "
+                                         "Veredelung prüfen")
+    fg.add_argument("--projekt", required=True)
+    fg.add_argument("--cam", default="", help="Kamera(s), mit Komma getrennt (innen <wohnung>_<kamera>)")
+    fg.add_argument("--setzen", choices=["ja", "nein"], default=None)
+    fg.add_argument("--von", default="", help="wer freigibt (Pflicht bei --setzen ja)")
+    fg.add_argument("--notiz", default="")
+    fg.add_argument("--pruefbogen", default="", help="Pfad zum Prüfbogen, der dem Kunden vorlag")
+    fg.add_argument("--pruefen", action="store_true", help="Gate wie vor der Veredelung (Exit 1, wenn gesperrt)")
     fg.add_argument("--trockenlauf", action="store_true")
     fg.add_argument("--force", action="store_true", help="Sperre bewusst übergehen (wird ausgegeben)")
     pr = sub.add_parser("prompt", help="Vor einem Higgsfield-Auftrag (MCP oder Studio): Freigabe prüfen und den "
