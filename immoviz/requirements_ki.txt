@@ -1,0 +1,13 @@
+# immoviz: lokaler KI-Schritt (immoviz.py ki-lokal, lib/ki_lokal.py), zusaetzlich zu requirements.txt.
+# Gedacht fuer den Mac (Apple Silicon, Metal/MPS); laeuft auch mit NVIDIA-Grafikkarte, auf CPU nur als Funktionstest.
+# Installation: .venv-immoviz/bin/pip install -r immoviz/requirements_ki.txt
+# Modelle laedt diffusers beim ersten Lauf nach ~/.cache/huggingface (SDXL fp16 rund 7 GB, ControlNet-Union ProMax
+# 2,5 GB, VAE 0,3 GB), nie ins Repo. Lizenzen: lib/ki_lokal.py Kopf und auftraege/2026-11-19_ki_lokal_test.md.
+# Funktionstest in der Cloud am 18.11.2026 (CPU, Testmodell) mit torch 2.15.0, diffusers 0.43.0, transformers 5.23.0,
+# accelerate 1.16.0.
+torch>=2.6
+diffusers>=0.36            # StableDiffusionXLControlNetUnionImg2ImgPipeline und ...InpaintPipeline
+transformers>=4.48
+accelerate>=1.2
+safetensors
+huggingface_hub

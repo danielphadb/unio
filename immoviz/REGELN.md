@@ -1,6 +1,6 @@
 # immoviz: Regelwerk (verbindlich)
 
-Stand 18.11.2026 (V6, V7 Schutzmaske und Grading; P2, P3, U9 Plan-Soll-Liste). Abgeleitet aus allen Korrekturrunden bei NOMA Schlachthausgasse 13 (Runde 1 bis 4, Apartments
+Stand 18.11.2026 (V6, V7 Schutzmaske und Grading; V8 Schutz mit Toleranz, V9 Lizenzen lokale KI; P2, P3, U9 Plan-Soll-Liste). Abgeleitet aus allen Korrekturrunden bei NOMA Schlachthausgasse 13 (Runde 1 bis 4, Apartments
 Variante 2) und Wimmergasse 20 (Umgebungsabgleich, Innenräume). Ziel: weniger Runden, weniger verworfene Credits,
 jeder Fehler wird früh und möglichst automatisch gefunden.
 
@@ -115,6 +115,8 @@ korrigiert, nie per Prompt. Was die KI dazuerfindet, wird verworfen, nicht schö
 | V6 | KI-Bilder nur mit Schutzmaske verwenden: Render mit `--ebenen`, nach der Veredelung `immoviz.py schutz` (Gebäude, Fenster, Rahmen, Geländer, Leuchten, Straßenmöbel, Autos kommen pixelgenau aus Blender, die KI liefert Himmel, Vegetation, Menschen, Stimmung). Ausnahme (Klasse aus dem Schutz nehmen mit `--ohne`/`schutz: {minus: ...}`, oder Bild ohne `schutz`) nur mit schriftlicher Begründung in `project.yaml` bzw. `staging.json` | W Runde 5/6: springende Fenster, erfundene Küchen und Lampen hinter Fenstern, hängende statt stehende Laternen | auto: `schutz` (Exit 1 bei Kanten-F1 unter 0,95), `nachkontrolle --ebenen` (Schutzzonen, Fensterzahl je Fassade) |
 | V7 | Look über `immoviz.py grading` an die Leitbilder angleichen (project.yaml `look`), nicht über Prompt-Wörter allein; Leitbilder bleiben lokal | W Runde 5: Himmel zu gesättigt, kein Grading (mood_analyse.md 6.2) | auto: `grading` (Abstand Lab-Mittel zum Leitbild) |
 
+| V8 | `schutz --modus toleranz` (KI je Bauteil behalten, wenn Kantenabstand, Kanten-F1, Versatz, Fensterglas und Sprossen in der Toleranz liegen) nur nach Sichtprüfung des Komponentenbilds; Standard bleibt `voll`, bis der Kunde die Toleranz-Fassung freigibt | W 18.11.2026: Kunde "Blender-Bilder zu schlecht, KI-Bilder stimmen nicht"; Runde 7 genau, aber Putz und Licht flacher als Runde 6 | auto: `_komponenten.jpg/.json` (grün KI, rot Render), Exit 1 unter F1 0,90; manuell: Kachelübergänge, Fenster |
+| V9 | Lokale Bild-KI (`ki-lokal`) nur mit Modellen, deren Lizenz kommerzielle Nutzung erlaubt und dokumentiert ist (`lib/ki_lokal.py` MODELLE: SDXL Open RAIL++-M, ControlNet-Union Apache-2.0, VAE MIT); keine FLUX.1-dev-Gewichte oder -Ableger, kein SD 3.5 ohne Lizenzprüfung, Feinabstimmungen ohne offengelegte Trainingsdaten nur nach Freigabe | Lizenzrisiko bei Vertriebsbildern | auto: `--modell` nur aus der Liste, Lizenz steht im Ergebnis-JSON |
 ## 8. Nachkontrolle (nach jedem Auftrag)
 
 | ID | Regel | Grund (Fehler) | Prüfung |

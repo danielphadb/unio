@@ -578,7 +578,7 @@ als unkomprimierte EXR zwischengespeichert, mit einem eigenen Leser (nur numpy) 
 
 | Datei | Inhalt |
 |---|---|
-| `<klasse>.png` | Maske je Klasse: gebaeude_objekt, fenster_glas (auch Innenraum hinter Glas), fenster_rahmen (auch Tore, Bleche), gelaender, leuchten, strassenmoebel, autos, baeume, menschen_platzhalter, nachbarn, boden, himmel, sonstige |
+| `<klasse>.png` | Maske je Klasse: gebaeude_objekt, fenster_glas (auch Innenraum hinter Glas), fenster_rahmen (auch Tore, Bleche), gelaender, leuchten, strassenmoebel, autos, baeume, vegetation (Gründach, Pflanzen, bepflanzte Tröge, Hecken, Sträucher; Neubau-Teil `<gruppe>_gruen`), ausstattung (Terrassenmöbel, Pergola, Kissen, Kübel; `neubau.ausstattung`), menschen_platzhalter, nachbarn, boden, himmel, sonstige |
 | `klassen.png` | Übersicht, eine Farbe je Klasse |
 | `tiefe.png` | 16 Bit, logarithmisch 0,1 m bis 30 km (`d = 0,1 * 300000^(v/65535)`), Himmel 65535 |
 | `normalen.png` | Weltnormalen (Projektsystem), `n = rgb/127,5 - 1`, Himmel schwarz |
@@ -588,7 +588,9 @@ als unkomprimierte EXR zwischengespeichert, mit einem eigenen Leser (nur numpy) 
 | `hintergrund/` | zweiter Durchgang ohne Menschen-Platzhalter und Autos, nur im Ausschnitt um diese Objekte (Border-Render): `beauty.png`, dieselben Ebenen, `bereich.png`; liefert die Fassade und den Boden dahinter. Abschalten mit `IMMOVIZ_HINTERGRUND=aus` |
 
 Geschützt sind standardmäßig gebaeude_objekt, fenster_glas, fenster_rahmen, gelaender, leuchten, strassenmoebel und
-autos. Je Projekt in `project.yaml`: `schutz: [..]` oder `schutz: {klassen: [...], plus: [nachbarn], minus: [autos],
+autos. Nicht geschützt (die KI darf sie realistisch zeichnen, Blender gibt Lage und Größe vor): baeume, vegetation,
+ausstattung, Menschen, Boden, Himmel, Nachbarn. Ein Trogkörper bleibt Planelement (Gebäude); nur Pflanzen, Substrat
+und Objekte oder Materialien mit `bepflanzt` zählen als vegetation. Je Projekt in `project.yaml`: `schutz: [..]` oder `schutz: {klassen: [...], plus: [nachbarn], minus: [autos],
 kante_px: 2}`; Abweichungen nur mit Begründung im Kommentar. Neue Assets (Straßenleuchten, Bänke, Menschen-Platzhalter,
 Bäume aus `lib/assets/`) werden über ihre Namen erkannt (`leuchte|laterne|lampe|mast`, `bank|poller|schild|fahrrad`,
 `mensch|person|figur`, `baum|krone|stamm|laub|rinde`, Collection-Namen zählen auch, Collection-Instanzen erben die
@@ -684,3 +686,78 @@ look:                                    # in project.yaml; Leitbilder bleiben a
 ```
 
 Test 18.11.2026: Leitbilder 05, 13, 39 (Wimmergasse), Abstand Lab-Mittel zum Leitbild 5,7 auf 1,7.
+**Schutz mit Toleranz** (`schutz ... --modus toleranz`, seit 18.11.2026, Standard bleibt `voll` bis zur Freigabe):
+statt den ganzen Schutzbereich aus dem Render zu nehmen, bleibt die KI je Bauteil, wenn sie geometrisch passt.
+
+1. Elastische Feinausrichtung nach der Homographie (`fein_ausrichten`): die Bild-KI verzieht die Fassade örtlich
+   (gpt_image_2_6, 4k: Median 2 px, 90 % unter 6,5 px). Optischer Fluss (OpenCV DIS) auf ausgeglichenen Graubildern,
+   kantengewichtet geglättet (6 px), höchstens 10 px, außerhalb des Bauteilbereichs auslaufend.
+2. Komponenten (`komponenten_bilden`): je Fenster (Glas plus Rahmen; Glasfronten gekachelt), Geländerfeld,
+   Leuchte, Straßenmöbel; Gebäudeflächen als Segmente zwischen Tiefen- und Normalensprüngen (`kanten.png`), als
+   Dachfläche (Normale aus der Render-Tiefe näher als 50 Grad an "oben" = Bodennormale), Gesims (flach und lang) oder
+   Fassadenfeld, alle Flächen in Kacheln von 256 px.
+3. Je Komponente (4k-Pixel, `TOL` in `lib/kompositing.py`): Kantenabstand Render zu KI (Mittel, höchstens 1,5 px),
+   Kanten-F1 der Bauteilkanten (Bilder geglättet, damit Putzkorn und Ornament der KI nicht zählen, mindestens 0,9,
+   Toleranz 2 px), örtlicher Versatz (Gradienten-Korrelation, nur bei zweidimensionaler Struktur, höchstens 1,5 px),
+   flache Felder: starke KI-Kanten ohne Render-Kante (erfundene Bauteile). Fenster zusätzlich: Lage und Fläche des
+   Glases (gleiches Farbmodell Rahmen gegen Glas auf Render und KI), Sprossen und Riegel (Anzahl und Lage), Innenleben:
+   Glas mit großer Helligkeitsabweichung (mehr als 30 % der Pixel über 22 L) oder hellem Fleck (Lampe, Küche) wird
+   allein zurückgesetzt. Fensterreihen: ab der Hälfte zurückgesetzter Fenster die ganze Reihe.
+4. Zusammensetzen: zurückgesetzte Komponenten aus dem Render (Farbabgleich neu, feine Statistik an der Grenze zur
+   behaltenen KI), Naht nach außen in die KI (Fenster 2 px, Flächen 16 px), alles innerhalb der Schutzmaske.
+5. Ausgabe `<ki>_toleranz.jpg` (oder `--out`) mit `_pruefung.jpg`, `.json` (Abschnitt `toleranz`: Anteile je Typ,
+   Gründe, Fensterreihen, `ki_behalten_prozent_schutz`; `ausrichtung.fein`), `_komponenten.jpg` (grün KI behalten,
+   rot Render, orange nur Glas Render) und `_komponenten.json` (Kennzahlen je Komponente). Exit 1 unter Kanten-F1 0,90.
+
+Test 18.11.2026 (Cloud, R7-KI-Rohbilder gpt_image_2_6, Render und Ebenen aus `r7_basis`, rund 60 s je Bild auf 4
+CPU-Kernen; Bogen Runde 6 | Runde 7 | Runde 7 Toleranz im Scratchpad `pipeline/toleranz_test.jpg`, Ergebnisse in
+`renders/higgsfield/r7_toleranz/`):
+
+| Bild | KI behalten (Schutzbereich) | Fenster KI / Render / nur Glas | Fassadenfelder KI / Render | Kanten-F1 vorher / nachher |
+|---|---|---|---|---|
+| ecke golden_hour | 19,5 % | 16 / 96 / 7 | 304 / 290 | 0,85 / 0,97 |
+| ecke herbst | 20,3 % | 15 / 93 / 5 | 296 / 302 | 0,86 / 0,97 |
+| ecke_erhoeht golden_hour | 17,3 % | 17 / 111 / 6 | 269 / 344 | 0,83 / 0,97 |
+| drohne golden_hour | 7,8 % | 7 / 119 / 6 | 121 / 107 | 0,81 / 0,98 |
+
+Befund: Die freien KI-Bilder weichen auch nach der Feinausrichtung bei den meisten Fenstern ab (Sprossen und Riegel
+anders, Rahmenprofile, Vorhänge, Lampen und Möbel hinter Glas), deshalb kommen 85 bis 95 % der Fenster weiter aus dem
+Render. Behalten werden vor allem glatte Fassadenfelder, Dachflächen, Gesimsbänder und Seile; dort zeigt das Bild
+Putz und Licht der KI. Gewinn gegenüber Runde 7 sichtbar, aber begrenzt; an Kachelgrenzen zwischen KI- und
+Render-Putz bleiben weiche Übergänge sichtbar. Der größere Hebel ist eine KI, die die Geometrie von vornherein hält
+(`ki-lokal`, unten); deren Ergebnis läuft durch denselben Toleranz-Schritt.
+
+
+## Lokaler KI-Schritt (`ki-lokal`, Mac)
+
+Alternative zu Higgsfield: ein offenes Diffusionsmodell veredelt den Render auf dem Mac (M3 Max, Metal/MPS) mit
+geringer Veränderungsstärke und wird dabei von Tiefe und Kanten aus den Render-Ebenen geführt. Die Geometrie bleibt
+damit pixelgenau, Putz, Licht und Glas werden fotografisch. Danach `schutz --modus toleranz` und `grading`.
+Installation zusätzlich zu `requirements.txt`: `requirements_ki.txt` (torch, diffusers, transformers, accelerate);
+Modelle lädt der erste Lauf nach `~/.cache/huggingface` (rund 10 GB, nie ins Repo).
+
+```bash
+.venv-immoviz/bin/python immoviz/immoviz.py ki-lokal --render <render.png> --ebenen <kamera_licht_ebenen> \
+    --staerke 0.3 [--prompt "..."] [--steuerung tiefe,kanten] [--inpaint himmel,baeume,vegetation] [--out x.jpg]
+```
+
+| Teil | Modell | Lizenz |
+|---|---|---|
+| Basis (Standard `sdxl`) | stabilityai/stable-diffusion-xl-base-1.0 | CreativeML Open RAIL++-M: kommerziell erlaubt, keine Rechte des Lizenzgebers an den Ausgaben, Nutzungsbeschränkungen Anhang A |
+| Steuerung | xinsir/controlnet-union-sdxl-1.0, ProMax (Tiefe 1, Kanten 3, Tile 6, Inpaint 7) | Apache-2.0 |
+| VAE | madebyollin/sdxl-vae-fp16-fix (fp16 ohne NaN auf MPS) | MIT |
+| optional `realvisxl` | SG161222/RealVisXL_V5.0 (fotorealistische SDXL-Feinabstimmung) | openrail++ laut Modellkarte, Trainingsdaten nicht offengelegt: nur nach Freigabe |
+
+Nicht gewählt: FLUX.1 dev mit Depth/Canny (nicht kommerziell), FLUX.2 klein 9B (nicht kommerziell), SD 3.5 (Community
+License mit Umsatzgrenze 1 Mio. USD). FLUX.2 klein 4B und Z-Image Turbo mit Fun-ControlNet-Union sind Apache-2.0,
+haben in diffusers aber noch keinen Bild-zu-Bild- bzw. Inpaint-Weg mit Tiefensteuerung; Kandidaten für später.
+
+Verfahren (`lib/ki_lokal.py`): Steuerbilder aus den Ebenen (inverse Tiefe, nah hell; Canny des Renders plus
+`kanten.png`), Kacheln 1024 px (SDXL-Grundgröße) mit 256 px Überlappung und linearer Überblendung, je Kachel Lab-Mittel
+und -Streuung halb an den Render (`--farbe-halten`, gegen Kachelnähte), Prompt kurz (SDXL liest höchstens 77 Token;
+die Geometrie kommt aus der Steuerung). `--inpaint` zeichnet nur freigegebene Klassen neu (himmel, baeume, vegetation,
+menschen_platzhalter, ausstattung; Gebäudeklassen werden abgelehnt), danach folgt das Verfeinern (`--nur-inpaint`
+ohne). Ausgabe `<render>_ki_lokal_<modell>_s<stärke>.jpg`, `_pruefung.jpg`, `.json` (Parameter, Zeiten je Kachel,
+Speicher, Versionen, Lizenzen). `--modell test` ist ein winziges Zufallsmodell für den Funktionstest ohne
+Grafikeinheit (Cloud 18.11.2026: 512 px, 6 Kacheln, Inpaint und Verfeinern laufen durch, 2 min auf CPU). Erster
+echter Lauf auf dem Mac: `auftraege/2026-11-19_ki_lokal_test.md`.

@@ -59,3 +59,17 @@ Regeln: kein em dash oder en dash in Texten; nie zwei Renders parallel; Google-S
 
 `IMMOVIZ_DEVICE=auto` (Standard) nimmt Metal, OptiX, CUDA, HIP oder oneAPI, sonst CPU. `IMMOVIZ_DEVICE=CPU` erzwingt
 den Prozessor.
+
+## 3. Lokaler KI-Schritt (optional, `ki-lokal`)
+
+Für die strukturgeführte Veredelung auf dem Mac (README, Abschnitt "Lokaler KI-Schritt"):
+
+```bash
+.venv-immoviz/bin/pip install -r immoviz/requirements_ki.txt
+.venv-immoviz/bin/python -c "import torch; print(torch.__version__, torch.backends.mps.is_available())"   # erwartet True
+```
+
+Die Modelle (SDXL, ControlNet-Union ProMax, VAE; rund 10 GB) lädt der erste Lauf nach `~/.cache/huggingface`,
+ohne Konto. Nichts davon ins Repo. Ein `ki-lokal`-Lauf belegt die Grafikeinheit: wie ein Render behandeln, also nie
+parallel zu `render` oder einem zweiten `ki-lokal` (`pgrep -f immoviz.py`). Erster Testlauf:
+`auftraege/2026-11-19_ki_lokal_test.md`.

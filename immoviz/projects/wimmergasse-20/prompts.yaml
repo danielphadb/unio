@@ -19,7 +19,11 @@ objekt: >-
   A renovated Viennese Gruenderzeit corner apartment building from around 1900, sand-beige lime plaster facade, white
   double casement windows, rich stucco with triangular pediments on the piano nobile, a strong main cornice with
   brackets, and a modern rooftop extension clad in anthracite standing-seam zinc. Located on a quiet street in
-  Vienna's 5th district, with neighbouring historic facades, cobblestone and sidewalk details.
+  Vienna's 5th district, with neighbouring historic facades, a smooth asphalt roadway and paved sidewalks.
+# 18.11.2026 bereinigt (staging.json runde_7_final, Restfehler): "cobblestone" fuehrte zu Kopfsteinpflaster auf der
+# Fahrbahn, ein Stil-Zusatz "leaves framing the picture" (Rahmung durch Laub aus mood_analyse.md) zu einem erfundenen
+# Ast (Verstoss TREES ARE LOCKED). Beides nicht mehr verwenden; Fahrbahn Asphalt wie im Render, keine Rahmung durch
+# Laub oder Aeste, die nicht im Render stehen.
 
 aussen:
   golden_hour:
@@ -56,7 +60,7 @@ aussen:
   herbst:
     titel: Herbst nach Regen
     text: >-
-      Autumn afternoon right after rain, wet cobblestones and sidewalk reflecting the facade and warm shop windows,
+      Autumn afternoon right after rain, wet asphalt and sidewalks reflecting the facade and warm shop windows,
       yellow leaves scattered on the ground and on the trees. Overcast sky with a soft break of light, people in
       coats, one umbrella. Moody yet warm, muted palette of beige, ochre and slate grey.
   winter:
@@ -113,7 +117,8 @@ negativ:
   aussen: >-
     Avoid: oversaturated blue sky, harsh midday sun, HDR look, plastic CGI surfaces, distorted vertical lines, posing
     models looking into the camera, futuristic glass towers, palm trees, text, watermark or logos, extra floors,
-    distorted windows, fantasy architecture.
+    distorted windows, fantasy architecture, cobblestones on the roadway, branches or leaves framing the picture
+    that are not in image 1.
   innen: >-
     No people, no animals, no clutter, no cool grey tones, no pure white, no recessed downlight grid, no glossy
     surfaces, no changed architecture, no extra windows, no wide-angle distortion, no text, no watermark.

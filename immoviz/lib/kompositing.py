@@ -22,6 +22,10 @@ Ablauf (`immoviz.py schutz --render <beauty.png> --ki <veredelt.jpg> --ebenen <o
    Schatten, Spiegelungen, Menschen und Baeume der KI ausserhalb des Schutzbereichs bleiben.
 6. Kennzahlen (JSON) und Pruefbild (Schutzmaske rot, erhaltener Vordergrund gruen).
 
+Variante `--modus toleranz` (Abschnitt "Schutz mit Toleranz" unten, README): nach einer elastischen Feinausrichtung
+wird der Schutzbereich in Bauteile zerlegt; die KI bleibt je Bauteil, wenn sie geometrisch in der Toleranz liegt,
+nur abweichende Bauteile kommen aus dem Render. Standard bleibt `voll` bis zur Freigabe (REGELN.md V8).
+
 Grenzen: Baeume der KI, die ueber den Blender-Baum hinaus vor die Fassade ragen, werden abgeschnitten. Teile einer
 Person, die fast wie die Fassade aussehen, koennen fehlen. Putz- und Stuckdetail der KI im Schutzbereich
 geht verloren (das Gebaeude ist das Blender-Material mit KI-Farbstimmung); dafuer braucht es gute Materialien in
@@ -628,7 +632,12 @@ def _gruppen(masken: dict, schutz: list[str]) -> list[np.ndarray]:
 
 def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] | None = None,
                     ohne: list[str] | None = None, farbe: float = 1.0, modell: str = "homographie",
-                    pruefbild: bool = True, vordergrund: bool = True) -> dict:
+                    pruefbild: bool = True, vordergrund: bool = True, modus: str = "voll",
+                    toleranz: dict | None = None) -> dict:
+    """modus 'voll' (Standard): ganzer Schutzbereich aus dem Render. modus 'toleranz': nur Komponenten, deren KI
+    ausserhalb der Toleranz liegt (TOL, `toleranz` ueberschreibt einzelne Werte), kommen aus dem Render."""
+    if modus not in ("voll", "toleranz"):
+        raise ValueError(f"modus {modus!r}: erlaubt voll, toleranz")
     render_p, ki_p = Path(render_p), Path(ki_p)
     ebn = EB.laden(ebenen_ordner)
     R = bild_laden(render_p)
@@ -649,6 +658,9 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
 
     al = ausrichten_ki(R, K, ausricht_maske(masken, hart), modell)
     Kw, gueltig = warp(K, al["H"], (W, H))
+    fein_info = None
+    if modus == "toleranz":
+        Kw, fein_info = fein_ausrichten(R, Kw, ndi.binary_dilation(hart, iterations=2), toleranz)
     B_lab, K_lab = rgb_zu_lab(R), rgb_zu_lab(Kw)
     gruppen = _gruppen(masken, schutz)
     F, objekte, D = np.zeros((H, W), bool), [], None
@@ -663,6 +675,7 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     T_lab = farbabgleich(B_lab, K_lab, gruppen, stat_ok, hart, farbe)
     T = lab_zu_rgb(T_lab)
     L, laub_info = np.zeros((H, W), bool), {"pixel": 0}
+    Z = None
     if vordergrund and baum is not None:
         L, laub_info = laub_finden(K_lab, T_lab, baum, hart, gueltig)
         # Fassade zwischen den Blaettern: die KI zeigt sie im Laubschatten, der Hintergrund-Durchgang in der Sonne.
@@ -675,6 +688,21 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     F = F | L
     schutz_hart = hart & ~F
     alpha = EB.weiche_kante(schutz_hart, kante)
+    tol_daten = None
+    if modus == "toleranz":
+        a_reset, t_lab, t_status, t_komps, t_zus = toleranz_auswerten(R, Kw, T_lab, K_lab, masken, schutz_hart,
+                                                                       gueltig, ebn, toleranz)
+        alpha = np.minimum(alpha, a_reset)
+        tol_daten = (t_lab, t_status, t_komps, t_zus)
+        # Farbabgleich neu, feine Statistik jetzt an der Grenze zur behaltenen KI (sonst Helligkeitsstufen an
+        # Kachelnaehten); im Laubbereich bleibt der eigene Abgleich
+        zz = (a_reset >= 0.999) & schutz_hart
+        if zz.any():
+            T2 = farbabgleich(B_lab, K_lab, gruppen, stat_ok, zz, farbe)
+            if Z is not None:
+                T2[Z] = T_lab[Z]
+            T_lab = T2
+            T = lab_zu_rgb(T_lab)
     a = alpha[..., None]
     out = a * T + (1 - a) * Kw              # Rand ohne KI-Deckung: Kw ist dort gespiegelt fortgesetzt (BORDER_REFLECT)
 
@@ -728,11 +756,24 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
         kz["klassen"][k] = {"anteil_prozent": round(100 * float(m.mean()), 2),
                             "kanten_vorher": kanten_deckung(gr, gk, mk),
                             "kanten_nachher": kanten_deckung(gr, go, mk)}
+    kz["modus"] = modus
+    if fein_info is not None:
+        kz["ausrichtung"]["fein"] = fein_info
     if aus is None:
-        aus = ki_p.with_name(ki_p.stem + "_schutz.jpg")
+        aus = ki_p.with_name(ki_p.stem + ("_toleranz.jpg" if modus == "toleranz" else "_schutz.jpg"))
     aus = Path(aus)
     bild_speichern(out, aus)
     kz["ergebnis"] = str(aus)
+    if tol_daten is not None:
+        t_lab, t_status, t_komps, t_zus = tol_daten
+        kz["toleranz"] = t_zus
+        pk = aus.with_name(aus.stem + "_komponenten.json")
+        pk.write_text(json.dumps(t_komps, ensure_ascii=False))
+        kz["toleranz"]["komponenten_json"] = str(pk)
+        if pruefbild:
+            kz["pruefbild_komponenten"] = str(_toleranz_pruefbild(
+                R, Kw, out, t_lab, t_status, masken.get("fenster_glas", np.zeros((H, W), bool)), kz,
+                aus.with_name(aus.stem + "_komponenten.jpg")))
     if pruefbild:
         kz["pruefbild"] = str(_pruefbild(R, Kw, out, alpha, kz, aus.with_name(aus.stem + "_pruefung.jpg"), F))
     aus.with_name(aus.stem + ".json").write_text(json.dumps(kz, ensure_ascii=False, indent=1))
@@ -759,7 +800,7 @@ def _pruefbild(R, Kw, out, alpha, kz, pfad: Path, F=None) -> Path:
     if F is not None and F.any():
         ueber = maske_ueberlagern(ueber, F.astype(np.float32), farbe=(0.1, 0.9, 0.2), deckkraft=0.6)
     tafeln = [("Render (Blender, Hintergrund eingesetzt)", R), ("KI ausgerichtet", Kw),
-              ("Schutzmaske rot, KI-Vordergrund gruen", ueber), ("Ergebnis", out)]
+              ("Render-Anteil rot, KI-Vordergrund gruen", ueber), ("Ergebnis", out)]
     kopf = 50
     o = Image.new("RGB", (2 * bw + 10, 2 * (bh + 24) + kopf), (250, 250, 248))
     d = ImageDraw.Draw(o)
@@ -947,6 +988,566 @@ def fenster_je_fassade(Rk, Kw, mk, ebn, gueltig, g) -> dict:
     return {k: v for k, v in out.items() if v["render"] or v["ki"]}
 
 
+# ------------------------------------------------------------------ Schutz mit Toleranz (--modus toleranz)
+# Statt den ganzen Schutzbereich aus dem Render zu nehmen, wird er in Bauteil-Komponenten zerlegt (je Fenster,
+# Gelaenderfeld, Leuchte, Gesimsband, Dachflaeche, Fassadenfeld). Je Komponente wird die KI geometrisch gegen den
+# Render geprueft (nach der globalen Ausrichtung): Kantenabstand, Kanten-F1, oertlicher Versatz (Lage), bei Fenstern
+# zusaetzlich Lage und Flaeche des Glases, Sprossenteilung und Innenleben hinter Glas. Liegt die KI in der Toleranz,
+# bleibt das KI-Pixel (Putz, Stuck, Licht); sonst wird nur diese Komponente aus dem Render (farbangeglichen) gesetzt,
+# mit weicher Naht nach aussen in die behaltene KI. Pixelangaben gelten fuer 4k (3840 px Breite) und werden mit
+# der Bildbreite skaliert.
+TOL = {"kantenabstand_px": 1.5,     # mittlerer Abstand Render-Kante -> naechste KI-Kante (Kappe 6 px)
+       "f1_min": 0.90,              # Kanten-F1 je Komponente (Naehe toleranz_px)
+       "toleranz_px": 2.0,
+       "versatz_px": 1.5,           # oertlicher Versatz KI gegen Render (Gradienten-NCC, Suche +-suche_px)
+       "suche_px": 3,
+       "ncc_min": 0.30,             # darunter kein verlaesslicher Versatz (strukturarme Flaeche)
+       "versatz_gewinn": 0.05,
+       "versatz_isotropie": 0.15,   # Strukturtensor kleiner/grosser Eigenwert; darunter (eine Kantenrichtung) kein Versatz      # Versatz zaehlt nur, wenn er die Korrelation gegenueber 0 so verbessert
+       "min_kanten": 30,            # Render-Kantenpixel, ab denen Abstand und F1 zaehlen
+       "flach_praezision": 0.80,    # Komponente ohne Render-Kanten: starke KI-Kanten muessen zu 80 % an Render-Kanten
+                                    # liegen, sonst hat die KI dort etwas erfunden (Fenster, Erker, Ornament)
+       "flach_kanten": 60,          # ab so vielen starken KI-Kanten zaehlt die Praezision einer flachen Komponente
+       "kachel_px": 256,            # Flaechen (Fassade, Gesims, Dach, Gelaender, Leuchten) werden so gekachelt
+       "fenster_max_kacheln": 4,    # groessere Fensterkomponenten (Glasfronten) ebenfalls kacheln
+       "min_flaeche_px": 400,       # kleinere Segmente gehen in das Fassadenfeld ihrer Kachel
+       "fenster_min_px": 150,
+       "gesims_seitenverhaeltnis": 4.0, "gesims_max_hoehe_px": 90,
+       "dach_winkel_grad": 50.0,    # Flaechennormale naeher als das an "oben" (Bodennormale): Dachflaeche
+       "glas_schwerpunkt_px": 3.0, "glas_flaeche": (0.75, 1.33),   # Glas (gleiches Farbmodell in Render und KI)
+       "sprossen_kontrast_dE": 10.0, "sprossen_lage_px": 2.5,
+       "innen_dL": 22.0, "innen_anteil": 0.30,       # Glas: Anteil Pixel mit |L_KI - L_Render| ueber innen_dL
+       "lampe_dL": 30.0, "lampe_anteil": 0.04,       # helle Flecken (Lampen, Kuechen) hinter Glas
+       "reihe_anteil": 0.5, "reihe_min": 3,          # Fensterreihe: ab diesem Anteil zurueckgesetzter Fenster ganz
+       "gueltig_min": 0.9,
+       "naht_fein_px": 2.0, "naht_flaeche_px": 16.0,
+       "fein_sigma_px": 6.0,        # elastische Feinausrichtung: Glaettung des optischen Flusses (4k-Pixel)
+       "fein_max_px": 10.0,         # groessere Flussvektoren gelten als Fehlzuordnung
+       "fein_arbeit": 0.5}          # Flussberechnung auf halber Aufloesung
+TYP_FEIN = ("fenster", "glas", "gelaenderfeld", "leuchte", "moebel", "auto")
+TYP_FARBE = {"behalten": (0.15, 0.8, 0.25), "zurueck": (0.9, 0.12, 0.1), "glas_zurueck": (1.0, 0.55, 0.0)}
+
+
+def _kachel_ids(H, W, kp):
+    nx = int(math.ceil(W / kp))
+    return ((np.arange(H) // kp)[:, None] * nx + (np.arange(W) // kp)[None, :]).astype(np.int64), \
+        nx * int(math.ceil(H / kp))
+
+
+def oben_winkel(tiefe_m, kam, boden, schritt=4):
+    """Winkel (Grad) zwischen Flaechennormale (aus der Render-Tiefe, Kamerasystem) und 'oben' (mittlere Normale des
+    Bodens). Tiefe ist planar (Abstand zur Bildebene). Rueckgabe in voller Groesse oder None."""
+    if tiefe_m is None or not kam or not kam.get("f_px"):
+        return None
+    H, W = tiefe_m.shape
+    f = kam["f_px"]
+    cx = W / 2 - kam.get("shift_x", 0.0) * max(W, H)
+    cy = H / 2 + kam.get("shift_y", 0.0) * max(W, H)
+    d = tiefe_m[::schritt, ::schritt]
+    yy, xx = np.mgrid[0:H:schritt, 0:W:schritt].astype(np.float64)
+    P = np.stack([(xx - cx) / f * d, (yy - cy) / f * d, d], -1)
+    n = np.cross(np.gradient(P, axis=1), np.gradient(P, axis=0))
+    n /= np.linalg.norm(n, axis=-1, keepdims=True) + 1e-12
+    b = boden[::schritt, ::schritt] & (d < 80)
+    if b.sum() < 50:
+        oben = np.array([0.0, -1.0, 0.0])
+    else:
+        nb = n[b]
+        nb *= -np.sign(nb[:, 1:2] + 1e-12)                 # nach oben (Bild-y negativ)
+        oben = np.median(nb, 0)
+        oben /= np.linalg.norm(oben)
+    w = np.degrees(np.arccos(np.clip(np.abs(n @ oben), 0, 1))).astype(np.float32)
+    return _resize(w, (W, H), nearest=True)
+
+
+def fein_ausrichten(R: np.ndarray, Kw: np.ndarray, maske: np.ndarray, p: dict | None = None):
+    """Elastische Feinausrichtung nach der Homographie: die Bild-KI verzieht Fassaden oertlich um einige Pixel
+    (gemessen an ecke golden_hour: 1,5 bis 6 px bei 4k nach der Homographie). Optischer Fluss (OpenCV DIS) zwischen
+    Render und KI auf ausgeglichenen Graubildern, nur auf Kanten im Bauteilbereich gewichtet, stark geglaettet
+    (normierte Faltung, fein_sigma_px), auf fein_max_px begrenzt und ausserhalb des Bauteilbereichs auf 0
+    auslaufend. Die KI wird damit oertlich verschoben (keine neuen Inhalte, nur Lage). Rueckgabe: KI neu, Kennzahlen."""
+    import cv2
+    p = {**TOL, **(p or {})}
+    H, W = maske.shape
+    s = W / 3840.0
+
+    def prep(x):
+        return (NK._ausgleich(_grau(x), maske if maske.sum() > 100 else None) * 255).astype(np.uint8)
+    a, b = prep(R), prep(Kw)
+    f = float(p["fein_arbeit"])
+    gross = (max(16, round(W * f)), max(16, round(H * f)))
+    dis = cv2.DISOpticalFlow_create(cv2.DISOPTICAL_FLOW_PRESET_MEDIUM)
+    dis.setFinestScale(0)
+    dis.setPatchSize(12)
+    dis.setPatchStride(3)
+    dis.setVariationalRefinementIterations(10)
+    fl = dis.calc(cv2.resize(a, gross, interpolation=cv2.INTER_AREA), cv2.resize(b, gross, interpolation=cv2.INTER_AREA),
+                  None)
+    fl = cv2.resize(fl, (W, H), interpolation=cv2.INTER_LINEAR) * (W / gross[0])
+    af = a.astype(np.float32)
+    gm = np.hypot(cv2.Sobel(af, cv2.CV_32F, 1, 0), cv2.Sobel(af, cv2.CV_32F, 0, 1))
+    w = np.minimum(gm / (np.percentile(gm[maske], 90) + 1e-6), 1.0) * maske
+    w[np.hypot(fl[..., 0], fl[..., 1]) > p["fein_max_px"] * s] = 0
+    w = w.astype(np.float32)
+    sig = max(1.0, p["fein_sigma_px"] * s)
+    nw = cv2.GaussianBlur(w, (0, 0), sig)
+    fs = np.stack([cv2.GaussianBlur(fl[..., c] * w, (0, 0), sig) for c in (0, 1)], -1) / np.maximum(nw, 1e-4)[..., None]
+    fs *= np.clip(nw / 0.05, 0, 1)[..., None]
+    fs = np.stack([cv2.GaussianBlur(fs[..., c], (0, 0), sig / 2) for c in (0, 1)], -1)
+    xx, yy = np.meshgrid(np.arange(W, dtype=np.float32), np.arange(H, dtype=np.float32))
+    K2 = cv2.remap(Kw, xx + fs[..., 0], yy + fs[..., 1], cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
+    v = np.hypot(fs[..., 0], fs[..., 1])[maske] / max(s, 1e-6)
+    info = {"verfahren": "DIS-Fluss, kantengewichtet geglaettet", "sigma_px": p["fein_sigma_px"],
+            "verschiebung_4k_px": {"median": round(float(np.median(v)), 2), "p90": round(float(np.percentile(v, 90)), 2),
+                                   "max": round(float(v.max()), 2)} if v.size else None}
+    return np.clip(K2, 0, 1).astype(np.float32), info
+
+
+def komponenten_bilden(masken: dict, hart: np.ndarray, kanten_geo: np.ndarray | None, winkel, p: dict, s: float):
+    """Schutzbereich in Bauteil-Komponenten zerlegen. Rueckgabe: Labelbild (0 = keine), Liste {typ, klasse}."""
+    H, W = hart.shape
+    leer = np.zeros((H, W), bool)
+    kp = max(32, int(round(p["kachel_px"] * s)))
+    kid, nk = _kachel_ids(H, W, kp)
+    lab = np.zeros((H, W), np.int32)
+    komps = [None]
+
+    def setzen(maske, typ, klasse, kacheln=False):
+        if kacheln:
+            ks = kid[maske]
+            u, inv = np.unique(ks, return_inverse=True)
+            lab[maske] = len(komps) + inv
+            komps.extend({"typ": typ, "klasse": klasse} for _ in u)
+        else:
+            lab[maske] = len(komps)
+            komps.append({"typ": typ, "klasse": klasse})
+
+    # 1. Fenster: Glas plus Rahmen, je Komponente (Glasfronten gekachelt)
+    glas, rahmen = masken.get("fenster_glas", leer), masken.get("fenster_rahmen", leer)
+    fen = ndi.binary_closing(glas | rahmen, iterations=1) & hart & (glas | rahmen | ~masken.get("gebaeude_objekt", leer))
+    L, n = ndi.label(fen, structure=np.ones((3, 3)))
+    fl = ndi.sum(np.ones_like(L), L, index=np.arange(1, n + 1)) if n else []
+    for i, sl in enumerate(ndi.find_objects(L), start=1):
+        if sl is None or fl[i - 1] < p["fenster_min_px"] * s * s:
+            continue
+        m = np.zeros((H, W), bool)
+        m[sl] = L[sl] == i
+        if not (glas[sl] & m[sl]).any():
+            continue                                             # Tuerblaetter, Bleche ohne Glas: Flaeche
+        gross = (sl[0].stop - sl[0].start) * (sl[1].stop - sl[1].start) > p["fenster_max_kacheln"] * kp * kp
+        setzen(m, "fensterfront" if gross else "fenster", "fenster", kacheln=gross)
+    belegt = lab > 0
+    # 2. Gelaender, Leuchten, Strassenmoebel, Autos (wenn geschuetzt): Komponenten je Kachel
+    for k, typ in (("gelaender", "gelaenderfeld"), ("leuchten", "leuchte"), ("strassenmoebel", "moebel"),
+                   ("autos", "auto")):
+        m = masken.get(k, leer) & hart & ~belegt
+        if m.sum() < 20:
+            continue
+        L, n = ndi.label(m, structure=np.ones((3, 3)))
+        key = L.astype(np.int64)[m] * nk + kid[m]
+        u, inv = np.unique(key, return_inverse=True)
+        lab[m] = len(komps) + inv
+        komps.extend({"typ": typ, "klasse": k} for _ in u)
+        belegt |= m
+    # 3. Gebaeude: Segmente zwischen Tiefen-/Normalenspruengen, als Dachflaeche, Gesims oder Fassadenfeld, gekachelt
+    g = hart & ~belegt
+    if g.any():
+        innen = g & ~(kanten_geo if kanten_geo is not None else leer)
+        S, ns = ndi.label(innen)                                 # 4er-Nachbarschaft: Kanten trennen
+        if ns:
+            idx = ndi.distance_transform_edt(S == 0, return_distances=False, return_indices=True)
+            S = np.where(g, S[idx[0], idx[1]], 0)
+        flaeche = np.bincount(S[g], minlength=ns + 1)
+        styp = np.zeros(ns + 1, np.int8)                         # 0 Feld (Kachel), 1 Fassadenfeld, 2 Gesims, 3 Dach
+        w_mittel = None
+        if winkel is not None and ns:
+            w_mittel = np.bincount(S[g], weights=winkel[g], minlength=ns + 1) / np.maximum(flaeche, 1)
+        for j, sl in enumerate(ndi.find_objects(S), start=1):
+            if sl is None or flaeche[j] < p["min_flaeche_px"] * s * s:
+                continue
+            h, w = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
+            if w_mittel is not None and w_mittel[j] < p["dach_winkel_grad"]:
+                styp[j] = 3
+            elif w >= p["gesims_seitenverhaeltnis"] * h and h <= p["gesims_max_hoehe_px"] * s:
+                styp[j] = 2
+            else:
+                styp[j] = 1
+        Sg = S[g].astype(np.int64)
+        t = styp[Sg]
+        key = np.where(t == 0, 0, Sg) * nk + kid[g]
+        u, inv = np.unique(key, return_inverse=True)
+        lab[g] = len(komps) + inv
+        namen = {0: "fassadenfeld", 1: "fassadenfeld", 2: "gesims", 3: "dachflaeche"}
+        seg_u = u // nk
+        komps.extend({"typ": namen[int(styp[sg])], "klasse": "gebaeude"} for sg in seg_u)
+    return lab, komps
+
+
+def _profil_stege(rahmen_m: np.ndarray, glas_m: np.ndarray, achse: int, min_anteil: float = 0.5):
+    """Sprossen (achse 1: senkrechte Stege, Profil ueber Spalten; achse 0: waagrechte) innerhalb der Glasspanne:
+    Liste der Stegmitten (Pixel) und Stegbreiten."""
+    quer = glas_m.any(axis=achse)                       # Zeilen (bzw. Spalten) mit Glas
+    if quer.sum() < 4:
+        return []
+    lauf = glas_m.any(axis=1 - achse)
+    idx = np.nonzero(lauf)[0]
+    if len(idx) < 4:
+        return []
+    a, b = idx.min(), idx.max()
+    sub = rahmen_m[quer, :] if achse == 1 else rahmen_m[:, quer]
+    prof = sub.mean(axis=0 if achse == 1 else 1)
+    st = prof >= min_anteil
+    st[:a + 1] = False
+    st[b:] = False
+    L, n = ndi.label(st)
+    out = []
+    for i in range(1, n + 1):
+        z = np.nonzero(L == i)[0]
+        out.append((float(z.mean()), int(len(z))))
+    return out
+
+
+def _fenster_pruefen(sl, m, glas, rahmen, K_lab, T_lab, p, s) -> dict:
+    """Fenster gesondert: Lage und Flaeche des Glases im KI-Bild, Sprossenteilung, Innenleben hinter Glas.
+    Pro Fenster ein Zwei-Klassen-Modell (Rahmen gegen Glas) aus den KI-Farben an den Render-Masken."""
+    out = {}
+    gR, rR = m & glas, m & rahmen
+    Kl, Tl = K_lab[sl], T_lab[sl]
+    # Innenleben (unabhaengig vom Kontrast): Helligkeit KI gegen farbangeglichenen Render auf dem Glas
+    gi = ndi.binary_erosion(gR, iterations=1) if gR.sum() > 60 else gR
+    if gi.sum() >= 20:
+        dL = Kl[..., 0][gi] - Tl[..., 0][gi]
+        abw = float((np.abs(dL) > p["innen_dL"]).mean())
+        hell = np.zeros_like(gi)
+        hell[gi] = dL > p["lampe_dL"]
+        Lh, nh = ndi.label(hell)
+        groesst = float(np.bincount(Lh[hell]).max() / gi.sum()) if nh else 0.0
+        out.update(innen_abweichung=round(abw, 3), innen_hellfleck=round(groesst, 3),
+                   innen_ok=bool(abw <= p["innen_anteil"] and groesst <= p["lampe_anteil"]))
+    if gR.sum() < 30 * s * s or rR.sum() < 20:
+        return out
+    re = ndi.binary_erosion(rR, iterations=1)
+    re = re if re.sum() >= 10 else rR
+    muF, muG = Kl[re].mean(0), Kl[gi if gi.sum() >= 10 else gR].mean(0)
+    kontrast = float(np.linalg.norm(muF - muG))
+    out["kontrast_dE"] = round(kontrast, 1)
+    if kontrast < p["sprossen_kontrast_dE"]:
+        return out
+    # Dasselbe Zwei-Klassen-Modell auf beide Bilder (Render farbangeglichen T und KI): Unterschiede kommen aus der
+    # Geometrie, nicht aus dem Verfahren (die Render-Maske allein ist bei Kastenfenstern zu grob)
+    zone = ndi.binary_dilation(m, iterations=max(2, int(round(3 * s))))
+    glas_zone = ndi.binary_dilation(gR, iterations=max(2, int(round(4 * s))))
+
+    def rahmen_klasse(X):
+        return zone & (((X - muF) ** 2).sum(-1) <= ((X - muG) ** 2).sum(-1))
+    tf, kf = rahmen_klasse(Tl), rahmen_klasse(Kl)
+    tg, kg = glas_zone & zone & ~tf, glas_zone & zone & ~kf
+    if tg.sum() >= 10 and kg.sum() >= 10:
+        yt, xt = np.nonzero(tg)
+        yk, xk = np.nonzero(kg)
+        out["glas_versatz_px"] = round(float(math.hypot(yk.mean() - yt.mean(), xk.mean() - xt.mean())), 2)
+        out["glas_flaeche"] = round(float(len(yk) / len(yt)), 3)
+    # Sprossenteilung: durchgehende, schmale Stege (Vorhaenge und Spiegelungen sind breit) in beiden Bildern
+    tol = p["sprossen_lage_px"] * s
+    fehl = []
+    for achse in (1, 0):
+        spanne = int(gR.any(axis=achse).sum())
+        grenze = max(6 * s, 0.15 * spanne)
+        sr = [x for x in _profil_stege(tf, gR, achse, 0.7) if x[1] <= grenze]
+        sk = [x for x in _profil_stege(kf, gR, achse, 0.7) if x[1] <= grenze]
+        frei = list(sk)
+        for c, _ in sr:
+            j = min(range(len(frei)), key=lambda q: abs(frei[q][0] - c), default=None)
+            if j is None or abs(frei[j][0] - c) > tol:
+                fehl.append("fehlt")
+            else:
+                frei.pop(j)
+        fehl += ["neu"] * len(frei)
+        out["stege_render" if achse == 1 else "riegel_render"] = len(sr)
+        out["stege_ki" if achse == 1 else "riegel_ki"] = len(sk)
+    out["sprossen_ok"] = not fehl
+    return out
+
+
+def toleranz_auswerten(R, Kw, T_lab, K_lab, masken, hart, gueltig, ebn, p: dict | None = None):
+    """Je Komponente des Schutzbereichs: KI in der Toleranz (behalten) oder zuruecksetzen.
+    Rueckgabe: alpha_reset (0..1, 1 = Render), Labelbild, Komponentenliste mit Kennzahlen, Zusammenfassung."""
+    import cv2
+    p = {**TOL, **(p or {})}
+    H, W = hart.shape
+    s = W / 3840.0
+    leer = np.zeros((H, W), bool)
+    kam = ebn["meta"].get("kamera_intern") or {}
+    winkel = oben_winkel(ebn.get("tiefe_m"), kam, masken.get("boden", leer))
+    lab, komps = komponenten_bilden(masken, hart, ebn.get("kanten"), winkel, p, s)
+    n = len(komps)
+    # Kanten in voller Aufloesung (Helligkeit je Bild im Schutzbereich ausgeglichen)
+    gR, gK = _grau(R), _grau(Kw)
+
+    def stufen(g, sigma):
+        e = (NK._ausgleich(g, hart if hart.sum() > 100 else None) * 255).astype(np.uint8)
+        e = cv2.GaussianBlur(e, (0, 0), sigma * max(s, 0.5))
+        return e, {k: cv2.Canny(e, lo, hi) > 0 for k, (lo, hi) in (("lo", (20, 50)), ("mid", (40, 100)),
+                                                                     ("hi", (60, 150)))}
+    # fein (Lage der Kanten): Abstand Render-Kante -> KI-Kante; grob (Bauteilkanten, Ornament und Putzkorn der
+    # KI geglaettet): Kanten-F1, damit reicheres KI-Detail auf derselben Geometrie nicht als Abweichung zaehlt
+    eR, KR = stufen(gR, 1.2)
+    eK, KK = stufen(gK, 1.2)
+    _, KRg = stufen(gR, 2.5)
+    _, KKg = stufen(gK, 2.5)
+    tol = p["toleranz_px"] * s
+    dK = ndi.distance_transform_edt(~KK["mid"])
+    dRg = ndi.distance_transform_edt(~KRg["lo"])
+    dKg = ndi.distance_transform_edt(~KKg["lo"])
+    ok_px = gueltig & (lab > 0)
+
+    def zaehl(maske, gewicht=None):
+        mm = maske & ok_px
+        return np.bincount(lab[mm], weights=None if gewicht is None else gewicht[mm], minlength=n)
+    nRh = zaehl(KR["hi"])
+    dsum = zaehl(KR["hi"], np.minimum(dK, 6.0 * max(s, 0.5)))
+    nRg = zaehl(KRg["hi"])
+    nRg_t = zaehl(KRg["hi"] & (dKg <= tol))
+    nKh = zaehl(KKg["hi"])
+    nKh_t = zaehl(KKg["hi"] & (dRg <= tol))
+    flaeche = np.bincount(lab.ravel(), minlength=n)
+    fl_ok = zaehl(np.ones((H, W), bool))
+    voll = nRg_t / np.maximum(nRg, 1)
+    praez = nKh_t / np.maximum(nKh, 1)
+    f1 = 2 * voll * praez / np.maximum(voll + praez, 1e-9)
+    abstand = dsum / np.maximum(nRh, 1) / max(s, 1e-6)          # in 4k-Pixeln
+    # oertlicher Versatz: normierte Kreuzkorrelation der Gradientenbetraege je Komponente ueber kleine Verschiebungen
+    def gradbetrag(e):
+        ef = e.astype(np.float32) / 255.0
+        return np.hypot(cv2.Sobel(ef, cv2.CV_32F, 1, 0, ksize=3), cv2.Sobel(ef, cv2.CV_32F, 0, 1, ksize=3))
+    mR, mK = gradbetrag(eR).ravel(), gradbetrag(eK).ravel()
+    # Blendenproblem: an einer einzelnen geraden Kante (Gesimslinie, Seil) ist der Versatz entlang der Kante
+    # unbestimmt. Strukturtensor des Renders je Komponente; Versatz nur bei zweidimensionaler Struktur
+    ef = eR.astype(np.float32) / 255.0
+    gx, gy = cv2.Sobel(ef, cv2.CV_32F, 1, 0, ksize=3)[ok_px], cv2.Sobel(ef, cv2.CV_32F, 0, 1, ksize=3)[ok_px]
+    lo_ = lab[ok_px]
+    jxx, jyy, jxy = (np.bincount(lo_, v, minlength=n) for v in (gx * gx, gy * gy, gx * gy))
+    spur = jxx + jyy
+    diskr = np.sqrt(np.maximum((jxx - jyy) ** 2 + 4 * jxy ** 2, 0))
+    isotropie = (spur - diskr) / np.maximum(spur + diskr, 1e-12)      # kleiner/grosser Eigenwert
+    idx = np.flatnonzero(ok_px)
+    li = lab.ravel()[idx]
+    a = mR[idx]
+    cnt = np.bincount(li, minlength=n).astype(np.float64)
+    Sa = np.bincount(li, a, minlength=n)
+    Saa = np.bincount(li, a * a, minlength=n)
+    r = int(p["suche_px"])
+    yy, xx = idx // W, idx % W
+    ncc = np.full((2 * r + 1, 2 * r + 1, n), -1.0)
+    for dy in range(-r, r + 1):
+        y2 = np.clip(yy + dy, 0, H - 1)
+        for dx in range(-r, r + 1):
+            b = mK[y2 * W + np.clip(xx + dx, 0, W - 1)]
+            Sb = np.bincount(li, b, minlength=n)
+            Sbb = np.bincount(li, b * b, minlength=n)
+            Sab = np.bincount(li, a * b, minlength=n)
+            c = Sab - Sa * Sb / np.maximum(cnt, 1)
+            v = (Saa - Sa ** 2 / np.maximum(cnt, 1)) * (Sbb - Sb ** 2 / np.maximum(cnt, 1))
+            ncc[dy + r, dx + r] = c / np.sqrt(np.maximum(v, 1e-12))
+    flach = ncc.reshape(-1, n)
+    best = flach.argmax(0)
+    ncc_max = flach.max(0)
+    by, bx = best // (2 * r + 1), best % (2 * r + 1)
+
+    def sub(c, cm, cp):                                  # Parabel-Feinlage
+        d = cm - 2 * c + cp
+        return np.where(np.abs(d) > 1e-9, 0.5 * (cm - cp) / np.where(np.abs(d) > 1e-9, d, 1), 0.0)
+    ar = np.arange(n)
+    c0 = ncc[by, bx, ar]
+    oy = sub(c0, ncc[np.clip(by - 1, 0, 2 * r), bx, ar], ncc[np.clip(by + 1, 0, 2 * r), bx, ar])
+    ox = sub(c0, ncc[by, np.clip(bx - 1, 0, 2 * r), ar], ncc[by, np.clip(bx + 1, 0, 2 * r), ar])
+    vy = np.where((by > 0) & (by < 2 * r), by - r + oy, by - r)
+    vx = np.where((bx > 0) & (bx < 2 * r), bx - r + ox, bx - r)
+    versatz = np.hypot(vy, vx) / max(s, 1e-6)
+    # flache Korrelationsflaeche (Putzkorn, Schattierung): Versatz nur, wenn er die Korrelation deutlich verbessert
+    gewinn = ncc_max - ncc[r, r]
+    versatz = np.where((gewinn >= p["versatz_gewinn"]) & (isotropie >= p["versatz_isotropie"]), versatz, 0.0)
+
+    # Entscheidung je Komponente
+    zurueck = np.zeros(n, bool)
+    glas_zurueck = np.zeros(n, bool)
+    infos = [None] * n
+    gruende_alle = {}
+    for i in range(1, n):
+        k = komps[i]
+        gr = []
+        if fl_ok[i] < p["gueltig_min"] * flaeche[i]:
+            gr.append("ohne_ki_deckung")
+        if nRh[i] >= p["min_kanten"] * s and abstand[i] > p["kantenabstand_px"]:
+            gr.append("kantenabstand")
+        if nRg[i] >= p["min_kanten"] * s:
+            if f1[i] < p["f1_min"]:
+                gr.append("kanten_f1")
+        elif nKh[i] >= p["flach_kanten"] * s and praez[i] < p["flach_praezision"]:
+            gr.append("erfundene_kanten")
+        if ncc_max[i] >= p["ncc_min"] and versatz[i] > p["versatz_px"]:
+            gr.append("versatz")
+        infos[i] = {"id": i, **k, "flaeche_px": int(flaeche[i]), "render_kanten": int(nRh[i]),
+                    "kantenabstand_px": round(float(abstand[i]), 2) if nRh[i] else None,
+                    "kanten_f1": round(float(f1[i]), 3) if nRg[i] else None,
+                    "vollstaendig": round(float(voll[i]), 3) if nRg[i] else None,
+                    "praezision": round(float(praez[i]), 3) if nKh[i] else None,
+                    "versatz_px": round(float(versatz[i]), 2) if ncc_max[i] >= p["ncc_min"] else None,
+                    "ncc": round(float(ncc_max[i]), 3), "ncc_gewinn": round(float(gewinn[i]), 3)}
+        zurueck[i] = bool(gr)
+        infos[i]["gruende"] = gr
+    # Fenster gesondert
+    glas, rahmen = masken.get("fenster_glas", leer), masken.get("fenster_rahmen", leer)
+    objs = ndi.find_objects(lab)
+    rand = max(3, int(round(6 * s)))
+    fenster_ids = []
+    for i in range(1, n):
+        if komps[i]["typ"] != "fenster" or i - 1 >= len(objs) or objs[i - 1] is None:
+            continue
+        sl0 = objs[i - 1]
+        sl = (slice(max(0, sl0[0].start - rand), min(H, sl0[0].stop + rand)),
+              slice(max(0, sl0[1].start - rand), min(W, sl0[1].stop + rand)))
+        m = lab[sl] == i
+        f = _fenster_pruefen(sl, m, glas[sl], rahmen[sl], K_lab, T_lab, p, s)
+        infos[i].update(f)
+        gr = infos[i]["gruende"]
+        if "glas_versatz_px" in f and f["glas_versatz_px"] > p["glas_schwerpunkt_px"] * s:
+            gr.append("glas_lage")
+        if "glas_flaeche" in f and not (p["glas_flaeche"][0] <= f["glas_flaeche"] <= p["glas_flaeche"][1]):
+            gr.append("glas_flaeche")
+        if f.get("sprossen_ok") is False:
+            gr.append("sprossen")
+        zurueck[i] = bool(gr)
+        if not zurueck[i] and f.get("innen_ok") is False:
+            glas_zurueck[i] = True
+            infos[i]["glas_zurueck"] = "innenleben"
+        ys, xs = np.nonzero(m)
+        fenster_ids.append((i, float(ys.mean() + sl[0].start), float(xs.mean() + sl[1].start),
+                            float(np.ptp(ys) + 1), float(np.ptp(xs) + 1)))
+    # Fensterreihen: Nachbarn auf gleicher Hoehe (Mitte innerhalb 0,4 Fensterhoehen, Luecke bis 3 Fensterbreiten)
+    reihen = []
+    if fenster_ids:
+        eltern = list(range(len(fenster_ids)))
+
+        def wurzel(x):
+            while eltern[x] != x:
+                eltern[x] = eltern[eltern[x]]
+                x = eltern[x]
+            return x
+        ordn = sorted(range(len(fenster_ids)), key=lambda q: fenster_ids[q][2])
+        for ai, qa in enumerate(ordn):
+            _, ya, xa, ha, wa = fenster_ids[qa]
+            for qb in ordn[ai + 1:]:
+                _, yb, xb, hb, wb = fenster_ids[qb]
+                if xb - xa > 3.5 * max(wa, wb):
+                    break
+                if abs(yb - ya) < 0.4 * min(ha, hb) and 0.6 < hb / ha < 1.6:
+                    eltern[wurzel(qb)] = wurzel(qa)
+        gruppen = {}
+        for q in range(len(fenster_ids)):
+            gruppen.setdefault(wurzel(q), []).append(fenster_ids[q][0])
+        for ids in gruppen.values():
+            if len(ids) < p["reihe_min"]:
+                continue
+            anteil = float(np.mean([zurueck[i] for i in ids]))
+            ganz = anteil >= p["reihe_anteil"]
+            if ganz:
+                for i in ids:
+                    if not zurueck[i]:
+                        zurueck[i] = True
+                        infos[i]["gruende"].append("reihe")
+            reihen.append({"fenster": len(ids), "zurueck_anteil": round(anteil, 2), "ganz_zurueck": ganz})
+    # Masken und weiche Naht (nach aussen in die behaltene KI, nur im Schutzbereich)
+    typ_fein = np.array([False] + [k["typ"] in TYP_FEIN for k in komps[1:]])
+    Z = zurueck[lab] & (lab > 0)
+    Zf = Z & typ_fein[lab]
+    Zg = glas_zurueck[lab] & glas & (lab > 0)
+    Za = Z & ~typ_fein[lab]
+
+    def rampe(M, w):
+        if not M.any():
+            return np.zeros((H, W), np.float32)
+        d = ndi.distance_transform_edt(~M)
+        return np.clip(1.0 - d / max(w * s, 1.0), 0, 1).astype(np.float32)
+    alpha = np.maximum(np.maximum(rampe(Zf | Zg, p["naht_fein_px"]), rampe(Za, p["naht_flaeche_px"])), 0)
+    # Zusammenfassung je Typ
+    je_typ = {}
+    gesamt = float(max(1, (lab > 0).sum()))
+    for i in range(1, n):
+        t = komps[i]["typ"]
+        e = je_typ.setdefault(t, {"anzahl": 0, "behalten": 0, "zurueck": 0, "nur_glas_zurueck": 0,
+                                  "flaeche_prozent_schutz": 0.0, "flaeche_zurueck_prozent_schutz": 0.0,
+                                  "gruende": {}})
+        e["anzahl"] += 1
+        e["zurueck" if zurueck[i] else "behalten"] += 1
+        e["nur_glas_zurueck"] += int(glas_zurueck[i])
+        e["flaeche_prozent_schutz"] += 100.0 * flaeche[i] / gesamt
+        if zurueck[i]:
+            e["flaeche_zurueck_prozent_schutz"] += 100.0 * flaeche[i] / gesamt
+        for g_ in infos[i]["gruende"]:
+            e["gruende"][g_] = e["gruende"].get(g_, 0) + 1
+            gruende_alle[g_] = gruende_alle.get(g_, 0) + 1
+    for e in je_typ.values():
+        e["flaeche_prozent_schutz"] = round(e["flaeche_prozent_schutz"], 2)
+        e["flaeche_zurueck_prozent_schutz"] = round(e["flaeche_zurueck_prozent_schutz"], 2)
+    im_schutz = lab > 0
+    ki_anteil = float(((1 - alpha)[im_schutz]).mean()) if im_schutz.any() else 0.0
+    zus = {"parameter": p, "komponenten": n - 1, "je_typ": je_typ, "gruende": gruende_alle,
+           "fensterreihen": {"anzahl": len(reihen), "ganz_zurueck": sum(r_["ganz_zurueck"] for r_ in reihen),
+                             "liste": reihen[:60]},
+           "ki_behalten_prozent_schutz": round(100 * ki_anteil, 2),
+           "zurueck_prozent_schutz": round(100 * (1 - ki_anteil), 2),
+           "hinweis": "Anteile auf die Flaeche des Schutzbereichs (ohne KI-Vordergrund und Laub) bezogen; "
+                      "Pixelwerte in 4k-Pixeln (3840 px Breite)"}
+    status = np.zeros(n, np.int8)                         # 1 behalten, 2 zurueck, 3 nur Glas zurueck
+    status[1:] = np.where(zurueck[1:], 2, np.where(glas_zurueck[1:], 3, 1))
+    return alpha, lab, status, [x for x in infos[1:]], zus
+
+
+def _toleranz_pruefbild(R, Kw, out, lab, status, glas, kz, pfad: Path) -> Path:
+    """Render | KI ausgerichtet | Komponenten (gruen KI behalten, rot zurueckgesetzt, orange nur Glas) | Ergebnis."""
+    bw = min(1200, R.shape[1])
+    bh = round(R.shape[0] * bw / R.shape[1])
+    st = status[_resize(lab, (bw, bh), nearest=True)]
+    gl = _resize(glas, (bw, bh), nearest=True)
+    basis = _resize(out, (bw, bh))
+    farbe = np.zeros((bh, bw, 3), np.float32)
+    deck = np.zeros((bh, bw), np.float32)
+    for code, name in ((1, "behalten"), (2, "zurueck")):
+        farbe[st == code] = TYP_FARBE[name]
+        deck[st == code] = 0.5
+    m3 = (st == 3)
+    farbe[m3] = TYP_FARBE["behalten"]
+    deck[m3] = 0.5
+    farbe[m3 & gl] = TYP_FARBE["glas_zurueck"]
+    ueber = basis * (1 - deck[..., None]) + farbe * deck[..., None]
+    lk = _resize(lab, (bw, bh), nearest=True)
+    grenze = (np.diff(lk, axis=0, prepend=lk[:1]) != 0) | (np.diff(lk, axis=1, prepend=lk[:, :1]) != 0)
+    ueber[grenze & (lk > 0)] *= 0.55
+    tafeln = [("Render (Blender)", R), ("KI ausgerichtet", Kw),
+              ("Komponenten: gruen KI behalten, rot Render, orange nur Glas Render", ueber), ("Ergebnis Toleranz", out)]
+    kopf = 56
+    o = Image.new("RGB", (2 * bw + 10, 2 * (bh + 24) + kopf), (250, 250, 248))
+    d = ImageDraw.Draw(o)
+    f = _schrift(16)
+    for i, (t, x) in enumerate(tafeln):
+        im = Image.fromarray(np.rint(np.clip(x if x.shape[1] == bw else _resize(x, (bw, bh)), 0, 1) * 255)
+                             .astype(np.uint8))
+        px, py = (i % 2) * (bw + 10), kopf + (i // 2) * (bh + 24)
+        d.text((px + 4, py + 3), t, fill=(40, 40, 40), font=f)
+        o.paste(im, (px, py + 22))
+    t = kz["toleranz"]
+    fen = t["je_typ"].get("fenster", {})
+    d.text((8, 6), f"Schutz mit Toleranz: KI behalten {t['ki_behalten_prozent_schutz']} % des Schutzbereichs, "
+                   f"{t['komponenten']} Komponenten  |  Fenster {fen.get('behalten', 0)} KI / {fen.get('zurueck', 0)} "
+                   f"Render / {fen.get('nur_glas_zurueck', 0)} nur Glas  |  Kanten-F1 Schutzbereich nachher "
+                   f"{kz['schutzbereich']['kanten_nachher']['f1']}", fill=(30, 30, 30), font=f)
+    d.text((8, 30), "Gruende: " + ", ".join(f"{k} {v}" for k, v in sorted(t["gruende"].items(), key=lambda x: -x[1])),
+           fill=(90, 90, 90), font=f)
+    o.save(pfad, quality=90)
+    return pfad
+
+
 def _autos_klassen(ebenen, klassen, ohne, mit_autos: bool) -> list[str]:
     meta = json.loads((Path(ebenen) / "ebenen.json").read_text())
     k = [x for x in (klassen or meta["schutz_klassen"]) if x not in (ohne or []) and x != "autos"]
@@ -969,24 +1570,28 @@ def autos_vergleich(a_pfad, b_pfad, ziel, titel=("Autos: Blender-Modelle", "Auto
     return str(ziel)
 
 
+F1_GRENZE = {"voll": 0.95, "toleranz": 0.90}    # Exit 1 darunter (Toleranz: KI-Kanten bleiben, je Bauteil geprueft)
+
+
 def main_cli(render, ki, ebenen, aus=None, klassen=None, ohne=None, farbe=1.0, modell="homographie",
-             vordergrund=True, autos="projekt") -> int:
+             vordergrund=True, autos="projekt", modus="voll") -> int:
     kl = [k for k in (klassen or "").split(",") if k] or None
     oh = [k for k in (ohne or "").split(",") if k]
+    grenze = F1_GRENZE[modus]
     if autos == "projekt":
-        kz = schutz_anwenden(render, ki, ebenen, aus, kl, oh, farbe, modell, vordergrund=vordergrund)
+        kz = schutz_anwenden(render, ki, ebenen, aus, kl, oh, farbe, modell, vordergrund=vordergrund, modus=modus)
         print(json.dumps(kz, ensure_ascii=False, indent=1))
         f1 = kz["schutzbereich"]["kanten_nachher"]["f1"]
-        return 0 if f1 is None or f1 >= 0.95 else 1
+        return 0 if f1 is None or f1 >= grenze else 1
     basis = Path(aus) if aus else Path(ki).with_name(Path(ki).stem + "_schutz.jpg")
     varianten = {"modelle": True, "ki": False} if autos == "beide" else {autos: autos == "modelle"}
     ergebnisse, ok = {}, True
     for name, mit in varianten.items():
         ziel = basis.with_name(f"{basis.stem}_{name}{basis.suffix}") if autos == "beide" else basis
         kz = schutz_anwenden(render, ki, ebenen, ziel, _autos_klassen(ebenen, kl, oh, mit), [], farbe, modell,
-                             vordergrund=vordergrund)
+                             vordergrund=vordergrund, modus=modus)
         f1 = kz["schutzbereich"]["kanten_nachher"]["f1"]
-        ok &= f1 is None or f1 >= 0.95
+        ok &= f1 is None or f1 >= grenze
         ergebnisse[name] = {"ergebnis": kz["ergebnis"], "pruefbild": kz.get("pruefbild"), "kanten_f1_nachher": f1,
                             "vordergrund_prozent": kz["vordergrund"]["anteil_prozent"]}
     if autos == "beide":

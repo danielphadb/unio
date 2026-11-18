@@ -14,7 +14,9 @@ Beispiele:
   python immoviz.py render  projects/wimmergasse-20 --cam ecke --light golden_hour --ebenen   (plus Masken, Tiefe, Schutzmaske)
   python immoviz.py schutz  --render <render.png> --ki <veredelt.jpg> --ebenen <ordner>       (Gebäude aus Blender zurück)
   python immoviz.py grading --bild <bild.jpg> --leitbild <referenz.jpg> --staerke 0.6         (Look an Leitbild)
+  python immoviz.py schutz  ... --modus toleranz      (je Bauteil: KI behalten, wenn geometrisch in der Toleranz)
   python immoviz.py studio  (Web-Oberfläche auf Port 8765)
+  python immoviz.py ki-lokal --render <render> --ebenen <ordner> --staerke 0.3   (Mac: SDXL + ControlNet, Tiefe/Kanten)
 """
 from __future__ import annotations
 
@@ -202,6 +204,35 @@ def main():
     fg.add_argument("--notiz", default="")
     fg.add_argument("--pruefbogen", default="", help="Pfad zum Prüfbogen, der dem Kunden vorlag")
     fg.add_argument("--pruefen", action="store_true", help="Gate wie vor der Veredelung (Exit 1, wenn gesperrt)")
+    sz.add_argument("--modus", choices=["voll", "toleranz"], default="voll",
+                    help="voll (Standard): ganzer Schutzbereich aus dem Render; toleranz: Schutzbereich in Bauteile "
+                         "zerlegen (Fenster, Gelaenderfeld, Leuchte, Gesims, Dach, Fassadenfeld), KI behalten, wo sie "
+                         "geometrisch passt (lib/kompositing.py TOL), nur abweichende Bauteile aus dem Render; "
+                         "zusaetzlich _komponenten.jpg/.json")
+    kl = sub.add_parser("ki-lokal", help="Lokaler KI-Schritt (Mac, MPS): SDXL + ControlNet-Union (Tiefe, Kanten aus den "
+                                         "Render-Ebenen), Bild zu Bild mit geringer Staerke, Kacheln fuer 4k, Inpainting "
+                                         "nur in freigegebenen Masken; braucht requirements_ki.txt")
+    kl.add_argument("--render", required=True, help="Blender-Bild (Beauty) zu den Ebenen")
+    kl.add_argument("--ebenen", required=True, help="Ordner <kamera>_<licht>_ebenen (tiefe.png, kanten.png, Masken)")
+    kl.add_argument("--prompt", default=None, help="Standard: lib/ki_lokal.py PROMPT_STANDARD (kurz, CLIP 77 Token)")
+    kl.add_argument("--negativ", default=None)
+    kl.add_argument("--modell", default="sdxl", choices=["sdxl", "realvisxl", "test"],
+                    help="sdxl (Standard, Open RAIL++-M); realvisxl nur nach Freigabe; test = Zufallsmodell")
+    kl.add_argument("--staerke", type=float, default=None, help="Veraenderungsstaerke Bild zu Bild (Standard 0,3)")
+    kl.add_argument("--schritte", type=int, default=None)
+    kl.add_argument("--cfg", type=float, default=None)
+    kl.add_argument("--steuerung", default=None, help="tiefe,kanten[,tile] (Standard tiefe,kanten)")
+    kl.add_argument("--steuerung-staerke", type=float, default=None, help="ControlNet-Gewicht (Standard 0,8)")
+    kl.add_argument("--kachel", type=int, default=None, help="Kachelgroesse (Standard 1024)")
+    kl.add_argument("--ueberlappung", type=int, default=None, help="Standard 256")
+    kl.add_argument("--seed", type=int, default=None)
+    kl.add_argument("--farbe-halten", type=float, default=None, help="Lab-Angleich je Kachel an den Render 0..1 (0,5)")
+    kl.add_argument("--inpaint", default=None, help="nur diese Klassen neu zeichnen: himmel,baeume,vegetation,"
+                                                    "menschen_platzhalter,ausstattung")
+    kl.add_argument("--inpaint-staerke", type=float, default=None, help="Standard 0,85")
+    kl.add_argument("--nur-inpaint", action="store_true", help="ohne anschliessendes Verfeinern")
+    kl.add_argument("--arbeitsbreite", type=int, default=None, help="kleiner rechnen (Test), Ergebnis in Render-Groesse")
+    kl.add_argument("--out", default=None)
     fg.add_argument("--trockenlauf", action="store_true")
     fg.add_argument("--force", action="store_true", help="Sperre bewusst übergehen (wird ausgegeben)")
     pr = sub.add_parser("prompt", help="Vor einem Higgsfield-Auftrag (MCP oder Studio): Freigabe prüfen und den "
@@ -222,7 +253,10 @@ def main():
     if a.cmd == "schutz":
         from lib import kompositing as KO
         sys.exit(KO.main_cli(a.render, a.ki, a.ebenen, a.out, a.klassen, a.ohne, a.farbe, a.ausrichtung,
-                             not a.ohne_vordergrund, a.autos))
+                             not a.ohne_vordergrund, a.autos, a.modus))
+    if a.cmd == "ki-lokal":
+        from lib import ki_lokal as KL
+        sys.exit(KL.main_cli(a))
     if a.cmd == "grading":
         from lib import grading as GR
         sys.exit(GR.main_cli(a))

@@ -1,0 +1,511 @@
+{
+ "render": "/home/user/unio/immoviz/projects/wimmergasse-20/renders/r7_basis/wimmergasse-20_ecke_erhoeht_golden_hour_final.jpg",
+ "ki": "/home/user/unio/immoviz/projects/wimmergasse-20/renders/higgsfield/ecke_erhoeht_golden_hour_r7_ki.jpg",
+ "ebenen": "/home/user/unio/immoviz/projects/wimmergasse-20/renders/r7_basis/ecke_erhoeht_golden_hour_ebenen",
+ "schutz_klassen": [
+  "gebaeude_objekt",
+  "fenster_glas",
+  "fenster_rahmen",
+  "gelaender",
+  "leuchten",
+  "strassenmoebel"
+ ],
+ "anteil_geschuetzt_prozent": 25.73,
+ "ausrichtung": {
+  "modell": "homographie",
+  "massstab_ki_zu_render": 0.9978,
+  "schiebung_prozent": 0.13,
+  "ecc_korrelation": 0.7037,
+  "kantenabstand_median_px": 1.0,
+  "kantenabstand_mittel_px": 1.06,
+  "hinweis": "Abstand der Render-Kanten zur naechsten KI-Kante im Schutzbereich, Analysebreite 1600 px",
+  "fein": {
+   "verfahren": "DIS-Fluss, kantengewichtet geglaettet",
+   "sigma_px": 6.0,
+   "verschiebung_4k_px": {
+    "median": 2.09,
+    "p90": 6.34,
+    "max": 9.92
+   }
+  }
+ },
+ "schutzbereich": {
+  "farbabweichung_dE_vorher": 19.75,
+  "farbabweichung_dE_nachher": 16.0,
+  "kanten_vorher": {
+   "f1": 0.8325,
+   "vollstaendig": 0.9329,
+   "praezision": 0.7515
+  },
+  "kanten_nachher": {
+   "f1": 0.9738,
+   "vollstaendig": 0.9859,
+   "praezision": 0.9619
+  },
+  "kantenabstand_mittel_px_vorher": 0.71,
+  "kantenabstand_mittel_px_nachher": 0.25,
+  "gradienten_korrelation_vorher": 0.6976,
+  "gradienten_korrelation_nachher": 0.9539,
+  "hinweis": "kanten: praezision = Anteil starker Kanten des Bildes nahe einer Render-Kante (nichts Neues), vollstaendig = Anteil starker Render-Kanten im Bild (nichts fehlt), Toleranz 1 px. Nachher nahe 1 = Geometrie aus dem Render. dE nachher ist die gewollte Farbangleichung"
+ },
+ "klassen": {
+  "fenster_glas": {
+   "anteil_prozent": 3.24,
+   "kanten_vorher": {
+    "f1": 0.8243,
+    "vollstaendig": 0.8529,
+    "praezision": 0.7977
+   },
+   "kanten_nachher": {
+    "f1": 0.9699,
+    "vollstaendig": 0.9688,
+    "praezision": 0.971
+   }
+  },
+  "fenster_rahmen": {
+   "anteil_prozent": 2.09,
+   "kanten_vorher": {
+    "f1": 0.8692,
+    "vollstaendig": 0.9077,
+    "praezision": 0.8338
+   },
+   "kanten_nachher": {
+    "f1": 0.9583,
+    "vollstaendig": 0.9511,
+    "praezision": 0.9656
+   }
+  },
+  "gelaender": {
+   "anteil_prozent": 1.61,
+   "kanten_vorher": {
+    "f1": 0.7478,
+    "vollstaendig": 0.8455,
+    "praezision": 0.6704
+   },
+   "kanten_nachher": {
+    "f1": 0.9403,
+    "vollstaendig": 0.9578,
+    "praezision": 0.9234
+   }
+  },
+  "leuchten": {
+   "anteil_prozent": 0.5,
+   "kanten_vorher": {
+    "f1": 0.9121,
+    "vollstaendig": 0.9043,
+    "praezision": 0.92
+   },
+   "kanten_nachher": {
+    "f1": 0.9374,
+    "vollstaendig": 0.9249,
+    "praezision": 0.9503
+   }
+  },
+  "gebaeude_objekt": {
+   "anteil_prozent": 23.0,
+   "kanten_vorher": {
+    "f1": 0.8222,
+    "vollstaendig": 0.9056,
+    "praezision": 0.7529
+   },
+   "kanten_nachher": {
+    "f1": 0.9575,
+    "vollstaendig": 0.9744,
+    "praezision": 0.9411
+   }
+  }
+ },
+ "hintergrund": {
+  "verwendet": true,
+  "anteil_prozent": 4.51,
+  "hinweis": "Pixel hinter Platzhaltern (und ungeschuetzten Autos) aus dem zweiten Durchgang"
+ },
+ "laub": {
+  "pixel": 503163,
+  "anteil_prozent": 5.118,
+  "modell_lab": [
+   23.4,
+   -0.0,
+   14.9
+  ],
+  "zone_prozent": 5.9,
+  "parameter": {
+   "saum_anteil": 0.012,
+   "seed_dE": 25.0,
+   "min_dE": 10.0,
+   "maha": 3.0,
+   "struktur": 2.5,
+   "krone_anteil": 0.008
+  },
+  "hinweis": "KI-Laub vor der Fassade (Blender-Baum plus Saum), bleibt KI; Rest dort Render"
+ },
+ "vordergrund": {
+  "aktiv": true,
+  "anteil_prozent": 5.286,
+  "flecken": [
+   {
+    "box_analyse": [
+     1141,
+     1088,
+     1157,
+     1098
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.004
+   },
+   {
+    "box_analyse": [
+     886,
+     1073,
+     888,
+     1090
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.001
+   },
+   {
+    "box_analyse": [
+     1298,
+     1085,
+     1324,
+     1116
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.025
+   },
+   {
+    "box_analyse": [
+     923,
+     1094,
+     964,
+     1198
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.112
+   },
+   {
+    "box_analyse": [
+     685,
+     1098,
+     695,
+     1119
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.008
+   },
+   {
+    "box_analyse": [
+     697,
+     1131,
+     708,
+     1156
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.009
+   },
+   {
+    "box_analyse": [
+     670,
+     1141,
+     677,
+     1149
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.002
+   },
+   {
+    "box_analyse": [
+     713,
+     1161,
+     725,
+     1168
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.003
+   },
+   {
+    "box_analyse": [
+     688,
+     1167,
+     696,
+     1169
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.001
+   },
+   {
+    "box_analyse": [
+     690,
+     1165,
+     698,
+     1190
+    ],
+    "abstand_m": 25.9,
+    "hoehe_m_aus_tiefe": 0.49,
+    "anteil_prozent": 0.0
+   },
+   {
+    "box_analyse": [
+     268,
+     1217,
+     275,
+     1229
+    ],
+    "abstand_m": 21.3,
+    "hoehe_m_aus_tiefe": 0.18,
+    "anteil_prozent": 0.001
+   }
+  ],
+  "verworfen": [],
+  "parameter": {
+   "schwelle": 14.0,
+   "schwelle_glas": 26.0,
+   "oeffnen_px": 4,
+   "boden_min_px": 60,
+   "max_hoehe_m": 2.4,
+   "vor_fassade_m": 0.4,
+   "statistik_ausreisser": 20.0,
+   "platzhalter_rand": [
+    1.0,
+    0.25,
+    0.08
+   ],
+   "platzhalter_min_px": 20
+  },
+  "hinweis": "KI-Pixel vor der geschuetzten Flaeche, die als Person/Auto am Boden gelten und nicht zurueckgesetzt werden (gruen im Pruefbild)"
+ },
+ "modus": "toleranz",
+ "ergebnis": "/tmp/claude-0/-home-user/4efdce14-7e10-5b98-9dc3-fc44cf246a5c/scratchpad/tol/ecke_erhoeht_golden_hour_toleranz.jpg",
+ "toleranz": {
+  "parameter": {
+   "kantenabstand_px": 1.5,
+   "f1_min": 0.9,
+   "toleranz_px": 2.0,
+   "versatz_px": 1.5,
+   "suche_px": 3,
+   "ncc_min": 0.3,
+   "versatz_gewinn": 0.05,
+   "versatz_isotropie": 0.15,
+   "min_kanten": 30,
+   "flach_praezision": 0.8,
+   "flach_kanten": 60,
+   "kachel_px": 256,
+   "fenster_max_kacheln": 4,
+   "min_flaeche_px": 400,
+   "fenster_min_px": 150,
+   "gesims_seitenverhaeltnis": 4.0,
+   "gesims_max_hoehe_px": 90,
+   "dach_winkel_grad": 50.0,
+   "glas_schwerpunkt_px": 3.0,
+   "glas_flaeche": [
+    0.75,
+    1.33
+   ],
+   "sprossen_kontrast_dE": 10.0,
+   "sprossen_lage_px": 2.5,
+   "innen_dL": 22.0,
+   "innen_anteil": 0.3,
+   "lampe_dL": 30.0,
+   "lampe_anteil": 0.04,
+   "reihe_anteil": 0.5,
+   "reihe_min": 3,
+   "gueltig_min": 0.9,
+   "naht_fein_px": 2.0,
+   "naht_flaeche_px": 16.0,
+   "fein_sigma_px": 6.0,
+   "fein_max_px": 10.0,
+   "fein_arbeit": 0.5
+  },
+  "komponenten": 1302,
+  "je_typ": {
+   "fenster": {
+    "anzahl": 128,
+    "behalten": 17,
+    "zurueck": 111,
+    "nur_glas_zurueck": 6,
+    "flaeche_prozent_schutz": 17.31,
+    "flaeche_zurueck_prozent_schutz": 16.87,
+    "gruende": {
+     "erfundene_kanten": 17,
+     "glas_lage": 46,
+     "sprossen": 72,
+     "kanten_f1": 43,
+     "kantenabstand": 19,
+     "versatz": 19,
+     "reihe": 6,
+     "glas_flaeche": 32
+    }
+   },
+   "gelaenderfeld": {
+    "anzahl": 99,
+    "behalten": 54,
+    "zurueck": 45,
+    "nur_glas_zurueck": 0,
+    "flaeche_prozent_schutz": 5.13,
+    "flaeche_zurueck_prozent_schutz": 4.52,
+    "gruende": {
+     "kanten_f1": 19,
+     "kantenabstand": 18,
+     "erfundene_kanten": 15,
+     "versatz": 18
+    }
+   },
+   "leuchte": {
+    "anzahl": 325,
+    "behalten": 276,
+    "zurueck": 49,
+    "nur_glas_zurueck": 0,
+    "flaeche_prozent_schutz": 1.63,
+    "flaeche_zurueck_prozent_schutz": 0.83,
+    "gruende": {
+     "kantenabstand": 9,
+     "erfundene_kanten": 6,
+     "kanten_f1": 9,
+     "versatz": 25,
+     "ohne_ki_deckung": 3
+    }
+   },
+   "moebel": {
+    "anzahl": 11,
+    "behalten": 7,
+    "zurueck": 4,
+    "nur_glas_zurueck": 0,
+    "flaeche_prozent_schutz": 0.94,
+    "flaeche_zurueck_prozent_schutz": 0.3,
+    "gruende": {
+     "kantenabstand": 2,
+     "versatz": 3,
+     "kanten_f1": 2
+    }
+   },
+   "fassadenfeld": {
+    "anzahl": 613,
+    "behalten": 269,
+    "zurueck": 344,
+    "nur_glas_zurueck": 0,
+    "flaeche_prozent_schutz": 68.48,
+    "flaeche_zurueck_prozent_schutz": 50.18,
+    "gruende": {
+     "kanten_f1": 186,
+     "versatz": 96,
+     "erfundene_kanten": 63,
+     "kantenabstand": 78
+    }
+   },
+   "dachflaeche": {
+    "anzahl": 103,
+    "behalten": 57,
+    "zurueck": 46,
+    "nur_glas_zurueck": 0,
+    "flaeche_prozent_schutz": 3.73,
+    "flaeche_zurueck_prozent_schutz": 1.98,
+    "gruende": {
+     "versatz": 14,
+     "kanten_f1": 26,
+     "kantenabstand": 3,
+     "erfundene_kanten": 12
+    }
+   },
+   "gesims": {
+    "anzahl": 23,
+    "behalten": 18,
+    "zurueck": 5,
+    "nur_glas_zurueck": 0,
+    "flaeche_prozent_schutz": 2.77,
+    "flaeche_zurueck_prozent_schutz": 1.02,
+    "gruende": {
+     "erfundene_kanten": 4,
+     "kantenabstand": 1
+    }
+   }
+  },
+  "gruende": {
+   "erfundene_kanten": 117,
+   "glas_lage": 46,
+   "sprossen": 72,
+   "kanten_f1": 285,
+   "kantenabstand": 130,
+   "versatz": 175,
+   "reihe": 6,
+   "glas_flaeche": 32,
+   "ohne_ki_deckung": 3
+  },
+  "fensterreihen": {
+   "anzahl": 13,
+   "ganz_zurueck": 12,
+   "liste": [
+    {
+     "fenster": 8,
+     "zurueck_anteil": 0.75,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 10,
+     "zurueck_anteil": 1.0,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 3,
+     "zurueck_anteil": 0.67,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 3,
+     "zurueck_anteil": 0.67,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 7,
+     "zurueck_anteil": 0.14,
+     "ganz_zurueck": false
+    },
+    {
+     "fenster": 4,
+     "zurueck_anteil": 0.5,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 12,
+     "zurueck_anteil": 1.0,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 3,
+     "zurueck_anteil": 1.0,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 12,
+     "zurueck_anteil": 1.0,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 12,
+     "zurueck_anteil": 1.0,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 3,
+     "zurueck_anteil": 1.0,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 12,
+     "zurueck_anteil": 1.0,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 6,
+     "zurueck_anteil": 1.0,
+     "ganz_zurueck": true
+    }
+   ]
+  },
+  "ki_behalten_prozent_schutz": 17.28,
+  "zurueck_prozent_schutz": 82.72,
+  "hinweis": "Anteile auf die Flaeche des Schutzbereichs (ohne KI-Vordergrund und Laub) bezogen; Pixelwerte in 4k-Pixeln (3840 px Breite)",
+  "komponenten_json": "/tmp/claude-0/-home-user/4efdce14-7e10-5b98-9dc3-fc44cf246a5c/scratchpad/tol/ecke_erhoeht_golden_hour_toleranz_komponenten.json"
+ },
+ "pruefbild_komponenten": "/tmp/claude-0/-home-user/4efdce14-7e10-5b98-9dc3-fc44cf246a5c/scratchpad/tol/ecke_erhoeht_golden_hour_toleranz_komponenten.jpg",
+ "pruefbild": "/tmp/claude-0/-home-user/4efdce14-7e10-5b98-9dc3-fc44cf246a5c/scratchpad/tol/ecke_erhoeht_golden_hour_toleranz_pruefung.jpg"
+}

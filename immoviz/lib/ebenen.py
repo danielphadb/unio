@@ -42,12 +42,16 @@ import numpy as np
 
 # ------------------------------------------------------------------ Klassen
 KLASSEN = ["gebaeude_objekt", "fenster_glas", "fenster_rahmen", "gelaender", "leuchten", "strassenmoebel", "autos",
-           "baeume", "menschen_platzhalter", "nachbarn", "boden", "himmel", "sonstige"]
+           "baeume", "vegetation", "ausstattung", "menschen_platzhalter", "nachbarn", "boden", "himmel", "sonstige"]
+# vegetation (Gruendach, Pflanzen, Bepflanzung in Troegen, Hecken, Straeucher) und ausstattung (Terrassenmoebel,
+# Pergola, Kissen, Kuebel; neubau.ausstattung) sind standardmaessig NICHT geschuetzt: die KI darf sie realistisch
+# zeichnen (Blender gibt Lage und Groesse vor). Schutz bei Bedarf je Projekt mit `schutz: {plus: [ausstattung]}`.
 SCHUTZ_STANDARD = ["gebaeude_objekt", "fenster_glas", "fenster_rahmen", "gelaender", "leuchten", "strassenmoebel",
                    "autos"]
 FARBEN = {"gebaeude_objekt": (230, 190, 120), "fenster_glas": (40, 120, 230), "fenster_rahmen": (250, 250, 250),
           "gelaender": (230, 40, 200), "leuchten": (255, 230, 0), "strassenmoebel": (255, 120, 0),
-          "autos": (220, 30, 30), "baeume": (40, 170, 60), "menschen_platzhalter": (0, 230, 230),
+          "autos": (220, 30, 30), "baeume": (40, 170, 60), "vegetation": (140, 215, 70),
+          "ausstattung": (170, 100, 50), "menschen_platzhalter": (0, 230, 230),
           "nachbarn": (150, 140, 130), "boden": (80, 80, 80), "himmel": (170, 210, 250), "sonstige": (120, 0, 120)}
 
 # Bereich: "objekt" = Objekt in der Collection "Objekt" (Held, auch Neubau-Gruppen) oder Name hero_*/nb_*,
@@ -56,19 +60,29 @@ FARBEN = {"gebaeude_objekt": (230, 190, 120), "fenster_glas": (40, 120, 230), "f
 REGELN = [
     {"klasse": "menschen_platzhalter", "objekt": r"mensch|person|figur|passant|people|human|silhouette",
      "collection": r"mensch|person|figur|passant|people"},
-    {"klasse": "baeume", "objekt": r"baum|baeume|krone|stamm|tree|hecke|strauch|straeucher|busch|vegetation|"
-                                    r"pflanze|bepflanzung|efeu|ranke",
-     "material": r"^laub|^stamm|blatt|leaf|bark|rinde|hecke", "collection": r"baum|tree|vegetation|pflanz"},
+    {"klasse": "baeume", "objekt": r"baum|baeume|krone|stamm|tree",
+     "material": r"^laub|^stamm|blatt|leaf|bark|rinde", "collection": r"baum|tree"},
+    # Gruendach, Pflanzen, bepflanzte Troege (Pflanzen, Substrat; Trogkoerper ohne "bepflanzt" bleibt Planelement
+    # im Gebaeude, REGELN P3), Hecken und Straeucher; Neubau-Gruppenteil `<gruppe>_gruen` (lib/neubau.py)
+    {"klasse": "vegetation", "objekt": r"_gruen$|gruendach|vegetation|pflanze|bepflanz|efeu|ranke|hecke|strauch|"
+                                        r"straeucher|busch|sedum|substrat",
+     "material": r"^nb_busch|^nb_rasen|^aus_laub|gruendach|sedum|substrat|bepflanz|^pflanz|efeu|hecke|blumen",
+     "collection": r"vegetation|pflanz|gruendach|hecke"},
     {"klasse": "autos", "objekt": r"^autos?(\b|_|\.)|fahrzeug|pkw|\bcars?\b|vehicle|moped|motorrad",
      "material": r"^auto|^reifen|felge", "collection": r"^autos?$|fahrzeug|vehicle"},
     {"klasse": "leuchten", "objekt": r"leuchte|laterne|lampe|kandelaber|beleuchtung|lamp|lantern|streetlight|"
                                      r"lichtmast",
-     "material": r"^leuchte|^seil$|laterne|lampe|lichtmast", "collection": r"leuchte|laterne|lampe|beleuchtung"},
+     "material": r"^leuchte|^aus_leuchte|^seil$|laterne|lampe|lichtmast",
+     "collection": r"leuchte|laterne|lampe|beleuchtung"},
     {"klasse": "strassenmoebel", "objekt": r"sitzbank|parkbank|\bbank\b|bank_|poller|ampel|schild|verkehrszeichen|"
                                            r"fahrradbuegel|radbuegel|radstaender|fahrradstaender|muell|abfall|"
                                            r"hydrant|stadtmoebel|strassenmoebel|kiosk|haltestelle|bench|bollard|"
                                            r"litfass|pflanzkuebel|fahrrad|bike",
-     "collection": r"moebel|mobiliar|furniture|poller|bank"},
+     "collection": r"^(strassen|stadt)?moebel|mobiliar|furniture|poller|bank"},
+    # Terrassen- und Gartenausstattung (neubau.ausstattung, Gruppe ausstattung_*, Materialien aus_*): nicht Planung
+    {"klasse": "ausstattung", "objekt": r"^ausstattung|pergola|kissen|polster|kuebel|terrassenmoebel|lounge|liege|"
+                                         r"sonnenschirm|outdoor|gartenmoebel",
+     "material": r"^aus_|pergola|kissen|polster|teak|rattan|kuebel", "collection": r"ausstattung|terrasse"},
     {"klasse": "gelaender", "bereich": "objekt", "objekt": r"gelaender|railing|handlauf|bruestung",
      "material": r"gelaender|railing|handlauf|bruestung"},
     {"klasse": "fenster_glas", "bereich": "objekt", "objekt": r"_glas|glass|verglasung|_innen",
