@@ -967,5 +967,17 @@
     "prompt_abweichung": "wie eg_lokal_golden, Blaue Stunde"
    }
   }
+ },
+ "test_autos_2026_11_18": {
+  "stand": "2026-11-18",
+  "auftrag": "Kunde (Chat 18.11.2026): realistische Autos einmal ohne Autoschutz probieren, 2 Credits freigegeben",
+  "eingang": "renders/autos_4k/wimmergasse-20_ecke_golden_hour_final.jpg (4k, 256 Samples, 16 BlenderKit-Autos, Ebenen mit Hintergrund)",
+  "modell": "nano_banana_pro 2k angefragt (Job meldet nano_banana_2), 2 Credits, Ausgabe 2528 x 1696",
+  "job": "de593c2f-a118-490a-9e59-bd0d9f560e5e",
+  "prompt": "geometrie.aussen + objekt + aussen.golden_hour + umgebung (neu: Autos in Bild 1 sind Modelle, unveraendert lassen) + negativ.aussen + Regelblock immoviz.py prompt",
+  "ergebnis": "ecke_golden_r7_autos.jpg",
+  "befund": "KI uebernimmt die Blender-Autos fast unveraendert (Modell, Farbe, Platz), ergaenzt Passanten. Nachkontrolle des KI-Bildes: alle Schutzzonen ok, Kanten-F1 0,89 (R6: 0,77); Fensterzahl Wimmergasse 45 von 58 erkannt.",
+  "schutz": "renders/autos_4k/ecke_golden_r7_autos_schutz.jpg ohne Autoschutz: Kanten-F1 0,90 auf 0,99, Nachkontrolle Status ok (erstmals), Fenster 58/59 und 38/39. Erster Lauf hatte die Autos durch den Hintergrund-Durchgang ersetzt (RS6 fast weg); behoben: bei realistischen Modellen (ebenen.json autos: modelle) ersetzt der Hintergrund keine Autos.",
+  "rest": "zackige Kante am Baumstamm hinter dem Audi RS6 (KI- und Blender-Stamm nicht deckungsgleich)"
  }
 }

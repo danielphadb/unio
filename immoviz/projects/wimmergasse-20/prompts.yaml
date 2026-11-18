@@ -68,9 +68,9 @@ aussen:
 
 umgebung: >-
   Realistic Vienna street scene in the 5th district: mature street trees with detailed leaves, a few parked cars, two
-  or three pedestrians, natural asphalt and pavement textures. The parked cars in image 1 are simple low-poly
-  placeholders: show them as realistic contemporary European cars (varied makes and sizes, realistic paint, glass,
-  wheels and reflections, everyday mid-range models), exactly in the same bays, size and orientation as in image 1.
+  or three pedestrians, natural asphalt and pavement textures. The parked cars in image 1 are detailed 3D models:
+  keep every car as it is, same model, shape, colour, position, size and orientation, only with photographic
+  realism (reflections, dust, slight wear); no additional cars, no cars removed, no logos.
   Vertical lines perfectly straight, natural colours, no HDR look, magazine quality, photorealistic.
 
 innen:

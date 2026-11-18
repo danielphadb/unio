@@ -1,0 +1,175 @@
+{
+ "vorschau": "immoviz/projects/wimmergasse-20/renders/autos_4k/wimmergasse-20_ecke_golden_hour_final.png",
+ "veredelt": "immoviz/projects/wimmergasse-20/renders/autos_4k/ecke_golden_r7_autos_schutz.jpg",
+ "status": "ok",
+ "score": 9,
+ "schwelle": 400.0,
+ "score_struktur": 9,
+ "score_ausschnitt": 0,
+ "massstab": 0.9999,
+ "schiebung_prozent": 0.0,
+ "deckung": 0.915,
+ "befunde": [
+  "4 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)"
+ ],
+ "merkmale": {
+  "senkrechte_neu": 0.0,
+  "senkrechte_neu_glatt": 0.0,
+  "senkrechte_fehlt": 0.0,
+  "andere_neu": 196.1,
+  "andere_neu_glatt": 92.0,
+  "oeffnungen": 0,
+  "oeffnungen_flaeche_prozent": 0
+ },
+ "oeffnungen": [],
+ "stellen": [
+  {
+   "art": "neu",
+   "box": [
+    0.5,
+    0.615,
+    0.654,
+    0.672
+   ],
+   "pixel": 613,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 40.1
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.586,
+    0.0,
+    0.609,
+    0.102
+   ],
+   "pixel": 210,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 16.9
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.6,
+    0.068,
+    0.651,
+    0.129
+   ],
+   "pixel": 110,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 6.7
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.115,
+    0.594,
+    0.172,
+    0.668
+   ],
+   "pixel": 138,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 6.1
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.828,
+    0.053,
+    1.0,
+    0.107
+   ],
+   "pixel": 718,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 21.0
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.161,
+    0.812,
+    0.319,
+    0.85
+   ],
+   "pixel": 263,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 7.7
+  }
+ ],
+ "schutzzonen": {
+  "ausrichtung": {
+   "modell": "aehnlich",
+   "kantenabstand_mittel_px": 0.36,
+   "massstab": 0.9999
+  },
+  "zonen": {
+   "fenster": {
+    "anteil_prozent": 4.66,
+    "kanten_f1": 0.988,
+    "kanten_vollstaendig": 0.9858,
+    "kanten_praezision": 0.9902,
+    "kantenabstand_mittel_px": 0.42,
+    "gradienten_korrelation": 0.9367,
+    "status": "ok"
+   },
+   "leuchten": {
+    "anteil_prozent": 0.5,
+    "kanten_f1": 0.9854,
+    "kanten_vollstaendig": 0.9851,
+    "kanten_praezision": 0.9857,
+    "kantenabstand_mittel_px": 0.41,
+    "gradienten_korrelation": 0.9276,
+    "status": "ok"
+   },
+   "gelaender": {
+    "anteil_prozent": 0.5,
+    "kanten_f1": 0.9851,
+    "kanten_vollstaendig": 0.9942,
+    "kanten_praezision": 0.9761,
+    "kantenabstand_mittel_px": 0.46,
+    "gradienten_korrelation": 0.9771,
+    "status": "ok"
+   },
+   "gebaeude": {
+    "anteil_prozent": 19.37,
+    "kanten_f1": 0.9821,
+    "kanten_vollstaendig": 0.9783,
+    "kanten_praezision": 0.986,
+    "kantenabstand_mittel_px": 0.63,
+    "gradienten_korrelation": 0.949,
+    "status": "ok"
+   }
+  },
+  "fenster_je_fassade": {
+   "wimmergasse": {
+    "render": 58,
+    "ki": 59,
+    "ki_gefunden": 58,
+    "ki_neu": 1,
+    "render_fehlt": 0
+   },
+   "stolberggasse": {
+    "render": 38,
+    "ki": 39,
+    "ki_gefunden": 38,
+    "ki_neu": 1,
+    "render_fehlt": 0
+   }
+  },
+  "befunde": [],
+  "grenzen": {
+   "fenster": 0.9,
+   "leuchten": 0.85,
+   "gelaender": 0.9,
+   "gebaeude": 0.85
+  },
+  "status": "ok"
+ },
+ "markierung": "immoviz/projects/wimmergasse-20/renders/autos_4k/nk_ecke_golden_r7_autos_schutz.jpg"
+}

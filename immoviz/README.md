@@ -604,8 +604,9 @@ Klasse des Platzhalter-Empties); steht etwas unter `nicht_zugeordnet`, Muster in
    0,5 bis 2. Ändert nur Farbe und Helligkeit, nicht die Kanten. `--farbe 0..1` regelt die Stärke.
    Pixel, die stark von der KI abweichen (dE über 20, z. B. KI-Laub oder Personen vor der Fassade), zählen nicht
    in die Statistik, sonst färben sie die Fassade fleckig ein.
-3. Hintergrund: hinter Menschen-Platzhaltern (und Autos, wenn sie nicht geschützt sind) kommt die Fassade aus dem
-   zweiten Durchgang `hintergrund/`. Ohne ihn blieben dort KI-Pixel stehen: sichtbare Umrisse der Platzhalter und eine
+3. Hintergrund: hinter Menschen-Platzhaltern, Bäumen vor dem Objekt und Platzhalter-Autos (wenn nicht geschützt)
+   kommt die Fassade aus dem zweiten Durchgang `hintergrund/`; realistische Autos (`ebenen.json` `autos: modelle`)
+   werden nicht ersetzt, die KI übernimmt sie. Ohne ihn blieben dort KI-Pixel stehen: sichtbare Umrisse der Platzhalter und eine
    Naht auf Autohöhe.
 4. KI-Vordergrund erhalten (`vordergrund_finden`, abschaltbar mit `--ohne-vordergrund`): Personen, Radfahrer und
    Autos, die die KI vor die geschützte Fassade stellt, bleiben KI. Auf 1920 px Breite: dE zwischen KI und

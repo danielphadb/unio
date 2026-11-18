@@ -216,10 +216,17 @@ def schreiben(scene, meta: dict, ordner: Path, cfg: dict | None = None, kamera: 
             Path(tmp).unlink(missing_ok=True)
     info = {"kamera": kamera, "licht": licht, "beauty": beauty,
             "fassaden": _fassaden(cfg), "kamera_pos": list(scene.camera.location) if scene.camera else None,
-            "kamera_intern": _kamera_intern(scene)}
+            "kamera_intern": _kamera_intern(scene), "autos": _autos_art()}
     res = auswerten(kan, meta, ordner, schutz_klassen(cfg), info, schutz_kante(cfg))
     res["sekunden"] = round(time.time() - t0, 1)
     return res
+
+
+def _autos_art() -> str:
+    """'modelle', wenn die realistischen Automodelle (assets/autos/bibliothek.blend) in der Szene stehen, sonst
+    'platzhalter'. Das Kompositing ersetzt nur Platzhalter-Autos durch die Fassade aus dem Hintergrund-Durchgang."""
+    import bpy
+    return "modelle" if any(c.name.startswith("auto_") for c in bpy.data.collections) else "platzhalter"
 
 
 def _kamera_intern(scene) -> dict | None:

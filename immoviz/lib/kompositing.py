@@ -13,8 +13,9 @@ Ablauf (`immoviz.py schutz --render <beauty.png> --ki <veredelt.jpg> --ebenen <o
    keine Naht entsteht), getrennt nach Gruppen (Glas, Autos, uebrige Schutzklassen), Streuungsverhaeltnis begrenzt.
    Nur Farbe und Helligkeit aendern sich, die Kanten (Geometrie) bleiben die des Renders.
    Stark abweichende KI-Pixel (Laub, Personen) zaehlen nicht in die Statistik.
-3. Hintergrund: hinter Platzhaltern (und ungeschuetzten Autos) die Fassade aus dem zweiten Durchgang
-   (`ebenen.hintergrund`), sonst bleiben Umrisse der Platzhalter und eine Naht auf Autohoehe.
+3. Hintergrund: hinter Platzhaltern (und ungeschuetzten Platzhalter-Autos) die Fassade aus dem zweiten Durchgang
+   (`ebenen.hintergrund`), sonst bleiben Umrisse der Platzhalter und eine Naht auf Autohoehe. Realistische Autos
+   (ebenen.json `autos: modelle`) werden nicht ersetzt: die KI uebernimmt sie, dort bleibt KI bzw. Render.
 4. KI-Vordergrund: Personen, Radfahrer, Autos der KI vor der Fassade, die am Boden stehen, bleiben KI
    (`vordergrund_finden`).
 5. Zuruecksetzen: Ergebnis = Schutzmaske ohne Vordergrund (weiche Kante) * Blender farbangeglichen + Rest * KI.
@@ -344,7 +345,7 @@ def farbabgleich(B_lab: np.ndarray, K_lab: np.ndarray, gruppen: list[np.ndarray]
 
 
 # ------------------------------------------------------------------ Hintergrund und Vordergrund
-def hintergrund_einsetzen(R: np.ndarray, masken: dict, ordner, schutz: list[str]):
+def hintergrund_einsetzen(R: np.ndarray, masken: dict, ordner, schutz: list[str], autos_art: str = "platzhalter"):
     """Render und Masken hinter Platzhaltern (und ungeschuetzten Autos) aus dem zweiten Durchgang
     (`ebenen.hintergrund`, Ordner <ebenen>/hintergrund). Liefert (R, masken, V) mit V = ersetzte Pixel oder None."""
     hg = Path(ordner) / "hintergrund"
@@ -358,6 +359,8 @@ def hintergrund_einsetzen(R: np.ndarray, masken: dict, ordner, schutz: list[str]
     V = np.zeros((H, W), bool)
     for k in EB.HINTERGRUND_KLASSEN:
         if k in schutz or k not in masken:          # geschuetzte Autos bleiben die Blender-Autos
+            continue
+        if k == "autos" and autos_art == "modelle":  # realistische Autos: die KI uebernimmt sie, dort bleibt KI
             continue
         m = ndi.binary_dilation(masken[k], iterations=2)     # Kantenpixel (Antialiasing) mit ersetzen
         if k == "baeume":                           # Baeume nur, wo dahinter etwas Geschuetztes liegt
@@ -604,7 +607,7 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     schutz = [k for k in schutz if k not in (ohne or [])]
     kante = ebn["meta"].get("schutz_kante_px", EB.KANTE_WEICH_PX)
     # Hinter Platzhaltern und ungeschuetzten Autos: Fassade aus dem zweiten Durchgang (render --ebenen)
-    R, masken, V, baum = hintergrund_einsetzen(R, masken, ebn["ordner"], schutz)
+    R, masken, V, baum = hintergrund_einsetzen(R, masken, ebn["ordner"], schutz, ebn["meta"].get("autos", "platzhalter"))
     hart = np.zeros((H, W), bool)
     for k in schutz:
         hart |= masken.get(k, False)
