@@ -571,7 +571,8 @@ als unkomprimierte EXR zwischengespeichert, mit einem eigenen Leser (nur numpy) 
 | `normalen.png` | Weltnormalen (Projektsystem), `n = rgb/127,5 - 1`, Himmel schwarz |
 | `kanten.png` | Tiefensprünge (zweite Differenz über 3 %), Normalenknicke über 25 Grad, Rand zum Himmel |
 | `schutz.png` | Vereinigung der geschützten Klassen mit 2 px weicher Kante |
-| `ebenen.json` | Bildanteil je Klasse, Schutzklassen, Kodierungen, Fassadennormalen, `nicht_zugeordnet` (Objekt/Material ohne Regel mit Bildanteil) |
+| `ebenen.json` | Bildanteil je Klasse, Schutzklassen, Kodierungen, Fassadennormalen, Brennweite in Pixeln (`kamera_intern.f_px`), `nicht_zugeordnet` (Objekt/Material ohne Regel mit Bildanteil) |
+| `hintergrund/` | zweiter Durchgang ohne Menschen-Platzhalter und Autos, nur im Ausschnitt um diese Objekte (Border-Render): `beauty.png`, dieselben Ebenen, `bereich.png`; liefert die Fassade und den Boden dahinter. Abschalten mit `IMMOVIZ_HINTERGRUND=aus` |
 
 Geschützt sind standardmäßig gebaeude_objekt, fenster_glas, fenster_rahmen, gelaender, leuchten, strassenmoebel und
 autos. Je Projekt in `project.yaml`: `schutz: [..]` oder `schutz: {klassen: [...], plus: [nachbarn], minus: [autos],
@@ -588,17 +589,31 @@ Klasse des Platzhalter-Empties); steht etwas unter `nicht_zugeordnet`, Muster in
 2. Farbabgleich: lokale Lab-Statistik (Mittelwert, Streuung; Gauss-Fenster 6 % und nahe der Maskenkante 1,5 % der
    Bildbreite) der KI auf die Blender-Pixel, getrennt für Glas, Autos und übrige Schutzklassen, Streuungsverhältnis
    0,5 bis 2. Ändert nur Farbe und Helligkeit, nicht die Kanten. `--farbe 0..1` regelt die Stärke.
-3. Ergebnis = Schutzmaske x Blender (farbangeglichen) + Rest x KI. Schatten, Spiegelungen, Menschen und Bäume der KI
-   außerhalb des Schutzbereichs bleiben.
-4. Ausgabe `<ki>_schutz.jpg` (oder `--out`), daneben `_pruefung.jpg` (Render, KI ausgerichtet, Maske rot, Ergebnis)
-   und `.json`: Ausrichtung (Modell, Maßstab, Verschiebung, ECC, Kantenabstand Render zu KI in px), Schutzbereich
+   Pixel, die stark von der KI abweichen (dE über 20, z. B. KI-Laub oder Personen vor der Fassade), zählen nicht
+   in die Statistik, sonst färben sie die Fassade fleckig ein.
+3. Hintergrund: hinter Menschen-Platzhaltern (und Autos, wenn sie nicht geschützt sind) kommt die Fassade aus dem
+   zweiten Durchgang `hintergrund/`. Ohne ihn blieben dort KI-Pixel stehen: sichtbare Umrisse der Platzhalter und eine
+   Naht auf Autohöhe.
+4. KI-Vordergrund erhalten (`vordergrund_finden`, abschaltbar mit `--ohne-vordergrund`): Personen, Radfahrer und
+   Autos, die die KI vor die geschützte Fassade stellt, bleiben KI. Auf 1920 px Breite: dE zwischen KI und
+   farbangeglichenem Render über 14 (auf Glas über 26, geschützte Autos nie), Öffnen mit einer Scheibe von 4 px Radius
+   (Fensterrahmen, Stangen, Kanten fallen weg). Ein Fleck zählt, wenn er die geschützte Fläche berührt, mit mindestens
+   60 px auf dem Boden steht, sein Fußpunkt laut Render-Tiefe mindestens 0,4 m vor der Fassadenbasis liegt; erhalten
+   wird er bis 2,4 m über dem Fußpunkt (Höhe aus Tiefe und Brennweite). Erfundene Fenster, Erker oder Bäume an der
+   Fassade stehen nicht am Boden vor der Fassade und werden weiter zurückgesetzt. Parameter in `VG`.
+5. Ergebnis = Schutzmaske (ohne Vordergrund, 2 px weiche Kante) x Blender (farbangeglichen) + Rest x KI. Schatten,
+   Spiegelungen, Menschen und Bäume der KI außerhalb des Schutzbereichs bleiben.
+6. Ausgabe `<ki>_schutz.jpg` (oder `--out`), daneben `_pruefung.jpg` (Render mit Hintergrund, KI ausgerichtet, Maske
+   rot und erhaltener KI-Vordergrund grün, Ergebnis) und `.json` (zusätzlich `hintergrund` und `vordergrund` mit den
+   erhaltenen und verworfenen Flecken): Ausrichtung (Modell, Maßstab, Verschiebung, ECC, Kantenabstand Render zu KI in px), Schutzbereich
    vorher/nachher (Kanten: Präzision = starke Kanten nahe einer Render-Kante, Vollständigkeit = Render-Kanten im
    Bild, F1; mittlerer Kantenabstand; Gradientenkorrelation; Farbabweichung dE), dieselben Kanten je Klasse, Anteil
    der geschützten Fläche. Exit 1, wenn Kanten-F1 nachher unter 0,95.
 
 `--ohne autos` (bzw. `--klassen`) nimmt Klassen aus dem Schutz, z. B. solange die Autos in Blender nur Platzhalter
-sind. Grenzen: KI-Menschen und -Bäume vor geschützten Flächen werden abgeschnitten (Abhilfe: Platzhalter in Blender,
-Klassen `menschen_platzhalter`, `baeume`); Putz- und Stuckdetail der KI im Schutzbereich geht verloren, das Gebäude
+sind. Grenzen: KI-Bäume vor geschützten Flächen werden abgeschnitten, wo der Blender-Baum kleiner ist (Abhilfe:
+Bäume im Modell richtig groß); Personen vor geschützten Autos bleiben nur mit `--ohne autos` ganz; Teile einer Person,
+die farblich fast wie die Fassade aussehen, können fehlen (Prüfbild, grüne Fläche); Putz- und Stuckdetail der KI im Schutzbereich geht verloren, das Gebäude
 ist das Blender-Material in der Farbstimmung der KI, gute Materialien in Blender sind also Pflicht; Ebenen und Render
 müssen aus demselben Aufruf stammen.
 
@@ -615,6 +630,11 @@ Test 18.11.2026 (Wimmergasse `ecke`, `golden_hour`, 1200 x 800, 16 Samples, 36 s
 Kanten-F1 im Schutzbereich vorher 0,79, nachher 0,98; Fensterzone Präzision 0,79 auf 0,98 (die KI hatte Lampen und
 Möbel hinter die Fenster gesetzt), Fensterzahl Wimmergasse 58/57, Stolberggasse 22/22. Mit geschützten
 Platzhalter-Autos sieht die Straße schlecht aus, deshalb im Test zusätzlich `--ohne autos`.
+
+Test 18.11.2026 auf dem Mac (4k, 256 Samples, Metal; Hintergrund, Vordergrund und Laub wie oben): Render mit Ebenen
+278 s (davon Hintergrund 64 s), `schutz` rund 30 s; Kanten-F1 im Schutzbereich 0,81 auf 0,99, alle Schutzzonen der
+Nachkontrolle ok; Personen, Radfahrer und KI-Krone bleiben ganz, keine Umrisse der Platzhalter, keine Naht auf
+Autohöhe (Einzelheiten `auftraege/2026-11-18_ebenen_test.md`, Abschnitt 7).
 
 ## Grading (`grading`)
 

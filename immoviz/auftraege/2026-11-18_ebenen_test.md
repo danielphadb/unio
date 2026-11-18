@@ -134,3 +134,31 @@ Prüfbild `nk_ecke_golden_r6_schutz_ohne_autos.jpg` ansehen.
   rosa, Gelb der Fassade zurückgenommen, Vignette und Korn dezent; Geometrie unverändert. Wirkt etwas dunkler und
   flauer als das Ausgangsbild, passt aber zur Filmpalette der Leitbilder. Die Fehler aus Abschnitt 5 (abgeschnittene
   Passanten, Platzhalter-Umrisse, Naht am Sockel) bleiben natürlich sichtbar.
+
+### 7. Nachbesserung Schutz-Kompositing (18.11.2026, Mac-Sitzung)
+Befund aus der Sichtprüfung: abgeschnittene Personen, Umrisse der Platzhalter in der Fassade, Naht auf Autohöhe,
+Flecken neben dem Baum. Ursachen und Änderungen (Code in `lib/ebenen.py`, `lib/kompositing.py`, `lib/build.py`):
+
+| Fehler | Ursache | Änderung |
+|---|---|---|
+| Personen ohne Oberkörper | Schutzmaske ersetzt alles vor der Fassade | `vordergrund_finden`: KI-Flecken vor der Fassade, die am Boden stehen (Fußpunkt laut Tiefe mindestens 0,4 m vor der Fassadenbasis, höchstens 2,4 m hoch, eigener Fußpunkt je Teil), bleiben KI; Glas mit höherer Schwelle, dünne Strukturen fallen beim Öffnen weg; `--ohne-vordergrund` schaltet ab |
+| Umrisse der Platzhalter, Naht auf Autohöhe | hinter Platzhaltern und Blender-Autos gibt es im Render keine Fassade, dort blieb KI | `render --ebenen` rendert zusätzlich `hintergrund/` (Platzhalter, Autos, Bäume vor dem Objekt ausgeblendet, nur im Ausschnitt, 96 Samples); `schutz` setzt dort die Fassade ein, Helligkeit lokal an das Hauptbild angeglichen |
+| Flecken neben dem Baum | KI-Baum steht anders als der Blender-Baum; KI-Fassadenstücke in Blattform, KI-Laub färbte die Farbstatistik | `laub_finden`: Laubmodell (Lab, Struktur), Lücken zwischen den Blättern geschlossen, die ganze KI-Krone bleibt KI, Naht am Außenrand der Blätter; Farbstatistik ohne Ausreißer (dE über 20) |
+
+Zeiten (Metal, M3 Max): Render mit Ebenen und Hintergrund 278 s gesamt (Hintergrund 64 s, 55 % Bildausschnitt
+wegen des Baums), max. Speicher 5,7 GB; `schutz` 28 bis 32 s statt 15 s.
+
+Kennzahlen neu (`--ohne autos`, Klammer: mit Autos): geschützt 24,8 % (28,1 %), Kanten-F1 Schutzbereich 0,807
+auf 0,994 (0,773 auf 0,994), dE 24,1 auf 18,0; Hintergrund eingesetzt 7,6 % des Bildes (3,6 %), erhaltener
+KI-Vordergrund 5,3 % (4,7 %), davon Laub 4,2 %. Nachkontrolle nachher: alle vier Schutzzonen ok (Fenster 0,974,
+Leuchten 0,975, Geländer 0,983, Gebäude 0,961); Fenster Wimmergasse 58/59 (1 neu), Stolberggasse 39/42 (3 neu,
+vorher 2): vermutlich KI-Fenster, die innerhalb der erhaltenen KI-Krone durch die Blätter zu sehen sind. Grading
+danach: Abstand zum Leitbild 8,1 auf 1,45.
+
+Sichtprüfung: Frau, Mann vor dem Erdgeschoss und Radfahrer vollständig, keine Umrisse der Platzhalter, keine Naht
+auf Autohöhe, Krone als Ganzes aus der KI. Rest: links an der Krone ein schmaler heller Streifen neben einem
+Fenster im 1. OG (Fassade aus dem Hintergrund-Durchgang neben verschatteter Fassade des Hauptbilds), nur in der
+4k-Vergrößerung sichtbar; tritt auf, weil das KI-Bild aus einem älteren Modellstand mit anders stehendem Baum
+stammt. Mit geschützten Autos (Standard) liegen die kantigen Blender-Autos über den KI-Autos; solange die Autos in
+Blender Platzhalter sind, `--ohne autos` verwenden (Vorschlag: `schutz: {minus: [autos]}` in `project.yaml`).
+

@@ -10,15 +10,15 @@
  "schiebung_prozent": 0.0,
  "deckung": 0.886,
  "befunde": [
-  "8 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
-  "Fassade stolberggasse: 39 Fenster im Render, 41 im KI-Bild (2 neu, 0 fehlen)"
+  "7 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+  "Fassade stolberggasse: 39 Fenster im Render, 42 im KI-Bild (3 neu, 0 fehlen)"
  ],
  "merkmale": {
   "senkrechte_neu": 0.0,
   "senkrechte_neu_glatt": 0.0,
   "senkrechte_fehlt": 0.0,
-  "andere_neu": 577.0,
-  "andere_neu_glatt": 180.1,
+  "andere_neu": 559.2,
+  "andere_neu_glatt": 184.0,
   "oeffnungen": 0,
   "oeffnungen_flaeche_prozent": 0
  },
@@ -32,10 +32,23 @@
     0.664,
     0.686
    ],
-   "pixel": 734,
+   "pixel": 676,
    "lange_senkrechte_px": 0,
    "auf_glatter_flaeche": 0.0,
-   "score": 44.0
+   "score": 42.2
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.004,
+    0.85,
+    0.211,
+    0.891
+   ],
+   "pixel": 593,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 25.0
   },
   {
    "art": "neu",
@@ -45,23 +58,10 @@
     0.781,
     0.836
    ],
-   "pixel": 429,
+   "pixel": 427,
    "lange_senkrechte_px": 0,
    "auf_glatter_flaeche": 0.0,
-   "score": 24.7
-  },
-  {
-   "art": "neu",
-   "box": [
-    0.001,
-    0.814,
-    0.211,
-    0.893
-   ],
-   "pixel": 587,
-   "lange_senkrechte_px": 0,
-   "auf_glatter_flaeche": 0.0,
-   "score": 21.2
+   "score": 24.6
   },
   {
    "art": "neu",
@@ -69,12 +69,12 @@
     0.876,
     0.826,
     0.967,
-    0.895
+    0.893
    ],
-   "pixel": 211,
+   "pixel": 194,
    "lange_senkrechte_px": 0,
    "auf_glatter_flaeche": 0.0,
-   "score": 19.4
+   "score": 17.9
   },
   {
    "art": "neu",
@@ -84,10 +84,10 @@
     0.561,
     0.857
    ],
-   "pixel": 225,
+   "pixel": 255,
    "lange_senkrechte_px": 0,
    "auf_glatter_flaeche": 0.0,
-   "score": 10.4
+   "score": 13.5
   },
   {
    "art": "neu",
@@ -97,36 +97,23 @@
     0.171,
     0.668
    ],
-   "pixel": 209,
+   "pixel": 185,
    "lange_senkrechte_px": 0,
    "auf_glatter_flaeche": 0.0,
-   "score": 9.3
+   "score": 8.6
   },
   {
    "art": "neu",
    "box": [
     0.294,
     0.834,
-    0.418,
+    0.417,
     0.857
    ],
-   "pixel": 235,
+   "pixel": 234,
    "lange_senkrechte_px": 0,
    "auf_glatter_flaeche": 0.0,
    "score": 6.9
-  },
-  {
-   "art": "neu",
-   "box": [
-    0.798,
-    0.861,
-    0.845,
-    0.881
-   ],
-   "pixel": 54,
-   "lange_senkrechte_px": 0,
-   "auf_glatter_flaeche": 0.0,
-   "score": 5.3
   },
   {
    "art": "fehlt",
@@ -172,13 +159,13 @@
    "box": [
     0.236,
     0.945,
-    0.396,
+    0.409,
     0.967
    ],
-   "pixel": 256,
+   "pixel": 284,
    "lange_senkrechte_px": 0,
    "auf_glatter_flaeche": 0.0,
-   "score": 8.0
+   "score": 8.8
   },
   {
    "art": "fehlt",
@@ -192,19 +179,6 @@
    "lange_senkrechte_px": 0,
    "auf_glatter_flaeche": 0.0,
    "score": 5.3
-  },
-  {
-   "art": "fehlt",
-   "box": [
-    0.0,
-    0.824,
-    0.066,
-    0.863
-   ],
-   "pixel": 171,
-   "lange_senkrechte_px": 0,
-   "auf_glatter_flaeche": 0.0,
-   "score": 5.0
   }
  ],
  "schutzzonen": {
@@ -216,59 +190,59 @@
   "zonen": {
    "fenster": {
     "anteil_prozent": 4.63,
-    "kanten_f1": 0.9875,
-    "kanten_vollstaendig": 0.9885,
-    "kanten_praezision": 0.9866,
-    "kantenabstand_mittel_px": 0.33,
-    "gradienten_korrelation": 0.9533,
+    "kanten_f1": 0.9739,
+    "kanten_vollstaendig": 0.9779,
+    "kanten_praezision": 0.97,
+    "kantenabstand_mittel_px": 0.43,
+    "gradienten_korrelation": 0.92,
     "status": "ok"
    },
    "leuchten": {
     "anteil_prozent": 0.5,
-    "kanten_f1": 0.9739,
-    "kanten_vollstaendig": 0.9845,
-    "kanten_praezision": 0.9635,
-    "kantenabstand_mittel_px": 0.49,
-    "gradienten_korrelation": 0.885,
+    "kanten_f1": 0.9753,
+    "kanten_vollstaendig": 0.9872,
+    "kanten_praezision": 0.9638,
+    "kantenabstand_mittel_px": 0.31,
+    "gradienten_korrelation": 0.8921,
     "status": "ok"
    },
    "gelaender": {
     "anteil_prozent": 0.5,
-    "kanten_f1": 0.9892,
-    "kanten_vollstaendig": 0.9984,
-    "kanten_praezision": 0.9801,
-    "kantenabstand_mittel_px": 0.44,
-    "gradienten_korrelation": 0.9872,
+    "kanten_f1": 0.9825,
+    "kanten_vollstaendig": 0.9916,
+    "kanten_praezision": 0.9736,
+    "kantenabstand_mittel_px": 0.41,
+    "gradienten_korrelation": 0.9854,
     "status": "ok"
    },
    "gebaeude": {
     "anteil_prozent": 19.27,
-    "kanten_f1": 0.9779,
-    "kanten_vollstaendig": 0.9757,
-    "kanten_praezision": 0.9802,
-    "kantenabstand_mittel_px": 0.49,
-    "gradienten_korrelation": 0.9398,
+    "kanten_f1": 0.9605,
+    "kanten_vollstaendig": 0.9557,
+    "kanten_praezision": 0.9654,
+    "kantenabstand_mittel_px": 0.56,
+    "gradienten_korrelation": 0.894,
     "status": "ok"
    }
   },
   "fenster_je_fassade": {
    "wimmergasse": {
     "render": 58,
-    "ki": 58,
+    "ki": 59,
     "ki_gefunden": 58,
-    "ki_neu": 0,
+    "ki_neu": 1,
     "render_fehlt": 0
    },
    "stolberggasse": {
     "render": 39,
-    "ki": 41,
+    "ki": 42,
     "ki_gefunden": 39,
-    "ki_neu": 2,
+    "ki_neu": 3,
     "render_fehlt": 0
    }
   },
   "befunde": [
-   "Fassade stolberggasse: 39 Fenster im Render, 41 im KI-Bild (2 neu, 0 fehlen)"
+   "Fassade stolberggasse: 39 Fenster im Render, 42 im KI-Bild (3 neu, 0 fehlen)"
   ],
   "grenzen": {
    "fenster": 0.9,

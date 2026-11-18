@@ -18,7 +18,11 @@ Ausgabe je Kamera und Licht in `renders/<unterordner>/<kamera>_<licht>_ebenen/`:
     normalen.png      Normalen in Weltkoordinaten (= Projektsystem), RGB = (n + 1) / 2, 8 Bit, Himmel schwarz
     kanten.png        Kanten aus Tiefen- und Normalenspruengen (8 Bit, weiss = Kante)
     schutz.png        Schutzmaske = Vereinigung der geschuetzten Klassen, weiche Kante (Standard 2 px), 8 Bit
-    ebenen.json       Klassen mit Bildanteil, Schutzklassen, Kodierung, Fassadennormalen, nicht zugeordnete Paare
+    ebenen.json       Klassen mit Bildanteil, Schutzklassen, Kodierung, Fassadennormalen, Brennweite (kamera_intern),
+                      nicht zugeordnete Paare
+    hintergrund/      zweiter Durchgang ohne Menschen-Platzhalter, Autos und Baeume vor dem Objekt (ganz
+                      ausgeblendet, ohne Schatten, 96 Samples, Ausschnitt um diese Objekte; `hintergrund`):
+                      beauty.png, dieselben Ebenen, bereich.png; abschalten mit IMMOVIZ_HINTERGRUND=aus
 
 Klassentabelle: Die erste passende Regel gilt. Neue Assets (lib/assets.py, Strassenleuchten, Baenke, Menschen-
 Platzhalter) werden ueber ihre Objekt- oder Collection-Namen erkannt; was keine Regel trifft, steht in
@@ -83,6 +87,13 @@ TIEFE_MIN, TIEFE_MAX = 0.1, 30000.0      # m, logarithmische Kodierung (16 Bit: 
 KANTE_TIEFE = 0.03                        # relativer Tiefensprung zwischen Nachbarpixeln (3 %) = Kante
 KANTE_NORMALE_GRAD = 25.0                 # Winkel zwischen Nachbarnormalen = Kante
 KANTE_WEICH_PX = 2.0
+# Zweiter Durchgang ohne diese Klassen (ganz ausgeblendet, auch ohne Schatten: die KI malt eigene Baeume und
+# Schatten, ein Blender-Schatten hinter einem anders stehenden KI-Baum wirkt wie Russ; nur im Ausschnitt um sie):
+# Fassade und Boden dahinter fuer das Kompositing. Baeume nur, soweit sie vor dem Objekt stehen.
+HINTERGRUND_KLASSEN = ["menschen_platzhalter", "autos", "baeume"]
+HINTERGRUND_RAND_PX = 24
+HINTERGRUND_SAMPLES = 96          # reicht fuer Fassade hinter Laub und Autos (Entrauschen), spart Zeit
+OBJEKT_KLASSEN = ["gebaeude_objekt", "fenster_glas", "fenster_rahmen", "gelaender"]
 
 
 def _passt(muster, text) -> bool:
@@ -204,10 +215,95 @@ def schreiben(scene, meta: dict, ordner: Path, cfg: dict | None = None, kamera: 
         if not os.environ.get("IMMOVIZ_EBENEN_EXR"):
             Path(tmp).unlink(missing_ok=True)
     info = {"kamera": kamera, "licht": licht, "beauty": beauty,
-            "fassaden": _fassaden(cfg), "kamera_pos": list(scene.camera.location) if scene.camera else None}
+            "fassaden": _fassaden(cfg), "kamera_pos": list(scene.camera.location) if scene.camera else None,
+            "kamera_intern": _kamera_intern(scene)}
     res = auswerten(kan, meta, ordner, schutz_klassen(cfg), info, schutz_kante(cfg))
     res["sekunden"] = round(time.time() - t0, 1)
     return res
+
+
+def _kamera_intern(scene) -> dict | None:
+    """Brennweite in Pixeln (Sensor an der laengeren Bildseite, wie setup_camera) fuer Hoehen aus der Tiefe."""
+    cam = scene.camera
+    if cam is None or cam.type != "CAMERA":
+        return None
+    c = cam.data
+    W, H = scene.render.resolution_x, scene.render.resolution_y
+    return {"lens_mm": c.lens, "sensor_mm": c.sensor_width, "shift_x": c.shift_x, "shift_y": c.shift_y,
+            "f_px": c.lens / c.sensor_width * max(W, H), "typ": c.type}
+
+
+def hintergrund(scene, meta: dict, ordner: Path, cfg: dict | None = None, kamera: str = "", licht: str = "") -> dict | None:
+    """Zweiter Durchgang ohne Menschen-Platzhalter, Autos und Baeume (HINTERGRUND_KLASSEN; fuer die Kamera
+    ausgeblendet, ohne Schatten), nur im Ausschnitt um diese Objekte (Border-Render, volle Bildgroesse; Baeume nur
+    im Rechteck um das Objekt), mit hoechstens HINTERGRUND_SAMPLES Samples. Ergebnis in <ordner>/hintergrund/: beauty.png, Ebenen wie oben und
+    bereich.png (gerenderter Ausschnitt). Das Schutz-Kompositing setzt dort, wo die KI keine Person und kein Auto
+    hinstellt, die Fassade aus diesem Durchgang ein; ohne ihn bleiben dort KI-Pixel stehen (Umrisse der Platzhalter,
+    Naht auf Autohoehe). Aufruf nach `schreiben`, solange das Bild noch in der Szene eingestellt ist."""
+    import time
+    import bpy
+    from PIL import Image
+    t0 = time.time()
+    ordner = Path(ordner)
+    def maske(k):
+        p = ordner / f"{k}.png"
+        return np.asarray(Image.open(p).convert("L")) > 127 if p.exists() else None
+
+    V = None
+    for k in HINTERGRUND_KLASSEN:
+        m = maske(k)
+        if m is None:
+            continue
+        if k == "baeume":                      # nur Baeume vor dem Objekt (Rechteck um das Objekt)
+            obj = np.zeros_like(m)
+            for ko in OBJEKT_KLASSEN:
+                mo = maske(ko)
+                if mo is not None:
+                    obj |= mo
+            if not obj.any():
+                continue
+            oy, ox = np.nonzero(obj)
+            rahmen = np.zeros_like(m)
+            rahmen[oy.min():oy.max() + 1, ox.min():ox.max() + 1] = True
+            m = m & rahmen
+        V = m if V is None else (V | m)
+    if V is None or not V.any():
+        return None
+    H, W = V.shape
+    ys, xs = np.nonzero(V)
+    r = HINTERGRUND_RAND_PX
+    x0, x1 = max(0, xs.min() - r), min(W - 1, xs.max() + r)
+    y0, y1 = max(0, ys.min() - r), min(H - 1, ys.max() + r)
+    klasse_ob = {int(key.split(",")[0]): k for key, k in meta["tabelle"].items() if key.endswith(",0")}
+    weg = [ob for ob in bpy.data.objects
+           if klasse_ob.get(ob.pass_index) in HINTERGRUND_KLASSEN and not ob.hide_render]
+    rd = scene.render
+    alt = (rd.use_border, rd.use_crop_to_border, rd.border_min_x, rd.border_max_x, rd.border_min_y, rd.border_max_y)
+    samples_alt = scene.cycles.samples
+    hg = ordner / "hintergrund"
+    hg.mkdir(parents=True, exist_ok=True)
+    try:
+        for ob in weg:
+            ob.hide_render = True
+        scene.cycles.samples = min(samples_alt, HINTERGRUND_SAMPLES)
+        rd.use_border, rd.use_crop_to_border = True, False
+        rd.border_min_x, rd.border_max_x = x0 / W, (x1 + 1) / W
+        rd.border_min_y, rd.border_max_y = 1.0 - (y1 + 1) / H, 1.0 - y0 / H      # Blender: y von unten
+        bpy.ops.render.render(write_still=False)
+        bpy.data.images["Render Result"].save_render(str(hg / "beauty.png"), scene=scene)
+        res = schreiben(scene, meta, hg, cfg, kamera, licht, str(hg / "beauty.png"))
+    finally:
+        for ob in weg:
+            ob.hide_render = False
+        scene.cycles.samples = samples_alt
+        (rd.use_border, rd.use_crop_to_border, rd.border_min_x, rd.border_max_x, rd.border_min_y,
+         rd.border_max_y) = alt
+    bereich = np.zeros((H, W), np.uint8)
+    bereich[y0:y1 + 1, x0:x1 + 1] = 255
+    Image.fromarray(bereich).save(hg / "bereich.png")
+    return {"ordner": str(hg), "ausschnitt": [int(x0), int(y0), int(x1), int(y1)],
+            "anteil_ausschnitt_prozent": round(100.0 * (x1 - x0 + 1) * (y1 - y0 + 1) / (W * H), 1),
+            "ausgeblendet": len(weg), "sekunden": round(time.time() - t0, 1)}
 
 
 def _fassaden(cfg) -> dict:

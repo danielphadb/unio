@@ -154,6 +154,8 @@ def main():
                                                  "REGELN.md V6)")
     sz.add_argument("--farbe", type=float, default=1.0, help="Stärke der Farbübertragung KI auf Render (0 bis 1)")
     sz.add_argument("--ausrichtung", choices=["aehnlich", "affin", "homographie"], default="homographie")
+    sz.add_argument("--ohne-vordergrund", action="store_true", help="KI-Personen und -Autos vor der Fassade nicht "
+                                                                   "erhalten (alles Geschützte aus dem Render)")
     gd = sub.add_parser("grading", help="Farbangleich an Leitbilder (Lab-Statistik, Histogramm begrenzt) plus "
                                         "Vignette, Glow, Filmkorn")
     gd.add_argument("--bild", required=True)
@@ -194,7 +196,8 @@ def main():
         return
     if a.cmd == "schutz":
         from lib import kompositing as KO
-        sys.exit(KO.main_cli(a.render, a.ki, a.ebenen, a.out, a.klassen, a.ohne, a.farbe, a.ausrichtung))
+        sys.exit(KO.main_cli(a.render, a.ki, a.ebenen, a.out, a.klassen, a.ohne, a.farbe, a.ausrichtung,
+                             not a.ohne_vordergrund))
     if a.cmd == "grading":
         from lib import grading as GR
         sys.exit(GR.main_cli(a))

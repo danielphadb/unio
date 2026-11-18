@@ -12,12 +12,17 @@ Ablauf (`immoviz.py schutz --render <beauty.png> --ki <veredelt.jpg> --ebenen <o
    Streuung je Bildregion (Gauss-Fenster, grob 6 % und fein 1,5 % der Bildbreite, fein nahe der Maskenkante, damit
    keine Naht entsteht), getrennt nach Gruppen (Glas, Autos, uebrige Schutzklassen), Streuungsverhaeltnis begrenzt.
    Nur Farbe und Helligkeit aendern sich, die Kanten (Geometrie) bleiben die des Renders.
-3. Zuruecksetzen: Ergebnis = Schutzmaske (weiche Kante) * Blender farbangeglichen + Rest * KI. Schatten,
-   Spiegelungen, Menschen und Baeume der KI ausserhalb des Schutzbereichs bleiben.
-4. Kennzahlen (JSON) und Pruefbild (Schutzmaske rot ueberlagert).
+   Stark abweichende KI-Pixel (Laub, Personen) zaehlen nicht in die Statistik.
+3. Hintergrund: hinter Platzhaltern (und ungeschuetzten Autos) die Fassade aus dem zweiten Durchgang
+   (`ebenen.hintergrund`), sonst bleiben Umrisse der Platzhalter und eine Naht auf Autohoehe.
+4. KI-Vordergrund: Personen, Radfahrer, Autos der KI vor der Fassade, die am Boden stehen, bleiben KI
+   (`vordergrund_finden`).
+5. Zuruecksetzen: Ergebnis = Schutzmaske ohne Vordergrund (weiche Kante) * Blender farbangeglichen + Rest * KI.
+   Schatten, Spiegelungen, Menschen und Baeume der KI ausserhalb des Schutzbereichs bleiben.
+6. Kennzahlen (JSON) und Pruefbild (Schutzmaske rot, erhaltener Vordergrund gruen).
 
-Grenzen: Menschen oder Baeume der KI, die vor geschuetzten Flaechen stehen, werden abgeschnitten, ausser dort steht
-in Blender ein Platzhalter (Klasse menschen_platzhalter, baeume). Putz- und Stuckdetail der KI im Schutzbereich
+Grenzen: Baeume der KI, die ueber den Blender-Baum hinaus vor die Fassade ragen, werden abgeschnitten. Teile einer
+Person, die fast wie die Fassade aussehen, koennen fehlen. Putz- und Stuckdetail der KI im Schutzbereich
 geht verloren (das Gebaeude ist das Blender-Material mit KI-Farbstimmung); dafuer braucht es gute Materialien in
 Blender.
 """
@@ -338,6 +343,232 @@ def farbabgleich(B_lab: np.ndarray, K_lab: np.ndarray, gruppen: list[np.ndarray]
     return T
 
 
+# ------------------------------------------------------------------ Hintergrund und Vordergrund
+def hintergrund_einsetzen(R: np.ndarray, masken: dict, ordner, schutz: list[str]):
+    """Render und Masken hinter Platzhaltern (und ungeschuetzten Autos) aus dem zweiten Durchgang
+    (`ebenen.hintergrund`, Ordner <ebenen>/hintergrund). Liefert (R, masken, V) mit V = ersetzte Pixel oder None."""
+    hg = Path(ordner) / "hintergrund"
+    leer = (R, masken, None, None)
+    if not (hg / "ebenen.json").exists() or not (hg / "bereich.png").exists():
+        return leer
+    H, W = R.shape[:2]
+    bereich = np.asarray(Image.open(hg / "bereich.png").convert("L")) > 127
+    bereich = ndi.binary_erosion(bereich, iterations=4)
+    mb = EB.laden(hg)["masken"]
+    V = np.zeros((H, W), bool)
+    for k in EB.HINTERGRUND_KLASSEN:
+        if k in schutz or k not in masken:          # geschuetzte Autos bleiben die Blender-Autos
+            continue
+        m = ndi.binary_dilation(masken[k], iterations=2)     # Kantenpixel (Antialiasing) mit ersetzen
+        if k == "baeume":                           # Baeume nur, wo dahinter etwas Geschuetztes liegt
+            hinten = np.zeros((H, W), bool)
+            for ks in schutz:
+                hinten |= mb.get(ks, False)
+            m &= hinten
+        V |= m
+    V &= bereich
+    if not V.any():
+        return leer
+    Rb = bild_laden(hg / "beauty.png")
+    if Rb.shape != R.shape:
+        raise ValueError(f"Hintergrund {Rb.shape} passt nicht zum Render {R.shape}")
+    # Lichtangleich: ohne Baeume und Autos faellt mehr Licht auf die Fassade dahinter. Lokale Lab-Differenz
+    # Hauptbild minus Hintergrund dort, wo beide dieselbe Flaeche zeigen (Ring um die ersetzten Pixel, gleiche Klasse)
+    weg = np.zeros((H, W), bool)
+    for k in EB.HINTERGRUND_KLASSEN:
+        if k in masken:
+            weg |= masken[k]
+    ring = bereich & ~ndi.binary_dilation(weg, iterations=3)
+    for k in ("himmel", "sonstige"):
+        ring &= ~masken.get(k, np.zeros_like(ring))
+    Lm, Lb = rgb_zu_lab(R), rgb_zu_lab(Rb)
+    f = min(1.0, STATISTIK_MAX / W)
+    g = (max(8, round(W * f)), max(8, round(H * f)))
+    wr = _resize(ring.astype(np.float32), g)
+    sig = max(1.0, SIGMA_FEIN * g[0])
+    mu_m, _, n = _lokal(_resize(Lm, g), wr, sig)
+    mu_b, _, _ = _lokal(_resize(Lb, g), wr, sig)
+    a = np.clip(n / (n + 0.05), 0, 1)[..., None]
+    diff = _resize((a * (mu_m - mu_b)).astype(np.float32), (W, H))
+    Lb = Lb + diff
+    Lb[..., 0] = np.clip(Lb[..., 0], 0, 100)
+    Rb = lab_zu_rgb(Lb)
+    R2 = R.copy()
+    R2[V] = Rb[V]
+    m2 = {k: np.where(V, mb.get(k, np.zeros_like(V)), v) for k, v in masken.items()}
+    baum = V & ndi.binary_dilation(masken.get("baeume", np.zeros_like(V)), iterations=2)
+    return R2, m2, V, baum
+
+
+LAUB = {"saum_anteil": 0.012,     # KI-Laub bis so weit (Anteil Bildbreite) ausserhalb des Blender-Baums erhalten
+        "seed_dE": 25.0,          # sichere Laubpixel fuer das Farbmodell (dE gegen Fassade dahinter)
+        "min_dE": 10.0,           # darunter sieht die KI wie die Fassade aus: Render
+        "maha": 3.0,              # Mahalanobis-Abstand zum Laubmodell (Lab)
+        "struktur": 2.5,          # Mindeststreuung von L im 5x5-Fenster: Laub ist unruhig, Putz glatt
+        "krone_anteil": 0.008}    # Luecken zwischen Blaettern bis zu diesem Radius (Anteil Breite) schliessen: die
+                                  # ganze KI-Krone bleibt KI, die Naht liegt am Aussenrand der Blaetter
+
+
+def laub_finden(K_lab, T_lab, baum: np.ndarray, hart: np.ndarray, gueltig: np.ndarray, p: dict | None = None):
+    """Vor der geschuetzten Fassade, wo in Blender ein Baum steht (plus schmaler Saum): KI-Pixel, die wie Laub
+    aussehen, bleiben KI; KI-Pixel, die wie Fassade aussehen, werden Render (Fassade aus dem Hintergrund-Durchgang).
+    Laubmodell: Lab-Mittel und -Kovarianz der KI an sicheren Laubpixeln (dE ueber seed_dE) im Blender-Baum."""
+    p = {**LAUB, **(p or {})}
+    H, W = hart.shape
+    if not baum.any():
+        return np.zeros((H, W), bool), {"pixel": 0}
+    saum = ndi.distance_transform_edt(~baum) <= p["saum_anteil"] * W
+    zone = saum & hart & gueltig
+    D = ndi.gaussian_filter(np.sqrt(((T_lab - K_lab) ** 2).sum(-1)), 1.0)
+    seed = zone & baum & (D > p["seed_dE"])
+    if seed.sum() < 500:
+        return np.zeros((H, W), bool), {"pixel": 0, "hinweis": "zu wenig sichere Laubpixel"}
+    X = K_lab[seed][:: max(1, int(seed.sum()) // 200000)].astype(np.float64)
+    mu, C = X.mean(0), np.cov(X.T) + np.eye(3) * 1.0
+    Ci = np.linalg.inv(C)
+    Y = K_lab[zone].astype(np.float64) - mu
+    m = np.sqrt(np.einsum("ij,jk,ik->i", Y, Ci, Y))
+    Lk = K_lab[..., 0]
+    sd = np.sqrt(np.maximum(ndi.uniform_filter(Lk ** 2, 5) - ndi.uniform_filter(Lk, 5) ** 2, 0))
+    sd = ndi.maximum_filter(sd, 3)                         # Blattinneres neben Kanten mitnehmen
+    laub = np.zeros((H, W), bool)
+    laub[zone] = (m < p["maha"]) & (D[zone] > p["min_dE"]) & (sd[zone] > p["struktur"])
+    laub = ndi.binary_closing(ndi.binary_opening(laub, iterations=1), iterations=2) & zone
+    # Krone: Luecken zwischen den Blaettern schliessen (auf halber Groesse), innen alles KI
+    fk = min(1.0, ANALYSE_VG / W)
+    gk = (round(W * fk), round(H * fk))
+    lk = _resize(laub, gk, nearest=True)
+    r = max(2, int(round(p["krone_anteil"] * gk[0])))
+    lk = ndi.binary_fill_holes(ndi.binary_closing(lk, structure=_scheibe(r)))
+    krone = _resize(lk, (W, H), nearest=True)
+    laub = (laub | (ndi.binary_erosion(krone, iterations=2) & zone)) & zone
+    return laub, {"pixel": int(laub.sum()), "anteil_prozent": round(100.0 * float(laub.mean()), 3),
+                  "modell_lab": [round(float(v), 1) for v in mu], "zone_prozent": round(100.0 * float(zone.mean()), 2)}
+
+
+VG = {"schwelle": 14.0,          # dE KI gegen farbangeglichenen Render (geglaettet): Kandidat auf Wand, Boden
+      "schwelle_glas": 26.0,     # auf Glas (KI malt dort eigene Innenraeume, nur deutlich Abweichendes zaehlt)
+      "oeffnen_px": 4,           # Radius (Analyseebene 1920 px): Rahmen, Stangen, Linien fallen weg
+      "boden_min_px": 60,        # der Fleck muss mit so vielen Pixeln auf dem Boden stehen
+      "max_hoehe_m": 2.4,        # hoechstens so hoch ueber dem Fusspunkt (Personen, Radfahrer, Autos)
+      "vor_fassade_m": 0.4,      # Fusspunkt mindestens so weit vor der Fassadenbasis
+      "statistik_ausreisser": 20.0}   # dE ab dem ein Pixel nicht in die Farbstatistik zaehlt
+ANALYSE_VG = 1920
+
+
+def _scheibe(r: int) -> np.ndarray:
+    y, x = np.ogrid[-r:r + 1, -r:r + 1]
+    return x * x + y * y <= r * r
+
+
+def _abweichung(B_lab, K_lab, gruppen, gueltig, hart):
+    """dE zwischen KI und farbangeglichenem Render, leicht geglaettet (gleiche Groesse wie die Eingaben)."""
+    T = farbabgleich(B_lab, K_lab, gruppen, gueltig, hart)
+    return ndi.gaussian_filter(np.sqrt(((T - K_lab) ** 2).sum(-1)), 1.0)
+
+
+def vordergrund_finden(B_lab, K_lab, masken: dict, hart: np.ndarray, gueltig: np.ndarray, schutz: list[str],
+                       tiefe_m: np.ndarray | None, f_px: float | None, p: dict | None = None,
+                       ausschluss: np.ndarray | None = None):
+    """Was die KI vor die geschuetzte Fassade stellt und am Boden steht (Personen, Radfahrer, Autos) bleibt KI.
+
+    Auf der Analyseebene: dE zwischen KI und farbangeglichenem Render (Boden mit eigenem Abgleich), Kandidaten ueber
+    der Schwelle (Glas mit hoeherer Schwelle, geschuetzte Autos nie), Oeffnen mit einer Scheibe (duenne Rahmen,
+    Stangen, Kanten fallen weg). Ein Fleck zaehlt als Vordergrund, wenn er die geschuetzte Flaeche beruehrt, mit
+    `boden_min_px` auf dem Boden steht, sein Fusspunkt laut Render-Tiefe mindestens `vor_fassade_m` vor der
+    Fassadenbasis liegt, und nur bis `max_hoehe_m` ueber dem Fusspunkt (Hoehe aus Tiefe und Brennweite). Jeder Teil
+    ueber der geschuetzten Flaeche bekommt seinen Fusspunkt aus den Pixeln direkt darunter. `ausschluss` (Blender-
+    Baeume vor der Fassade) gehoert nicht zur Zone, dort entscheidet `laub_finden`.
+    Liefert (F in voller Groesse, Liste der Flecken, dE der Analyseebene)."""
+    p = {**VG, **(p or {})}
+    H, W = hart.shape
+    fa = min(1.0, ANALYSE_VG / W)
+    g = (round(W * fa), round(H * fa))
+    w, h = g
+    Bs, Ks = _resize(B_lab, g), _resize(K_lab, g)
+    ms = {k: _resize(v, g, nearest=True) for k, v in masken.items()}
+    hs, gs = _resize(hart, g, nearest=True), _resize(gueltig, g, nearest=True)
+    leer = np.zeros((h, w), bool)
+    boden = ms.get("boden", leer)
+    glas = ms.get("fenster_glas", leer) & hs
+    autos_fest = ms.get("autos", leer) if "autos" in schutz else leer
+    gr = _gruppen(ms, schutz) + [boden]
+    D = _abweichung(Bs, Ks, gr, gs, hs | boden)
+    aus = D > p["statistik_ausreisser"]                 # zweiter Durchgang ohne Ausreisser (KI-Laub, Personen)
+    D = _abweichung(Bs, Ks, gr, gs & ~aus, hs | boden)
+    zone = (hs | boden) & ~autos_fest & gs
+    if ausschluss is not None:
+        zone &= ~ndi.binary_dilation(_resize(ausschluss, g, nearest=True), iterations=2)
+    C = zone & np.where(glas, D > p["schwelle_glas"], D > p["schwelle"])
+    C = ndi.binary_opening(C, structure=_scheibe(int(p["oeffnen_px"])))
+    lab, n = ndi.label(C)
+    F = np.zeros((h, w), bool)
+    objekte = []
+    if n == 0:
+        return np.zeros((H, W), bool), objekte, D
+    ts = _resize(tiefe_m.astype(np.float32), g, nearest=True) if tiefe_m is not None else None
+    f = (f_px or 0.0) * fa
+    geb = ms.get("gebaeude_objekt", leer) | ms.get("fenster_glas", leer) | ms.get("fenster_rahmen", leer)
+    hat = geb.any(0)
+    basis = np.where(hat, h - 1 - np.argmax(geb[::-1], 0), -1)      # unterste Gebaeudezeile je Spalte
+    for i, sl in enumerate(ndi.find_objects(lab), start=1):
+        if sl is None:
+            continue
+        c = lab[sl] == i
+        hc = c & hs[sl]
+        if not hc.any() or int((c & boden[sl]).sum()) < p["boden_min_px"]:
+            continue
+        # jeder Teil ueber der geschuetzten Flaeche bekommt seinen eigenen Fusspunkt (nur aus den Pixeln direkt
+        # darunter): sonst verbindet der Gehsteig eine Person mit einem Fleck an der Fassade daneben
+        sub, ns = ndi.label(hc)
+        for j, ssl in enumerate(ndi.find_objects(sub), start=1):
+            if ssl is None:
+                continue
+            a0, a1 = max(0, ssl[1].start - 3), min(c.shape[1], ssl[1].stop + 3)
+            spalten = c[:, a0:a1]
+            lab2, _ = ndi.label(spalten)
+            ids = np.unique(lab2[:, ssl[1].start - a0:ssl[1].stop - a0][sub[:, ssl[1].start:ssl[1].stop] == j])
+            stueck = np.isin(lab2, ids[ids > 0])
+            ox, oy = sl[1].start + a0, sl[0].start
+            if int((stueck & boden[oy:oy + c.shape[0], ox:ox + stueck.shape[1]]).sum()) < p["boden_min_px"] // 2:
+                continue
+            yy, xx = np.nonzero(stueck)
+            yy, xx = yy + oy, xx + ox
+            v_f = int(yy.max())
+            fuss = yy >= v_f - 2
+            d_f = None
+            if ts is not None:
+                fb = boden[yy[fuss], xx[fuss]]
+                dd = ts[yy[fuss], xx[fuss]][fb] if fb.any() else ts[yy[fuss], xx[fuss]]
+                d_f = float(np.median(dd)) if len(dd) else None
+                bx = xx[fuss]
+                bx = bx[basis[bx] >= 0]
+                if d_f is not None and len(bx):
+                    d_b = float(np.median(ts[basis[bx], bx]))
+                    if not d_f < d_b - p["vor_fassade_m"]:
+                        objekte.append({"verworfen": "nicht vor der Fassade", "zeile": v_f,
+                                        "abstand_m": round(d_f, 1), "fassade_m": round(d_b, 1)})
+                        continue
+            rows = np.arange(sl[0].start, sl[0].stop)[:, None]
+            if d_f and f > 0:
+                v_top = v_f - f * p["max_hoehe_m"] / d_f
+            else:
+                v_top = v_f - 0.25 * h                          # ohne Tiefe/Brennweite: grobe Grenze
+            teil = (sub == j) & (rows >= v_top)
+            teil = ndi.binary_fill_holes(ndi.binary_closing(teil, iterations=2)) & (rows >= v_top) & hs[sl]
+            if not teil.any():
+                continue
+            F[sl] |= teil
+            oben = int(yy.min())
+            objekte.append({"box_analyse": [int(xx.min()), int(yy.min()), int(xx.max()) + 1, int(yy.max()) + 1],
+                            "abstand_m": round(d_f, 1) if d_f else None,
+                            "hoehe_m_aus_tiefe": round((v_f - oben) * d_f / f, 2) if d_f and f > 0 else None,
+                            "anteil_prozent": round(100.0 * float(teil.sum()) / (w * h), 3)})
+    Ff = _resize(F, (W, H), nearest=True)
+    Ff = ndi.binary_closing(Ff, iterations=2) & hart
+    return Ff, objekte, D
+
+
 # ------------------------------------------------------------------ Hauptfunktion
 def _gruppen(masken: dict, schutz: list[str]) -> list[np.ndarray]:
     eigene = [["fenster_glas"], ["autos"]]
@@ -360,7 +591,7 @@ def _gruppen(masken: dict, schutz: list[str]) -> list[np.ndarray]:
 
 def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] | None = None,
                     ohne: list[str] | None = None, farbe: float = 1.0, modell: str = "homographie",
-                    pruefbild: bool = True) -> dict:
+                    pruefbild: bool = True, vordergrund: bool = True) -> dict:
     render_p, ki_p = Path(render_p), Path(ki_p)
     ebn = EB.laden(ebenen_ordner)
     R = bild_laden(render_p)
@@ -371,29 +602,51 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
         raise ValueError(f"Ebenen {next(iter(masken.values())).shape[::-1]} passen nicht zum Render {(W, H)}")
     schutz = list(klassen or ebn["meta"]["schutz_klassen"])
     schutz = [k for k in schutz if k not in (ohne or [])]
+    kante = ebn["meta"].get("schutz_kante_px", EB.KANTE_WEICH_PX)
+    # Hinter Platzhaltern und ungeschuetzten Autos: Fassade aus dem zweiten Durchgang (render --ebenen)
+    R, masken, V, baum = hintergrund_einsetzen(R, masken, ebn["ordner"], schutz)
     hart = np.zeros((H, W), bool)
     for k in schutz:
         hart |= masken.get(k, False)
-    if schutz == ebn["meta"]["schutz_klassen"]:
-        alpha = ebn["schutz"]
-    else:
-        alpha = EB.weiche_kante(hart, ebn["meta"].get("schutz_kante_px", EB.KANTE_WEICH_PX))
 
     al = ausrichten_ki(R, K, ausricht_maske(masken, hart), modell)
     Kw, gueltig = warp(K, al["H"], (W, H))
     B_lab, K_lab = rgb_zu_lab(R), rgb_zu_lab(Kw)
-    T_lab = farbabgleich(B_lab, K_lab, _gruppen(masken, schutz), gueltig, hart, farbe)
+    gruppen = _gruppen(masken, schutz)
+    F, objekte, D = np.zeros((H, W), bool), [], None
+    if vordergrund:
+        kam = ebn["meta"].get("kamera_intern") or {}
+        F, objekte, D = vordergrund_finden(B_lab, K_lab, masken, hart, gueltig, schutz, ebn.get("tiefe_m"),
+                                           kam.get("f_px"), ausschluss=baum)
+    # Farbstatistik ohne Ausreisser (KI-Laub, Personen vor der Fassade): sonst faerben sie die Fassade ein
+    stat_ok = gueltig & ~F
+    if D is not None:
+        stat_ok &= ~_resize(D > VG["statistik_ausreisser"], (W, H), nearest=True)
+    T_lab = farbabgleich(B_lab, K_lab, gruppen, stat_ok, hart, farbe)
     T = lab_zu_rgb(T_lab)
+    L, laub_info = np.zeros((H, W), bool), {"pixel": 0}
+    if vordergrund and baum is not None:
+        L, laub_info = laub_finden(K_lab, T_lab, baum, hart, gueltig)
+        # Fassade zwischen den Blaettern: die KI zeigt sie im Laubschatten, der Hintergrund-Durchgang in der Sonne.
+        # Eigener lokaler Farbabgleich nur dort, Statistik aus genau diesen Pixeln (ohne Laub, mit Schatten)
+        Z = baum & hart & ~L
+        if Z.sum() > 2000:
+            T2 = farbabgleich(B_lab, K_lab, [Z], gueltig & Z, Z, farbe)
+            T_lab[Z] = T2[Z]
+            T = lab_zu_rgb(T_lab)
+    F = F | L
+    schutz_hart = hart & ~F
+    alpha = EB.weiche_kante(schutz_hart, kante)
     a = alpha[..., None]
     out = a * T + (1 - a) * Kw              # Rand ohne KI-Deckung: Kw ist dort gespiegelt fortgesetzt (BORDER_REFLECT)
 
     # Kennzahlen (Analyseebene)
     fa = min(1.0, ANALYSE_MAX / W)
     g = (round(W * fa), round(H * fa))
-    innen = ndi.binary_erosion(_resize(hart, g), iterations=2) & _resize(gueltig, g)
+    innen = ndi.binary_erosion(_resize(schutz_hart, g), iterations=2) & _resize(gueltig, g)
     gr, gk, go = (_grau(_resize(x, g)) for x in (R, Kw, out))
     kr, kk, ko = _canny(gr), _canny(gk), _canny(go)
-    dE = lambda x: float(np.sqrt(((x - B_lab) ** 2).sum(-1))[ndi.binary_erosion(hart, iterations=2) & gueltig].mean())
+    dE = lambda x: float(np.sqrt(((x - B_lab) ** 2).sum(-1))[ndi.binary_erosion(schutz_hart, iterations=2) & gueltig].mean())
     O_lab = rgb_zu_lab(out)
     kz = {"render": str(render_p), "ki": str(ki_p), "ebenen": str(ebn["ordner"]), "schutz_klassen": schutz,
           "anteil_geschuetzt_prozent": round(100 * float((alpha >= 0.5).mean()), 2),
@@ -415,9 +668,22 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
               "hinweis": "kanten: praezision = Anteil starker Kanten des Bildes nahe einer Render-Kante (nichts "
                          "Neues), vollstaendig = Anteil starker Render-Kanten im Bild (nichts fehlt), Toleranz 1 px. "
                          "Nachher nahe 1 = Geometrie aus dem Render. dE nachher ist die gewollte Farbangleichung"},
-          "klassen": {}}
+          "klassen": {},
+          "hintergrund": {"verwendet": V is not None,
+                          "anteil_prozent": round(100 * float(V.mean()), 2) if V is not None else 0.0,
+                          "hinweis": "Pixel hinter Platzhaltern (und ungeschuetzten Autos) aus dem zweiten Durchgang"},
+          "laub": {**laub_info, "parameter": LAUB,
+                   "hinweis": "KI-Laub vor der Fassade (Blender-Baum plus Saum), bleibt KI; Rest dort Render"},
+          "vordergrund": {"aktiv": vordergrund, "anteil_prozent": round(100 * float(F.mean()), 3),
+                          "flecken": [o for o in objekte if "verworfen" not in o],
+                          "verworfen": [o for o in objekte if "verworfen" in o][:20],
+                          "parameter": VG,
+                          "hinweis": "KI-Pixel vor der geschuetzten Flaeche, die als Person/Auto am Boden gelten und "
+                                     "nicht zurueckgesetzt werden (gruen im Pruefbild)"}}
     for k in ("fenster_glas", "fenster_rahmen", "gelaender", "leuchten", "gebaeude_objekt"):
         m = masken.get(k)
+        if m is not None:
+            m = m & ~F
         if m is None or k not in schutz or m.sum() < 30:
             continue
         mk = _resize(ndi.binary_dilation(m, iterations=1), g) & _resize(gueltig, g)
@@ -430,7 +696,7 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     bild_speichern(out, aus)
     kz["ergebnis"] = str(aus)
     if pruefbild:
-        kz["pruefbild"] = str(_pruefbild(R, Kw, out, alpha, kz, aus.with_name(aus.stem + "_pruefung.jpg")))
+        kz["pruefbild"] = str(_pruefbild(R, Kw, out, alpha, kz, aus.with_name(aus.stem + "_pruefung.jpg"), F))
     aus.with_name(aus.stem + ".json").write_text(json.dumps(kz, ensure_ascii=False, indent=1))
     kz["json"] = str(aus.with_name(aus.stem + ".json"))
     return kz
@@ -448,11 +714,14 @@ def _schrift(gr=15):
         return ImageFont.load_default()
 
 
-def _pruefbild(R, Kw, out, alpha, kz, pfad: Path) -> Path:
+def _pruefbild(R, Kw, out, alpha, kz, pfad: Path, F=None) -> Path:
     bw = min(900, R.shape[1])
     bh = round(R.shape[0] * bw / R.shape[1])
-    tafeln = [("Render (Blender)", R), ("KI ausgerichtet", Kw),
-              ("Schutzmaske rot ueber Ergebnis", maske_ueberlagern(out, alpha)), ("Ergebnis", out)]
+    ueber = maske_ueberlagern(out, alpha)
+    if F is not None and F.any():
+        ueber = maske_ueberlagern(ueber, F.astype(np.float32), farbe=(0.1, 0.9, 0.2), deckkraft=0.6)
+    tafeln = [("Render (Blender, Hintergrund eingesetzt)", R), ("KI ausgerichtet", Kw),
+              ("Schutzmaske rot, KI-Vordergrund gruen", ueber), ("Ergebnis", out)]
     kopf = 50
     o = Image.new("RGB", (2 * bw + 10, 2 * (bh + 24) + kopf), (250, 250, 248))
     d = ImageDraw.Draw(o)
@@ -640,9 +909,10 @@ def fenster_je_fassade(Rk, Kw, mk, ebn, gueltig, g) -> dict:
     return {k: v for k, v in out.items() if v["render"] or v["ki"]}
 
 
-def main_cli(render, ki, ebenen, aus=None, klassen=None, ohne=None, farbe=1.0, modell="homographie") -> int:
+def main_cli(render, ki, ebenen, aus=None, klassen=None, ohne=None, farbe=1.0, modell="homographie",
+             vordergrund=True) -> int:
     kz = schutz_anwenden(render, ki, ebenen, aus, [k for k in (klassen or "").split(",") if k] or None,
-                         [k for k in (ohne or "").split(",") if k], farbe, modell)
+                         [k for k in (ohne or "").split(",") if k], farbe, modell, vordergrund=vordergrund)
     print(json.dumps(kz, ensure_ascii=False, indent=1))
     f1 = kz["schutzbereich"]["kanten_nachher"]["f1"]
     return 0 if f1 is None or f1 >= 0.95 else 1

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import math
 import random
 from pathlib import Path
@@ -921,6 +922,9 @@ def render(project_dir: Path, cams: list[str], lights: list[str], preview: bool,
                 eb = EB.schreiben(scene, eb_meta, out_dir / f"{cn}_{ln}_ebenen", cfg, cn, ln, str(path))
                 results[-1]["ebenen"] = {"ordner": eb["ordner"], "schutz_anteil_prozent": eb["schutz_anteil_prozent"],
                                          "sekunden": eb["sekunden"], "nicht_zugeordnet": eb["nicht_zugeordnet"][:5]}
+                # Fassade und Boden hinter Platzhaltern und Autos (zweiter Durchgang im Ausschnitt), fuer `schutz`
+                if os.environ.get("IMMOVIZ_HINTERGRUND", "").lower() not in ("aus", "0", "nein", "false"):
+                    results[-1]["ebenen"]["hintergrund"] = EB.hintergrund(scene, eb_meta, Path(eb["ordner"]), cfg, cn, ln)
     if save_blend:
         bpy.ops.wm.save_as_mainfile(filepath=str(project_dir / "renders" / f"{cfg['project']['slug']}.blend"))
     return results

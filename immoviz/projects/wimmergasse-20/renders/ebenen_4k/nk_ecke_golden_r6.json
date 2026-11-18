@@ -11,10 +11,10 @@
  "deckung": 0.859,
  "befunde": [
   "10 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
-  "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.8547, praezise 0.743); Bauteile veraendert oder versetzt?",
-  "Schutzzone leuchten: Kanten weichen ab (vollstaendig 0.3798, praezise 0.8004); Bauteile veraendert oder versetzt?",
-  "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.9045, praezise 0.8077); Bauteile veraendert oder versetzt?",
-  "Schutzzone gebaeude: Kanten weichen ab (vollstaendig 0.8723, praezise 0.7533); Bauteile veraendert oder versetzt?",
+  "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.8551, praezise 0.7429); Bauteile veraendert oder versetzt?",
+  "Schutzzone leuchten: Kanten weichen ab (vollstaendig 0.3768, praezise 0.8024); Bauteile veraendert oder versetzt?",
+  "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.9067, praezise 0.8058); Bauteile veraendert oder versetzt?",
+  "Schutzzone gebaeude: Kanten weichen ab (vollstaendig 0.872, praezise 0.7563); Bauteile veraendert oder versetzt?",
   "Fassade stolberggasse: 39 Fenster im Render, 41 im KI-Bild (2 neu, 0 fehlen)"
  ],
  "merkmale": {
@@ -101,7 +101,7 @@
     0.62,
     0.326
    ],
-   "pixel": 260,
+   "pixel": 261,
    "lange_senkrechte_px": 0,
    "auf_glatter_flaeche": 0.0,
    "score": 9.5
@@ -162,14 +162,14 @@
    "art": "fehlt",
    "box": [
     0.0,
-    0.139,
+    0.141,
     0.375,
     0.176
    ],
-   "pixel": 1480,
+   "pixel": 1477,
    "lange_senkrechte_px": 0,
    "auf_glatter_flaeche": 0.0,
-   "score": 43.4
+   "score": 43.3
   },
   {
    "art": "fehlt",
@@ -179,7 +179,7 @@
     1.0,
     0.119
    ],
-   "pixel": 1031,
+   "pixel": 1030,
    "lange_senkrechte_px": 0,
    "auf_glatter_flaeche": 0.0,
    "score": 30.2
@@ -233,36 +233,36 @@
   "zonen": {
    "fenster": {
     "anteil_prozent": 4.63,
-    "kanten_f1": 0.795,
-    "kanten_vollstaendig": 0.8547,
-    "kanten_praezision": 0.743,
-    "kantenabstand_mittel_px": 1.04,
-    "gradienten_korrelation": 0.3519,
+    "kanten_f1": 0.7951,
+    "kanten_vollstaendig": 0.8551,
+    "kanten_praezision": 0.7429,
+    "kantenabstand_mittel_px": 1.05,
+    "gradienten_korrelation": 0.3518,
     "status": "abweichung"
    },
    "leuchten": {
     "anteil_prozent": 0.5,
-    "kanten_f1": 0.5152,
-    "kanten_vollstaendig": 0.3798,
-    "kanten_praezision": 0.8004,
+    "kanten_f1": 0.5128,
+    "kanten_vollstaendig": 0.3768,
+    "kanten_praezision": 0.8024,
     "kantenabstand_mittel_px": 7.8,
-    "gradienten_korrelation": -0.0192,
+    "gradienten_korrelation": -0.0193,
     "status": "abweichung"
    },
    "gelaender": {
     "anteil_prozent": 0.5,
-    "kanten_f1": 0.8534,
-    "kanten_vollstaendig": 0.9045,
-    "kanten_praezision": 0.8077,
+    "kanten_f1": 0.8533,
+    "kanten_vollstaendig": 0.9067,
+    "kanten_praezision": 0.8058,
     "kantenabstand_mittel_px": 1.23,
-    "gradienten_korrelation": 0.3711,
+    "gradienten_korrelation": 0.3721,
     "status": "abweichung"
    },
    "gebaeude": {
     "anteil_prozent": 19.27,
-    "kanten_f1": 0.8085,
-    "kanten_vollstaendig": 0.8723,
-    "kanten_praezision": 0.7533,
+    "kanten_f1": 0.81,
+    "kanten_vollstaendig": 0.872,
+    "kanten_praezision": 0.7563,
     "kantenabstand_mittel_px": 1.19,
     "gradienten_korrelation": 0.5599,
     "status": "abweichung"
@@ -285,10 +285,10 @@
    }
   },
   "befunde": [
-   "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.8547, praezise 0.743); Bauteile veraendert oder versetzt?",
-   "Schutzzone leuchten: Kanten weichen ab (vollstaendig 0.3798, praezise 0.8004); Bauteile veraendert oder versetzt?",
-   "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.9045, praezise 0.8077); Bauteile veraendert oder versetzt?",
-   "Schutzzone gebaeude: Kanten weichen ab (vollstaendig 0.8723, praezise 0.7533); Bauteile veraendert oder versetzt?",
+   "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.8551, praezise 0.7429); Bauteile veraendert oder versetzt?",
+   "Schutzzone leuchten: Kanten weichen ab (vollstaendig 0.3768, praezise 0.8024); Bauteile veraendert oder versetzt?",
+   "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.9067, praezise 0.8058); Bauteile veraendert oder versetzt?",
+   "Schutzzone gebaeude: Kanten weichen ab (vollstaendig 0.872, praezise 0.7563); Bauteile veraendert oder versetzt?",
    "Fassade stolberggasse: 39 Fenster im Render, 41 im KI-Bild (2 neu, 0 fehlen)"
   ],
   "grenzen": {

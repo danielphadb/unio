@@ -1,26 +1,26 @@
 {
  "vorher": {
   "mittel_lab": [
-   64.63,
-   3.89,
-   9.26
+   64.71,
+   3.81,
+   9.18
   ],
   "streuung_lab": [
-   25.99,
-   3.57,
-   11.19
+   26.14,
+   3.61,
+   11.16
   ]
  },
  "nachher": {
   "mittel_lab": [
-   56.15,
-   3.16,
-   8.3
+   56.19,
+   3.11,
+   8.24
   ],
   "streuung_lab": [
-   26.57,
-   3.88,
-   9.56
+   26.66,
+   3.89,
+   9.53
   ]
  },
  "leitbild": {
@@ -45,8 +45,8 @@
   "maske": true
  },
  "abstand_mittel_zum_leitbild": {
-  "vorher": 8.1,
-  "nachher": 1.54
+  "vorher": 8.14,
+  "nachher": 1.45
  },
  "bild": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/ecke_golden_r6_schutz_ohne_autos.jpg",
  "ergebnis": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/ecke_golden_r6_schutz_ohne_autos_grading.jpg",

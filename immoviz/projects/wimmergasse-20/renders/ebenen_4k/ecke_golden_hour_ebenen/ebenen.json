@@ -42,6 +42,14 @@
   -15.5,
   1.649999976158142
  ],
+ "kamera_intern": {
+  "lens_mm": 20.0,
+  "sensor_mm": 36.0,
+  "shift_x": 0.0,
+  "shift_y": 0.17638714611530304,
+  "f_px": 2133.3333333333335,
+  "typ": "PERSP"
+ },
  "klassen": [
   "gebaeude_objekt",
   "fenster_glas",
