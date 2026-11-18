@@ -553,3 +553,17 @@ Foto-Textur 1,5 mm je Texel mit Normal Map) wurde bei flachem Blick gestaucht un
 Linien. `lib/materials.py`: `detail_faktor` (Pixel-Fußabdruck = Abstand / cos Blickwinkel) blendet Korn, Relief,
 Normal Map und Foto-Helligkeit ab rund 2,5 m aus (ganz ab 5,7 m bei 1,6 m Augenhöhe), Risse und Nähte erst weiter
 hinten; Korn als weiche Helligkeit statt Schwellwert, Nähte 1,2 cm. Gilt für Fahrbahn, Gehsteig und Parkstreifen.
+
+## 16. Virtuelle Begehung (18.11.2026)
+
+Kunde 18.11.2026 zum Apple-Look-Around-Bild der Einfahrt an der Objektecke (Lokal "Hinteralm" im Erdgeschoss des Objekts,
+Blick vom Kreuzungsbereich nach Norden in die Wimmergasse): die Schwelle sei "weder ein Zebrastreifen noch eine harte
+Kante". Ursache im Modell: die zwei Fahrbahnschwellen der FMZK (Rampen der Gehsteigüberfahrt) waren nicht belegt, im
+Boden stand dort ein Loch (dunkle Rinne quer über die Einmündung), dazwischen Fahrbahn auf Straßenniveau und an beiden
+Seiten 12 cm Bordstein; die Bild-KI machte daraus Zebrastreifen und Pflaster. Die OGD-Gehsteigabsenkungen bestätigen
+"0 cm" (niveaugleich) an beiden Seiten.
+
+Neu ist die virtuelle Begehung als fester Prüfschritt (`immoviz.py begehung`, Regel U11, README Abschnitt "Virtuelle
+Begehung"): 47 Street-View-Standorte entlang Wimmergasse und Stolberggasse (Umkreis 120 m), je 8 Ansichten gegen das
+Modell. Befunde und Korrekturen je Standort in `begehung.md`; Übersicht `renders/check/begehung_karte.jpg`,
+Vorprüfung `renders/check/begehung_auto.md`. Neue OGD-Daten in `data/strassen_ogd.json` (`lib/strasse.ogd_laden`).

@@ -200,10 +200,22 @@ street:
   parking:
     # Wimmergasse Ostseite (vor dem Haus und suedlich der Kreuzung): Schraegparker, markierte Linien, rund 55 Grad.
     # Negativer Winkel: Einbahn Richtung Sueden, das bordsteinseitige Ende zeigt zur Kreuzung.
-    - {name: Wimmergasse Hausseite, strasse: wimmergasse, seite: haus, art: schraeg, winkel: -55, raster: 2.35}
+    # Begehung 18.11.2026 (begehung.md A10): Schraegparker auf Asphalt mit weissen Trennlinien und Randlinie zur Fahrbahn
+    - {name: Wimmergasse Hausseite, strasse: wimmergasse, seite: haus, art: schraeg, winkel: -55, raster: 2.35, markierung: true, randlinie: true}
     - {name: Wimmergasse gegenueber, strasse: wimmergasse, seite: gegenueber, art: laengs}
+    # erste Bucht vor der Objektecke: Motorraeder (SV 05/2024 und Kundenbild Apple Look Around), keine Autos (begehung.md A9)
+    - {name: Motorraeder Objektecke, bereich: [0.0, -6.0, 2.9, -1.8], art: keine}
     # Stolberggasse beidseitig 90 Grad zum Randstein, oestlich und westlich der Kreuzung
     - {name: Stolberggasse beidseitig, strasse: stolberggasse, art: senkrecht, raster: 2.6}
+  # Belag je Parkstreifen (Mittelpunkt im Bereich): Wimmergasse Ostseite Asphalt (Schraegparker), sonst Granitpflaster
+  parkstreifen_material:
+    - {bereich: [-7.0, -200.0, 0.5, 200.0], material: parkstreifen, quelle: "Begehung SV 05/2024 und 04/2026 (WI01 bis WI24)"}
+  # Gehsteigvorziehungen an der Kreuzung mit Betonplatten, uebrige Gehsteige Gussasphalt (Begehung, begehung.md A11)
+  belag:
+    - {bereich: [-5.7, -6.4, 0.45, 0.0], material: gehsteig_platten, quelle: "Begehung WI10, WI11, ST13 (SV 05/2024), Kundenbild"}
+    - {bereich: [-17.4, -6.4, -10.3, 0.0], material: gehsteig_platten, quelle: "Begehung WI10, WI11, ST14 (SV 05/2024)"}
+    - {bereich: [-5.7, -18.7, 0.4, -12.4], material: gehsteig_platten, quelle: "Begehung WI09, WI10, ST13 (SV 05/2024)"}
+    - {bereich: [-17.8, -18.7, -9.8, -12.4], material: gehsteig_platten, quelle: "Begehung WI09, WI10, ST14 (SV 05/2024)"}
   cables:   # alt, nur Fallback ohne Inventar strassenleuchten: Seilleuchten quer ueber die Fahrbahn [x0, y0, x1, y1], Hoehe 7,5 m
     - [0.0, 0.5, -15.0, -17.5]        # Kreuzung diagonal
     - [0.0, 36.0, -15.0, 36.0]
@@ -247,31 +259,74 @@ strassenleuchten:
   - {id: S12, typ: seil, leuchte: [133.6, -10.7], hoehe: 7.2, a: [133.6, 0.42, 8.6], b: [133.6, -17.96, 8.6], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
 
 # ---------------------------------------------------------------- Strassenmoebel und Platzhalter (lib/assets/moebel.py)
-# Poller an den Gehsteigvorziehungen der Kreuzung (gruen mit weissen Ringen, SV 05/2024), Lage am Bordstein laut OGD
-# Verkehrsflaechen (0,35 m hinter der Kante, Abstand 1,5 m). Zeichen und Fahrradbuegel laut SV 05/2024, Lage +-1 m.
-# Baumscheiben mit Gussgitter automatisch je Katasterbaum auf Gehsteig/Parkstreifen (strassenmoebel_auto).
+# Begehung 18.11.2026 (begehung.md, Kundenbild Apple Look Around): Poller dunkelgruen mit rot-weissen Reflexringen, Anzahl je
+# Gehsteigvorziehung aus Street View 05/2024 und 04/2026 (NW 3, NE 4, SE 5, SW 3), Lage gleichmaessig auf dem OGD-Bordsteinbogen,
+# 0,35 m hinter der Kante (Triangulation aus Panoramen weicht bis 2 m ab, GPS; umgebung_abgleich.md 15). Zeichen: Lage aus
+# Street View +-1 m, Gefahrzeichen Objektecke aus dem Schatten im Orthofoto 2024 (OGD). Fahrradbuegel kommen jetzt aus OGD
+# (FAHRRADABSTELLANLAGEOGD, lib/strasse.ogd_elemente). Baumscheiben automatisch je Katasterbaum (strassenmoebel_auto).
 strassenmoebel:
-  - {typ: poller, pos: [-5.46, -1.71], quelle: "SV 05/2024, Lage Bordstein OGD"}
-  - {typ: poller, pos: [-3.79, -4.48], quelle: "SV 05/2024, Lage Bordstein OGD"}
-  - {typ: poller, pos: [-0.79, -5.63], quelle: "SV 05/2024, Lage Bordstein OGD"}
-  - {typ: poller, pos: [-14.91, -5.61], quelle: "SV 05/2024, Lage Bordstein OGD"}
-  - {typ: poller, pos: [-11.95, -3.96], quelle: "SV 05/2024, Lage Bordstein OGD"}
-  - {typ: poller, pos: [-10.91, -1.01], quelle: "SV 05/2024, Lage Bordstein OGD"}
-  # Suedwestecke (Standpunkt Kamera ecke) am 18.11.2026 nachgemessen: drei Poller am Bogen der Vorziehung, aus zwei Panoramen
-  # (SV 05/2024 bei -7,0/-12,3 und -6,9/-22,6) trianguliert, +-0,5 m. Der fruehere Poller -11,19/-18,26 war der Pfosten
-  # des Einbahnschilds (jetzt verkehrszeichen info), -11,42/-15,34 und -13,73/-13,31 lagen 0,8 bzw. 1,4 m daneben.
-  - {typ: poller, pos: [-10.14, -15.88], quelle: "SV 05/2024, trianguliert aus zwei Panoramen +-0,5 m (18.11.2026)"}
-  - {typ: poller, pos: [-11.07, -14.62], quelle: "SV 05/2024, trianguliert aus zwei Panoramen +-0,5 m (18.11.2026)"}
-  - {typ: poller, pos: [-12.48, -13.85], quelle: "SV 05/2024, trianguliert aus zwei Panoramen +-0,5 m (18.11.2026)"}
-  - {typ: poller, pos: [-1.47, -13.06], quelle: "SV 05/2024, Lage Bordstein OGD"}
-  - {typ: poller, pos: [-4.06, -14.64], quelle: "SV 05/2024, Lage Bordstein OGD"}
-  - {typ: poller, pos: [-5.28, -17.73], quelle: "SV 05/2024, Lage Bordstein OGD"}
-  - {typ: verkehrszeichen, schild: verbot, pos: [-4.45, -2.96], drehung: 225, quelle: "SV 05/2024 (Ecke Objekt), Lage +-1 m"}
+  # NW (Wimmergasse 17): 3 Poller
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-14.67, -5.57], quelle: "SV 05/2024 Anzahl (WI11, WI10), Lage OGD-Bordstein"}
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-11.95, -3.95], quelle: "SV 05/2024 Anzahl (WI11, WI10), Lage OGD-Bordstein"}
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-10.91, -0.94], quelle: "SV 05/2024 Anzahl (WI11, WI10), Lage OGD-Bordstein"}
+  # NE (Objektecke): 4 Poller
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-4.89, -3.18], quelle: "SV 05/2024 Anzahl (ST13, WI10), Kundenbild, Lage OGD-Bordstein"}
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-2.69, -5.17], quelle: "SV 05/2024 Anzahl (ST13, WI10), Kundenbild, Lage OGD-Bordstein"}
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-0.02, -5.42], quelle: "SV 05/2024 Anzahl (ST13, WI10), Kundenbild, Lage OGD-Bordstein"}
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [0.1, -2.52], quelle: "SV 05/2024 Anzahl (ST13, WI10), Kundenbild, Lage OGD-Bordstein"}
+  # SE (Wimmergasse 18): 5 Poller
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-0.23, -12.96], quelle: "SV 05/2024 Anzahl (WI10, umgebung_abgleich.md 15), Lage OGD-Bordstein"}
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-2.06, -13.24], quelle: "SV 05/2024 Anzahl (WI10, umgebung_abgleich.md 15), Lage OGD-Bordstein"}
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-3.72, -14.29], quelle: "SV 05/2024 Anzahl (WI10, umgebung_abgleich.md 15), Lage OGD-Bordstein"}
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-4.86, -15.91], quelle: "SV 05/2024 Anzahl (WI10, umgebung_abgleich.md 15), Lage OGD-Bordstein"}
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-5.27, -17.75], quelle: "SV 05/2024 Anzahl (WI10, umgebung_abgleich.md 15), Lage OGD-Bordstein"}
+  # SW (Wimmergasse 15, Standpunkt Kamera ecke): 3 Poller
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-10.88, -17.85], quelle: "SV 05/2024 Anzahl (WI10, umgebung_abgleich.md 14), Lage OGD-Bordstein"}
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-11.77, -14.81], quelle: "SV 05/2024 Anzahl (WI10, umgebung_abgleich.md 14), Lage OGD-Bordstein"}
+  - {typ: poller, farbe: gruen_rot_weiss, pos: [-14.5, -13.08], quelle: "SV 05/2024 Anzahl (WI10, umgebung_abgleich.md 14), Lage OGD-Bordstein"}
+  # NE Steher an der Gehsteigueberfahrt: Einfahrt verboten (Sueden) mit Zusatztafel "ausgenommen Rad", Stop (Norden)
+  - {typ: verkehrszeichen, schild: verbot, pos: [-4.45, -2.96], drehung: 240, hoehe: 2.05, quelle: "SV 05/2024 (WI10, ST13), Kundenbild, Lage +-1 m"}
+  - {typ: verkehrszeichen, schild: zusatz, pos: [-4.45, -2.96], drehung: 240, hoehe: 1.62, steher: false, quelle: "SV 05/2024 (ausgenommen Rad), Kundenbild"}
+  - {typ: verkehrszeichen, schild: stop, pos: [-4.45, -2.96], drehung: 60, hoehe: 2.55, steher: false, quelle: "SV 05/2024 (WI12 Blick nach Sueden)"}
+  # NE Gefahrzeichen Bodenschwelle (Kundenbild), Lage aus dem Schatten im Orthofoto 2024 (OGD)
+  - {typ: verkehrszeichen, schild: gefahr, pos: [-3.4, -4.7], drehung: -45, quelle: "Orthofoto 2024 (Schatten), SV 05/2024 (ST13, WI10), Kundenbild"}
+  # NW Steher: Stop und Gefahrzeichen Bodenschwelle (Norden, Ausfahrt aus der Einbahn), Mistkuebel grau-orange
+  - {typ: verkehrszeichen, schild: stop, pos: [-11.2, -0.2], drehung: 90, hoehe: 2.1, quelle: "SV 05/2024 (WI12 Blick nach Sueden, WI11), Lage +-1 m"}
+  - {typ: verkehrszeichen, schild: gefahr, pos: [-11.2, -0.2], drehung: 90, hoehe: 2.75, steher: false, quelle: "SV 05/2024 (WI12), Kundenbild (Rueckseite)"}
+  - {typ: mistkuebel, farbe: grau_orange, pos: [-11.2, -0.2], drehung: 200, steher: false, quelle: "SV 05/2024 (WI11), Kundenbild"}
+  # SE Steher: Stop (Sueden) und Mistkuebel grau-orange
   - {typ: verkehrszeichen, schild: stop, pos: [-4.4, -16.6], drehung: 270, quelle: "SV 05/2024, Lage +-1 m"}
+  - {typ: mistkuebel, farbe: grau_orange, pos: [-4.4, -16.6], drehung: 180, steher: false, quelle: "SV 05/2024 (WI10 Blick nach Sueden)"}
+  # SW Steher: Einbahn mit Zusatztafel "ausgenommen Rad"
   - {typ: verkehrszeichen, schild: info, pos: [-10.47, -17.86], drehung: 0, quelle: "SV 05/2024 (Einbahn, ausgen. Rad), trianguliert +-0,5 m (18.11.2026; vorher -13,4/-21,0)"}
-  - {typ: fahrradbuegel, pos: [-13.45, 4.9], drehung: 0, quelle: "umgebung_abgleich.md 5 (SV 05/2024), Lage +-1 m"}
-  - {typ: fahrradbuegel, pos: [-13.45, 5.9], drehung: 0, quelle: "umgebung_abgleich.md 5 (SV 05/2024), Lage +-1 m"}
-  - {typ: fahrradbuegel, pos: [-13.45, 6.9], drehung: 0, quelle: "umgebung_abgleich.md 5 (SV 05/2024), Lage +-1 m"}
+  - {typ: verkehrszeichen, schild: zusatz, pos: [-10.47, -17.86], drehung: 0, hoehe: 1.95, steher: false, quelle: "SV 05/2024 (ausgen. Rad)"}
+  # Motorraeder in der ersten Bucht vor der Objektecke (Platzhalter, wechseln wie Autos)
+  - {typ: motorrad, pos: [0.85, -3.9], drehung: 90, z: 0.0, quelle: "SV 05/2024 (ST13), Kundenbild Apple Look Around"}
+  - {typ: motorrad, pos: [1.85, -3.9], drehung: 90, z: 0.0, quelle: "SV 05/2024 (ST13), Kundenbild Apple Look Around"}
+
+# ---------------------------------------------------------------- Strassenelemente (lib/assets/strassenelemente.py)
+# Automatisch aus OGD (lib/strasse.ogd_elemente, data/strassen_ogd.json): Gehsteigueberfahrten (Fahrbahnschwellen plus
+# Absenkung 0 cm, Einmuendung Wimmergasse Nord zwischen Objekt und Nr. 17), Gehsteigabsenkungen bis 3 cm, Fahrradbuegel,
+# Unterflurhydranten, Leitlinie und Radpiktogramme (Radfahren gegen die Einbahn, alle 25 m laut Begehung), Leitlinie
+# Stolberggasse (Begehung). Zebrastreifen nur aus der FMZK (keiner an der Kreuzung, Begehung bestaetigt).
+strassenelemente_auto: {leitlinie_strassen: [Stolberggasse], piktogramm_abstand: 25}
+strassenelemente:
+  # Dreiecke in der Fahrbahn vor der Kreuzung, Spitze zur Kreuzung (Orthofoto 2024, SV 05/2024 ST12, ST14, ST15)
+  - {typ: flaeche, poly: [[-23.4, -9.8], [-23.4, -12.1], [-18.6, -10.9]], quelle: "Orthofoto 2024 (OGD), SV 05/2024 ST14/ST15"}
+  - {typ: flaeche, poly: [[6.3, -6.7], [6.3, -8.7], [2.1, -7.6]], quelle: "Orthofoto 2024 (OGD), SV 05/2024 ST12"}
+  # Radpiktogramme neben den Dreiecken (Stolberggasse, Fahrtrichtung zur Kreuzung)
+  - {typ: radpiktogramm, pos: [-26.5, -11.4], richtung: [1.0, 0.0], quelle: "SV 05/2024 (ST15 Blick nach Osten), Lage +-1 m"}
+  - {typ: radpiktogramm, pos: [9.0, -7.2], richtung: [-1.0, 0.0], quelle: "SV 05/2024 (ST12 Blick nach Westen), Lage +-1 m"}
+  # Wiener Strassentafeln (blau, ohne lesbare Schrift)
+  - {typ: strassenschild, pos: [0.85, 0.0], drehung: 270, z: 3.85, quelle: "SV 05/2024 (ST13), Kundenbild: Tafel Stolberggasse ueber dem Lokalportal"}
+  - {typ: strassenschild, pos: [1.0, -18.63], drehung: 90, z: 3.6, quelle: "SV 05/2024 (WI10 Blick nach Osten), Tafel Stolberggasse"}
+  - {typ: strassenschild, pos: [0.32, -19.4], drehung: 180, z: 3.6, quelle: "SV 05/2024 (WI10 Blick nach Osten), Tafel Wimmergasse"}
+  # Strasseneinlauf (Gitter) Stolberggasse vor der Objektecke
+  - {typ: schachtdeckel, art: einlauf, pos: [0.6, -12.3], drehung: 0, quelle: "SV 05/2024 (ST13), Lage +-1 m"}
+
+# Baumscheiben: offene Erde mit Kante statt Gussgitter (Begehung: alle Baumscheiben in Wimmergasse und Stolberggasse sind
+# bepflanzte Inseln mit Bordstein, begehung.md A20)
+strassenmoebel_auto: {baumscheiben: true, baumscheibe: erde, umkreis_m: 90}
 # Platzhalter fuer Menschen (Gruppe menschen_platzhalter): nur Lage und Massstab fuer die Bild-KI, ausblendbar mit
 # assets: {menschen: aus} oder IMMOVIZ_MENSCHEN=aus. Lage fuer die Kamera ecke gewaehlt.
 menschen:
@@ -390,6 +445,11 @@ checks:
     span: [-2.0, 27.5]
     z: [-0.5, 26.5]
     levels: [16.27, 21.07, 24.28]
+
+# ---------------------------------------------------------------- Virtuelle Begehung (immoviz.py begehung, lib/begehung.py)
+# Street View alle 10 m entlang Wimmergasse und Stolberggasse (je Richtung bis zum 4. bis 5. Haus, Umkreis 120 m um das
+# Objekt), 8 Ansichten je Standort gegen das Modell; Prüfliste begehung.md. Fotos nur intern (renders/streetview/begehung/).
+begehung: {radius: 120, schritt: 10, strassen: [Wimmergasse, Stolberggasse]}
 
 # ---------------------------------------------------------------- Street-View-Abgleich (immoviz.py svcheck)
 # Bilder nur als interne Referenz (Google-Lizenz), landen in renders/streetview und werden nicht eingecheckt.

@@ -871,6 +871,8 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     else:      # Wiener Gehsteig: Gussasphalt, heller und feinkoerniger als die Fahrbahn
         L["gehsteig"] = asphalt(bpy, "gehsteig", (0.085, 0.083, 0.08), flick=True)
     L["parkstreifen"] = asphalt(bpy, "parkstreifen", (0.05, 0.05, 0.052))
+    # Betonplatten fuer Teilflaechen (street.belag, z. B. Gehsteigvorziehungen an Kreuzungen laut Begehung)
+    L["gehsteig_platten"] = platten(bpy, "gehsteig_platten", (0.30, 0.29, 0.27), tuple(st.get("platten_raster", (0.5, 0.5))))
     L["zebra"] = simple(bpy, "zebra", (0.7, 0.7, 0.68), 0.7)
     L["markierung"] = simple(bpy, "markierung", (0.62, 0.62, 0.60), 0.6)
     L["pflaster"] = pflaster_granit(bpy, "pflaster")

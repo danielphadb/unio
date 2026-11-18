@@ -12,7 +12,7 @@ Geschosse und Dachkanten mit den Plänen überein, was reine KI-Bilder nicht lei
 | Stufe | Inhalt | Werkzeug | Stand |
 |---|---|---|---|
 | 0 Intake | Pläne, Ansichten, BAB, Farbkonzept, Mood sammeln, Quellen in `quellen/` dokumentieren | Checkliste unten | aktiv |
-| 1 Umgebung | Gebäudeblöcke, Straßen, Gehsteige, Bäume aus Stadt Wien Open Data, echte Dachflächen aus dem Dachmodell LOD2 | `immoviz.py geo`, `immoviz.py daecher`, Prüfung mit `immoviz.py strasse` | fertig |
+| 1 Umgebung | Gebäudeblöcke, Straßen, Gehsteige, Bäume aus Stadt Wien Open Data, echte Dachflächen aus dem Dachmodell LOD2, Straßenausstattung (Überfahrten, Absenkungen, Abstellanlagen, Markierungen) | `immoviz.py geo`, `immoviz.py daecher`, Prüfung mit `immoviz.py strasse` und der virtuellen Begehung `immoviz.py begehung` | fertig |
 | 2 Objekt außen | Fassaden, Fensterachsen, Gesimse, Dachgeschoss-Kubatur aus `project.yaml` | `lib/build.py` | fertig, wird je Objekt verfeinert |
 | 3 Licht und Kamera | Sonnenstand nach Datum und Uhrzeit, Kamerasets mit stürzenden Linien korrigiert | `project.yaml` | fertig |
 | 4 Rendering | Cycles, AgX-Farbmanagement, Vorschau und Final | `immoviz.py render` | fertig |
@@ -113,7 +113,8 @@ assets: {baeume: natur, autos: modelle, leuchten: bibliothek, innenraum: an, men
 | Autos, realistisch (`assets/autos_bibliothek.py`, Standard) | 16 Modelle aus BlenderKit/BlendKit (kostenlos, Royalty Free oder CC0, Liste mit Autor und Lizenz in `lib/assets/autos_bibliothek.yaml`): einheitlich aufbereitet (Front +X, Herstellerlänge, gemeinsamer Klarlack mit Farbe je Auto, Logos, Embleme und Schriftzüge entfernt, Kennzeichen weiß ohne Schrift, Leuchten aus, Unterteilung höchstens 1 Stufe); als Collection-Instanzen, gleiche Autos in jedem Bild (eigener Zufall je Projekt), Sportwagen selten (`gewicht`) | `immoviz.py autos-laden` (rund 300 MB nach `assets/autos/`, gitignored, ohne Konto), dann `immoviz.py autos-bibliothek` (rund 20 s); Schräg- und Senkrechtparker nur Modelle mit 10 cm Luft zur Nachbarbucht, Längsparker nach Länge. Jedes Auto steht auf vier Radaufstandspunkten (je Modell aus Reifen und Felgen ermittelt): Höhe, Längs- und Querneigung aus der Oberfläche unter jedem Rad (Strahl von oben, Autos werden durchstoßen), höchstens 4 Grad quer und 6 Grad längs; liegt ein Rad mehr als 3 cm daneben oder steht das Auto in einem Poller, Schild oder Stamm, wird es in der Bucht um bis zu 0,5 m verschoben, sonst bleibt die Bucht frei (Nachlauf am Ende von `build_scene`). Prüfung in drei Stufen: (1) `immoviz.py autos-pruefen <projekt>` und automatisch vor jedem `render` (Abbruch bei Befund, nur zum Testen `IMMOVIZ_AUTOS_PRUEFUNG=aus`): Räder gegen Oberfläche, Neigung, Bucht, Überschneidungen, Hindernisse, Maßstab je Modell, freie Buchten mit Grund (`renders/check/autos_pruefung.md`, `.json`, `autos_lage.json`); (2) `immoviz.py strasse` zeichnet die gesetzten Autos (violett, Strich zur Front) und die freien Buchten (Kreuz: grau Zufallsbelegung, rot Rad auf Kante, orange uneben, pink Hindernis) über das Orthofoto; (3) jeder `render` schreibt `<kamera>_<licht>_autos_bogen.jpg`: Nahaufnahmen der Autos, deren Räder die Kamera sieht, Marken unter den Aufstandspunkten. Nach der Veredelung `schutz --autos beide`: zwei Fassungen (`_modelle`: Blender-Autos geschützt, gleich in jedem Bild; `_ki`: Autos aus dem KI-Bild) und `_autos_vergleich.jpg`. Rund 10 Mio. Flächen, Render-Speicher rund 20 GB (Mac) |
 | Autos, parametrisch (`assets/autos.py`) | Kleinwagen, Kompakt, Kombi, SUV, Transporter mit Karosserie aus Querschnitten (Schulter, eingezogene Fahrgastzelle, geneigte Scheiben), Rädern mit Felge, Radläufen, Scheinwerfern, Rückleuchten, Spiegeln, Kennzeichenfeld ohne Schrift; gedeckte Lackfarben je Auto | Stellplätze und Parkordnung wie bisher aus `street.parking` (`lib/strasse.py`) |
 | Straßenleuchten (`assets/leuchten.py`) | Seil-/Überspannungsleuchte (Wiener Hängeleuchte, Querseil mit Wandhaken und Spannschloss, Abspannung an Kreuzungen, Längsseil je Strang), Peitschenmast, Aufsatzmast, Wandausleger, Altwiener Laterne; Licht 3000 K (Blackbody), Spot nach unten mit 115 Grad Kegel und 1800 W (Seil/Peitsche), Leuchtkörper mit geringer Leuchtdichte (`DIFFUSOR_AN` 0,5) und Lichtquelle für die Kamera unsichtbar (Nachtprobe 18.11.2026), an bei Sonnenhöhe unter 2 Grad oder mit `strassenlicht: an` in der Lichtstimmung (`aus` erzwingt aus) | nur aus dem Inventar `strassenleuchten` (siehe unten), ohne Inventar Fallback aus `street.cables` mit Warnung in `pruefen` |
-| Straßenmöbel (`assets/moebel.py`) | Poller (grün-weiß, rot-weiß, grau), Fahrradbügel, Mistkübel, Verkehrszeichen ohne lesbare Schrift (Verbot, Gebot, Gefahr, Stop, Info, Zusatz), Hydrant, Baumscheibe mit Gussgitter oder Erde | `strassenmoebel` (Liste mit `typ`, `pos`, `drehung`, `quelle`); Baumscheiben automatisch je Katasterbaum auf Gehsteig/Parkstreifen (`strassenmoebel_auto: {baumscheiben: true, baumscheibe: gitter, umkreis_m: 90}`) |
+| Straßenmöbel (`assets/moebel.py`) | Poller (grün-weiß, dunkelgrün mit rot-weißen Reflexringen `gruen_rot_weiss`, rot-weiß, grau), Fahrradbügel, Mistkübel (orange oder grau mit orangem Rand, auch am Zeichensteher), Verkehrszeichen ohne lesbare Schrift (Verbot, Gebot, Gefahr, Stop, Vorrang, Info, Zusatz; mehrere Tafeln an einem Steher mit `hoehe` und `steher: false`), Hydrant, Baumscheibe mit Gussgitter oder Erde, abgestelltes Motorrad (Platzhalter) | `strassenmoebel` (Liste mit `typ`, `pos`, `drehung`, `quelle`); Baumscheiben automatisch je Katasterbaum auf Gehsteig/Parkstreifen (`strassenmoebel_auto: {baumscheiben: true, baumscheibe: gitter, umkreis_m: 90}`) |
+| Straßenelemente (`assets/strassenelemente.py`) | Gehsteigüberfahrt (durchgezogener Gehsteig über eine Einmündung, Plateau 5 mm unter Bordsteinoberkante im Gehsteigbelag, flache Rampen auf beiden Seiten, Granitkante), Fahrbahnschwelle (Kosinusprofil 7 cm), Gehsteigabsenkung (Bordstein auf 3 cm, seitlich auslaufend), Bodenmarkierungen (Leitlinie strichliert, durchgezogene Linie, Radpiktogramm mit optionalem Pfeil, Sperrfläche, gefüllte Fläche wie Dreiecke, Parkmarkierung und Randlinie je Parkregel), Schachtdeckel und Straßeneinlauf, Wiener Straßentafel am Haus (blau, weißer Rand, ohne Schrift), Fahrradständer, Motorradabstellplatz (Umriss), Unterflurhydrant. Höhe jedes Elements aus der fertigen Bodenfläche (Strahl von oben), Markierungen 6 mm darüber | `strassenelemente` (von Hand, je Eintrag `typ`, `quelle`) plus automatisch aus OGD (`lib/strasse.ogd_elemente`, abschaltbar je Art mit `strassenelemente_auto: {<art>: false}`, ganz mit `{aus: true}`); Belag je Teilfläche: `street.belag` (Rechteck, z. B. Betonplatten auf Gehsteigvorziehungen), `street.parkstreifen_material` (Belag je Parkstreifen), Parkregel `markierung: true`, `randlinie: true`. Zebrastreifen nur aus der FMZK (`Zebrastreifen`) oder als Eintrag nach der Begehung |
 | Menschen (`assets/moebel.py`) | graue Silhouetten in realistischer Größe (stehen, gehen), Sammlung `menschen_platzhalter`, nur Lage und Maßstab für die Bild-KI | `menschen` (Liste mit `pos`, `hoehe`, `drehung`, `haltung`, `quelle`); ausblenden mit `assets: {menschen: aus}` oder `IMMOVIZ_MENSCHEN=aus` vor dem Befehl |
 | Materialien (`materials.py`) | Putz mit Körnung, Kellenstruktur, Fleckigkeit, Schmutz in Kehlen und unter Gesimsen und Fensterbänken (Umgebungsverdeckung), Laufspuren, gerundeten Kanten (Bevel-Shader 2 cm); Stuck; Zink mit Falzen; Floatglas (IOR 1,52, leichte Unruhe), Kastenfenster mit zwei Ebenen; lackierte Rahmen mit gerundeten Kanten; Asphalt mit Gesteinskorn, Flickstellen mit Naht und Rissen; Gehsteig als Gussasphalt oder Betonplatten; Granit-Kleinsteinpflaster mit Farbe je Stein; Bordstein Granit; Holztor; Metall | Gehsteig: `street.gehsteig: asphalt | platten` (`platten_raster: [0.5, 0.5]`); Variation gegen Wiederholung über Objekt-Zufall und mehrere Rauschebenen |
 | Innenräume hinter Fenstern (`materials.innenraum`, `meshkit.innen_karte`) | Interior Mapping: aus einer Fläche in der Fensteröffnung rechnet der Shader einen Raum (Rückwand mit Möbel-Silhouette, Bild oder Tür, Seitenwände, Parkett, Decke), Vorhänge (Schals oder Store), Tageslicht nach hinten abfallend, zufällig Licht an (12 % am Tag, bis 55 % nachts, Stärke aus `interior` der Lichtstimmung). Für das Objekt, die Nachbarfassaden, die Fenster der Umgebung (mit eigener Spiegelung) und `neubau` | eigene Wohnungen mit Möblierung bleiben in `wohnungen.yaml` (`interior`) |
@@ -258,6 +259,75 @@ Dachkorrekturen aus dem Abgleich (`roofs_override`, Code `lib/roofs.py`): `dz` (
 `fern_spitzen` (Turmhelme auf markanten Gebäuden). Seit dem Abgleich stehen Baukörper und Dächer auf der
 Sockelhöhe des Baukörpermodells (T_KOTE) statt auf dem Gelände am Schwerpunkt (`site.hoehen_absolut`, Standard an):
 das Gelände lag dort im Mittel 0,44 m, bis 1 m höher, alle Dächer standen entsprechend zu hoch.
+
+## Virtuelle Begehung (`begehung`, Street View gegen das Modell, nur intern)
+
+Fester Prüfschritt vor jeder Veredelung einer Straßen- oder Luftkamera (Regel U11 in `REGELN.md`, `lib/begehung.py`).
+Das Werkzeug "geht" die Straßen um das Objekt ab und stellt an jedem Standort das Street-View-Foto neben dieselbe
+Ansicht aus dem Modell. So fallen Details auf, die weder Plan noch Orthofoto zeigen: Gehsteigüberfahrten, Schwellen,
+Absenkungen, Markierungen, Poller, Zeichen, Abstellplätze, Pflaster, Erdgeschosszonen.
+
+```bash
+# Schlüssel nur als Umgebungsvariable im Befehl, nie in Dateien
+GOOGLE_MAPS_API_KEY=... .venv-immoviz/bin/python immoviz/immoviz.py begehung --projekt immoviz/projects/wimmergasse-20
+# Umkreis, Abstand und Straßen (Standard aus project.yaml `begehung:`, sonst 120 m, 10 m, alle Straßen im Umkreis)
+... begehung --projekt <p> --radius 120 --schritt 10 --strassen Wimmergasse,Stolberggasse
+# nach Korrekturen am Modell: Fotos wiederverwenden, nur Modell und Vorprüfung neu, einzelne Standorte
+.venv-immoviz/bin/python immoviz/immoviz.py begehung --projekt <p> --nur-modell --nur WI10,WI11,ST13
+# Vorher/Nachher-Bogen eines Standorts (Modellbilder mit --tag _vorher und ohne Tag vorhanden)
+.venv-immoviz/bin/python immoviz/immoviz.py begehung --projekt <p> --vorher-nachher WI10:vorn_u,vorn_o:_vorher: --out <datei.jpg>
+```
+
+Ablauf:
+
+1. **Standorte**: Straßenachsen aus dem Straßengraphen der Stadt Wien (`STRASSENGRAPHOGD`) im Umkreis um das Objekt,
+   alle `--schritt` Meter eine Abfrage der Street-View-Metadaten (kostenlos: Standort, Aufnahmedatum, Panorama-ID).
+   Doppelte Panoramen fallen weg, jüngere Aufnahmen haben Vorrang, Mindestabstand 0,7 x Schritt. Lage ins lokale System
+   über die Kalibrierung aus `referenz` (`kalibrierung.json`, Lageversatz der Google-Daten gegen die Stadtvermessung).
+   Ergebnis `renders/streetview/begehung/standorte.json`, Nummern je Straße (`WI01`, `ST13`, ...).
+2. **Fotos**: je Standort 8 Ansichten über die Static API (vorn, rechts, hinten, links relativ zur Straßenachse;
+   Bildwinkel 90 Grad; Neigung -10 und +10 Grad; 640 x 640), einmal geladen und wiederverwendet.
+3. **Modell**: dieselben Ansichten in Blender, Kamera 2,5 m über Gelände (Google-Auto), gleiche Kompassrichtung,
+   Neigung und Brennweite, 6 Grad Rand. Der Rand gleicht einen kleinen Richtungsfehler des Panoramas aus: gemeinsamer
+   Bildversatz aller Ansichten eines Standorts über Kantenabgleich (Chamfer), im Bericht als Gier/Nick in Grad.
+   Menschen-Platzhalter sind ausgeblendet, Licht `dunst_hell`, 8 Samples, wenige Bounces.
+4. **Vorprüfung**: Kanten (Canny) und Klassenkarten für Foto und Modell mit SegFormer B2 (Cityscapes, über `torch`
+   und `transformers`, CPU; ohne die Pakete nur Kanten): Fahrbahn, Gehsteig, Markierung (helle Farbe auf der Fahrbahn),
+   Mast/Pfahl, Schild, Vegetation, Auto, Zweirad, Gebäude, Himmel. Je Ansicht Raster 8 x 8: Bereiche, in denen eine
+   Klasse nur im Foto (fehlt im Modell) oder nur im Modell vorkommt, mit Schwere (hoch: Gehsteig, Fahrbahn, Mast,
+   Schild, Markierung in der unteren Bildhälfte; Autos und Personen nur Hinweis).
+5. **Sichtprüfung**: die Bögen ansehen und `begehung.md` im Projekt ausfüllen (wird beim ersten Lauf mit allen
+   Standorten und Prüfpunkten angelegt): je Abweichung Standort, Prüfpunkt, Beschreibung, Schwere, Korrektur, Stand.
+   Korrigieren im Modell (OGD, `strassenmoebel`, `strassenelemente`, `street`), dann `--nur-modell` erneut, bis keine
+   Abweichung "hoch" mehr offen ist.
+
+| Datei | Inhalt | Repo |
+|---|---|---|
+| `renders/streetview/begehung/<standort>/bogen<tag>.jpg` | je Ansicht: Foto, Modell, Überblendung mit Kanten (rot Foto, cyan Modell), Klassen Foto, Klassen Modell, Befund-Rahmen | nein (gitignored) |
+| `renders/streetview/begehung/<standort>/*_foto.jpg`, `*_modell<tag>.png`, `vorpruefung<tag>.json` | Fotos, Modellbilder, Befunde je Ansicht | nein |
+| `renders/check/begehung_karte<tag>.jpg` | Orthofoto (OGD) mit Standorten, Straßenachse, Ampel aus der Vorprüfung | ja |
+| `renders/check/begehung_auto<tag>.md` | Tabelle je Standort (Aufnahme, Ausgleich, Kanten, Befunde hoch/mittel/niedrig) und Befundliste | ja |
+| `begehung.md` | Prüfliste und Abweichungen (Sichtprüfung) | ja |
+
+Laufzeit Wimmergasse 20 (Wimmergasse und Stolberggasse, Umkreis 120 m, 47 Standorte, 376 Ansichten), Cloud mit 4
+CPU-Kernen: Standorte und Fotos rund 3 Minuten (einmalig), Szenenaufbau rund 1,5 Minuten, Modell rund 14 Sekunden je
+Ansicht (rund 2 Minuten je Standort, alle Standorte rund 1,5 Stunden), Vorprüfung rund 5 Sekunden je Standort. Für
+Nachläufe nur die betroffenen Standorte mit `--nur`. Kosten: Metadaten frei, Static API rund 0,007 USD je Bild (376
+Bilder rund 2,60 USD). Voraussetzungen: Blender-Modul, `pyproj`, `scipy`, `opencv-python-headless`; für die Klassen
+`torch` (CPU-Wheel) und `transformers`, das Modell lädt beim ersten Lauf (rund 110 MB, Hugging Face Cache).
+
+**OGD-Straßenausstattung** (`lib/strasse.ogd_laden`, `data/strassen_ogd.json`, Felder geprüft mit
+DescribeFeatureType): Gehsteigabsenkungen `SISGEHSTEIGABSOGD` (Punkte, "0 cm" bzw. "bis 3 cm abgesenkt"),
+Fahrradabstellanlagen `FAHRRADABSTELLANLAGEOGD` (Punkt, Anzahl Räder), Motorradabstellplätze `MOTORRADABSTELLPLATZOGD`,
+Radfahren gegen die Einbahn `RADGEGENEINBAHNOG` (Linien je Graphkante), Einbahnen `EINBAHNOGD` (Richtung zur Kante),
+Begegnungszonen `BEGEGNUNGSZONEOGD`, Kurzparkstreifen `KURZPARKSTREIFENOGD`, Behindertenparkplätze
+`BEHINDERTENPARKPLATZOGD`, Hydranten `HYDRANTOGD`, Ladezonen `LADEZONEOGD`, Straßengraph `STRASSENGRAPHOGD`. Daraus
+(`ogd_elemente`): Gehsteigüberfahrt, wo zwei Fahrbahnschwellen der FMZK eine Einmündung einfassen und eine Absenkung
+"0 cm" dazwischen liegt; Fahrbahnschwellen; Gehsteigabsenkungen am nächsten Bordstein; Fahrradbügel (je zwei Räder ein
+Bügel, quer zum Bordstein); Leitlinie in Fahrbahnmitte und Radpiktogramme auf der Gegenrichtungsseite (alle
+`piktogramm_abstand` Meter) bei Radfahren gegen die Einbahn; Leitlinie weiterer Straßen laut Begehung
+(`strassenelemente_auto.leitlinie_strassen`); Zusatztafel an Behindertenparkplätzen; Unterflurhydranten. `strasse`
+lädt die Daten mit.
 
 ## Kamera einer Referenzvisualisierung matchen (`kameramatch`)
 
@@ -486,7 +556,9 @@ Ziel: ein Objekt in etwa einem Tag aufnehmen, ohne YAML von Hand zu schreiben. I
    Danach „Straße prüfen“: Parkordnung, Gehsteige und Bäume vor dem Haus gegen das Orthofoto, Korrekturen in
    `street.parking` und `trees_override`.
 6. Angebaute Nachbarn und Häuser gegenüber (`neighbour_facades`) weiterhin in `project.yaml` (noch ohne Editor),
-   Kameras und Licht im Studio, Vorschau rendern, mit `svcheck` gegen Street View prüfen. Erst dann Higgsfield.
+   Kameras und Licht im Studio, Vorschau rendern, dann die virtuelle Begehung (`begehung`, `begehung.md` ohne offene
+   Abweichung "hoch"). Erst dann Higgsfield (Regel U11: jede Straßen- und Luftkamera erst nach bestandener Begehung
+   veredeln).
 
 Ohne Studio: Ordner wie oben von Hand anlegen (am besten `_vorlage` kopieren), `site.origin_gk`, `x_axis_deg` und
 `facades` nach `immoviz.py geo` aus dem Baukörpermodell ablesen. Jede Zahl bekommt im YAML-Kommentar ihre Quelle.
@@ -534,6 +606,7 @@ Sekunden je Aufruf:
 ```bash
 .venv-immoviz/bin/python immoviz/immoviz.py pruefen --projekt immoviz/projects/noma-shg13        # Quellen je Element
 .venv-immoviz/bin/python immoviz/immoviz.py freigabe --projekt immoviz/projects/noma-shg13       # Modellfreigabe je Kamera
+GOOGLE_MAPS_API_KEY=... .venv-immoviz/bin/python immoviz/immoviz.py begehung --projekt immoviz/projects/wimmergasse-20  # U11, mit Blender
 .venv-immoviz/bin/python immoviz/immoviz.py prompt --projekt immoviz/projects/noma-shg13 --cam garten_top4_weit
 .venv-immoviz/bin/python immoviz/immoviz.py nachkontrolle --vorschau <vorschau.png> --veredelt <bild.jpg>
 ```

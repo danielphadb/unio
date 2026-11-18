@@ -1,0 +1,5249 @@
+{
+"quelle": "Stadt Wien, data.wien.gv.at (CC BY 4.0), WFS",
+"radius_m": 220.0,
+"layer": {
+"absenkungen": [
+{
+"typ": "punkt",
+"pts": [
+[
+-13.868,
+163.881
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-6.346,
+164.605
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+222.59,
+-1.458
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-14.647,
+173.858
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-5.764,
+173.325
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+83.088,
+-127.644
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+82.134,
+-135.165
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+92.757,
+-127.164
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+85.383,
+-137.648
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+92.304,
+-137.279
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+193.511,
+-125.08
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-83.041,
+-65.158
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-91.123,
+-76.158
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-80.373,
+-68.708
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-82.839,
+-76.696
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-80.149,
+-74.214
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-12.005,
+-15.054
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-90.648,
+-127.939
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-82.035,
+-127.453
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-78.836,
+-130.471
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-80.723,
+-138.215
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-10.022,
+-126.408
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-3.055,
+-126.592
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-10.688,
+-137.062
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+0.897,
+-130.534
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-3.754,
+-139.344
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+0.479,
+-136.583
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+81.355,
+-67.147
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+86.29,
+-62.576
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+84.211,
+-74.771
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+94.452,
+-64.571
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+93.303,
+-74.472
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+81.387,
+-221.622
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+78.406,
+-242.506
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+85.996,
+171.802
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+85.896,
+166.509
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+87.899,
+163.108
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+94.075,
+161.662
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+97.867,
+165.576
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+197.279,
+62.769
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+209.332,
+66.296
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+207.928,
+58.374
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+195.347,
+-1.51
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+194.691,
+-13.188
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+207.274,
+-4.374
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+204.052,
+-16.397
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+206.972,
+-12.537
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+215.828,
+-2.864
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-95.448,
+187.525
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-84.767,
+183.057
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-82.771,
+180.462
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-84.715,
+173.341
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-9.343,
+-249.177
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-1.633,
+-246.586
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-90.618,
+-138.11
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+83.302,
+-214.81
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+90.418,
+-213.582
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-10.286,
+-76.716
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-12.31,
+-73.177
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-3.164,
+-76.514
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-81.952,
+-17.54
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-13.639,
+-66.73
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+0.332,
+-73.575
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-10.89,
+-63.086
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+0.237,
+-67.903
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-4.475,
+-63.555
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-4.937,
+-16.324
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-11.374,
+-3.095
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-5.166,
+-2.391
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+87.155,
+-17.699
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+92.8,
+-17.709
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+85.468,
+-1.362
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+93.877,
+-3.007
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+194.352,
+-72.727
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+194.545,
+-63.751
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+201.455,
+-63.527
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+85.457,
+-243.591
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+91.934,
+-235.78
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+94.289,
+-217.988
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-201.366,
+-141.288
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-194.73,
+-140.833
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-259.747,
+-76.432
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-259.311,
+-67.548
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-245.237,
+-77.847
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-245.795,
+-69.149
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-258.919,
+-13.365
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-244.793,
+-17.813
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-242.2,
+-13.451
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-242.613,
+-4.252
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-192.812,
+-2.533
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-184.944,
+-2.257
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-192.134,
+48.818
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 5 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-91.418,
+-16.402
+]
+],
+"props": {
+"ABSENKUNG_TXT": "0 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-190.532,
+57.464
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-91.825,
+-3.369
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-82.009,
+-1.139
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-94.22,
+176.583
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-259.532,
+-1.842
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-246.834,
+0.101
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-258.157,
+-18.019
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-91.984,
+-66.594
+]
+],
+"props": {
+"ABSENKUNG_TXT": "bis 3 cm abgesenkt"
+}
+}
+],
+"fahrradabstellanlagen": [
+{
+"typ": "punkt",
+"pts": [
+[
+-13.258,
+-272.858
+]
+],
+"props": {
+"ADRESSE": "Wiedner Hauptstraße 125",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+189.706,
+-63.847
+]
+],
+"props": {
+"ADRESSE": "Vogelsanggasse 2",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-258.521,
+-82.802
+]
+],
+"props": {
+"ADRESSE": "Reinprechtsdorfer Straße 5",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-3.037,
+-84.907
+]
+],
+"props": {
+"ADRESSE": "Wimmergasse 14",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+73.662,
+-72.981
+]
+],
+"props": {
+"ADRESSE": "Vogelsanggasse 15",
+"ANZAHL": 4,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+188.249,
+-72.045
+]
+],
+"props": {
+"ADRESSE": "Vogelsanggasse 1",
+"ANZAHL": 4,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+184.544,
+-64.26
+]
+],
+"props": {
+"ADRESSE": "Vogelsanggasse 2",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-16.354,
+-73.794
+]
+],
+"props": {
+"ADRESSE": "Vogelsanggasse 23",
+"ANZAHL": 4,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-86.337,
+120.542
+]
+],
+"props": {
+"ADRESSE": "Spengergasse 20",
+"ANZAHL": 12,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-83.61,
+-20.338
+]
+],
+"props": {
+"ADRESSE": "Spengergasse 16",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-0.956,
+164.677
+]
+],
+"props": {
+"ADRESSE": "Siebenbrunnengasse 31",
+"ANZAHL": 4,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-176.896,
+-14.825
+]
+],
+"props": {
+"ADRESSE": "Stolberggasse 53",
+"ANZAHL": 12,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+212.037,
+-3.671
+]
+],
+"props": {
+"ADRESSE": "Zentaplatz",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-190.97,
+-75.402
+]
+],
+"props": {
+"ADRESSE": "Vogelsanggasse  39-41",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+204.626,
+-17.663
+]
+],
+"props": {
+"ADRESSE": "Zentagasse 12",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-187.126,
+-75.333
+]
+],
+"props": {
+"ADRESSE": "Vogelsanggasse 39-41",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+94.012,
+-237.196
+]
+],
+"props": {
+"ADRESSE": "Wiedner Hauptstraße 117",
+"ANZAHL": 4,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-139.566,
+-130.784
+]
+],
+"props": {
+"ADRESSE": "Jahngasse 34",
+"ANZAHL": 8,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+85.342,
+-21.059
+]
+],
+"props": {
+"ADRESSE": "Ramperstorffergasse 13-15",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+93.268,
+154.632
+]
+],
+"props": {
+"ADRESSE": "Ramperstorffergasse 32",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-86.082,
+133.419
+]
+],
+"props": {
+"ADRESSE": "Spengergasse 20",
+"ANZAHL": 18,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-191.58,
+16.723
+]
+],
+"props": {
+"ADRESSE": "Stöbergasse 1-3",
+"ANZAHL": 8,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+274.062,
+-2.03
+]
+],
+"props": {
+"ADRESSE": "Stolberggasse 16",
+"ANZAHL": 4,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+283.37,
+-2.066
+]
+],
+"props": {
+"ADRESSE": "Stolberggasse 14",
+"ANZAHL": 4,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-135.233,
+-4.315
+]
+],
+"props": {
+"ADRESSE": "Stolberggasse 42",
+"ANZAHL": 8,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+39.621,
+-235.444
+]
+],
+"props": {
+"ADRESSE": "Wiedner Hauptstraße 134",
+"ANZAHL": 8,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-77.479,
+-66.818
+]
+],
+"props": {
+"ADRESSE": "Vogelsanggasse - Spengergasse 28",
+"ANZAHL": 4,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-11.648,
+2.875
+]
+],
+"props": {
+"ADRESSE": "Wimmergasse 17",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-241.127,
+-75.821
+]
+],
+"props": {
+"ADRESSE": "Vogelsanggasse 45",
+"ANZAHL": 8,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-8.528,
+-241.619
+]
+],
+"props": {
+"ADRESSE": "Wimmergasse 1",
+"ANZAHL": 8,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-73.119,
+-138.106
+]
+],
+"props": {
+"ADRESSE": "Jahngasse 29",
+"ANZAHL": 8,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+1.629,
+-248.266
+]
+],
+"props": {
+"ADRESSE": "Wiedner Hauptstraße 136",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+74.872,
+-221.242
+]
+],
+"props": {
+"ADRESSE": "Wiedner Hauptstraße 130",
+"ANZAHL": 4,
+"ART_TXT": "Radabstellanlage"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+97.204,
+-215.23
+]
+],
+"props": {
+"ADRESSE": "Wiedner Hauptstraße 126-128",
+"ANZAHL": 6,
+"ART_TXT": "Radabstellanlage"
+}
+}
+],
+"motorradabstellplaetze": [
+{
+"typ": "punkt",
+"pts": [
+[
+-191.786,
+12.131
+]
+],
+"props": {
+"STRASSE": "Stöbergasse 1-3",
+"STELLPL_ANZ": 2,
+"ZEITRAUM": "v. 1.3. - 1.11."
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-93.23,
+102.48
+]
+],
+"props": {
+"STRASSE": "Spengergasse 27",
+"STELLPL_ANZ": 10,
+"ZEITRAUM": "v.1.3.-31.10."
+}
+}
+],
+"radgegeneinbahn": [
+{
+"typ": "linie",
+"pts": [
+[
+79.291,
+-300.985
+],
+[
+80.551,
+-298.565
+],
+[
+83.077,
+-237.499
+],
+[
+84.051,
+-229.502
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Geigergasse zwischen Hauslabgasse und Wiedner Hauptstraße"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+79.291,
+-300.985
+],
+[
+80.551,
+-298.565
+],
+[
+83.077,
+-237.499
+],
+[
+84.051,
+-229.502
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Geigergasse zwischen Hauslabgasse und Wiedner Hauptstraße"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+79.291,
+-300.985
+],
+[
+80.551,
+-298.565
+],
+[
+83.077,
+-237.499
+],
+[
+84.051,
+-229.502
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Geigergasse zwischen Hauslabgasse und Wiedner Hauptstraße"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+198.42,
+-67.352
+],
+[
+89.085,
+-68.615
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Vogelsanggasse zwischen Zentagasse und Ramperstorffergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+198.42,
+-67.352
+],
+[
+89.085,
+-68.615
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Vogelsanggasse zwischen Zentagasse und Ramperstorffergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+198.42,
+-67.352
+],
+[
+89.085,
+-68.615
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Vogelsanggasse zwischen Zentagasse und Ramperstorffergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-2.657,
+-258.107
+],
+[
+-4.826,
+-132.857
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Wimmergasse zwischen Wiedner Hauptstraße und Jahngasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-2.657,
+-258.107
+],
+[
+-4.826,
+-132.857
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Wimmergasse zwischen Wiedner Hauptstraße und Jahngasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-2.657,
+-258.107
+],
+[
+-4.826,
+-132.857
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Wimmergasse zwischen Wiedner Hauptstraße und Jahngasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-4.826,
+-132.857
+],
+[
+-5.809,
+-69.797
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Wimmergasse zwischen Jahngasse und Vogelsanggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-4.826,
+-132.857
+],
+[
+-5.809,
+-69.797
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Wimmergasse zwischen Jahngasse und Vogelsanggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-4.826,
+-132.857
+],
+[
+-5.809,
+-69.797
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Wimmergasse zwischen Jahngasse und Vogelsanggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+89.085,
+-68.615
+],
+[
+-5.809,
+-69.797
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Vogelsanggasse zwischen Ramperstorffergasse und Wimmergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+89.085,
+-68.615
+],
+[
+-5.809,
+-69.797
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Vogelsanggasse zwischen Ramperstorffergasse und Wimmergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+89.085,
+-68.615
+],
+[
+-5.809,
+-69.797
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Vogelsanggasse zwischen Ramperstorffergasse und Wimmergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-5.809,
+-69.797
+],
+[
+-6.958,
+-8.847
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Wimmergasse zwischen Vogelsanggasse und Stolberggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-5.809,
+-69.797
+],
+[
+-6.958,
+-8.847
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Wimmergasse zwischen Vogelsanggasse und Stolberggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-5.809,
+-69.797
+],
+[
+-6.958,
+-8.847
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Wimmergasse zwischen Vogelsanggasse und Stolberggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+206.448,
+169.114
+],
+[
+91.083,
+167.966
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Siebenbrunnengasse zwischen Zentagasse und Ramperstorffergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+206.448,
+169.114
+],
+[
+91.083,
+167.966
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Siebenbrunnengasse zwischen Zentagasse und Ramperstorffergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+206.448,
+169.114
+],
+[
+91.083,
+167.966
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Siebenbrunnengasse zwischen Zentagasse und Ramperstorffergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-5.809,
+-69.797
+],
+[
+-86.496,
+-70.89
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Vogelsanggasse zwischen Wimmergasse und Spengergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-5.809,
+-69.797
+],
+[
+-86.496,
+-70.89
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Vogelsanggasse zwischen Wimmergasse und Spengergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-5.809,
+-69.797
+],
+[
+-86.496,
+-70.89
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Vogelsanggasse zwischen Wimmergasse und Spengergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-85.414,
+-134.566
+],
+[
+-86.496,
+-70.89
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Spengergasse zwischen Jahngasse und Vogelsanggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-85.414,
+-134.566
+],
+[
+-86.496,
+-70.89
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Spengergasse zwischen Jahngasse und Vogelsanggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-85.414,
+-134.566
+],
+[
+-86.496,
+-70.89
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Spengergasse zwischen Jahngasse und Vogelsanggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-6.958,
+-8.847
+],
+[
+-9.148,
+168.379
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Wimmergasse zwischen Stolberggasse und Siebenbrunnengasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-6.958,
+-8.847
+],
+[
+-9.148,
+168.379
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Wimmergasse zwischen Stolberggasse und Siebenbrunnengasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-6.958,
+-8.847
+],
+[
+-9.148,
+168.379
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Wimmergasse zwischen Stolberggasse und Siebenbrunnengasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-86.496,
+-70.89
+],
+[
+-87.104,
+-9.02
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Spengergasse zwischen Vogelsanggasse und Stolberggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-86.496,
+-70.89
+],
+[
+-87.104,
+-9.02
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Spengergasse zwischen Vogelsanggasse und Stolberggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-86.496,
+-70.89
+],
+[
+-87.104,
+-9.02
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Spengergasse zwischen Vogelsanggasse und Stolberggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-86.496,
+-70.89
+],
+[
+-254.107,
+-71.964
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Vogelsanggasse zwischen Spengergasse und Reinprechtsdorfer Straße"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-86.496,
+-70.89
+],
+[
+-254.107,
+-71.964
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Vogelsanggasse zwischen Spengergasse und Reinprechtsdorfer Straße"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-86.496,
+-70.89
+],
+[
+-254.107,
+-71.964
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Vogelsanggasse zwischen Spengergasse und Reinprechtsdorfer Straße"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-199.222,
+-232.601
+],
+[
+-196.257,
+-137.203
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Stauraczgasse zwischen Scalagasse und Jahngasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-199.222,
+-232.601
+],
+[
+-196.257,
+-137.203
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Stauraczgasse zwischen Scalagasse und Jahngasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-199.222,
+-232.601
+],
+[
+-196.257,
+-137.203
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Stauraczgasse zwischen Scalagasse und Jahngasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-9.148,
+168.379
+],
+[
+-12.873,
+169.921
+],
+[
+-33.45,
+171.867
+],
+[
+-86.036,
+178.616
+],
+[
+-88.696,
+179.8
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Siebenbrunnengasse zwischen Wimmergasse und Spengergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-9.148,
+168.379
+],
+[
+-12.873,
+169.921
+],
+[
+-33.45,
+171.867
+],
+[
+-86.036,
+178.616
+],
+[
+-88.696,
+179.8
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Siebenbrunnengasse zwischen Wimmergasse und Spengergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-9.148,
+168.379
+],
+[
+-12.873,
+169.921
+],
+[
+-33.45,
+171.867
+],
+[
+-86.036,
+178.616
+],
+[
+-88.696,
+179.8
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Siebenbrunnengasse zwischen Wimmergasse und Spengergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+91.083,
+167.966
+],
+[
+-9.148,
+168.379
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Siebenbrunnengasse zwischen Ramperstorffergasse und Wimmergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+91.083,
+167.966
+],
+[
+-9.148,
+168.379
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Siebenbrunnengasse zwischen Ramperstorffergasse und Wimmergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+91.083,
+167.966
+],
+[
+-9.148,
+168.379
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Siebenbrunnengasse zwischen Ramperstorffergasse und Wimmergasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-88.696,
+179.8
+],
+[
+-89.659,
+184.169
+],
+[
+-89.488,
+244.185
+],
+[
+-88.902,
+311.823
+],
+[
+-89.529,
+314.12
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Spengergasse zwischen Siebenbrunnengasse und Bacherplatz"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-88.696,
+179.8
+],
+[
+-89.659,
+184.169
+],
+[
+-89.488,
+244.185
+],
+[
+-88.902,
+311.823
+],
+[
+-89.529,
+314.12
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Spengergasse zwischen Siebenbrunnengasse und Bacherplatz"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-88.696,
+179.8
+],
+[
+-89.659,
+184.169
+],
+[
+-89.488,
+244.185
+],
+[
+-88.902,
+311.823
+],
+[
+-89.529,
+314.12
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Spengergasse zwischen Siebenbrunnengasse und Bacherplatz"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-87.104,
+-9.02
+],
+[
+-88.696,
+179.8
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Spengergasse zwischen Stolberggasse und Siebenbrunnengasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-87.104,
+-9.02
+],
+[
+-88.696,
+179.8
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Spengergasse zwischen Stolberggasse und Siebenbrunnengasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-87.104,
+-9.02
+],
+[
+-88.696,
+179.8
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Spengergasse zwischen Stolberggasse und Siebenbrunnengasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-254.107,
+-71.964
+],
+[
+-252.409,
+-8.309
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Reinprechtsdorfer Straße zwischen Vogelsanggasse und Stolberggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-254.107,
+-71.964
+],
+[
+-252.409,
+-8.309
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Reinprechtsdorfer Straße zwischen Vogelsanggasse und Stolberggasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-252.409,
+-8.309
+],
+[
+-250.573,
+56.099
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Reinprechtsdorfer Straße zwischen Stolberggasse und Leitgebgasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-252.409,
+-8.309
+],
+[
+-250.573,
+56.099
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Reinprechtsdorfer Straße zwischen Stolberggasse und Leitgebgasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-252.409,
+-8.309
+],
+[
+-366.257,
+8.826
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Fendigasse zwischen Reinprechtsdorfer Straße und Kohlgasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-252.409,
+-8.309
+],
+[
+-366.257,
+8.826
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Fendigasse zwischen Reinprechtsdorfer Straße und Kohlgasse"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-252.409,
+-8.309
+],
+[
+-366.257,
+8.826
+]
+],
+"props": {
+"DIRECTION_NAME": "beide Richtungen",
+"BASETYPE_NAME": "Radfahrstreifen gegen die Einbahn",
+"EDGE_FEATURENAME": "Fendigasse zwischen Reinprechtsdorfer Straße und Kohlgasse"
+}
+}
+],
+"einbahn": [
+{
+"typ": "linie",
+"pts": [
+[
+-88.696,
+179.8
+],
+[
+-89.659,
+184.169
+],
+[
+-89.488,
+244.185
+],
+[
+-88.902,
+311.823
+],
+[
+-89.529,
+314.12
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-185.922,
+53.172
+],
+[
+-250.573,
+56.099
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-185.922,
+53.172
+],
+[
+-184.197,
+115.178
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-187.132,
+-8.834
+],
+[
+-185.922,
+53.172
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-9.148,
+168.379
+],
+[
+-12.873,
+169.921
+],
+[
+-33.45,
+171.867
+],
+[
+-86.036,
+178.616
+],
+[
+-88.696,
+179.8
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-87.104,
+-9.02
+],
+[
+-88.696,
+179.8
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-6.958,
+-8.847
+],
+[
+-9.148,
+168.379
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+91.083,
+167.966
+],
+[
+-9.148,
+168.379
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+91.083,
+167.966
+],
+[
+92.415,
+172.303
+],
+[
+94.973,
+304.007
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-86.496,
+-70.89
+],
+[
+-87.104,
+-9.02
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-5.809,
+-69.797
+],
+[
+-86.496,
+-70.89
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+206.448,
+169.114
+],
+[
+91.083,
+167.966
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+89.614,
+-8.824
+],
+[
+88.85,
+-2.972
+],
+[
+91.627,
+164.333
+],
+[
+91.083,
+167.966
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-5.809,
+-69.797
+],
+[
+-6.958,
+-8.847
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-4.826,
+-132.857
+],
+[
+-5.809,
+-69.797
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+89.085,
+-68.615
+],
+[
+-5.809,
+-69.797
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+202.672,
+62.24
+],
+[
+206.448,
+169.114
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+86.953,
+-131.397
+],
+[
+-4.826,
+-132.857
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+89.085,
+-68.615
+],
+[
+89.614,
+-8.824
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+86.953,
+-131.397
+],
+[
+89.085,
+-68.615
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+198.42,
+-67.352
+],
+[
+89.085,
+-68.615
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+200.077,
+-8.257
+],
+[
+202.672,
+62.24
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+202.672,
+62.24
+],
+[
+218.552,
+61.901
+],
+[
+220.449,
+61.406
+],
+[
+221.38,
+60.418
+],
+[
+221.526,
+58.35
+],
+[
+218.762,
+-8.042
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+84.051,
+-229.502
+],
+[
+86.953,
+-131.397
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+197.053,
+-129.913
+],
+[
+86.953,
+-131.397
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+198.42,
+-67.352
+],
+[
+200.077,
+-8.257
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+197.053,
+-129.913
+],
+[
+198.42,
+-67.352
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-252.409,
+-8.309
+],
+[
+-366.257,
+8.826
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-254.107,
+-71.964
+],
+[
+-375.943,
+-53.989
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-252.409,
+-8.309
+],
+[
+-250.573,
+56.099
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-254.107,
+-71.964
+],
+[
+-252.409,
+-8.309
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-256.296,
+-138.985
+],
+[
+-254.107,
+-71.964
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-86.496,
+-70.89
+],
+[
+-254.107,
+-71.964
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-196.257,
+-137.203
+],
+[
+-256.296,
+-138.985
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-199.222,
+-232.601
+],
+[
+-196.257,
+-137.203
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-85.414,
+-134.566
+],
+[
+-196.257,
+-137.203
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-85.414,
+-134.566
+],
+[
+-86.496,
+-70.89
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-4.826,
+-132.857
+],
+[
+-85.414,
+-134.566
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-2.657,
+-258.107
+],
+[
+-4.826,
+-132.857
+]
+],
+"props": {
+"DIRECTION_NAME": "gegen Richtung"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+79.291,
+-300.985
+],
+[
+80.551,
+-298.565
+],
+[
+83.077,
+-237.499
+],
+[
+84.051,
+-229.502
+]
+],
+"props": {
+"DIRECTION_NAME": "in Richtung"
+}
+}
+],
+"begegnungszonen": [],
+"kurzparkstreifen": [
+{
+"typ": "linie",
+"pts": [
+[
+-247.466,
+49.97
+],
+[
+-248.843,
+1.99
+]
+],
+"props": {
+"STRNAM": "Reinprechtsdorfer Straße",
+"GELTUNGSBEREICH": "24-26 ",
+"ZEITRAUM": "Mo.-Fr. (w.) v. 9-19h, Sa. (w.) v. 9-12h",
+"DAUER": "1,5 h"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-247.67,
+-21.613
+],
+[
+-248.509,
+-63.27
+]
+],
+"props": {
+"STRNAM": "Reinprechtsdorfer Straße",
+"GELTUNGSBEREICH": "20 bis 22",
+"ZEITRAUM": "Mo.-Fr. (w.) v. 9-19h, Sa. (w.) v. 9-12h",
+"DAUER": "1,5 h"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-248.189,
+-87.647
+],
+[
+-249.222,
+-125.611
+]
+],
+"props": {
+"STRNAM": "Reinprechtsdorfer Straße",
+"GELTUNGSBEREICH": "16 bis 18",
+"ZEITRAUM": "Mo.-Fr. (w.) v. 9-19h, Sa. (w.) v. 9-12h",
+"DAUER": "1,5 h"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-256.567,
+-20.796
+],
+[
+-257.041,
+-36.863
+],
+[
+-256.467,
+-44.806
+],
+[
+-257.242,
+-63.964
+]
+],
+"props": {
+"STRNAM": "Reinprechtsdorfer Straße",
+"GELTUNGSBEREICH": "7 bis 9",
+"ZEITRAUM": "Mo.-Fr. (w.) v. 9-19h, Sa. (w.) v. 9-12h",
+"DAUER": "1,5 h"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-254.219,
+49.394
+],
+[
+-255.959,
+2.921
+]
+],
+"props": {
+"STRNAM": "Reinprechtsdorfer Straße",
+"GELTUNGSBEREICH": "11 bis 13",
+"ZEITRAUM": "Mo.-Fr. (w.) v. 9-19h, Sa. (w.) v. 9-12h",
+"DAUER": "1,5 h"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-258.446,
+-84.998
+],
+[
+-259.171,
+-127.091
+]
+],
+"props": {
+"STRNAM": "Reinprechtsdorfer Straße",
+"GELTUNGSBEREICH": "3 bis 5",
+"ZEITRAUM": "Mo.-Fr. (w.) v. 9-19h, Sa. (w.) v. 9-12h",
+"DAUER": "1,5 h"
+}
+}
+],
+"behindertenparkplaetze": [
+{
+"typ": "punkt",
+"pts": [
+[
+91.449,
+-145.028
+]
+],
+"props": {
+"STRNAM": "Ramperstorffergasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Allgemein",
+"ONR_VON": "4"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+105.698,
+-64.053
+]
+],
+"props": {
+"STRNAM": "Vogelsanggasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Privat mit Kennzeichen",
+"ONR_VON": "10"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-39.952,
+176.549
+]
+],
+"props": {
+"STRNAM": "Siebenbrunnengasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Privat mit Kennzeichen",
+"ONR_VON": "34-36"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-134.544,
+-130.664
+]
+],
+"props": {
+"STRNAM": "Jahngasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Privat ohne Kennzeichen",
+"ONR_VON": "34"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-12.77,
+84.549
+]
+],
+"props": {
+"STRNAM": "Wimmergasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Privat mit Kennzeichen",
+"ONR_VON": "25"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+67.786,
+-15.684
+]
+],
+"props": {
+"STRNAM": "Stolberggasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Privat mit Kennzeichen",
+"ONR_VON": "31-33"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+108.132,
+-64.109
+]
+],
+"props": {
+"STRNAM": "Vogelsanggasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Privat mit Kennzeichen",
+"ONR_VON": "10"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-14.334,
+185.22
+]
+],
+"props": {
+"STRNAM": "Wimmergasse ident mit Siebenbrunnengasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Privat mit Kennzeichen",
+"ONR_VON": "34"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-202.724,
+58.027
+]
+],
+"props": {
+"STRNAM": "Leitgebgasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Privat mit Kennzeichen",
+"ONR_VON": "2"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-14.513,
+191.24
+]
+],
+"props": {
+"STRNAM": "Wimmergasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Privat mit Kennzeichen",
+"ONR_VON": "46-48"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-22.128,
+174.329
+]
+],
+"props": {
+"STRNAM": "Siebenbrunnengasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Privat mit Kennzeichen",
+"ONR_VON": "34"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-188.039,
+-67.128
+]
+],
+"props": {
+"STRNAM": "Vogelsanggasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Allgemein",
+"ONR_VON": "36"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-205.939,
+57.945
+]
+],
+"props": {
+"STRNAM": "Leitgebgasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Privat mit Kennzeichen",
+"ONR_VON": "2"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-183.36,
+8.292
+]
+],
+"props": {
+"STRNAM": "Stöbergasse",
+"STELLPL_ANZ": 1,
+"KATEGORIE_TXT": "Allgemein",
+"ONR_VON": "2"
+}
+}
+],
+"hydranten": [
+{
+"typ": "punkt",
+"pts": [
+[
+-192.052,
+63.628
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-94.903,
+192.945
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-94.405,
+93.539
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+97.312,
+-62.625
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+93.271,
+-242.409
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-234.935,
+-16.842
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-260.582,
+-110.573
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-238.314,
+-65.992
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+91.662,
+-203.045
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-76.348,
+-64.54
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-13.214,
+6.124
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+189.616,
+-125.885
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-56.348,
+167.814
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+195.911,
+5.727
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-76.528,
+-128.767
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-11.183,
+-143.883
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+83.304,
+3.488
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+211.12,
+-13.668
+]
+],
+"props": {}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-3.85,
+181.248
+]
+],
+"props": {}
+}
+],
+"ladezonen": [
+{
+"typ": "punkt",
+"pts": [
+[
+-212.161,
+-75.643
+]
+],
+"props": {
+"ADRESSE": "Vogelsanggasse 43"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-93.173,
+118.568
+]
+],
+"props": {
+"ADRESSE": "Spengergasse 27"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-247.299,
+-52.612
+]
+],
+"props": {
+"ADRESSE": "Reinprechtsdorfer Straße 20"
+}
+},
+{
+"typ": "punkt",
+"pts": [
+[
+-107.604,
+181.674
+]
+],
+"props": {
+"ADRESSE": "Siebenbrunnengasse 37"
+}
+}
+],
+"strassengraph": [
+{
+"typ": "linie",
+"pts": [
+[
+-2.657,
+-258.107
+],
+[
+-31.694,
+-268.801
+],
+[
+-83.563,
+-286.94
+]
+],
+"props": {
+"FEATURENAME": "Wiedner Hauptstraße",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "004 - Gemeindeverbindungen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+84.051,
+-229.502
+],
+[
+81.152,
+-230.985
+],
+[
+-2.657,
+-258.107
+]
+],
+"props": {
+"FEATURENAME": "Wiedner Hauptstraße",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "004 - Gemeindeverbindungen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+79.291,
+-300.985
+],
+[
+80.551,
+-298.565
+],
+[
+83.077,
+-237.499
+],
+[
+84.051,
+-229.502
+]
+],
+"props": {
+"FEATURENAME": "Geigergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-4.826,
+-132.857
+],
+[
+-85.414,
+-134.566
+]
+],
+"props": {
+"FEATURENAME": "Jahngasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+205.865,
+-195.122
+],
+[
+194.788,
+-197.906
+],
+[
+160.906,
+-210.445
+],
+[
+134.221,
+-217.564
+],
+[
+87.078,
+-228.094
+],
+[
+84.051,
+-229.502
+]
+],
+"props": {
+"FEATURENAME": "Wiedner Hauptstraße",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "004 - Gemeindeverbindungen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+84.051,
+-229.502
+],
+[
+86.953,
+-131.397
+]
+],
+"props": {
+"FEATURENAME": "Ramperstorffergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-4.826,
+-132.857
+],
+[
+-5.809,
+-69.797
+]
+],
+"props": {
+"FEATURENAME": "Wimmergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+197.053,
+-129.913
+],
+[
+86.953,
+-131.397
+]
+],
+"props": {
+"FEATURENAME": "Jahngasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+89.085,
+-68.615
+],
+[
+89.614,
+-8.824
+]
+],
+"props": {
+"FEATURENAME": "Ramperstorffergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+200.077,
+-8.257
+],
+[
+89.614,
+-8.824
+]
+],
+"props": {
+"FEATURENAME": "Stolberggasse",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+200.077,
+-8.257
+],
+[
+202.672,
+62.24
+]
+],
+"props": {
+"FEATURENAME": "Zentaplatz",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+218.762,
+-8.042
+],
+[
+200.077,
+-8.257
+]
+],
+"props": {
+"FEATURENAME": "Zentaplatz",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+354.707,
+-7.69
+],
+[
+278.387,
+-7.887
+],
+[
+218.762,
+-8.042
+]
+],
+"props": {
+"FEATURENAME": "Stolberggasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-199.222,
+-232.601
+],
+[
+-196.257,
+-137.203
+]
+],
+"props": {
+"FEATURENAME": "Stauraczgasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-256.296,
+-138.985
+],
+[
+-254.107,
+-71.964
+]
+],
+"props": {
+"FEATURENAME": "Reinprechtsdorfer Straße",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "004 - Gemeindeverbindungen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-86.496,
+-70.89
+],
+[
+-254.107,
+-71.964
+]
+],
+"props": {
+"FEATURENAME": "Vogelsanggasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-85.414,
+-134.566
+],
+[
+-86.496,
+-70.89
+]
+],
+"props": {
+"FEATURENAME": "Spengergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+89.614,
+-8.824
+],
+[
+88.85,
+-2.972
+],
+[
+91.627,
+164.333
+],
+[
+91.083,
+167.966
+]
+],
+"props": {
+"FEATURENAME": "Ramperstorffergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-88.696,
+179.8
+],
+[
+-181.264,
+212.706
+]
+],
+"props": {
+"FEATURENAME": "Siebenbrunnengasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+91.083,
+167.966
+],
+[
+92.415,
+172.303
+],
+[
+94.973,
+304.007
+]
+],
+"props": {
+"FEATURENAME": "Ramperstorffergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+206.448,
+169.114
+],
+[
+91.083,
+167.966
+]
+],
+"props": {
+"FEATURENAME": "Siebenbrunnengasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-88.696,
+179.8
+],
+[
+-89.659,
+184.169
+],
+[
+-89.488,
+244.185
+],
+[
+-88.902,
+311.823
+],
+[
+-89.529,
+314.12
+]
+],
+"props": {
+"FEATURENAME": "Spengergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-9.148,
+168.379
+],
+[
+-12.873,
+169.921
+],
+[
+-33.45,
+171.867
+],
+[
+-86.036,
+178.616
+],
+[
+-88.696,
+179.8
+]
+],
+"props": {
+"FEATURENAME": "Siebenbrunnengasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-9.148,
+168.379
+],
+[
+-10.275,
+201.915
+]
+],
+"props": {
+"FEATURENAME": "Wimmergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+91.083,
+167.966
+],
+[
+-9.148,
+168.379
+]
+],
+"props": {
+"FEATURENAME": "Siebenbrunnengasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+202.672,
+62.24
+],
+[
+206.448,
+169.114
+]
+],
+"props": {
+"FEATURENAME": "Zentagasse",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+202.672,
+62.24
+],
+[
+218.552,
+61.901
+],
+[
+220.449,
+61.406
+],
+[
+221.38,
+60.418
+],
+[
+221.526,
+58.35
+],
+[
+218.762,
+-8.042
+]
+],
+"props": {
+"FEATURENAME": "Zentaplatz",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-254.107,
+-71.964
+],
+[
+-375.943,
+-53.989
+]
+],
+"props": {
+"FEATURENAME": "Storkgasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-185.922,
+53.172
+],
+[
+-250.573,
+56.099
+]
+],
+"props": {
+"FEATURENAME": "Leitgebgasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-185.922,
+53.172
+],
+[
+-184.197,
+115.178
+]
+],
+"props": {
+"FEATURENAME": "Stöbergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-187.132,
+-8.834
+],
+[
+-252.409,
+-8.309
+]
+],
+"props": {
+"FEATURENAME": "Stolberggasse",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-254.107,
+-71.964
+],
+[
+-252.409,
+-8.309
+]
+],
+"props": {
+"FEATURENAME": "Reinprechtsdorfer Straße",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "004 - Gemeindeverbindungen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-187.132,
+-8.834
+],
+[
+-185.922,
+53.172
+]
+],
+"props": {
+"FEATURENAME": "Stöbergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-87.104,
+-9.02
+],
+[
+-88.696,
+179.8
+]
+],
+"props": {
+"FEATURENAME": "Spengergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-87.104,
+-9.02
+],
+[
+-187.132,
+-8.834
+]
+],
+"props": {
+"FEATURENAME": "Stolberggasse",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-196.257,
+-137.203
+],
+[
+-256.296,
+-138.985
+]
+],
+"props": {
+"FEATURENAME": "Jahngasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-6.958,
+-8.847
+],
+[
+-9.148,
+168.379
+]
+],
+"props": {
+"FEATURENAME": "Wimmergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-85.414,
+-134.566
+],
+[
+-196.257,
+-137.203
+]
+],
+"props": {
+"FEATURENAME": "Jahngasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-6.958,
+-8.847
+],
+[
+-87.104,
+-9.02
+]
+],
+"props": {
+"FEATURENAME": "Stolberggasse",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-86.496,
+-70.89
+],
+[
+-87.104,
+-9.02
+]
+],
+"props": {
+"FEATURENAME": "Spengergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-5.809,
+-69.797
+],
+[
+-86.496,
+-70.89
+]
+],
+"props": {
+"FEATURENAME": "Vogelsanggasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-5.809,
+-69.797
+],
+[
+-6.958,
+-8.847
+]
+],
+"props": {
+"FEATURENAME": "Wimmergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+89.614,
+-8.824
+],
+[
+-6.958,
+-8.847
+]
+],
+"props": {
+"FEATURENAME": "Stolberggasse",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-83.563,
+-286.94
+],
+[
+-85.414,
+-134.566
+]
+],
+"props": {
+"FEATURENAME": "Spengergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+89.085,
+-68.615
+],
+[
+-5.809,
+-69.797
+]
+],
+"props": {
+"FEATURENAME": "Vogelsanggasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-2.657,
+-258.107
+],
+[
+-4.826,
+-132.857
+]
+],
+"props": {
+"FEATURENAME": "Wimmergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+86.953,
+-131.397
+],
+[
+-4.826,
+-132.857
+]
+],
+"props": {
+"FEATURENAME": "Jahngasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+86.953,
+-131.397
+],
+[
+89.085,
+-68.615
+]
+],
+"props": {
+"FEATURENAME": "Ramperstorffergasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+198.42,
+-67.352
+],
+[
+89.085,
+-68.615
+]
+],
+"props": {
+"FEATURENAME": "Vogelsanggasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+198.42,
+-67.352
+],
+[
+200.077,
+-8.257
+]
+],
+"props": {
+"FEATURENAME": "Zentagasse",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+197.053,
+-129.913
+],
+[
+198.42,
+-67.352
+]
+],
+"props": {
+"FEATURENAME": "Zentagasse",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-252.409,
+-8.309
+],
+[
+-366.257,
+8.826
+]
+],
+"props": {
+"FEATURENAME": "Fendigasse",
+"EDGECATEGORY_NAME": "Gemeindestraße",
+"FRC_NAME": "006 - Sammelstraßen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+},
+{
+"typ": "linie",
+"pts": [
+[
+-252.409,
+-8.309
+],
+[
+-250.573,
+56.099
+]
+],
+"props": {
+"FEATURENAME": "Reinprechtsdorfer Straße",
+"EDGECATEGORY_NAME": "Hauptstraße A/Landeshauptstraße",
+"FRC_NAME": "004 - Gemeindeverbindungen",
+"FOW_NAME": "003 - Ungeteilte Fahrbahn"
+}
+}
+]
+},
+"fehler": {}
+}

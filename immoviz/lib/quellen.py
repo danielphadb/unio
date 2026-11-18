@@ -74,6 +74,7 @@ KLASSEN = [
     ("baum", "project", ("trees_override", "*"), None),
     ("leuchte", "project", ("strassenleuchten", "*"), None),
     ("strassenmoebel", "project", ("strassenmoebel", "*"), None),
+    ("strassenmoebel", "project", ("strassenelemente", "*"), None),      # Markierungen, Ueberfahrten, Tafeln (Begehung)
     ("nachbar", "project", ("neighbour_facades", "*"), None),
     ("nachbar", "project", ("roofs_override", "*"), None),
     ("nachbar", "project", ("neighbours", "*"), None),

@@ -11,6 +11,7 @@ Beispiele:
   python immoviz.py website projects/wimmergasse-20
   python immoviz.py kameramatch projects/noma-shg13 --bild vorlage.jpg --punkte punkte.yaml --kamera hof_fin
   GOOGLE_MAPS_API_KEY=... python immoviz.py referenz projects/wimmergasse-20 --kamera drohne  (Abgleich gegen Google 3D, nur intern)
+  GOOGLE_MAPS_API_KEY=... python immoviz.py begehung --projekt projects/wimmergasse-20         (virtuelle Begehung, Street View)
   python immoviz.py render  projects/wimmergasse-20 --cam ecke --light golden_hour --ebenen   (plus Masken, Tiefe, Schutzmaske)
   python immoviz.py schutz  --render <render.png> --ki <veredelt.jpg> --ebenen <ordner>       (Gebäude aus Blender zurück)
   python immoviz.py schutz  ... --modus toleranz      (je Bauteil: KI behalten, wenn geometrisch in der Toleranz)
@@ -147,6 +148,26 @@ def main():
     rf.add_argument("--tag", default="", help="Zusatz für Dateinamen, z. B. _vorher")
     rf.add_argument("--test-kamera", action="append", default=[],
                     help="zusätzliche Probekamera name:x,y,z:x,y,z:lens (Standpunkt, Ziel, Brennweite), nicht in project.yaml")
+    bg = sub.add_parser("begehung", help="Virtuelle Begehung: Street-View-Panoramen entlang der Straßen um das Objekt "
+                                         "gegen dieselben Ansichten aus dem Modell (Bögen nur intern, Vorprüfung, "
+                                         "Prüfliste begehung.md); Schlüssel in GOOGLE_MAPS_API_KEY")
+    bg.add_argument("project", nargs="?", default=None)
+    bg.add_argument("--projekt", default=None, help="Projektordner (statt des Positionsarguments)")
+    bg.add_argument("--radius", type=float, default=None, help="Umkreis um das Objekt in m (Standard begehung.radius "
+                                                               "oder 120)")
+    bg.add_argument("--schritt", type=float, default=None, help="Abstand der Standorte in m (Standard 10)")
+    bg.add_argument("--strassen", default=None, help="nur diese Straßen (Anfang des Namens, mit Komma), Standard "
+                                                     "begehung.strassen, sonst alle im Umkreis")
+    bg.add_argument("--nur", default=None, help="nur diese Standorte (Anfang der ID, mit Komma), z. B. WI05,ST1")
+    bg.add_argument("--tag", default="", help="Zusatz für Modellbilder und Bögen, z. B. _vorher")
+    bg.add_argument("--nur-modell", action="store_true", help="vorhandene Fotos verwenden, nur Modell und Vorprüfung")
+    bg.add_argument("--ohne-modell", action="store_true", help="kein Blender: nur Fotos laden und vorhandene Modellbilder "
+                                                               "auswerten")
+    bg.add_argument("--standorte-neu", action="store_true", help="Standorte neu abfragen (Metadaten)")
+    bg.add_argument("--samples", type=int, default=8)
+    bg.add_argument("--licht", default="dunst_hell")
+    bg.add_argument("--vorher-nachher", default=None, help="nur Bogen bauen: STANDORT:ansicht1,ansicht2:tag_vorher:tag_nachher")
+    bg.add_argument("--out", default=None, help="Ausgabe für --vorher-nachher")
     st = sub.add_parser("studio", help="Web-Oberfläche immoviz Studio starten (http://127.0.0.1:8765)")
     st.add_argument("--host", default="127.0.0.1")
     st.add_argument("--port", type=int, default=8765)
@@ -249,6 +270,9 @@ def main():
         return
     if a.cmd == "referenz":
         _referenz(a)
+        return
+    if a.cmd == "begehung":
+        _begehung(a)
         return
     if a.cmd == "schutz":
         from lib import kompositing as KO
@@ -409,6 +433,21 @@ def _referenz(a):
     res = RF.abgleich(pdir, cams, google_neu=a.google_neu, nur_modell=a.nur_modell, kalib_neu=a.kalibrieren,
                       licht=a.licht, sse=a.sse, extra_cams=extra, tag=a.tag, samples=a.samples)
     print(json.dumps({**res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
+
+
+def _begehung(a):
+    """Virtuelle Begehung (lib/begehung.py). Schlüssel nur aus der Umgebung, nie ausgeben."""
+    from lib import begehung as BG
+    pdir = Path(a.projekt or a.project or ".").resolve()
+    if a.vorher_nachher:
+        sid, ans, tv, tn = (a.vorher_nachher.split(":") + ["", ""])[:4]
+        out = Path(a.out) if a.out else pdir / BG.SUB / f"{sid}_vorher_nachher.jpg"
+        print(BG.vorher_nachher(pdir, sid, ans.split(","), tv, tn, out))
+        return
+    res = BG.begehung(pdir, a.radius, a.schritt, a.strassen.split(",") if a.strassen else None,
+                      a.nur.split(",") if a.nur else None, a.tag, a.nur_modell, a.ohne_modell, a.standorte_neu,
+                      a.samples, a.licht)
+    print(json.dumps(res, ensure_ascii=False, indent=1))
 
 
 def _svcheck(pdir):

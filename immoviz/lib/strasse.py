@@ -548,3 +548,310 @@ def streetview(project_dir: Path, key: str) -> list:
     B.setup_light(scene, cfg, ctx, cfg.get("streetview_light", "dunst_hell"))
     return C.streetview_compare(scene, {**cfg, "streetview_checks": ansichten}, ctx,
                                 Path(project_dir) / "renders" / "streetview", key, getattr(B, "LAST_TERRAIN", None))
+
+
+# ---------------------------------------------------------------- OGD Straßenausstattung (Stadt Wien, WFS)
+# Geprüft mit DescribeFeatureType am 18.11.2026 (Felder in Klammern); Layer ohne Objekte im Umkreis bleiben leer.
+OGD_LAYER = {
+    "absenkungen": ("SISGEHSTEIGABSOGD", ("ABSENKUNG_TXT",)),                         # Punkte: "0 cm" | "bis 3 cm abgesenkt"
+    "fahrradabstellanlagen": ("FAHRRADABSTELLANLAGEOGD", ("ADRESSE", "ANZAHL", "ART_TXT")),   # Punkte, Anzahl Räder
+    "motorradabstellplaetze": ("MOTORRADABSTELLPLATZOGD", ("STRASSE", "STELLPL_ANZ", "ZEITRAUM")),
+    "radgegeneinbahn": ("RADGEGENEINBAHNOG", ("DIRECTION_NAME", "BASETYPE_NAME", "EDGE_FEATURENAME")),  # Linien
+    "einbahn": ("EINBAHNOGD", ("DIRECTION_NAME",)),                                    # Linien, Richtung zur Graphkante
+    "begegnungszonen": ("BEGEGNUNGSZONEOGD", ("ADRESSE",)),
+    "kurzparkstreifen": ("KURZPARKSTREIFENOGD", ("STRNAM", "GELTUNGSBEREICH", "ZEITRAUM", "DAUER")),
+    "behindertenparkplaetze": ("BEHINDERTENPARKPLATZOGD", ("STRNAM", "STELLPL_ANZ", "KATEGORIE_TXT", "ONR_VON")),
+    "hydranten": ("HYDRANTOGD", ()),
+    "ladezonen": ("LADEZONEOGD", ("ADRESSE",)),
+    "strassengraph": ("STRASSENGRAPHOGD", ("FEATURENAME", "EDGECATEGORY_NAME", "FRC_NAME", "FOW_NAME")),
+}
+OGD_DATEI = Path("data") / "strassen_ogd.json"
+OGD_QUELLE = "Stadt Wien, data.wien.gv.at (CC BY 4.0), WFS"
+
+
+def ogd_laden(project_dir: Path, radius: float = 220.0, neu: bool = False) -> dict:
+    """Lädt die Straßenausstattung der Stadt Wien im Umkreis und speichert sie im lokalen System
+    (data/strassen_ogd.json). Je Layer eine Liste {typ: punkt|linie|flaeche, pts: [[x, y], ...], props}."""
+    from . import geo_wien as G
+    project_dir = Path(project_dir)
+    pfad = project_dir / OGD_DATEI
+    if pfad.exists() and not neu:
+        d = json.loads(pfad.read_text())
+        if d.get("radius_m", 0) >= radius and set(OGD_LAYER) <= set(d.get("layer", {})):
+            return d
+    ctx = json.loads((project_dir / "data" / "context.json").read_text())
+    fr = G.LocalFrame(*ctx["frame"]["origin_gk"], ctx["frame"]["x_axis_deg"])
+    out = {"quelle": OGD_QUELLE, "radius_m": radius, "layer": {}, "fehler": {}}
+    for key, (layer, felder) in OGD_LAYER.items():
+        try:
+            fs = G.fetch_layer(layer, ctx["lat"], ctx["lon"], radius)
+        except Exception as e:                       # Layer nicht erreichbar: leer, aber vermerkt
+            out["layer"][key], out["fehler"][key] = [], str(e)[:200]
+            continue
+        liste = []
+        for f in fs:
+            g = f.get("geometry")
+            if not g:
+                continue
+            t, co = g["type"], g["coordinates"]
+            if t == "Point":
+                teile = [("punkt", [co])]
+            elif t == "MultiPoint":
+                teile = [("punkt", [c]) for c in co]
+            elif t == "LineString":
+                teile = [("linie", co)]
+            elif t == "MultiLineString":
+                teile = [("linie", c) for c in co]
+            elif t == "Polygon":
+                teile = [("flaeche", co[0])]
+            elif t == "MultiPolygon":
+                teile = [("flaeche", c[0]) for c in co]
+            else:
+                continue
+            props = {k: f["properties"].get(k) for k in felder}
+            for typ, pts in teile:
+                liste.append({"typ": typ, "pts": [list(fr(*p[:2])) for p in pts], "props": props})
+        out["layer"][key] = liste
+    pfad.parent.mkdir(parents=True, exist_ok=True)
+    pfad.write_text(json.dumps(out, ensure_ascii=False, indent=0))
+    return out
+
+
+def _naechste_kante(segs, x, y):
+    """Nächstes Bordsteinsegment zu (x, y): (Abstand, Fußpunkt, Richtung entlang, Normale zur Fahrbahn)."""
+    best = None
+    for a, b in segs:
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        L2 = dx * dx + dy * dy
+        if L2 < 1e-6:
+            continue
+        t = max(0.0, min(1.0, ((x - a[0]) * dx + (y - a[1]) * dy) / L2))
+        px, py = a[0] + t * dx, a[1] + t * dy
+        d = math.hypot(x - px, y - py)
+        if best is None or d < best[0]:
+            L = math.sqrt(L2)
+            best = (d, (px, py), (dx / L, dy / L), a, b)
+    return best
+
+
+def _fahrbahn_normale(fahr, p, t):
+    """Normale zur Kante t im Punkt p, die auf die Fahrbahn zeigt."""
+    n = (-t[1], t[0])
+    if _in_layer(fahr, p[0] + n[0] * 0.4, p[1] + n[1] * 0.4):
+        return n
+    return (t[1], -t[0])
+
+
+def _streifen_achse(poly):
+    """Lange Achse eines schmalen Streifens: (Mitte, Richtung u, Normale v, halbe Länge, halbe Breite)."""
+    cx = sum(p[0] for p in poly) / len(poly)
+    cy = sum(p[1] for p in poly) / len(poly)
+    best = None
+    for k in range(180):
+        w = math.radians(k)
+        u = (math.cos(w), math.sin(w))
+        us = [(p[0] - cx) * u[0] + (p[1] - cy) * u[1] for p in poly]
+        vs = [-(p[0] - cx) * u[1] + (p[1] - cy) * u[0] for p in poly]
+        if best is None or max(vs) - min(vs) < best[0]:
+            best = (max(vs) - min(vs), u, min(us), max(us), min(vs), max(vs))
+    _, u, u0, u1, v0, v1 = best
+    return {"mitte": (cx, cy), "u": u, "v": (-u[1], u[0]), "u0": u0, "u1": u1, "v0": v0, "v1": v1}
+
+
+def ogd_elemente(ctx, cfg, ogd, radius: float = 160.0) -> list[dict]:
+    """Leitet aus OGD und Flächenmehrzweckkarte Straßenelemente ab (Liste wie `strassenelemente` in project.yaml):
+    Gehsteigüberfahrten (zwei Fahrbahnschwellen mit niveaugleicher Absenkung "0 cm" dazwischen), Fahrbahnschwellen,
+    Gehsteigabsenkungen ("bis 3 cm"), Fahrradständer, Motorradabstellplätze (Markierung), Leitlinie und Radpiktogramme
+    bei Radfahren gegen die Einbahn, Hydranten. Abschaltbar je Art über `strassenelemente_auto: {<art>: false}`."""
+    auto = (cfg or {}).get("strassenelemente_auto") or {}
+    an = lambda k: auto.get(k, True) is not False
+    L = (ogd or {}).get("layer", {})
+    fahr = _index(ctx, ("Fahrbahn", "Fahrbahnschwelle", "Zebrastreifen"))
+    segs = _bordsteine(ctx, radius, (0.0, 0.0))
+    nah = lambda p: math.hypot(p[0], p[1]) < radius
+    out = []
+    # Gehsteigüberfahrten und Fahrbahnschwellen
+    schwellen = [s for s in ctx["surfaces"] if s["layer"] == "Fahrbahnschwelle" and len(s["poly"]) >= 3 and
+                 nah(s["poly"][0])]
+    achsen = [_streifen_achse(s["poly"]) for s in schwellen]
+    null = [a["pts"][0] for a in L.get("absenkungen", []) if "0 cm" in str(a["props"].get("ABSENKUNG_TXT"))]
+    benutzt = set()
+    for i in range(len(achsen)):
+        for j in range(i + 1, len(achsen)):
+            A, B = achsen[i], achsen[j]
+            if abs(A["u"][0] * B["u"][0] + A["u"][1] * B["u"][1]) < 0.97:
+                continue
+            d = (B["mitte"][0] - A["mitte"][0]) * A["v"][0] + (B["mitte"][1] - A["mitte"][1]) * A["v"][1]
+            if not 2.0 < abs(d) < 9.0:
+                continue
+            mx, my = (A["mitte"][0] + B["mitte"][0]) / 2, (A["mitte"][1] + B["mitte"][1]) / 2
+            treffer = [p for p in null if math.hypot(p[0] - mx, p[1] - my) < 8.0]
+            if not treffer or not an("ueberfahrten"):
+                continue
+            benutzt |= {i, j}
+            out.append({"typ": "gehsteigueberfahrt", "rampen": [schwellen[i]["poly"], schwellen[j]["poly"]],
+                        "hoehe": float(auto.get("ueberfahrt_hoehe", 0.115)),
+                        "quelle": "OGD FMZK Fahrbahnschwelle (2 Rampen) und SISGEHSTEIGABSOGD 0 cm "
+                                  f"({len(treffer)} Punkte)"})
+    for k, s in enumerate(schwellen):
+        if k not in benutzt and an("schwellen"):
+            out.append({"typ": "fahrbahnschwelle", "poly": s["poly"], "quelle": "OGD FMZK Fahrbahnschwelle"})
+    # Gehsteigabsenkungen bis 3 cm
+    if an("absenkungen"):
+        for a in L.get("absenkungen", []):
+            p = a["pts"][0]
+            txt = str(a["props"].get("ABSENKUNG_TXT"))
+            if "0 cm" in txt or not nah(p):
+                continue
+            k = _naechste_kante(segs, *p)
+            if k is None or k[0] > 3.0:
+                continue
+            n = _fahrbahn_normale(fahr, k[1], k[2])
+            out.append({"typ": "gehsteigabsenkung", "pos": [round(k[1][0], 2), round(k[1][1], 2)],
+                        "richtung": [round(n[0], 3), round(n[1], 3)], "laenge": 2.0, "tiefe_cm": 3,
+                        "quelle": f"OGD SISGEHSTEIGABSOGD ({txt})"})
+    # Fahrradständer: je zwei Räder ein Bügel, quer zum nächsten Bordstein
+    if an("fahrradstaender"):
+        for a in L.get("fahrradabstellanlagen", []):
+            p = a["pts"][0]
+            if not nah(p):
+                continue
+            n_buegel = max(1, int(math.ceil(float(a["props"].get("ANZAHL") or 2) / 2)))
+            k = _naechste_kante(segs, *p)
+            t = k[2] if k else (1.0, 0.0)
+            out.append({"typ": "fahrradstaender", "pos": [round(p[0], 2), round(p[1], 2)], "anzahl": n_buegel,
+                        "entlang": [round(t[0], 3), round(t[1], 3)], "abstand": 1.0,
+                        "quelle": f"OGD FAHRRADABSTELLANLAGEOGD ({a['props'].get('ADRESSE')}, "
+                                  f"{a['props'].get('ANZAHL')} Räder)"})
+    if an("motorradplaetze"):
+        for a in L.get("motorradabstellplaetze", []):
+            pts = a["pts"]
+            if not nah(pts[0]):
+                continue
+            out.append({"typ": "motorradplatz", "pts": pts, "anzahl": a["props"].get("STELLPL_ANZ"),
+                        "quelle": "OGD MOTORRADABSTELLPLATZOGD"})
+    if an("hydranten"):
+        for a in L.get("hydranten", []):
+            p = a["pts"][0]
+            if nah(p):
+                out.append({"typ": "hydrant_ogd", "pos": [round(p[0], 2), round(p[1], 2)],
+                            "quelle": "OGD HYDRANTOGD (Lage; Bauart Unterflur, nur Deckel)"})
+    # Radfahren gegen die Einbahn: Leitlinie in Fahrbahnmitte und Radpiktogramme auf der Gegenrichtungsseite, ab der
+    # Einmündung alle `piktogramm_abstand` Meter (Begehung Wimmergasse: rund 25 m, erstes direkt nach der Kreuzung)
+    schwell = _index(ctx, ("Fahrbahnschwelle",))
+    if an("radgegeneinbahn"):
+        gesehen = set()
+        einb = {tuple(map(tuple, e["pts"])): e["props"].get("DIRECTION_NAME") for e in L.get("einbahn", [])}
+        abst = float(auto.get("piktogramm_abstand", 25.0))
+        for a in L.get("radgegeneinbahn", []):
+            pts = [tuple(p) for p in a["pts"]]
+            if (pts[0], pts[-1]) in gesehen or len(pts) < 2:
+                continue
+            gesehen.add((pts[0], pts[-1]))
+            richtung = einb.get(tuple(pts))
+            if richtung is None:
+                continue
+            # Fahrtrichtung der Autos: "in Richtung" = Graphrichtung, "gegen Richtung" = umgekehrt; Rad dagegen
+            rad = pts if richtung == "gegen Richtung" else pts[::-1]
+            p0, p1 = rad[0], rad[-1]
+            lin, t, s0, s1 = _mittellinie(fahr, schwell, p0, p1)
+            if lin is None:
+                continue
+            name = a["props"].get("EDGE_FEATURENAME")
+            n_r = (t[1], -t[0])                                  # rechts in Fahrtrichtung des Rades
+            s = s0 + 3.0
+            while s < s1 - 6.0:
+                q = (p0[0] + t[0] * s, p0[1] + t[1] * s)
+                br = _fahrbahn_breite(fahr, q, t)
+                if br and nah(q):
+                    links, rechts = br
+                    ver = ((rechts - links) / 2 + rechts) / 2         # Mitte der rechten Fahrbahnhälfte
+                    out.append({"typ": "radpiktogramm", "pos": [round(q[0] + n_r[0] * ver, 2), round(q[1] + n_r[1] * ver, 2)],
+                                "richtung": [round(t[0], 3), round(t[1], 3)], "pfeil": bool(auto.get("piktogramm_pfeil", False)),
+                                "quelle": f"OGD RADGEGENEINBAHNOG ({name}), Abstand {abst:.0f} m laut Begehung"})
+                s += abst
+            lin = [p for p in lin if nah(p)]
+            if auto.get("leitlinie", True) and len(lin) >= 3:
+                out.append({"typ": "leitlinie", "pts": lin, "strich": 1.5, "luecke": 3.0,
+                            "breite": 0.12, "quelle": f"Radfahren gegen die Einbahn (OGD RADGEGENEINBAHNOG, {name}), "
+                                                      "Lage Fahrbahnmitte aus FMZK, Begehung"})
+    # Leitlinie (strichliert) in weiteren Straßen laut Begehung: strassenelemente_auto.leitlinie_strassen
+    for sname in auto.get("leitlinie_strassen") or []:
+        for g in L.get("strassengraph", []):
+            if not str(g["props"].get("FEATURENAME") or "").lower().startswith(sname.lower()):
+                continue
+            pts = g["pts"]
+            lin, t, s0, s1 = _mittellinie(fahr, schwell, pts[0], pts[-1])
+            lin = [p for p in (lin or []) if nah(p)]
+            if len(lin) >= 3:
+                out.append({"typ": "leitlinie", "pts": lin, "strich": float(auto.get("leitlinie_strich", 3.0)),
+                            "luecke": float(auto.get("leitlinie_luecke", 3.0)), "breite": 0.12,
+                            "quelle": f"Begehung (Leitlinie {sname}), Lage Fahrbahnmitte aus FMZK"})
+    # Behindertenparkplätze: Zusatztafel am Steher am Bordstein
+    if an("behindertenparkplaetze"):
+        for a in L.get("behindertenparkplaetze", []):
+            p = a["pts"][0]
+            k = _naechste_kante(segs, *p)
+            if not nah(p) or k is None or k[0] > 4.0:
+                continue
+            n = _fahrbahn_normale(fahr, k[1], k[2])
+            pos = (k[1][0] - n[0] * 0.4, k[1][1] - n[1] * 0.4)
+            out.append({"typ": "verkehrszeichen", "schild": "info", "pos": [round(pos[0], 2), round(pos[1], 2)],
+                        "drehung": round(math.degrees(math.atan2(k[2][1], k[2][0])), 1),
+                        "quelle": f"OGD BEHINDERTENPARKPLATZOGD ({a['props'].get('STRNAM')} {a['props'].get('ONR_VON')})"})
+    return out
+
+
+def _mittellinie(fahr, schwell, p0, p1, schritt=2.0, kreuzung=9.5):
+    """Fahrbahnmitte entlang einer Graphkante zwischen den Kreuzungen: Beginn, wo die Fahrbahn schmäler als 9 m ist
+    und keine Fahrbahnschwelle (Überfahrt) mehr folgt. Liefert (Punkte, Richtung, Start, Ende)."""
+    Lk = math.dist(p0, p1)
+    if Lk < 12:
+        return None, None, 0, 0
+    t = ((p1[0] - p0[0]) / Lk, (p1[1] - p0[1]) / Lk)
+    n_r = (t[1], -t[0])
+
+    def ok(s):
+        q = (p0[0] + t[0] * s, p0[1] + t[1] * s)
+        br = _fahrbahn_breite(fahr, q, t)
+        return br if br and br[0] + br[1] < 9.0 else None
+    # Knoten des Straßengraphen liegen in Kreuzungsmitte: erst `kreuzung` Meter danach beginnen
+    s0 = next((s for s in range(int(kreuzung), int(Lk / 2)) if ok(s) and ok(s + 2)), None)
+    s1 = next((Lk - s for s in range(int(kreuzung), int(Lk / 2)) if ok(Lk - s) and ok(Lk - s - 2)), None)
+    if s0 is None or s1 is None:
+        return None, None, 0, 0
+    # nach einer Überfahrt (Fahrbahnschwelle in den ersten 12 m) erst hinter der letzten Schwelle beginnen
+    for s in range(int(s0), int(min(s0 + 12, s1))):
+        for d in (-1.0, 0.0, 1.0):
+            q = (p0[0] + t[0] * s + n_r[0] * d, p0[1] + t[1] * s + n_r[1] * d)
+            if _in_layer(schwell, *q):
+                s0 = s + 1.0
+    for s in range(int(s1), int(max(s1 - 12, s0)), -1):
+        for d in (-1.0, 0.0, 1.0):
+            q = (p0[0] + t[0] * s + n_r[0] * d, p0[1] + t[1] * s + n_r[1] * d)
+            if _in_layer(schwell, *q):
+                s1 = s - 1.0
+    lin = []
+    s = s0
+    while s <= s1:
+        br = ok(s)
+        if br:
+            q = (p0[0] + t[0] * s, p0[1] + t[1] * s)
+            m = (br[1] - br[0]) / 2
+            lin.append([round(q[0] + n_r[0] * m, 2), round(q[1] + n_r[1] * m, 2)])
+        s += schritt
+    return lin, t, s0, s1
+
+
+def _fahrbahn_breite(fahr, q, t, weit=12.0):
+    """Abstand von q bis zum Fahrbahnrand links und rechts (quer zu t), None wenn q nicht auf der Fahrbahn."""
+    if not _in_layer(fahr, *q):
+        return None
+    res = []
+    for sgn in (1, -1):                       # links (n = (-t1, t0)) und rechts
+        n = (-t[1] * sgn, t[0] * sgn)
+        s = 0.0
+        while s < weit and _in_layer(fahr, q[0] + n[0] * s, q[1] + n[1] * s):
+            s += 0.1
+        res.append(s)
+    return res[0], res[1]

@@ -1,10 +1,14 @@
 """Strassenmoebel und Platzhalter fuer Menschen.
 
 Strassenmoebel (`strassenmoebel` in project.yaml, je Eintrag `typ`, `pos`, optional `drehung` in Grad, `quelle`):
-  poller          Wiener Poller (Stahlrohr 0,9 m), `farbe`: gruen_weiss (Standard), rot_weiss, grau
+  poller          Wiener Poller (Stahlrohr 0,9 m), `farbe`: gruen_weiss (Standard), gruen_rot_weiss (dunkelgruen mit
+                  rot-weissen Reflexringen, Wien 5. Bezirk laut Begehung), rot_weiss, grau
   fahrradbuegel   Wiener Buegel (Edelstahl, 0,8 m hoch, 0,75 m breit), `drehung` = Richtung des Buegels
-  mistkuebel      Wiener Mistkuebel (orange, am Steher)
-  verkehrszeichen Steher 2,6 m mit Tafel ohne lesbare Schrift, `schild`: verbot | gebot | gefahr | stop | info | zusatz
+  mistkuebel      Wiener Mistkuebel am Steher, `farbe`: orange (Standard) | grau_orange (grau mit orangem Rand)
+  verkehrszeichen Steher 2,6 m mit Tafel ohne lesbare Schrift, `schild`: verbot | gebot | gefahr | stop | info | zusatz |
+                  vorrang; `hoehe` = Mitte der Tafel ueber Boden (Standard 2,35), `steher: false` fuer eine zweite Tafel
+                  am selben Steher
+  motorrad        abgestelltes Motorrad (Platzhalter in Groesse und Lage, ohne Marke), `drehung` = Fahrtrichtung
   hydrant         Ueberflurhydrant (rot)
   baumscheibe     Baumscheibe mit Gussgitter (`art: gitter`) oder offener Erde mit Kante (`art: erde`), `groesse` in m
 Automatisch (abschaltbar mit `strassenmoebel_auto: {baumscheiben: false}`): je Baum aus dem Kataster im Umkreis von
@@ -35,6 +39,14 @@ def _mats(mats):
     mats["poller_rot_weiss"] = M.ring_material(bpy, "poller_rot_weiss", (0.35, 0.02, 0.02), (0.75, 0.75, 0.72),
                                                [(0.36, 0.48), (0.60, 0.72)])
     mats["poller_grau"] = M.lack(bpy, "poller_grau", (0.06, 0.065, 0.07), 0.45)
+    # dunkelgruen (RAL 6009 Tannengruen) mit Reflexband weiss-rot-weiss unter dem Kopf (Begehung 18.11.2026)
+    mats["poller_gruen_rot_weiss"] = _ringe3(M, "poller_gruen_rot_weiss", (0.010, 0.028, 0.018),
+                                             [((0.62, 0.66), (0.75, 0.75, 0.72)), ((0.66, 0.74), (0.42, 0.015, 0.015)),
+                                              ((0.74, 0.78), (0.75, 0.75, 0.72))])
+    mats["mistkuebel_grau"] = M.lack(bpy, "mistkuebel_grau", (0.16, 0.165, 0.17), 0.45)
+    mats["moped_lack"] = M.lack(bpy, "moped_lack", (0.03, 0.035, 0.045), 0.3)
+    mats["moped_reifen"] = M.simple(bpy, "moped_reifen", (0.015, 0.015, 0.015), 0.8)
+    mats["schild_gelb"] = M.simple(bpy, "schild_gelb", (0.75, 0.50, 0.02), 0.35)
     mats["edelstahl"] = M.simple(bpy, "edelstahl", (0.55, 0.56, 0.57), 0.28, 1.0)
     mats["mistkuebel"] = M.lack(bpy, "mistkuebel", (0.55, 0.12, 0.012), 0.45)
     mats["steher"] = M.simple(bpy, "steher", (0.30, 0.31, 0.32), 0.4, 0.9)
@@ -46,6 +58,19 @@ def _mats(mats):
     mats["gussgitter"] = _gitter(M)
     mats["erde"] = M.plaster(bpy, "erde", (0.035, 0.025, 0.018), var=0.3, bump=0.6, detail=False)
     mats["menschen_platzhalter"] = M.simple(bpy, "menschen_platzhalter", (0.30, 0.30, 0.31), 0.8)
+
+
+def _ringe3(M, name, grund, ringe):
+    """Poller mit mehreren farbigen Ringen (UV v = Hoehe): Liste ((z0, z1), Farbe)."""
+    m = M._new(bpy, name)
+    N = M.Nodes(m)
+    tc, sep = N.uv()
+    col = grund
+    for (z0, z1), farbe in ringe:
+        r = N.math("MULTIPLY", N.math("GREATER_THAN", sep.outputs["Y"], z0), N.math("LESS_THAN", sep.outputs["Y"], z1))
+        col = N.mix_rgb(r, col, farbe)
+    N.principled(col, rough=0.4, metal=0.3)
+    return m
 
 
 def _gitter(M):
@@ -73,7 +98,8 @@ def _gitter(M):
 
 
 def _poller(mb, x, y, z, farbe):
-    mat = {"rot_weiss": "poller_rot_weiss", "grau": "poller_grau"}.get(farbe, "poller_gruen_weiss")
+    mat = {"rot_weiss": "poller_rot_weiss", "grau": "poller_grau",
+           "gruen_rot_weiss": "poller_gruen_rot_weiss"}.get(farbe, "poller_gruen_weiss")
     F.drehkoerper(mb, (x, y, z), [(0.065, 0.0), (0.065, 0.86), (0.055, 0.9), (0.0, 0.92)], mat, seg=14, kappen=True)
 
 
@@ -94,20 +120,45 @@ def _buegel(mb, x, y, z, dreh):
     F.rohr(mb, pts, 0.024, "edelstahl", seg=8)
 
 
-def _mistkuebel(mb, x, y, z, dreh):
+def _mistkuebel(mb, x, y, z, dreh, farbe="orange", steher=True):
     w = math.radians(dreh)
-    F.drehkoerper(mb, (x, y, z), [(0.035, 0.0), (0.035, 1.05)], "steher", seg=8)
+    if steher:
+        F.drehkoerper(mb, (x, y, z), [(0.035, 0.0), (0.035, 1.05)], "steher", seg=8)
     cx, cy = x + math.cos(w) * 0.22, y + math.sin(w) * 0.22
+    if farbe == "grau_orange":
+        F.drehkoerper(mb, (cx, cy, z + 0.45), [(0.0, 0.0), (0.17, 0.0), (0.19, 0.44), (0.0, 0.44)], "mistkuebel_grau",
+                      seg=16, kappen=False)
+        F.drehkoerper(mb, (cx, cy, z + 0.89), [(0.0, 0.0), (0.195, 0.0), (0.20, 0.07), (0.20, 0.11), (0.0, 0.13)],
+                      "mistkuebel", seg=16, kappen=False)
+        return
     F.drehkoerper(mb, (cx, cy, z + 0.45), [(0.0, 0.0), (0.17, 0.0), (0.19, 0.50), (0.20, 0.52), (0.20, 0.56), (0.0, 0.58)],
                   "mistkuebel", seg=16, kappen=False)
 
 
-def _zeichen(mb, x, y, z, dreh, schild):
-    F.drehkoerper(mb, (x, y, z), [(0.03, 0.0), (0.03, 2.75), (0.0, 2.77)], "steher", seg=8)
+def _motorrad(mb, x, y, z, dreh):
+    """Abgestelltes Motorrad als Platzhalter: zwei Raeder, Rahmen, Tank, Sitzbank, Lenker (Laenge 2,1 m)."""
+    w = math.radians(dreh)
+    f, s = (math.cos(w), math.sin(w)), (-math.sin(w), math.cos(w))
+    P = lambda a, b, c: (x + f[0] * a + s[0] * b, y + f[1] * a + s[1] * b, z + c)
+    for a in (-0.72, 0.72):
+        F.drehkoerper(mb, P(a, -0.06, 0.32), [(0.0, 0.0), (0.32, 0.0), (0.32, 0.12), (0.0, 0.12)], "moped_reifen", seg=18,
+                      achse=(s[0], s[1], 0.0), kappen=True)
+    F.rohr(mb, [P(-0.72, 0.0, 0.32), P(-0.2, 0.0, 0.45), P(0.45, 0.0, 0.62), P(0.72, 0.0, 0.32)], 0.05, "moped_lack", seg=6)
+    F.quader(mb, P(0.1, 0.0, 0.62), (0.55, 0.26, 0.26), "moped_lack", drehung=dreh)
+    F.quader(mb, P(-0.4, 0.0, 0.72), (0.6, 0.24, 0.1), "moped_reifen", drehung=dreh)
+    F.quader(mb, P(-0.1, 0.0, 0.38), (0.45, 0.22, 0.28), "steher", drehung=dreh)
+    F.rohr(mb, [P(0.5, -0.36, 1.0), P(0.5, 0.36, 1.0)], 0.018, "steher", seg=6)
+    F.rohr(mb, [P(0.72, 0.0, 0.32), P(0.5, 0.0, 1.0)], 0.03, "steher", seg=6)
+
+
+def _zeichen(mb, x, y, z, dreh, schild, hoehe=2.35, steher=True):
+    if steher:
+        F.drehkoerper(mb, (x, y, z), [(0.03, 0.0), (0.03, max(2.75, hoehe + 0.4)), (0.0, max(2.77, hoehe + 0.42))],
+                      "steher", seg=8)
     w = math.radians(dreh)
     n = (math.cos(w), math.sin(w), 0.0)       # Tafel blickt in diese Richtung
     t = (-n[1], n[0], 0.0)
-    c = (x + n[0] * 0.04, y + n[1] * 0.04, z + 2.35)
+    c = (x + n[0] * 0.04, y + n[1] * 0.04, z + hoehe)
 
     def poly(pts2, mat, off=0.0, gross=1.0):
         pts = [(c[0] + t[0] * u * gross + n[0] * off, c[1] + t[1] * u * gross + n[1] * off, c[2] + v * gross) for u, v in pts2]
@@ -125,6 +176,11 @@ def _zeichen(mb, x, y, z, dreh, schild):
         poly(dr, "schild_rot")
         mb.poly([(c[0] + t[0] * u * 0.7 + n[0] * 0.004, c[1] + t[1] * u * 0.7 + n[1] * 0.004, c[2] + v * 0.7) for u, v in dr],
                 None, "schild_weiss", n)
+    elif schild == "vorrang":                 # Vorrangstrasse: gelbe Raute mit weissem Rand
+        raute = [(0.3, 0.0), (0.0, 0.3), (-0.3, 0.0), (0.0, -0.3)]
+        poly(raute, "schild_weiss")
+        mb.poly([(c[0] + t[0] * u * 0.7 + n[0] * 0.004, c[1] + t[1] * u * 0.7 + n[1] * 0.004, c[2] + v * 0.7) for u, v in raute],
+                None, "schild_gelb", n)
     elif schild == "stop":
         poly([(0.3 * math.cos(math.pi / 8 + k * math.pi / 4), 0.3 * math.sin(math.pi / 8 + k * math.pi / 4)) for k in range(8)], "schild_rot")
     else:          # info / zusatz: blaues bzw. weisses Rechteck mit abstrakter Flaeche, keine Schrift
@@ -183,9 +239,11 @@ def build_moebel(cfg, ctx, mats, coll, terrain):
         elif typ == "fahrradbuegel":
             _buegel(mb, x, y, z, dreh)
         elif typ == "mistkuebel":
-            _mistkuebel(mb, x, y, z, dreh)
+            _mistkuebel(mb, x, y, z, dreh, e.get("farbe", "orange"), e.get("steher", True))
         elif typ == "verkehrszeichen":
-            _zeichen(mb, x, y, z, dreh, e.get("schild", "verbot"))
+            _zeichen(mb, x, y, z, dreh, e.get("schild", "verbot"), float(e.get("hoehe", 2.35)), e.get("steher", True))
+        elif typ == "motorrad":
+            _motorrad(mb, x, y, z, dreh)
         elif typ == "hydrant":
             _hydrant(mb, x, y, z)
         elif typ == "baumscheibe":

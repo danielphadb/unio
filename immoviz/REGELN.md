@@ -1,6 +1,6 @@
 # immoviz: Regelwerk (verbindlich)
 
-Stand 18.11.2026 (V6, V7 Schutzmaske und Grading; V8 Schutz mit Toleranz, V9 Lizenzen lokale KI; P2, P3, U9 Plan-Soll-Liste). Abgeleitet aus allen Korrekturrunden bei NOMA Schlachthausgasse 13 (Runde 1 bis 4, Apartments
+Stand 18.11.2026 (V6, V7 Schutzmaske und Grading; V8 Schutz mit Toleranz, V9 Lizenzen lokale KI; P2, P3, U9 Plan-Soll-Liste; U11 virtuelle Begehung). Abgeleitet aus allen Korrekturrunden bei NOMA Schlachthausgasse 13 (Runde 1 bis 4, Apartments
 Variante 2) und Wimmergasse 20 (Umgebungsabgleich, Innenräume). Ziel: weniger Runden, weniger verworfene Credits,
 jeder Fehler wird früh und möglichst automatisch gefunden.
 
@@ -75,6 +75,7 @@ korrigiert, nie per Prompt. Was die KI dazuerfindet, wird verworfen, nicht schö
 | U8 | Jede Außenkamera gegen die 3D-Referenz (Google, nur intern) und, wo der Kunde Vorlagen liefert, Kamera gegen Vorlage abgleichen, bevor der Prüfbogen rausgeht | N Runde 3 und 4 (Hoffassaden, Dächer, Standpunkt der Vorlage) | auto: `immoviz.py referenz <p> --kamera <k>`, `immoviz.py kameramatch <p> --bild --punkte --kamera` (paralleler Ausbau, Schwellen in KONZEPT.md Abschnitt 7) |
 | U9 | Straßenleuchten nur aus dem Leuchten-Inventar `strassenleuchten` mit Feld `quelle` je Leuchte (Street View Blick nach oben, trianguliert; Plan für Hof und Terrassen). Typ (Seil-, Mast-, Wandleuchte, Laterne), Lage, Lichtpunkthöhe und bei Seilleuchten beide Aufhängepunkte; keine Leuchten aus Vorlagen oder nach Gefühl, kein Ersatz durch die Bild-KI | W Runde 6: Seilleuchte als schwarzer Kasten, Kunde 18.11.2026: Laternen hängend statt stehend (Prompt-Laternen) | auto: `pruefen` (Klasse Straßenleuchten, Warnung ohne Inventar oder ohne Aufhängepunkte; Leuchten je Straßenabschnitt gegen `soll:`), `immoviz.py leuchten <p>` (Prüfbild über Orthofoto) |
 | U10 | Straßenmöbel (Poller, Zeichen ohne lesbare Schrift, Bügel, Mistkübel, Hydrant) nur mit Quelle (`strassenmoebel`, Street View oder Plan); Lage im Bildvordergrund aus zwei Panoramen triangulieren, nicht aus einem Bild schätzen; Baumscheiben nur an Katasterbäumen; Menschen nur als Platzhalter (`menschen`) für Lage und Maßstab, nie als Ersatz für die KI-Menschen | W Runde 5: Poller, Zeichen und Fahrradbügel fehlten im Modell (umgebung_abgleich.md 5); W 18.11.2026: Einbahnschild-Pfosten als Poller erfasst, Poller vor Kamera `ecke` 0,8 bis 1,4 m versetzt (umgebung_abgleich.md 14) | auto: `pruefen` (Klasse Straßenmöbel) |
+| U11 | **Jede Straßen- und Luftkamera erst nach bestandener Begehung veredeln.** Virtuelle Begehung `immoviz.py begehung` (Street View alle 10 m entlang der Straßen um das Objekt, je Standort 8 Ansichten gegen dieselben Ansichten aus dem Modell, Kamera 2,5 m über Gelände wie das Google-Auto), Prüfliste `begehung.md` je Standort ausgefüllt (Bordsteine, Querungen und Überfahrten, Schwellen, Rampen, Markierungen, Zeichen, Poller, Leuchten, Bäume, Parkordnung, Abstellplätze, Mistkübel, Hydranten, Erdgeschosszonen, Pflaster); bestanden = keine Abweichung "hoch" offen. Straßendetails nur aus OGD (FMZK, Gehsteigabsenkungen, Abstellanlagen, Radfahren gegen die Einbahn, Hydranten) und Begehung, nie aus Erinnerung, Vorlagen oder der Bild-KI; Zebrastreifen nur, wo FMZK oder Begehung sie zeigen | W Kunde 18.11.2026 (Apple Look Around, Einfahrt Wimmergasse Nord an der Objektecke): Gehsteigüberfahrt als harte Kante mit dunkler Rinne (Fahrbahnschwelle der FMZK war ein Loch im Boden), von der KI als Zebrastreifen und Pflaster gedeutet; Poller grün-weiß statt dunkelgrün mit rot-weißen Ringen; Leitlinie, Radpiktogramme, Parkmarkierung, Stop- und Gefahrzeichen fehlten (begehung.md) | auto: `begehung` (Vorprüfung je Ansicht: Kanten und Klassen Fahrbahn, Gehsteig, Markierung, Mast, Schild, Vegetation, Auto; `renders/check/begehung_auto.md`, Karte `begehung_karte.jpg`); manuell: Sichtprüfung der Bögen, Einträge in `begehung.md` |
 
 ## 4. Innen
 
@@ -101,7 +102,7 @@ korrigiert, nie per Prompt. Was die KI dazuerfindet, wird verworfen, nicht schö
 |---|---|---|---|
 | F1 | Erst Prüfbogen an den Kunden: Blender-Vorschau je Kamera, Draufsicht über Plan, offene Annahmen (Anteil ANN je Bild aus `pruefen`), Nachbarübersicht | N Runde 2 und 3 veredelt, Runde 4 korrigierte danach EG, Weg, Geländer, Küche, Stuck: Credits für veraltete Bilder | manuell: Prüfbogen; auto: `pruefen` liefert die Zahlen |
 | F2 | Veredelung nur für Kameras mit `modell_freigegeben: ja` in `freigabe.yaml` (Datum, von wem) | dto. | auto: Studio sperrt (HTTP 409), `immoviz.py freigabe --projekt <p> --cam <k> --pruefen`; Ausnahme `--force`/`force: true`, wird protokolliert |
-| F3 | Vor der Freigabe: `pruefen` ohne Rot (keine Elemente ohne Quelle im Bild), `strasse`, `sichtbar --pflicht` und `autos-pruefen` (ohne Befund) bestanden | alle Runden; W 18.11.2026: Autos schwebten bis 1 m bzw. standen halb auf dem Bordstein und in Pollern | auto |
+| F3 | Vor der Freigabe: `pruefen` ohne Rot (keine Elemente ohne Quelle im Bild), `strasse`, `sichtbar --pflicht`, `autos-pruefen` (ohne Befund) und für Straßen- und Luftkameras die Begehung (U11, keine Abweichung "hoch" offen in `begehung.md`) bestanden | alle Runden; W 18.11.2026: Autos schwebten bis 1 m bzw. standen halb auf dem Bordstein und in Pollern | auto |
 
 ## 7. Veredelung
 
@@ -140,7 +141,8 @@ korrigiert, nie per Prompt. Was die KI dazuerfindet, wird verworfen, nicht schö
 ```bash
 PY=.venv-immoviz/bin/python
 $PY immoviz/immoviz.py pruefen --projekt immoviz/projects/<p>            # Quellen je Element, ANN je Bild (Text, --json)
-$PY immoviz/immoviz.py strasse immoviz/projects/<p>                      # Parkordnung, Gehsteige, Baumscheiben
+$PY immoviz/immoviz.py strasse immoviz/projects/<p>                      # Parkordnung, Gehsteige, Baumscheiben, OGD-Ausstattung
+GOOGLE_MAPS_API_KEY=... $PY immoviz/immoviz.py begehung --projekt immoviz/projects/<p>   # U11 virtuelle Begehung, dann begehung.md
 $PY immoviz/immoviz.py sichtbar immoviz/projects/<p> --pflicht           # Pflichthäuser
 $PY immoviz/immoviz.py autos-pruefen immoviz/projects/<p>               # Autos: Räder auf Fahrbahn, Bucht, Poller, Maßstab
 $PY immoviz/immoviz.py freigabe --projekt immoviz/projects/<p>           # Stand je Kamera

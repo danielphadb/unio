@@ -494,7 +494,9 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
         FE.markante(mk, fern, far_ground, (cfg or {}).get("fern_spitzen"))     # Turmhelme laut project.yaml
         FE.kulisse(mk, fern, extra=FE.gipfel(cfg))                            # Gipfel laut project.yaml
         mk.to_object(bpy, mats, coll)
-    spec = {"Fahrbahn": ("asphalt", 0.0, 0.0), "Gehsteig": ("gehsteig", 0.0, 0.12),
+    # Fahrbahnschwelle (FMZK) als Fahrbahn: vorher Loch im Boden (dunkle Rinne quer ueber die Einmuendung); Rampen und
+    # Gehsteigueberfahrten baut lib/assets/strassenelemente.py darueber (Begehung 18.11.2026)
+    spec = {"Fahrbahn": ("asphalt", 0.0, 0.0), "Fahrbahnschwelle": ("asphalt", 0.0, 0.0), "Gehsteig": ("gehsteig", 0.0, 0.12),
             "Gehweg, Radweg": ("gehsteig", 0.0, 0.12), "Ruhender Verkehr": ((cfg or {}).get("street", {}).get("parking_material", "parkstreifen"), 0.004, 0.0),
             "Zebrastreifen": ("zebra", 0.008, 0.0), "Innenhof": ("hof", 0.0, 0.05),
             "Befestigte Fläche": ("gehsteig", 0.0, 0.05), "Sonstige Verkehrsfläche": ("gehsteig", 0.0, 0.1)}
@@ -506,13 +508,25 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
         if math.hypot(cx, cy) > radius + 30:
             continue
         mat, z, h = spec[s["layer"]]
-        if h > 0:
-            K.extrude(ground, s["poly"], 0.0, h, "randstein", mat, bottom=False)
-        else:
-            poly = s["poly"] if K.polygon_area(s["poly"]) > 0 else s["poly"][::-1]
-            ground.poly([(x, y, z) for x, y in poly], [(x, y) for x, y in poly], mat, (0, 0, 1))
+        if s["layer"] == "Ruhender Verkehr":
+            mat = _streifen_material(cfg, cx, cy, mat, mats)
+        teile = [(s["poly"], mat)]
+        if s["layer"] in ("Gehsteig", "Gehweg, Radweg"):
+            teile = _belag_teile(cfg, s["poly"], mat, mats)
+        for poly_, mat_ in teile:
+            if h > 0:
+                K.extrude(ground, poly_, 0.0, h, "randstein", mat_, bottom=False)
+            else:
+                poly = poly_ if K.polygon_area(poly_) > 0 else poly_[::-1]
+                ground.poly([(x, y, z) for x, y in poly], [(x, y) for x, y in poly], mat_, (0, 0, 1))
     shift_z(ground, terrain)
-    ground.to_object(bpy, mats, coll)
+    boden_ob = ground.to_object(bpy, mats, coll)
+    # Strassenelemente: Gehsteigueberfahrten, Schwellen, Absenkungen, Markierungen, Schachtdeckel, Strassentafeln,
+    # Fahrradstaender (strassenelemente in project.yaml plus OGD, lib/assets/strassenelemente.py)
+    from .assets import strassenelemente as SE
+    zahl = SE.build(cfg, ctx, mats, coll, terrain, boden_ob, log=print)
+    if zahl:
+        print("[immoviz] Strassenelemente: " + ", ".join(f"{k} {v}" for k, v in sorted(zahl.items()) if v))
     # Strassenleuchten: Inventar `strassenleuchten` (lib/assets/leuchten.py), ohne Inventar Fallback aus street.cables
     if _asset(cfg, "leuchten", "bibliothek") != "einfach":
         from .assets import leuchten as LE
@@ -552,6 +566,53 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     from .assets import moebel as MO
     MO.build_moebel(cfg, ctx, mats, coll, terrain)
     MO.build_menschen(cfg, mats, coll, terrain)
+
+
+def _streifen_material(cfg, x, y, mat, mats):
+    """Belag eines Parkstreifens nach Lage: street.parkstreifen_material [{bereich: [x0, y0, x1, y1], material}],
+    erste passende Regel; Mittelpunkt des Streifens entscheidet (Begehung: Schraegparker Wimmergasse Asphalt mit
+    Markierung, Laengsparker und Stolberggasse Granitpflaster)."""
+    for r in ((cfg or {}).get("street") or {}).get("parkstreifen_material") or []:
+        x0, y0, x1, y1 = r["bereich"]
+        if min(x0, x1) <= x <= max(x0, x1) and min(y0, y1) <= y <= max(y0, y1) and r.get("material") in mats:
+            return r["material"]
+    return mat
+
+
+def _belag_teile(cfg, poly, mat, mats):
+    """Gehsteigflaeche in Teile mit eigenem Belag zerlegen: street.belag [{bereich: [x0, y0, x1, y1], material}].
+    Rechteck-Schnitt mit Halbebenen (exakte Kanten, keine Zacken); ausserhalb bleibt der Standardbelag."""
+    regeln = [r for r in (((cfg or {}).get("street") or {}).get("belag") or []) if r.get("material") in mats]
+    teile = [(poly, mat)]
+    for r in regeln:
+        x0, y0, x1, y1 = r["bereich"]
+        x0, x1, y0, y1 = min(x0, x1), max(x0, x1), min(y0, y1), max(y0, y1)
+        neu = []
+        for p, m in teile:
+            if m != mat:                 # schon belegt
+                neu.append((p, m))
+                continue
+            innen = p
+            for fn in (lambda q: q[0] - x0, lambda q: x1 - q[0], lambda q: q[1] - y0, lambda q: y1 - q[1]):
+                innen = K.clip_halfplane(innen, fn)
+                if len(innen) < 3:
+                    break
+            if len(innen) < 3 or abs(K.polygon_area(innen)) < 0.05:
+                neu.append((p, m))
+                continue
+            neu.append((innen, r["material"]))
+            for fns in ((lambda q: x0 - q[0],), (lambda q: q[0] - x1,),
+                        (lambda q: q[0] - x0, lambda q: x1 - q[0], lambda q: y0 - q[1]),
+                        (lambda q: q[0] - x0, lambda q: x1 - q[0], lambda q: q[1] - y1)):
+                aus = p
+                for fn in fns:
+                    aus = K.clip_halfplane(aus, fn)
+                    if len(aus) < 3:
+                        break
+                if len(aus) >= 3 and abs(K.polygon_area(aus)) > 0.05:
+                    neu.append((aus, m))
+        teile = neu
+    return teile
 
 
 def _sockel(cfg, b, z_gelaende):
