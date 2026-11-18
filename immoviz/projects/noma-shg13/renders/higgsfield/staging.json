@@ -268,5 +268,139 @@
    }
   },
   "credits": "84 (39 Auftraege: 35 x 2k zu 2, 4 x 4k zu 4); im selben Konto liefen 14:38 bis 14:52 Uhr weitere 47,5 Credits aus einer anderen Sitzung (nicht Runde 7)"
+ },
+ "runde_7_final": {
+  "stand": "2026-11-18",
+  "auftrag": "Erster vollstaendiger Durchlauf mit Ebenen: top3_aussen_gruendach und top3_terrasse_garten spaetsommer aus renders/r7_basis",
+  "modell": "gpt_image_2_6 high 4k (Modelltest an Wimmergasse ecke golden_hour, siehe dortige staging.json runde_7_final)",
+  "referenzen": "Vorlagen wie Runde 7 als Stilreferenz (bereits hochgeladene Medien): gruendach Hof_fin 3628a1c6-e4dc-4e8c-8b9b-9ca205a571a6; terrasse Hof_fin-3 cbf0a95b-1d3d-46e2-a90b-11099b8d9b95 und Hof_fin-4 c82cc51e-a000-4f6b-8207-0bdead3a5edc",
+  "schutz": "Befund: die r7_basis-Ebenen fuehren Gruendach, Pflanzen-Platzhalter, Olivenkrone, Moebel, Pergola und Geländer als gebaeude_objekt (Schutz 79 %), damit ersetzt schutz auch die KI-Vegetation durch die flachen Blender-Flaechen. Abhilfe ohne Code: Kopie der Ebenen im Scratchpad, Vegetation aus gebaeude_objekt und schutz.png genommen und als baeume gefuehrt (Render-Farbe gruen, Saettigung ueber 0,28 als Saat, Wachstum bis 0,12, kleine Flecken als konvexe Huelle, terrasse zusaetzlich olivgruene Saat; Skript scratchpad r7f/tools/veg_maske.py; Masken als r7_final_pruefung/*_vegetation_maske.jpg). Gruendach 19,8 % und Terrasse 4,4 % des Bildes frei. Moebel, Pergola, Kissen bleiben laut Auftrag Blender. Fuer den naechsten Render: Klassen vegetation und ausstattung in lib/ebenen.py (Material gruendach, pflanze, Ausstattungsebene neubau.ausstattung)",
+  "grading": "Leitbilder intern: Vorlagen SHG13_Hof_fin, _Hof_fin-3, _Hof_fin-4 (Scratchpad, nicht im Repo), vignette 0,12, glow 0,08, korn 0,008, Maske schutz plus himmel",
+  "code_fix": "siehe wimmergasse-20 staging.json runde_7_final.code_fix (Platzhalter-Personen in kompositing.py; hier ohne Wirkung, keine Platzhalter)",
+  "credits": {
+   "verbraucht": 8.5,
+   "hinweis": "Teil der 55 Credits des Durchlaufs (Aufstellung in wimmergasse-20 staging.json runde_7_final)"
+  },
+  "bilder": {
+   "top3_aussen_gruendach_spaetsommer_r7_final.jpg": {
+    "eingang": "renders/r7_basis (noma-shg13_top3_aussen_gruendach_spaetsommer_final.jpg), Upload media 64004cd4-3325-4f90-bd07-816cf825a159",
+    "job": "d7e196df-96aa-4696-974f-d5a5de4755b2",
+    "ki_roh": "top3_aussen_gruendach_spaetsommer_r7_ki.jpg (3504 x 2336)",
+    "modell": "gpt_image_2_6, quality high, resolution 4k, 3:2",
+    "prompt": "Turn image 1, a 3D render, into a high-end photorealistic architectural photograph. Image 1 is binding for everything: camera, framing, building geometry, openings, railings, trees, and the position, size and count of every furnishing object. Allowed changes: sky, light and atmosphere, planting (leaves, grasses, flowers in the existing planters, beds and green roofs), people, and fine photographic micro detail. Everything else stays as in image 1.\n\nCourtyard pavilions of a new residential building in Vienna: smooth sage green-grey render facade (hue as in image 1), slim anthracite window and lift-and-slide door frames, dark basalt-grey metal bar railings only where image 1 shows them, light grey porcelain tiles on the terraces and paths, extensive green roofs with grasses and sedum.\n\nKeep the content of image 1. On the terrace between the pavilions the furnishing of image 1 (small wooden pergola, planters, olive tree in a pot, teak furniture) stays exactly as small as in image 1. Add nothing anywhere else: no furniture, pergola, trellis, terrace, paving, planters, cars or lamps; lawns, green roofs, the ladder and the three small steps stay exactly as in image 1. The green roof in the foreground stays a green roof with lush grasses and sedum.\n\nImage 2 is a mood reference from the same project (warm late-summer light, colour grade, lush planting style). Its buildings, glass roofs, layout, terraces, furniture, trees and neighbours do NOT apply; never copy geometry or objects from it.\n\nLate summer afternoon, low warm sun from the west-south-west, soft long shadows, slight haze and gentle backlight glow on leaves, pale warm sky with a few soft clouds, warm neutral grade, no saturated blue, shadows neutral never blue.\n\nFull-frame camera, vertical lines perfectly straight, natural colours, no HDR look, magazine quality. No people on the terraces; at most two small people far in the background, faces not recognisable. TREES: exactly the trees of image 1, same positions, heights and crown outlines, made natural and leafy; no additional trees or branches at the image edges, none removed or made smaller. No text, no watermark, no logos.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1. Railings only where image 1 shows them.\n- TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add, remove, move or shrink trees. Planting only in existing planters, beds and green roofs.\n- Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and materials only, never for building geometry or colours of neighbours.\n- PARKING LAYOUT (fixed, checked against the aerial photo): schlachthausgasse on the building side: parallel parking along the kerb; schlachthausgasse opposite: parallel parking along the kerb. Parked cars only in these bays and in this orientation, as in image 1.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.",
+    "schutz": {
+     "kanten_f1_vorher": 0.7422,
+     "kanten_f1_nachher": 0.9906,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 1.08,
+     "anteil_geschuetzt_prozent": 59.18,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_glas",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel",
+      "autos"
+     ],
+     "ki_personen_an_platzhaltern": 0,
+     "vordergrund_flecken": 0
+    },
+    "grading": {
+     "staerke": 0.3,
+     "maske": "schutz.png plus himmel.png (dort halbe Staerke)",
+     "himmel_C_vorher": 8.5,
+     "himmel_C_nachher": 7.0,
+     "abstand_lab_zum_leitbild": {
+      "vorher": 4.63,
+      "nachher": 3.45
+     },
+     "leitbilder": "Vorlagen Hof_fin, Hof_fin-3, Hof_fin-4 (intern)"
+    },
+    "nachkontrolle": {
+     "status": "ok",
+     "score": 87,
+     "zonen_f1": {
+      "fenster": 0.985,
+      "gebaeude": 0.9828
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 15,
+       "ki": 15,
+       "ki_gefunden": 15,
+       "ki_neu": 0,
+       "render_fehlt": 0
+      }
+     },
+     "befunde": [
+      "9 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)"
+     ]
+    },
+    "pruefbilder": "r7_final_pruefung/top3_aussen_gruendach_spaetsommer_schutz_pruefung.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg",
+    "verworfen": [],
+    "restfehler": "Moebel und Pergola auf der Terrasse aus Blender (Klasse gebaeude_objekt, laut Auftrag keine KI-Moebel)"
+   },
+   "top3_terrasse_garten_spaetsommer_r7_final.jpg": {
+    "eingang": "renders/r7_basis (noma-shg13_top3_terrasse_garten_spaetsommer_final.jpg), Upload media 571fcb92-28c8-48cc-93b9-41ab4d34fc2a",
+    "job": "74c056ad-a8e8-43f6-913e-b60d4dcc36b4",
+    "ki_roh": "top3_terrasse_garten_spaetsommer_r7_ki.jpg (3504 x 2336)",
+    "modell": "gpt_image_2_6, quality high, resolution 4k, 3:2",
+    "prompt": "Turn image 1, a 3D render, into a high-end photorealistic architectural photograph. Image 1 is binding for everything: camera, framing, building geometry, openings, railings, trees, and the position, size and count of every furnishing object. Allowed changes: sky, light and atmosphere, planting (leaves, grasses, flowers in the existing planters, beds and green roofs), people, and fine photographic micro detail. Everything else stays as in image 1.\n\nCourtyard pavilions of a new residential building in Vienna: smooth sage green-grey render facade (hue as in image 1), slim anthracite window and lift-and-slide door frames, dark basalt-grey metal bar railings only where image 1 shows them, light grey porcelain tiles on the terraces and paths, extensive green roofs with grasses and sedum.\n\nFURNISHING ON THE TERRACE OF TOP 3 (already modelled in image 1 as simple blocks: render each object exactly where and as large as its block, add nothing else): a light natural wooden wall pergola with slim posts and open slatted top above a teak lounge sofa with cream outdoor cushions; a wooden lattice trellis behind it grown over with lush climbing plants (star jasmine, clematis, a few white climbing roses); planters with ornamental grasses, lavender and white hydrangeas; a low teak coffee table and two teak lounge armchairs with cream cushions; exactly one olive tree in a terracotta pot as in image 1; a small bronze wall light where image 1 shows it. Styled and inviting, a few cushions and a throw, no clutter. Nothing in front of the sliding door on the right.\n\nImages 2 and 3 are mood references from the same project (warm late-summer light, colour grade, lush planting style). Their buildings, glass roofs, layout, terraces, furniture, trees and neighbours do NOT apply; never copy geometry or objects from them.\n\nLate summer afternoon, low warm sun from the west-south-west, soft long shadows, slight haze and gentle backlight glow on leaves, pale warm sky with a few soft clouds, warm neutral grade, no saturated blue, shadows neutral never blue.\n\nFull-frame camera, vertical lines perfectly straight, natural colours, no HDR look, magazine quality. No people on the terraces; at most two small people far in the background, faces not recognisable. TREES: exactly the trees of image 1, same positions, heights and crown outlines, made natural and leafy; no additional trees or branches at the image edges, none removed or made smaller. No text, no watermark, no logos.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1. Railings only where image 1 shows them.\n- TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add, remove, move or shrink trees. Planting only in existing planters, beds and green roofs.\n- Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and materials only, never for building geometry or colours of neighbours.\n- PARKING LAYOUT (fixed, checked against the aerial photo): schlachthausgasse on the building side: parallel parking along the kerb; schlachthausgasse opposite: parallel parking along the kerb. Parked cars only in these bays and in this orientation, as in image 1.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.",
+    "schutz": {
+     "kanten_f1_vorher": 0.3501,
+     "kanten_f1_nachher": 0.9836,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 2.16,
+     "anteil_geschuetzt_prozent": 73.24,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_glas",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel",
+      "autos"
+     ],
+     "ki_personen_an_platzhaltern": 0,
+     "vordergrund_flecken": 0
+    },
+    "grading": {
+     "staerke": 0.2,
+     "maske": "schutz.png plus himmel.png (dort halbe Staerke)",
+     "himmel_C_vorher": 4.2,
+     "himmel_C_nachher": 3.5,
+     "abstand_lab_zum_leitbild": {
+      "vorher": 7.77,
+      "nachher": 6.62
+     },
+     "leitbilder": "Vorlagen Hof_fin, Hof_fin-3, Hof_fin-4 (intern)"
+    },
+    "nachkontrolle": {
+     "status": "zur Pruefung",
+     "score": 159,
+     "zonen_f1": {
+      "fenster": 0.916,
+      "gebaeude": 0.9363
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 3,
+       "ki": 26,
+       "ki_gefunden": 3,
+       "ki_neu": 23,
+       "render_fehlt": 0
+      }
+     },
+     "befunde": [
+      "5 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+      "Fassade sonstige: 3 Fenster im Render, 26 im KI-Bild (23 neu, 0 fehlen)"
+     ]
+    },
+    "pruefbilder": "r7_final_pruefung/top3_terrasse_garten_spaetsommer_schutz_pruefung.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg",
+    "verworfen": [],
+    "restfehler": "Moebel, Pergola, Rankgitter, Kissen und Olivenkuebel aus Blender (Bloecke, wirken CG), nur Pflanzen aus der KI; Nachkontrolle meldet 23 neue Fenster (Fehlalarm: Pflanzen/Spiegelungen an der grossen Glasflaeche)"
+   }
+  }
  }
 }

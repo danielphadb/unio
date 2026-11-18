@@ -614,7 +614,11 @@ Klasse des Platzhalter-Empties); steht etwas unter `nicht_zugeordnet`, Muster in
    (Fensterrahmen, Stangen, Kanten fallen weg). Ein Fleck zählt, wenn er die geschützte Fläche berührt, mit mindestens
    60 px auf dem Boden steht, sein Fußpunkt laut Render-Tiefe mindestens 0,4 m vor der Fassadenbasis liegt; erhalten
    wird er bis 2,4 m über dem Fußpunkt (Höhe aus Tiefe und Brennweite). Erfundene Fenster, Erker oder Bäume an der
-   Fassade stehen nicht am Boden vor der Fassade und werden weiter zurückgesetzt. Parameter in `VG`.
+   Fassade stehen nicht am Boden vor der Fassade und werden weiter zurückgesetzt. Ausnahme Menschen-Platzhalter (seit
+   18.11.2026): Flecken in einer Zone um jeden Platzhalter (seitlich eine Platzhalterbreite, oben 25 %) sind die Person,
+   die die KI dort einsetzen soll, und bleiben ohne Boden- und Tiefenprüfung KI (sonst blieben bei Personen dicht an der
+   Fassade nur die Beine). Helle Mäntel vor hellem Putz fallen teils weg: im Prompt dunkle Kleidung verlangen.
+   Parameter in `VG`.
 5. Ergebnis = Schutzmaske (ohne Vordergrund, 2 px weiche Kante) x Blender (farbangeglichen) + Rest x KI. Schatten,
    Spiegelungen, Menschen und Bäume der KI außerhalb des Schutzbereichs bleiben.
 6. Ausgabe `<ki>_schutz.jpg` (oder `--out`), daneben `_pruefung.jpg` (Render mit Hintergrund, KI ausgerichtet, Maske

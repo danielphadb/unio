@@ -979,5 +979,557 @@
   "befund": "KI uebernimmt die Blender-Autos fast unveraendert (Modell, Farbe, Platz), ergaenzt Passanten. Nachkontrolle des KI-Bildes: alle Schutzzonen ok, Kanten-F1 0,89 (R6: 0,77); Fensterzahl Wimmergasse 45 von 58 erkannt.",
   "schutz": "renders/autos_4k/ecke_golden_r7_autos_schutz.jpg ohne Autoschutz: Kanten-F1 0,90 auf 0,99, Nachkontrolle Status ok (erstmals), Fenster 58/59 und 38/39. Erster Lauf hatte die Autos durch den Hintergrund-Durchgang ersetzt (RS6 fast weg); behoben: bei realistischen Modellen (ebenen.json autos: modelle) ersetzt der Hintergrund keine Autos.",
   "rest": "zackige Kante am Baumstamm hinter dem Audi RS6 (KI- und Blender-Stamm nicht deckungsgleich)"
+ },
+ "runde_7_final": {
+  "stand": "2026-11-18",
+  "auftrag": "Erster vollstaendiger Durchlauf mit Ebenen: Veredelung der 4k-Renders renders/r7_basis, schutz, grading, nachkontrolle --ebenen",
+  "modelltest": {
+   "motiv": "ecke golden_hour, gleicher Prompt, Bild 1 = 4k-Render (media 8ec704f2)",
+   "gpt_image_2_6_high_4k": {
+    "job": "e335b1b0-5ea2-41a2-a78d-b6e306ab2f2c",
+    "aufloesung": "3504 x 2336",
+    "roh_nachkontrolle": {
+     "status": "zur Pruefung",
+     "score": 22,
+     "zonen_f1": {
+      "fenster": 0.84,
+      "leuchten": 0.884,
+      "gelaender": 0.848,
+      "gebaeude": 0.82
+     },
+     "fenster": "107 von 108"
+    },
+    "schutz": {
+     "kanten_f1_vorher": 0.83,
+     "kanten_f1_nachher": 0.993,
+     "gradienten_korrelation_nachher": 0.976
+    },
+    "nach_schutz_nachkontrolle": {
+     "status": "ok",
+     "score": 21,
+     "fenster": "108 von 108 (1 neu, 1 fehlt)"
+    },
+    "sicht": "warmes Streiflicht, cremiger Himmel mit Wolken, Laub luftig, Passanten an den Platzhaltern, Autos unveraendert"
+   },
+   "nano_banana_pro_4k": {
+    "job": "42e6779f-467d-4190-92e2-2d931950ea2f",
+    "backend": "nano_banana_2",
+    "aufloesung": "5056 x 3392",
+    "roh_nachkontrolle": {
+     "status": "zur Pruefung",
+     "score": 21,
+     "zonen_f1": {
+      "fenster": 0.934,
+      "leuchten": 0.958,
+      "gelaender": 0.938,
+      "gebaeude": 0.96
+     },
+     "fenster": "81 von 108"
+    },
+    "schutz": {
+     "kanten_f1_vorher": 0.955,
+     "kanten_f1_nachher": 0.98,
+     "gradienten_korrelation_nachher": 0.877
+    },
+    "nach_schutz_nachkontrolle": {
+     "status": "zur Pruefung",
+     "score": 19,
+     "fenster": "91 von 108 (17 fehlen)"
+    },
+    "sicht": "Geometrie roh enger am Render, aber flaches graues Licht, blasser Himmel ohne Stimmung, Fahrbahn zu Kopfsteinpflaster, dunkles Glas (Fenster nach schutz schlechter erkannt)"
+   },
+   "entscheidung": "gpt_image_2_6 high 4k: nach schutz bessere Kennzahlen (F1 0,993 gegen 0,98, Nachkontrolle ok gegen zur Pruefung) und deutlich bessere Stimmung; die engere Rohgeometrie von nano_banana_pro bringt mit Schutzmaske keinen Vorteil mehr"
+  },
+  "verfahren": "je Bild: gpt_image_2_6 high 4k mit dem 4k-Render als einzigem Bild 1 (Referenzbilder nur beschrieben, Upload nicht freigegeben); schutz nach project.yaml (schutz minus autos, Autos sind Modelle und kommen aus der KI); grading mit look-Block (Leitbilder 05, 13, 39), Maske schutz.png plus himmel.png (halbe Staerke), Staerke 0,5 abwaerts bis die Himmel-Chroma mindestens 80 % von vorher und ueber 6 bleibt; nachkontrolle --ebenen gegen den Render. Prompt: prompts.yaml (geometrie, objekt, Licht) plus Bausteine Atmosphaere, Platzhalter-Personen, Autos-Modelle, Baeume, Schrift, negativ, Regelblock immoviz.py prompt; Generator scratchpad r7f/tools/prompts.py",
+  "code_fix": "lib/kompositing.py (Fix 18.11.2026, Commit 8564284 als Zwischenstand): vordergrund_finden bekommt die Maske der Menschen-Platzhalter (vor dem Hintergrund-Durchgang). Flecken in einer Zone um jeden Platzhalter (seitlich 1 x Breite, oben 25 %, unten 8 %) bleiben KI ohne Boden- und Tiefenpruefung (VG platzhalter_rand, platzhalter_min_px). Grund: im ersten Lauf (ecke golden_hour) wurden die KI-Passanten an den Platzhaltern bis auf die Beine durch die Fassade aus dem Hintergrund-Durchgang ersetzt (Fuesse < 60 px auf dem Boden bzw. Fusspunkt nicht 0,4 m vor der Fassadenbasis). Getestet und verworfen: niedrigere Schwelle am Platzhalter (Platzhalter-Umriss als heller Geist), spaltenweises Schliessen (KI-Putz statt Mantel), lokaler KI-Kontrast (kein Gewinn).",
+  "erkenntnisse": [
+   "Passanten an Platzhaltern vor heller Fassade in dunkler Kleidung verlangen: helle Maentel (camel, creme) fallen beim Kompositing teils weg (dE zu Putz zu klein)",
+   "Personen nur an den Platzhaltern zulassen: zusaetzliche KI-Passanten vor der Fassade werden sonst angeschnitten",
+   "Blaue Stunde: Prompt muss die Dunkelheit des Renders verlangen, sonst hellt die KI auf und der Farbabgleich erzeugt Flecken (F1 unter 0,95)",
+   "Prompt-Baustein objekt \"cobblestone\" und Stil \"leaves framing the picture\" fuehren zu Pflaster auf der Fahrbahn bzw. erfundenem Ast; in Versuch 2/3 ersetzt",
+   "Fensterzahl je Fassade laeuft ohne normalen.png (nicht eingecheckt) als eine Fassade \"sonstige\"; Fehlbestaende von 4 bis 15 nach schutz sind Klassifikator-Fehlalarme (Fenster kommen aus dem Render)"
+  ],
+  "kontaktbogen": "Scratchpad pipeline/r7_final_bogen.jpg (Render | KI roh | Endbild), pipeline/r6_r7_vergleich.jpg (nur intern)",
+  "credits": {
+   "verbraucht": 55.0,
+   "kontostand_vorher": 7701.63,
+   "kontostand_nachher": 7646.63,
+   "budget": 80,
+   "auftraege": [
+    {
+     "job": "e335b1b0-5ea2-41a2-a78d-b6e306ab2f2c",
+     "zweck": "Modelltest und Endbild ecke golden_hour",
+     "modell": "gpt_image_2_6 high 4k",
+     "credits": 4.25
+    },
+    {
+     "job": "42e6779f-467d-4190-92e2-2d931950ea2f",
+     "zweck": "Modelltest ecke golden_hour",
+     "modell": "nano_banana_pro 4k",
+     "credits": 4
+    },
+    {
+     "job": "b16b5638-3098-43f3-8408-89e281f51e91",
+     "zweck": "ecke herbst",
+     "modell": "gpt_image_2_6 high 4k",
+     "credits": 4.25
+    },
+    {
+     "job": "0b45fce8-80a4-4393-9b4f-6532b6679e28",
+     "zweck": "ecke blaue_stunde v1 (verworfen)",
+     "modell": "gpt_image_2_6 high 4k",
+     "credits": 4.25
+    },
+    {
+     "job": "10ac1d9f-4e89-4d90-8e88-6e8e19b4f197",
+     "zweck": "ecke blaue_stunde v2 (verworfen)",
+     "modell": "gpt_image_2_6 high 4k",
+     "credits": 4.25
+    },
+    {
+     "job": "fe87f0e0-a039-4110-9beb-a217c75f9b5f",
+     "zweck": "ecke blaue_stunde v3",
+     "modell": "gpt_image_2_6 high 4k",
+     "credits": 4.25
+    },
+    {
+     "job": "f5a4d174-bcff-4aa4-bc3c-c73d05cf26fd",
+     "zweck": "ecke_erhoeht golden_hour",
+     "modell": "gpt_image_2_6 high 4k",
+     "credits": 4.25
+    },
+    {
+     "job": "35e77877-ceb9-4f44-beaa-a06f4ec6f366",
+     "zweck": "eg_lokal golden_hour v1 (verworfen)",
+     "modell": "gpt_image_2_6 high 4k",
+     "credits": 4.25
+    },
+    {
+     "job": "8b9cdfcc-89fe-474e-8f6b-1d3078a47005",
+     "zweck": "eg_lokal golden_hour v2",
+     "modell": "gpt_image_2_6 high 4k",
+     "credits": 4.25
+    },
+    {
+     "job": "8fc7f5bf-c0b7-4868-8ade-799e20c651cd",
+     "zweck": "drohne golden_hour v1 (verworfen)",
+     "modell": "gpt_image_2_6 high 4k",
+     "credits": 4.25
+    },
+    {
+     "job": "377ab808-4b61-4878-8baa-08babfdd2bc4",
+     "zweck": "drohne golden_hour v2",
+     "modell": "gpt_image_2_6 high 4k",
+     "credits": 4.25
+    },
+    {
+     "job": "d7e196df-96aa-4696-974f-d5a5de4755b2",
+     "zweck": "Noma top3_aussen_gruendach",
+     "modell": "gpt_image_2_6 high 4k",
+     "credits": 4.25
+    },
+    {
+     "job": "74c056ad-a8e8-43f6-913e-b60d4dcc36b4",
+     "zweck": "Noma top3_terrasse_garten",
+     "modell": "gpt_image_2_6 high 4k",
+     "credits": 4.25
+    }
+   ]
+  },
+  "bilder": {
+   "ecke_golden_hour_r7_final.jpg": {
+    "eingang": "renders/r7_basis (wimmergasse-20_ecke_golden_hour_final.jpg), Upload media 8ec704f2-a1a4-408e-b0fd-c8ba46b8f139",
+    "job": "e335b1b0-5ea2-41a2-a78d-b6e306ab2f2c",
+    "ki_roh": "ecke_golden_hour_r7_ki.jpg (3504 x 2336)",
+    "modell": "gpt_image_2_6, quality high, resolution 4k, 3:2",
+    "prompt": "Turn image 1, a 3D render, into a high-end architectural photograph. Keep the building geometry exactly as in image 1: same number of window axes, same window positions, same storey heights, same cornices, same roofline and the same camera perspective. Do not add, remove or move any windows, balconies or floors.\n\nAllowed changes: sky, clouds, light and atmosphere, vegetation (leaves of the existing trees), people, and fine photographic micro detail (plaster texture, reflections, dust, slight wear). Everything else in image 1 stays as it is.\n\nA renovated Viennese Gruenderzeit corner apartment building from around 1900, sand-beige lime plaster facade, white double casement windows, rich stucco with triangular pediments on the piano nobile, a strong main cornice with brackets, and a modern rooftop extension clad in anthracite standing-seam zinc. Located on a quiet street in Vienna's 5th district, with neighbouring historic facades, cobblestone and sidewalk details.\n\nView across the crossing of Wimmergasse and Stolberggasse onto the corner building; on the right the modern neighbour with dark ground floor band, white upper floors and dark balconies; the thin overhead suspension cables and the hanging street lamps stay exactly as in image 1.\n\nLate-summer golden hour, low warm sun from the west, warm light on the upper floors and the rooftop extension while the street lies in soft warm shade, gentle haze, a luminous pale blue to creamy sky with a soft warm glow near the horizon and a few thin clouds (not grey, not overcast, no orange postcard gradient).\n\nStyle like the client's reference photographs (described only): a Viennese corner house large in frame under a creamy, hazy sky; low grazing light with long soft shadows on the pavement; a muted film palette with lifted shadows; leaves framing the picture; warm light inside the ground floor. (Style description only; do not copy buildings, layout or objects from any reference.)\n\nLook of a real architectural photograph, not a rendering: natural light falloff, subtle atmospheric depth so the far end of the street is slightly lighter and softer, warm-neutral colour grading, lifted shadows, olive-toned greens, very fine film grain, no HDR, no oversaturation, no plastic CGI surfaces. Window glass with realistic reflections of sky and trees; behind about a quarter of the windows curtains and a soft warm interior light. Facade plaster with fine texture and slight patina, stucco with soft shadow edges.\n\nThe plain grey mannequin figures in image 1 are placeholders for people: replace each one with a real pedestrian standing or walking at exactly the same spot and with the same height in the picture, dressed for the season in muted colours (camel, navy, cream, grey), seen from behind or in profile, faces not recognisable, nobody looking into the camera, no posing; you may add two to four more small passers-by on the sidewalks and crossings, one of them slightly motion-blurred.\n\nThe parked cars in image 1 are detailed 3D models of real cars: keep every car exactly as it is, same model, shape, colour, position, size and orientation, only with photographic realism (reflections, slight dust); no cars added or removed, no logos or badges, licence plates plain without characters.\n\nTREES ARE LOCKED: only the trees of image 1, each at exactly the same position, height and crown outline; make their crowns natural and airy with visible branches and small gaps, not narrower, not smaller. No additional trees, bushes or plants anywhere.\n\nNo readable text anywhere: no shop signs with lettering, no posters, no logos, no house numbers; the traffic signs and poles of image 1 stay exactly as they are, add no new signs. No watermark, no frame.\n\nAvoid: oversaturated blue sky, harsh midday sun, HDR look, plastic CGI surfaces, distorted vertical lines, posing models looking into the camera, futuristic glass towers, palm trees, text, watermark or logos, extra floors, distorted windows, fantasy architecture.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1. Railings only where image 1 shows them.\n- TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add, remove, move or shrink trees. Planting only in existing planters, beds and green roofs.\n- Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and materials only, never for building geometry or colours of neighbours.\n- PARKING LAYOUT (fixed, checked against the aerial photo): wimmergasse on the building side: angled parking at about 55 degrees; wimmergasse opposite: parallel parking along the kerb; stolberggasse on the building side: perpendicular parking (90 degrees); stolberggasse opposite: perpendicular parking (90 degrees). Parked cars only in these bays and in this orientation, as in image 1.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.",
+    "schutz": {
+     "kanten_f1_vorher": 0.8321,
+     "kanten_f1_nachher": 0.9928,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 0.92,
+     "anteil_geschuetzt_prozent": 27.19,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_glas",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel"
+     ],
+     "ki_personen_an_platzhaltern": 8,
+     "vordergrund_flecken": 8
+    },
+    "grading": {
+     "staerke": 0.4,
+     "maske": "schutz.png plus himmel.png (dort halbe Staerke)",
+     "himmel_C_vorher": 7.5,
+     "himmel_C_nachher": 6.2,
+     "abstand_lab_zum_leitbild": {
+      "vorher": 2.96,
+      "nachher": 1.85
+     },
+     "leitbilder": "project.yaml look"
+    },
+    "nachkontrolle": {
+     "status": "zur Pruefung",
+     "score": 17,
+     "zonen_f1": {
+      "fenster": 0.9698,
+      "leuchten": 0.9425,
+      "gelaender": 0.9526,
+      "gebaeude": 0.9712
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 108,
+       "ki": 109,
+       "ki_gefunden": 107,
+       "ki_neu": 2,
+       "render_fehlt": 1
+      }
+     },
+     "befunde": [
+      "5 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+      "Fassade sonstige: 108 Fenster im Render, 109 im KI-Bild (2 neu, 1 fehlen)"
+     ]
+    },
+    "pruefbilder": "r7_final_pruefung/ecke_golden_hour_schutz_pruefung.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg",
+    "verworfen": [
+     {
+      "job": "42e6779f-467d-4190-92e2-2d931950ea2f",
+      "grund": "Modelltest nano_banana_pro 4k (Backend nano_banana_2): flacheres Licht, Fahrbahn zu Kopfsteinpflaster, nach schutz 17 von 108 Fenstern nicht erkannt (Nachkontrolle zur Pruefung)"
+     }
+    ],
+    "restfehler": "Gehsteig und Kreuzungsbereich teils Pflaster (KI, Boden nicht geschuetzt); Mantel der Passantin links teils in Putzfarbe; Putz und Stuck aus Blender wirken flacher als in R6"
+   },
+   "ecke_herbst_r7_final.jpg": {
+    "eingang": "renders/r7_basis (wimmergasse-20_ecke_herbst_final.jpg), Upload media bbec7e06-0d18-4206-88a4-d867988dd7b4",
+    "job": "b16b5638-3098-43f3-8408-89e281f51e91",
+    "ki_roh": "ecke_herbst_r7_ki.jpg (3504 x 2336)",
+    "modell": "gpt_image_2_6, quality high, resolution 4k, 3:2",
+    "prompt": "Turn image 1, a 3D render, into a high-end architectural photograph. Keep the building geometry exactly as in image 1: same number of window axes, same window positions, same storey heights, same cornices, same roofline and the same camera perspective. Do not add, remove or move any windows, balconies or floors.\n\nAllowed changes: sky, clouds, light and atmosphere, vegetation (leaves of the existing trees), people, and fine photographic micro detail (plaster texture, reflections, dust, slight wear). Everything else in image 1 stays as it is.\n\nA renovated Viennese Gruenderzeit corner apartment building from around 1900, sand-beige lime plaster facade, white double casement windows, rich stucco with triangular pediments on the piano nobile, a strong main cornice with brackets, and a modern rooftop extension clad in anthracite standing-seam zinc. Located on a quiet street in Vienna's 5th district, with neighbouring historic facades, cobblestone and sidewalk details.\n\nView across the crossing of Wimmergasse and Stolberggasse onto the corner building; on the right the modern neighbour with dark ground floor band, white upper floors and dark balconies; the thin overhead suspension cables and the hanging street lamps stay exactly as in image 1.\n\nMid-October afternoon in Vienna, low warm sun from the south-west grazing across the facades, long soft shadows of trees and buildings across the pavement, golden and orange autumn foliage glowing where the sun shines through it, fallen leaves on the ground, clear pale blue sky with a light haze (not grey).\n\nStyle like the client's reference photographs (described only): a Viennese corner house large in frame under a creamy, hazy sky; low grazing light with long soft shadows on the pavement; a muted film palette with lifted shadows; leaves framing the picture; warm light inside the ground floor. (Style description only; do not copy buildings, layout or objects from any reference.)\n\nLook of a real architectural photograph, not a rendering: natural light falloff, subtle atmospheric depth so the far end of the street is slightly lighter and softer, warm-neutral colour grading, lifted shadows, olive-toned greens, very fine film grain, no HDR, no oversaturation, no plastic CGI surfaces. Window glass with realistic reflections of sky and trees; behind about a quarter of the windows curtains and a soft warm interior light. Facade plaster with fine texture and slight patina, stucco with soft shadow edges.\n\nThe plain grey mannequin figures in image 1 are placeholders for people: replace each one with a real pedestrian standing or walking at exactly the same spot and with the same height in the picture, dressed for the season in muted colours (camel, navy, cream, grey), seen from behind or in profile, faces not recognisable, nobody looking into the camera, no posing; you may add two to four more small passers-by on the sidewalks and crossings, one of them slightly motion-blurred.\n\nThe parked cars in image 1 are detailed 3D models of real cars: keep every car exactly as it is, same model, shape, colour, position, size and orientation, only with photographic realism (reflections, slight dust); no cars added or removed, no logos or badges, licence plates plain without characters.\n\nTREES ARE LOCKED: only the trees of image 1, each at exactly the same position, height and crown outline; make their crowns natural and airy with visible branches and small gaps, not narrower, not smaller. No additional trees, bushes or plants anywhere.\n\nNo readable text anywhere: no shop signs with lettering, no posters, no logos, no house numbers; the traffic signs and poles of image 1 stay exactly as they are, add no new signs. No watermark, no frame.\n\nAvoid: oversaturated blue sky, harsh midday sun, HDR look, plastic CGI surfaces, distorted vertical lines, posing models looking into the camera, futuristic glass towers, palm trees, text, watermark or logos, extra floors, distorted windows, fantasy architecture.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1. Railings only where image 1 shows them.\n- TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add, remove, move or shrink trees. Planting only in existing planters, beds and green roofs.\n- Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and materials only, never for building geometry or colours of neighbours.\n- PARKING LAYOUT (fixed, checked against the aerial photo): wimmergasse on the building side: angled parking at about 55 degrees; wimmergasse opposite: parallel parking along the kerb; stolberggasse on the building side: perpendicular parking (90 degrees); stolberggasse opposite: perpendicular parking (90 degrees). Parked cars only in these bays and in this orientation, as in image 1.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.",
+    "schutz": {
+     "kanten_f1_vorher": 0.8401,
+     "kanten_f1_nachher": 0.9867,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 0.9,
+     "anteil_geschuetzt_prozent": 26.77,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_glas",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel"
+     ],
+     "ki_personen_an_platzhaltern": 12,
+     "vordergrund_flecken": 21
+    },
+    "grading": {
+     "staerke": 0.3,
+     "maske": "schutz.png plus himmel.png (dort halbe Staerke)",
+     "himmel_C_vorher": 9.3,
+     "himmel_C_nachher": 7.7,
+     "abstand_lab_zum_leitbild": {
+      "vorher": 10.49,
+      "nachher": 5.5
+     },
+     "leitbilder": "project.yaml look"
+    },
+    "nachkontrolle": {
+     "status": "zur Pruefung",
+     "score": 29,
+     "zonen_f1": {
+      "fenster": 0.9606,
+      "leuchten": 0.9417,
+      "gelaender": 0.9665,
+      "gebaeude": 0.9635
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 116,
+       "ki": 103,
+       "ki_gefunden": 103,
+       "ki_neu": 0,
+       "render_fehlt": 13
+      }
+     },
+     "befunde": [
+      "9 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+      "Fassade sonstige: 116 Fenster im Render, 103 im KI-Bild (0 neu, 13 fehlen)"
+     ]
+    },
+    "pruefbilder": "r7_final_pruefung/ecke_herbst_schutz_pruefung.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg",
+    "verworfen": [],
+    "restfehler": "Fahrbahn Kopfsteinpflaster statt Asphalt (KI, Prompt objekt \"cobblestone\"); Fensterzahl-Klassifikator meldet 13 fehlende (Fenster kommen aus dem Render, Fehlalarm bei hellem Glas)"
+   },
+   "ecke_blaue_stunde_r7_final.jpg": {
+    "eingang": "renders/r7_basis (wimmergasse-20_ecke_blaue_stunde_final.jpg), Upload media 00ddff84-c84d-4106-af6e-988fe370567d",
+    "job": "fe87f0e0-a039-4110-9beb-a217c75f9b5f",
+    "ki_roh": "ecke_blaue_stunde_r7_ki.jpg (3504 x 2336)",
+    "modell": "gpt_image_2_6, quality high, resolution 4k, 3:2",
+    "prompt": "Turn image 1, a 3D render, into a high-end architectural photograph. Keep the building geometry exactly as in image 1: same number of window axes, same window positions, same storey heights, same cornices, same roofline and the same camera perspective. Do not add, remove or move any windows, balconies or floors.\n\nAllowed changes: sky, clouds, light and atmosphere, vegetation (leaves of the existing trees), people, and fine photographic micro detail (plaster texture, reflections, dust, slight wear). Everything else in image 1 stays as it is.\n\nA renovated Viennese Gruenderzeit corner apartment building from around 1900, sand-beige lime plaster facade, white double casement windows, rich stucco with triangular pediments on the piano nobile, a strong main cornice with brackets, and a modern rooftop extension clad in anthracite standing-seam zinc. Located on a quiet street in Vienna's 5th district, with neighbouring historic facades, asphalt street and paved sidewalks.\n\nView across the crossing of Wimmergasse and Stolberggasse onto the corner building; on the right the modern neighbour with dark ground floor band, white upper floors and dark balconies; the thin overhead suspension cables and the hanging street lamps stay exactly as in image 1.\n\nLate blue hour, well after sunset: deep blue sky, the scene as dark as image 1. The facades receive no daylight; they are lit only by the warm street lamps of image 1 and by the lit windows and shop fronts, so the overall brightness, contrast and light distribution stay as in image 1. Slight reflections on the damp pavement. Keep the street lamps of image 1 as the light sources; no new lamps.\n\nStyle like the client's reference photographs (described only): a Viennese corner house large in frame under a creamy, hazy sky; low grazing light with long soft shadows on the pavement; a muted film palette with lifted shadows; warm light inside the ground floor. (Style description only; do not copy buildings, layout or objects from any reference.)\n\nLook of a real architectural photograph, not a rendering: natural light falloff, subtle atmospheric depth so the far end of the street is slightly lighter and softer, warm-neutral colour grading, lifted shadows, olive-toned greens, very fine film grain, no HDR, no oversaturation, no plastic CGI surfaces. Window glass with realistic reflections of sky and trees; behind about a quarter of the windows curtains and a soft warm interior light. Facade plaster with fine texture and slight patina, stucco with soft shadow edges.\n\nThe plain grey mannequin figures in image 1 are placeholders for people: replace each one with a real pedestrian standing or walking at exactly the same spot and with the same height in the picture, dressed for the season, seen from behind or in profile, faces not recognisable, nobody looking into the camera, no posing. People only where image 1 shows a grey placeholder figure: no other people in front of the building, at most one or two very small passers-by far down the street on the left; nobody motion-blurred. Dress the people at the placeholders in dark clothing (black, charcoal or deep navy coats, dark trousers) so that they stand out clearly from the light facade behind them.\n\nThe parked cars in image 1 are detailed 3D models of real cars: keep every car exactly as it is, same model, shape, colour, position, size and orientation, only with photographic realism (reflections, slight dust); no cars added or removed, no logos or badges, licence plates plain without characters.\n\nTREES ARE LOCKED: only the trees of image 1, each at exactly the same position, height and crown outline; make their crowns natural and airy with visible branches and small gaps, not narrower, not smaller. No additional trees, bushes or plants anywhere. No branches or leaves at the image edges unless image 1 shows them.\n\nThe roadway stays smooth asphalt and the sidewalks stay paved exactly as in image 1; no cobblestones on the roadway.\n\nNo readable text anywhere: no shop signs with lettering, no posters, no logos, no house numbers; the traffic signs and poles of image 1 stay exactly as they are, add no new signs. No watermark, no frame.\n\nAvoid: oversaturated blue sky, harsh midday sun, HDR look, plastic CGI surfaces, distorted vertical lines, posing models looking into the camera, futuristic glass towers, palm trees, text, watermark or logos, extra floors, distorted windows, fantasy architecture.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1. Railings only where image 1 shows them.\n- TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add, remove, move or shrink trees. Planting only in existing planters, beds and green roofs.\n- Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and materials only, never for building geometry or colours of neighbours.\n- PARKING LAYOUT (fixed, checked against the aerial photo): wimmergasse on the building side: angled parking at about 55 degrees; wimmergasse opposite: parallel parking along the kerb; stolberggasse on the building side: perpendicular parking (90 degrees); stolberggasse opposite: perpendicular parking (90 degrees). Parked cars only in these bays and in this orientation, as in image 1.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.",
+    "schutz": {
+     "kanten_f1_vorher": 0.7697,
+     "kanten_f1_nachher": 0.9575,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 1.11,
+     "anteil_geschuetzt_prozent": 27.17,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_glas",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel"
+     ],
+     "ki_personen_an_platzhaltern": 8,
+     "vordergrund_flecken": 14
+    },
+    "grading": {
+     "staerke": 0.5,
+     "maske": "schutz.png plus himmel.png (dort halbe Staerke)",
+     "himmel_C_vorher": 16.5,
+     "himmel_C_nachher": 13.3,
+     "abstand_lab_zum_leitbild": {
+      "vorher": 31.33,
+      "nachher": 26.97
+     },
+     "leitbilder": "project.yaml look"
+    },
+    "nachkontrolle": {
+     "status": "zur Pruefung",
+     "score": 24,
+     "zonen_f1": {
+      "fenster": 0.8957,
+      "leuchten": 0.8512,
+      "gelaender": 0.8593,
+      "gebaeude": 0.9438
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 116,
+       "ki": 101,
+       "ki_gefunden": 101,
+       "ki_neu": 0,
+       "render_fehlt": 15
+      }
+     },
+     "befunde": [
+      "2 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+      "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.8913, praezise 0.9001); Bauteile veraendert oder versetzt?",
+      "Schutzzone leuchten: Kanten weichen ab (vollstaendig 0.7834, praezise 0.9318); Bauteile veraendert oder versetzt?",
+      "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.8426, praezise 0.8767); Bauteile veraendert oder versetzt?",
+      "Fassade sonstige: 116 Fenster im Render, 101 im KI-Bild (0 neu, 15 fehlen)"
+     ]
+    },
+    "pruefbilder": "r7_final_pruefung/ecke_blaue_stunde_schutz_pruefung.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg",
+    "verworfen": [
+     {
+      "job": "0b45fce8-80a4-4393-9b4f-6532b6679e28",
+      "grund": "Versuch 1: KI deutlich heller als der Render (Daemmerung statt Nacht), schutz Kanten-F1 0,944 (unter 0,95), Personen vor der Fassade nur teilweise erhalten, Flecken"
+     },
+     {
+      "job": "10ac1d9f-4e89-4d90-8e88-6e8e19b4f197",
+      "grund": "Versuch 2: Helligkeit passt (F1 0,96), aber Passant in hellem Mantel an der Ecke zerfaellt beim Kompositing (Mantel wie Putz, hellerer KI-Putzfleck daneben)"
+     }
+    ],
+    "restfehler": "Rundes Verkehrszeichen wirkt leuchtend (Blender-Material im Lampenlicht); Zonen Leuchten/Gelaender knapp unter Grenze (dunkles Bild, schwache Kanten); Fensterzahl-Fehlalarm 15"
+   },
+   "ecke_erhoeht_golden_hour_r7_final.jpg": {
+    "eingang": "renders/r7_basis (wimmergasse-20_ecke_erhoeht_golden_hour_final.jpg), Upload media 638b39be-323c-4b38-9bbd-1058665c42f6",
+    "job": "f5a4d174-bcff-4aa4-bc3c-c73d05cf26fd",
+    "ki_roh": "ecke_erhoeht_golden_hour_r7_ki.jpg (3504 x 2336)",
+    "modell": "gpt_image_2_6, quality high, resolution 4k, 3:2",
+    "prompt": "Turn image 1, a 3D render, into a high-end architectural photograph. Keep the building geometry exactly as in image 1: same number of window axes, same window positions, same storey heights, same cornices, same roofline and the same camera perspective. Do not add, remove or move any windows, balconies or floors.\n\nAllowed changes: sky, clouds, light and atmosphere, vegetation (leaves of the existing trees), people, and fine photographic micro detail (plaster texture, reflections, dust, slight wear). Everything else in image 1 stays as it is.\n\nA renovated Viennese Gruenderzeit corner apartment building from around 1900, sand-beige lime plaster facade, white double casement windows, rich stucco with triangular pediments on the piano nobile, a strong main cornice with brackets, and a modern rooftop extension clad in anthracite standing-seam zinc. Located on a quiet street in Vienna's 5th district, with neighbouring historic facades, cobblestone and sidewalk details.\n\nRaised view from the first floor across the crossing onto the corner building with its rooftop extension; the leaves at the upper left edge frame the picture; overhead suspension cables and hanging street lamps stay exactly as in image 1.\n\nLate-summer golden hour, low warm sun from the west, warm light on the upper floors and the rooftop extension while the street lies in soft warm shade, gentle haze, a luminous pale blue to creamy sky with a soft warm glow near the horizon and a few thin clouds (not grey, not overcast, no orange postcard gradient).\n\nStyle like the client's reference photographs (described only): a Viennese corner house large in frame under a creamy, hazy sky; low grazing light with long soft shadows on the pavement; a muted film palette with lifted shadows; leaves framing the picture; warm light inside the ground floor. (Style description only; do not copy buildings, layout or objects from any reference.)\n\nLook of a real architectural photograph, not a rendering: natural light falloff, subtle atmospheric depth so the far end of the street is slightly lighter and softer, warm-neutral colour grading, lifted shadows, olive-toned greens, very fine film grain, no HDR, no oversaturation, no plastic CGI surfaces. Window glass with realistic reflections of sky and trees; behind about a quarter of the windows curtains and a soft warm interior light. Facade plaster with fine texture and slight patina, stucco with soft shadow edges.\n\nThe plain grey mannequin figures in image 1 are placeholders for people: replace each one with a real pedestrian standing or walking at exactly the same spot and with the same height in the picture, dressed for the season in muted colours (camel, navy, cream, grey), seen from behind or in profile, faces not recognisable, nobody looking into the camera, no posing; you may add two to four more small passers-by on the sidewalks and crossings, one of them slightly motion-blurred.\n\nThe parked cars in image 1 are detailed 3D models of real cars: keep every car exactly as it is, same model, shape, colour, position, size and orientation, only with photographic realism (reflections, slight dust); no cars added or removed, no logos or badges, licence plates plain without characters.\n\nTREES ARE LOCKED: only the trees of image 1, each at exactly the same position, height and crown outline; make their crowns natural and airy with visible branches and small gaps, not narrower, not smaller. No additional trees, bushes or plants anywhere.\n\nNo readable text anywhere: no shop signs with lettering, no posters, no logos, no house numbers; the traffic signs and poles of image 1 stay exactly as they are, add no new signs. No watermark, no frame.\n\nAvoid: oversaturated blue sky, harsh midday sun, HDR look, plastic CGI surfaces, distorted vertical lines, posing models looking into the camera, futuristic glass towers, palm trees, text, watermark or logos, extra floors, distorted windows, fantasy architecture.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1. Railings only where image 1 shows them.\n- TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add, remove, move or shrink trees. Planting only in existing planters, beds and green roofs.\n- Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and materials only, never for building geometry or colours of neighbours.\n- PARKING LAYOUT (fixed, checked against the aerial photo): wimmergasse on the building side: angled parking at about 55 degrees; wimmergasse opposite: parallel parking along the kerb; stolberggasse on the building side: perpendicular parking (90 degrees); stolberggasse opposite: perpendicular parking (90 degrees). Parked cars only in these bays and in this orientation, as in image 1.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.",
+    "schutz": {
+     "kanten_f1_vorher": 0.7921,
+     "kanten_f1_nachher": 0.9905,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 1.06,
+     "anteil_geschuetzt_prozent": 30.71,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_glas",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel"
+     ],
+     "ki_personen_an_platzhaltern": 8,
+     "vordergrund_flecken": 11
+    },
+    "grading": {
+     "staerke": 0.5,
+     "maske": "schutz.png plus himmel.png (dort halbe Staerke)",
+     "himmel_C_vorher": 7.3,
+     "himmel_C_nachher": 6.1,
+     "abstand_lab_zum_leitbild": {
+      "vorher": 4.31,
+      "nachher": 1.09
+     },
+     "leitbilder": "project.yaml look"
+    },
+    "nachkontrolle": {
+     "status": "zur Pruefung",
+     "score": 13,
+     "zonen_f1": {
+      "fenster": 0.9713,
+      "leuchten": 0.9578,
+      "gelaender": 0.957,
+      "gebaeude": 0.9694
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 139,
+       "ki": 137,
+       "ki_gefunden": 135,
+       "ki_neu": 2,
+       "render_fehlt": 4
+      }
+     },
+     "befunde": [
+      "4 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+      "Fassade sonstige: 139 Fenster im Render, 137 im KI-Bild (2 neu, 4 fehlen)"
+     ]
+    },
+    "pruefbilder": "r7_final_pruefung/ecke_erhoeht_golden_hour_schutz_pruefung.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg",
+    "verworfen": [],
+    "restfehler": "keine sichtbaren Naehte; Nachbarn rechts aus der KI (nicht geschuetzt)"
+   },
+   "eg_lokal_golden_hour_r7_final.jpg": {
+    "eingang": "renders/r7_basis (wimmergasse-20_eg_lokal_golden_hour_final.jpg), Upload media 3be77a0e-738d-4759-bdf6-726ea182c5dd",
+    "job": "8b9cdfcc-89fe-474e-8f6b-1d3078a47005",
+    "ki_roh": "eg_lokal_golden_hour_r7_ki.jpg (3504 x 2336)",
+    "modell": "gpt_image_2_6, quality high, resolution 4k, 3:2",
+    "prompt": "Turn image 1, a 3D render, into a high-end architectural photograph. Keep the building geometry exactly as in image 1: same number of window axes, same window positions, same storey heights, same cornices, same roofline and the same camera perspective. Do not add, remove or move any windows, balconies or floors.\n\nAllowed changes: sky, clouds, light and atmosphere, vegetation (leaves of the existing trees), people, and fine photographic micro detail (plaster texture, reflections, dust, slight wear). Everything else in image 1 stays as it is.\n\nA renovated Viennese Gruenderzeit corner apartment building from around 1900, sand-beige lime plaster facade, white double casement windows, rich stucco with triangular pediments on the piano nobile, a strong main cornice with brackets, and a modern rooftop extension clad in anthracite standing-seam zinc. Located on a quiet street in Vienna's 5th district, with neighbouring historic facades, asphalt street and paved sidewalks.\n\nEye-level view from the crossing onto the ground floor corner with its large shop windows; warm, cosy interior light behind the glass. Do not place furniture, awnings, planters or signs on the sidewalk.\n\nLate-summer golden hour, low warm sun from the west, warm light on the upper floors and the rooftop extension while the street lies in soft warm shade, gentle haze, a luminous pale blue to creamy sky with a soft warm glow near the horizon and a few thin clouds (not grey, not overcast, no orange postcard gradient).\n\nStyle like the client's reference photographs (described only): a Viennese corner house large in frame under a creamy, hazy sky; low grazing light with long soft shadows on the pavement; a muted film palette with lifted shadows; warm light inside the ground floor. (Style description only; do not copy buildings, layout or objects from any reference.)\n\nLook of a real architectural photograph, not a rendering: natural light falloff, subtle atmospheric depth so the far end of the street is slightly lighter and softer, warm-neutral colour grading, lifted shadows, olive-toned greens, very fine film grain, no HDR, no oversaturation, no plastic CGI surfaces. Window glass with realistic reflections of sky and trees; behind about a quarter of the windows curtains and a soft warm interior light. Facade plaster with fine texture and slight patina, stucco with soft shadow edges.\n\nThe plain grey mannequin figures in image 1 are placeholders for people: replace each one with a real pedestrian standing or walking at exactly the same spot and with the same height in the picture, dressed for the season in muted colours (camel, navy, cream, grey), seen from behind or in profile, faces not recognisable, nobody looking into the camera, no posing. People only where image 1 shows a grey placeholder figure: no other people in front of the building, at most one or two very small passers-by far down the street on the left; nobody motion-blurred.\n\nThe parked cars in image 1 are detailed 3D models of real cars: keep every car exactly as it is, same model, shape, colour, position, size and orientation, only with photographic realism (reflections, slight dust); no cars added or removed, no logos or badges, licence plates plain without characters.\n\nTREES ARE LOCKED: only the trees of image 1, each at exactly the same position, height and crown outline; make their crowns natural and airy with visible branches and small gaps, not narrower, not smaller. No additional trees, bushes or plants anywhere. No branches or leaves at the image edges unless image 1 shows them.\n\nThe roadway stays smooth asphalt and the sidewalks stay paved exactly as in image 1; no cobblestones on the roadway.\n\nNo readable text anywhere: no shop signs with lettering, no posters, no logos, no house numbers; the traffic signs and poles of image 1 stay exactly as they are, add no new signs. No watermark, no frame.\n\nAvoid: oversaturated blue sky, harsh midday sun, HDR look, plastic CGI surfaces, distorted vertical lines, posing models looking into the camera, futuristic glass towers, palm trees, text, watermark or logos, extra floors, distorted windows, fantasy architecture.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1. Railings only where image 1 shows them.\n- TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add, remove, move or shrink trees. Planting only in existing planters, beds and green roofs.\n- Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and materials only, never for building geometry or colours of neighbours.\n- PARKING LAYOUT (fixed, checked against the aerial photo): wimmergasse on the building side: angled parking at about 55 degrees; wimmergasse opposite: parallel parking along the kerb; stolberggasse on the building side: perpendicular parking (90 degrees); stolberggasse opposite: perpendicular parking (90 degrees). Parked cars only in these bays and in this orientation, as in image 1.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.",
+    "schutz": {
+     "kanten_f1_vorher": 0.6201,
+     "kanten_f1_nachher": 0.9725,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 1.38,
+     "anteil_geschuetzt_prozent": 70.89,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_glas",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel"
+     ],
+     "ki_personen_an_platzhaltern": 19,
+     "vordergrund_flecken": 20
+    },
+    "grading": {
+     "staerke": 0.2,
+     "maske": "schutz.png plus himmel.png (dort halbe Staerke)",
+     "himmel_C_vorher": 3.7,
+     "himmel_C_nachher": 2.9,
+     "abstand_lab_zum_leitbild": {
+      "vorher": 9.18,
+      "nachher": 8.74
+     },
+     "leitbilder": "project.yaml look"
+    },
+    "nachkontrolle": {
+     "status": "zur Pruefung",
+     "score": 8,
+     "zonen_f1": {
+      "fenster": 0.9699,
+      "leuchten": 0.9807,
+      "gebaeude": 0.9535
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 35,
+       "ki": 32,
+       "ki_gefunden": 31,
+       "ki_neu": 1,
+       "render_fehlt": 4
+      }
+     },
+     "befunde": [
+      "5 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+      "Fassade sonstige: 35 Fenster im Render, 32 im KI-Bild (1 neu, 4 fehlen)"
+     ]
+    },
+    "pruefbilder": "r7_final_pruefung/eg_lokal_golden_hour_schutz_pruefung.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg",
+    "verworfen": [
+     {
+      "job": "35e77877-ceb9-4f44-beaa-a06f4ec6f366",
+      "grund": "Versuch 1: zusaetzliche bewegungsunscharfe Passantin vor der Fassade, im Endbild nur Beine (Fusspunkt hinter der Fassadenbasis laut Tiefe, Vordergrund verworfen)"
+     }
+    ],
+    "restfehler": "schwacher heller Kreis (Kopf des Platzhalters) links neben dem Passanten: Hintergrund-Durchgang dort heller als die Umgebung"
+   },
+   "drohne_golden_hour_r7_final.jpg": {
+    "eingang": "renders/r7_basis (wimmergasse-20_drohne_golden_hour_final.jpg), Upload media 69173cb1-c2b3-4999-973f-f2ffdf1b7949",
+    "job": "377ab808-4b61-4878-8baa-08babfdd2bc4",
+    "ki_roh": "drohne_golden_hour_r7_ki.jpg (3504 x 2336)",
+    "modell": "gpt_image_2_6, quality high, resolution 4k, 3:2",
+    "prompt": "Turn image 1, a 3D render, into a high-end architectural photograph. Keep the building geometry exactly as in image 1: same number of window axes, same window positions, same storey heights, same cornices, same roofline and the same camera perspective. Do not add, remove or move any windows, balconies or floors.\n\nAllowed changes: sky, clouds, light and atmosphere, vegetation (leaves of the existing trees), people, and fine photographic micro detail (plaster texture, reflections, dust, slight wear). Everything else in image 1 stays as it is.\n\nA renovated Viennese Gruenderzeit corner apartment building from around 1900, sand-beige lime plaster facade, white double casement windows, rich stucco with triangular pediments on the piano nobile, a strong main cornice with brackets, and a modern rooftop extension clad in anthracite standing-seam zinc. Located on a quiet street in Vienna's 5th district, with neighbouring historic facades, asphalt street and paved sidewalks.\n\nAerial view from about 40 m onto the corner building with its rooftop extension, embedded in the roofscape of Vienna's 5th district; the far distance with the hills of the Vienna Woods and the towers exactly as in image 1. Roofs of every building exactly as in image 1 (shapes, materials, colours, dormers, chimneys).\n\nLate-summer golden hour, low warm sun from the west, warm light on the upper floors and the rooftop extension while the street lies in soft warm shade, gentle haze, a luminous pale blue to creamy sky with a soft warm glow near the horizon and a few thin clouds (not grey, not overcast, no orange postcard gradient).\n\nStyle like the client's reference photographs (described only): a Viennese corner house large in frame under a creamy, hazy sky; low grazing light with long soft shadows on the pavement; a muted film palette with lifted shadows; warm light inside the ground floor. (Style description only; do not copy buildings, layout or objects from any reference.)\n\nLook of a real architectural photograph, not a rendering: natural light falloff, subtle atmospheric depth so the far end of the street is slightly lighter and softer, warm-neutral colour grading, lifted shadows, olive-toned greens, very fine film grain, no HDR, no oversaturation, no plastic CGI surfaces. Window glass with realistic reflections of sky and trees; behind about a quarter of the windows curtains and a soft warm interior light. Facade plaster with fine texture and slight patina, stucco with soft shadow edges.\n\nThe plain grey mannequin figures in image 1 are placeholders for people: replace each one with a real pedestrian standing or walking at exactly the same spot and with the same height in the picture, dressed for the season in muted colours (camel, navy, cream, grey), seen from behind or in profile, faces not recognisable, nobody looking into the camera, no posing; you may add a few more small passers-by on the sidewalks and crossings, one of them slightly motion-blurred.\n\nThe parked cars in image 1 are detailed 3D models of real cars: keep every car exactly as it is, same model, shape, colour, position, size and orientation, only with photographic realism (reflections, slight dust); no cars added or removed, no logos or badges, licence plates plain without characters.\n\nTREES ARE LOCKED: only the trees of image 1, each at exactly the same position, height and crown outline; make their crowns natural and airy with visible branches and small gaps, not narrower, not smaller. No additional trees, bushes or plants anywhere. No branches or leaves at the image edges unless image 1 shows them.\n\nThe roadway stays smooth asphalt and the sidewalks stay paved exactly as in image 1; no cobblestones on the roadway.\n\nNo readable text anywhere: no shop signs with lettering, no posters, no logos, no house numbers; the traffic signs and poles of image 1 stay exactly as they are, add no new signs. No watermark, no frame.\n\nAvoid: oversaturated blue sky, harsh midday sun, HDR look, plastic CGI surfaces, distorted vertical lines, posing models looking into the camera, futuristic glass towers, palm trees, text, watermark or logos, extra floors, distorted windows, fantasy architecture.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1. Railings only where image 1 shows them.\n- TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add, remove, move or shrink trees. Planting only in existing planters, beds and green roofs.\n- Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and materials only, never for building geometry or colours of neighbours.\n- PARKING LAYOUT (fixed, checked against the aerial photo): wimmergasse on the building side: angled parking at about 55 degrees; wimmergasse opposite: parallel parking along the kerb; stolberggasse on the building side: perpendicular parking (90 degrees); stolberggasse opposite: perpendicular parking (90 degrees). Parked cars only in these bays and in this orientation, as in image 1.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.",
+    "schutz": {
+     "kanten_f1_vorher": 0.7964,
+     "kanten_f1_nachher": 0.994,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 0.89,
+     "anteil_geschuetzt_prozent": 13.27,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_glas",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel"
+     ],
+     "ki_personen_an_platzhaltern": 3,
+     "vordergrund_flecken": 3
+    },
+    "grading": {
+     "staerke": 0.5,
+     "maske": "schutz.png plus himmel.png (dort halbe Staerke)",
+     "himmel_C_vorher": 7.8,
+     "himmel_C_nachher": 6.4,
+     "abstand_lab_zum_leitbild": {
+      "vorher": 3.7,
+      "nachher": 1.61
+     },
+     "leitbilder": "project.yaml look"
+    },
+    "nachkontrolle": {
+     "status": "zur Pruefung",
+     "score": 2,
+     "zonen_f1": {
+      "fenster": 0.9798,
+      "leuchten": 0.8281,
+      "gelaender": 0.9906,
+      "gebaeude": 0.9651
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 130,
+       "ki": 118,
+       "ki_gefunden": 117,
+       "ki_neu": 1,
+       "render_fehlt": 13
+      }
+     },
+     "befunde": [
+      "1 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+      "Schutzzone leuchten: Kanten weichen ab (vollstaendig 0.8174, praezise 0.8391); Bauteile veraendert oder versetzt?",
+      "Fassade sonstige: 130 Fenster im Render, 118 im KI-Bild (1 neu, 13 fehlen)"
+     ]
+    },
+    "pruefbilder": "r7_final_pruefung/drohne_golden_hour_schutz_pruefung.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg",
+    "verworfen": [
+     {
+      "job": "8fc7f5bf-c0b7-4868-8ade-799e20c651cd",
+      "grund": "Versuch 1: Ast oben links erfunden (Prompt \"leaves framing the picture\"), Verstoss TREES ARE LOCKED"
+     }
+    ],
+    "restfehler": "Verglasung des Dachaufbaus kupferfarben (Blender-Material), in R6 dunkles Glas; Fensterzahl-Fehlalarm 13 (kleine Fenster, 4k-Klassifikator)"
+   }
+  }
  }
 }
