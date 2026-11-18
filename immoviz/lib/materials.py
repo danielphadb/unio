@@ -354,7 +354,7 @@ def _bild(bpy, pfad, farbe=True):
     return img
 
 
-def textur(N, bpy, schluessel, vec_m):
+def textur(N, bpy, schluessel, vec_m, staerke=None):
     """CC0-Textur (Poly Haven, siehe immoviz/assets/LIZENZEN.md) als Variation: liefert (Helligkeitsfaktor um 1,
     Rauheit, Normal) oder None, wenn die Bilder nicht geladen sind (immoviz.py texturen). Zwei gegeneinander
     gedrehte Abtastungen, ueber Rauschen gemischt, gegen sichtbare Kachelung."""
@@ -395,6 +395,8 @@ def textur(N, bpy, schluessel, vec_m):
     if t.get("nor"):
         nm = N.new("ShaderNodeNormalMap")
         nm.inputs["Strength"].default_value = 0.8
+        if staerke is not None:      # Detailfaktor (Ausgang): Normal Map nur im Nahbereich, gegen Moire
+            N.link(N.math("MULTIPLY", staerke, 0.8), nm.inputs["Strength"])
         N.link(abtasten(t["nor"], False), nm.inputs["Color"])
         nrm = nm.outputs["Normal"]
     return hell, rough, nrm
@@ -405,19 +407,41 @@ def _farbe_mal(N, col, fak):
     return N.mix_rgb(1.0, col, N.comb(fak, fak, fak), blend="MULTIPLY")
 
 
+def detail_faktor(N, fuss0=4.0, fuss1=20.0):
+    """1 = volle Feinstruktur, 0 = ausgeblendet. Gegen Moire bei flachem Blick (Strassenkamera auf 1,6 m): Mass ist der
+    Pixel-Fussabdruck auf der Flaeche, proportional zu Abstand / cos(Blickwinkel zur Flaechennormale). Bei 1,6 m
+    Augenhoehe entspricht fuss0 = 4 rund 2,5 m und fuss1 = 20 rund 5,7 m Abstand; aus der Drohne (steiler Blick, grosser
+    Abstand) ist die Koernung ohnehin kleiner als ein Pixel. Cycles hat keine Mipmaps, deshalb hier im Shader."""
+    geo = N.new("ShaderNodeNewGeometry")
+    cam = N.new("ShaderNodeCameraData")
+    cosw = N.math("MAXIMUM", N.math("ABSOLUTE", N.vmath("DOT_PRODUCT", geo.outputs["Incoming"], geo.outputs["Normal"])),
+                  0.02)
+    fuss = N.math("DIVIDE", cam.outputs["View Distance"], cosw)
+    return N.math("SUBTRACT", 1.0, N.math("DIVIDE", N.math("SUBTRACT", fuss, fuss0), fuss1 - fuss0), clamp=True)
+
+
 def asphalt(bpy, name, color=(0.030, 0.030, 0.032), flick=True, textur_key="asphalt", hell=False):
     """Asphalt mit Gesteinskorn, Flickstellen (aeltere und neuere Flaechen mit Naht), feinen Rissen und
-    Fahrspuren. UV in Metern (Draufsicht)."""
+    Fahrspuren. UV in Metern (Draufsicht).
+    Runde 7 Korrektur (Moire): feine Waagrechtstreifen im Vordergrund der Strassenkameras kamen von Feinstruktur unter
+    der Pixelgroesse (Korn 140/m als harte Farbspritzer und Relief, 6-mm-Risse und Naehte, Foto-Textur 1,5 mm je
+    Texel samt Normal Map), die bei flachem Blick gestaucht und vom Entrauschen zu Linien verschmiert wurde. Jetzt:
+    Korn als weiche Helligkeit statt Schwellwert, alle Feinanteile mit `detail_faktor` ausgeblendet (Mittelwert statt
+    Muster), Naehte breiter (1,2 cm), Risse und Naehte erst weiter hinten ausgeblendet, Relief nur im Nahbereich."""
     m = _new(bpy, name)
     N = Nodes(m)
     tc, sep = N.uv()
     uvm = tc.outputs["UV"]
+    det = detail_faktor(N)
+    det_weit = detail_faktor(N, 10.0, 60.0)
     korn = N.noise(uvm, 140.0, 2.0, 0.6)
     grob = N.noise(uvm, 0.6, 4.0, 0.55)
     base = N.mix_rgb(N.math("MULTIPLY", grob.outputs["Fac"], 0.5), color, tuple(c * 1.35 for c in color))
-    base = N.mix_rgb(N.math("MULTIPLY", N.math("GREATER_THAN", korn.outputs["Fac"], 0.62), 0.5), base,
-                     tuple(min(1.0, c * 1.9) for c in color))
-    h = N.math("MULTIPLY", korn.outputs["Fac"], 1.0)
+    # Gesteinskorn: weiche Rampe statt harter Schwelle; mit dem Detailfaktor zum Mittelwert (Anteil heller Koerner)
+    spr = N.math("MULTIPLY", N.math("SUBTRACT", korn.outputs["Fac"], 0.55), 6.0, clamp=True)
+    spr = N.math("ADD", N.math("MULTIPLY", spr, det), N.math("MULTIPLY", N.math("SUBTRACT", 1.0, det), 0.2))
+    base = N.mix_rgb(N.math("MULTIPLY", spr, 0.4), base, tuple(min(1.0, c * 1.9) for c in color))
+    h = N.math("MULTIPLY", korn.outputs["Fac"], det)
     if flick:
         # Flickstellen: Voronoi-Zellen (3 bis 8 m), ein Teil davon dunkler (neuer) oder heller (aelter)
         vor = N.new("ShaderNodeTexVoronoi", Scale=0.22)
@@ -433,27 +457,32 @@ def asphalt(bpy, name, color=(0.030, 0.030, 0.032), flick=True, textur_key="asph
         kante = N.new("ShaderNodeTexVoronoi", Scale=0.22)
         kante.feature = "DISTANCE_TO_EDGE"
         N.link(N.vmath("ADD", uvm, N.vmath("SCALE", N.noise(uvm, 0.3, 2.0).outputs["Color"])), kante.inputs["Vector"])
-        naht = N.math("MULTIPLY", N.math("LESS_THAN", kante.outputs["Distance"], 0.006), N.math("ADD", neu, alt))
-        base = N.mix_rgb(N.math("MULTIPLY", naht, 0.6), base, tuple(c * 0.5 for c in color))
-        # feine Risse
+        naht = N.math("MULTIPLY", N.math("LESS_THAN", kante.outputs["Distance"], 0.012), N.math("ADD", neu, alt))
+        base = N.mix_rgb(N.math("MULTIPLY", naht, N.math("MULTIPLY", det_weit, 0.5)), base, tuple(c * 0.5 for c in color))
+        # feine Risse (erst weiter hinten ausgeblendet)
         riss = N.new("ShaderNodeTexVoronoi", Scale=1.3)
         riss.feature = "DISTANCE_TO_EDGE"
         N.link(N.vmath("ADD", uvm, N.vmath("SCALE", N.noise(uvm, 2.0, 3.0).outputs["Color"])), riss.inputs["Vector"])
         rmask = N.math("MULTIPLY", N.math("LESS_THAN", riss.outputs["Distance"], 0.006),
                        N.math("GREATER_THAN", N.noise(uvm, 0.4, 2.0).outputs["Fac"], 0.56))
-        base = N.mix_rgb(N.math("MULTIPLY", rmask, 0.85), base, tuple(c * 0.35 for c in color))
-        h = N.math("SUBTRACT", h, N.math("MULTIPLY", rmask, 2.0))
+        base = N.mix_rgb(N.math("MULTIPLY", rmask, N.math("MULTIPLY", det_weit, 0.7)), base, tuple(c * 0.35 for c in color))
+        h = N.math("SUBTRACT", h, N.math("MULTIPLY", rmask, N.math("MULTIPLY", det, 2.0)))
     rough = 0.82
     nrm = None
-    tx = textur(N, bpy, textur_key, uvm) if textur_key else None
+    tx = textur(N, bpy, textur_key, uvm, staerke=det) if textur_key else None
     if tx:
         hell_, rough_, nrm = tx
-        base = _farbe_mal(N, base, N.math("ADD", N.math("MULTIPLY", N.math("SUBTRACT", hell_, 1.0), 0.8), 1.0))
+        # Foto-Helligkeit: Abweichung von 1 nur im Nahbereich, sonst Mittelwert
+        base = _farbe_mal(N, base, N.math("ADD", N.math("MULTIPLY", N.math("SUBTRACT", hell_, 1.0),
+                                                        N.math("MULTIPLY", det, 0.8)), 1.0))
     p = N.principled(base, rough=rough)
     p.inputs["Specular IOR Level"].default_value = 0.4
     if tx and tx[1] is not None:
-        N.link(N.math("ADD", N.math("MULTIPLY", tx[1], 0.5), 0.45, clamp=True), p.inputs["Roughness"])
+        r_tex = N.math("ADD", N.math("MULTIPLY", tx[1], 0.5), 0.45, clamp=True)
+        N.link(N.math("ADD", N.math("MULTIPLY", r_tex, det), N.math("MULTIPLY", N.math("SUBTRACT", 1.0, det), rough)),
+               p.inputs["Roughness"])
     bmp = N.new("ShaderNodeBump", Strength=0.35, Distance=0.004)
+    N.link(N.math("MULTIPLY", det, 0.35), bmp.inputs["Strength"])
     N.link(h, bmp.inputs["Height"])
     if nrm is not None:
         N.link(nrm, bmp.inputs["Normal"])

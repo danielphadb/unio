@@ -4,7 +4,9 @@ Ergaenzt den Altbau-Helden (lib/build.py, Hero) und wird nur gebaut, wenn `neuba
 Alle Koordinaten im lokalen System des Projekts (Meter), z relativ zu +-0,00.
 
 Bausteine (je Eintrag optional `gruppe`, Standard "neubau"; jede Gruppe wird zu eigenen Blender-Objekten
-`<gruppe>_masse`, `_rahmen`, `_glas`, `_innen`, `_gruen`, damit Innenraumbilder einzelne Gruppen ausblenden koennen):
+`<gruppe>_masse`, `_rahmen`, `_glas`, `_innen`, `_gruen`, `_gelaender`, damit Innenraumbilder einzelne Gruppen
+ausblenden koennen; alle Gelaenderteile liegen in `<gruppe>_gelaender`, damit lib/ebenen.py sie als Klasse
+`gelaender` erkennt, Runde 7):
 
 - koerper:   Prisma aus Grundriss-Polygon {poly, z: [z0, z1], wand, dach, ohne_kanten: [i, ...], boden: false}
 - fassaden:  Wandflaeche mit Oeffnungen an einer Linie a -> b (Gebaeude links der Laufrichtung, wie meshkit.Facade)
@@ -35,7 +37,7 @@ import random
 from . import materials as M
 from . import meshkit as K
 
-GRUPPEN_TEILE = ("masse", "rahmen", "glas", "innen", "gruen")
+GRUPPEN_TEILE = ("masse", "rahmen", "glas", "innen", "gruen", "gelaender")
 
 
 def _mat_lib(bpy, mats: dict, spec: dict):
@@ -196,23 +198,24 @@ class Neubau:
             return
         z, h = gl["z"], gl.get("h", 1.0)
         typ, mat = gl.get("typ", "stab"), gl.get("mat", "nb_metall")
+        T = G["gelaender"]      # Stab, Glas, Volle Felder: ein Objekt <gruppe>_gelaender (Ebenen-Klasse gelaender)
         for (pa, pb) in zip(pts[:-1], pts[1:]):
             f = K.Facade("gl", tuple(pa), tuple(pb))
             L = f.length
             if L < 0.05:
                 continue
-            K.box(G["rahmen"], f, 0.0, L, -0.025, 0.025, z + h - 0.05, z + h, mat, skip_back=False)
+            K.box(T, f, 0.0, L, -0.025, 0.025, z + h - 0.05, z + h, mat, skip_back=False)
             if typ == "glas":
-                K.box(G["glas"], f, 0.0, L, -0.008, 0.008, z + 0.05, z + h - 0.05, "glas_gelaender", skip_back=False)
-                K.box(G["rahmen"], f, 0.0, L, -0.02, 0.02, z, z + 0.06, mat, skip_back=False)
+                K.box(T, f, 0.0, L, -0.008, 0.008, z + 0.05, z + h - 0.05, "glas_gelaender", skip_back=False)
+                K.box(T, f, 0.0, L, -0.02, 0.02, z, z + 0.06, mat, skip_back=False)
             elif typ == "voll":
-                K.box(G["masse"], f, 0.0, L, -0.06, 0.06, z, z + h, mat, skip_back=False)
+                K.box(T, f, 0.0, L, -0.06, 0.06, z, z + h, mat, skip_back=False)
             else:
-                K.box(G["rahmen"], f, 0.0, L, -0.02, 0.02, z + 0.08, z + 0.12, mat, skip_back=False)
+                K.box(T, f, 0.0, L, -0.02, 0.02, z + 0.08, z + 0.12, mat, skip_back=False)
                 n = max(1, int(L / gl.get("abstand", 0.11)))
                 for k in range(n + 1):
                     u = 0.02 + (L - 0.04) * k / n
-                    K.box(G["rahmen"], f, u - 0.01, u + 0.01, -0.01, 0.01, z + 0.08, z + h - 0.05, mat, skip_back=False)
+                    K.box(T, f, u - 0.01, u + 0.01, -0.01, 0.01, z + 0.08, z + h - 0.05, mat, skip_back=False)
 
     def flaeche(self, fl):
         poly = [tuple(p) for p in fl["poly"]]

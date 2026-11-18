@@ -10,8 +10,9 @@ Ablauf:
    Lichter, Texte); Logos, Embleme, Schriftzuege entfernt; Kennzeichen weiss ohne Schrift; Lack durch das gemeinsame
    Material `auto_lack` ersetzt (Klarlack, Farbe je Auto aus der Farbverteilung, ueber Object Info Random je Instanz).
    Alle Objekte heissen `auto_<id8>_<n>`, damit die Render-Ebenen sie der Klasse autos zuordnen.
-3. `build` setzt die Modelle als Collection-Instanzen auf die Stellplaetze (lib/strasse.py), gewichtet nach `gewicht`,
-   laengs nur Modelle, die in den Stellplatz passen. Fehlt die Bibliothek, gibt es die parametrischen Autos
+3. `build` setzt die Modelle als Collection-Instanzen auf die Stellplaetze (lib/strasse.py): Klassengruppe nach
+   `verteilung` (Alltag 70 %, SUV/Van 20 %, Oberklasse 10 %), darin nach `gewicht`; Sportwagen nicht naeher als
+   `sport_mindestabstand_m` an einer Strassenkamera; laengs nur Modelle, die in den Stellplatz passen. Fehlt die Bibliothek, gibt es die parametrischen Autos
    (lib/assets/autos.py).
 """
 from __future__ import annotations
@@ -52,6 +53,39 @@ FARBEN = [((0.012, 0.012, 0.013), 16), ((0.040, 0.042, 0.046), 14), ((0.12, 0.12
 def tabelle() -> list[dict]:
     import yaml
     return yaml.safe_load(TABELLE.read_text(encoding="utf-8"))["modelle"]
+
+
+def verteilung() -> tuple[dict, float]:
+    """Klassengruppen mit Anteil ({gruppe: {anteil, klassen}}) und Mindestabstand der Sportwagen zu Strassenkameras."""
+    import yaml
+    t = yaml.safe_load(TABELLE.read_text(encoding="utf-8"))
+    return t.get("verteilung") or {}, float(t.get("sport_mindestabstand_m", 0.0) or 0.0)
+
+
+def strassenkameras(cfg, terrain, max_hoehe: float = 12.0) -> list[tuple[float, float]]:
+    """Standpunkte (x, y) der Kameras aus project.yaml, die hoechstens max_hoehe ueber dem Gelaende stehen."""
+    out = []
+    for c in ((cfg or {}).get("cameras") or {}).values():
+        if not isinstance(c, dict) or len(c.get("pos") or []) < 3:
+            continue
+        x, y, z = c["pos"][:3]
+        h = float(c["augenhoehe"]) if c.get("augenhoehe") is not None else z - terrain(x, y)
+        if h <= max_hoehe:
+            out.append((float(x), float(y)))
+    return out
+
+
+def _waehlen(rng, passend: list, info: dict, gruppen: dict, sport_verboten: bool):
+    """Modell fuer einen Stellplatz: erst die Klassengruppe nach Anteil (Gruppen ohne passendes Modell fallen weg),
+    dann das Modell nach Gewicht. sport_verboten: Stellplatz naeher als sport_mindestabstand_m an einer Kamera."""
+    kand = [c for c in passend if not (sport_verboten and info[c.name][0] == "sport")] or passend
+    if gruppen:
+        mit = [(float(g.get("anteil", 0)), [c for c in kand if info[c.name][0] in (g.get("klassen") or [])])
+               for g in gruppen.values()]
+        mit = [(a, m) for a, m in mit if a > 0 and m]
+        if mit:
+            kand = rng.choices([m for _, m in mit], [a for a, _ in mit])[0]
+    return rng.choices(kand, [info[c.name][1] for c in kand])[0]
 
 
 def _slug(s: str) -> str:
@@ -572,6 +606,15 @@ def build(ctx, terrain, radius, cfg, coll) -> int:
             lc.exclude = True
     if not namen:
         return 0
+    # Klasse und Gewicht aus der Tabelle (gilt ohne Neubau der Bibliothek), sonst aus der Collection
+    tab = {e["id"][:8]: e for e in tabelle()}
+    info = {}
+    for c in namen:
+        e = tab.get(c.name[len("auto_"):][:8], {})
+        info[c.name] = (str(e.get("klasse") or c.get("klasse") or "mittelklasse"),
+                        float(e.get("gewicht", c.get("gewicht", 1.0))))
+    gruppen, sport_min = verteilung()
+    kameras = strassenkameras(cfg, terrain) if sport_min > 0 else []
     sub = bpy.data.collections.new("Autos")
     coll.children.link(sub)
     plaetze = [(ab, p) for s in ST.stellplaetze(ctx, cfg, radius) for ab in s["abschnitte"] for p in ab["plaetze"]]
@@ -589,7 +632,9 @@ def build(ctx, terrain, radius, cfg, coll) -> int:
         else:                                   # Schraeg- und Senkrechtparker: 10 cm Luft zur Nachbarbucht
             passend = [c for c in namen if c["breite"] <= platz["breite"] - 0.10]
         passend = passend or sorted(namen, key=lambda c: c["breite"] if platz["art"] != "laengs" else c["laenge"])[:2]
-        c = rng.choices(passend, [x["gewicht"] for x in passend])[0]
+        px, py = platz["pos"][0], platz["pos"][1]
+        nah = any(math.hypot(px - kx, py - ky) < sport_min for kx, ky in kameras)
+        c = _waehlen(rng, passend, info, gruppen, nah)
         dw = math.radians(rng.uniform(-1.0, 1.0))
         ax = platz["achse"]
         if platz["art"] != "laengs" and rng.random() < 0.25:        # manche parken rueckwaerts ein

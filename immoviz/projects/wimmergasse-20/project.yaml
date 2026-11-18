@@ -108,10 +108,13 @@ dach:
                   rails: [{z: [17.94, 19.04], typ: stab, quelle: "GR DG1/DG2 (Gel. H=110cm), Typ ANN wie ANS Loggia Wimmergasse"}]},
                  {u: [10.16, 13.30], z: [16.27, 20.40], depth: 1.3, slab: 17.69,
                   rails: [{z: [17.94, 19.04], typ: stab, quelle: "GR DG1/DG2 (Gel. H=110cm), Typ ANN wie ANS Loggia Wimmergasse"}]}]}
-    # DG3 Top 35: Terrasse 6,93 m2 [NWG] als Einschnitt u 16,9 bis 20,4 (Wand d 1,8), Eckaufbau buendig mit DG1/DG2 [ANS, GR DG3]
-    - {facade: wimmergasse, u: [16.9, 20.4], z: [21.07, 24.28], d: 1.8, quelle: "ANS (DG3 links: 2 Fenster und Fixteil), GR DG3 Terrasse Top 35",
-       windows: [{u: [17.44, 18.37], z: [21.10, 23.35]}, {u: [18.42, 19.40], z: [21.10, 23.35]}, {u: [19.44, 19.91], z: [21.10, 23.35]}]}
-    - {facade: wimmergasse, u: [20.4, 24.74], z: [21.07, 24.28], d: 0.7, quelle: "ANS (DG3 rechts: 4 Fenster und Fixteil bis u 24,97), GR DG3",
+    # DG3 Top 35: Terrasse 6,93 m2 [NWG] als Dacheinschnitt (umgebung_abgleich.md 15, Runde 7 Korrektur): ANS 600 dpi Einschnitt
+    # u 17,26 bis 20,00 (Wange 0,18, 2 Fenster und Fixteil, Eckaufbau-Kante u 20,00), Oberkante +52,59 WrN (z 23,46), darueber
+    # laeuft die Dachdeckung durch; GR DG3 Terrasse lichte Breite 2,80, Tiefe 6,93/2,80 = 2,48, also Fensterwand d 2,76 = Lage
+    # der Schraege auf z 23,46 (vorher u 16,9 bis 20,4, Wand d 1,8 bis z 24,28 mit Seitenwangen ueber der Dachflaeche)
+    - {facade: wimmergasse, u: [17.26, 20.0], z: [21.07, 23.46], d: 2.76, quelle: "ANS (DG3 Einschnitt: 2 Fenster und Fixteil u 17,44 bis 20,00, OK +52,59), GR DG3 Terrasse Top 35 (2,80 x 2,48)",
+       windows: [{u: [17.44, 18.44], z: [21.10, 23.35]}, {u: [18.48, 19.47], z: [21.10, 23.35]}, {u: [19.51, 19.92], z: [21.10, 23.35]}]}
+    - {facade: wimmergasse, u: [20.0, 24.74], z: [21.07, 24.28], d: 0.7, quelle: "ANS (DG3 rechts: Kante u 20,00, 4 Fenster und Fixteil bis u 24,97), GR DG3",
        windows: [{u: [20.45, 21.43], z: [21.10, 23.35]}, {u: [21.45, 22.47], z: [21.10, 23.35]},
                  {u: [22.49, 23.49], z: [21.10, 23.35]}, {u: [23.51, 24.53], z: [21.10, 23.35]}, {u: [24.55, 24.72], z: [21.10, 23.35]}]}
     - {facade: stolberggasse, u: [0.7, 5.4], z: [21.07, 24.28], d: 0.7, quelle: "GR DG3 (4 Fenstertueren 1,00, FPH=FOK), Lage ANN gespiegelt aus ANS",
@@ -122,16 +125,18 @@ dach:
        roof_windows: [{u: [1.07, 2.38], z: [16.45, 17.50]}, {u: [1.07, 2.38], z: [18.40, 19.90]},
                       {u: [5.02, 6.35], z: [16.45, 17.50]}, {u: [5.02, 6.35], z: [18.40, 19.90]}]}
     # DG3-Schraege erst ab u 10,45: davor Terrasse Top 34 (18,28 m2) bis zur Front [GR DG3, ANS Bemassung 10,45]
-    - {facade: wimmergasse, u: [10.45, 16.9], z: [21.07, 24.28], d: [0.9, 3.4],
+    - {facade: wimmergasse, u: [10.45, 17.26], z: [21.07, 24.28], d: [0.9, 3.4],
        roof_windows: [{u: [11.18, 12.45], z: [21.60, 23.10]}, {u: [13.13, 14.50], z: [21.60, 23.10]},
                       {u: [15.18, 16.55], z: [21.60, 23.10]}]}
+    # ueber dem Einschnitt Top 35 laeuft die Schraege weiter (ANS: Deckung ueber +52,59 bis zur Eckaufbau-Kante), gleiche Ebene
+    - {facade: wimmergasse, u: [17.26, 20.0], z: [23.46, 24.28], d: [2.76, 3.4]}
     - {facade: stolberggasse, u: [5.4, 16.16], z: [21.07, 24.28], d: [0.7, 4.1],
        roof_windows: [{u: [7.4, 8.74], z: [21.60, 23.10]}, {u: [10.6, 11.94], z: [21.60, 23.10]},
                       {u: [13.8, 15.14], z: [21.60, 23.10]}]}
-  cheeks:   # Seitenwangen der Dachaufbauten
-    - {facade: wimmergasse, u: [20.35, 20.45], d: [0.7, 1.8], z: [21.07, 24.28]}
+  cheeks:   # Seitenwangen der Dachaufbauten. Linke Wange des Einschnitts Top 35 = Endflaeche der Schraege u 17,26 (folgt der
+            # Dachflaeche, ANS); die fruehere Wange u 16,85 bis 16,95 (d 0,7 bis 1,8, bis z 24,28) ragte vor die Schraege
+    - {facade: wimmergasse, u: [20.0, 20.1], d: [0.72, 3.4], z: [21.07, 24.28]}     # Eckaufbau zum Einschnitt [ANS Kante u 20,00]
     - {facade: stolberggasse, u: [5.35, 5.45], d: [0.7, 4.1], z: [21.07, 24.28]}
-    - {facade: wimmergasse, u: [16.85, 16.95], d: [0.7, 1.8], z: [21.07, 24.28]}
   railings:
     # G-W1 DG2 franzoesische Fenster Wimmergasse: Ganzglas VSG in der Leibung, H 1,10 ab FOK DG2
     - {facade: wimmergasse, felder: [[8.25, 9.28], [11.30, 12.32], [17.23, 18.12], [18.30, 19.30], [20.36, 21.34], [21.43, 22.41], [22.51, 23.49], [23.58, 24.56]],
@@ -140,7 +145,7 @@ dach:
     - {facade: stolberggasse, felder: [[0.88, 1.86], [1.95, 2.93], [3.03, 4.01], [4.10, 5.08], [14.10, 15.10]],
        z: 17.95, d: 0.73, h: 1.10, typ: vsg, quelle: "GR DG2 (Gel. H=110cm, FPH=FOK), Typ ANN wie ANS Wimmergasse"}
     # G-W5 DG3 Terrasse Top 35: Stabgelaender an der Terrassenkante (ANS Staebe u 17,2 bis 19,9; GR DG3 Gel. H=110cm)
-    - {facade: wimmergasse, u: [16.9, 20.4], z: 21.07, d: 0.85, h: 1.10, typ: stab, quelle: "ANS (Staebe, Gel. H=110cm), GR DG3 Terrasse Top 35 6,93 m2"}
+    - {facade: wimmergasse, u: [17.26, 20.0], z: 21.07, d: 0.85, h: 1.10, typ: stab, quelle: "ANS (Staebe u 17,2 bis 19,9, Gel. H=110cm), GR DG3 Terrasse Top 35 6,93 m2"}
     # G-W6 DG3 Top 35 Eckaufbau Wimmergasse: VSG in der Leibung (ANS "Gel. H=110cm VSG")
     - {facade: wimmergasse, felder: [[20.45, 21.43], [21.45, 22.47], [22.49, 23.49], [23.51, 24.53], [24.55, 24.72]],
        z: 21.10, d: 0.73, h: 1.10, typ: vsg, quelle: "ANS (Gel. H=110cm VSG, 4 Fenster und Fixteil), GR DG3"}
@@ -157,24 +162,26 @@ dach:
     - {z: [16.27, 21.07], clip: [[stolberggasse, d, ">=", 2.2], [wimmergasse, d, ">=", 2.2], [wimmergasse, u, ">=", 7.0]]}
     - {z: [21.07, 24.90], clip: [[wimmergasse, d, ">=", 4.6], [wimmergasse, d, "<=", 11.0], [wimmergasse, u, ">=", 4.1], [wimmergasse, u, "<=", 7.2]]}   # Stiegenhaus/Aufzug
     - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 4.6], [wimmergasse, u, ">=", 7.2], [wimmergasse, u, "<=", 10.45], [stolberggasse, d, ">=", 4.1]]}   # Top 34 hinter der Terrasse
-    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.4], [wimmergasse, u, ">=", 10.45], [wimmergasse, u, "<=", 16.9], [stolberggasse, d, ">=", 4.1]]}
-    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.3], [wimmergasse, u, ">=", 16.9], [stolberggasse, u, "<=", 5.4], [stolberggasse, d, ">=", 3.3]]}
-    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.3], [wimmergasse, u, ">=", 16.9], [stolberggasse, u, ">=", 5.4], [stolberggasse, d, ">=", 4.1]]}
+    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.4], [wimmergasse, u, ">=", 10.45], [wimmergasse, u, "<=", 17.26], [stolberggasse, d, ">=", 4.1]]}
+    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.3], [wimmergasse, u, ">=", 17.26], [stolberggasse, u, "<=", 5.4], [stolberggasse, d, ">=", 3.3]]}
+    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.3], [wimmergasse, u, ">=", 17.26], [stolberggasse, u, ">=", 5.4], [stolberggasse, d, ">=", 4.1]]}
   slabs:
     - {z: 16.27, t: 0.30, clip: []}
     - {z: 17.94, t: 0.24, clip: [[stolberggasse, d, ">=", 0.75], [wimmergasse, d, ">=", 0.75]]}   # Decke DG1 / FOK DG2 (ANS Platte bis z 17,93)
     - {z: 21.07, t: 0.30, clip: [[stolberggasse, d, ">=", 0.7], [wimmergasse, d, ">=", 0.7], [wimmergasse, u, ">=", 7.0]]}
     - {z: 21.07, t: 0.30, clip: [[stolberggasse, d, ">=", 0.7], [wimmergasse, d, ">=", 2.45]]}
     - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 4.6], [wimmergasse, u, ">=", 7.2], [wimmergasse, u, "<=", 10.45], [stolberggasse, d, ">=", 4.1]]}
-    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 3.4], [wimmergasse, u, ">=", 10.45], [wimmergasse, u, "<=", 16.9], [stolberggasse, d, ">=", 4.1]]}
-    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 1.8], [wimmergasse, u, ">=", 16.9], [wimmergasse, u, "<=", 20.4], [stolberggasse, u, "<=", 5.4], [stolberggasse, d, ">=", 0.7]]}
-    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 0.7], [wimmergasse, u, ">=", 20.4], [stolberggasse, u, "<=", 5.4], [stolberggasse, d, ">=", 0.7]]}
-    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 1.8], [wimmergasse, u, ">=", 16.9], [stolberggasse, u, ">=", 5.4], [stolberggasse, d, ">=", 4.1]]}
+    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 3.4], [wimmergasse, u, ">=", 10.45], [wimmergasse, u, "<=", 17.26], [stolberggasse, d, ">=", 4.1]]}
+    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 3.4], [wimmergasse, u, ">=", 17.26], [wimmergasse, u, "<=", 20.0], [stolberggasse, u, "<=", 5.4], [stolberggasse, d, ">=", 0.7]]}
+    # Eckaufbau "Dachaufbau 1/3": Oberkante +53,91 WrN (z 24,78) laut ANS, 0,5 m ueber dem First +53,41 (vorher 24,28); die
+    # Plattenseiten bilden die Attika ueber den Waenden
+    - {z: 24.78, t: 0.50, clip: [[wimmergasse, d, ">=", 0.7], [wimmergasse, u, ">=", 20.0], [stolberggasse, u, "<=", 5.4], [stolberggasse, d, ">=", 0.7]]}
+    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 1.8], [wimmergasse, u, ">=", 17.26], [stolberggasse, u, ">=", 5.4], [stolberggasse, d, ">=", 4.1]]}
   boxes:   # Stiegenhaus und Aufzug ueber Dach [ANS], Kamine [NWG Dachaufsicht]
     - {facade: wimmergasse, u: [9.0, 9.7], d: [9.5, 11.0], z: [24.28, 25.40], material: kamin}
     - {facade: wimmergasse, u: [13.5, 14.2], d: [8.0, 9.4], z: [24.28, 25.40], material: kamin}
     - {facade: stolberggasse, u: [9.5, 10.2], d: [7.5, 8.9], z: [24.28, 25.40], material: kamin}
-  solar: {facade: wimmergasse, u: [11.5, 20.5], d: [5.2, 10.5], z: 24.28, rows: 4}
+  solar: {facade: wimmergasse, u: [11.5, 19.9], d: [5.2, 10.5], z: 24.28, rows: 4}
 
 # ---------------------------------------------------------------- Umgebung nach Street View (Google, 05/2024) und Luftbild Wien 2024
 neighbours:   # Fassadenfarbe je Gebaeude (BEZUG aus dem Baukoerpermodell), abgeglichen mit Street View 05/2024
@@ -286,7 +293,7 @@ materials:
 
 # ---------------------------------------------------------------- Kameras und Licht
 cameras:
-  ecke:            {pos: [-12.2, -14.6, 1.65], target: [6.0, 7.0, 11.0], lens: 20, vertical: true, augenhoehe: 1.6}   # 18.11.2026: 1,2 m nach vorn in die Pollerreihe (vorher -13,0/-15,5): Poller -11,07/-14,62 und -12,48/-13,85 stehen jetzt 52 bzw. 59 Grad seitlich, ausserhalb des Bildes (halber Bildwinkel 42 Grad); Ziel und Brennweite gleich
+  ecke:            {pos: [-12.2, -14.6, 1.65], target: [5.43, 7.47, 11.0], lens: 20, vertical: true, augenhoehe: 1.6}   # 18.11.2026: 1,2 m nach vorn in die Pollerreihe (vorher -13,0/-15,5): Poller -11,07/-14,62 und -12,48/-13,85 stehen jetzt 52 bzw. 59 Grad seitlich, ausserhalb des Bildes (halber Bildwinkel 42 Grad). Runde 7 Korrektur: Blick 1,5 Grad nach links (Ziel vorher 6,0/7,0), der Poller -1,47/-13,06 der Suedostnase stand angeschnitten am rechten Rand (X/Z 0,89, jetzt 0,94 bei Grenze 0,90; umgebung_abgleich.md 15)
   ecke_orbit:      {pos: [-7.57, -18.73, 1.65], target: [6.0, 7.0, 11.0], lens: 20, vertical: true, augenhoehe: 1.6}   # Endbild Video: 18 Grad um die Ecke gedreht
   ecke_tele:       {pos: [-24.0, -30.0, 1.65], target: [5.0, 6.0, 11.5], lens: 32, vertical: true, augenhoehe: 1.6}
   drohne:          {pos: [-40.0, -48.0, 38.0], target: [6.0, 8.0, 24.0], lens: 32, vertical: true}

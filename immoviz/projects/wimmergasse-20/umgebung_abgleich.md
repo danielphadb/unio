@@ -511,3 +511,45 @@ Bildaufbau gleich bleiben sollte; Vorschlag: z 2,8 (1,65 über Gelände) als Var
 unsichtbar, Spot nach unten 115 Grad statt 150 Grad, weiche Kante 0,35, Leistung Seil 450 auf 1800 W, Farbtemperatur
 3000 K über die Blackbody-Temperatur der Lichtquelle. Vorschau `ecke blaue_stunde` 900 x 600 (Cloud, CPU): Fahrbahn und
 Gehsteige an der Kreuzung sichtbar warm ausgeleuchtet, Teller nicht mehr ausgebrannt.
+
+## 15. Korrektur nach den 4k-Bildern runde7_basis (18.11.2026)
+
+Befunde der Mac-Sitzung (auftraege/2026-11-19_runde7_basis.md, Abschnitt Ergebnis 3 bis 5), Mac-Auftrag
+`auftraege/2026-11-19_runde7_korrektur.md`.
+
+**Poller am rechten Rand der Kamera `ecke`.** Es war der Poller -1,47/-13,06 der Südostnase (Lage am Bordstein laut
+OGD), nicht einer der Südwestecke: Projektion bei 3840 px Breite x 3823, also angeschnitten am Rand (X/Z 0,89, Grenze
+0,90 bei 20 mm). Street View 05/2024 (nur intern, Panoramen -7,01/-12,25 und -6,92/-22,59) bestätigt Poller an dieser
+Nase, und zwar fünf statt drei, trianguliert 1,02/-13,40, -0,79/-13,84, -2,27/-14,87, -3,35/-16,47, -3,66/-18,48,
+Stoppschild -3,16/-18,42. Diese Punkte liegen aber 1,2 bis 2 m hinter dem OGD-Bordstein im Gehsteig, der erste auf dem
+Parkstreifen; die Poller der Südwestecke aus derselben Triangulation (Abschnitt 14) liegen laut OGD 0,6 m auf der
+Fahrbahn. Die Panoramastandorte sind also um rund 1 m versetzt (GPS), die Triangulation taugt für Abstände, nicht für
+die absolute Lage. Deshalb Lage nicht geändert (OGD-Bordstein bleibt maßgeblich), sondern die Kamera minimal gedreht:
+Ziel 5,43/7,47 statt 6,0/7,0 (1,5 Grad nach links), der Poller steht jetzt bei X/Z 0,94 außerhalb des Bildes.
+Offen: Südostnase mit fünf Pollern statt drei und Stoppschild-Lage; Südwestpoller auf den OGD-Bordstein zurücksetzen
+(in keinem Bild sichtbar).
+
+**DG3 Seitenwange.** Die Wange u 16,85 bis 16,95 (d 0,7 bis 1,8, bis z 24,28) stand als dunkle Scheibe vor der
+DG3-Schräge (die bei z 24,28 schon bei d 3,4 liegt) und ragte damit über die Dachfläche hinaus. Gegen den Plan:
+- ANS (600 dpi, 1 m = 236 px): Einschnitt Terrasse Top 35 von u 17,26 bis 20,00 (links 0,18 m Wange, dann 2 Fenster
+  und Fixteil bis zur Kante des Eckaufbaus), Oberkante +52,59 WrN (z 23,46); darüber laufen die Deckungslinien der
+  Schräge bis zum Eckaufbau durch. Eckaufbau-Kante u 20,00, 0,44 m Wand bis zum ersten Fenster (u 20,45).
+- GR DG3 (NWG Beilage, Scan): Terrasse Top 35 lichte Breite 2,80 zwischen 0,32-m-Wänden, Fläche 6,93 m2, also Tiefe
+  2,48; die Fensterwand liegt damit bei d rund 2,76, genau dort, wo die Schräge (d 0,9 bei z 21,07 bis d 3,4 bei
+  z 24,28) die Höhe z 23,46 erreicht. Ein klassischer Dacheinschnitt.
+- Eckaufbau "Dachaufbau 1/3": Oberkante +53,91 WrN (z 24,78), 0,5 m über dem First +53,41 (Modell bisher 24,28).
+
+Geändert (`project.yaml` dach): Einschnitt u 17,26 bis 20,00, Fensterwand d 2,76 bis z 23,46 (Fenster 17,44 bis
+18,44, 18,48 bis 19,47, Fixteil 19,51 bis 19,92), Schräge Wimmergasse bis u 17,26 (ihre Endfläche ist die Wange des
+Einschnitts und folgt der Dachfläche), darüber ein Schrägenstück u 17,26 bis 20,00, z 23,46 bis 24,28 in derselben
+Ebene, Wange des Eckaufbaus u 20,00 bis 20,10 (d bis 3,4), Eckaufbau-Wand ab u 20,00, Eckaufbau-Decke auf z 24,78
+(0,5 m Plattenseite = Attika), Geländer G-W5 u 17,26 bis 20,00 (ANS Stäbe 17,2 bis 19,9). Wange u 16,85 entfernt.
+Offen: Innenmodell Top 35 (`wohnungen.yaml`) hat noch die alte Glasfront bei d 1,8 (y 5,34 bis 8,5); für
+Innenbilder nachziehen (Glasfront x 2,76, y 5,44 bis 8,18, Terrasse 0,85 bis 2,76). Stolberggasse-Eckaufbau gleiche
+Höhe angenommen (Ansicht fehlt).
+
+**Asphalt-Moiré.** Feinstruktur unter der Pixelgröße (Korn 140/m als harte Spritzer und Relief, 6-mm-Risse und Nähte,
+Foto-Textur 1,5 mm je Texel mit Normal Map) wurde bei flachem Blick gestaucht und vom Entrauschen zu waagrechten
+Linien. `lib/materials.py`: `detail_faktor` (Pixel-Fußabdruck = Abstand / cos Blickwinkel) blendet Korn, Relief,
+Normal Map und Foto-Helligkeit ab rund 2,5 m aus (ganz ab 5,7 m bei 1,6 m Augenhöhe), Risse und Nähte erst weiter
+hinten; Korn als weiche Helligkeit statt Schwellwert, Nähte 1,2 cm. Gilt für Fahrbahn, Gehsteig und Parkstreifen.
