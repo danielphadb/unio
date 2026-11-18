@@ -63,6 +63,9 @@ neubau:
     # Runde 5 (kameramatch Hof_fin): Paneelstreifen Erdbergstrasse 123 (Vorlage graubraun #ACA0A6 im Schatten)
     nb_paneel: {color: "#B9ADB2", art: putz}
     nb_weiss_005378: {color: "#F5F1EB", faktor: 0.74, art: putz}   # wie hof_ost_005378 (Nachbarkarten rechnen Farbe x 0,74)
+    # Runde 8 (Apple 13/14 des Kunden, 18.11.2026): Erkertuerme Schnirchgasse 4 und 6 in der Farbe der Hofkarten
+    nb_weiss_005379: {color: "#F4F1EC", faktor: 0.74, art: putz}
+    nb_weiss_005380: {color: "#ECE8DF", faktor: 0.74, art: putz}
     # Runde 6: Nr. 15 Gemeindebau, Balkone rotbraun und Markisen (Apple 9/8, Farbwerte geschaetzt aus dem Schatten zurueckgerechnet)
     nb_balkon_15: {color: "#3A1E17", art: putz, quelle: "Apple 9 (Balkonbruestungen rotbraun) ANN Farbwert, dunkel angesetzt, im Sonnenlicht rotbraun"}
     nb_markise_15: {color: "#C98B5E", art: einfach, rough: 0.8, quelle: "Apple 9 (Markise orange-beige) ANN Farbwert"}
@@ -163,7 +166,15 @@ neubau:
     # Runde 5 (kameramatch Hof_fin und Hof_fin-3): Schlachthausgasse 11 (005378) reicht in den Vorlagen mit einer Suedfassade bei
     # y -15,5 bis an die Ostkante des Strassenhauses (x 19,6); OGD laesst dort eine 1,6 m breite Nische offen (Hoffassade erst ab
     # x 21,2). Vorlage hat Vorrang (Nachbar): Baukoerper weiss bis zur Traufe 19,0 (Suedfassade 18,3 bis 19,1 gemessen), Ziegeldach flach angedeutet
-    - {gruppe: nb_umgebung, poly: [[19.6, -15.5], [22.0, -15.5], [21.2, -8.4], [19.6, -8.4]], z: [0.0, 19.0], wand: nb_weiss_005378, dach: dach_ziegel_rot_alt, ohne_kanten: [0, 1, 2]}
+    - {gruppe: nb_umgebung, poly: [[19.6, -15.5], [22.0, -15.5], [21.2, -8.4], [19.6, -8.4]], z: [0.0, 19.0], wand: nb_weiss_005378, dach: nb_kies, ohne_kanten: [0, 1, 2]}   # Runde 8: Dach Kies wie das Flachdach von 005378 (vorher Ziegel)
+    # Runde 8 (Kunde 18.11.2026: "die Daecher der Haeuser rund um den Innenhof stimmen alle samt nicht", Apple 13/14):
+    # Erkertuerme wieder da. Grundriss aus dem Baukoerpermodell (Vorsprung vor der Hofkarte), Traufe und Spitze aus
+    # LOD2 und Apple 13: Schnirchgasse 4 (005379) polygonaler Erker 7,4 m breit, 1,6 m tief, Traufe +16,4 ueber Sockel,
+    # Pyramidendach grau bis +19,0; Schnirchgasse 6 (005380) Erker 6,5 m breit, 3,65 m tief, Traufe +16,8, Zeltdach
+    # Ziegel orange bis +18,6. Fuer die Vorlagenkameras hof_fin und hof_fin4 (Standpunkt in 005382) ausgeblendet.
+    # Runde 5 hatte die Tuerme entfernt (Vorlage Hof_fin zeigt sie nicht), auskommentierte Fassung von Runde 3 darunter.
+    - {gruppe: nb_umgebung_erker_005379, poly: [[24.072, -31.286], [23.58, -31.371], [22.769, -33.136], [23.485, -37.274], [24.842, -38.663], [25.335, -38.578]], z: [-0.26, 16.14], wand: nb_weiss_005379, dach: nb_weiss_005379, ohne_kanten: [1, 2, 3, 5], quelle: "BKM 4003912180 (Vorsprung), LOD2 (Traufe 16,3 bis 16,9, Spitze 18,6), Apple 13"}
+    - {gruppe: nb_umgebung_erker_005380, poly: [[27.58, -51.495], [25.446, -52.88], [24.358, -54.277], [24.717, -56.346], [26.213, -57.304], [28.689, -57.89]], z: [-0.4, 16.4], wand: nb_weiss_005380, dach: nb_weiss_005380, ohne_kanten: [0, 1, 2, 3, 4, 5], quelle: "BKM 4003912229 (Vorsprung), LOD2 (Traufe 16,6 bis 17,2, Spitze 18,3), Apple 13"}
     # Runde 4: EG Hoftrakt nach EIN S. 8/15 (Aussenkanten Daemmung): Suedreihe b 0 bis Gang, Nordreihe bis zur Grundgrenze b 14,86, drei offene Hoefe (Gaerten 42,09 / 31,17 / 29,91 m2), Ostende schraeg (Top 4A darueber), Gangausgang bei a 37,65. Dachaufbauten siehe flaechen
     - {gruppe: nb_hof, rahmen: hof, poly: [[-7.318, 0.0], [38.8, 0.0], [41.36, 6.62], [37.65, 6.62], [37.65, 8.09], [36.14, 8.09], [36.14, 12.48], [30.84, 12.48], [30.84, 14.86], [25.52, 14.86], [25.52, 8.09], [21.72, 8.09], [21.72, 12.48], [16.42, 12.48], [16.42, 14.86], [10.6, 14.86], [10.6, 8.09], [5.82, 8.09], [5.82, 12.48], [0.5, 12.48], [0.5, 14.86], [-5.641, 14.86]], z: [0.0, 2.92], wand: nb_wand_hof, dach: dach_flach, ohne_kanten: [0, 3, 5, 7, 9, 10, 11, 13, 16, 17, 19, 21]}
     # Runde 4: Pavillons FOK +3,50, DUK +6,01, Attika +6,78 [EIN S. 23]; Top 4 bei a 15,90 (Abstand 3,93 laut EIN S. 16, vorher 16,04)
@@ -174,6 +185,15 @@ neubau:
     # Sandkiste mit Sonnensegel [EIN S. 18] (Segel als Dreieck, Mast 2,8 m [ANN])
     - {gruppe: nb_garten, rahmen: hof, poly: [[41.60, 8.40], [42.75, 8.40], [42.75, 9.60], [41.60, 9.60]], z: [0.0, 0.30], wand: nb_holzdeck, dach: nb_sand}
   fassaden:
+    # Runde 8: Fensterachsen der Erkertuerme Schnirchgasse 4 und 6 (je Seite eine Achse, Reihen wie die Hofkarten) [Apple 13]
+    - {gruppe: nb_umgebung_erker_005379, a: [23.58, -31.371], b: [22.769, -33.136], z: [-0.26, 16.14], wand: nb_weiss_005379, fenster: [{u: [0.47, 1.47], z: [0.94, 2.74]}, {u: [0.47, 1.47], z: [4.04, 5.74]}, {u: [0.47, 1.47], z: [7.14, 8.84]}, {u: [0.47, 1.47], z: [10.24, 11.94]}, {u: [0.47, 1.47], z: [13.34, 15.04]}]}
+    - {gruppe: nb_umgebung_erker_005379, a: [22.769, -33.136], b: [23.485, -37.274], z: [-0.26, 16.14], wand: nb_weiss_005379, fenster: [{u: [1.6, 2.6], z: [0.94, 2.74]}, {u: [1.6, 2.6], z: [4.04, 5.74]}, {u: [1.6, 2.6], z: [7.14, 8.84]}, {u: [1.6, 2.6], z: [10.24, 11.94]}, {u: [1.6, 2.6], z: [13.34, 15.04]}]}
+    - {gruppe: nb_umgebung_erker_005379, a: [23.485, -37.274], b: [24.842, -38.663], z: [-0.26, 16.14], wand: nb_weiss_005379, fenster: [{u: [0.47, 1.47], z: [0.94, 2.74]}, {u: [0.47, 1.47], z: [4.04, 5.74]}, {u: [0.47, 1.47], z: [7.14, 8.84]}, {u: [0.47, 1.47], z: [10.24, 11.94]}, {u: [0.47, 1.47], z: [13.34, 15.04]}]}
+    - {gruppe: nb_umgebung_erker_005380, a: [27.58, -51.495], b: [25.446, -52.88], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.77, 1.77], z: [0.8, 2.6]}, {u: [0.77, 1.77], z: [3.9, 5.6]}, {u: [0.77, 1.77], z: [7.0, 8.7]}, {u: [0.77, 1.77], z: [10.1, 11.8]}, {u: [0.77, 1.77], z: [13.2, 14.9]}]}
+    - {gruppe: nb_umgebung_erker_005380, a: [25.446, -52.88], b: [24.358, -54.277], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.39, 1.39], z: [0.8, 2.6]}, {u: [0.39, 1.39], z: [3.9, 5.6]}, {u: [0.39, 1.39], z: [7.0, 8.7]}, {u: [0.39, 1.39], z: [10.1, 11.8]}, {u: [0.39, 1.39], z: [13.2, 14.9]}]}
+    - {gruppe: nb_umgebung_erker_005380, a: [24.358, -54.277], b: [24.717, -56.346], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.55, 1.55], z: [0.8, 2.6]}, {u: [0.55, 1.55], z: [3.9, 5.6]}, {u: [0.55, 1.55], z: [7.0, 8.7]}, {u: [0.55, 1.55], z: [10.1, 11.8]}, {u: [0.55, 1.55], z: [13.2, 14.9]}]}
+    - {gruppe: nb_umgebung_erker_005380, a: [24.717, -56.346], b: [26.213, -57.304], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.39, 1.39], z: [0.8, 2.6]}, {u: [0.39, 1.39], z: [3.9, 5.6]}, {u: [0.39, 1.39], z: [7.0, 8.7]}, {u: [0.39, 1.39], z: [10.1, 11.8]}, {u: [0.39, 1.39], z: [13.2, 14.9]}]}
+    - {gruppe: nb_umgebung_erker_005380, a: [26.213, -57.304], b: [28.689, -57.89], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.77, 1.77], z: [0.8, 2.6]}, {u: [0.77, 1.77], z: [3.9, 5.6]}, {u: [0.77, 1.77], z: [7.0, 8.7]}, {u: [0.77, 1.77], z: [10.1, 11.8]}, {u: [0.77, 1.77], z: [13.2, 14.9]}]}
     # --- Strassenhaus Hoffassade y = -15,00, u = x - 0,80. Runde 4: 1. OG (FOK +3,98) nach Ansicht EIN S. 26 vektoriell
     # ausgewertet (Glasflaechen + Rahmen, F 18,79): Fenster 1,18 x 1,45 und 1,40 x 1,45 FPH 0,90, Terrassentueren 1,00 x 2,32,
     # Stiegenhaustuer zum Weg 0,90 x 2,57 (vorher zwei 2,20 m breite Tueren und 1,00 m breite Fenster geschaetzt).
@@ -582,6 +602,19 @@ neubau:
     - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [6.86, 6.885], mat: nb_basalt}
     - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [7.14, 7.165], mat: nb_basalt}
   schraegen:
+    # Runde 8: Erkerdaecher Schnirchgasse 4 (Pyramide schiefergrau, Spitze 1 m hinter der Hofwand) und 6 (Zeltdach Ziegel orange) [LOD2, Apple 13]
+    - {gruppe: nb_umgebung_erker_005379, pts: [[24.072, -31.286, 16.14], [23.58, -31.371, 16.14], [25.689, -34.761, 18.74]], mat: dach_schiefer_dunkel}
+    - {gruppe: nb_umgebung_erker_005379, pts: [[23.58, -31.371, 16.14], [22.769, -33.136, 16.14], [25.689, -34.761, 18.74]], mat: dach_schiefer_dunkel}
+    - {gruppe: nb_umgebung_erker_005379, pts: [[22.769, -33.136, 16.14], [23.485, -37.274, 16.14], [25.689, -34.761, 18.74]], mat: dach_schiefer_dunkel}
+    - {gruppe: nb_umgebung_erker_005379, pts: [[23.485, -37.274, 16.14], [24.842, -38.663, 16.14], [25.689, -34.761, 18.74]], mat: dach_schiefer_dunkel}
+    - {gruppe: nb_umgebung_erker_005379, pts: [[24.842, -38.663, 16.14], [25.335, -38.578, 16.14], [25.689, -34.761, 18.74]], mat: dach_schiefer_dunkel}
+    - {gruppe: nb_umgebung_erker_005379, pts: [[25.335, -38.578, 16.14], [24.072, -31.286, 16.14], [25.689, -34.761, 18.74]], mat: dach_schiefer_dunkel}
+    - {gruppe: nb_umgebung_erker_005380, pts: [[27.58, -51.495, 16.4], [25.446, -52.88, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_orange}
+    - {gruppe: nb_umgebung_erker_005380, pts: [[25.446, -52.88, 16.4], [24.358, -54.277, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_orange}
+    - {gruppe: nb_umgebung_erker_005380, pts: [[24.358, -54.277, 16.4], [24.717, -56.346, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_orange}
+    - {gruppe: nb_umgebung_erker_005380, pts: [[24.717, -56.346, 16.4], [26.213, -57.304, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_orange}
+    - {gruppe: nb_umgebung_erker_005380, pts: [[26.213, -57.304, 16.4], [28.689, -57.89, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_orange}
+    - {gruppe: nb_umgebung_erker_005380, pts: [[28.689, -57.89, 16.4], [27.58, -51.495, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_orange}
     # Runde 4: Decke des EG-Ruecksprungs unter dem Strassenhaus (Unterseite DUK +3,50, Normale nach unten) [EIN S. 8]
     - {gruppe: nb_shg, rahmen: hof, pts: [[-10.17, -3.42, 3.50], [-10.17, 0.0, 3.50], [-7.32, 0.0, 3.50], [-7.70, -3.42, 3.50]], mat: nb_wand_hof_eg}
     # Runde 6: Dach Strassenhaus nach EIN S. 13 (2. DG), S. 14 (Dachdraufsicht), S. 23 (Schnitt 1), S. 26 (Ansicht): Hofseite 45 Grad von der Traufe +21,00 an der BFL
@@ -1047,10 +1080,10 @@ cameras:
   weg_pavillons:          {pos: [14.12, -35.24, 5.1], target: [3.62, -36.27, 4.4], lens: 20, vertical: true}    # Verbindungsweg zwischen den Pavillons (a 13,9 / b 7,55, Weg +3,50), Blick ueber die Terrasse Top 3: links Pergolawand Top 4, rechts HST Top 3
   # verworfen Runde 7 (Vorschau): Weg a -1,5 und Podest a -3,0 entlang der Pavillons (nur Nordwand Top 3 sichtbar, Top 4 verdeckt)
   # Runde 5: Kameras der Vorlagen SHG13_Hof_fin, -2, -3, -4 aus `immoviz.py kameramatch` (Punkte in kameramatch/*.yaml)
-  hof_fin: {pos: [28.451, -70.713, 11.12], target: [5.037, -51.957, 11.12], lens: 19.09, shift: [0.0678, -0.0742], format: [1920, 1080], clip_start: 2.7, vertical: true}   # kameramatch SHG13_Hof_fin.jpg, 17 Punkte, Fehler 4.9 px = 0.26 % Bildbreite
+  hof_fin: {pos: [28.451, -70.713, 11.12], target: [5.037, -51.957, 11.12], lens: 19.09, shift: [0.0678, -0.0742], format: [1920, 1080], clip_start: 2.7, vertical: true, ausblenden: [nb_umgebung_erker_]}   # kameramatch SHG13_Hof_fin.jpg, 17 Punkte, Fehler 4.9 px = 0.26 % Bildbreite
   hof_fin2: {pos: [9.337, -29.774, 14.279], target: [1.172, -0.907, 14.279], lens: 19.42, shift: [0.2861, 0.2989], format: [1920, 1284], vertical: true}   # kameramatch SHG13_Hof_fin-2.jpg, 6 Punkte, Fehler 6.5 px = 0.34 % Bildbreite
   hof_fin3: {pos: [24, -55, 6.5], target: [18.006, -25.605, 6.5], lens: 102.61, shift: [-0.0032, -0.0624], format: [1920, 1292], vertical: true}   # kameramatch SHG13_Hof_fin-3.jpg, 10 Punkte, Fehler 6.5 px = 0.34 % Bildbreite
-  hof_fin4: {pos: [27.575, -68.476, 11], target: [4.491, -49.315, 11], lens: 52.08, shift: [0.1042, -0.3428], format: [1920, 1166], clip_start: 0.3, vertical: true}   # kameramatch SHG13_Hof_fin-4.jpg, 10 Punkte, Fehler 12.9 px = 0.67 % Bildbreite
+  hof_fin4: {pos: [27.575, -68.476, 11], target: [4.491, -49.315, 11], lens: 52.08, shift: [0.1042, -0.3428], format: [1920, 1166], clip_start: 0.3, vertical: true, ausblenden: [nb_umgebung_erker_]}   # kameramatch SHG13_Hof_fin-4.jpg, 10 Punkte, Fehler 12.9 px = 0.67 % Bildbreite
 
 lights:
   spaetsommer:  {date: "2026-08-27", time: "16:20", tz: 2, exposure: 0.0, interior: 0.0, aerosol: 2.0, season: spaetsommer}   # Sonne 32,6 Grad, Azimut 246 Grad
@@ -1069,29 +1102,29 @@ render:
 neighbour_facades:
   hof_ost_005379:               # Schnirchgasse 4 (Nr. 2), Hoftrakt Ost gegenueber Top 3. Runde 5 nach kameramatch Hof_fin (Vorlage hat
     bezug: "005379"               # Vorrang): Traufe 18,6 statt 16,3 [OGD], keine Erkertuerme, weiss, Fensterreihen aus der Vorlage
-    a: [23.0, -25.0]              # gemessen (Unterkanten +8,0/+14,1 am Strahlschnitt), Ziegeldach um +2,3 gehoben (roofs_override)
+    a: [23.0, -25.0]              # gemessen (Unterkanten +8,0/+14,1 am Strahlschnitt); Runde 8: Traufe wieder 15,9, Erker in neubau
     b: [26.4, -44.9]
-    height: 18.6
+    height: 15.9                  # Runde 8 (Apple 13): Traufe 15,9 wie LOD2, EG + 4 OG; vorher 18,6 nach der Vorlage
     color: "#F4F1EC"              # Vorlage Mitteltoene #FCFCF8 (besonnt), Runde 3 #ECE9E2
     style: plain
     frame: stuck
     axes: {n: 8, margin: 1.2}
-    rows: {eg: {z: 1.2, h: 2.0, w: 1.0}, z0: 4.7, step: 3.3, n: 4, h: 2.0, w: 1.0}
+    rows: {eg: {z: 1.2, h: 1.8, w: 1.0}, z0: 4.3, step: 3.1, n: 4, h: 1.7, w: 1.0}
   hof_ost_005380:               # Hoftrakt Wuertzlerstrasse (Gruenderzeit), 3 bis 4 % in den Gartenkameras. Runde 2: weiss, weisse
     bezug: "005380"               # Fensterrahmen, Ziegeldach laut Vorlage SHG13_Hof_fin (rechter Bildrand) und LOD2 (vorher beige)
     a: [26.5, -45.2]
     b: [29.9, -64.6]
-    height: 15.9
+    height: 15.7                  # Runde 8 (Apple 13): Traufe und Fensterreihen durchlaufend wie Schnirchgasse 4 (EG + 4 OG)
     color: "#ECE8DF"
     style: plain
     frame: stuck
     axes: {n: 8, margin: 1.2}
-    rows: {eg: {z: 1.0, h: 1.7, w: 1.0}, z0: 4.4, step: 3.4, n: 3, h: 1.7, w: 1.0}
+    rows: {eg: {z: 1.0, h: 1.8, w: 1.0}, z0: 4.3, step: 3.1, n: 4, h: 1.7, w: 1.0}
   hof_ost_005378:               # Schlachthausgasse 11 / Schnirchgasse 2 (Nr. 1), Hofseite neben dem Strassenhaus. Runde 5 nach kameramatch
-    bezug: "005378"               # Hof_fin: Traufe 19,0 statt 21,6 [OGD], Ziegel-Walm bis +23 (Vorlage; Apple zeigt Flachdach mit Terrassen),
+    bezug: "005378"               # Runde 5 nach Hof_fin: Traufe 19,0 statt 21,6 [OGD]; Runde 8 nach Apple 13: Flachdach 21,6 mit Terrassen,
     a: [21.2, -12.0]              # weiss, Fenster weiss gerahmt mit Faschen, Reihen am Strahlschnitt gemessen (Fenster 8,4 bis 11,0 und
     b: [22.8, -19.0]              # 14,6 bis 17,4). Traufe an der Hofecke 20,2 gemessen, an der Suedfassade 18,3 bis 19,1
-    height: 20.0
+    height: 21.6                  # Runde 8 (Apple 13): Flachdach auf 21,6 [OGD], sechste Fensterreihe; vorher 20,0 nach der Vorlage
     color: "#F5F1EB"              # Vorlage Mitteltoene #F7F2EC
     stuck_color: "#FAF8F3"
     style: plain
@@ -1103,6 +1136,7 @@ neighbour_facades:
       - {z: 8.4, h: 2.7, w: 1.0, surround: fasche}
       - {z: 11.5, h: 2.7, w: 1.0, surround: fasche}
       - {z: 14.6, h: 2.7, w: 1.0, surround: fasche}
+      - {z: 17.7, h: 2.4, w: 1.0, surround: fasche}
   hof_west_005363:              # Erdbergstrasse 123 (Nr. 9), Ostfassade zum Nachbargarten. Runde 5 nach kameramatch Hof_fin: 8 Geschosse +
     bezug: "005363"               # Dachgeschoss, Oberkante 24,8 statt 19,9 [OGD], Fassade beginnt 2,5 m weiter suedlich (y -55,8), weiss mit
     a: [-22.7, -55.8]             # graubraunen Paneelstreifen zwischen den Fensterbaendern (neubau boxen nb_umgebung), Geschoss 2,9 m
@@ -1151,7 +1185,7 @@ neighbour_facades:
     axes: {n: 3, margin: 1.0}
     rows: {z0: 2.35, step: 2.75, n: 7, h: 1.5, w: 1.2}   # Runde 5: Fensteroberkanten 6,6 bis 20,4 (Vorlage)
   hof_west_005364:              # Erdbergstrasse 125 (Nr. 8), Ostfassade. Runde 5 nach kameramatch Hof_fin: weiss mit weiss gerahmten Fenstern
-    bezug: "005364"               # (statt hellgrau modern), Traufe 20,8 (Vorlage und OGD gleich), dunkle Blechmansarde bis +25 (roofs_override),
+    bezug: "005364"               # (statt hellgrau modern), Traufe 20,8 (Vorlage und OGD gleich); Runde 8: dunkle Dachgeschosskaesten (roofs_override),
     a: [-23.1, -64.7]             # Fassade endet bei y -55,8 (dort beginnt 005363 in der Vorlage)
     b: [-23.7, -55.8]
     height: 20.8
@@ -1199,16 +1233,29 @@ neighbour_facades:
 roofs_override:
   # (1) Schlachthausgasse 11 / Schnirchgasse 2. Runde 5: Vorlage Hof_fin zeigt Traufe 19 bis 20 und Ziegeldach bis rund +23 (Strahlschnitt);
   # vorher Flachdach Kies nach Apple 9/10/11 (Bestand). Vorlage hat Vorrang (Kundenwunsch), Widerspruch in umgebung_abgleich.md 9
-  - {bezug: "005378", material: ziegel_rot_alt, dach: {form: mansarde, traufe: 20.0, first: 23.5, neigung: 50}}
-  - {bezug: "005379", material: ziegel_rot_alt, gauben: {anzahl: 4, seiten: ["-x"]}, kamine: 3,
-     dach: {form: mansarde, traufe: 18.6, first: 23.0, neigung: 50}}   # Runde 5: Traufe 18,6 laut Vorlage Hof_fin (LOD2 16,3), Dach parametrisch   # (2) Schnirchgasse 4: rotbraunes Ziegeldach mit Gauben zum Hof (Apple 10)
-  - {bezug: "005380", material: ziegel_rot_alt, gauben: {anzahl: 3, seiten: ["-x"]}, kamine: 2,
-     dach: {form: mansarde, traufe: 15.9, first: 20.3, neigung: 50}}   # Runde 5: parametrisch ueber dem beschnittenen Grundriss
+  # Runde 8 (Apple 13/14, 18.11.2026): Flachdach mit Dachterrassen auf +21,6 [OGD, LOD2 21,9] wie im Bestand; Aufbauten [ANN Lage]
+  - {bezug: "005378", material: kies, dach: {form: flach, traufe: 21.6},
+     aufbauten: [{pos: [27.5, -14.0], l: 3.2, b: 2.6, z1: 24.3, z0: 21.6, material: blech_hell}, {pos: [26.0, -4.5], l: 4.0, b: 3.0, z1: 24.0, z0: 21.6, material: blech_hell}]}
+  # Runde 8 (Apple 13): Satteldach Ziegel rotbraun, Traufe 15,9 und First 19,4 wie LOD2, sechs Kaminkoepfe am First,
+  # zwei kleine Gauben zum Hof; Erkerturm mit Pyramidendach in neubau (nb_umgebung_erker_005379). Vorher Mansarde 18,6 bis 23,0 (Vorlage)
+  - {bezug: "005379", material: ziegel_rot, gauben: {anzahl: 2, breite: 0.8, hoehe: 0.8, seiten: ["-x"]}, kamine: 6,
+     dach: {form: sattel, traufe: 15.9, first: 19.4}}   # Runde 5: Traufe 18,6 laut Vorlage Hof_fin (LOD2 16,3), Dach parametrisch   # (2) Schnirchgasse 4: rotbraunes Ziegeldach mit Gauben zum Hof (Apple 10)
+  # Runde 8 (Apple 13): Satteldach Ziegel orange, Traufe 15,7 und First 19,2 wie LOD2, fuenf Kaminkoepfe, zwei kleine Gauben;
+  # Erkerturm mit Zeltdach in neubau (nb_umgebung_erker_005380). Vorher Mansarde 15,9 bis 20,3
+  - {bezug: "005380", material: ziegel_orange, gauben: {anzahl: 2, breite: 0.8, hoehe: 0.8, seiten: ["-x"]}, kamine: 5,
+     dach: {form: sattel, traufe: 15.7, first: 19.2}}   # Runde 5: parametrisch ueber dem beschnittenen Grundriss
      # (3) Schnirchgasse 6 (Apple 10, LOD2 vorher Ziegel dunkel); die LOD2-Flaechen des entfernten Erkers standen 2,3 m vor der Karte ueber
   - {bezug: "005382", material: ziegel_rot, kamine: 2}                                   # (4) Schnirchgasse 8 / Wuertzlerstrasse 8: rotes Ziegeldach (Apple 10)
   - {bezug: "005387", material: blech_hell}                                              # (5) Wuertzlerstrasse 12: helles Flachdach mit Aufbauten (Apple 9/10)
-  - {bezug: "005362", material: blech_hell, gauben: {anzahl: 8, breite: 1.2, seiten: ["-y"]}}   # Runde 5: helles Blech wie Vorlage Hof_fin (vorher grau)  # (10) Schlachthausgasse 15/17: graue Blechmansarde mit Gauben zum Hof (Apple 10/11, Visualisierung Hof_fin-2)
+  - {bezug: "005362", material: blech, gauben: {anzahl: 8, breite: 1.2, seiten: ["-y"]}}   # Runde 8: mittelgrau wie Apple 14 (vorher helles Blech nach der Vorlage)   # Runde 5: helles Blech wie Vorlage Hof_fin (vorher grau)  # (10) Schlachthausgasse 15/17: graue Blechmansarde mit Gauben zum Hof (Apple 10/11, Visualisierung Hof_fin-2)
   # Runde 5 (kameramatch Hof_fin, umgebung_abgleich.md Abschnitt 9)
   - {pos: [-23.2, -45.0], dz: 4.9}                                                       # (9) Erdbergstrasse 123, Ostteil: 24,8 statt 19,9 (Vorlage)
-  - {bezug: "005364", material: blech_dunkel, dach: {form: mansarde, traufe: 20.8, first: 25.0, neigung: 65}}   # (8) Erdbergstrasse 125: dunkle Blechmansarde (Vorlage)
+  # (8) Erdbergstrasse 125. Runde 8 (Kunde 18.11.2026 "dieser Teil ist noch falsch", Apple 14): kein Mansarddach, sondern
+  # zwei dunkle, kastenfoermige Dachgeschosse mit senkrechten Waenden und Terrassen auf der weissen Hoffassade; Oberkante
+  # etwa wie Erdbergstrasse 123 (24,8). Flachdach dunkel auf der eigenen Traufe je Baukoerperteil (20,8 / 22,2 [OGD]),
+  # Aufbauten [ANN Lage und Hoehe, Apple 14]. Vorher Mansarde 65 Grad bis 25,0, die ueber dem verwinkelten Grundriss einknickte
+  - {bezug: "005364", material: blech_dunkel, dach: {form: flach},
+     aufbauten: [{pos: [-26.2, -61.0], l: 10.0, b: 5.0, z0: 20.8, z1: 23.6, drehung: 93.0, material: blech_dunkel, material_oben: blech_dunkel},
+                 {pos: [-27.3, -58.6], l: 4.6, b: 3.6, z0: 23.6, z1: 25.4, drehung: 93.0, material: blech_dunkel, material_oben: blech_dunkel},
+                 {pos: [-21.6, -67.0], l: 4.0, b: 3.2, z0: 22.2, z1: 24.6, drehung: 93.0, material: blech_dunkel, material_oben: blech_dunkel}]}
   - {pos: [3.0, -66.5], dz: 1.7}                                                          # (5) Wuertzlerstrasse 12, Hoftrakt: Ostwand hoeher (Vorlage)

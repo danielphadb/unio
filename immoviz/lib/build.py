@@ -923,6 +923,17 @@ def setup_camera(scene, cfg, name):
         cam.shift_x, cam.shift_y = c["shift"]
     if c.get("clip_start"):   # Standpunkt der Vorlage in einem Nachbarbaukoerper: Wand wegschneiden
         cam.clip_start = c["clip_start"]
+    # `ausblenden: [namensanfang, ...]`: Objekte nur fuer diese Kamera nicht rendern (z. B. Erkertuerme der Nachbarn
+    # vor einer gematchten Kamera, die in einem Nachbarbaukoerper steht); die naechste Kamera bekommt sie zurueck
+    for n in list(scene.get("_kam_ausgeblendet", [])):
+        o = bpy.data.objects.get(n)
+        if o is not None:
+            o.hide_render = False
+    weg = [o.name for o in scene.objects
+           if not o.hide_render and any(o.name.startswith(p) for p in c.get("ausblenden") or [])]
+    for n in weg:
+        bpy.data.objects[n].hide_render = True
+    scene["_kam_ausgeblendet"] = weg
     ob.location = (px, py, pz)
     scene.camera = ob
     return ob

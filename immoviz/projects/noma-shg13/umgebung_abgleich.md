@@ -280,6 +280,42 @@ Offen: Ostfassade (nicht modelliert, aus den Hofkameras nicht sichtbar), genaue 
 (Apple zeigt die oberen drei Geschoße bläulich-hell, Vorgabe war "dunkleres Oberteil"; im Modell leicht dunkler abgesetzt).
 
 
+## 11. Runde 8: Dächer rund um den Innenhof (Apple 13/14, 18.11.2026)
+
+Kundenfeedback: "die dächer der hause rund um den innenhof bei noma stimmen alle samt nicht", dazu zwei Apple-Maps-3D-
+Schrägsichten (`renders/streetview/referenz_apple_kunde/apple_13_ost.webp` Blick nach Osten auf die Schnirchgasse,
+`apple_14_west.webp` Blick nach Westen auf die Erdbergstraße; gitignored, nur Ansicht). Abgleich mit Drohnenansichten
+des Modells aus denselben Richtungen (Prüfbogen im Scratchpad, nicht im Repo).
+
+**Ursache:** Runde 5 hat die Hoftrakte der Schnirchgasse nach der Projektvisualisierung `SHG13_Hof_fin` angeglichen
+(Traufen höher, Mansarden statt Satteldach, Erkertürme entfernt). Apple 13 zeigt den Bestand und bestätigt die Höhen
+aus OGD und LOD2: Schnirchgasse 4 und 6 haben Satteldächer mit Kaminköpfen am First, die Traufe liegt rund zwei
+Geschoße unter dem Flachdach von Schlachthausgasse 11. Die Visualisierung ist künstlerisch; für die Dächer gilt jetzt
+wieder der Bestand.
+
+| Nr | Haus | vorher (Runde 5, Vorlage) | nachher (Runde 8, Apple 13/14 und LOD2) |
+|---|---|---|---|
+| 1 | 005378 Schlachthausgasse 11 / Schnirchgasse 2 | Traufe 20,0, Ziegel-Mansarde bis +23,5 | Flachdach Kies auf 21,6 [OGD, LOD2 21,9] mit zwei Dachaufbauten [ANN Lage], Hofkarte bis 21,6 mit sechster Fensterreihe; Nischenkörper zum Straßenhaus Dach Kies |
+| 2 | 005379 Schnirchgasse 4 | Traufe 18,6, Mansarde bis 23,0, 4 Gauben, 3 Kamine, kein Erker | Satteldach Ziegel rotbraun, Traufe 15,9, First 19,4 (LOD2), 6 Kaminköpfe, 2 kleine Gauben; polygonaler Erkerturm (7,4 m breit, 1,6 m tief, Lage aus dem Baukörpermodell) mit schiefergrauem Pyramidendach bis +19,0; Hofkarte EG + 4 OG |
+| 3 | 005380 Schnirchgasse 6 | Mansarde 15,9 bis 20,3, 3 Gauben, 2 Kamine, kein Erker | Satteldach Ziegel orange, Traufe 15,7, First 19,2 (LOD2), 5 Kaminköpfe, 2 kleine Gauben; Erkerturm (6,5 m breit, 3,65 m tief, Baukörpermodell) mit Zeltdach Ziegel orange bis +18,6; Fensterreihen durchlaufend wie Nr. 2 |
+| 10 | 005362 Schlachthausgasse 15/17 | helles Blech | mittelgraues Blech wie Apple 14, Gauben unverändert |
+| 8 | 005364 Erdbergstraße 125 | dunkle Blechmansarde 65 Grad bis 25,0 (knickte über dem verwinkelten Grundriss ein, schwarze Kerbe) | Kundenhinweis "dieser teil ist noch falsch": Flachdach dunkel auf der eigenen Traufe (20,8 / 22,2 [OGD]), darauf drei dunkle Dachgeschoßkästen mit senkrechten Wänden (20,8 bis 23,6 an der Hoffassade, 23,6 bis 25,4 zurückversetzt, Eckteil 22,2 bis 24,6) wie Apple 14 [ANN Lage und Höhe] |
+
+Unverändert, weil Apple 14 das Modell bestätigt: 005363 Flachdach, 005382 Ziegeldach aus
+LOD2, 005387 helles Flachdach.
+
+**Erkertürme und Vorlagenkameras:** Die gematchten Kameras `hof_fin` und `hof_fin4` stehen im Eckhaus Schnirchgasse 8
+(005382); der Erker von Nr. 6 stünde 10 bis 15 m davor und verdeckte die halbe Vorlage. Neue Kameraoption `ausblenden`
+(lib/build.py): diese beiden Kameras blenden die Gruppen `nb_umgebung_erker_*` aus, alle anderen zeigen sie.
+Für Traufen und Dächer weicht `hof_fin` damit bewusst von der Vorlage ab (Bestand hat Vorrang vor der Visualisierung).
+
+**Nebenänderungen:** Neubau-Gruppen `nb_umgebung*` zählen in den Render-Ebenen jetzt zu `nachbarn` statt zum Objekt
+(lib/ebenen.py, `NACHBAR_GRUPPEN`), damit Nachbarteile nicht als Gebäude geschützt werden; die Quellenprüfung ordnet
+Fassaden und Körper dieser Gruppen den Nachbarn zu (lib/quellen.py). Quellenprüfung Noma: 21 statt 23 Befunde.
+
+Offen: Dachaufbauten und Terrassen auf 005378 nur angedeutet (Lage geschätzt); Dachgeschoßkästen auf 005364 ohne Fenster; Fensterraster der Erkertürme je Seite
+eine Achse; Kaminköpfe im Modell schmaler als im Bestand.
+
 ## Straßenleuchten (18.11.2026)
 
 Erhoben aus Street View 04/2026 (nur intern, `renders/streetview/leuchten/`), Inventar `strassenleuchten` in

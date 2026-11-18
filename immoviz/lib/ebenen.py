@@ -83,6 +83,10 @@ REGELN = [
      "material": r"nachbar|^nb_|dach|fassade|kamin|glas|fenster|rahmen|stuck|brandwand|balkon|fern_|tor$"},
 ]
 
+# Neubau-Gruppen, die Nachbarn darstellen (Gaerten, Erkertuerme, Balkone der Nachbarhaeuser): zaehlen nicht zum Objekt,
+# auch wenn sie in der Collection "Objekt" liegen (lib/neubau.py baut alle Gruppen dort hinein)
+NACHBAR_GRUPPEN = r"^nb_umgebung"
+
 TIEFE_MIN, TIEFE_MAX = 0.1, 30000.0      # m, logarithmische Kodierung (16 Bit: rund 0,02 % der Entfernung je Stufe)
 KANTE_TIEFE = 0.03                        # relativer Tiefensprung zwischen Nachbarpixeln (3 %) = Kante
 KANTE_NORMALE_GRAD = 25.0                 # Winkel zwischen Nachbarnormalen = Kante
@@ -176,7 +180,8 @@ def vorbereiten(scene) -> dict:
         colls = []
         for c in ob.users_collection:
             colls += kette(c.name)
-        ist_objekt = any(c == "Objekt" for c in colls) or bool(re.match(r"^(hero|nb)_", ob.name))
+        ist_objekt = (any(c == "Objekt" for c in colls) or bool(re.match(r"^(hero|nb)_", ob.name))) \
+            and not re.match(NACHBAR_GRUPPEN, ob.name)
         slots = [s.material for s in getattr(ob, "material_slots", []) if s.material] or [None]
         for m in slots + [None]:
             k = klasse_fuer(ob.name, m.name if m else None, colls, ist_objekt)

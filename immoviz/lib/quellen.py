@@ -295,8 +295,8 @@ def pruefen(pdir: Path) -> dict:
                 if not re.search(filt, eigen + " " + " ".join(direkt)):
                     continue
             k_eff = klasse
-            if klasse == "gelaender" and str(getattr(wert, "get", lambda *_: "")("gruppe") or "").startswith("nb_umgebung"):
-                k_eff = "nachbar"           # Balkonbruestungen der Nachbarhaeuser: Umgebung, nicht Planelement
+            if str(getattr(wert, "get", lambda *_: "")("gruppe") or "").startswith("nb_umgebung"):
+                k_eff = "nachbar"           # Balkonbruestungen, Erkertuerme, Fenster der Nachbarhaeuser: Umgebung, nicht Planelement
             klasse = k_eff
             schluessel = (klasse, datei, z)
             if schluessel in gesehen:            # YAML-Anker (<<: *top04) zeigen auf dieselben Zeilen
