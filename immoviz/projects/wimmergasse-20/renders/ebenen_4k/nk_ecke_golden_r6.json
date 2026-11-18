@@ -1,0 +1,303 @@
+{
+ "vorschau": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/wimmergasse-20_ecke_golden_hour_final.png",
+ "veredelt": "immoviz/projects/wimmergasse-20/renders/higgsfield/ecke_golden_r6.jpg",
+ "status": "zur Pruefung",
+ "score": 12,
+ "schwelle": 400.0,
+ "score_struktur": 12,
+ "score_ausschnitt": 0,
+ "massstab": 0.9999,
+ "schiebung_prozent": 0.0,
+ "deckung": 0.859,
+ "befunde": [
+  "10 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+  "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.8547, praezise 0.743); Bauteile veraendert oder versetzt?",
+  "Schutzzone leuchten: Kanten weichen ab (vollstaendig 0.3798, praezise 0.8004); Bauteile veraendert oder versetzt?",
+  "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.9045, praezise 0.8077); Bauteile veraendert oder versetzt?",
+  "Schutzzone gebaeude: Kanten weichen ab (vollstaendig 0.8723, praezise 0.7533); Bauteile veraendert oder versetzt?",
+  "Fassade stolberggasse: 39 Fenster im Render, 41 im KI-Bild (2 neu, 0 fehlen)"
+ ],
+ "merkmale": {
+  "senkrechte_neu": 0.0,
+  "senkrechte_neu_glatt": 0.0,
+  "senkrechte_fehlt": 0.0,
+  "andere_neu": 472.7,
+  "andere_neu_glatt": 122.5,
+  "oeffnungen": 0,
+  "oeffnungen_flaeche_prozent": 0
+ },
+ "oeffnungen": [],
+ "stellen": [
+  {
+   "art": "neu",
+   "box": [
+    0.48,
+    0.234,
+    0.505,
+    0.406
+   ],
+   "pixel": 165,
+   "lange_senkrechte_px": 144,
+   "auf_glatter_flaeche": 0.08,
+   "score": 33.0
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.003,
+    0.85,
+    0.21,
+    0.891
+   ],
+   "pixel": 584,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 23.8
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.592,
+    0.803,
+    0.777,
+    0.834
+   ],
+   "pixel": 323,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 19.3
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.874,
+    0.822,
+    0.966,
+    0.889
+   ],
+   "pixel": 192,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 17.9
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.434,
+    0.822,
+    0.561,
+    0.855
+   ],
+   "pixel": 240,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 9.7
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.495,
+    0.217,
+    0.62,
+    0.326
+   ],
+   "pixel": 260,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 9.5
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.116,
+    0.584,
+    0.169,
+    0.666
+   ],
+   "pixel": 164,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 7.5
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.292,
+    0.832,
+    0.417,
+    0.855
+   ],
+   "pixel": 211,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 6.2
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.501,
+    0.633,
+    0.577,
+    0.67
+   ],
+   "pixel": 111,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 6.0
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.794,
+    0.857,
+    0.845,
+    0.877
+   ],
+   "pixel": 60,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 5.9
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.0,
+    0.139,
+    0.375,
+    0.176
+   ],
+   "pixel": 1480,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 43.4
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.73,
+    0.053,
+    1.0,
+    0.119
+   ],
+   "pixel": 1031,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 30.2
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.414,
+    0.945,
+    0.908,
+    0.996
+   ],
+   "pixel": 945,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 27.7
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.001,
+    0.947,
+    0.185,
+    0.975
+   ],
+   "pixel": 298,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 9.8
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.236,
+    0.945,
+    0.393,
+    0.967
+   ],
+   "pixel": 252,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 7.9
+  }
+ ],
+ "schutzzonen": {
+  "ausrichtung": {
+   "modell": "homographie",
+   "kantenabstand_mittel_px": 0.92,
+   "massstab": 0.9909
+  },
+  "zonen": {
+   "fenster": {
+    "anteil_prozent": 4.63,
+    "kanten_f1": 0.795,
+    "kanten_vollstaendig": 0.8547,
+    "kanten_praezision": 0.743,
+    "kantenabstand_mittel_px": 1.04,
+    "gradienten_korrelation": 0.3519,
+    "status": "abweichung"
+   },
+   "leuchten": {
+    "anteil_prozent": 0.5,
+    "kanten_f1": 0.5152,
+    "kanten_vollstaendig": 0.3798,
+    "kanten_praezision": 0.8004,
+    "kantenabstand_mittel_px": 7.8,
+    "gradienten_korrelation": -0.0192,
+    "status": "abweichung"
+   },
+   "gelaender": {
+    "anteil_prozent": 0.5,
+    "kanten_f1": 0.8534,
+    "kanten_vollstaendig": 0.9045,
+    "kanten_praezision": 0.8077,
+    "kantenabstand_mittel_px": 1.23,
+    "gradienten_korrelation": 0.3711,
+    "status": "abweichung"
+   },
+   "gebaeude": {
+    "anteil_prozent": 19.27,
+    "kanten_f1": 0.8085,
+    "kanten_vollstaendig": 0.8723,
+    "kanten_praezision": 0.7533,
+    "kantenabstand_mittel_px": 1.19,
+    "gradienten_korrelation": 0.5599,
+    "status": "abweichung"
+   }
+  },
+  "fenster_je_fassade": {
+   "wimmergasse": {
+    "render": 58,
+    "ki": 59,
+    "ki_gefunden": 58,
+    "ki_neu": 1,
+    "render_fehlt": 0
+   },
+   "stolberggasse": {
+    "render": 39,
+    "ki": 41,
+    "ki_gefunden": 39,
+    "ki_neu": 2,
+    "render_fehlt": 0
+   }
+  },
+  "befunde": [
+   "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.8547, praezise 0.743); Bauteile veraendert oder versetzt?",
+   "Schutzzone leuchten: Kanten weichen ab (vollstaendig 0.3798, praezise 0.8004); Bauteile veraendert oder versetzt?",
+   "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.9045, praezise 0.8077); Bauteile veraendert oder versetzt?",
+   "Schutzzone gebaeude: Kanten weichen ab (vollstaendig 0.8723, praezise 0.7533); Bauteile veraendert oder versetzt?",
+   "Fassade stolberggasse: 39 Fenster im Render, 41 im KI-Bild (2 neu, 0 fehlen)"
+  ],
+  "grenzen": {
+   "fenster": 0.9,
+   "leuchten": 0.85,
+   "gelaender": 0.9,
+   "gebaeude": 0.85
+  },
+  "status": "zur Pruefung"
+ },
+ "markierung": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/nk_ecke_golden_r6.jpg"
+}

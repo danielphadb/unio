@@ -1,8 +1,8 @@
 # Auftrag ebenen_test
 
-Status: offen
+Status: erledigt
 Erstellt: 18.11.2026, Cloud-Sitzung
-Erledigt:
+Erledigt: 18.11.2026, Mac-Sitzung
 
 ## Ziel
 Render-Ebenen und Schutz-Kompositing in Endauflösung prüfen: 4k-Render der Kamera `ecke` (Wimmergasse 20,
@@ -60,4 +60,64 @@ Unter "Ergebnis" eintragen und pushen:
    Maskenkante sichtbar? Fenster scharf? Farbstimmung passend?
 
 ## Ergebnis
-(von der Mac-Sitzung auszufüllen)
+
+cv2 5.0.0, scipy 1.18.1 (opencv-python-headless 5.0.0.93, siehe MAC_SETUP: 5.1 hat kein Wheel für macOS 14).
+Grading nicht ausgeführt (Referenzordner liegt nicht auf dem Mac).
+
+### 1. Render mit Ebenen
+- Gerät: Metal, Apple M3 Max (GPU, 30 Kerne), Blender 5.2.4 LTS.
+- `"sekunden"` gesamt 232, davon Ebenen schreiben (`renders[0].ebenen.sekunden`) 9,6.
+- Maximaler Speicher (RSS) 5,21 GB (ohne Ebenen 4,16 GB).
+- Keine EXR-, Speicher- oder OpenCV-Fehler. 18 Ebenen-PNGs geschrieben (tiefe.png 3,9 MB, normalen.png 7,4 MB).
+
+### 2. ebenen.json
+- `schutz_anteil_prozent`: 29,4 (Schutzkante 2 px).
+- `nicht_zugeordnet`: leer.
+- Anteile über 0,1 %: himmel 33,0, boden 20,1, gebaeude_objekt 19,2, nachbarn 9,7, baeume 7,6, autos 3,9,
+  fenster_glas 2,8, fenster_rahmen 1,9, strassenmoebel 0,64, leuchten 0,50, gelaender 0,50,
+  menschen_platzhalter 0,13; sonstige 0,0.
+
+### 3. schutz
+| | mit Autos | `--ohne autos` |
+|---|---|---|
+| geschützt | 29,4 % | 25,5 % |
+| Ausrichtung | Homographie, Maßstab 0,991, Schiebung 0,51 %, ECC 0,717, Kantenabstand Median 1,0 px, Mittel 0,92 px | gleich |
+| Kanten F1 Schutzbereich vorher / nachher | 0,768 / 0,992 | 0,802 / 0,992 |
+| Kantenabstand Mittel vorher / nachher | 1,13 / 0,30 px | 1,05 / 0,29 px |
+| Farbabweichung dE vorher / nachher | 25,6 / 18,9 | 24,4 / 18,6 |
+| Laufzeit | 16,3 s | 14,2 s |
+
+F1 nachher je Klasse (ohne Autos): fenster_glas 0,980, fenster_rahmen 0,975, gelaender 0,990, leuchten 0,962
+(vorher 0,486), gebaeude_objekt 0,979.
+
+### 4. Nachkontrolle
+| | KI-Bild Runde 6 (vorher) | nach `schutz --ohne autos` |
+|---|---|---|
+| Status, Score | zur Prüfung, 12 | zur Prüfung, 18 |
+| Zone fenster (F1) | abweichung (0,795) | ok (0,988) |
+| Zone leuchten | abweichung (0,515) | ok (0,974) |
+| Zone gelaender | abweichung (0,853) | ok (0,989) |
+| Zone gebaeude | abweichung (0,809) | ok (0,978) |
+| Fenster wimmergasse Render / KI / neu / fehlt | 58 / 59 / 1 / 0 | 58 / 58 / 0 / 0 |
+| Fenster stolberggasse Render / KI / neu / fehlt | 39 / 41 / 2 / 0 | 39 / 41 / 2 / 0 |
+| neue gerade Kanten | 10 Stellen | 8 Stellen |
+
+Auffällig: an der Stolberggasse bleiben auch nach `schutz` 2 neue Fenster gezählt, obwohl die Schutzzone
+fenster ok ist; vermutlich liegen sie außerhalb der Maske (Nachbar oder vom Baum verdeckter Teil), bitte im
+Prüfbild `nk_ecke_golden_r6_schutz_ohne_autos.jpg` ansehen.
+
+### 5. Sichtprüfung `ecke_golden_r6_schutz_ohne_autos.jpg` und Prüfbild
+- Fenster scharf, Achsen und Gesimse sauber aus dem Render, Farbstimmung an das KI-Bild angeglichen (warmes
+  Abendlicht, passt). Seilleuchte und Seile aus dem Render übernommen.
+- **Passanten aus dem KI-Bild werden abgeschnitten**: Frau mit Tasche und Mann vor dem Erdgeschoss an der Ecke
+  zeigen nur Beine, der Oberkörper ist durch Fassade ersetzt. Die Schutzmaske braucht eine Ausnahme für Dinge,
+  die die KI vor das Gebäude stellt (Menschen, Radfahrer), sonst taugt das Ergebnis so nicht für den Vertrieb.
+- **Platzhalter-Silhouetten als Umriss in der Fassade**: an der Ecke und links am Erdgeschoss sind die Umrisse der
+  grauen Menschen-Platzhalter als Linien im Putz zu sehen (die Platzhalter-Pixel sind nicht geschützt, die
+  Fassade dahinter fehlt im Render).
+- **Naht am unteren Maskenrand**: waagrechte Kante auf Sockelhöhe im Erdgeschoss, darunter der Steinsockel aus dem
+  KI-Bild, darüber der Render; der Sockel springt sichtbar.
+- **Baum** (älterer Modellstand, erwartet): wo die KI-Krone über der Fassade lag, der Render-Baum aber kleiner ist,
+  bleiben fleckige Reste (graue Flecken wie abgeplatzter Putz neben den Fenstern links der Krone, 1. und 2. OG
+  Stolberggasse).
+- Sonst keine Naht an den Maskenkanten zu Himmel und Dach sichtbar.

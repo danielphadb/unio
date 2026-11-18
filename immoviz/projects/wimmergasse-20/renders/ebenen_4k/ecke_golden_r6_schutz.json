@@ -1,0 +1,112 @@
+{
+ "render": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/wimmergasse-20_ecke_golden_hour_final.png",
+ "ki": "immoviz/projects/wimmergasse-20/renders/higgsfield/ecke_golden_r6.jpg",
+ "ebenen": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/ecke_golden_hour_ebenen",
+ "schutz_klassen": [
+  "gebaeude_objekt",
+  "fenster_glas",
+  "fenster_rahmen",
+  "gelaender",
+  "leuchten",
+  "strassenmoebel",
+  "autos"
+ ],
+ "anteil_geschuetzt_prozent": 29.4,
+ "ausrichtung": {
+  "modell": "homographie",
+  "massstab_ki_zu_render": 0.9909,
+  "schiebung_prozent": 0.51,
+  "ecc_korrelation": 0.7169,
+  "kantenabstand_median_px": 1.0,
+  "kantenabstand_mittel_px": 0.92,
+  "hinweis": "Abstand der Render-Kanten zur naechsten KI-Kante im Schutzbereich, Analysebreite 1600 px"
+ },
+ "schutzbereich": {
+  "farbabweichung_dE_vorher": 25.56,
+  "farbabweichung_dE_nachher": 18.92,
+  "kanten_vorher": {
+   "f1": 0.7677,
+   "vollstaendig": 0.8797,
+   "praezision": 0.681
+  },
+  "kanten_nachher": {
+   "f1": 0.9918,
+   "vollstaendig": 0.9948,
+   "praezision": 0.9888
+  },
+  "kantenabstand_mittel_px_vorher": 1.13,
+  "kantenabstand_mittel_px_nachher": 0.3,
+  "gradienten_korrelation_vorher": 0.4696,
+  "gradienten_korrelation_nachher": 0.9736,
+  "hinweis": "kanten: praezision = Anteil starker Kanten des Bildes nahe einer Render-Kante (nichts Neues), vollstaendig = Anteil starker Render-Kanten im Bild (nichts fehlt), Toleranz 1 px. Nachher nahe 1 = Geometrie aus dem Render. dE nachher ist die gewollte Farbangleichung"
+ },
+ "klassen": {
+  "fenster_glas": {
+   "anteil_prozent": 2.79,
+   "kanten_vorher": {
+    "f1": 0.7273,
+    "vollstaendig": 0.7876,
+    "praezision": 0.6757
+   },
+   "kanten_nachher": {
+    "f1": 0.9801,
+    "vollstaendig": 0.9737,
+    "praezision": 0.9865
+   }
+  },
+  "fenster_rahmen": {
+   "anteil_prozent": 1.86,
+   "kanten_vorher": {
+    "f1": 0.7948,
+    "vollstaendig": 0.8087,
+    "praezision": 0.7814
+   },
+   "kanten_nachher": {
+    "f1": 0.9765,
+    "vollstaendig": 0.9766,
+    "praezision": 0.9763
+   }
+  },
+  "gelaender": {
+   "anteil_prozent": 0.5,
+   "kanten_vorher": {
+    "f1": 0.8496,
+    "vollstaendig": 0.9141,
+    "praezision": 0.7936
+   },
+   "kanten_nachher": {
+    "f1": 0.9901,
+    "vollstaendig": 1.0,
+    "praezision": 0.9805
+   }
+  },
+  "leuchten": {
+   "anteil_prozent": 0.5,
+   "kanten_vorher": {
+    "f1": 0.4858,
+    "vollstaendig": 0.3616,
+    "praezision": 0.7398
+   },
+   "kanten_nachher": {
+    "f1": 0.9619,
+    "vollstaendig": 0.9774,
+    "praezision": 0.9469
+   }
+  },
+  "gebaeude_objekt": {
+   "anteil_prozent": 19.25,
+   "kanten_vorher": {
+    "f1": 0.8014,
+    "vollstaendig": 0.8667,
+    "praezision": 0.7452
+   },
+   "kanten_nachher": {
+    "f1": 0.9787,
+    "vollstaendig": 0.9765,
+    "praezision": 0.981
+   }
+  }
+ },
+ "ergebnis": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/ecke_golden_r6_schutz.jpg",
+ "pruefbild": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/ecke_golden_r6_schutz_pruefung.jpg"
+}

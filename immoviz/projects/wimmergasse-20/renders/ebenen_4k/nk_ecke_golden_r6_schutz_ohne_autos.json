@@ -1,0 +1,282 @@
+{
+ "vorschau": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/wimmergasse-20_ecke_golden_hour_final.png",
+ "veredelt": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/ecke_golden_r6_schutz_ohne_autos.jpg",
+ "status": "zur Pruefung",
+ "score": 18,
+ "schwelle": 400.0,
+ "score_struktur": 18,
+ "score_ausschnitt": 0,
+ "massstab": 0.9999,
+ "schiebung_prozent": 0.0,
+ "deckung": 0.886,
+ "befunde": [
+  "8 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+  "Fassade stolberggasse: 39 Fenster im Render, 41 im KI-Bild (2 neu, 0 fehlen)"
+ ],
+ "merkmale": {
+  "senkrechte_neu": 0.0,
+  "senkrechte_neu_glatt": 0.0,
+  "senkrechte_fehlt": 0.0,
+  "andere_neu": 577.0,
+  "andere_neu_glatt": 180.1,
+  "oeffnungen": 0,
+  "oeffnungen_flaeche_prozent": 0
+ },
+ "oeffnungen": [],
+ "stellen": [
+  {
+   "art": "neu",
+   "box": [
+    0.5,
+    0.615,
+    0.664,
+    0.686
+   ],
+   "pixel": 734,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 44.0
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.592,
+    0.805,
+    0.781,
+    0.836
+   ],
+   "pixel": 429,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 24.7
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.001,
+    0.814,
+    0.211,
+    0.893
+   ],
+   "pixel": 587,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 21.2
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.876,
+    0.826,
+    0.967,
+    0.895
+   ],
+   "pixel": 211,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 19.4
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.434,
+    0.824,
+    0.561,
+    0.857
+   ],
+   "pixel": 225,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 10.4
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.116,
+    0.586,
+    0.171,
+    0.668
+   ],
+   "pixel": 209,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 9.3
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.294,
+    0.834,
+    0.418,
+    0.857
+   ],
+   "pixel": 235,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 6.9
+  },
+  {
+   "art": "neu",
+   "box": [
+    0.798,
+    0.861,
+    0.845,
+    0.881
+   ],
+   "pixel": 54,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 5.3
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.413,
+    0.945,
+    0.647,
+    0.975
+   ],
+   "pixel": 480,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 14.1
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.65,
+    0.957,
+    0.908,
+    0.996
+   ],
+   "pixel": 458,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 13.4
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.001,
+    0.947,
+    0.185,
+    0.975
+   ],
+   "pixel": 298,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 9.8
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.236,
+    0.945,
+    0.396,
+    0.967
+   ],
+   "pixel": 256,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 8.0
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.945,
+    0.053,
+    1.0,
+    0.086
+   ],
+   "pixel": 182,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 5.3
+  },
+  {
+   "art": "fehlt",
+   "box": [
+    0.0,
+    0.824,
+    0.066,
+    0.863
+   ],
+   "pixel": 171,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 5.0
+  }
+ ],
+ "schutzzonen": {
+  "ausrichtung": {
+   "modell": "aehnlich",
+   "kantenabstand_mittel_px": 0.26,
+   "massstab": 0.9999
+  },
+  "zonen": {
+   "fenster": {
+    "anteil_prozent": 4.63,
+    "kanten_f1": 0.9875,
+    "kanten_vollstaendig": 0.9885,
+    "kanten_praezision": 0.9866,
+    "kantenabstand_mittel_px": 0.33,
+    "gradienten_korrelation": 0.9533,
+    "status": "ok"
+   },
+   "leuchten": {
+    "anteil_prozent": 0.5,
+    "kanten_f1": 0.9739,
+    "kanten_vollstaendig": 0.9845,
+    "kanten_praezision": 0.9635,
+    "kantenabstand_mittel_px": 0.49,
+    "gradienten_korrelation": 0.885,
+    "status": "ok"
+   },
+   "gelaender": {
+    "anteil_prozent": 0.5,
+    "kanten_f1": 0.9892,
+    "kanten_vollstaendig": 0.9984,
+    "kanten_praezision": 0.9801,
+    "kantenabstand_mittel_px": 0.44,
+    "gradienten_korrelation": 0.9872,
+    "status": "ok"
+   },
+   "gebaeude": {
+    "anteil_prozent": 19.27,
+    "kanten_f1": 0.9779,
+    "kanten_vollstaendig": 0.9757,
+    "kanten_praezision": 0.9802,
+    "kantenabstand_mittel_px": 0.49,
+    "gradienten_korrelation": 0.9398,
+    "status": "ok"
+   }
+  },
+  "fenster_je_fassade": {
+   "wimmergasse": {
+    "render": 58,
+    "ki": 58,
+    "ki_gefunden": 58,
+    "ki_neu": 0,
+    "render_fehlt": 0
+   },
+   "stolberggasse": {
+    "render": 39,
+    "ki": 41,
+    "ki_gefunden": 39,
+    "ki_neu": 2,
+    "render_fehlt": 0
+   }
+  },
+  "befunde": [
+   "Fassade stolberggasse: 39 Fenster im Render, 41 im KI-Bild (2 neu, 0 fehlen)"
+  ],
+  "grenzen": {
+   "fenster": 0.9,
+   "leuchten": 0.85,
+   "gelaender": 0.9,
+   "gebaeude": 0.85
+  },
+  "status": "zur Pruefung"
+ },
+ "markierung": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/nk_ecke_golden_r6_schutz_ohne_autos.jpg"
+}
