@@ -842,15 +842,17 @@ def setup_camera(scene, cfg, name):
     return ob
 
 
-def render(project_dir: Path, cams: list[str], lights: list[str], preview: bool, save_blend: bool = True):
+def render(project_dir: Path, cams: list[str], lights: list[str], preview: bool, save_blend: bool = True,
+           res: tuple[int, int] | None = None, samples: int | None = None, out_sub: str | None = None):
+    """res, samples und out_sub überschreiben project.yaml (z. B. Testrender auf dem Mac)."""
     cfg, ctx = load_project(project_dir)
     scene = build_scene(cfg, ctx)
     R = cfg["render"]
-    res = R["preview_resolution"] if preview else R["resolution"]
-    smp = R["preview_samples"] if preview else R["samples"]
+    res = tuple(res) if res else tuple(R["preview_resolution"] if preview else R["resolution"])
+    smp = samples or (R["preview_samples"] if preview else R["samples"])
     setup_render(scene, res, smp)
-    out_dir = project_dir / "renders"
-    out_dir.mkdir(exist_ok=True)
+    out_dir = project_dir / "renders" / out_sub if out_sub else project_dir / "renders"
+    out_dir.mkdir(parents=True, exist_ok=True)
     results = []
     for ln in lights:
         elev, az = setup_light(scene, cfg, ctx, ln)
@@ -861,7 +863,8 @@ def render(project_dir: Path, cams: list[str], lights: list[str], preview: bool,
             scene.render.filepath = str(path)
             bpy.ops.render.render(write_still=True)
             results.append({"file": str(path), "camera": cn, "light": ln, "sun_elev": round(elev, 1),
-                            "sun_az": round(az, 1)})
+                            "sun_az": round(az, 1), "resolution": list(res), "samples": smp,
+                            "device": scene.cycles.device})
     if save_blend:
         bpy.ops.wm.save_as_mainfile(filepath=str(project_dir / "renders" / f"{cfg['project']['slug']}.blend"))
     return results

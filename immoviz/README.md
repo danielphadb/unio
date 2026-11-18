@@ -56,6 +56,9 @@ Blender läuft als Python-Modul ohne Oberfläche. Die erzeugte `.blend`-Datei l�
 
 # Finale Bilder, mehrere Kameras und Lichtstimmungen
 .venv-immoviz/bin/python immoviz/immoviz.py render immoviz/projects/wimmergasse-20 --cam ecke,drohne,wimmergasse --light golden_hour,blaue_stunde
+
+# Auflösung, Samples und Unterordner nur für diesen Aufruf (statt project.yaml), z. B. Testrender auf dem Mac
+.venv-immoviz/bin/python immoviz/immoviz.py render immoviz/projects/wimmergasse-20 --cam ecke --res 3840x2560 --samples 256 --out mac_test --no-blend
 ```
 
 Ergebnisse landen in `projects/<objekt>/renders/`.

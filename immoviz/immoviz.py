@@ -50,6 +50,9 @@ def main():
     r.add_argument("--light", default="golden_hour")
     r.add_argument("--preview", action="store_true")
     r.add_argument("--no-blend", action="store_true")
+    r.add_argument("--res", default=None, help="Auflösung BxH statt project.yaml, z. B. 3840x2560")
+    r.add_argument("--samples", type=int, default=None, help="Samples statt project.yaml")
+    r.add_argument("--out", default=None, help="Unterordner von renders/ für die Bilder, z. B. mac_test")
     c = sub.add_parser("check", help="Orthogonal-Ansicht ueber die Strassenansicht legen (Planabgleich)")
     c.add_argument("project")
     c.add_argument("--facade", default=None)
@@ -196,7 +199,9 @@ def main():
     elif a.cmd == "render":
         from lib.build import render
         t = time.time()
-        res = render(pdir, a.cam.split(","), a.light.split(","), a.preview, not a.no_blend)
+        aufl = tuple(int(v) for v in a.res.lower().split("x")) if a.res else None
+        res = render(pdir, a.cam.split(","), a.light.split(","), a.preview, not a.no_blend,
+                     res=aufl, samples=a.samples, out_sub=a.out)
         print(json.dumps({"renders": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
     elif a.cmd == "svcheck":
         _svcheck(pdir)

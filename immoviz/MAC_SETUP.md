@@ -40,7 +40,21 @@ Regeln: kein em dash oder en dash in Texten; nie zwei Renders parallel; Google-S
 - Übergabe über Git: Die Cloud-Sitzung legt Aufträge als Datei `immoviz/auftraege/<datum>_<name>.md` ab, die
   Mac-Sitzung arbeitet sie ab und pusht die Ergebnisse.
 
-## 4. Gerät wählen
+## 4. Erfahrungen bei der Einrichtung (18.11.2026, MacBook Pro M3 Max, macOS 14.4)
+
+- Kein Homebrew vorhanden (Installation bräuchte ein Admin-Passwort). Ohne Admin-Rechte geht es mit `uv`:
+  `/usr/bin/python3 -m pip install --user uv`, dann `~/Library/Python/3.9/bin/uv python install 3.13` und
+  `~/Library/Python/3.9/bin/uv venv --python 3.13 --seed .venv-immoviz`.
+- `bpy==5.2.4` installiert als Wheel ohne Probleme (rund 245 MB).
+- `opencv-python-headless` 5.1 hat kein Wheel für macOS 14, pip kompiliert es dann aus dem Quellcode (über eine
+  Stunde). `requirements.txt` begrenzt es auf dem Mac deshalb auf unter 5.1 (5.0.0.93 als Wheel).
+- Testrender: `immoviz.py render ... --res 3840x2560 --samples 256 --out mac_test --no-blend`; `--res`,
+  `--samples` und `--out` überschreiben `project.yaml` nur für diesen Aufruf.
+- Ergebnis Testrender Wimmergasse, Kamera `ecke`, `golden_hour`, 3840 x 2560, 256 Samples, OpenImageDenoise:
+  Blender 5.2.4 LTS, Metal auf Apple M3 Max (GPU, 30 Kerne), 219 Sekunden gesamt (Szenenaufbau, erstes
+  Laden der Metal-Kernel und Rendering). Bild: `projects/wimmergasse-20/renders/mac_test/`.
+
+## 5. Gerät wählen
 
 `IMMOVIZ_DEVICE=auto` (Standard) nimmt Metal, OptiX, CUDA, HIP oder oneAPI, sonst CPU. `IMMOVIZ_DEVICE=CPU` erzwingt
 den Prozessor.
