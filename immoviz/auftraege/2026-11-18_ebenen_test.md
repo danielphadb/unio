@@ -162,3 +162,9 @@ Fenster im 1. OG (Fassade aus dem Hintergrund-Durchgang neben verschatteter Fass
 stammt. Mit geschützten Autos (Standard) liegen die kantigen Blender-Autos über den KI-Autos; solange die Autos in
 Blender Platzhalter sind, `--ohne autos` verwenden (Vorschlag: `schutz: {minus: [autos]}` in `project.yaml`).
 
+Umgesetzt am 18.11.2026 auf Kundenwunsch ("realistische Autos verwenden"): `project.yaml` der Wimmergasse hat
+`schutz: {minus: [autos]}` mit Begründung (REGELN V6), `schutz` braucht damit kein `--ohne autos` mehr (ab dem
+nächsten `render --ebenen`; der Hintergrund-Durchgang liefert dann auch die Fassade hinter den Blender-Autos).
+Der Baustein `umgebung` in `prompts.yaml` sagt der KI, dass die Autos in Bild 1 Platzhalter sind und als
+realistische europäische Alltagsautos auf denselben Stellplätzen in derselben Ausrichtung erscheinen sollen.
+

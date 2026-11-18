@@ -272,7 +272,10 @@ render:
 # ---------------------------------------------------------------- Schutzmaske und Look (README "Render-Ebenen", "Grading")
 # Schutzmaske fuer die KI-Veredelung: Standard gebaeude_objekt, fenster_glas, fenster_rahmen, gelaender, leuchten,
 # strassenmoebel, autos. Abweichung nur mit Begruendung (REGELN.md V6), z. B.:
-# schutz: {minus: [autos], kante_px: 2}      # solange die Autos in Blender nur Platzhalter sind
+schutz: {minus: [autos], kante_px: 2}        # 18.11.2026 Kundenwunsch: realistische Autos aus der KI-Veredelung; die
+                                             # Blender-Autos sind kantige Platzhalter und lagen ueber den KI-Autos
+                                             # (auftraege/2026-11-18_ebenen_test.md Abschnitt 7). Parkordnung und
+                                             # Stellplaetze gibt weiter das Blender-Bild vor (Bild 1 der Veredelung)
 look:                     # Leitbilder aus dem Referenzordner des Kunden (mood_analyse.md 6.1), lokal, nie im Repo
   ordner: ${IMMOVIZ_REFERENZ}/wimmer/referenz
   leitbilder:
