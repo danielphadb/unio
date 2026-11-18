@@ -496,22 +496,24 @@ def _radpunkte(c) -> list[tuple[float, float, float]]:
     return [tuple(r[i:i + 3]) for i in range(0, 12, 3)]
 
 
+BODEN_OBJEKT = re.compile(r"boden|strasse|fahrbahn|gehsteig|platz|pflaster|parkstreifen|gelaende", re.I)
+BODEN_UNTEN = 2.0          # m: Fahrbahn darf so weit unter dem groben Gelaendemodell liegen (Rampen, Gefaelle)
+
+
 def boden_hoehe(scene, dg, x, y, z_gelaende):
-    """Hoehe der sichtbaren Oberflaeche (Fahrbahn, Parkstreifen, Gehsteig, Bordstein) unter (x, y) per Strahl von
-    oben; liefert (z, Objektname) oder (Gelaende, None), wenn nichts Passendes getroffen wird."""
+    """Hoehe der Fahrbahn- bzw. Gehsteigflaeche unter (x, y) per Strahl von oben. Andere Objekte (Autos, Poller,
+    Staemme, Schilder) werden durchstossen; die grobe Fernzone (`fernboden`) zaehlt nicht. Liefert (z, Objektname) oder
+    (Gelaende, None), wenn keine Bodenflaeche zwischen BODEN_SUCHE ueber und BODEN_UNTEN unter dem Gelaende liegt."""
     from mathutils import Vector
     z = z_gelaende + BODEN_SUCHE
-    unten = z_gelaende - BODEN_TOLERANZ - 0.5
-    for _ in range(8):                  # bereits platzierte Autos (Spiegel, Raeder, Ueberhaenge) durchstossen
+    unten = z_gelaende - BODEN_UNTEN
+    for _ in range(12):
         ok, loc, _n, _i, ob, _m = scene.ray_cast(dg, Vector((x, y, z)), Vector((0, 0, -1)), distance=max(0.01, z - unten))
         if not ok:
             break
-        if ob.name.startswith("auto"):
-            z = loc.z - 0.002
-            continue
-        if abs(loc.z - z_gelaende) <= BODEN_TOLERANZ:
+        if BODEN_OBJEKT.search(ob.name) and not ob.name.startswith("fernboden"):
             return loc.z, ob.name
-        z = loc.z - 0.002              # etwas zu Hohes (Poller, Stamm): weiter nach unten
+        z = loc.z - 0.002              # Auto, Poller, Stamm, Schild: weiter nach unten
     return z_gelaende, None
 
 
@@ -526,7 +528,7 @@ def auf_boden_setzen(ob, c, terrain, scene, dg, yaw):
         wx, wy = x0 + cy * px - sy * py, y0 + sy * px + cy * py
         z, name = boden_hoehe(scene, dg, wx, wy, terrain(wx, wy))
         h.append(z)
-        treffer.append(name or "gelaende")
+        treffer.append(name or "kein_boden")
     ob["boden_h"] = [round(v, 3) for v in h]
     ob["boden_obj"] = ",".join(treffer)
     (xf, yl), (xr, yr) = ((rp[0][0] + rp[1][0]) / 2, (rp[0][1] + rp[2][1]) / 2), \
@@ -544,6 +546,8 @@ def auf_boden_setzen(ob, c, terrain, scene, dg, yaw):
     rest = max(abs(d - ob.location.z) for d in dz)     # Restfehler: wie weit ein Rad schwebt oder einsinkt
     if abs(roll) > math.radians(NEIGUNG_QUER_MAX) or abs(nick) > math.radians(NEIGUNG_LAENGS_MAX):
         rest = max(rest, 1.0)                           # Rad auf Bordstein oder Stufe: keine Strassenneigung
+    if "kein_boden" in treffer:
+        rest = max(rest, 1.0)                           # unter einem Rad keine Fahrbahn (Rand des Modells)
     return rest
 
 
@@ -724,12 +728,17 @@ def pruefen(scene, terrain=None) -> dict:
         # aus Position und Drehung (die Weltmatrix versteckter Objekte wird von Blender nicht aktualisiert)
         M = Matrix.Translation(o.location) @ Euler(o.rotation_euler, "XYZ").to_matrix().to_4x4()
         abw = []
+        kein_boden = False
         for p in _radpunkte(c):
             w = M @ Vector(p)
             zb, name = boden_hoehe(scene, dg, w.x, w.y, terrain(w.x, w.y))
             abw.append(round(w.z - zb, 3))
+            if name is None:
+                kein_boden = True
         raeder_abw += abw
         f = []
+        if kein_boden:
+            f.append("unter einem Rad keine Fahrbahn (Rand des Modells)")
         if max(abw) > GRENZE_SCHWEBT:
             f.append(f"schwebt bis {max(abw) * 100:.0f} cm")
         if min(abw) < -GRENZE_SINKT:

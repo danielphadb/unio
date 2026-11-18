@@ -1,8 +1,8 @@
 {
- "autos": 578,
+ "autos": 580,
  "befunde_anzahl": 0,
  "raeder": {
-  "mittel_cm": -0.0,
+  "mittel_cm": 0.0,
   "max_schwebt_cm": 2.9,
   "max_sinkt_cm": 2.9,
   "ueber_grenze": 0
@@ -146,8 +146,8 @@
  ],
  "frei_gruende": {
   "belegung": 115,
-  "kante": 27,
-  "uneben": 6,
+  "kante": 28,
+  "uneben": 3,
   "hindernis": 2
  },
  "befunde": []

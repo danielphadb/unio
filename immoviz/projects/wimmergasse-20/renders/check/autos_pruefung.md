@@ -1,9 +1,9 @@
 # Autos pruefen: wimmergasse-20
 
-578 Autos, 0 Befunde. Radaufstand gegen die Oberflaeche (je Rad ein Strahl von oben): Mittel -0.0 cm, hoechstens 2.9 cm schwebend, 2.9 cm eingesunken, 0 Raeder ausserhalb +-3 cm. Ueberschneidungen 0, in Hindernissen 0 (235 Hindernisse erkannt). Lage der Autos im Strassen-Pruefbild (`immoviz.py strasse`), Nahaufnahmen je Kamera in `<kamera>_<licht>_autos_bogen.jpg` neben dem Render.
+580 Autos, 0 Befunde. Radaufstand gegen die Oberflaeche (je Rad ein Strahl von oben): Mittel 0.0 cm, hoechstens 2.9 cm schwebend, 2.9 cm eingesunken, 0 Raeder ausserhalb +-3 cm. Ueberschneidungen 0, in Hindernissen 0 (235 Hindernisse erkannt). Lage der Autos im Strassen-Pruefbild (`immoviz.py strasse`), Nahaufnahmen je Kamera in `<kamera>_<licht>_autos_bogen.jpg` neben dem Render.
 
 
-Freie Buchten: 150 (Zufallsbelegung 115, Rad auf Kante 27, Untergrund uneben 6, Hindernis 2); im Strassen-Pruefbild als Kreuz.
+Freie Buchten: 148 (Zufallsbelegung 115, Rad auf Kante 28, Untergrund uneben 3, Hindernis 2); im Strassen-Pruefbild als Kreuz.
 
 ## Massstab je Modell
 
