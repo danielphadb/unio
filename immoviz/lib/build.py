@@ -940,6 +940,8 @@ def render(project_dir: Path, cams: list[str], lights: list[str], preview: bool,
     res = tuple(res) if res else tuple(R["preview_resolution"] if preview else R["resolution"])
     smp = samples or (R["preview_samples"] if preview else R["samples"])
     setup_render(scene, res, smp)
+    from .assets import autos_bibliothek as AB
+    AB.vor_render(scene, LAST_TERRAIN, project_dir)     # Autos: Raeder, Bucht, Hindernisse; bricht bei Befund ab
     if ebenen:
         from . import ebenen as EB
         eb_meta = EB.vorbereiten(scene)
@@ -957,6 +959,9 @@ def render(project_dir: Path, cams: list[str], lights: list[str], preview: bool,
             results.append({"file": str(path), "camera": cn, "light": ln, "sun_elev": round(elev, 1),
                             "sun_az": round(az, 1), "resolution": list(res), "samples": smp,
                             "device": scene.cycles.device})
+            bogen = AB.kamera_bogen(scene, path, out_dir / f"{cn}_{ln}_autos_bogen.jpg")
+            if bogen:
+                results[-1]["autos_bogen"] = bogen
             if ebenen:
                 eb = EB.schreiben(scene, eb_meta, out_dir / f"{cn}_{ln}_ebenen", cfg, cn, ln, str(path))
                 results[-1]["ebenen"] = {"ordner": eb["ordner"], "schutz_anteil_prozent": eb["schutz_anteil_prozent"],

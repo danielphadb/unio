@@ -36,19 +36,8 @@ def _autos_pruefen(a) -> int:
     cfg, ctx = B.load_project(pdir)
     scene = B.build_scene(cfg, ctx)
     res = AB.pruefen(scene, B.LAST_TERRAIN)
-    ziel = pdir / "renders" / "check"
-    ziel.mkdir(parents=True, exist_ok=True)
-    (ziel / "autos_pruefung.json").write_text(json.dumps(res, ensure_ascii=False, indent=1))
-    r = res["raeder"]
-    zeilen = [f"# Autos pruefen: {pdir.name}", "",
-              f"{res['autos']} Autos, {res['befunde_anzahl']} Befunde. Radaufstand gegen die Oberflaeche (je Rad ein "
-              f"Strahl von oben): Mittel {r['mittel_cm']} cm, hoechstens {r['max_schwebt_cm']} cm schwebend, "
-              f"{r['max_sinkt_cm']} cm eingesunken, {r['ueber_grenze']} Raeder ausserhalb +-{res['grenzen_cm']['schwebt']:.0f} cm. "
-              f"Ueberschneidungen {res['ueberschneidungen']}, in Hindernissen {res['hindernisse']} "
-              f"({res['hindernis_punkte']} Hindernisse erkannt).", ""]
-    zeilen += [f"- {b['auto']} bei {b['pos'][0]}/{b['pos'][1]}: {'; '.join(b['befund'])}" for b in res["befunde"][:200]]
-    (ziel / "autos_pruefung.md").write_text("\n".join(zeilen) + "\n")
-    print(json.dumps({k: v for k, v in res.items() if k != "befunde"}, ensure_ascii=False, indent=1))
+    AB.bericht_schreiben(pdir, res)
+    print(json.dumps({k: v for k, v in res.items() if k not in ("befunde", "lage", "massstab")}, ensure_ascii=False, indent=1))
     return 1 if res["befunde_anzahl"] else 0
 
 
@@ -187,6 +176,9 @@ def main():
                                                  "REGELN.md V6)")
     sz.add_argument("--farbe", type=float, default=1.0, help="Stärke der Farbübertragung KI auf Render (0 bis 1)")
     sz.add_argument("--ausrichtung", choices=["aehnlich", "affin", "homographie"], default="homographie")
+    sz.add_argument("--autos", choices=["projekt", "beide", "modelle", "ki"], default="projekt",
+                    help="Autos: projekt = wie project.yaml schutz; modelle = Blender-Autos geschuetzt (gleich in jedem "
+                         "Bild); ki = Autos aus dem KI-Bild; beide = zwei Fassungen _modelle und _ki plus Vergleich")
     sz.add_argument("--ohne-vordergrund", action="store_true", help="KI-Personen und -Autos vor der Fassade nicht "
                                                                    "erhalten (alles Geschützte aus dem Render)")
     gd = sub.add_parser("grading", help="Farbangleich an Leitbilder (Lab-Statistik, Histogramm begrenzt) plus "
@@ -230,7 +222,7 @@ def main():
     if a.cmd == "schutz":
         from lib import kompositing as KO
         sys.exit(KO.main_cli(a.render, a.ki, a.ebenen, a.out, a.klassen, a.ohne, a.farbe, a.ausrichtung,
-                             not a.ohne_vordergrund))
+                             not a.ohne_vordergrund, a.autos))
     if a.cmd == "grading":
         from lib import grading as GR
         sys.exit(GR.main_cli(a))

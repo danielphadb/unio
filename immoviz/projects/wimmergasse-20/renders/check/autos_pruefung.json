@@ -1,5 +1,5 @@
 {
- "autos": 575,
+ "autos": 578,
  "befunde_anzahl": 0,
  "raeder": {
   "mittel_cm": -0.0,
@@ -85,7 +85,7 @@
    "breite": 2.06,
    "hoehe": 1.43,
    "radstand": 2.9,
-   "spur": 1.69
+   "spur": 1.68
   },
   {
    "modell": "Ferrari Dodici Cilindri",
@@ -144,5 +144,11 @@
    "spur": 1.63
   }
  ],
+ "frei_gruende": {
+  "belegung": 115,
+  "kante": 27,
+  "uneben": 6,
+  "hindernis": 2
+ },
  "befunde": []
 }

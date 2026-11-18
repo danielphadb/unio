@@ -306,7 +306,9 @@ def messen(ctx, cfg, streifen) -> list[dict]:
 # ---------------------------------------------------------------- Prüfbild
 FARBE = {"objekt": (255, 0, 255), "bordstein": (255, 235, 0), "gehsteig": (0, 235, 255), "streifen": (255, 255, 255),
          "laengs": (70, 150, 255), "schraeg": (255, 150, 0), "senkrecht": (255, 40, 40), "baum": (60, 255, 60),
-         "scheibe": (160, 255, 160), "mass": (255, 255, 255)}
+         "scheibe": (160, 255, 160), "mass": (255, 255, 255), "auto": (150, 70, 255),
+         "frei_belegung": (200, 200, 200), "frei_kante": (255, 0, 0), "frei_uneben": (255, 120, 0),
+         "frei_hindernis": (255, 0, 160)}
 
 
 def _font(size):
@@ -393,6 +395,30 @@ def pruefen(project_dir: Path, cfg=None, ctx=None, cache_dir: Path | None = None
     for t in T.apply_override(ctx["trees"], cfg.get("trees_override")):
         c, r = P(*t["pos"]), t["crown"] / 2 / mpp
         d.ellipse([c[0] - r, c[1] - r, c[0] + r, c[1] + r], outline=FARBE["baum"], width=3)
+    n_autos = 0
+    lage_p = project_dir / "renders" / "check" / "autos_lage.json"
+    if lage_p.exists():                                     # gesetzte Autos (immoviz.py autos-pruefen bzw. render)
+        lage_j = json.loads(lage_p.read_text())
+        lage_j = lage_j if isinstance(lage_j, dict) else {"autos": lage_j, "frei": []}
+        for f_ in lage_j.get("frei", []):                   # freie Buchten mit Grund
+            if abs(f_["x"] - mx) > half or abs(f_["y"] - my) > half:
+                continue
+            c_ = P(f_["x"], f_["y"])
+            col = FARBE["frei_" + f_["grund"]] if "frei_" + f_["grund"] in FARBE else (255, 255, 255)
+            r_ = 0.7 / mpp
+            d.line([(c_[0] - r_, c_[1] - r_), (c_[0] + r_, c_[1] + r_)], fill=col, width=4)
+            d.line([(c_[0] - r_, c_[1] + r_), (c_[0] + r_, c_[1] - r_)], fill=col, width=4)
+        for a_ in lage_j.get("autos", []):
+            if abs(a_["x"] - mx) > half or abs(a_["y"] - my) > half:
+                continue
+            w_ = math.radians(a_["richtung_grad"])
+            cw, sw = math.cos(w_), math.sin(w_)
+            L2, B2 = a_["laenge"] / 2, a_["breite"] / 2
+            ek = [(a_["x"] + cw * u - sw * v, a_["y"] + sw * u + cw * v) for u, v in ((L2, B2), (L2, -B2), (-L2, -B2), (-L2, B2))]
+            ring(ek, fill=FARBE["auto"], width=3)
+            spitze = (a_["x"] + cw * L2, a_["y"] + sw * L2)
+            d.line([P(a_["x"], a_["y"]), P(*spitze)], fill=FARBE["auto"], width=3)     # Front
+            n_autos += 1
     for h in ctx["hero"]:
         ring(h["poly"], fill=FARBE["objekt"], width=5)
     f_kl, f_gr = _font(22), _font(30)
@@ -428,7 +454,9 @@ def pruefen(project_dir: Path, cfg=None, ctx=None, cache_dir: Path | None = None
            ("streifen", "Parkstreifen", 1), ("laengs", f"Stellplatz längs ({zahl['laengs']})", 2),
            ("schraeg", f"Stellplatz schräg ({zahl['schraeg']})", 2), ("senkrecht", f"Stellplatz senkrecht ({zahl['senkrecht']})", 2),
            ("baum", "Baum, Krone im Modell", 3), ("scheibe", "Baumscheibe laut Kataster", 1),
-           ("mass", "Gehsteigbreite in m", 3)]
+           ("mass", "Gehsteigbreite in m", 3)] + ([("auto", f"Auto im Modell ({n_autos}), Strich zur Front", 3), ("frei_belegung", "frei: Zufallsbelegung", 4),
+                  ("frei_kante", "frei: Rad auf Kante", 4), ("frei_uneben", "frei: Untergrund uneben", 4),
+                  ("frei_hindernis", "frei: Hindernis", 4)] if n_autos else [])
     lx, ly = 28, 28
     d.rectangle([lx - 12, ly - 12, lx + 440, ly + len(leg) * 32 + 44], fill=(0, 0, 0))
     d.text((lx, ly), f"Straßenabgleich {cfg.get('project', {}).get('name', project_dir.name)}", font=f_kl, fill=(255, 255, 255))

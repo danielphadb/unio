@@ -912,10 +912,50 @@ def fenster_je_fassade(Rk, Kw, mk, ebn, gueltig, g) -> dict:
     return {k: v for k, v in out.items() if v["render"] or v["ki"]}
 
 
+def _autos_klassen(ebenen, klassen, ohne, mit_autos: bool) -> list[str]:
+    meta = json.loads((Path(ebenen) / "ebenen.json").read_text())
+    k = [x for x in (klassen or meta["schutz_klassen"]) if x not in (ohne or []) and x != "autos"]
+    return k + ["autos"] if mit_autos else k
+
+
+def autos_vergleich(a_pfad, b_pfad, ziel, titel=("Autos: Blender-Modelle", "Autos: aus dem KI-Bild")) -> str:
+    a, b = Image.open(a_pfad).convert("RGB"), Image.open(b_pfad).convert("RGB")
+    bw = min(1400, a.width)
+    a = a.resize((bw, round(a.height * bw / a.width)))
+    b = b.resize((bw, round(b.height * bw / b.width)))
+    o = Image.new("RGB", (2 * bw + 10, a.height + 40), (250, 250, 248))
+    d = ImageDraw.Draw(o)
+    f = _schrift(18)
+    o.paste(a, (0, 40))
+    o.paste(b, (bw + 10, 40))
+    d.text((6, 10), titel[0], fill=(30, 30, 30), font=f)
+    d.text((bw + 16, 10), titel[1], fill=(30, 30, 30), font=f)
+    o.save(ziel, quality=88)
+    return str(ziel)
+
+
 def main_cli(render, ki, ebenen, aus=None, klassen=None, ohne=None, farbe=1.0, modell="homographie",
-             vordergrund=True) -> int:
-    kz = schutz_anwenden(render, ki, ebenen, aus, [k for k in (klassen or "").split(",") if k] or None,
-                         [k for k in (ohne or "").split(",") if k], farbe, modell, vordergrund=vordergrund)
-    print(json.dumps(kz, ensure_ascii=False, indent=1))
-    f1 = kz["schutzbereich"]["kanten_nachher"]["f1"]
-    return 0 if f1 is None or f1 >= 0.95 else 1
+             vordergrund=True, autos="projekt") -> int:
+    kl = [k for k in (klassen or "").split(",") if k] or None
+    oh = [k for k in (ohne or "").split(",") if k]
+    if autos == "projekt":
+        kz = schutz_anwenden(render, ki, ebenen, aus, kl, oh, farbe, modell, vordergrund=vordergrund)
+        print(json.dumps(kz, ensure_ascii=False, indent=1))
+        f1 = kz["schutzbereich"]["kanten_nachher"]["f1"]
+        return 0 if f1 is None or f1 >= 0.95 else 1
+    basis = Path(aus) if aus else Path(ki).with_name(Path(ki).stem + "_schutz.jpg")
+    varianten = {"modelle": True, "ki": False} if autos == "beide" else {autos: autos == "modelle"}
+    ergebnisse, ok = {}, True
+    for name, mit in varianten.items():
+        ziel = basis.with_name(f"{basis.stem}_{name}{basis.suffix}") if autos == "beide" else basis
+        kz = schutz_anwenden(render, ki, ebenen, ziel, _autos_klassen(ebenen, kl, oh, mit), [], farbe, modell,
+                             vordergrund=vordergrund)
+        f1 = kz["schutzbereich"]["kanten_nachher"]["f1"]
+        ok &= f1 is None or f1 >= 0.95
+        ergebnisse[name] = {"ergebnis": kz["ergebnis"], "pruefbild": kz.get("pruefbild"), "kanten_f1_nachher": f1,
+                            "vordergrund_prozent": kz["vordergrund"]["anteil_prozent"]}
+    if autos == "beide":
+        ergebnisse["vergleich"] = autos_vergleich(ergebnisse["modelle"]["ergebnis"], ergebnisse["ki"]["ergebnis"],
+                                                  basis.with_name(f"{basis.stem}_autos_vergleich.jpg"))
+    print(json.dumps(ergebnisse, ensure_ascii=False, indent=1))
+    return 0 if ok else 1

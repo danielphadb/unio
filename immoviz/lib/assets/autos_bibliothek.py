@@ -352,13 +352,16 @@ def _modell_aufbereiten(bpy, e: dict, mats: dict, ziel_coll, log: list):
             lack_namen = {g.lower().strip()}
     n_lack = n_kz = n_logo = 0
     for o in behalten:
-        kz_obj = bool(KENNZEICHEN.search(o.name))
+        lo_o, hi_o = _welt_bbox([o])
+        dims = sorted(hi_o - lo_o)
+        kz_gross = dims[2] < 0.8 and dims[1] < 0.35        # Kennzeichen: bis etwa 0,55 x 0,2 m (auch schraeg)
+        kz_obj = bool(KENNZEICHEN.search(o.name)) and kz_gross
         for s in getattr(o, "material_slots", []):
             m = s.material
             if m is None:
                 continue
             nm = on(m)
-            if kz_obj or KENNZEICHEN.search(nm):
+            if kz_obj or (KENNZEICHEN.search(nm) and kz_gross):
                 s.material = mats["kennzeichen"]
                 n_kz += 1
             elif LOGO.search(nm) or nm.lower() in weg_namen:
@@ -474,7 +477,10 @@ def bibliothek_bauen(nur: list[str] | None = None) -> list[dict]:
 
 
 # ------------------------------------------------------------------ Einsetzen (build_scene)
-VERSCHUB = (0.0, 0.25, -0.25, 0.5, -0.5)   # m entlang der Bucht, falls ein Rad auf einer Kante liegt
+FREI: list[dict] = []      # freie Buchten des letzten Szenenaufbaus mit Grund (Belegung, Kante, Hindernis)
+VERSCHUB = (0.0, -0.25, 0.25, -0.5, 0.5, -0.75, -1.0)   # m entlang der Fahrzeugachse (negativ = zurueck), falls ein
+                                                       # Rad auf einer Kante liegt: Schraegparker halten mit den
+                                                       # Raedern vor dem Bordstein, die Front ragt ueber den Gehsteig
 RAD_REST = 0.03            # m: so weit darf ein Rad hoechstens schweben oder einsinken
 NEIGUNG_QUER_MAX = 4.0     # Grad: steiler quer = zwei Raeder auf dem Bordstein, keine Strassenneigung
 NEIGUNG_LAENGS_MAX = 6.0   # Grad laengs (Wiener Gassen bis rund 8 %, also 4,6 Grad)
@@ -569,8 +575,10 @@ def build(ctx, terrain, radius, cfg, coll) -> int:
     bpy.context.view_layer.update()
     dg = bpy.context.evaluated_depsgraph_get()            # Strassen und Gehsteige stehen schon, Autos noch nicht
     n = frei = 0
+    FREI.clear()
     for ab, platz in plaetze:
         if rng.random() > ab["belegung"]:
+            FREI.append({"x": round(platz["pos"][0], 2), "y": round(platz["pos"][1], 2), "grund": "belegung"})
             continue
         if platz["art"] == "laengs":
             passend = [c for c in namen if c["laenge"] <= platz["laenge"] - 0.25]
@@ -604,6 +612,8 @@ def build(ctx, terrain, radius, cfg, coll) -> int:
                 if rest <= RAD_REST:
                     break
             if best[0] > RAD_REST:
+                FREI.append({"x": round(ox, 2), "y": round(oy, 2),
+                             "grund": "kante" if best[0] >= 1.0 else "uneben", "auto": c.get("name")})
                 bpy.data.objects.remove(ob)
                 frei += 1
                 continue
@@ -774,6 +784,11 @@ def pruefen(scene, terrain=None) -> dict:
         massstab.append({"modell": c.get("name"), **{k: round(v, 2) for k, (v, _l, _h) in werte.items()}})
         if falsch:
             befunde.append({"auto": c.get("name"), "pos": [0, 0], "befund": ["Massstab: " + "; ".join(falsch)]})
+    lage = [{"modell": o.instance_collection.get("name"), "x": round(o.location.x, 3), "y": round(o.location.y, 3),
+             "z": round(o.location.z, 3), "richtung_grad": round(math.degrees(o.rotation_euler.z), 2),
+             "quer_grad": round(math.degrees(o.rotation_euler.x), 2), "laengs_grad": round(-math.degrees(o.rotation_euler.y), 2),
+             "laenge": o.instance_collection["laenge"], "breite": o.instance_collection["breite"],
+             "bucht": o.get("platz_art")} for o in autos]
     import numpy as np
     a = np.array(raeder_abw) if raeder_abw else np.zeros(1)
     return {"autos": len(autos), "befunde_anzahl": len(befunde),
@@ -782,7 +797,8 @@ def pruefen(scene, terrain=None) -> dict:
                        "ueber_grenze": int(((a > GRENZE_SCHWEBT) | (a < -GRENZE_SINKT)).sum())},
             "ueberschneidungen": n_ueber, "hindernisse": n_hind, "hindernis_punkte": len(hind),
             "grenzen_cm": {"schwebt": GRENZE_SCHWEBT * 100, "sinkt": GRENZE_SINKT * 100},
-            "massstab": sorted(massstab, key=lambda m: m["modell"] or ""),
+            "massstab": sorted(massstab, key=lambda m: m["modell"] or ""), "lage": lage, "frei": list(FREI),
+            "frei_gruende": {g: sum(1 for f in FREI if f["grund"] == g) for g in ("belegung", "kante", "uneben", "hindernis")},
             "befunde": befunde}
 
 
@@ -841,6 +857,8 @@ def aufraeumen(scene, terrain) -> dict:
                 break
         (stoss, schief, _r), d = best
         if stoss or schief:
+            FREI.append({"x": round(x0, 2), "y": round(y0, 2), "grund": "hindernis" if stoss else
+                         ("kante" if _r >= 1.0 else "uneben"), "auto": c.get("name")})
             weg.append(o)
             continue
         if d != 0.0:
@@ -857,3 +875,145 @@ def aufraeumen(scene, terrain) -> dict:
     print(f"[immoviz] Autos nachgesetzt: {len(autos) - entfernt} stehen, {verschoben} in der Bucht verschoben, "
           f"{entfernt} entfernt (Hindernis oder Untergrund)", flush=True)
     return {"autos": len(autos) - entfernt, "verschoben": verschoben, "entfernt": entfernt}
+
+
+def bericht_schreiben(project_dir, res) -> dict:
+    """renders/check/autos_pruefung.md und .json, dazu autos_lage.json (fuer das Strassen-Pruefbild)."""
+    import json
+    from pathlib import Path
+    project_dir = Path(project_dir)
+    ziel = project_dir / "renders" / "check"
+    ziel.mkdir(parents=True, exist_ok=True)
+    (ziel / "autos_lage.json").write_text(json.dumps({"autos": res.get("lage", []), "frei": res.get("frei", [])},
+                                                     ensure_ascii=False))
+    (ziel / "autos_pruefung.json").write_text(json.dumps({k: v for k, v in res.items() if k not in ("lage", "frei")},
+                                                         ensure_ascii=False, indent=1))
+    r = res["raeder"]
+    zeilen = [f"# Autos pruefen: {project_dir.name}", "",
+              f"{res['autos']} Autos, {res['befunde_anzahl']} Befunde. Radaufstand gegen die Oberflaeche (je Rad ein "
+              f"Strahl von oben): Mittel {r['mittel_cm']} cm, hoechstens {r['max_schwebt_cm']} cm schwebend, "
+              f"{r['max_sinkt_cm']} cm eingesunken, {r['ueber_grenze']} Raeder ausserhalb +-{res['grenzen_cm']['schwebt']:.0f} cm. "
+              f"Ueberschneidungen {res['ueberschneidungen']}, in Hindernissen {res['hindernisse']} "
+              f"({res['hindernis_punkte']} Hindernisse erkannt). Lage der Autos im Strassen-Pruefbild (`immoviz.py strasse`), "
+              f"Nahaufnahmen je Kamera in `<kamera>_<licht>_autos_bogen.jpg` neben dem Render.", ""]
+    zeilen += [f"- {b['auto']} bei {b['pos'][0]}/{b['pos'][1]}: {'; '.join(b['befund'])}" for b in res["befunde"][:200]]
+    fg = res.get("frei_gruende") or {}
+    zeilen += ["", f"Freie Buchten: {sum(fg.values())} (Zufallsbelegung {fg.get('belegung', 0)}, Rad auf Kante "
+               f"{fg.get('kante', 0)}, Untergrund uneben {fg.get('uneben', 0)}, Hindernis {fg.get('hindernis', 0)}); "
+               f"im Strassen-Pruefbild als Kreuz."]
+    zeilen += ["", "## Massstab je Modell", "", "| Modell | Laenge | Breite | Hoehe | Radstand | Spur |", "|---|---|---|---|---|---|"]
+    zeilen += [f"| {m['modell']} | {m['laenge']} | {m['breite']} | {m['hoehe']} | {m['radstand']} | {m['spur']} |"
+               for m in res.get("massstab", [])]
+    (ziel / "autos_pruefung.md").write_text("\n".join(zeilen) + "\n")
+    return {"md": str(ziel / "autos_pruefung.md"), "json": str(ziel / "autos_pruefung.json")}
+
+
+def vor_render(scene, terrain, project_dir) -> dict | None:
+    """Pflichtpruefung vor jedem Render mit Bibliotheksautos: Bericht schreiben, bei Befund abbrechen (bevor Minuten
+    Renderzeit verloren gehen). Abschalten nur zum Testen: IMMOVIZ_AUTOS_PRUEFUNG=aus."""
+    import bpy
+    if not any(c.name.startswith("auto_") for c in bpy.data.collections):
+        return None
+    res = pruefen(scene, terrain)
+    bericht_schreiben(project_dir, res)
+    print(f"[immoviz] Autopruefung: {res['autos']} Autos, {res['befunde_anzahl']} Befunde", flush=True)
+    if res["befunde_anzahl"] and os.environ.get("IMMOVIZ_AUTOS_PRUEFUNG", "").lower() not in ("aus", "0", "nein"):
+        zeilen = [f"{b['auto']} bei {b['pos'][0]}/{b['pos'][1]}: {'; '.join(b['befund'])}" for b in res["befunde"][:8]]
+        raise SystemExit("Autopruefung nicht bestanden, Render abgebrochen (renders/check/autos_pruefung.md):\n  "
+                         + "\n  ".join(zeilen))
+    return res
+
+
+def kamera_bogen(scene, bild, ziel, max_abstand=70.0, anzahl=24) -> str | None:
+    """Pruefbogen je Kamera: Nahaufnahmen der sichtbaren Bibliotheksautos aus dem fertigen Bild (Raeder und Boden),
+    Aufstandspunkte als kurze Marken darunter. Zum schnellen Durchsehen statt das ganze Bild abzusuchen."""
+    from pathlib import Path
+    from bpy_extras.object_utils import world_to_camera_view
+    from mathutils import Euler, Matrix, Vector
+    from PIL import Image, ImageDraw
+    cam = scene.camera
+    if cam is None or not Path(bild).exists():
+        return None
+    import bpy
+    im = Image.open(bild).convert("RGB")
+    W, H = im.size
+    kpos = cam.matrix_world.translation.copy()
+    dg = bpy.context.evaluated_depsgraph_get()
+    kacheln = []
+    for o in scene.objects:
+        if o.instance_type != "COLLECTION" or o.instance_collection is None \
+                or not o.instance_collection.name.startswith("auto_"):
+            continue
+        dist = (o.location - kpos).length
+        if dist > max_abstand:
+            continue
+        c = o.instance_collection
+        M = Matrix.Translation(o.location) @ Euler(o.rotation_euler, "XYZ").to_matrix().to_4x4()
+        pts = []
+        for p in _radpunkte(c) + [(0.0, 0.0, c["hoehe"])]:
+            v = world_to_camera_view(scene, cam, M @ Vector(p))
+            if v.z <= 0:
+                pts = []
+                break
+            pts.append((v.x * W, (1 - v.y) * H))
+        if not pts:
+            continue
+        rad, dach = pts[:4], pts[4]
+        if not all(0 <= x < W and 0 <= y < H for x, y in rad):
+            continue
+        # sichtbar: Strahl Kamera -> Rad trifft zuerst dieses Auto (Grundriss) oder den Boden daneben
+        sichtbar = 0
+        e = _ecken(o, c, -0.15)
+        for p in _radpunkte(c):
+            w = M @ Vector((p[0], p[1], p[2] + 0.12))
+            r = w - kpos
+            ok, loc, _n, _i, _ob, _m = scene.ray_cast(dg, kpos, r.normalized(), distance=r.length + 0.5)
+            if not ok or (loc - kpos).length >= r.length - 0.6 or _ueberlappen(e, [(loc.x - 0.01, loc.y - 0.01),
+                                                                                (loc.x + 0.01, loc.y - 0.01),
+                                                                                (loc.x + 0.01, loc.y + 0.01)]):
+                sichtbar += 1
+        if sichtbar < 2:
+            continue
+        x0, x1 = min(x for x, _ in rad), max(x for x, _ in rad)
+        y0, y1 = min(dach[1], min(y for _, y in rad)), max(y for _, y in rad)
+        rx = max(40.0, 0.25 * (x1 - x0))
+        box = (int(max(0, x0 - rx)), int(max(0, y0 - 0.15 * (y1 - y0))), int(min(W, x1 + rx)), int(min(H, y1 + 0.35 * (y1 - y0) + 12)))
+        if box[2] - box[0] < 80 or box[3] - box[1] < 40:
+            continue
+        k = im.crop(box)
+        d = ImageDraw.Draw(k)
+        for x, y in rad:
+            xx, yy = x - box[0], y - box[1]
+            d.line([(xx - 7, yy + 10), (xx + 7, yy + 10)], fill=(0, 230, 255), width=2)
+        kacheln.append((box[2] - box[0], k, f"{c.get('name', '')[:26]}  {dist:.0f} m"))
+    if not kacheln:
+        return None
+    kacheln = sorted(kacheln, key=lambda t: -t[0])[:anzahl]
+    th, sp = 300, 4
+    kl = []
+    for _w, k, t in kacheln:
+        f = th / k.height
+        kl.append((k.resize((max(1, int(k.width * f)), th)), t))
+    zeilen, zeile, breite = [], [], 0
+    for k, t in kl:
+        if zeile and breite + k.width > 2400:
+            zeilen.append(zeile)
+            zeile, breite = [], 0
+        zeile.append((k, t))
+        breite += k.width + sp
+    zeilen.append(zeile)
+    B = max(sum(k.width + sp for k, _ in z) for z in zeilen)
+    out = Image.new("RGB", (B, len(zeilen) * (th + 26) + 40), (245, 245, 243))
+    d = ImageDraw.Draw(out)
+    d.text((8, 10), f"Autos im Bild: Raeder und Boden (Marken unter den Aufstandspunkten), {Path(bild).name}",
+           fill=(20, 20, 20))
+    y = 40
+    for z in zeilen:
+        x = 0
+        for k, t in z:
+            out.paste(k, (x, y + 22))
+            d.text((x + 4, y + 4), t, fill=(30, 30, 30))
+            x += k.width + sp
+        y += th + 26
+    out.save(ziel, quality=88)
+    return str(ziel)
