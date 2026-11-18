@@ -455,8 +455,27 @@ VG = {"schwelle": 14.0,          # dE KI gegen farbangeglichenen Render (geglaet
       "boden_min_px": 60,        # der Fleck muss mit so vielen Pixeln auf dem Boden stehen
       "max_hoehe_m": 2.4,        # hoechstens so hoch ueber dem Fusspunkt (Personen, Radfahrer, Autos)
       "vor_fassade_m": 0.4,      # Fusspunkt mindestens so weit vor der Fassadenbasis
-      "statistik_ausreisser": 20.0}   # dE ab dem ein Pixel nicht in die Farbstatistik zaehlt
+      "statistik_ausreisser": 20.0,   # dE ab dem ein Pixel nicht in die Farbstatistik zaehlt
+      "platzhalter_rand": (1.0, 0.25, 0.08),   # Zone um Menschen-Platzhalter: Breite seitlich, oben, unten (Anteil)
+      "platzhalter_min_px": 20}      # so viele Fleckpixel in der Zone: Person am Platzhalter, bleibt KI
 ANALYSE_VG = 1920
+
+
+def _platzhalter_zone(pm: np.ndarray, p: dict) -> np.ndarray:
+    """Rechteck um jeden Menschen-Platzhalter, seitlich und oben erweitert (KI-Person steht dort, etwas versetzt)."""
+    zone = np.zeros_like(pm)
+    lab, _ = ndi.label(pm)
+    sx, so, su = p["platzhalter_rand"]
+    for sl in ndi.find_objects(lab):
+        if sl is None:
+            continue
+        h, w = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
+        if h < 6:
+            continue
+        y0, y1 = max(0, int(sl[0].start - so * h)), min(pm.shape[0], int(sl[0].stop + su * h) + 1)
+        x0, x1 = max(0, int(sl[1].start - sx * w)), min(pm.shape[1], int(sl[1].stop + sx * w) + 1)
+        zone[y0:y1, x0:x1] = True
+    return zone
 
 
 def _scheibe(r: int) -> np.ndarray:
@@ -472,7 +491,7 @@ def _abweichung(B_lab, K_lab, gruppen, gueltig, hart):
 
 def vordergrund_finden(B_lab, K_lab, masken: dict, hart: np.ndarray, gueltig: np.ndarray, schutz: list[str],
                        tiefe_m: np.ndarray | None, f_px: float | None, p: dict | None = None,
-                       ausschluss: np.ndarray | None = None):
+                       ausschluss: np.ndarray | None = None, platzhalter: np.ndarray | None = None):
     """Was die KI vor die geschuetzte Fassade stellt und am Boden steht (Personen, Radfahrer, Autos) bleibt KI.
 
     Auf der Analyseebene: dE zwischen KI und farbangeglichenem Render (Boden mit eigenem Abgleich), Kandidaten ueber
@@ -482,6 +501,9 @@ def vordergrund_finden(B_lab, K_lab, masken: dict, hart: np.ndarray, gueltig: np
     Fassadenbasis liegt, und nur bis `max_hoehe_m` ueber dem Fusspunkt (Hoehe aus Tiefe und Brennweite). Jeder Teil
     ueber der geschuetzten Flaeche bekommt seinen Fusspunkt aus den Pixeln direkt darunter. `ausschluss` (Blender-
     Baeume vor der Fassade) gehoert nicht zur Zone, dort entscheidet `laub_finden`.
+    `platzhalter` (Maske der Menschen-Platzhalter vor dem Hintergrund-Durchgang): Flecken in der Zone um einen
+    Platzhalter sind die Person, die die KI dort einsetzen soll (REGELN U10), und bleiben KI ohne Boden- und
+    Tiefenpruefung (Fix 18.11.2026: bei Personen dicht an der Fassade blieben sonst nur die Beine stehen).
     Liefert (F in voller Groesse, Liste der Flecken, dE der Analyseebene)."""
     p = {**VG, **(p or {})}
     H, W = hart.shape
@@ -514,18 +536,30 @@ def vordergrund_finden(B_lab, K_lab, masken: dict, hart: np.ndarray, gueltig: np
     geb = ms.get("gebaeude_objekt", leer) | ms.get("fenster_glas", leer) | ms.get("fenster_rahmen", leer)
     hat = geb.any(0)
     basis = np.where(hat, h - 1 - np.argmax(geb[::-1], 0), -1)      # unterste Gebaeudezeile je Spalte
+    pz = _platzhalter_zone(_resize(platzhalter, g, nearest=True), p) if platzhalter is not None else None
     for i, sl in enumerate(ndi.find_objects(lab), start=1):
         if sl is None:
             continue
         c = lab[sl] == i
         hc = c & hs[sl]
-        if not hc.any() or int((c & boden[sl]).sum()) < p["boden_min_px"]:
+        am_platz = pz is not None and int((hc & pz[sl]).sum()) >= p["platzhalter_min_px"]
+        if not hc.any() or (int((c & boden[sl]).sum()) < p["boden_min_px"] and not am_platz):
             continue
         # jeder Teil ueber der geschuetzten Flaeche bekommt seinen eigenen Fusspunkt (nur aus den Pixeln direkt
         # darunter): sonst verbindet der Gehsteig eine Person mit einem Fleck an der Fassade daneben
         sub, ns = ndi.label(hc)
         for j, ssl in enumerate(ndi.find_objects(sub), start=1):
             if ssl is None:
+                continue
+            if pz is not None and int(((sub == j) & pz[sl]).sum()) >= p["platzhalter_min_px"]:
+                teil = ndi.binary_fill_holes(ndi.binary_closing(sub == j, iterations=2)) & pz[sl] & hs[sl]
+                if teil.any():
+                    F[sl] |= teil
+                    ty, tx = np.nonzero(teil)
+                    objekte.append({"box_analyse": [int(tx.min() + sl[1].start), int(ty.min() + sl[0].start),
+                                                    int(tx.max() + sl[1].start) + 1, int(ty.max() + sl[0].start) + 1],
+                                    "platzhalter": True,
+                                    "anteil_prozent": round(100.0 * float(teil.sum()) / (w * h), 3)})
                 continue
             a0, a1 = max(0, ssl[1].start - 3), min(c.shape[1], ssl[1].stop + 3)
             spalten = c[:, a0:a1]
@@ -606,6 +640,7 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     schutz = list(klassen or ebn["meta"]["schutz_klassen"])
     schutz = [k for k in schutz if k not in (ohne or [])]
     kante = ebn["meta"].get("schutz_kante_px", EB.KANTE_WEICH_PX)
+    platz = masken.get("menschen_platzhalter")       # vor dem Hintergrund-Durchgang merken (Zone fuer KI-Personen)
     # Hinter Platzhaltern und ungeschuetzten Autos: Fassade aus dem zweiten Durchgang (render --ebenen)
     R, masken, V, baum = hintergrund_einsetzen(R, masken, ebn["ordner"], schutz, ebn["meta"].get("autos", "platzhalter"))
     hart = np.zeros((H, W), bool)
@@ -620,7 +655,7 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     if vordergrund:
         kam = ebn["meta"].get("kamera_intern") or {}
         F, objekte, D = vordergrund_finden(B_lab, K_lab, masken, hart, gueltig, schutz, ebn.get("tiefe_m"),
-                                           kam.get("f_px"), ausschluss=baum)
+                                           kam.get("f_px"), ausschluss=baum, platzhalter=platz)
     # Farbstatistik ohne Ausreisser (KI-Laub, Personen vor der Fassade): sonst faerben sie die Fassade ein
     stat_ok = gueltig & ~F
     if D is not None:
