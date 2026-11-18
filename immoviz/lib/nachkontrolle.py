@@ -293,7 +293,9 @@ def _merkmale_struktur(neu, fehlt, klA, klB, sB, glatt, eA, eB, gueltig):
 
 # ------------------------------------------------------------------ Hauptfunktion
 def pruefen(vorschau: Path, veredelt: Path, aus: Path | None = None, schwelle: float = SCHWELLE,
-            breite: int = ARBEITSBREITE) -> dict:
+            breite: int = ARBEITSBREITE, ebenen: Path | None = None) -> dict:
+    """ebenen: Ordner der Render-Ebenen derselben Kamera (render --ebenen). Dann zusaetzlich Schutzzonen (Fenster,
+    Leuchten, Gelaender, Gebaeude) getrennt und Fensterzahl je Fassade (lib/kompositing.zonen_pruefen)."""
     vorschau, veredelt = Path(vorschau), Path(veredelt)
     rgbA, gA = _laden(vorschau, breite)
     rgbB, gB = _laden(veredelt, breite)
@@ -402,10 +404,19 @@ def pruefen(vorschau: Path, veredelt: Path, aus: Path | None = None, schwelle: f
         status = "nicht pruefbar"
         befunde.insert(0, f"Vorschau ohne Kontrast ({kontrast:.2f}): zu dunkel oder leer, Vergleich nicht belastbar; "
                           "Vorschau heller rendern oder Sichtpruefung")
+    zonen = None
+    if ebenen is not None:
+        from . import kompositing as KO
+        zonen = KO.zonen_pruefen(vorschau, veredelt, ebenen)
+        befunde += zonen["befunde"]
+        if zonen["status"] != "ok" and status == "ok":
+            status = "zur Pruefung"
     res = {"vorschau": str(vorschau), "veredelt": str(veredelt), "status": status, "score": score,
            "schwelle": schwelle, "score_struktur": round(score_struktur), "score_ausschnitt": round(score_ausschnitt),
            "massstab": round(s, 4), "schiebung_prozent": round(100 * schieb, 2), "deckung": round(al["deckung"], 3),
            "befunde": befunde, "merkmale": merk, "oeffnungen": oeff, "stellen": (st_neu + st_fehlt)[:30]}
+    if zonen is not None:
+        res["schutzzonen"] = zonen
     if aus is not None:
         res["markierung"] = str(_markierung(rgbA, rgbBw, neu, fehlt, st_neu, st_fehlt, oeff, res, Path(aus)))
     return res
@@ -451,7 +462,7 @@ def _markierung(rgbA, rgbBw, neu, fehlt, st_neu, st_fehlt, oeff, res, aus: Path)
     return aus
 
 
-def main_cli(vorschau: str, veredelt: list[str], aus: str | None, schwelle: float) -> int:
+def main_cli(vorschau: str, veredelt: list[str], aus: str | None, schwelle: float, ebenen: str | None = None) -> int:
     """Eine oder mehrere Varianten pruefen. Bei mehreren: Rangfolge (kleinster Score zuerst = Empfehlung)."""
     ergebnisse = []
     for v in veredelt:
@@ -462,13 +473,17 @@ def main_cli(vorschau: str, veredelt: list[str], aus: str | None, schwelle: floa
             ziel = Path(aus) / f"{v.stem}_nachkontrolle.jpg"
         else:
             ziel = v.with_name(v.stem + "_nachkontrolle.jpg")
-        ergebnisse.append(pruefen(Path(vorschau), v, ziel, schwelle))
+        ergebnisse.append(pruefen(Path(vorschau), v, ziel, schwelle, ebenen=Path(ebenen) if ebenen else None))
     if len(ergebnisse) == 1:
         print(json.dumps(ergebnisse[0], ensure_ascii=False, indent=1))
         return 0 if ergebnisse[0]["status"] == "ok" else 1
     rang = sorted(ergebnisse, key=lambda r: (r["status"] == "nicht pruefbar", r["score"]))
     print(json.dumps({"rangfolge": [{"veredelt": r["veredelt"], "status": r["status"], "score": r["score"],
                                      "massstab": r["massstab"], "schiebung_prozent": r["schiebung_prozent"],
-                                     "befunde": r["befunde"], "markierung": r.get("markierung")} for r in rang],
+                                     "befunde": r["befunde"], "markierung": r.get("markierung"),
+                                     "schutzzonen": {k: v["status"] for k, v in
+                                                     (r.get("schutzzonen") or {}).get("zonen", {}).items()} or None,
+                                     "fenster_je_fassade": (r.get("schutzzonen") or {}).get("fenster_je_fassade")}
+                                    for r in rang],
                       "empfehlung": rang[0]["veredelt"]}, ensure_ascii=False, indent=1))
     return 0 if rang[0]["status"] == "ok" else 1

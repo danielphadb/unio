@@ -11,6 +11,9 @@ Beispiele:
   python immoviz.py website projects/wimmergasse-20
   python immoviz.py kameramatch projects/noma-shg13 --bild vorlage.jpg --punkte punkte.yaml --kamera hof_fin
   GOOGLE_MAPS_API_KEY=... python immoviz.py referenz projects/wimmergasse-20 --kamera drohne  (Abgleich gegen Google 3D, nur intern)
+  python immoviz.py render  projects/wimmergasse-20 --cam ecke --light golden_hour --ebenen   (plus Masken, Tiefe, Schutzmaske)
+  python immoviz.py schutz  --render <render.png> --ki <veredelt.jpg> --ebenen <ordner>       (Gebäude aus Blender zurück)
+  python immoviz.py grading --bild <bild.jpg> --leitbild <referenz.jpg> --staerke 0.6         (Look an Leitbild)
   python immoviz.py studio  (Web-Oberfläche auf Port 8765)
 """
 from __future__ import annotations
@@ -53,6 +56,8 @@ def main():
     r.add_argument("--res", default=None, help="Auflösung BxH statt project.yaml, z. B. 3840x2560")
     r.add_argument("--samples", type=int, default=None, help="Samples statt project.yaml")
     r.add_argument("--out", default=None, help="Unterordner von renders/ für die Bilder, z. B. mac_test")
+    r.add_argument("--ebenen", action="store_true", help="zusätzlich Render-Ebenen: Klassenmasken, Tiefe, Normalen, "
+                                                         "Kanten, Schutzmaske (renders/<out>/<kamera>_<licht>_ebenen/)")
     c = sub.add_parser("check", help="Orthogonal-Ansicht ueber die Strassenansicht legen (Planabgleich)")
     c.add_argument("project")
     c.add_argument("--facade", default=None)
@@ -129,6 +134,31 @@ def main():
     nk.add_argument("--veredelt", required=True, nargs="+", help="ein Bild oder mehrere Varianten (Rangfolge)")
     nk.add_argument("--aus", default=None, help="Markierungsbild (bei Varianten: Ordner); Standard neben dem Bild")
     nk.add_argument("--schwelle", type=float, default=None, help="Score ab dem 'zur Pruefung' gilt (Standard 400)")
+    nk.add_argument("--ebenen", default=None, help="Ordner der Render-Ebenen derselben Kamera (render --ebenen): "
+                                                  "Schutzzonen Fenster/Leuchten/Geländer getrennt, Fensterzahl je Fassade")
+    sz = sub.add_parser("schutz", help="Schutz-Kompositing: KI-Bild ausrichten, Farbe übertragen, Gebäude und "
+                                       "Planelemente aus dem Render zurücksetzen (Schutzmaske aus render --ebenen)")
+    sz.add_argument("--render", required=True, help="Blender-Bild (Beauty) zu den Ebenen")
+    sz.add_argument("--ki", required=True, help="veredeltes Bild")
+    sz.add_argument("--ebenen", required=True, help="Ordner <kamera>_<licht>_ebenen")
+    sz.add_argument("--out", default=None, help="Ergebnis (Standard <ki>_schutz.jpg); Prüfbild und JSON daneben")
+    sz.add_argument("--klassen", default=None, help="geschützte Klassen statt ebenen.json, mit Komma")
+    sz.add_argument("--ohne", default=None, help="Klassen aus dem Schutz nehmen, z. B. autos (nur mit Begründung, "
+                                                 "REGELN.md V6)")
+    sz.add_argument("--farbe", type=float, default=1.0, help="Stärke der Farbübertragung KI auf Render (0 bis 1)")
+    sz.add_argument("--ausrichtung", choices=["aehnlich", "affin", "homographie"], default="homographie")
+    gd = sub.add_parser("grading", help="Farbangleich an Leitbilder (Lab-Statistik, Histogramm begrenzt) plus "
+                                        "Vignette, Glow, Filmkorn")
+    gd.add_argument("--bild", required=True)
+    gd.add_argument("--leitbild", nargs="*", default=None, help="Referenzbild(er), lokal, nie im Repo; ohne Angabe "
+                                                               "aus project.yaml look.leitbilder (--projekt)")
+    gd.add_argument("--projekt", default=None, help="Projektordner für look: in project.yaml")
+    gd.add_argument("--staerke", type=float, default=None, help="0 bis 1 (Standard look.staerke bzw. 0,6)")
+    gd.add_argument("--vignette", type=float, default=None)
+    gd.add_argument("--glow", type=float, default=None)
+    gd.add_argument("--korn", type=float, default=None)
+    gd.add_argument("--maske", default=None, help="optional: Schutzmaske (schutz.png), dort nur halbe Stärke")
+    gd.add_argument("--out", default=None, help="Ergebnis (Standard <bild>_grading.jpg); Prüfbild und JSON daneben")
     fg = sub.add_parser("freigabe", help="Modellfreigabe je Kamera (freigabe.yaml): anzeigen, setzen, vor der "
                                          "Veredelung prüfen")
     fg.add_argument("--projekt", required=True)
@@ -155,6 +185,12 @@ def main():
     if a.cmd == "referenz":
         _referenz(a)
         return
+    if a.cmd == "schutz":
+        from lib import kompositing as KO
+        sys.exit(KO.main_cli(a.render, a.ki, a.ebenen, a.out, a.klassen, a.ohne, a.farbe, a.ausrichtung))
+    if a.cmd == "grading":
+        from lib import grading as GR
+        sys.exit(GR.main_cli(a))
     if a.cmd in ("pruefen", "nachkontrolle", "freigabe", "prompt"):
         sys.exit(_korrekturschleife(a))
     pdir = Path(a.project).resolve()
@@ -201,7 +237,7 @@ def main():
         t = time.time()
         aufl = tuple(int(v) for v in a.res.lower().split("x")) if a.res else None
         res = render(pdir, a.cam.split(","), a.light.split(","), a.preview, not a.no_blend,
-                     res=aufl, samples=a.samples, out_sub=a.out)
+                     res=aufl, samples=a.samples, out_sub=a.out, ebenen=a.ebenen)
         print(json.dumps({"renders": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
     elif a.cmd == "svcheck":
         _svcheck(pdir)
@@ -385,7 +421,8 @@ def _korrekturschleife(a) -> int:
         return Q.main_cli(a.projekt, a.json, a.streng)
     if a.cmd == "nachkontrolle":
         from lib import nachkontrolle as NK
-        return NK.main_cli(a.vorschau, a.veredelt, a.aus, a.schwelle if a.schwelle is not None else NK.SCHWELLE)
+        return NK.main_cli(a.vorschau, a.veredelt, a.aus, a.schwelle if a.schwelle is not None else NK.SCHWELLE,
+                           a.ebenen)
     from lib import freigabe as FG
     pdir = Path(a.projekt).resolve()
     if a.cmd == "freigabe":

@@ -249,7 +249,10 @@ Plan auswerten (Vektor vor Pixel, Feld quelle je Element)
   -> Prüfbogen an den Kunden (Vorschau je Kamera, offene Annahmen, Nachbarübersicht)
   -> Freigabe je Kamera in freigabe.yaml (immoviz.py freigabe)
   -> Veredelung (Studio oder MCP; Gate und Regelblock aus higgsfield/prompt_regeln.yaml, immoviz.py prompt)
-  -> nachkontrolle (Struktur-Diff Vorschau gegen Ergebnis, Markierungsbild, Score, Varianten-Rangfolge)
+  -> schutz (Gebäude und Planelemente pixelgenau aus Blender, Farbstimmung der KI; render --ebenen)
+  -> grading (Farbangleich an die Leitbilder, Vignette, Glow, Korn)
+  -> nachkontrolle (Struktur-Diff Vorschau gegen Ergebnis, Markierungsbild, Score, Varianten-Rangfolge;
+                    mit --ebenen Schutzzonen und Fensterzahl je Fassade)
   -> Kunde
 ```
 

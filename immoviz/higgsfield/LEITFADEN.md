@@ -9,6 +9,9 @@ Fensterachsen, Geschosshöhen, Gesimse und die Dachgeschoss-Kubatur dürfen sich
 0. Vorab (REGELN.md, Phasen Freigabe und Veredelung): `immoviz.py prompt --projekt <p> --cam <kamera>` prüft die
    Modellfreigabe der Kamera in `freigabe.yaml` und gibt den Regelblock aus, der an den Prompt angehängt wird.
    Ist die Kamera nicht freigegeben, keine Credits ausgeben (Ausnahme nur bewusst mit `--force`).
+0b. Render mit Ebenen: `immoviz.py render <p> --cam <k> --light <l> --ebenen` (Bild plus Klassenmasken, Tiefe,
+   Normalen, Kanten, Schutzmaske in `renders/<unterordner>/<k>_<l>_ebenen/`). Final auf dem Mac (Auftrag in
+   `immoviz/auftraege/`), Vorschau in der Cloud.
 1. Rendering hochladen (`media_upload`, dann `curl -X PUT` und `media_confirm`).
 2. Bild erzeugen mit dem Rendering als Referenz (Modell siehe unten), Seitenverhältnis 3:2. Budget je Bild ca. 2,5 Credits
    (nano_banana_pro 2k) einplanen, mit `get_cost: true` vorab prüfbar.
@@ -18,7 +21,15 @@ Fensterachsen, Geschosshöhen, Gesimse und die Dachgeschoss-Kubatur dürfen sich
    400), dann Sichtprüfung der markierten Stellen: Achsen zählen, Gesimse, Dachkante, Ecklösung, Küche und
    Großmöbel an der Planwand, Bäume unverändert. Bei mehreren Varianten alle angeben, die Rangfolge nennt die
    beste zuerst. Weicht etwas ab, wird es verworfen und nicht „schön geredet“.
-4. Freigegebenes Bild auf 4K hochrechnen (`upscale_image`).
+3b. Schutz-Kompositing (Pflicht, REGELN.md V6): `immoviz.py schutz --render <render.png> --ki <ergebnis.jpg>
+   --ebenen <ordner>` richtet das KI-Bild aus, überträgt seine Farbstimmung auf die Blender-Pixel und setzt Gebäude,
+   Fenster, Rahmen, Geländer, Leuchten, Straßenmöbel und Autos aus dem Render zurück. Danach Grading an die Leitbilder:
+   `immoviz.py grading --bild <ergebnis_schutz.jpg> --projekt <p> --maske <ordner>/schutz.png`. Zum Schluss
+   `immoviz.py nachkontrolle --vorschau <render.png> --veredelt <ergebnis_schutz_grading.jpg> --ebenen <ordner>`
+   (Schutzzonen und Fensterzahl je Fassade). Damit darf der Prompt der KI mehr Freiheit bei Himmel, Bäumen, Menschen
+   und Licht geben; was sie an der Architektur erfindet, wird ohnehin ersetzt.
+4. Freigegebenes Bild auf 4K hochrechnen (`upscale_image`), falls die KI-Auflösung unter der Renderauflösung liegt,
+   vor `schutz` (sonst wird beim Ausrichten hochskaliert).
 5. Optional: kurze Kamerafahrt mit dem freigegebenen Bild als Startbild (`generate_video`).
 
 ## Modellwahl
@@ -89,3 +100,4 @@ Der Prompt besteht immer aus vier Teilen. Die Teile in `[...]` kommen aus `proje
 | 14.11.2026 | Wimmergasse 20 | ecke, dunst_hell | gpt_image_2_6 (Standardparameter) | Geometrie korrekt, nur 1024 x 688 px |
 | 14.11.2026 | Wimmergasse 20 | ecke, golden_hour | nano_banana_pro 2k | sehr stimmig, warmes Streiflicht, belebte Ecke |
 | 14.11.2026 | Wimmergasse 20 | drohne, dunst_hell | nano_banana_pro 2k | Dachlandschaft und Wienerwald glaubwürdig, Objekt unverändert |
+| 18.11.2026 | Wimmergasse 20 | ecke, golden_hour, Render 1200 x 800 mit Ebenen | vorhandenes R6-Bild (gpt_image_2_6), keine Credits | Kette render --ebenen, schutz, grading, nachkontrolle getestet: Kanten-F1 im Schutzbereich 0,79 auf 0,98, Lampen und Möbel hinter den Fenstern entfernt, Farbstimmung der KI übernommen |

@@ -843,14 +843,20 @@ def setup_camera(scene, cfg, name):
 
 
 def render(project_dir: Path, cams: list[str], lights: list[str], preview: bool, save_blend: bool = True,
-           res: tuple[int, int] | None = None, samples: int | None = None, out_sub: str | None = None):
-    """res, samples und out_sub überschreiben project.yaml (z. B. Testrender auf dem Mac)."""
+           res: tuple[int, int] | None = None, samples: int | None = None, out_sub: str | None = None,
+           ebenen: bool = False):
+    """res, samples und out_sub überschreiben project.yaml (z. B. Testrender auf dem Mac).
+    ebenen: zusätzlich Render-Ebenen (Klassenmasken, Tiefe, Normalen, Kanten, Schutzmaske) je Bild in
+    <out_dir>/<kamera>_<licht>_ebenen/ (lib/ebenen.py)."""
     cfg, ctx = load_project(project_dir)
     scene = build_scene(cfg, ctx)
     R = cfg["render"]
     res = tuple(res) if res else tuple(R["preview_resolution"] if preview else R["resolution"])
     smp = samples or (R["preview_samples"] if preview else R["samples"])
     setup_render(scene, res, smp)
+    if ebenen:
+        from . import ebenen as EB
+        eb_meta = EB.vorbereiten(scene)
     out_dir = project_dir / "renders" / out_sub if out_sub else project_dir / "renders"
     out_dir.mkdir(parents=True, exist_ok=True)
     results = []
@@ -865,6 +871,10 @@ def render(project_dir: Path, cams: list[str], lights: list[str], preview: bool,
             results.append({"file": str(path), "camera": cn, "light": ln, "sun_elev": round(elev, 1),
                             "sun_az": round(az, 1), "resolution": list(res), "samples": smp,
                             "device": scene.cycles.device})
+            if ebenen:
+                eb = EB.schreiben(scene, eb_meta, out_dir / f"{cn}_{ln}_ebenen", cfg, cn, ln, str(path))
+                results[-1]["ebenen"] = {"ordner": eb["ordner"], "schutz_anteil_prozent": eb["schutz_anteil_prozent"],
+                                         "sekunden": eb["sekunden"], "nicht_zugeordnet": eb["nicht_zugeordnet"][:5]}
     if save_blend:
         bpy.ops.wm.save_as_mainfile(filepath=str(project_dir / "renders" / f"{cfg['project']['slug']}.blend"))
     return results

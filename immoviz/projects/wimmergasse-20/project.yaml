@@ -205,6 +205,21 @@ render:
   preview_resolution: [1200, 800]
   preview_samples: 32
 
+# ---------------------------------------------------------------- Schutzmaske und Look (README "Render-Ebenen", "Grading")
+# Schutzmaske fuer die KI-Veredelung: Standard gebaeude_objekt, fenster_glas, fenster_rahmen, gelaender, leuchten,
+# strassenmoebel, autos. Abweichung nur mit Begruendung (REGELN.md V6), z. B.:
+# schutz: {minus: [autos], kante_px: 2}      # solange die Autos in Blender nur Platzhalter sind
+look:                     # Leitbilder aus dem Referenzordner des Kunden (mood_analyse.md 6.1), lokal, nie im Repo
+  ordner: ${IMMOVIZ_REFERENZ}/wimmer/referenz
+  leitbilder:
+    - 05_m41_pazelhof__1kpqnJMgeq58Q6pmA3yBgG6JFhgOcHsXN.jpg   # diesig, cremiger Himmel, Wiener Eckhaus
+    - 13_zhiloy_herbsthof__1XDg3qnaVXqZoFxDCr_Z5u7VGCzbIirDt.jpg   # Streiflicht, warmes Laub
+    - 39_m31_rahmung__125EcNmi47RtNqtlrAoPITalSzd5nbkQz.jpg   # gedaempfte Filmpalette
+  staerke: 0.5
+  vignette: 0.12
+  glow: 0.08
+  korn: 0.008
+
 # ---------------------------------------------------------------- Planabgleich (immoviz.py check)
 checks:
   wimmergasse:

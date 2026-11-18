@@ -37,7 +37,8 @@ Regeln: kein em dash oder en dash in Texten; nie zwei Renders parallel; Google-S
 - Cloud-Sitzung: Planauswertung, Modell, Prüfungen, Higgsfield, Abstimmungsseiten, Doku.
 - Mac-Sitzung: fotorealistische Renders, Render-Ebenen (Objektmasken, Tiefe, Normalen), lokale KI-Bearbeitung mit
   Schutzmaske, Fotogrammetrie.
-- Übergabe über Git: Die Cloud-Sitzung legt Aufträge als Datei `immoviz/auftraege/<datum>_<name>.md` ab, die
+- Übergabe über Git: Die Cloud-Sitzung legt Aufträge als Datei `immoviz/auftraege/<datum>_<name>.md` ab (Format in
+  `immoviz/auftraege/README.md`), die
   Mac-Sitzung arbeitet sie ab und pusht die Ergebnisse.
 
 ## 4. Erfahrungen bei der Einrichtung (18.11.2026, MacBook Pro M3 Max, macOS 14.4)

@@ -1,6 +1,6 @@
 # immoviz: Regelwerk (verbindlich)
 
-Stand 16.11.2026. Abgeleitet aus allen Korrekturrunden bei NOMA Schlachthausgasse 13 (Runde 1 bis 4, Apartments
+Stand 18.11.2026 (V6, V7 Schutzmaske und Grading). Abgeleitet aus allen Korrekturrunden bei NOMA Schlachthausgasse 13 (Runde 1 bis 4, Apartments
 Variante 2) und Wimmergasse 20 (Umgebungsabgleich, Innenräume). Ziel: weniger Runden, weniger verworfene Credits,
 jeder Fehler wird früh und möglichst automatisch gefunden.
 
@@ -109,12 +109,14 @@ korrigiert, nie per Prompt. Was die KI dazuerfindet, wird verworfen, nicht schö
 | V3 | Zweiter Blick in denselben Raum mit dem ersten gelungenen Bild als Anker | Konsistenz Möbel und Material | manuell |
 | V4 | Budget je Bild 2 bis 2,5 Credits (nano_banana_pro 2k), Varianten statt Wiederholung, wenn die Kamera schwierig ist | Leitfaden schätzte 1,5 | manuell |
 | V5 | Fremdbilder (Moodboards anderer Herkunft) nicht hochladen, nur beschreiben | Rechte | manuell |
+| V6 | KI-Bilder nur mit Schutzmaske verwenden: Render mit `--ebenen`, nach der Veredelung `immoviz.py schutz` (Gebäude, Fenster, Rahmen, Geländer, Leuchten, Straßenmöbel, Autos kommen pixelgenau aus Blender, die KI liefert Himmel, Vegetation, Menschen, Stimmung). Ausnahme (Klasse aus dem Schutz nehmen mit `--ohne`/`schutz: {minus: ...}`, oder Bild ohne `schutz`) nur mit schriftlicher Begründung in `project.yaml` bzw. `staging.json` | W Runde 5/6: springende Fenster, erfundene Küchen und Lampen hinter Fenstern, hängende statt stehende Laternen | auto: `schutz` (Exit 1 bei Kanten-F1 unter 0,95), `nachkontrolle --ebenen` (Schutzzonen, Fensterzahl je Fassade) |
+| V7 | Look über `immoviz.py grading` an die Leitbilder angleichen (project.yaml `look`), nicht über Prompt-Wörter allein; Leitbilder bleiben lokal | W Runde 5: Himmel zu gesättigt, kein Grading (mood_analyse.md 6.2) | auto: `grading` (Abstand Lab-Mittel zum Leitbild) |
 
 ## 8. Nachkontrolle (nach jedem Auftrag)
 
 | ID | Regel | Grund (Fehler) | Prüfung |
 |---|---|---|---|
-| N1 | Jedes veredelte Bild gegen die Vorschau prüfen: `immoviz.py nachkontrolle --vorschau <png> --veredelt <jpg>`; Status "zur Prüfung" heißt Sichtprüfung der markierten Stellen (rot neu, blau fehlt, orange Rechteck) | 18 von 74 Aufträgen bei Noma verworfen (staging.json, README Noma), teils erst nach Kundenhinweis | auto (Score, Markierungsbild), manuell (Entscheidung) |
+| N1 | Jedes veredelte Bild gegen die Vorschau prüfen: `immoviz.py nachkontrolle --vorschau <png> --veredelt <jpg>` (mit Ebenen zusätzlich `--ebenen <ordner>`: Schutzzonen und Fensterzahl je Fassade); Status "zur Prüfung" heißt Sichtprüfung der markierten Stellen (rot neu, blau fehlt, orange Rechteck) | 18 von 74 Aufträgen bei Noma verworfen (staging.json, README Noma), teils erst nach Kundenhinweis | auto (Score, Markierungsbild), manuell (Entscheidung) |
 | N2 | Mehrere Varianten derselben Kamera vergleichen lassen und die mit dem kleinsten Score zuerst ansehen: `--veredelt a.jpg b.jpg` | Rangfolge stimmt an den Testfällen in 9 von 13 Paaren | auto |
 | N3 | Checkliste je Bild: Achsen/Öffnungen zählen, geschlossene Wände geschlossen, Küche/Großmöbel an der Planwand, Bäume gleich groß und am Ort, Geländer nur laut Plan, Ausschnitt gleich, keine Stuckleisten ohne Plan | wie V1 | manuell |
 | N4 | Vorbehalte nicht stillschweigend übernehmen: Bild mit bekanntem Fehler bekommt `vorbehalt` in staging.json und geht nicht an den Vertrieb | N `pavillons_drohne_sued`, `*_wohnkueche_aussicht` | manuell |
@@ -138,7 +140,10 @@ $PY immoviz/immoviz.py sichtbar immoviz/projects/<p> --pflicht           # Pflic
 $PY immoviz/immoviz.py freigabe --projekt immoviz/projects/<p>           # Stand je Kamera
 $PY immoviz/immoviz.py freigabe --projekt immoviz/projects/<p> --cam ecke --setzen ja --von "Kunde, Mail 16.11."
 $PY immoviz/immoviz.py prompt --projekt immoviz/projects/<p> --cam ecke  # Gate plus Regelblock für MCP/Higgsfield
-$PY immoviz/immoviz.py nachkontrolle --vorschau <vorschau.png> --veredelt <bild.jpg> [<variante2.jpg> ...]
+$PY immoviz/immoviz.py render immoviz/projects/<p> --cam ecke --light golden_hour --ebenen   # Bild plus Masken, Schutzmaske
+$PY immoviz/immoviz.py schutz --render <render.png> --ki <veredelt.jpg> --ebenen <ordner>      # V6
+$PY immoviz/immoviz.py grading --bild <bild_schutz.jpg> --projekt immoviz/projects/<p>       # V7, Leitbilder aus look
+$PY immoviz/immoviz.py nachkontrolle --vorschau <vorschau.png> --veredelt <bild.jpg> [<variante2.jpg> ...] [--ebenen <ordner>]
 ```
 
 Dazu `referenz` (Google-3D-Gegenprobe) und `kameramatch` (Kamera gegen Vorlage), beide parallel entstanden;

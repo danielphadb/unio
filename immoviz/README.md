@@ -492,3 +492,107 @@ Sekunden je Aufruf:
 - `freigabe.yaml` je Projekt (Vorlage in `projects/_vorlage/`): Veredelung im Studio nur für freigegebene Kameras.
 - Prompt-Regeln für alle Projekte: `higgsfield/prompt_regeln.yaml`, werden automatisch angehängt (LEITFADEN).
 - Code: `lib/quellen.py`, `lib/freigabe.py`, `lib/nachkontrolle.py` (numpy, scipy, Pillow).
+
+## Render-Ebenen und Schutzmaske (`render --ebenen`, `schutz`)
+
+Prinzip wie Element Preservation in Profi-Werkzeugen: Gebäude und Planelemente kommen pixelgenau aus Blender, die
+Bild-KI darf nur Himmel, Vegetation, Menschen, Boden und Stimmung bearbeiten. Grund: springende Fenster, erfundene
+Küchen hinter Fenstern, hängende statt stehende Laternen in den Runden 5 und 6 (REGELN.md V6).
+
+```bash
+# 1. Render mit Ebenen (zusätzlich zum Bild, kostet nur das Schreiben der Passes)
+.venv-immoviz/bin/python immoviz/immoviz.py render immoviz/projects/wimmergasse-20 --cam ecke --light golden_hour --ebenen
+# 2. Veredelung wie bisher (Higgsfield, Bild 1 = Render)
+# 3. Gebäude und Planelemente aus dem Render zurücksetzen, Farbstimmung der KI übernehmen
+.venv-immoviz/bin/python immoviz/immoviz.py schutz --render <render.png> --ki <veredelt.jpg> --ebenen <ordner> [--out x.jpg]
+```
+
+**Ebenen** (`lib/ebenen.py`): Cycles schreibt Tiefe, Normalen, Objekt- und Material-Index; jedes Objekt und jedes
+Material bekommt einen eindeutigen Pass-Index, die Klasse je Paar (Objekt, Material) kommt aus der Tabelle `REGELN`
+in `lib/ebenen.py` (Namensmuster auf Objekt, Material und Collection, erste passende Regel gilt). Die Passes werden
+als unkomprimierte EXR zwischengespeichert, mit einem eigenen Leser (nur numpy) gelesen und als PNG abgelegt in
+`renders/<unterordner>/<kamera>_<licht>_ebenen/` (PNG nicht im Repo):
+
+| Datei | Inhalt |
+|---|---|
+| `<klasse>.png` | Maske je Klasse: gebaeude_objekt, fenster_glas (auch Innenraum hinter Glas), fenster_rahmen (auch Tore, Bleche), gelaender, leuchten, strassenmoebel, autos, baeume, menschen_platzhalter, nachbarn, boden, himmel, sonstige |
+| `klassen.png` | Übersicht, eine Farbe je Klasse |
+| `tiefe.png` | 16 Bit, logarithmisch 0,1 m bis 30 km (`d = 0,1 * 300000^(v/65535)`), Himmel 65535 |
+| `normalen.png` | Weltnormalen (Projektsystem), `n = rgb/127,5 - 1`, Himmel schwarz |
+| `kanten.png` | Tiefensprünge (zweite Differenz über 3 %), Normalenknicke über 25 Grad, Rand zum Himmel |
+| `schutz.png` | Vereinigung der geschützten Klassen mit 2 px weicher Kante |
+| `ebenen.json` | Bildanteil je Klasse, Schutzklassen, Kodierungen, Fassadennormalen, `nicht_zugeordnet` (Objekt/Material ohne Regel mit Bildanteil) |
+
+Geschützt sind standardmäßig gebaeude_objekt, fenster_glas, fenster_rahmen, gelaender, leuchten, strassenmoebel und
+autos. Je Projekt in `project.yaml`: `schutz: [..]` oder `schutz: {klassen: [...], plus: [nachbarn], minus: [autos],
+kante_px: 2}`; Abweichungen nur mit Begründung im Kommentar. Neue Assets (Straßenleuchten, Bänke, Menschen-Platzhalter,
+Bäume aus `lib/assets/`) werden über ihre Namen erkannt (`leuchte|laterne|lampe|mast`, `bank|poller|schild|fahrrad`,
+`mensch|person|figur`, `baum|krone|stamm|laub|rinde`, Collection-Namen zählen auch, Collection-Instanzen erben die
+Klasse des Platzhalter-Empties); steht etwas unter `nicht_zugeordnet`, Muster in `REGELN` ergänzen.
+
+**Schutz-Kompositing** (`lib/kompositing.py`):
+
+1. Ausrichtung: Ähnlichkeitstransformation aus der Nachkontrolle, dann OpenCV ECC (Homographie, `--ausrichtung
+   aehnlich|affin|homographie`) auf Gradientenbildern, nur auf der Architektur des Objekts; gilt nur, wenn der
+   Kantenabstand kleiner wird.
+2. Farbabgleich: lokale Lab-Statistik (Mittelwert, Streuung; Gauss-Fenster 6 % und nahe der Maskenkante 1,5 % der
+   Bildbreite) der KI auf die Blender-Pixel, getrennt für Glas, Autos und übrige Schutzklassen, Streuungsverhältnis
+   0,5 bis 2. Ändert nur Farbe und Helligkeit, nicht die Kanten. `--farbe 0..1` regelt die Stärke.
+3. Ergebnis = Schutzmaske x Blender (farbangeglichen) + Rest x KI. Schatten, Spiegelungen, Menschen und Bäume der KI
+   außerhalb des Schutzbereichs bleiben.
+4. Ausgabe `<ki>_schutz.jpg` (oder `--out`), daneben `_pruefung.jpg` (Render, KI ausgerichtet, Maske rot, Ergebnis)
+   und `.json`: Ausrichtung (Modell, Maßstab, Verschiebung, ECC, Kantenabstand Render zu KI in px), Schutzbereich
+   vorher/nachher (Kanten: Präzision = starke Kanten nahe einer Render-Kante, Vollständigkeit = Render-Kanten im
+   Bild, F1; mittlerer Kantenabstand; Gradientenkorrelation; Farbabweichung dE), dieselben Kanten je Klasse, Anteil
+   der geschützten Fläche. Exit 1, wenn Kanten-F1 nachher unter 0,95.
+
+`--ohne autos` (bzw. `--klassen`) nimmt Klassen aus dem Schutz, z. B. solange die Autos in Blender nur Platzhalter
+sind. Grenzen: KI-Menschen und -Bäume vor geschützten Flächen werden abgeschnitten (Abhilfe: Platzhalter in Blender,
+Klassen `menschen_platzhalter`, `baeume`); Putz- und Stuckdetail der KI im Schutzbereich geht verloren, das Gebäude
+ist das Blender-Material in der Farbstimmung der KI, gute Materialien in Blender sind also Pflicht; Ebenen und Render
+müssen aus demselben Aufruf stammen.
+
+**Nachkontrolle mit Ebenen**: `immoviz.py nachkontrolle --vorschau <render.png> --veredelt <bild.jpg> --ebenen <ordner>`
+meldet zusätzlich unter `schutzzonen` je Zone (Fenster, Leuchten, Geländer, Gebäude) Kantenpräzision und
+-vollständigkeit (Grenzen 0,90 / 0,85 / 0,90 / 0,85) und die Fensterzahl je Fassade: Fenster = Komponenten von Glas
+plus Rahmen im Render, Fassade über die Normalen; im KI-Bild gilt ein Fenster als gefunden, wenn sein Glas wie das
+Glas der KI aussieht (Lab-Klassifikator je Fassade, trainiert auf den Masken) oder sich deutlich von der Wand
+abhebt; glasartige Flecken auf der Wand zählen als neue Fenster. Befund ab 2 neuen oder mehr als 8 % fehlenden
+Fenstern. Bei 1200 px Breite auf etwa +-3 Fenster genau, bei 4k genauer.
+
+Test 18.11.2026 (Wimmergasse `ecke`, `golden_hour`, 1200 x 800, 16 Samples, 36 s auf 4 CPU-Kernen; KI-Bild
+`ecke_golden_r6.jpg` aus älterem Modellstand): Ausrichtung Homographie, Kantenabstand 0,8 px; geschützt 27 %;
+Kanten-F1 im Schutzbereich vorher 0,79, nachher 0,98; Fensterzone Präzision 0,79 auf 0,98 (die KI hatte Lampen und
+Möbel hinter die Fenster gesetzt), Fensterzahl Wimmergasse 58/57, Stolberggasse 22/22. Mit geschützten
+Platzhalter-Autos sieht die Straße schlecht aus, deshalb im Test zusätzlich `--ohne autos`.
+
+## Grading (`grading`)
+
+Farbangleich an Leitbilder aus dem Referenzordner, danach dezente Objektivwirkung (`lib/grading.py`). Nur Farbe,
+deshalb nach `schutz` anwendbar; Geometrie bleibt.
+
+```bash
+.venv-immoviz/bin/python immoviz/immoviz.py grading --bild <bild.jpg> --leitbild <ref1.jpg> [<ref2.jpg> ...] [--staerke 0.6]
+# Leitbilder und Parameter aus project.yaml (look:), Referenzordner lokal über Umgebungsvariable
+IMMOVIZ_REFERENZ=/pfad/zu/referenzen .venv-immoviz/bin/python immoviz/immoviz.py grading --bild <bild.jpg> \
+    --projekt immoviz/projects/wimmergasse-20 --maske <ebenen>/schutz.png
+```
+
+Verfahren: Lab-Statistik der Leitbilder (zusammengelegt), Übertragung von Mittelwert (höchstens L +-12, a/b +-8) und
+Streuung (Faktor 0,7 bis 1,4), Histogramm-Abgleich je Kanal mit Gewicht `histogramm` (0,5) und höchstens L +-10,
+a/b +-6, Mischung mit `staerke` (0,6; mit `--maske` im Schutzbereich halb), dann Glow (helle Stellen, Screen),
+Vignette, Filmkorn (Mitteltöne, fester Seed). Optionen `--vignette`, `--glow`, `--korn`. Ausgabe `<bild>_grading.jpg`,
+`_pruefung.jpg` (vorher/nachher, ohne Leitbilder) und `.json` (Lab-Mittel und -Streuung vorher, nachher, Leitbild,
+Abstand zum Leitbild).
+
+```yaml
+look:                                    # in project.yaml; Leitbilder bleiben außerhalb des Repos
+  ordner: ${IMMOVIZ_REFERENZ}/wimmer/referenz
+  leitbilder: [05_m41_pazelhof__....jpg, 13_zhiloy_herbsthof__....jpg]
+  staerke: 0.5
+  vignette: 0.12
+  glow: 0.08
+  korn: 0.008
+```
+
+Test 18.11.2026: Leitbilder 05, 13, 39 (Wimmergasse), Abstand Lab-Mittel zum Leitbild 5,7 auf 1,7.
