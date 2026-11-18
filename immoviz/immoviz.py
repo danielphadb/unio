@@ -47,6 +47,13 @@ def main():
                                         "Orthofoto der Stadt Wien (renders/check/strasse_abgleich.jpg und .md)")
     sg.add_argument("project")
     sg.add_argument("--ohne-streetview", action="store_true", help="Street-View-Vergleich auch mit Schlüssel auslassen")
+    lc = sub.add_parser("leuchten", help="Leuchten-Inventar (strassenleuchten) als Draufsicht über dem Orthofoto prüfen "
+                                         "(renders/check/leuchten_abgleich.jpg und .md)")
+    lc.add_argument("project")
+    lc.add_argument("--m-je-pixel", type=float, default=0.12, help="Auflösung des Prüfbilds (Standard 0,12 m)")
+    tx = sub.add_parser("texturen", help="Optionale CC0-Texturen (Poly Haven) nach immoviz/assets/texturen/ laden "
+                                         "(gitignored, Quelle und Lizenz in immoviz/assets/LIZENZEN.md)")
+    tx.add_argument("--aufloesung", default="2k")
     r = sub.add_parser("render", help="Szene bauen und rendern")
     r.add_argument("project")
     r.add_argument("--cam", default="ecke")
@@ -191,6 +198,10 @@ def main():
     if a.cmd == "grading":
         from lib import grading as GR
         sys.exit(GR.main_cli(a))
+    if a.cmd == "texturen":
+        from lib.assets import texturen as TX
+        print(json.dumps({"geladen": TX.laden(a.aufloesung), "ordner": str(TX.ORDNER)}, ensure_ascii=False, indent=1))
+        return
     if a.cmd in ("pruefen", "nachkontrolle", "freigabe", "prompt"):
         sys.exit(_korrekturschleife(a))
     pdir = Path(a.project).resolve()
@@ -232,6 +243,9 @@ def main():
         else:
             res["streetview"] = "ausgelassen" if key else "ausgelassen, GOOGLE_MAPS_API_KEY nicht gesetzt"
         print(json.dumps({**res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
+    elif a.cmd == "leuchten":
+        from lib.assets import leuchten as LE
+        print(json.dumps(LE.pruefbild(pdir, a.m_je_pixel), ensure_ascii=False, indent=1))
     elif a.cmd == "render":
         from lib.build import render
         t = time.time()

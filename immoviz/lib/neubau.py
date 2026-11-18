@@ -98,6 +98,7 @@ class Neubau:
     def __init__(self, cfg: dict, mats: dict):
         import bpy
         self.N = cfg.get("neubau") or {}
+        self.innenraum = str(((cfg.get("assets") or {}).get("innenraum", "an"))).lower() == "an"
         self.mats = _mat_lib(bpy, mats, self.N.get("material"))
         self.G: dict[str, dict] = {}
         self.rng = random.Random(13)
@@ -164,7 +165,11 @@ class Neubau:
                 K.box(G["rahmen"], f, ua + (ub - ua) * 0.5 - 0.04, ua + (ub - ua) * 0.5 + 0.04, dr, dr + 0.1, za, zb, fm)
             if fs.get("karten", True):
                 mat = self.rng.choices(["innen_a", "innen_b", "innen_c"], [0.45, 0.25, 0.30])[0]
-                K.quad_plane(G["innen"], f, ua - 0.4, ub + 0.4, za - 0.3, zb + 0.2, d + fs.get("karte_tiefe", 1.6), mat)
+                if self.innenraum:      # Interior Mapping in der Oeffnung (lib/materials.py innenraum)
+                    K.innen_karte(G["innen"], f, ua, ub, za, zb, d + fs.get("laibung", 0.22) - 0.005,
+                                  (math.sin(ua * 12.9898 + za * 78.233 + f.a[0] * 3.71 + f.a[1] * 1.37) * 43758.5453) % 1.0)
+                else:
+                    K.quad_plane(G["innen"], f, ua - 0.4, ub + 0.4, za - 0.3, zb + 0.2, d + fs.get("karte_tiefe", 1.6), mat)
 
     def boxen(self, b):
         f = K.Facade("nb", tuple(b["a"]), tuple(b["b"]))

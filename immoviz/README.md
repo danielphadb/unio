@@ -87,10 +87,60 @@ Ergebnisse landen in `projects/<objekt>/renders/`.
 - **Direkt sichtbare Häuser** (Befehl `sichtbar`): Sehstrahlen je Kamera, Ergebnis je BEZUG mit Bildanteil und
   Entfernung. Jedes Haus mit mindestens 1 % Bildanteil und unter 80 m braucht einen Eintrag in
   `neighbour_facades` und eine frontale Ansicht in `streetview_checks`.
-- **Bäume** (`lib/trees.py`): Kronenvorlagen (rundlich, säulenförmig) als Instanzen, Größe aus dem Baumkataster.
-  Korrekturen in `trees_override` am Ende von `project.yaml`: Baum über die Position finden, `remove: true`,
-  `height`, `crown`, `form` (rund, saeule), `base`, oder `add: true` für fehlende Bäume.
+- **Bäume** (`lib/trees.py` Lage und Korrekturen, Gestalt `lib/assets/baeume.py`, siehe "Objekt- und
+  Materialbibliothek"): Größe aus dem Baumkataster. Korrekturen in `trees_override` am Ende von `project.yaml`: Baum
+  über die Position finden, `remove: true`, `height`, `crown`, `form` (rund, saeule), `base`, `art` (linde, ahorn,
+  platane, kastanie, saeule), oder `add: true` für fehlende Bäume.
 - Stand und Befund je Objekt: `projects/<objekt>/umgebung_abgleich.md`.
+
+## Objekt- und Materialbibliothek
+
+Ziel: Das Blender-Bild ist schon fotorealistisch, die Bild-KI bearbeitet nur noch Himmel, Vegetation, Menschen und
+Stimmung. Alles ist selbst erzeugte, parametrische Geometrie oder CC0-Material (Quellen und Lizenzen:
+`assets/LIZENZEN.md`). Code in `lib/assets/` (Objekte) und `lib/materials.py` (Materialien), eingebunden in
+`build_context`. Bestehende Projekte laufen ohne Änderung; jeder Teil lässt sich in `project.yaml` auf die alte Fassung
+zurückschalten:
+
+```yaml
+assets: {baeume: natur, autos: karosserie, leuchten: bibliothek, innenraum: an, menschen: an}
+# alte Fassung: {baeume: einfach, autos: kisten, leuchten: einfach, innenraum: aus}; menschen: aus blendet die Platzhalter aus
+```
+
+| Bereich | Inhalt | Steuerung |
+|---|---|---|
+| Bäume (`assets/baeume.py`) | Stamm, Gerüstäste, Nebenäste, Zweige und rund 20.000 bis 45.000 Blätter je Vorlage in der Umrissform der Art; Kronenhülle je Art (Linde oval, Ahorn rund, Platane breit mit Fleckenrinde, Kastanie Kuppel, Säulenform), gelappter Rand, Lücken zwischen den Blattbüschen. Drei Vorlagen je Art, jeder Baum ist eine Instanz; Lage, Höhe, Kronendurchmesser und Kronenansatz unverändert aus Kataster und `trees_override` | Art aus dem Katasternamen (Tilia, Acer, Platanus, Aesculus; übrige Gattungen nach Wuchsform) oder `art` in `trees_override`. Jahreszeit aus der Lichtstimmung (`season`): Frühling, Sommer, Spätsommer, Herbst (Gelb, Orange, Rot, Braun je Art, 32 % Blattverlust), Winter kahl |
+| Autos (`assets/autos.py`) | Kleinwagen, Kompakt, Kombi, SUV, Transporter mit Karosserie aus Querschnitten (Schulter, eingezogene Fahrgastzelle, geneigte Scheiben), Rädern mit Felge, Radläufen, Scheinwerfern, Rückleuchten, Spiegeln, Kennzeichenfeld ohne Schrift; gedeckte Lackfarben je Auto | Stellplätze und Parkordnung wie bisher aus `street.parking` (`lib/strasse.py`) |
+| Straßenleuchten (`assets/leuchten.py`) | Seil-/Überspannungsleuchte (Wiener Hängeleuchte, Querseil mit Wandhaken und Spannschloss, Abspannung an Kreuzungen, Längsseil je Strang), Peitschenmast, Aufsatzmast, Wandausleger, Altwiener Laterne; warmweißes Licht (rund 3000 K), an bei Sonnenhöhe unter 2 Grad oder mit `strassenlicht: an` in der Lichtstimmung (`aus` erzwingt aus) | nur aus dem Inventar `strassenleuchten` (siehe unten), ohne Inventar Fallback aus `street.cables` mit Warnung in `pruefen` |
+| Straßenmöbel (`assets/moebel.py`) | Poller (grün-weiß, rot-weiß, grau), Fahrradbügel, Mistkübel, Verkehrszeichen ohne lesbare Schrift (Verbot, Gebot, Gefahr, Stop, Info, Zusatz), Hydrant, Baumscheibe mit Gussgitter oder Erde | `strassenmoebel` (Liste mit `typ`, `pos`, `drehung`, `quelle`); Baumscheiben automatisch je Katasterbaum auf Gehsteig/Parkstreifen (`strassenmoebel_auto: {baumscheiben: true, baumscheibe: gitter, umkreis_m: 90}`) |
+| Menschen (`assets/moebel.py`) | graue Silhouetten in realistischer Größe (stehen, gehen), Sammlung `menschen_platzhalter`, nur Lage und Maßstab für die Bild-KI | `menschen` (Liste mit `pos`, `hoehe`, `drehung`, `haltung`, `quelle`); ausblenden mit `assets: {menschen: aus}` oder `IMMOVIZ_MENSCHEN=aus` vor dem Befehl |
+| Materialien (`materials.py`) | Putz mit Körnung, Kellenstruktur, Fleckigkeit, Schmutz in Kehlen und unter Gesimsen und Fensterbänken (Umgebungsverdeckung), Laufspuren, gerundeten Kanten (Bevel-Shader 2 cm); Stuck; Zink mit Falzen; Floatglas (IOR 1,52, leichte Unruhe), Kastenfenster mit zwei Ebenen; lackierte Rahmen mit gerundeten Kanten; Asphalt mit Gesteinskorn, Flickstellen mit Naht und Rissen; Gehsteig als Gussasphalt oder Betonplatten; Granit-Kleinsteinpflaster mit Farbe je Stein; Bordstein Granit; Holztor; Metall | Gehsteig: `street.gehsteig: asphalt | platten` (`platten_raster: [0.5, 0.5]`); Variation gegen Wiederholung über Objekt-Zufall und mehrere Rauschebenen |
+| Innenräume hinter Fenstern (`materials.innenraum`, `meshkit.innen_karte`) | Interior Mapping: aus einer Fläche in der Fensteröffnung rechnet der Shader einen Raum (Rückwand mit Möbel-Silhouette, Bild oder Tür, Seitenwände, Parkett, Decke), Vorhänge (Schals oder Store), Tageslicht nach hinten abfallend, zufällig Licht an (12 % am Tag, bis 55 % nachts, Stärke aus `interior` der Lichtstimmung). Für das Objekt, die Nachbarfassaden, die Fenster der Umgebung (mit eigener Spiegelung) und `neubau` | eigene Wohnungen mit Möblierung bleiben in `wohnungen.yaml` (`interior`) |
+| Texturen (`assets/texturen.py`) | optionale CC0-Texturen von Poly Haven (Asphalt, Betonplatten, Putzkorn) als Helligkeits-, Rauheits- und Reliefvariation | `immoviz.py texturen` lädt sie nach `assets/texturen/` (gitignored); ohne sie rein prozedural |
+
+**Leuchten-Inventar** (`strassenleuchten` in `project.yaml`, Regel U9 in `REGELN.md`): je Leuchte `id`, `typ`
+(`seil`, `mast_peitsche`, `mast_aufsatz`, `wandausleger`, `altwiener_laterne`), Lage (`leuchte` bzw. `pos`, lokal),
+`hoehe` (Lichtpunkthöhe über Gelände), bei Seilleuchten beide Aufhängepunkte `a` und `b` (x, y, Höhe) oder an
+Kreuzungen `abspannung` (Liste), optional `strang` (Längsseil), bei Mast und Wandarm `ausleger` und `richtung`, immer
+`quelle`. Erhebung aus Street View (nur intern, Bilder in `renders/streetview/leuchten/`): je Panorama ein Blick
+senkrecht nach oben, die Lage folgt aus dem Versatz der Leuchte in zwei Nachbarpanoramen (Abstand d der Panoramen,
+Bildversatz v1, v2 in Pixeln, f = Bildbreite / 2 / tan(60 Grad) bei 120 Grad Bildwinkel): Höhe über Kamera
+h = d * f / (v1 - v2), Lage = Panorama plus v * h / f; Wandhaken als Strahl quer zur Straße bis zur Fassade laut
+Baukörpermodell. Prüfen mit
+
+```bash
+.venv-immoviz/bin/python immoviz/immoviz.py leuchten immoviz/projects/wimmergasse-20   # renders/check/leuchten_abgleich.jpg und .md
+.venv-immoviz/bin/python immoviz/immoviz.py texturen                                     # optionale CC0-Texturen laden
+```
+
+Das Prüfbild zeigt das Orthofoto 2024 mit Leuchten (Farbe je Typ, ID, Höhe), Querseilen und Haken, Längsseilen und
+Auslegern. Stand: Wimmergasse 20 mit 24 Seilleuchten (Wimmergasse und Stolberggasse je Richtung bis zum 4. bis 5. Haus,
+vier Kreuzungen mit Abspannung), Noma mit 7 Seilleuchten an der Straßenbahn-Überspannung der Schlachthausgasse und
+4 Peitschenmasten an der Südseite der Würtzlerstraße; Hof- und Terrassenleuchten der Noma sind Ausstattung
+(`neubau.ausstattung`, typ leuchte), der Einreichplan zeigt keine Außenleuchten.
+
+Render-Ebenen (`render --ebenen`, `lib/ebenen.py`) ordnen die Bibliothek über die Objektnamen zu: `baeume_*`,
+`autos`, `strassenleuchten*`, `strassenmoebel`, `menschen_platzhalter`. Rechenzeit Vorschau 960 x 640, 32 Samples auf
+4 CPU-Kernen: Wimmergasse `ecke` rund 110 s (vorher 47 s), davon Szenenaufbau rund 50 s (Baumvorlagen, Autos, Texturen).
 
 ## Straßenabgleich: Parkplätze und Gehsteige vor dem Haus
 

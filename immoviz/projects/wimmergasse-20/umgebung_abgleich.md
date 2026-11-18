@@ -406,3 +406,24 @@ zeigt viel Dachfläche im Vordergrund und wirkt gedrungen. Empfehlung: `drohne_s
 fehlende Aufbauten bis 40 m²); Wimmergasse 9 (009533, nicht im Bild) hat einen Dachausbau nach 2016 (First 2,9 m
 höher); Hügelkette als flache Kulisse ohne Dunst; Wimmergasse 19 und Stolberggasse 34 First wie beschrieben.
 Der Vorschlagsteil in `renders/check/abgleich_drohne.md` listet die übrigen fehlenden Aufbauten als `aufbauten`-Quader.
+
+## 12. Straßenleuchten, Poller, Zeichen (18.11.2026)
+
+Kunde 18.11.2026: Laternen falsch (hängend statt stehend in KI-Bildern), Seilleuchte im Blender-Bild als schwarzer
+Kasten. Neu erhoben aus Street View 05/2024 und 04/2026 (nur intern, `renders/streetview/leuchten/`): je Panorama
+entlang Wimmergasse (y -160 bis +100) und Stolberggasse (x -127 bis +134) ein Blick senkrecht nach oben.
+
+- Bauart: ausschließlich Wiener Hängeleuchten (flacher runder Teller) an einem Längsseil in Straßenmitte, je Leuchte
+  ein Querseil zu Wandhaken an beiden Fassaden; an den vier Kreuzungen (Stolberggasse, y -70, y -132 in der
+  Wimmergasse, Spengergasse und Ramperstorffergasse in der Stolberggasse) Abspannung zu den vier Eckhäusern. Keine
+  Mastleuchten in beiden Gassen. Am Spengergassen-Eck ein Ampelausleger (keine Leuchte).
+- 24 Leuchten im Inventar `strassenleuchten` (11 Wimmergasse, 12 Stolberggasse, 1 Kreuzung vor dem Objekt), Abstand
+  20 bis 25 m, Lichtpunkthöhe 7,2 m (aus drei Panoramapaaren trianguliert, 7,2 bis 7,3 m), Lage +-0,5 m. Prüfbild
+  `renders/check/leuchten_abgleich.jpg`: alle Leuchten liegen in Straßenmitte, Kreuzungsleuchten mitten auf den
+  Kreuzungen.
+- Die bisherigen `street.cables` (7 Seile, eines diagonal über die Kreuzung, Leuchte als Kasten) sind ersetzt und nur
+  noch Fallback ohne Inventar.
+- Poller grün mit weißen Ringen an allen vier Gehsteigvorziehungen der Kreuzung (je drei im Modell, Lage am Bordstein
+  laut OGD), Verkehrszeichen an der Ecke des Objekts (rundes Verbotszeichen), Stop an der Südostecke, Einbahn an der
+  Südwestecke, drei Fahrradbügel an der Westecke (`strassenmoebel`, Lage +-1 m). Die Kamera `ecke` steht auf der
+  südwestlichen Vorziehung 1,6 m neben einem Poller (rechter Bildrand).

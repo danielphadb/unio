@@ -19,6 +19,19 @@ from . import strasse as ST
 from . import trees as T
 from .sun import sun_position, sun_vector_local
 
+
+def _asset(cfg, key, standard):
+    """Schalter der Objektbibliothek (project.yaml `assets:`), z. B. baeume: natur | einfach, autos: karosserie |
+    kisten, innenraum: an | aus. Ohne Angabe gilt die neue Bibliothek (lib/assets)."""
+    return str((((cfg or {}).get("assets") or {}).get(key, standard))).lower()
+
+
+def _zufall(*w):
+    """Reproduzierbarer Zufall 0..1 aus Koordinaten (Interior Mapping je Fenster, ohne die Szenen-Zufallsfolgen zu
+    veraendern)."""
+    v = math.sin(sum(x * k for x, k in zip(w, (12.9898, 78.233, 37.719, 4.581)))) * 43758.5453
+    return v - math.floor(v)
+
 LAST_TERRAIN = None
 STREET_LAYERS = {"Fahrbahn", "Gehsteig", "Ruhender Verkehr", "Gehweg, Radweg", "Zebrastreifen",
                  "Sonstige Verkehrsfläche", "Befestigte Fläche", "Fahrbahnschwelle"}
@@ -55,8 +68,12 @@ class Hero:
             ends.append(hit)
         return tuple(ends)
 
-    def card(self, f, ua, ub, za, zb, d):
+    def card(self, f, ua, ub, za, zb, d, d_fenster=None):
         mat = self.rng.choices(["innen_a", "innen_b", "innen_c"], [0.45, 0.25, 0.30])[0]
+        if d_fenster is not None and _asset(self.cfg, "innenraum", "an") == "an":
+            # Interior Mapping (lib/materials.py innenraum): Raum mit Rueckwand, Vorhang, Licht hinter der Scheibe
+            K.innen_karte(self.inner, f, ua, ub, za, zb, d_fenster, _zufall(*f.p((ua + ub) / 2, 0, za)))
+            return
         K.quad_plane(self.inner, f, ua - 0.5, ub + 0.5, za - 0.4, zb + 0.3, d, mat)
 
     def altbau(self):
@@ -105,7 +122,7 @@ class Hero:
                 if sur:
                     K.surround(self.orn, f, ua, ub, za, zb, sur)
                 if typ != "keller":
-                    self.card(f, ua, ub, za, zb, 2.2)
+                    self.card(f, ua, ub, za, zb, 2.2, 0.29)
             ext = self.corner_ext(f)
             for c in A["cornices"]:
                 K.cornice(self.orn, f, 0.0, L, c["steps"], "stuck", ext)
@@ -156,7 +173,7 @@ class Hero:
             K.wall_with_holes(self.mass, f, u0, u1, z0, z1, d, holes, dm, reveal=0.22)
             for (ua, ub, za, zb) in wins:
                 K.modern_window(self.frames, self.glass, f, ua, ub, za, zb, d)
-                self.card(f, ua, ub, za, zb, d + 1.2)
+                self.card(f, ua, ub, za, zb, d + 1.2, d + 0.21)
             for lg in w.get("loggias", []):
                 ua, ub = lg["u"]
                 za, zb = lg["z"]
@@ -165,7 +182,7 @@ class Hero:
                 K.box(self.mass, f, ua, ub, d - 0.05, back, s, s + 0.22, dm)
                 K.modern_window(self.frames, self.glass, f, ua + 0.1, ub - 0.1, za + 0.05, s - 0.05, back - 0.15)
                 K.modern_window(self.frames, self.glass, f, ua + 0.1, ub - 0.1, s + 0.25, zb - 0.1, back - 0.15)
-                self.card(f, ua, ub, za, zb, back + 1.0)
+                self.card(f, ua, ub, za, zb, back + 1.0, back + 0.05)
                 r0, r1 = lg["rail"]
                 K.box(self.frames, f, ua, ub, d - 0.02, d + 0.04, r1 - 0.05, r1, "rahmen_dunkel")
                 n = int((ub - ua) / 0.12)
@@ -319,6 +336,7 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
 
     walls = K.MeshBuilder("umgebung_gebaeude", ["nachbar_0"])
     wins = K.MeshBuilder("umgebung_fenster", ["fenster_dunkel"])
+    innen_an = _asset(cfg, "innenraum", "an") == "an"
     roofs = K.MeshBuilder("umgebung_daecher", ["nachbar_dach"])
     special = {str(v["bezug"]) for v in (cfg or {}).get("neighbour_facades", {}).values()}
     roof_by_id = (roofdata or {}).get("by_id", {})
@@ -392,7 +410,10 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
                 for c in range(cols):
                     uc = (c + 0.5) * sp
                     ua, ub = uc - 0.55, uc + 0.55
-                    K.quad_plane(wins, f, ua, ub, za, zb, -0.015, "fenster_dunkel")
+                    if innen_an:
+                        K.innen_karte(wins, f, ua, ub, za, zb, -0.015, _zufall(p1[0] + uc, p1[1], za), "fenster_innen")
+                    else:
+                        K.quad_plane(wins, f, ua, ub, za, zb, -0.015, "fenster_dunkel")
                     K.box(wins, f, ua - 0.07, ub + 0.07, -0.03, 0.0, za - 0.07, za, "nachbar_rahmen")
                     K.box(wins, f, ua - 0.07, ub + 0.07, -0.03, 0.0, zb, zb + 0.07, "nachbar_rahmen")
                     K.box(wins, f, ua - 0.07, ua, -0.03, 0.0, za, zb, "nachbar_rahmen")
@@ -468,9 +489,15 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
             ground.poly([(x, y, z) for x, y in poly], [(x, y) for x, y in poly], mat, (0, 0, 1))
     shift_z(ground, terrain)
     ground.to_object(bpy, mats, coll)
-    # Seilleuchten
+    # Strassenleuchten: Inventar `strassenleuchten` (lib/assets/leuchten.py), ohne Inventar Fallback aus street.cables
+    if _asset(cfg, "leuchten", "bibliothek") != "einfach":
+        from .assets import leuchten as LE
+        LE.build(cfg, mats, coll, terrain)
+        cables = []
+    else:
+        cables = (cfg or {}).get("street", {}).get("cables", [])
     cab = K.MeshBuilder("seilleuchten", ["seil"])
-    for x0, y0, x1, y1 in (cfg or {}).get("street", {}).get("cables", []):
+    for x0, y0, x1, y1 in cables:
         f = K.Facade("c", (x0, y0), (x1, y1))
         L_ = f.length
         z0 = terrain((x0 + x1) / 2, (y0 + y1) / 2) + 7.5
@@ -478,12 +505,25 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
         um = L_ / 2
         K.box(cab, f, um - 0.006, um + 0.006, -0.006, 0.006, z0 - 0.55, z0, "seil", skip_back=False)
         K.box(cab, f, um - 0.28, um + 0.28, -0.28, 0.28, z0 - 0.75, z0 - 0.55, "leuchte", skip_back=False)
-    cab.to_object(bpy, mats, coll)
-    park_cars(ctx, rng, terrain, min(radius, 200), cfg).to_object(bpy, mats, coll)
+    if cab.faces:
+        cab.to_object(bpy, mats, coll)
+    if _asset(cfg, "autos", "karosserie") == "kisten":
+        park_cars(ctx, rng, terrain, min(radius, 200), cfg).to_object(bpy, mats, coll)
+    else:      # Karosserieformen (lib/assets/autos.py) auf denselben Stellplaetzen
+        from .assets import autos as AU
+        AU.build(ctx, rng, terrain, min(radius, 200), cfg, mats, coll)
 
     # Baeume aus dem Baumkataster, korrigiert ueber trees_override (Abgleich mit Street View und Orthofoto)
     trees = T.apply_override(ctx["trees"], (cfg or {}).get("trees_override"))
-    T.build(trees, mats, coll, terrain, min(radius, 260), hero_poly)
+    if _asset(cfg, "baeume", "natur") == "einfach":
+        T.build(trees, mats, coll, terrain, min(radius, 260), hero_poly)
+    else:      # natuerliche Kronen je Art (lib/assets/baeume.py), Lage und Groesse unveraendert
+        from .assets import baeume as BA
+        BA.build(trees, mats, coll, terrain, min(radius, 260), hero_poly)
+    # Strassenmoebel (Inventar `strassenmoebel`, Baumscheiben aus dem Kataster) und Platzhalter fuer Menschen
+    from .assets import moebel as MO
+    MO.build_moebel(cfg, ctx, mats, coll, terrain)
+    MO.build_menschen(cfg, mats, coll, terrain)
 
 
 def _sockel(cfg, b, z_gelaende):
@@ -610,8 +650,11 @@ def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
                 K.kastenfenster(fr, gl, f, ua, ub, za, zb, 0.0)
             if sur:
                 K.surround(orn, f, ua, ub, za, zb, sur, mat=col + "_stuck")
-            K.quad_plane(inner, f, ua - 0.4, ub + 0.4, za - 0.3, zb + 0.3, 2.0,
-                         rng.choice(["innen_a", "innen_b", "innen_c"]))
+            if _asset(cfg, "innenraum", "an") == "an":
+                K.innen_karte(inner, f, ua, ub, za, zb, 0.27, _zufall(*f.p((ua + ub) / 2, 0, za)))
+            else:
+                K.quad_plane(inner, f, ua - 0.4, ub + 0.4, za - 0.3, zb + 0.3, 2.0,
+                             rng.choice(["innen_a", "innen_b", "innen_c"]))
         if sp.get("gate"):
             g = sp["gate"]
             uc = sp["axes"][g["axis"]]
@@ -684,6 +727,7 @@ def build_scene(cfg, ctx):
     alt = cfg.get("altbau")
     if alt:
         cm["_altbau"] = {"rustika": (*alt["rustika"]["z"], alt["rustika"]["spacing"]), "sockel": alt["sockel"]}
+    cm["_strasse"] = cfg.get("street") or {}      # Gehsteigbelag (asphalt | platten) fuer die Materialbibliothek
     mats = M.build_library(bpy, cm)
     scene = bpy.context.scene
     hero_coll = bpy.data.collections.new("Objekt")
@@ -798,6 +842,8 @@ def setup_light(scene, cfg, ctx, name):
     scene.view_settings.exposure = L.get("exposure", 0.0)
     M.set_interior_emission(bpy, L.get("interior", 0.0))
     M.set_season(bpy, L.get("season", "sommer"))
+    from .assets import leuchten as LE
+    LE.set_strassenlicht(bpy, LE.licht_an(L, elev))      # warmweiss, an unter 2 Grad Sonnenhoehe oder strassenlicht: an
     return elev, az
 
 

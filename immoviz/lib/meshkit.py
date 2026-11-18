@@ -34,6 +34,9 @@ class MeshBuilder:
         self.faces: list[list[int]] = []
         self.uvs: list[list[tuple[float, float]]] = []
         self.mats: list[int] = []
+        # optional je Flaeche: zweite UV ("fenster", lokale Fensterkoordinaten) und Zusatzwerte ("info", RGB)
+        self.uv2: list | None = None
+        self.attr: list | None = None
 
     def mat(self, name: str) -> int:
         if name not in self.materials:
@@ -41,8 +44,9 @@ class MeshBuilder:
         return self.materials.index(name)
 
     def poly(self, pts: list[Vec], uv: list[tuple[float, float]] | None = None,
-             mat: str | int = 0, normal: Vec | None = None):
-        """Fuegt ein Polygon hinzu. Mit normal wird die Orientierung bei Bedarf umgedreht."""
+             mat: str | int = 0, normal: Vec | None = None, uv2=None, attr=None):
+        """Fuegt ein Polygon hinzu. Mit normal wird die Orientierung bei Bedarf umgedreht.
+        uv2: zweite UV je Ecke (Layer "fenster"), attr: (r, g, b) je Flaeche (Farbattribut "info")."""
         if len(pts) < 3:
             return
         if uv is None:
@@ -52,30 +56,55 @@ class MeshBuilder:
             if _dot(n, normal) < 0:
                 pts = pts[::-1]
                 uv = uv[::-1]
+                if uv2 is not None:
+                    uv2 = uv2[::-1]
+        if (uv2 is not None or attr is not None) and self.uv2 is None:
+            self.uv2 = [None] * len(self.faces)
+            self.attr = [None] * len(self.faces)
         base = len(self.verts)
         self.verts.extend(pts)
         self.faces.append(list(range(base, base + len(pts))))
         self.uvs.append(list(uv))
         self.mats.append(self.mat(mat) if isinstance(mat, str) else mat)
+        if self.uv2 is not None:
+            self.uv2.append(list(uv2) if uv2 is not None else None)
+            self.attr.append(tuple(attr) if attr is not None else None)
 
     def merge(self, other: "MeshBuilder"):
         remap = [self.mat(m) for m in other.materials]
         base = len(self.verts)
+        if other.uv2 is not None and self.uv2 is None:
+            self.uv2 = [None] * len(self.faces)
+            self.attr = [None] * len(self.faces)
         self.verts.extend(other.verts)
-        for f, uv, m in zip(other.faces, other.uvs, other.mats):
+        for k, (f, uv, m) in enumerate(zip(other.faces, other.uvs, other.mats)):
             self.faces.append([i + base for i in f])
             self.uvs.append(uv)
             self.mats.append(remap[m])
+            if self.uv2 is not None:
+                self.uv2.append(other.uv2[k] if other.uv2 is not None else None)
+                self.attr.append(other.attr[k] if other.attr is not None else None)
 
-    def to_object(self, bpy, materials: dict, collection=None, smooth: bool = False):
+    def to_mesh(self, bpy, materials: dict, smooth: bool = False):
+        """Blender-Mesh ohne Objekt (z. B. Vorlage fuer Instanzen: Baeume, Autos)."""
         mesh = bpy.data.meshes.new(self.name)
         mesh.from_pydata(self.verts, [], self.faces)
         uvl = mesh.uv_layers.new(name="UVMap")
-        li = 0
-        for poly_uv in self.uvs:
-            for uv in poly_uv:
-                uvl.data[li].uv = uv
-                li += 1
+        flat = [c for poly_uv in self.uvs for uv in poly_uv for c in uv]
+        uvl.data.foreach_set("uv", flat)
+        if self.uv2 is not None:
+            u2 = mesh.uv_layers.new(name="fenster")
+            flat2 = []
+            for f, uv in zip(self.faces, self.uv2):
+                flat2.extend(c for q in (uv or [(0.0, 0.0)] * len(f)) for c in q)
+            u2.data.foreach_set("uv", flat2)
+            col = mesh.color_attributes.new("info", "FLOAT_COLOR", "CORNER")
+            vals = []
+            for f, a in zip(self.faces, self.attr):
+                vals.extend((*(a or (0.0, 0.0, 0.0)), 1.0) * len(f))
+            col.data.foreach_set("color", vals)
+            mesh.uv_layers.active = uvl
+            uvl.active_render = True
         for name in self.materials:
             mesh.materials.append(materials[name])
         mesh.polygons.foreach_set("material_index", self.mats)
@@ -83,6 +112,10 @@ class MeshBuilder:
             mesh.polygons.foreach_set("use_smooth", [True] * len(self.faces))
         mesh.validate(clean_customdata=False)
         mesh.update()
+        return mesh
+
+    def to_object(self, bpy, materials: dict, collection=None, smooth: bool = False):
+        mesh = self.to_mesh(bpy, materials, smooth)
         obj = bpy.data.objects.new(self.name, mesh)
         (collection or bpy.context.scene.collection).objects.link(obj)
         return obj
@@ -203,6 +236,19 @@ def prism_pediment(mb: MeshBuilder, f: Facade, u0, u1, z0, h, d0, d1, mat):
                 [(ua, d0), (ub, d0), (ub, d1), (ua, d1)], mat, (0, 0, 1))
 
 
+# ------------------------------------------------------------------ Innenraum hinter Fenstern (Interior Mapping)
+def innen_karte(mb: MeshBuilder, f: Facade, ua, ub, za, zb, d, seed: float, mat="innen_raum"):
+    """Flaeche genau in der Fensteroeffnung (Tiefe d hinter der Flucht). Das Material (lib/materials.py, innenraum)
+    rechnet daraus einen Raum mit Rueckwand, Boden, Decke, Vorhang und Licht: UV "fenster" = lokale Meter
+    (s quer ab Fenstermitte, t ab Bruestung), Attribut "info" = (Breite, Hoehe, Zufall)."""
+    P = f.p
+    w, h = ub - ua, zb - za
+    um = (ua + ub) / 2
+    pts = [P(ua, d, za), P(ub, d, za), P(ub, d, zb), P(ua, d, zb)]
+    uv2 = [(ua - um, 0.0), (ub - um, 0.0), (ub - um, h), (ua - um, h)]
+    mb.poly(pts, [(ua, za), (ub, za), (ub, zb), (ua, zb)], mat, f.out, uv2=uv2, attr=(w, h, seed % 1.0))
+
+
 # ------------------------------------------------------------------ Fenster und Tueren
 def kastenfenster(frames: MeshBuilder, glass: MeshBuilder, f: Facade, ua, ub, za, zb, d,
                   frame_mat="fenster", glass_mat="glas", transom: bool = True):
@@ -232,6 +278,8 @@ def kastenfenster(frames: MeshBuilder, glass: MeshBuilder, f: Facade, ua, ub, za
         zs = za2 + (zb2 - za2) * 0.62
         box(frames, f, sa, sb, dd - 0.01, dd + 0.02, zs - 0.02, zs + 0.02, frame_mat)
     quad_plane(glass, f, ua + ft, ub - ft, za + ft, zb - ft, dd + 0.035, glass_mat)
+    # Kastenfenster: zweite (innere) Scheibe, doppelte Spiegelung wie im Bestand
+    quad_plane(glass, f, ua + ft, ub - ft, za + ft, zb - ft, dd + 0.14, glass_mat)
     # Blech-Fensterbank aussen
     box(frames, f, ua - 0.03, ub + 0.03, d - 0.06, dd, za - 0.035, za, "blech")
 

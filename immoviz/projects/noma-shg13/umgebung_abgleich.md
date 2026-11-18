@@ -279,3 +279,15 @@ Kunden (nur intern: Geschoße, Achsen, Balkonstapel, Farben), Orthofoto 2024 (B�
 Offen: Ostfassade (nicht modelliert, aus den Hofkameras nicht sichtbar), genaue Lage der Markisen, Farbe des Oberteils
 (Apple zeigt die oberen drei Geschoße bläulich-hell, Vorgabe war "dunkleres Oberteil"; im Modell leicht dunkler abgesetzt).
 
+
+## Straßenleuchten (18.11.2026)
+
+Erhoben aus Street View 04/2026 (nur intern, `renders/streetview/leuchten/`), Inventar `strassenleuchten` in
+`project.yaml`, Prüfbild `renders/check/leuchten_abgleich.jpg`:
+
+- Schlachthausgasse vor dem Objekt (x -38 bis 27): 7 Hängeleuchten an den Querseilen der Straßenbahn-Überspannung,
+  alle über der Fahrspur an der Objektseite (y 4 bis 5), Abstand 9 bis 13 m, Lichtpunkthöhe 8,4 m (trianguliert).
+- Würtzlerstraße: an der Objektseite (Nr. 10, Baulücke) keine Leuchten; an der Südseite 4 Straßenbahnmasten mit
+  Leuchtenausleger (Peitschenmast, Lage entlang der Straße +-2 m, Höhe 8 m geschätzt).
+- Hof und Terrassen: der Einreichplan zeigt keine Außenleuchten (Textsuche der Planungsmappe ohne Treffer); die
+  Wandleuchten an den Terrassen Top 3 und Top 4 stehen als Ausstattung in `neubau.ausstattung` (Kundenwunsch).

@@ -18,3 +18,6 @@ immoviz/projects/*/.history/
 immoviz/projects/*/kundenlinks.json
 immoviz/projects/*/website/
 *.zip
+
+# immoviz: optionale CC0-Texturen (immoviz.py texturen), gross, nachladbar
+immoviz/assets/texturen/

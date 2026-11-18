@@ -211,7 +211,8 @@ def visible_buildings(scene, cfg, ctx, cams, res=(240, 160), max_dist=80.0, min_
                 best, bd = b, d
         return best
 
-    skip = ("baeume", "autos", "seilleuchten", "KAM_", "umgebung_boden", "fernboden")
+    skip = ("baeume", "autos", "seilleuchten", "strassenleuchten", "strassenmoebel", "menschen", "KAM_", "umgebung_boden",
+            "fernboden")
     out = {}
     for cn in cams:
         ob = setup_camera(scene, cfg, cn)

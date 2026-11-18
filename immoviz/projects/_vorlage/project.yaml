@@ -84,6 +84,17 @@ street:
   parking_material: asphalt
   cables: []
 
+# Strassenleuchten nur aus dem Inventar mit Quelle (REGELN.md U9, README "Objekt- und Materialbibliothek"). Erhebung aus
+# Street View (Blick nach oben, trianguliert), Pruefbild mit `immoviz.py leuchten <projekt>`. Beispiel:
+# strassenleuchten:
+#   - {id: W01, typ: seil, leuchte: [-5.4, -49.5], hoehe: 7.2, a: [0.6, -49.5, 8.6], b: [-14.2, -49.5, 8.6], strang: gasse, quelle: "SV 05/2024 oben, trianguliert"}
+#   - {id: M01, typ: mast_peitsche, pos: [2.0, -99.1], hoehe: 8.0, ausleger: 1.8, richtung: [0, 1], quelle: "SV 04/2026 Seitenblick"}
+# strassenmoebel:
+#   - {typ: poller, pos: [-5.5, -1.7], quelle: "SV 05/2024, Lage Bordstein OGD"}
+# menschen:      # Platzhalter fuer Lage und Massstab der KI-Menschen
+#   - {pos: [5.0, -1.0], hoehe: 1.75, drehung: 0, haltung: gehen, quelle: "ANN Platzhalter"}
+# assets: {baeume: natur, autos: karosserie, leuchten: bibliothek, innenraum: an, menschen: an}
+
 # ---------------------------------------------------------------- Materialien (aus dem Farbkonzept)
 materials:                  # Farbe aus Farbkonzept/Farbcode (Vektor), nie aus beleuchteten Ansichten gemessen
   fassade: {color: "#E2CFA8", note: "BEISPIEL, an Farbmuster abgleichen", quelle: "ANN bis Farbkonzept vorliegt"}

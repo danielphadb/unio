@@ -44,7 +44,7 @@ _RANG_RE = [(r, re.compile(p)) for r, p in RANG]
 RANG_NAME = {1: "Plan", 2: "OGD", 3: "Kunde", 4: "3D-Referenz", 5: "Visualisierung", 9: "Annahme"}
 # Mindestrang je Klasse: schlechter = Hinweis (z. B. Gelaender nur aus Plan, Baeume aus OGD oder Street View)
 MINDESTRANG = {"gelaender": 1, "trog": 1, "weg": 1, "fenster": 1, "stuck": 1, "moebel": 1, "baum": 4,
-               "nachbar": 4, "farbe": 3}
+               "nachbar": 4, "farbe": 3, "leuchte": 4, "strassenmoebel": 4}
 
 # ------------------------------------------------------------------ Klassen
 # (klasse, datei, pfad, filter): Pfad mit "*" fuer jede Listenposition bzw. jeden Schluessel; filter ist ein
@@ -71,6 +71,8 @@ KLASSEN = [
     ("moebel", "wohnungen", ("wohnungen", "*", "einbauten", "*"),
      r"(?i)k(ue|ü)che|hochschrank|zeile|garderobe|insel|sideboard|\bbett\b|schrank"),
     ("baum", "project", ("trees_override", "*"), None),
+    ("leuchte", "project", ("strassenleuchten", "*"), None),
+    ("strassenmoebel", "project", ("strassenmoebel", "*"), None),
     ("nachbar", "project", ("neighbour_facades", "*"), None),
     ("nachbar", "project", ("roofs_override", "*"), None),
     ("nachbar", "project", ("neighbours", "*"), None),
@@ -80,7 +82,8 @@ KLASSEN = [
 ]
 KLASSEN_NAMEN = {"gelaender": "Gelaender", "trog": "Troege", "weg": "Wege/Rampen/Podeste", "fenster": "Fenster/Oeffnungen",
                  "stuck": "Stuck/Profile", "moebel": "Grossmoebel/Einbauten", "baum": "Baeume",
-                 "nachbar": "Nachbarfassaden/-daecher", "farbe": "Farben"}
+                 "nachbar": "Nachbarfassaden/-daecher", "farbe": "Farben", "leuchte": "Strassenleuchten",
+                 "strassenmoebel": "Strassenmoebel"}
 
 TAG_RE = re.compile(r"\[([^\]\[]{1,160})\]")
 # Kommentartext ohne Klammern, der trotzdem eine Quelle nennt (z. B. "laut EIN S. 8", "Orthofoto", "Annahme")
@@ -327,7 +330,30 @@ def pruefen(pdir: Path) -> dict:
                 "punkte": _punkte(_plain(wert), cfg_plain) if datei == "project" else [],
                 "wohnung": str(pfad[1]) if datei == "wohnungen" and pfad[0] == "wohnungen" else None,
                 "auszug": zeilen[z].strip()[:110]})
-    return _auswerten(pdir, elemente, cfg_plain, _plain(geladen["wohnungen"][0]) if "wohnungen" in geladen else {})
+    r = _auswerten(pdir, elemente, cfg_plain, _plain(geladen["wohnungen"][0]) if "wohnungen" in geladen else {})
+    r["warnungen"] = _warnungen(cfg_plain)
+    if r["warnungen"] and r["ampel"] == "gruen":
+        r["ampel"] = "gelb"
+    return r
+
+
+def _warnungen(cfg: dict) -> list[str]:
+    """Projektweite Warnungen (REGELN.md U9): Strassenleuchten nur aus dem Inventar mit Quelle."""
+    w = []
+    inv = cfg.get("strassenleuchten")
+    if not inv:
+        alt = ((cfg.get("street") or {}).get("cables") or [])
+        w.append("kein Leuchten-Inventar (strassenleuchten): " + (f"Fallback aus street.cables ({len(alt)} Seilleuchten "
+                 "ohne Quelle)" if alt else "keine Strassenleuchten im Modell") + "; Leuchten aus Street View erheben, "
+                 "siehe README 'Objekt- und Materialbibliothek'")
+    else:
+        typen = {"seil", "mast_peitsche", "mast_aufsatz", "wandausleger", "altwiener_laterne"}
+        for k, e in enumerate(inv):
+            if (e or {}).get("typ", "seil") not in typen:
+                w.append(f"strassenleuchten[{k}]: unbekannter typ {e.get('typ')}")
+            if (e or {}).get("typ", "seil") == "seil" and not (e.get("a") and e.get("b")) and not e.get("abspannung"):
+                w.append(f"strassenleuchten[{k}] ({e.get('id', '')}): Seilleuchte ohne beide Aufhaengepunkte a und b")
+    return w
 
 
 def _plain(x):
@@ -403,6 +429,8 @@ def bericht_text(r: dict, max_zeilen: int = 40) -> str:
         L += ["", f"Ohne Quelle ({len(r['fehlende_quellen'])}, erste {max_zeilen}):"]
         for e in r["fehlende_quellen"][:max_zeilen]:
             L.append(f"  {e['datei']}:{e['zeile']:<5d} {KLASSEN_NAMEN[e['klasse']]:22s} {e['auszug']}")
+    if r.get("warnungen"):
+        L += ["", "Warnungen:"] + [f"  {w}" for w in r["warnungen"]]
     if r["hinweise"]:
         L += ["", f"Hinweise ({len(r['hinweise'])}, erste {max_zeilen}):"]
         for e in r["hinweise"][:max_zeilen]:

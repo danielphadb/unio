@@ -147,7 +147,7 @@ street:
     - {name: Wimmergasse gegenueber, strasse: wimmergasse, seite: gegenueber, art: laengs}
     # Stolberggasse beidseitig 90 Grad zum Randstein, oestlich und westlich der Kreuzung
     - {name: Stolberggasse beidseitig, strasse: stolberggasse, art: senkrecht, raster: 2.6}
-  cables:   # Seilleuchten quer ueber die Fahrbahn [x0, y0, x1, y1], Hoehe 7,5 m
+  cables:   # alt, nur Fallback ohne Inventar strassenleuchten: Seilleuchten quer ueber die Fahrbahn [x0, y0, x1, y1], Hoehe 7,5 m
     - [0.0, 0.5, -15.0, -17.5]        # Kreuzung diagonal
     - [0.0, 36.0, -15.0, 36.0]
     - [0.0, 68.0, -15.0, 68.0]
@@ -155,6 +155,70 @@ street:
     - [30.0, 0.0, 30.0, -18.0]
     - [62.0, 0.0, 62.0, -18.0]
     - [-42.0, 0.0, -42.0, -18.0]
+
+# ---------------------------------------------------------------- Strassenleuchten (Inventar, lib/assets/leuchten.py)
+# Erhebung 18.11.2026 aus Google Street View 05/2024 und 04/2026 (nur intern angesehen; Bilder in renders/streetview/leuchten/,
+# nicht im Repo): je Panorama entlang Wimmergasse und Stolberggasse (je Richtung bis zum 4. bis 5. Haus) ein Blick senkrecht
+# nach oben; Lage aus dem Versatz in zwei Nachbarpanoramen trianguliert (+-0,5 m), Lichtpunkthoehe 7,2 m (Kamera 2,5 m plus
+# 4,7 m, in drei Paaren gleich). Bauart: Wiener Haengeleuchte (flacher Teller) am Laengsseil in Strassenmitte, je Leuchte ein
+# Querseil zu Wandhaken an beiden Fassaden; an Kreuzungen Abspannung zu den vier Eckhaeusern. Hakenlage = Strahl quer zur
+# Strasse bis zur Fassade laut Baukoerpermodell (OGD), Hakenhoehe 8,6 m [ANN]. Ersetzt street.cables (nur noch Fallback).
+strassenleuchten:
+  - {id: W01, typ: seil, leuchte: [-4.6, -159.3], hoehe: 7.2, a: [2.03, -159.3, 8.6], b: [-12.72, -159.3, 8.6], strang: wimmergasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: W02, typ: seil, leuchte: [-5.2, -132.5], hoehe: 7.2, abspannung: [[3.16, -124.14, 8.6], [2.33, -140.03, 8.6], [-13.21, -124.49, 8.6], [-13.01, -140.31, 8.6]], strang: wimmergasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: W03, typ: seil, leuchte: [-5.5, -110.6], hoehe: 7.2, a: [1.57, -110.6, 8.6], b: [-13.37, -110.6, 8.6], strang: wimmergasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: W04, typ: seil, leuchte: [-5.4, -89.2], hoehe: 7.2, a: [1.22, -89.2, 8.6], b: [-13.63, -89.2, 8.6], strang: wimmergasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: W05, typ: seil, leuchte: [-6.2, -69.9], hoehe: 7.2, abspannung: [[1.41, -62.29, 8.6], [1.16, -77.26, 8.6], [-14.03, -62.07, 8.6], [-13.78, -77.48, 8.6]], strang: wimmergasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: W06, typ: seil, leuchte: [-5.4, -49.5], hoehe: 7.2, a: [0.63, -49.5, 8.6], b: [-14.16, -49.5, 8.6], strang: wimmergasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: W07, typ: seil, leuchte: [-5.2, -29.2], hoehe: 7.2, a: [0.42, -29.2, 8.6], b: [-14.49, -29.2, 8.6], strang: wimmergasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: K01, typ: seil, leuchte: [-5.7, -9.3], hoehe: 7.2, abspannung: [[3.61, 0.01, 8.6], [3.59, -18.59, 8.6], [-15.08, 0.08, 8.6], [-15.05, -18.65, 8.6]], strang: [wimmergasse, stolberggasse], quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert, Kreuzung"}
+  - {id: W08, typ: seil, leuchte: [-6.7, 16.1], hoehe: 7.2, a: [-0.19, 16.1, 8.6], b: [-15.09, 16.1, 8.6], strang: wimmergasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: W09, typ: seil, leuchte: [-7.1, 41.3], hoehe: 7.2, a: [-0.39, 41.3, 8.6], b: [-15.43, 41.3, 8.6], strang: wimmergasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: W10, typ: seil, leuchte: [-7.3, 65.9], hoehe: 7.2, a: [-0.96, 65.9, 8.6], b: [-15.7, 65.9, 8.6], strang: wimmergasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: W11, typ: seil, leuchte: [-7.9, 92.1], hoehe: 7.2, a: [-1.15, 92.1, 8.6], b: [-16.07, 92.1, 8.6], strang: wimmergasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: S01, typ: seil, leuchte: [-126.7, -8.5], hoehe: 7.2, a: [-126.7, -0.12, 8.6], b: [-126.7, -18.77, 8.6], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: S02, typ: seil, leuchte: [-105.1, -8.6], hoehe: 7.2, a: [-105.1, -0.09, 8.6], b: [-105.1, -18.76, 8.6], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: S03, typ: seil, leuchte: [-87.8, -9.6], hoehe: 7.2, abspannung: [[-97.33, -0.07, 8.6], [-77.94, 0.26, 8.6], [-96.98, -18.78, 8.6], [-78.68, -18.72, 8.6]], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: S04, typ: seil, leuchte: [-69.5, -11.3], hoehe: 7.2, a: [-69.5, 0.25, 8.6], b: [-69.5, -18.68, 8.6], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: S05, typ: seil, leuchte: [-48.1, -11.3], hoehe: 7.2, a: [-48.1, 0.27, 8.6], b: [-48.1, -18.66, 8.6], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: S06, typ: seil, leuchte: [-27.6, -11.3], hoehe: 7.2, a: [-27.6, 0.03, 8.6], b: [-27.6, -18.65, 8.6], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: S07, typ: seil, leuchte: [16.9, -10.3], hoehe: 7.2, a: [16.9, -0.05, 8.6], b: [16.9, -18.58, 8.6], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: S08, typ: seil, leuchte: [40.9, -10.6], hoehe: 7.2, a: [40.9, 0.02, 8.6], b: [40.9, -18.54, 8.6], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: S09, typ: seil, leuchte: [64.8, -10.9], hoehe: 7.2, a: [64.8, -0.07, 8.6], b: [64.8, -18.51, 8.6], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: S10, typ: seil, leuchte: [88, -8.1], hoehe: 7.2, abspannung: [[80, -0.1, 8.6], [96.53, 0.43, 8.6], [77.59, -18.51, 8.6], [98.3, -18.4, 8.6]], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: S11, typ: seil, leuchte: [112.6, -11.4], hoehe: 7.2, a: [112.6, -0.15, 8.6], b: [112.6, -18.18, 8.6], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+  - {id: S12, typ: seil, leuchte: [133.6, -10.7], hoehe: 7.2, a: [133.6, 0.42, 8.6], b: [133.6, -17.96, 8.6], strang: stolberggasse, quelle: "SV 05/2024 und 04/2026 Blick nach oben, trianguliert"}
+
+# ---------------------------------------------------------------- Strassenmoebel und Platzhalter (lib/assets/moebel.py)
+# Poller an den Gehsteigvorziehungen der Kreuzung (gruen mit weissen Ringen, SV 05/2024), Lage am Bordstein laut OGD
+# Verkehrsflaechen (0,35 m hinter der Kante, Abstand 1,5 m). Zeichen und Fahrradbuegel laut SV 05/2024, Lage +-1 m.
+# Baumscheiben mit Gussgitter automatisch je Katasterbaum auf Gehsteig/Parkstreifen (strassenmoebel_auto).
+strassenmoebel:
+  - {typ: poller, pos: [-5.46, -1.71], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  - {typ: poller, pos: [-3.79, -4.48], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  - {typ: poller, pos: [-0.79, -5.63], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  - {typ: poller, pos: [-14.91, -5.61], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  - {typ: poller, pos: [-11.95, -3.96], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  - {typ: poller, pos: [-10.91, -1.01], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  - {typ: poller, pos: [-11.19, -18.26], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  - {typ: poller, pos: [-11.42, -15.34], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  - {typ: poller, pos: [-13.73, -13.31], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  - {typ: poller, pos: [-1.47, -13.06], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  - {typ: poller, pos: [-4.06, -14.64], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  - {typ: poller, pos: [-5.28, -17.73], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  - {typ: verkehrszeichen, schild: verbot, pos: [-4.45, -2.96], drehung: 225, quelle: "SV 05/2024 (Ecke Objekt), Lage +-1 m"}
+  - {typ: verkehrszeichen, schild: stop, pos: [-4.4, -16.6], drehung: 270, quelle: "SV 05/2024, Lage +-1 m"}
+  - {typ: verkehrszeichen, schild: info, pos: [-13.4, -21.0], drehung: 0, quelle: "SV 05/2024 (Einbahn), Lage +-1 m"}
+  - {typ: fahrradbuegel, pos: [-13.45, 4.9], drehung: 0, quelle: "umgebung_abgleich.md 5 (SV 05/2024), Lage +-1 m"}
+  - {typ: fahrradbuegel, pos: [-13.45, 5.9], drehung: 0, quelle: "umgebung_abgleich.md 5 (SV 05/2024), Lage +-1 m"}
+  - {typ: fahrradbuegel, pos: [-13.45, 6.9], drehung: 0, quelle: "umgebung_abgleich.md 5 (SV 05/2024), Lage +-1 m"}
+# Platzhalter fuer Menschen (Gruppe menschen_platzhalter): nur Lage und Massstab fuer die Bild-KI, ausblendbar mit
+# assets: {menschen: aus} oder IMMOVIZ_MENSCHEN=aus. Lage fuer die Kamera ecke gewaehlt.
+menschen:
+  - {pos: [5.0, -1.0], hoehe: 1.72, drehung: 0, haltung: gehen, quelle: "ANN Platzhalter fuer KI-Steuerung"}
+  - {pos: [9.6, -1.3], hoehe: 1.84, drehung: 180, haltung: stehen, quelle: "ANN Platzhalter fuer KI-Steuerung"}
+  - {pos: [-1.2, 6.5], hoehe: 1.66, drehung: 90, haltung: gehen, quelle: "ANN Platzhalter fuer KI-Steuerung"}
+  - {pos: [-2.6, -3.6], hoehe: 1.78, drehung: 210, haltung: stehen, quelle: "ANN Platzhalter fuer KI-Steuerung"}
 
 # ---------------------------------------------------------------- Materialien [FK]
 materials:

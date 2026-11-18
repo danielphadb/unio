@@ -912,6 +912,28 @@ street:
   parking_material: asphalt
   cables: []
 
+# ---------------------------------------------------------------- Strassenleuchten (Inventar, lib/assets/leuchten.py)
+# Erhebung 18.11.2026 aus Google Street View 04/2026 (nur intern angesehen; Bilder in renders/streetview/leuchten/, nicht im
+# Repo). Schlachthausgasse vor dem Objekt (x -38 bis 27): Haengeleuchten an den Querseilen der Strassenbahn-Ueberspannung,
+# alle ueber der Fahrspur an der Objektseite (y 4 bis 5); Lage aus dem Blick nach oben in zwei Nachbarpanoramen trianguliert
+# (+-0,7 m), Lichtpunkthoehe 8,4 m. Hakenlage = Strahl quer zur Strasse bis zur Fassade laut Baukoerpermodell (OGD), Hakenhoehe
+# 9,6 m [ANN]. Wuertzlerstrasse vor Nr. 10: keine Leuchten an der Objektseite; an der Suedseite Strassenbahnmasten mit
+# Leuchtenausleger (Peitschenmast), Lage aus Seitenblicken (+-2 m), Hoehe 8 m geschaetzt. Hof und Terrassen: der Einreichplan
+# [EIN] zeigt keine Aussenleuchten (Textsuche S. 1 bis 30 ohne Treffer), die Wandleuchten der Terrassen stehen als
+# Ausstattung in neubau.ausstattung (typ leuchte, Kundenwunsch 16.11.2026).
+strassenleuchten:
+  - {id: S01, typ: seil, leuchte: [-37.8, 4], hoehe: 8.4, a: [-37.8, 18.47, 9.6], b: [-37.8, 0.09, 9.6], quelle: "SV 04/2026 Blick nach oben, trianguliert"}
+  - {id: S02, typ: seil, leuchte: [-26.8, 4.9], hoehe: 8.4, a: [-26.8, 18.82, 9.6], b: [-26.8, 0.04, 9.6], quelle: "SV 04/2026 Blick nach oben, trianguliert"}
+  - {id: S03, typ: seil, leuchte: [-14.1, 4.9], hoehe: 8.4, a: [-14.1, 18.8, 9.6], b: [-14.1, 0.01, 9.6], quelle: "SV 04/2026 Blick nach oben, trianguliert"}
+  - {id: S04, typ: seil, leuchte: [-4.5, 4.4], hoehe: 8.4, a: [-4.5, 18.8, 9.6], b: [-4.5, -0.08, 9.6], quelle: "SV 04/2026 Blick nach oben, trianguliert"}
+  - {id: S05, typ: seil, leuchte: [5.6, 4.3], hoehe: 8.4, a: [5.6, 18.83, 9.6], b: [5.6, 0.05, 9.6], quelle: "SV 04/2026 Blick nach oben, trianguliert"}
+  - {id: S06, typ: seil, leuchte: [18.4, 4.3], hoehe: 8.4, a: [18.4, 18.79, 9.6], b: [18.4, 0.05, 9.6], quelle: "SV 04/2026 Blick nach oben, trianguliert"}
+  - {id: S07, typ: seil, leuchte: [27.3, 4.2], hoehe: 8.4, a: [27.3, 18.79, 9.6], b: [27.3, 0.07, 9.6], quelle: "SV 04/2026 Blick nach oben, trianguliert"}
+  - {id: M01, typ: mast_peitsche, pos: [-23, -101.6], hoehe: 8.0, ausleger: 1.8, richtung: [-0.1, 1], quelle: "SV 04/2026 Seitenblick, Lage +-2 m, Hoehe geschaetzt"}
+  - {id: M02, typ: mast_peitsche, pos: [2, -99.1], hoehe: 8.0, ausleger: 1.8, richtung: [-0.1, 1], quelle: "SV 04/2026 Seitenblick, Lage +-2 m, Hoehe geschaetzt"}
+  - {id: M03, typ: mast_peitsche, pos: [26, -96.7], hoehe: 8.0, ausleger: 1.8, richtung: [-0.1, 1], quelle: "SV 04/2026 Seitenblick, Lage +-2 m, Hoehe geschaetzt"}
+  - {id: M04, typ: mast_peitsche, pos: [41, -95.2], hoehe: 8.0, ausleger: 1.8, richtung: [-0.1, 1], quelle: "SV 04/2026 Seitenblick, Lage +-2 m, Hoehe geschaetzt"}
+
 # Baeume ausserhalb des Baumkatasters (Hof- und Gartenbaeume, aus dem Orthofoto 2024 abgelesen, Hoehe geschaetzt) [ANN]
 trees_override:
   # Runde 3: Abgleich Orthofoto 2024 (entzerrt, Lage) und Google-Luftbild/3D (Krone, Hoehe), siehe umgebung_abgleich.md Abschnitt 7
