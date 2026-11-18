@@ -1,0 +1,12 @@
+# immoviz, Python 3.13 (bpy 5.2 setzt Python 3.13 voraus)
+bpy==5.2.4
+numpy
+scipy
+pillow
+pyyaml
+ruamel.yaml
+pyproj
+requests
+fastapi
+uvicorn
+opencv-python-headless

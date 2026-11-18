@@ -721,9 +721,40 @@ def build_scene(cfg, ctx):
     return scene
 
 
+def _gpu_aktivieren():
+    """Grafikkarte fuer Cycles einschalten, wenn vorhanden (Mac: METAL, Nvidia: OPTIX/CUDA, AMD: HIP).
+    Steuerbar ueber IMMOVIZ_DEVICE=auto|CPU|METAL|OPTIX|CUDA|HIP|ONEAPI (Standard auto). Liefert True bei GPU."""
+    import os
+    wunsch = os.environ.get("IMMOVIZ_DEVICE", "auto").upper()
+    if wunsch == "CPU":
+        return False
+    try:
+        prefs = bpy.context.preferences.addons["cycles"].preferences
+    except (KeyError, AttributeError):
+        return False
+    typen = [wunsch] if wunsch != "AUTO" else ["METAL", "OPTIX", "CUDA", "HIP", "ONEAPI"]
+    for typ in typen:
+        try:
+            prefs.compute_device_type = typ
+        except TypeError:
+            continue
+        try:
+            prefs.refresh_devices()
+        except AttributeError:
+            prefs.get_devices()
+        gpus = [d for d in prefs.devices if d.type == typ]
+        if not gpus:
+            continue
+        for d in prefs.devices:
+            d.use = d.type == typ
+        print(f"[immoviz] Cycles rendert auf {typ}: " + ", ".join(d.name for d in gpus))
+        return True
+    return False
+
+
 def setup_render(scene, res, samples):
     scene.render.engine = "CYCLES"
-    scene.cycles.device = "CPU"
+    scene.cycles.device = "GPU" if _gpu_aktivieren() else "CPU"
     scene.cycles.samples = samples
     scene.cycles.use_denoising = True
     scene.cycles.denoiser = "OPENIMAGEDENOISE"
