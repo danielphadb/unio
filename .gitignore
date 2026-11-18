@@ -21,3 +21,6 @@ immoviz/projects/*/website/
 
 # immoviz: optionale CC0-Texturen (immoviz.py texturen), gross, nachladbar
 immoviz/assets/texturen/
+
+# immoviz: Automodelle (immoviz.py autos-laden, BlenderKit), gross, nachladbar; Liste in lib/assets/autos_bibliothek.yaml
+immoviz/assets/autos/

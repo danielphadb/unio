@@ -51,6 +51,12 @@ def main():
                                          "(renders/check/leuchten_abgleich.jpg und .md)")
     lc.add_argument("project")
     lc.add_argument("--m-je-pixel", type=float, default=0.12, help="Auflösung des Prüfbilds (Standard 0,12 m)")
+    al = sub.add_parser("autos-laden", help="Realistische Automodelle (BlenderKit, kostenlos) laut "
+                                            "lib/assets/autos_bibliothek.yaml nach immoviz/assets/autos/ laden")
+    al.add_argument("--nur", default=None, help="nur diese Modelle (Anfang der id), mit Komma")
+    ab = sub.add_parser("autos-bibliothek", help="assets/autos/bibliothek.blend bauen: Front +X, echte Länge, "
+                                                 "eigener Lack, ohne Logos")
+    ab.add_argument("--nur", default=None, help="nur diese Modelle (Anfang der id), mit Komma")
     tx = sub.add_parser("texturen", help="Optionale CC0-Texturen (Poly Haven) nach immoviz/assets/texturen/ laden "
                                          "(gitignored, Quelle und Lizenz in immoviz/assets/LIZENZEN.md)")
     tx.add_argument("--aufloesung", default="2k")
@@ -201,6 +207,14 @@ def main():
     if a.cmd == "grading":
         from lib import grading as GR
         sys.exit(GR.main_cli(a))
+    if a.cmd == "autos-laden":
+        from lib.assets import autos_bibliothek as AB
+        print(json.dumps(AB.laden(a.nur.split(",") if a.nur else None), ensure_ascii=False, indent=1))
+        return
+    if a.cmd == "autos-bibliothek":
+        from lib.assets import autos_bibliothek as AB
+        print(json.dumps(AB.bibliothek_bauen(a.nur.split(",") if a.nur else None), ensure_ascii=False, indent=1))
+        return
     if a.cmd == "texturen":
         from lib.assets import texturen as TX
         print(json.dumps({"geladen": TX.laden(a.aufloesung), "ordner": str(TX.ORDNER)}, ensure_ascii=False, indent=1))

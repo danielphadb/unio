@@ -1,0 +1,28 @@
+# Automodelle aus BlenderKit / BlendKit (kostenlos, Lizenz je Eintrag), ausgewaehlt am 18.11.2026 vom Kunden (Chat).
+# Die Dateien liegen NICHT im Repo: `immoviz.py autos-laden` holt sie nach immoviz/assets/autos/<id8>_<name>/
+# (gitignored, rund 300 MB), `immoviz.py autos-bibliothek` baut daraus immoviz/assets/autos/bibliothek.blend
+# (einheitlich: Front +X, Ursprung Mitte am Boden, echte Laenge, eigener Autolack, ohne Logos und Kennzeichen-Schrift).
+# Lizenzen: royalty_free = BlenderKit Royalty Free (kommerziell nutzbar ohne Namensnennung, Weiterverkauf der Modelle
+# verboten), cc_zero = CC0 1.0. Markenlogos, Embleme und Schriftzuege werden beim Bauen entfernt.
+#
+# Felder: id (asset_base_id), name, autor, lizenz, laenge_m (Herstellerangabe, auf diese Laenge wird skaliert;
+# leer = Laenge des Modells), gewicht (Haeufigkeit auf der Strasse), optional vorne (+x/-x/+y/-y, wenn die Erkennung
+# falsch liegt), lack (Materialnamen des Lacks, wenn die Namensregel nicht greift), weg (Objekt- oder Materialnamen,
+# die entfernt werden).
+modelle:
+  - {id: b6b859bd-dc4b-4700-990e-0a95115cffca, name: "2020 Audi Q3 Sportback", autor: "cgi Moon", lizenz: royalty_free, laenge_m: 4.50, gewicht: 1.0}
+  - {id: 816784a2-19a5-4d2b-9657-684204ef5277, name: "Audi A7 55 TFSI", autor: "Nobody", lizenz: royalty_free, laenge_m: 4.97, gewicht: 1.0}
+  - {id: a908edf8-1e65-4a46-aef1-bacfab5686fc, name: "Mercedes Benz EQS 2021", autor: "Jayrenn Reeve", lizenz: royalty_free, laenge_m: 5.22, gewicht: 0.8}
+  - {id: 2e34c4a5-44eb-4a57-bbca-b1d56a04d91d, name: "Mercedes amg gt 63", autor: "Jayrenn Reeve", lizenz: royalty_free, laenge_m: 5.05, gewicht: 0.3}
+  - {id: b501e06a-f9fa-47b3-a164-de6300c64ac9, name: "Volvo S90", autor: "Adam Wiese", lizenz: royalty_free, laenge_m: 4.96, gewicht: 1.0}
+  - {id: 1dcca4af-6e33-4225-8103-aee2ddf21cb1, name: "Hyundai veloster sport car", autor: "AmJViZ", lizenz: royalty_free, laenge_m: 4.24, gewicht: 1.0}
+  - {id: 7701f4be-16c6-4278-a8d2-66998f5c8d8f, name: "Car 006 - audi rs6 avant 2020", autor: "AmJViZ", lizenz: royalty_free, laenge_m: 5.00, gewicht: 1.0}
+  - {id: 4d1260af-df3b-4d42-ba0b-0a077eed0aec, name: "Porsche 911 turbo s 992 2021", autor: "Joe Naaman", lizenz: royalty_free, laenge_m: 4.54, gewicht: 0.3}
+  - {id: 8d28cc4d-d7d5-4289-884d-084e4c10907c, name: "Audi rs6 avant 2024", autor: "Joe Naaman", lizenz: royalty_free, laenge_m: 5.00, gewicht: 1.0}
+  - {id: ade0d0cf-a3ec-4c9c-b242-a7b6abb27a9d, name: "BMW M4 Competition", autor: "Seatla Morake", lizenz: cc_zero, laenge_m: 4.79, gewicht: 0.4, lack: ["Carbon fiber"]}
+  - {id: 828d733c-8af7-4bda-a638-e885deda9d3c, name: "Ferrari Dodici Cilindri", autor: "Seatla Morake", lizenz: cc_zero, laenge_m: 4.73, gewicht: 0.15}
+  - {id: 5fdcd0d1-65e6-420c-a408-567d4e883dbe, name: "Aston Martin Valour", autor: "Seatla Morake", lizenz: royalty_free, laenge_m: 4.51, gewicht: 0.15}
+  - {id: 0035b02c-6eec-4da4-85e5-1999082a0386, name: "Bmw", autor: "3d cars studio", lizenz: royalty_free, laenge_m: null, gewicht: 1.0}
+  - {id: c3c28d91-3547-4b7b-9cc3-68d00d7a6993, name: "Audi e-tron GT quattro Black", autor: "Ibrohim Toxirov", lizenz: royalty_free, laenge_m: 4.99, gewicht: 0.6, vorne: "-y", lack: ["Material.002", "Car paint"]}
+  - {id: 60e683e8-7cd1-4b4e-b142-91697f0a5bbe, name: "Bmw 5-series", autor: "AmJViZ", lizenz: royalty_free, laenge_m: 5.06, gewicht: 1.0}
+  - {id: 433b7ea4-3fcd-46fd-ba8b-bc4bc1ff3ad7, name: "Tesla Model S (2016)", autor: "Davide Tirindelli", lizenz: royalty_free, laenge_m: 4.98, gewicht: 1.0}

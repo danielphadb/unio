@@ -27,6 +27,35 @@ Die drei Poly-Haven-Texturen sind optional: `immoviz.py texturen` lädt sie (2k,
 Rauheit und Relief; die Farbe bleibt die des Materials. Ohne die Bilder rendern alle Materialien rein prozedural.
 Lizenztext CC0: https://creativecommons.org/publicdomain/zero/1.0/ (Poly Haven: https://polyhaven.com/license).
 
+## Fremdmodelle: Autos (BlenderKit / BlendKit)
+
+Ausgewählt am 18.11.2026 vom Kunden. Kostenlose Modelle, geladen ohne Konto über die öffentliche API
+(`immoviz.py autos-laden`), Dateien nur lokal in `immoviz/assets/autos/` (gitignored), je Modell `quelle.json` mit
+Prüfsumme. Lizenzen: **BlenderKit Royalty Free** (kommerzielle Nutzung in Bildern und Videos ohne Namensnennung
+erlaubt, Weiterverkauf oder Weitergabe der Modelldateien verboten: https://www.blenderkit.com/docs/licenses/) bzw.
+**CC0 1.0**. Die Lizenzen betreffen das Urheberrecht am Modell, nicht die Marken der Hersteller: beim Aufbereiten
+werden Logos, Embleme und Schriftzüge entfernt und der Lack vereinheitlicht (`lib/assets/autos_bibliothek.py`);
+markante Formen bleiben erkennbar, für Werbung mit einem einzelnen Auto im Vordergrund vorher prüfen.
+
+| Modell | Autor | Lizenz | Quelle |
+|---|---|---|---|
+| 2020 Audi Q3 Sportback | cgi Moon | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/b6b859bd-dc4b-4700-990e-0a95115cffca/ |
+| Audi A7 55 TFSI | Nobody | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/816784a2-19a5-4d2b-9657-684204ef5277/ |
+| Mercedes Benz EQS 2021 | Jayrenn Reeve | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/a908edf8-1e65-4a46-aef1-bacfab5686fc/ |
+| Mercedes amg gt 63 | Jayrenn Reeve | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/2e34c4a5-44eb-4a57-bbca-b1d56a04d91d/ |
+| Volvo S90 | Adam Wiese | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/b501e06a-f9fa-47b3-a164-de6300c64ac9/ |
+| Hyundai veloster sport car | AmJViZ | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/1dcca4af-6e33-4225-8103-aee2ddf21cb1/ |
+| Car 006 - audi rs6 avant 2020 | AmJViZ | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/7701f4be-16c6-4278-a8d2-66998f5c8d8f/ |
+| Porsche 911 turbo s 992 2021 | Joe Naaman | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/4d1260af-df3b-4d42-ba0b-0a077eed0aec/ |
+| Audi rs6 avant 2024 | Joe Naaman | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/8d28cc4d-d7d5-4289-884d-084e4c10907c/ |
+| BMW M4 Competition | Seatla Morake | CC0 1.0 | https://www.blendkit.com/asset-gallery-detail/ade0d0cf-a3ec-4c9c-b242-a7b6abb27a9d/ |
+| Ferrari Dodici Cilindri | Seatla Morake | CC0 1.0 | https://www.blendkit.com/asset-gallery-detail/828d733c-8af7-4bda-a638-e885deda9d3c/ |
+| Aston Martin Valour | Seatla Morake | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/5fdcd0d1-65e6-420c-a408-567d4e883dbe/ |
+| Bmw | 3d cars studio | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/0035b02c-6eec-4da4-85e5-1999082a0386/ |
+| Audi e-tron GT quattro Black | Ibrohim Toxirov | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/c3c28d91-3547-4b7b-9cc3-68d00d7a6993/ |
+| Bmw 5-series | AmJViZ | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/60e683e8-7cd1-4b4e-b142-91697f0a5bbe/ |
+| Tesla Model S (2016) | Davide Tirindelli | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/433b7ea4-3fcd-46fd-ba8b-bc4bc1ff3ad7/ |
+
 ## Referenzen, die nicht ins Modell gehen
 
 Google Street View diente nur zum Ansehen (Leuchten-Inventar, Poller, Zeichen), Bilder in

@@ -22,8 +22,8 @@ from .sun import sun_position, sun_vector_local
 
 
 def _asset(cfg, key, standard):
-    """Schalter der Objektbibliothek (project.yaml `assets:`), z. B. baeume: natur | einfach, autos: karosserie |
-    kisten, innenraum: an | aus. Ohne Angabe gilt die neue Bibliothek (lib/assets)."""
+    """Schalter der Objektbibliothek (project.yaml `assets:`), z. B. baeume: natur | einfach, autos: modelle |
+    karosserie | kisten (modelle = assets/autos/bibliothek.blend, ohne sie karosserie), innenraum: an | aus. Ohne Angabe gilt die neue Bibliothek (lib/assets)."""
     return str((((cfg or {}).get("assets") or {}).get(key, standard))).lower()
 
 
@@ -531,8 +531,12 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
         K.box(cab, f, um - 0.28, um + 0.28, -0.28, 0.28, z0 - 0.75, z0 - 0.55, "leuchte", skip_back=False)
     if cab.faces:
         cab.to_object(bpy, mats, coll)
-    if _asset(cfg, "autos", "karosserie") == "kisten":
+    from .assets import autos_bibliothek as AB
+    modus = _asset(cfg, "autos", "modelle")
+    if modus == "kisten":
         park_cars(ctx, rng, terrain, min(radius, 200), cfg).to_object(bpy, mats, coll)
+    elif modus == "modelle" and AB.vorhanden():   # realistische Modelle (assets/autos/bibliothek.blend)
+        AB.build(ctx, terrain, min(radius, 200), cfg, coll)
     else:      # Karosserieformen (lib/assets/autos.py) auf denselben Stellplaetzen
         from .assets import autos as AU
         AU.build(ctx, rng, terrain, min(radius, 200), cfg, mats, coll)
