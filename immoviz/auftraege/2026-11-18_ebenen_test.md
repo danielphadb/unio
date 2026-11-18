@@ -62,7 +62,7 @@ Unter "Ergebnis" eintragen und pushen:
 ## Ergebnis
 
 cv2 5.0.0, scipy 1.18.1 (opencv-python-headless 5.0.0.93, siehe MAC_SETUP: 5.1 hat kein Wheel für macOS 14).
-Grading nicht ausgeführt (Referenzordner liegt nicht auf dem Mac).
+Grading nachgeholt am 18.11.2026 (Abschnitt 6), Leitbilder aus dem Drive-Ordner "Visualisierungen Datenbank".
 
 ### 1. Render mit Ebenen
 - Gerät: Metal, Apple M3 Max (GPU, 30 Kerne), Blender 5.2.4 LTS.
@@ -121,3 +121,16 @@ Prüfbild `nk_ecke_golden_r6_schutz_ohne_autos.jpg` ansehen.
   bleiben fleckige Reste (graue Flecken wie abgeplatzter Putz neben den Fenstern links der Krone, 1. und 2. OG
   Stolberggasse).
 - Sonst keine Naht an den Maskenkanten zu Himmel und Dach sichtbar.
+
+### 6. Grading (nachgeholt)
+- Leitbilder laut `project.yaml` `look:` (05 Pazelhof, 13 Herbsthof, 39 Rahmung), per Google-Drive-Connector aus
+  dem Ordner "Visualisierungen Datenbank" geladen, lokal unter `~/Documents/Claudius/immoviz/referenzen/wimmer/referenz/`
+  (außerhalb des Repos, `IMMOVIZ_REFERENZ=~/Documents/Claudius/immoviz/referenzen`). Nicht eingecheckt.
+- Befehl: `grading --bild ecke_golden_r6_schutz_ohne_autos.jpg --projekt immoviz/projects/wimmergasse-20 --maske
+  ecke_golden_hour_ebenen/schutz.png`, Laufzeit 5,3 s.
+- Abstand Lab-Mittel zum Leitbild 8,1 vorher, 1,54 nachher. Lab-Mittel L/a/b vorher 64,6 / 3,9 / 9,3, nachher
+  56,2 / 3,2 / 8,3, Leitbilder 56,9 / 2,6 / 7,1.
+- Sichtprüfung `ecke_golden_r6_schutz_ohne_autos_grading_pruefung.jpg`: deutlich gedämpfter, Himmel cremig statt
+  rosa, Gelb der Fassade zurückgenommen, Vignette und Korn dezent; Geometrie unverändert. Wirkt etwas dunkler und
+  flauer als das Ausgangsbild, passt aber zur Filmpalette der Leitbilder. Die Fehler aus Abschnitt 5 (abgeschnittene
+  Passanten, Platzhalter-Umrisse, Naht am Sockel) bleiben natürlich sichtbar.

@@ -1,0 +1,59 @@
+{
+ "vorher": {
+  "mittel_lab": [
+   64.63,
+   3.89,
+   9.26
+  ],
+  "streuung_lab": [
+   25.99,
+   3.57,
+   11.19
+  ]
+ },
+ "nachher": {
+  "mittel_lab": [
+   56.15,
+   3.16,
+   8.3
+  ],
+  "streuung_lab": [
+   26.57,
+   3.88,
+   9.56
+  ]
+ },
+ "leitbild": {
+  "mittel_lab": [
+   56.93,
+   2.58,
+   7.11
+  ],
+  "streuung_lab": [
+   29.77,
+   4.92,
+   7.13
+  ],
+  "anzahl": 3
+ },
+ "parameter": {
+  "staerke": 0.5,
+  "histogramm": 0.5,
+  "vignette": 0.12,
+  "glow": 0.08,
+  "korn": 0.008,
+  "maske": true
+ },
+ "abstand_mittel_zum_leitbild": {
+  "vorher": 8.1,
+  "nachher": 1.54
+ },
+ "bild": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/ecke_golden_r6_schutz_ohne_autos.jpg",
+ "ergebnis": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/ecke_golden_r6_schutz_ohne_autos_grading.jpg",
+ "leitbilder": [
+  "05_m41_pazelhof__1kpqnJMgeq58Q6pmA3yBgG6JFhgOcHsXN.jpg",
+  "13_zhiloy_herbsthof__1XDg3qnaVXqZoFxDCr_Z5u7VGCzbIirDt.jpg",
+  "39_m31_rahmung__125EcNmi47RtNqtlrAoPITalSzd5nbkQz.jpg"
+ ],
+ "pruefbild": "immoviz/projects/wimmergasse-20/renders/ebenen_4k/ecke_golden_r6_schutz_ohne_autos_grading_pruefung.jpg"
+}
