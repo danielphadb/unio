@@ -1,8 +1,8 @@
 # Auftrag runde7_basis
 
-Status: offen
+Status: erledigt
 Erstellt: 18.11.2026, Cloud-Sitzung
-Erledigt:
+Erledigt: 18.11.2026, Mac-Sitzung
 
 ## Ziel
 Basisbilder Runde 7 in 4k mit Render-Ebenen (inklusive Hintergrund-Durchgang) für die Veredelung mit Schutzmaske
@@ -76,4 +76,66 @@ Unter "Ergebnis" eintragen und pushen (`git pull --rebase` vorher):
 5. Probleme mit genauer Fehlermeldung.
 
 ## Ergebnis
-(von der Mac-Sitzung auszufüllen)
+
+Gerät: Metal, Apple M3 Max (GPU, 30 Kerne), Blender 5.2.4 LTS. Neu seit dem Auftrag (Mac-Sitzung, 18.11.): die Szene
+enthält die 16 realistischen Automodelle (lib/assets/autos_bibliothek.py), jeder `render` prüft sie vorher
+(`autos-pruefen`, Abbruch bei Befund) und schreibt je Kamera `<kamera>_<licht>_autos_bogen.jpg`.
+
+### 1. Schritt 0
+- Wimmergasse: Geländer 13 Elemente grün; "Soll gegen Modell" 20 Zeilen, 0 Abweichungen (Geländer Wimmergasse Soll 17
+  Ist 17, Stolberggasse Soll 11 Ist 11). Gesamtampel ROT (wie bisher: 30 Elemente ohne Quelle, v. a.
+  Nachbarfassaden 25, Farben 4, Stuck 1), deshalb Exit 1.
+- Noma: Geländer 65 Elemente grün; "Soll gegen Modell" 21 Zeilen, 0 Abweichungen. Gesamtampel ROT (7 ohne Quelle,
+  Farben aus Hof_fin bzw. Apple 9 unter Mindestrang).
+- `autos-pruefen`: Wimmergasse 580 Autos, Noma 233 Autos, je 0 Befunde (Räder ±3 cm, Neigung, Bucht,
+  Überschneidungen, Hindernisse, Maßstab). Erster Lauf brach die Noma ab (Audi A7 bei 38/244 schwebte 63 cm: dort
+  liegt die Fahrbahn bis 0,7 m unter dem groben Geländemodell, der Bodenstrahl fiel aufs Gelände zurück); behoben,
+  der Strahl sucht jetzt die Bodenfläche bis 2 m unter dem Gelände und lässt die Bucht sonst frei. Die Wimmergasse-
+  Bilder entstanden noch mit der Fassung davor (ebenfalls 0 Befunde, 578 Autos).
+
+### 2. Zeiten und Speicher
+| Aufruf | Bilder | "sekunden" gesamt | Ebenen je Bild | Hintergrund je Bild (Ausschnitt) | max. Speicher |
+|---|---|---|---|---|---|
+| Wimmergasse ecke | golden_hour, herbst, blaue_stunde | 1126 | 5,8 / 5,1 / 4,9 s | 74 / 75 / 84 s (62 %) | 20,6 GB |
+| Wimmergasse weitere | ecke_erhoeht, eg_lokal, drohne | 1310 | 5,7 / 4,9 / 4,4 s | 94 (100 %) / 120 (100 %) / 192 s (13 %) | 21,3 GB |
+| Noma | top3_aussen_gruendach, top3_terrasse_garten | 745 | 4,7 / 4,2 s | 30 / 25 s (17 %) | 16,4 GB |
+
+Rund 6 bis 7 Minuten je 4k-Bild mit 256 Samples, Ebenen und Hintergrund-Durchgang.
+
+### 3. ebenen.json
+| Bild | schutz % | gelaender % | leuchten % | autos % | nicht_zugeordnet |
+|---|---|---|---|---|---|
+| ecke golden_hour | 28,37 | 1,30 | 0,58 | 3,80 | leer |
+| ecke herbst | 28,54 | 1,30 | 0,58 | 3,80 | leer |
+| ecke blaue_stunde | 28,54 | 1,30 | 0,58 | 3,80 | leer |
+| ecke_erhoeht golden_hour | 31,87 | 1,61 | 0,54 | 5,09 | leer |
+| eg_lokal golden_hour | 70,53 | 0,00 | 0,01 | 4,04 | leer |
+| drohne golden_hour | 14,02 | 0,54 | 0,04 | 0,93 | leer |
+| Noma top3_aussen_gruendach | 79,20 | **0,00** | 0,00 | 0,00 | leer |
+| Noma top3_terrasse_garten | 79,84 | **0,00** | 0,00 | 0,00 | leer |
+
+Befund Noma: die Geländer (im Bild deutlich, G3/G4 an der Terrasse) landen in `gebaeude_objekt`, nicht in
+`gelaender`; geschützt sind sie damit, aber die Geländer-Kennzahl und die Schutzzone "gelaender" der Nachkontrolle
+greifen bei der Noma nicht. Vermutlich passen die Objekt- und Materialnamen der `neubau`-Geländer nicht auf die Regel
+in `lib/ebenen.py` (`gelaender|railing|handlauf|bruestung`).
+
+### 4. Sichtprüfung
+- Wimmergasse Dachgeschosse (ecke_erhoeht, ecke): französische Fenster mit Glasbrüstung in der Leibung, Loggia
+  mit Stabgeländer, DG3 links Stabgeländer vor der Terrasse, rechts Eckaufbau mit vier Fenstern je Geschoss und Glas;
+  Stolberggasse zwei Loggien mit Stäben. Keine schwarzen Flächen, nichts Schwebendes. Am linken Ende des
+  Eckaufbaus steht eine dunkle Seitenwange über die Dachfläche hinaus (ecke_erhoeht, über der Loggia DG3 links):
+  bitte gegen den Plan prüfen, ob sie so hoch sein soll.
+- ecke: **am rechten Bildrand steht noch ein Poller** (grün-weiß, an der Gehsteignase rechts unten, neben dem
+  blauen Mercedes AMG GT). Einbahnschild nicht im Bild; das runde Fahrverbotsschild an der Ecke ist da.
+  Asphalt im Vordergrund rechts mit feinen waagrechten Streifen (Moiré der Asphalttextur bei flachem Blick).
+- ecke blaue_stunde: Teller leuchtend, warmweiß, nicht ausgebrannt (Rand facettiert). Fahrbahn und Gehsteig
+  gleichmäßig warm beleuchtet, einzelne Lichtkegel kaum abgegrenzt; Gesamteindruck eher orange als 3000 K neutral,
+  Fassade gut lesbar. Fenster beleuchtet.
+- Noma: unverändert gegenüber assets_4k, Geländer G3/G4 an der Terrasse vorhanden (siehe Befund Ebenen).
+- Autos: in allen Wimmergasse-Bildern auf der Fahrbahn, Prüfbögen `*_autos_bogen.jpg` ohne Auffälligkeit (ecke 7,
+  ecke_erhoeht und ecke herbst/blaue_stunde je Bild die sichtbaren Autos; drohne und eg_lokal ohne Bogen, dort keine
+  Räder im Bild bzw. Autos über 70 m). Noma: keine Autos im Bild.
+
+### 5. Probleme
+- Erster Noma-Lauf: "Autopruefung nicht bestanden, Render abgebrochen: Audi A7 55 TFSI bei 38.05/244.46: schwebt bis
+  63 cm" (behoben, siehe 1). Sonst keine Fehler.
