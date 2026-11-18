@@ -162,20 +162,22 @@ class Hero:
             u0, u1 = w["u"]
             z0, z1 = w["z"]
             d = w["d"]
+            lgs = w.get("loggias", [])
             wins = [(x["u"][0], x["u"][1], x["z"][0], x["z"][1]) for x in w.get("windows", [])]
             if w.get("axes_from") == "altbau":
                 for uc in A["facades"][w["facade"]]["axes"]:
-                    if u0 + 0.4 < uc < u1 - 0.4:
+                    # keine Achsfenster in Loggien (die Loggia hat eigene Verglasung)
+                    if u0 + 0.4 < uc < u1 - 0.4 and not any(lg["u"][0] - 0.3 < uc < lg["u"][1] + 0.3 for lg in lgs):
                         for za, zb in w["rows"]:
                             wins.append((uc - w["w"] / 2, uc + w["w"] / 2, za, zb))
             holes = list(wins)
-            for lg in w.get("loggias", []):
+            for lg in lgs:
                 holes.append((lg["u"][0], lg["u"][1], lg["z"][0], lg["z"][1], lg["depth"]))
             K.wall_with_holes(self.mass, f, u0, u1, z0, z1, d, holes, dm, reveal=0.22)
             for (ua, ub, za, zb) in wins:
                 K.modern_window(self.frames, self.glass, f, ua, ub, za, zb, d)
                 self.card(f, ua, ub, za, zb, d + 1.2, d + 0.21)
-            for lg in w.get("loggias", []):
+            for lg in lgs:
                 ua, ub = lg["u"]
                 za, zb = lg["z"]
                 back = d + lg["depth"]
@@ -184,12 +186,10 @@ class Hero:
                 K.modern_window(self.frames, self.glass, f, ua + 0.1, ub - 0.1, za + 0.05, s - 0.05, back - 0.15)
                 K.modern_window(self.frames, self.glass, f, ua + 0.1, ub - 0.1, s + 0.25, zb - 0.1, back - 0.15)
                 self.card(f, ua, ub, za, zb, back + 1.0, back + 0.05)
-                r0, r1 = lg["rail"]
-                K.box(self.frames, f, ua, ub, d - 0.02, d + 0.04, r1 - 0.05, r1, "rahmen_dunkel")
-                n = int((ub - ua) / 0.12)
-                for k in range(n + 1):
-                    u = ua + 0.05 + k * (ub - ua - 0.1) / max(n, 1)
-                    K.box(self.frames, f, u - 0.012, u + 0.012, d, d + 0.024, r0, r1, "rahmen_dunkel")
+                rails = lg.get("rails") or ([{"z": lg["rail"]}] if "rail" in lg else [])
+                for r in rails:
+                    r0, r1 = r["z"]
+                    self.gelaender_dach(f, ua, ub, r0, r1 - r0, d + 0.01, r.get("typ", "stab"))
         for s in D.get("slopes", []):
             f = self.F[s["facade"]]
             u0, u1 = s["u"]
@@ -199,13 +199,14 @@ class Hero:
             for rw in s.get("roof_windows", []):
                 K.roof_window(self.frames, self.glass, f, rw["u"][0], rw["u"][1], rw["z"][0], rw["z"][1],
                               z0, z1, d0, d1)
+        for b in D.get("cheeks", []):     # Seitenwangen von Dachaufbauten (Ruecksprung, Ende einer Schraege)
+            f = self.F[b["facade"]]
+            K.box(self.mass, f, b["u"][0], b["u"][1], b["d"][0], b["d"][1], b["z"][0], b["z"][1], dm, skip_back=False)
         for r in D.get("railings", []):
             f = self.F[r["facade"]]
-            u0, u1 = r["u"]
             z, d, h = r["z"], r["d"], r["h"]
-            K.quad_plane(self.glass, f, u0, u1, z + 0.05, z + h - 0.05, d, "glas_gelaender")
-            K.box(self.frames, f, u0, u1, d - 0.03, d + 0.03, z + h - 0.05, z + h, "rahmen_dunkel")
-            K.box(self.frames, f, u0, u1, d - 0.03, d + 0.03, z, z + 0.06, "rahmen_dunkel")
+            for (u0, u1) in (r.get("felder") or [r["u"]]):
+                self.gelaender_dach(f, u0, u1, z, h, d, r.get("type", r.get("typ", "glas")))
         for v in D.get("volumes", []):
             poly, lines = K.clip_polygon(self.footprint, v["clip"], self.F)
             K.extrude(self.mass, poly, v["z"][0], v["z"][1], dm, "dach_flach", "innen", lines)
@@ -225,6 +226,28 @@ class Hero:
                 da = d0 + k * step
                 K.box(self.mass, f, so["u"][0], so["u"][1], da, da + step * 0.7,
                       so["z"] + 0.25, so["z"] + 0.32, "solar", skip_back=False)
+
+    def gelaender_dach(self, f, u0, u1, z, h, d, typ="glas"):
+        """Gelaender an einer Fassadenlinie (Dachgeschosse). typ: glas (Glasfuellung mit Handlauf und Fussprofil),
+        vsg (Ganzglas-Absturzsicherung in der Fensterleibung: VSG-Scheibe mit schmalem Klemmprofil oben),
+        stab (Stabgelaender: Handlauf, Fussholm, Staebe 12 cm). Material gelaender_metall (Ebenen-Klasse gelaender)."""
+        m = "gelaender_metall"
+        if typ in ("glas", "vsg"):
+            K.quad_plane(self.glass, f, u0, u1, z + 0.03, z + h - 0.03, d, "glas_gelaender")
+            if typ == "vsg":
+                K.box(self.frames, f, u0, u1, d - 0.015, d + 0.015, z + h - 0.035, z + h, m)
+                for uu in (u0, u1 - 0.03):
+                    K.box(self.frames, f, uu, uu + 0.03, d - 0.015, d + 0.015, z, z + h, m)
+            else:
+                K.box(self.frames, f, u0, u1, d - 0.03, d + 0.03, z + h - 0.05, z + h, m)
+                K.box(self.frames, f, u0, u1, d - 0.03, d + 0.03, z, z + 0.06, m)
+            return
+        K.box(self.frames, f, u0, u1, d - 0.025, d + 0.025, z + h - 0.05, z + h, m)
+        K.box(self.frames, f, u0, u1, d - 0.02, d + 0.02, z + 0.06, z + 0.10, m)
+        n = max(1, int((u1 - u0) / 0.12))
+        for k in range(n + 1):
+            u = u0 + 0.03 + k * (u1 - u0 - 0.06) / n
+            K.box(self.frames, f, u - 0.01, u + 0.01, d - 0.01, d + 0.01, z + 0.06, z + h - 0.05, m)
 
     def emit(self, coll):
         for mb in (self.mass, self.orn, self.frames, self.glass, self.inner):

@@ -66,12 +66,19 @@ altbau:
 
 # ---------------------------------------------------------------- Dachgeschosse (vereinfachte Kubatur)
 # DG1 + DG2 sichtbar von +45,40 bis +50,20 WrN (z 16,27 bis 21,07), DG3 bis +53,41 WrN (z 24,28) [ANS][NWG]
-# Fensterpositionen aus [ANS]. Tiefen und Ruecksprunge ANNAHME nach [NWG], zu pruefen mit Schnitt/Ansicht Stolberggasse.
+# Koten aus den DG-Grundrissen [NWG Beilagen]: FOK DG1 +14,08, DG2 +16,86/+16,96, DG3 +19,90/+19,99 relativ;
+# +19,99 = +50,20 WrN, also FOK DG1 rund z 15,16 (Attika/Hauptgesims ist die Bruestung der DG1-Loggia), DG2 rund z 18,0.
+# Fensterpositionen Wimmergasse aus [ANS] (Vektor). Stolberggasse: keine Ansicht im Repo; Fenster und Loggien aus den
+# DG-Grundrissen [NWG Beilagen, Scan ~36 px/m, Lage +-0,4 m]. Eckaufbau "Dachaufbau 1/3" je 5,00 m an beiden Fassaden
+# geht durch DG1 bis DG3 (GR DG1 bis DG3, ANS DG3-Verglasung bis u 24,97). Tiefen d der Dachwaende ANNAHME (0,7 statt
+# 0,45 laut Kette ".45 .32" im Scan), zu pruefen mit Schnitt/Ansicht Stolberggasse (250507 W20_EIN_Ansichten; Schnitte).
+# Gelaender nach Plan (umgebung_abgleich.md Abschnitt 13, Tabelle G-W1 bis G-W9): je Eintrag `quelle`, Typ
+# vsg (Ganzglas in der Leibung) | stab | glas, Hoehe 1,10 laut "Gel. H=110cm" [ANS][GR DG].
 dach:
   material: zink           # Stehfalz Titanzink anthrazit
   frame: rahmen_dunkel
   walls:
-    - {facade: wimmergasse, u: [7.0, 24.74], z: [16.27, 21.07], d: 0.7,
+    - {facade: wimmergasse, u: [7.0, 24.74], z: [16.27, 21.07], d: 0.7, quelle: "ANS (Fenster DG1/DG2, Loggia), GR DG1/DG2",
        windows: [
          {u: [8.25, 9.28], z: [16.40, 17.30]}, {u: [8.25, 9.28], z: [17.90, 20.20]},
          {u: [11.30, 12.32], z: [16.40, 17.30]}, {u: [11.30, 12.32], z: [17.90, 20.20]},
@@ -81,44 +88,87 @@ dach:
          {u: [21.43, 22.41], z: [16.40, 17.30]}, {u: [21.43, 22.41], z: [17.90, 20.20]},
          {u: [22.51, 23.49], z: [16.40, 17.30]}, {u: [22.51, 23.49], z: [17.90, 20.20]},
          {u: [23.58, 24.56], z: [16.40, 17.30]}, {u: [23.58, 24.56], z: [17.90, 20.20]}],
-       loggias: [{u: [13.00, 16.60], z: [16.27, 20.40], depth: 1.6, slab: 17.60, rail: [17.80, 18.90]}]}
-    - {facade: stolberggasse, u: [0.7, 16.16], z: [16.27, 21.07], d: 0.7, axes_from: altbau, w: 1.0,
-       rows: [[16.40, 17.30], [17.90, 20.20]]}
-    - {facade: wimmergasse, u: [16.9, 23.64], z: [21.07, 24.28], d: 1.8,
-       windows: [{u: [17.23, 18.55], z: [21.10, 23.35]}, {u: [18.65, 19.97], z: [21.10, 23.35]},
-                 {u: [20.36, 21.34], z: [21.10, 23.35]}, {u: [21.43, 22.41], z: [21.10, 23.35]},
-                 {u: [22.51, 23.49], z: [21.10, 23.35]}]}
-    - {facade: stolberggasse, u: [1.8, 5.4], z: [21.07, 24.28], d: 1.8,
-       windows: [{u: [2.2, 3.4], z: [21.10, 23.35]}, {u: [3.6, 4.8], z: [21.10, 23.35]}]}
+       # G-W2 Loggia Top 28 (DG1) / Top 31 (DG2): Stabgelaender H 1,10 ueber der DG2-Platte (ANS: Staebe, "Glas-Schiebewaende
+       # oben, Gel. H=110cm", Platte z 17,47 bis 17,93, Staebe bis z 19,05); DG1-Teil ohne Gelaender (Attika als Bruestung)
+       loggias: [{u: [13.00, 16.60], z: [16.27, 20.40], depth: 1.6, slab: 17.69,
+                  rails: [{z: [17.94, 19.04], typ: stab, quelle: "ANS (Staebe, Gel. H=110cm), GR DG2 Top 31 Loggia 6,03 m2"}]}]}
+    # Stolberggasse DG1/DG2 nach GR DG1/DG2 (vorher Altbau-Achsen ANN): Eckaufbau 4 Fenster 1,00 (gespiegelt aus ANS
+    # Wimmergasse), zwei Loggien Top 30 (DG1) bzw. Top 32/33 (DG2) mit "Glas-Schiebewaende oben, Gel. H=110cm", ein
+    # Fenster am Ende zum Nachbarn Stolberggasse 34. DG1 100/130 FPH 1,10, DG2 100/240 FPH=FOK (franzoesisch).
+    - {facade: stolberggasse, u: [0.7, 16.16], z: [16.27, 21.07], d: 0.7,
+       quelle: "GR DG1/DG2 (NWG Beilagen, Scan, Lage +-0,4 m), Eckfenster ANN gespiegelt aus ANS Wimmergasse",
+       windows: [
+         {u: [0.88, 1.86], z: [16.40, 17.30]}, {u: [0.88, 1.86], z: [17.90, 20.20]},
+         {u: [1.95, 2.93], z: [16.40, 17.30]}, {u: [1.95, 2.93], z: [17.90, 20.20]},
+         {u: [3.03, 4.01], z: [16.40, 17.30]}, {u: [3.03, 4.01], z: [17.90, 20.20]},
+         {u: [4.10, 5.08], z: [16.40, 17.30]}, {u: [4.10, 5.08], z: [17.90, 20.20]},
+         {u: [14.10, 15.10], z: [16.40, 17.30]}, {u: [14.10, 15.10], z: [17.90, 20.20]}],
+       # G-W4 Loggien Stolberggasse: Stabgelaender H 1,10 (Typ ANN wie Loggia Wimmergasse, GR: "Gel. H=110cm")
+       loggias: [{u: [7.00, 9.80], z: [16.27, 20.40], depth: 1.3, slab: 17.69,
+                  rails: [{z: [17.94, 19.04], typ: stab, quelle: "GR DG1/DG2 (Gel. H=110cm), Typ ANN wie ANS Loggia Wimmergasse"}]},
+                 {u: [10.16, 13.30], z: [16.27, 20.40], depth: 1.3, slab: 17.69,
+                  rails: [{z: [17.94, 19.04], typ: stab, quelle: "GR DG1/DG2 (Gel. H=110cm), Typ ANN wie ANS Loggia Wimmergasse"}]}]}
+    # DG3 Top 35: Terrasse 6,93 m2 [NWG] als Einschnitt u 16,9 bis 20,4 (Wand d 1,8), Eckaufbau buendig mit DG1/DG2 [ANS, GR DG3]
+    - {facade: wimmergasse, u: [16.9, 20.4], z: [21.07, 24.28], d: 1.8, quelle: "ANS (DG3 links: 2 Fenster und Fixteil), GR DG3 Terrasse Top 35",
+       windows: [{u: [17.44, 18.37], z: [21.10, 23.35]}, {u: [18.42, 19.40], z: [21.10, 23.35]}, {u: [19.44, 19.91], z: [21.10, 23.35]}]}
+    - {facade: wimmergasse, u: [20.4, 24.74], z: [21.07, 24.28], d: 0.7, quelle: "ANS (DG3 rechts: 4 Fenster und Fixteil bis u 24,97), GR DG3",
+       windows: [{u: [20.45, 21.43], z: [21.10, 23.35]}, {u: [21.45, 22.47], z: [21.10, 23.35]},
+                 {u: [22.49, 23.49], z: [21.10, 23.35]}, {u: [23.51, 24.53], z: [21.10, 23.35]}, {u: [24.55, 24.72], z: [21.10, 23.35]}]}
+    - {facade: stolberggasse, u: [0.7, 5.4], z: [21.07, 24.28], d: 0.7, quelle: "GR DG3 (4 Fenstertueren 1,00, FPH=FOK), Lage ANN gespiegelt aus ANS",
+       windows: [{u: [0.91, 1.86], z: [21.10, 23.35]}, {u: [1.95, 2.93], z: [21.10, 23.35]},
+                 {u: [3.03, 4.01], z: [21.10, 23.35]}, {u: [4.10, 5.08], z: [21.10, 23.35]}]}
   slopes:
     - {facade: wimmergasse, u: [0.0, 7.0], z: [16.27, 21.07], d: [0.7, 2.45],
        roof_windows: [{u: [1.07, 2.38], z: [16.45, 17.50]}, {u: [1.07, 2.38], z: [18.40, 19.90]},
                       {u: [5.02, 6.35], z: [16.45, 17.50]}, {u: [5.02, 6.35], z: [18.40, 19.90]}]}
-    - {facade: wimmergasse, u: [7.2, 16.9], z: [21.07, 24.28], d: [0.9, 3.4],
+    # DG3-Schraege erst ab u 10,45: davor Terrasse Top 34 (18,28 m2) bis zur Front [GR DG3, ANS Bemassung 10,45]
+    - {facade: wimmergasse, u: [10.45, 16.9], z: [21.07, 24.28], d: [0.9, 3.4],
        roof_windows: [{u: [11.18, 12.45], z: [21.60, 23.10]}, {u: [13.13, 14.50], z: [21.60, 23.10]},
                       {u: [15.18, 16.55], z: [21.60, 23.10]}]}
     - {facade: stolberggasse, u: [5.4, 16.16], z: [21.07, 24.28], d: [0.7, 4.1],
        roof_windows: [{u: [7.4, 8.74], z: [21.60, 23.10]}, {u: [10.6, 11.94], z: [21.60, 23.10]},
                       {u: [13.8, 15.14], z: [21.60, 23.10]}]}
+  cheeks:   # Seitenwangen der Dachaufbauten
+    - {facade: wimmergasse, u: [20.35, 20.45], d: [0.7, 1.8], z: [21.07, 24.28]}
+    - {facade: stolberggasse, u: [5.35, 5.45], d: [0.7, 4.1], z: [21.07, 24.28]}
+    - {facade: wimmergasse, u: [16.85, 16.95], d: [0.7, 1.8], z: [21.07, 24.28]}
   railings:
-    - {facade: wimmergasse, u: [16.9, 24.59], z: 21.07, d: 0.85, h: 1.10, type: glas}
-    - {facade: wimmergasse, u: [0.3, 7.2], z: 21.07, d: 2.6, h: 1.10, type: glas}      # Dachterrasse links [ANS]
-    - {facade: stolberggasse, u: [0.85, 5.4], z: 21.07, d: 0.85, h: 1.10, type: glas}
+    # G-W1 DG2 franzoesische Fenster Wimmergasse: Ganzglas VSG in der Leibung, H 1,10 ab FOK DG2
+    - {facade: wimmergasse, felder: [[8.25, 9.28], [11.30, 12.32], [17.23, 18.12], [18.30, 19.30], [20.36, 21.34], [21.43, 22.41], [22.51, 23.49], [23.58, 24.56]],
+       z: 17.95, d: 0.73, h: 1.10, typ: vsg, quelle: "ANS (Gel. H=110cm VSG, 8 Fenster), GR DG2 FPH=FOK"}
+    # G-W3 DG2 franzoesische Fenster Stolberggasse (GR DG2: 100/240 FPH=FOK, Gel. H=110cm), Typ VSG ANN wie Wimmergasse
+    - {facade: stolberggasse, felder: [[0.88, 1.86], [1.95, 2.93], [3.03, 4.01], [4.10, 5.08], [14.10, 15.10]],
+       z: 17.95, d: 0.73, h: 1.10, typ: vsg, quelle: "GR DG2 (Gel. H=110cm, FPH=FOK), Typ ANN wie ANS Wimmergasse"}
+    # G-W5 DG3 Terrasse Top 35: Stabgelaender an der Terrassenkante (ANS Staebe u 17,2 bis 19,9; GR DG3 Gel. H=110cm)
+    - {facade: wimmergasse, u: [16.9, 20.4], z: 21.07, d: 0.85, h: 1.10, typ: stab, quelle: "ANS (Staebe, Gel. H=110cm), GR DG3 Terrasse Top 35 6,93 m2"}
+    # G-W6 DG3 Top 35 Eckaufbau Wimmergasse: VSG in der Leibung (ANS "Gel. H=110cm VSG")
+    - {facade: wimmergasse, felder: [[20.45, 21.43], [21.45, 22.47], [22.49, 23.49], [23.51, 24.53], [24.55, 24.72]],
+       z: 21.10, d: 0.73, h: 1.10, typ: vsg, quelle: "ANS (Gel. H=110cm VSG, 4 Fenster und Fixteil), GR DG3"}
+    # G-W7 DG3 Top 35 Eckaufbau Stolberggasse (GR DG3 Gel. H=110cm), Typ VSG ANN wie Wimmergasse
+    - {facade: stolberggasse, felder: [[0.91, 1.86], [1.95, 2.93], [3.03, 4.01], [4.10, 5.08]],
+       z: 21.10, d: 0.73, h: 1.10, typ: vsg, quelle: "GR DG3 (Gel. H=110cm), Typ ANN wie ANS Wimmergasse"}
+    # G-W8 DG3 Dachterrasse Top 31 (21,61 m2) auf der DG1/2-Schraege links: Stabgelaender (ANS Staebe u 0,15 bis 7,0 ueber +50,20)
+    - {facade: wimmergasse, u: [0.3, 7.0], z: 21.07, d: 2.6, h: 1.10, typ: stab, quelle: "ANS (Staebe +50,20, u 0,15 bis 7,0), GR DG3 Terrasse 21,61 m2 Gel. H=110cm"}
+    # G-W9 DG3 Terrasse Top 34 (18,28 m2) bis zur Front: Stabgelaender (ANS Staebe u 7,0 bis 10,45)
+    - {facade: wimmergasse, u: [7.0, 10.45], z: 21.07, d: 0.85, h: 1.10, typ: stab, quelle: "ANS (Staebe u 7,0 bis 10,45), GR DG3 Terrasse Top 34 Gel. H=110cm"}
   # Innenvolumen und Decken (Clip-Regeln: [Fassade, u|d, >=|<=, Wert])
   volumes:
     - {z: [16.27, 21.07], clip: [[stolberggasse, d, ">=", 2.2], [wimmergasse, d, ">=", 2.45]]}
     - {z: [16.27, 21.07], clip: [[stolberggasse, d, ">=", 2.2], [wimmergasse, d, ">=", 2.2], [wimmergasse, u, ">=", 7.0]]}
     - {z: [21.07, 24.90], clip: [[wimmergasse, d, ">=", 4.6], [wimmergasse, d, "<=", 11.0], [wimmergasse, u, ">=", 4.1], [wimmergasse, u, "<=", 7.2]]}   # Stiegenhaus/Aufzug
-    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.4], [wimmergasse, u, ">=", 7.2], [wimmergasse, u, "<=", 16.9], [stolberggasse, d, ">=", 4.1]]}
+    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 4.6], [wimmergasse, u, ">=", 7.2], [wimmergasse, u, "<=", 10.45], [stolberggasse, d, ">=", 4.1]]}   # Top 34 hinter der Terrasse
+    - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.4], [wimmergasse, u, ">=", 10.45], [wimmergasse, u, "<=", 16.9], [stolberggasse, d, ">=", 4.1]]}
     - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.3], [wimmergasse, u, ">=", 16.9], [stolberggasse, u, "<=", 5.4], [stolberggasse, d, ">=", 3.3]]}
     - {z: [21.07, 24.28], clip: [[wimmergasse, d, ">=", 3.3], [wimmergasse, u, ">=", 16.9], [stolberggasse, u, ">=", 5.4], [stolberggasse, d, ">=", 4.1]]}
   slabs:
     - {z: 16.27, t: 0.30, clip: []}
-    - {z: 17.60, t: 0.25, clip: [[stolberggasse, d, ">=", 0.75], [wimmergasse, d, ">=", 0.75]]}
+    - {z: 17.94, t: 0.24, clip: [[stolberggasse, d, ">=", 0.75], [wimmergasse, d, ">=", 0.75]]}   # Decke DG1 / FOK DG2 (ANS Platte bis z 17,93)
     - {z: 21.07, t: 0.30, clip: [[stolberggasse, d, ">=", 0.7], [wimmergasse, d, ">=", 0.7], [wimmergasse, u, ">=", 7.0]]}
     - {z: 21.07, t: 0.30, clip: [[stolberggasse, d, ">=", 0.7], [wimmergasse, d, ">=", 2.45]]}
-    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 3.4], [wimmergasse, u, ">=", 7.2], [wimmergasse, u, "<=", 16.9], [stolberggasse, d, ">=", 4.1]]}
-    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 1.8], [wimmergasse, u, ">=", 16.9], [stolberggasse, u, "<=", 5.4], [stolberggasse, d, ">=", 1.8]]}
+    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 4.6], [wimmergasse, u, ">=", 7.2], [wimmergasse, u, "<=", 10.45], [stolberggasse, d, ">=", 4.1]]}
+    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 3.4], [wimmergasse, u, ">=", 10.45], [wimmergasse, u, "<=", 16.9], [stolberggasse, d, ">=", 4.1]]}
+    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 1.8], [wimmergasse, u, ">=", 16.9], [wimmergasse, u, "<=", 20.4], [stolberggasse, u, "<=", 5.4], [stolberggasse, d, ">=", 0.7]]}
+    - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 0.7], [wimmergasse, u, ">=", 20.4], [stolberggasse, u, "<=", 5.4], [stolberggasse, d, ">=", 0.7]]}
     - {z: 24.28, t: 0.30, clip: [[wimmergasse, d, ">=", 1.8], [wimmergasse, u, ">=", 16.9], [stolberggasse, u, ">=", 5.4], [stolberggasse, d, ">=", 4.1]]}
   boxes:   # Stiegenhaus und Aufzug ueber Dach [ANS], Kamine [NWG Dachaufsicht]
     - {facade: wimmergasse, u: [9.0, 9.7], d: [9.5, 11.0], z: [24.28, 25.40], material: kamin}
@@ -200,15 +250,18 @@ strassenmoebel:
   - {typ: poller, pos: [-14.91, -5.61], quelle: "SV 05/2024, Lage Bordstein OGD"}
   - {typ: poller, pos: [-11.95, -3.96], quelle: "SV 05/2024, Lage Bordstein OGD"}
   - {typ: poller, pos: [-10.91, -1.01], quelle: "SV 05/2024, Lage Bordstein OGD"}
-  - {typ: poller, pos: [-11.19, -18.26], quelle: "SV 05/2024, Lage Bordstein OGD"}
-  - {typ: poller, pos: [-11.42, -15.34], quelle: "SV 05/2024, Lage Bordstein OGD"}
-  - {typ: poller, pos: [-13.73, -13.31], quelle: "SV 05/2024, Lage Bordstein OGD"}
+  # Suedwestecke (Standpunkt Kamera ecke) am 18.11.2026 nachgemessen: drei Poller am Bogen der Vorziehung, aus zwei Panoramen
+  # (SV 05/2024 bei -7,0/-12,3 und -6,9/-22,6) trianguliert, +-0,5 m. Der fruehere Poller -11,19/-18,26 war der Pfosten
+  # des Einbahnschilds (jetzt verkehrszeichen info), -11,42/-15,34 und -13,73/-13,31 lagen 0,8 bzw. 1,4 m daneben.
+  - {typ: poller, pos: [-10.14, -15.88], quelle: "SV 05/2024, trianguliert aus zwei Panoramen +-0,5 m (18.11.2026)"}
+  - {typ: poller, pos: [-11.07, -14.62], quelle: "SV 05/2024, trianguliert aus zwei Panoramen +-0,5 m (18.11.2026)"}
+  - {typ: poller, pos: [-12.48, -13.85], quelle: "SV 05/2024, trianguliert aus zwei Panoramen +-0,5 m (18.11.2026)"}
   - {typ: poller, pos: [-1.47, -13.06], quelle: "SV 05/2024, Lage Bordstein OGD"}
   - {typ: poller, pos: [-4.06, -14.64], quelle: "SV 05/2024, Lage Bordstein OGD"}
   - {typ: poller, pos: [-5.28, -17.73], quelle: "SV 05/2024, Lage Bordstein OGD"}
   - {typ: verkehrszeichen, schild: verbot, pos: [-4.45, -2.96], drehung: 225, quelle: "SV 05/2024 (Ecke Objekt), Lage +-1 m"}
   - {typ: verkehrszeichen, schild: stop, pos: [-4.4, -16.6], drehung: 270, quelle: "SV 05/2024, Lage +-1 m"}
-  - {typ: verkehrszeichen, schild: info, pos: [-13.4, -21.0], drehung: 0, quelle: "SV 05/2024 (Einbahn), Lage +-1 m"}
+  - {typ: verkehrszeichen, schild: info, pos: [-10.47, -17.86], drehung: 0, quelle: "SV 05/2024 (Einbahn, ausgen. Rad), trianguliert +-0,5 m (18.11.2026; vorher -13,4/-21,0)"}
   - {typ: fahrradbuegel, pos: [-13.45, 4.9], drehung: 0, quelle: "umgebung_abgleich.md 5 (SV 05/2024), Lage +-1 m"}
   - {typ: fahrradbuegel, pos: [-13.45, 5.9], drehung: 0, quelle: "umgebung_abgleich.md 5 (SV 05/2024), Lage +-1 m"}
   - {typ: fahrradbuegel, pos: [-13.45, 6.9], drehung: 0, quelle: "umgebung_abgleich.md 5 (SV 05/2024), Lage +-1 m"}
@@ -228,11 +281,12 @@ materials:
   fenster: {color: "#F4F1E8", note: "RAL 9010 Reinweiss aussen"}
   zink: {color: "#3A3D40"}
   rahmen_dunkel: {color: "#2B2D30"}
+  gelaender: {color: "#2B2D30", quelle: "ANN wie Fensterrahmen DG (ANS dunkel gezeichnet); Farbe fehlt in FK und Produktkatalog, Frage an Bautraeger"}
   haustor: {color: "#6B4A2E", note: "Massive Eiche nach historischem Vorbild 1880 [FK]"}
 
 # ---------------------------------------------------------------- Kameras und Licht
 cameras:
-  ecke:            {pos: [-13.0, -15.5, 1.65], target: [6.0, 7.0, 11.0], lens: 20, vertical: true}
+  ecke:            {pos: [-12.2, -14.6, 1.65], target: [6.0, 7.0, 11.0], lens: 20, vertical: true}   # 18.11.2026: 1,2 m nach vorn in die Pollerreihe (vorher -13,0/-15,5): Poller -11,07/-14,62 und -12,48/-13,85 stehen jetzt 52 bzw. 59 Grad seitlich, ausserhalb des Bildes (halber Bildwinkel 42 Grad); Ziel und Brennweite gleich
   ecke_orbit:      {pos: [-7.57, -18.73, 1.65], target: [6.0, 7.0, 11.0], lens: 20, vertical: true}   # Endbild Video: 18 Grad um die Ecke gedreht
   ecke_tele:       {pos: [-24.0, -30.0, 1.65], target: [5.0, 6.0, 11.5], lens: 32, vertical: true}
   drohne:          {pos: [-40.0, -48.0, 38.0], target: [6.0, 8.0, 24.0], lens: 32, vertical: true}
@@ -286,6 +340,37 @@ look:                     # Leitbilder aus dem Referenzordner des Kunden (mood_a
   vignette: 0.12
   glow: 0.08
   korn: 0.008
+
+# ---------------------------------------------------------------- Plan-Soll-Liste (immoviz.py pruefen, lib/soll.py)
+# Gezaehlt aus dem Plan, verglichen mit dem Modell; jede Abweichung ist ein Fehler (Ampel rot). Geschoss nach
+# Unterkante der Oeffnung. Fenster = Oeffnungen (Fenster, Fenstertueren, Schaufenster, Haustor, Dachflaechenfenster),
+# ohne Kellerfenster und Loggien. Gelaender = Felder (je franzoesisches Fenster ein Feld, Terrassen-/Loggiakante ein Feld).
+soll:
+  geschosse: {eg: [-1.0, 4.4], og1: [4.4, 7.95], og2: [7.95, 11.6], og3: [11.6, 15.3], dg1: [15.3, 17.7], dg2: [17.7, 21.0], dg3: [21.0, 25.0]}
+  fenster:
+    - {fassade: wimmergasse, geschoss: eg, anzahl: 12, quelle: "ANS (Haustor, 5 Fenster/VSG-Tueren, 6 Schaufenster)"}
+    - {fassade: wimmergasse, geschoss: og1, anzahl: 12, quelle: "ANS"}
+    - {fassade: wimmergasse, geschoss: og2, anzahl: 12, quelle: "ANS"}
+    - {fassade: wimmergasse, geschoss: og3, anzahl: 12, quelle: "ANS"}
+    - {fassade: wimmergasse, geschoss: dg1, anzahl: 10, quelle: "ANS (8 Fenster, 2 DFF in der Schraege)"}
+    - {fassade: wimmergasse, geschoss: dg2, anzahl: 10, quelle: "ANS (8 franz. Fenster, 2 DFF)"}
+    - {fassade: wimmergasse, geschoss: dg3, anzahl: 11, quelle: "ANS (3 DFF, 2+1 und 4+1 Fenster/Fixteile)"}
+    - {fassade: stolberggasse, geschoss: og1, anzahl: 7, quelle: "GR 1.OG 24.04.2026"}
+    - {fassade: stolberggasse, geschoss: og2, anzahl: 7, quelle: "GR 2.OG 24.04.2026"}
+    - {fassade: stolberggasse, geschoss: og3, anzahl: 7, quelle: "GR 3.OG 24.04.2026"}
+    - {fassade: stolberggasse, geschoss: dg1, anzahl: 5, quelle: "GR DG1 (4 Eckfenster 100/130, 1 am Ende; Loggien extra)"}
+    - {fassade: stolberggasse, geschoss: dg2, anzahl: 5, quelle: "GR DG2 (5 Fenstertueren 100/240 FPH=FOK; Loggien extra)"}
+    - {fassade: stolberggasse, geschoss: dg3, anzahl: 7, quelle: "GR DG3 (4 Fenstertueren 1,00, 3 DFF 134x140)"}
+    # EG Stolberggasse fehlt bewusst: Ansicht Stolberggasse fehlt, GR EG mit Legende (nummerierte Felder) nicht ausgewertet
+  gelaender:
+    - {fassade: wimmergasse, anzahl: 17, quelle: "ANS: 8 VSG DG2, Loggia, Stab Terrasse Top 35, 5 VSG DG3, Stab u 0,15 bis 7,0 und 7,0 bis 10,45"}
+    - {fassade: stolberggasse, anzahl: 11, quelle: "GR DG2/DG3: 5 franz. Fenster DG2, 2 Loggien, 4 Fenstertueren DG3 (Gel. H=110cm)"}
+  leuchten:   # Erhebung Street View (umgebung_abgleich.md 12), je Strassenabschnitt ab der Kreuzung
+    - {name: "Wimmergasse Nord", strang: wimmergasse, bereich: [-30, 1, 10, 200], anzahl: 4, quelle: "SV 05/2024 und 04/2026 (W08 bis W11)"}
+    - {name: "Wimmergasse Sued", strang: wimmergasse, bereich: [-30, -200, 10, -20], anzahl: 7, quelle: "SV 05/2024 und 04/2026 (W01 bis W07)"}
+    - {name: "Kreuzung", strang: wimmergasse, bereich: [-20, -20, 5, 1], anzahl: 1, quelle: "SV 05/2024 und 04/2026 (K01, Abspannung an vier Ecken)"}
+    - {name: "Stolberggasse West", strang: stolberggasse, bereich: [-200, -30, -20, 5], anzahl: 6, quelle: "SV 05/2024 und 04/2026 (S01 bis S06)"}
+    - {name: "Stolberggasse Ost", strang: stolberggasse, bereich: [5, -30, 200, 5], anzahl: 6, quelle: "SV 05/2024 und 04/2026 (S07 bis S12)"}
 
 # ---------------------------------------------------------------- Planabgleich (immoviz.py check)
 checks:

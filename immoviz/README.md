@@ -110,7 +110,7 @@ assets: {baeume: natur, autos: karosserie, leuchten: bibliothek, innenraum: an, 
 |---|---|---|
 | Bäume (`assets/baeume.py`) | Stamm, Gerüstäste, Nebenäste, Zweige und rund 20.000 bis 45.000 Blätter je Vorlage in der Umrissform der Art; Kronenhülle je Art (Linde oval, Ahorn rund, Platane breit mit Fleckenrinde, Kastanie Kuppel, Säulenform), gelappter Rand, Lücken zwischen den Blattbüschen. Drei Vorlagen je Art, jeder Baum ist eine Instanz; Lage, Höhe, Kronendurchmesser und Kronenansatz unverändert aus Kataster und `trees_override` | Art aus dem Katasternamen (Tilia, Acer, Platanus, Aesculus; übrige Gattungen nach Wuchsform) oder `art` in `trees_override`. Jahreszeit aus der Lichtstimmung (`season`): Frühling, Sommer, Spätsommer, Herbst (Gelb, Orange, Rot, Braun je Art, 32 % Blattverlust), Winter kahl |
 | Autos (`assets/autos.py`) | Kleinwagen, Kompakt, Kombi, SUV, Transporter mit Karosserie aus Querschnitten (Schulter, eingezogene Fahrgastzelle, geneigte Scheiben), Rädern mit Felge, Radläufen, Scheinwerfern, Rückleuchten, Spiegeln, Kennzeichenfeld ohne Schrift; gedeckte Lackfarben je Auto | Stellplätze und Parkordnung wie bisher aus `street.parking` (`lib/strasse.py`) |
-| Straßenleuchten (`assets/leuchten.py`) | Seil-/Überspannungsleuchte (Wiener Hängeleuchte, Querseil mit Wandhaken und Spannschloss, Abspannung an Kreuzungen, Längsseil je Strang), Peitschenmast, Aufsatzmast, Wandausleger, Altwiener Laterne; warmweißes Licht (rund 3000 K), an bei Sonnenhöhe unter 2 Grad oder mit `strassenlicht: an` in der Lichtstimmung (`aus` erzwingt aus) | nur aus dem Inventar `strassenleuchten` (siehe unten), ohne Inventar Fallback aus `street.cables` mit Warnung in `pruefen` |
+| Straßenleuchten (`assets/leuchten.py`) | Seil-/Überspannungsleuchte (Wiener Hängeleuchte, Querseil mit Wandhaken und Spannschloss, Abspannung an Kreuzungen, Längsseil je Strang), Peitschenmast, Aufsatzmast, Wandausleger, Altwiener Laterne; Licht 3000 K (Blackbody), Spot nach unten mit 115 Grad Kegel und 1800 W (Seil/Peitsche), Leuchtkörper mit geringer Leuchtdichte (`DIFFUSOR_AN` 0,5) und Lichtquelle für die Kamera unsichtbar (Nachtprobe 18.11.2026), an bei Sonnenhöhe unter 2 Grad oder mit `strassenlicht: an` in der Lichtstimmung (`aus` erzwingt aus) | nur aus dem Inventar `strassenleuchten` (siehe unten), ohne Inventar Fallback aus `street.cables` mit Warnung in `pruefen` |
 | Straßenmöbel (`assets/moebel.py`) | Poller (grün-weiß, rot-weiß, grau), Fahrradbügel, Mistkübel, Verkehrszeichen ohne lesbare Schrift (Verbot, Gebot, Gefahr, Stop, Info, Zusatz), Hydrant, Baumscheibe mit Gussgitter oder Erde | `strassenmoebel` (Liste mit `typ`, `pos`, `drehung`, `quelle`); Baumscheiben automatisch je Katasterbaum auf Gehsteig/Parkstreifen (`strassenmoebel_auto: {baumscheiben: true, baumscheibe: gitter, umkreis_m: 90}`) |
 | Menschen (`assets/moebel.py`) | graue Silhouetten in realistischer Größe (stehen, gehen), Sammlung `menschen_platzhalter`, nur Lage und Maßstab für die Bild-KI | `menschen` (Liste mit `pos`, `hoehe`, `drehung`, `haltung`, `quelle`); ausblenden mit `assets: {menschen: aus}` oder `IMMOVIZ_MENSCHEN=aus` vor dem Befehl |
 | Materialien (`materials.py`) | Putz mit Körnung, Kellenstruktur, Fleckigkeit, Schmutz in Kehlen und unter Gesimsen und Fensterbänken (Umgebungsverdeckung), Laufspuren, gerundeten Kanten (Bevel-Shader 2 cm); Stuck; Zink mit Falzen; Floatglas (IOR 1,52, leichte Unruhe), Kastenfenster mit zwei Ebenen; lackierte Rahmen mit gerundeten Kanten; Asphalt mit Gesteinskorn, Flickstellen mit Naht und Rissen; Gehsteig als Gussasphalt oder Betonplatten; Granit-Kleinsteinpflaster mit Farbe je Stein; Bordstein Granit; Holztor; Metall | Gehsteig: `street.gehsteig: asphalt | platten` (`platten_raster: [0.5, 0.5]`); Variation gegen Wiederholung über Objekt-Zufall und mehrere Rauschebenen |
@@ -539,9 +539,20 @@ Sekunden je Aufruf:
 - Neue Elemente in `project.yaml` und `wohnungen.yaml` bekommen ein Feld `quelle` (`"EIN S. 16"`, `"OGD Orthofoto"`,
   `"ANN Raster 5 m"`), Beispiele in `projects/_vorlage/project.yaml`. Kommentare mit `[Kürzel]` zählen für den
   Altbestand als Warnung.
+- **Plan-Soll-Liste** (Block `soll:` in `project.yaml`, `lib/soll.py`, seit 18.11.2026): Anzahl Fenster je Fassade
+  und Geschoss, Geländerfelder je Fassade bzw. Gruppe, Straßenleuchten je Straßenabschnitt, aus dem Plan gezählt.
+  `pruefen` zählt dasselbe im Modell (gleiche Logik wie `build.py`/`neubau.py`, ohne Blender) und meldet jede
+  Abweichung als FEHLER (Ampel rot, Exit 1); Geländer im Modell ohne Soll-Zeile sind ebenfalls Fehler. Geschoss nach
+  Unterkante der Öffnung (`geschosse`, je Fassade überschreibbar), Neubau-Fassaden über `fassaden: {name: {gruppen,
+  linien, dachfenster_bereich}}`, Leuchten über `strang` und `bereich`. Beispiele: Wimmergasse (ANS, GR, DG-Grundrisse)
+  und Noma (EIN S. 26/28, Geländertabelle G1 bis G10). Die Klassenampel (`gruen`/`gelb`/`rot`) steht je Klasse in der
+  Tabelle; "Geländer grün" heißt: jedes Geländer mit Feld `quelle`.
+- Dach-Geländer (`dach.railings`): `typ: vsg` (Ganzglas in der Fensterleibung, französisches Fenster), `stab`, `glas`;
+  `felder: [[u0, u1], ...]` für mehrere gleiche Felder; Loggien `rails: [{z: [z0, z1], typ, quelle}]`; Material
+  `gelaender_metall` (Farbe `materials.gelaender`), damit die Ebenen sie als Klasse `gelaender` schützen.
 - `freigabe.yaml` je Projekt (Vorlage in `projects/_vorlage/`): Veredelung im Studio nur für freigegebene Kameras.
 - Prompt-Regeln für alle Projekte: `higgsfield/prompt_regeln.yaml`, werden automatisch angehängt (LEITFADEN).
-- Code: `lib/quellen.py`, `lib/freigabe.py`, `lib/nachkontrolle.py` (numpy, scipy, Pillow).
+- Code: `lib/quellen.py`, `lib/soll.py`, `lib/freigabe.py`, `lib/nachkontrolle.py` (numpy, scipy, Pillow).
 
 ## Render-Ebenen und Schutzmaske (`render --ebenen`, `schutz`)
 

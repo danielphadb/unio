@@ -388,8 +388,22 @@ class ManualApartment:
             box_xy(mw, x0, x1, y0, y1, z0 - 0.3, z0 - 0.02, "terrasse_holz")
         for r in self.c.get("railings", []):
             x0, y0, x1, y1 = r["rect"]
-            box_xy(mg, x0, x1, y0, y1, z0, z0 + 1.08, "glas")
-            box_xy(mf, x0 - 0.01, x1 + 0.01, y0 - 0.01, y1 + 0.01, z0 + 1.06, z0 + 1.10, "rahmen_dunkel")
+            h = r.get("h", 1.10)
+            if r.get("typ") == "stab":      # Stabgelaender: Handlauf, Fussholm, Staebe 12 cm
+                box_xy(mf, x0 - 0.01, x1 + 0.01, y0 - 0.01, y1 + 0.01, z0 + h - 0.05, z0 + h, "rahmen_dunkel")
+                box_xy(mf, x0, x1, y0, y1, z0 + 0.06, z0 + 0.10, "rahmen_dunkel")
+                lang_x = (x1 - x0) >= (y1 - y0)
+                L = (x1 - x0) if lang_x else (y1 - y0)
+                n = max(1, int(L / 0.12))
+                for k in range(n + 1):
+                    t = 0.03 + (L - 0.06) * k / n
+                    if lang_x:
+                        box_xy(mf, x0 + t - 0.01, x0 + t + 0.01, y0, y1, z0 + 0.06, z0 + h - 0.05, "rahmen_dunkel")
+                    else:
+                        box_xy(mf, x0, x1, y0 + t - 0.01, y0 + t + 0.01, z0 + 0.06, z0 + h - 0.05, "rahmen_dunkel")
+                continue
+            box_xy(mg, x0, x1, y0, y1, z0, z0 + h - 0.02, "glas")
+            box_xy(mf, x0 - 0.01, x1 + 0.01, y0 - 0.01, y1 + 0.01, z0 + h - 0.04, z0 + h, "rahmen_dunkel")
         self.einbauten(mw, mg)
         return {"oeffnungen": n}
 
@@ -463,10 +477,10 @@ class ManualApartment:
             mb.verts = [(*self._dreh(x, y), z) for x, y, z in mb.verts]
 
     def slabs(self, mb):
-        x0, y0, x1, y1 = self.c["slab_rect"]
         z0 = self.c["floor_z"]
-        box_xy(mb, x0, x1, y0, y1, z0 - 0.3, z0, "boden_parkett")
-        box_xy(mb, x0, x1, y0, y1, z0 + self.c["height"], z0 + self.c["height"] + 0.3, "decke")
+        for x0, y0, x1, y1 in (self.c.get("slab_rects") or [self.c["slab_rect"]]):   # mehrere Rechtecke fuer L-Formen
+            box_xy(mb, x0, x1, y0, y1, z0 - 0.3, z0, "boden_parkett")
+            box_xy(mb, x0, x1, y0, y1, z0 + self.c["height"], z0 + self.c["height"] + 0.3, "decke")
 
     def px_to_local(self, x, y):
         return self._dreh(x, y)

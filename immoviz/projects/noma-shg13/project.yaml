@@ -766,33 +766,33 @@ neubau:
     - {gruppe: nb_umgebung, pts: [[-18.0, -16.33], [-8.0, -16.33]], z: 15.0, h: 1.0, typ: voll, mat: nb_weiss}
     - {gruppe: nb_umgebung, pts: [[-18.0, -16.33], [-8.0, -16.33]], z: 18.0, h: 1.0, typ: voll, mat: nb_weiss}
     # Runde 4, Gelaendertabelle im Bericht. G1 Weg Nordkante a -4,00 bis 29,52 (GLH 1,02 [EIN S. 9/16]; Absturz in die Hoefe 1 und 2, sonst Kante zum tieferen Gruendach +3,06; Tor zur Stufe auf Gruendach 61,26 bei a 15,0 bis 15,9; Abschnitt ab 25,7 aus VP 4A abgeleitet)
-    - {gruppe: nb_hof, rahmen: hof, pts: [[-4.0, 8.03, 3.96], [-3.9, 8.03, 3.96], [5.6, 8.03, 3.5], [29.52, 8.03, 3.5]], h: 1.02, mat: nb_basalt}
+    - {gruppe: nb_hof, rahmen: hof, pts: [[-4.0, 8.03, 3.96], [-3.9, 8.03, 3.96], [5.6, 8.03, 3.5], [29.52, 8.03, 3.5]], h: 1.02, mat: nb_basalt, quelle: "G1 EIN S. 9/16 (GLH 1,02, Weg Nordkante), VP 4A (Abschnitt ab a 25,7)"}
     # G2 Weg Suedkante entlang Gruendach 27,57 bis Pavillon Top 3 (GLH 1,02 [EIN S. 9/16])
-    - {gruppe: nb_hof, rahmen: hof, pts: [[-4.0, 6.57, 3.96], [-3.9, 6.57, 3.96], [0.0, 6.57, 3.771]], h: 1.02, mat: nb_basalt}
+    - {gruppe: nb_hof, rahmen: hof, pts: [[-4.0, 6.57, 3.96], [-3.9, 6.57, 3.96], [0.0, 6.57, 3.771]], h: 1.02, mat: nb_basalt, quelle: "G2 EIN S. 9/16 (GLH 1,02, Weg Suedkante)"}
     # G3/G4 Terrasse Top 3 Nord (zum Weg) und Sued (Absturzkante 3,50 m) [EIN S. 16 GLH 1,02, VP Top 3/4]
-    - {gruppe: nb_hof, rahmen: hof, pts: [[11.95, 5.59], [15.9, 5.59]], z: 3.5, h: 1.02, mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, pts: [[11.95, 0.11], [15.9, 0.11]], z: 3.5, h: 1.02, mat: nb_basalt}
+    - {gruppe: nb_hof, rahmen: hof, pts: [[11.95, 5.59], [15.9, 5.59]], z: 3.5, h: 1.02, mat: nb_basalt, quelle: "G3 EIN S. 16 (GLH 1,02), VP Top 3"}
+    - {gruppe: nb_hof, rahmen: hof, pts: [[11.95, 0.11], [15.9, 0.11]], z: 3.5, h: 1.02, mat: nb_basalt, quelle: "G4 EIN S. 16 (GLH 1,02, Absturzkante 3,50), VP Top 3"}
     # G5/G6 Terrasse Top 4 Nord und Sued [VP Top 4; EIN S. 16 GLH 1,02 am Terrassenrand]
-    - {gruppe: nb_hof, rahmen: hof, pts: [[27.85, 5.59], [30.77, 5.59]], z: 3.5, h: 1.02, mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, pts: [[27.85, 0.11], [30.77, 0.11]], z: 3.5, h: 1.02, mat: nb_basalt}
+    - {gruppe: nb_hof, rahmen: hof, pts: [[27.85, 5.59], [30.77, 5.59]], z: 3.5, h: 1.02, mat: nb_basalt, quelle: "G5 VP Top 4, EIN S. 16 (GLH 1,02)"}
+    - {gruppe: nb_hof, rahmen: hof, pts: [[27.85, 0.11], [30.77, 0.11]], z: 3.5, h: 1.02, mat: nb_basalt, quelle: "G6 VP Top 4, EIN S. 16 (GLH 1,02)"}
     # G7 Terrasse Top 4A umlaufend, Tor an der Westseite b 8,0 [VP Top 4A]
-    - {gruppe: nb_hof, rahmen: hof, pts: [[30.77, 6.67], [30.77, 8.0], [29.52, 8.0], [29.52, 10.08], [35.89, 10.08], [35.89, 8.0], [37.63, 8.0], [37.63, 6.67]], z: 3.5, h: 1.02, mat: nb_basalt}
+    - {gruppe: nb_hof, rahmen: hof, pts: [[30.77, 6.67], [30.77, 8.0], [29.52, 8.0], [29.52, 10.08], [35.89, 10.08], [35.89, 8.0], [37.63, 8.0], [37.63, 6.67]], z: 3.5, h: 1.02, mat: nb_basalt, quelle: "G7 VP Top 4A (umlaufend, Tor Westseite)"}
     # G8 Terrasse Top 5 Sued (Absturz 3,96 m zum Gartenstreifen) und Ost (zum Gruendach) [EIN S. 9, S. 26]
-    - {gruppe: nb_hof, pts: [[4.35, -15.0], [4.35, -18.0], [10.93, -18.0]], z: 3.96, h: 1.02, mat: nb_basalt}
+    - {gruppe: nb_hof, pts: [[4.35, -15.0], [4.35, -18.0], [10.93, -18.0]], z: 3.96, h: 1.02, mat: nb_basalt, quelle: "G8 EIN S. 9, S. 26"}
     # G9 Terrasse Top 2 Ost (zum Gruendach) [EIN S. 9, S. 26: Gelaender bis b 12,0]
-    - {gruppe: nb_hof, pts: [[12.55, -18.3], [16.3, -18.3]], z: 3.96, h: 1.02, mat: nb_basalt}
+    - {gruppe: nb_hof, pts: [[12.55, -18.3], [16.3, -18.3]], z: 3.96, h: 1.02, mat: nb_basalt, quelle: "G9 EIN S. 9, S. 26 (bis b 12,0)"}
     # G10 Stuetzmauer mit Gelaender h = 1,00 am Spielhuegel (+1,16) [EIN S. 18]
-    - {gruppe: nb_garten, rahmen: hof, pts: [[42.8, 5.95], [47.9, 6.3]], z: 1.16, h: 1.0, mat: nb_basalt}
+    - {gruppe: nb_garten, rahmen: hof, pts: [[42.8, 5.95], [47.9, 6.3]], z: 1.16, h: 1.0, mat: nb_basalt, quelle: "G10 EIN S. 18 (Stuetzmauer, h 1,00)"}
     # Z1 Zaun Gartenstreifen an der Grundgrenze Sued: STB-Sockel +0,50, Stabzaun OK +1,02 [EIN S. 8/15/18]
-    - {gruppe: nb_garten, rahmen: hof, pts: [[-7.8, -3.42], [48.0, -3.42]], z: 0.0, h: 0.5, typ: voll, mat: nb_attika}
-    - {gruppe: nb_garten, rahmen: hof, pts: [[-7.8, -3.42], [48.0, -3.42]], z: 0.5, h: 0.52, mat: nb_metall}
+    - {gruppe: nb_garten, rahmen: hof, pts: [[-7.8, -3.42], [48.0, -3.42]], z: 0.0, h: 0.5, typ: voll, mat: nb_attika, quelle: "Z1 EIN S. 8/15/18 (Zaun Grundgrenze Sued, STB-Sockel +0,50, Stab OK +1,02)"}
+    - {gruppe: nb_garten, rahmen: hof, pts: [[-7.8, -3.42], [48.0, -3.42]], z: 0.5, h: 0.52, mat: nb_metall, quelle: "Z1 EIN S. 8/15/18 (Zaun Grundgrenze Sued, STB-Sockel +0,50, Stab OK +1,02)"}
     # Z2 Zaun an der Nordgrenze vor den Hoefen 1 bis 3 und dem Spielplatz, gleiche Ausfuehrung [EIN S. 15/18]
-    - {gruppe: nb_garten, rahmen: hof, pts: [[0.5, 14.95], [10.6, 14.95]], z: 0.0, h: 0.5, typ: voll, mat: nb_attika}
-    - {gruppe: nb_garten, rahmen: hof, pts: [[0.5, 14.95], [10.6, 14.95]], z: 0.5, h: 0.52, mat: nb_metall}
-    - {gruppe: nb_garten, rahmen: hof, pts: [[16.42, 14.95], [25.52, 14.95]], z: 0.0, h: 0.5, typ: voll, mat: nb_attika}
-    - {gruppe: nb_garten, rahmen: hof, pts: [[16.42, 14.95], [25.52, 14.95]], z: 0.5, h: 0.52, mat: nb_metall}
-    - {gruppe: nb_garten, rahmen: hof, pts: [[30.84, 14.95], [44.45, 13.6], [44.1, 9.85], [48.0, 9.45]], z: 0.0, h: 0.5, typ: voll, mat: nb_attika}
-    - {gruppe: nb_garten, rahmen: hof, pts: [[30.84, 14.95], [44.45, 13.6], [44.1, 9.85], [48.0, 9.45]], z: 0.5, h: 0.52, mat: nb_metall}
+    - {gruppe: nb_garten, rahmen: hof, pts: [[0.5, 14.95], [10.6, 14.95]], z: 0.0, h: 0.5, typ: voll, mat: nb_attika, quelle: "Z2 EIN S. 15/18 (Zaun Nordgrenze, wie Z1)"}
+    - {gruppe: nb_garten, rahmen: hof, pts: [[0.5, 14.95], [10.6, 14.95]], z: 0.5, h: 0.52, mat: nb_metall, quelle: "Z2 EIN S. 15/18 (Zaun Nordgrenze, wie Z1)"}
+    - {gruppe: nb_garten, rahmen: hof, pts: [[16.42, 14.95], [25.52, 14.95]], z: 0.0, h: 0.5, typ: voll, mat: nb_attika, quelle: "Z2 EIN S. 15/18 (Zaun Nordgrenze, wie Z1)"}
+    - {gruppe: nb_garten, rahmen: hof, pts: [[16.42, 14.95], [25.52, 14.95]], z: 0.5, h: 0.52, mat: nb_metall, quelle: "Z2 EIN S. 15/18 (Zaun Nordgrenze, wie Z1)"}
+    - {gruppe: nb_garten, rahmen: hof, pts: [[30.84, 14.95], [44.45, 13.6], [44.1, 9.85], [48.0, 9.45]], z: 0.0, h: 0.5, typ: voll, mat: nb_attika, quelle: "Z2 EIN S. 15/18 (Zaun Nordgrenze, wie Z1)"}
+    - {gruppe: nb_garten, rahmen: hof, pts: [[30.84, 14.95], [44.45, 13.6], [44.1, 9.85], [48.0, 9.45]], z: 0.5, h: 0.52, mat: nb_metall, quelle: "Z2 EIN S. 15/18 (Zaun Nordgrenze, wie Z1)"}
   pv:   # PV-Module auf den Pavillondaechern [EIN S. 22 Schnitt 1/3]
     - {gruppe: nb_top3, rahmen: hof, a: [0.5, 0.0], b: [11.45, 0.0], d: [0.6, 6.0], z: 6.61, reihen: 3, neigung: 12}
     - {gruppe: nb_top4, rahmen: hof, a: [16.4, 0.0], b: [27.35, 0.0], d: [0.6, 6.0], z: 6.61, reihen: 3, neigung: 12}
@@ -933,6 +933,47 @@ strassenleuchten:
   - {id: M02, typ: mast_peitsche, pos: [2, -99.1], hoehe: 8.0, ausleger: 1.8, richtung: [-0.1, 1], quelle: "SV 04/2026 Seitenblick, Lage +-2 m, Hoehe geschaetzt"}
   - {id: M03, typ: mast_peitsche, pos: [26, -96.7], hoehe: 8.0, ausleger: 1.8, richtung: [-0.1, 1], quelle: "SV 04/2026 Seitenblick, Lage +-2 m, Hoehe geschaetzt"}
   - {id: M04, typ: mast_peitsche, pos: [41, -95.2], hoehe: 8.0, ausleger: 1.8, richtung: [-0.1, 1], quelle: "SV 04/2026 Seitenblick, Lage +-2 m, Hoehe geschaetzt"}
+
+# ---------------------------------------------------------------- Plan-Soll-Liste (immoviz.py pruefen, lib/soll.py)
+# Aus EIN S. 26 (Ansicht SHG 13 Hofseite) und S. 28 (Ansicht Wuertzlerstrasse 10 Hofseite) gezaehlt, Gelaender aus der
+# Gelaendertabelle Runde 4 (G1 bis G10, Z1/Z2; EIN S. 8/9/15/16/18, VP Top 3/4/4A) und S. 11 bis 14/26/28. Jede
+# Abweichung Modell gegen Soll ist ein Fehler. Fenster = Oeffnungen (Fenster, Tueren, HST, Dachflaechenfenster/Gauben).
+soll:
+  geschosse: {og1: [3.9, 7.3], og2: [7.3, 10.2], og3: [10.2, 13.1], og4: [13.1, 16.0], og5: [16.0, 18.9], dg1: [18.9, 21.8], dg2: [21.8, 25.3]}
+  fassaden:
+    shg_hof:   # Strassenhaus Hoffassade an der BFL y -15,00, Erkerfront y -16,41, Dacheinschnitt 2. DG y -13,00
+      gruppen: [nb_shg, nb_shg_dach]
+      linien: [[[0.8, -15.0], [19.55, -15.0]], [[5.87, -16.41], [14.11, -16.41]], [[7.07, -13.0], [13.33, -13.0]]]
+      dachfenster_bereich: [0.0, -14.5, 20.0, -11.0]
+    wue_hof:   # Wuertzlerstrasse 10 Hofseite: Erkerfront und 2. DG
+      gruppen: [nb_wue]
+      linien: [[[17.572, -68.975], [11.158, -69.433]], [[16.84, -69.669], [12.71, -69.964]]]
+      dachfenster_bereich: [5.0, -75.0, 25.0, -65.0]
+      geschosse: {eg: [-1.0, 2.85], og1: [2.85, 5.7], og2: [5.7, 8.6], og3: [8.6, 11.45], og4: [11.45, 14.35], dg1: [14.35, 17.25], dg2: [17.25, 21.0]}
+  fenster:
+    - {fassade: shg_hof, geschoss: og1, anzahl: 8, quelle: "EIN S. 26 (6 Fenster, 2 Tueren; Stiegenhaustuer)"}
+    - {fassade: shg_hof, geschoss: og2, anzahl: 8, quelle: "EIN S. 26 (2 aussen, Erker 4 Fenster und 2 Tueren)"}
+    - {fassade: shg_hof, geschoss: og3, anzahl: 8, quelle: "EIN S. 26"}
+    - {fassade: shg_hof, geschoss: og4, anzahl: 8, quelle: "EIN S. 26"}
+    - {fassade: shg_hof, geschoss: og5, anzahl: 8, quelle: "EIN S. 26"}
+    - {fassade: shg_hof, geschoss: dg1, anzahl: 6, quelle: "EIN S. 26 (2 franz. Fenster aussen, 2 Fenster, 2 HST)"}
+    - {fassade: shg_hof, geschoss: dg2, anzahl: 8, quelle: "EIN S. 26 (2 HST im Einschnitt, je 3 Gauben-/Dachfenster links und rechts), S. 13"}
+    - {fassade: wue_hof, geschoss: eg, anzahl: 4, typ: [tuer, dunkel, fenster], quelle: "EIN S. 28 (Tuer, Gitter DBA, Zu-/Abluft, RA ER)"}
+    - {fassade: wue_hof, geschoss: og1, anzahl: 6, quelle: "EIN S. 28 (2 aussen, Erker 2 Fenster und 2 Tueren)"}
+    - {fassade: wue_hof, geschoss: og2, anzahl: 6, quelle: "EIN S. 28"}
+    - {fassade: wue_hof, geschoss: og3, anzahl: 6, quelle: "EIN S. 28"}
+    - {fassade: wue_hof, geschoss: og4, anzahl: 6, quelle: "EIN S. 28"}
+    - {fassade: wue_hof, geschoss: dg1, anzahl: 6, quelle: "EIN S. 28"}
+    - {fassade: wue_hof, geschoss: dg2, anzahl: 6, quelle: "EIN S. 28 (2 Tueren, je 2 Dachfenster links und rechts), S. 21"}
+  gelaender:
+    - {gruppe: nb_shg, anzahl: 27, quelle: "EIN S. 26, S. 11/12: je Balkon 2. bis 5. OG Stab, 2 volle Felder, 2 Seiten; 1. DG dazu 2 franz. Fenster"}
+    - {gruppe: nb_shg_dach, anzahl: 8, quelle: "EIN S. 13/14/26: 4 Treppengelaender, 3 Dachterrassen (OK +26,40), Terrasse 2. DG (OK +22,92)"}
+    - {gruppe: nb_wue, anzahl: 30, quelle: "EIN S. 28, S. 19 bis 21: 6 Balkone (1. OG bis 2. DG) je Stab, 2 volle Felder, 2 Seiten"}
+    - {gruppe: nb_hof, anzahl: 9, quelle: "Gelaendertabelle Runde 4: G1 bis G9 (EIN S. 9/16, VP Top 3/4/4A)"}
+    - {gruppe: nb_garten, anzahl: 9, quelle: "G10 (EIN S. 18), Zaeune Z1 (2) und Z2 (6, je Sockel und Stab) (EIN S. 8/15/18)"}
+  leuchten:
+    - {name: "Schlachthausgasse", bereich: [-60, -5, 60, 25], anzahl: 7, quelle: "SV 04/2026 Blick nach oben (S01 bis S07)"}
+    - {name: "Wuertzlerstrasse", bereich: [-60, -120, 60, -85], anzahl: 4, quelle: "SV 04/2026 Seitenblick (M01 bis M04)"}
 
 # Baeume ausserhalb des Baumkatasters (Hof- und Gartenbaeume, aus dem Orthofoto 2024 abgelesen, Hoehe geschaetzt) [ANN]
 trees_override:

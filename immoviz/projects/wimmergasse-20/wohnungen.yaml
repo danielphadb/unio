@@ -65,23 +65,38 @@ wohnungen:
     # Lokale Koordinaten: x entlang Stolberggasse, y entlang Wimmergasse ab der Ecke.
     floor_z: 21.07              # Oberkante Rohdecke DG3 +50,20 WrN
     height: 2.65                # lichte Raumhöhe laut DG-Plan RH 2,52 bis 2,68
-    slab_rect: [1.8, 1.8, 8.8, 8.8]
+    # 18.11.2026 nach GR DG3 und ANS: Eckaufbau (5,00 m je Fassade) buendig mit DG1/DG2 (d 0,7, ANN), dort franzoesische
+    # Fenster mit VSG; Terrasse 6,93 m2 nur als Einschnitt zur Wimmergasse (y 5,34 bis 8,5), keine umlaufende Terrasse.
+    slab_rects: [[0.7, 0.7, 8.8, 5.34], [1.8, 5.34, 8.8, 8.8]]
     walls:
-      - rect: [1.8, 1.8, 2.1, 8.5]          # Glasfront zur Wimmergasse (Terrasse)
+      - rect: [0.7, 0.7, 1.0, 5.04]         # Eckaufbau zur Wimmergasse (y = 25,44 - u)
+        quelle: "ANS DG3 (4 Fenster u 20,45 bis 24,53), GR DG3"
         openings:
+          - {span: [0.91, 1.93], z: [0.03, 2.28], type: glastuer}
+          - {span: [1.95, 2.95], z: [0.03, 2.28], type: glastuer}
+          - {span: [2.97, 3.99], z: [0.03, 2.28], type: glastuer}
+          - {span: [4.01, 4.99], z: [0.03, 2.28], type: glastuer}
+      - rect: [1.0, 0.7, 5.4, 1.0]          # Eckaufbau zur Stolberggasse
+        quelle: "GR DG3 (4 Fenstertueren 1,00), Lage ANN gespiegelt aus ANS"
+        openings:
+          - {span: [1.02, 1.86], z: [0.03, 2.28], type: glastuer}
           - {span: [1.95, 2.93], z: [0.03, 2.28], type: glastuer}
           - {span: [3.03, 4.01], z: [0.03, 2.28], type: glastuer}
           - {span: [4.10, 5.08], z: [0.03, 2.28], type: glastuer}
-          - {span: [5.47, 6.79], z: [0.03, 2.28], type: glastuer}
-          - {span: [6.89, 8.21], z: [0.03, 2.28], type: glastuer}
-      - rect: [2.1, 1.8, 5.4, 2.1]          # Glasfront zur Stolberggasse
+      - {rect: [1.0, 5.04, 1.8, 5.34]}      # Wange Eckaufbau / Terrasse
+      - {rect: [5.35, 1.0, 5.45, 1.8]}      # Wange Eckaufbau / Dachschraege Stolberggasse
+      - rect: [1.8, 5.34, 2.1, 8.5]         # Glasfront zur Terrasse (Einschnitt Wimmergasse u 16,9 bis 20,4)
+        quelle: "ANS DG3 (2 Fenster und Fixteil u 17,44 bis 19,91)"
         openings:
-          - {span: [2.2, 3.4], z: [0.03, 2.28], type: glastuer}
-          - {span: [3.6, 4.8], z: [0.03, 2.28], type: glastuer}
+          - {span: [5.53, 6.00], z: [0.03, 2.28], type: glastuer}
+          - {span: [6.04, 7.02], z: [0.03, 2.28], type: glastuer}
+          - {span: [7.07, 8.00], z: [0.03, 2.28], type: glastuer}
       - {rect: [5.4, 1.8, 8.3, 2.1], h: 1.32}   # Kniestock unter der Dachschräge
       - rect: [8.0, 2.1, 8.3, 8.8]
+        quelle: "ANN Innentuer (GR DG3 Scan, Lage +-0,5 m)"
         openings: [{span: [6.3, 7.2], z: [0.0, 2.1], type: tuer}]
       - rect: [1.8, 8.5, 8.0, 8.8]
+        quelle: "ANN Innentuer (GR DG3 Scan, Lage +-0,5 m)"
         openings: [{span: [4.2, 5.1], z: [0.0, 2.1], type: tuer}]
     slopes:
       - x: [5.4, 8.0]
@@ -89,11 +104,11 @@ wohnungen:
         to: [3.25, 23.72]
         roof_windows: [{x: [6.2, 7.4], t: [0.12, 0.88]}]
     terrace:
-      - {rect: [0.85, 0.85, 1.8, 8.5]}
-      - {rect: [1.8, 0.85, 5.4, 1.8]}
+      - {rect: [0.85, 5.34, 1.8, 8.5]}
     railings:
-      - {rect: [0.83, 0.85, 0.87, 8.5]}
-      - {rect: [0.85, 0.83, 5.4, 0.87]}
+      - {rect: [0.83, 5.34, 0.87, 8.5], typ: stab, quelle: "ANS (Staebe, Gel. H=110cm), GR DG3 Terrasse Top 35"}
+      - {rect: [0.71, 0.91, 0.73, 4.99], quelle: "ANS (Gel. H=110cm VSG) vor den Fenstertueren zur Wimmergasse"}
+      - {rect: [1.02, 0.71, 5.08, 0.73], quelle: "GR DG3 (Gel. H=110cm), Typ VSG ANN wie ANS Wimmergasse"}
     light: golden_hour
     exposure: 1.4
     kameras:

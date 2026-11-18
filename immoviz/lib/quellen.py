@@ -52,6 +52,7 @@ MINDESTRANG = {"gelaender": 1, "trog": 1, "weg": 1, "fenster": 1, "stuck": 1, "m
 KLASSEN = [
     ("gelaender", "project", ("neubau", "gelaender", "*"), None),
     ("gelaender", "project", ("dach", "railings", "*"), None),
+    ("gelaender", "project", ("dach", "walls", "*", "loggias", "*", "rails", "*"), None),
     ("gelaender", "wohnungen", ("wohnungen", "*", "railings", "*"), None),
     ("trog", "project", ("neubau", "boxen", "*"), r"(?i)trog|pflanz|kuebel|beet"),
     ("trog", "project", ("neubau", "flaechen", "*"), r"(?i)trog|pflanz|kuebel"),
@@ -293,6 +294,10 @@ def pruefen(pdir: Path) -> dict:
                     i -= 1
                 if not re.search(filt, eigen + " " + " ".join(direkt)):
                     continue
+            k_eff = klasse
+            if klasse == "gelaender" and str(getattr(wert, "get", lambda *_: "")("gruppe") or "").startswith("nb_umgebung"):
+                k_eff = "nachbar"           # Balkonbruestungen der Nachbarhaeuser: Umgebung, nicht Planelement
+            klasse = k_eff
             schluessel = (klasse, datei, z)
             if schluessel in gesehen:            # YAML-Anker (<<: *top04) zeigen auf dieselben Zeilen
                 continue
@@ -334,6 +339,13 @@ def pruefen(pdir: Path) -> dict:
     r["warnungen"] = _warnungen(cfg_plain)
     if r["warnungen"] and r["ampel"] == "gruen":
         r["ampel"] = "gelb"
+    from . import soll as SO        # Zaehlpruefung gegen die Plan-Soll-Liste (Block soll in project.yaml)
+    r["soll"] = SO.pruefen(cfg_plain)
+    if r["soll"]["abweichungen"]:
+        r["ampel"] = "rot"
+    # Ampel je Klasse (gruen: alle mit Feld quelle, gelb: Kommentar, rot: fehlt), fuer "Gelaender gruen"
+    for k, v in r["je_klasse"].items():
+        v["ampel"] = "rot" if v["fehlt"] else ("gelb" if v["kommentar"] else "gruen")
     return r
 
 
@@ -417,7 +429,8 @@ def bericht_text(r: dict, max_zeilen: int = 40) -> str:
          f"{r['nur_kommentar']} nur Kommentar (Warnung), {r['ohne_quelle']} ohne Quelle, Annahmen {int(100 * r['anteil_ann'])} %"
          f"  -> Ampel {r['ampel'].upper()}", "", "Je Klasse (gesamt / ok / Kommentar / fehlt / ANN):"]
     for k, v in r["je_klasse"].items():
-        L.append(f"  {KLASSEN_NAMEN[k]:28s} {v['gesamt']:4d} {v['ok']:4d} {v['kommentar']:4d} {v['fehlt']:4d} {v['ann']:4d}")
+        L.append(f"  {KLASSEN_NAMEN[k]:28s} {v['gesamt']:4d} {v['ok']:4d} {v['kommentar']:4d} {v['fehlt']:4d} {v['ann']:4d}"
+                 f"  {v.get('ampel', '')}")
     L.append("Quellen-Rang (beste Quelle je Element): " + ", ".join(f"{k} {v}" for k, v in r["quellen_rang"].items()))
     if r["je_bild"]:
         L += ["", "Je Bild (Elemente im Blickfeld, Anteil ANN, Anteil ohne Quelle):"]
@@ -431,6 +444,9 @@ def bericht_text(r: dict, max_zeilen: int = 40) -> str:
             L.append(f"  {e['datei']}:{e['zeile']:<5d} {KLASSEN_NAMEN[e['klasse']]:22s} {e['auszug']}")
     if r.get("warnungen"):
         L += ["", "Warnungen:"] + [f"  {w}" for w in r["warnungen"]]
+    if r.get("soll") is not None:
+        from . import soll as SO
+        L += SO.bericht_text(r["soll"])
     if r["hinweise"]:
         L += ["", f"Hinweise ({len(r['hinweise'])}, erste {max_zeilen}):"]
         for e in r["hinweise"][:max_zeilen]:
@@ -445,6 +461,6 @@ def main_cli(projekt: str, als_json: bool = False, streng: bool = False) -> int:
         print(json.dumps(r, ensure_ascii=False, indent=1))
     else:
         print(bericht_text(r))
-    if r["ohne_quelle"] or (streng and r["nur_kommentar"]):
+    if r["ohne_quelle"] or (streng and r["nur_kommentar"]) or (r.get("soll") or {}).get("abweichungen"):
         return 1
     return 0

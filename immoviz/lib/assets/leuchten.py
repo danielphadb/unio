@@ -16,8 +16,11 @@ Eintrag (lokale Koordinaten, Hoehen ueber Gelaende am Punkt, `hoehe` = Lichtpunk
   - {id: H01, typ: wandausleger, pos: [x, y], hoehe: 5.5, ausleger: 1.0, richtung: [dx, dy], quelle: "..."}
 Optional: leistung (W, Standard je Typ), farbe ("#RRGGBB" Gehaeuse), form (seil: teller | kegel).
 
-Licht: warmweiss (rund 3000 K), an bei Sonnenhoehe unter 2 Grad oder mit `strassenlicht: an` in der Lichtstimmung
-(`aus` erzwingt aus). Ohne Inventar baut build.py den bisherigen Fallback aus `street.cables` mit diesen Leuchten,
+Licht: Farbtemperatur 3000 K (Lichtquelle mit Blackbody-Temperatur, `farbtemperatur` je Eintrag), an bei Sonnenhoehe
+unter 2 Grad oder mit `strassenlicht: an` in der Lichtstimmung (`aus` erzwingt aus). Seit 18.11.2026 (Nachtprobe,
+auftraege/2026-11-18_assets_test.md: Teller ueberstrahlt, kein Lichtkegel): Leuchtkoerper mit geringer Leuchtdichte
+(DIFFUSOR_AN statt 6), Lichtquelle fuer die Kamera unsichtbar, Spot nach unten mit 115 Grad Kegel und hoeherer Leistung,
+damit Fahrbahn und Gehsteig sichtbar ausgeleuchtet sind. Ohne Inventar baut build.py den bisherigen Fallback aus `street.cables` mit diesen Leuchten,
 `immoviz.py pruefen` warnt dann.
 """
 from __future__ import annotations
@@ -32,7 +35,10 @@ from .. import meshkit as K
 from . import form as F
 
 WARMWEISS = (1.0, 0.74, 0.46)
-LEISTUNG = {"seil": 450.0, "mast_peitsche": 500.0, "mast_aufsatz": 150.0, "wandausleger": 300.0, "altwiener_laterne": 120.0}
+LEISTUNG = {"seil": 1800.0, "mast_peitsche": 1800.0, "mast_aufsatz": 600.0, "wandausleger": 1000.0, "altwiener_laterne": 250.0}
+KEGEL = {"seil": 115.0, "mast_peitsche": 115.0, "mast_aufsatz": 150.0, "wandausleger": 120.0}   # Spot-Oeffnung (Grad)
+FARBTEMPERATUR = 3000.0       # K, Wiener LED-Strassenbeleuchtung warmweiss (2700 bis 3000 K)
+DIFFUSOR_AN = 0.5             # Emissionsstaerke des Leuchtkoerpers (vorher 6, Probe 1,5: ueberstrahlt bei Belichtung +1,6)
 TYPEN = tuple(LEISTUNG)
 
 
@@ -223,16 +229,23 @@ def build(cfg, mats, coll, terrain, eintraege=None):
 
 def _lampe(sub, e, pos, typ):
     ld = bpy.data.lights.new(f"strassenleuchten_{e.get('id', '')}", "SPOT" if typ != "altwiener_laterne" else "POINT")
-    ld.color = WARMWEISS
+    ld.color = (1.0, 1.0, 1.0)
+    if hasattr(ld, "use_temperature"):
+        ld.use_temperature = True
+        ld.temperature = float(e.get("farbtemperatur", FARBTEMPERATUR))
+    else:
+        ld.color = WARMWEISS
     ld["leistung"] = float(e.get("leistung", LEISTUNG.get(typ, 150.0)))
     ld.energy = 0.0
     ld.shadow_soft_size = 0.12
     if ld.type == "SPOT":
-        ld.spot_size = math.radians(150)
-        ld.spot_blend = 0.6
+        ld.spot_size = math.radians(float(e.get("kegel", KEGEL.get(typ, 120.0))))
+        ld.spot_blend = 0.35
     ob = bpy.data.objects.new(f"strassenleuchten_licht_{e.get('id', '')}", ld)
     ob.location = pos
     ob.hide_render = True
+    if hasattr(ob, "visible_camera"):
+        ob.visible_camera = False      # Lichtquelle selbst nicht im Bild, nur der Leuchtkoerper (DIFFUSOR_AN)
     sub.objects.link(ob)
 
 
@@ -246,7 +259,7 @@ def set_strassenlicht(bpy_, an: bool):
         if m.get("immoviz_strassenlicht") and m.node_tree:
             for n in m.node_tree.nodes:
                 if n.type == "BSDF_PRINCIPLED":
-                    n.inputs["Emission Strength"].default_value = 6.0 if an else 0.0
+                    n.inputs["Emission Strength"].default_value = DIFFUSOR_AN if an else 0.0
 
 
 def licht_an(L: dict, sonnenhoehe: float) -> bool:

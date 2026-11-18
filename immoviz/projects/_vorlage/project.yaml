@@ -136,3 +136,14 @@ checks:
 # ---------------------------------------------------------------- Nachbarn (Pflicht vor dem Vertrieb, siehe KONZEPT Abschnitt 7)
 neighbour_facades: {}       # je Eintrag quelle: "SV 05/2024" oder "OGD BKM; Kunde Foto" (nie Visualisierungen)
 trees_override: []          # Korrekturen je Baum mit quelle: "OGD Orthofoto" / "SV 05/2024 belaubt"
+
+# Plan-Soll-Liste (immoviz.py pruefen, lib/soll.py, README "Korrekturschleife"): aus dem Plan zaehlen, nicht aus dem
+# Modell; jede Abweichung Modell gegen Soll ist ein Fehler. Beispiele: projects/wimmergasse-20, projects/noma-shg13.
+# soll:
+#   geschosse: {eg: [-1.0, 4.4], og1: [4.4, 7.95]}          # Geschoss nach Unterkante der Oeffnung
+#   fenster:
+#     - {fassade: hauptstrasse, geschoss: eg, anzahl: 10, quelle: "ANS"}
+#   gelaender:
+#     - {fassade: hauptstrasse, anzahl: 6, quelle: "ANS (Gel. H=110cm)"}
+#   leuchten:
+#     - {name: "Hauptstrasse Nord", strang: hauptstrasse, bereich: [-30, 0, 30, 200], anzahl: 4, quelle: "SV 05/2024"}

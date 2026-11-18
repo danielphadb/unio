@@ -425,5 +425,89 @@ entlang Wimmergasse (y -160 bis +100) und Stolberggasse (x -127 bis +134) ein Bl
   noch Fallback ohne Inventar.
 - Poller grün mit weißen Ringen an allen vier Gehsteigvorziehungen der Kreuzung (je drei im Modell, Lage am Bordstein
   laut OGD), Verkehrszeichen an der Ecke des Objekts (rundes Verbotszeichen), Stop an der Südostecke, Einbahn an der
-  Südwestecke, drei Fahrradbügel an der Westecke (`strassenmoebel`, Lage +-1 m). Die Kamera `ecke` steht auf der
-  südwestlichen Vorziehung 1,6 m neben einem Poller (rechter Bildrand).
+  Südwestecke, drei Fahrradbügel an der Westecke (`strassenmoebel`, Lage +-1 m). Die Kamera `ecke` stand auf der
+  südwestlichen Vorziehung 1,6 m neben einem Poller (rechter Bildrand); korrigiert in Abschnitt 14.
+
+## 13. Geländer nach Plan (18.11.2026)
+
+Kundenkritik 18.11.2026: "bei Laternen und Geländern bitte genau den Plan beachten". `pruefen` meldete 4 von 5
+Geländern ohne Quelle; im Modell standen drei umlaufende Glasbrüstungen (DG3 Wimmergasse u 16,9 bis 24,6, DG3
+Stolberggasse, "Dachterrasse links" als Glas) und die Loggia-Stäbe. Geprüft gegen:
+
+- **ANS** `06_Wimmerg_Strassenansicht.pdf` (Vektor, 300 dpi ausgewertet, 1 m = 118 px): jedes Geländer ist als
+  "Gel. H=110cm" beschriftet, VSG-Glas als punktierte Fläche, Stabgeländer als Stäbe im Abstand rund 0,25 m.
+- **GR DG1 bis DG3** und Dachdraufsicht (Beilagen zum Nutzwertgutachten [NWG], Scan rund 36 px/m, Lage +-0,4 m):
+  "Gel. H=110cm", "Glas-Schiebewände oben", FPH je Fenster, Terrassen- und Loggiaflächen; Flächen laut NWG.
+- **GR EG bis 3.OG** (Mappe 24.04. und 30.04.2026, Vektor): Straßenseite ohne Geländer (Kastenfenster mit
+  Parapet), Hofloggien Top 5/12/19/26.
+- **FK** Farbkonzept 15.04.2026 und Produktkatalog 22.07.2026: keine Angabe zu Geländerfarbe oder -typ (Loggia-/
+  Balkonboden Eiche-Lattenrost). Koten: FOK DG1 +14,08, DG2 +16,86/+16,96, DG3 +19,90/+19,99 relativ, +19,99 =
+  +50,20 WrN (z 21,07); damit FOK DG1 rund z 15,16 (Attika/Hauptgesims = Brüstung der DG1-Loggien), DG2 rund z 18,0.
+
+Ergebnis (alle Einträge in `project.yaml` `dach.railings` bzw. `loggias.rails` mit Feld `quelle`; Höhe 1,10 m ab FOK
+laut "Gel. H=110cm"; Farbe dunkel wie die DG-Fensterrahmen, `materials.gelaender` #2B2D30, ANN):
+
+| ID | Lage | Typ | Höhe | Quelle | vorher | jetzt |
+|---|---|---|---|---|---|---|
+| G-W1 | DG2 Wimmergasse, 8 französische Fenster (u 8,25 bis 24,56) | VSG in der Leibung | 1,10 ab FOK DG2 (z 17,95 bis 19,05) | ANS "Gel. H=110cm VSG", GR DG2 FPH=FOK | fehlte | ergänzt (8 Felder) |
+| G-W2 | Loggia Top 28/31 Wimmergasse (u 13,00 bis 16,60) | Stab | 1,10 über DG2-Platte (z 17,94 bis 19,04) | ANS Stäbe, "Glas-Schiebewände oben, Gel. H=110cm" | Stab ohne Quelle, 0,17 m zu tief | Platte und Stäbe auf ANS-Höhe, Quelle |
+| G-W3 | DG2 Stolberggasse, 5 französische Fenster (4 am Eckaufbau u 0,88 bis 5,08, 1 bei u 14,1) | VSG (Typ ANN) | 1,10 | GR DG2 "Gel. H=110cm", 100/240 FPH=FOK | fehlte (Fenster im Altbauraster) | ergänzt, Typ wie Wimmergasse ANN |
+| G-W4 | Loggien Stolberggasse Top 30 (DG1) / Top 32, 33 (DG2), u 7,0 bis 9,8 und 10,16 bis 13,3 | Stab (Typ ANN) | 1,10 über DG2-Platte | GR DG1/DG2 "Glas-Schiebewände oben, Gel. H=110cm" | Loggien fehlten | Loggien und Geländer ergänzt, Lage +-0,4 m |
+| G-W5 | DG3 Terrasse Top 35 (6,93 m²) Wimmergasse u 16,9 bis 20,4, Kante d 0,85 | Stab | 1,10 | ANS Stäbe u 17,2 bis 19,9, GR DG3 | Glas, umlaufend bis u 24,6 | Stab, nur vor dem Einschnitt |
+| G-W6 | DG3 Top 35 Eckaufbau Wimmergasse, 4 Fenstertüren und Fixteil (u 20,45 bis 24,72) | VSG in der Leibung | 1,10 | ANS "Gel. H=110cm VSG" | Glasbrüstung an der Dachkante | VSG an den Fenstern (5 Felder) |
+| G-W7 | DG3 Top 35 Eckaufbau Stolberggasse, 4 Fenstertüren (u 0,91 bis 5,08) | VSG (Typ ANN) | 1,10 | GR DG3 "Gel. H=110cm" | Glasbrüstung an der Dachkante (u 0,85 bis 5,4) | VSG an den Fenstern, Typ ANN |
+| G-W8 | DG3 Dachterrasse Top 31 (21,61 m²) über der DG1/2-Schräge links, u 0,3 bis 7,0, d 2,6 | Stab | 1,10 | ANS Stäbe über +50,20 u 0,15 bis 7,0, GR DG3 | Glas, Quelle nur Kommentar | Stab |
+| G-W9 | DG3 Terrasse Top 34 (18,28 m²) bis zur Front, u 7,0 bis 10,45 | Stab | 1,10 | ANS Stäbe u 7,0 bis 10,45, GR DG3 | fehlte (dort stand die DG3-Schräge) | ergänzt, Schräge beginnt erst bei u 10,45 |
+| entfernt | umlaufende Terrasse Top 35 im Innenmodell (`wohnungen.yaml`, L-förmig 0,85 bis 1,8) | | | GR DG3: nur Einschnitt 6,93 m², Eckaufbau mit Fenstertüren | Glasbrüstung L-förmig | Stab vor dem Einschnitt, VSG an den Ecktüren |
+
+Nicht modelliert, weil in keinem Bild sichtbar (Hof): Hofloggien Top 5, 12, 19, 26 (EG bis 3.OG, je 3,33 m²), DG1 Top 27
+Loggia/Terrasse ("Brüstung + Gel. H=110cm"), DG2 Terrassen Top 31 (4,35 m²) und Top 33 (10,37 m²), DG3 Terrasse Top 36
+(5,65 m²), Handlauf mit Durchzug H 1,00 am RFK-Steg auf dem Dach (ANS "HL m. Durchzug H=100"). Straßenseite EG bis
+3.OG: keine Geländer (Kastenfenster mit Parapet, EG-Türen VSG ohne Absturzsicherung).
+
+Mit den Geländern nach Plan geändert (Kubatur, damit die Geländer an der richtigen Stelle stehen): Stolberggasse DG1/DG2
+mit Eckaufbau (4 Fenster je Geschoss), zwei Loggien und einem Fenster am Ende statt 7 Achsen aus dem Altbau; DG3-Eckaufbau
+(5,00 m je Fassade, "Dachaufbau 1/3") bündig mit DG1/DG2 (d 0,7) statt 1,8 m zurück, DG3 Wimmergasse mit 4 Fenstern und
+Fixteil (vorher 3), Terrasse Top 35 als Einschnitt mit 2 Fenstern und Fixteil; DG3-Schräge Wimmergasse ab u 10,45
+(davor Terrasse Top 34, dahinter Wand bei d 4,6). `immoviz.py pruefen`: Geländer 13 von 13 mit Feld `quelle` (grün),
+Soll gegen Modell 20 Zeilen ohne Abweichung (vorher 6 Abweichungen, siehe Abschnitt 14).
+
+### Offene Fragen an den Bauträger (Geländer)
+
+1. Farbe der Geländer und VSG-Klemmprofile (RAL)? Farbkonzept und Produktkatalog nennen keine; im Modell dunkel wie die
+   DG-Fensterrahmen (ANN).
+2. Stolberggasse: Ansicht fehlt. Sind die Absturzsicherungen der französischen Fenster DG2/DG3 ebenfalls VSG wie zur
+   Wimmergasse, und die Loggien Stolberggasse Stabgeländer wie die Loggia Wimmergasse? Bitte "250507 W20_EIN_Ansichten;
+   Schnitte" (12 MB) in kleinerer Fassung oder als Einzelblatt Ansicht Stolberggasse senden.
+3. Tiefe der Dachgeschosswände: Scan zeigt vor DG3 eine Rinne von 0,45 m ("Saumrinne"), das Modell nimmt d 0,7 an. Schnitt
+   mit Koten (DG1 bis DG3, Terrassenkanten) erbeten.
+4. Terrasse Top 34 / Top 31 (DG3 links): Geländer an der Grenze zur DG1/2-Schräge (u rund 6,4 bis 7,0) und zwischen den
+   beiden Terrassen? Im Scan nicht lesbar.
+5. DG3 Fixteil an der Ecke (ANS u 24,53 bis 24,97): Eckverglasung oder schmales Fenster? Im Modell 0,17 m Fixteil bis
+   zur angenommenen Wandflucht.
+6. Hofseite (nicht im Bild, nur zur Vollständigkeit): Typ der Geländer an Hofloggien und DG-Hofterrassen.
+
+## 14. Soll-Prüfung, Poller und Kamera `ecke`, Nachtlicht (18.11.2026)
+
+**Plan-Soll-Liste** (`soll:` in `project.yaml`, `lib/soll.py`): 13 Fensterzeilen (Wimmergasse EG bis DG3 aus ANS,
+Stolberggasse 1.OG bis DG3 aus GR; EG Stolberggasse fehlt bewusst, Ansicht fehlt), 2 Geländerzeilen (17 Felder
+Wimmergasse, 11 Stolberggasse), 5 Leuchtenabschnitte (Wimmergasse Nord 4, Süd 7, Kreuzung 1, Stolberggasse West 6,
+Ost 6). Gegen das Modell vor dieser Runde: 6 Abweichungen (DG3 Wimmergasse 8 statt 11 Öffnungen, Stolberggasse DG1/DG2
+je 7 statt 5, DG3 5 statt 7, Geländer 3 statt 17 und 1 statt 11). Jetzt 0 Abweichungen.
+
+**Poller Südwestecke** (Standpunkt der Kamera `ecke`), Street View 05/2024 nur intern (`renders/streetview/poller/`,
+nicht im Repo): drei Poller am Bogen der Gehsteigvorziehung, trianguliert aus den Panoramen bei -7,0/-12,3 und
+-6,9/-22,6 (Schnittwinkel rund 90 Grad, +-0,5 m): -10,14/-15,88, -11,07/-14,62, -12,48/-13,85. Im Modell standen sie bei
+-11,42/-15,34 und -13,73/-13,31 (0,8 und 1,4 m daneben); der dritte "Poller" -11,19/-18,26 war der Pfosten des
+Einbahnschilds (jetzt `verkehrszeichen info` bei -10,47/-17,86, vorher -13,4/-21,0).
+
+**Kamera `ecke`**: von -13,0/-15,5 um 1,2 m nach vorn in die Pollerreihe (-12,2/-14,6), Ziel 6,0/7,0/11,0 und 20 mm
+gleich. Die beiden nächsten Poller stehen jetzt 52 und 59 Grad seitlich (halber Bildwinkel 42 Grad), der Pfosten am
+rechten Bildrand entfällt. Befund nebenbei: die Kamerahöhe z 1,65 ist absolut, das Gelände liegt dort bei z 1,13; das
+Auge steht also rund 0,5 m über dem Gehsteig (Froschperspektive, Poller wirken dadurch hoch). Nicht geändert, weil der
+Bildaufbau gleich bleiben sollte; Vorschlag: z 2,8 (1,65 über Gelände) als Variante `ecke_augenhoehe` prüfen.
+
+**Nachtlicht** (`lib/assets/leuchten.py`): Leuchtkörper Emission 6 auf 0,5 (`DIFFUSOR_AN`), Lichtquelle für die Kamera
+unsichtbar, Spot nach unten 115 Grad statt 150 Grad, weiche Kante 0,35, Leistung Seil 450 auf 1800 W, Farbtemperatur
+3000 K über die Blackbody-Temperatur der Lichtquelle. Vorschau `ecke blaue_stunde` 900 x 600 (Cloud, CPU): Fahrbahn und
+Gehsteige an der Kreuzung sichtbar warm ausgeleuchtet, Teller nicht mehr ausgebrannt.

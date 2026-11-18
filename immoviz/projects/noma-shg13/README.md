@@ -407,6 +407,29 @@ der Tröge, Pergola, Leuchten) vom Kunden bestätigen lassen; die Pergola Top 3 
 klären); Top 26-2 Kniestock und Treppeneinhausung aus dem Plan abgeleitet [ANN], Schnitt mit Dachaufbau anfordern;
 `hof_fin`-Pflichtbaum (Plan) verdeckt in der Vorlagenperspektive die Pavillons.
 
+## Geländer nach Plan (18.11.2026)
+
+Kundenkritik Wimmergasse ("bei Laternen und Geländern bitte genau den Plan beachten") auch hier geprüft. Die Geländer G1
+bis G10 und Z1/Z2 aus Runde 4 sind belegt; geprüft wurde, ob im Modell zusätzliche Geländer stehen.
+
+| Gruppe | Einträge | Plan (Soll) | Ergebnis |
+|---|---|---|---|
+| `nb_shg` Balkone Straßenhaus Hofseite | 27 | EIN S. 26, S. 11/12: 2. bis 5. OG je Stab, 2 volle Felder RAL 7012, 2 Seiten; 1. DG dazu 2 französische Fenster GLH 1,12 | stimmt |
+| `nb_shg_dach` Dach und 2. DG | 8 | EIN S. 13/14/26: 4 Treppengeländer, 3 Dachterrassen OK +26,40, Terrasse 2. DG OK +22,92 | stimmt |
+| `nb_wue` Würtzlerstraße 10 Hofseite | 30 | EIN S. 28, S. 19 bis 21: 6 Balkone (1. OG bis 2. DG) je Stab, 2 volle Felder, 2 Seiten | stimmt |
+| `nb_hof` G1 bis G9 | 9 | Geländertabelle Runde 4 (EIN S. 9/16, VP Top 3/4/4A) | stimmt, jetzt mit Feld `quelle` statt Kommentar |
+| `nb_garten` G10, Z1, Z2 | 9 | EIN S. 8/15/18 (Stützmauer h 1,00, Zäune Sockel +0,50 und Stab OK +1,02) | stimmt, jetzt mit Feld `quelle` |
+| `nb_umgebung` volle Brüstungen Schlachthausgasse 11 | 5 | Nachbar, kein Planelement (Google 3D) | zählt jetzt als Nachbarfassade, nicht als Geländer |
+| `ausstattung_top3/4` | 0 Geländer | Rankgitter, Pergola, Tröge, Möbel, Leuchten (Kundenwunsch 16.11.) | keine Geländer, keine zusätzlichen Absturzsicherungen |
+| `wohnungen.yaml` | 0 | | keine Geländer in den Innenräumen |
+
+`immoviz.py pruefen`: Klasse Geländer 65 von 65 mit Feld `quelle`, Ampel grün (vorher 23 nur Kommentar und 5
+Nachbarbrüstungen mit Rang 3D-Referenz). Neu ist die Plan-Soll-Liste (`soll:` in `project.yaml`): Öffnungen je Geschoss
+der Hoffassaden aus EIN S. 26 (Straßenhaus, 1. OG bis 2. DG je 8, 8, 8, 8, 8, 6, 8) und S. 28 (Würtzlerstraße, EG 4,
+1. OG bis 2. DG je 6), Geländer je Gruppe wie oben, Straßenleuchten Schlachthausgasse 7 und Würtzlerstraße 4:
+21 Zeilen, 0 Abweichungen. Die Gesamtampel bleibt rot wegen älterer Fenster, Stuck und Farben ohne Quelle (nicht Teil
+dieser Runde).
+
 ## Quellen (`quellen/`, PDFs nicht im Repo)
 
 | Kürzel | Datei | Verwendet für |

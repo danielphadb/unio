@@ -821,6 +821,10 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     L["zink"] = zinc(bpy, "zink", c["zink"])
     L["rahmen_dunkel"] = lack(bpy, "rahmen_dunkel", c["rahmen_dunkel"], 0.35)
     L["rahmen_dunkel"].node_tree.nodes["Principled BSDF"].inputs["Metallic"].default_value = 0.4
+    # Gelaender-Metall (Staebe, Handlauf, Klemmprofile): eigener Name, damit die Ebenen es als Klasse gelaender
+    # erkennen (lib/ebenen.py); Farbe materials.gelaender, sonst wie rahmen_dunkel
+    # pulverbeschichtet: nicht metallisch, matt (Probe 18.11.: Metallic 0,5 spiegelte im Streiflicht fast weiss)
+    L["gelaender_metall"] = lack(bpy, "gelaender_metall", c.get("gelaender", c["rahmen_dunkel"]), 0.55)
     L["haustor"] = oak(bpy, "haustor", c["haustor"])
     L["dach_flach"] = simple(bpy, "dach_flach", (0.09, 0.09, 0.09), 0.95)
     st = cfg_mats.get("_strasse") or {}
