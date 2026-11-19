@@ -16,7 +16,7 @@ Beispiele:
   python immoviz.py schutz  --render <render.png> --ki <veredelt.jpg> --ebenen <ordner>       (Gebäude aus Blender zurück)
   python immoviz.py schutz  ... --modus toleranz      (je Bauteil: KI behalten, wenn geometrisch in der Toleranz)
   python immoviz.py grading --bild <bild.jpg> --leitbild <referenz.jpg> --staerke 0.6         (Look an Leitbild)
-  python immoviz.py ki-lokal --render <render> --ebenen <ordner> --staerke 0.3   (Mac: SDXL + ControlNet, Tiefe/Kanten)
+  python immoviz.py ki-lokal --render <render> --ebenen <ordner> --staerke 0.3   (Mac: SDXL + ControlNet, Tiefe/Kanten; --modell flux2_klein)
   python immoviz.py studio  (Web-Oberfläche auf Port 8765)
 """
 from __future__ import annotations
@@ -216,12 +216,22 @@ def main():
     kl.add_argument("--ebenen", required=True, help="Ordner <kamera>_<licht>_ebenen (tiefe.png, kanten.png, Masken)")
     kl.add_argument("--prompt", default=None, help="Standard: lib/ki_lokal.py PROMPT_STANDARD (kurz, CLIP 77 Token)")
     kl.add_argument("--negativ", default=None)
-    kl.add_argument("--modell", default="sdxl", choices=["sdxl", "realvisxl", "test"],
-                    help="sdxl (Standard, Open RAIL++-M); realvisxl nur nach Freigabe; test = Zufallsmodell")
+    kl.add_argument("--modell", default="sdxl_union",
+                    choices=["sdxl_union", "sdxl", "flux2_klein", "flux1_dev_depth", "flux1_dev_canny", "realvisxl",
+                             "test"],
+                    help="sdxl_union (Standard, = sdxl, Open RAIL++-M + ControlNet-Union); flux2_klein (FLUX.2 klein "
+                         "4B, Apache-2.0, Render als Referenz); flux1_dev_depth/_canny NUR intern (nicht kommerziell, "
+                         "gated, Dateiname _NUR_INTERN_nichtkommerziell); realvisxl nur nach Freigabe; test = Zufall")
+    kl.add_argument("--offload", default=None, choices=["aus", "modell", "sequenziell"],
+                    help="Modell-Auslagerung (enable_model_cpu_offload / sequential), Standard aus")
+    kl.add_argument("--quant", default=None, choices=["aus", "int8", "fp8"],
+                    help="nur FLUX: Transformer mit optimum-quanto quantisieren (FLUX.1 dev bf16 24 GB, int8 12 GB)")
     kl.add_argument("--staerke", type=float, default=None, help="Veraenderungsstaerke Bild zu Bild (Standard 0,3)")
     kl.add_argument("--schritte", type=int, default=None)
     kl.add_argument("--cfg", type=float, default=None)
-    kl.add_argument("--steuerung", default=None, help="tiefe,kanten[,tile] (Standard tiefe,kanten)")
+    kl.add_argument("--steuerung", default=None, help="sdxl_union: tiefe,kanten[,tile] (Standard tiefe,kanten); "
+                                                      "flux2_klein: referenz (Standard), keine, tiefe (LoRA, intern); "
+                                                      "flux1_dev_*: fest (Tiefe bzw. Kanten)")
     kl.add_argument("--steuerung-staerke", type=float, default=None, help="ControlNet-Gewicht (Standard 0,8)")
     kl.add_argument("--kachel", type=int, default=None, help="Kachelgroesse (Standard 1024)")
     kl.add_argument("--ueberlappung", type=int, default=None, help="Standard 256")

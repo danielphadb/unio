@@ -814,7 +814,9 @@ Modelle lädt der erste Lauf nach `~/.cache/huggingface` (rund 10 GB, nie ins Re
 
 ```bash
 .venv-immoviz/bin/python immoviz/immoviz.py ki-lokal --render <render.png> --ebenen <kamera_licht_ebenen> \
-    --staerke 0.3 [--prompt "..."] [--steuerung tiefe,kanten] [--inpaint himmel,baeume,vegetation] [--out x.jpg]
+    --staerke 0.3 [--modell sdxl_union|flux2_klein|flux1_dev_depth|flux1_dev_canny] [--prompt "..."] \
+    [--steuerung tiefe,kanten] [--inpaint himmel,baeume,vegetation] [--offload aus|modell|sequenziell] \
+    [--quant aus|int8|fp8] [--out x.jpg]
 ```
 
 | Teil | Modell | Lizenz |
@@ -823,17 +825,33 @@ Modelle lädt der erste Lauf nach `~/.cache/huggingface` (rund 10 GB, nie ins Re
 | Steuerung | xinsir/controlnet-union-sdxl-1.0, ProMax (Tiefe 1, Kanten 3, Tile 6, Inpaint 7) | Apache-2.0 |
 | VAE | madebyollin/sdxl-vae-fp16-fix (fp16 ohne NaN auf MPS) | MIT |
 | optional `realvisxl` | SG161222/RealVisXL_V5.0 (fotorealistische SDXL-Feinabstimmung) | openrail++ laut Modellkarte, Trainingsdaten nicht offengelegt: nur nach Freigabe |
+| `flux2_klein` | black-forest-labs/FLUX.2-klein-4B (destilliert, Textkodierer Qwen3-4B), diffusers `Flux2KleinInpaintPipeline` (ab 0.38) mit voller Maske = Bild zu Bild, Render zusätzlich als Referenzbild | Apache-2.0, nicht gated: kommerziell frei |
+| `flux2_klein --steuerung tiefe` (Versuch) | black-forest-labs/FLUX.2-klein-base-4B plus Gemeinschafts-LoRA thedeoxen/refcontrol-FLUX.2-klein-4B-reference-depth-lora (Referenz plus Tiefenbild) | Basis Apache-2.0; LoRA Apache-2.0 laut Modellkarte, Trainingsdaten nicht offengelegt: nur intern bis Freigabe |
+| `flux1_dev_depth`, `flux1_dev_canny` | black-forest-labs/FLUX.1-Depth-dev bzw. FLUX.1-Canny-dev, `FluxControlImg2ImgPipeline` | FLUX.1 [dev] Non-Commercial License, gated: **nur interner Qualitätsvergleich**, gesperrt (siehe unten) |
 
-Nicht gewählt: FLUX.1 dev mit Depth/Canny (nicht kommerziell), FLUX.2 klein 9B (nicht kommerziell), SD 3.5 (Community
-License mit Umsatzgrenze 1 Mio. USD). FLUX.2 klein 4B und Z-Image Turbo mit Fun-ControlNet-Union sind Apache-2.0,
-haben in diffusers aber noch keinen Bild-zu-Bild- bzw. Inpaint-Weg mit Tiefensteuerung; Kandidaten für später.
+FLUX.2 hat in diffusers keine Tiefen- oder Kantensteuerung (kein ControlNet, kein Control-Modell, Stand 0.43);
+`flux2_klein` verfeinert deshalb ohne Steuerung mit niedriger Stärke, die Geometrie halten die geringe Stärke und das
+Referenzbild. Nicht gewählt: FLUX.2 klein 9B und FLUX.2 dev (nicht kommerziell), SD 3.5 (Community License mit
+Umsatzgrenze 1 Mio. USD). Z-Image Turbo mit Fun-ControlNet-Union (Apache-2.0) bleibt Kandidat für später.
+
+Sperre für FLUX.1 dev (REGELN.md V9): Ausgaben tragen `_NUR_INTERN_nichtkommerziell` im Dateinamen, das JSON
+`lizenz_kommerziell: false`; `schutz` und `grading` übernehmen die Markierung in ihre Ausgaben und lehnen jedes Ziel
+unter `renders/higgsfield/` ab (`ki_lokal.lizenz_ziel`). Zugang: auf der Modellseite angemeldet die Lizenz bestätigen,
+Lese-Token anlegen, `hf auth login` (früher `huggingface-cli login`); ohne Zugang endet `ki-lokal` mit Code 3.
+
+Speicher (M3 Max, 36 GB): SDXL fp16 rund 10 GB. FLUX in bf16. `flux2_klein` rund 16 GB (Transformer 4B plus
+Qwen3-4B), ohne Auslagern. `flux1_dev_*`: Prompt einmal auf der CPU mit CLIP und T5-XXL kodieren, Textkodierer
+freigeben, auf der GPU nur Transformer 12B (bf16 rund 24 GB, `--quant int8` mit optimum-quanto rund 12 GB) und VAE;
+`--offload modell|sequenziell` nur als Notlösung (langsam). Kacheln immer 1024 px.
 
 Verfahren (`lib/ki_lokal.py`): Steuerbilder aus den Ebenen (inverse Tiefe, nah hell; Canny des Renders plus
 `kanten.png`), Kacheln 1024 px (SDXL-Grundgröße) mit 256 px Überlappung und linearer Überblendung, je Kachel Lab-Mittel
 und -Streuung halb an den Render (`--farbe-halten`, gegen Kachelnähte), Prompt kurz (SDXL liest höchstens 77 Token;
 die Geometrie kommt aus der Steuerung). `--inpaint` zeichnet nur freigegebene Klassen neu (himmel, baeume, vegetation,
 menschen_platzhalter, ausstattung; Gebäudeklassen werden abgelehnt), danach folgt das Verfeinern (`--nur-inpaint`
-ohne). Ausgabe `<render>_ki_lokal_<modell>_s<stärke>.jpg`, `_pruefung.jpg`, `.json` (Parameter, Zeiten je Kachel,
+ohne; nur `sdxl_union`). Ausgabe `<render>_ki_lokal_<modell>_s<stärke>.jpg`, `_pruefung.jpg`, `.json` (Parameter, Zeiten je Kachel,
 Speicher, Versionen, Lizenzen). `--modell test` ist ein winziges Zufallsmodell für den Funktionstest ohne
-Grafikeinheit (Cloud 18.11.2026: 512 px, 6 Kacheln, Inpaint und Verfeinern laufen durch, 2 min auf CPU). Erster
-echter Lauf auf dem Mac: `auftraege/2026-11-19_ki_lokal_test.md`.
+Grafikeinheit (Cloud 18.11.2026: 512 px, 6 Kacheln, Inpaint und Verfeinern laufen durch, 2 min auf CPU). FLUX-Wege
+in der Cloud am 19.11.2026 nur auf Syntax, Import und Pipeline-Signaturen geprüft (diffusers 0.43.0, keine Modelle
+geladen). Erster echter Lauf auf dem Mac mit Vergleich SDXL | FLUX.2 klein | FLUX.1 dev (intern):
+`auftraege/2026-11-19_ki_lokal_test.md`.

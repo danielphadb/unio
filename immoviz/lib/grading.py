@@ -173,7 +173,10 @@ def main_cli(a) -> int:
         if maske.shape != rgb.shape[:2]:
             maske = _resize(maske, (rgb.shape[1], rgb.shape[0]))
     out, info = graden(rgb, statistik(pfade), maske=maske, **params)
-    aus = Path(a.out) if a.out else bild.with_name(bild.stem + "_grading.jpg")
+    from .ki_lokal import MARKER, lizenz_ziel
+    aus = Path(lizenz_ziel(bild, a.out) or bild.with_name(bild.stem + "_grading.jpg"))   # Sperre V9 (FLUX.1 dev)
+    if MARKER in bild.name:
+        info["lizenz_kommerziell"] = False
     bild_speichern(out, aus)
     info.update({"bild": str(bild), "ergebnis": str(aus), "leitbilder": [p.name for p in pfade],
                  "pruefbild": str(_pruefbild(rgb, out, info, aus.with_name(aus.stem + "_pruefung.jpg")))})

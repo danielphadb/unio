@@ -1575,6 +1575,8 @@ F1_GRENZE = {"voll": 0.95, "toleranz": 0.90}    # Exit 1 darunter (Toleranz: KI-
 
 def main_cli(render, ki, ebenen, aus=None, klassen=None, ohne=None, farbe=1.0, modell="homographie",
              vordergrund=True, autos="projekt", modus="voll") -> int:
+    from .ki_lokal import lizenz_ziel
+    aus = lizenz_ziel(ki, aus)               # KI-Bild aus FLUX.1 dev: Ergebnis bleibt markiert, nie in higgsfield/ (V9)
     kl = [k for k in (klassen or "").split(",") if k] or None
     oh = [k for k in (ohne or "").split(",") if k]
     grenze = F1_GRENZE[modus]

@@ -2,34 +2,48 @@
 
 Zweck: Die freie Bild-KI (Runde 6) liefert Putz, Licht und Leben, verschiebt aber Fenster und erfindet Bauteile; der
 Blender-Render mit Schutzmaske (Runde 7) ist genau, wirkt aber flacher. Hier veraendert ein offenes Diffusionsmodell
-den Render nur wenig (Bild zu Bild mit geringer Staerke) und wird dabei von Tiefe und Kanten aus den Render-Ebenen
-gefuehrt (ControlNet). Ergebnis: dieselbe Geometrie pixelgenau wie der Render, aber fotografisches Material und Licht.
+den Render nur wenig (Bild zu Bild mit geringer Staerke) und wird dabei, wo das Modell es kann, von Tiefe und Kanten
+aus den Render-Ebenen gefuehrt. Ergebnis: dieselbe Geometrie wie der Render, aber fotografisches Material und Licht.
 Danach wie gewohnt `schutz --modus toleranz` (Fenster, Gelaender usw. je Bauteil pruefen) und `grading`.
 
 Befehl:
-    immoviz.py ki-lokal --render <beauty.png|jpg> --ebenen <kamera_licht_ebenen> [--prompt "..."] [--modell sdxl]
-                        [--staerke 0.3] [--inpaint himmel,baeume,vegetation,menschen_platzhalter,ausstattung]
+    immoviz.py ki-lokal --render <beauty.png|jpg> --ebenen <kamera_licht_ebenen> [--prompt "..."]
+                        [--modell sdxl_union|flux2_klein|flux1_dev_depth|flux1_dev_canny] [--staerke 0.3]
+                        [--inpaint himmel,baeume,vegetation,menschen_platzhalter,ausstattung] (nur sdxl_union)
+                        [--offload aus|modell|sequenziell] [--quant aus|int8|fp8] (nur FLUX)
 
-Modelle (Stand 18.11.2026, Lizenzen geprueft, Einzelheiten in auftraege/2026-11-19_ki_lokal_test.md):
-- Basis `sdxl`: stabilityai/stable-diffusion-xl-base-1.0, CreativeML Open RAIL++-M: kommerzielle Nutzung erlaubt,
-  keine Rechte des Lizenzgebers an den Ausgaben, Nutzungsbeschraenkungen nach Anhang A (u. a. keine Taeuschung,
-  keine Verletzung von Gesetzen). Weitergabe des Modells nur mit Lizenz und Anhang A.
-- Steuerung: xinsir/controlnet-union-sdxl-1.0, Datei ProMax (Apache-2.0): ein Netz fuer Tiefe (Modus 1),
-  Kanten (3), Tile (6) und Inpainting (7); in diffusers als ControlNetUnionModel mit eigener Img2Img- und
-  Inpaint-Pipeline.
-- VAE: madebyollin/sdxl-vae-fp16-fix (MIT), damit fp16 auf MPS keine NaN liefert.
-- Optional `realvisxl`: SG161222/RealVisXL_V5.0 (fotorealistische SDXL-Feinabstimmung, laut Modellkarte openrail++;
-  Trainingsdaten nicht offengelegt, deshalb nur nach ausdruecklicher Freigabe).
-- Nicht verwendet: FLUX.1 dev und dessen Depth/Canny-Modelle (nicht kommerzielle Lizenz), FLUX.2 klein 9B (nicht
-  kommerziell), SD 3.5 (Community License mit Umsatzgrenze). FLUX.2 klein 4B (Apache-2.0) und Z-Image Turbo mit
-  Fun-ControlNet-Union (Apache-2.0) sind kommerziell frei, haben in diffusers aber (noch) keinen Bild-zu-Bild- bzw.
-  Inpaint-Weg mit Tiefensteuerung; Kandidaten fuer spaeter.
+Modelle (Stand 19.11.2026, Lizenzen geprueft; Tabelle in README "Lokaler KI-Schritt" und REGELN.md V9):
+- `sdxl_union` (Standard, alter Name `sdxl`): stabilityai/stable-diffusion-xl-base-1.0 (CreativeML Open RAIL++-M:
+  kommerziell erlaubt, keine Rechte des Lizenzgebers an den Ausgaben, Nutzungsbeschraenkungen Anhang A) mit
+  xinsir/controlnet-union-sdxl-1.0 ProMax (Apache-2.0; Tiefe 1, Kanten 3, Tile 6, Inpaint 7; diffusers
+  StableDiffusionXLControlNetUnionImg2ImgPipeline/...InpaintPipeline) und VAE madebyollin/sdxl-vae-fp16-fix (MIT).
+- `flux2_klein`: black-forest-labs/FLUX.2-klein-4B (Apache-2.0, nicht gated, destilliert, Textkodierer Qwen3-4B im
+  Repo). diffusers Flux2KleinInpaintPipeline (ab 0.38) mit voller Maske = Bild zu Bild mit `strength`; der Render geht
+  zusaetzlich als Referenzbild (`image_reference`, Edit-Modus) hinein (`--steuerung referenz`, Standard; `keine` ohne).
+  Eine Tiefen- oder Kantensteuerung gibt es in diffusers fuer FLUX.2 nicht (kein ControlNet, kein Control-Modell).
+  Versuch `--steuerung tiefe`: Gemeinschafts-LoRA thedeoxen/refcontrol-FLUX.2-klein-4B-reference-depth-lora
+  (Apache-2.0 laut Modellkarte, Trainingsdaten nicht offengelegt: nur intern bis Freigabe) auf
+  black-forest-labs/FLUX.2-klein-base-4B (Apache-2.0, nicht destilliert, CFG), Referenz = Render plus Tiefenbild.
+- `flux1_dev_depth` / `flux1_dev_canny`: black-forest-labs/FLUX.1-Depth-dev bzw. FLUX.1-Canny-dev (FLUX.1 [dev]
+  Non-Commercial License, gated) mit FluxControlImg2ImgPipeline. NUR interner Qualitaetsvergleich: Ausgaben tragen
+  `_NUR_INTERN_nichtkommerziell` im Dateinamen, JSON `lizenz_kommerziell: false`, ein Ziel unter renders/higgsfield/
+  wird abgelehnt; `schutz` und `grading` uebernehmen die Sperre (lizenz_ziel). Zugang: Lizenz auf der Modellseite
+  bestaetigen und `hf auth login` (frueher `huggingface-cli login`); ohne Zugang Abbruch mit Code 3.
+- `realvisxl`: SG161222/RealVisXL_V5.0 (openrail++ laut Modellkarte, Trainingsdaten nicht offengelegt): nur nach
+  Freigabe.
+- Nicht verwendet: FLUX.2 klein 9B und FLUX.2 dev (nicht kommerziell), SD 3.5 (Community License mit Umsatzgrenze).
 
-Modelle werden beim ersten Lauf von Hugging Face geladen (Cache ~/.cache/huggingface, rund 10 GB), nie ins Repo.
+Speicher (M3 Max, 36 GB gemeinsamer Speicher): SDXL fp16 rund 10 GB. FLUX in bf16 (fp16 laeuft bei FLUX ueber).
+flux2_klein: Transformer 4B rund 8 GB plus Qwen3-4B rund 8 GB, passt ohne Auslagern. flux1_dev_*: der Prompt wird
+einmal auf der CPU mit CLIP und T5-XXL kodiert, danach werden beide Textkodierer freigegeben; auf der GPU liegen nur
+Transformer (12B, bf16 rund 24 GB; `--quant int8` mit optimum-quanto rund 12 GB) und VAE. `--offload modell` bzw.
+`sequenziell` (enable_model_cpu_offload / enable_sequential_cpu_offload) nur, wenn es trotzdem nicht reicht.
+
+Modelle werden beim ersten Lauf von Hugging Face geladen (Cache ~/.cache/huggingface), nie ins Repo.
 `--modell test` baut ein winziges Zufallsmodell (hf-internal-testing) fuer den Funktionstest ohne Grafikeinheit.
 
-4k: Kacheln von 1024 px (SDXL-Grundgroesse) mit 256 px Ueberlappung und linearer Ueberblendung; je Kachel werden
-Mittelwert und Streuung in Lab teilweise an den Render angeglichen (`farbe_halten`), damit keine Kachelnaehte
+4k: Kacheln von 1024 px (SDXL- und FLUX-Grundgroesse) mit 256 px Ueberlappung und linearer Ueberblendung; je Kachel
+werden Mittelwert und Streuung in Lab teilweise an den Render angeglichen (`farbe_halten`), damit keine Kachelnaehte
 entstehen. Inpainting nur in freigegebenen Masken (INPAINT_ERLAUBT); Gebaeudeklassen werden abgelehnt.
 """
 from __future__ import annotations
@@ -46,14 +60,37 @@ import numpy as np
 from PIL import Image
 
 MODELLE = {
-    "sdxl": {"basis": "stabilityai/stable-diffusion-xl-base-1.0", "variant": "fp16",
-             "lizenz": "CreativeML Open RAIL++-M (kommerziell erlaubt, Nutzungsbeschraenkungen Anhang A)"},
-    "realvisxl": {"basis": "SG161222/RealVisXL_V5.0", "variant": "fp16",
+    "sdxl_union": {"familie": "sdxl", "basis": "stabilityai/stable-diffusion-xl-base-1.0", "variant": "fp16",
+                   "kommerziell": True,
+                   "lizenz": "CreativeML Open RAIL++-M (kommerziell erlaubt, Nutzungsbeschraenkungen Anhang A)"},
+    "realvisxl": {"familie": "sdxl", "basis": "SG161222/RealVisXL_V5.0", "variant": "fp16", "kommerziell": True,
                   "lizenz": "openrail++ laut Modellkarte (SDXL-Feinabstimmung, Trainingsdaten nicht offengelegt): "
                             "nur nach Freigabe"},
-    "test": {"basis": "hf-internal-testing/tiny-stable-diffusion-xl-pipe", "variant": None,
-             "lizenz": "Testmodell mit Zufallsgewichten, nur Funktionstest"},
+    "flux2_klein": {"familie": "flux2", "basis": "black-forest-labs/FLUX.2-klein-4B", "kommerziell": True,
+                    "basis_tiefe": "black-forest-labs/FLUX.2-klein-base-4B",
+                    "lizenz": "Apache-2.0 (FLUX.2 klein 4B und klein base 4B, nicht gated)"},
+    "flux1_dev_depth": {"familie": "flux1", "basis": "black-forest-labs/FLUX.1-Depth-dev", "kommerziell": False,
+                        "lizenz": "FLUX.1 [dev] Non-Commercial License (gated): NUR interner Vergleich"},
+    "flux1_dev_canny": {"familie": "flux1", "basis": "black-forest-labs/FLUX.1-Canny-dev", "kommerziell": False,
+                        "lizenz": "FLUX.1 [dev] Non-Commercial License (gated): NUR interner Vergleich"},
+    "test": {"familie": "sdxl", "basis": "hf-internal-testing/tiny-stable-diffusion-xl-pipe", "variant": None,
+             "kommerziell": True, "lizenz": "Testmodell mit Zufallsgewichten, nur Funktionstest"},
 }
+ALIAS = {"sdxl": "sdxl_union"}
+# Je Familie: Standardwerte (vor den Angaben auf der Kommandozeile) und erlaubte Steuerung
+FAMILIE = {
+    "sdxl": {"standard": {}, "steuerung": ("tiefe", "kanten", "tile")},
+    "flux2": {"standard": {"schritte": 16, "cfg": 1.0, "steuerung": "referenz", "steuerung_staerke": 1.0},
+              "steuerung": ("referenz", "tiefe", "keine")},
+    "flux1": {"standard": {"schritte": 30, "cfg": 10.0, "steuerung": "tiefe"}, "steuerung": ("tiefe", "kanten")},
+}
+FLUX1_STEUERUNG = {"flux1_dev_depth": ("tiefe", 10.0), "flux1_dev_canny": ("kanten", 30.0)}   # Modellkarte BFL
+FLUX2_TIEFE_LORA = {"repo": "thedeoxen/refcontrol-FLUX.2-klein-4B-reference-depth-lora",
+                    "datei": "flux2_klein_4b_refcontrol_depth.safetensors", "ausloeser": "refcontrol",
+                    "lizenz": "Apache-2.0 laut Modellkarte (Gemeinschafts-LoRA, Trainingsdaten nicht offengelegt): "
+                              "nur intern bis Freigabe"}
+MARKER = "_NUR_INTERN_nichtkommerziell"
+ZUGANG_FEHLT = 3                       # Rueckgabecode, wenn ein gated Modell ohne Hugging-Face-Zugang verlangt wird
 CONTROLNET = {"repo": "xinsir/controlnet-union-sdxl-1.0", "gewichte": "diffusion_pytorch_model_promax.safetensors",
               "config": "config_promax.json", "lizenz": "Apache-2.0"}
 VAE = {"repo": "madebyollin/sdxl-vae-fp16-fix", "lizenz": "MIT"}
@@ -102,15 +139,172 @@ def _controlnet_ordner(cache: Path | None = None) -> Path:
     return ziel
 
 
-def pipeline_laden(modell: str = "sdxl", art: str = "verfeinern"):
-    """art: verfeinern (Img2Img) oder inpaint. Rueckgabe (pipe, geraet, dtype, info)."""
+def modell_name(modell: str) -> str:
+    m = ALIAS.get(modell, modell)
+    if m not in MODELLE:
+        raise SystemExit(f"--modell {modell}: erlaubt {sorted(MODELLE)} (alter Name sdxl = sdxl_union)")
+    return m
+
+
+def lizenz_ziel(quelle, ziel=None, kommerziell: bool | None = None):
+    """Lizenzsperre fuer nicht kommerzielle Modelle (REGELN.md V9). Traegt `quelle` den MARKER (oder ist
+    kommerziell=False), muss auch `ziel` ihn tragen (wird ergaenzt) und darf nicht unter renders/higgsfield/ liegen.
+    Rueckgabe: ziel (unveraendert None, wenn keins angegeben; dann leitet der Aufrufer den Namen von quelle ab)."""
+    gesperrt = (kommerziell is False) or (MARKER in Path(str(quelle)).name)
+    if not gesperrt:
+        return ziel
+    pruef = Path(ziel) if ziel is not None else Path(str(quelle))
+    if "higgsfield" in pruef.resolve().parts:
+        raise SystemExit(f"Lizenzsperre: {pruef} liegt unter higgsfield/; Ergebnisse nicht kommerzieller Modelle "
+                         "(FLUX.1 dev) nur unter renders/ki_lokal/ und nur intern (REGELN.md V9)")
+    if ziel is None:
+        return None
+    z = Path(ziel)
+    return z if MARKER in z.name else z.with_name(z.stem + MARKER + z.suffix)
+
+
+def zugang_pruefen(repo: str) -> None:
+    """Gated Repos (FLUX.1 dev): Abbruch mit Code ZUGANG_FEHLT und Anleitung, wenn Token oder Lizenzbestaetigung fehlt."""
+    try:
+        from huggingface_hub import auth_check
+        auth_check(repo)
+    except Exception as e:                              # noqa: BLE001 (GatedRepoError, RepositoryNotFoundError, Netz)
+        print(f"KEIN ZUGANG zu {repo}: {type(e).__name__}. 1. https://huggingface.co/{repo} oeffnen, angemeldet die "
+              "Lizenz bestaetigen. 2. Token (Lesen) unter https://huggingface.co/settings/tokens anlegen. 3. "
+              "`hf auth login` (aeltere Versionen `huggingface-cli login`). Test wird uebersprungen.")
+        raise SystemExit(ZUGANG_FEHLT)
+
+
+def _flux_dtype(dev):
+    import torch
+    return torch.bfloat16 if dev in ("mps", "cuda") else torch.float32
+
+
+def _transformer_quant(klasse, repo, dtype, quant: str):
+    if quant in (None, "aus"):
+        return None
+    from diffusers import QuantoConfig                  # braucht optimum-quanto (requirements_ki.txt, optional)
+    return klasse.from_pretrained(repo, subfolder="transformer", torch_dtype=dtype,
+                                  quantization_config=QuantoConfig(weights_dtype={"int8": "int8",
+                                                                                  "fp8": "float8"}[quant]))
+
+
+def _platzieren(pipe, dev, offload: str):
+    if offload == "modell":
+        pipe.enable_model_cpu_offload(device=dev)
+    elif offload == "sequenziell":
+        pipe.enable_sequential_cpu_offload(device=dev)
+    else:
+        pipe = pipe.to(dev)
+    pipe.set_progress_bar_config(disable=True)
+    return pipe
+
+
+def pipeline_laden(modell: str = "sdxl_union", art: str = "verfeinern", prompt: str = "", negativ: str = "",
+                   p: dict | None = None):
+    """art: verfeinern (Bild zu Bild) oder inpaint (nur SDXL). Rueckgabe (rechner, info); rechner(kachel, steuer,
+    staerke, gen, maske=None, maskiert=None) -> PIL rechnet eine Kachel, `steuer` ist {name: PIL} der Steuerbilder."""
+    import torch
+    p = p or {}
+    modell = modell_name(modell)
+    m = MODELLE[modell]
+    fam = m["familie"]
+    dev, dtype = geraet()
+    offload, quant = p.get("offload") or "aus", p.get("quant") or "aus"
+    steuer = list(p.get("steuerung_liste") or [])
+    if art == "inpaint" and fam != "sdxl":
+        raise SystemExit(f"--inpaint gibt es nur mit sdxl_union (nicht {modell})")
+    info = {"modell": modell, "familie": fam, "basis": m["basis"], "lizenz_basis": m["lizenz"],
+            "lizenz_kommerziell": m["kommerziell"], "geraet": dev, "offload": offload, "quant": quant}
+
+    if fam == "flux2":
+        from diffusers import Flux2KleinInpaintPipeline, Flux2Transformer2DModel
+        dtype = _flux_dtype(dev)
+        repo = m["basis_tiefe"] if "tiefe" in steuer else m["basis"]
+        tr = _transformer_quant(Flux2Transformer2DModel, repo, dtype, quant)
+        pipe = Flux2KleinInpaintPipeline.from_pretrained(repo, torch_dtype=dtype, **({"transformer": tr} if tr else {}))
+        if "tiefe" in steuer:
+            pipe.load_lora_weights(FLUX2_TIEFE_LORA["repo"], weight_name=FLUX2_TIEFE_LORA["datei"], adapter_name="tiefe")
+            pipe.set_adapters(["tiefe"], [float(p.get("steuerung_staerke", 1.0))])
+            prompt = f"{FLUX2_TIEFE_LORA['ausloeser']}, {prompt}"
+            info.update(lora=FLUX2_TIEFE_LORA["repo"], lizenz_lora=FLUX2_TIEFE_LORA["lizenz"])
+        pipe = _platzieren(pipe, dev, offload)
+        info.update(basis=repo, steuerung="Render als Referenzbild" if "referenz" in steuer else
+                    ("Referenz plus Tiefe (LoRA)" if "tiefe" in steuer else "keine"),
+                    textkodierer="Qwen3-4B (im Repo)", negativ="nicht verwendet (destilliert bzw. CFG ohne Negativ)")
+
+        def rechner(kachel, st, staerke, gen, maske=None, maskiert=None):
+            w, h = kachel.size
+            ref = None
+            if "tiefe" in steuer:
+                ref = [kachel, st["tiefe"]]
+            elif "referenz" in steuer:
+                ref = kachel
+            kw = dict(prompt=prompt, image=kachel, mask_image=Image.new("L", (w, h), 255), image_reference=ref,
+                      strength=float(staerke), num_inference_steps=int(p["schritte"]), guidance_scale=float(p["cfg"]),
+                      generator=gen, width=w, height=h)
+            return pipe(**kw).images[0]
+
+    elif fam == "flux1":
+        zugang_pruefen(m["basis"])
+        from diffusers import FluxControlImg2ImgPipeline, FluxTransformer2DModel
+        dtype = _flux_dtype(dev)
+        t = time.time()
+        # 1. Prompt einmal auf der CPU kodieren (CLIP-L und T5-XXL, bf16 rund 10 GB), dann Textkodierer freigeben
+        enc = FluxControlImg2ImgPipeline.from_pretrained(m["basis"], transformer=None, vae=None,
+                                                         torch_dtype=torch.bfloat16)
+        with torch.no_grad():
+            pe, pooled, _ = enc.encode_prompt(prompt=prompt, prompt_2=None, device="cpu", max_sequence_length=512)
+        del enc
+        _leeren()
+        info["text_kodieren_s"] = round(time.time() - t, 1)
+        # 2. Transformer und VAE ohne Textkodierer
+        tr = _transformer_quant(FluxTransformer2DModel, m["basis"], dtype, quant)
+        pipe = FluxControlImg2ImgPipeline.from_pretrained(
+            m["basis"], text_encoder=None, text_encoder_2=None, tokenizer=None, tokenizer_2=None, torch_dtype=dtype,
+            **({"transformer": tr} if tr else {}))
+        pipe = _platzieren(pipe, dev, offload)
+        ziel = dev if offload == "aus" else "cpu"
+        pe, pooled = pe.to(ziel, dtype), pooled.to(ziel, dtype)
+        art_steuer = FLUX1_STEUERUNG[modell][0]
+        info.update(steuerung=art_steuer, textkodierer="CLIP-L und T5-XXL auf CPU, danach freigegeben",
+                    negativ="nicht verwendet (FLUX.1 dev ohne Negativ-Prompt)")
+
+        def rechner(kachel, st, staerke, gen, maske=None, maskiert=None):
+            w, h = kachel.size
+            return pipe(image=kachel, control_image=st[art_steuer], prompt_embeds=pe, pooled_prompt_embeds=pooled,
+                        strength=float(staerke), num_inference_steps=int(p["schritte"]),
+                        guidance_scale=float(p["cfg"]), generator=gen, width=w, height=h).images[0]
+
+    else:
+        pipe = _sdxl_laden(modell, m, art, dev, dtype, offload)
+        info.update(controlnet="Zufallsnetz (Test)" if modell == "test" else
+                    f"{CONTROLNET['repo']} ({CONTROLNET['gewichte']})",
+                    lizenz_controlnet="-" if modell == "test" else CONTROLNET["lizenz"],
+                    vae=VAE["repo"] if dtype == torch.float16 and modell != "test" else "aus der Basis")
+        if modell == "test":
+            dtype = torch.float32
+
+        def rechner(kachel, st, staerke, gen, maske=None, maskiert=None):
+            w, h = kachel.size
+            cimg = [st[s] for s in steuer]
+            cmod = [MODUS[s] for s in steuer]
+            kw = dict(prompt=prompt, negative_prompt=negativ, image=kachel, control_image=cimg, control_mode=cmod,
+                      num_inference_steps=int(p["schritte"]), guidance_scale=float(p["cfg"]),
+                      controlnet_conditioning_scale=float(p["steuerung_staerke"]), generator=gen, width=w, height=h,
+                      strength=float(staerke))
+            if maske is not None:
+                kw.update(mask_image=maske, control_image=cimg + [maskiert], control_mode=cmod + [MODUS["inpaint"]])
+            return pipe(**kw).images[0]
+
+    info["dtype"] = str(dtype).replace("torch.", "")
+    return rechner, info
+
+
+def _sdxl_laden(modell, m, art, dev, dtype, offload):
     import torch
     from diffusers import (AutoencoderKL, ControlNetUnionModel, StableDiffusionXLControlNetUnionImg2ImgPipeline,
                            StableDiffusionXLControlNetUnionInpaintPipeline)
-    if modell not in MODELLE:
-        raise SystemExit(f"--modell {modell}: erlaubt {sorted(MODELLE)}")
-    dev, dtype = geraet()
-    m = MODELLE[modell]
     klasse = (StableDiffusionXLControlNetUnionInpaintPipeline if art == "inpaint"
               else StableDiffusionXLControlNetUnionImg2ImgPipeline)
     if modell == "test":
@@ -136,14 +330,7 @@ def pipeline_laden(modell: str = "sdxl", art: str = "verfeinern"):
             if m["variant"]:
                 kw["variant"] = m["variant"]
         pipe = klasse.from_pretrained(m["basis"], **kw)
-    pipe = pipe.to(dev)
-    pipe.set_progress_bar_config(disable=True)
-    info = {"modell": modell, "basis": m["basis"], "lizenz_basis": m["lizenz"],
-            "controlnet": "Zufallsnetz (Test)" if modell == "test" else f"{CONTROLNET['repo']} ({CONTROLNET['gewichte']})",
-            "lizenz_controlnet": "-" if modell == "test" else CONTROLNET["lizenz"],
-            "vae": VAE["repo"] if dtype == torch.float16 and modell != "test" else "aus der Basis",
-            "geraet": dev, "dtype": str(dtype).replace("torch.", "")}
-    return pipe, dev, dtype, info
+    return _platzieren(pipe, dev, offload)
 
 
 # ------------------------------------------------------------------ Steuerbilder aus den Render-Ebenen
@@ -238,12 +425,23 @@ def _speicher() -> dict:
     return out
 
 
-def ki_lokal(render_p, ebenen_ordner, prompt: str | None = None, negativ: str | None = None, modell: str = "sdxl",
+def ki_lokal(render_p, ebenen_ordner, prompt: str | None = None, negativ: str | None = None,
+             modell: str = "sdxl_union",
              aus=None, arbeitsbreite: int | None = None, inpaint: list[str] | None = None, nur_inpaint: bool = False,
              **param) -> dict:
     import torch
     from .kompositing import _resize, bild_laden, bild_speichern
-    p = {**STANDARD, **{k: v for k, v in param.items() if v is not None}}
+    modell = modell_name(modell)
+    fam = MODELLE[modell]["familie"]
+    kommerziell = MODELLE[modell]["kommerziell"]
+    p = {**STANDARD, **FAMILIE[fam]["standard"], **{k: v for k, v in param.items() if v is not None}}
+    if modell in FLUX1_STEUERUNG:                       # Steuerart steckt im Modell (Depth bzw. Canny)
+        p["steuerung"] = FLUX1_STEUERUNG[modell][0]
+        if param.get("cfg") is None:
+            p["cfg"] = FLUX1_STEUERUNG[modell][1]
+    if inpaint and fam != "sdxl":
+        raise SystemExit(f"--inpaint gibt es nur mit sdxl_union (nicht {modell})")
+    aus = lizenz_ziel(render_p, aus, kommerziell)       # vor dem Rechnen: Sperre fuer FLUX.1 dev pruefen
     t0 = time.time()
     render_p = Path(render_p)
     R = bild_laden(render_p)
@@ -259,21 +457,25 @@ def ki_lokal(render_p, ebenen_ordner, prompt: str | None = None, negativ: str | 
             st[k] = _resize(st[k], (W, H))
         st["masken"] = {k: _resize(v, (W, H)) for k, v in st["masken"].items()}
     steuer = [s.strip() for s in str(p["steuerung"]).split(",") if s.strip()]
-    falsch = [s for s in steuer if s not in ("tiefe", "kanten", "tile")]
+    falsch = [s for s in steuer if s not in FAMILIE[fam]["steuerung"]]
     if falsch:
-        raise SystemExit(f"--steuerung {falsch}: erlaubt tiefe, kanten, tile")
+        raise SystemExit(f"--steuerung {falsch}: fuer {modell} erlaubt {', '.join(FAMILIE[fam]['steuerung'])}")
+    if fam == "flux2" and "tiefe" in steuer and "referenz" in steuer:
+        steuer.remove("referenz")                       # Tiefe-LoRA nutzt den Render ohnehin als Referenz
+    p["steuerung_liste"] = steuer
     prompt = prompt or PROMPT_STANDARD
     negativ = negativ if negativ is not None else NEGATIV_STANDARD
-    gross = min(int(p["kachel"]), W, H) if modell != "test" else min(int(p["kachel"]), W, H)
-    gross -= gross % 8
+    gross = min(int(p["kachel"]), W, H)
+    gross -= gross % (16 if fam != "sdxl" else 8)           # FLUX: Latent 8 x Patch 2
     boxen = kacheln(W, H, gross, int(p["ueberlappung"]))
     info = {"render": str(render_p), "ebenen": str(ebenen_ordner), "prompt": prompt, "negativ": negativ,
-            "parameter": {**p, "steuerung": steuer}, "arbeitsgroesse": [W, H], "kacheln": len(boxen),
+            "parameter": {**{k: v for k, v in p.items() if k != "steuerung_liste"}, "steuerung": steuer},
+            "lizenz_kommerziell": kommerziell, "arbeitsgroesse": [W, H], "kacheln": len(boxen),
             "kachelgroesse": gross, "schritte_wirksam": int(round(p["schritte"] * p["staerke"]))}
     ergebnis = R.copy()
     zeiten = {}
 
-    def laufen(pipe, dev, art, bild, maske=None):
+    def laufen(rechner, art, bild, maske=None):
         """Alle Kacheln (bei inpaint nur die mit Maske) rechnen und ueberblenden."""
         acc = np.zeros((H, W, 3), np.float32)
         wsum = np.zeros((H, W), np.float32)
@@ -284,24 +486,16 @@ def ki_lokal(render_p, ebenen_ordner, prompt: str | None = None, negativ: str | 
                 continue
             kb = bild[y0:y1, x0:x1]
             pil = Image.fromarray(np.rint(kb * 255).astype(np.uint8))
-            cimg, cmod = [], []
-            for s in steuer:
-                cimg.append(Image.fromarray(st[s][y0:y1, x0:x1]))
-                cmod.append(MODUS[s])
-            kw = dict(prompt=prompt, negative_prompt=negativ, image=pil, control_image=cimg, control_mode=cmod,
-                      num_inference_steps=int(p["schritte"]), guidance_scale=float(p["cfg"]),
-                      controlnet_conditioning_scale=float(p["steuerung_staerke"]), generator=gen,
-                      width=x1 - x0, height=y1 - y0)
+            cst = {k: Image.fromarray(st[k][y0:y1, x0:x1]) for k in ("tiefe", "kanten", "tile") if k in st}
             if art == "inpaint":
                 mk = maske[y0:y1, x0:x1]
                 maskiert = (kb * 255).astype(np.uint8).copy()
                 maskiert[mk] = 0
-                kw.update(mask_image=Image.fromarray((mk * 255).astype(np.uint8)),
-                          control_image=cimg + [Image.fromarray(maskiert)], control_mode=cmod + [MODUS["inpaint"]],
-                          strength=float(p["inpaint_staerke"]))
+                out = rechner(pil, cst, float(p["inpaint_staerke"]), gen,
+                              Image.fromarray((mk * 255).astype(np.uint8)), Image.fromarray(maskiert))
             else:
-                kw["strength"] = float(p["staerke"])
-            out = pipe(**kw).images[0].convert("RGB")
+                out = rechner(pil, cst, float(p["staerke"]), gen)
+            out = out.convert("RGB")
             if out.size != (x1 - x0, y1 - y0):
                 out = out.resize((x1 - x0, y1 - y0), Image.LANCZOS)
             o = np.asarray(out, np.float32) / 255.0
@@ -317,37 +511,40 @@ def ki_lokal(render_p, ebenen_ordner, prompt: str | None = None, negativ: str | 
         from scipy import ndimage as ndi
         mk = inpaint_maske(st["masken"], inpaint, int(p["inpaint_rand_px"]))
         t = time.time()
-        pipe, dev, dtype, minfo = pipeline_laden(modell, "inpaint")
+        rechner, minfo = pipeline_laden(modell, "inpaint", prompt, negativ, p)
         zeiten["laden_inpaint_s"] = round(time.time() - t, 1)
         t = time.time()
-        neu, n = laufen(pipe, dev, "inpaint", ergebnis, mk)
+        neu, n = laufen(rechner, "inpaint", ergebnis, mk)
         weich = ndi.gaussian_filter(mk.astype(np.float32), 2.0)[..., None]
         ergebnis = weich * neu + (1 - weich) * ergebnis
         zeiten["inpaint_s"] = round(time.time() - t, 1)
         info.update(inpaint={"klassen": inpaint, "anteil_prozent": round(100 * float(mk.mean()), 2), "kacheln": n},
                     modell_info=minfo)
-        del pipe
+        del rechner
         _leeren()
     if not nur_inpaint:
         t = time.time()
-        pipe, dev, dtype, minfo = pipeline_laden(modell, "verfeinern")
+        rechner, minfo = pipeline_laden(modell, "verfeinern", prompt, negativ, p)
         zeiten["laden_s"] = round(time.time() - t, 1)
         t = time.time()
-        ergebnis, n = laufen(pipe, dev, "verfeinern", ergebnis)
+        ergebnis, n = laufen(rechner, "verfeinern", ergebnis)
         zeiten["verfeinern_s"] = round(time.time() - t, 1)
         zeiten["je_kachel_s"] = round(zeiten["verfeinern_s"] / max(n, 1), 1)
         info["modell_info"] = minfo
-        del pipe
+        del rechner
         _leeren()
     if (W, H) != (W0, H0):
         ergebnis = _resize(ergebnis.astype(np.float32), (W0, H0))
     if aus is None:
-        aus = render_p.with_name(f"{render_p.stem}_ki_lokal_{modell}_s{int(round(100 * p['staerke']))}.jpg")
+        aus = lizenz_ziel(render_p, render_p.with_name(
+            f"{render_p.stem}_ki_lokal_{modell}_s{int(round(100 * p['staerke']))}.jpg"), kommerziell)
     aus = Path(aus)
     bild_speichern(ergebnis, aus)
     zeiten["gesamt_s"] = round(time.time() - t0, 1)
     info.update(ergebnis=str(aus), zeiten=zeiten, speicher=_speicher(), versionen=_versionen(),
-                hinweis="Geometrie aus Tiefe und Kanten des Renders; danach schutz --modus toleranz und grading")
+                hinweis="Geometrie aus dem Render (Steuerung je Modell, siehe modell_info); danach schutz --modus "
+                        "toleranz und grading" + ("" if kommerziell else "; NUR INTERN, nicht kommerziell (REGELN V9), "
+                                                   "nie nach renders/higgsfield/"))
     info["pruefbild"] = str(_pruefbild(bild_laden(render_p), ergebnis, info, aus.with_name(aus.stem + "_pruefung.jpg")))
     aus.with_name(aus.stem + ".json").write_text(json.dumps(info, ensure_ascii=False, indent=1))
     return info
@@ -389,6 +586,8 @@ def _pruefbild(R, E, info, pfad: Path) -> Path:
                 (i * (bw + 10), 50))
         d.text((i * (bw + 10) + 4, 30), t, fill=(40, 40, 40), font=f)
     p = info["parameter"]
+    if not info.get("lizenz_kommerziell", True):
+        d.text((2 * bw - 330, 6), "NUR INTERN, nicht kommerziell", fill=(200, 0, 0), font=f)
     d.text((6, 6), f"ki-lokal {info.get('modell_info', {}).get('modell')}: Staerke {p['staerke']}, Steuerung "
                    f"{','.join(p['steuerung'])} {p['steuerung_staerke']}, {info['kacheln']} Kacheln, "
                    f"{info['zeiten'].get('gesamt_s')} s", fill=(30, 30, 30), font=f)
@@ -401,6 +600,7 @@ def main_cli(a) -> int:
     info = ki_lokal(a.render, a.ebenen, a.prompt, a.negativ, a.modell, a.out, a.arbeitsbreite, inp or None,
                     a.nur_inpaint, staerke=a.staerke, schritte=a.schritte, cfg=a.cfg, steuerung=a.steuerung,
                     steuerung_staerke=a.steuerung_staerke, kachel=a.kachel, ueberlappung=a.ueberlappung,
-                    seed=a.seed, farbe_halten=a.farbe_halten, inpaint_staerke=a.inpaint_staerke)
+                    seed=a.seed, farbe_halten=a.farbe_halten, inpaint_staerke=a.inpaint_staerke,
+                    offload=getattr(a, "offload", None), quant=getattr(a, "quant", None))
     print(json.dumps(info, ensure_ascii=False, indent=1))
     return 0
