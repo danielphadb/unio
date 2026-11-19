@@ -262,7 +262,7 @@ strassenleuchten:
 # Begehung 18.11.2026 (begehung.md, Kundenbild Apple Look Around): Poller dunkelgruen mit rot-weissen Reflexringen, Anzahl je
 # Gehsteigvorziehung aus Street View 05/2024 und 04/2026 (NW 3, NE 4, SE 5, SW 3), Lage gleichmaessig auf dem OGD-Bordsteinbogen,
 # 0,35 m hinter der Kante (Triangulation aus Panoramen weicht bis 2 m ab, GPS; umgebung_abgleich.md 15). Zeichen: Lage aus
-# Street View +-1 m, Gefahrzeichen Objektecke aus dem Schatten im Orthofoto 2024 (OGD). Fahrradbuegel kommen jetzt aus OGD
+# Street View +-1 m, Gefahrzeichen Objektecke trianguliert und gegen den Schatten im Orthofoto 2024 (OGD) geprueft. Fahrradbuegel kommen jetzt aus OGD
 # (FAHRRADABSTELLANLAGEOGD, lib/strasse.ogd_elemente). Baumscheiben automatisch je Katasterbaum (strassenmoebel_auto).
 strassenmoebel:
   # NW (Wimmergasse 17): 3 Poller
@@ -289,7 +289,7 @@ strassenmoebel:
   - {typ: verkehrszeichen, schild: zusatz, pos: [-4.45, -2.96], drehung: 240, hoehe: 1.62, steher: false, quelle: "SV 05/2024 (ausgenommen Rad), Kundenbild"}
   - {typ: verkehrszeichen, schild: stop, pos: [-4.45, -2.96], drehung: 60, hoehe: 2.55, steher: false, quelle: "SV 05/2024 (WI12 Blick nach Sueden)"}
   # NE Gefahrzeichen Bodenschwelle (Kundenbild), Lage aus dem Schatten im Orthofoto 2024 (OGD)
-  - {typ: verkehrszeichen, schild: gefahr, pos: [-3.4, -4.7], drehung: -45, quelle: "Orthofoto 2024 (Schatten), SV 05/2024 (ST13, WI10), Kundenbild"}
+  - {typ: verkehrszeichen, schild: gefahr, pos: [-3.2, -5.0], drehung: 280, quelle: "SV 05/2024 trianguliert aus WI10 und ST13 (-2,9/-5,8, +-0,7 m), Schatten im Orthofoto 2024 (-3,4/-4,7), Kundenbild"}
   # NW Steher: Stop und Gefahrzeichen Bodenschwelle (Norden, Ausfahrt aus der Einbahn), Mistkuebel grau-orange
   - {typ: verkehrszeichen, schild: stop, pos: [-11.2, -0.2], drehung: 90, hoehe: 2.1, quelle: "SV 05/2024 (WI12 Blick nach Sueden, WI11), Lage +-1 m"}
   - {typ: verkehrszeichen, schild: gefahr, pos: [-11.2, -0.2], drehung: 90, hoehe: 2.75, steher: false, quelle: "SV 05/2024 (WI12), Kundenbild (Rueckseite)"}

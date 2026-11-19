@@ -11,8 +11,8 @@ Einträge (lokales System, Meter):
                       OGD: `rampen: [poly, poly]` (zwei Fahrbahnschwellen der FMZK), von Hand: `a`, `b` (Linie quer
                       über die Einmündung, Mitte des Plateaus), `tiefe` (Plateau entlang der Gasse), `rampe` (Länge je
                       Rampe), `breite` (über die Einmündung). `hoehe` (Standard 0,115, knapp unter Bordsteinoberkante).
-                      Material Plateau Betonplatten wie die Gehsteigvorziehungen (`material`, Standard
-                      gehsteig_platten), Rampe Asphalt hell, Granitkante am Übergang.
+                      Material laut Begehung: Plateau Asphalt (`material`), Rampe zur Kreuzung helle Betonplatten
+                      (`material_rampe_aussen`), Rampe zur Gasse Asphalt (`material_rampe_innen`), optional `kante`.
   fahrbahnschwelle    Temposchwelle über die Fahrbahn: `poly` (FMZK) oder `a`, `b`, `tiefe`; `hoehe` 0,07
   gehsteigabsenkung   abgesenkter Bordstein (Rest 3 cm): `pos` (am Bordstein), `richtung` (zur Fahrbahn), `laenge`
   leitlinie           strichlierte Linie: `pts` (Polylinie), `strich`, `luecke`, `breite`
@@ -171,14 +171,25 @@ def ueberfahrt(mb, e, ctx, boden):
         return ST._in_layer(geh, x, y) and any(ST._in_layer(fahr, x + dx, y + dy) for dx, dy in
                                                 ((0.4, 0), (-0.4, 0), (0, 0.4), (0, -0.4)))
 
-    kante = float(e.get("kante", 0.2))         # Granitkante am Übergang Rampe/Plateau
+    # Material laut Begehung Wimmergasse Nord (WI10, WI11, Kundenbild): Plateau Asphalt wie die Fahrbahn, Rampe zur
+    # Kreuzung (die breitere, sie fasst die Bordsteinbögen ein) helle Betonplatten, Rampe zur Gasse Asphalt
+    breit_a = True
+    if rampen:
+        ua = [U(p) for p in rampen[0]]
+        ub = [U(p) for p in rampen[1]]
+        breit_a = (max(ua) - min(ua)) >= (max(ub) - min(ub))
+        if V(rampen[0][0]) > V(rampen[1][0]):        # rampen[0] liegt oben (vb), nicht unten (va)
+            breit_a = not breit_a
+    kante = float(e.get("kante", 0.0))         # optional Granitkante am Übergang Rampe/Plateau
+    platten = "gehsteig_platten" if "gehsteig_platten" in bpy.data.materials else "gehsteig"
 
     def mat(uu, vv):
         if va1 - 1e-6 <= vv <= vb0 + 1e-6:
-            if vv < va1 + kante or vv > vb0 - kante:
+            if kante and (vv < va1 + kante or vv > vb0 - kante):
                 return "randstein"
-            return e.get("material", "gehsteig_platten" if "gehsteig_platten" in bpy.data.materials else "gehsteig")
-        return "rampe"
+            return e.get("material", "asphalt")
+        aussen = (vv < va1) == breit_a
+        return e.get("material_rampe_aussen", platten) if aussen else e.get("material_rampe_innen", "asphalt")
     step = float(e.get("raster", 0.2))
     us = [u_min + k * step for k in range(int((u_max - u_min) / step) + 2)]
     vs = sorted(set([va0, va1, vb0, vb1, va1 + kante, vb0 - kante] +

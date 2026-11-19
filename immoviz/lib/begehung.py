@@ -353,10 +353,14 @@ def vergleich(foto_rgb, modell_rgb, kf, km, n=8):
     chamfer = float(np.minimum(dt_m[ef], 12).mean()) if ef.any() else 0.0
     kennz = {"chamfer_px": round(chamfer, 2)}
     if kf is not None and km is not None:
+        # Autos, Zweiräder und Personen wechseln: dort zählen Boden- und Markierungsklassen auf keiner Seite
+        dyn = np.isin(kf, [KLASSEN.index(k) for k in ("Auto", "Zweirad", "Person")]) | \
+            np.isin(km, [KLASSEN.index(k) for k in ("Auto", "Zweirad", "Person")])
         for kl in DETAIL:
             i = KLASSEN.index(kl)
-            af = (kf == i).reshape(n, ch, n, cw).mean(axis=(1, 3))
-            am = (km == i).reshape(n, ch, n, cw).mean(axis=(1, 3))
+            gilt = ~dyn if kl in ("Fahrbahn", "Gehsteig", "Markierung") else np.ones_like(dyn)
+            af = ((kf == i) & gilt).reshape(n, ch, n, cw).mean(axis=(1, 3))
+            am = ((km == i) & gilt).reshape(n, ch, n, cw).mean(axis=(1, 3))
             schwach = 0.02 if kl in ("Mast/Pfahl", "Schild", "Markierung", "Zweirad") else 0.15
             for seite, a, b in (("nur im Foto", af, am), ("nur im Modell", am, af)):
                 z = (a > schwach) & (b < a * 0.35)
@@ -368,10 +372,17 @@ def vergleich(foto_rgb, modell_rgb, kf, km, n=8):
                         continue
                     nah = y1 >= n * 0.6          # untere Bildhälfte: nahe am Standort
                     sg = GEWICHT[kl]
-                    if sg == "mittel" and nah and kl in ("Mast/Pfahl", "Schild", "Markierung"):
+                    # kalibriert am Lauf Wimmergasse 20 (376 Ansichten): kleine Flächenunterschiede Fahrbahn/Gehsteig
+                    # und helle Asphaltflecken im Modell ("Markierung nur im Modell") sind meist Belichtung oder
+                    # Klassenrauschen; hoch nur bei großer naher Fläche bzw. fehlendem Mast, Schild, Markierung im Foto
+                    if kl in ("Mast/Pfahl", "Schild", "Markierung") and nah and anteil >= 0.003 and seite == "nur im Foto":
                         sg = "hoch"
+                    if kl in ("Fahrbahn", "Gehsteig") and not (nah and anteil >= 0.04):
+                        sg = "mittel"
                     if sg == "hoch" and not nah:
                         sg = "mittel"
+                    if kl == "Markierung" and seite == "nur im Modell":
+                        sg = "niedrig" if anteil < 0.005 else "mittel"
                     befunde.append({"klasse": kl, "seite": seite, "schwere": sg, "anteil_prozent": round(100 * anteil, 2),
                                     "box": [int(x0 * cw), int(y0 * ch), int(x1 * cw), int(y1 * ch)]})
         for kl in ("Fahrbahn", "Gehsteig", "Markierung", "Mast/Pfahl", "Schild", "Vegetation", "Gebäude", "Himmel"):
@@ -495,15 +506,16 @@ def karte(pdir: Path, cfg, ctx, liste, ergebnisse, out: Path, mpp=0.12):
         e = ergebnisse.get(s["id"])
         n_h = sum(b["schwere"] == "hoch" for a in (e or {}).get("ansichten", []) for b in a["befunde"])
         n_m = sum(b["schwere"] == "mittel" for a in (e or {}).get("ansichten", []) for b in a["befunde"])
-        col = (200, 200, 200) if e is None else (255, 40, 40) if n_h else (255, 170, 0) if n_m > 3 else (40, 220, 60)
+        col = (200, 200, 200) if e is None else (255, 40, 40) if n_h >= 5 else (255, 170, 0) if n_h or n_m > 24 else \
+            (40, 220, 60)
         c = P(s["x"], s["y"])
         d.ellipse([c[0] - 9, c[1] - 9, c[0] + 9, c[1] + 9], fill=col, outline=(0, 0, 0), width=2)
         ax = s["achse"]
         d.line([c, (c[0] + ax[0] * 22, c[1] - ax[1] * 22)], fill=(0, 0, 0), width=3)
         d.text((c[0] + 11, c[1] - 8), s["id"], fill=(255, 255, 255), font=fnt, stroke_width=3, stroke_fill=(0, 0, 0))
     d.rectangle([0, H - 30, W, H], fill=(0, 0, 0))
-    d.text((8, H - 24), "Begehung: Standorte (Strich = Straßenachse vorn), Ampel aus der Vorprüfung (rot: Befund hoch, "
-                        "orange: mehr als 3 mittel). Orthofoto 2024: Stadt Wien, data.wien.gv.at (CC BY 4.0)",
+    d.text((8, H - 24), "Begehung: Standorte (Strich = Straßenachse vorn), Ampel aus der Vorprüfung (rot: 5 und mehr Befunde "
+                        "hoch, orange: 1 bis 4 hoch oder mehr als 24 mittel). Orthofoto 2024: Stadt Wien, data.wien.gv.at (CC BY 4.0)",
            fill=(255, 255, 255), font=fnt)
     out.parent.mkdir(parents=True, exist_ok=True)
     img.save(out, quality=85)
