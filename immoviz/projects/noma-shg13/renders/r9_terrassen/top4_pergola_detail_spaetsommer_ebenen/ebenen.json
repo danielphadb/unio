@@ -1,0 +1,128 @@
+{
+ "version": 1,
+ "groesse": [
+  3840,
+  2560
+ ],
+ "kamera": "top4_pergola_detail",
+ "licht": "spaetsommer",
+ "beauty": "/Users/daniel/Documents/Claudius/immoviz/unio/immoviz/projects/noma-shg13/renders/r9_terrassen/noma-shg13_top4_pergola_detail_spaetsommer_final.png",
+ "fassaden": {
+  "schlachthausgasse": {
+   "normale": [
+    0.0,
+    1.0
+   ],
+   "a": [
+    18.48,
+    0.0
+   ],
+   "b": [
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "kamera_pos": [
+  13.430000305175781,
+  -49.65999984741211,
+  5.0
+ ],
+ "kamera_intern": {
+  "lens_mm": 22.0,
+  "sensor_mm": 36.0,
+  "shift_x": 0.0,
+  "shift_y": -0.057613227516412735,
+  "f_px": 2346.666666666667,
+  "typ": "PERSP"
+ },
+ "autos": "modelle",
+ "klassen": [
+  "gebaeude_objekt",
+  "fenster_glas",
+  "fenster_rahmen",
+  "gelaender",
+  "leuchten",
+  "strassenmoebel",
+  "autos",
+  "baeume",
+  "vegetation",
+  "ausstattung",
+  "menschen_platzhalter",
+  "nachbarn",
+  "boden",
+  "himmel",
+  "sonstige"
+ ],
+ "anteile_prozent": {
+  "gebaeude_objekt": 28.719,
+  "fenster_glas": 0.0,
+  "fenster_rahmen": 0.0,
+  "gelaender": 1.085,
+  "leuchten": 0.016,
+  "strassenmoebel": 0.0,
+  "autos": 0.0,
+  "baeume": 0.474,
+  "vegetation": 24.627,
+  "ausstattung": 29.611,
+  "menschen_platzhalter": 0.0,
+  "nachbarn": 13.708,
+  "boden": 1.582,
+  "himmel": 0.178,
+  "sonstige": 0.0
+ },
+ "schutz_klassen": [
+  "gebaeude_objekt",
+  "fenster_glas",
+  "fenster_rahmen",
+  "gelaender",
+  "leuchten",
+  "strassenmoebel",
+  "autos"
+ ],
+ "schutz_anteil_prozent": 29.82,
+ "schutz_kante_px": 2.0,
+ "dateien": {
+  "gebaeude_objekt": "gebaeude_objekt.png",
+  "fenster_glas": "fenster_glas.png",
+  "fenster_rahmen": "fenster_rahmen.png",
+  "gelaender": "gelaender.png",
+  "leuchten": "leuchten.png",
+  "strassenmoebel": "strassenmoebel.png",
+  "autos": "autos.png",
+  "baeume": "baeume.png",
+  "vegetation": "vegetation.png",
+  "ausstattung": "ausstattung.png",
+  "menschen_platzhalter": "menschen_platzhalter.png",
+  "nachbarn": "nachbarn.png",
+  "boden": "boden.png",
+  "himmel": "himmel.png",
+  "sonstige": "sonstige.png",
+  "klassen": "klassen.png",
+  "tiefe": "tiefe.png",
+  "normalen": "normalen.png",
+  "kanten": "kanten.png",
+  "schutz": "schutz.png"
+ },
+ "tiefe": {
+  "kodierung": "log",
+  "min_m": 0.1,
+  "max_m": 30000.0,
+  "formel": "d = min_m * (max_m/min_m) ** (v/65535)",
+  "himmel": 65535
+ },
+ "normalen": {
+  "raum": "Welt (Projektsystem, x Stolberggasse usw.)",
+  "formel": "n = rgb/127.5 - 1",
+  "himmel": [
+   0,
+   0,
+   0
+  ]
+ },
+ "kanten": {
+  "tiefe_relativ": 0.03,
+  "normale_grad": 25.0
+ },
+ "nicht_zugeordnet": []
+}

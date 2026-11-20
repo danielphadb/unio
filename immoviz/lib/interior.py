@@ -14,6 +14,7 @@ Plan-zu-Welt: x_lokal = (ecke_py - py) * s, y_lokal = (ecke_px - px) * s, s = Me
 from __future__ import annotations
 
 import math
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -37,8 +38,13 @@ def raster_page(pdf: Path, page: int, dpi: int, cache: Path, tag: str | None = N
     out = cache / (f"plan_{tag}_p{page}_{dpi}.png" if tag else f"plan_p{page}_{dpi}.png")
     if not out.exists():
         cache.mkdir(parents=True, exist_ok=True)
-        subprocess.run(["pdftoppm", "-r", str(dpi), "-png", "-singlefile", "-f", str(page), "-l", str(page),
-                        str(pdf), str(out.with_suffix(""))], check=True)
+        if shutil.which("pdftoppm"):
+            subprocess.run(["pdftoppm", "-r", str(dpi), "-png", "-singlefile", "-f", str(page), "-l", str(page),
+                            str(pdf), str(out.with_suffix(""))], check=True)
+        else:      # Mac ohne Poppler: PyMuPDF (gleiche Pixelgroesse wie pdftoppm bei gleicher dpi)
+            import pymupdf
+            doc = pymupdf.open(str(pdf))
+            doc[page - 1].get_pixmap(matrix=pymupdf.Matrix(dpi / 72.0, dpi / 72.0), alpha=False).save(str(out))
     return np.array(Image.open(out).convert("RGB")).astype(np.int16)
 
 
@@ -535,7 +541,11 @@ def add_lamps(bpy, coll, apt, a: dict):
     return obs
 
 
-def render_apartments(project_dir: Path, names: list[str], preview: bool = True, cams: list[str] | None = None):
+def render_apartments(project_dir: Path, names: list[str], preview: bool = True, cams: list[str] | None = None,
+                      res=None, samples: int | None = None, out_sub: str | None = None, ebenen: bool = False):
+    """res, samples, out_sub ueberschreiben wohnungen.yaml (wie `render`); ebenen: Render-Ebenen und Hintergrund-
+    Durchgang je Bild ueber lib/ebenen.py in <out_dir>/<wohnung>_<kamera>_<licht>_ebenen/."""
+    import os
     import bpy
     from . import build as B
     from . import materials as M
@@ -549,9 +559,9 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
     build_custom_materials(bpy, mats, W.get("materialien"))
     coll = bpy.data.collections.new("Innen")
     scene.collection.children.link(coll)
-    res = W["render"]["preview_resolution"] if preview else W["render"]["resolution"]
-    B.setup_render(scene, res, W["render"]["samples"])
-    out_dir = project_dir / "renders" / "innen"
+    res = tuple(res) if res else (W["render"]["preview_resolution"] if preview else W["render"]["resolution"])
+    B.setup_render(scene, res, samples or W["render"]["samples"])
+    out_dir = project_dir / "renders" / (out_sub or "innen")
     out_dir.mkdir(parents=True, exist_ok=True)
     results = []
     plan_cache = project_dir / "data" / "plan_cache"
@@ -583,6 +593,9 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
                 mb.materials = [ersatz.get(m, m) for m in mb.materials]
         objs = [mb.to_object(bpy, mats, coll) for mb in (mw, mf, mg)]
         objs += add_lamps(bpy, coll, apt, a)
+        if ebenen:      # Pass-Indizes erst jetzt, wenn die Innenraeume dieser Wohnung in der Szene stehen
+            from . import ebenen as EB
+            eb_meta = EB.vorbereiten(scene)
         for cam_name, cam in a["kameras"].items():
             if cams and f"{name}_{cam_name}" not in cams:
                 continue
@@ -597,10 +610,19 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
             B.setup_light(scene, cfg, ctx, lname)
             scene.view_settings.exposure = cam.get("exposure", a.get("exposure", 2.0))
             B.setup_camera(scene, cfg, f"{name}_{cam_name}")
-            path = out_dir / f"{name}_{cam_name}_vorschau.png"
+            tag = "vorschau" if preview else "final"
+            path = out_dir / (f"{name}_{cam_name}_{tag}.png" if out_sub else f"{name}_{cam_name}_vorschau.png")
             scene.render.filepath = str(path)
             bpy.ops.render.render(write_still=True)
-            results.append({"file": str(path), "wohnung": name, "kamera": cam_name, "oeffnungen": stats})
+            results.append({"file": str(path), "wohnung": name, "kamera": cam_name, "licht": lname,
+                            "oeffnungen": stats, "resolution": list(res), "device": scene.cycles.device})
+            if ebenen:
+                cn = f"{name}_{cam_name}"
+                eb = EB.schreiben(scene, eb_meta, out_dir / f"{cn}_{lname}_ebenen", cfg, cn, lname, str(path))
+                results[-1]["ebenen"] = {"ordner": eb["ordner"], "schutz_anteil_prozent": eb["schutz_anteil_prozent"],
+                                         "sekunden": eb["sekunden"], "nicht_zugeordnet": eb["nicht_zugeordnet"][:5]}
+                if os.environ.get("IMMOVIZ_HINTERGRUND", "").lower() not in ("aus", "0", "nein", "false"):
+                    results[-1]["ebenen"]["hintergrund"] = EB.hintergrund(scene, eb_meta, Path(eb["ordner"]), cfg, cn, lname)
         for o in objs:
             o.hide_render = True
     return results

@@ -12,3 +12,4 @@ uvicorn
 opencv-python-headless; sys_platform != "darwin"
 # macOS 14: 5.1 hat nur Wheels ab macOS 15, sonst baut pip OpenCV über eine Stunde aus dem Quellcode
 opencv-python-headless<5.1; sys_platform == "darwin"
+pymupdf>=1.24

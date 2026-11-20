@@ -54,7 +54,8 @@ FARBEN = {"gebaeude_objekt": (230, 190, 120), "fenster_glas": (40, 120, 230), "f
           "ausstattung": (170, 100, 50), "menschen_platzhalter": (0, 230, 230),
           "nachbarn": (150, 140, 130), "boden": (80, 80, 80), "himmel": (170, 210, 250), "sonstige": (120, 0, 120)}
 
-# Bereich: "objekt" = Objekt in der Collection "Objekt" (Held, auch Neubau-Gruppen) oder Name hero_*/nb_*,
+# Bereich: "objekt" = Objekt in der Collection "Objekt" (Held, auch Neubau-Gruppen) oder "Innen" (Innenraeume aus
+#          interior.py, z. B. hinter der offenen HST) oder Name hero_*/nb_*,
 #          "umgebung" = alles andere, None = beides. Muster: Python-Regex, Gross-/Kleinschreibung egal.
 # Je Regel genuegt EIN passendes Muster (objekt ODER material ODER collection); "nur_material" verlangt das Material.
 REGELN = [
@@ -93,7 +94,7 @@ REGELN = [
     {"klasse": "boden", "objekt": r"boden|strasse|gehsteig|gelaende|terrain|ground|platz|fahrbahn",
      "material": r"^asphalt|gehsteig|pflaster|randstein|zebra|parkstreifen|rasen|gras|^hof$|schotter"},
     {"klasse": "nachbarn", "bereich": "umgebung",
-     "objekt": r"nachbar|gebaeude|daecher|dach|fern|haus|building|block|umgebung_fenster",
+     "objekt": r"nachbar|gebaeude|daecher|dach|fern|haus|building|block|umgebung_fenster|^nb_umgebung",
      "material": r"nachbar|^nb_|dach|fassade|kamin|glas|fenster|rahmen|stuck|brandwand|balkon|fern_|tor$"},
 ]
 
@@ -194,7 +195,7 @@ def vorbereiten(scene) -> dict:
         colls = []
         for c in ob.users_collection:
             colls += kette(c.name)
-        ist_objekt = (any(c == "Objekt" for c in colls) or bool(re.match(r"^(hero|nb)_", ob.name))) \
+        ist_objekt = (any(c in ("Objekt", "Innen") for c in colls) or bool(re.match(r"^(hero|nb)_", ob.name))) \
             and not re.match(NACHBAR_GRUPPEN, ob.name)
         slots = [s.material for s in getattr(ob, "material_slots", []) if s.material] or [None]
         for m in slots + [None]:

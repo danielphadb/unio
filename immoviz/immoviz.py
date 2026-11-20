@@ -107,6 +107,11 @@ def main():
     it.add_argument("--top", default="top07")
     it.add_argument("--final", action="store_true")
     it.add_argument("--cam", default="", help="nur diese Kameras, z. B. top07_zimmer,top12_kueche")
+    it.add_argument("--res", default="", help="Auflösung BxH statt wohnungen.yaml, z. B. 3840x2560")
+    it.add_argument("--samples", type=int, default=None, help="Samples statt wohnungen.yaml")
+    it.add_argument("--out", default="", help="Unterordner von renders/ statt renders/innen, z. B. r9_terrassen")
+    it.add_argument("--ebenen", action="store_true",
+                    help="zusätzlich Render-Ebenen wie bei render (Masken, Tiefe, Kanten, Schutz, Hintergrund-Durchgang)")
     wk = sub.add_parser("walkthrough", help="Kamerafahrt durch eine Wohnung: Standbilder je Wegpunkt und Clay-Fahrt")
     wk.add_argument("project")
     wk.add_argument("--top", default="top35")
@@ -545,7 +550,9 @@ def _deg(r):
 def _interior(a, pdir):
     from lib.interior import render_apartments
     t = time.time()
-    res = render_apartments(pdir, a.top.split(","), not a.final, [c for c in a.cam.split(",") if c])
+    aufl = tuple(int(v) for v in a.res.lower().split("x")) if a.res else None
+    res = render_apartments(pdir, a.top.split(","), not a.final, [c for c in a.cam.split(",") if c],
+                            res=aufl, samples=a.samples, out_sub=a.out or None, ebenen=a.ebenen)
     print(json.dumps({"renders": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1, default=str))
 
 
