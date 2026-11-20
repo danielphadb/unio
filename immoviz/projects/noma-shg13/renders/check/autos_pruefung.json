@@ -2,14 +2,14 @@
  "autos": 233,
  "befunde_anzahl": 0,
  "raeder": {
-  "mittel_cm": 0.0,
+  "mittel_cm": -0.0,
   "max_schwebt_cm": 3.0,
   "max_sinkt_cm": 3.0,
   "ueber_grenze": 0
  },
  "ueberschneidungen": 0,
  "hindernisse": 0,
- "hindernis_punkte": 150,
+ "hindernis_punkte": 143,
  "grenzen_cm": {
   "schwebt": 3.0,
   "sinkt": 3.0
@@ -24,28 +24,12 @@
    "spur": 1.66
   },
   {
-   "modell": "Aston Martin Valour",
-   "laenge": 4.51,
-   "breite": 2.11,
-   "hoehe": 1.27,
-   "radstand": 2.72,
-   "spur": 1.74
-  },
-  {
    "modell": "Audi A7 55 TFSI",
    "laenge": 4.97,
    "breite": 2.11,
    "hoehe": 1.43,
    "radstand": 2.95,
    "spur": 1.57
-  },
-  {
-   "modell": "Audi e-tron GT quattro Black",
-   "laenge": 4.99,
-   "breite": 2.15,
-   "hoehe": 1.35,
-   "radstand": 2.93,
-   "spur": 1.66
   },
   {
    "modell": "Audi rs6 avant 2024",
@@ -104,14 +88,6 @@
    "spur": 1.68
   },
   {
-   "modell": "Mercedes amg gt 63",
-   "laenge": 5.05,
-   "breite": 2.02,
-   "hoehe": 1.45,
-   "radstand": 2.95,
-   "spur": 1.62
-  },
-  {
    "modell": "Porsche 911 turbo s 992 2021",
    "laenge": 4.54,
    "breite": 1.9,
@@ -138,8 +114,8 @@
  ],
  "frei_gruende": {
   "belegung": 48,
-  "kante": 64,
-  "uneben": 21,
+  "kante": 67,
+  "uneben": 18,
   "hindernis": 0
  },
  "befunde": []
