@@ -402,5 +402,676 @@
     "restfehler": "Moebel, Pergola, Rankgitter, Kissen und Olivenkuebel aus Blender (Bloecke, wirken CG), nur Pflanzen aus der KI; Nachkontrolle meldet 23 neue Fenster (Fehlalarm: Pflanzen/Spiegelungen an der grossen Glasflaeche)"
    }
   }
+ },
+ "runde_9": {
+  "stand": "2026-11-20",
+  "auftrag": "Kunde: \"bitte noch einmal ohne lokale KI machen\". Die 8 Terrassen-Renders 4k mit Ebenen aus renders/r9_terrassen (Auftrag 2026-11-20_noma_terrassen) mit Higgsfield veredelt, nicht mit ki-lokal",
+  "modell": "gpt_image_2_6, quality high, resolution 4k, 3:2 (Ausgabe 3504 x 2336), Rolle image_references; Bild 1 = Render",
+  "referenzen": "Vorlagen wie Runde 7 als Stilreferenz (bereits hochgeladene Medien, nur intern): Hof_fin-3 cbf0a95b-1d3d-46e2-a90b-11099b8d9b95, Hof_fin-4 c82cc51e-a000-4f6b-8207-0bdead3a5edc",
+  "prompt_aufbau": "Kopf (Bild 1 bindend, Pflanzen/Olivenbaum/Kissen/Moebel nur Platzhalter fuer Lage und Groesse), Objekt (Salbei-Fassade Baumit 1026 an allen Pavillonwaenden), Szene je Motiv, bei HST-Motiven Innenraum nach Moebelplan wohnungen.yaml (Kueche Nordwand rechts, Esstisch, Sofa; Top 3 Moeblierung 3Z HOF, Top 4 Loft laut mood_vorlagen.md), Pflanzen ueppig, Moebel realistisch, Mood-Referenz, Licht (Spaetsommer bzw. blaue Stunde), Sperren (Fassade, HST-Rahmen und -Teilung, Gelaender, Pergola-Konstruktion, Nachbarn, keine neuen Fenster/Tueren/Leitern/Gelaender, keine Menschen), Regelblock aus immoviz.py prompt (alle 8 Kameras freigegeben 16.11.2026). Generator scratchpad r9/prompts.py",
+  "fassade_top4": "Vorab geprueft: Render top04_terrasse_hst (und _abend) zeigt die Wand um die HST von Top 4 weiss, Top 3 salbeigruen. Soll laut project.yaml: beide Pavillons wand nb_wand_hof #A9B092 (Baumit 1026 laut EIN S. 25/27, Hoffassade hellgruen-grau), keine Sonderfarbe fuer Top 4; die Aussenkameras top4_terrasse_garten/top4_pergola_detail zeigen Top 4 ebenfalls salbei. Modellfehler im interior-Aufbau (Ostwand Top 4 um die HST, vermutlich Innenhuelle vp_top4_aussen mit Innenwandmaterial vor der Aussenfassade; die Laibung daneben ist salbei). Kein Neurender in dieser Runde: im Prompt Salbei vorgegeben (COLOUR CORRECTION), schutz uebertraegt die KI-Farbe auf die zurueckgesetzten Render-Flaechen, Endbilder zeigen die Wand salbei. Fuer den naechsten Render im Modell beheben (wohnungen.yaml top04_terrasse bzw. interior.py Aussenseite der Huelle)",
+  "schutz": "immoviz.py schutz --modus toleranz (Standardklassen gebaeude_objekt, fenster_glas, fenster_rahmen, gelaender, leuchten, strassenmoebel, autos; vegetation und ausstattung nicht geschuetzt). Zwei Abweichungen mit Begruendung (REGELN.md V6): (1) Rankgitter-Zone: Wandflaeche in den vom Rankgitter umschlossenen Zellen aus gebaeude_objekt und schutz.png genommen (Ebenen-Kopie im Scratchpad, r9/rank_maske.py, Pruefbild r9_pruefung/*_rankgitter_zone.jpg; 2,7 bis 10,2 % des Bildes in den 4 Aussenmotiven, in den HST-Motiven 0), sonst setzt schutz die KI-Kletterpflanzen vor der geschlossenen Wand auf die Blender-Wand zurueck; Leuchten, Fenster und Gelaender dort bleiben geschuetzt. (2) HST-Motive mit --ohne fenster_glas: Innenraum hinter Glas bleibt KI, weil die Lage der Moebel zum Moebelplan passt (Sichtpruefung KI-Rohbild: Kueche an der Nordwand rechts, runder Esstisch Mitte, Sofa links, in allen 4 Bildern); der offene HST-Fluegel zeigt den Innenraum als gebaeude_objekt und kommt aus dem Render",
+  "grading": "immoviz.py grading, Leitbilder intern Vorlagen SHG13_Hof_fin, _Hof_fin-3, _Hof_fin-4 (Scratchpad, nicht im Repo), Maske schutz plus himmel (halbe Staerke), Staerke 0,3 Tag und 0,15 blaue Stunde (Leitbilder sind Tagbilder), vignette 0,12, glow 0,08 bzw. 0,05, korn 0,008",
+  "credits": {
+   "verbraucht": 34,
+   "rechnung": "8 Auftraege x 4,25 (gpt_image_2_6 high 4k mit 2 Referenzen), Kontostand 7153,38 auf 7119,38",
+   "budget": 50
+  },
+  "verworfen": [
+   "keine Higgsfield-Auftraege verworfen (kein zweiter Versuch noetig)",
+   "erster Kompositing-Lauf ohne Rankgitter-Zone und mit geschuetztem Glas: Kletterpflanzen fast vollstaendig durch die nackte Blender-Wand ersetzt, Innenraum hinter der HST leer aus dem Render; Kennzahlen je Bild unter erster_lauf"
+  ],
+  "befund_nachkontrolle": "Kanten-F1 im Schutzbereich nach schutz 0,80 bis 0,95; Exit 1 (unter 0,90) bei 5 Bildern, Ursache laut Sichtpruefung gewollt: KI-Innenraum hinter Glas (HST-Motive, Zone fenster), KI-Laub vor der Fassade (Olivenbaum, Kletterpflanzen) und Spiegelungen in der grossen HST (top3_terrasse_garten, Fehlalarm \"30 neue Fenster\" wie Runde 7). Keine erfundenen Fenster, Tueren, Leitern oder Gelaender gefunden; Fassade, HST-Rahmen und -Teilung, Gelaender, Pergola-Balken, Nachbarn wie im Render",
+  "restfehler": [
+   "top04_terrasse_hst/_abend: im offenen HST-Fluegel stehen Render-Innenteile (runder Holzkoerper, Boden) neben KI-Moebeln (Samtstuehle); liest sich als runder Esstisch, aber Mischbild",
+   "top04_terrasse_abend: Wand um die HST im Lampenlicht etwas cremiger als die uebrige Salbei-Fassade (weisse Render-Wand, Farbe nur uebertragen)",
+   "top3_terrasse_garten: Glas der HST rechts mit streifigen Render-Spiegelungen",
+   "Kletterpflanzen nur innerhalb geschlossener Gitterzellen ganz aus der KI; an Raendern des Gitters teils Blender-Wand"
+  ],
+  "bilder": {
+   "top3_terrasse_garten_spaetsommer_r9_final.jpg": {
+    "eingang": "renders/r9_terrassen/noma-shg13_top3_terrasse_garten_spaetsommer_final.jpg, Upload media b3c255f7-c9c5-4e6e-8bf6-0ad52fff4aa3",
+    "ebenen": "renders/r9_terrassen/top3_terrasse_garten_spaetsommer_ebenen (Kopie im Scratchpad: Rankgitter-Zone aus gebaeude_objekt genommen, r9/rank_maske.py)",
+    "job": "bb6c6807-b16b-4650-8691-f0cce2d5e719",
+    "ki_roh": "top3_terrasse_garten_spaetsommer_r9_ki.jpg (3504 x 2336)",
+    "licht": "spaetsommer",
+    "prompt": "Turn image 1, a 3D render, into a high-end photorealistic architectural photograph. Image 1 is binding for camera, framing, building geometry, openings, the lift-and-slide door frame and its division, railings, the wooden pergola construction (timber posts and beams, position) and the neighbouring buildings. The simple rounded shapes for plants, the olive tree, cushions and the blocky furniture in image 1 are only placeholders for position and size: replace them with real, lush, high-quality objects at exactly those positions and sizes.\n\nCourtyard pavilion of a new residential building in Vienna: smooth light sage green-grey render facade (Baumit 1026), every exterior wall of the pavilion in this same sage green-grey, slim anthracite frames of the lift-and-slide door, small bronze wall lights, dark anthracite metal bar railings only where image 1 shows them, light grey porcelain tiles on the terrace.\n\nTerrace of Top 3: on the left the wooden wall pergola with the lounge sofa, a low coffee table and two lounge armchairs, the olive tree at the railing, on the right the sage facade with the lift-and-slide door and a wall light; beyond the railing the courtyard garden and the neighbouring houses exactly as in image 1.\n\nPLANTING, realistic and lush: the wooden lattice trellis densely grown over with climbing plants (star jasmine and clematis with glossy leaves, a few white climbing roses), real depth and gaps, following the trellis exactly; the potted tree is a real olive tree with silvery-green foliage and a gnarled trunk in a terracotta planter, same position and crown size; the planter troughs densely planted with ornamental grasses, lavender, white hydrangeas and rosemary spilling over the edge; green roofs with sedum and grasses.\n\nFURNITURE, realistic: teak outdoor furniture with cream and light grey outdoor cushions, a few linen pillows in terracotta and sage, a ceramic vase or lantern on the table, styled and inviting, no clutter, exactly at the positions and sizes of image 1.\n\nImages 2 and 3 are mood references from the same project (warm late-summer light, colour grade, lush planting and furnishing style). Their buildings, glass roofs, layout, terraces, furniture, trees and neighbours do NOT apply; never copy geometry or objects from them.\n\nLate summer afternoon, low warm sun from the west-south-west, soft long shadows, dappled leaf shadows, slight haze and gentle backlight glow on leaves, pale warm sky with a few soft clouds, warm neutral grade, no saturated blue, shadows neutral never blue.\n\nFull-frame camera, vertical lines perfectly straight, natural colours, no HDR look, magazine quality. No people. Do not change: pavilion facade, lift-and-slide door frame and division, railings, pergola construction, neighbouring houses. No additional windows, doors, ladders, railings, pergolas or planters. TREES: exactly the trees of image 1, same positions and crown outlines. No text, no watermark, no logos.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1. Railings only where image 1 shows them.\n- TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add, remove, move or shrink trees. Planting only in existing planters, beds and green roofs.\n- Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and materials only, never for building geometry or colours of neighbours.\n- PARKING LAYOUT (fixed, checked against the aerial photo): schlachthausgasse on the building side: parallel parking along the kerb; schlachthausgasse opposite: parallel parking along the kerb. Parked cars only in these bays and in this orientation, as in image 1.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.",
+    "schutz": {
+     "modus": "toleranz",
+     "kanten_f1_vorher": 0.2768,
+     "kanten_f1_nachher": 0.795,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 2.5,
+     "anteil_geschuetzt_prozent": 41.68,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_glas",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel",
+      "autos"
+     ],
+     "ki_behalten_prozent_schutz": 10.38,
+     "exit": 1,
+     "ohne": null
+    },
+    "grading": {
+     "staerke": 0.3,
+     "abstand_mittel_zum_leitbild": {
+      "vorher": 7.37,
+      "nachher": 6.02
+     },
+     "maske": "schutz.png plus himmel.png (halbe Staerke)",
+     "leitbilder": "Vorlagen Hof_fin, Hof_fin-3, Hof_fin-4 (intern)"
+    },
+    "nachkontrolle": {
+     "exit": 1,
+     "status": "zur Pruefung",
+     "score": 786,
+     "befunde": [
+      "1 neue(s) Rechteck(e) mit anderer Helligkeit auf vorher glatter Flaeche (Tuer, Fenster, Glasfront, Grossmoebel?)",
+      "lange neue Senkrechte auf vorher glatter Wand/Fassade (Oeffnung, Hochschrank, Kueche?)",
+      "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.9005, praezise 0.6397); Bauteile veraendert oder versetzt?",
+      "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.8836, praezise 0.907); Bauteile veraendert oder versetzt?",
+      "Schutzzone gebaeude: Kanten weichen ab (vollstaendig 0.9208, praezise 0.8456); Bauteile veraendert oder versetzt?",
+      "Fassade sonstige: 0 Fenster im Render, 18 im KI-Bild (18 neu, 0 fehlen)"
+     ],
+     "zonen": {
+      "fenster": {
+       "f1": 0.748,
+       "status": "abweichung"
+      },
+      "leuchten": {
+       "f1": 0.9821,
+       "status": "ok"
+      },
+      "gelaender": {
+       "f1": 0.8951,
+       "status": "abweichung"
+      },
+      "gebaeude": {
+       "f1": 0.8816,
+       "status": "abweichung"
+      }
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 0,
+       "ki": 18,
+       "ki_gefunden": 0,
+       "ki_neu": 18,
+       "render_fehlt": 0
+      }
+     }
+    },
+    "pruefbilder": "r9_pruefung/top3_terrasse_garten_spaetsommer_schutz_pruefung.jpg, _schutz_komponenten.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg, _rankgitter_zone.jpg",
+    "erster_lauf": {
+     "schutz_f1_nachher": 0.7781,
+     "ki_behalten_prozent_schutz": 11.81,
+     "nachkontrolle": [
+      "zur Pruefung",
+      615
+     ]
+    }
+   },
+   "top4_terrasse_garten_spaetsommer_r9_final.jpg": {
+    "eingang": "renders/r9_terrassen/noma-shg13_top4_terrasse_garten_spaetsommer_final.jpg, Upload media 35320c9c-7158-4592-be7a-fa21697ca479",
+    "ebenen": "renders/r9_terrassen/top4_terrasse_garten_spaetsommer_ebenen (Kopie im Scratchpad: Rankgitter-Zone aus gebaeude_objekt genommen, r9/rank_maske.py)",
+    "job": "916f787a-be8b-47bc-9272-7b7cd5fe7832",
+    "ki_roh": "top4_terrasse_garten_spaetsommer_r9_ki.jpg (3504 x 2336)",
+    "licht": "spaetsommer",
+    "prompt": "Turn image 1, a 3D render, into a high-end photorealistic architectural photograph. Image 1 is binding for camera, framing, building geometry, openings, the lift-and-slide door frame and its division, railings, the wooden pergola construction (timber posts and beams, position) and the neighbouring buildings. The simple rounded shapes for plants, the olive tree, cushions and the blocky furniture in image 1 are only placeholders for position and size: replace them with real, lush, high-quality objects at exactly those positions and sizes.\n\nCourtyard pavilion of a new residential building in Vienna: smooth light sage green-grey render facade (Baumit 1026), every exterior wall of the pavilion in this same sage green-grey, slim anthracite frames of the lift-and-slide door, small bronze wall lights, dark anthracite metal bar railings only where image 1 shows them, light grey porcelain tiles on the terrace.\n\nTerrace of Top 4: on the left the wooden wall pergola with a dining table for four and cushioned chairs, the olive tree at the railing, on the right the sage facade with the lift-and-slide door and a wall light; beyond the railing the courtyard garden and the neighbouring houses exactly as in image 1.\n\nPLANTING, realistic and lush: the wooden lattice trellis densely grown over with climbing plants (star jasmine and clematis with glossy leaves, a few white climbing roses), real depth and gaps, following the trellis exactly; the potted tree is a real olive tree with silvery-green foliage and a gnarled trunk in a terracotta planter, same position and crown size; the planter troughs densely planted with ornamental grasses, lavender, white hydrangeas and rosemary spilling over the edge; green roofs with sedum and grasses.\n\nFURNITURE, realistic: teak outdoor furniture with cream and light grey outdoor cushions, a few linen pillows in terracotta and sage, a ceramic vase or lantern on the table, styled and inviting, no clutter, exactly at the positions and sizes of image 1.\n\nImages 2 and 3 are mood references from the same project (warm late-summer light, colour grade, lush planting and furnishing style). Their buildings, glass roofs, layout, terraces, furniture, trees and neighbours do NOT apply; never copy geometry or objects from them.\n\nLate summer afternoon, low warm sun from the west-south-west, soft long shadows, dappled leaf shadows, slight haze and gentle backlight glow on leaves, pale warm sky with a few soft clouds, warm neutral grade, no saturated blue, shadows neutral never blue.\n\nFull-frame camera, vertical lines perfectly straight, natural colours, no HDR look, magazine quality. No people. Do not change: pavilion facade, lift-and-slide door frame and division, railings, pergola construction, neighbouring houses. No additional windows, doors, ladders, railings, pergolas or planters. TREES: exactly the trees of image 1, same positions and crown outlines. No text, no watermark, no logos.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1. Railings only where image 1 shows them.\n- TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add, remove, move or shrink trees. Planting only in existing planters, beds and green roofs.\n- Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and materials only, never for building geometry or colours of neighbours.\n- PARKING LAYOUT (fixed, checked against the aerial photo): schlachthausgasse on the building side: parallel parking along the kerb; schlachthausgasse opposite: parallel parking along the kerb. Parked cars only in these bays and in this orientation, as in image 1.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.",
+    "schutz": {
+     "modus": "toleranz",
+     "kanten_f1_vorher": 0.3227,
+     "kanten_f1_nachher": 0.9108,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 3.67,
+     "anteil_geschuetzt_prozent": 41.85,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_glas",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel",
+      "autos"
+     ],
+     "ki_behalten_prozent_schutz": 23.33,
+     "exit": 0,
+     "ohne": null
+    },
+    "grading": {
+     "staerke": 0.3,
+     "abstand_mittel_zum_leitbild": {
+      "vorher": 9.75,
+      "nachher": 8.78
+     },
+     "maske": "schutz.png plus himmel.png (halbe Staerke)",
+     "leitbilder": "Vorlagen Hof_fin, Hof_fin-3, Hof_fin-4 (intern)"
+    },
+    "nachkontrolle": {
+     "exit": 1,
+     "status": "zur Pruefung",
+     "score": 79,
+     "befunde": [
+      "13 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+      "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.9062, praezise 0.649); Bauteile veraendert oder versetzt?",
+      "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.8785, praezise 0.9265); Bauteile veraendert oder versetzt?",
+      "Fassade sonstige: 0 Fenster im Render, 11 im KI-Bild (11 neu, 0 fehlen)"
+     ],
+     "zonen": {
+      "fenster": {
+       "f1": 0.7563,
+       "status": "abweichung"
+      },
+      "leuchten": {
+       "f1": 0.9536,
+       "status": "ok"
+      },
+      "gelaender": {
+       "f1": 0.9019,
+       "status": "abweichung"
+      },
+      "gebaeude": {
+       "f1": 0.9162,
+       "status": "ok"
+      }
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 0,
+       "ki": 11,
+       "ki_gefunden": 0,
+       "ki_neu": 11,
+       "render_fehlt": 0
+      }
+     }
+    },
+    "pruefbilder": "r9_pruefung/top4_terrasse_garten_spaetsommer_schutz_pruefung.jpg, _schutz_komponenten.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg, _rankgitter_zone.jpg",
+    "erster_lauf": {
+     "schutz_f1_nachher": 0.9129,
+     "ki_behalten_prozent_schutz": 25.64,
+     "nachkontrolle": [
+      "zur Pruefung",
+      227
+     ]
+    }
+   },
+   "top3_pergola_detail_spaetsommer_r9_final.jpg": {
+    "eingang": "renders/r9_terrassen/noma-shg13_top3_pergola_detail_spaetsommer_final.jpg, Upload media 455ecce4-69a3-4108-acb5-76d49c8f1e22",
+    "ebenen": "renders/r9_terrassen/top3_pergola_detail_spaetsommer_ebenen (Kopie im Scratchpad: Rankgitter-Zone aus gebaeude_objekt genommen, r9/rank_maske.py)",
+    "job": "a3dc8eb1-ad5c-4f57-bd90-4ee4127ce8c4",
+    "ki_roh": "top3_pergola_detail_spaetsommer_r9_ki.jpg (3504 x 2336)",
+    "licht": "spaetsommer",
+    "prompt": "Turn image 1, a 3D render, into a high-end photorealistic architectural photograph. Image 1 is binding for camera, framing, building geometry, openings, the lift-and-slide door frame and its division, railings, the wooden pergola construction (timber posts and beams, position) and the neighbouring buildings. The simple rounded shapes for plants, the olive tree, cushions and the blocky furniture in image 1 are only placeholders for position and size: replace them with real, lush, high-quality objects at exactly those positions and sizes.\n\nCourtyard pavilion of a new residential building in Vienna: smooth light sage green-grey render facade (Baumit 1026), every exterior wall of the pavilion in this same sage green-grey, slim anthracite frames of the lift-and-slide door, small bronze wall lights, dark anthracite metal bar railings only where image 1 shows them, light grey porcelain tiles on the terrace.\n\nClose view into the pergola corner of Top 3: lounge sofa with cushions under the pergola, coffee table, the trellis behind it, a planter trough in the left foreground; neighbouring houses beyond the railing exactly as in image 1.\n\nPLANTING, realistic and lush: the wooden lattice trellis densely grown over with climbing plants (star jasmine and clematis with glossy leaves, a few white climbing roses), real depth and gaps, following the trellis exactly; the potted tree is a real olive tree with silvery-green foliage and a gnarled trunk in a terracotta planter, same position and crown size; the planter troughs densely planted with ornamental grasses, lavender, white hydrangeas and rosemary spilling over the edge; green roofs with sedum and grasses.\n\nFURNITURE, realistic: teak outdoor furniture with cream and light grey outdoor cushions, a few linen pillows in terracotta and sage, a ceramic vase or lantern on the table, styled and inviting, no clutter, exactly at the positions and sizes of image 1.\n\nImages 2 and 3 are mood references from the same project (warm late-summer light, colour grade, lush planting and furnishing style). Their buildings, glass roofs, layout, terraces, furniture, trees and neighbours do NOT apply; never copy geometry or objects from them.\n\nLate summer afternoon, low warm sun from the west-south-west, soft long shadows, dappled leaf shadows, slight haze and gentle backlight glow on leaves, pale warm sky with a few soft clouds, warm neutral grade, no saturated blue, shadows neutral never blue.\n\nFull-frame camera, vertical lines perfectly straight, natural colours, no HDR look, magazine quality. No people. Do not change: pavilion facade, lift-and-slide door frame and division, railings, pergola construction, neighbouring houses. No additional windows, doors, ladders, railings, pergolas or planters. TREES: exactly the trees of image 1, same positions and crown outlines. No text, no watermark, no logos.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1. Railings only where image 1 shows them.\n- TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add, remove, move or shrink trees. Planting only in existing planters, beds and green roofs.\n- Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and materials only, never for building geometry or colours of neighbours.\n- PARKING LAYOUT (fixed, checked against the aerial photo): schlachthausgasse on the building side: parallel parking along the kerb; schlachthausgasse opposite: parallel parking along the kerb. Parked cars only in these bays and in this orientation, as in image 1.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.",
+    "schutz": {
+     "modus": "toleranz",
+     "kanten_f1_vorher": 0.5022,
+     "kanten_f1_nachher": 0.8977,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 1.7,
+     "anteil_geschuetzt_prozent": 9.69,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_glas",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel",
+      "autos"
+     ],
+     "ki_behalten_prozent_schutz": 3.01,
+     "exit": 1,
+     "ohne": null
+    },
+    "grading": {
+     "staerke": 0.3,
+     "abstand_mittel_zum_leitbild": {
+      "vorher": 10.92,
+      "nachher": 7.97
+     },
+     "maske": "schutz.png plus himmel.png (halbe Staerke)",
+     "leitbilder": "Vorlagen Hof_fin, Hof_fin-3, Hof_fin-4 (intern)"
+    },
+    "nachkontrolle": {
+     "exit": 1,
+     "status": "zur Pruefung",
+     "score": 38,
+     "befunde": [
+      "13 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+      "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.8377, praezise 0.9296); Bauteile veraendert oder versetzt?"
+     ],
+     "zonen": {
+      "leuchten": {
+       "f1": 0.9744,
+       "status": "ok"
+      },
+      "gelaender": {
+       "f1": 0.8813,
+       "status": "abweichung"
+      },
+      "gebaeude": {
+       "f1": 0.9118,
+       "status": "ok"
+      }
+     },
+     "fenster": {}
+    },
+    "pruefbilder": "r9_pruefung/top3_pergola_detail_spaetsommer_schutz_pruefung.jpg, _schutz_komponenten.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg, _rankgitter_zone.jpg",
+    "erster_lauf": {
+     "schutz_f1_nachher": 0.9164,
+     "ki_behalten_prozent_schutz": 1.38,
+     "nachkontrolle": [
+      "zur Pruefung",
+      32
+     ]
+    }
+   },
+   "top4_pergola_detail_spaetsommer_r9_final.jpg": {
+    "eingang": "renders/r9_terrassen/noma-shg13_top4_pergola_detail_spaetsommer_final.jpg, Upload media 7ecbb689-8054-4647-9d28-7697d52a5cf0",
+    "ebenen": "renders/r9_terrassen/top4_pergola_detail_spaetsommer_ebenen (Kopie im Scratchpad: Rankgitter-Zone aus gebaeude_objekt genommen, r9/rank_maske.py)",
+    "job": "3b106d9f-0d19-4462-abcd-0cfa49fba6f0",
+    "ki_roh": "top4_pergola_detail_spaetsommer_r9_ki.jpg (3504 x 2336)",
+    "licht": "spaetsommer",
+    "prompt": "Turn image 1, a 3D render, into a high-end photorealistic architectural photograph. Image 1 is binding for camera, framing, building geometry, openings, the lift-and-slide door frame and its division, railings, the wooden pergola construction (timber posts and beams, position) and the neighbouring buildings. The simple rounded shapes for plants, the olive tree, cushions and the blocky furniture in image 1 are only placeholders for position and size: replace them with real, lush, high-quality objects at exactly those positions and sizes.\n\nCourtyard pavilion of a new residential building in Vienna: smooth light sage green-grey render facade (Baumit 1026), every exterior wall of the pavilion in this same sage green-grey, slim anthracite frames of the lift-and-slide door, small bronze wall lights, dark anthracite metal bar railings only where image 1 shows them, light grey porcelain tiles on the terrace.\n\nClose view into the pergola corner of Top 4: dining table for four with cushioned chairs under the pergola, the trellis behind it, the olive tree on the right, a planter trough in the left foreground; neighbouring houses beyond the railing exactly as in image 1.\n\nPLANTING, realistic and lush: the wooden lattice trellis densely grown over with climbing plants (star jasmine and clematis with glossy leaves, a few white climbing roses), real depth and gaps, following the trellis exactly; the potted tree is a real olive tree with silvery-green foliage and a gnarled trunk in a terracotta planter, same position and crown size; the planter troughs densely planted with ornamental grasses, lavender, white hydrangeas and rosemary spilling over the edge; green roofs with sedum and grasses.\n\nFURNITURE, realistic: teak outdoor furniture with cream and light grey outdoor cushions, a few linen pillows in terracotta and sage, a ceramic vase or lantern on the table, styled and inviting, no clutter, exactly at the positions and sizes of image 1.\n\nImages 2 and 3 are mood references from the same project (warm late-summer light, colour grade, lush planting and furnishing style). Their buildings, glass roofs, layout, terraces, furniture, trees and neighbours do NOT apply; never copy geometry or objects from them.\n\nLate summer afternoon, low warm sun from the west-south-west, soft long shadows, dappled leaf shadows, slight haze and gentle backlight glow on leaves, pale warm sky with a few soft clouds, warm neutral grade, no saturated blue, shadows neutral never blue.\n\nFull-frame camera, vertical lines perfectly straight, natural colours, no HDR look, magazine quality. No people. Do not change: pavilion facade, lift-and-slide door frame and division, railings, pergola construction, neighbouring houses. No additional windows, doors, ladders, railings, pergolas or planters. TREES: exactly the trees of image 1, same positions and crown outlines. No text, no watermark, no logos.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- No new railings, handrails, fences, glass roofs, canopies, pergolas, planters or steps that are not in image 1. Railings only where image 1 shows them.\n- TREES ARE LOCKED: keep every tree exactly at its position, height and crown size from image 1. Do not add, remove, move or shrink trees. Planting only in existing planters, beds and green roofs.\n- Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and materials only, never for building geometry or colours of neighbours.\n- PARKING LAYOUT (fixed, checked against the aerial photo): schlachthausgasse on the building side: parallel parking along the kerb; schlachthausgasse opposite: parallel parking along the kerb. Parked cars only in these bays and in this orientation, as in image 1.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.",
+    "schutz": {
+     "modus": "toleranz",
+     "kanten_f1_vorher": 0.4433,
+     "kanten_f1_nachher": 0.9541,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 3.67,
+     "anteil_geschuetzt_prozent": 20.38,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_glas",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel",
+      "autos"
+     ],
+     "ki_behalten_prozent_schutz": 0.34,
+     "exit": 0,
+     "ohne": null
+    },
+    "grading": {
+     "staerke": 0.3,
+     "abstand_mittel_zum_leitbild": {
+      "vorher": 8.62,
+      "nachher": 6.66
+     },
+     "maske": "schutz.png plus himmel.png (halbe Staerke)",
+     "leitbilder": "Vorlagen Hof_fin, Hof_fin-3, Hof_fin-4 (intern)"
+    },
+    "nachkontrolle": {
+     "exit": 1,
+     "status": "zur Pruefung",
+     "score": 23,
+     "befunde": [
+      "16 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+      "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.883, praezise 0.9473); Bauteile veraendert oder versetzt?"
+     ],
+     "zonen": {
+      "leuchten": {
+       "f1": 0.963,
+       "status": "ok"
+      },
+      "gelaender": {
+       "f1": 0.914,
+       "status": "abweichung"
+      },
+      "gebaeude": {
+       "f1": 0.9292,
+       "status": "ok"
+      }
+     },
+     "fenster": {}
+    },
+    "pruefbilder": "r9_pruefung/top4_pergola_detail_spaetsommer_schutz_pruefung.jpg, _schutz_komponenten.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg, _rankgitter_zone.jpg",
+    "erster_lauf": {
+     "schutz_f1_nachher": 0.9548,
+     "ki_behalten_prozent_schutz": 0.05,
+     "nachkontrolle": [
+      "ok",
+      26
+     ]
+    }
+   },
+   "top03_terrasse_hst_spaetsommer_r9_final.jpg": {
+    "eingang": "renders/r9_terrassen/top03_terrasse_hst_final.jpg, Upload media 43cecb3a-de18-418d-91b3-0a624a872900",
+    "ebenen": "renders/r9_terrassen/top03_terrasse_hst_spaetsommer_ebenen (Kopie im Scratchpad: Rankgitter-Zone aus gebaeude_objekt genommen, r9/rank_maske.py)",
+    "job": "5d4be079-7544-4ee1-93e2-9bfa328b7642",
+    "ki_roh": "top03_terrasse_hst_spaetsommer_r9_ki.jpg (3504 x 2336)",
+    "licht": "spaetsommer",
+    "prompt": "Turn image 1, a 3D render, into a high-end photorealistic architectural photograph. Image 1 is binding for camera, framing, building geometry, openings, the lift-and-slide door frame and its division, railings, the wooden pergola construction (timber posts and beams, position) and the neighbouring buildings. The simple rounded shapes for plants, the olive tree, cushions and the blocky furniture in image 1 are only placeholders for position and size: replace them with real, lush, high-quality objects at exactly those positions and sizes.\n\nCourtyard pavilion of a new residential building in Vienna: smooth light sage green-grey render facade (Baumit 1026), every exterior wall of the pavilion in this same sage green-grey, slim anthracite frames of the lift-and-slide door, small bronze wall lights, dark anthracite metal bar railings only where image 1 shows them, light grey porcelain tiles on the terrace.\n\nTerrace of Top 3 seen from its corner: on the left the wooden pergola with the lounge sofa (cut off) and two lounge armchairs, the olive tree at the railing, ahead the sage facade with the lift-and-slide door between two bronze wall lights.\n\nThrough the open lift-and-slide door a homely, furnished living room (warm, as in a lived-in home): kitchen run in dark walnut with a terrazzo worktop along the north wall (inside on the right), a round walnut dining table with four cream boucle chairs, a rose-beige boucle sofa with an oval travertine coffee table, a tripod floor lamp, light oak floorboards, white linen curtains, a fiddle-leaf fig. Furniture only where image 1 shows the volumes; walls, doors and room depth as in image 1.\n\nPLANTING, realistic and lush: the wooden lattice trellis densely grown over with climbing plants (star jasmine and clematis with glossy leaves, a few white climbing roses), real depth and gaps, following the trellis exactly; the potted tree is a real olive tree with silvery-green foliage and a gnarled trunk in a terracotta planter, same position and crown size; the planter troughs densely planted with ornamental grasses, lavender, white hydrangeas and rosemary spilling over the edge; green roofs with sedum and grasses.\n\nFURNITURE, realistic: teak outdoor furniture with cream and light grey outdoor cushions, a few linen pillows in terracotta and sage, a ceramic vase or lantern on the table, styled and inviting, no clutter, exactly at the positions and sizes of image 1.\n\nImages 2 and 3 are mood references from the same project (warm late-summer light, colour grade, lush planting and furnishing style). Their buildings, glass roofs, layout, terraces, furniture, trees and neighbours do NOT apply; never copy geometry or objects from them.\n\nLate summer afternoon, low warm sun from the west-south-west, soft long shadows, dappled leaf shadows, slight haze and gentle backlight glow on leaves, pale warm sky with a few soft clouds, warm neutral grade, no saturated blue, shadows neutral never blue.\n\nFull-frame camera, vertical lines perfectly straight, natural colours, no HDR look, magazine quality. No people. Do not change: pavilion facade, lift-and-slide door frame and division, railings, pergola construction, neighbouring houses. No additional windows, doors, ladders, railings, pergolas or planters. TREES: exactly the trees of image 1, same positions and crown outlines. No text, no watermark, no logos.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- FURNITURE PLAN (fixed): Terrasse: links Pergola mit Sofa (angeschnitten) und zwei Sessel, rechts Hebeschiebetuer offen; innen hinter der Tuer Kueche an der Nordwand (rechts), Esstisch und Sofa wie Platzhalter. Large items (kitchen, tall cabinets, island, wardrobe, bed, sideboard) stay exactly at the walls and positions of image 1; nothing large stands free in the room unless image 1 shows it.\n- NO STUCCO: smooth ceilings and plain wall-to-ceiling junctions. No cornices, crown mouldings, ceiling roses, wall panel mouldings or decorative profiles.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.\n- Keep ceiling height, room depth and room width of image 1. No extra room behind walls.",
+    "schutz": {
+     "modus": "toleranz",
+     "kanten_f1_vorher": 0.328,
+     "kanten_f1_nachher": 0.8607,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 2.47,
+     "anteil_geschuetzt_prozent": 34.45,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel",
+      "autos"
+     ],
+     "ki_behalten_prozent_schutz": 20.4,
+     "exit": 1,
+     "ohne": "fenster_glas"
+    },
+    "grading": {
+     "staerke": 0.3,
+     "abstand_mittel_zum_leitbild": {
+      "vorher": 9.64,
+      "nachher": 7.1
+     },
+     "maske": "schutz.png plus himmel.png (halbe Staerke)",
+     "leitbilder": "Vorlagen Hof_fin, Hof_fin-3, Hof_fin-4 (intern)"
+    },
+    "nachkontrolle": {
+     "exit": 1,
+     "status": "zur Pruefung",
+     "score": 140,
+     "befunde": [
+      "1 neue(s) Rechteck(e) mit anderer Helligkeit auf vorher glatter Flaeche (Tuer, Fenster, Glasfront, Grossmoebel?)",
+      "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.6995, praezise 0.4259); Bauteile veraendert oder versetzt?"
+     ],
+     "zonen": {
+      "fenster": {
+       "f1": 0.5295,
+       "status": "abweichung"
+      },
+      "leuchten": {
+       "f1": 0.9825,
+       "status": "ok"
+      },
+      "gelaender": {
+       "f1": 0.9264,
+       "status": "ok"
+      },
+      "gebaeude": {
+       "f1": 0.9286,
+       "status": "ok"
+      }
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 2,
+       "ki": 2,
+       "ki_gefunden": 2,
+       "ki_neu": 0,
+       "render_fehlt": 0
+      }
+     }
+    },
+    "pruefbilder": "r9_pruefung/top03_terrasse_hst_spaetsommer_schutz_pruefung.jpg, _schutz_komponenten.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg",
+    "erster_lauf": {
+     "schutz_f1_nachher": 0.9507,
+     "ki_behalten_prozent_schutz": 16.3,
+     "nachkontrolle": [
+      "ok",
+      138
+     ]
+    }
+   },
+   "top04_terrasse_hst_spaetsommer_r9_final.jpg": {
+    "eingang": "renders/r9_terrassen/top04_terrasse_hst_final.jpg, Upload media ffdbbc35-2430-429a-a438-c97ebe88e8dd",
+    "ebenen": "renders/r9_terrassen/top04_terrasse_hst_spaetsommer_ebenen (Kopie im Scratchpad: Rankgitter-Zone aus gebaeude_objekt genommen, r9/rank_maske.py)",
+    "job": "f904a3ae-64ef-43a2-bc29-ca44dfa77128",
+    "ki_roh": "top04_terrasse_hst_spaetsommer_r9_ki.jpg (3504 x 2336)",
+    "licht": "spaetsommer",
+    "prompt": "Turn image 1, a 3D render, into a high-end photorealistic architectural photograph. Image 1 is binding for camera, framing, building geometry, openings, the lift-and-slide door frame and its division, railings, the wooden pergola construction (timber posts and beams, position) and the neighbouring buildings. The simple rounded shapes for plants, the olive tree, cushions and the blocky furniture in image 1 are only placeholders for position and size: replace them with real, lush, high-quality objects at exactly those positions and sizes.\n\nCourtyard pavilion of a new residential building in Vienna: smooth light sage green-grey render facade (Baumit 1026), every exterior wall of the pavilion in this same sage green-grey, slim anthracite frames of the lift-and-slide door, small bronze wall lights, dark anthracite metal bar railings only where image 1 shows them, light grey porcelain tiles on the terrace.\n\nTerrace of Top 4 seen from its corner: on the left the dining table for four under the wooden pergola, a planter with an olive tree, ahead the sage facade with the lift-and-slide door and a bronze wall light.\n\nThrough the open lift-and-slide door a homely, furnished living room (warm, as in a lived-in home): kitchen run in light oak with a green-grey marble worktop along the north wall (inside on the right), a round oak dining table with four rust velvet chairs, a cream sofa with an oak coffee table, a flat white disc pendant lamp, honey oak floorboards, a cognac throw, a monstera. Furniture only where image 1 shows the volumes; walls, doors and room depth as in image 1.\n\nCOLOUR CORRECTION: in image 1 the wall face around the lift-and-slide door of this pavilion is wrongly white; it is the same smooth light sage green-grey render as the rest of the facade (and as the reveal next to the door). Same geometry, only this colour.\n\nPLANTING, realistic and lush: the wooden lattice trellis densely grown over with climbing plants (star jasmine and clematis with glossy leaves, a few white climbing roses), real depth and gaps, following the trellis exactly; the potted tree is a real olive tree with silvery-green foliage and a gnarled trunk in a terracotta planter, same position and crown size; the planter troughs densely planted with ornamental grasses, lavender, white hydrangeas and rosemary spilling over the edge; green roofs with sedum and grasses.\n\nFURNITURE, realistic: teak outdoor furniture with cream and light grey outdoor cushions, a few linen pillows in terracotta and sage, a ceramic vase or lantern on the table, styled and inviting, no clutter, exactly at the positions and sizes of image 1.\n\nImages 2 and 3 are mood references from the same project (warm late-summer light, colour grade, lush planting and furnishing style). Their buildings, glass roofs, layout, terraces, furniture, trees and neighbours do NOT apply; never copy geometry or objects from them.\n\nLate summer afternoon, low warm sun from the west-south-west, soft long shadows, dappled leaf shadows, slight haze and gentle backlight glow on leaves, pale warm sky with a few soft clouds, warm neutral grade, no saturated blue, shadows neutral never blue.\n\nFull-frame camera, vertical lines perfectly straight, natural colours, no HDR look, magazine quality. No people. Do not change: pavilion facade, lift-and-slide door frame and division, railings, pergola construction, neighbouring houses. No additional windows, doors, ladders, railings, pergolas or planters. TREES: exactly the trees of image 1, same positions and crown outlines. No text, no watermark, no logos.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- FURNITURE PLAN (fixed): Terrasse: links Esstisch fuer vier unter der Pergola, rechts Hebeschiebetuer offen; innen hinter der Tuer Kueche an der Nordwand (rechts), Esstisch und Sofa wie Platzhalter. Large items (kitchen, tall cabinets, island, wardrobe, bed, sideboard) stay exactly at the walls and positions of image 1; nothing large stands free in the room unless image 1 shows it.\n- NO STUCCO: smooth ceilings and plain wall-to-ceiling junctions. No cornices, crown mouldings, ceiling roses, wall panel mouldings or decorative profiles.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.\n- Keep ceiling height, room depth and room width of image 1. No extra room behind walls.",
+    "schutz": {
+     "modus": "toleranz",
+     "kanten_f1_vorher": 0.3812,
+     "kanten_f1_nachher": 0.9501,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 2.92,
+     "anteil_geschuetzt_prozent": 29.29,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel",
+      "autos"
+     ],
+     "ki_behalten_prozent_schutz": 16.54,
+     "exit": 0,
+     "ohne": "fenster_glas"
+    },
+    "grading": {
+     "staerke": 0.3,
+     "abstand_mittel_zum_leitbild": {
+      "vorher": 10.85,
+      "nachher": 8.47
+     },
+     "maske": "schutz.png plus himmel.png (halbe Staerke)",
+     "leitbilder": "Vorlagen Hof_fin, Hof_fin-3, Hof_fin-4 (intern)"
+    },
+    "nachkontrolle": {
+     "exit": 1,
+     "status": "zur Pruefung",
+     "score": 168,
+     "befunde": [
+      "16 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+      "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.7651, praezise 0.2877); Bauteile veraendert oder versetzt?",
+      "Schutzzone leuchten: Kanten weichen ab (vollstaendig 0.7143, praezise 1.0); Bauteile veraendert oder versetzt?",
+      "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.9583, praezise 0.8663); Bauteile veraendert oder versetzt?",
+      "Fassade sonstige: 4 Fenster im Render, 8 im KI-Bild (8 neu, 4 fehlen)"
+     ],
+     "zonen": {
+      "fenster": {
+       "f1": 0.4182,
+       "status": "abweichung"
+      },
+      "leuchten": {
+       "f1": 0.8333,
+       "status": "abweichung"
+      },
+      "gelaender": {
+       "f1": 0.9099,
+       "status": "abweichung"
+      },
+      "gebaeude": {
+       "f1": 0.9128,
+       "status": "ok"
+      }
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 4,
+       "ki": 8,
+       "ki_gefunden": 0,
+       "ki_neu": 8,
+       "render_fehlt": 4
+      }
+     }
+    },
+    "pruefbilder": "r9_pruefung/top04_terrasse_hst_spaetsommer_schutz_pruefung.jpg, _schutz_komponenten.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg",
+    "erster_lauf": {
+     "schutz_f1_nachher": 0.8918,
+     "ki_behalten_prozent_schutz": 17.46,
+     "nachkontrolle": [
+      "zur Pruefung",
+      32
+     ]
+    }
+   },
+   "top03_terrasse_abend_blaue_stunde_r9_final.jpg": {
+    "eingang": "renders/r9_terrassen/top03_terrasse_abend_final.jpg, Upload media ddf1d126-32ba-4093-8c15-7d339672ae07",
+    "ebenen": "renders/r9_terrassen/top03_terrasse_abend_blaue_stunde_ebenen (Kopie im Scratchpad: Rankgitter-Zone aus gebaeude_objekt genommen, r9/rank_maske.py)",
+    "job": "a8d78779-d404-4c56-84f7-a455ba8dd191",
+    "ki_roh": "top03_terrasse_abend_blaue_stunde_r9_ki.jpg (3504 x 2336)",
+    "licht": "blaue_stunde",
+    "prompt": "Turn image 1, a 3D render, into a high-end photorealistic architectural photograph. Image 1 is binding for camera, framing, building geometry, openings, the lift-and-slide door frame and its division, railings, the wooden pergola construction (timber posts and beams, position) and the neighbouring buildings. The simple rounded shapes for plants, the olive tree, cushions and the blocky furniture in image 1 are only placeholders for position and size: replace them with real, lush, high-quality objects at exactly those positions and sizes.\n\nCourtyard pavilion of a new residential building in Vienna: smooth light sage green-grey render facade (Baumit 1026), every exterior wall of the pavilion in this same sage green-grey, slim anthracite frames of the lift-and-slide door, small bronze wall lights, dark anthracite metal bar railings only where image 1 shows them, light grey porcelain tiles on the terrace.\n\nTerrace of Top 3 seen from its corner: on the left the wooden pergola with the lounge sofa (cut off) and two lounge armchairs, the olive tree at the railing, ahead the sage facade with the lift-and-slide door between two bronze wall lights.\n\nThrough the open lift-and-slide door a homely, furnished living room (warm, as in a lived-in home): kitchen run in dark walnut with a terrazzo worktop along the north wall (inside on the right), a round walnut dining table with four cream boucle chairs, a rose-beige boucle sofa with an oval travertine coffee table, a tripod floor lamp, light oak floorboards, white linen curtains, a fiddle-leaf fig. Furniture only where image 1 shows the volumes; walls, doors and room depth as in image 1.\n\nPLANTING, realistic and lush: the wooden lattice trellis densely grown over with climbing plants (star jasmine and clematis with glossy leaves, a few white climbing roses), real depth and gaps, following the trellis exactly; the potted tree is a real olive tree with silvery-green foliage and a gnarled trunk in a terracotta planter, same position and crown size; the planter troughs densely planted with ornamental grasses, lavender, white hydrangeas and rosemary spilling over the edge; green roofs with sedum and grasses.\n\nFURNITURE, realistic: teak outdoor furniture with cream and light grey outdoor cushions, a few linen pillows in terracotta and sage, a ceramic vase or lantern on the table, styled and inviting, no clutter, exactly at the positions and sizes of image 1.\n\nImages 2 and 3 are mood references from the same project (warm late-summer light, colour grade, lush planting and furnishing style). Their buildings, glass roofs, layout, terraces, furniture, trees and neighbours do NOT apply; never copy geometry or objects from them.\n\nBlue hour shortly after sunset: deep blue evening sky with a faint warm afterglow, facades in cool dusk shade, the bronze wall lights glowing warm with soft light cones on the wall, warm cosy interior light (pendant above the dining table, kitchen under-cabinet light, floor lamp), the terrace softly lit by the interior; overall as dark as image 1, not brightened, calm and premium.\n\nFull-frame camera, vertical lines perfectly straight, natural colours, no HDR look, magazine quality. No people. Do not change: pavilion facade, lift-and-slide door frame and division, railings, pergola construction, neighbouring houses. No additional windows, doors, ladders, railings, pergolas or planters. TREES: exactly the trees of image 1, same positions and crown outlines. No text, no watermark, no logos.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- FURNITURE PLAN (fixed): Terrasse: links Pergola mit Sofa (angeschnitten) und zwei Sessel, rechts Hebeschiebetuer offen; innen hinter der Tuer Kueche an der Nordwand (rechts), Esstisch und Sofa wie Platzhalter. Large items (kitchen, tall cabinets, island, wardrobe, bed, sideboard) stay exactly at the walls and positions of image 1; nothing large stands free in the room unless image 1 shows it.\n- NO STUCCO: smooth ceilings and plain wall-to-ceiling junctions. No cornices, crown mouldings, ceiling roses, wall panel mouldings or decorative profiles.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.\n- Keep ceiling height, room depth and room width of image 1. No extra room behind walls.",
+    "schutz": {
+     "modus": "toleranz",
+     "kanten_f1_vorher": 0.4039,
+     "kanten_f1_nachher": 0.8354,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 2.26,
+     "anteil_geschuetzt_prozent": 27.84,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel",
+      "autos"
+     ],
+     "ki_behalten_prozent_schutz": 35.69,
+     "exit": 1,
+     "ohne": "fenster_glas"
+    },
+    "grading": {
+     "staerke": 0.15,
+     "abstand_mittel_zum_leitbild": {
+      "vorher": 20.26,
+      "nachher": 19.65
+     },
+     "maske": "schutz.png plus himmel.png (halbe Staerke)",
+     "leitbilder": "Vorlagen Hof_fin, Hof_fin-3, Hof_fin-4 (intern)"
+    },
+    "nachkontrolle": {
+     "exit": 1,
+     "status": "zur Pruefung",
+     "score": 61,
+     "befunde": [
+      "13 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)",
+      "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.8265, praezise 0.3251); Bauteile veraendert oder versetzt?",
+      "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.8875, praezise 0.9327); Bauteile veraendert oder versetzt?",
+      "Schutzzone gebaeude: Kanten weichen ab (vollstaendig 0.8161, praezise 0.7087); Bauteile veraendert oder versetzt?"
+     ],
+     "zonen": {
+      "fenster": {
+       "f1": 0.4666,
+       "status": "abweichung"
+      },
+      "leuchten": {
+       "f1": 0.9147,
+       "status": "ok"
+      },
+      "gelaender": {
+       "f1": 0.9096,
+       "status": "abweichung"
+      },
+      "gebaeude": {
+       "f1": 0.7586,
+       "status": "abweichung"
+      }
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 2,
+       "ki": 2,
+       "ki_gefunden": 2,
+       "ki_neu": 0,
+       "render_fehlt": 0
+      }
+     }
+    },
+    "pruefbilder": "r9_pruefung/top03_terrasse_abend_blaue_stunde_schutz_pruefung.jpg, _schutz_komponenten.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg",
+    "erster_lauf": {
+     "schutz_f1_nachher": 0.8098,
+     "ki_behalten_prozent_schutz": 30.8,
+     "nachkontrolle": [
+      "zur Pruefung",
+      60
+     ]
+    }
+   },
+   "top04_terrasse_abend_blaue_stunde_r9_final.jpg": {
+    "eingang": "renders/r9_terrassen/top04_terrasse_abend_final.jpg, Upload media e7bd1c47-e2b3-4a6f-891d-e9f02ea3aaf0",
+    "ebenen": "renders/r9_terrassen/top04_terrasse_abend_blaue_stunde_ebenen (Kopie im Scratchpad: Rankgitter-Zone aus gebaeude_objekt genommen, r9/rank_maske.py)",
+    "job": "2811312a-ee76-4633-b8be-ab9d93735122",
+    "ki_roh": "top04_terrasse_abend_blaue_stunde_r9_ki.jpg (3504 x 2336)",
+    "licht": "blaue_stunde",
+    "prompt": "Turn image 1, a 3D render, into a high-end photorealistic architectural photograph. Image 1 is binding for camera, framing, building geometry, openings, the lift-and-slide door frame and its division, railings, the wooden pergola construction (timber posts and beams, position) and the neighbouring buildings. The simple rounded shapes for plants, the olive tree, cushions and the blocky furniture in image 1 are only placeholders for position and size: replace them with real, lush, high-quality objects at exactly those positions and sizes.\n\nCourtyard pavilion of a new residential building in Vienna: smooth light sage green-grey render facade (Baumit 1026), every exterior wall of the pavilion in this same sage green-grey, slim anthracite frames of the lift-and-slide door, small bronze wall lights, dark anthracite metal bar railings only where image 1 shows them, light grey porcelain tiles on the terrace.\n\nTerrace of Top 4 seen from its corner: on the left the dining table for four under the wooden pergola, a planter with an olive tree, ahead the sage facade with the lift-and-slide door and a bronze wall light.\n\nThrough the open lift-and-slide door a homely, furnished living room (warm, as in a lived-in home): kitchen run in light oak with a green-grey marble worktop along the north wall (inside on the right), a round oak dining table with four rust velvet chairs, a cream sofa with an oak coffee table, a flat white disc pendant lamp, honey oak floorboards, a cognac throw, a monstera. Furniture only where image 1 shows the volumes; walls, doors and room depth as in image 1.\n\nCOLOUR CORRECTION: in image 1 the wall face around the lift-and-slide door of this pavilion is wrongly white; it is the same smooth light sage green-grey render as the rest of the facade (and as the reveal next to the door). Same geometry, only this colour.\n\nPLANTING, realistic and lush: the wooden lattice trellis densely grown over with climbing plants (star jasmine and clematis with glossy leaves, a few white climbing roses), real depth and gaps, following the trellis exactly; the potted tree is a real olive tree with silvery-green foliage and a gnarled trunk in a terracotta planter, same position and crown size; the planter troughs densely planted with ornamental grasses, lavender, white hydrangeas and rosemary spilling over the edge; green roofs with sedum and grasses.\n\nFURNITURE, realistic: teak outdoor furniture with cream and light grey outdoor cushions, a few linen pillows in terracotta and sage, a ceramic vase or lantern on the table, styled and inviting, no clutter, exactly at the positions and sizes of image 1.\n\nImages 2 and 3 are mood references from the same project (warm late-summer light, colour grade, lush planting and furnishing style). Their buildings, glass roofs, layout, terraces, furniture, trees and neighbours do NOT apply; never copy geometry or objects from them.\n\nBlue hour shortly after sunset: deep blue evening sky with a faint warm afterglow, facades in cool dusk shade, the bronze wall lights glowing warm with soft light cones on the wall, warm cosy interior light (pendant above the dining table, kitchen under-cabinet light, floor lamp), the terrace softly lit by the interior; overall as dark as image 1, not brightened, calm and premium.\n\nFull-frame camera, vertical lines perfectly straight, natural colours, no HDR look, magazine quality. No people. Do not change: pavilion facade, lift-and-slide door frame and division, railings, pergola construction, neighbouring houses. No additional windows, doors, ladders, railings, pergolas or planters. TREES: exactly the trees of image 1, same positions and crown outlines. No text, no watermark, no logos.\n\nIMMOVIZ RULES:\n- GEOMETRY LOCK: image 1 is the binding geometry. Every wall, opening, window, door, sliding door, roof edge and storey stays exactly where it is in image 1, with the same size and count. Do not add, remove, enlarge, merge or move any window, door, glass front, skylight, balcony, bay or floor. Closed walls in image 1 stay closed.\n- CAMERA LOCK: keep the exact framing, camera position, height and focal length of image 1. No zoom, no crop, no change of perspective.\n- FURNITURE PLAN (fixed): Terrasse: links Esstisch fuer vier unter der Pergola, rechts Hebeschiebetuer offen; innen hinter der Tuer Kueche an der Nordwand (rechts), Esstisch und Sofa wie Platzhalter. Large items (kitchen, tall cabinets, island, wardrobe, bed, sideboard) stay exactly at the walls and positions of image 1; nothing large stands free in the room unless image 1 shows it.\n- NO STUCCO: smooth ceilings and plain wall-to-ceiling junctions. No cornices, crown mouldings, ceiling roses, wall panel mouldings or decorative profiles.\n- Keep the material colours of image 1 (they come from the colour concept). Lighting may change brightness, not the hue of walls, facades and painted surfaces.\n- Keep ceiling height, room depth and room width of image 1. No extra room behind walls.",
+    "schutz": {
+     "modus": "toleranz",
+     "kanten_f1_vorher": 0.3713,
+     "kanten_f1_nachher": 0.8455,
+     "ausrichtung": "homographie",
+     "kantenabstand_px": 3.44,
+     "anteil_geschuetzt_prozent": 23.86,
+     "klassen": [
+      "gebaeude_objekt",
+      "fenster_rahmen",
+      "gelaender",
+      "leuchten",
+      "strassenmoebel",
+      "autos"
+     ],
+     "ki_behalten_prozent_schutz": 32.11,
+     "exit": 1,
+     "ohne": "fenster_glas"
+    },
+    "grading": {
+     "staerke": 0.15,
+     "abstand_mittel_zum_leitbild": {
+      "vorher": 17.33,
+      "nachher": 16.85
+     },
+     "maske": "schutz.png plus himmel.png (halbe Staerke)",
+     "leitbilder": "Vorlagen Hof_fin, Hof_fin-3, Hof_fin-4 (intern)"
+    },
+    "nachkontrolle": {
+     "exit": 1,
+     "status": "zur Pruefung",
+     "score": 269,
+     "befunde": [
+      "lange neue Senkrechte auf vorher glatter Wand/Fassade (Oeffnung, Hochschrank, Kueche?)",
+      "Schutzzone fenster: Kanten weichen ab (vollstaendig 0.8241, praezise 0.3901); Bauteile veraendert oder versetzt?",
+      "Schutzzone gelaender: Kanten weichen ab (vollstaendig 0.7697, praezise 0.8263); Bauteile veraendert oder versetzt?",
+      "Schutzzone gebaeude: Kanten weichen ab (vollstaendig 0.8716, praezise 0.7242); Bauteile veraendert oder versetzt?",
+      "Fassade sonstige: 4 Fenster im Render, 4 im KI-Bild (4 neu, 4 fehlen)"
+     ],
+     "zonen": {
+      "fenster": {
+       "f1": 0.5295,
+       "status": "abweichung"
+      },
+      "leuchten": {
+       "f1": 0.9535,
+       "status": "ok"
+      },
+      "gelaender": {
+       "f1": 0.797,
+       "status": "abweichung"
+      },
+      "gebaeude": {
+       "f1": 0.7911,
+       "status": "abweichung"
+      }
+     },
+     "fenster": {
+      "sonstige": {
+       "render": 4,
+       "ki": 4,
+       "ki_gefunden": 0,
+       "ki_neu": 4,
+       "render_fehlt": 4
+      }
+     }
+    },
+    "pruefbilder": "r9_pruefung/top04_terrasse_abend_blaue_stunde_schutz_pruefung.jpg, _schutz_komponenten.jpg, _grading_pruefung.jpg, _nachkontrolle.jpg",
+    "erster_lauf": {
+     "schutz_f1_nachher": 0.8913,
+     "ki_behalten_prozent_schutz": 25.09,
+     "nachkontrolle": [
+      "zur Pruefung",
+      104
+     ]
+    }
+   }
+  },
+  "kontaktbogen": "scratchpad noma_r9_terrassen_final.jpg (Render | Endbild), ZIP der 8 Endbilder /home/user/unio/noma_terrassen_r9.zip (gitignored)"
  }
 }

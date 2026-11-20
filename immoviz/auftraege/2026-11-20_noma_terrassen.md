@@ -84,3 +84,13 @@ wirkt ab dem nächsten Render (in diesen 8 Ebenen höchstens 0,08 % des Bildes).
 
 Eingecheckt: 8 JPGs, `kontaktbogen.jpg`, 8 Ebenen-Ordner ohne `normalen.png` (236 Dateien, 53 MB) mit `git add -f`.
 PNG-Fassungen der Bilder bleiben lokal.
+
+## Veredelung Runde 9 (Cloud, 20.11.2026)
+Kundenwunsch "bitte noch einmal ohne lokale KI": die 8 Bilder mit Higgsfield veredelt (gpt_image_2_6 high 4k, 34 Credits),
+danach `schutz --modus toleranz`, `grading`, `nachkontrolle --ebenen`. Endbilder `renders/higgsfield/*_r9_final.jpg`,
+Rohbilder `*_r9_ki.jpg`, Prüfbilder `renders/higgsfield/r9_pruefung/`, Einzelheiten staging.json `runde_9`.
+
+**Fassadenfarbe Top 4 (Modellfehler):** In `top04_terrasse_hst` und `_abend` ist die Wand um die HST weiß, laut
+project.yaml sind beide Pavillons `nb_wand_hof` (Baumit 1026 hellgrün-grau, EIN S. 25/27); die Außenkameras zeigen Top 4
+richtig salbei. Ursache vermutlich die Innenhülle `vp_top4_aussen` (Innenwandmaterial vor der Außenfassade an der
+Ostwand). In Runde 9 nur per Prompt korrigiert (Endbilder salbei); vor dem nächsten Render im Modell beheben.
