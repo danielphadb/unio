@@ -368,7 +368,8 @@ Ergebnis:
 
 | Ausgabe | Inhalt | Repo |
 |---|---|---|
-| `project.yaml` `cameras.<name>` | `pos`, `target` (waagrecht), `lens`, `shift: [x, y]`, `format: [b, h]` (Seitenverhältnis der Vorlage), `clip_start`, falls der Standpunkt in einem Nachbarbaukörper liegt (Vorlagen blenden nahe Nachbarteile oft aus), `ausblenden: [<Namensanfang>]` für Objekte, die nur diese Kamera nicht rendert (z. B. `nb_umgebung_erker_`), Kommentar mit Fehler | ja |
+| `project.yaml` `cameras.<name>` | `pos`, `target` (waagrecht), `lens`, `shift: [x, y]`, `format: [b, h]` (Seitenverhältnis der Vorlage), `clip_start`, falls der Standpunkt in einem Nachbarbaukörper liegt (Vorlagen blenden nahe Nachbarteile oft aus), `ausblenden: [<Namensanfang>]` für Objekte, die nur diese Kamera nicht rendert (z. B. `nb_umgebung_erker_`), `roll` (Grad, nur mit `vertical: false`) für gematchte Handyfotos, Kommentar mit Fehler | ja |
+| `project.yaml` `baukoerper` | `[{id, poly, quelle}]`: Grundriss eines Baukörpers aus `data/context.json` ersetzen (z. B. offene Balkontürme, die das Baukörpermodell als massive Vorsprünge führt) | nein |
 | Konsole (JSON) | Reprojektionsfehler je Punkt in Pixeln, Mittel, Maximum, Prozent der Bildbreite, `gematcht`, Kantenabweichung gesamt und bei Nachbarn | |
 | `renders/kameramatch/<name>_modell.png` | Blender-Vorschau aus der gematchten Kamera im Format der Vorlage | nein (PNG) |
 | `renders/kameramatch/<name>_ueberlagerung.png` | drei Felder: Vorlage und Modell 50 % überblendet; Kanten (Vorlage rot, Modell blau, deckungsgleich violett); Passpunkte (Vorlage grün, Modell gelb) | nein (enthält die Vorlage) |

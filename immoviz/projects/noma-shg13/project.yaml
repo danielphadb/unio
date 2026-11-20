@@ -64,8 +64,9 @@ neubau:
     nb_paneel: {color: "#B9ADB2", art: putz}
     nb_weiss_005378: {color: "#F5F1EB", faktor: 0.74, art: putz}   # wie hof_ost_005378 (Nachbarkarten rechnen Farbe x 0,74)
     # Runde 8 (Apple 13/14 des Kunden, 18.11.2026): Erkertuerme Schnirchgasse 4 und 6 in der Farbe der Hofkarten
-    nb_weiss_005379: {color: "#F4F1EC", faktor: 0.74, art: putz}
-    nb_weiss_005380: {color: "#ECE8DF", faktor: 0.74, art: putz}
+    nb_weiss_005379: {color: "#BDB6AB", faktor: 0.74, art: putz, quelle: "Fotos Hof 20.11.2026"}   # Runde 9: grau-beige wie die Hofkarte (Fotos)
+    nb_weiss_005380: {color: "#E2E2DF", faktor: 0.74, art: putz, quelle: "Fotos Hof 20.11.2026"}
+    nb_weiss_005364: {color: "#E8ECF0", faktor: 0.74, art: putz, quelle: "Fotos Hof 20.11.2026"}   # Runde 9: wie Hofkarte Erdbergstrasse 125 (weiss mit Blaustich, Fotos)
     # Runde 6: Nr. 15 Gemeindebau, Balkone rotbraun und Markisen (Apple 9/8, Farbwerte geschaetzt aus dem Schatten zurueckgerechnet)
     nb_balkon_15: {color: "#3A1E17", art: putz, quelle: "Apple 9 (Balkonbruestungen rotbraun) ANN Farbwert, dunkel angesetzt, im Sonnenlicht rotbraun"}
     nb_markise_15: {color: "#C98B5E", art: einfach, rough: 0.8, quelle: "Apple 9 (Markise orange-beige) ANN Farbwert"}
@@ -84,6 +85,17 @@ neubau:
     aus_kletter: {color: "#365A27", art: rasen, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     aus_oliv: {color: "#6E7D5A", art: rasen, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
   koerper:
+    # Runde 9 (Fotos Hof 20.11.2026): Erdbergstrasse 125 ist ein weisser Gruenderzeitbau mit verglasten Balkonen (1. bis 4. OG und DG),
+    # verglastem Stiegenhausstreifen an der Suedecke und Dachausbau: DG 1 weiss mit Fenstertueren hinter dem Glasbalkon, DG 2
+    # Zinkmansarde mittelgrau mit Dachflaechenfenster, oben Terrasse mit Gelaender. Ersetzt die dunklen Kaesten von Runde 8
+    - {gruppe: nb_umgebung_005364, poly: [[-22.777, -65.781], [-22.851, -64.683], [-23.1, -64.7], [-23.026, -65.798]], z: [-0.66, 22.94], wand: glas, dach: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Stiegenhaus verglast"}
+    - {gruppe: nb_umgebung_005364, poly: [[-23.399, -64.72], [-23.999, -55.82], [-30.684, -56.271], [-30.084, -65.171]], z: [20.14, 22.94], wand: nb_weiss_005364, dach: dach_blech_grau, ohne_kanten: [0], quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) DG 1"}
+    - {gruppe: nb_umgebung_005364, poly: [[-25.694, -64.875], [-26.294, -55.975], [-30.684, -56.271], [-30.084, -65.171]], z: [22.94, 25.94], wand: dach_blech_grau, dach: dach_blech_grau, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) DG 2 Kern"}
+    # Runde 9 (Fotos Hof 20.11.2026): Erdbergstrasse 123 = Bau der 1960er/70er, graue Kratzputzfelder zwischen weissen Lisenen bis 22,3
+    # [OGD 22,28], darueber links ein zurueckgesetztes Terrassengeschoss bis 23,9, rechts eine weisse Attika bis 26,0 ueber dem
+    # Grauteil und dem weissen Nordteil mit der Einzelfensterachse (Anteile am Foto: grau 70 %, weiss 30 % der Hoffront)
+    - {gruppe: nb_umgebung_005363, poly: [[-24.288, -55.992], [-24.767, -52.02], [-31.121, -52.786], [-30.642, -56.758]], z: [21.87, 23.47], wand: nb_weiss, dach: dach_blech_hellgrau, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Terrassengeschoss"}
+    - {gruppe: nb_umgebung_005363, poly: [[-23.228, -51.835], [-24.45, -41.706], [-33.335, -42.777], [-32.114, -52.906]], z: [21.07, 25.57], wand: nb_weiss, dach: dach_blech_hellgrau, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Attika"}
     # --- Strassenhaus Schlachthausgasse 13 [EIN S. 9, 22, 25]: 15,00 m tief, Traufe +21,00, Strassen- und Hofseite als Fassade
     - {gruppe: nb_shg, poly: [[0.0, 0.0], [18.48, 0.0], [19.55, -15.0], [0.80, -15.0]], z: [0.0, 21.0], wand: nb_brandwand,
        dach: dach_flach, ohne_kanten: [0, 2]}
@@ -152,8 +164,13 @@ neubau:
     # Runde 5 (kameramatch Hof_fin und Hof_fin-4, Strahlschnitt): die Vorlage zeigt den Kasten 1,0 x 3,2 m, 1,2 m hoch, rund 7 m
     # weiter westlich als das Orthofoto (dort 3 x 8 m bei x -4 bis -1). Vorlage hat Vorrang (Nachbargrund), Orthofoto-Lage war:
     # poly [[-4.0, -37.5], [-1.0, -37.5], [-1.0, -45.5], [-4.0, -45.5]], z [0, 1.35]
-    - {gruppe: nb_umgebung, poly: [[-10.94, -41.02], [-9.94, -40.82], [-10.26, -37.78], [-11.26, -37.98]], z: [0.0, 1.2], wand: nb_weiss, dach: nb_attika}
-    - {gruppe: nb_umgebung, poly: [[-4.3, -45.5], [-1.3, -45.5], [-1.3, -53.5], [-4.3, -53.5]], z: [0.0, 0.75], wand: nb_brandwand, dach: nb_brandwand}
+    # Runde 9 (Fotos Hof 20.11.2026, Kamera foto_7836 gematcht, Lage per Strahl auf den Boden): statt des weissen Kastens aus
+    # der Vorlage steht dort ein verglaster Stiegenabgang (Tiefgarage) mit Blechpultdaechern und Lamellenkasten, genau an der
+    # Stelle des Orthofotos (x -4 bis -1, Runde 3). Vorlagen-Kasten bei x -10,9 und die Mauer x -4,3 bis -1,3 entfernt (dort Weg)
+    - {gruppe: nb_umgebung, poly: [[-3.6, -38.4], [-1.4, -38.1], [-1.0, -43.5], [-3.2, -43.7]], z: [0.15, 2.45], wand: glas, dach: nb_huette, quelle: "Fotos Hof 20.11.2026 (IMG_7836, Strahlschnitt) ANN Hoehe"}
+    - {gruppe: nb_umgebung, poly: [[-3.2, -43.7], [-1.0, -43.5], [-0.3, -46.5], [-2.1, -46.4]], z: [0.15, 2.7], wand: nb_huette, dach: nb_huette, quelle: "Fotos Hof 20.11.2026 (IMG_7836) ANN Hoehe"}
+    - {gruppe: nb_umgebung, poly: [[1.7, -33.4], [2.2, -33.4], [2.3, -35.2], [1.8, -35.2]], z: [0.15, 0.6], wand: aus_holz, dach: aus_holz, quelle: "Fotos Hof 20.11.2026 (Bank)"}
+    - {gruppe: nb_umgebung, poly: [[1.85, -35.5], [2.35, -35.5], [2.45, -37.3], [1.95, -37.3]], z: [0.15, 0.6], wand: aus_holz, dach: aus_holz, quelle: "Fotos Hof 20.11.2026 (Bank)"}
     # Gartenhuette Spielplatz (Blech grau, 2,0 x 3,6 m) und niedriger Kasten am Beet [Orthofoto, Google] [ANN Hoehen]
     - {gruppe: nb_umgebung, poly: [[-12.75, -35.5], [-10.75, -35.5], [-10.75, -39.1], [-12.75, -39.1]], z: [0.0, 2.15], wand: nb_huette, dach: nb_huette}
     - {gruppe: nb_umgebung, poly: [[-10.5, -53.8], [-8.75, -53.8], [-8.75, -57.5], [-10.5, -57.5]], z: [0.0, 0.75], wand: nb_huette, dach: nb_huette}
@@ -175,6 +192,9 @@ neubau:
     # Runde 5 hatte die Tuerme entfernt (Vorlage Hof_fin zeigt sie nicht), auskommentierte Fassung von Runde 3 darunter.
     - {gruppe: nb_umgebung_erker_005379, poly: [[24.072, -31.286], [23.58, -31.371], [22.769, -33.136], [23.485, -37.274], [24.842, -38.663], [25.335, -38.578]], z: [-0.26, 16.14], wand: nb_weiss_005379, dach: nb_weiss_005379, ohne_kanten: [1, 2, 3, 5], quelle: "BKM 4003912180 (Vorsprung), LOD2 (Traufe 16,3 bis 16,9, Spitze 18,6), Apple 13"}
     - {gruppe: nb_umgebung_erker_005380, poly: [[27.58, -51.495], [25.446, -52.88], [24.358, -54.277], [24.717, -56.346], [26.213, -57.304], [28.689, -57.89]], z: [-0.4, 16.4], wand: nb_weiss_005380, dach: nb_weiss_005380, ohne_kanten: [0, 1, 2, 3, 4, 5], quelle: "BKM 4003912229 (Vorsprung), LOD2 (Traufe 16,6 bis 17,2, Spitze 18,3), Apple 13"}
+    # Runde 9 (Fotos Hof 20.11.2026, IMG_7836/7804/7823): Schlachthausgasse 11 hat an der Hofseite einen aussenliegenden verglasten
+    # Liftschacht mit grauem Rahmen ueber alle Geschosse, vor dem schmalen Vorsprung des Baukoerpermodells (22,04/-19,19 bis 22,36/-21,09)
+    - {gruppe: nb_umgebung, poly: [[21.85, -19.13], [22.17, -21.16], [22.42, -21.12], [22.1, -19.09]], z: [-0.05, 22.3], wand: glas, dach: nb_attika, quelle: "Fotos Hof 20.11.2026 (Liftschacht)"}
     # Runde 4: EG Hoftrakt nach EIN S. 8/15 (Aussenkanten Daemmung): Suedreihe b 0 bis Gang, Nordreihe bis zur Grundgrenze b 14,86, drei offene Hoefe (Gaerten 42,09 / 31,17 / 29,91 m2), Ostende schraeg (Top 4A darueber), Gangausgang bei a 37,65. Dachaufbauten siehe flaechen
     - {gruppe: nb_hof, rahmen: hof, poly: [[-7.318, 0.0], [38.8, 0.0], [41.36, 6.62], [37.65, 6.62], [37.65, 8.09], [36.14, 8.09], [36.14, 12.48], [30.84, 12.48], [30.84, 14.86], [25.52, 14.86], [25.52, 8.09], [21.72, 8.09], [21.72, 12.48], [16.42, 12.48], [16.42, 14.86], [10.6, 14.86], [10.6, 8.09], [5.82, 8.09], [5.82, 12.48], [0.5, 12.48], [0.5, 14.86], [-5.641, 14.86]], z: [0.0, 2.92], wand: nb_wand_hof, dach: dach_flach, ohne_kanten: [0, 3, 5, 7, 9, 10, 11, 13, 16, 17, 19, 21]}
     # Runde 4: Pavillons FOK +3,50, DUK +6,01, Attika +6,78 [EIN S. 23]; Top 4 bei a 15,90 (Abstand 3,93 laut EIN S. 16, vorher 16,04)
@@ -185,15 +205,18 @@ neubau:
     # Sandkiste mit Sonnensegel [EIN S. 18] (Segel als Dreieck, Mast 2,8 m [ANN])
     - {gruppe: nb_garten, rahmen: hof, poly: [[41.60, 8.40], [42.75, 8.40], [42.75, 9.60], [41.60, 9.60]], z: [0.0, 0.30], wand: nb_holzdeck, dach: nb_sand}
   fassaden:
-    # Runde 8: Fensterachsen der Erkertuerme Schnirchgasse 4 und 6 (je Seite eine Achse, Reihen wie die Hofkarten) [Apple 13]
-    - {gruppe: nb_umgebung_erker_005379, a: [23.58, -31.371], b: [22.769, -33.136], z: [-0.26, 16.14], wand: nb_weiss_005379, fenster: [{u: [0.47, 1.47], z: [0.94, 2.74]}, {u: [0.47, 1.47], z: [4.04, 5.74]}, {u: [0.47, 1.47], z: [7.14, 8.84]}, {u: [0.47, 1.47], z: [10.24, 11.94]}, {u: [0.47, 1.47], z: [13.34, 15.04]}]}
-    - {gruppe: nb_umgebung_erker_005379, a: [22.769, -33.136], b: [23.485, -37.274], z: [-0.26, 16.14], wand: nb_weiss_005379, fenster: [{u: [1.6, 2.6], z: [0.94, 2.74]}, {u: [1.6, 2.6], z: [4.04, 5.74]}, {u: [1.6, 2.6], z: [7.14, 8.84]}, {u: [1.6, 2.6], z: [10.24, 11.94]}, {u: [1.6, 2.6], z: [13.34, 15.04]}]}
-    - {gruppe: nb_umgebung_erker_005379, a: [23.485, -37.274], b: [24.842, -38.663], z: [-0.26, 16.14], wand: nb_weiss_005379, fenster: [{u: [0.47, 1.47], z: [0.94, 2.74]}, {u: [0.47, 1.47], z: [4.04, 5.74]}, {u: [0.47, 1.47], z: [7.14, 8.84]}, {u: [0.47, 1.47], z: [10.24, 11.94]}, {u: [0.47, 1.47], z: [13.34, 15.04]}]}
-    - {gruppe: nb_umgebung_erker_005380, a: [27.58, -51.495], b: [25.446, -52.88], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.77, 1.77], z: [0.8, 2.6]}, {u: [0.77, 1.77], z: [3.9, 5.6]}, {u: [0.77, 1.77], z: [7.0, 8.7]}, {u: [0.77, 1.77], z: [10.1, 11.8]}, {u: [0.77, 1.77], z: [13.2, 14.9]}]}
-    - {gruppe: nb_umgebung_erker_005380, a: [25.446, -52.88], b: [24.358, -54.277], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.39, 1.39], z: [0.8, 2.6]}, {u: [0.39, 1.39], z: [3.9, 5.6]}, {u: [0.39, 1.39], z: [7.0, 8.7]}, {u: [0.39, 1.39], z: [10.1, 11.8]}, {u: [0.39, 1.39], z: [13.2, 14.9]}]}
-    - {gruppe: nb_umgebung_erker_005380, a: [24.358, -54.277], b: [24.717, -56.346], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.55, 1.55], z: [0.8, 2.6]}, {u: [0.55, 1.55], z: [3.9, 5.6]}, {u: [0.55, 1.55], z: [7.0, 8.7]}, {u: [0.55, 1.55], z: [10.1, 11.8]}, {u: [0.55, 1.55], z: [13.2, 14.9]}]}
-    - {gruppe: nb_umgebung_erker_005380, a: [24.717, -56.346], b: [26.213, -57.304], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.39, 1.39], z: [0.8, 2.6]}, {u: [0.39, 1.39], z: [3.9, 5.6]}, {u: [0.39, 1.39], z: [7.0, 8.7]}, {u: [0.39, 1.39], z: [10.1, 11.8]}, {u: [0.39, 1.39], z: [13.2, 14.9]}]}
-    - {gruppe: nb_umgebung_erker_005380, a: [26.213, -57.304], b: [28.689, -57.89], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.77, 1.77], z: [0.8, 2.6]}, {u: [0.77, 1.77], z: [3.9, 5.6]}, {u: [0.77, 1.77], z: [7.0, 8.7]}, {u: [0.77, 1.77], z: [10.1, 11.8]}, {u: [0.77, 1.77], z: [13.2, 14.9]}]}
+    - {gruppe: nb_umgebung_005364, a: [-23.399, -64.72], b: [-23.999, -55.82], z: [20.14, 22.94], wand: nb_weiss_005364, fenster: [{u: [1.25, 2.65], z: [20.44, 22.54], typ: tuer}, {u: [3.1, 4.5], z: [20.44, 22.54], typ: tuer}, {u: [4.9, 6.3], z: [20.44, 22.54], typ: tuer}, {u: [7.0, 8.4], z: [20.44, 22.54], typ: tuer}], quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) DG 1 Fenstertueren"}
+    - {gruppe: nb_umgebung_005363, a: [-24.288, -55.992], b: [-24.767, -52.02], z: [21.87, 23.47], wand: nb_weiss, fenster: [{u: [0.3, 1.9], z: [22.07, 23.17]}, {u: [2.2, 3.7], z: [22.07, 23.17]}], quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Terrassengeschoss"}
+    # Runde 8: Fensterachsen der Erkertuerme Schnirchgasse 4 und 6. Runde 9 (Fotos Hof 20.11.2026): die Tuerme sind Stiegenhaeuser,
+    # Frontfenster auf den Podesten (halbes Geschoss versetzt), auf den Schraegseiten kleine Fenster
+    - {gruppe: nb_umgebung_erker_005379, a: [23.58, -31.371], b: [22.769, -33.136], z: [-0.26, 16.14], wand: nb_weiss_005379, fenster: [{u: [0.7, 1.25], z: [1.34, 2.04]}, {u: [0.7, 1.25], z: [5.14, 5.84]}, {u: [0.7, 1.25], z: [8.84, 9.54]}, {u: [0.7, 1.25], z: [12.64, 13.34]}], quelle: "Fotos Hof 20.11.2026 (Stiegenhausfenster um ein halbes Geschoss versetzt)"}
+    - {gruppe: nb_umgebung_erker_005379, a: [22.769, -33.136], b: [23.485, -37.274], z: [-0.26, 16.14], wand: nb_weiss_005379, fenster: [{u: [1.6, 2.6], z: [2.94, 4.34]}, {u: [1.6, 2.6], z: [6.69, 8.09]}, {u: [1.6, 2.6], z: [10.44, 11.84]}, {u: [1.6, 2.6], z: [14.04, 15.34]}], quelle: "Fotos Hof 20.11.2026 (Stiegenhausfenster um ein halbes Geschoss versetzt)"}
+    - {gruppe: nb_umgebung_erker_005379, a: [23.485, -37.274], b: [24.842, -38.663], z: [-0.26, 16.14], wand: nb_weiss_005379, fenster: [{u: [0.7, 1.25], z: [1.34, 2.04]}, {u: [0.7, 1.25], z: [5.14, 5.84]}, {u: [0.7, 1.25], z: [8.84, 9.54]}, {u: [0.7, 1.25], z: [12.64, 13.34]}], quelle: "Fotos Hof 20.11.2026 (Stiegenhausfenster um ein halbes Geschoss versetzt)"}
+    - {gruppe: nb_umgebung_erker_005380, a: [27.58, -51.495], b: [25.446, -52.88], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [1.0, 1.55], z: [1.2, 1.9]}, {u: [1.0, 1.55], z: [5.0, 5.7]}, {u: [1.0, 1.55], z: [8.7, 9.4]}, {u: [1.0, 1.55], z: [12.5, 13.2]}], quelle: "Fotos Hof 20.11.2026 (Stiegenhausfenster um ein halbes Geschoss versetzt)"}
+    - {gruppe: nb_umgebung_erker_005380, a: [25.446, -52.88], b: [24.358, -54.277], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.61, 1.16], z: [1.2, 1.9]}, {u: [0.61, 1.16], z: [5.0, 5.7]}, {u: [0.61, 1.16], z: [8.7, 9.4]}, {u: [0.61, 1.16], z: [12.5, 13.2]}], quelle: "Fotos Hof 20.11.2026 (Stiegenhausfenster um ein halbes Geschoss versetzt)"}
+    - {gruppe: nb_umgebung_erker_005380, a: [24.358, -54.277], b: [24.717, -56.346], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.55, 1.55], z: [2.8, 4.2]}, {u: [0.55, 1.55], z: [6.55, 7.95]}, {u: [0.55, 1.55], z: [10.3, 11.7]}, {u: [0.55, 1.55], z: [13.9, 15.2]}], quelle: "Fotos Hof 20.11.2026 (Stiegenhausfenster um ein halbes Geschoss versetzt)"}
+    - {gruppe: nb_umgebung_erker_005380, a: [24.717, -56.346], b: [26.213, -57.304], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [0.61, 1.16], z: [1.2, 1.9]}, {u: [0.61, 1.16], z: [5.0, 5.7]}, {u: [0.61, 1.16], z: [8.7, 9.4]}, {u: [0.61, 1.16], z: [12.5, 13.2]}], quelle: "Fotos Hof 20.11.2026 (Stiegenhausfenster um ein halbes Geschoss versetzt)"}
+    - {gruppe: nb_umgebung_erker_005380, a: [26.213, -57.304], b: [28.689, -57.89], z: [-0.4, 16.4], wand: nb_weiss_005380, fenster: [{u: [1.0, 1.55], z: [1.2, 1.9]}, {u: [1.0, 1.55], z: [5.0, 5.7]}, {u: [1.0, 1.55], z: [8.7, 9.4]}, {u: [1.0, 1.55], z: [12.5, 13.2]}], quelle: "Fotos Hof 20.11.2026 (Stiegenhausfenster um ein halbes Geschoss versetzt)"}
     # --- Strassenhaus Hoffassade y = -15,00, u = x - 0,80. Runde 4: 1. OG (FOK +3,98) nach Ansicht EIN S. 26 vektoriell
     # ausgewertet (Glasflaechen + Rahmen, F 18,79): Fenster 1,18 x 1,45 und 1,40 x 1,45 FPH 0,90, Terrassentueren 1,00 x 2,32,
     # Stiegenhaustuer zum Weg 0,90 x 2,57 (vorher zwei 2,20 m breite Tueren und 1,00 m breite Fenster geschaetzt).
@@ -318,6 +341,37 @@ neubau:
     - {gruppe: nb_top4a, rahmen: hof, a: [30.77, 0.0], b: [38.80, 0.0], z: [3.38, 6.78], wand: nb_wand_hof, fenster: [{u: [1.84, 3.44], z: [4.40, 5.90]}, {u: [5.83, 7.43], z: [4.40, 5.90]}]}
     - {gruppe: nb_top4a, rahmen: hof, a: [41.36, 6.62], b: [30.77, 6.62], z: [3.38, 6.78], wand: nb_wand_hof, fenster: [{u: [3.83, 5.83], z: [3.50, 5.90], typ: hst}, {u: [6.93, 7.94], z: [3.50, 5.70], typ: tuer}, {u: [8.23, 9.66], z: [4.40, 5.90]}]}
   boxen:
+    # Runde 9: Schlachthausgasse 15/17 Hofseite, zwei offene Stahl-Balkontuerme (1. bis 6. OG und DG) und zwei auskragende Stahlbalkone [Fotos Hof 20.11.2026]
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [7.3, 9.9], d: [-1.45, 0.0], z: [2.63, 2.81], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [7.3, 9.9], d: [-1.45, 0.0], z: [5.58, 5.76], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [7.3, 9.9], d: [-1.45, 0.0], z: [8.53, 8.71], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [7.3, 9.9], d: [-1.45, 0.0], z: [11.48, 11.66], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [7.3, 9.9], d: [-1.45, 0.0], z: [14.43, 14.61], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [7.3, 9.9], d: [-1.45, 0.0], z: [17.38, 17.56], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [7.3, 9.9], d: [-1.45, 0.0], z: [20.43, 20.61], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [7.3, 7.42], d: [-1.45, -1.33], z: [-0.19, 21.61], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlstuetze"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [9.78, 9.9], d: [-1.45, -1.33], z: [-0.19, 21.61], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlstuetze"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [17.4, 19.9], d: [-1.45, 0.0], z: [2.63, 2.81], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [17.4, 19.9], d: [-1.45, 0.0], z: [5.58, 5.76], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [17.4, 19.9], d: [-1.45, 0.0], z: [8.53, 8.71], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [17.4, 19.9], d: [-1.45, 0.0], z: [11.48, 11.66], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [17.4, 19.9], d: [-1.45, 0.0], z: [14.43, 14.61], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [17.4, 19.9], d: [-1.45, 0.0], z: [17.38, 17.56], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [17.4, 19.9], d: [-1.45, 0.0], z: [20.43, 20.61], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [17.4, 17.52], d: [-1.45, -1.33], z: [-0.19, 21.61], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlstuetze"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [19.78, 19.9], d: [-1.45, -1.33], z: [-0.19, 21.61], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlstuetze"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [11.0, 16.0], d: [-1.4, 0.0], z: [11.48, 11.66], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) auskragender Stahlbalkon"}
+    - {gruppe: nb_umgebung_005362, a: [-25.5, -15.05], b: [0.8, -15.05], u: [11.0, 16.0], d: [-1.4, 0.0], z: [14.43, 14.61], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) auskragender Stahlbalkon"}
+    - {gruppe: nb_umgebung_005364, a: [-23.1, -64.7], b: [-23.7, -55.8], u: [0.4, 6.4], d: [-1.3, 0.0], z: [4.54, 4.74], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Balkonplatte"}
+    - {gruppe: nb_umgebung_005364, a: [-23.1, -64.7], b: [-23.7, -55.8], u: [0.4, 6.4], d: [-1.3, 0.0], z: [8.64, 8.84], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Balkonplatte"}
+    - {gruppe: nb_umgebung_005364, a: [-23.1, -64.7], b: [-23.7, -55.8], u: [0.4, 6.4], d: [-1.3, 0.0], z: [12.74, 12.94], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Balkonplatte"}
+    - {gruppe: nb_umgebung_005364, a: [-23.1, -64.7], b: [-23.7, -55.8], u: [0.4, 6.4], d: [-1.3, 0.0], z: [16.84, 17.04], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Balkonplatte"}
+    - {gruppe: nb_umgebung_005364, a: [-23.1, -64.7], b: [-23.7, -55.8], u: [0.4, 6.4], d: [-1.3, 0.0], z: [19.94, 20.14], mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Balkonplatte"}
+    - {gruppe: nb_umgebung_005363, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [1.6, 3.4], d: [-0.12, 0.0], z: [2.17, 21.87], mat: nb_weiss, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) weisse Lisene"}
+    - {gruppe: nb_umgebung_005363, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [3.4, 3.55], d: [-0.12, 0.0], z: [2.17, 21.87], mat: nb_weiss, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) weisse Lisene"}
+    - {gruppe: nb_umgebung_005363, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [5.6, 5.75], d: [-0.12, 0.0], z: [2.17, 21.87], mat: nb_weiss, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) weisse Lisene"}
+    - {gruppe: nb_umgebung_005363, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [7.9, 8.05], d: [-0.12, 0.0], z: [2.17, 21.87], mat: nb_weiss, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) weisse Lisene"}
+    - {gruppe: nb_umgebung_005363, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [9.85, 10.0], d: [-0.12, 0.0], z: [2.17, 21.87], mat: nb_weiss, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) weisse Lisene"}
     # Runde 6: Treppen 17 Stg. 20,0/24,0 vom 2. DG (+21,82) aufs Flachdach (+25,30) in der Dachflaeche [EIN S. 13/14, S. 26]; Wendel unten als Podest vereinfacht [ANN]
     - {gruppe: nb_shg_dach, a: [5.65, -15.0], b: [7.07, -15.0], d: [0.0, 0.45], z: [21.0, 21.81], mat: nb_platten, quelle: "EIN S. 13 (Antritt an der Terrasse), Podest ANN"}
     - {gruppe: nb_shg_dach, a: [5.65, -14.55], b: [6.55, -14.55], d: [0.0, 0.212], z: [21.15, 22.025], mat: nb_platten, quelle: "EIN S. 13/14 (17 Stg. 20,0/24,0)"}
@@ -508,29 +562,10 @@ neubau:
     - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 75.392], d: [-1.25, -1.15], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8 (Bruestung voll rotbraun)"}
     - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [72.392, 72.492], d: [-1.15, 0.0], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
     - {gruppe: nb_umgebung, a: [83.65, -12.106], b: [93.25, -96.006], u: [75.292, 75.392], d: [-1.15, 0.0], z: [25.4, 26.4], mat: nb_balkon_15, quelle: "Apple 9/8"}
-    # Runde 3: Balkonstapel Hoffassade Schlachthausgasse 11 (Mitte, weiss), ab 2. OG ueber dem Hofbau [Google 3D] [ANN Lage, Tiefe]
-    - {gruppe: nb_umgebung, a: [-18.0, -15.05], b: [-8.0, -15.05], d: [-1.3, 0.0], z: [5.8, 6.0], mat: nb_weiss}
-    - {gruppe: nb_umgebung, a: [-18.0, -15.05], b: [-8.0, -15.05], d: [-1.3, 0.0], z: [8.8, 9.0], mat: nb_weiss}
-    - {gruppe: nb_umgebung, a: [-18.0, -15.05], b: [-8.0, -15.05], d: [-1.3, 0.0], z: [11.8, 12.0], mat: nb_weiss}
-    - {gruppe: nb_umgebung, a: [-18.0, -15.05], b: [-8.0, -15.05], d: [-1.3, 0.0], z: [14.8, 15.0], mat: nb_weiss}
-    - {gruppe: nb_umgebung, a: [-18.0, -15.05], b: [-8.0, -15.05], d: [-1.3, 0.0], z: [17.8, 18.0], mat: nb_weiss}
+    # Runde 3: Balkonstapel Hoffassade Schlachthausgasse 15/17 (x -18 bis -8, Google 3D) ersetzt in Runde 9 durch die Stahl-Balkontuerme (Fotos)
     # Traufgesims Strassenhaus
     - {gruppe: nb_shg, a: [0.0, 0.0], b: [18.48, 0.0], d: [-0.3, 0.0], z: [20.75, 21.10], mat: nb_strasse}
     # Runde 5: Paneelstreifen (Bruestungen) Erdbergstrasse 123 zwischen den Fensterbaendern, zwei Achsgruppen (Vorlage Hof_fin)
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [0.75, 2.95], d: [-0.04, 0.0], z: [4.7, 6.1], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [5.9, 13.9], d: [-0.04, 0.0], z: [4.7, 6.1], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [0.75, 2.95], d: [-0.04, 0.0], z: [7.6, 9.0], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [5.9, 13.9], d: [-0.04, 0.0], z: [7.6, 9.0], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [0.75, 2.95], d: [-0.04, 0.0], z: [10.5, 11.9], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [5.9, 13.9], d: [-0.04, 0.0], z: [10.5, 11.9], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [0.75, 2.95], d: [-0.04, 0.0], z: [13.4, 14.8], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [5.9, 13.9], d: [-0.04, 0.0], z: [13.4, 14.8], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [0.75, 2.95], d: [-0.04, 0.0], z: [16.3, 17.7], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [5.9, 13.9], d: [-0.04, 0.0], z: [16.3, 17.7], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [0.75, 2.95], d: [-0.04, 0.0], z: [19.2, 20.6], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [5.9, 13.9], d: [-0.04, 0.0], z: [19.2, 20.6], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [0.75, 2.95], d: [-0.04, 0.0], z: [22.1, 23.5], mat: nb_paneel}
-    - {gruppe: nb_umgebung, a: [-22.7, -55.8], b: [-24.4, -41.7], u: [5.9, 13.9], d: [-0.04, 0.0], z: [22.1, 23.5], mat: nb_paneel}
     # Runde 4: Rinne (Rigol) am Rampenfuss und vor den Hebeschiebetueren [EIN S. 16]
     - {gruppe: nb_hof, rahmen: hof, a: [5.6, 6.62], b: [5.6, 7.98], d: [0.0, 0.18], z: [3.50, 3.505], mat: nb_metall}
     # Attiken [EIN S. 24 Schnitt 3: OK Attika +4,16 ueber DOK +3,96]; Nordreihe +3,06 mit Attika +3,26 [ANN]
@@ -602,19 +637,20 @@ neubau:
     - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [6.86, 6.885], mat: nb_basalt}
     - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [7.14, 7.165], mat: nb_basalt}
   schraegen:
-    # Runde 8: Erkerdaecher Schnirchgasse 4 (Pyramide schiefergrau, Spitze 1 m hinter der Hofwand) und 6 (Zeltdach Ziegel orange) [LOD2, Apple 13]
-    - {gruppe: nb_umgebung_erker_005379, pts: [[24.072, -31.286, 16.14], [23.58, -31.371, 16.14], [25.689, -34.761, 18.74]], mat: dach_schiefer_dunkel}
-    - {gruppe: nb_umgebung_erker_005379, pts: [[23.58, -31.371, 16.14], [22.769, -33.136, 16.14], [25.689, -34.761, 18.74]], mat: dach_schiefer_dunkel}
-    - {gruppe: nb_umgebung_erker_005379, pts: [[22.769, -33.136, 16.14], [23.485, -37.274, 16.14], [25.689, -34.761, 18.74]], mat: dach_schiefer_dunkel}
-    - {gruppe: nb_umgebung_erker_005379, pts: [[23.485, -37.274, 16.14], [24.842, -38.663, 16.14], [25.689, -34.761, 18.74]], mat: dach_schiefer_dunkel}
-    - {gruppe: nb_umgebung_erker_005379, pts: [[24.842, -38.663, 16.14], [25.335, -38.578, 16.14], [25.689, -34.761, 18.74]], mat: dach_schiefer_dunkel}
-    - {gruppe: nb_umgebung_erker_005379, pts: [[25.335, -38.578, 16.14], [24.072, -31.286, 16.14], [25.689, -34.761, 18.74]], mat: dach_schiefer_dunkel}
-    - {gruppe: nb_umgebung_erker_005380, pts: [[27.58, -51.495, 16.4], [25.446, -52.88, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_orange}
-    - {gruppe: nb_umgebung_erker_005380, pts: [[25.446, -52.88, 16.4], [24.358, -54.277, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_orange}
-    - {gruppe: nb_umgebung_erker_005380, pts: [[24.358, -54.277, 16.4], [24.717, -56.346, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_orange}
-    - {gruppe: nb_umgebung_erker_005380, pts: [[24.717, -56.346, 16.4], [26.213, -57.304, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_orange}
-    - {gruppe: nb_umgebung_erker_005380, pts: [[26.213, -57.304, 16.4], [28.689, -57.89, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_orange}
-    - {gruppe: nb_umgebung_erker_005380, pts: [[28.689, -57.89, 16.4], [27.58, -51.495, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_orange}
+    - {gruppe: nb_umgebung_005364, pts: [[-23.998, -64.761, 22.94], [-24.598, -55.861, 22.94], [-26.294, -55.975, 25.94], [-25.694, -64.875, 25.94]], mat: dach_blech_grau, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) DG 2 Zinkmansarde"}
+    # Runde 8: Erkerdaecher Schnirchgasse 4 (Pyramide, Spitze 1 m hinter der Hofwand) und 6 (Zeltdach); Runde 9 nach den Fotos beide Ziegel braunrot mit Zinkkanten [LOD2, Apple 13]
+    - {gruppe: nb_umgebung_erker_005379, pts: [[24.072, -31.286, 16.14], [23.58, -31.371, 16.14], [25.689, -34.761, 18.74]], mat: dach_ziegel_rot_alt}
+    - {gruppe: nb_umgebung_erker_005379, pts: [[23.58, -31.371, 16.14], [22.769, -33.136, 16.14], [25.689, -34.761, 18.74]], mat: dach_ziegel_rot_alt}
+    - {gruppe: nb_umgebung_erker_005379, pts: [[22.769, -33.136, 16.14], [23.485, -37.274, 16.14], [25.689, -34.761, 18.74]], mat: dach_ziegel_rot_alt}
+    - {gruppe: nb_umgebung_erker_005379, pts: [[23.485, -37.274, 16.14], [24.842, -38.663, 16.14], [25.689, -34.761, 18.74]], mat: dach_ziegel_rot_alt}
+    - {gruppe: nb_umgebung_erker_005379, pts: [[24.842, -38.663, 16.14], [25.335, -38.578, 16.14], [25.689, -34.761, 18.74]], mat: dach_ziegel_rot_alt}
+    - {gruppe: nb_umgebung_erker_005379, pts: [[25.335, -38.578, 16.14], [24.072, -31.286, 16.14], [25.689, -34.761, 18.74]], mat: dach_ziegel_rot_alt}
+    - {gruppe: nb_umgebung_erker_005380, pts: [[27.58, -51.495, 16.4], [25.446, -52.88, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_braun}
+    - {gruppe: nb_umgebung_erker_005380, pts: [[25.446, -52.88, 16.4], [24.358, -54.277, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_braun}
+    - {gruppe: nb_umgebung_erker_005380, pts: [[24.358, -54.277, 16.4], [24.717, -56.346, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_braun}
+    - {gruppe: nb_umgebung_erker_005380, pts: [[24.717, -56.346, 16.4], [26.213, -57.304, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_braun}
+    - {gruppe: nb_umgebung_erker_005380, pts: [[26.213, -57.304, 16.4], [28.689, -57.89, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_braun}
+    - {gruppe: nb_umgebung_erker_005380, pts: [[28.689, -57.89, 16.4], [27.58, -51.495, 16.4], [26.952, -54.893, 18.2]], mat: dach_ziegel_braun}
     # Runde 4: Decke des EG-Ruecksprungs unter dem Strassenhaus (Unterseite DUK +3,50, Normale nach unten) [EIN S. 8]
     - {gruppe: nb_shg, rahmen: hof, pts: [[-10.17, -3.42, 3.50], [-10.17, 0.0, 3.50], [-7.32, 0.0, 3.50], [-7.70, -3.42, 3.50]], mat: nb_wand_hof_eg}
     # Runde 6: Dach Strassenhaus nach EIN S. 13 (2. DG), S. 14 (Dachdraufsicht), S. 23 (Schnitt 1), S. 26 (Ansicht): Hofseite 45 Grad von der Traufe +21,00 an der BFL
@@ -675,13 +711,17 @@ neubau:
     - {gruppe: nb_wue, poly: [[17.628, -69.612], [11.204, -70.071], [11.023, -67.538], [17.447, -67.079]], z: 17.282, dicke: 0.01, mat: nb_platten, seite: nb_basalt, quelle: "EIN S. 19 (Betonplatten)"}   # Belag 2. DG
     # Nachbargaerten (Orthofoto 2024): Dachgarten auf dem Hofbau Schlachthausgasse 11 (OGD 4,8 m) und Garten im Hof dahinter
     - {gruppe: nb_umgebung, poly: [[-20.8, -15.3], [0.45, -15.3], [2.45, -29.6], [-20.8, -29.6]], z: 4.66, dicke: 0.06, mat: nb_rasen}
-    - {gruppe: nb_umgebung, poly: [[-21.0, -30.3], [2.4, -30.3], [4.6, -62.0], [-21.0, -62.0]], z: 0.15, dicke: 0.1, mat: gehsteig}
+    - {gruppe: nb_umgebung, poly: [[-21.0, -30.3], [2.4, -30.3], [4.6, -62.0], [-21.0, -62.0]], z: 0.15, dicke: 0.1, mat: nb_platten}   # Runde 9: Betonplatten 50/50 statt Asphalt (Fotos)
+    # Runde 9 (Fotos Hof 20.11.2026, IMG_7836): Platz aus Betonplatten x -6,4 bis 2,6 / y -30,5 bis -40 (Grundflaeche), Weg vor dem
+    # Pavillon nach Sueden bis y -54,5, Rasen rundherum, Spielflaeche Rindenmulch mit Schaukel x -1,7 bis 2,5 / y -53 bis -61,5
+    - {gruppe: nb_umgebung, poly: [[-0.3, -40.0], [3.0, -40.0], [3.8, -53.0], [-1.3, -53.0], [-0.1, -46.6]], z: 0.18, dicke: 0.1, mat: nb_rasen}
+    - {gruppe: nb_umgebung, poly: [[-1.7, -53.0], [3.8, -53.0], [4.3, -61.5], [-1.7, -61.5]], z: 0.17, dicke: 0.08, mat: nb_mulch}
     # Runde 3: Rasen x -19,8 bis -4,3 / y -40,0 bis -53,7 (Orthofoto 2024, Google-Luftbild Sommer), vorher x -17 bis -7
     - {gruppe: nb_umgebung, poly: [[-19.8, -40.0], [-4.3, -40.0], [-4.3, -53.7], [-19.8, -53.7]], z: 0.18, dicke: 0.1, mat: nb_rasen}
     # Spielflaeche Fallschutz (dunkel) mit Holzspielturm und Huette, x -19,6 bis -9,75 / y -33,6 bis -39,75 [Orthofoto, Google]
     - {gruppe: nb_umgebung, poly: [[-19.6, -33.6], [-9.75, -33.6], [-9.75, -39.75], [-19.6, -39.75]], z: 0.17, dicke: 0.08, mat: nb_fallschutz}
     - {gruppe: nb_umgebung, poly: [[-20.0, -31.2], [-6.0, -31.2], [-6.0, -33.3], [-20.0, -33.3]], z: 0.18, dicke: 0.1, mat: nb_rasen}
-    - {gruppe: nb_umgebung, poly: [[-4.2, -31.2], [2.4, -31.2], [2.5, -33.3], [-4.2, -33.3]], z: 0.18, dicke: 0.1, mat: nb_rasen}
+    # Runde 9: Rasenstreifen x -4,2 bis 2,4 / y -31,2 bis -33,3 entfernt, dort liegt der Plattenplatz mit den Baenken (Fotos)
     # Runde 3: Suedteil ist kein Rasen unter Baeumen, sondern Beet/Mulch mit Holzpergola (Google-Luftbild), Rasenstreifen am Westrand
     - {gruppe: nb_umgebung, poly: [[-17.3, -53.7], [-4.3, -53.7], [-4.3, -59.5], [-17.3, -59.5]], z: 0.17, dicke: 0.08, mat: nb_mulch}
     - {gruppe: nb_umgebung, poly: [[-19.8, -53.7], [-17.3, -53.7], [-17.3, -59.5], [-19.8, -59.5]], z: 0.18, dicke: 0.1, mat: nb_rasen}
@@ -726,6 +766,29 @@ neubau:
     - {gruppe: nb_garten, rahmen: hof, poly: [[38.8, 0.0], [38.8, -1.22], [40.6, -1.22], [40.6, -3.32], [48.0, -3.32], [48.0, 6.3], [42.8, 5.95], [41.36, 6.62]], z: 0.03, dicke: 0.03, mat: nb_rasen}
     - {gruppe: nb_garten, rahmen: hof, poly: [[39.25, 0.55], [40.7, 0.55], [42.45, 5.1], [41.15, 5.1]], z: 0.04, dicke: 0.04, mat: nb_rost}
   gelaender:
+    - {gruppe: nb_umgebung_005362, pts: [[-18.2, -15.1], [-18.2, -16.5], [-15.6, -16.5], [-15.6, -15.1]], z: 2.81, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-18.2, -15.1], [-18.2, -16.5], [-15.6, -16.5], [-15.6, -15.1]], z: 5.76, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-18.2, -15.1], [-18.2, -16.5], [-15.6, -16.5], [-15.6, -15.1]], z: 8.71, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-18.2, -15.1], [-18.2, -16.5], [-15.6, -16.5], [-15.6, -15.1]], z: 11.66, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-18.2, -15.1], [-18.2, -16.5], [-15.6, -16.5], [-15.6, -15.1]], z: 14.61, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-18.2, -15.1], [-18.2, -16.5], [-15.6, -16.5], [-15.6, -15.1]], z: 17.56, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-18.2, -15.1], [-18.2, -16.5], [-15.6, -16.5], [-15.6, -15.1]], z: 20.61, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-8.1, -15.1], [-8.1, -16.5], [-5.6, -16.5], [-5.6, -15.1]], z: 2.81, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-8.1, -15.1], [-8.1, -16.5], [-5.6, -16.5], [-5.6, -15.1]], z: 5.76, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-8.1, -15.1], [-8.1, -16.5], [-5.6, -16.5], [-5.6, -15.1]], z: 8.71, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-8.1, -15.1], [-8.1, -16.5], [-5.6, -16.5], [-5.6, -15.1]], z: 11.66, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-8.1, -15.1], [-8.1, -16.5], [-5.6, -16.5], [-5.6, -15.1]], z: 14.61, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-8.1, -15.1], [-8.1, -16.5], [-5.6, -16.5], [-5.6, -15.1]], z: 17.56, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-8.1, -15.1], [-8.1, -16.5], [-5.6, -16.5], [-5.6, -15.1]], z: 20.61, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-14.5, -15.1], [-14.5, -16.45], [-9.5, -16.45], [-9.5, -15.1]], z: 11.66, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005362, pts: [[-14.5, -15.1], [-14.5, -16.45], [-9.5, -16.45], [-9.5, -15.1]], z: 14.61, h: 1.0, typ: voll, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7849, 7864 bis 7867, 7901) Stahlbalkon mit grauer Blechbruestung"}
+    - {gruppe: nb_umgebung_005364, pts: [[-23.077, -64.298], [-21.83, -64.213], [-22.233, -58.227], [-23.481, -58.311]], z: 4.74, h: 1.0, typ: glas, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Glasgelaender"}
+    - {gruppe: nb_umgebung_005364, pts: [[-23.077, -64.298], [-21.83, -64.213], [-22.233, -58.227], [-23.481, -58.311]], z: 8.84, h: 1.0, typ: glas, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Glasgelaender"}
+    - {gruppe: nb_umgebung_005364, pts: [[-23.077, -64.298], [-21.83, -64.213], [-22.233, -58.227], [-23.481, -58.311]], z: 12.94, h: 1.0, typ: glas, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Glasgelaender"}
+    - {gruppe: nb_umgebung_005364, pts: [[-23.077, -64.298], [-21.83, -64.213], [-22.233, -58.227], [-23.481, -58.311]], z: 17.04, h: 1.0, typ: glas, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Glasgelaender"}
+    - {gruppe: nb_umgebung_005364, pts: [[-23.077, -64.298], [-21.83, -64.213], [-22.233, -58.227], [-23.481, -58.311]], z: 20.14, h: 1.0, typ: glas, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Glasgelaender"}
+    - {gruppe: nb_umgebung_005364, pts: [[-30.098, -64.971], [-25.807, -64.682], [-26.38, -56.181], [-30.671, -56.47]], z: 25.94, h: 1.0, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Dachterrasse"}
+    - {gruppe: nb_umgebung_005363, pts: [[-22.805, -55.762], [-23.278, -51.841]], z: 21.87, h: 1.0, mat: nb_attika, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Terrassengelaender"}
     - {gruppe: nb_shg, pts: [[5.06, -17.36], [15.11, -17.36]], z: 7.4, h: 1.02, mat: nb_basalt, quelle: "EIN S. 26 (Stabgelaender, OK 8.42), S. 11/12 (Lage), BAB (Stabgelaender)"}   # 2. OG
     - {gruppe: nb_shg, pts: [[4.1, -17.36], [5.06, -17.36]], z: 7.4, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (geschlossenes Feld RAL 7012 x 4,10 bis 5,06)"}   # 2. OG
     - {gruppe: nb_shg, pts: [[15.11, -17.36], [15.93, -17.36]], z: 7.4, h: 1.02, typ: voll, mat: nb_basalt, quelle: "EIN S. 26 (geschlossenes Feld RAL 7012 x 15,11 bis 16,07)"}   # 2. OG
@@ -793,11 +856,6 @@ neubau:
     - {gruppe: nb_wue, pts: [[17.373, -67.164], [17.544, -69.568]], z: 17.27, h: 1.12, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 2. DG
     - {gruppe: nb_wue, pts: [[11.089, -67.613], [11.26, -70.017]], z: 17.27, h: 1.12, mat: nb_basalt, quelle: "EIN S. 19/20/21 (GLH 1,12 seitlich)"}   # 2. DG
     # Runde 3: volle Bruestungen der Balkone Schlachthausgasse 11 (weiss) [Google 3D]
-    - {gruppe: nb_umgebung, pts: [[-18.0, -16.33], [-8.0, -16.33]], z: 6.0, h: 1.0, typ: voll, mat: nb_weiss}
-    - {gruppe: nb_umgebung, pts: [[-18.0, -16.33], [-8.0, -16.33]], z: 9.0, h: 1.0, typ: voll, mat: nb_weiss}
-    - {gruppe: nb_umgebung, pts: [[-18.0, -16.33], [-8.0, -16.33]], z: 12.0, h: 1.0, typ: voll, mat: nb_weiss}
-    - {gruppe: nb_umgebung, pts: [[-18.0, -16.33], [-8.0, -16.33]], z: 15.0, h: 1.0, typ: voll, mat: nb_weiss}
-    - {gruppe: nb_umgebung, pts: [[-18.0, -16.33], [-8.0, -16.33]], z: 18.0, h: 1.0, typ: voll, mat: nb_weiss}
     # Runde 4, Gelaendertabelle im Bericht. G1 Weg Nordkante a -4,00 bis 29,52 (GLH 1,02 [EIN S. 9/16]; Absturz in die Hoefe 1 und 2, sonst Kante zum tieferen Gruendach +3,06; Tor zur Stufe auf Gruendach 61,26 bei a 15,0 bis 15,9; Abschnitt ab 25,7 aus VP 4A abgeleitet)
     - {gruppe: nb_hof, rahmen: hof, pts: [[-4.0, 8.03, 3.96], [-3.9, 8.03, 3.96], [5.6, 8.03, 3.5], [29.52, 8.03, 3.5]], h: 1.02, mat: nb_basalt, quelle: "G1 EIN S. 9/16 (GLH 1,02, Weg Nordkante), VP 4A (Abschnitt ab a 25,7)"}
     # G2 Weg Suedkante entlang Gruendach 27,57 bis Pavillon Top 3 (GLH 1,02 [EIN S. 9/16])
@@ -832,7 +890,8 @@ neubau:
     - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [1.35, 3.55], d: [3.7, 5.5], z: 20.72, reihen: 2, neigung: 35, quelle: "EIN S. 22 (Feld 10 Stk.), S. 28 (Lage u, OK +21,53)"}
     - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [4.74, 6.94], d: [3.7, 5.5], z: 20.72, reihen: 2, neigung: 35, quelle: "EIN S. 28 (Lage u, Hoehe), Tiefe ANN wie Feld 1"}
     - {gruppe: nb_wue, a: [20.6, -69.4], b: [8.0, -70.3], u: [8.54, 9.63], d: [3.7, 5.5], z: 20.72, reihen: 2, neigung: 35, quelle: "EIN S. 28 (Lage u, Hoehe), Tiefe ANN wie Feld 1"}
-  dachfenster:   # Runde 6: Dachflaechenfenster 0,94 x 2,52 Strassenhaus und Wuertzlerstrasse 10 [EIN S. 13/14, 21/22, Ansichten S. 26/28]
+  dachfenster:
+    - {gruppe: nb_umgebung_005364, pts: [[-24.674, -59.193, 23.44], [-24.755, -57.996, 23.44], [-25.553, -58.05, 24.84], [-25.472, -59.247, 24.84]], quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) Dachflaechenfenster"}
     - {gruppe: nb_shg_dach, pts: [[1.96, -13.82, 22.18], [2.94, -13.82, 22.18], [2.94, -11.94, 24.06], [1.96, -11.94, 24.06]], quelle: "EIN S. 13/14 (94/252), S. 26 (Rahmen vektoriell)"}
     - {gruppe: nb_shg_dach, pts: [[3, -13.82, 22.18], [3.98, -13.82, 22.18], [3.98, -11.94, 24.06], [3, -11.94, 24.06]], quelle: "EIN S. 13/14 (94/252), S. 26 (Rahmen vektoriell)"}
     - {gruppe: nb_shg_dach, pts: [[4.04, -13.82, 22.18], [5.02, -13.82, 22.18], [5.02, -11.94, 24.06], [4.04, -11.94, 24.06]], quelle: "EIN S. 13/14 (94/252), S. 26 (Rahmen vektoriell)"}
@@ -850,6 +909,13 @@ neubau:
     - {gruppe: nb_wue, pts: [[10.935, -70.792, 17.98], [9.957, -70.862, 17.98], [10.091, -72.737, 19.86], [11.069, -72.667, 19.86]], quelle: "EIN S. 21 (94/252), S. 28 (Rahmen vektoriell)"}
   straeucher:   # Bepflanzung Pflanztroege [ANN, Gestaltung laut Hofvisualisierung]. Runde 3: Kugelbuesche im Gartenstreifen entfernt
     # (EIN S. 8 zeigt Rasen mit Gefaelle und den Blumentrog), dafuer Hecke am Westrand des Nachbargartens (Google-Luftbild)
+    # Runde 9: Dachgarten auf dem Hofbau (+4,66) mit Strauchgruppen statt Baeumen (Fotos Hof 20.11.2026, IMG_7804/7836) [ANN Lage]
+    - {gruppe: nb_umgebung, pos: [-8.5, -27.5], z: 4.72, r: 2.2, h: 1.8}
+    - {gruppe: nb_umgebung, pos: [-4.5, -28.2], z: 4.72, r: 1.8, h: 1.6}
+    - {gruppe: nb_umgebung, pos: [-12.5, -27.0], z: 4.72, r: 2.0, h: 1.7}
+    - {gruppe: nb_umgebung, pos: [-16.5, -23.0], z: 4.72, r: 1.8, h: 2.2}
+    - {gruppe: nb_umgebung, pos: [-1.0, -19.0], z: 4.72, r: 1.6, h: 1.5}
+    - {gruppe: nb_umgebung, pos: [-10.0, -17.5], z: 4.72, r: 1.5, h: 1.4}
     - {gruppe: nb_umgebung, pos: [-18.7, -51.5], z: 0.15, r: 0.9, h: 1.7}
     - {gruppe: nb_umgebung, pos: [-18.7, -54.5], z: 0.15, r: 1.0, h: 1.9}
     - {gruppe: nb_umgebung, pos: [-18.7, -57.6], z: 0.15, r: 0.9, h: 1.6}
@@ -1011,21 +1077,21 @@ soll:
 # Baeume ausserhalb des Baumkatasters (Hof- und Gartenbaeume, aus dem Orthofoto 2024 abgelesen, Hoehe geschaetzt) [ANN]
 trees_override:
   # Runde 3: Abgleich Orthofoto 2024 (entzerrt, Lage) und Google-Luftbild/3D (Krone, Hoehe), siehe umgebung_abgleich.md Abschnitt 7
-  - {add: true, pos: [-10.8, -27.0], height: 15, crown: 9.0, z: 4.66}    # Dachgarten Nachbar, grosser Laubbaum (vorher -11,6/-25,2). Runde 5: 15 m statt 10 (Vorlage Hof_fin, Krone bis +20)
-  - {add: true, pos: [-15.0, -26.1], height: 5, crown: 3.0, z: 4.66}     # Dachgarten, Forsythie/Zierbaum gelb
-  - {add: true, pos: [-15.0, -20.5], height: 6, crown: 5.0, z: 4.66}     # Dachgarten Nordwest (vorher -16,0/-22,8)
-  - {add: true, pos: [-7.5, -19.8], height: 9, crown: 6.0, z: 4.66}      # Dachgarten Mitte (neu; der alte Eintrag -6,0/-26,2 lag auf den Lichtkuppeln). Runde 5: 9 m (Vorlage)
-  - {add: true, pos: [1.2, -24.0], height: 5, crown: 3.5, z: 4.66}       # Dachgarten Ostrand, runde dunkle Krone (neu)
-  - {add: true, pos: [2.8, -55.0], height: 10, crown: 7.0}               # Nachbargarten Suedost, Bestandsbaum (Orthofoto: kahle Krone 6,5 m)
-  - {add: true, pos: [1.0, -40.5], height: 6, crown: 4.0}                # Nachbargarten am Zaun neben dem weissen Kasten (neu)
+# - {add: true, pos: [-10.8, -27.0], height: 15, crown: 9.0, z: 4.66}    # Dachgarten Nachbar, grosser Laubbaum (vorher -11,6/-25,2). Runde 5: 15 m statt 10 (Vorlage Hof_fin, Krone bis +20)   # Runde 9 entfernt: Fotos Hof 20.11.2026 zeigen dort keinen Baum
+# - {add: true, pos: [-15.0, -26.1], height: 5, crown: 3.0, z: 4.66}     # Dachgarten, Forsythie/Zierbaum gelb   # Runde 9 entfernt: Fotos Hof 20.11.2026 zeigen dort keinen Baum
+# - {add: true, pos: [-15.0, -20.5], height: 6, crown: 5.0, z: 4.66}     # Dachgarten Nordwest (vorher -16,0/-22,8)   # Runde 9 entfernt: Fotos Hof 20.11.2026 zeigen dort keinen Baum
+# - {add: true, pos: [-7.5, -19.8], height: 9, crown: 6.0, z: 4.66}      # Dachgarten Mitte (neu; der alte Eintrag -6,0/-26,2 lag auf den Lichtkuppeln). Runde 5: 9 m (Vorlage)   # Runde 9 entfernt: Fotos Hof 20.11.2026 zeigen dort keinen Baum
+# - {add: true, pos: [1.2, -24.0], height: 5, crown: 3.5, z: 4.66}       # Dachgarten Ostrand, runde dunkle Krone (neu)   # Runde 9 entfernt: Fotos Hof 20.11.2026 zeigen dort keinen Baum
+  - {add: true, pos: [3.6, -58.0], height: 13, crown: 5.0}               # Nachbargarten Suedost: Birke (Runde 9, Fotos Hof 20.11.2026: schlank, rund 13 m; vorher 2,8/-55, Krone 7)
+  - {add: true, pos: [1.6, -42.0], height: 4, crown: 3.0}                # Nachbargarten am Zaun hinter dem Pavillon, kleiner Baum (Runde 9: Fotos, vorher 6 m)
   - {add: true, pos: [25.0, -62.0], height: 9, crown: 6.0}               # Hof Schlachthausgasse 15 / Wuertzlerstrasse (neu)
   # Runde 4: zwei Pflichtbaeume r 2,50 m im Hof Ost (Spielplatz/Garten 29,91 und Garten BFL) [EIN S. 15/18], Hoehe [ANN]
   - {add: true, pos: [20.06, -60.23], height: 7, crown: 5.0}
   - {add: true, pos: [8.41, -63.56], height: 7, crown: 5.0}
   # Runde 5 (kameramatch Hof_fin, Strahlschnitt Stammfuss auf z 0): zwei Laubbaeume im Westteil des Nachbargartens vor
   # Erdbergstrasse 123, in der Vorlage deutlich zu sehen (Orthofoto 2024 zeigt dort keine Kronen, Vorlage hat Vorrang)
-  - {add: true, pos: [-14.7, -43.5], height: 12, crown: 7.0}
-  - {add: true, pos: [-13.8, -33.6], height: 14, crown: 8.0}
+# - {add: true, pos: [-14.7, -43.5], height: 12, crown: 7.0}   # Runde 9 entfernt: Fotos Hof 20.11.2026 zeigen dort keinen Baum
+# - {add: true, pos: [-13.8, -33.6], height: 14, crown: 8.0}   # Runde 9 entfernt: Fotos Hof 20.11.2026 zeigen dort keinen Baum
   # entfernt: zwei grosse Baeume im Suedteil des Nachbargartens (-9/-56 und -14,5/-57,5), weder im Orthofoto noch im Luftbild
   # Runde 6: Baumgruppe vor Nr. 15 (Gemeindebau) zwischen Parkplatz und Westfassade: Lage aus dem Orthofoto 2024 (kahle Kronen, Schatten), Groesse aus Apple 9/8
   - {add: true, pos: [73.0, -36.0], height: 17, crown: 11.0, quelle: "Orthofoto 2024 (Lage), Apple 9/8 (Hoehe, Krone)"}
@@ -1085,6 +1151,10 @@ cameras:
   hof_fin3: {pos: [24, -55, 6.5], target: [18.006, -25.605, 6.5], lens: 102.61, shift: [-0.0032, -0.0624], format: [1920, 1292], vertical: true}   # kameramatch SHG13_Hof_fin-3.jpg, 10 Punkte, Fehler 6.5 px = 0.34 % Bildbreite
   hof_fin4: {pos: [27.575, -68.476, 11], target: [4.491, -49.315, 11], lens: 52.08, shift: [0.1042, -0.3428], format: [1920, 1166], clip_start: 0.3, vertical: true, ausblenden: [nb_umgebung_erker_]}   # kameramatch SHG13_Hof_fin-4.jpg, 10 Punkte, Fehler 12.9 px = 0.67 % Bildbreite
 
+  # Runde 9: Kontrollkamera nach Foto IMG_7836 vom 20.11.2026 (Standpunkt Erdbergstrasse 123 oben, Blick Ost), geloest aus 14 Passpunkten
+  # (Traufen Schnirchgasse 4/6, Turmgesimse, Dachkante Schlachthausgasse 11, Gemeindebau), Brennweite iPhone 24 mm fest, Restfehler
+  # im Mittel rund 10 px bei 2400 px Bildbreite. Foto liegt nur intern unter renders/streetview/fotos_hof_2026-11-20/
+  foto_7836: {pos: [-25.7, -38.97, 21.53], target: [2.663, -37.469, 11.872], lens: 25.0, vertical: false, roll: -2.35}
 lights:
   spaetsommer:  {date: "2026-08-27", time: "16:20", tz: 2, exposure: 0.0, interior: 0.0, aerosol: 2.0, season: spaetsommer}   # Sonne 32,6 Grad, Azimut 246 Grad
   golden_hour:  {date: "2026-08-27", time: "18:40", tz: 2, exposure: 0.3, interior: 0.2, aerosol: 2.5, season: spaetsommer}   # Sonne 10 Grad, Azimut 274 Grad
@@ -1099,27 +1169,33 @@ render:
 # ---------------------------------------------------------------- Nachbarfassaden zum Hof (Grundregel KONZEPT Abschnitt 7)
 # Direkt sichtbar laut `immoviz.py sichtbar` (Bildanteil >= 1 %, < 80 m) in den Hof- und Gartenkameras. Hoffassaden sind
 # in Street View nicht einsehbar: Geschosszahl aus der Traufhoehe [OGD], Raster und Farbe als Annahme [ANN], Daecher aus LOD2.
+# ---------------------------------------------------------------- Baukoerper-Grundrisse ersetzen (lib/build.py load_project)
+# Runde 9 (Fotos Hof 20.11.2026, IMG_7849): Schlachthausgasse 15/17 Hoftrakt (BKM 4003912213) fuehrt die zwei offenen
+# Stahl-Balkontuerme als massive Vorspruenge bis 16,5; Grundriss ohne Vorspruenge, die Balkone stehen in neubau (nb_umgebung_005362)
+baukoerper:
+  - {id: 4003912213, poly: [[0.674, -12.236], [0.588, -10.718], [-25.484, -10.557], [-25.49, -11.437], [-25.512, -14.881], [0.833, -15.043]], quelle: "Fotos Hof 20.11.2026 (Balkontuerme offen)"}
+
 neighbour_facades:
   hof_ost_005379:               # Schnirchgasse 4 (Nr. 2), Hoftrakt Ost gegenueber Top 3. Runde 5 nach kameramatch Hof_fin (Vorlage hat
     bezug: "005379"               # Vorrang): Traufe 18,6 statt 16,3 [OGD], keine Erkertuerme, weiss, Fensterreihen aus der Vorlage
     a: [23.0, -25.0]              # gemessen (Unterkanten +8,0/+14,1 am Strahlschnitt); Runde 8: Traufe wieder 15,9, Erker in neubau
     b: [26.4, -44.9]
-    height: 15.9                  # Runde 8 (Apple 13): Traufe 15,9 wie LOD2, EG + 4 OG; vorher 18,6 nach der Vorlage
-    color: "#F4F1EC"              # Vorlage Mitteltoene #FCFCF8 (besonnt), Runde 3 #ECE9E2
-    style: plain
+    height: 15.9                  # Runde 8: Traufe 15,9 wie LOD2. Runde 9 (Fotos Hof 20.11.2026): EG + 3 OG (hohe Gruenderzeitgeschosse),
+    color: "#BDB6AB"              # Putz grau-beige verwittert (Fotos; vorher weiss nach der Vorlage), Fensterachsen am Foto IMG_7836
+    style: plain                  # abgemessen (u ab der Nordecke), weiss gerahmte Kastenfenster; Turm und Lisene in neubau
     frame: stuck
-    axes: {n: 8, margin: 1.2}
-    rows: {eg: {z: 1.2, h: 1.8, w: 1.0}, z0: 4.3, step: 3.1, n: 4, h: 1.7, w: 1.0}
+    axes: [1.8, 5.0, 16.5, 18.7]
+    rows: {eg: {z: 1.1, h: 1.9, w: 1.3}, z0: 4.8, step: 3.75, n: 3, h: 2.0, w: 1.3}
   hof_ost_005380:               # Hoftrakt Wuertzlerstrasse (Gruenderzeit), 3 bis 4 % in den Gartenkameras. Runde 2: weiss, weisse
     bezug: "005380"               # Fensterrahmen, Ziegeldach laut Vorlage SHG13_Hof_fin (rechter Bildrand) und LOD2 (vorher beige)
     a: [26.5, -45.2]
     b: [29.9, -64.6]
-    height: 15.7                  # Runde 8 (Apple 13): Traufe und Fensterreihen durchlaufend wie Schnirchgasse 4 (EG + 4 OG)
-    color: "#ECE8DF"
+    height: 15.7                  # Runde 9 (Fotos Hof 20.11.2026): EG + 3 OG wie Schnirchgasse 4, Putz hellgrau-weiss, Achsen am Foto
+    color: "#E2E2DF"
     style: plain
     frame: stuck
-    axes: {n: 8, margin: 1.2}
-    rows: {eg: {z: 1.0, h: 1.8, w: 1.0}, z0: 4.3, step: 3.1, n: 4, h: 1.7, w: 1.0}
+    axes: [1.8, 4.7, 14.6, 18.0]
+    rows: {eg: {z: 1.0, h: 1.9, w: 1.3}, z0: 4.7, step: 3.75, n: 3, h: 2.0, w: 1.3}
   hof_ost_005378:               # Schlachthausgasse 11 / Schnirchgasse 2 (Nr. 1), Hofseite neben dem Strassenhaus. Runde 5 nach kameramatch
     bezug: "005378"               # Runde 5 nach Hof_fin: Traufe 19,0 statt 21,6 [OGD]; Runde 8 nach Apple 13: Flachdach 21,6 mit Terrassen,
     a: [21.2, -12.0]              # weiss, Fenster weiss gerahmt mit Faschen, Reihen am Strahlschnitt gemessen (Fenster 8,4 bis 11,0 und
@@ -1137,16 +1213,34 @@ neighbour_facades:
       - {z: 11.5, h: 2.7, w: 1.0, surround: fasche}
       - {z: 14.6, h: 2.7, w: 1.0, surround: fasche}
       - {z: 17.7, h: 2.4, w: 1.0, surround: fasche}
-  hof_west_005363:              # Erdbergstrasse 123 (Nr. 9), Ostfassade zum Nachbargarten. Runde 5 nach kameramatch Hof_fin: 8 Geschosse +
-    bezug: "005363"               # Dachgeschoss, Oberkante 24,8 statt 19,9 [OGD], Fassade beginnt 2,5 m weiter suedlich (y -55,8), weiss mit
-    a: [-22.7, -55.8]             # graubraunen Paneelstreifen zwischen den Fensterbaendern (neubau boxen nb_umgebung), Geschoss 2,9 m
-    b: [-24.4, -41.7]
-    height: 24.8
-    color: "#E9E6EA"              # Vorlage im Schatten #BCB9C1, Paneele #ACA0A6
+  hof_west_005363:              # Erdbergstrasse 123 (Nr. 9), Hoffront Teil 1. Runde 9 (Fotos Hof 20.11.2026, IMG_7896/7857): Bau der 1960er/70er,
+    bezug: "005363"               # graue Kratzputzfelder mit dunkel gerahmten Fensterbaendern zwischen weissen Lisenen (neubau boxen), EG offen
+    a: [-22.7, -55.8]             # (Durchgang), 6 OG zu 3,1 m bis 22,3 [OGD 22,28], Fotoanteil 70 % der Front (9,9 m). Vorher Runde 5/8:
+    b: [-23.885, -45.97]          # weiss mit Paneelstreifen bis 24,8 nach der Vorlage
+    height: 22.3
+    color: "#8E8B86"
     style: modern
     frame: fenster
-    axes: [1.85, 7.0, 9.9, 12.8]  # Fensterachsen am Strahlschnitt (Vorlage)
-    rows: {eg: {z: 0.9, h: 1.6, w: 1.6}, z0: 3.2, step: 2.9, n: 7, h: 1.5, w: 1.6}
+    axes: [0.85, 4.5, 6.8, 8.95]
+    rows: {z0: 3.6, step: 3.1, n: 6, h: 1.5, w: 1.8}
+  hof_west_005363_nord:         # Runde 9: Teil 2, weiss mit einer Einzelfensterachse, reicht mit der Attika bis 26,0 (Fotos Hof 20.11.2026)
+    bezug: "005363"
+    a: [-23.885, -45.97]
+    b: [-24.4, -41.7]
+    height: 26.0
+    color: "#E9E6EA"
+    style: modern
+    frame: fenster
+    axes: [3.5]
+    rows:
+      - {z: 1.9, h: 1.0, w: 0.9}
+      - {z: 4.9, h: 1.0, w: 0.9}
+      - {z: 7.8, h: 1.0, w: 0.9}
+      - {z: 10.8, h: 1.0, w: 0.9}
+      - {z: 13.8, h: 1.0, w: 0.9}
+      - {z: 16.7, h: 1.0, w: 0.9}
+      - {z: 19.6, h: 1.0, w: 0.9}
+      - {z: 23.0, h: 0.6, w: 0.9}
   hof_west_005363_b:            # Ruecksprung desselben Blocks (Nr. 9). Runde 5: Oberkante 23,4 statt 20,1 (Vorlage Hof_fin)
     bezug: "005363"
     a: [-30.2, -37.4]
@@ -1155,51 +1249,83 @@ neighbour_facades:
     color: "#E9E6EA"
     style: modern
     frame: fenster
-    axes: {n: 3, margin: 1.2}
-    rows: {eg: {z: 0.9, h: 1.6, w: 1.4}, z0: 3.2, step: 2.9, n: 6, h: 1.5, w: 1.4}
-  hof_nord_005362:              # Hoffassade Schlachthausgasse 11 (Traufe 21,8 [OGD]) ueber dem Hofbau mit Dachgarten. Eigener Schluessel
-    bezug: "005362_hof"           # "005362_hof": nur Fassadenkarte 5 cm vor dem Baukoerper (Block 005362 wird nicht abgeschnitten).
-    a: [-25.5, -15.05]            # Runde 3 nach Google 3D: kein Gruenderzeithaus, sondern 7 Geschosse, glatte Fenster ohne Faschen;
-    b: [-20.0, -15.05]            # Westteil und Ostteil apricot/lachs, Mitte weiss mit Balkonstapel (hof_nord_005362_mitte, _ost)
+    axes: [1.0]                   # Runde 9 (Fotos Hof 20.11.2026): eine Fensterachse am Nordrand, sonst geschlossene Wand (vorher 3 Achsen)
+    rows: {eg: {z: 0.9, h: 1.6, w: 1.0}, z0: 3.2, step: 2.9, n: 6, h: 1.3, w: 1.0}
+  hof_nord_005362:              # Schlachthausgasse 15/17 (Nr. 10), Hof-Suedseite, eigener Schluessel "005362_hof" (Karte 5 cm vor dem Baukoerper).
+    bezug: "005362_hof"           # Runde 9 nach den Fotos Hof 20.11.2026 (IMG_7849/7866/7901): EG + 6 OG bis 21,8, lachs mit zwei weissen
+    a: [-24.9, -15.05]            # Wandstreifen (x -14,8 bis -12,1 und -5,1 bis -3,3) und zwei offenen Stahl-Balkontuermen vor x -18,2 bis -15,6
+    b: [-14.8, -15.05]            # und -8,1 bis -5,6 (neubau nb_umgebung_005362); Achsen am Foto. Vorher (Runde 3/5) lachs/weiss/lachs
     height: 21.8
-    color: "#D8957F"              # Runde 5: Vorlage Hof_fin lachs #CD9987 (Mitteltoene)
+    color: "#E09E80"
     style: plain
-    axes: {n: 2, margin: 1.0}
-    rows: {z0: 2.35, step: 2.75, n: 7, h: 1.5, w: 1.2}   # Runde 5: Fensteroberkanten 6,6 bis 20,4 (Vorlage)
-  hof_nord_005362_mitte:        # Mittelteil weiss, Balkonplatten und volle Bruestungen in neubau nb_umgebung [Google 3D, Lage +-2 m]
+    axes: [0.9, 3.0, 4.95, 7.3, 8.7]
+    rows: {eg: {z: 0.9, h: 2.0, w: 1.2}, z0: 3.9, step: 2.95, n: 6, h: 2.0, w: 1.2}
+  hof_nord_005362_weiss1:                # Runde 9: Abschnitt der Hof-Suedseite nach Fotos Hof 20.11.2026 (IMG_7849)
     bezug: "005362_hof"
-    a: [-20.0, -15.05]
-    b: [-6.0, -15.05]
+    a: [-14.8, -15.05]
+    b: [-12.1, -15.05]
     height: 21.8
     color: "#EEECE6"
     style: plain
-    axes: {n: 5, margin: 1.2}
-    rows: {z0: 2.35, step: 2.75, n: 7, h: 2.2, w: 1.4}   # Runde 5: Geschosse wie Ost/West (Vorlage)
-  hof_nord_005362_ost:
+    axes: [1.3]
+    rows: {eg: {z: 0.9, h: 2.0, w: 1.2}, z0: 3.9, step: 2.95, n: 6, h: 2.0, w: 1.2}
+  hof_nord_005362_mitte:                # Runde 9: Abschnitt der Hof-Suedseite nach Fotos Hof 20.11.2026 (IMG_7849)
     bezug: "005362_hof"
-    a: [-6.0, -15.05]
+    a: [-12.1, -15.05]
+    b: [-5.1, -15.05]
+    height: 21.8
+    color: "#E09E80"
+    style: plain
+    axes: [0.85, 2.8, 4.6, 5.9]
+    rows: {eg: {z: 0.9, h: 2.0, w: 1.2}, z0: 3.9, step: 2.95, n: 6, h: 2.0, w: 1.2}
+  hof_nord_005362_weiss2:                # Runde 9: Abschnitt der Hof-Suedseite nach Fotos Hof 20.11.2026 (IMG_7849)
+    bezug: "005362_hof"
+    a: [-5.1, -15.05]
+    b: [-3.3, -15.05]
+    height: 21.8
+    color: "#EEECE6"
+    style: plain
+    axes: [0.9]
+    rows: {eg: {z: 0.9, h: 2.0, w: 1.0}, z0: 3.9, step: 2.95, n: 6, h: 2.0, w: 1.0}
+  hof_nord_005362_ost:                # Runde 9: Abschnitt der Hof-Suedseite nach Fotos Hof 20.11.2026 (IMG_7849)
+    bezug: "005362_hof"
+    a: [-3.3, -15.05]
     b: [0.8, -15.05]
     height: 21.8
-    color: "#D8957F"              # Runde 5: Vorlage Hof_fin lachs #CD9987 (Mitteltoene)
+    color: "#E09E80"
     style: plain
-    axes: {n: 3, margin: 1.0}
-    rows: {z0: 2.35, step: 2.75, n: 7, h: 1.5, w: 1.2}   # Runde 5: Fensteroberkanten 6,6 bis 20,4 (Vorlage)
-  hof_west_005364:              # Erdbergstrasse 125 (Nr. 8), Ostfassade. Runde 5 nach kameramatch Hof_fin: weiss mit weiss gerahmten Fenstern
-    bezug: "005364"               # (statt hellgrau modern), Traufe 20,8 (Vorlage und OGD gleich); Runde 8: dunkle Dachgeschosskaesten (roofs_override),
-    a: [-23.1, -64.7]             # Fassade endet bei y -55,8 (dort beginnt 005363 in der Vorlage)
+    axes: [1.0, 2.1, 3.3]
+    rows: {eg: {z: 0.9, h: 2.0, w: 1.0}, z0: 3.9, step: 2.95, n: 6, h: 2.0, w: 1.0}
+  hof_ost_005362_fluegel:       # Runde 9: Westfluegel Schlachthausgasse 15/17 (BKM 4003912350), Ostseite zum Hof: lachs, zwei Fensterachsen,
+    bezug: "005362_fluegel"       # EG + 6 OG bis 21,8, darueber die Zinkmansarde mit Gauben (Fotos Hof 20.11.2026, IMG_7864/7896); eigener
+    a: [-24.85, -22.3]            # Schluessel, damit der Block 005362 nicht abgeschnitten wird
+    b: [-25.35, -15.9]
+    height: 21.8
+    color: "#D98B6C"
+    style: plain
+    axes: [2.0, 4.4]
+    rows: {eg: {z: 0.9, h: 2.0, w: 1.1}, z0: 3.9, step: 2.95, n: 6, h: 1.8, w: 1.1}
+  hof_west_005364:              # Erdbergstrasse 125 (Nr. 8), Ostfassade. Runde 9 (Fotos Hof 20.11.2026, IMG_7896/7854 bis 7858): weisser
+    bezug: "005364"               # Gruenderzeitbau mit leichtem Blaustich, EG + 4 OG zu rund 4 m bis 20,8 [OGD], 4 Achsen, weiss gerahmte Fenster,
+    a: [-23.1, -64.7]             # verglaste Balkone 1. bis 4. OG und DG (neubau nb_umgebung_005364), Stiegenhausstreifen verglast an der Suedecke
     b: [-23.7, -55.8]
     height: 20.8
-    color: "#EEE9E7"              # Vorlage Mitteltoene #D9D2D2 (Schatten)
+    color: "#E8ECF0"
     style: plain
     frame: stuck
-    axes: {n: 3, margin: 1.0}
-    rows: {eg: {z: 0.9, h: 1.6, w: 1.0}, z0: 3.4, step: 3.4, n: 5, h: 1.7, w: 1.0}
+    axes: [1.95, 3.8, 5.6, 7.7]
+    rows:
+      - {z: 0.5, h: 2.3, w: 1.0}
+      - {z: 5.6, h: 2.2, w: 1.0}
+      - {z: 9.7, h: 2.2, w: 1.0}
+      - {z: 13.6, h: 2.1, w: 1.0}
+      - {z: 17.5, h: 2.0, w: 1.0}
   hof_nord_005382:              # Runde 3 neu: Eckhaus Wuertzlerstrasse, Nordfassade zum Hof hinter 005380, 1,7 bis 4,6 % (Drohne Sued,
     bezug: "005382"               # Gartenkameras). Google 3D: weisser Gruenderzeitbau, Ziegeldach (LOD2) [ANN Achsraster]
     a: [41.9, -62.7]
     b: [29.9, -64.6]
     height: 20.3
-    color: "#E8E4DC"
+    color: "#E3D6B4"              # Runde 9: Fotos Hof 20.11.2026 zeigen die Hoffassade cremegelb (vorher weiss-grau)
     style: plain
     frame: stuck
     axes: {n: 5, margin: 1.2}
@@ -1238,24 +1364,27 @@ roofs_override:
      aufbauten: [{pos: [27.5, -14.0], l: 3.2, b: 2.6, z1: 24.3, z0: 21.6, material: blech_hell}, {pos: [26.0, -4.5], l: 4.0, b: 3.0, z1: 24.0, z0: 21.6, material: blech_hell}]}
   # Runde 8 (Apple 13): Satteldach Ziegel rotbraun, Traufe 15,9 und First 19,4 wie LOD2, sechs Kaminkoepfe am First,
   # zwei kleine Gauben zum Hof; Erkerturm mit Pyramidendach in neubau (nb_umgebung_erker_005379). Vorher Mansarde 18,6 bis 23,0 (Vorlage)
-  - {bezug: "005379", material: ziegel_rot, gauben: {anzahl: 2, breite: 0.8, hoehe: 0.8, seiten: ["-x"]}, kamine: 6,
+  # Runde 9 (Fotos): Ziegel braunrot verwittert (rot_alt), fuenf breite Kaminkoepfe am First, zwei kleine Dachluken
+  - {bezug: "005379", material: ziegel_rot_alt, gauben: {anzahl: 2, breite: 0.7, hoehe: 0.6, seiten: ["-x"]}, kamine: 5,
      dach: {form: sattel, traufe: 15.9, first: 19.4}}   # Runde 5: Traufe 18,6 laut Vorlage Hof_fin (LOD2 16,3), Dach parametrisch   # (2) Schnirchgasse 4: rotbraunes Ziegeldach mit Gauben zum Hof (Apple 10)
   # Runde 8 (Apple 13): Satteldach Ziegel orange, Traufe 15,7 und First 19,2 wie LOD2, fuenf Kaminkoepfe, zwei kleine Gauben;
   # Erkerturm mit Zeltdach in neubau (nb_umgebung_erker_005380). Vorher Mansarde 15,9 bis 20,3
-  - {bezug: "005380", material: ziegel_orange, gauben: {anzahl: 2, breite: 0.8, hoehe: 0.8, seiten: ["-x"]}, kamine: 5,
+  # Runde 9 (Fotos): Ziegel braun verwittert wie Nr. 4 (Apple zeigte orange), drei Kaminkoepfe, eine Dachluke
+  - {bezug: "005380", material: ziegel_braun, gauben: {anzahl: 1, breite: 0.7, hoehe: 0.6, seiten: ["-x"]}, kamine: 3,
      dach: {form: sattel, traufe: 15.7, first: 19.2}}   # Runde 5: parametrisch ueber dem beschnittenen Grundriss
      # (3) Schnirchgasse 6 (Apple 10, LOD2 vorher Ziegel dunkel); die LOD2-Flaechen des entfernten Erkers standen 2,3 m vor der Karte ueber
   - {bezug: "005382", material: ziegel_rot, kamine: 2}                                   # (4) Schnirchgasse 8 / Wuertzlerstrasse 8: rotes Ziegeldach (Apple 10)
   - {bezug: "005387", material: blech_hell}                                              # (5) Wuertzlerstrasse 12: helles Flachdach mit Aufbauten (Apple 9/10)
-  - {bezug: "005362", material: blech, gauben: {anzahl: 8, breite: 1.2, seiten: ["-y"]}}   # Runde 8: mittelgrau wie Apple 14 (vorher helles Blech nach der Vorlage)   # Runde 5: helles Blech wie Vorlage Hof_fin (vorher grau)  # (10) Schlachthausgasse 15/17: graue Blechmansarde mit Gauben zum Hof (Apple 10/11, Visualisierung Hof_fin-2)
+  - {bezug: "005362", material: blech_hell, gauben: {anzahl: 8, breite: 1.2, seiten: ["-y"]}}   # Runde 9: hellgraue Zinkmansarde mit weissen Gauben (Fotos Hof 20.11.2026, IMG_7849); Runde 8 mittelgrau (Apple)   # Runde 5: helles Blech wie Vorlage Hof_fin (vorher grau)  # (10) Schlachthausgasse 15/17: graue Blechmansarde mit Gauben zum Hof (Apple 10/11, Visualisierung Hof_fin-2)
   # Runde 5 (kameramatch Hof_fin, umgebung_abgleich.md Abschnitt 9)
-  - {pos: [-23.2, -45.0], dz: 4.9}                                                       # (9) Erdbergstrasse 123, Ostteil: 24,8 statt 19,9 (Vorlage)
-  # (8) Erdbergstrasse 125. Runde 8 (Kunde 18.11.2026 "dieser Teil ist noch falsch", Apple 14): kein Mansarddach, sondern
-  # zwei dunkle, kastenfoermige Dachgeschosse mit senkrechten Waenden und Terrassen auf der weissen Hoffassade; Oberkante
-  # etwa wie Erdbergstrasse 123 (24,8). Flachdach dunkel auf der eigenen Traufe je Baukoerperteil (20,8 / 22,2 [OGD]),
-  # Aufbauten [ANN Lage und Hoehe, Apple 14]. Vorher Mansarde 65 Grad bis 25,0, die ueber dem verwinkelten Grundriss einknickte
-  - {bezug: "005364", material: blech_dunkel, dach: {form: flach},
-     aufbauten: [{pos: [-26.2, -61.0], l: 10.0, b: 5.0, z0: 20.8, z1: 23.6, drehung: 93.0, material: blech_dunkel, material_oben: blech_dunkel},
-                 {pos: [-27.3, -58.6], l: 4.6, b: 3.6, z0: 23.6, z1: 25.4, drehung: 93.0, material: blech_dunkel, material_oben: blech_dunkel},
-                 {pos: [-21.6, -67.0], l: 4.0, b: 3.2, z0: 22.2, z1: 24.6, drehung: 93.0, material: blech_dunkel, material_oben: blech_dunkel}]}
+  # (9) Erdbergstrasse 123. Runde 8 (Apple 14): alle Teile Flachdach hellgrau statt LOD2-Schraegen (die standen als weisse
+  # Stufen ueber der Hoffassade). Ruecksprung 24,86 [OGD], Hauptkoerper 22,28 [OGD]; hoher Teil an der Hofkarte als
+  # neubau-Koerper nb_umgebung_005363_hoch bis 24,8 (Vorlage). Vorher dz 4,9 auf einem Streifen vor der Karte
+  - {pos: [-28.0, -43.0], material: blech_hell, dach: {form: flach}}
+  - {bezug: "005363", material: blech_hell, dach: {form: flach}}
+  # (8) Erdbergstrasse 125. Runde 8 (Kunde "dieser Teil ist noch falsch", Apple 14): kein Mansarddach, sondern ein
+  # zweistufiges mittelgraues Dachgeschoss mit Fenstern und Terrasse auf der weissen Hoffassade (neubau nb_umgebung_005364_dg).
+  # Flachdach grau auf der eigenen Traufe je Baukoerperteil (20,8 / 22,2 [OGD]). Vorher Mansarde 65 Grad bis 25,0, die ueber
+  # dem verwinkelten Grundriss einknickte, danach kurz dunkle Kaesten ohne Fenster
+  - {bezug: "005364", material: blech, dach: {form: flach}}   # Runde 8: Dachgeschoss mit Fenstern in neubau (nb_umgebung_005364_dg)
   - {pos: [3.0, -66.5], dz: 1.7}                                                          # (5) Wuertzlerstrasse 12, Hoftrakt: Ostwand hoeher (Vorlage)

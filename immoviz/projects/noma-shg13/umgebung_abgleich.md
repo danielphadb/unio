@@ -213,7 +213,8 @@ eine waagrechte Kamera mit Shift. `hof_vorlage` bleibt als alter Eintrag, gilt a
 | 2 | 005379 Schnirchgasse 4 | Traufe 16,3 (LOD2), Erkerturm mit Zeltdach, `#ECE9E2` | Traufe 18,6 (Strahlschnitt an drei Stellen 18,5 bis 18,6), Ziegel-Mansarddach parametrisch bis +23 mit 4 Gauben, Erkerturm entfernt, weiß `#F4F1EC`, Fensterreihen Schritt 3,3 |
 | 3 | 005380 Schnirchgasse 6 | Erkerturm mit Zeltdach, LOD2-Dach | Erkerturm entfernt (er stand 10 m vor der Kamera und verdeckte die ganze rechte Bildhälfte, die Vorlage zeigt ihn nicht), Dach parametrisch über dem an der Karte beschnittenen Grundriss |
 | 5 | 005387 Würtzlerstraße 12, Hoftrakt | Nordfassade y -64,6 bis -63,9, 17,8 m | Nordfassade 1,9 m nach Süden (y -65,8 / -65,1), 19,5 m, Baukörper +1,7 (`dz`); die Vorlage zeigt die Nordostecke dort und die Ostwand über 18,7 m |
-| 8 | 005364 Erdbergstraße 125 | modern hellgrau, LOD2-Dach | weiß mit weiß gerahmten Fenstern, Reihen Schritt 3,4 (Oberkanten 18,7 / 15,3 gemessen), dunkle Blechmansarde 20,8 bis 25 (Traufe 20,8 = OGD), Fassade endet bei y -55,8 |
+| 8 | 005364 Erdbergstraße 125 | dunkle Blechmansarde 65 Grad bis 25,0 (knickte über dem verwinkelten Grundriss ein, schwarze Kerbe) | Kundenhinweise "dieser teil ist noch falsch" und "das schwarze dach daneben auch": Flachdach grau auf der eigenen Traufe (20,8 / 22,2 [OGD]), darauf ein zweistufiges mittelgraues Dachgeschoß mit Fenstern (20,8 bis 23,4 an der Hoffassade, 23,4 bis 25,6 zurückversetzt) wie Apple 14 (`nb_umgebung_005364_dg`) [ANN Lage, Höhe, Fensterraster]; die Zwischenstufe mit dunklen Kästen ohne Fenster ist ersetzt |
+| 9 | 005363 Erdbergstraße 123 | Hoffassade 24,8 über die ganze Länge, darüber leere weiße Stufen und Schrägen | Kundenhinweis "das ist noch immer falsch": die weißen Stufen waren Dach und Seitenwände eines Baukörperstreifens, der ganz vor der Hofkarte liegt (Wand weggeschnitten, Dach nicht). Behoben in lib/build.py (Teile ganz vor der Karte entfallen ganz). Hofkarte geteilt wie Apple 14: hoher Teil mit Balkonraster nördlich von y -49,7 bis 24,8 mit oberstem Geschoß als Fensterband, dahinter Körper `nb_umgebung_005363_hoch`; Südteil niedriger (22,3) mit Dachterrasse; alle Dächer flach hellgrau statt LOD2-Schrägen |
 | 9 | 005363 Erdbergstraße 123 | Ostfassade 19,9 m ab y -53,3, 4 Achsen, Raster 3,0 | 24,8 m (8 Geschosse + DG, Geschoss 2,9 m, gemessen 7,6 / 10,5 / 13,4 / 16,3 / 18,9), beginnt bei y -55,8, Fensterachsen 1,85 / 7,0 / 9,9 / 12,8, graubraune Paneelstreifen `#B9ADB2` zwischen den Fensterbändern, Baukörper +4,9 (`dz`); Rücksprung 23,4 statt 20,1 |
 | 10 | 005362 Schlachthausgasse 15/17 | apricot `#DDA38A`, 6 OG im Raster 3,0, graue Blechmansarde | lachs `#D8957F` (Vorlage `#CD9987` Mitteltöne), Fensteroberkanten 6,6 bis 20,4 im Raster 2,75 (Traufe 21,4 bis 22,2 gemessen = OGD 21,8), Ostteil 3 Achsen, Mansarde helles Blech wie die Vorlage |
 | | Nachbargarten | weißer Kasten 3 x 8 m bei x -4 bis -1 (Orthofoto) | Kasten 1,0 x 3,2 m, 1,2 m hoch bei x -10,9 bis -9,9 / y -41 bis -37,8 (in `Hof_fin` und `Hof_fin-4` gleich gemessen) |
@@ -301,7 +302,7 @@ wieder der Bestand.
 | 10 | 005362 Schlachthausgasse 15/17 | helles Blech | mittelgraues Blech wie Apple 14, Gauben unverändert |
 | 8 | 005364 Erdbergstraße 125 | dunkle Blechmansarde 65 Grad bis 25,0 (knickte über dem verwinkelten Grundriss ein, schwarze Kerbe) | Kundenhinweis "dieser teil ist noch falsch": Flachdach dunkel auf der eigenen Traufe (20,8 / 22,2 [OGD]), darauf drei dunkle Dachgeschoßkästen mit senkrechten Wänden (20,8 bis 23,6 an der Hoffassade, 23,6 bis 25,4 zurückversetzt, Eckteil 22,2 bis 24,6) wie Apple 14 [ANN Lage und Höhe] |
 
-Unverändert, weil Apple 14 das Modell bestätigt: 005363 Flachdach, 005382 Ziegeldach aus
+Unverändert, weil Apple 14 das Modell bestätigt: 005382 Ziegeldach aus
 LOD2, 005387 helles Flachdach.
 
 **Erkertürme und Vorlagenkameras:** Die gematchten Kameras `hof_fin` und `hof_fin4` stehen im Eckhaus Schnirchgasse 8
@@ -313,8 +314,50 @@ Für Traufen und Dächer weicht `hof_fin` damit bewusst von der Vorlage ab (Best
 (lib/ebenen.py, `NACHBAR_GRUPPEN`), damit Nachbarteile nicht als Gebäude geschützt werden; die Quellenprüfung ordnet
 Fassaden und Körper dieser Gruppen den Nachbarn zu (lib/quellen.py). Quellenprüfung Noma: 21 statt 23 Befunde.
 
-Offen: Dachaufbauten und Terrassen auf 005378 nur angedeutet (Lage geschätzt); Dachgeschoßkästen auf 005364 ohne Fenster; Fensterraster der Erkertürme je Seite
+Offen: Dachaufbauten und Terrassen auf 005378 nur angedeutet (Lage geschätzt); Balkonraster von 005363 nur als Paneelstreifen;
+Teile ganz vor einer Hofkarte fallen jetzt weg (Wimmergasse: sechs schmale Lisenen vor Stolberggasse 42, Noma: vier Teile von
+005363, darunter der Rücksprung 24,86; die Karten schneiden mit unbegrenzten Linien); Fensterraster der Erkertürme je Seite
 eine Achse; Kaminköpfe im Modell schmaler als im Bestand.
+
+## 12. Runde 9: Hof und Häuser nach Fotos vom 20.11.2026
+
+Kundenauftrag: "bitte nutze die bilder um den hof und die häuser 1:1 nachzubilden". 75 Fotos (iPhone, 24/48/77 mm) und
+3 Videos aus Drive, nur intern unter `renders/streetview/fotos_hof_2026-11-20/` (gitignored, Liste mit Brennweiten in
+`aufnahmen.txt`). Zwei Standpunkte: oben in Erdbergstraße 123 mit Blick nach Osten (IMG_7804 bis 7853) und auf der
+Noma-Baustelle mit Blick nach Westen (IMG_7854 bis 7912). Die Fotos haben Vorrang vor Apple und vor der
+Projektvisualisierung; gemessen wird nur, nichts wird als Textur übernommen.
+
+**Kamera:** IMG_7836 aus 14 Passpunkten gelöst (Traufen Schnirchgasse 4/6 aus LOD2, Turmgesimse, Dachkante
+Schlachthausgasse 11, Gemeindebau Ecke und Balkonstapel), Brennweite fest 24 mm, Kippung und Rollwinkel frei:
+Standpunkt -25,7 / -39,0 / +21,5, Restfehler im Mittel rund 10 px bei 2400 px. Neue Kontrollkamera `foto_7836`
+(Option `roll` in lib/build.py). Gartenelemente per Strahl vom Foto auf den Boden gemessen.
+
+| Bereich | Befund (Foto) | vorher | nachher |
+|---|---|---|---|
+| 005379 Schnirchgasse 4 | EG + 3 OG (hohe Gründerzeitgeschoße), Putz grau-beige, Stiegenhausturm mit Podestfenstern, Turmdach Ziegel mit Zinkkanten, fünf breite Kaminköpfe | EG + 4 OG weiß, Turmdach grau | Karte EG + 3 OG (Raster 3,75), Achsen am Foto, `#BDB6AB`, Turm mit versetzten Fenstern, Ziegel braunrot |
+| 005380 Schnirchgasse 6 | wie Nr. 4, Putz hellgrau-weiß, Ziegel braun, drei Kaminköpfe | Ziegel orange (Apple) | Ziegel braun, EG + 3 OG |
+| 005378 Schlachthausgasse 11 | außenliegender verglaster Liftschacht über alle Geschoße, Flachdach mit Terrassen | fehlte | Glasschacht vor dem Vorsprung des Baukörpermodells |
+| 005382 Schnirchgasse 8 | Hoffassade cremegelb | weiß-grau | `#E3D6B4` |
+| 005364 Erdbergstraße 125 | weißer Gründerzeitbau, EG + 4 OG zu rund 4 m, vier Achsen, verglaste Balkone 1. bis 4. OG und DG, verglaster Stiegenhausstreifen, DG 1 weiß mit Fenstertüren, DG 2 Zinkmansarde mit Dachflächenfenster, Terrasse | dunkle Kästen (Runde 8) | Karte neu, Balkonplatten und Glasgeländer, DG 1 und Zinkmansarde in `nb_umgebung_005364` |
+| 005363 Erdbergstraße 123 | Bau der 1960er/70er: graue Kratzputzfelder mit Fensterbändern zwischen weißen Lisenen, EG offen, 6 OG bis 22,3 [OGD 22,28], links zurückgesetztes Terrassengeschoß, rechts weißer Teil mit Einzelfensterachse und Attika bis 26,0 | weiß mit Paneelstreifen bis 24,8 (Vorlage) | zwei Karten (grau 9,9 m / weiß 4,3 m nach Fotoanteil), Lisenen als Boxen, Terrassengeschoß und Attika in `nb_umgebung_005363`; Rücksprung mit nur einer Fensterachse |
+| Nachbargarten | verglaster Stiegenabgang (Tiefgarage) mit Blechpultdächern und Lamellenkasten bei x -3,6 bis -0,3 / y -38 bis -46,5 (deckt sich mit dem Orthofoto), Plattenplatz mit zwei Bänken, Weg nach Süden, Rasen, Spielfläche mit Rindenmulch und Schaukel im Südosten, kleine Bäume, Birke | weißer Kasten und Mauer nach der Vorlage, zwei große Bäume vor 005363 | Pavillon, Bänke, Platten, Weg, Rasen, Mulch neu; Vorlagenbäume entfernt, Birke 13 m |
+| Dachgarten Hofbau (+4,66) | Rasen mit Strauchgruppen, Liege, zwei Lichtkuppeln, keine Bäume | fünf Bäume bis 15 m (Vorlage) | Bäume entfernt, sechs Strauchgruppen |
+
+Höhen der Westseite relativ zur Traufe Erdbergstraße 125 (20,8 [OGD]) am Foto IMG_7896 gemessen; die Kamera dieses
+Fotos ließ sich mit den sicheren Punkten nicht eindeutig lösen.
+
+**Schlachthausgasse 15/17 (005362), Nachtrag Runde 9:** Der "Westflügel" rechts im Foto IMG_7896 ist der Flügel
+BKM 4003912350 (x -29,6 bis -24,9 / y -22,5 bis -15,9). Seine Ostseite zum Hof ist lachs mit zwei Fensterachsen,
+EG + 6 OG bis 21,8, darüber die Zinkmansarde (neue Karte `hof_ost_005362_fluegel`, eigener Schlüssel). Die Hof-Südseite
+(IMG_7849) ist neu gegliedert: lachs mit zwei weißen Wandstreifen (x -14,8 bis -12,1 und -5,1 bis -3,3), zwei offene
+Stahl-Balkontürme vor x -18,2 bis -15,6 und -8,1 bis -5,6 (1. bis 6. OG und DG, graue Blechbrüstungen, Stützen) und
+zwei auskragende Stahlbalkone vor dem ersten weißen Streifen; Zinkmansarde hellgrau mit weißen Gauben. Das
+Baukörpermodell führt die Balkontürme als massive Vorsprünge; der Grundriss von BKM 4003912213 wird deshalb ohne sie
+gesetzt (neuer Projektschlüssel `baukoerper`, lib/build.py). Die geschätzten weißen Balkone aus Runde 3 sind entfernt.
+
+Offen: Kleinfenster (WC) an Schnirchgasse 4/6 und der
+Südteil der Hoffassade von Schlachthausgasse 11 ohne Fenster; Lüftungskasten im Garten; Farben der Ostseite wirken
+im hellen Sommerlicht weißer als auf den Fotos (bedeckter Novembertag).
 
 ## Straßenleuchten (18.11.2026)
 

@@ -91,7 +91,7 @@ TAG_RE = re.compile(r"\[([^\]\[]{1,160})\]")
 # Kommentartext ohne Klammern, der trotzdem eine Quelle nennt (z. B. "laut EIN S. 8", "Orthofoto", "Annahme")
 TEXT_RE = re.compile(r"\b(EIN S\. ?\d+|INT\d? S\. ?\d+|VP Top ?\w+|BAB[- ]?[A-Z]* ?\d[\d.]*|Orthofoto|LOD2|Baumkataster|"
                      r"Farbkonzept|RAL ?\d{4}|NCS [\w-]+|Caparol [\w ]+?\d+|Baumit \d+|Luftbild|Schr(ae|ä)gluftbild|"
-                     r"Street ?View|Google ?(3D|Luftbild)?|Apple ?\d*|Annahme|geschaetzt|geschätzt|Hof_fin[-\d]*)\b")
+                     r"Street ?View|Google ?(3D|Luftbild)?|Apple ?\d*|Fotos? (Hof|vor Ort)|Annahme|geschaetzt|geschätzt|Hof_fin[-\d]*)\b")
 ANN_RE = re.compile(r"(?i)\bANN\b|annahme|geschaetzt|geschätzt|regelwert|vermutlich")
 PIXEL_RE = re.compile(r"(?i)gemessen|abgelesen|aus der ansicht|beleuchtet|pipette|mittelwert")
 VEKTOR_RE = re.compile(r"(?i)vektor|RAL ?\d|NCS|baumit ?\d|palette|farbkonzept|\bFK\b|devicergb|hersteller|#\w+ laut")

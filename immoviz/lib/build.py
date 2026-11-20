@@ -43,6 +43,13 @@ def load_project(project_dir: Path):
     ctx_path = project_dir / "data" / "context.json"
     ctx = json.loads(ctx_path.read_text()) if ctx_path.exists() else None
     cfg["_project_dir"] = str(project_dir)      # fuer Zusatzdaten wie data/roofs.json
+    # `baukoerper: [{id, poly, quelle}]`: Grundriss eines Baukoerpers (id aus context.json) ersetzen, z. B. wenn das
+    # Baukoerpermodell offene Balkontuerme als massive Vorspruenge fuehrt (die Balkone stehen dann in neubau)
+    ersatz = {int(e["id"]): e["poly"] for e in (cfg.get("baukoerper") or [])}
+    if ctx and ersatz:
+        for b in ctx.get("buildings", []):
+            if int(b.get("id", -1)) in ersatz:
+                b["poly"] = [list(map(float, q)) for q in ersatz[int(b["id"])]]
     return cfg, ctx
 
 
@@ -679,6 +686,11 @@ def build_neighbours(cfg, ctx, mats, coll, terrain, roofs=None):
             if str(b.get("bezug")) != str(sp["bezug"]) or b.get("klasse") != 11:
                 continue
             poly, lines = K.clip_polygon(b["poly"], [[n, "d", ">=", 0.6] for n in same], facades)
+            if len(poly) < 3:
+                # Baukoerperteil liegt ganz vor der Fassadenkarte (Vorspruenge, Balkonstreifen im Baukoerpermodell):
+                # weder Wand noch Dach. Vorher blieben Dach und Giebelwaende stehen (weisser Kasten ueber der Hoffassade
+                # Erdbergstrasse 123, NOMA Runde 8)
+                continue
             hb = b["height"]
             top_mat = "dach_flach"
             side = sp.get("upper_material") if (sp.get("upper_material") and hb > H + 1.0) else col
@@ -978,8 +990,8 @@ def setup_camera(scene, cfg, name):
         aspect = scene.render.resolution_x / scene.render.resolution_y
         cam.shift_y = max(-1.0, min(1.0, (dz / r) * cam.lens / 36 * (1 if aspect >= 1 else aspect)))
         cam.shift_x = 0
-    else:
-        ob.rotation_euler = (math.radians(90) + math.atan2(dz, r), 0, yaw)
+    else:      # `roll` (Grad): Rollwinkel einer gematchten Handykamera (Foto nicht waagrecht gehalten)
+        ob.rotation_euler = (math.radians(90) + math.atan2(dz, r), math.radians(c.get("roll", 0.0)), yaw)
     if c.get("shift"):        # gematchte Kamera: Shift ausdruecklich (Einheit wie Blender, Anteil der laengeren Bildseite)
         cam.shift_x, cam.shift_y = c["shift"]
     if c.get("clip_start"):   # Standpunkt der Vorlage in einem Nachbarbaukoerper: Wand wegschneiden
