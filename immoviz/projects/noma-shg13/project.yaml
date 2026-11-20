@@ -605,37 +605,38 @@ neubau:
     - {gruppe: nb_hof, rahmen: hof, a: [15.0, 8.09], b: [15.9, 8.09], d: [0.0, 0.26], z: [3.06, 3.39], mat: nb_platten}
     - {gruppe: nb_hof, rahmen: hof, a: [15.0, 8.35], b: [15.9, 8.35], d: [0.0, 0.27], z: [3.06, 3.28], mat: nb_platten}
     - {gruppe: nb_hof, rahmen: hof, a: [15.0, 8.62], b: [15.9, 8.62], d: [0.0, 0.27], z: [3.06, 3.17], mat: nb_platten}
-    # Leitern (Dachausstieg ueber Leiter) an Top 3 Ost und Top 4 West [EIN S. 16, Schnitt S. 23]
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.825], b: [11.95, 5.875], d: [-0.21, -0.15], z: [3.50, 7.60], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 6.325], b: [11.95, 6.375], d: [-0.21, -0.15], z: [3.50, 7.60], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [3.78, 3.805], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [4.06, 4.085], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [4.34, 4.365], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [4.62, 4.645], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [4.9, 4.925], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [5.18, 5.205], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [5.46, 5.485], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [5.74, 5.765], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [6.02, 6.045], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [6.3, 6.325], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [6.58, 6.605], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [6.86, 6.885], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [7.14, 7.165], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 5.875], b: [15.9, 5.825], d: [-0.21, -0.15], z: [3.50, 7.60], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.375], b: [15.9, 6.325], d: [-0.21, -0.15], z: [3.50, 7.60], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [3.78, 3.805], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [4.06, 4.085], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [4.34, 4.365], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [4.62, 4.645], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [4.9, 4.925], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [5.18, 5.205], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [5.46, 5.485], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [5.74, 5.765], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [6.02, 6.045], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [6.3, 6.325], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [6.58, 6.605], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [6.86, 6.885], mat: nb_basalt}
-    - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [7.14, 7.165], mat: nb_basalt}
+    # Leitern (Dachausstieg ueber Leiter) an Top 3 Ost und Top 4 West [EIN S. 16, Schnitt S. 23]. Runde 10 (Kunde 20.11.2026: "die leitern bei
+    # einheit 3 und 4 nicht einzeichnen"): auskommentiert, der Plan zeigt sie weiterhin
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.825], b: [11.95, 5.875], d: [-0.21, -0.15], z: [3.50, 7.60], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 6.325], b: [11.95, 6.375], d: [-0.21, -0.15], z: [3.50, 7.60], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [3.78, 3.805], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [4.06, 4.085], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [4.34, 4.365], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [4.62, 4.645], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [4.9, 4.925], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [5.18, 5.205], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [5.46, 5.485], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [5.74, 5.765], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [6.02, 6.045], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [6.3, 6.325], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [6.58, 6.605], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [6.86, 6.885], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [11.95, 5.85], b: [11.95, 6.35], d: [-0.19, -0.17], z: [7.14, 7.165], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 5.875], b: [15.9, 5.825], d: [-0.21, -0.15], z: [3.50, 7.60], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.375], b: [15.9, 6.325], d: [-0.21, -0.15], z: [3.50, 7.60], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [3.78, 3.805], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [4.06, 4.085], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [4.34, 4.365], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [4.62, 4.645], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [4.9, 4.925], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [5.18, 5.205], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [5.46, 5.485], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [5.74, 5.765], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [6.02, 6.045], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [6.3, 6.325], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [6.58, 6.605], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [6.86, 6.885], mat: nb_basalt}
+#   - {gruppe: nb_hof, rahmen: hof, a: [15.9, 6.35], b: [15.9, 5.85], d: [-0.19, -0.17], z: [7.14, 7.165], mat: nb_basalt}
   schraegen:
     - {gruppe: nb_umgebung_005364, pts: [[-23.998, -64.761, 22.94], [-24.598, -55.861, 22.94], [-26.294, -55.975, 25.94], [-25.694, -64.875, 25.94]], mat: dach_blech_grau, quelle: "Fotos Hof 20.11.2026 (IMG_7896/7857, Hoehen relativ zur Traufe Erdbergstrasse 125 = 20,8 [OGD]) DG 2 Zinkmansarde"}
     # Runde 8: Erkerdaecher Schnirchgasse 4 (Pyramide, Spitze 1 m hinter der Hofwand) und 6 (Zeltdach); Runde 9 nach den Fotos beide Ziegel braunrot mit Zinkkanten [LOD2, Apple 13]

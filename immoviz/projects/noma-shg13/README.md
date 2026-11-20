@@ -430,6 +430,33 @@ der Hoffassaden aus EIN S. 26 (Straßenhaus, 1. OG bis 2. DG je 8, 8, 8, 8, 8, 6
 21 Zeilen, 0 Abweichungen. Die Gesamtampel bleibt rot wegen älterer Fenster, Stuck und Farben ohne Quelle (nicht Teil
 dieser Runde).
 
+## Weg, Geländer und Leitern nach Plan und BAB (20.11.2026)
+
+Kundenauftrag: "bab und den plan bei noma noch einmal im detail vergleichen, damit sowohl der weg am noma projekt vorbei
+die richtige größe hat als auch geländer richtig positioniert werden, bitte die leitern bei einheit 3 und 4 nicht
+einzeichnen".
+
+**Unterlagen:** Für das 1. OG gibt es keinen neueren Plan als die Einreichmappe 04.03.2026 (in Drive als "Planungsmappe
+gesamt", 01.04.2026, gleicher Stand; die Installationspläne 1. OG vom 22.05.2026 sind Küchenpläne). Der Polierplan EG
+(SHG13-260522-PP-EG-Index A) betrifft nur das Erdgeschoss. Neueste BAB hofseitig/DG/Lofts vom 07.07.2026:
+Terrassen und Balkone Plattenbelag 50 x 50 auf Kiesbett, Geländer pulverbeschichtet (keine Angaben zum Weg).
+
+**Vergleich:** Modell (Weg, Terrassen, Pavillons, Geländer G1 bis G7) als Linien deckungsgleich über die vektorielle
+Planseite 1. OG gelegt (Entwurf 20.02.2026 S. 10/11, Registrierung an den Außenecken Pavillon Top 4; Einreichmappe 04.03.
+liegt nur als Text vor). Ergebnis:
+
+| Prüfpunkt | Plan / BAB | Modell | Ergebnis |
+|---|---|---|---|
+| Weg Breite | 1,34 licht, 1,50 am Westende, GLH 1,02 an der Nordkante | Streifen b 6,62 bis 8,09 (1,47) mit G1 bei b 8,03 | stimmt |
+| Weg Fläche | "Weg Feinst. 46,80 m²", Rampe 5 % | 46 bis 47 m² ohne Podest und ohne das Stück vor der Terrasse Top 3 | stimmt |
+| Belag | Feinsteinzeug, Platten 50 x 50 (BAB) | `nb_platten` Raster 0,50 | stimmt |
+| G1 Weg Nord, G2 Weg Süd West, G3/G4 Terrasse Top 3, G5/G6 Terrasse Top 4 | GLH 1,02 | Lage innerhalb rund 0,1 m deckungsgleich | stimmt |
+| Stufen vom Weg aufs Gründach 61,26 | a 15,0 bis 15,8 | a 15,0 bis 15,9 | stimmt |
+| Stufen bei a 25,8 bis 26,6 | nur im Entwurf Februar (dort Gründach statt Pavillon 4A) | keine | nicht übernommen, Einreichmappe und VP 4A haben dort die Terrasse 4A |
+| Leitern Dachausstieg Top 3 Ost / Top 4 West | im Plan "über Leiter Dachausstieg" | jetzt auskommentiert | auf Kundenwunsch nicht gezeichnet |
+
+Die hölzernen Rankgitter an den Terrassenwänden Top 3/4 (Ausstattung, Kundenwunsch 16.11.) bleiben.
+
 ## Quellen (`quellen/`, PDFs nicht im Repo)
 
 | Kürzel | Datei | Verwendet für |
