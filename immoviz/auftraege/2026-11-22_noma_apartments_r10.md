@@ -4,8 +4,8 @@ Status: offen
 Erstellt: 22.11.2026, cloud-neu
 Erledigt:
 
-Start nach dem Terrassen-Neurender (`2026-11-22_noma_terrassen_r10.md`, Neustart 2), sobald keine andere Mac-Arbeit läuft (`SITZUNGEN.md` "Laufend", `pgrep -f immoviz.py`). Kein Neurender der
-Terrassen in diesem Auftrag (vom Nutzer zurückgestellt).
+Start nach dem Terrassen-Neurender (`2026-11-22_noma_terrassen_r10.md`, Neustart 2), sobald keine andere Mac-Arbeit läuft (`SITZUNGEN.md` "Laufend", `pgrep -f immoviz.py`).
+Der Terrassen-Neurender läuft im eigenen Auftrag.
 
 ## Ziel
 Noma Apartments im neuen Ablauf (Runde 10): 4k-Renders mit Ebenen als Grundlage für die Veredelung `ki_verzogen` in der
@@ -28,7 +28,7 @@ pgrep -f immoviz.py && echo "BELEGT: warten" || echo frei
 
 ## Ausgabe
 - `renders/r10_apt_probe/`: JPG der Probe, `planbeleg/`.
-- `renders/r10_apartments/`: 9 Bilder 4k (JPG einchecken, PNG lokal), Ebenen ohne `normalen.png` mit `git add -f`,
+- `renders/r10_apartments/`: 23 Bilder 4k (JPG einchecken, PNG lokal), Ebenen ohne `normalen.png` mit `git add -f`,
   `planbeleg/`, Kontaktbogen `r10_apartments/kontaktbogen.jpg`.
 
 ## Melden
