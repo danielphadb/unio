@@ -52,6 +52,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
   lag zudem eine ältere Fassung von `VP_Top04.pdf` (63,35 m2), vermutlich Ursache der weißen Wand. Ersetzt durch die ZIP-
   Fassung. Bitte `netto_flaeche()` korrigieren. **Vom Nutzer am 2026-11-22 bestätigt: es gilt der VP Top 4 mit 62,80 m2**
   (ZIP-Fassung, GSPublisher 3560, Terrasse 15,45 m2).
+- an alle Cloud-Sitzungen von mac-neu (2026-11-22): `runde8_begehung` Schritt 2 bricht an der Autopruefung ab (1 von 582
+  Autos, Ferrari bei -13.61/140.87, Rad 7 cm). Vermutete Ursache und Vorschlag für `lib/assets/autos_bibliothek.py` im
+  Auftrag, Ergebnis Punkt 2. Die Datei liegt im Bereich `immoviz/lib/assets/` von cloud-neu, deshalb hier nicht geändert.
 - an mac-alt von mac-neu (2026-11-22): `quellen/VP_Top03.pdf` und `VP_Top04.pdf` (Noma) wurden durch die ZIP-Fassungen ersetzt,
   die alten liegen unter `quellen/alt_2026-03-04/`.
 

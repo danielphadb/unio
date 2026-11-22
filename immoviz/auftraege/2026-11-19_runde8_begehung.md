@@ -1,6 +1,6 @@
 # Auftrag runde8_begehung
 
-Status: in Arbeit (mac-neu, 2026-11-22 16:29)
+Status: Problem (mac-neu, 2026-11-22: Schritt 2 bricht an der Autopruefung ab; Schritt 4 läuft)
 Erstellt: 18.11.2026, Cloud-Sitzung
 
 ## Ziel
@@ -48,4 +48,19 @@ Zeiten je Kamera, Gerät, Auffälligkeiten an der Kreuzung (Überfahrt, Rampen, 
 Fehlermeldungen wörtlich.
 
 ## Ergebnis
-(von der Mac-Sitzung auszufüllen)
+(mac-neu, 22.11.2026; Schritt 1 ok, **Schritt 2 abgebrochen, kein 4k gerendert**, Schritt 4 läuft)
+
+1. Schritt 1: Strassenmoebel 36/36 grün, Soll gegen Modell 0 Abweichungen.
+2. Schritt 2: alle drei Kameras brechen vor dem Rendern ab (Gerät Metal, M3 Max; `ecke` nach 56 s). Wörtlich:
+   `Autopruefung nicht bestanden, Render abgebrochen (renders/check/autos_pruefung.md): Ferrari Dodici Cilindri bei
+   -13.61/140.87: schwebt bis 7 cm`. 582 Autos, 1 Befund, 0 Überschneidungen, 0 in Hindernissen. Der Abbruch wurde erst
+   um 17:54 bemerkt (Warteskript prüfte nur auf das Ende).
+   - Messwerte der vier Räder: -0,7 / **7,0** / 0,7 / -0,7 cm. Beim Setzen lag der Restfehler unter 3 cm.
+   - Vermutete Ursache (aus dem Code gelesen, nicht nachgestellt): `auf_boden_setzen()` misst den Boden an den Radpunkten
+     ohne Neigung, `pruefen()` an den Radpunkten mit Neigung. Die Punkte liegen Millimeter auseinander; steht ein Rad
+     genau an einer Kante, trifft der eine Strahl oben und der andere 7 cm tiefer. Der Bericht vom 18.11. (580 Autos, 0
+     Befunde) hatte an dieser Stelle einen anderen Wagen.
+   - Die Prüfung wurde nicht abgeschaltet (`IMMOVIZ_AUTOS_PRUEFUNG=aus` ist nur zum Testen gedacht).
+   - Vorschlag: in `auf_boden_setzen()` nach dem Neigen den Boden an den geneigten Radpunkten neu messen und `rest`
+     daraus bilden, dann verschiebt oder räumt `aufraeumen()` die Bucht selbst.
+   - Die drei `renders/check/autos_*` Dateien dieses Laufs wurden nicht eingecheckt.
