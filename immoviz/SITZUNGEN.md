@@ -43,7 +43,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Laufend
 
 - cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11.: Modell, Bibliotheken, Schutz und Mac-Auftrag fertig; wartet auf Mac-Render noma_terrassen_r10, danach Veredelung und Lieferung) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
-- mac-neu | seit 2026-11-22 16:29 | Auftrag runde8_begehung (3 Straßenkameras 4k mit Ebenen, danach Begehung mit Google-Schlüssel des Nutzers) | Bereich: immoviz/auftraege/2026-11-19_runde8_begehung.md, immoviz/projects/wimmergasse-20/renders/r8_begehung/, renders/check/begehung_*, GPU
+- mac-neu | seit 2026-11-22 16:29 | Auftrag runde8_begehung (3 Straßenkameras 4k mit Ebenen, danach Begehung mit Google-Schlüssel des Nutzers) | Bereich: immoviz/auftraege/2026-11-19_runde8_begehung.md, immoviz/projects/wimmergasse-20/renders/r8_begehung/, renders/check/begehung_*, GPU, immoviz/lib/assets/autos_bibliothek.py (nur `auf_boden_setzen()`, vom Nutzer freigegeben am 2026-11-22, cloud-neu bitte nicht gleichzeitig ändern)
 
 ## Nachrichten
 
