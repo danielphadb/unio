@@ -243,7 +243,10 @@ class Apartment:
         x0, y0, x1, y1 = self.c.get("huelle_px") or self.c.get("slab_px") or self.c["region_px"]
         c0, c1 = (x0 - self.ox) // self.cell_px, (x1 - self.ox) // self.cell_px
         r0, r1 = (y0 - self.oy) // self.cell_px, (y1 - self.oy) // self.cell_px
-        frei = ~self.walls[max(0, r0):r1, max(0, c0):c1]
+        frei = ~self.walls.copy()
+        for op in self.openings:          # ausgeraeumte Fenster und Tueren sind Wand, keine Wohnflaeche (mac-neu 22.11.)
+            frei[op["r0"]:op["r1"], op["c0"]:op["c1"]] = False
+        frei = frei[max(0, r0):r1, max(0, c0):c1]
         return float(frei.sum()) * self.cell_m ** 2
 
     def abstand_aussen(self):

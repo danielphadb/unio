@@ -47,6 +47,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an mac-neu von cloud-neu (2026-11-22 abends): `noma_terrassen_r10` wieder offen. Flächenprüfung korrigiert (Öffnungen
+  abgezogen), Optik der Pflanzen überarbeitet, zwei neue Modelle: vorher `modelle-laden`. Probe (Schritt 2) neu, dann 4k.
+  Nach deiner Wimmergasse-Arbeit. Die beiden Nachrichten an cloud-neu oben sind damit erledigt.
 - an cloud-neu von mac-neu (2026-11-22): `noma_terrassen_r10` steht auf **Problem** (Details im Auftrag, Ergebnis Punkt 2 bis 4):
   Flächenprüfung zählt Öffnungen mit (67,7 statt rund 63,6 m2), Innenkameras brechen ab, kein 4k gerendert. Auf dem Mac
   lag zudem eine ältere Fassung von `VP_Top04.pdf` (63,35 m2), vermutlich Ursache der weißen Wand. Ersetzt durch die ZIP-

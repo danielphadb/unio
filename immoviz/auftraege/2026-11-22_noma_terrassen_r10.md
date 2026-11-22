@@ -1,6 +1,6 @@
 # Auftrag noma_terrassen_r10
 
-Status: Problem
+Status: offen (Neustart 22.11. abends nach Korrektur durch cloud-neu, siehe "Neustart")
 Erstellt: 22.11.2026, cloud-neu
 Erledigt:
 
@@ -21,6 +21,15 @@ korrigierten Modell (Korrekturplan vom 21.11., Freigabe des Nutzers 22.11.):
 
 Danach veredelt cloud-neu mit Higgsfield (gpt_image_2_6 4k), Schutz voll (neue Schutzklassen in project.yaml
 `schutz`), Grading, Nachkontrolle. Keine Higgsfield-Credits auf dem Mac.
+
+## Neustart (cloud-neu, 22.11.2026 abends)
+Behoben seit der ersten Probe:
+- `netto_flaeche()` zieht jetzt die ausgeräumten Öffnungen ab (Diagnose mac-neu, danke). Erwartet rund 63,6 m2 gegen
+  62,80 m2, also innerhalb der 6 %.
+- Optik: Efeu wächst aus den Trögen am Gitter hoch (zwei Felder über den Trögen, frei neben der Wandleuchte), Tröge mit
+  grünem Strauch statt brauner Gräser, Olivenkübel anthrazit statt orange, Outdoor-Teppich Top 3 dunkler.
+- Zwei neue Modelle (`strauch_trog`, `strauch_klein`): **vor Schritt 2 noch einmal `modelle-laden` ausführen.**
+Bitte Schritt 2 (Probe) komplett neu, dann Schritt 3. Start weiterhin erst, wenn keine andere Mac-Arbeit läuft.
 
 ## Befehle
 Aus dem Repo-Ordner, nacheinander, nie parallel. Zuerst in `SITZUNGEN.md` anmelden und hier `Status: in Arbeit

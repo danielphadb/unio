@@ -205,6 +205,9 @@ def vorlage(bpy, key: str) -> list:
     R = Matrix.Rotation(dreh, 4, "Z")
     if e.get("hoch") == "y":                     # Modell liegt (Y oben): aufrichten
         R = R @ Matrix.Rotation(math.pi / 2, 4, "X")
+    if e.get("kopf"):                            # senkrecht spiegeln (haengender Efeu waechst dann vom Trog nach oben)
+        R = R @ Matrix.Rotation(math.pi, 4, "Y") if e.get("hoch") != "y" else \
+            Matrix.Rotation(dreh, 4, "Z") @ Matrix.Rotation(math.pi, 4, "Y") @ Matrix.Rotation(math.pi / 2, 4, "X")
     lo, hi = [1e9] * 3, [-1e9] * 3
     for me in netze:
         me.transform(R)
