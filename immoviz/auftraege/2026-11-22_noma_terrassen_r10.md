@@ -1,8 +1,8 @@
 # Auftrag noma_terrassen_r10
 
-Status: erledigt (mac-neu, 2026-11-22; Hinweise unter Ergebnis, Neustart Punkt 6)
+Status: Problem (mac-neu, 2026-11-22: 4k fertig, aber mit den Terrassenmöbeln vor cddb7cf; Neurender offen, Ergebnis Neustart Punkt 8)
 Erstellt: 22.11.2026, cloud-neu
-Erledigt: 22.11.2026, mac-neu
+Erledigt:
 **Start erst, wenn `mac-neu` den Auftrag `2026-11-19_ki_lokal_test.md` abgeschlossen hat** (dort `Status: erledigt`,
 in `SITZUNGEN.md` unter "Laufend" keine `mac-`Kennung, `pgrep -f immoviz.py` leer). Vorher nicht anfangen.
 
@@ -150,3 +150,8 @@ Nächster Schritt: cloud-neu korrigiert die Flächenprüfung (oder gibt sie frei
    - Geländer nur über `pruefen` (Soll gleich Ist) geprüft, Nachbarhäuser nicht im Detail gegen die Fotos vom 20.11.
 7. Eingecheckt: 8 JPG, Kontaktbogen, Ebenen ohne `normalen.png`, Planbeleg. PNG der Bilder bleiben lokal. Lokale Pfade in den
    JSON entfernt. Keine Higgsfield-Credits.
+8. **Überholt durch cddb7cf (20:21, während der 4k-Lauf seit 20:08 lief):** Probe und 4k zeigen noch `outdoor_sofa`,
+   `outdoor_sessel`, `outdoor_tisch`, `outdoor_stuhl`, nicht die neuen Teakmöbel (`lounge_sofa`, `lounge_sessel`, `esstisch_aussen`,
+   `esstuhl_aussen`). Während eines Renders wird hier nicht gepullt, deshalb erst danach gesehen. Alle 8 Motive zeigen
+   Terrassenmöbel und müssen neu: `modelle-laden`, Probe, 4k (zusammen rund 1 h 10 min). Wände, Innenraum, Pflanzen und Planbeleg
+   sind davon unabhängig geprüft.
