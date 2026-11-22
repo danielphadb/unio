@@ -43,7 +43,6 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Laufend
 
 - cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11.: Modell, Bibliotheken, Schutz und Mac-Auftrag fertig; wartet auf Mac-Render noma_terrassen_r10, danach Veredelung und Lieferung) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
-- mac-neu | seit 2026-11-22 16:29 | Auftrag runde8_begehung (3 Straßenkameras 4k mit Ebenen, danach Begehung mit Google-Schlüssel des Nutzers) | Bereich: immoviz/auftraege/2026-11-19_runde8_begehung.md, immoviz/projects/wimmergasse-20/renders/r8_begehung/, renders/check/begehung_*, GPU, immoviz/lib/assets/autos_bibliothek.py (nur `auf_boden_setzen()`, vom Nutzer freigegeben am 2026-11-22, cloud-neu bitte nicht gleichzeitig ändern)
 
 ## Nachrichten
 
@@ -52,14 +51,19 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
   lag zudem eine ältere Fassung von `VP_Top04.pdf` (63,35 m2), vermutlich Ursache der weißen Wand. Ersetzt durch die ZIP-
   Fassung. Bitte `netto_flaeche()` korrigieren. **Vom Nutzer am 2026-11-22 bestätigt: es gilt der VP Top 4 mit 62,80 m2**
   (ZIP-Fassung, GSPublisher 3560, Terrasse 15,45 m2).
-- an alle Cloud-Sitzungen von mac-neu (2026-11-22): `runde8_begehung` Schritt 2 bricht an der Autopruefung ab (1 von 582
-  Autos, Ferrari bei -13.61/140.87, Rad 7 cm). Vermutete Ursache und Vorschlag für `lib/assets/autos_bibliothek.py` im
-  Auftrag, Ergebnis Punkt 2. Die Datei liegt im Bereich `immoviz/lib/assets/` von cloud-neu, deshalb hier nicht geändert.
+- an cloud-neu von mac-neu (2026-11-22): `lib/assets/autos_bibliothek.py`, `auf_boden_setzen()` mit Freigabe des Nutzers
+  geändert (Boden auch an geneigten Radpunkten); gilt auch für Noma, dort nicht getestet. Die Datei ist wieder frei.
+- an alle Cloud-Sitzungen von mac-neu (2026-11-22): `runde8_begehung` ist gerendert. Vor der Veredelung bitte Ergebnis Punkt 4
+  im Auftrag ansehen (Stufe im Parkstreifen, Gehsteigstufe an der Objektecke, Schilderrückseiten, Bildaufbau `eg_lokal`).
 - an mac-alt von mac-neu (2026-11-22): `quellen/VP_Top03.pdf` und `VP_Top04.pdf` (Noma) wurden durch die ZIP-Fassungen ersetzt,
   die alten liegen unter `quellen/alt_2026-03-04/`.
 
 ## Log
 
+- 2026-11-22 mac-neu: Auftrag `runde8_begehung` erledigt. Autopruefung brach zuerst ab (Ferrari, Rad 7 cm), Korrektur in
+  `auf_boden_setzen()`, danach 0 Befunde; 3 Straßenkameras in 4k mit Ebenen, Begehung 376 Ansichten (Bericht `_mac`).
+  VP Top 4 mit 62,80 m2 vom Nutzer bestätigt. Keine Higgsfield-Credits. Offen: Auffälligkeiten im Auftrag Punkt 4,
+  Korrektur `netto_flaeche()` durch cloud-neu.
 - 2026-11-22 mac-neu: `noma_terrassen_r10` begonnen, Status Problem (Flächenprüfung, falscher VP lokal; Nachricht an
   cloud-neu). 14 Modelle geladen, 4 Außenproben ohne Planbeleg-Fehler. Kein 4k, keine Higgsfield-Credits.
 - 2026-11-22 mac-neu: Auftrag `ki_lokal_test` erledigt (Nachricht von cloud-neu zum KI-Test erledigt). SDXL + Union 0,25 und

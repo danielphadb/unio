@@ -1,6 +1,6 @@
 # Auftrag runde8_begehung
 
-Status: Problem (mac-neu, 2026-11-22: Schritt 2 bricht an der Autopruefung ab; Schritt 4 läuft)
+Status: erledigt (mac-neu, 2026-11-22; Auffälligkeiten unter Ergebnis Punkt 4 und 5)
 Erstellt: 18.11.2026, Cloud-Sitzung
 
 ## Ziel
@@ -48,19 +48,57 @@ Zeiten je Kamera, Gerät, Auffälligkeiten an der Kreuzung (Überfahrt, Rampen, 
 Fehlermeldungen wörtlich.
 
 ## Ergebnis
-(mac-neu, 22.11.2026; Schritt 1 ok, **Schritt 2 abgebrochen, kein 4k gerendert**, Schritt 4 läuft)
+(mac-neu, 22.11.2026; Schritte 1 bis 5 erledigt, Gerät Metal auf Apple M3 Max, keine Higgsfield-Credits)
 
 1. Schritt 1: Strassenmoebel 36/36 grün, Soll gegen Modell 0 Abweichungen.
-2. Schritt 2: alle drei Kameras brechen vor dem Rendern ab (Gerät Metal, M3 Max; `ecke` nach 56 s). Wörtlich:
-   `Autopruefung nicht bestanden, Render abgebrochen (renders/check/autos_pruefung.md): Ferrari Dodici Cilindri bei
-   -13.61/140.87: schwebt bis 7 cm`. 582 Autos, 1 Befund, 0 Überschneidungen, 0 in Hindernissen. Der Abbruch wurde erst
-   um 17:54 bemerkt (Warteskript prüfte nur auf das Ende).
-   - Messwerte der vier Räder: -0,7 / **7,0** / 0,7 / -0,7 cm. Beim Setzen lag der Restfehler unter 3 cm.
-   - Vermutete Ursache (aus dem Code gelesen, nicht nachgestellt): `auf_boden_setzen()` misst den Boden an den Radpunkten
-     ohne Neigung, `pruefen()` an den Radpunkten mit Neigung. Die Punkte liegen Millimeter auseinander; steht ein Rad
-     genau an einer Kante, trifft der eine Strahl oben und der andere 7 cm tiefer. Der Bericht vom 18.11. (580 Autos, 0
-     Befunde) hatte an dieser Stelle einen anderen Wagen.
-   - Die Prüfung wurde nicht abgeschaltet (`IMMOVIZ_AUTOS_PRUEFUNG=aus` ist nur zum Testen gedacht).
-   - Vorschlag: in `auf_boden_setzen()` nach dem Neigen den Boden an den geneigten Radpunkten neu messen und `rest`
-     daraus bilden, dann verschiebt oder räumt `aufraeumen()` die Bucht selbst.
-   - Die drei `renders/check/autos_*` Dateien dieses Laufs wurden nicht eingecheckt.
+2. Schritt 2, erster Versuch 16:30: alle drei Kameras abgebrochen. Wörtlich: `Autopruefung nicht bestanden, Render
+   abgebrochen (renders/check/autos_pruefung.md): Ferrari Dodici Cilindri bei -13.61/140.87: schwebt bis 7 cm`.
+   Bemerkt erst um 17:54 (Warteskript prüfte nur auf das Ende).
+   - Messwerte der Räder -0,7 / 7,0 / 0,7 / -0,7 cm. Ursache: `auf_boden_setzen()` maß den Boden an den Radpunkten ohne
+     Neigung, `pruefen()` an den geneigten Punkten; das Rad stand auf einer Kante.
+   - Korrektur (Freigabe des Nutzers, `lib/assets/autos_bibliothek.py`): Boden zusätzlich an den geneigten Radpunkten
+     messen, Grenze 3 cm unverändert. Danach 582 Autos, **0 Befunde**. Gegen den Lauf davor hat sich nur der Ferrari
+     geändert (0,25 m in der Bucht verschoben). Prüfung nicht abgeschaltet. Bei Noma nicht getestet.
+   - Die `renders/check/autos_*` Dateien dieser Läufe sind nicht eingecheckt.
+3. Schritt 2, zweiter Versuch (3840x2560, 256 Samples, mit Ebenen), alle rc=0, Planbeleg je 0 Fehler:
+
+   | Kamera | Zeit gesamt | max. resident | peak footprint | Schutzanteil |
+   |---|---|---|---|---|
+   | ecke | 507 s | 13,6 GB | 44,1 GB | 28,5 % |
+   | ecke_erhoeht | 479 s | 17,3 GB | 43,5 GB | 32,3 % |
+   | eg_lokal | 621 s | 16,2 GB | 43,1 GB | 75,0 % |
+
+   `nicht_zugeordnet` bei allen leer. `eg_lokal` hat keinen Autobogen (nur `ecke` und `ecke_erhoeht`).
+4. Sichtprüfung der Kreuzung (4k und Modellansichten WI11, ST13 gegen Street View):
+   - In Ordnung: Überfahrt mit Plateau und Rampenstreifen, Poller mit rot-weißen Ringen, Leitlinien, Parkmarkierung,
+     Mistkübel, Motorräder in der ersten Bucht (als grobe Platzhalter, in `eg_lokal` groß im Bild).
+   - **Stufe im Parkstreifen Wimmergasse Ost** (`ecke`, vor dem weißen BMW): dunkle Bordsteinkante zwischen Fahrbahn und
+     Schrägparkplatz, in Street View nicht zu sehen.
+   - **Gehsteig an der Objektecke** (`eg_lokal`, rechts): Stufe mit dunklem, senkrecht gestreiftem Band zwischen
+     Vorziehung und Gehsteig Stolberggasse (die schwarze Kante aus r7_basis), in Street View niveaugleich.
+   - Bordstein der NW-Vorziehung ausgefranst (`ecke` unten links).
+   - Stoppschilder: Rückseite rot statt grau, mit Flächenflimmern; in `eg_lokal` auch am Rand von Einfahrt verboten.
+   - `eg_lokal`: Schild mit Steher und ein Menschen-Platzhalter stehen mitten vor dem Lokal, die Schilder sind
+     angeschnitten. Kamera oder Platzhalter prüfen.
+   - ST13: gestreifte, verzerrte Asphalttextur im Kreuzungsbereich (in `ecke` nicht aufgefallen).
+   - NW-Vorziehung (WI11 links): bepflanztes Beet um den Baum fehlt, drei Poller im Foto gegen zwei sichtbare im Modell,
+     Platten im Modell heller und größer.
+   - WI11 vorn: Richtungspfeil hinter dem Radpiktogramm fehlt, Piktogramm sitzt einige Meter weiter nördlich als im Foto.
+   - ST13: Straßeneinlauf rund 2 m neben der Lage im Foto (Street View selbst bis 1,5 m ungenau).
+   - Schwarze senkrechte Fugen zwischen Nachbarhäusern der Wimmergasse (`ecke`, `ecke_erhoeht`).
+   - `ecke_erhoeht`: große, eckige Blätter im Bild oben links.
+5. Schritt 4 (Begehung mit Schlüssel des Nutzers, nur als Umgebungsvariable): 376 Fotos einmal geladen, 47 Standorte,
+   1432 s gesamt, davon Modell 362 s, peak footprint 44,1 GB. Verschiebung [0.324, 0.003] wie im eingecheckten Bericht,
+   lokal nachgetragen (`kalibrierung.json`, gitignored). Ausgabe mit Zusatz `_mac`, damit der geprüfte Bericht erhalten bleibt:
+   `renders/check/begehung_auto_mac.md`, `begehung_karte_mac.jpg`.
+
+   | | hoch | mittel | niedrig |
+   |---|---|---|---|
+   | eingecheckt (19.11.) | 230 | 1295 | 585 |
+   | Mac (22.11.) | 216 | 950 | 555 |
+   | nur die 37 lagegleichen Standorte, eingecheckt / Mac | 157 / 132 | 1012 / 695 | 447 / 439 |
+
+   Kreuzung (WI09 bis WI12, ST13) "hoch": 32 / 30. Zehn Standorte (ST01 bis ST04, ST21 bis ST23, WI02 bis WI04) liegen
+   0,5 bis 8 m anders. Nicht untersucht, warum "mittel" so viel niedriger ist (anderes Gerät, andere Standorte, neueres Modell).
+   Keine Street-View-Bilder eingecheckt.
+6. `ebenen.json`: Pfad `beauty` im eingecheckten Stand relativ zum Repo (lokal absolut).
