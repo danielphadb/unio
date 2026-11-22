@@ -1,0 +1,25 @@
+# Echte 3D-Moebel und -Pflanzen (lib/assets/modelle.py), ausgewaehlt am 22.11.2026 von cloud-neu fuer Noma Runde 10.
+# Dateien NICHT im Repo: `immoviz.py modelle-laden` holt sie nach immoviz/assets/modelle/<key>/ (gitignored).
+# Lizenzen (assets/LIZENZEN.md): cc0 = CC0 1.0 (Poly Haven), royalty_free = BlenderKit Royalty Free (kommerzielle
+# Nutzung in Bildern und Videos ohne Namensnennung, Weitergabe der Modelldateien verboten).
+#
+# Felder: quelle (polyhaven | blenderkit), id (Poly-Haven-Slug bzw. BlenderKit asset_base_id), name, autor, lizenz,
+# masse_m (laut Katalog, B x T x H), vorne (Achse der Vorderseite im Modell, Standard -y), hoch (y, wenn das Modell
+# liegt), weg (Regex fuer Objekte, die entfernt werden), aufloesung (Poly Haven, Standard 1k), verwendung.
+modelle:
+  # ---------------------------------------------------------------- Innen (Wohnkueche Top 3 / Top 4, Verkaufsplan)
+  sofa_cloud:        {quelle: blenderkit, id: bac5b260-bda1-4817-b85a-dadf779d2d14, name: "Cloud sofa", lizenz: royalty_free, masse_m: [2.27, 1.03, 0.74], verwendung: "Sofa an der Ostwand (VP), Stoff Boucle"}
+  couchtisch:        {quelle: polyhaven, id: modern_coffee_table_01, name: "Modern Coffee Table 01", lizenz: cc0, masse_m: [1.20, 0.60, 0.39], verwendung: "Couchtisch innen (VP) und Lounge Top 3"}
+  sideboard:         {quelle: polyhaven, id: modern_wooden_cabinet, name: "Modern Wooden Cabinet", lizenz: cc0, masse_m: [2.44, 0.52, 0.68], verwendung: "Sideboard an der Trennwand (VP)"}
+  esstisch_rund:     {quelle: polyhaven, id: round_wooden_table_02, name: "Round Wooden Table 02", lizenz: cc0, masse_m: [0.80, 0.80, 0.75], verwendung: "runder Esstisch D 0,90 (VP)"}
+  stuhl_boucle:      {quelle: blenderkit, id: 63c86b3f-f47a-4322-aa91-2ecb46495f33, name: "Walnut bouclette dining chair", lizenz: royalty_free, masse_m: [0.47, 0.53, 0.78], verwendung: "Esszimmerstuehle Top 3 (Nuss, Boucle)"}
+  stuhl_samt:        {quelle: blenderkit, id: 721d33e1-9cb1-4b2c-aa24-dda82488351c, name: "Stella Velvet Dining Chair", lizenz: royalty_free, masse_m: [0.53, 0.60, 0.75], verwendung: "Esszimmerstuehle Top 4 (Samt rost)"}
+  pendelleuchte:     {quelle: polyhaven, id: modern_ceiling_lamp_01, name: "Modern Ceiling Lamp 01", lizenz: cc0, masse_m: [0.43, 0.43, 0.95], verwendung: "Pendelleuchte ueber dem Esstisch"}
+  # ---------------------------------------------------------------- Terrassen (Ausstattung, Kundenwunsch 16.11.2026)
+  outdoor_sofa:      {quelle: blenderkit, id: c44a0e64-1942-4105-b21d-659b7f0611a5, name: "Outdoor Sofa Cap-Antibes", lizenz: royalty_free, masse_m: [2.20, 0.98, 0.78], verwendung: "Lounge-Sofa unter der Pergola Top 3"}
+  outdoor_sessel:    {quelle: blenderkit, id: 78349060-0588-43bb-b790-8949ce42e12a, name: "Delhi Wooden Slat Lounge Chair", lizenz: royalty_free, masse_m: [0.67, 0.80, 0.71], verwendung: "zwei Sessel Lounge Top 3"}
+  outdoor_tisch:     {quelle: blenderkit, id: 57ecf4a0-4a73-475c-97c5-d6a7c00dd836, name: "GUBI Rectangular Table", lizenz: royalty_free, masse_m: [2.00, 1.00, 0.74], verwendung: "Esstisch fuer vier unter der Pergola Top 4"}
+  outdoor_stuhl:     {quelle: blenderkit, id: d4fc6226-9a00-48ec-a609-a957f80f2303, name: "Rattan and teak chair", lizenz: royalty_free, masse_m: [0.52, 0.52, 0.79], verwendung: "vier Stuehle Top 4"}
+  olivenbaum:        {quelle: blenderkit, id: 08bc3c6d-2549-4229-bee8-861329038c67, name: "Olive tree", lizenz: royalty_free, masse_m: [11.18, 12.57, 9.37], verwendung: "Olivenbaum im Kuebel Top 3 und Top 4, auf rund 2,3 m skaliert (alter knorriger Baum)"}   # Montra Olive Tree verworfen: trockener Busch ohne Stamm
+  efeu_wand:         {quelle: blenderkit, id: 538125fe-f497-4789-a533-9de21248c2cd, name: "Dense Wall Ivy Climber", lizenz: royalty_free, masse_m: [4.58, 1.97, 0.53], hoch: y, verwendung: "Kletterpflanzen am Rankgitter"}
+  graeser:           {quelle: polyhaven, id: grass_medium_02, name: "Grass Medium 02", lizenz: cc0, masse_m: [0.72, 0.72, 0.71], nur: geometry_nodes, verwendung: "Gräser in den Pflanztroegen"}   # BlenderKit-Pampasgras verworfen: Rispen sind Haar-Kurven, Topf im Modell

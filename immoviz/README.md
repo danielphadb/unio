@@ -805,6 +805,20 @@ look:                                    # in project.yaml; Leitbilder bleiben a
 
 Test 18.11.2026: Leitbilder 05, 13, 39 (Wimmergasse), Abstand Lab-Mittel zum Leitbild 5,7 auf 1,7.
 
+## Planbeleg vor jedem Render und echte Modelle (Runde 10, Noma)
+
+**Planbeleg** (`lib/planbeleg.py`, REGELN P10): `render` und `interior` pruefen vor jedem Bild, was die Kamera sieht
+(Strahlenraster durch die Kamera, durch Glas hindurch). Jedes sichtbare Objekt braucht eine Herkunft: Planelement
+(Gruppe in `neubau`), Ausstattung mit `quelle`, Innenraum mit `quelle` oder Umgebung. Innenraeume mit `huelle_px`
+muessen mit jedem Punkt innerhalb der Wohnung liegen, die freie Flaeche der Huelle muss zur Wohnflaeche im Titel
+passen (6 %). Bei Fehlern bricht der Render ab; Bericht `renders/<out>/planbeleg/<kamera>_planbeleg.md`.
+
+**Echte Moebel und Pflanzen** (`lib/assets/modelle.py`, Liste `lib/assets/modelle_bibliothek.yaml`, Lizenzen in
+`assets/LIZENZEN.md`): `immoviz.py modelle-laden` holt die Modelle nach `assets/modelle/` (gitignored). Innen:
+`wohnungen.yaml` `<wohnung>.moebel` (Planpixel wie `einbauten`, `front`, `anlegen`, `farbe`, `stuehle`). Terrassen:
+`neubau.ausstattung` mit `typ: modell` (Hofrahmen-Box, `vorne`, `skalierung`, `klasse`). Die Objektnamen tragen die
+Ebenen-Klasse (`<gruppe>_<nr>__<klasse>__<modell>_<n>`); neue Klassen `innenraum` und `stoffe`.
+
 ## Lokaler KI-Schritt (`ki-lokal`, Mac)
 
 Alternative zu Higgsfield: ein offenes Diffusionsmodell veredelt den Render auf dem Mac (M3 Max, Metal/MPS) mit

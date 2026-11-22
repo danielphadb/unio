@@ -56,6 +56,35 @@ markante Formen bleiben erkennbar, für Werbung mit einem einzelnen Auto im Vord
 | Bmw 5-series | AmJViZ | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/60e683e8-7cd1-4b4e-b142-91697f0a5bbe/ |
 | Tesla Model S (2016) | Davide Tirindelli | BlenderKit Royalty Free | https://www.blendkit.com/asset-gallery-detail/433b7ea4-3fcd-46fd-ba8b-bc4bc1ff3ad7/ |
 
+## Fremdmodelle: Möbel und Pflanzen (Poly Haven, BlenderKit / BlendKit)
+
+Ausgewählt am 22.11.2026 (cloud-neu) für Noma Runde 10. Liste mit Verwendung: `lib/assets/modelle_bibliothek.yaml`.
+Geladen über die öffentlichen APIs (`immoviz.py modelle-laden`, ohne Konto), Dateien nur lokal in
+`immoviz/assets/modelle/` (gitignored), je Modell `quelle.json` mit Prüfsumme. Lizenzen: **CC0 1.0** (Poly Haven,
+https://polyhaven.com/license) bzw. **BlenderKit Royalty Free** (kommerzielle Nutzung in Bildern und Videos ohne
+Namensnennung, Weitergabe der Modelldateien verboten: https://www.blenderkit.com/docs/licenses/). Keine Marken oder
+Logos an den Modellen; Stofffarben werden je Projekt gesetzt (`farbe`).
+
+| Schlüssel | Modell | Quelle | Lizenz |
+|---|---|---|---|
+| sofa_cloud | Cloud sofa | BlenderKit bac5b260 | Royalty Free |
+| couchtisch | Modern Coffee Table 01 | Poly Haven modern_coffee_table_01 | CC0 |
+| sideboard | Modern Wooden Cabinet | Poly Haven modern_wooden_cabinet | CC0 |
+| esstisch_rund | Round Wooden Table 02 | Poly Haven round_wooden_table_02 | CC0 |
+| stuhl_boucle | Walnut bouclette dining chair | BlenderKit 63c86b3f | Royalty Free |
+| stuhl_samt | Stella Velvet Dining Chair | BlenderKit 721d33e1 | Royalty Free |
+| pendelleuchte | Modern Ceiling Lamp 01 | Poly Haven modern_ceiling_lamp_01 | CC0 |
+| outdoor_sofa | Outdoor Sofa Cap-Antibes | BlenderKit c44a0e64 | Royalty Free |
+| outdoor_sessel | Delhi Wooden Slat Lounge Chair | BlenderKit 78349060 | Royalty Free |
+| outdoor_tisch | GUBI Rectangular Table | BlenderKit 57ecf4a0 | Royalty Free |
+| outdoor_stuhl | Rattan and teak chair | BlenderKit d4fc6226 | Royalty Free |
+| olivenbaum | Olive tree | BlenderKit 08bc3c6d | Royalty Free |
+| efeu_wand | Dense Wall Ivy Climber | BlenderKit 538125fe | Royalty Free |
+| graeser | Grass Medium 02 (nur Horst) | Poly Haven grass_medium_02 | CC0 |
+
+Hinweis: Die Namen „Eichholtz“ (Outdoor-Sofa) und „GUBI“ (Tisch) stehen nur im Modelltitel des Katalogs; in Bildern
+erscheinen keine Marken. Für Werbung mit einem Möbelstück im Vordergrund vorher prüfen.
+
 ## Referenzen, die nicht ins Modell gehen
 
 Google Street View diente nur zum Ansehen (Leuchten-Inventar, Poller, Zeichen), Bilder in

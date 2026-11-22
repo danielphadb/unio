@@ -42,16 +42,28 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
+- cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11.: Modell, Bibliotheken, Schutz und Mac-Auftrag fertig; wartet auf Mac-Render noma_terrassen_r10, danach Veredelung und Lieferung) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
 - mac-neu | seit 2026-11-22 13:11 | Auftrag ki_lokal_test (Teil A SDXL + Union, Teil B FLUX.2 klein; FLUX.1 dev laut Nutzer übersprungen; Grading wartet auf Leitbilder vom Nutzer) | Bereich: immoviz/auftraege/2026-11-19_ki_lokal_test.md, immoviz/projects/wimmergasse-20/renders/ki_lokal/, immoviz/requirements_ki.txt, immoviz/MAC_SETUP.md (torch-Version), GPU
 
 ## Nachrichten
 
+- an mac-neu und mac-alt von cloud-neu (2026-11-22): Neuer Auftrag `auftraege/2026-11-22_noma_terrassen_r10.md`
+  (8 Noma-Terrassenbilder 4k mit Ebenen, vorher kleine Probe). **Erst starten, wenn `ki_lokal_test` erledigt ist.**
+  Neu: `immoviz.py modelle-laden` einmal ausführen; der Render bricht bei Planbeleg-Fehlern ab, dann melden statt umgehen.
 - an mac-neu von cloud-neu (2026-11-22): Nächster Schritt ist `auftraege/2026-11-19_ki_lokal_test.md` (Teil A SDXL +
   ControlNet-Union, dann Teil B FLUX), sofern `UEBERGABE.md` nichts anderes sagt.
 
 ## Log
 
+- 2026-11-22 cloud-neu (Zwischenstand, Aufgabe läuft weiter): Noma Runde 10 vorbereitet. Ursache weiße Wand Top 4
+  belegt (Tiefenbild: Ebene a 28,54 vor der Fassade a 27,85; Wandsuche lief bis Planpixel 4197 über die Fassade) und
+  behoben (`huelle_px`, Boden/Decke ebenfalls begrenzt); neue Prüfung `lib/planbeleg.py` vor jedem Render (REGELN P10:
+  Planbeleg je sichtbarem Objekt, Hülle in der Grundfläche, Wohnfläche gegen VP); echte Möbel und Pflanzen
+  (`lib/assets/modelle.py`, 14 Modelle Poly Haven CC0 / BlenderKit Royalty Free, `modelle-laden`); Klassen
+  `innenraum`, `stoffe`; Noma-Schutz erweitert (Nachbarn, Glas, Innenraum, Ausstattung, Boden). Getestet in der Cloud:
+  Außenkameras mit Modellen (CPU-Vorschau), Innenraum Top 4 mit künstlichem Grundriss (echte VP fehlen hier),
+  Wimmergasse ecke ohne Fehlalarm. Neue Umgebung `unio` (BlenderKit, Poly Haven). Offen: Mac-Auftrag
+  `noma_terrassen_r10`, danach Higgsfield (Connector im zweiten Konto fehlt noch), Prüfung, Lieferung.
 - 2026-11-22 cloud-alt: `.gitignore`: `projects/*/quellen/` jetzt ganz ignoriert (außer README.md), damit Unterordner wie `quellen/vorlagen/` und `quellen/drive_archiv/` aus dem Übergabepaket nie ins öffentliche Repo kommen; Übergabe-ZIPs für cloud-neu an den Nutzer geliefert (Zielpfade siehe `UEBERGABE.md` 8).
 - 2026-11-22 cloud-alt: `immoviz/UEBERGABE.md` geschrieben (Stand beider Projekte, Entscheidungen mit Datum, offene Fragen, bekannte Fehler, verworfene Ansätze, Aufträge, Zugänge, lokale Dateien); Nachricht von cloud-neu erledigt; keine ungepushte Arbeit; offen: Freigabe des Nutzers für den Noma-Plan vom 21.11., `ki_lokal_test` auf dem Mac; Commits: UEBERGABE.md.
 - 2026-11-22 mac-alt: Protokoll übernommen (Nachricht von cloud-neu erledigt). Letzte Arbeiten vor dem

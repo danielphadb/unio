@@ -42,7 +42,11 @@ import numpy as np
 
 # ------------------------------------------------------------------ Klassen
 KLASSEN = ["gebaeude_objekt", "fenster_glas", "fenster_rahmen", "gelaender", "leuchten", "strassenmoebel", "autos",
-           "baeume", "vegetation", "ausstattung", "menschen_platzhalter", "nachbarn", "boden", "himmel", "sonstige"]
+           "baeume", "vegetation", "ausstattung", "menschen_platzhalter", "nachbarn", "boden", "himmel", "sonstige",
+           "innenraum", "stoffe"]
+# innenraum (Runde 10 Noma): echte Moebel im Innenraum (lib/assets/modelle.py), Teil des Plans (Verkaufsplan), wird je
+# Projekt geschuetzt. stoffe: Polster, Kissen, Teppiche aus den Modellen; die KI darf Stofflichkeit verfeinern.
+# Modelle aus lib/assets/modelle.py tragen die Klasse im Namen (`<praefix>__<klasse>__<key>_<n>`, KLASSE_IM_NAMEN).
 # vegetation (Gruendach, Pflanzen, Bepflanzung in Troegen, Hecken, Straeucher) und ausstattung (Terrassenmoebel,
 # Pergola, Kissen, Kuebel; neubau.ausstattung) sind standardmaessig NICHT geschuetzt: die KI darf sie realistisch
 # zeichnen (Blender gibt Lage und Groesse vor). Schutz bei Bedarf je Projekt mit `schutz: {plus: [ausstattung]}`.
@@ -52,7 +56,9 @@ FARBEN = {"gebaeude_objekt": (230, 190, 120), "fenster_glas": (40, 120, 230), "f
           "gelaender": (230, 40, 200), "leuchten": (255, 230, 0), "strassenmoebel": (255, 120, 0),
           "autos": (220, 30, 30), "baeume": (40, 170, 60), "vegetation": (140, 215, 70),
           "ausstattung": (170, 100, 50), "menschen_platzhalter": (0, 230, 230),
-          "nachbarn": (150, 140, 130), "boden": (80, 80, 80), "himmel": (170, 210, 250), "sonstige": (120, 0, 120)}
+          "nachbarn": (150, 140, 130), "boden": (80, 80, 80), "himmel": (170, 210, 250), "sonstige": (120, 0, 120),
+          "innenraum": (200, 120, 230), "stoffe": (255, 170, 190)}
+KLASSE_IM_NAMEN = re.compile(r"__([a-z_]+)__")
 
 # Bereich: "objekt" = Objekt in der Collection "Objekt" (Held, auch Neubau-Gruppen) oder "Innen" (Innenraeume aus
 #          interior.py, z. B. hinter der offenen HST) oder Name hero_*/nb_*,
@@ -101,6 +107,8 @@ REGELN = [
 # Neubau-Gruppen, die Nachbarn darstellen (Gaerten, Erkertuerme, Balkone der Nachbarhaeuser): zaehlen nicht zum Objekt,
 # auch wenn sie in der Collection "Objekt" liegen (lib/neubau.py baut alle Gruppen dort hinein)
 NACHBAR_GRUPPEN = r"^nb_umgebung"
+STOFF_MATERIAL = re.compile(r"fabric|cloth|textile|stoff|velvet|samt|boucl|linen|leinen|cushion|kissen|polster|"
+                            r"upholster|pillow|felt|wool|rug|carpet|teppich", re.I)
 
 TIEFE_MIN, TIEFE_MAX = 0.1, 30000.0      # m, logarithmische Kodierung (16 Bit: rund 0,02 % der Entfernung je Stufe)
 KANTE_TIEFE = 0.03                        # relativer Tiefensprung zwischen Nachbarpixeln (3 %) = Kante
@@ -120,7 +128,14 @@ def _passt(muster, text) -> bool:
 
 
 def klasse_fuer(objekt: str, material: str | None, collections: list[str], ist_objekt: bool) -> str:
-    """Klasse fuer ein Paar (Objekt, Material). Erste passende Regel gilt; sonst 'sonstige'."""
+    """Klasse fuer ein Paar (Objekt, Material). Klasse im Objektnamen (Modelle) zuerst, dann erste passende Regel;
+    sonst 'sonstige'. Bei Modellen mit Klasse innenraum oder ausstattung zaehlen Stoffmaterialien als stoffe."""
+    m = KLASSE_IM_NAMEN.search(objekt or "")
+    if m and m.group(1) in KLASSEN:
+        k = m.group(1)
+        if k in ("innenraum", "ausstattung") and material and STOFF_MATERIAL.search(material):
+            return "stoffe"
+        return k
     for r in REGELN:
         b = r.get("bereich")
         if b == "objekt" and not ist_objekt or b == "umgebung" and ist_objekt:

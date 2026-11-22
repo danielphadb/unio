@@ -1036,6 +1036,9 @@ def render(project_dir: Path, cams: list[str], lights: list[str], preview: bool,
         elev, az = setup_light(scene, cfg, ctx, ln)
         for cn in cams:
             setup_camera(scene, cfg, cn)
+            if ln == lights[0]:          # Planbeleg je Kamera vor dem ersten Render (lib/planbeleg.py, REGELN P10)
+                from . import planbeleg as PB
+                PB.pruefen(scene, cfg, cn, out_dir / "planbeleg")
             tag = "vorschau" if preview else "final"
             path = out_dir / f"{cfg['project']['slug']}_{cn}_{ln}_{tag}.png"
             scene.render.filepath = str(path)

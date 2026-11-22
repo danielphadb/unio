@@ -60,6 +60,7 @@ korrigiert, nie per Prompt. Was die KI dazuerfindet, wird verworfen, nicht schö
 | P7 | Stuck, Gesimse, Profile nur, wenn Grundriss oder Schnitt sie zeigen; Profil in einer Ansicht allein reicht nicht | N Kranzgesims aus Ansicht übernommen, Kunde schließt Stuck aus (interior_v2.md 6.2) | auto: `pruefen` (Klasse Stuck, Mindestrang Plan), Prompt-Regel `kein_stuck` |
 | P8 | Gerundete Bauteile als echte Geometrie (Bogen, Radius gemessen), nicht als Ersatzkörper | N Rundsäule statt gerundeter Trennwand (interior_v2.md 6.4) | manuell |
 | P9 | Farben aus Vektor/Palette/Farbcode (G2), Abweichung zwischen Palette und Materialkreis als Frage an den Planer | N Bordeaux #5C1727 gegen #5E2E24 | auto: `pruefen` (Farbe aus Pixeln gemessen?) |
+| P10 | Vor jedem Render: keine Bauteile ohne Planbeleg im Bild; Innenhülle (aus dem Verkaufsplan) mit jedem Punkt innerhalb der Grundfläche der Wohnung (`huelle_px`); Wohnfläche des Modells gegen den Verkaufsplan (6 %); Möbel und Pflanzen als echte Modelle mit Quelle statt Grundformen; Render mit Befund wird nicht veredelt | N Runde 9 (Kritik 21.11.2026): Wandsuche lief über die Ostfassade Top 4 hinaus, weiße Wand 0,69 m vor der Fassade (Tiefenbild a 28,54 statt 27,85), Bild trotzdem veredelt und geliefert; Kugelpflanzen und Quadermöbel ließen die KI einen zu großen Raum erfinden | auto: `lib/planbeleg.py` in `render` und `interior` (bricht ab, Bericht `planbeleg/<kamera>_planbeleg.md`); manuell: Sichtprüfung der Probe vor 4k |
 
 ## 3. Umgebung
 

@@ -70,6 +70,9 @@ def main():
     al = sub.add_parser("autos-laden", help="Realistische Automodelle (BlenderKit, kostenlos) laut "
                                             "lib/assets/autos_bibliothek.yaml nach immoviz/assets/autos/ laden")
     al.add_argument("--nur", default=None, help="nur diese Modelle (Anfang der id), mit Komma")
+    ml = sub.add_parser("modelle-laden", help="Echte 3D-Moebel und -Pflanzen (Poly Haven CC0, BlenderKit Royalty Free) "
+                                              "laut lib/assets/modelle_bibliothek.yaml nach immoviz/assets/modelle/ laden")
+    ml.add_argument("--nur", default=None, help="nur diese Modelle (Schluessel), mit Komma")
     ab = sub.add_parser("autos-bibliothek", help="assets/autos/bibliothek.blend bauen: Front +X, echte Länge, "
                                                  "eigener Lack, ohne Logos")
     ab.add_argument("--nur", default=None, help="nur diese Modelle (Anfang der id), mit Komma")
@@ -303,6 +306,11 @@ def main():
         from lib.assets import autos_bibliothek as AB
         print(json.dumps(AB.laden(a.nur.split(",") if a.nur else None), ensure_ascii=False, indent=1))
         return
+    if a.cmd == "modelle-laden":
+        from lib.assets import modelle as MO
+        log = MO.laden(a.nur.split(",") if a.nur else None)
+        print(json.dumps(log, ensure_ascii=False, indent=1))
+        sys.exit(1 if any(str(x["status"]).startswith(("Fehler", "nicht", "kosten")) for x in log) else 0)
     if a.cmd == "autos-bibliothek":
         from lib.assets import autos_bibliothek as AB
         print(json.dumps(AB.bibliothek_bauen(a.nur.split(",") if a.nur else None), ensure_ascii=False, indent=1))

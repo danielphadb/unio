@@ -945,27 +945,14 @@ neubau:
     - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [14.5, 3.35, 15.85, 3.39], z: [6.13, 6.19], mat: aus_holz, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.44, 3.7, 15.84, 5.3], z: [3.5, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.46, 3.72, 15.82, 5.28], z: [3.99, 4.02], mat: nb_erde, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: pflanze, c: [15.64, 4.05], z: 3.98, r: [0.24, 0.4], h: 0.75, mat: aus_laub, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: pflanze, c: [15.64, 4.85], z: 3.98, r: [0.24, 0.42], h: 0.55, mat: aus_gras, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: pflanze, c: [15.81, 4.25], z: 4.05, r: [0.07, 0.55], h: 1.75, mat: aus_kletter, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: pflanze, c: [15.81, 4.75], z: 5.2, r: [0.07, 0.45], h: 0.8, mat: aus_kletter, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.44, 0.25, 15.84, 0.85], z: [3.5, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.46, 0.27, 15.82, 0.83], z: [3.99, 4.02], mat: nb_erde, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: pflanze, c: [15.64, 0.55], z: 3.98, r: [0.22, 0.3], h: 0.7, mat: aus_gras, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: pflanze, c: [15.81, 0.62], z: 4.05, r: [0.07, 0.4], h: 1.9, mat: aus_kletter, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: pflanze, c: [15.81, 1.35], z: 5.3, r: [0.07, 0.6], h: 0.75, mat: aus_kletter, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: zylinder, c: [12.35, 0.62], r: 0.28, z: [3.5, 4.02], mat: aus_kuebel, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: zylinder, c: [12.35, 0.62], r: 0.04, z: [4.02, 4.85], mat: aus_teak, seg: 8, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: pflanze, c: [12.35, 0.62], z: 4.55, r: 0.5, h: 1, mat: aus_oliv, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: leuchte, c: [11.95, 3.04], vorne: [1, 0], z: [5, 5.26], mat: aus_bronze, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: leuchte, c: [11.95, 5.57], vorne: [1, 0], z: [5, 5.26], mat: aus_bronze, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: leuchte, c: [15.85, 3.62], vorne: [-1, 0], z: [5.2, 5.46], mat: aus_bronze, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    # ausstattung_top3: Lounge (wie Runde 3): Sofa unter der Pergola, Couchtisch, zwei Sessel, Outdoor-Teppich
+    # ausstattung_top3: Outdoor-Teppich der Lounge (Sofa, Couchtisch, Sessel ab Runde 10 als Modelle, unten)
     - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [12.85, 0.95, 14.95, 3.25], z: [3.5, 3.51], mat: aus_teppich, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: sitz, box: [14.95, 1.15, 15.78, 3.3], z: 3.5, lehne: a+, arme: true, sitz: 0.4, hoehe: 0.74, mat: aus_teak, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: tisch, box: [13.95, 1.8, 14.55, 2.7], z: 3.5, h: 0.38, mat: aus_teak, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: sitz, box: [12.8, 1.05, 13.55, 1.8], z: 3.5, lehne: a-, arme: true, sitz: 0.4, hoehe: 0.74, mat: aus_teak, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: sitz, box: [12.8, 2.45, 13.55, 3.2], z: 3.5, lehne: a-, arme: true, sitz: 0.4, hoehe: 0.74, mat: aus_teak, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     # ausstattung_top4: Rankgitter Holz an der Wand a 30.77 gegenueber der HST (b 0,45 bis 5,25, h 2,50), Wandpergola 1,30 tief
     - {gruppe: ausstattung_top4, rahmen: hof, typ: gitter, von: [30.75, 0.45], bis: [30.75, 5.25], vorne: [-1, 0], z: [3.5, 6], v: 0.48, h: 0.32, mat: aus_holz, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [29.47, 0.45, 29.56, 0.54], z: [3.5, 5.95], mat: aus_holz, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
@@ -984,27 +971,35 @@ neubau:
     - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [29.37, 2.85, 30.72, 2.89], z: [6.13, 6.19], mat: aus_holz, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.31, 3.7, 30.71, 5.3], z: [3.5, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.33, 3.72, 30.69, 5.28], z: [3.99, 4.02], mat: nb_erde, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: pflanze, c: [30.51, 4.05], z: 3.98, r: [0.24, 0.4], h: 0.75, mat: aus_laub, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: pflanze, c: [30.51, 4.85], z: 3.98, r: [0.24, 0.42], h: 0.55, mat: aus_gras, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: pflanze, c: [30.68, 4.25], z: 4.05, r: [0.07, 0.55], h: 1.75, mat: aus_kletter, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: pflanze, c: [30.68, 4.75], z: 5.2, r: [0.07, 0.45], h: 0.8, mat: aus_kletter, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.31, 0.25, 30.71, 0.85], z: [3.5, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.33, 0.27, 30.69, 0.83], z: [3.99, 4.02], mat: nb_erde, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: pflanze, c: [30.51, 0.55], z: 3.98, r: [0.22, 0.3], h: 0.7, mat: aus_gras, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: pflanze, c: [30.68, 0.62], z: 4.05, r: [0.07, 0.4], h: 1.9, mat: aus_kletter, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: pflanze, c: [30.68, 1.35], z: 5.3, r: [0.07, 0.6], h: 0.75, mat: aus_kletter, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: zylinder, c: [28.25, 0.62], r: 0.28, z: [3.5, 4.02], mat: aus_kuebel, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: zylinder, c: [28.25, 0.62], r: 0.04, z: [4.02, 4.85], mat: aus_teak, seg: 8, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: pflanze, c: [28.25, 0.62], z: 4.55, r: 0.5, h: 1, mat: aus_oliv, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: leuchte, c: [27.85, 2.94], vorne: [1, 0], z: [5, 5.26], mat: aus_bronze, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: leuchte, c: [27.85, 5.47], vorne: [1, 0], z: [5, 5.26], mat: aus_bronze, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: leuchte, c: [30.72, 3.62], vorne: [-1, 0], z: [5.2, 5.46], mat: aus_bronze, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    # ausstattung_top4: Essplatz (wie Runde 3): Teaktisch 0,90 x 1,60 fuer vier, Stuehle mit Polster hellgrau, rechts halb unter der Pergola
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: tisch, box: [28.8, 0.95, 29.7, 2.55], z: 3.5, h: 0.75, mat: aus_teak, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: sitz, box: [28.25, 1.05, 28.72, 1.53], z: 3.5, lehne: a-, sitz: 0.46, hoehe: 0.88, mat: aus_teak, polster: aus_polster_grau, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: sitz, box: [29.78, 1.05, 30.25, 1.53], z: 3.5, lehne: a+, sitz: 0.46, hoehe: 0.88, mat: aus_teak, polster: aus_polster_grau, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: sitz, box: [28.25, 1.95, 28.72, 2.43], z: 3.5, lehne: a-, sitz: 0.46, hoehe: 0.88, mat: aus_teak, polster: aus_polster_grau, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: sitz, box: [29.78, 1.95, 30.25, 2.43], z: 3.5, lehne: a+, sitz: 0.46, hoehe: 0.88, mat: aus_teak, polster: aus_polster_grau, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
+    # ausstattung_top3: Runde 10 echte 3D-Modelle statt Kugeln und Quader (lib/assets/modelle.py), gleiche Planlage wie Runde 7
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: modell, modell: olivenbaum, box: [11.80, 0.07, 12.90, 1.17], z: [4.02, 6.0], vorne: a-, skalierung: frei, klasse: vegetation, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell olivenbaum (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: modell, modell: efeu_wand, box: [15.62, 0.45, 15.86, 3.35], z: [4.05, 5.9], vorne: a-, skalierung: frei, klasse: vegetation, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell efeu_wand (modelle_bibliothek.yaml)"}   # bis vor die Wandleuchte b 3,62
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: modell, modell: efeu_wand, box: [15.62, 3.9, 15.86, 5.25], z: 4.05, vorne: a-, klasse: vegetation, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell efeu_wand (modelle_bibliothek.yaml)"}   # junger Trieb aus dem Trog
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: modell, modell: graeser, box: [15.44, 3.75, 15.82, 4.45], z: 4.0, vorne: a-, klasse: vegetation, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell graeser (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: modell, modell: graeser, box: [15.44, 4.55, 15.82, 5.25], z: 4.0, vorne: a-, klasse: vegetation, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell graeser (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: modell, modell: graeser, box: [15.44, 0.27, 15.82, 0.83], z: 4.0, vorne: a-, klasse: vegetation, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell graeser (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: modell, modell: outdoor_sofa, box: [14.95, 1.15, 15.78, 3.3], z: 3.5, vorne: a-, anlegen: true, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell outdoor_sofa (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: modell, modell: couchtisch, box: [13.95, 1.8, 14.55, 2.7], z: [3.5, 3.88], vorne: a-, skalierung: frei, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell couchtisch (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: modell, modell: outdoor_sessel, box: [12.8, 1.05, 13.55, 1.8], z: [3.5, 4.22], vorne: a+, skalierung: hoehe, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell outdoor_sessel (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: modell, modell: outdoor_sessel, box: [12.8, 2.45, 13.55, 3.2], z: [3.5, 4.22], vorne: a+, skalierung: hoehe, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell outdoor_sessel (modelle_bibliothek.yaml)"}
+    # ausstattung_top4: Runde 10 echte 3D-Modelle statt Kugeln und Quader (lib/assets/modelle.py), gleiche Planlage wie Runde 7
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: modell, modell: olivenbaum, box: [27.70, 0.07, 28.80, 1.17], z: [4.02, 6.0], vorne: a-, skalierung: frei, klasse: vegetation, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell olivenbaum (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: modell, modell: efeu_wand, box: [30.49, 0.45, 30.73, 3.35], z: [4.05, 5.9], vorne: a-, skalierung: frei, klasse: vegetation, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell efeu_wand (modelle_bibliothek.yaml)"}   # bis vor die Wandleuchte b 3,62
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: modell, modell: efeu_wand, box: [30.49, 3.9, 30.73, 5.25], z: 4.05, vorne: a-, klasse: vegetation, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell efeu_wand (modelle_bibliothek.yaml)"}   # junger Trieb aus dem Trog
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: modell, modell: graeser, box: [30.31, 3.75, 30.69, 4.45], z: 4.0, vorne: a-, klasse: vegetation, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell graeser (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: modell, modell: graeser, box: [30.31, 4.55, 30.69, 5.25], z: 4.0, vorne: a-, klasse: vegetation, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell graeser (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: modell, modell: graeser, box: [30.31, 0.27, 30.69, 0.83], z: 4.0, vorne: a-, klasse: vegetation, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell graeser (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: modell, modell: outdoor_tisch, box: [28.8, 0.95, 29.7, 2.55], z: [3.5, 4.25], vorne: a-, skalierung: frei, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell outdoor_tisch (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: modell, modell: outdoor_stuhl, box: [28.25, 1.05, 28.72, 1.53], z: [3.5, 4.29], vorne: a+, skalierung: hoehe, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell outdoor_stuhl (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: modell, modell: outdoor_stuhl, box: [29.78, 1.05, 30.25, 1.53], z: [3.5, 4.29], vorne: a-, skalierung: hoehe, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell outdoor_stuhl (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: modell, modell: outdoor_stuhl, box: [28.25, 1.95, 28.72, 2.43], z: [3.5, 4.29], vorne: a+, skalierung: hoehe, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell outdoor_stuhl (modelle_bibliothek.yaml)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: modell, modell: outdoor_stuhl, box: [29.78, 1.95, 30.25, 2.43], z: [3.5, 4.29], vorne: a-, skalierung: hoehe, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Modell outdoor_stuhl (modelle_bibliothek.yaml)"}
 
 # ---------------------------------------------------------------- Umgebung
 neighbours: {}
@@ -1389,3 +1384,10 @@ roofs_override:
   # dem verwinkelten Grundriss einknickte, danach kurz dunkle Kaesten ohne Fenster
   - {bezug: "005364", material: blech, dach: {form: flach}}   # Runde 8: Dachgeschoss mit Fenstern in neubau (nb_umgebung_005364_dg)
   - {pos: [3.0, -66.5], dz: 1.7}                                                          # (5) Wuertzlerstrasse 12, Hoftrakt: Ostwand hoeher (Vorlage)
+
+# Runde 10 (Nutzer 22.11.2026, Korrekturplan vom 21.11.): Die KI darf nur Licht, Himmel, Feinheiten der Pflanzen und
+# Stoffe verfeinern. Geschuetzt (pixelgenau aus Blender, KI-Farbstimmung uebertragen): Objekt, Glas (damit auch der
+# Innenraum hinter Glas; Runde 9 hatte Glas frei, daher der zu grosse Raum), Rahmen, Gelaender, Leuchten, Nachbarhaeuser
+# (Runde 9 frei, daher falsche Haeuser), Innenraum-Moebel, Terrassenmoebel/Pergola/Rankgitter (ausstattung), Boden.
+# Frei: himmel, vegetation (3D-Pflanzen geben Lage und Groesse vor), baeume, stoffe. Modus voll, nicht toleranz.
+schutz: {klassen: [gebaeude_objekt, fenster_glas, fenster_rahmen, gelaender, leuchten, strassenmoebel, autos, nachbarn, innenraum, ausstattung, boden], kante_px: 2}

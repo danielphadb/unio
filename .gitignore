@@ -25,3 +25,6 @@ immoviz/assets/texturen/
 
 # immoviz: Automodelle (immoviz.py autos-laden, BlenderKit), gross, nachladbar; Liste in lib/assets/autos_bibliothek.yaml
 immoviz/assets/autos/
+
+# immoviz: Moebel- und Pflanzenmodelle (immoviz.py modelle-laden, Poly Haven / BlenderKit), nachladbar; Liste in lib/assets/modelle_bibliothek.yaml
+immoviz/assets/modelle/

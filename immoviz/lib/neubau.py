@@ -381,6 +381,8 @@ class Neubau:
                 else:
                     self._q(mb, T, a0, b0, a0 + aw, b1, z0 + sh - 0.12, ah, mat)
                     self._q(mb, T, a1 - aw, b0, a1, b1, z0 + sh - 0.12, ah, mat)
+        elif typ == "modell":      # echtes 3D-Modell (lib/assets/modelle.py), wird in build() gesetzt
+            self.modelle.append((e, T, e.get("gruppe", "ausstattung")))
         elif typ == "leuchte":     # Wandleuchte: Gehaeuse an der Wand, Lichtaustritt oben und unten
             ca, cb = e["c"]
             da, db = e.get("vorne", [0.0, 0.0])
@@ -440,9 +442,14 @@ class Neubau:
             self.pv(p)
         for s in N.get("straeucher", []):
             self.strauch(s)
+        self.modelle = []
         for e in N.get("ausstattung", []) or []:      # Ausstattung (nicht Planung), Rahmen wird hier umgerechnet
             self.ausstattung(e)
         objs = []
+        if self.modelle:                              # Runde 10: echte Moebel und Pflanzen statt Grundformen
+            from .assets import modelle as MO
+            for i, (e, T, g) in enumerate(self.modelle):
+                objs += MO.ausstattung(bpy, coll, e, T, g, i)
         for name, parts in self.G.items():
             for t, mb in parts.items():
                 if mb.faces:

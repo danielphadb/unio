@@ -195,6 +195,21 @@ class Apartment:
             c0 = 0 if c0 <= m else c0
             c1 = W if c1 >= W - m else c1
             self.walls[r0:r1, c0:c1] = False
+        # huelle_px (Noma Runde 10): harte Grenze der Huelle in Planpixeln, in der Regel die Aussenkante der Wohnung
+        # (slab_px) etwas nach innen. Alles ausserhalb (Terrasse, Troege, Nachbarwohnung in Wandfarbe) wird
+        # verworfen, damit keine Innenwand vor der Aussenfassade stehen kann (Top 4: Wand 0,69 m vor der Ostfassade).
+        if cfg.get("huelle_px"):
+            hx0, hy0, hx1, hy1 = cfg["huelle_px"]
+            c0, c1 = max(0, -(-(hx0 - x0) // self.cell_px)), min(W, (hx1 - x0) // self.cell_px)
+            r0, r1 = max(0, -(-(hy0 - y0) // self.cell_px)), min(H, (hy1 - y0) // self.cell_px)
+            innen = np.zeros_like(self.walls)
+            innen[r0:r1, c0:c1] = True
+            self.walls &= innen
+            self.openings = [op for op in self.openings
+                             if c0 <= (op["c0"] + op["c1"]) / 2 <= c1 and r0 <= (op["r0"] + op["r1"]) / 2 <= r1]
+            for op in self.openings:
+                op["c0"], op["c1"] = max(op["c0"], c0), min(op["c1"], c1)
+                op["r0"], op["r1"] = max(op["r0"], r0), min(op["r1"], r1)
 
     # Planpixel der Zelle -> lokale Weltkoordinaten
     def cell_xy(self, r, c):
@@ -221,6 +236,33 @@ class Apartment:
             return
         for mb in mbs:
             mb.verts = [(*self._dreh(x, y), z) for x, y, z in mb.verts]
+
+    def netto_flaeche(self) -> float:
+        """Freie Flaeche innerhalb der Huelle (huelle_px, sonst slab_px) ohne Waende, m2 (Plausibilitaet gegen den
+        Verkaufsplan: Raumgroesse muss der Wohnung entsprechen)."""
+        x0, y0, x1, y1 = self.c.get("huelle_px") or self.c.get("slab_px") or self.c["region_px"]
+        c0, c1 = (x0 - self.ox) // self.cell_px, (x1 - self.ox) // self.cell_px
+        r0, r1 = (y0 - self.oy) // self.cell_px, (y1 - self.oy) // self.cell_px
+        frei = ~self.walls[max(0, r0):r1, max(0, c0):c1]
+        return float(frei.sum()) * self.cell_m ** 2
+
+    def abstand_aussen(self):
+        """Funktion (x, y lokal, numpy) -> Abstand in m ausserhalb der Grundflaeche (huelle_px, sonst slab_px);
+        <= 0 heisst innen. Fuer lib/planbeleg.py."""
+        x0, y0, x1, y1 = self.c.get("huelle_px") or self.c.get("slab_px") or self.c["region_px"]
+        a = math.radians(self.proj.get("drehung_grad", 0.0))
+        ox, oy = self.proj.get("ursprung_lokal", (0.0, 0.0))
+        ex, ey = self.proj["corner_px"]
+        s = self.s
+
+        def fn(X, Y):
+            xr = math.cos(a) * (X - ox) + math.sin(a) * (Y - oy)
+            yr = -math.sin(a) * (X - ox) + math.cos(a) * (Y - oy)
+            px, py = ex - yr / s, ey - xr / s
+            dx = np.maximum(np.maximum(x0 - px, px - x1), 0.0)
+            dy = np.maximum(np.maximum(y0 - py, py - y1), 0.0)
+            return np.maximum(dx, dy) * s
+        return fn
 
     def classify(self, op):
         if op.get("type"):
@@ -313,7 +355,7 @@ class Apartment:
 
     def slabs(self, mb):
         # slab_px: Boden/Decke nur ueber der Wohnung, wenn region_px fuer die Oeffnungssuche groesser gewaehlt ist
-        x0, y0, x1, y1 = self.c.get("slab_px", self.c["region_px"])
+        x0, y0, x1, y1 = self.c.get("huelle_px") or self.c.get("slab_px", self.c["region_px"])   # Runde 10: nie ueber die Huelle
         xa, ya = self._raw(x0, y0)
         xb, yb = self._raw(x1, y1)
         z0 = self.c["floor_z"]
@@ -488,6 +530,20 @@ class ManualApartment:
             box_xy(mb, x0, x1, y0, y1, z0 - 0.3, z0, "boden_parkett")
             box_xy(mb, x0, x1, y0, y1, z0 + self.c["height"], z0 + self.c["height"] + 0.3, "decke")
 
+    def abstand_aussen(self):
+        """Wie Apartment.abstand_aussen, Grundflaeche = slab_rect (eigene Koordinaten)."""
+        x0, y0, x1, y1 = self.c.get("huelle_rect") or self.c.get("slab_rect") or (-1e9, -1e9, 1e9, 1e9)
+        a = math.radians(self.c.get("drehung_grad", 0.0))
+        ox, oy = self.c.get("ursprung_lokal", (0.0, 0.0))
+
+        def fn(X, Y):
+            xr = math.cos(a) * (X - ox) + math.sin(a) * (Y - oy)
+            yr = -math.sin(a) * (X - ox) + math.cos(a) * (Y - oy)
+            dx = np.maximum(np.maximum(x0 - xr, xr - x1), 0.0)
+            dy = np.maximum(np.maximum(y0 - yr, yr - y1), 0.0)
+            return np.maximum(dx, dy)
+        return fn
+
     def px_to_local(self, x, y):
         return self._dreh(x, y)
 
@@ -592,7 +648,21 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
             for mb in (mw, mf, mg):
                 mb.materials = [ersatz.get(m, m) for m in mb.materials]
         objs = [mb.to_object(bpy, mats, coll) for mb in (mw, mf, mg)]
+        quelle = a.get("titel") or name
+        if a.get("plan") != "manuell":
+            quelle = f"{W['plaene'][a['plan']]['pdf']} ({a['plan']})"
+        for o in objs:
+            o["quelle"] = quelle
+        from .assets import modelle as IA        # 3D-Moebel und -Pflanzen nach Verkaufsplan (wohnungen.yaml moebel)
+        objs += IA.einrichten(bpy, coll, apt, a, name, project_dir)
         objs += add_lamps(bpy, coll, apt, a)
+        # Grundflaechenpruefung nur, wo die Wohnung eine harte Huellgrenze hat (huelle_px / huelle_rect)
+        huellen = {f"{name}_": apt.abstand_aussen()} if (a.get("huelle_px") or a.get("huelle_rect")) else {}
+        flaeche = None
+        import re as _re
+        m2 = _re.search(r"(\d+[,.]\d+)\s*m2", a.get("titel", ""))
+        if huellen and m2 and hasattr(apt, "netto_flaeche"):
+            flaeche = (round(apt.netto_flaeche(), 2), float(m2.group(1).replace(",", ".")))
         if ebenen:      # Pass-Indizes erst jetzt, wenn die Innenraeume dieser Wohnung in der Szene stehen
             from . import ebenen as EB
             eb_meta = EB.vorbereiten(scene)
@@ -610,6 +680,9 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
             B.setup_light(scene, cfg, ctx, lname)
             scene.view_settings.exposure = cam.get("exposure", a.get("exposure", 2.0))
             B.setup_camera(scene, cfg, f"{name}_{cam_name}")
+            from . import planbeleg as PB            # REGELN P10: nichts ohne Planbeleg, Huelle in der Grundflaeche
+            PB.pruefen(scene, cfg, f"{name}_{cam_name}", out_dir / "planbeleg", huellen=huellen,
+                       ausgeblendet=tuple(a.get("objekt_ausblenden", [])), flaeche=flaeche)
             tag = "vorschau" if preview else "final"
             path = out_dir / (f"{name}_{cam_name}_{tag}.png" if out_sub else f"{name}_{cam_name}_vorschau.png")
             scene.render.filepath = str(path)
