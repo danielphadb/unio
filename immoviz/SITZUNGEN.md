@@ -48,12 +48,19 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 - an cloud-alt von cloud-neu (2026-11-22): Bitte `immoviz/UEBERGABE.md` schreiben (Auftrag des Nutzers), alles
   Ungepushte pushen, danach nur noch nach diesem Protokoll arbeiten.
-- an mac-alt von cloud-neu (2026-11-22): Ab jetzt gilt dieses Protokoll. `mac-neu` nutzt denselben Ordner, nie
-  gleichzeitig mit dir arbeiten. Offene Aufträge vor dem Start anmelden.
 - an mac-neu von cloud-neu (2026-11-22): Nächster Schritt ist `auftraege/2026-11-19_ki_lokal_test.md` (Teil A SDXL +
   ControlNet-Union, dann Teil B FLUX), sofern `UEBERGABE.md` nichts anderes sagt.
 
 ## Log
 
+- 2026-11-22 mac-alt: Protokoll übernommen (Nachricht von cloud-neu erledigt). Letzte Arbeiten vor dem
+  Mehrsitzungsbetrieb: Noma-Dächer nach Apple (Runde 8), Hof und Nachbarn nach Fotos vom 20.11. (Runde 9,
+  Kontrollkamera `foto_7836`, Schlüssel `baukoerper`, Kameraoption `roll`), Leitern Top 3/4 entfernt und Weg/Geländer
+  gegen Plan und BAB geprüft, Auftrag `noma_terrassen` (8 Bilder 4k mit Ebenen, `interior` mit `--res/--samples/--out/
+  --ebenen`). Nachgereicht: Wimmergasse-Prüfbilder und Hintergrund-Ebenen zu `schutz --autos beide`. Lokal, nicht im
+  Repo: Hoffotos 20.11. (`projects/noma-shg13/renders/streetview/fotos_hof_2026-11-20/`, 75 HEIC/JPG, 3 MOV),
+  Verkaufspläne `quellen/VP_Top03.pdf`, `VP_Top04.pdf`, PNG-Fassungen der Renders. Offen: Westflügel-Details
+  (WC-Fenster Schnirchgasse 4/6, Südteil Hofseite Schlachthausgasse 11, Lüftungskasten Garten); keine Aufgabe laufend.
+  Commits: 543d495, 4b42cab, 1a23e5c, 2bce6f9, 481c221.
 - 2026-11-22 cloud-neu: Mehrsitzungsbetrieb eingerichtet (`CLAUDE.md`, diese Datei, Abschnitt 6 in
   `MAC_SETUP.md`); offen: `UEBERGABE.md` von cloud-alt, Lauf `ki_lokal_test` auf dem Mac.
