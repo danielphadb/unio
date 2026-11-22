@@ -228,6 +228,17 @@ def pipeline_laden(modell: str = "sdxl_union", art: str = "verfeinern", prompt: 
             pipe.set_adapters(["tiefe"], [float(p.get("steuerung_staerke", 1.0))])
             prompt = f"{FLUX2_TIEFE_LORA['ausloeser']}, {prompt}"
             info.update(lora=FLUX2_TIEFE_LORA["repo"], lizenz_lora=FLUX2_TIEFE_LORA["lizenz"])
+        # Prompt einmal kodieren und den Textkodierer (Qwen3-4B, rund 8 GB) freigeben, wie bei FLUX.1: der Prompt ist
+        # fuer alle Kacheln gleich; spart Speicher und das Umladen je Kachel (M3 Max 36 GB: sonst MPS out of memory)
+        t = time.time()
+        pe = None
+        if offload == "aus":
+            pipe.text_encoder.to(dev)
+            with torch.no_grad():
+                pe, _ = pipe.encode_prompt(prompt=prompt, device=dev)
+            pipe.text_encoder = None
+            _leeren()
+            info["text_kodieren_s"] = round(time.time() - t, 1)
         pipe = _platzieren(pipe, dev, offload)
         info.update(basis=repo, steuerung="Render als Referenzbild" if "referenz" in steuer else
                     ("Referenz plus Tiefe (LoRA)" if "tiefe" in steuer else "keine"),
@@ -240,7 +251,8 @@ def pipeline_laden(modell: str = "sdxl_union", art: str = "verfeinern", prompt: 
                 ref = [kachel, st["tiefe"]]
             elif "referenz" in steuer:
                 ref = kachel
-            kw = dict(prompt=prompt, image=kachel, mask_image=Image.new("L", (w, h), 255), image_reference=ref,
+            kw = dict(prompt=None if pe is not None else prompt, prompt_embeds=pe, image=kachel,
+                      mask_image=Image.new("L", (w, h), 255), image_reference=ref,
                       strength=float(staerke), num_inference_steps=int(p["schritte"]), guidance_scale=float(p["cfg"]),
                       generator=gen, width=w, height=h)
             return pipe(**kw).images[0]
