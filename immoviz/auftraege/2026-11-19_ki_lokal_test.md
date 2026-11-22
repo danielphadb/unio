@@ -233,4 +233,60 @@ Unter "Ergebnis" eintragen und pushen:
    Runde 7 mit einem Satz Begründung je Platz.
 
 ## Ergebnis
-(von der Mac-Sitzung auszufüllen)
+(mac-neu, 22.11.2026; Zwischenstand nach Teil A, Teil B läuft)
+
+### Umgebung und Abweichungen vom Auftrag
+- MacBook Pro M3 Max (36 GB), macOS 14.4, Gerät `mps`, dtype float16; python 3.13.18, torch 2.12.1, diffusers 0.43.0,
+  transformers 5.24.0, accelerate 1.16.0.
+- torch 2.15.0 (zuerst installiert) bricht schon beim Testmodell ab: `NSInvalidArgumentException: -[MPSNDArray
+  arrayViewWithShape:strides:]: unrecognized selector`. Mit 2.12.1 läuft alles; 2.13 und 2.14 nicht geprüft.
+  `requirements_ki.txt` begrenzt torch auf macOS auf unter 2.13.
+- FLUX.1 dev: übersprungen (Entscheidung des Nutzers 22.11., kein Hugging-Face-Zugang). Hinweis an cloud-neu: der
+  Abschnitt "Ausgabe" nennt für FLUX.1 "Repo privat", das Repo ist aber öffentlich; FLUX.1-Bilder dürften nicht
+  eingecheckt werden.
+- Grading mit `IMMOVIZ_REFERENZ` = lokaler Referenzordner (die drei Leitbilder sind bytegleich mit dem Übergabe-ZIP 3).
+- Schritt 2 (Testmodell): nach dem torch-Wechsel ohne Fehler, 6 Kacheln, 17 s.
+- In den Logs ist der Pfad des Benutzerordners entfernt (Repo öffentlich), sonst unverändert.
+
+### Teil A: SDXL + ControlNet-Union
+| | 0,25 (8 wirksame Schritte) | 0,4 (12 wirksame Schritte) |
+|---|---|---|
+| Laden | 976,9 s (mit Download rund 10 GB) | 22,0 s (aus dem Cache) |
+| je Kachel (15 Kacheln 1024) | 33,0 s | 50,5 s |
+| Verfeinern gesamt | 494,9 s | 757,4 s |
+| gesamt | 1474,3 s (mit Download) | 781,8 s |
+| `prozess_max_gb` / `mps_treiber_gb` | 3,75 / 2,69 | 2,2 / 2,69 |
+| `/usr/bin/time -l`: maximum resident / peak footprint | 3,7 GB / 24,7 GB | 2,2 GB / 24,7 GB |
+| KI behalten, Anteil Schutzfläche | 79,55 % | 69,8 % |
+| Fenster behalten / gesamt (zurueck, nur_glas_zurueck) | 48 / 112 = 43 % (64, 1) | 46 / 112 = 41 % (66, 3) |
+| häufigste Gründe Fenster | Sprossen 31, Reihe 20, Glaslage 18 | Sprossen 36, Glaslage 29, Reihe 12 |
+| Feinversatz 4k px (Median, p90, max) | 0,63 / 3,18 / 9,42 | 0,83 / 3,76 / 9,69 |
+| Kanten-F1 Toleranz | 0,9918 | 0,9893 |
+| Kanten-F1 Schutz voll | 0,9982 | 0,9980 |
+| Nachkontrolle | zur Prüfung (Exit 1) | ok |
+| Zonen F1 (Fenster, Leuchten, Geländer, Gebäude) | 0,987 / 0,988 / 0,978 / 0,988 | 0,984 / 0,980 / 0,971 / 0,984 |
+| Fenster Wimmergasse (Render, KI, neu, fehlt) | 68 / 66, 2 neu, 4 fehlen | 68 / 65, 0 neu, 3 fehlen |
+| Fenster Stolberggasse | 40 / 40 | 40 / 40 |
+| Grading, Abstand zum Leitbild | 11,29 auf 8,74 | 10,92 auf 8,41 |
+
+Anmerkungen zu den Zahlen:
+- Die JSON-Speicherwerte sind für diese Läufe irreführend (nach dem Freigeben gemessen bzw. nur residenter Speicher);
+  aussagekräftig ist der peak footprint von 24,7 GB, also mehr als die erwarteten 10 GB.
+- Die Zeit je Kachel liegt über der Erwartung von 15 bis 25 s.
+- Die Nachkontrolle nennt bei 0,25 "zur Prüfung", bei 0,4 "ok", obwohl auch dort 3 Fenster nicht gefunden werden. Ob
+  Fenster tatsächlich fehlen oder nur nicht erkannt werden, ist nicht einzeln geprüft; auf den geprüften Ausschnitten
+  fehlt keines.
+
+Sichtprüfung Teil A (`ecke_golden_hour_vergleich.jpg`, Komponentenbild 0,25, 100-%-Ausschnitte gegen den Render):
+- Geometrie sehr nah am Render, keine schwarzen oder grauen Kacheln, keine sichtbaren Kachelnähte. Himmel gegen Render
+  gemessen: Abweichung bei 0,25 höchstens 2 von 255 und gleichmäßig, bei 0,4 bis 4,6 im Blaukanal.
+- Kein fotografischer Gewinn: Putz, Stuck und Glas sehen fast aus wie der Render, eher glatter. Asphaltrisse und
+  Steinkörnung verschwinden. Die Körnung im Endbild stammt aus dem Grading.
+- Stimmung bleibt die des Renders (kühl, leerer Himmel, dunkler Vordergrund), kein Abendlicht wie Runde 7. Auch die
+  grauen Figuren-Platzhalter, der schwarze Streifen am Bordstein und der dunkle Baum bleiben stehen.
+- Kleine Änderungen am Bestand: Poller mit zusätzlichem dunklem Ring, Autofront links umgeformt und umgefärbt,
+  Felgen anders, taktile Fläche heller. 0,4 verstärkt das.
+- Toleranz erzeugt neue Fehler: Poller und Hosenbein der Figur leicht verbogen (Feinausrichtung), heller senkrechter
+  Streifen und grauer Fleck im Baum, wo Render ohne Laub eingesetzt wird.
+- Besser ist 0,25 (mehr KI-Anteil erlaubt, weniger Änderungen, gleicher Look). Gegen Runde 7 final verliert SDXL in
+  dieser Einstellung klar bei Licht und Leben.

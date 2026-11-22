@@ -1,0 +1,105 @@
+W1122 13:38:18.555000 43805 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+.venv-immoviz/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+.venv-immoviz/lib/python3.13/site-packages/diffusers/utils/deprecation_utils.py:23: FutureWarning: `torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]
+
+Loading weights:   0%|          | 0/517 [00:00<?, ?it/s][A
+Loading weights: 100%|██████████| 517/517 [00:00<00:00, 7908.79it/s]
+
+Loading pipeline components...:  14%|█▍        | 1/7 [00:00<00:01,  4.42it/s]
+
+Loading weights:   0%|          | 0/196 [00:00<?, ?it/s][A
+Loading weights: 100%|██████████| 196/196 [00:00<00:00, 7275.98it/s]
+
+Loading pipeline components...:  57%|█████▋    | 4/7 [00:00<00:00,  8.29it/s]
+Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00, 12.14it/s]
+{
+ "render": "immoviz/projects/wimmergasse-20/renders/r7_basis/wimmergasse-20_ecke_golden_hour_final.png",
+ "ebenen": "immoviz/projects/wimmergasse-20/renders/r7_basis/ecke_golden_hour_ebenen",
+ "prompt": "architectural photograph, Viennese historic apartment building, beige lime plaster with fine texture, stucco with soft shadows, white windows, real glass reflections, natural light, photorealistic, sharp detail",
+ "negativ": "cgi, 3d render, plastic, cartoon, painting, oversaturated, hdr, blurry, text, watermark, logo, extra windows, deformed architecture",
+ "parameter": {
+  "staerke": 0.4,
+  "schritte": 30,
+  "cfg": 5.0,
+  "steuerung": [
+   "tiefe",
+   "kanten"
+  ],
+  "steuerung_staerke": 0.8,
+  "kachel": 1024,
+  "ueberlappung": 256,
+  "seed": 7,
+  "farbe_halten": 0.5,
+  "inpaint_staerke": 0.85,
+  "inpaint_rand_px": 6
+ },
+ "lizenz_kommerziell": true,
+ "arbeitsgroesse": [
+  3840,
+  2560
+ ],
+ "kacheln": 15,
+ "kachelgroesse": 1024,
+ "schritte_wirksam": 12,
+ "modell_info": {
+  "modell": "sdxl_union",
+  "familie": "sdxl",
+  "basis": "stabilityai/stable-diffusion-xl-base-1.0",
+  "lizenz_basis": "CreativeML Open RAIL++-M (kommerziell erlaubt, Nutzungsbeschraenkungen Anhang A)",
+  "lizenz_kommerziell": true,
+  "geraet": "mps",
+  "offload": "aus",
+  "quant": "aus",
+  "controlnet": "xinsir/controlnet-union-sdxl-1.0 (diffusion_pytorch_model_promax.safetensors)",
+  "lizenz_controlnet": "Apache-2.0",
+  "vae": "madebyollin/sdxl-vae-fp16-fix",
+  "dtype": "float16"
+ },
+ "ergebnis": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_ki_lokal_s04.jpg",
+ "zeiten": {
+  "laden_s": 22.0,
+  "verfeinern_s": 757.4,
+  "je_kachel_s": 50.5,
+  "gesamt_s": 781.8
+ },
+ "speicher": {
+  "prozess_max_gb": 2.2,
+  "mps_treiber_gb": 2.69,
+  "mps_belegt_gb": 0.0
+ },
+ "versionen": {
+  "python": "3.13.18",
+  "system": "Darwin arm64",
+  "torch": "2.12.1",
+  "diffusers": "0.43.0",
+  "transformers": "5.24.0",
+  "accelerate": "1.16.0"
+ },
+ "hinweis": "Geometrie aus dem Render (Steuerung je Modell, siehe modell_info); danach schutz --modus toleranz und grading",
+ "pruefbild": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_ki_lokal_s04_pruefung.jpg"
+}
+      783.47 real        54.26 user        69.42 sys
+          2197733376  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               99546  page reclaims
+              589413  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  29  messages sent
+                  79  messages received
+                   0  signals received
+              109605  voluntary context switches
+              902129  involuntary context switches
+        660498652187  instructions retired
+        408205401261  cycles elapsed
+         24696512832  peak memory footprint

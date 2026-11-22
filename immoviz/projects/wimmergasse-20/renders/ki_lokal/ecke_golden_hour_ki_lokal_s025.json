@@ -1,0 +1,66 @@
+{
+ "render": "immoviz/projects/wimmergasse-20/renders/r7_basis/wimmergasse-20_ecke_golden_hour_final.png",
+ "ebenen": "immoviz/projects/wimmergasse-20/renders/r7_basis/ecke_golden_hour_ebenen",
+ "prompt": "architectural photograph, Viennese historic apartment building, beige lime plaster with fine texture, stucco with soft shadows, white windows, real glass reflections, natural light, photorealistic, sharp detail",
+ "negativ": "cgi, 3d render, plastic, cartoon, painting, oversaturated, hdr, blurry, text, watermark, logo, extra windows, deformed architecture",
+ "parameter": {
+  "staerke": 0.25,
+  "schritte": 30,
+  "cfg": 5.0,
+  "steuerung": [
+   "tiefe",
+   "kanten"
+  ],
+  "steuerung_staerke": 0.8,
+  "kachel": 1024,
+  "ueberlappung": 256,
+  "seed": 7,
+  "farbe_halten": 0.5,
+  "inpaint_staerke": 0.85,
+  "inpaint_rand_px": 6
+ },
+ "lizenz_kommerziell": true,
+ "arbeitsgroesse": [
+  3840,
+  2560
+ ],
+ "kacheln": 15,
+ "kachelgroesse": 1024,
+ "schritte_wirksam": 8,
+ "modell_info": {
+  "modell": "sdxl_union",
+  "familie": "sdxl",
+  "basis": "stabilityai/stable-diffusion-xl-base-1.0",
+  "lizenz_basis": "CreativeML Open RAIL++-M (kommerziell erlaubt, Nutzungsbeschraenkungen Anhang A)",
+  "lizenz_kommerziell": true,
+  "geraet": "mps",
+  "offload": "aus",
+  "quant": "aus",
+  "controlnet": "xinsir/controlnet-union-sdxl-1.0 (diffusion_pytorch_model_promax.safetensors)",
+  "lizenz_controlnet": "Apache-2.0",
+  "vae": "madebyollin/sdxl-vae-fp16-fix",
+  "dtype": "float16"
+ },
+ "ergebnis": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_ki_lokal_s025.jpg",
+ "zeiten": {
+  "laden_s": 976.9,
+  "verfeinern_s": 494.9,
+  "je_kachel_s": 33.0,
+  "gesamt_s": 1474.3
+ },
+ "speicher": {
+  "prozess_max_gb": 3.75,
+  "mps_treiber_gb": 2.69,
+  "mps_belegt_gb": 0.0
+ },
+ "versionen": {
+  "python": "3.13.18",
+  "system": "Darwin arm64",
+  "torch": "2.12.1",
+  "diffusers": "0.43.0",
+  "transformers": "5.24.0",
+  "accelerate": "1.16.0"
+ },
+ "hinweis": "Geometrie aus dem Render (Steuerung je Modell, siehe modell_info); danach schutz --modus toleranz und grading",
+ "pruefbild": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_ki_lokal_s025_pruefung.jpg"
+}

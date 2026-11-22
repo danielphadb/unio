@@ -1,0 +1,398 @@
+{
+ "render": "immoviz/projects/wimmergasse-20/renders/r7_basis/wimmergasse-20_ecke_golden_hour_final.png",
+ "ki": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_ki_lokal_s025.jpg",
+ "ebenen": "immoviz/projects/wimmergasse-20/renders/r7_basis/ecke_golden_hour_ebenen",
+ "schutz_klassen": [
+  "gebaeude_objekt",
+  "fenster_glas",
+  "fenster_rahmen",
+  "gelaender",
+  "leuchten",
+  "strassenmoebel"
+ ],
+ "anteil_geschuetzt_prozent": 5.87,
+ "ausrichtung": {
+  "modell": "homographie",
+  "massstab_ki_zu_render": 1.0002,
+  "schiebung_prozent": 0.0,
+  "ecc_korrelation": 0.8815,
+  "kantenabstand_median_px": 0.0,
+  "kantenabstand_mittel_px": 1.13,
+  "hinweis": "Abstand der Render-Kanten zur naechsten KI-Kante im Schutzbereich, Analysebreite 1600 px",
+  "fein": {
+   "verfahren": "DIS-Fluss, kantengewichtet geglaettet",
+   "sigma_px": 6.0,
+   "verschiebung_4k_px": {
+    "median": 0.63,
+    "p90": 3.18,
+    "max": 9.42
+   }
+  }
+ },
+ "schutzbereich": {
+  "farbabweichung_dE_vorher": 3.56,
+  "farbabweichung_dE_nachher": 2.73,
+  "kanten_vorher": {
+   "f1": 0.9875,
+   "vollstaendig": 0.9871,
+   "praezision": 0.9879
+  },
+  "kanten_nachher": {
+   "f1": 0.9918,
+   "vollstaendig": 0.992,
+   "praezision": 0.9916
+  },
+  "kantenabstand_mittel_px_vorher": 0.33,
+  "kantenabstand_mittel_px_nachher": 0.3,
+  "gradienten_korrelation_vorher": 0.9741,
+  "gradienten_korrelation_nachher": 0.9851,
+  "hinweis": "kanten: praezision = Anteil starker Kanten des Bildes nahe einer Render-Kante (nichts Neues), vollstaendig = Anteil starker Render-Kanten im Bild (nichts fehlt), Toleranz 1 px. Nachher nahe 1 = Geometrie aus dem Render. dE nachher ist die gewollte Farbangleichung"
+ },
+ "klassen": {
+  "fenster_glas": {
+   "anteil_prozent": 2.64,
+   "kanten_vorher": {
+    "f1": 0.9631,
+    "vollstaendig": 0.9551,
+    "praezision": 0.9713
+   },
+   "kanten_nachher": {
+    "f1": 0.9898,
+    "vollstaendig": 0.9914,
+    "praezision": 0.9883
+   }
+  },
+  "fenster_rahmen": {
+   "anteil_prozent": 1.86,
+   "kanten_vorher": {
+    "f1": 0.9657,
+    "vollstaendig": 0.9676,
+    "praezision": 0.9637
+   },
+   "kanten_nachher": {
+    "f1": 0.9897,
+    "vollstaendig": 0.9909,
+    "praezision": 0.9886
+   }
+  },
+  "gelaender": {
+   "anteil_prozent": 1.3,
+   "kanten_vorher": {
+    "f1": 0.9571,
+    "vollstaendig": 0.9562,
+    "praezision": 0.9581
+   },
+   "kanten_nachher": {
+    "f1": 0.9729,
+    "vollstaendig": 0.9755,
+    "praezision": 0.9703
+   }
+  },
+  "leuchten": {
+   "anteil_prozent": 0.57,
+   "kanten_vorher": {
+    "f1": 0.9687,
+    "vollstaendig": 0.9627,
+    "praezision": 0.9748
+   },
+   "kanten_nachher": {
+    "f1": 0.9704,
+    "vollstaendig": 0.965,
+    "praezision": 0.9759
+   }
+  },
+  "gebaeude_objekt": {
+   "anteil_prozent": 21.19,
+   "kanten_vorher": {
+    "f1": 0.9749,
+    "vollstaendig": 0.9746,
+    "praezision": 0.9752
+   },
+   "kanten_nachher": {
+    "f1": 0.9803,
+    "vollstaendig": 0.978,
+    "praezision": 0.9826
+   }
+  }
+ },
+ "hintergrund": {
+  "verwendet": true,
+  "anteil_prozent": 3.94,
+  "hinweis": "Pixel hinter Platzhaltern (und ungeschuetzten Autos) aus dem zweiten Durchgang"
+ },
+ "laub": {
+  "pixel": 381104,
+  "anteil_prozent": 3.877,
+  "modell_lab": [
+   11.1,
+   -4.3,
+   6.5
+  ],
+  "zone_prozent": 5.03,
+  "parameter": {
+   "saum_anteil": 0.012,
+   "seed_dE": 25.0,
+   "min_dE": 10.0,
+   "maha": 3.0,
+   "struktur": 2.5,
+   "krone_anteil": 0.008
+  },
+  "hinweis": "KI-Laub vor der Fassade (Blender-Baum plus Saum), bleibt KI; Rest dort Render"
+ },
+ "vordergrund": {
+  "aktiv": true,
+  "anteil_prozent": 4.005,
+  "flecken": [
+   {
+    "box_analyse": [
+     963,
+     939,
+     994,
+     1064
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.115
+   },
+   {
+    "box_analyse": [
+     716,
+     988,
+     728,
+     1015
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.013
+   }
+  ],
+  "verworfen": [],
+  "parameter": {
+   "schwelle": 14.0,
+   "schwelle_glas": 26.0,
+   "oeffnen_px": 4,
+   "boden_min_px": 60,
+   "max_hoehe_m": 2.4,
+   "vor_fassade_m": 0.4,
+   "statistik_ausreisser": 20.0,
+   "platzhalter_rand": [
+    1.0,
+    0.25,
+    0.08
+   ],
+   "platzhalter_min_px": 20
+  },
+  "hinweis": "KI-Pixel vor der geschuetzten Flaeche, die als Person/Auto am Boden gelten und nicht zurueckgesetzt werden (gruen im Pruefbild)"
+ },
+ "modus": "toleranz",
+ "ergebnis": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_s025_toleranz.jpg",
+ "toleranz": {
+  "parameter": {
+   "kantenabstand_px": 1.5,
+   "f1_min": 0.9,
+   "toleranz_px": 2.0,
+   "versatz_px": 1.5,
+   "suche_px": 3,
+   "ncc_min": 0.3,
+   "versatz_gewinn": 0.05,
+   "versatz_isotropie": 0.15,
+   "min_kanten": 30,
+   "flach_praezision": 0.8,
+   "flach_kanten": 60,
+   "kachel_px": 256,
+   "fenster_max_kacheln": 4,
+   "min_flaeche_px": 400,
+   "fenster_min_px": 150,
+   "gesims_seitenverhaeltnis": 4.0,
+   "gesims_max_hoehe_px": 90,
+   "dach_winkel_grad": 50.0,
+   "glas_schwerpunkt_px": 3.0,
+   "glas_flaeche": [
+    0.75,
+    1.33
+   ],
+   "sprossen_kontrast_dE": 10.0,
+   "sprossen_lage_px": 2.5,
+   "innen_dL": 22.0,
+   "innen_anteil": 0.3,
+   "lampe_dL": 30.0,
+   "lampe_anteil": 0.04,
+   "reihe_anteil": 0.5,
+   "reihe_min": 3,
+   "gueltig_min": 0.9,
+   "naht_fein_px": 2.0,
+   "naht_flaeche_px": 16.0,
+   "fein_sigma_px": 6.0,
+   "fein_max_px": 10.0,
+   "fein_arbeit": 0.5
+  },
+  "komponenten": 1301,
+  "je_typ": {
+   "fenster": {
+    "anzahl": 112,
+    "behalten": 48,
+    "zurueck": 64,
+    "nur_glas_zurueck": 1,
+    "flaeche_prozent_schutz": 16.05,
+    "flaeche_zurueck_prozent_schutz": 11.46,
+    "gruende": {
+     "sprossen": 31,
+     "reihe": 20,
+     "versatz": 2,
+     "glas_lage": 18,
+     "kantenabstand": 2,
+     "kanten_f1": 5
+    }
+   },
+   "gelaenderfeld": {
+    "anzahl": 65,
+    "behalten": 52,
+    "zurueck": 13,
+    "nur_glas_zurueck": 0,
+    "flaeche_prozent_schutz": 4.57,
+    "flaeche_zurueck_prozent_schutz": 0.77,
+    "gruende": {
+     "kantenabstand": 4,
+     "ohne_ki_deckung": 2,
+     "kanten_f1": 3,
+     "versatz": 5
+    }
+   },
+   "leuchte": {
+    "anzahl": 367,
+    "behalten": 331,
+    "zurueck": 36,
+    "nur_glas_zurueck": 0,
+    "flaeche_prozent_schutz": 2.03,
+    "flaeche_zurueck_prozent_schutz": 0.13,
+    "gruende": {
+     "versatz": 32,
+     "kanten_f1": 1,
+     "kantenabstand": 1,
+     "ohne_ki_deckung": 2
+    }
+   },
+   "moebel": {
+    "anzahl": 14,
+    "behalten": 12,
+    "zurueck": 2,
+    "nur_glas_zurueck": 0,
+    "flaeche_prozent_schutz": 1.55,
+    "flaeche_zurueck_prozent_schutz": 0.18,
+    "gruende": {
+     "kanten_f1": 2
+    }
+   },
+   "fassadenfeld": {
+    "anzahl": 621,
+    "behalten": 576,
+    "zurueck": 45,
+    "nur_glas_zurueck": 0,
+    "flaeche_prozent_schutz": 70.69,
+    "flaeche_zurueck_prozent_schutz": 4.25,
+    "gruende": {
+     "kanten_f1": 24,
+     "kantenabstand": 21,
+     "erfundene_kanten": 1,
+     "versatz": 9
+    }
+   },
+   "dachflaeche": {
+    "anzahl": 118,
+    "behalten": 105,
+    "zurueck": 13,
+    "nur_glas_zurueck": 0,
+    "flaeche_prozent_schutz": 4.7,
+    "flaeche_zurueck_prozent_schutz": 0.48,
+    "gruende": {
+     "kanten_f1": 10,
+     "versatz": 3
+    }
+   },
+   "gesims": {
+    "anzahl": 4,
+    "behalten": 4,
+    "zurueck": 0,
+    "nur_glas_zurueck": 0,
+    "flaeche_prozent_schutz": 0.4,
+    "flaeche_zurueck_prozent_schutz": 0.0,
+    "gruende": {}
+   }
+  },
+  "gruende": {
+   "sprossen": 31,
+   "reihe": 20,
+   "versatz": 51,
+   "glas_lage": 18,
+   "kantenabstand": 28,
+   "kanten_f1": 45,
+   "ohne_ki_deckung": 4,
+   "erfundene_kanten": 1
+  },
+  "fensterreihen": {
+   "anzahl": 11,
+   "ganz_zurueck": 8,
+   "liste": [
+    {
+     "fenster": 5,
+     "zurueck_anteil": 0.0,
+     "ganz_zurueck": false
+    },
+    {
+     "fenster": 4,
+     "zurueck_anteil": 0.5,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 3,
+     "zurueck_anteil": 0.0,
+     "ganz_zurueck": false
+    },
+    {
+     "fenster": 3,
+     "zurueck_anteil": 0.0,
+     "ganz_zurueck": false
+    },
+    {
+     "fenster": 8,
+     "zurueck_anteil": 0.62,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 12,
+     "zurueck_anteil": 0.83,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 12,
+     "zurueck_anteil": 0.58,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 3,
+     "zurueck_anteil": 1.0,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 6,
+     "zurueck_anteil": 0.67,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 7,
+     "zurueck_anteil": 0.57,
+     "ganz_zurueck": true
+    },
+    {
+     "fenster": 6,
+     "zurueck_anteil": 0.5,
+     "ganz_zurueck": true
+    }
+   ]
+  },
+  "ki_behalten_prozent_schutz": 79.55,
+  "zurueck_prozent_schutz": 20.45,
+  "hinweis": "Anteile auf die Flaeche des Schutzbereichs (ohne KI-Vordergrund und Laub) bezogen; Pixelwerte in 4k-Pixeln (3840 px Breite)",
+  "komponenten_json": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_s025_toleranz_komponenten.json"
+ },
+ "pruefbild_komponenten": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_s025_toleranz_komponenten.jpg",
+ "pruefbild": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_s025_toleranz_pruefung.jpg"
+}

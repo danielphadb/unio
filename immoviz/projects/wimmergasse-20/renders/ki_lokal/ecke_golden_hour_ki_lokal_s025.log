@@ -1,0 +1,117 @@
+W1122 13:13:42.534000 43131 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+[transformers] `CLIPImageProcessor` requires torchvision (not installed); falling back to `CLIPImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `CLIPImageProcessorPil` directly to silence this warning.
+[transformers] `SiglipImageProcessor` requires torchvision (not installed); falling back to `SiglipImageProcessorPil` for backward compatibility. Install torchvision to use the default backend, or import `SiglipImageProcessorPil` directly to silence this warning.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+.venv-immoviz/lib/python3.13/site-packages/huggingface_hub/utils/_validators.py:205: UserWarning: The `local_dir_use_symlinks` argument is deprecated and ignored in `hf_hub_download`. Downloading to a local directory does not use symlinks anymore.
+  warnings.warn(
+.venv-immoviz/lib/python3.13/site-packages/diffusers/utils/deprecation_utils.py:23: FutureWarning: `torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+
+Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]
+Fetching 17 files:  12%|█▏        | 2/17 [00:00<00:01, 11.61it/s]
+Fetching 17 files:  29%|██▉       | 5/17 [00:00<00:00, 16.79it/s]
+Fetching 17 files:  59%|█████▉    | 10/17 [00:00<00:00, 26.15it/s]
+Fetching 17 files:  76%|███████▋  | 13/17 [00:17<00:00, 26.15it/s]
+Fetching 17 files:  82%|████████▏ | 14/17 [02:15<00:41, 13.98s/it]
+Fetching 17 files:  88%|████████▊ | 15/17 [02:16<00:24, 12.28s/it]
+Fetching 17 files:  88%|████████▊ | 15/17 [02:27<00:24, 12.28s/it]
+Fetching 17 files:  94%|█████████▍| 16/17 [07:17<00:57, 57.22s/it]
+Fetching 17 files: 100%|██████████| 17/17 [11:30<00:00, 92.92s/it]
+Fetching 17 files: 100%|██████████| 17/17 [11:30<00:00, 40.65s/it]
+
+Loading pipeline components...:   0%|          | 0/7 [00:00<?, ?it/s]
+
+Loading weights:   0%|          | 0/517 [00:00<?, ?it/s][A
+Loading weights: 100%|██████████| 517/517 [00:00<00:00, 7451.40it/s]
+
+Loading pipeline components...:  57%|█████▋    | 4/7 [00:00<00:00, 10.77it/s]
+
+Loading weights:   0%|          | 0/196 [00:00<?, ?it/s][A
+Loading weights: 100%|██████████| 196/196 [00:00<00:00, 8633.88it/s]
+
+Loading pipeline components...:  86%|████████▌ | 6/7 [00:00<00:00,  9.59it/s]
+Loading pipeline components...: 100%|██████████| 7/7 [00:00<00:00, 11.43it/s]
+{
+ "render": "immoviz/projects/wimmergasse-20/renders/r7_basis/wimmergasse-20_ecke_golden_hour_final.png",
+ "ebenen": "immoviz/projects/wimmergasse-20/renders/r7_basis/ecke_golden_hour_ebenen",
+ "prompt": "architectural photograph, Viennese historic apartment building, beige lime plaster with fine texture, stucco with soft shadows, white windows, real glass reflections, natural light, photorealistic, sharp detail",
+ "negativ": "cgi, 3d render, plastic, cartoon, painting, oversaturated, hdr, blurry, text, watermark, logo, extra windows, deformed architecture",
+ "parameter": {
+  "staerke": 0.25,
+  "schritte": 30,
+  "cfg": 5.0,
+  "steuerung": [
+   "tiefe",
+   "kanten"
+  ],
+  "steuerung_staerke": 0.8,
+  "kachel": 1024,
+  "ueberlappung": 256,
+  "seed": 7,
+  "farbe_halten": 0.5,
+  "inpaint_staerke": 0.85,
+  "inpaint_rand_px": 6
+ },
+ "lizenz_kommerziell": true,
+ "arbeitsgroesse": [
+  3840,
+  2560
+ ],
+ "kacheln": 15,
+ "kachelgroesse": 1024,
+ "schritte_wirksam": 8,
+ "modell_info": {
+  "modell": "sdxl_union",
+  "familie": "sdxl",
+  "basis": "stabilityai/stable-diffusion-xl-base-1.0",
+  "lizenz_basis": "CreativeML Open RAIL++-M (kommerziell erlaubt, Nutzungsbeschraenkungen Anhang A)",
+  "lizenz_kommerziell": true,
+  "geraet": "mps",
+  "offload": "aus",
+  "quant": "aus",
+  "controlnet": "xinsir/controlnet-union-sdxl-1.0 (diffusion_pytorch_model_promax.safetensors)",
+  "lizenz_controlnet": "Apache-2.0",
+  "vae": "madebyollin/sdxl-vae-fp16-fix",
+  "dtype": "float16"
+ },
+ "ergebnis": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_ki_lokal_s025.jpg",
+ "zeiten": {
+  "laden_s": 976.9,
+  "verfeinern_s": 494.9,
+  "je_kachel_s": 33.0,
+  "gesamt_s": 1474.3
+ },
+ "speicher": {
+  "prozess_max_gb": 3.75,
+  "mps_treiber_gb": 2.69,
+  "mps_belegt_gb": 0.0
+ },
+ "versionen": {
+  "python": "3.13.18",
+  "system": "Darwin arm64",
+  "torch": "2.12.1",
+  "diffusers": "0.43.0",
+  "transformers": "5.24.0",
+  "accelerate": "1.16.0"
+ },
+ "hinweis": "Geometrie aus dem Render (Steuerung je Modell, siehe modell_info); danach schutz --modus toleranz und grading",
+ "pruefbild": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_ki_lokal_s025_pruefung.jpg"
+}
+     1476.02 real        68.64 user       122.80 sys
+          3749838848  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              587408  page reclaims
+              568442  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                2389  messages sent
+             1798727  messages received
+                   0  signals received
+              182096  voluntary context switches
+             2336281  involuntary context switches
+        656696987191  instructions retired
+        447160660030  cycles elapsed
+         24696158976  peak memory footprint
