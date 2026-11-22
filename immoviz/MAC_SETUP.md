@@ -73,3 +73,13 @@ Die Modelle (SDXL, ControlNet-Union ProMax, VAE; rund 10 GB) lädt der erste Lau
 ohne Konto. Nichts davon ins Repo. Ein `ki-lokal`-Lauf belegt die Grafikeinheit: wie ein Render behandeln, also nie
 parallel zu `render` oder einem zweiten `ki-lokal` (`pgrep -f immoviz.py`). Erster Testlauf:
 `auftraege/2026-11-19_ki_lokal_test.md`.
+
+## 6. Zweite lokale Sitzung `mac-neu` (zweites Claude-Konto, ab 22.11.2026)
+
+Auf demselben Mac arbeitet neben `mac-alt` eine zweite Claude-Code-Sitzung aus dem zweiten Claude-Konto. Beide nutzen
+**denselben Ordner** (der schon eingerichtete Klon mit `.venv-immoviz`, Modell-Caches und lokalen Renders), aber nie
+gleichzeitig. Protokoll: `CLAUDE.md` und `SITZUNGEN.md`.
+
+Starten: In der Claude-Desktop-App mit dem zweiten Konto angemeldet eine neue Claude-Code-Sitzung (lokal) im
+bestehenden immoviz-Ordner öffnen, oder im Terminal `cd <ordner> && claude` und mit dem zweiten Konto anmelden. Git
+pusht über die Zugangsdaten des Macs, nicht über das Claude-Konto; dafür ist nichts Neues einzurichten.
