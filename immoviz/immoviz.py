@@ -274,6 +274,12 @@ def main():
     fg.add_argument("--pruefen", action="store_true", help="Gate wie vor der Veredelung (Exit 1, wenn gesperrt)")
     fg.add_argument("--trockenlauf", action="store_true")
     fg.add_argument("--force", action="store_true", help="Sperre bewusst übergehen (wird ausgegeben)")
+    vp = sub.add_parser("veredeln-prompt", help="Higgsfield-Prompt je Kamera aus projects/<objekt>/veredeln.yaml "
+                                                "plus Regelblock (lib/veredeln.py)")
+    vp.add_argument("--projekt", required=True)
+    vp.add_argument("--cam", required=True)
+    vp.add_argument("--licht", required=True)
+    vp.add_argument("--out", default=None, help="Prompt zusaetzlich in diese Datei schreiben")
     pr = sub.add_parser("prompt", help="Vor einem Higgsfield-Auftrag (MCP oder Studio): Freigabe prüfen und den "
                                        "Regelblock aus higgsfield/prompt_regeln.yaml ausgeben")
     pr.add_argument("--projekt", required=True)
@@ -306,6 +312,9 @@ def main():
         from lib.assets import autos_bibliothek as AB
         print(json.dumps(AB.laden(a.nur.split(",") if a.nur else None), ensure_ascii=False, indent=1))
         return
+    if a.cmd == "veredeln-prompt":
+        from lib import veredeln as VR
+        sys.exit(VR.main_cli(a))
     if a.cmd == "modelle-laden":
         from lib.assets import modelle as MO
         log = MO.laden(a.nur.split(",") if a.nur else None)

@@ -821,11 +821,15 @@ def _pruefbild(R, Kw, out, alpha, kz, pfad: Path, F=None) -> Path:
 
 # ------------------------------------------------------------------ Schutzzonen-Pruefung (Nachkontrolle)
 ZONEN = {"fenster": ["fenster_glas", "fenster_rahmen"], "leuchten": ["leuchten"], "gelaender": ["gelaender"],
-         "gebaeude": ["gebaeude_objekt"]}
+         "gebaeude": ["gebaeude_objekt"], "nachbarn": ["nachbarn"], "innenraum": ["innenraum"],
+         "ausstattung": ["ausstattung"]}
+# Runde 10 Noma: auch Nachbarhaeuser, Innenraum-Moebel und Ausstattung werden geprueft (am KI-Rohbild zeigt das, wo die
+# KI abweicht; am Endbild nach `schutz` voll muessen alle Zonen bestehen, sonst Naht oder Fehlausrichtung)
 # Fensterzahl: Befund ab FENSTER_NEU glasartigen Flecken auf der Wand oder wenn mehr als FENSTER_FEHLT der Render-Fenster
 # im KI-Bild nicht zu finden sind (Zaehlung bei 1200 px Breite auf +-3 Fenster genau, bei 4k deutlich besser)
 FENSTER_NEU, FENSTER_FEHLT = 2, 0.08
-ZONE_GRENZE = {"fenster": 0.90, "leuchten": 0.85, "gelaender": 0.90, "gebaeude": 0.85}   # praezision/vollstaendig
+ZONE_GRENZE = {"fenster": 0.90, "leuchten": 0.85, "gelaender": 0.90, "gebaeude": 0.85,   # praezision/vollstaendig
+               "nachbarn": 0.85, "innenraum": 0.85, "ausstattung": 0.80}
 
 
 def zonen_pruefen(render_p, veredelt_p, ebenen_ordner, modell: str = "homographie") -> dict:

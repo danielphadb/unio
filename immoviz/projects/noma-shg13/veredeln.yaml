@@ -1,0 +1,93 @@
+# Higgsfield-Veredelung Noma, ab Runde 10 (lib/veredeln.py, `immoviz.py veredeln-prompt`).
+# Unterschied zu Runde 9: Pflanzen und Moebel sind echte 3D-Modelle (lib/assets/modelle.py). Die KI ersetzt keine
+# Platzhalter mehr, sie verfeinert nur Licht, Himmel, Pflanzendetails und Stoffe. Alles andere setzt `schutz` (Modus
+# voll, Klassen project.yaml `schutz`) pixelgenau aus Blender zurueck: Fassade, Glas mit Innenraum, Rahmen,
+# Gelaender, Leuchten, Nachbarhaeuser, Moebel, Pergola, Rankgitter, Boden.
+runde: 10
+modell: {model: gpt_image_2_6, quality: high, resolution: 4k, aspect_ratio: "3:2"}
+# Stilreferenzen: Projektvisualisierungen des Kunden (Vorlagen, nur intern, Freigabe 15.11.2026), bereits im
+# Higgsfield-Konto (Runde 7/9). Nie Geometrie oder Nachbarn daraus.
+referenzen:
+  - {media_id: cbf0a95b-1d3d-46e2-a90b-11099b8d9b95, name: SHG13_Hof_fin-3}
+  - {media_id: c82cc51e-a000-4f6b-8207-0bdead3a5edc, name: SHG13_Hof_fin-4}
+
+bausteine:
+  kopf: >-
+    Turn image 1, a physically based 3D render, into a high-end photorealistic architectural photograph. Image 1 is
+    binding for everything it shows: camera, framing, building geometry, openings, the lift-and-slide door frame and
+    its division, railings, the wooden pergola and trellis, all furniture (real models at their planned position and
+    size), the interior behind the glass, the planters and the neighbouring buildings. The plants in image 1 are
+    already real plants at their final position and size: keep their position, outline and size, only make leaves,
+    blossoms and stems more natural, detailed and alive. Do not replace, move or resize any object.
+  objekt: >-
+    Courtyard pavilion of a new residential building in Vienna: smooth light sage green-grey render facade (Baumit
+    1026) on every exterior wall of the pavilion, slim anthracite frames, small bronze wall lights, dark anthracite
+    metal bar railings only where image 1 shows them, light grey porcelain tiles on the terrace.
+  bepflanzung: >-
+    PLANTING: refine only. The climbing plants growing from the troughs up the wooden trellis get glossy, varied
+    leaves with natural depth and a few small white flowers; the potted olive tree gets silvery-green foliage and a
+    gnarled trunk; the shrubs in the troughs get fresh, dense foliage. Same positions, same outlines, no new plants.
+  moebel: >-
+    FURNITURE AND TEXTILES: keep every piece exactly as in image 1. Fabrics may gain natural texture and soft folds
+    (cushions, upholstery, outdoor rug), nothing else changes.
+  referenzen: >-
+    Images 2 and 3 are mood references from the same project (warm late-summer light, colour grade, atmosphere).
+    Their buildings, glass roofs, layout, terraces, furniture, trees and neighbours do NOT apply; never copy geometry
+    or objects from them.
+  schluss: >-
+    Full-frame camera, vertical lines perfectly straight, natural colours, no HDR look, magazine quality. No people.
+    No additional windows, doors, ladders, railings, pergolas, planters, furniture or decoration. The room behind the
+    glass keeps exactly its size, walls and furniture from image 1. No text, no watermark, no logos.
+
+licht:
+  spaetsommer: >-
+    Late summer afternoon, low warm sun from the west-south-west, soft long shadows, dappled leaf shadows, slight haze
+    and gentle backlight glow on leaves, pale warm sky with a few soft clouds, warm neutral grade, no saturated blue,
+    shadows neutral never blue.
+  blaue_stunde: >-
+    Blue hour shortly after sunset, deep soft blue-grey sky, warm interior light glowing through the glass, the bronze
+    wall lights switched on with soft cones on the facade, calm and elegant, no harsh contrast.
+
+motive:
+  top3_terrasse_garten: >-
+    Terrace of Top 3 seen from the lift-and-slide door: under the wooden wall pergola the striped outdoor sofa with
+    cushions, the coffee table and two slatted teak lounge chairs on an outdoor rug, the olive tree in an anthracite
+    planter at the railing, climbing plants on the trellis; beyond the railing the courtyard garden and the
+    neighbouring houses exactly as in image 1.
+  top4_terrasse_garten: >-
+    Terrace of Top 4: on the left the wooden wall pergola with the trellis and climbing plants, a light wooden dining
+    table for four with cane-and-teak chairs, the olive tree in an anthracite planter at the railing, on the right
+    the sage facade with the lift-and-slide door and a wall light; neighbouring houses exactly as in image 1.
+  top3_pergola_detail: >-
+    Close view into the pergola corner of Top 3: the striped outdoor sofa with cushions under the pergola, the
+    coffee table, the trellis behind with climbing plants growing from the planter troughs, a trough in the left
+    foreground; neighbouring houses beyond the railing exactly as in image 1.
+  top4_pergola_detail: >-
+    Close view into the pergola corner of Top 4: dining table for four with cane-and-teak chairs under the pergola,
+    the trellis with climbing plants growing from the troughs, the olive tree at the railing; neighbouring houses
+    exactly as in image 1.
+  top03_terrasse_hst: >-
+    View from the terrace corner of Top 3 towards the open lift-and-slide door: pergola with sofa and lounge chairs
+    on the left, the sage facade with the door on the right; behind the glass the living room of Top 3 exactly as in
+    image 1 (walnut kitchen with terrazzo top on the north wall, round walnut dining table with bouclé chairs, a rose
+    bouclé sofa on the east wall, walnut sideboard).
+  top03_terrasse_abend: >-
+    Same view as the daytime image of the Top 3 terrace at blue hour: interior lights on behind the glass, wall lights
+    on, the living room of Top 3 exactly as in image 1.
+  top04_terrasse_hst: >-
+    View from the terrace corner of Top 4 towards the open lift-and-slide door: pergola with the dining table on the
+    left, the sage facade with the door on the right; behind the glass the living room of Top 4 exactly as in image 1
+    (oak kitchen with green-grey marble top on the north wall, round oak dining table with rust velvet chairs and a
+    globe pendant, a cream bouclé sofa on the east wall, oak sideboard).
+  top04_terrasse_abend: >-
+    Same view as the daytime image of the Top 4 terrace at blue hour: interior lights on behind the glass, wall lights
+    on, the living room of Top 4 exactly as in image 1.
+
+# Ablauf je Bild (Befehle aus dem Repo-Ordner; R = Render-PNG, E = Ebenen-Ordner, K = KI-Rohbild):
+ablauf:
+  - "immoviz.py veredeln-prompt --projekt immoviz/projects/noma-shg13 --cam <kamera> --licht <licht> --out <ordner>/<kamera>_prompt.txt"
+  - "Higgsfield (MCP): media_upload Render-JPG, generate_image mit modell und Bild 1 = Render, Bild 2/3 = referenzen"
+  - "immoviz.py schutz --render R --ki K --ebenen E --ohne-vordergrund   (Modus voll, Klassen aus project.yaml schutz)"
+  - "immoviz.py grading --bild <schutz.jpg> --projekt immoviz/projects/noma-shg13 --maske <schutz plus himmel> --staerke 0.3"
+  - "immoviz.py nachkontrolle --vorschau R --veredelt <grading.jpg> --ebenen E --aus <pruefung.jpg>"
+  - "Sichtpruefung gegen den Render: Waende, Fenster, Raumgroesse, Nachbarn, Artefakte; erst dann Kontaktbogen und ZIP"
