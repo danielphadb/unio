@@ -102,3 +102,25 @@ Fehlermeldungen wörtlich.
    0,5 bis 8 m anders. Nicht untersucht, warum "mittel" so viel niedriger ist (anderes Gerät, andere Standorte, neueres Modell).
    Keine Street-View-Bilder eingecheckt.
 6. `ebenen.json`: Pfad `beauty` im eingecheckten Stand relativ zum Repo (lokal absolut).
+7. **Nachtrag 22.11. abends: Kreuzung korrigiert (Auftrag des Nutzers), neue Basis für die Veredelung ist
+   `renders/r8_kreuzung/`, `r8_begehung/` ist überholt.**
+   - Ursache der Stufen: `contour_terrain()` springt, wo die zweitnächste Höhenstufe wechselt (43 cm an der Objektecke), und
+     war je 2-m-Kachel konstant. Neu `smooth_terrain()` (TIN, geglättet) und Boden im 2-m-Raster vernetzt, Schalter
+     `site.gelaende: glatt` (nur Wimmergasse, Noma unverändert). Kote Objektecke 0,77 (Plan 0,79, vorher 0,60), Nachbar
+     Nr. 22 0,03 (Plan 0,00). Bodenflächen im Umkreis 60 m: Parkstreifen und Pflaster höchstens 0,8 cm neben Soll (vorher bis 55 cm).
+   - Damit erledigt: Stufe Parkstreifen, Gehsteigstufe Objektecke, ausgefranster Bordstein NW, gestreifter Asphalt
+     (Untergrundraster ohne UV stieß durch), Motorradbucht vom Gehsteig überdeckt. Innenhof 1 cm über die Gehsteigfläche gehoben.
+   - `_zeichen()`: Rückseite 4 mm versetzt (grau, kein Flimmern). Neues Element `beet`, NW-Beet in der FMZK-Lücke.
+   - `eg_lokal` neu: [-2.6, -4.6], Brennweite 24 (vorher [-5.0, -6.5], 30); ein Menschen-Platzhalter auf [-3.9, -0.5].
+   - Erneute Begehung nur der Kreuzung (`begehung_auto_kreuzung.md`, vorhandene Fotos): "hoch" 25 (vorher 30).
+   - Gilt für alle Kameras der Wimmergasse, ältere Renders passen am Boden nicht mehr pixelgenau. Probe `drohne` 0 Fehler,
+     übrige Kameras nicht neu gerendert.
+
+   | Kamera (4k, Ebenen) | Zeit | max. resident | Schutzanteil | Autos / Befunde | Planbeleg |
+   |---|---|---|---|---|---|
+   | ecke | 495 s | 19,5 GB | 28,5 % | 612 / 0 | 0 Fehler |
+   | ecke_erhoeht | 479 s | 13,6 GB | 32,2 % | 612 / 0 | 0 Fehler |
+   | eg_lokal | 539 s | 13,7 GB | 63,2 % | 612 / 0 | 0 Fehler |
+
+   Offen: Plattenfarbe und Format der Vorziehungen, Radpiktogramm mit Pfeil (WI11), Straßeneinlauf, vierter Poller NW laut
+   Street View (Modell drei), Beet SW nicht geprüft, schwarze Fugen zwischen Nachbarhäusern, große Blätter in `ecke_erhoeht`.

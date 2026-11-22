@@ -43,27 +43,25 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Laufend
 
 - cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11.: Modell, Bibliotheken, Schutz und Mac-Auftrag fertig; wartet auf Mac-Render noma_terrassen_r10, danach Veredelung und Lieferung) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
-- mac-neu | seit 2026-11-22 18:55 | Modellfehler an der Kreuzung Wimmergasse beheben (Auftrag des Nutzers, runde8_begehung Ergebnis Punkt 4), danach 3 Kameras 4k neu | Bereich: immoviz/projects/wimmergasse-20/project.yaml (street, strassenmoebel, menschen, cameras), immoviz/lib/build.py (nur Geländefunktion und Boden der Umgebung, Schalter `site.gelaende: glatt`), immoviz/lib/assets/moebel.py (nur `_zeichen()`), immoviz/lib/assets/strassenelemente.py, immoviz/auftraege/2026-11-19_runde8_begehung.md, renders/r8_kreuzung/, GPU
+- mac-neu | seit 2026-11-22 19:58 | Auftrag noma_terrassen_r10 (Neustart: Probe, bei sauberer Probe 4k mit Ebenen) | Bereich: immoviz/auftraege/2026-11-22_noma_terrassen_r10.md, immoviz/projects/noma-shg13/renders/r10_probe/, renders/r10_terrassen/, GPU
 
 ## Nachrichten
 
 - an mac-neu von cloud-neu (2026-11-22 abends): `noma_terrassen_r10` wieder offen. Flächenprüfung korrigiert (Öffnungen
   abgezogen), Optik der Pflanzen überarbeitet, zwei neue Modelle: vorher `modelle-laden`. Probe (Schritt 2) neu, dann 4k.
   Nach deiner Wimmergasse-Arbeit. Die beiden Nachrichten an cloud-neu oben sind damit erledigt.
-- an cloud-neu von mac-neu (2026-11-22): `noma_terrassen_r10` steht auf **Problem** (Details im Auftrag, Ergebnis Punkt 2 bis 4):
-  Flächenprüfung zählt Öffnungen mit (67,7 statt rund 63,6 m2), Innenkameras brechen ab, kein 4k gerendert. Auf dem Mac
-  lag zudem eine ältere Fassung von `VP_Top04.pdf` (63,35 m2), vermutlich Ursache der weißen Wand. Ersetzt durch die ZIP-
-  Fassung. Bitte `netto_flaeche()` korrigieren. **Vom Nutzer am 2026-11-22 bestätigt: es gilt der VP Top 4 mit 62,80 m2**
-  (ZIP-Fassung, GSPublisher 3560, Terrasse 15,45 m2).
 - an cloud-neu von mac-neu (2026-11-22): `lib/assets/autos_bibliothek.py`, `auf_boden_setzen()` mit Freigabe des Nutzers
   geändert (Boden auch an geneigten Radpunkten); gilt auch für Noma, dort nicht getestet. Die Datei ist wieder frei.
-- an alle Cloud-Sitzungen von mac-neu (2026-11-22): `runde8_begehung` ist gerendert. Vor der Veredelung bitte Ergebnis Punkt 4
-  im Auftrag ansehen (Stufe im Parkstreifen, Gehsteigstufe an der Objektecke, Schilderrückseiten, Bildaufbau `eg_lokal`).
+- an alle Cloud-Sitzungen von mac-neu (2026-11-22): Basis der Wimmergasse-Veredelung ist jetzt `renders/r8_kreuzung/`
+  (nicht `r8_begehung/`): neues Gelände `site.gelaende: glatt`, Stufen an der Kreuzung behoben, `eg_lokal` versetzt.
+  Andere Wimmergasse-Kameras vor der nächsten Veredelung neu rendern. Details im Auftrag, Ergebnis Punkt 7.
 - an mac-alt von mac-neu (2026-11-22): `quellen/VP_Top03.pdf` und `VP_Top04.pdf` (Noma) wurden durch die ZIP-Fassungen ersetzt,
   die alten liegen unter `quellen/alt_2026-03-04/`.
 
 ## Log
 
+- 2026-11-22 mac-neu: Modellfehler an der Kreuzung Wimmergasse behoben (Gelände, Bodenvernetzung, Schilder, Beet, `eg_lokal`),
+  3 Kameras 4k neu in `r8_kreuzung/`, 612 Autos 0 Befunde. Keine Higgsfield-Credits. Danach `noma_terrassen_r10`.
 - 2026-11-22 mac-neu: Auftrag `runde8_begehung` erledigt. Autopruefung brach zuerst ab (Ferrari, Rad 7 cm), Korrektur in
   `auf_boden_setzen()`, danach 0 Befunde; 3 Straßenkameras in 4k mit Ebenen, Begehung 376 Ansichten (Bericht `_mac`).
   VP Top 4 mit 62,80 m2 vom Nutzer bestätigt. Keine Higgsfield-Credits. Offen: Auffälligkeiten im Auftrag Punkt 4,

@@ -1,6 +1,6 @@
 # Auftrag noma_terrassen_r10
 
-Status: offen (Neustart 22.11. abends nach Korrektur durch cloud-neu, siehe "Neustart")
+Status: in Arbeit (mac-neu, 2026-11-22 19:58)
 Erstellt: 22.11.2026, cloud-neu
 Erledigt:
 
