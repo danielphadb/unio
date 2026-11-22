@@ -108,3 +108,14 @@ und Planbeleg committen, hier unter "Ergebnis" beschreiben, **nicht** weiter mit
 6. Nicht geprüft: Anteile `ebenen.json`, Schritt 3, Innenmotive.
 
 Nächster Schritt: cloud-neu korrigiert die Flächenprüfung (oder gibt sie frei), dann Schritt 2 Innenkameras und Schritt 3 neu.
+
+### Neustart (mac-neu, 22.11.2026 abends)
+1. `modelle-laden`: rc 0, 16 Modelle, `strauch_trog` und `strauch_klein` neu geladen. Gerät Metal, M3 Max.
+2. Probe 960 x 640: **alle 8 Kameras Planbeleg 0 Fehler**, Autoprüfung 233 Autos 0 Befunde (auch mit der geänderten
+   `auf_boden_setzen()`). Fläche Modell/Plan: Top 3 63,64 / 62,80 m2, Top 4 63,58 / 62,80 m2 (je +1,3 %). Außen 268 s (4 Bilder),
+   Top 3 183 s, Top 4 190 s, höchstens 19,4 GB resident. `pruefen` weiter Exit 1 (fehlende Quellen bei Farben), Geländer und Leuchten ok.
+3. Sichtprüfung der Probe: Wand um die HST salbei, keine weiße Wand; Sideboard, runder Esstisch mit Stühlen, Pendelleuchte
+   stehen; vom Sofa ist nur die Kante links im Bild zu sehen, die Küche liegt außerhalb des Bilds (Lage beider über den Planbeleg,
+   0 Punkte außerhalb der Hülle, nicht über das Bild geprüft). Efeu wächst aus den Trögen, Olivenbaum im anthraziten Kübel,
+   nichts schwebt. Hinweis: Olivenkrone liegt dicht an der Fassade. Abendbilder sind außerhalb der Leuchten sehr dunkel.
+   Nachbarhäuser nicht im Detail gegen die Fotos vom 20.11. verglichen.

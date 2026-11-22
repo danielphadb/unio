@@ -10,22 +10,22 @@
  "huellen": [],
  "sichtbar": [
   {
-   "objekt": "nb_top4a_masse",
-   "anteil_prozent": 23.37,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "nb_top4a",
-   "herkunft": "plan"
-  },
-  {
    "objekt": "ausstattung_top4_masse",
-   "anteil_prozent": 22.53,
+   "anteil_prozent": 22.24,
    "collections": [
     "Objekt"
    ],
    "gruppe": "ausstattung_top4",
    "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_top4a_masse",
+   "anteil_prozent": 19.11,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4a",
+   "herkunft": "plan"
   },
   {
    "objekt": "nb_hof_masse",
@@ -46,7 +46,7 @@
   },
   {
    "objekt": "ausstattung_top4_11__vegetation__efeu_wand_2",
-   "anteil_prozent": 4.36,
+   "anteil_prozent": 6.06,
    "collections": [
     "Objekt"
    ],
@@ -54,7 +54,25 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top4_10__vegetation__olivenbaum_1",
+   "objekt": "ausstattung_top4_11__vegetation__efeu_wand_3",
+   "anteil_prozent": 4.23,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_11__vegetation__efeu_wand_1",
+   "anteil_prozent": 4.03,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_09__vegetation__olivenbaum_1",
    "anteil_prozent": 3.35,
    "collections": [
     "Objekt"
@@ -63,16 +81,7 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top4_13__vegetation__graeser_0",
-   "anteil_prozent": 2.23,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top4",
-   "herkunft": "ausstattung"
-  },
-  {
-   "objekt": "ausstattung_top4_19__ausstattung__outdoor_stuhl_0",
+   "objekt": "ausstattung_top4_17__ausstattung__outdoor_stuhl_0",
    "anteil_prozent": 2.05,
    "collections": [
     "Objekt"
@@ -81,16 +90,7 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top4_12__vegetation__efeu_wand_3",
-   "anteil_prozent": 1.81,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top4",
-   "herkunft": "ausstattung"
-  },
-  {
-   "objekt": "ausstattung_top4_16__ausstattung__outdoor_tisch_0",
+   "objekt": "ausstattung_top4_14__ausstattung__outdoor_tisch_0",
    "anteil_prozent": 1.75,
    "collections": [
     "Objekt"
@@ -133,26 +133,8 @@
    "herkunft": "nachbarn"
   },
   {
-   "objekt": "ausstattung_top4_11__vegetation__efeu_wand_1",
-   "anteil_prozent": 1.18,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top4",
-   "herkunft": "ausstattung"
-  },
-  {
-   "objekt": "ausstattung_top4_11__vegetation__efeu_wand_3",
-   "anteil_prozent": 1.12,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top4",
-   "herkunft": "ausstattung"
-  },
-  {
    "objekt": "umgebung_gebaeude",
-   "anteil_prozent": 1.08,
+   "anteil_prozent": 1.11,
    "collections": [
     "Umgebung"
    ],
@@ -160,7 +142,7 @@
   },
   {
    "objekt": "nb_hof_gelaender",
-   "anteil_prozent": 0.99,
+   "anteil_prozent": 1.03,
    "collections": [
     "Objekt"
    ],
@@ -186,7 +168,7 @@
    "herkunft": "nachbarn"
   },
   {
-   "objekt": "ausstattung_top4_10__vegetation__olivenbaum_0",
+   "objekt": "ausstattung_top4_09__vegetation__olivenbaum_0",
    "anteil_prozent": 0.77,
    "collections": [
     "Objekt"
@@ -195,7 +177,7 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top4_20__ausstattung__outdoor_stuhl_0",
+   "objekt": "ausstattung_top4_10__vegetation__efeu_wand_2",
    "anteil_prozent": 0.75,
    "collections": [
     "Objekt"
@@ -204,7 +186,16 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top4_17__ausstattung__outdoor_stuhl_0",
+   "objekt": "ausstattung_top4_18__ausstattung__outdoor_stuhl_0",
+   "anteil_prozent": 0.75,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_15__ausstattung__outdoor_stuhl_0",
    "anteil_prozent": 0.72,
    "collections": [
     "Objekt"
@@ -213,8 +204,17 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top4_12__vegetation__efeu_wand_1",
-   "anteil_prozent": 0.6,
+   "objekt": "ausstattung_top4_12__vegetation__strauch_trog_0",
+   "anteil_prozent": 0.69,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_10__vegetation__efeu_wand_0",
+   "anteil_prozent": 0.63,
    "collections": [
     "Objekt"
    ],
@@ -239,16 +239,7 @@
    "herkunft": "nachbarn"
   },
   {
-   "objekt": "ausstattung_top4_14__vegetation__graeser_0",
-   "anteil_prozent": 0.46,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top4",
-   "herkunft": "ausstattung"
-  },
-  {
-   "objekt": "ausstattung_top4_16__ausstattung__outdoor_tisch_4",
+   "objekt": "ausstattung_top4_14__ausstattung__outdoor_tisch_4",
    "anteil_prozent": 0.45,
    "collections": [
     "Objekt"
@@ -265,7 +256,7 @@
    "herkunft": "umgebung"
   },
   {
-   "objekt": "ausstattung_top4_18__ausstattung__outdoor_stuhl_0",
+   "objekt": "ausstattung_top4_16__ausstattung__outdoor_stuhl_0",
    "anteil_prozent": 0.44,
    "collections": [
     "Objekt"
@@ -274,8 +265,8 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top4_11__vegetation__efeu_wand_0",
-   "anteil_prozent": 0.35,
+   "objekt": "ausstattung_top4_10__vegetation__efeu_wand_3",
+   "anteil_prozent": 0.38,
    "collections": [
     "Objekt"
    ],
@@ -307,7 +298,7 @@
    "herkunft": "umgebung"
   },
   {
-   "objekt": "ausstattung_top4_16__ausstattung__outdoor_tisch_3",
+   "objekt": "ausstattung_top4_14__ausstattung__outdoor_tisch_3",
    "anteil_prozent": 0.24,
    "collections": [
     "Objekt"
@@ -316,17 +307,8 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top4_15__vegetation__graeser_0",
+   "objekt": "ausstattung_top4_10__vegetation__efeu_wand_1",
    "anteil_prozent": 0.22,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top4",
-   "herkunft": "ausstattung"
-  },
-  {
-   "objekt": "ausstattung_top4_12__vegetation__efeu_wand_0",
-   "anteil_prozent": 0.2,
    "collections": [
     "Objekt"
    ],
@@ -350,7 +332,7 @@
    "herkunft": "umgebung"
   },
   {
-   "objekt": "ausstattung_top4_16__ausstattung__outdoor_tisch_2",
+   "objekt": "ausstattung_top4_14__ausstattung__outdoor_tisch_2",
    "anteil_prozent": 0.1,
    "collections": [
     "Objekt"
@@ -359,7 +341,7 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top4_16__ausstattung__outdoor_tisch_1",
+   "objekt": "ausstattung_top4_14__ausstattung__outdoor_tisch_1",
    "anteil_prozent": 0.05,
    "collections": [
     "Objekt"

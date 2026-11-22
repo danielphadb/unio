@@ -11,7 +11,7 @@
  "sichtbar": [
   {
    "objekt": "ausstattung_top3_masse",
-   "anteil_prozent": 28.88,
+   "anteil_prozent": 28.58,
    "collections": [
     "Objekt"
    ],
@@ -20,12 +20,21 @@
   },
   {
    "objekt": "nb_top4_masse",
-   "anteil_prozent": 21.86,
+   "anteil_prozent": 18.07,
    "collections": [
     "Objekt"
    ],
    "gruppe": "nb_top4",
    "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top3_02__vegetation__efeu_wand_2",
+   "anteil_prozent": 6.42,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
   },
   {
    "objekt": "nachbar_hof_west_005363",
@@ -34,15 +43,6 @@
     "Umgebung"
    ],
    "herkunft": "umgebung"
-  },
-  {
-   "objekt": "ausstattung_top3_01__vegetation__efeu_wand_2",
-   "anteil_prozent": 4.54,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top3",
-   "herkunft": "ausstattung"
   },
   {
    "objekt": "nb_hof_masse",
@@ -54,7 +54,16 @@
    "herkunft": "plan"
   },
   {
-   "objekt": "ausstattung_top3_07__ausstattung__couchtisch_0",
+   "objekt": "ausstattung_top3_02__vegetation__efeu_wand_1",
+   "anteil_prozent": 3.99,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top3_06__ausstattung__couchtisch_0",
    "anteil_prozent": 3.1,
    "collections": [
     "Objekt"
@@ -63,7 +72,16 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top3_06__ausstattung__outdoor_sofa_10",
+   "objekt": "ausstattung_top3_02__vegetation__efeu_wand_3",
+   "anteil_prozent": 3.06,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top3_05__ausstattung__outdoor_sofa_10",
    "anteil_prozent": 2.8,
    "collections": [
     "Objekt"
@@ -89,7 +107,7 @@
   },
   {
    "objekt": "nb_umgebung_masse",
-   "anteil_prozent": 2.55,
+   "anteil_prozent": 2.56,
    "collections": [
     "Objekt"
    ],
@@ -97,26 +115,8 @@
    "herkunft": "nachbarn"
   },
   {
-   "objekt": "ausstattung_top3_01__vegetation__efeu_wand_3",
-   "anteil_prozent": 2.38,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top3",
-   "herkunft": "ausstattung"
-  },
-  {
-   "objekt": "ausstattung_top3_06__ausstattung__outdoor_sofa_11",
+   "objekt": "ausstattung_top3_05__ausstattung__outdoor_sofa_11",
    "anteil_prozent": 2.35,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top3",
-   "herkunft": "ausstattung"
-  },
-  {
-   "objekt": "ausstattung_top3_03__vegetation__graeser_0",
-   "anteil_prozent": 2.28,
    "collections": [
     "Objekt"
    ],
@@ -133,21 +133,12 @@
   },
   {
    "objekt": "nb_hof_gelaender",
-   "anteil_prozent": 1.85,
+   "anteil_prozent": 1.86,
    "collections": [
     "Objekt"
    ],
    "gruppe": "nb_hof",
    "herkunft": "plan"
-  },
-  {
-   "objekt": "ausstattung_top3_02__vegetation__efeu_wand_3",
-   "anteil_prozent": 1.81,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top3",
-   "herkunft": "ausstattung"
   },
   {
    "objekt": "nb_umgebung_005363_masse",
@@ -159,6 +150,15 @@
    "herkunft": "nachbarn"
   },
   {
+   "objekt": "ausstattung_top3_01__vegetation__efeu_wand_3",
+   "anteil_prozent": 1.42,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
    "objekt": "nachbar_hof_west_005364",
    "anteil_prozent": 1.18,
    "collections": [
@@ -167,7 +167,7 @@
    "herkunft": "umgebung"
   },
   {
-   "objekt": "ausstattung_top3_06__ausstattung__outdoor_sofa_12",
+   "objekt": "ausstattung_top3_05__ausstattung__outdoor_sofa_12",
    "anteil_prozent": 1.17,
    "collections": [
     "Objekt"
@@ -176,7 +176,7 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top3_01__vegetation__efeu_wand_1",
+   "objekt": "ausstattung_top3_01__vegetation__efeu_wand_2",
    "anteil_prozent": 1.09,
    "collections": [
     "Objekt"
@@ -186,7 +186,7 @@
   },
   {
    "objekt": "ausstattung_top3_01__vegetation__efeu_wand_0",
-   "anteil_prozent": 0.72,
+   "anteil_prozent": 0.81,
    "collections": [
     "Objekt"
    ],
@@ -194,7 +194,7 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top3_06__ausstattung__outdoor_sofa_5",
+   "objekt": "ausstattung_top3_05__ausstattung__outdoor_sofa_5",
    "anteil_prozent": 0.71,
    "collections": [
     "Objekt"
@@ -203,8 +203,17 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top3_02__vegetation__efeu_wand_1",
-   "anteil_prozent": 0.56,
+   "objekt": "ausstattung_top3_01__vegetation__efeu_wand_1",
+   "anteil_prozent": 0.61,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top3_03__vegetation__strauch_trog_0",
+   "anteil_prozent": 0.61,
    "collections": [
     "Objekt"
    ],
@@ -220,7 +229,7 @@
    "herkunft": "umgebung"
   },
   {
-   "objekt": "ausstattung_top3_06__ausstattung__outdoor_sofa_3",
+   "objekt": "ausstattung_top3_05__ausstattung__outdoor_sofa_3",
    "anteil_prozent": 0.54,
    "collections": [
     "Objekt"
@@ -246,7 +255,7 @@
   },
   {
    "objekt": "nb_umgebung_gruen",
-   "anteil_prozent": 0.45,
+   "anteil_prozent": 0.46,
    "collections": [
     "Objekt"
    ],
@@ -254,17 +263,16 @@
    "herkunft": "nachbarn"
   },
   {
-   "objekt": "ausstattung_top3_05__vegetation__graeser_0",
-   "anteil_prozent": 0.33,
+   "objekt": "baeume_kronen_ahorn.089",
+   "anteil_prozent": 0.35,
    "collections": [
-    "Objekt"
+    "Baumkronen"
    ],
-   "gruppe": "ausstattung_top3",
-   "herkunft": "ausstattung"
+   "herkunft": "umgebung"
   },
   {
    "objekt": "nb_umgebung_005364_gelaender",
-   "anteil_prozent": 0.32,
+   "anteil_prozent": 0.31,
    "collections": [
     "Objekt"
    ],
@@ -272,15 +280,7 @@
    "herkunft": "nachbarn"
   },
   {
-   "objekt": "baeume_kronen_ahorn.089",
-   "anteil_prozent": 0.3,
-   "collections": [
-    "Baumkronen"
-   ],
-   "herkunft": "umgebung"
-  },
-  {
-   "objekt": "ausstattung_top3_09__ausstattung__outdoor_sessel_3",
+   "objekt": "ausstattung_top3_08__ausstattung__outdoor_sessel_3",
    "anteil_prozent": 0.28,
    "collections": [
     "Objekt"
@@ -289,7 +289,7 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top3_02__vegetation__efeu_wand_0",
+   "objekt": "ausstattung_top3_05__ausstattung__outdoor_sofa_1",
    "anteil_prozent": 0.24,
    "collections": [
     "Objekt"
@@ -298,16 +298,7 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top3_06__ausstattung__outdoor_sofa_1",
-   "anteil_prozent": 0.24,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top3",
-   "herkunft": "ausstattung"
-  },
-  {
-   "objekt": "ausstattung_top3_06__ausstattung__outdoor_sofa_7",
+   "objekt": "ausstattung_top3_05__ausstattung__outdoor_sofa_7",
    "anteil_prozent": 0.22,
    "collections": [
     "Objekt"
@@ -317,14 +308,14 @@
   },
   {
    "objekt": "umgebung_boden",
-   "anteil_prozent": 0.16,
+   "anteil_prozent": 0.17,
    "collections": [
     "Umgebung"
    ],
    "herkunft": "umgebung"
   },
   {
-   "objekt": "ausstattung_top3_09__ausstattung__outdoor_sessel_1",
+   "objekt": "ausstattung_top3_08__ausstattung__outdoor_sessel_1",
    "anteil_prozent": 0.15,
    "collections": [
     "Objekt"
@@ -342,8 +333,8 @@
    "herkunft": "nachbarn"
   },
   {
-   "objekt": "ausstattung_top3_04__vegetation__graeser_0",
-   "anteil_prozent": 0.09,
+   "objekt": "ausstattung_top3_05__ausstattung__outdoor_sofa_8",
+   "anteil_prozent": 0.06,
    "collections": [
     "Objekt"
    ],
@@ -351,8 +342,8 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top3_06__ausstattung__outdoor_sofa_8",
-   "anteil_prozent": 0.06,
+   "objekt": "ausstattung_top3_04__vegetation__strauch_klein_0",
+   "anteil_prozent": 0.05,
    "collections": [
     "Objekt"
    ],

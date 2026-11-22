@@ -4,12 +4,10 @@
   192,
   128
  ],
- "fehler": [
-  "Wohnflaeche im Modell 67.7 m2, Verkaufsplan 62.8 m2 (Abweichung +8 %, erlaubt 6 %)"
- ],
+ "fehler": [],
  "hinweise": [],
  "flaeche_m2": {
-  "modell": 67.73,
+  "modell": 63.64,
   "plan": 62.8
  },
  "huellen": [
@@ -198,7 +196,7 @@
    "herkunft": "plan"
   },
   {
-   "objekt": "ausstattung_top3_07__ausstattung__couchtisch_0",
+   "objekt": "ausstattung_top3_06__ausstattung__couchtisch_0",
    "anteil_prozent": 1.41,
    "collections": [
     "Objekt"
@@ -241,7 +239,7 @@
    "herkunft": "umgebung"
   },
   {
-   "objekt": "ausstattung_top3_09__ausstattung__outdoor_sessel_1",
+   "objekt": "ausstattung_top3_08__ausstattung__outdoor_sessel_1",
    "anteil_prozent": 0.73,
    "collections": [
     "Objekt"
@@ -259,7 +257,7 @@
    "herkunft": "plan"
   },
   {
-   "objekt": "ausstattung_top3_09__ausstattung__outdoor_sessel_3",
+   "objekt": "ausstattung_top3_08__ausstattung__outdoor_sessel_3",
    "anteil_prozent": 0.57,
    "collections": [
     "Objekt"
@@ -285,7 +283,7 @@
    "herkunft": "umgebung"
   },
   {
-   "objekt": "ausstattung_top3_08__ausstattung__outdoor_sessel_1",
+   "objekt": "ausstattung_top3_07__ausstattung__outdoor_sessel_1",
    "anteil_prozent": 0.4,
    "collections": [
     "Objekt"
@@ -312,7 +310,7 @@
    "quelle": "quellen/VP_Top03.pdf (vp_top3_aussen)"
   },
   {
-   "objekt": "ausstattung_top3_06__ausstattung__outdoor_sofa_10",
+   "objekt": "ausstattung_top3_05__ausstattung__outdoor_sofa_10",
    "anteil_prozent": 0.33,
    "collections": [
     "Objekt"
@@ -330,7 +328,7 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top3_08__ausstattung__outdoor_sessel_3",
+   "objekt": "ausstattung_top3_07__ausstattung__outdoor_sessel_3",
    "anteil_prozent": 0.29,
    "collections": [
     "Objekt"
@@ -441,7 +439,7 @@
    "herkunft": "plan"
   },
   {
-   "objekt": "ausstattung_top3_06__ausstattung__outdoor_sofa_11",
+   "objekt": "ausstattung_top3_05__ausstattung__outdoor_sofa_11",
    "anteil_prozent": 0.2,
    "collections": [
     "Objekt"
