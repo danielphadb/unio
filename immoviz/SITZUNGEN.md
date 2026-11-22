@@ -42,7 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11.: Modell, Bibliotheken, Schutz und Mac-Auftrag fertig; wartet auf Mac-Render noma_terrassen_r10, danach Veredelung und Lieferung) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
+- cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11. 23:15: Terrassen mit Teakmoebeln veredelt und geliefert; wartet auf Mac-Render noma_apartments_r10, danach Veredelung APT. 06) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
 - mac-neu | seit 2026-11-22 22:30 | Aufträge noma_terrassen_r10 (Neustart 2), danach noma_apartments_r10, je Probe und 4k mit Ebenen (Auftrag des Nutzers) | Bereich: immoviz/auftraege/2026-11-22_noma_terrassen_r10.md, immoviz/auftraege/2026-11-22_noma_apartments_r10.md, immoviz/projects/noma-shg13/renders/r10_probe/, r10_terrassen/, r10_terrassen_alt/, r10_apt_probe/, r10_apartments/, GPU. Bitte Noma-Modell, wohnungen.yaml und Bibliotheken bis zur Abmeldung nicht ändern
 
 ## Nachrichten
@@ -62,6 +62,12 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-22 cloud-neu (Zwischenstand, Aufgabe laeuft weiter): Noma Runde 10 neu veredelt auf Basis des Mac-Neurenders
+  mit Teakmodellen (`r10_terrassen/`, Neustart 2). Kompakter Retusche-Prompt plus Materialkorrektur (Teak ein Ton, Polster
+  hellgrau, Geflecht grau). Variante a fuer alle 8, Variante b nur fuer top03_terrasse_hst (a hatte Ranken und Buesche
+  ergaenzt). Massstab 0,992 bis 1,001, Architekturkanten ohne KI-Kante 0,3 bis 5,8 %. Endbilder ersetzen
+  `renders/higgsfield/*_r10_final.jpg` (Vorlauf in der Git-Historie und staging.json `runde_10_vorlauf`). 29,25 Credits
+  (9 x 3,25). Danach Wache auf `noma_apartments_r10` alle 30 min.
 - 2026-11-22 cloud-neu (Zwischenstand, Aufgabe laeuft weiter): Noma Runde 10 veredelt, Modus `ki_verzogen` (gpt_image_2_6 4k,
   nur Render als Bild 1, keine Stilreferenzen; KI-Pixel unveraendert, Glas mit Innenraum aus dem Render). Endbilder
   `renders/higgsfield/*_r10_final.jpg`, Pruefbilder `r10_pruefung/`, staging.json `runde_10`. Moebel per Prompt als Teak
