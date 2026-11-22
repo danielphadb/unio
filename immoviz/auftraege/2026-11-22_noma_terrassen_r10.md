@@ -1,8 +1,8 @@
 # Auftrag noma_terrassen_r10
 
-Status: in Arbeit (mac-neu, 2026-11-22 22:30, Neustart 2)
+Status: erledigt (mac-neu, 2026-11-22 23:35, Neustart 2; Hinweise unter Neustart 2 Punkt 6)
 Erstellt: 22.11.2026, cloud-neu
-Erledigt:
+Erledigt: 22.11.2026, mac-neu
 **Start erst, wenn `mac-neu` den Auftrag `2026-11-19_ki_lokal_test.md` abgeschlossen hat** (dort `Status: erledigt`,
 in `SITZUNGEN.md` unter "Laufend" keine `mac-`Kennung, `pgrep -f immoviz.py` leer). Vorher nicht anfangen.
 
@@ -171,3 +171,28 @@ Nächster Schritt: cloud-neu korrigiert die Flächenprüfung (oder gibt sie frei
    hinter der HST bei Tag lesbar, Wand salbei. Hinweise zur Optik, kein Abbruchgrund: Sofapolster im Bild fast weiß (RGB rund
    242/237/231) statt hellgrau #C8C6C1; Esstisch Top 4 rötlich wie Mahagoni; Stuhlgeflecht Top 4 fast schwarz; drei Holztöne
    nebeneinander (Pergola hell, Couchtisch orange, Teak rotbraun). Küche weiter nicht im Bild.
+4. 4k mit Ebenen (3840x2560, 256 Samples, Metal M3 Max), 22:41 bis 23:31, alle rc 0, **Planbeleg 8 x 0 Fehler**, 233 Autos 0 Befunde:
+
+   | Lauf | Bilder | Zeit | max. resident | peak footprint |
+   |---|---|---|---|---|
+   | außen | 4 | 1426 s | 16,7 GB | 36,9 GB |
+   | Top 3 HST und Abend | 2 | 763 s | 17,6 GB | 38,7 GB |
+   | Top 4 HST und Abend | 2 | 804 s | 21,3 GB | 38,7 GB |
+
+5. `ebenen.json` (Prozent, `nicht_zugeordnet` überall leer):
+
+   | Bild | schutz | innenraum | stoffe | vegetation | ausstattung | nachbarn | fenster_glas |
+   |---|---|---|---|---|---|---|---|
+   | top3_terrasse_garten | 85,1 | 0 | 3,1 | 4,9 | 19,9 | 14,8 | 15,9 |
+   | top4_terrasse_garten | 91,3 | 0 | 0,2 | 3,8 | 16,5 | 8,6 | 16,0 |
+   | top3_pergola_detail | 77,1 | 0 | 5,3 | 17,2 | 34,8 | 16,3 | 0 |
+   | top4_pergola_detail | 78,6 | 0 | 0,4 | 20,3 | 29,8 | 12,9 | 0 |
+   | top03 hst und abend | 94,1 | 0 | 0,3 | 2,0 | 18,6 | 16,6 | 14,3 |
+   | top04 hst und abend | 88,8 | 0 | 0,3 | 4,9 | 15,1 | 9,8 | 22,8 |
+
+   `innenraum` bleibt 0, der Raum hinter der HST zählt als `fenster_glas`.
+6. Sichtprüfung 4k: Teakmöbel stehen, keine weiße Wand, Pergola ohne Spiegelrechtecke (Hinweis von vorher behoben), Tröge mit Erde,
+   Raum bei Tag lesbar (behoben), keine Leitern gesehen. Weiter: Polster fast weiß statt #C8C6C1, Tisch Top 4 rötlich, Geflecht Top 4
+   fast schwarz, drei Holztöne, Olivenkrone dicht an der Fassade, Abendbilder abseits der Leuchten sehr dunkel. Geländer nur über
+   `pruefen` (Soll gleich Ist), Nachbarhäuser nicht im Detail gegen die Fotos vom 20.11., Küche nicht im Bild.
+7. Eingecheckt: 8 JPG, Kontaktbogen, Ebenen ohne `normalen.png`, Planbeleg. Keine Higgsfield-Credits.

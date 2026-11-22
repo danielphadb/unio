@@ -1,0 +1,540 @@
+{
+ "kamera": "top04_terrasse_hst",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": {
+  "modell": 63.58,
+  "plan": 62.8
+ },
+ "huellen": [
+  {
+   "objekt": "top04_terrasse_00__innenraum__sofa_cloud_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_00__innenraum__sofa_cloud_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_01__innenraum__couchtisch_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_02__innenraum__sideboard_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_02__innenraum__sideboard_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_02__innenraum__sideboard_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_03__innenraum__esstisch_rund_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_03s0__innenraum__stuhl_samt_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_03s1__innenraum__stuhl_samt_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_03s2__innenraum__stuhl_samt_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_03s3__innenraum__stuhl_samt_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_04__innenraum__pendelleuchte_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_glas",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_rahmen",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top04_terrasse_waende",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  }
+ ],
+ "sichtbar": [
+  {
+   "objekt": "top04_terrasse_glas",
+   "anteil_prozent": 22.62,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "quellen/VP_Top04.pdf (vp_top4_aussen)"
+  },
+  {
+   "objekt": "nb_top4_masse",
+   "anteil_prozent": 21.96,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "top04_terrasse_waende",
+   "anteil_prozent": 19.51,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "quellen/VP_Top04.pdf (vp_top4_aussen)"
+  },
+  {
+   "objekt": "nb_hof_masse",
+   "anteil_prozent": 12.72,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_hof",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top4_masse",
+   "anteil_prozent": 10.21,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_top4_rahmen",
+   "anteil_prozent": 5.26,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363",
+   "anteil_prozent": 2.74,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_umgebung_005363_masse",
+   "anteil_prozent": 2.29,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_005363",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_nord",
+   "anteil_prozent": 1.79,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_glas",
+   "anteil_prozent": 1.29,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_innen",
+   "anteil_prozent": 1.29,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top4_09__vegetation__olivenbaum_1",
+   "anteil_prozent": 1.19,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_11__vegetation__efeu_wand_2",
+   "anteil_prozent": 0.98,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "top04_terrasse_rahmen",
+   "anteil_prozent": 0.96,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "quellen/VP_Top04.pdf (vp_top4_aussen)"
+  },
+  {
+   "objekt": "ausstattung_top4_18__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.94,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_umgebung_gruen",
+   "anteil_prozent": 0.92,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "ausstattung_top4_14__ausstattung__esstisch_aussen_0",
+   "anteil_prozent": 0.92,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_10__vegetation__efeu_wand_3",
+   "anteil_prozent": 0.83,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_10__vegetation__efeu_wand_0",
+   "anteil_prozent": 0.81,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_14__ausstattung__esstisch_aussen_2",
+   "anteil_prozent": 0.73,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005364",
+   "anteil_prozent": 0.62,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_hof_gelaender",
+   "anteil_prozent": 0.62,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_hof",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "top04_terrasse_03s3__innenraum__stuhl_samt_0",
+   "anteil_prozent": 0.56,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"
+  },
+  {
+   "objekt": "top04_terrasse_02__innenraum__sideboard_2",
+   "anteil_prozent": 0.55,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"
+  },
+  {
+   "objekt": "top04_terrasse_03__innenraum__esstisch_rund_0",
+   "anteil_prozent": 0.55,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"
+  },
+  {
+   "objekt": "ausstattung_top4_17__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.43,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_18__ausstattung__esstuhl_aussen_0",
+   "anteil_prozent": 0.38,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_16__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.34,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_b",
+   "anteil_prozent": 0.33,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top04_terrasse_04__innenraum__pendelleuchte_0",
+   "anteil_prozent": 0.26,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung (Staging), Lage ueber dem Esstisch laut VP"
+  },
+  {
+   "objekt": "top04_terrasse_03s2__innenraum__stuhl_samt_0",
+   "anteil_prozent": 0.26,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"
+  },
+  {
+   "objekt": "ausstattung_top4_14__ausstattung__esstisch_aussen_1",
+   "anteil_prozent": 0.25,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_10__vegetation__efeu_wand_2",
+   "anteil_prozent": 0.21,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_09__vegetation__olivenbaum_0",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_umgebung_masse",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "ausstattung_top4_18__ausstattung__esstuhl_aussen_3",
+   "anteil_prozent": 0.19,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "top04_terrasse_03s0__innenraum__stuhl_samt_0",
+   "anteil_prozent": 0.18,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"
+  },
+  {
+   "objekt": "ausstattung_top4_15__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_umgebung_005364_masse",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_005364",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nachbar_hof_west_005364_glas",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005364_innen",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top4_17__ausstattung__esstuhl_aussen_0",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "umgebung_boden",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_rahmen",
+   "anteil_prozent": 0.12,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top04_terrasse_00__innenraum__sofa_cloud_1",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"
+  },
+  {
+   "objekt": "nachbar_hof_west_005364_rahmen",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top4_16__ausstattung__esstuhl_aussen_0",
+   "anteil_prozent": 0.1,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "top04_terrasse_02__innenraum__sideboard_0",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"
+  },
+  {
+   "objekt": "top04_terrasse_01__innenraum__couchtisch_0",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 4 (Moeblierung Kueche/WZ, grundrissgleich mit Top 3, +47 px)"
+  },
+  {
+   "objekt": "nb_top4a_masse",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4a",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top4_17__ausstattung__esstuhl_aussen_3",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  }
+ ]
+}

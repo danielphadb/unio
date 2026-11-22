@@ -1,0 +1,547 @@
+{
+ "kamera": "top03_terrasse_hst",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": {
+  "modell": 63.64,
+  "plan": 62.8
+ },
+ "huellen": [
+  {
+   "objekt": "top03_terrasse_00__innenraum__sofa_cloud_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_00__innenraum__sofa_cloud_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_01__innenraum__couchtisch_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_02__innenraum__sideboard_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_02__innenraum__sideboard_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_02__innenraum__sideboard_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_03__innenraum__esstisch_rund_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_03s0__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_03s0__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_03s1__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_03s1__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_03s2__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_03s2__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_03s3__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_03s3__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_04__innenraum__pendelleuchte_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_glas",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_rahmen",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top03_terrasse_waende",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  }
+ ],
+ "sichtbar": [
+  {
+   "objekt": "nb_top3_masse",
+   "anteil_prozent": 27.36,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top3",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top3_masse",
+   "anteil_prozent": 14.6,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "top03_terrasse_glas",
+   "anteil_prozent": 13.8,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "quellen/VP_Top03.pdf (vp_top3_aussen)"
+  },
+  {
+   "objekt": "top03_terrasse_waende",
+   "anteil_prozent": 12.11,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "quellen/VP_Top03.pdf (vp_top3_aussen)"
+  },
+  {
+   "objekt": "nb_hof_masse",
+   "anteil_prozent": 9.84,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_hof",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_b",
+   "anteil_prozent": 4.82,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 4.55,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_top3_rahmen",
+   "anteil_prozent": 3.52,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top3",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363",
+   "anteil_prozent": 2.43,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_hof_gelaender",
+   "anteil_prozent": 2.29,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_hof",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top3_06__ausstattung__couchtisch_0",
+   "anteil_prozent": 1.41,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top3_00__vegetation__olivenbaum_1",
+   "anteil_prozent": 1.34,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_umgebung_masse",
+   "anteil_prozent": 1.32,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "ausstattung_top3_08__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 0.98,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005362_fluegel",
+   "anteil_prozent": 0.81,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_daecher",
+   "anteil_prozent": 0.79,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top3_08__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 0.69,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_shg_masse",
+   "anteil_prozent": 0.63,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top3_07__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 0.48,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_umgebung_005362_gelaender",
+   "anteil_prozent": 0.46,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_005362",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nachbar_hof_nord_005362_ost",
+   "anteil_prozent": 0.41,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_umgebung_gruen",
+   "anteil_prozent": 0.38,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "ausstattung_top3_07__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 0.38,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "top03_terrasse_rahmen",
+   "anteil_prozent": 0.37,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "quellen/VP_Top03.pdf (vp_top3_aussen)"
+  },
+  {
+   "objekt": "ausstattung_top3_05__ausstattung__lounge_sofa_2",
+   "anteil_prozent": 0.33,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_umgebung_005362_masse",
+   "anteil_prozent": 0.28,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_005362",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "ausstattung_top3_00__vegetation__olivenbaum_0",
+   "anteil_prozent": 0.28,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_b_glas",
+   "anteil_prozent": 0.26,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_b_innen",
+   "anteil_prozent": 0.26,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top03_terrasse_03__innenraum__esstisch_rund_0",
+   "anteil_prozent": 0.26,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 3 (Moeblierung Kueche/WZ)"
+  },
+  {
+   "objekt": "nachbar_hof_nord_005362_weiss2",
+   "anteil_prozent": 0.25,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top03_terrasse_02__innenraum__sideboard_2",
+   "anteil_prozent": 0.24,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 3 (Moeblierung Kueche/WZ)"
+  },
+  {
+   "objekt": "umgebung_fenster",
+   "anteil_prozent": 0.24,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top03_terrasse_03s3__innenraum__stuhl_boucle_1",
+   "anteil_prozent": 0.24,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 3 (Moeblierung Kueche/WZ)"
+  },
+  {
+   "objekt": "nb_shg_gelaender",
+   "anteil_prozent": 0.22,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_nord_005362_mitte",
+   "anteil_prozent": 0.22,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_boden",
+   "anteil_prozent": 0.21,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_shg_glas",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "top03_terrasse_03s0__innenraum__stuhl_boucle_1",
+   "anteil_prozent": 0.19,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 3 (Moeblierung Kueche/WZ)"
+  },
+  {
+   "objekt": "top03_terrasse_02__innenraum__sideboard_0",
+   "anteil_prozent": 0.17,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 3 (Moeblierung Kueche/WZ)"
+  },
+  {
+   "objekt": "nachbar_hof_nord_005362",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_nord_005362_weiss1",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top03_terrasse_03s3__innenraum__stuhl_boucle_0",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 3 (Moeblierung Kueche/WZ)"
+  },
+  {
+   "objekt": "top03_terrasse_04__innenraum__pendelleuchte_0",
+   "anteil_prozent": 0.1,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung (Staging), Lage ueber dem Esstisch laut VP"
+  },
+  {
+   "objekt": "top03_terrasse_03s2__innenraum__stuhl_boucle_1",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 3 (Moeblierung Kueche/WZ)"
+  },
+  {
+   "objekt": "top03_terrasse_03s2__innenraum__stuhl_boucle_0",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 3 (Moeblierung Kueche/WZ)"
+  },
+  {
+   "objekt": "top03_terrasse_03s0__innenraum__stuhl_boucle_0",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 3 (Moeblierung Kueche/WZ)"
+  },
+  {
+   "objekt": "nb_shg_rahmen",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_b_rahmen",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top03_terrasse_03s1__innenraum__stuhl_boucle_0",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "VP Top 3 (Moeblierung Kueche/WZ)"
+  }
+ ]
+}
