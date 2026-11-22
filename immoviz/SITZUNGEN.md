@@ -42,7 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-(niemand)
+- mac-neu | seit 2026-11-22 13:11 | Auftrag ki_lokal_test (Teil A SDXL + Union, Teil B FLUX.2 klein; FLUX.1 dev laut Nutzer übersprungen; Grading wartet auf Leitbilder vom Nutzer) | Bereich: immoviz/auftraege/2026-11-19_ki_lokal_test.md, immoviz/projects/wimmergasse-20/renders/ki_lokal/, GPU
 
 ## Nachrichten
 

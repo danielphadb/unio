@@ -1,6 +1,6 @@
 # Auftrag ki_lokal_test
 
-Status: offen
+Status: in Arbeit (mac-neu, 2026-11-22 13:11)
 Erstellt: 18.11.2026, Cloud-Sitzung; erweitert 19.11.2026 um den FLUX-Vergleich (Teil B, Schritte 8 bis 11)
 Erledigt:
 
