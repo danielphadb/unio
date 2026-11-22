@@ -25,3 +25,9 @@ modelle:
   strauch_trog:      {quelle: polyhaven, id: shrub_02, name: "Shrub 02 (Variante c)", lizenz: cc0, masse_m: [1.77, 1.19, 0.95], nur: "_c_LOD0$", vorne: "+x", verwendung: "Bepflanzung der Troege (gruener Strauch, statt Graeser: die wirkten in der Probe wie braune Kugeln)"}
   strauch_klein:     {quelle: polyhaven, id: shrub_02, name: "Shrub 02 (Variante d)", lizenz: cc0, masse_m: [1.04, 0.80, 1.01], nur: "_d_LOD0$", verwendung: "kleiner Trog"}
   graeser:           {quelle: polyhaven, id: grass_medium_02, name: "Grass Medium 02", lizenz: cc0, masse_m: [0.72, 0.72, 0.71], nur: geometry_nodes, verwendung: "Gräser in den Pflanztroegen"}   # BlenderKit-Pampasgras verworfen: Rispen sind Haar-Kurven, Topf im Modell
+  # Runde 10b (Nutzer 22.11.2026: Terrassenmoebel Teak, Polster hellgrau, wie die Projektvisualisierungen Hof_fin;
+  # "wirklich High-End, wie Westwing und Co."): schlanke Teakgestelle, dicke helle Polster, Seilgeflecht, ruhige Formen.
+  lounge_sofa:       {quelle: blenderkit, id: d9cac77d-fa69-4490-8c04-491b47d19e67, name: "Soren Lounge Sofa", autor: "Duy Ngo", lizenz: royalty_free, masse_m: [2.20, 1.09, 0.82], verwendung: "Lounge-Sofa Top 3 (Teak-Plattform, Polster hellgrau)"}
+  lounge_sessel:     {quelle: blenderkit, id: 6715a22e-4ac5-42c5-8c3f-c3a0d01366e6, name: "Reni Lounge Chair", autor: "Duy Ngo", lizenz: royalty_free, masse_m: [0.86, 1.00, 0.94], verwendung: "zwei Lounge-Sessel Top 3 (Teak, Seilgeflecht grau)"}
+  esstuhl_aussen:    {quelle: blenderkit, id: de84d117-07c3-4a92-ad92-948980231970, name: "Albenga Dining Chair", autor: "Duy Ngo", lizenz: royalty_free, masse_m: [0.60, 0.61, 0.87], verwendung: "vier Stuehle Terrasse Top 4 (Seilgeflecht, Teakbeine, Polster hell)"}
+  esstisch_aussen:   {quelle: blenderkit, id: 8a877bf3-eba0-4643-9d01-69e89960aadb, name: "Cancun Dining Table", autor: "Duy Ngo", lizenz: royalty_free, masse_m: [2.40, 1.00, 0.77], verwendung: "Teak-Esstisch Terrasse Top 4, auf 1,60 x 0,90 m"}

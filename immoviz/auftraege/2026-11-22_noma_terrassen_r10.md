@@ -28,7 +28,8 @@ Behoben seit der ersten Probe:
   62,80 m2, also innerhalb der 6 %.
 - Optik: Efeu wächst aus den Trögen am Gitter hoch (zwei Felder über den Trögen, frei neben der Wandleuchte), Tröge mit
   grünem Strauch statt brauner Gräser, Olivenkübel anthrazit statt orange, Outdoor-Teppich Top 3 dunkler.
-- Zwei neue Modelle (`strauch_trog`, `strauch_klein`): **vor Schritt 2 noch einmal `modelle-laden` ausführen.**
+- Terrassenmöbel neu (Nutzer: Teak, Polster hellgrau, High-End): `lounge_sofa`, `lounge_sessel`, `esstuhl_aussen`,
+  `esstisch_aussen`, dazu `strauch_trog`, `strauch_klein`: **vor Schritt 2 noch einmal `modelle-laden` ausführen.**
 Bitte Schritt 2 (Probe) komplett neu, dann Schritt 3. Start weiterhin erst, wenn keine andere Mac-Arbeit läuft.
 
 ## Befehle
