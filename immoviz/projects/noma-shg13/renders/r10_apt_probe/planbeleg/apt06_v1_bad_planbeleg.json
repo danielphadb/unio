@@ -1,0 +1,31 @@
+{
+ "kamera": "apt06_v1_bad",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [],
+ "sichtbar": [
+  {
+   "objekt": "apt06_v1_waende",
+   "anteil_prozent": 100.0,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Noma Apartment APT. 06 (Typ Derenko Top 1 gespiegelt), Variante 1 nach Mappe 07.10.2026 [EIN S. 15, S. 23, INT]"
+  },
+  {
+   "objekt": "apt06_v1_glas",
+   "anteil_prozent": 35.82,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Noma Apartment APT. 06 (Typ Derenko Top 1 gespiegelt), Variante 1 nach Mappe 07.10.2026 [EIN S. 15, S. 23, INT]"
+  }
+ ]
+}

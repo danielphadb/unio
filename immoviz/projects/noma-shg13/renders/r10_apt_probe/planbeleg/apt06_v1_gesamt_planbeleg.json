@@ -1,0 +1,56 @@
+{
+ "kamera": "apt06_v1_gesamt",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [],
+ "sichtbar": [
+  {
+   "objekt": "apt06_v1_waende",
+   "anteil_prozent": 98.32,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Noma Apartment APT. 06 (Typ Derenko Top 1 gespiegelt), Variante 1 nach Mappe 07.10.2026 [EIN S. 15, S. 23, INT]"
+  },
+  {
+   "objekt": "apt06_v1_glas",
+   "anteil_prozent": 1.4,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Noma Apartment APT. 06 (Typ Derenko Top 1 gespiegelt), Variante 1 nach Mappe 07.10.2026 [EIN S. 15, S. 23, INT]"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 1.02,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "apt06_v1_rahmen",
+   "anteil_prozent": 0.29,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Noma Apartment APT. 06 (Typ Derenko Top 1 gespiegelt), Variante 1 nach Mappe 07.10.2026 [EIN S. 15, S. 23, INT]"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363",
+   "anteil_prozent": 0.24,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  }
+ ]
+}

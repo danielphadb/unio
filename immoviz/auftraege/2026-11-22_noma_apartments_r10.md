@@ -1,6 +1,6 @@
 # Auftrag noma_apartments_r10
 
-Status: offen
+Status: in Arbeit (mac-neu, 2026-11-22 23:32, 4k ab 2026-11-23 00:15)
 Erstellt: 22.11.2026, cloud-neu
 Erledigt:
 
@@ -38,4 +38,18 @@ pgrep -f immoviz.py && echo "BELEGT: warten" || echo frei
   Garderobe V2, Lichtleiste und Fensterschimmer im Bad) prüfen und notieren.
 
 ## Ergebnis
-(von der Mac-Sitzung auszufüllen)
+(mac-neu, 23.11.2026, Metal auf Apple M3 Max)
+
+1. Probe 960 x 640, 32 Samples: 23 Kameras in 2345 s, 19,5 GB resident, 41,2 GB peak footprint, **Planbeleg 23 x 0 Fehler**, rc 0.
+2. Sichtprüfung der Probe:
+   - Fenster, Kochfeld ohne Laden darunter (V1 Drehtür neben der Garderobe, V2 drei Laden nur im Hochschrank), Küchenreihenfolge V1
+     und V2, Mikrowelle und offene Garderobe wie `interior_v2.md` Abschnitt 5 und 6. Raumhöhe wirkt plausibel, Maße nicht am Bild gemessen.
+   - **Farbstich:** alles stark orange. Bordeaux statt #5C1727 (Farbton 346) ziegelrot, V2 Bettwand RGB 99/18/0, Farbton 10,
+     Blau auf 0; Wände rund 214/168/126. Wenn die Veredelung Farben vom Render übernimmt, kippt das Bordeaux.
+   - **Stühle am Esstisch ohne Beine**, sie schweben als L-Form (Runde 6 ergänzte die KI die Beine). Bett, Bank, WC, Waschtisch als Blöcke.
+   - **Bad:** Wände ohne Fliesenfugen, Duschwand ohne Beschläge; Waschtisch und WC unten angeschnitten (Runde 6 zeigte sie ganz).
+   - V1 `gesamt` und `essplatz`: Fensterausblick fast weiß, Spiegelung der Pendel im Glas.
+   - Lichtband entlang der Wand zum Fenster (V1 und V2 `kueche`, `fenster_gegenlicht`, oben links): bitte prüfen, ob Vorhangleiste
+     oder die gestrichene Stuckleiste. Im Bad keine Lichtleiste und kein Fensterschimmer mehr zu sehen.
+   - V2 `kueche_fliesen`: Fliesenspiegel als glatte rote Fläche ohne Fugen.
+   - Kein Abbruchgrund, weil die Veredelung in Runde 6 Möbel und Farben aus demselben Blockmodell geholt hat.

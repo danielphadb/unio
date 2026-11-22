@@ -1,0 +1,366 @@
+{
+ "kamera": "apt06_v2_bad",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [],
+ "sichtbar": [
+  {
+   "objekt": "nachbar_hof_ost_005379",
+   "anteil_prozent": 20.78,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005379_masse",
+   "anteil_prozent": 17.13,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005379",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "umgebung_boden",
+   "anteil_prozent": 14.48,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_top4_masse",
+   "anteil_prozent": 6.92,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005380_masse",
+   "anteil_prozent": 3.69,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005380",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005379_glas",
+   "anteil_prozent": 3.63,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_garten_gruen",
+   "anteil_prozent": 3.59,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_garten",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005379_innen",
+   "anteil_prozent": 3.23,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 2.82,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005380",
+   "anteil_prozent": 2.36,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_nord_005382",
+   "anteil_prozent": 2.27,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_garten_gelaender",
+   "anteil_prozent": 2.01,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_garten",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top3_masse",
+   "anteil_prozent": 1.27,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top3_02__vegetation__efeu_wand_3",
+   "anteil_prozent": 0.8,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_wue_masse",
+   "anteil_prozent": 0.7,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005379_rahmen",
+   "anteil_prozent": 0.67,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005379_glas",
+   "anteil_prozent": 0.53,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005379",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "baeume_kronen_ahorn.090",
+   "anteil_prozent": 0.47,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_top4_glas",
+   "anteil_prozent": 0.43,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005380_glas",
+   "anteil_prozent": 0.4,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_top4a_masse",
+   "anteil_prozent": 0.4,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4a",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top3_02__vegetation__efeu_wand_0",
+   "anteil_prozent": 0.35,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005379_rahmen",
+   "anteil_prozent": 0.33,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005379",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "baeume_kronen_ahorn.091",
+   "anteil_prozent": 0.29,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005379_innen",
+   "anteil_prozent": 0.25,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005379",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005380_innen",
+   "anteil_prozent": 0.25,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_nord_005382_dach",
+   "anteil_prozent": 0.18,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_top4_innen",
+   "anteil_prozent": 0.17,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top4_masse",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005380_rahmen",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top3_02__vegetation__efeu_wand_1",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_11__vegetation__efeu_wand_3",
+   "anteil_prozent": 0.1,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_wue_rahmen",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005380_glas",
+   "anteil_prozent": 0.08,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005380",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nb_wue_gelaender",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005380_innen",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005380",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nb_top4_rahmen",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top4_11__vegetation__efeu_wand_1",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "baeume_staemme",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top3_03__vegetation__strauch_trog_0",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "baeume_holz.122",
+   "anteil_prozent": 0.05,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  }
+ ]
+}

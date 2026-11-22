@@ -1,0 +1,307 @@
+{
+ "kamera": "apt06_v2_bett_diagonal",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [],
+ "sichtbar": [
+  {
+   "objekt": "apt06_v2_waende",
+   "anteil_prozent": 34.99,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Noma Apartment APT. 06 (Typ Derenko Top 1 gespiegelt), Variante 2 nach Mappe 28.10.2026 [EIN S. 15, S. 23, INT2]"
+  },
+  {
+   "objekt": "umgebung_boden",
+   "anteil_prozent": 31.04,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_top4_masse",
+   "anteil_prozent": 3.23,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top3_masse",
+   "anteil_prozent": 2.19,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005379_masse",
+   "anteil_prozent": 1.77,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005379",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nb_wue_masse",
+   "anteil_prozent": 1.37,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_nord_005382",
+   "anteil_prozent": 1.25,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005380_masse",
+   "anteil_prozent": 1.06,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005380",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005379",
+   "anteil_prozent": 0.79,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_top4a_masse",
+   "anteil_prozent": 0.71,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4a",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_garten_gruen",
+   "anteil_prozent": 0.57,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_garten",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005380",
+   "anteil_prozent": 0.35,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_garten_gelaender",
+   "anteil_prozent": 0.34,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_garten",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_top4_innen",
+   "anteil_prozent": 0.33,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_top4_glas",
+   "anteil_prozent": 0.26,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 0.25,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_wue_rahmen",
+   "anteil_prozent": 0.23,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top3_08__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 0.18,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_wue_innen",
+   "anteil_prozent": 0.17,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_wue_gelaender",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top3_05__ausstattung__lounge_sofa_1",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top3_01__vegetation__efeu_wand_0",
+   "anteil_prozent": 0.14,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005379_glas",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top3_08__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 0.12,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top3_07__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 0.1,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005379_rahmen",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "baeume_kronen_ahorn.092",
+   "anteil_prozent": 0.08,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "baeume_staemme",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005380_glas",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top4_11__vegetation__efeu_wand_2",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005380_innen",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top4_masse",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top3_07__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "baeume_kronen_ahorn.091",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  }
+ ]
+}

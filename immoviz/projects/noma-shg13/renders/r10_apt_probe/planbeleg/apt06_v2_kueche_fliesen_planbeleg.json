@@ -1,0 +1,156 @@
+{
+ "kamera": "apt06_v2_kueche_fliesen",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [],
+ "sichtbar": [
+  {
+   "objekt": "apt06_v2_waende",
+   "anteil_prozent": 30.99,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Noma Apartment APT. 06 (Typ Derenko Top 1 gespiegelt), Variante 2 nach Mappe 28.10.2026 [EIN S. 15, S. 23, INT2]"
+  },
+  {
+   "objekt": "umgebung_boden",
+   "anteil_prozent": 29.31,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 6.62,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_umgebung_masse",
+   "anteil_prozent": 4.89,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005378",
+   "anteil_prozent": 4.48,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_fenster",
+   "anteil_prozent": 2.25,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_garten_gruen",
+   "anteil_prozent": 1.75,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_garten",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005378_glas",
+   "anteil_prozent": 1.03,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005378_innen",
+   "anteil_prozent": 0.86,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_garten_gelaender",
+   "anteil_prozent": 0.76,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_garten",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005378_stuck",
+   "anteil_prozent": 0.73,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_daecher",
+   "anteil_prozent": 0.69,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_umgebung_glas",
+   "anteil_prozent": 0.32,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "auto_1dcca4af_035",
+   "anteil_prozent": 0.29,
+   "collections": [
+    "auto_1dcca4af"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005378_rahmen",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_umgebung_rahmen",
+   "anteil_prozent": 0.19,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nb_umgebung_innen",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung",
+   "herkunft": "nachbarn"
+  }
+ ]
+}
