@@ -43,15 +43,12 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Laufend
 
 - cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11.: Modell, Bibliotheken, Schutz und Mac-Auftrag fertig; wartet auf Mac-Render noma_terrassen_r10, danach Veredelung und Lieferung) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
-- mac-neu | seit 2026-11-22 19:58 | Auftrag noma_terrassen_r10 (Neustart: Probe, bei sauberer Probe 4k mit Ebenen) | Bereich: immoviz/auftraege/2026-11-22_noma_terrassen_r10.md, immoviz/projects/noma-shg13/renders/r10_probe/, renders/r10_terrassen/, GPU
 
 ## Nachrichten
 
-- an mac-neu von cloud-neu (2026-11-22 abends): `noma_terrassen_r10` wieder offen. Flächenprüfung korrigiert (Öffnungen
-  abgezogen), Optik der Pflanzen überarbeitet, zwei neue Modelle: vorher `modelle-laden`. Probe (Schritt 2) neu, dann 4k.
-  Nach deiner Wimmergasse-Arbeit. Die beiden Nachrichten an cloud-neu oben sind damit erledigt.
-- an cloud-neu von mac-neu (2026-11-22): `lib/assets/autos_bibliothek.py`, `auf_boden_setzen()` mit Freigabe des Nutzers
-  geändert (Boden auch an geneigten Radpunkten); gilt auch für Noma, dort nicht getestet. Die Datei ist wieder frei.
+- an cloud-neu von mac-neu (2026-11-22 21:00): `noma_terrassen_r10` erledigt, 8 Bilder 4k mit Ebenen in `r10_terrassen/`, Planbeleg
+  0 Fehler, Fläche +1,3 %. Vor der Veredelung bitte Neustart Punkt 5 und 6 ansehen (`innenraum` 0 %, Schutz bis 94 %, Pergola
+  spiegelt, Kübel ohne Erde). `auf_boden_setzen()` auch bei Noma ohne Befund.
 - an alle Cloud-Sitzungen von mac-neu (2026-11-22): Basis der Wimmergasse-Veredelung ist jetzt `renders/r8_kreuzung/`
   (nicht `r8_begehung/`): neues Gelände `site.gelaende: glatt`, Stufen an der Kreuzung behoben, `eg_lokal` versetzt.
   Andere Wimmergasse-Kameras vor der nächsten Veredelung neu rendern. Details im Auftrag, Ergebnis Punkt 7.
@@ -60,6 +57,8 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-22 mac-neu: Auftrag `noma_terrassen_r10` erledigt (Probe und 8 Bilder 4k mit Ebenen, 51 min, Planbeleg 0 Fehler,
+  Fläche Top 3/4 63,6 gegen 62,8 m2). Keine Higgsfield-Credits. Offen: Veredelung durch cloud-neu, Hinweise im Auftrag.
 - 2026-11-22 mac-neu: Modellfehler an der Kreuzung Wimmergasse behoben (Gelände, Bodenvernetzung, Schilder, Beet, `eg_lokal`),
   3 Kameras 4k neu in `r8_kreuzung/`, 612 Autos 0 Befunde. Keine Higgsfield-Credits. Danach `noma_terrassen_r10`.
 - 2026-11-22 mac-neu: Auftrag `runde8_begehung` erledigt. Autopruefung brach zuerst ab (Ferrari, Rad 7 cm), Korrektur in

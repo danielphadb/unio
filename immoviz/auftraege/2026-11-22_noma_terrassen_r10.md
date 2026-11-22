@@ -1,9 +1,8 @@
 # Auftrag noma_terrassen_r10
 
-Status: in Arbeit (mac-neu, 2026-11-22 19:58)
+Status: erledigt (mac-neu, 2026-11-22; Hinweise unter Ergebnis, Neustart Punkt 6)
 Erstellt: 22.11.2026, cloud-neu
-Erledigt:
-
+Erledigt: 22.11.2026, mac-neu
 **Start erst, wenn `mac-neu` den Auftrag `2026-11-19_ki_lokal_test.md` abgeschlossen hat** (dort `Status: erledigt`,
 in `SITZUNGEN.md` unter "Laufend" keine `mac-`Kennung, `pgrep -f immoviz.py` leer). Vorher nicht anfangen.
 
@@ -120,3 +119,34 @@ Nächster Schritt: cloud-neu korrigiert die Flächenprüfung (oder gibt sie frei
    0 Punkte außerhalb der Hülle, nicht über das Bild geprüft). Efeu wächst aus den Trögen, Olivenbaum im anthraziten Kübel,
    nichts schwebt. Hinweis: Olivenkrone liegt dicht an der Fassade. Abendbilder sind außerhalb der Leuchten sehr dunkel.
    Nachbarhäuser nicht im Detail gegen die Fotos vom 20.11. verglichen.
+4. 4k mit Ebenen (3840x2560, 256 Samples), 20:08 bis 20:59, alle rc 0, **Planbeleg 8 x 0 Fehler**, 233 Autos 0 Befunde:
+
+   | Lauf | Bilder | Zeit | max. resident | peak footprint |
+   |---|---|---|---|---|
+   | außen | 4 | 1472 s | 18,9 GB | 36,8 GB |
+   | Top 3 HST und Abend | 2 | 779 s | 16,1 GB | 38,2 GB |
+   | Top 4 HST und Abend | 2 | 793 s | 19,3 GB | 38,4 GB |
+
+5. `ebenen.json` (Anteile in Prozent, `nicht_zugeordnet` überall leer):
+
+   | Bild | schutz | innenraum | stoffe | vegetation | ausstattung | nachbarn |
+   |---|---|---|---|---|---|---|
+   | top3_terrasse_garten | 88,2 | 0 | 0,04 | 4,9 | 23,0 | 15,0 |
+   | top4_terrasse_garten | 91,4 | 0 | 0 | 3,9 | 16,1 | 8,7 |
+   | top3_pergola_detail | 82,4 | 0 | 0,07 | 17,1 | 40,8 | 16,3 |
+   | top4_pergola_detail | 78,9 | 0 | 0 | 20,4 | 28,9 | 13,1 |
+   | top03 hst und abend | 94,4 | 0 | 0,01 | 2,0 | 18,5 | 16,7 |
+   | top04 hst und abend | 88,9 | 0 | 0 | 5,1 | 14,6 | 9,8 |
+
+   **`innenraum` ist überall 0**: der Raum hinter der HST zählt als `fenster_glas` (14 bis 16 %), die Schutzklasse `innenraum`
+   greift also nicht eigens. Bei geschütztem Glas ist der Raum mitgeschützt, sonst bitte prüfen. Der Schutz deckt 79 bis 94 %
+   des Bilds, für die Veredelung bleibt wenig Fläche.
+6. Sichtprüfung 4k: Wände salbei, keine weiße Wand, keine Leitern gesehen, Möbel und Pflanzen stehen. Hinweise:
+   - Pergolaholz spiegelt zu stark: im Abendbild helle Rechtecke der beleuchteten Fenster auf Pfosten und Balken.
+   - Pflanzkübel und Tröge sind geschlossene Körper ohne Erde, der Olivenstamm steht auf dem Deckel; Kübel sichtbar kantig.
+   - Olivenkrone berührt fast die Fassade, dichte Kugelform. Efeublätter hängen alle nach unten.
+   - In den Glasflächen spiegeln sich Sofa und Efeu kräftig (physikalisch richtig), der Raum ist bei Tag dadurch schwer lesbar.
+   - Abendbilder abseits der Leuchten fast schwarz.
+   - Geländer nur über `pruefen` (Soll gleich Ist) geprüft, Nachbarhäuser nicht im Detail gegen die Fotos vom 20.11.
+7. Eingecheckt: 8 JPG, Kontaktbogen, Ebenen ohne `normalen.png`, Planbeleg. PNG der Bilder bleiben lokal. Lokale Pfade in den
+   JSON entfernt. Keine Higgsfield-Credits.
