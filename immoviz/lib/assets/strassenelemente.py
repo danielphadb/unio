@@ -20,6 +20,7 @@ Einträge (lokales System, Meter):
   radpiktogramm       Fahrradsymbol (Seitenansicht, oben = Fahrtrichtung): `pos`, `richtung`, optional `pfeil`
   sperrflaeche        Umrandung und Schrägstreifen: `poly`, `abstand` (Standard 1,0), `winkel` (45)
   parkmarkierung      Trennlinien zwischen Stellplätzen eines Streifens laut street.parking (`markierung: true`)
+  beet                offenes Beet (Erde) mit Granitkante: `poly` (konvex), `hoehe` (0,12)
   schachtdeckel       `pos`, `art`: rund (Kanal, 0,62 m) | einlauf (Straßeneinlauf am Bordstein, `drehung`) | klein
   strassenschild      Wiener Straßentafel am Haus, blau mit weißem Rand, ohne lesbare Schrift: `pos` (auf der
                       Fassadenflucht), `drehung` (Blickrichtung der Tafel in Grad), `z` (Unterkante über Gelände)
@@ -50,6 +51,8 @@ def _mats(mats):
     mats["tafel_blau"] = M.simple(bpy, "tafel_blau", (0.012, 0.045, 0.22), 0.3)
     mats["tafel_weiss"] = M.simple(bpy, "tafel_weiss", (0.80, 0.80, 0.78), 0.3)
     mats["tafel_rot"] = M.simple(bpy, "tafel_rot", (0.40, 0.012, 0.015), 0.35)
+    if "erde" not in mats:
+        mats["erde"] = M.plaster(bpy, "erde", (0.035, 0.025, 0.018), var=0.3, bump=0.6, detail=False)
     for k in ("markierung", "randstein", "gehsteig", "edelstahl", "pflaster"):
         if k not in mats:
             mats[k] = M.simple(bpy, k, (0.5, 0.5, 0.5), 0.5)
@@ -322,6 +325,40 @@ def flaeche(mb, e, boden):
                 mb.poly([(qx, qy, boden.z(qx, qy, False) + MARK_DZ) for qx, qy in clip], clip, "markierung_neu", (0, 0, 1))
 
 
+def beet(mb, e, boden):
+    """Offenes Beet (Erde) mit Granitkante rundum: `poly` (konvex), `hoehe` Oberkante Kante ueber Gelaende (0,12)."""
+    poly = e["poly"] if K.polygon_area(e["poly"]) > 0 else e["poly"][::-1]
+    h, st, br = float(e.get("hoehe", 0.12)), 0.5, float(e.get("kante", 0.12))
+    xs, ys = [p[0] for p in poly], [p[1] for p in poly]
+    T = boden.terrain
+    for i in range(int((max(xs) - min(xs)) / st) + 1):
+        for j in range(int((max(ys) - min(ys)) / st) + 1):
+            x0, y0 = min(xs) + i * st, min(ys) + j * st
+            clip = [(x0, y0), (x0 + st, y0), (x0 + st, y0 + st), (x0, y0 + st)]
+            for k in range(len(poly)):
+                a, b = poly[k], poly[(k + 1) % len(poly)]
+                clip = K.clip_halfplane(clip, lambda p, a=a, b=b: (b[0] - a[0]) * (p[1] - a[1]) - (b[1] - a[1]) * (p[0] - a[0]))
+                if len(clip) < 3:
+                    break
+            if len(clip) >= 3:
+                mb.poly([(qx, qy, T(qx, qy) + h - 0.03) for qx, qy in clip], clip, "erde", (0, 0, 1))
+    for k in range(len(poly)):
+        a, b = poly[k], poly[(k + 1) % len(poly)]
+        L = math.dist(a, b)
+        t = ((b[0] - a[0]) / L, (b[1] - a[1]) / L)
+        n = (-t[1], t[0])                       # nach innen
+        m = max(1, int(L / st))
+        for q in range(m):
+            p0 = (a[0] + t[0] * L * q / m, a[1] + t[1] * L * q / m)
+            p1 = (a[0] + t[0] * L * (q + 1) / m, a[1] + t[1] * L * (q + 1) / m)
+            i0, i1 = (p0[0] + n[0] * br, p0[1] + n[1] * br), (p1[0] + n[0] * br, p1[1] + n[1] * br)
+            Z = lambda p, d: (p[0], p[1], T(*p) + d)
+            uv = [(q, 0.0), (q + 1.0, 0.0), (q + 1.0, br), (q, br)]
+            mb.poly([Z(p0, h + 0.002), Z(p1, h + 0.002), Z(i1, h + 0.002), Z(i0, h + 0.002)], uv, "randstein", (0, 0, 1))
+            mb.poly([Z(p0, -0.02), Z(p1, -0.02), Z(p1, h + 0.002), Z(p0, h + 0.002)], uv, "randstein", (-n[0], -n[1], 0))
+            mb.poly([Z(i0, h - 0.06), Z(i1, h - 0.06), Z(i1, h + 0.002), Z(i0, h + 0.002)], uv, "randstein", (n[0], n[1], 0))
+
+
 def sperrflaeche(mb, e, boden):
     poly = e["poly"]
     br = float(e.get("breite", 0.15))
@@ -535,6 +572,8 @@ def build(cfg, ctx, mats, coll, terrain, boden_obj=None, log=None):
                 flaeche(mark, e, boden)
             elif typ in ("poller", "verkehrszeichen", "mistkuebel", "motorrad", "hydrant"):
                 moebel_extra.append(e)
+            elif typ == "beet":
+                beet(flaechen, e, boden)
             elif typ == "schachtdeckel":
                 schachtdeckel(flaechen, e, boden)
             elif typ == "hydrant_ogd":

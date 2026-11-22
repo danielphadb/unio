@@ -163,7 +163,9 @@ def _zeichen(mb, x, y, z, dreh, schild, hoehe=2.35, steher=True):
     def poly(pts2, mat, off=0.0, gross=1.0):
         pts = [(c[0] + t[0] * u * gross + n[0] * off, c[1] + t[1] * u * gross + n[1] * off, c[2] + v * gross) for u, v in pts2]
         mb.poly(pts, None, mat, n)
-        mb.poly(pts[::-1], None, "schild_rueck", (-n[0], -n[1], 0))
+        # Rueckseite 4 mm dahinter: deckungsgleich mit der Vorderseite flimmerte sie (rot statt grau)
+        mb.poly([(q[0] - n[0] * 0.004, q[1] - n[1] * 0.004, q[2]) for q in pts[::-1]], None, "schild_rueck",
+                (-n[0], -n[1], 0))
 
     rund = [(0.3 * math.cos(2 * math.pi * k / 24), 0.3 * math.sin(2 * math.pi * k / 24)) for k in range(24)]
     if schild in ("verbot", "gebot"):

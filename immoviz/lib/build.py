@@ -305,6 +305,33 @@ def contour_terrain(ctx, ground_wn):
     return z
 
 
+def smooth_terrain(ctx, ground_wn, radius=430.0, raster=1.0, sigma=3.0):
+    """Stetiges Gelaende aus Hoehenlinien (site.gelaende: glatt): Dreiecksnetz (TIN) ueber die Hoehenpunkte, leicht
+    geglaettet, bilinear. contour_terrain() springt, wo die zweitnaechste Hoehenstufe wechselt (Wimmergasse 22.11.2026:
+    43 cm an der Objektecke), und wurde je 2-m-Kachel konstant gesetzt: Stufen in Gehsteig und Parkstreifen."""
+    import numpy as np
+    from scipy.interpolate import LinearNDInterpolator, NearestNDInterpolator
+    from scipy.ndimage import gaussian_filter
+    P = np.array(ctx.get("contours") or [])
+    if len(P) < 10:
+        return None
+    g = np.arange(-radius, radius + raster / 2, raster)
+    X, Y = np.meshgrid(g, g, indexing="ij")
+    Z = LinearNDInterpolator(P[:, :2], P[:, 2] - ground_wn)(X, Y)
+    leer = np.isnan(Z)
+    if leer.any():
+        Z[leer] = NearestNDInterpolator(P[:, :2], P[:, 2] - ground_wn)(X[leer], Y[leer])
+    Z = gaussian_filter(Z, sigma / raster, mode="nearest")
+    n = len(g)
+
+    def z(x, y):
+        u, v = (x - g[0]) / raster, (y - g[0]) / raster
+        i, j = min(max(int(u), 0), n - 2), min(max(int(v), 0), n - 2)
+        a, b = min(max(u - i, 0.0), 1.0), min(max(v - j, 0.0), 1.0)
+        return float((Z[i, j] * (1 - a) + Z[i + 1, j] * a) * (1 - b) + (Z[i, j + 1] * (1 - a) + Z[i + 1, j + 1] * a) * b)
+    return z
+
+
 def shift_z(mb, fn):
     mb.verts = [(x, y, z + fn(x, y)) for x, y, z in mb.verts]
 
@@ -479,7 +506,15 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     # Gelaenderaster (20 m) im Nahbereich, darunter eine tiefe Fernebene
     g, R0 = 8.0, 200.0
     nn = int(R0 / g)
-    for i in range(-nn, nn):
+    linien = _boden_linien() if ((cfg or {}).get("site") or {}).get("gelaende") == "glatt" else None
+    if linien:      # dasselbe Raster wie die Bodenflaechen darueber, damit es nirgends durchstoesst
+        ls = [v for v in linien if abs(v) <= R0]
+        for x0, x1 in zip(ls, ls[1:]):
+            for y0, y1 in zip(ls, ls[1:]):
+                zr = -0.03 if max(abs(x0), abs(x1), abs(y0), abs(y1)) <= BODEN_FEIN else -0.10
+                q = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+                ground.poly([(x, y, zr) for x, y in q], q, "asphalt", (0, 0, 1))
+    for i in range(-nn, nn) if not linien else ():
         for j in range(-nn, nn):
             x0, y0 = i * g, j * g
             ground.poly([(x0, y0, -0.03), (x0 + g, y0, -0.03), (x0 + g, y0 + g, -0.03), (x0, y0 + g, -0.03)],
@@ -507,6 +542,8 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
             "Gehweg, Radweg": ("gehsteig", 0.0, 0.12), "Ruhender Verkehr": ((cfg or {}).get("street", {}).get("parking_material", "parkstreifen"), 0.004, 0.0),
             "Zebrastreifen": ("zebra", 0.008, 0.0), "Innenhof": ("hof", 0.0, 0.05),
             "Befestigte Fläche": ("gehsteig", 0.0, 0.05), "Sonstige Verkehrsfläche": ("gehsteig", 0.0, 0.1)}
+    if linien:                      # Gehsteigflaechen decken in der FMZK den ganzen Block: Innenhof 1 cm darueber
+        spec["Innenhof"] = ("hof", 0.0, 0.13)
     for s in ctx["surfaces"]:
         if s["layer"] not in spec or len(s["poly"]) < 3:
             continue
@@ -517,6 +554,11 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
         mat, z, h = spec[s["layer"]]
         if s["layer"] == "Ruhender Verkehr":
             mat = _streifen_material(cfg, cx, cy, mat, mats)
+        if linien:
+            regeln = [r for r in ((cfg or {}).get("street") or {}).get("belag") or [] if r.get("material") in mats] \
+                if s["layer"] in ("Gehsteig", "Gehweg, Radweg") else []
+            _boden_flaeche(ground, s["poly"], z, h, mat, linien, regeln)
+            continue
         teile = [(s["poly"], mat)]
         if s["layer"] in ("Gehsteig", "Gehweg, Radweg"):
             teile = _belag_teile(cfg, s["poly"], mat, mats)
@@ -573,6 +615,103 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     from .assets import moebel as MO
     MO.build_moebel(cfg, ctx, mats, coll, terrain)
     MO.build_menschen(cfg, mats, coll, terrain)
+
+
+BODEN_FEIN = 80.0      # m um das Objekt: Boden im 2-m-Raster am Gelaende, weiter aussen 8 m
+
+
+def _boden_linien(aussen=440.0):
+    """Rasterlinien (x und y gleich) fuer Bodenflaechen und Untergrund."""
+    n, m = int(BODEN_FEIN / 2), int((aussen - BODEN_FEIN) / 8)
+    grob = [BODEN_FEIN + 8.0 * k for k in range(1, m + 1)]
+    return [-v for v in grob[::-1]] + [2.0 * k for k in range(-n, n + 1)] + grob
+
+
+def _rand_teilen(poly, linien):
+    """Polygonrand an den Rasterlinien teilen: Nachbarflaechen bekommen auf gemeinsamen Kanten dieselben Punkte."""
+    import bisect
+    out = []
+    for k, (x1, y1) in enumerate(poly):
+        x2, y2 = poly[(k + 1) % len(poly)]
+        ts = set()
+        for a, b in ((x1, x2), (y1, y2)):
+            lo, hi = min(a, b), max(a, b)
+            if hi - lo > 1e-6:
+                for v in linien[bisect.bisect_right(linien, lo):bisect.bisect_left(linien, hi)]:
+                    ts.add((v - a) / (b - a))
+        out.append((x1, y1))
+        out += [(x1 + (x2 - x1) * t, y1 + (y2 - y1) * t) for t in sorted(ts) if 1e-4 < t < 1 - 1e-4]
+    return out
+
+
+def _innen_maske(P, poly):
+    """Punkte (n, 2) im Polygon (gerade/ungerade), vektorisiert."""
+    import numpy as np
+    q = np.array(poly)
+    r = np.roll(q, 1, axis=0)
+    drin = np.zeros(len(P), bool)
+    for (xi, yi), (xj, yj) in zip(q, r):
+        if yi == yj:
+            continue
+        m = (yi > P[:, 1]) != (yj > P[:, 1])
+        if m.any():
+            drin[m] ^= P[m, 0] < (xj - xi) * (P[m, 1] - yi) / (yj - yi) + xi
+    return drin
+
+
+def _boden_flaeche(mb, poly, z, h, mat, linien, regeln=()):
+    """Bodenflaeche im Raster vernetzt (Delaunay mit Randkanten), damit sie dem Gelaende folgt und Nachbarflaechen ohne
+    Stufe anschliessen. h > 0: Gehsteig mit Bordsteinwand. regeln: street.belag, Material je Dreieck nach Lage; die
+    Rechteckkanten sind Teil der Vernetzung. (Zerschneiden in Teilflaechen liess konkave Reste die Nachbarbucht
+    ueberdecken, Wimmergasse 22.11.2026.)"""
+    import bisect
+    import numpy as np
+    from mathutils import Vector
+    from mathutils.geometry import delaunay_2d_cdt
+    if K.polygon_area(poly) < 0:
+        poly = poly[::-1]
+    rand = _rand_teilen(poly, linien)
+    xs, ys = [p[0] for p in poly], [p[1] for p in poly]
+    lx = linien[bisect.bisect_left(linien, min(xs)):bisect.bisect_right(linien, max(xs))]
+    ly = linien[bisect.bisect_left(linien, min(ys)):bisect.bisect_right(linien, max(ys))]
+    pts = [Vector(p) for p in rand]
+    kanten = [(k, (k + 1) % len(rand)) for k in range(len(rand))]
+    for r in regeln:
+        x0, y0, x1, y1 = r["bereich"]
+        e = _rand_teilen([(x0, y0), (x1, y0), (x1, y1), (x0, y1)], linien)
+        if min(x0, x1) > max(xs) or max(x0, x1) < min(xs) or min(y0, y1) > max(ys) or max(y0, y1) < min(ys):
+            continue
+        n0 = len(pts)
+        pts += [Vector(p) for p in e]
+        kanten += [(n0 + k, n0 + (k + 1) % len(e)) for k in range(len(e))]
+    if lx and ly:
+        G = np.array([(x, y) for x in lx for y in ly])
+        pts += [Vector((float(a), float(b))) for a, b in G[_innen_maske(G, poly)]]
+    V, _e, F, *_ = delaunay_2d_cdt(pts, kanten, [], 0, 1e-5)
+    if not F:
+        return
+    C = np.array([(sum(V[i].x for i in f) / len(f), sum(V[i].y for i in f) / len(f)) for f in F])
+    top = z + h
+    for f, c, ok in zip(F, C, _innen_maske(C, poly)):
+        if not ok:
+            continue
+        m = mat
+        for r in regeln:
+            x0, y0, x1, y1 = r["bereich"]
+            if min(x0, x1) <= c[0] <= max(x0, x1) and min(y0, y1) <= c[1] <= max(y0, y1):
+                m = r["material"]
+                break
+        q = [(V[i].x, V[i].y) for i in f]
+        mb.poly([(x, y, top) for x, y in q], q, m, (0, 0, 1))
+    if h > 0:
+        lauf = 0.0
+        for (x1, y1), (x2, y2) in zip(rand, rand[1:] + rand[:1]):
+            L = math.hypot(x2 - x1, y2 - y1)
+            if L < 1e-4:
+                continue
+            mb.poly([(x1, y1, z), (x2, y2, z), (x2, y2, top), (x1, y1, top)],
+                    [(lauf, z), (lauf + L, z), (lauf + L, top), (lauf, top)], "randstein", (y2 - y1, -(x2 - x1), 0))
+            lauf += L
 
 
 def _streifen_material(cfg, x, y, mat, mats):
@@ -843,7 +982,8 @@ def build_scene(cfg, ctx):
         from . import neubau as NB
         NB.build(cfg, mats, hero_coll)
     if ctx:
-        raw = contour_terrain(ctx, cfg["site"].get("ground_wn", 0.0)) or \
+        glatt = cfg["site"].get("gelaende") == "glatt"
+        raw = (smooth_terrain if glatt else contour_terrain)(ctx, cfg["site"].get("ground_wn", 0.0)) or \
             fit_terrain(ctx, cfg["site"].get("ground_wn", 0.0), cfg["site"].get("terrain_anchors"))
 
         cache = {}
@@ -852,6 +992,8 @@ def build_scene(cfg, ctx):
             d = math.hypot(x, y)
             if d > r:
                 x, y = x * r / d, y * r / d
+            if glatt:
+                return raw(x, y)
             key = (round(x / 2.0), round(y / 2.0))
             if key not in cache:
                 cache[key] = raw(key[0] * 2.0, key[1] * 2.0)

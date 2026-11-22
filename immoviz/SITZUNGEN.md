@@ -43,7 +43,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Laufend
 
 - cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11.: Modell, Bibliotheken, Schutz und Mac-Auftrag fertig; wartet auf Mac-Render noma_terrassen_r10, danach Veredelung und Lieferung) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
-- mac-neu | seit 2026-11-22 18:55 | Modellfehler an der Kreuzung Wimmergasse beheben (Auftrag des Nutzers, runde8_begehung Ergebnis Punkt 4), danach 3 Kameras 4k neu | Bereich: immoviz/projects/wimmergasse-20/project.yaml (street, strassenmoebel, menschen, cameras), immoviz/lib/build.py (nur Boden der Umgebung), immoviz/lib/assets/moebel.py (nur `_zeichen()`), immoviz/lib/assets/strassenelemente.py, immoviz/auftraege/2026-11-19_runde8_begehung.md, renders/r8_kreuzung/, GPU
+- mac-neu | seit 2026-11-22 18:55 | Modellfehler an der Kreuzung Wimmergasse beheben (Auftrag des Nutzers, runde8_begehung Ergebnis Punkt 4), danach 3 Kameras 4k neu | Bereich: immoviz/projects/wimmergasse-20/project.yaml (street, strassenmoebel, menschen, cameras), immoviz/lib/build.py (nur Geländefunktion und Boden der Umgebung, Schalter `site.gelaende: glatt`), immoviz/lib/assets/moebel.py (nur `_zeichen()`), immoviz/lib/assets/strassenelemente.py, immoviz/auftraege/2026-11-19_runde8_begehung.md, renders/r8_kreuzung/, GPU
 
 ## Nachrichten
 
