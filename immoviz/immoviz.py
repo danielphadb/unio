@@ -212,7 +212,7 @@ def main():
                          "Bild); ki = Autos aus dem KI-Bild; beide = zwei Fassungen _modelle und _ki plus Vergleich")
     sz.add_argument("--ohne-vordergrund", action="store_true", help="KI-Personen und -Autos vor der Fassade nicht "
                                                                    "erhalten (alles Geschützte aus dem Render)")
-    sz.add_argument("--modus", choices=["voll", "toleranz"], default="voll",
+    sz.add_argument("--modus", choices=["voll", "toleranz", "ki_basis"], default="voll",
                     help="voll (Standard): ganzer Schutzbereich aus dem Render; toleranz: Schutzbereich in Bauteile "
                          "zerlegen (Fenster, Gelaenderfeld, Leuchte, Gesims, Dach, Fassadenfeld), KI behalten, wo sie "
                          "geometrisch passt (lib/kompositing.py TOL), nur abweichende Bauteile aus dem Render; "

@@ -636,8 +636,10 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
                     toleranz: dict | None = None) -> dict:
     """modus 'voll' (Standard): ganzer Schutzbereich aus dem Render. modus 'toleranz': nur Komponenten, deren KI
     ausserhalb der Toleranz liegt (TOL, `toleranz` ueberschreibt einzelne Werte), kommen aus dem Render."""
-    if modus not in ("voll", "toleranz"):
-        raise ValueError(f"modus {modus!r}: erlaubt voll, toleranz")
+    if modus not in ("voll", "toleranz", "ki_basis"):
+        raise ValueError(f"modus {modus!r}: erlaubt voll, toleranz, ki_basis")
+    if modus == "ki_basis":
+        toleranz = {**KI_BASIS, **(toleranz or {})}
     render_p, ki_p = Path(render_p), Path(ki_p)
     ebn = EB.laden(ebenen_ordner)
     R = bild_laden(render_p)
@@ -659,7 +661,7 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     al = ausrichten_ki(R, K, ausricht_maske(masken, hart), modell)
     Kw, gueltig = warp(K, al["H"], (W, H))
     fein_info = None
-    if modus == "toleranz":
+    if modus in ("toleranz", "ki_basis"):
         Kw, fein_info = fein_ausrichten(R, Kw, ndi.binary_dilation(hart, iterations=2), toleranz)
     B_lab, K_lab = rgb_zu_lab(R), rgb_zu_lab(Kw)
     gruppen = _gruppen(masken, schutz)
@@ -689,9 +691,17 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     schutz_hart = hart & ~F
     alpha = EB.weiche_kante(schutz_hart, kante)
     tol_daten = None
-    if modus == "toleranz":
+    if modus in ("toleranz", "ki_basis"):
         a_reset, t_lab, t_status, t_komps, t_zus = toleranz_auswerten(R, Kw, T_lab, K_lab, masken, schutz_hart,
                                                                        gueltig, ebn, toleranz)
+        if modus == "ki_basis":           # strenge Klassen immer aus dem Render
+            streng = np.zeros((H, W), bool)
+            for k_ in KI_BASIS_STRENG:
+                if k_ in schutz:
+                    streng |= masken.get(k_, False)
+            a_reset = np.maximum(a_reset, EB.weiche_kante(streng & schutz_hart, kante))
+            t_zus["streng_klassen"] = [k_ for k_ in KI_BASIS_STRENG if k_ in schutz]
+            t_zus["streng_prozent_bild"] = round(100 * float((streng & schutz_hart).mean()), 2)
         alpha = np.minimum(alpha, a_reset)
         tol_daten = (t_lab, t_status, t_komps, t_zus)
         # Farbabgleich neu, feine Statistik jetzt an der Grenze zur behaltenen KI (sonst Helligkeitsstufen an
@@ -703,6 +713,9 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
                 T2[Z] = T_lab[Z]
             T_lab = T2
             T = lab_zu_rgb(T_lab)
+    if modus == "ki_basis":               # Render-Teile mit KI-Feinstruktur (nicht im Glas: Spiegelungen der KI)
+        gew = np.clip(alpha, 0, 1) * (~masken.get("fenster_glas", np.zeros((H, W), bool))) * gueltig
+        T = lab_zu_rgb(detail_uebertragen(T_lab, K_lab, gew.astype(np.float32)))
     a = alpha[..., None]
     out = a * T + (1 - a) * Kw              # Rand ohne KI-Deckung: Kw ist dort gespiegelt fortgesetzt (BORDER_REFLECT)
 
@@ -760,7 +773,7 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     if fein_info is not None:
         kz["ausrichtung"]["fein"] = fein_info
     if aus is None:
-        aus = ki_p.with_name(ki_p.stem + ("_toleranz.jpg" if modus == "toleranz" else "_schutz.jpg"))
+        aus = ki_p.with_name(ki_p.stem + {"toleranz": "_toleranz.jpg", "ki_basis": "_kibasis.jpg"}.get(modus, "_schutz.jpg"))
     aus = Path(aus)
     bild_speichern(out, aus)
     kz["ergebnis"] = str(aus)
@@ -1029,6 +1042,34 @@ TOL = {"kantenabstand_px": 1.5,     # mittlerer Abstand Render-Kante -> naechste
        "fein_max_px": 10.0,         # groessere Flussvektoren gelten als Fehlzuordnung
        "fein_arbeit": 0.5}          # Flussberechnung auf halber Aufloesung
 TYP_FEIN = ("fenster", "glas", "gelaenderfeld", "leuchte", "moebel", "auto")
+# Modus ki_basis (Noma Runde 10, Nutzer 22.11.2026: "KI-Look und Leben nutzen, ohne dass Waende, Umgebung und
+# architektonische Genauigkeit verloren gehen"): das ausgerichtete KI-Bild ist die Basis. Bauteile in der Toleranz
+# bleiben KI (etwas weiter als `toleranz`, weil Moebel und Pflanzen im Render jetzt echte Modelle sind und die KI
+# sie nur verfeinert); abweichende Bauteile kommen aus dem Render. STRENG: immer aus dem Render (Glas mit dem
+# Innenraum dahinter, Innenraum-Moebel, Nachbarhaeuser). Alles, was aus dem Render kommt, bekommt Licht und Farbe
+# der KI (farbabgleich) und deren Feinstruktur ohne Kanten (detail_uebertragen), damit es nicht als CG-Fleck wirkt.
+KI_BASIS = {"kantenabstand_px": 3.0, "f1_min": 0.75, "toleranz_px": 3.0, "versatz_px": 3.0, "flach_praezision": 0.65}
+KI_BASIS_STRENG = ["fenster_glas", "innenraum", "nachbarn"]
+DETAIL = {"sigma_px": 1.6, "kante": 0.06, "staerke": 0.85, "max_dL": 9.0}
+
+
+def detail_uebertragen(T_lab: np.ndarray, K_lab: np.ndarray, gewicht: np.ndarray, p: dict | None = None) -> np.ndarray:
+    """Feinstruktur (Putzkorn, Holzmaserung, Blattschatten-Kleinteiligkeit) der KI in die Helligkeit von T uebertragen,
+    ohne deren Kanten: Hochpass der KI-Helligkeit, gedaempft wo KI oder Render eine Kante haben (Geometrie bleibt die
+    des Renders). gewicht 0..1 (1 = voll uebertragen). sigma_px in 4k-Pixeln."""
+    p = {**DETAIL, **(p or {})}
+    H, W = gewicht.shape
+    s = max(W / 3840.0, 0.25)
+    sig = p["sigma_px"] * s
+    LK = K_lab[..., 0]
+    hp = LK - ndi.gaussian_filter(LK, sig)
+    gx, gy = ndi.sobel(ndi.gaussian_filter(LK, sig), 1), ndi.sobel(ndi.gaussian_filter(LK, sig), 0)
+    gT = np.hypot(ndi.sobel(ndi.gaussian_filter(T_lab[..., 0], sig), 1), ndi.sobel(ndi.gaussian_filter(T_lab[..., 0], sig), 0))
+    g = np.maximum(np.hypot(gx, gy), gT) / 100.0
+    ruhig = np.exp(-(g / p["kante"]) ** 2)
+    out = T_lab.copy()
+    out[..., 0] = T_lab[..., 0] + np.clip(hp, -p["max_dL"], p["max_dL"]) * ruhig * gewicht * p["staerke"]
+    return out
 TYP_FARBE = {"behalten": (0.15, 0.8, 0.25), "zurueck": (0.9, 0.12, 0.1), "glas_zurueck": (1.0, 0.55, 0.0)}
 
 
@@ -1574,7 +1615,7 @@ def autos_vergleich(a_pfad, b_pfad, ziel, titel=("Autos: Blender-Modelle", "Auto
     return str(ziel)
 
 
-F1_GRENZE = {"voll": 0.95, "toleranz": 0.90}    # Exit 1 darunter (Toleranz: KI-Kanten bleiben, je Bauteil geprueft)
+F1_GRENZE = {"voll": 0.95, "toleranz": 0.90, "ki_basis": 0.85}    # Exit 1 darunter (Toleranz: KI-Kanten bleiben, je Bauteil geprueft)
 
 
 def main_cli(render, ki, ebenen, aus=None, klassen=None, ohne=None, farbe=1.0, modell="homographie",
