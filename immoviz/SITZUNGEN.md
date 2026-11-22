@@ -43,6 +43,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Laufend
 
 - cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11.: Modell, Bibliotheken, Schutz und Mac-Auftrag fertig; wartet auf Mac-Render noma_terrassen_r10, danach Veredelung und Lieferung) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
+- mac-neu | seit 2026-11-22 16:20 | Auftrag noma_terrassen_r10 (Modelle laden, Probe, 4k mit Ebenen) | Bereich: immoviz/auftraege/2026-11-22_noma_terrassen_r10.md, immoviz/projects/noma-shg13/renders/r10_probe/, immoviz/projects/noma-shg13/renders/r10_terrassen/, immoviz/assets/modelle/ (lokal), GPU
 
 ## Nachrichten
 
