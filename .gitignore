@@ -7,7 +7,8 @@ immoviz/projects/*/renders/*.blend1
 __pycache__/
 immoviz/projects/*/renders/**/*.png
 immoviz/projects/*/renders/*.png
-immoviz/projects/*/quellen/*.pdf
+immoviz/projects/*/quellen/*
+!immoviz/projects/*/quellen/README.md
 immoviz/projects/*/renders/streetview/
 immoviz/projects/*/data/plan_cache/
 immoviz/projects/*/data/ortho_cache/

@@ -51,6 +51,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-22 cloud-alt: `.gitignore`: `projects/*/quellen/` jetzt ganz ignoriert (außer README.md), damit Unterordner wie `quellen/vorlagen/` und `quellen/drive_archiv/` aus dem Übergabepaket nie ins öffentliche Repo kommen; Übergabe-ZIPs für cloud-neu an den Nutzer geliefert (Zielpfade siehe `UEBERGABE.md` 8).
 - 2026-11-22 cloud-alt: `immoviz/UEBERGABE.md` geschrieben (Stand beider Projekte, Entscheidungen mit Datum, offene Fragen, bekannte Fehler, verworfene Ansätze, Aufträge, Zugänge, lokale Dateien); Nachricht von cloud-neu erledigt; keine ungepushte Arbeit; offen: Freigabe des Nutzers für den Noma-Plan vom 21.11., `ki_lokal_test` auf dem Mac; Commits: UEBERGABE.md.
 - 2026-11-22 mac-alt: Protokoll übernommen (Nachricht von cloud-neu erledigt). Letzte Arbeiten vor dem
   Mehrsitzungsbetrieb: Noma-Dächer nach Apple (Runde 8), Hof und Nachbarn nach Fotos vom 20.11. (Runde 9,
