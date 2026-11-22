@@ -110,7 +110,7 @@
  "sichtbar": [
   {
    "objekt": "nb_top3_masse",
-   "anteil_prozent": 27.65,
+   "anteil_prozent": 27.36,
    "collections": [
     "Objekt"
    ],
@@ -119,7 +119,7 @@
   },
   {
    "objekt": "ausstattung_top3_masse",
-   "anteil_prozent": 14.46,
+   "anteil_prozent": 14.6,
    "collections": [
     "Objekt"
    ],
@@ -146,7 +146,7 @@
   },
   {
    "objekt": "nb_hof_masse",
-   "anteil_prozent": 9.81,
+   "anteil_prozent": 9.84,
    "collections": [
     "Objekt"
    ],
@@ -163,7 +163,7 @@
   },
   {
    "objekt": "umgebung_gebaeude",
-   "anteil_prozent": 4.62,
+   "anteil_prozent": 4.55,
    "collections": [
     "Umgebung"
    ],
@@ -188,7 +188,7 @@
   },
   {
    "objekt": "nb_hof_gelaender",
-   "anteil_prozent": 2.33,
+   "anteil_prozent": 2.29,
    "collections": [
     "Objekt"
    ],
@@ -205,8 +205,17 @@
    "herkunft": "ausstattung"
   },
   {
+   "objekt": "ausstattung_top3_00__vegetation__olivenbaum_1",
+   "anteil_prozent": 1.34,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
    "objekt": "nb_umgebung_masse",
-   "anteil_prozent": 1.35,
+   "anteil_prozent": 1.32,
    "collections": [
     "Objekt"
    ],
@@ -214,8 +223,8 @@
    "herkunft": "nachbarn"
   },
   {
-   "objekt": "ausstattung_top3_00__vegetation__olivenbaum_1",
-   "anteil_prozent": 1.34,
+   "objekt": "ausstattung_top3_08__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 0.98,
    "collections": [
     "Objekt"
    ],
@@ -239,8 +248,8 @@
    "herkunft": "umgebung"
   },
   {
-   "objekt": "ausstattung_top3_08__ausstattung__outdoor_sessel_1",
-   "anteil_prozent": 0.73,
+   "objekt": "ausstattung_top3_08__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 0.69,
    "collections": [
     "Objekt"
    ],
@@ -257,8 +266,8 @@
    "herkunft": "plan"
   },
   {
-   "objekt": "ausstattung_top3_08__ausstattung__outdoor_sessel_3",
-   "anteil_prozent": 0.57,
+   "objekt": "ausstattung_top3_07__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 0.48,
    "collections": [
     "Objekt"
    ],
@@ -283,22 +292,22 @@
    "herkunft": "umgebung"
   },
   {
-   "objekt": "ausstattung_top3_07__ausstattung__outdoor_sessel_1",
-   "anteil_prozent": 0.4,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top3",
-   "herkunft": "ausstattung"
-  },
-  {
    "objekt": "nb_umgebung_gruen",
-   "anteil_prozent": 0.39,
+   "anteil_prozent": 0.38,
    "collections": [
     "Objekt"
    ],
    "gruppe": "nb_umgebung",
    "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "ausstattung_top3_07__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 0.38,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
   },
   {
    "objekt": "top03_terrasse_rahmen",
@@ -310,26 +319,8 @@
    "quelle": "quellen/VP_Top03.pdf (vp_top3_aussen)"
   },
   {
-   "objekt": "ausstattung_top3_05__ausstattung__outdoor_sofa_10",
+   "objekt": "ausstattung_top3_05__ausstattung__lounge_sofa_2",
    "anteil_prozent": 0.33,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top3",
-   "herkunft": "ausstattung"
-  },
-  {
-   "objekt": "ausstattung_top3_00__vegetation__olivenbaum_0",
-   "anteil_prozent": 0.29,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top3",
-   "herkunft": "ausstattung"
-  },
-  {
-   "objekt": "ausstattung_top3_07__ausstattung__outdoor_sessel_3",
-   "anteil_prozent": 0.29,
    "collections": [
     "Objekt"
    ],
@@ -344,6 +335,15 @@
    ],
    "gruppe": "nb_umgebung_005362",
    "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "ausstattung_top3_00__vegetation__olivenbaum_0",
+   "anteil_prozent": 0.28,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
   },
   {
    "objekt": "nachbar_hof_west_005363_b_glas",
@@ -437,15 +437,6 @@
    ],
    "gruppe": "nb_shg",
    "herkunft": "plan"
-  },
-  {
-   "objekt": "ausstattung_top3_05__ausstattung__outdoor_sofa_11",
-   "anteil_prozent": 0.2,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top3",
-   "herkunft": "ausstattung"
   },
   {
    "objekt": "top03_terrasse_03s0__innenraum__stuhl_boucle_1",

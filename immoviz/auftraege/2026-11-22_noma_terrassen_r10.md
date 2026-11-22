@@ -162,3 +162,12 @@ Nächster Schritt: cloud-neu korrigiert die Flächenprüfung (oder gibt sie frei
    `esstuhl_aussen`). Während eines Renders wird hier nicht gepullt, deshalb erst danach gesehen. Alle 8 Motive zeigen
    Terrassenmöbel und müssen neu: `modelle-laden`, Probe, 4k (zusammen rund 1 h 10 min). Wände, Innenraum, Pflanzen und Planbeleg
    sind davon unabhängig geprüft.
+
+### Neustart 2 (mac-neu, 22.11.2026 ab 22:30)
+1. `modelle-laden`: rc 0, vier Möbelmodelle neu (7,1 / 9,5 / 9,1 / 0,6 MB), 20 vorhanden. Alte 4k-Fassung liegt in `r10_terrassen_alt/`.
+2. Probe 960 x 640: **8 Kameras Planbeleg 0 Fehler**, 0 Hüllenpunkte außerhalb, Fläche Top 3 63,64 und Top 4 63,58 gegen 62,80 m2,
+   233 Autos 0 Befunde. Außen 289 s, Top 3 197 s, Top 4 203 s.
+3. Sichtprüfung Probe: Teakmöbel stehen auf dem Boden, nichts schwebt oder ragt in Wände; Pergola matt, Tröge offen mit Erde, Raum
+   hinter der HST bei Tag lesbar, Wand salbei. Hinweise zur Optik, kein Abbruchgrund: Sofapolster im Bild fast weiß (RGB rund
+   242/237/231) statt hellgrau #C8C6C1; Esstisch Top 4 rötlich wie Mahagoni; Stuhlgeflecht Top 4 fast schwarz; drei Holztöne
+   nebeneinander (Pergola hell, Couchtisch orange, Teak rotbraun). Küche weiter nicht im Bild.

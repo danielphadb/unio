@@ -5,33 +5,33 @@ Fehler: 0
 
 | Objekt | Anteil % | Herkunft | Gruppe/Quelle |
 |---|---|---|---|
-| nb_top3_masse | 27.65 | plan | nb_top3 |
-| ausstattung_top3_masse | 14.46 | ausstattung | ausstattung_top3 |
+| nb_top3_masse | 27.36 | plan | nb_top3 |
+| ausstattung_top3_masse | 14.6 | ausstattung | ausstattung_top3 |
 | top03_terrasse_glas | 13.8 | innen | quellen/VP_Top03.pdf (vp_top3_aussen) |
 | top03_terrasse_waende | 12.11 | innen | quellen/VP_Top03.pdf (vp_top3_aussen) |
-| nb_hof_masse | 9.81 | plan | nb_hof |
+| nb_hof_masse | 9.84 | plan | nb_hof |
 | nachbar_hof_west_005363_b | 4.82 | umgebung |  |
-| umgebung_gebaeude | 4.62 | umgebung |  |
+| umgebung_gebaeude | 4.55 | umgebung |  |
 | nb_top3_rahmen | 3.52 | plan | nb_top3 |
 | nachbar_hof_west_005363 | 2.43 | umgebung |  |
-| nb_hof_gelaender | 2.33 | plan | nb_hof |
+| nb_hof_gelaender | 2.29 | plan | nb_hof |
 | ausstattung_top3_06__ausstattung__couchtisch_0 | 1.41 | ausstattung | ausstattung_top3 |
-| nb_umgebung_masse | 1.35 | nachbarn | nb_umgebung |
 | ausstattung_top3_00__vegetation__olivenbaum_1 | 1.34 | ausstattung | ausstattung_top3 |
+| nb_umgebung_masse | 1.32 | nachbarn | nb_umgebung |
+| ausstattung_top3_08__ausstattung__lounge_sessel_1 | 0.98 | ausstattung | ausstattung_top3 |
 | nachbar_hof_ost_005362_fluegel | 0.81 | umgebung |  |
 | umgebung_daecher | 0.79 | umgebung |  |
-| ausstattung_top3_08__ausstattung__outdoor_sessel_1 | 0.73 | ausstattung | ausstattung_top3 |
+| ausstattung_top3_08__ausstattung__lounge_sessel_0 | 0.69 | ausstattung | ausstattung_top3 |
 | nb_shg_masse | 0.63 | plan | nb_shg |
-| ausstattung_top3_08__ausstattung__outdoor_sessel_3 | 0.57 | ausstattung | ausstattung_top3 |
+| ausstattung_top3_07__ausstattung__lounge_sessel_1 | 0.48 | ausstattung | ausstattung_top3 |
 | nb_umgebung_005362_gelaender | 0.46 | nachbarn | nb_umgebung_005362 |
 | nachbar_hof_nord_005362_ost | 0.41 | umgebung |  |
-| ausstattung_top3_07__ausstattung__outdoor_sessel_1 | 0.4 | ausstattung | ausstattung_top3 |
-| nb_umgebung_gruen | 0.39 | nachbarn | nb_umgebung |
+| nb_umgebung_gruen | 0.38 | nachbarn | nb_umgebung |
+| ausstattung_top3_07__ausstattung__lounge_sessel_0 | 0.38 | ausstattung | ausstattung_top3 |
 | top03_terrasse_rahmen | 0.37 | innen | quellen/VP_Top03.pdf (vp_top3_aussen) |
-| ausstattung_top3_05__ausstattung__outdoor_sofa_10 | 0.33 | ausstattung | ausstattung_top3 |
-| ausstattung_top3_00__vegetation__olivenbaum_0 | 0.29 | ausstattung | ausstattung_top3 |
-| ausstattung_top3_07__ausstattung__outdoor_sessel_3 | 0.29 | ausstattung | ausstattung_top3 |
+| ausstattung_top3_05__ausstattung__lounge_sofa_2 | 0.33 | ausstattung | ausstattung_top3 |
 | nb_umgebung_005362_masse | 0.28 | nachbarn | nb_umgebung_005362 |
+| ausstattung_top3_00__vegetation__olivenbaum_0 | 0.28 | ausstattung | ausstattung_top3 |
 | nachbar_hof_west_005363_b_glas | 0.26 | umgebung |  |
 | nachbar_hof_west_005363_b_innen | 0.26 | umgebung |  |
 | top03_terrasse_03__innenraum__esstisch_rund_0 | 0.26 | innen | VP Top 3 (Moeblierung Kueche/WZ) |
@@ -43,7 +43,6 @@ Fehler: 0
 | nachbar_hof_nord_005362_mitte | 0.22 | umgebung |  |
 | umgebung_boden | 0.21 | umgebung |  |
 | nb_shg_glas | 0.2 | plan | nb_shg |
-| ausstattung_top3_05__ausstattung__outdoor_sofa_11 | 0.2 | ausstattung | ausstattung_top3 |
 | top03_terrasse_03s0__innenraum__stuhl_boucle_1 | 0.19 | innen | VP Top 3 (Moeblierung Kueche/WZ) |
 | top03_terrasse_02__innenraum__sideboard_0 | 0.17 | innen | VP Top 3 (Moeblierung Kueche/WZ) |
 | nachbar_hof_nord_005362 | 0.15 | umgebung |  |

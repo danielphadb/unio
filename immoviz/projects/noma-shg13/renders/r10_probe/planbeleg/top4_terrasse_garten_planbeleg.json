@@ -20,7 +20,7 @@
   },
   {
    "objekt": "nb_hof_masse",
-   "anteil_prozent": 16.0,
+   "anteil_prozent": 15.52,
    "collections": [
     "Objekt"
    ],
@@ -29,7 +29,7 @@
   },
   {
    "objekt": "nb_top4a_masse",
-   "anteil_prozent": 15.06,
+   "anteil_prozent": 15.1,
    "collections": [
     "Objekt"
    ],
@@ -47,7 +47,7 @@
   },
   {
    "objekt": "ausstattung_top4_masse",
-   "anteil_prozent": 12.84,
+   "anteil_prozent": 12.86,
    "collections": [
     "Objekt"
    ],
@@ -107,8 +107,8 @@
    "herkunft": "nachbarn"
   },
   {
-   "objekt": "ausstattung_top4_14__ausstattung__outdoor_tisch_0",
-   "anteil_prozent": 0.96,
+   "objekt": "ausstattung_top4_14__ausstattung__esstisch_aussen_0",
+   "anteil_prozent": 1.02,
    "collections": [
     "Objekt"
    ],
@@ -125,15 +125,6 @@
    "herkunft": "nachbarn"
   },
   {
-   "objekt": "ausstattung_top4_17__ausstattung__outdoor_stuhl_0",
-   "anteil_prozent": 0.87,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top4",
-   "herkunft": "ausstattung"
-  },
-  {
    "objekt": "nb_umgebung_005364_gelaender",
    "anteil_prozent": 0.8,
    "collections": [
@@ -143,8 +134,8 @@
    "herkunft": "nachbarn"
   },
   {
-   "objekt": "ausstattung_top4_10__vegetation__efeu_wand_3",
-   "anteil_prozent": 0.74,
+   "objekt": "ausstattung_top4_14__ausstattung__esstisch_aussen_2",
+   "anteil_prozent": 0.76,
    "collections": [
     "Objekt"
    ],
@@ -160,8 +151,8 @@
    "herkunft": "umgebung"
   },
   {
-   "objekt": "ausstattung_top4_18__ausstattung__outdoor_stuhl_0",
-   "anteil_prozent": 0.69,
+   "objekt": "ausstattung_top4_10__vegetation__efeu_wand_3",
+   "anteil_prozent": 0.71,
    "collections": [
     "Objekt"
    ],
@@ -185,8 +176,17 @@
    "herkunft": "umgebung"
   },
   {
+   "objekt": "ausstattung_top4_17__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.62,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
    "objekt": "ausstattung_top4_10__vegetation__efeu_wand_0",
-   "anteil_prozent": 0.56,
+   "anteil_prozent": 0.52,
    "collections": [
     "Objekt"
    ],
@@ -200,6 +200,15 @@
     "Umgebung"
    ],
    "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top4_18__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.46,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
   },
   {
    "objekt": "nachbar_hof_west_005363_glas",
@@ -218,17 +227,8 @@
    "herkunft": "umgebung"
   },
   {
-   "objekt": "nb_umgebung_masse",
-   "anteil_prozent": 0.42,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "nb_umgebung",
-   "herkunft": "nachbarn"
-  },
-  {
    "objekt": "ausstattung_top4_10__vegetation__efeu_wand_2",
-   "anteil_prozent": 0.41,
+   "anteil_prozent": 0.4,
    "collections": [
     "Objekt"
    ],
@@ -237,7 +237,7 @@
   },
   {
    "objekt": "nb_hof_gelaender",
-   "anteil_prozent": 0.38,
+   "anteil_prozent": 0.35,
    "collections": [
     "Objekt"
    ],
@@ -245,8 +245,17 @@
    "herkunft": "plan"
   },
   {
+   "objekt": "nb_umgebung_masse",
+   "anteil_prozent": 0.34,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung",
+   "herkunft": "nachbarn"
+  },
+  {
    "objekt": "nb_umgebung_gruen",
-   "anteil_prozent": 0.32,
+   "anteil_prozent": 0.31,
    "collections": [
     "Objekt"
    ],
@@ -255,24 +264,6 @@
   },
   {
    "objekt": "ausstattung_top4_09__vegetation__olivenbaum_0",
-   "anteil_prozent": 0.31,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top4",
-   "herkunft": "ausstattung"
-  },
-  {
-   "objekt": "ausstattung_top4_16__ausstattung__outdoor_stuhl_0",
-   "anteil_prozent": 0.29,
-   "collections": [
-    "Objekt"
-   ],
-   "gruppe": "ausstattung_top4",
-   "herkunft": "ausstattung"
-  },
-  {
-   "objekt": "ausstattung_top4_15__ausstattung__outdoor_stuhl_0",
    "anteil_prozent": 0.29,
    "collections": [
     "Objekt"
@@ -289,8 +280,8 @@
    "herkunft": "umgebung"
   },
   {
-   "objekt": "ausstattung_top4_14__ausstattung__outdoor_tisch_4",
-   "anteil_prozent": 0.23,
+   "objekt": "ausstattung_top4_15__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.26,
    "collections": [
     "Objekt"
    ],
@@ -298,8 +289,8 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "ausstattung_top4_14__ausstattung__outdoor_tisch_3",
-   "anteil_prozent": 0.18,
+   "objekt": "ausstattung_top4_17__ausstattung__esstuhl_aussen_0",
+   "anteil_prozent": 0.26,
    "collections": [
     "Objekt"
    ],
@@ -307,12 +298,22 @@
    "herkunft": "ausstattung"
   },
   {
-   "objekt": "umgebung_boden",
-   "anteil_prozent": 0.17,
+   "objekt": "ausstattung_top4_14__ausstattung__esstisch_aussen_1",
+   "anteil_prozent": 0.25,
    "collections": [
-    "Umgebung"
+    "Objekt"
    ],
-   "herkunft": "umgebung"
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_16__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.16,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
   },
   {
    "objekt": "nachbar_hof_sued_005387",
@@ -323,7 +324,33 @@
    "herkunft": "umgebung"
   },
   {
+   "objekt": "ausstattung_top4_18__ausstattung__esstuhl_aussen_0",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
    "objekt": "nachbar_hof_west_005364_rahmen",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top4_17__ausstattung__esstuhl_aussen_3",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "umgebung_boden",
    "anteil_prozent": 0.13,
    "collections": [
     "Umgebung"
@@ -338,6 +365,24 @@
    ],
    "gruppe": "nb_umgebung_005364",
    "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "ausstattung_top4_18__ausstattung__esstuhl_aussen_3",
+   "anteil_prozent": 0.08,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top4_16__ausstattung__esstuhl_aussen_0",
+   "anteil_prozent": 0.08,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top4",
+   "herkunft": "ausstattung"
   },
   {
    "objekt": "nb_umgebung_005364_rahmen",
