@@ -58,6 +58,11 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-22 cloud-neu (Zwischenstand, Aufgabe laeuft weiter): Noma Runde 10 veredelt, Modus `ki_verzogen` (gpt_image_2_6 4k,
+  nur Render als Bild 1, keine Stilreferenzen; KI-Pixel unveraendert, Glas mit Innenraum aus dem Render). Endbilder
+  `renders/higgsfield/*_r10_final.jpg`, Pruefbilder `r10_pruefung/`, staging.json `runde_10`. Moebel per Prompt als Teak
+  gezeichnet (Neurender zurueckgestellt). 61 Credits fuer 8 Bilder, heute gesamt 98,75 (Tests eingerechnet). Neue Umgebung
+  `unio` mit Higgsfield-, BlenderKit- und Poly-Haven-Hosts. Offen: Abnahme durch den Nutzer, Neurender mit Teakmodellen.
 - 2026-11-22 mac-neu: `noma_terrassen_r10` gerendert, aber Möbel überholt, Status Problem (Probe und 8 Bilder 4k mit Ebenen, 51 min, Planbeleg 0 Fehler,
   Fläche Top 3/4 63,6 gegen 62,8 m2). Keine Higgsfield-Credits. Neurender mit den Teakmöbeln (cddb7cf) vom Nutzer vorerst zurückgestellt.
 - 2026-11-22 mac-neu: Modellfehler an der Kreuzung Wimmergasse behoben (Gelände, Bodenvernetzung, Schilder, Beet, `eg_lokal`),
