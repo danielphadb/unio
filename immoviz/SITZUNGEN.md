@@ -42,7 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-(niemand)
+- cloud-alt | seit 2026-11-22 12:00 | UEBERGABE.md schreiben | Bereich: immoviz/UEBERGABE.md
 
 ## Nachrichten
 
