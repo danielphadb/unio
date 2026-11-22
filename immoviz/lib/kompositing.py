@@ -639,7 +639,10 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     if modus not in ("voll", "toleranz", "ki_basis", "ki_verzogen"):
         raise ValueError(f"modus {modus!r}: erlaubt voll, toleranz, ki_basis, ki_verzogen")
     if modus == "ki_verzogen":
-        toleranz = {"fein_max_px": 16.0, **(toleranz or {})}
+        # Standard: nur ganzes Bild ausrichten (Homographie, ein Umrechnungsschritt, scharf). Das elastische Verziehen
+        # verbog gerade Linien und machte das Bild weich (Nutzer 22.11.2026); der lokale Versatz wird nur gemessen
+        # (Abweichungskarte). verziehen: true schaltet es wieder ein.
+        toleranz = {"fein_max_px": 16.0, "verziehen": False, **(toleranz or {})}
     if modus == "ki_basis":
         toleranz = {**KI_BASIS, **(toleranz or {})}
     render_p, ki_p = Path(render_p), Path(ki_p)
@@ -663,8 +666,15 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     al = ausrichten_ki(R, K, ausricht_maske(masken, hart), modell)
     Kw, gueltig = warp(K, al["H"], (W, H))
     fein_info = None
+    fluss = None
     if modus in ("toleranz", "ki_basis", "ki_verzogen"):
-        Kw, fein_info = fein_ausrichten(R, Kw, ndi.binary_dilation(hart, iterations=2), toleranz)
+        Kf, fein_info = fein_ausrichten(R, Kw, ndi.binary_dilation(hart, iterations=2), toleranz)
+        if modus == "ki_verzogen" and not toleranz.get("verziehen"):
+            fluss = fein_info.get("_fluss_4k")                  # nur Messung; Bild bleibt scharf
+            fein_info = {**fein_info, "angewendet": False}
+        else:
+            Kw = Kf
+        fein_info.pop("_fluss_4k", None)
     B_lab, K_lab = rgb_zu_lab(R), rgb_zu_lab(Kw)
     gruppen = _gruppen(masken, schutz)
     F, objekte, D = np.zeros((H, W), bool), [], None
@@ -785,7 +795,18 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     if aus is None:
         aus = ki_p.with_name(ki_p.stem + {"toleranz": "_toleranz.jpg", "ki_basis": "_kibasis.jpg", "ki_verzogen": "_kiverzogen.jpg"}.get(modus, "_schutz.jpg"))
     aus = Path(aus)
-    bild_speichern(out, aus)
+    if modus == "ki_verzogen" and not toleranz.get("verziehen"):
+        # Endbild im Raster des KI-Bildes: KI-Pixel unveraendert (keine Umrechnung, volle Schaerfe), nur die strengen
+        # Bereiche (Glas mit Innenraum) aus dem Render mit H^-1 in das KI-Bild eingesetzt
+        import cv2
+        Hi = np.linalg.inv(al["H"])
+        kh, kw = K.shape[:2]
+        a_k = cv2.warpPerspective(alpha.astype(np.float32), Hi, (kw, kh), flags=cv2.INTER_LINEAR, borderValue=0)
+        T_k = cv2.warpPerspective(T.astype(np.float32), Hi, (kw, kh), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
+        bild_speichern(np.clip(a_k[..., None] * T_k + (1 - a_k[..., None]) * K, 0, 1), aus)
+        kz["ergebnis_raster"] = f"KI-Bild {kw} x {kh} (Pixel unveraendert ausser Glas/Innenraum)"
+    else:
+        bild_speichern(out, aus)
     kz["ergebnis"] = str(aus)
     if tol_daten is not None:
         t_lab, t_status, t_komps, t_zus = tol_daten
@@ -800,6 +821,13 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     if pruefbild:
         kz["pruefbild"] = str(_pruefbild(R, Kw, out, alpha, kz, aus.with_name(aus.stem + "_pruefung.jpg"), F))
         kz["pruefbild_kanten"] = str(render_kanten_pruefbild(R, out, aus.with_name(aus.stem + "_kanten.jpg")))
+        if fluss is not None:         # Abweichungskarte: lokaler Versatz KI gegen Render im Schutzbereich (4k-Pixel)
+            m5 = (fluss > ABWEICHUNG_PX) & hart & gueltig
+            kz["abweichung"] = {"grenze_4k_px": ABWEICHUNG_PX,
+                                "anteil_schutz_prozent": round(100 * float(m5.sum()) / max(1, int(hart.sum())), 2),
+                                "p90_4k_px": round(float(np.percentile(fluss[hart & gueltig], 90)), 2) if (hart & gueltig).any() else None}
+            kz["pruefbild_abweichung"] = str(bild_speichern(maske_ueberlagern(out, m5.astype(np.float32), (1.0, 0.1, 0.1), 0.55),
+                                                            aus.with_name(aus.stem + "_abweichung.jpg"), 90))
     aus.with_name(aus.stem + ".json").write_text(json.dumps(kz, ensure_ascii=False, indent=1))
     kz["json"] = str(aus.with_name(aus.stem + ".json"))
     return kz
@@ -1075,6 +1103,7 @@ KI_BASIS = {"kantenabstand_px": 5.0, "f1_min": 0.65, "toleranz_px": 5.0, "versat
 # Toleranzen in 4k-Pixeln (5 px bei 3840 px Breite: rund 1 cm auf 5 m Abstand). Nachbarhaeuser werden je Bauteil
 # geprueft (Fensterraster, Umriss) statt pauschal ersetzt: pauschal gab harte Naehte am Uebergang zur KI.
 KI_BASIS_STRENG = ["fenster_glas", "innenraum"]
+ABWEICHUNG_PX = 6.0          # ki_verzogen: ab diesem lokalen Versatz (4k-Pixel) markiert die Abweichungskarte rot
 DETAIL = {"sigma_px": 1.6, "kante": 0.06, "staerke": 0.85, "max_dL": 9.0}
 
 
@@ -1166,10 +1195,12 @@ def fein_ausrichten(R: np.ndarray, Kw: np.ndarray, maske: np.ndarray, p: dict | 
     fs = np.stack([cv2.GaussianBlur(fs[..., c], (0, 0), sig / 2) for c in (0, 1)], -1)
     xx, yy = np.meshgrid(np.arange(W, dtype=np.float32), np.arange(H, dtype=np.float32))
     K2 = cv2.remap(Kw, xx + fs[..., 0], yy + fs[..., 1], cv2.INTER_CUBIC, borderMode=cv2.BORDER_REFLECT)
-    v = np.hypot(fs[..., 0], fs[..., 1])[maske] / max(s, 1e-6)
+    fluss_4k = np.hypot(fs[..., 0], fs[..., 1]) / max(s, 1e-6)
+    v = fluss_4k[maske]
     info = {"verfahren": "DIS-Fluss, kantengewichtet geglaettet", "sigma_px": p["fein_sigma_px"],
             "verschiebung_4k_px": {"median": round(float(np.median(v)), 2), "p90": round(float(np.percentile(v, 90)), 2),
                                    "max": round(float(v.max()), 2)} if v.size else None}
+    info["_fluss_4k"] = fluss_4k
     return np.clip(K2, 0, 1).astype(np.float32), info
 
 
