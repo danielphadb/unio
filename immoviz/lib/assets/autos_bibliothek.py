@@ -578,6 +578,14 @@ def auf_boden_setzen(ob, c, terrain, scene, dg, yaw):
     dz = [hi - (R @ Vector(p)).z for hi, p in zip(h, rp)]
     ob.location.z = sum(dz) / 4.0
     rest = max(abs(d - ob.location.z) for d in dz)     # Restfehler: wie weit ein Rad schwebt oder einsinkt
+    # wie in pruefen(): Boden an den geneigten Radpunkten nachmessen. Die Neigung verschiebt die Punkte um Millimeter;
+    # steht ein Rad genau an einer Kante, liegt der Boden dort anders als oben gemessen (W 22.11.2026: 7 cm)
+    for p in rp:
+        w = R @ Vector(p) + ob.location
+        zb, name = boden_hoehe(scene, dg, w.x, w.y, terrain(w.x, w.y))
+        rest = max(rest, abs(w.z - zb))
+        if name is None:
+            rest = max(rest, 1.0)
     if abs(roll) > math.radians(NEIGUNG_QUER_MAX) or abs(nick) > math.radians(NEIGUNG_LAENGS_MAX):
         rest = max(rest, 1.0)                           # Rad auf Bordstein oder Stufe: keine Strassenneigung
     if "kein_boden" in treffer:
