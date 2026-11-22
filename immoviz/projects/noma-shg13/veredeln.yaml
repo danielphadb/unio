@@ -5,20 +5,21 @@
 # Gelaender, Leuchten, Nachbarhaeuser, Moebel, Pergola, Rankgitter, Boden.
 runde: 10
 modell: {model: gpt_image_2_6, quality: high, resolution: 4k, aspect_ratio: "3:2"}
-# Stilreferenzen: Projektvisualisierungen des Kunden (Vorlagen, nur intern, Freigabe 15.11.2026), bereits im
-# Higgsfield-Konto (Runde 7/9). Nie Geometrie oder Nachbarn daraus.
-referenzen:
+# Stilreferenzen: Projektvisualisierungen des Kunden (Hof_fin-3/-4, nur intern). Look-Test 22.11.2026: mit Referenzen
+# verschiebt gpt_image_2_6 Ausschnitt und Objekte (Top 4), ohne Referenzen und mit dem Retusche-Kopf bleibt die
+# Geometrie im Rahmen der elastischen Ausrichtung. Deshalb Standard ohne Referenzen; Licht und Stimmung stehen im Prompt.
+referenzen: []
+referenzen_optional:
   - {media_id: cbf0a95b-1d3d-46e2-a90b-11099b8d9b95, name: SHG13_Hof_fin-3}
   - {media_id: c82cc51e-a000-4f6b-8207-0bdead3a5edc, name: SHG13_Hof_fin-4}
 
 bausteine:
   kopf: >-
-    Turn image 1, a physically based 3D render, into a high-end photorealistic architectural photograph. Image 1 is
-    binding for everything it shows: camera, framing, building geometry, openings, the lift-and-slide door frame and
-    its division, railings, the wooden pergola and trellis, all furniture (real models at their planned position and
-    size), the interior behind the glass, the planters and the neighbouring buildings. The plants in image 1 are
-    already real plants at their final position and size: keep their position, outline and size, only make leaves,
-    blossoms and stems more natural, detailed and alive. Do not replace, move or resize any object.
+    Photorealistic edit of image 1, a physically based 3D render. This is a pixel-aligned retouch, not a new photo:
+    the output must overlay image 1 exactly. Same camera position, same lens, same framing and crop, same horizon,
+    every edge of walls, openings, the lift-and-slide door frame, railings, pergola, trellis, furniture, planters and
+    neighbouring buildings at exactly the same pixel position. Do not zoom out, do not widen the view, do not move,
+    add or resize any object. Only change surfaces, light and plant detail.
   objekt: >-
     Courtyard pavilion of a new residential building in Vienna: smooth light sage green-grey render facade (Baumit
     1026) on every exterior wall of the pavilion, slim anthracite frames, small bronze wall lights, dark anthracite
@@ -86,8 +87,8 @@ motive:
 # Ablauf je Bild (Befehle aus dem Repo-Ordner; R = Render-PNG, E = Ebenen-Ordner, K = KI-Rohbild):
 ablauf:
   - "immoviz.py veredeln-prompt --projekt immoviz/projects/noma-shg13 --cam <kamera> --licht <licht> --out <ordner>/<kamera>_prompt.txt"
-  - "Higgsfield (MCP): media_upload Render-JPG, generate_image mit modell und Bild 1 = Render, Bild 2/3 = referenzen"
-  - "immoviz.py schutz --render R --ki K --ebenen E --ohne-vordergrund   (Modus voll, Klassen aus project.yaml schutz)"
+  - "Higgsfield (MCP): media_upload Render-JPG, generate_image mit modell, nur Bild 1 = Render (keine Referenzen)"
+  - "immoviz.py schutz --render R --ki K --ebenen E --ohne-vordergrund --modus ki_verzogen   (ganzes KI-Bild elastisch auf den Render gezogen, Glas mit Innenraum aus dem Render; Pruefbild _kanten.jpg: Render-Kanten rot ueber dem Endbild)"
   - "immoviz.py grading --bild <schutz.jpg> --projekt immoviz/projects/noma-shg13 --maske <schutz plus himmel> --staerke 0.3"
   - "immoviz.py nachkontrolle --vorschau R --veredelt <grading.jpg> --ebenen E --aus <pruefung.jpg>"
   - "Sichtpruefung gegen den Render: Waende, Fenster, Raumgroesse, Nachbarn, Artefakte; erst dann Kontaktbogen und ZIP"

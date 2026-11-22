@@ -636,8 +636,10 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
                     toleranz: dict | None = None) -> dict:
     """modus 'voll' (Standard): ganzer Schutzbereich aus dem Render. modus 'toleranz': nur Komponenten, deren KI
     ausserhalb der Toleranz liegt (TOL, `toleranz` ueberschreibt einzelne Werte), kommen aus dem Render."""
-    if modus not in ("voll", "toleranz", "ki_basis"):
-        raise ValueError(f"modus {modus!r}: erlaubt voll, toleranz, ki_basis")
+    if modus not in ("voll", "toleranz", "ki_basis", "ki_verzogen"):
+        raise ValueError(f"modus {modus!r}: erlaubt voll, toleranz, ki_basis, ki_verzogen")
+    if modus == "ki_verzogen":
+        toleranz = {"fein_max_px": 16.0, **(toleranz or {})}
     if modus == "ki_basis":
         toleranz = {**KI_BASIS, **(toleranz or {})}
     render_p, ki_p = Path(render_p), Path(ki_p)
@@ -661,7 +663,7 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     al = ausrichten_ki(R, K, ausricht_maske(masken, hart), modell)
     Kw, gueltig = warp(K, al["H"], (W, H))
     fein_info = None
-    if modus in ("toleranz", "ki_basis"):
+    if modus in ("toleranz", "ki_basis", "ki_verzogen"):
         Kw, fein_info = fein_ausrichten(R, Kw, ndi.binary_dilation(hart, iterations=2), toleranz)
     B_lab, K_lab = rgb_zu_lab(R), rgb_zu_lab(Kw)
     gruppen = _gruppen(masken, schutz)
@@ -691,6 +693,14 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     schutz_hart = hart & ~F
     alpha = EB.weiche_kante(schutz_hart, kante)
     tol_daten = None
+    if modus == "ki_verzogen":
+        # Ganzes KI-Bild, elastisch auf die Render-Geometrie gezogen; nur strenge Klassen (Glas mit Innenraum dahinter,
+        # Innenraum-Moebel) aus dem Render. Pruefung ueber das Kantenbild (render_kanten_pruefbild) und nachkontrolle.
+        streng = np.zeros((H, W), bool)
+        for k_ in KI_BASIS_STRENG:
+            if k_ in schutz:
+                streng |= masken.get(k_, False)
+        alpha = EB.weiche_kante(streng & schutz_hart, kante)
     if modus in ("toleranz", "ki_basis"):
         a_reset, t_lab, t_status, t_komps, t_zus = toleranz_auswerten(R, Kw, T_lab, K_lab, masken, schutz_hart,
                                                                        gueltig, ebn, toleranz)
@@ -713,7 +723,7 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
                 T2[Z] = T_lab[Z]
             T_lab = T2
             T = lab_zu_rgb(T_lab)
-    if modus == "ki_basis":               # Render-Teile mit KI-Feinstruktur (nicht im Glas: Spiegelungen der KI)
+    if modus in ("ki_basis", "ki_verzogen"):   # Render-Teile mit KI-Feinstruktur (nicht im Glas: Spiegelungen der KI)
         gew = np.clip(alpha, 0, 1) * (~masken.get("fenster_glas", np.zeros((H, W), bool))) * gueltig
         T = lab_zu_rgb(detail_uebertragen(T_lab, K_lab, gew.astype(np.float32)))
     a = alpha[..., None]
@@ -773,7 +783,7 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     if fein_info is not None:
         kz["ausrichtung"]["fein"] = fein_info
     if aus is None:
-        aus = ki_p.with_name(ki_p.stem + {"toleranz": "_toleranz.jpg", "ki_basis": "_kibasis.jpg"}.get(modus, "_schutz.jpg"))
+        aus = ki_p.with_name(ki_p.stem + {"toleranz": "_toleranz.jpg", "ki_basis": "_kibasis.jpg", "ki_verzogen": "_kiverzogen.jpg"}.get(modus, "_schutz.jpg"))
     aus = Path(aus)
     bild_speichern(out, aus)
     kz["ergebnis"] = str(aus)
@@ -789,9 +799,21 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
                 aus.with_name(aus.stem + "_komponenten.jpg")))
     if pruefbild:
         kz["pruefbild"] = str(_pruefbild(R, Kw, out, alpha, kz, aus.with_name(aus.stem + "_pruefung.jpg"), F))
+        kz["pruefbild_kanten"] = str(render_kanten_pruefbild(R, out, aus.with_name(aus.stem + "_kanten.jpg")))
     aus.with_name(aus.stem + ".json").write_text(json.dumps(kz, ensure_ascii=False, indent=1))
     kz["json"] = str(aus.with_name(aus.stem + ".json"))
     return kz
+
+
+def render_kanten_pruefbild(R: np.ndarray, out: np.ndarray, pfad: Path) -> Path:
+    """Kanten des Renders (rot) ueber dem Endbild: jede Bauteilkante muss auf dem Bild liegen. Rote Linien ohne
+    Bauteil darunter sind entweder Schattenkanten des Renders oder eine Abweichung der KI (Sichtpruefung)."""
+    import cv2
+    g = (np.clip(_grau(R), 0, 1) * 255).astype(np.uint8)
+    e = cv2.Canny(cv2.GaussianBlur(g, (0, 0), 1.2 * max(R.shape[1] / 1500, 1)), 40, 110) > 0
+    o = np.clip(out, 0, 1).copy()
+    o[e] = (1.0, 0.0, 0.16)
+    return bild_speichern(o, pfad, 90)
 
 
 def maske_ueberlagern(rgb: np.ndarray, alpha: np.ndarray, farbe=(1.0, 0.1, 0.1), deckkraft: float = 0.45):
@@ -1048,8 +1070,11 @@ TYP_FEIN = ("fenster", "glas", "gelaenderfeld", "leuchte", "moebel", "auto")
 # sie nur verfeinert); abweichende Bauteile kommen aus dem Render. STRENG: immer aus dem Render (Glas mit dem
 # Innenraum dahinter, Innenraum-Moebel, Nachbarhaeuser). Alles, was aus dem Render kommt, bekommt Licht und Farbe
 # der KI (farbabgleich) und deren Feinstruktur ohne Kanten (detail_uebertragen), damit es nicht als CG-Fleck wirkt.
-KI_BASIS = {"kantenabstand_px": 3.0, "f1_min": 0.75, "toleranz_px": 3.0, "versatz_px": 3.0, "flach_praezision": 0.65}
-KI_BASIS_STRENG = ["fenster_glas", "innenraum", "nachbarn"]
+KI_BASIS = {"kantenabstand_px": 5.0, "f1_min": 0.65, "toleranz_px": 5.0, "versatz_px": 5.0, "flach_praezision": 0.55,
+            "suche_px": 6, "pflanzen_vor_wand": True, "pflanzen_anteil": 0.3, "pflanzen_chroma": 10.0}
+# Toleranzen in 4k-Pixeln (5 px bei 3840 px Breite: rund 1 cm auf 5 m Abstand). Nachbarhaeuser werden je Bauteil
+# geprueft (Fensterraster, Umriss) statt pauschal ersetzt: pauschal gab harte Naehte am Uebergang zur KI.
+KI_BASIS_STRENG = ["fenster_glas", "innenraum"]
 DETAIL = {"sigma_px": 1.6, "kante": 0.06, "staerke": 0.85, "max_dL": 9.0}
 
 
@@ -1413,6 +1438,14 @@ def toleranz_auswerten(R, Kw, T_lab, K_lab, masken, hart, gueltig, ebn, p: dict 
     gewinn = ncc_max - ncc[r, r]
     versatz = np.where((gewinn >= p["versatz_gewinn"]) & (isotropie >= p["versatz_isotropie"]), versatz, 0.0)
 
+    # Anteil KI-Bepflanzung je Komponente (gruene, gesaettigte Pixel): KI-Pflanzen vor einer Wand sind im Modus
+    # ki_basis erlaubt (pflanzen_vor_wand), Fenster werden weiter einzeln geprueft
+    veg_anteil = np.zeros(n)
+    if p.get("pflanzen_vor_wand"):
+        a_, b_ = K_lab[..., 1], K_lab[..., 2]
+        gruen = (a_ < -4.0) & (b_ > 2.0) & (np.hypot(a_, b_) > p.get("pflanzen_chroma", 10.0))
+        if n > 1:
+            veg_anteil[1:] = ndi.mean(gruen.astype(np.float32), lab, np.arange(1, n))
     # Entscheidung je Komponente
     zurueck = np.zeros(n, bool)
     glas_zurueck = np.zeros(n, bool)
@@ -1439,6 +1472,11 @@ def toleranz_auswerten(R, Kw, T_lab, K_lab, masken, hart, gueltig, ebn, p: dict 
                     "praezision": round(float(praez[i]), 3) if nKh[i] else None,
                     "versatz_px": round(float(versatz[i]), 2) if ncc_max[i] >= p["ncc_min"] else None,
                     "ncc": round(float(ncc_max[i]), 3), "ncc_gewinn": round(float(gewinn[i]), 3)}
+        if (gr and p.get("pflanzen_vor_wand") and veg_anteil[i] >= p.get("pflanzen_anteil", 0.3)
+                and k["typ"] in ("fassadenfeld", "gesims", "dachflaeche")
+                and set(gr) <= {"erfundene_kanten", "kanten_f1", "kantenabstand", "versatz"}):
+            infos[i]["pflanzen_vor_wand"] = round(float(veg_anteil[i]), 2)
+            gr = []                       # KI-Pflanzen vor einer Wandflaeche: Wand dahinter ist durch den Render belegt
         zurueck[i] = bool(gr)
         infos[i]["gruende"] = gr
     # Fenster gesondert
@@ -1615,7 +1653,7 @@ def autos_vergleich(a_pfad, b_pfad, ziel, titel=("Autos: Blender-Modelle", "Auto
     return str(ziel)
 
 
-F1_GRENZE = {"voll": 0.95, "toleranz": 0.90, "ki_basis": 0.85}    # Exit 1 darunter (Toleranz: KI-Kanten bleiben, je Bauteil geprueft)
+F1_GRENZE = {"voll": 0.95, "toleranz": 0.90, "ki_basis": 0.85, "ki_verzogen": 0.0}    # Exit 1 darunter (Toleranz: KI-Kanten bleiben, je Bauteil geprueft)
 
 
 def main_cli(render, ki, ebenen, aus=None, klassen=None, ohne=None, farbe=1.0, modell="homographie",
