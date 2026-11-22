@@ -1,0 +1,97 @@
+W1122 14:17:23.962000 45289 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+.venv-immoviz/lib/python3.13/site-packages/diffusers/utils/deprecation_utils.py:23: FutureWarning: `torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+Loading pipeline components...:   0%|          | 0/5 [00:00<?, ?it/s]
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s][ALoading weights: 100%|██████████| 398/398 [00:00<00:00, 5239.05it/s]
+Loading pipeline components...:  40%|████      | 2/5 [00:00<00:00, 11.97it/s]The config attributes {'force_upcast': True} were passed to AutoencoderKLFlux2, but are not expected and will be ignored. Please verify your config.json configuration file.
+Loading pipeline components...:  80%|████████  | 4/5 [00:00<00:00,  8.51it/s]Loading pipeline components...: 100%|██████████| 5/5 [00:00<00:00,  9.56it/s]
+Traceback (most recent call last):
+  File "immoviz/immoviz.py", line 619, in <module>
+    main()
+    ~~~~^^
+  File "immoviz/immoviz.py", line 301, in main
+    sys.exit(KL.main_cli(a))
+             ~~~~~~~~~~~^^^
+  File "immoviz/lib/ki_lokal.py", line 600, in main_cli
+    info = ki_lokal(a.render, a.ebenen, a.prompt, a.negativ, a.modell, a.out, a.arbeitsbreite, inp or None,
+                    a.nur_inpaint, staerke=a.staerke, schritte=a.schritte, cfg=a.cfg, steuerung=a.steuerung,
+                    steuerung_staerke=a.steuerung_staerke, kachel=a.kachel, ueberlappung=a.ueberlappung,
+                    seed=a.seed, farbe_halten=a.farbe_halten, inpaint_staerke=a.inpaint_staerke,
+                    offload=getattr(a, "offload", None), quant=getattr(a, "quant", None))
+  File "immoviz/lib/ki_lokal.py", line 530, in ki_lokal
+    ergebnis, n = laufen(rechner, "verfeinern", ergebnis)
+                  ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "immoviz/lib/ki_lokal.py", line 497, in laufen
+    out = rechner(pil, cst, float(p["staerke"]), gen)
+  File "immoviz/lib/ki_lokal.py", line 246, in rechner
+    return pipe(**kw).images[0]
+           ~~~~^^^^^^
+  File ".venv-immoviz/lib/python3.13/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File ".venv-immoviz/lib/python3.13/site-packages/diffusers/pipelines/flux2/pipeline_flux2_klein_inpaint.py", line 1184, in __call__
+    noise_pred = self.transformer(
+                 ~~~~~~~~~~~~~~~~^
+        hidden_states=latent_model_input,  # (B, image_seq_len, C)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        return_dict=False,
+        ^^^^^^^^^^^^^^^^^^
+    )[0]
+    ^
+  File ".venv-immoviz/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File ".venv-immoviz/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+  File ".venv-immoviz/lib/python3.13/site-packages/diffusers/utils/peft_utils.py", line 352, in wrapper
+    result = forward_fn(self, *args, **kwargs)
+  File ".venv-immoviz/lib/python3.13/site-packages/diffusers/models/transformers/transformer_flux2.py", line 1368, in forward
+    encoder_hidden_states, hidden_states = block(
+                                           ~~~~~^
+        hidden_states=hidden_states,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        joint_attention_kwargs=kv_attn_kwargs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ".venv-immoviz/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File ".venv-immoviz/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+  File ".venv-immoviz/lib/python3.13/site-packages/diffusers/models/transformers/transformer_flux2.py", line 937, in forward
+    attention_outputs = self.attn(
+        hidden_states=norm_hidden_states,
+    ...<2 lines>...
+        **joint_attention_kwargs,
+    )
+  File ".venv-immoviz/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File ".venv-immoviz/lib/python3.13/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+  File ".venv-immoviz/lib/python3.13/site-packages/diffusers/models/transformers/transformer_flux2.py", line 569, in forward
+    return self.processor(self, hidden_states, encoder_hidden_states, attention_mask, image_rotary_emb, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ".venv-immoviz/lib/python3.13/site-packages/diffusers/models/transformers/transformer_flux2.py", line 380, in __call__
+    hidden_states = hidden_states.flatten(2, 3)
+RuntimeError: MPS backend out of memory (MPS allocated: 17.25 GiB, other allocations: 29.32 GiB, max allowed: 45.90 GiB). Tried to allocate 75.00 MiB on shared pool. Use PYTORCH_MPS_HIGH_WATERMARK_RATIO=0.0 to disable upper limit for memory allocations (may cause system failure).
+      140.86 real         4.28 user        14.78 sys
+          1874067456  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             -753383  page reclaims
+              982495  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  23  messages sent
+                  64  messages received
+                   0  signals received
+              272053  voluntary context switches
+              310955  involuntary context switches
+        149302808503  instructions retired
+         68482594368  cycles elapsed
+         59857559424  peak memory footprint

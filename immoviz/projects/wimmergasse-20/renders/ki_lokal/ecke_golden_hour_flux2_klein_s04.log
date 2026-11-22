@@ -1,0 +1,97 @@
+W1122 15:14:51.811000 49437 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+.venv-immoviz/lib/python3.13/site-packages/diffusers/utils/deprecation_utils.py:23: FutureWarning: `torch_dtype` is deprecated and will be removed in version 1.0.0. Please use `dtype` instead.
+  deprecate("torch_dtype", "1.0.0", _TORCH_DTYPE_DEPRECATION_MESSAGE)
+
+Loading pipeline components...:   0%|          | 0/5 [00:00<?, ?it/s]The config attributes {'force_upcast': True} were passed to AutoencoderKLFlux2, but are not expected and will be ignored. Please verify your config.json configuration file.
+
+Loading pipeline components...:  40%|████      | 2/5 [00:00<00:00,  7.20it/s]
+
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s][A
+Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5508.19it/s]
+
+Loading pipeline components...:  80%|████████  | 4/5 [00:00<00:00,  9.04it/s]
+Loading pipeline components...: 100%|██████████| 5/5 [00:00<00:00, 10.86it/s]
+{
+ "render": "immoviz/projects/wimmergasse-20/renders/r7_basis/wimmergasse-20_ecke_golden_hour_final.png",
+ "ebenen": "immoviz/projects/wimmergasse-20/renders/r7_basis/ecke_golden_hour_ebenen",
+ "prompt": "architectural photograph, Viennese historic apartment building, beige lime plaster with fine texture, stucco with soft shadows, white windows, real glass reflections, natural light, photorealistic, sharp detail",
+ "negativ": "cgi, 3d render, plastic, cartoon, painting, oversaturated, hdr, blurry, text, watermark, logo, extra windows, deformed architecture",
+ "parameter": {
+  "staerke": 0.4,
+  "schritte": 16,
+  "cfg": 1.0,
+  "steuerung": [
+   "referenz"
+  ],
+  "steuerung_staerke": 1.0,
+  "kachel": 768,
+  "ueberlappung": 256,
+  "seed": 7,
+  "farbe_halten": 0.5,
+  "inpaint_staerke": 0.85,
+  "inpaint_rand_px": 6
+ },
+ "lizenz_kommerziell": true,
+ "arbeitsgroesse": [
+  3840,
+  2560
+ ],
+ "kacheln": 35,
+ "kachelgroesse": 768,
+ "schritte_wirksam": 6,
+ "modell_info": {
+  "modell": "flux2_klein",
+  "familie": "flux2",
+  "basis": "black-forest-labs/FLUX.2-klein-4B",
+  "lizenz_basis": "Apache-2.0 (FLUX.2 klein 4B und klein base 4B, nicht gated)",
+  "lizenz_kommerziell": true,
+  "geraet": "mps",
+  "offload": "aus",
+  "quant": "aus",
+  "text_kodieren_s": 14.8,
+  "steuerung": "Render als Referenzbild",
+  "textkodierer": "Qwen3-4B (im Repo)",
+  "negativ": "nicht verwendet (destilliert bzw. CFG ohne Negativ)",
+  "dtype": "bfloat16"
+ },
+ "ergebnis": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_flux2_klein_s04.jpg",
+ "zeiten": {
+  "laden_s": 34.6,
+  "verfeinern_s": 3645.0,
+  "je_kachel_s": 104.1,
+  "gesamt_s": 3681.7
+ },
+ "speicher": {
+  "prozess_max_gb": 1.9,
+  "mps_treiber_gb": 11.28,
+  "mps_belegt_gb": 0.0
+ },
+ "versionen": {
+  "python": "3.13.18",
+  "system": "Darwin arm64",
+  "torch": "2.12.1",
+  "diffusers": "0.43.0",
+  "transformers": "5.24.0",
+  "accelerate": "1.16.0"
+ },
+ "hinweis": "Geometrie aus dem Render (Steuerung je Modell, siehe modell_info); danach schutz --modus toleranz und grading",
+ "pruefbild": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_flux2_klein_s04_pruefung.jpg"
+}
+     3683.69 real        21.13 user       165.80 sys
+          1901412352  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              149155  page reclaims
+              989316  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                  24  messages sent
+                  68  messages received
+                   0  signals received
+              754629  voluntary context switches
+              971845  involuntary context switches
+        995674318034  instructions retired
+        667712045471  cycles elapsed
+         30411268544  peak memory footprint

@@ -1,0 +1,219 @@
+{
+ "render": "immoviz/projects/wimmergasse-20/renders/r7_basis/wimmergasse-20_ecke_golden_hour_final.png",
+ "ki": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_flux2_klein_s025.jpg",
+ "ebenen": "immoviz/projects/wimmergasse-20/renders/r7_basis/ecke_golden_hour_ebenen",
+ "schutz_klassen": [
+  "gebaeude_objekt",
+  "fenster_glas",
+  "fenster_rahmen",
+  "gelaender",
+  "leuchten",
+  "strassenmoebel"
+ ],
+ "anteil_geschuetzt_prozent": 28.11,
+ "ausrichtung": {
+  "modell": "homographie",
+  "massstab_ki_zu_render": 1.0003,
+  "schiebung_prozent": 0.01,
+  "ecc_korrelation": 0.8914,
+  "kantenabstand_median_px": 0.0,
+  "kantenabstand_mittel_px": 0.83,
+  "hinweis": "Abstand der Render-Kanten zur naechsten KI-Kante im Schutzbereich, Analysebreite 1600 px"
+ },
+ "schutzbereich": {
+  "farbabweichung_dE_vorher": 2.06,
+  "farbabweichung_dE_nachher": 0.88,
+  "kanten_vorher": {
+   "f1": 0.9962,
+   "vollstaendig": 0.9973,
+   "praezision": 0.9951
+  },
+  "kanten_nachher": {
+   "f1": 0.9984,
+   "vollstaendig": 0.9991,
+   "praezision": 0.9977
+  },
+  "kantenabstand_mittel_px_vorher": 0.24,
+  "kantenabstand_mittel_px_nachher": 0.15,
+  "gradienten_korrelation_vorher": 0.9942,
+  "gradienten_korrelation_nachher": 0.9968,
+  "hinweis": "kanten: praezision = Anteil starker Kanten des Bildes nahe einer Render-Kante (nichts Neues), vollstaendig = Anteil starker Render-Kanten im Bild (nichts fehlt), Toleranz 1 px. Nachher nahe 1 = Geometrie aus dem Render. dE nachher ist die gewollte Farbangleichung"
+ },
+ "klassen": {
+  "fenster_glas": {
+   "anteil_prozent": 2.65,
+   "kanten_vorher": {
+    "f1": 0.9938,
+    "vollstaendig": 0.9925,
+    "praezision": 0.995
+   },
+   "kanten_nachher": {
+    "f1": 0.9987,
+    "vollstaendig": 0.9988,
+    "praezision": 0.9986
+   }
+  },
+  "fenster_rahmen": {
+   "anteil_prozent": 1.87,
+   "kanten_vorher": {
+    "f1": 0.9922,
+    "vollstaendig": 0.9891,
+    "praezision": 0.9954
+   },
+   "kanten_nachher": {
+    "f1": 0.9981,
+    "vollstaendig": 0.9978,
+    "praezision": 0.9985
+   }
+  },
+  "gelaender": {
+   "anteil_prozent": 1.3,
+   "kanten_vorher": {
+    "f1": 0.9921,
+    "vollstaendig": 0.9945,
+    "praezision": 0.9898
+   },
+   "kanten_nachher": {
+    "f1": 0.9983,
+    "vollstaendig": 0.9986,
+    "praezision": 0.998
+   }
+  },
+  "leuchten": {
+   "anteil_prozent": 0.58,
+   "kanten_vorher": {
+    "f1": 0.9843,
+    "vollstaendig": 0.9815,
+    "praezision": 0.9872
+   },
+   "kanten_nachher": {
+    "f1": 0.9895,
+    "vollstaendig": 0.9852,
+    "praezision": 0.9939
+   }
+  },
+  "gebaeude_objekt": {
+   "anteil_prozent": 21.27,
+   "kanten_vorher": {
+    "f1": 0.9875,
+    "vollstaendig": 0.9848,
+    "praezision": 0.9902
+   },
+   "kanten_nachher": {
+    "f1": 0.9906,
+    "vollstaendig": 0.9891,
+    "praezision": 0.992
+   }
+  }
+ },
+ "hintergrund": {
+  "verwendet": true,
+  "anteil_prozent": 3.94,
+  "hinweis": "Pixel hinter Platzhaltern (und ungeschuetzten Autos) aus dem zweiten Durchgang"
+ },
+ "laub": {
+  "pixel": 368743,
+  "anteil_prozent": 3.751,
+  "modell_lab": [
+   10.3,
+   -4.5,
+   6.9
+  ],
+  "zone_prozent": 5.03,
+  "parameter": {
+   "saum_anteil": 0.012,
+   "seed_dE": 25.0,
+   "min_dE": 10.0,
+   "maha": 3.0,
+   "struktur": 2.5,
+   "krone_anteil": 0.008
+  },
+  "hinweis": "KI-Laub vor der Fassade (Blender-Baum plus Saum), bleibt KI; Rest dort Render"
+ },
+ "vordergrund": {
+  "aktiv": true,
+  "anteil_prozent": 3.885,
+  "flecken": [
+   {
+    "box_analyse": [
+     973,
+     938,
+     983,
+     954
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.006
+   },
+   {
+    "box_analyse": [
+     963,
+     959,
+     994,
+     1063
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.108
+   },
+   {
+    "box_analyse": [
+     1314,
+     963,
+     1319,
+     969
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.001
+   },
+   {
+    "box_analyse": [
+     1175,
+     971,
+     1180,
+     977
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.001
+   },
+   {
+    "box_analyse": [
+     715,
+     988,
+     729,
+     1017
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.016
+   },
+   {
+    "box_analyse": [
+     1175,
+     995,
+     1180,
+     1000
+    ],
+    "platzhalter": true,
+    "anteil_prozent": 0.001
+   }
+  ],
+  "verworfen": [],
+  "parameter": {
+   "schwelle": 14.0,
+   "schwelle_glas": 26.0,
+   "oeffnen_px": 4,
+   "boden_min_px": 60,
+   "max_hoehe_m": 2.4,
+   "vor_fassade_m": 0.4,
+   "statistik_ausreisser": 20.0,
+   "platzhalter_rand": [
+    1.0,
+    0.25,
+    0.08
+   ],
+   "platzhalter_min_px": 20
+  },
+  "hinweis": "KI-Pixel vor der geschuetzten Flaeche, die als Person/Auto am Boden gelten und nicht zurueckgesetzt werden (gruen im Pruefbild)"
+ },
+ "modus": "voll",
+ "ergebnis": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_flux2_klein_s025_schutz.jpg",
+ "pruefbild": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_flux2_klein_s025_schutz_pruefung.jpg"
+}

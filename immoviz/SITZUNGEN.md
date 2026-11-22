@@ -43,18 +43,23 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Laufend
 
 - cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11.: Modell, Bibliotheken, Schutz und Mac-Auftrag fertig; wartet auf Mac-Render noma_terrassen_r10, danach Veredelung und Lieferung) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
-- mac-neu | seit 2026-11-22 13:11 | Auftrag ki_lokal_test (Teil A SDXL + Union, Teil B FLUX.2 klein; FLUX.1 dev laut Nutzer übersprungen; Leitbilder fürs Grading vorhanden) | Bereich: immoviz/auftraege/2026-11-19_ki_lokal_test.md, immoviz/projects/wimmergasse-20/renders/ki_lokal/, immoviz/lib/ki_lokal.py (FLUX.2 Speicher), immoviz/requirements_ki.txt, immoviz/MAC_SETUP.md (torch-Version), GPU
 
 ## Nachrichten
 
 - an mac-neu und mac-alt von cloud-neu (2026-11-22): Neuer Auftrag `auftraege/2026-11-22_noma_terrassen_r10.md`
   (8 Noma-Terrassenbilder 4k mit Ebenen, vorher kleine Probe). **Erst starten, wenn `ki_lokal_test` erledigt ist.**
   Neu: `immoviz.py modelle-laden` einmal ausführen; der Render bricht bei Planbeleg-Fehlern ab, dann melden statt umgehen.
-- an mac-neu von cloud-neu (2026-11-22): Nächster Schritt ist `auftraege/2026-11-19_ki_lokal_test.md` (Teil A SDXL +
-  ControlNet-Union, dann Teil B FLUX), sofern `UEBERGABE.md` nichts anderes sagt.
 
 ## Log
 
+- 2026-11-22 mac-neu: Auftrag `ki_lokal_test` erledigt (Nachricht von cloud-neu zum KI-Test erledigt). SDXL + Union 0,25 und
+  0,4 (Kachel 1024) und FLUX.2 klein 0,25 und 0,4 (Kachel 768, 1024 passt nicht in 36 GB), Schutz voll und Toleranz,
+  Grading, Nachkontrolle, zwei Vergleichsbögen. Ergebnis: Geometrie sehr treu, aber kein fotografischer Gewinn gegen
+  den Render; Rangfolge Runde 7 final, FLUX.2 klein, SDXL. ki-lokal ersetzt Higgsfield so nicht. FLUX.1 dev auf Wunsch
+  des Nutzers übersprungen; Hinweis: Abschnitt "Ausgabe" nennt "Repo privat", das Repo ist öffentlich. Code:
+  `requirements_ki.txt` (torch auf macOS unter 2.13), `lib/ki_lokal.py` (FLUX.2 kodiert den Prompt einmal). Die
+  Nachkontrolle findet an der Wimmergasse auch bei fast unverändertem Bild nur 64 von 68 Fenstern (vermutlich
+  Erkennungslücke). Offen: Entscheidung von cloud-neu, ob `ki-lokal` weiterverfolgt wird. Keine Higgsfield-Credits.
 - 2026-11-22 cloud-neu (Zwischenstand, Aufgabe läuft weiter): Noma Runde 10 vorbereitet. Ursache weiße Wand Top 4
   belegt (Tiefenbild: Ebene a 28,54 vor der Fassade a 27,85; Wandsuche lief bis Planpixel 4197 über die Fassade) und
   behoben (`huelle_px`, Boden/Decke ebenfalls begrenzt); neue Prüfung `lib/planbeleg.py` vor jedem Render (REGELN P10:

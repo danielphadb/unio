@@ -1,0 +1,110 @@
+{
+ "vorschau": "immoviz/projects/wimmergasse-20/renders/r7_basis/wimmergasse-20_ecke_golden_hour_final.png",
+ "veredelt": "immoviz/projects/wimmergasse-20/renders/ki_lokal/ecke_golden_hour_flux2_klein_s04_toleranz_grading.jpg",
+ "status": "ok",
+ "score": 1,
+ "schwelle": 400.0,
+ "score_struktur": 1,
+ "score_ausschnitt": 0,
+ "massstab": 1.0019,
+ "schiebung_prozent": 0.0,
+ "deckung": 0.991,
+ "befunde": [
+  "1 Stelle(n) mit neuen geraden Kanten (Gelaender, Moebel, Deko?)"
+ ],
+ "merkmale": {
+  "senkrechte_neu": 0.0,
+  "senkrechte_neu_glatt": 0.0,
+  "senkrechte_fehlt": 0.0,
+  "andere_neu": 65.4,
+  "andere_neu_glatt": 6.8,
+  "oeffnungen": 0,
+  "oeffnungen_flaeche_prozent": 0
+ },
+ "oeffnungen": [],
+ "stellen": [
+  {
+   "art": "neu",
+   "box": [
+    0.51,
+    0.221,
+    0.648,
+    0.342
+   ],
+   "pixel": 273,
+   "lange_senkrechte_px": 0,
+   "auf_glatter_flaeche": 0.0,
+   "score": 8.1
+  }
+ ],
+ "schutzzonen": {
+  "ausrichtung": {
+   "modell": "homographie",
+   "kantenabstand_mittel_px": 0.21,
+   "massstab": 1.0006
+  },
+  "zonen": {
+   "fenster": {
+    "anteil_prozent": 4.59,
+    "kanten_f1": 0.9946,
+    "kanten_vollstaendig": 0.9926,
+    "kanten_praezision": 0.9967,
+    "kantenabstand_mittel_px": 0.17,
+    "gradienten_korrelation": 0.9897,
+    "status": "ok"
+   },
+   "leuchten": {
+    "anteil_prozent": 0.58,
+    "kanten_f1": 0.9933,
+    "kanten_vollstaendig": 0.9905,
+    "kanten_praezision": 0.996,
+    "kantenabstand_mittel_px": 0.17,
+    "gradienten_korrelation": 0.984,
+    "status": "ok"
+   },
+   "gelaender": {
+    "anteil_prozent": 1.31,
+    "kanten_f1": 0.987,
+    "kanten_vollstaendig": 0.9854,
+    "kanten_praezision": 0.9886,
+    "kantenabstand_mittel_px": 0.3,
+    "gradienten_korrelation": 0.9758,
+    "status": "ok"
+   },
+   "gebaeude": {
+    "anteil_prozent": 21.44,
+    "kanten_f1": 0.996,
+    "kanten_vollstaendig": 0.9962,
+    "kanten_praezision": 0.9958,
+    "kantenabstand_mittel_px": 0.24,
+    "gradienten_korrelation": 0.9869,
+    "status": "ok"
+   }
+  },
+  "fenster_je_fassade": {
+   "wimmergasse": {
+    "render": 68,
+    "ki": 64,
+    "ki_gefunden": 64,
+    "ki_neu": 0,
+    "render_fehlt": 4
+   },
+   "stolberggasse": {
+    "render": 40,
+    "ki": 40,
+    "ki_gefunden": 40,
+    "ki_neu": 0,
+    "render_fehlt": 0
+   }
+  },
+  "befunde": [],
+  "grenzen": {
+   "fenster": 0.9,
+   "leuchten": 0.85,
+   "gelaender": 0.9,
+   "gebaeude": 0.85
+  },
+  "status": "ok"
+ },
+ "markierung": "immoviz/projects/wimmergasse-20/renders/ki_lokal/nk_ecke_golden_hour_flux2_klein_s04.jpg"
+}

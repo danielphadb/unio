@@ -1,8 +1,8 @@
 # Auftrag ki_lokal_test
 
-Status: in Arbeit (mac-neu, 2026-11-22 13:11)
+Status: erledigt
 Erstellt: 18.11.2026, Cloud-Sitzung; erweitert 19.11.2026 um den FLUX-Vergleich (Teil B, Schritte 8 bis 11)
-Erledigt:
+Erledigt: 22.11.2026, mac-neu
 
 ## Ziel
 Erster echter Lauf des lokalen, strukturgeführten KI-Schritts (`immoviz.py ki-lokal`, `lib/ki_lokal.py`) auf dem
@@ -233,7 +233,7 @@ Unter "Ergebnis" eintragen und pushen:
    Runde 7 mit einem Satz Begründung je Platz.
 
 ## Ergebnis
-(mac-neu, 22.11.2026; Zwischenstand nach Teil A, Teil B läuft)
+(mac-neu, 22.11.2026)
 
 ### Umgebung und Abweichungen vom Auftrag
 - MacBook Pro M3 Max (36 GB), macOS 14.4, Gerät `mps`, dtype float16; python 3.13.18, torch 2.12.1, diffusers 0.43.0,
@@ -290,3 +290,57 @@ Sichtprüfung Teil A (`ecke_golden_hour_vergleich.jpg`, Komponentenbild 0,25, 10
   Streifen und grauer Fleck im Baum, wo Render ohne Laub eingesetzt wird.
 - Besser ist 0,25 (mehr KI-Anteil erlaubt, weniger Änderungen, gleicher Look). Gegen Runde 7 final verliert SDXL in
   dieser Einstellung klar bei Licht und Leben.
+
+### Teil B: FLUX.2 klein 4B
+- Mit den Vorgaben (Kachel 1024) brechen beide Stärken auf dem M3 Max mit 36 GB ab: `RuntimeError: MPS backend out of
+  memory (MPS allocated: 17.25 GiB, other allocations: 29.32 GiB, max allowed: 45.90 GiB). Tried to allocate 75.00 MiB
+  on shared pool` (peak footprint 59,9 GB; `flux2_klein_s*_kachel1024_speicherfehler.log`). Ein erster Lauf wurde um
+  14:15 mit dem Ende der Claude-Sitzung abgebrochen.
+- Proben mit 2 Kacheln: 1024 mit `--offload modell` nach 4 min abgebrochen (Auslagerung 22 GB); 768 mit `--offload
+  modell` 97,7 s je Kachel; 768 nach Änderung in `lib/ki_lokal.py` (Prompt einmal kodieren, Textkodierer freigeben wie
+  bei FLUX.1) 69,7 s je Kachel. Ergebnis pixelgleich mit der Probe mit Auslagern.
+- Gerechnet wurde deshalb mit `--kachel 768` (35 Kacheln), 1024 wie im Auftrag war nicht möglich. SDXL und FLUX.2
+  sind damit nicht mit derselben Kachelgröße gerechnet. Kein `--quant`, kein `--offload` im Endlauf. Rechner nicht
+  exklusiv: während FLUX.2 lagerte der Mac rund 12 bis 14 GB aus, die Zeiten sind daher eher Obergrenzen.
+
+| | SDXL 0,25 | SDXL 0,4 | FLUX.2 klein 0,25 | FLUX.2 klein 0,4 | FLUX.1 dev 0,3 |
+|---|---|---|---|---|---|
+| Kachel / Anzahl / wirksame Schritte | 1024 / 15 / 8 | 1024 / 15 / 12 | 768 / 35 / 4 | 768 / 35 / 6 | übersprungen, kein Zugang |
+| Download getrennt | in Laden enthalten | aus Cache | 1347 s vorab | aus Cache | |
+| `laden_s` | 976,9 (mit Download) | 22,0 | 31,6 | 34,6 | |
+| `je_kachel_s` | 33,0 | 50,5 | 70,0 | 104,1 | |
+| `gesamt_s` | 1474,3 (mit Download) | 781,8 | 2484,1 | 3681,7 | |
+| Text kodieren | nein | nein | 14,3 s | 14,8 s | |
+| `prozess_max_gb` / `mps_treiber_gb` | 3,75 / 2,69 | 2,2 / 2,69 | 1,92 / 11,28 | 1,9 / 11,28 | |
+| maximum resident / peak footprint | 3,7 / 24,7 GB | 2,2 / 24,7 GB | 1,9 / 30,4 GB | 1,9 / 30,4 GB | |
+| KI behalten, Schutzfläche | 79,55 % | 69,8 % | 89,15 % | 91,82 % | |
+| Fenster behalten / gesamt (zurueck, nur_glas_zurueck) | 48 / 112 = 43 % (64, 1) | 46 / 112 = 41 % (66, 3) | 88 / 114 = 77 % (26, 0) | 90 / 113 = 80 % (23, 0) | |
+| Kanten-F1 vor Schutz / Toleranz / voll | 0,9875 / 0,9918 / 0,9982 | 0,980 / 0,9893 / 0,9980 | 0,9958 / 0,9970 / 0,9984 | 0,9959 / 0,9970 / 0,9985 | |
+| Farbabweichung dE gegen Render, vorher | 3,56 | 4,32 | 2,09 | 2,17 | |
+| Nachkontrolle | zur Prüfung | ok | ok | ok | |
+| Fenster Wimmergasse gefunden von 68 / Stolberggasse von 40 | 64 (2 neu) / 40 | 65 / 40 | 64 / 40 | 64 / 40 | |
+
+Anmerkungen: Die hohen Anteile bei FLUX.2 bedeuten nicht bessere Fenster, sondern dass fast nichts verändert wurde.
+An der Wimmergasse findet die Nachkontrolle auch bei FLUX.2, das dem Render fast gleicht, nur 64 von 68 Fenstern. Die
+3 bis 4 "fehlenden" sind daher eher eine Erkennungslücke als erfundene Fehler (nicht einzeln geprüft). Der FLUX-Bogen
+(`ecke_golden_hour_vergleich_flux.jpg`) zeigt SDXL 0,25 und FLUX.2 0,4.
+
+Sichtprüfung Teil B (Vergleichsbogen, 100-%-Ausschnitte gegen den Render, Gesamtbild):
+- FLUX.2 0,25 und 0,4 sind vom Render kaum zu unterscheiden. Geometrie, Autos, Poller und Schilder stimmen,
+  keine erfundenen Details, keine Kachelnähte, keine Farbsprünge. Gegen SDXL bleiben Asphaltrisse, Granitkorn und
+  Baumblätter erhalten.
+- Es entsteht kein fotografischer Gewinn: Putz, Stuck, Glas, Licht, Himmel und Figuren-Platzhalter bleiben wie im
+  Render. Die Körnung im Endbild stammt aus dem Grading.
+- Die Toleranz erzeugt auch hier kleine Fehler: Poller am Fuß leicht verbogen, heller Streifen im Baum.
+- Zwischen 0,25 und 0,4 ist kein nennenswerter Unterschied, 0,4 kostet 50 % mehr Zeit. Ohne höhere Stärke oder andere
+  Steuerung ist der Schritt teuer und wirkungslos.
+
+Rangfolge für das Motiv ecke (Qualität des Endbilds):
+1. Runde 7 final (Higgsfield mit Schutzmaske): einziges Bild mit Abendlicht, Himmel, Leben; Geometrie aus der Maske.
+2. FLUX.2 klein (0,25): unveränderte, saubere Geometrie und Textur, aber praktisch das Renderbild; Lizenz frei.
+3. SDXL + Union (0,25): gleiche Stimmung wie der Render, glättet Texturen und verändert Autos, Poller und Felgen.
+FLUX.1 dev: nicht getestet. Aussage nur für ein Motiv und je zwei Stärken.
+
+Empfehlung an cloud-neu: ki-lokal ersetzt Higgsfield für die Außenbilder in dieser Einstellung nicht. Wenn weiter
+getestet wird, dann FLUX.2 mit höherer Stärke (0,55 bis 0,7) an einem Ausschnitt. Ein 768-px-Durchlauf der ganzen Ecke
+kostet 40 bis 60 min.
