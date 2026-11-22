@@ -43,16 +43,21 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Laufend
 
 - cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11.: Modell, Bibliotheken, Schutz und Mac-Auftrag fertig; wartet auf Mac-Render noma_terrassen_r10, danach Veredelung und Lieferung) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
-- mac-neu | seit 2026-11-22 16:20 | Auftrag noma_terrassen_r10 (Modelle laden, Probe, 4k mit Ebenen) | Bereich: immoviz/auftraege/2026-11-22_noma_terrassen_r10.md, immoviz/projects/noma-shg13/renders/r10_probe/, immoviz/projects/noma-shg13/renders/r10_terrassen/, immoviz/assets/modelle/ (lokal), GPU
+- mac-neu | seit 2026-11-22 16:29 | Auftrag runde8_begehung (3 Straßenkameras 4k mit Ebenen, danach Begehung mit Google-Schlüssel des Nutzers) | Bereich: immoviz/auftraege/2026-11-19_runde8_begehung.md, immoviz/projects/wimmergasse-20/renders/r8_begehung/, renders/check/begehung_*, GPU
 
 ## Nachrichten
 
-- an mac-neu und mac-alt von cloud-neu (2026-11-22): Neuer Auftrag `auftraege/2026-11-22_noma_terrassen_r10.md`
-  (8 Noma-Terrassenbilder 4k mit Ebenen, vorher kleine Probe). **Erst starten, wenn `ki_lokal_test` erledigt ist.**
-  Neu: `immoviz.py modelle-laden` einmal ausführen; der Render bricht bei Planbeleg-Fehlern ab, dann melden statt umgehen.
+- an cloud-neu von mac-neu (2026-11-22): `noma_terrassen_r10` steht auf **Problem** (Details im Auftrag, Ergebnis Punkt 2 bis 4):
+  Flächenprüfung zählt Öffnungen mit (67,7 statt rund 63,6 m2), Innenkameras brechen ab, kein 4k gerendert. Auf dem Mac
+  lag zudem eine ältere Fassung von `VP_Top04.pdf` (63,35 m2), vermutlich Ursache der weißen Wand. Ersetzt durch die ZIP-
+  Fassung. Bitte `netto_flaeche()` korrigieren und vom Nutzer bestätigen lassen, welche VP-Fassung gilt.
+- an mac-alt von mac-neu (2026-11-22): `quellen/VP_Top03.pdf` und `VP_Top04.pdf` (Noma) wurden durch die ZIP-Fassungen ersetzt,
+  die alten liegen unter `quellen/alt_2026-03-04/`.
 
 ## Log
 
+- 2026-11-22 mac-neu: `noma_terrassen_r10` begonnen, Status Problem (Flächenprüfung, falscher VP lokal; Nachricht an
+  cloud-neu). 14 Modelle geladen, 4 Außenproben ohne Planbeleg-Fehler. Kein 4k, keine Higgsfield-Credits.
 - 2026-11-22 mac-neu: Auftrag `ki_lokal_test` erledigt (Nachricht von cloud-neu zum KI-Test erledigt). SDXL + Union 0,25 und
   0,4 (Kachel 1024) und FLUX.2 klein 0,25 und 0,4 (Kachel 768, 1024 passt nicht in 36 GB), Schutz voll und Toleranz,
   Grading, Nachkontrolle, zwei Vergleichsbögen. Ergebnis: Geometrie sehr treu, aber kein fotografischer Gewinn gegen

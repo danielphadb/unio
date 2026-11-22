@@ -1,6 +1,6 @@
 # Auftrag noma_terrassen_r10
 
-Status: in Arbeit (mac-neu, 2026-11-22 16:20)
+Status: Problem
 Erstellt: 22.11.2026, cloud-neu
 Erledigt:
 
@@ -66,4 +66,36 @@ und Planbeleg committen, hier unter "Ergebnis" beschreiben, **nicht** weiter mit
 - Sichtprüfung je Bild wie oben, dazu: Nachbarhäuser wie auf den Fotos vom 20.11., keine Leitern, Geländer nur laut Plan.
 
 ## Ergebnis
-(von der Mac-Sitzung auszufüllen)
+(mac-neu, 22.11.2026, nur Schritt 1 und 2; **kein 4k gerendert**)
+
+1. `modelle-laden`: alle 14 Modelle geladen, 125 MB, 27 s. Gerät: Metal auf Apple M3 Max.
+2. **Falsche Verkaufspläne auf dem Mac (wichtig).** Lokal lagen in `quellen/` andere Dateien als im Übergabe-ZIP:
+   - `VP_Top04.pdf` lokal: Stand 04.03.2026 (GSPublisher 3405), **63,35 m2, Terrasse 19,85 m2**, ein Schlafzimmer,
+     Küche mit Insel, TV an der Ostwand. ZIP-Fassung (GSPublisher 3560): **62,80 m2, Terrasse 15,45 m2**, zwei
+     Schlafzimmer, runder Esstisch, Sofa an der Ostwand. `wohnungen.yaml` (corner_px, slab_px, huelle_px, Möbel,
+     Titel) passt zur ZIP-Fassung.
+   - In der alten Fassung liegt die Ostfassade bei Planpixel 4130. Genau dort fand die Wandsuche die "Wand" vor der
+     Ostfassade. Mit hoher Wahrscheinlichkeit ist der falsche Plan die Ursache der weißen Wand und der zu großen Räume
+     in Runde 9 (nicht nachgerendert, keine Gegenprobe). `huelle_px` bleibt als Schutz sinnvoll.
+   - `VP_Top03.pdf`: gleicher Grundriss, kleine Textunterschiede (ein Maß 2,01 statt 1,76 m2).
+   - Maßnahme: ZIP-Fassungen nach `quellen/` gelegt, alte Dateien unter `quellen/alt_2026-03-04/`, alte Plan-Bilder unter
+     `data/plan_cache/alt_2026-03-04/` gesichert (alles lokal, gitignored).
+   - Bitte klären: ist die ZIP-Fassung der aktuelle Verkaufsplan von Top 4? Das müsste der Nutzer bestätigen.
+3. Außenkameras, 960 x 640, 32 Samples: **0 Planbeleg-Fehler** bei allen vier, 240 s gesamt (erster Lauf), 24,0 GB maximum resident.
+4. Innenkameras `top03_terrasse` und `top04_terrasse`: **Abbruch, je 1 Fehler** (Planbeleg bricht vor dem ersten Bild ab,
+   daher nur Kamera `hst` geprüft): Wohnfläche Modell 67,7 m2, Verkaufsplan 62,8 m2 (+8 %, erlaubt 6 %). Nicht umgangen.
+   Je rund 80 s bis zum Abbruch, 19,8 GB maximum resident.
+   Diagnose (nur gelesen): `netto_flaeche()` zählt die in `walls` ausgeräumten Öffnungen als freie Fläche mit. Summe der
+   Öffnungen: Top 4 4,11 m2 (15 Öffnungen), Top 3 4,09 m2 (14). **Ohne Öffnungen 63,58 bzw. 63,64 m2, also +1,2 bzw.
+   +1,3 %.** Vorschlag: Öffnungen in `netto_flaeche()` abziehen, Toleranz 6 % behalten. Mit der alten VP-Fassung wären
+   68,7 m2 netto bzw. 65,4 m2 ohne Öffnungen herausgekommen (+4 %), der falsche Plan wäre also nicht aufgefallen.
+   `pruefen --projekt` läuft mit Exit 1 (Ampel ROT wegen fehlender Quellenangaben bei Farben, Öffnungen und Stuck,
+   Geländer- und Leuchtensoll ist erfüllt).
+5. Sichtprüfung der 4 Außenprobebilder (960 x 640, JPG in `renders/r10_probe/`): keine weiße Wand, Wände salbei,
+   Modelle vorhanden, nichts Schwebendes erkannt. Auffällig: Efeu hängt als Polster in der Wandmitte und ist nicht
+   verwurzelt; die Gräser in den Trögen wirken wie braune Kugeln; der orange Olivenkübel dominiert; Top 3 Tisch und
+   Teppich sehr hell. Nachbarhäuser nicht im Detail gegen die Fotos vom 20.11. verglichen. Innenraum von außen kaum zu
+   sehen (dunkles Glas), die vier Innenmotive fehlen.
+6. Nicht geprüft: Anteile `ebenen.json`, Schritt 3, Innenmotive.
+
+Nächster Schritt: cloud-neu korrigiert die Flächenprüfung (oder gibt sie frei), dann Schritt 2 Innenkameras und Schritt 3 neu.

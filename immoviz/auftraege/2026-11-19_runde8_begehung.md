@@ -1,6 +1,6 @@
 # Auftrag runde8_begehung
 
-Status: offen
+Status: in Arbeit (mac-neu, 2026-11-22 16:29)
 Erstellt: 18.11.2026, Cloud-Sitzung
 
 ## Ziel
