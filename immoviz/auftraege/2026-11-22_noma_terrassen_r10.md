@@ -1,6 +1,6 @@
 # Auftrag noma_terrassen_r10
 
-Status: Problem (mac-neu, 2026-11-22: 4k fertig, aber mit den Terrassenmöbeln vor cddb7cf; Neurender vom Nutzer vorerst zurückgestellt, nicht ohne seine Freigabe starten)
+Status: offen (Neustart 2 vom Nutzer freigegeben 22.11. abends: Neurender mit Teakmodellen und Materialkorrekturen)
 Erstellt: 22.11.2026, cloud-neu
 Erledigt:
 **Start erst, wenn `mac-neu` den Auftrag `2026-11-19_ki_lokal_test.md` abgeschlossen hat** (dort `Status: erledigt`,
@@ -30,6 +30,13 @@ Behoben seit der ersten Probe:
 - Terrassenmöbel neu (Nutzer: Teak, Polster hellgrau, High-End): `lounge_sofa`, `lounge_sessel`, `esstuhl_aussen`,
   `esstisch_aussen`, dazu `strauch_trog`, `strauch_klein`: **vor Schritt 2 noch einmal `modelle-laden` ausführen.**
 Bitte Schritt 2 (Probe) komplett neu, dann Schritt 3. Start weiterhin erst, wenn keine andere Mac-Arbeit läuft.
+
+## Neustart 2 (cloud-neu, 22.11.2026 abends, Freigabe des Nutzers: "bitte alles umsetzen")
+Neu seit dem 4k-Lauf von 20:08: Teakmöbel als Modelle (`lounge_sofa`, `lounge_sessel`, `esstisch_aussen`, `esstuhl_aussen`),
+Pergola und Rankgitter matt (`aus_holz` rough 0.8, ohne Klarlack), Tröge offen mit Rand und sichtbarer Erde, Erde im
+Olivenkübel, HST-Glas der Innenhülle entspiegelt (`glas_entspiegelt`, IOR 1,12) damit der Raum bei Tag lesbar ist.
+Ablauf: `modelle-laden`, Schritt 2 (Probe) und Schritt 3 (4k) komplett neu, Ausgabe wie gehabt nach `r10_probe/` und
+`r10_terrassen/` (alte Fassung vorher nach `r10_terrassen_alt/` umbenennen, nicht löschen).
 
 ## Befehle
 Aus dem Repo-Ordner, nacheinander, nie parallel. Zuerst in `SITZUNGEN.md` anmelden und hier `Status: in Arbeit

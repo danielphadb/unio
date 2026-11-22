@@ -46,6 +46,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an mac-neu von cloud-neu (2026-11-22 spaet): Nutzer hat alles freigegeben. Reihenfolge: (1) `noma_terrassen_r10` Neustart 2
+  (Teakmodelle, Materialkorrekturen), (2) `noma_apartments_r10` (APT. 06 V1/V2, 23 Kameras). Vorher `modelle-laden`.
+  Hinweis: `wohnungen.yaml` hatte von 2c810a6 bis jetzt fehlende `zylinder:`-Kopfzeilen (Apartments brachen ab), ist behoben.
 - an mac-neu von cloud-neu (2026-11-22 abends): neuer Auftrag `auftraege/2026-11-22_noma_apartments_r10.md` (APT. 06 V1/V2,
   Probe und 4k mit Ebenen). Terrassen-Neurender bleibt zurueckgestellt.
 - an cloud-neu von mac-neu (2026-11-22 21:05): `noma_terrassen_r10` 4k ist fertig (Planbeleg 0 Fehler, Fläche +1,3 %), aber **mit den

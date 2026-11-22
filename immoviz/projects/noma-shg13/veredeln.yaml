@@ -20,6 +20,15 @@ bausteine:
     every edge of walls, openings, the lift-and-slide door frame, railings, pergola, trellis, furniture, planters and
     neighbouring buildings at exactly the same pixel position. Do not zoom out, do not widen the view, do not move,
     add or resize any object. Only change surfaces, light and plant detail.
+  kopf_innen: >-
+    Photorealistic edit of image 1, a physically based 3D render of an apartment interior. This is a pixel-aligned
+    retouch, not a new photo: the output must overlay image 1 exactly. Same camera position, lens, framing and crop;
+    every wall, corner, ceiling edge, window, door, built-in cabinet, shelf, lamp and piece of furniture at exactly the
+    same pixel position and size. Do not widen the room, do not move or add anything. Only change surfaces, light,
+    fabrics and small natural details (styled books, a vase, a throw), no clutter.
+  schluss_innen: >-
+    High-end interior photograph, natural colours, no HDR look, vertical lines straight, no people, no text, no
+    watermark. The view through the window shows a calm green garden strip as in image 1.
   objekt: >-
     Courtyard pavilion of a new residential building in Vienna: smooth light sage green-grey render facade (Baumit
     1026) on every exterior wall of the pavilion, slim anthracite frames, small bronze wall lights, dark anthracite
@@ -45,10 +54,24 @@ licht:
     Late summer afternoon, low warm sun from the west-south-west, soft long shadows, dappled leaf shadows, slight haze
     and gentle backlight glow on leaves, pale warm sky with a few soft clouds, warm neutral grade, no saturated blue,
     shadows neutral never blue.
+  morgen: >-
+    Early morning, soft low sunlight from the south-east falling through the window in long warm stripes across the
+    floor and the built-ins, fresh and airy, gentle bounce light, quiet atmosphere.
+  blaue_stunde_innen: >-
+    Evening at blue hour: deep blue dusk outside the window, all interior lights on (warm pendant lights over the
+    table, LED lines on the shelves and above the bed panelling, ceiling spots), cosy warm 2700 K glow, soft pools of
+    light on the oak, calm and inviting, no harsh contrast.
   blaue_stunde: >-
     Blue hour shortly after sunset, deep soft blue-grey sky, warm interior light glowing through the glass, the bronze
     wall lights switched on with soft cones on the facade, calm and elegant, no harsh contrast.
 
+# Innenraeume (Apartments): Grundtext je Wohnungstyp, dazu der Moebelplan der Kamera aus wohnungen.yaml
+motive_vorlagen:
+  apt06: >-
+    Interior of a compact serviced apartment (28.9 m2, ceiling height 3.14 m) in a new Viennese courtyard building,
+    interior design exactly as in image 1: oak veneer built-ins with thin light-blue handle grooves, oak herringbone
+    parquet, warm cream walls, matte bordeaux (#5C1727) accents, olive-green upholstery, light-blue round table, linen
+    curtains, brass details. Keep the room size, the window size and position, every built-in and its height exactly.
 motive:
   top3_terrasse_garten: >-
     Terrace of Top 3 seen from the lift-and-slide door: under the wooden wall pergola a low teak lounge sofa with thick

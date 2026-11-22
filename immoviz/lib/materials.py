@@ -268,7 +268,8 @@ def zinc(bpy, name, color, seam=0.48):
     return m
 
 
-def oak(bpy, name, color):
+def oak(bpy, name, color, rough=0.45, coat=0.25):
+    """Holz; rough/coat steuern den Glanz (Runde 10: Pergola aussen matt, rough 0.8, coat 0)."""
     m = _new(bpy, name)
     N = Nodes(m)
     tc, sep = N.uv()
@@ -276,7 +277,7 @@ def oak(bpy, name, color):
     wave.bands_direction = "Y"
     N.link(tc.outputs["UV"], wave.inputs["Vector"])
     base = N.mix_rgb(N.math("MULTIPLY", wave.outputs["Fac"], 0.35), color, tuple(c * 0.6 for c in color))
-    p = N.principled(base, rough=0.45, **{"Coat Weight": 0.25})
+    p = N.principled(base, rough=rough, **{"Coat Weight": coat})
     bmp = N.new("ShaderNodeBump", Strength=0.15, Distance=0.003)      # Maserung im Relief, gerundete Kanten
     N.link(wave.outputs["Fac"], bmp.inputs["Height"])
     bev = N.new("ShaderNodeBevel", Radius=0.006)

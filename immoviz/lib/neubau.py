@@ -66,7 +66,7 @@ def _mat_lib(bpy, mats: dict, spec: dict):
         elif art == "metall":
             mats[name] = M.simple(bpy, name, c, s.get("rough", 0.4), s.get("metal", 0.5))
         elif art == "holz":
-            mats[name] = M.oak(bpy, name, c)
+            mats[name] = M.oak(bpy, name, c, s.get("rough", 0.45), s.get("coat", 0.25))
         elif art == "zink":
             mats[name] = M.zinc(bpy, name, c)
         elif art == "platten":

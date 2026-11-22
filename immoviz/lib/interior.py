@@ -575,6 +575,10 @@ def build_custom_materials(bpy, mats, spec: dict | None):
             mats[name] = M.plaster(bpy, name, rgb, var=0.03, bump=0.05)
         elif art == "glas":
             mats[name] = M.glass(bpy, name, rgb, s.get("rauh", 0.0))
+            if s.get("ior"):                  # entspiegelt: kleinerer Brechungsindex, schwaechere Spiegelung
+                for n in mats[name].node_tree.nodes:
+                    if n.type == "BSDF_PRINCIPLED":
+                        n.inputs["IOR"].default_value = float(s["ior"])
         elif s.get("leuchten"):
             mats[name] = M.simple(bpy, name, rgb, s.get("rauh", 0.5), **{"Emission Color": (*rgb, 1.0),
                                                                          "Emission Strength": float(s["leuchten"])})

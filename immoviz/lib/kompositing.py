@@ -821,12 +821,33 @@ def schutz_anwenden(render_p, ki_p, ebenen_ordner, aus=None, klassen: list[str] 
     if pruefbild:
         kz["pruefbild"] = str(_pruefbild(R, Kw, out, alpha, kz, aus.with_name(aus.stem + "_pruefung.jpg"), F))
         kz["pruefbild_kanten"] = str(render_kanten_pruefbild(R, out, aus.with_name(aus.stem + "_kanten.jpg")))
-        if fluss is not None:         # Abweichungskarte: lokaler Versatz KI gegen Render im Schutzbereich (4k-Pixel)
-            m5 = (fluss > ABWEICHUNG_PX) & hart & gueltig
+        if fluss is not None:         # Abweichungskarte: lokaler Versatz KI gegen Render (4k-Pixel), nur an Architekturkanten
+            arch = np.zeros((H, W), bool)       # aus Blender (kanten.png) in Gebaeude, Rahmen, Gelaender, Nachbarn; Blattschatten
+            for k_ in ("gebaeude_objekt", "fenster_rahmen", "gelaender", "nachbarn", "fenster_glas"):   # und Wiederholmuster
+                arch |= masken.get(k_, False)                                                   # zaehlen so nicht mit
+            kg = ebn.get("kanten")
+            if kg is not None:
+                kg = np.asarray(kg)
+                kg = (kg > (0.5 if kg.max() <= 1.0 else 127)) if kg.dtype != bool else kg
+                if kg.shape == (H, W):
+                    arch &= ndi.binary_dilation(kg, iterations=max(1, round(2 * W / 3840)))
+            hart_k = arch & gueltig
+            # Direkte Kantenmessung statt Fluss (der Fluss rauscht an Fensterreihen und Blattschatten): je Render-Kante an
+            # der Architektur der Abstand zur naechsten Kante im ausgerichteten KI-Bild (beide Canny, volle Aufloesung)
+            import cv2
+            def _cn(x):
+                g8 = (np.clip(_grau(x), 0, 1) * 255).astype(np.uint8)
+                return cv2.Canny(cv2.GaussianBlur(g8, (0, 0), 1.2 * max(W / 3840, 0.5)), 30, 90) > 0
+            eR, eK = _cn(R), _cn(Kw)
+            dK = ndi.distance_transform_edt(~eK) * (3840.0 / W)
+            hart_k = eR & hart_k
+            m5 = (dK > ABWEICHUNG_PX) & hart_k
+            fluss = dK
             kz["abweichung"] = {"grenze_4k_px": ABWEICHUNG_PX,
-                                "anteil_schutz_prozent": round(100 * float(m5.sum()) / max(1, int(hart.sum())), 2),
-                                "p90_4k_px": round(float(np.percentile(fluss[hart & gueltig], 90)), 2) if (hart & gueltig).any() else None}
-            kz["pruefbild_abweichung"] = str(bild_speichern(maske_ueberlagern(out, m5.astype(np.float32), (1.0, 0.1, 0.1), 0.55),
+                                "anteil_architekturkanten_prozent": round(100 * float(m5.sum()) / max(1, int(hart_k.sum())), 2),
+                                "p90_4k_px": round(float(np.percentile(fluss[hart_k], 90)), 2) if hart_k.any() else None,
+                                "hinweis": "Render-Kanten an der Architektur (Gebaeude, Rahmen, Gelaender, Nachbarn, Glas): Anteil ohne KI-Kante innerhalb der Grenze (4k-Pixel)"}
+            kz["pruefbild_abweichung"] = str(bild_speichern(maske_ueberlagern(out, ndi.binary_dilation(m5, iterations=2).astype(np.float32), (1.0, 0.1, 0.1), 0.9),
                                                             aus.with_name(aus.stem + "_abweichung.jpg"), 90))
     aus.with_name(aus.stem + ".json").write_text(json.dumps(kz, ensure_ascii=False, indent=1))
     kz["json"] = str(aus.with_name(aus.stem + ".json"))

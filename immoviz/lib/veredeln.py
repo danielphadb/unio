@@ -35,13 +35,30 @@ def prompt(pdir: Path, kamera: str, licht: str) -> dict:
     V = laden(pdir)
     B = V["bausteine"]
     motiv = (V.get("motive") or {}).get(kamera)
+    innen = False
+    if not motiv:                         # Innenraeume: Moebelplan der Kamera aus wohnungen.yaml, sonst Standardtext
+        try:
+            W = yaml.safe_load((Path(pdir) / "wohnungen.yaml").read_text(encoding="utf-8")) or {}
+        except OSError:
+            W = {}
+        for top, w in (W.get("wohnungen") or {}).items():
+            if kamera.startswith(f"{top}_"):
+                cam = (w.get("kameras") or {}).get(kamera[len(top) + 1:]) or {}
+                basis = next((t for k, t in (V.get("motive_vorlagen") or {}).items() if top.startswith(k)), "")
+                motiv = " ".join(x for x in (basis, cam.get("moebelplan", "")) if x)
+                innen = True
+                break
     if not motiv:
         raise KeyError(f"veredeln.yaml: kein Motiv fuer Kamera {kamera}")
     if licht not in (V.get("licht") or {}):
         raise KeyError(f"veredeln.yaml: kein Licht {licht}")
     refs = V.get("referenzen") or []
-    teile = [B["kopf"], B["objekt"], motiv, B.get("bepflanzung"), B.get("moebel"),
-             B.get("referenzen") if refs else None, V["licht"][licht], B["schluss"]]
+    if innen:                             # Innenraum: ohne Fassaden-, Pflanzen- und Terrassenmoebel-Bausteine
+        lt = V["licht"].get(f"{licht}_innen", V["licht"][licht])
+        teile = [B.get("kopf_innen", B["kopf"]), motiv, lt, B.get("schluss_innen", B["schluss"])]
+    else:
+        teile = [B["kopf"], B["objekt"], motiv, B.get("bepflanzung"), B.get("moebel"),
+                 B.get("referenzen") if refs else None, V["licht"][licht], B["schluss"]]
     text = "\n\n".join(" ".join(str(t).split()) for t in teile if t)
     R = FG.prompt_regeln(Path(pdir), kamera, _art(pdir, kamera))
     return {"prompt": FG.anhaengen(text, R), "regeln": R["regeln"], "warnungen": R["warnungen"],

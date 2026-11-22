@@ -72,7 +72,7 @@ neubau:
     nb_markise_15: {color: "#C98B5E", art: einfach, rough: 0.8, quelle: "Apple 9 (Markise orange-beige) ANN Farbwert"}
     # Runde 7: Materialien der Ausstattung (nicht Planung, Farbwerte Staging nach dem Look der Vorlagen)
     aus_teak: {color: "#8A5E3B", art: holz, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    aus_holz: {color: "#9C7A55", art: holz, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
+    aus_holz: {color: "#9C7A55", art: holz, rough: 0.8, coat: 0.0, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     aus_polster: {color: "#E6E0D4", art: einfach, rough: 0.95, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     aus_polster_grau: {color: "#C9C6BF", art: einfach, rough: 0.95, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     aus_teppich: {color: "#9E937F", art: einfach, rough: 0.98, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
@@ -943,11 +943,20 @@ neubau:
     - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [14.5, 2.75, 15.85, 2.79], z: [6.13, 6.19], mat: aus_holz, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [14.5, 3.05, 15.85, 3.09], z: [6.13, 6.19], mat: aus_holz, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [14.5, 3.35, 15.85, 3.39], z: [6.13, 6.19], mat: aus_holz, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.44, 3.7, 15.84, 5.3], z: [3.5, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.46, 3.72, 15.82, 5.28], z: [3.99, 4.02], mat: nb_erde, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.44, 0.25, 15.84, 0.85], z: [3.5, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.46, 0.27, 15.82, 0.83], z: [3.99, 4.02], mat: nb_erde, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.44, 3.7, 15.84, 5.3], z: [3.5, 3.98], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.44, 3.70, 15.48, 5.30], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.80, 3.70, 15.84, 5.30], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.44, 3.70, 15.84, 3.74], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.44, 5.26, 15.84, 5.30], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.46, 3.72, 15.82, 5.28], z: [3.97, 4.02], mat: nb_erde, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.44, 0.25, 15.84, 0.85], z: [3.5, 3.98], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.44, 0.25, 15.48, 0.85], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.80, 0.25, 15.84, 0.85], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.44, 0.25, 15.84, 0.29], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.44, 0.81, 15.84, 0.85], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: quader, box: [15.46, 0.27, 15.82, 0.83], z: [3.97, 4.02], mat: nb_erde, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: zylinder, c: [12.35, 0.62], r: 0.28, z: [3.5, 4.02], mat: aus_kuebel, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
+    - {gruppe: ausstattung_top3, rahmen: hof, typ: zylinder, c: [12.35, 0.62], r: 0.25, z: [4.02, 4.035], mat: nb_erde, quelle: "Ausstattung; Runde 10 Erde im Kuebel (mac-neu 22.11.)"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: leuchte, c: [11.95, 3.04], vorne: [1, 0], z: [5, 5.26], mat: aus_bronze, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: leuchte, c: [11.95, 5.57], vorne: [1, 0], z: [5, 5.26], mat: aus_bronze, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top3, rahmen: hof, typ: leuchte, c: [15.85, 3.62], vorne: [-1, 0], z: [5.2, 5.46], mat: aus_bronze, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
@@ -969,11 +978,20 @@ neubau:
     - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [29.37, 2.25, 30.72, 2.29], z: [6.13, 6.19], mat: aus_holz, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [29.37, 2.55, 30.72, 2.59], z: [6.13, 6.19], mat: aus_holz, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [29.37, 2.85, 30.72, 2.89], z: [6.13, 6.19], mat: aus_holz, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.31, 3.7, 30.71, 5.3], z: [3.5, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.33, 3.72, 30.69, 5.28], z: [3.99, 4.02], mat: nb_erde, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.31, 0.25, 30.71, 0.85], z: [3.5, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
-    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.33, 0.27, 30.69, 0.83], z: [3.99, 4.02], mat: nb_erde, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.31, 3.7, 30.71, 5.3], z: [3.5, 3.98], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.31, 3.70, 30.35, 5.30], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.67, 3.70, 30.71, 5.30], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.31, 3.70, 30.71, 3.74], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.31, 5.26, 30.71, 5.30], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.33, 3.72, 30.69, 5.28], z: [3.97, 4.02], mat: nb_erde, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.31, 0.25, 30.71, 0.85], z: [3.5, 3.98], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.31, 0.25, 30.35, 0.85], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.67, 0.25, 30.71, 0.85], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.31, 0.25, 30.71, 0.29], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.31, 0.81, 30.71, 0.85], z: [3.98, 4.05], mat: aus_trog, quelle: "Ausstattung, Kundenwunsch 16.11.2026; Runde 10 Trog offen mit Rand und Erde (mac-neu 22.11.)"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: quader, box: [30.33, 0.27, 30.69, 0.83], z: [3.97, 4.02], mat: nb_erde, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: zylinder, c: [28.25, 0.62], r: 0.28, z: [3.5, 4.02], mat: aus_kuebel, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
+    - {gruppe: ausstattung_top4, rahmen: hof, typ: zylinder, c: [28.25, 0.62], r: 0.25, z: [4.02, 4.035], mat: nb_erde, quelle: "Ausstattung; Runde 10 Erde im Kuebel (mac-neu 22.11.)"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: leuchte, c: [27.85, 2.94], vorne: [1, 0], z: [5, 5.26], mat: aus_bronze, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: leuchte, c: [27.85, 5.47], vorne: [1, 0], z: [5, 5.26], mat: aus_bronze, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     - {gruppe: ausstattung_top4, rahmen: hof, typ: leuchte, c: [30.72, 3.62], vorne: [-1, 0], z: [5.2, 5.46], mat: aus_bronze, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}

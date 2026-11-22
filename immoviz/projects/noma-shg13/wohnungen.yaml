@@ -41,6 +41,7 @@ plaene:
 
 # Innenraum-Lichtstimmungen (ergaenzen project.yaml lights)
 lichter:
+  morgen: {date: "2026-08-27", time: "09:40", tz: 2, exposure: 0.2, interior: 0.0, aerosol: 2.2, season: spaetsommer}   # Runde 10 APT. 06: Morgensonne flach von Suedost durch das Suedfenster
   spaetsommer_mittag: {date: "2026-08-27", time: "13:15", tz: 2, exposure: 0.0, interior: 0.0, aerosol: 2.0, season: spaetsommer}   # Sonne ca. 50 Grad aus Sued, fuer die Hofgauben Top 26
 
 render:
@@ -143,6 +144,7 @@ wohnungen:
   top03_terrasse:
     <<: *top03
     plan: vp_top3_aussen
+    material_ersatz: {glas: glas_entspiegelt}   # Runde 10: Raum hinter der HST bei Tag lesbar
     objekt_ausblenden: [nb_top3_innen, nb_top3_glas]
     leuchten:   # Runde 7: Innenlicht fuer das Abendbild (Pendel ueber dem Esstisch, Kueche, Stehleuchte), tagsueber vernachlaessigbar
       - {pos: [3413, 1689, 1.85], w: 90}
@@ -154,6 +156,7 @@ wohnungen:
   top04_terrasse:
     <<: *top04
     plan: vp_top4_aussen
+    material_ersatz: {glas: glas_entspiegelt}   # Runde 10: Raum hinter der HST bei Tag lesbar
     objekt_ausblenden: [nb_top4_innen, nb_top4_glas]
     leuchten:   # Runde 7: Innenlicht fuer das Abendbild
       - {pos: [3460, 1689, 1.85], w: 90}
@@ -204,6 +207,7 @@ wohnungen:
       - {rect: [2.07, -10.01, 3.05, -8.23], z: [0.0, 0.92], mat: t34_marmor, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
       - {rect: [4.28, -10.13, 6.65, -9.24], z: [0.0, 0.42], mat: t34_sofa_creme, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
       - {rect: [4.28, -9.44, 6.65, -9.24], z: [0.42, 0.80], mat: t34_sofa_creme, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
+    zylinder:
       - {c: [3.47, -11.32], r: 0.6, z: [0.0, 0.75], mat: t34_eiche, seg: 32, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
     objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof]   # Runde 7: Dach nach Plan bleibt sichtbar (Terrasse, Dachfenster), aus: Innenkarten und die aeusseren Hofschraegen (sonst kein Licht durch die Dachflaechenfenster)
     light: spaetsommer_mittag
@@ -247,6 +251,7 @@ wohnungen:
       - {c: [2.99, 3.856], r: [0.18, 0.28], winkel: [0, 90], z: [0, 3.38], mat: innen_wand}   # Runde 4: Trennwand-Rundung als Viertelkreis, R innen 0,18 / aussen 0,28 [INT S. 3]
       - {c: [2.99, 3.856], r: [0.134, 0.18], winkel: [0, 90], z: [0, 1.47], mat: eiche_derenko}   # Eichenverkleidung laeuft um die Rundung [INT S. 12: LED-Linie D]
       - {c: [2.99, 3.856], r: [0.13, 0.18], winkel: [0, 90], z: [1.47, 1.49], mat: led}
+    zylinder:
       - {c: [4.96, 2.538], r: 0.015, z: [0.9, 1.2], mat: messing}   # Armatur Messing [INT S. 13]
       - {c: [3.82, 0.916], r: 0.45, z: [0.72, 0.75], mat: hellblau}   # runder Tisch hellblau, Platte 0,75 [INT S. 13/14]
       - {c: [3.82, 0.916], r: 0.17, z: [0, 0.72], mat: hellblau}
@@ -426,6 +431,7 @@ wohnungen:
       - {rect: [7.0, 1.42, 8.0, 1.45], z: [1.35, 1.95], mat: bild_abstrakt}
       - {rect: [12.0, 1.42, 13.0, 1.45], z: [1.35, 1.95], mat: bild_abstrakt}
       - {rect: [26.0, -3.0, 27.0, 4.5], z: [0.0, 3.2], mat: hecke}
+    zylinder:
       - {c: [2.5, 0.72], r: 0.05, z: [2.82, 2.91], mat: schwarz}
       - {c: [5.0, 0.72], r: 0.05, z: [2.82, 2.91], mat: schwarz}
       - {c: [7.5, 0.72], r: 0.05, z: [2.82, 2.91], mat: schwarz}
@@ -481,6 +487,7 @@ wohnungen:
       - {c: [2.99, 3.856], r: [0.134, 0.18], winkel: [0, 90], z: [0, 1.47], mat: eiche_derenko}   # Eichenverkleidung laeuft um die Rundung [INT S. 12: LED-Linie D]
       - {c: [2.99, 3.856], r: [0.13, 0.18], winkel: [0, 90], z: [1.47, 1.49], mat: led}
       - {c: [2.99, 3.856], r: [0.176, 0.18], winkel: [0, 90], z: [1.47, 3.379], mat: bordeaux_wand}   # V2: Bettwand-Farbe auch auf der Rundung [INT2 S. 16]
+    zylinder:
       - {c: [4.96, 2.538], r: 0.015, z: [0.9, 1.2], mat: messing}   # Armatur Messing [INT S. 13]
       - {c: [3.82, 0.916], r: 0.45, z: [0.72, 0.75], mat: hellblau}   # runder Tisch hellblau, Platte 0,75 [INT S. 13/14]
       - {c: [3.82, 0.916], r: 0.17, z: [0, 0.72], mat: hellblau}
@@ -664,6 +671,7 @@ wohnungen:
       - {rect: [7.0, 1.42, 8.0, 1.45], z: [1.35, 1.95], mat: bild_abstrakt}
       - {rect: [12.0, 1.42, 13.0, 1.45], z: [1.35, 1.95], mat: bild_abstrakt}
       - {rect: [26.0, -3.0, 27.0, 4.5], z: [0.0, 3.2], mat: hecke}
+    zylinder:
       - {c: [2.5, 0.72], r: 0.05, z: [2.82, 2.91], mat: schwarz}
       - {c: [5.0, 0.72], r: 0.05, z: [2.82, 2.91], mat: schwarz}
       - {c: [7.5, 0.72], r: 0.05, z: [2.82, 2.91], mat: schwarz}
@@ -729,6 +737,7 @@ wohnungen:
       - {c: [2.04, 3.856], r: [0.18, 0.28], winkel: [90, 180], z: [0, 3.14], mat: innen_wand, quelle: "INT S. 3, S. 16 Trennwand-Rundung R 0,18 / 0,28"}
       - {c: [2.04, 3.856], r: [0.134, 0.18], winkel: [90, 180], z: [0, 1.4], mat: eiche_derenko, quelle: INT S. 12 Verkleidung um die Rundung}
       - {c: [2.04, 3.856], r: [0.13, 0.18], winkel: [90, 180], z: [1.4, 1.42], mat: led, quelle: INT S. 12 Leuchte D}
+    zylinder:
       - {c: [0.07, 2.538], r: 0.015, z: [0.9, 1.2], mat: messing, quelle: INT S. 13 Armatur Messing}
       - {c: [1.21, 0.916], r: 0.45, z: [0.72, 0.75], mat: hellblau, quelle: "INT S. 3 Tisch Ø 0,90; INT S. 13/14 hellblau"}
       - {c: [1.21, 0.916], r: 0.17, z: [0, 0.72], mat: hellblau, quelle: INT S. 13/14}
@@ -862,6 +871,14 @@ wohnungen:
       bett: {pos: [2.67, 0.3], target: [3.68, 4], lens: 18, h: 1.3, moebelplan: "centre: double bed 1.80 m against the bed wall with oak wall panelling up to 1.40 m, LED line on top and an olive upholstered headboard band; seen from the foot of the bed a floating oak night shelf on the right and a round bordeaux stool on the left, striped bench at the foot end, abstract painting above the bed; wall above the panelling warm cream. Left: partition wall with rounded corner and oak panelling, wardrobe behind it. Right: side wall with oak panelling. Camera stands at the TV sideboard by the window. Floor in the room: oak herringbone parquet."}   # zwischen Sideboard und Vorhang, Bettwand
       kueche: {pos: [4.73, 0.65], target: [0.33, 3.2], lens: 18, h: 1.4, moebelplan: "view from the TV sideboard across the room: back wall oak kitchen run along the wall, from the entrance towards the window: wardrobe, base unit with a small 2-zone induction hob and a plain hinged door below it (no drawers under the hob), base unit with door, base unit with sink and brass tap, oak tall cabinet 2.62 m with built-in microwave at the window end; splashback of square cream, light-blue and terracotta tiles up to the lowest shelf, three open oak shelves with LED strips, thin light-blue handle groove along the fronts; back right the built-in oak wardrobe up to 2.62 m (open shelves with LED, niche with olive-green seat cushion and coat hooks, hanging section with rail). Front left the round light-blue table with two olive-green chairs and three bordeaux pendants, window with linen curtain on the left. Right: partition wall with rounded corner. Floor in the room: oak herringbone parquet."}   # vor dem Sideboard, Kuechenzeile und Esstisch
       bad: {pos: [2.61, 4.25], target: [4.13, 5.9], lens: 16, h: 1.5, dz: 0.8, moebelplan: "bathroom: grooved oak vanity with round countertop basin and brass tap on the back wall, mirror above; WC on the right wall; walk-in shower with glass screen and beige tiles up to 2.21 m in the right foreground; ceiling and upper wall band matte bordeaux #5C1727. Floor: beige porcelain tiles (no wood, no herringbone in the bathroom)"}   # Badtuer, Waschtisch, WC, Dusche, Decke
+      # Runde 10 (Nutzer 22.11.2026: "den Plan des Apartments praezise umsetzen, verschiedene Winkel und Stimmung"):
+      fenster_gegenlicht: {pos: [4.55, 3.40], target: [0.60, 0.35], lens: 18, h: 1.35}          # aus der Bettecke diagonal zum Fenster mit Essplatz, Gegenlicht
+      eingang_tiefe: {pos: [1.25, 5.70], target: [1.10, 0.00], lens: 20, h: 1.50}              # von der Wohnungstuer durch den ganzen Raum zum Fenster
+      essplatz: {pos: [2.30, 2.00], target: [0.70, 0.55], lens: 26, h: 1.25}                   # runder Tisch, Pendel, Vorhang
+      bett_diagonal: {pos: [1.55, 1.70], target: [4.40, 3.70], lens: 22, h: 1.20}              # von der Kuechenseite auf Bett und Paneel
+      gesamt_morgen: {pos: [0.88, 5.80], target: [1.83, 0.20], lens: 16, h: 1.45, light: morgen, exposure: 1.2}
+      gesamt_abend: {pos: [0.88, 5.80], target: [1.83, 0.20], lens: 16, h: 1.45, light: blaue_stunde, exposure: 2.4}
+      bett_abend: {pos: [2.67, 0.30], target: [3.68, 4.00], lens: 18, h: 1.30, light: blaue_stunde, exposure: 2.4}
 
   apt06_v2:
     plan: manuell
@@ -896,6 +913,7 @@ wohnungen:
       - {c: [2.04, 3.856], r: [0.134, 0.18], winkel: [90, 180], z: [0, 1.4], mat: eiche_derenko, quelle: INT S. 12 Verkleidung um die Rundung}
       - {c: [2.04, 3.856], r: [0.13, 0.18], winkel: [90, 180], z: [1.4, 1.42], mat: led, quelle: INT S. 12 Leuchte D}
       - {c: [2.04, 3.856], r: [0.176, 0.18], winkel: [90, 180], z: [1.42, 3.139], mat: bordeaux_wand, quelle: INT2 S. 16}
+    zylinder:
       - {c: [0.07, 2.538], r: 0.015, z: [0.9, 1.2], mat: messing, quelle: INT S. 13 Armatur Messing}
       - {c: [1.21, 0.916], r: 0.45, z: [0.72, 0.75], mat: hellblau, quelle: "INT S. 3 Tisch Ø 0,90; INT S. 13/14 hellblau"}
       - {c: [1.21, 0.916], r: 0.17, z: [0, 0.72], mat: hellblau, quelle: INT S. 13/14}
@@ -1034,10 +1052,19 @@ wohnungen:
       bett: {pos: [2.67, 0.3], target: [3.68, 4], lens: 18, h: 1.3, moebelplan: "centre: double bed 1.80 m against the bed wall with oak wall panelling up to 1.40 m, LED line on top and an olive upholstered headboard band; seen from the foot of the bed a floating oak night shelf on the right and a round bordeaux stool on the left, striped bench at the foot end, abstract painting above the bed; wall above the panelling painted matte bordeaux #5C1727 up to the ceiling. Left: partition wall with rounded corner and oak panelling, wardrobe behind it. Right: side wall with oak panelling. Camera stands at the TV sideboard by the window. Floor in the room: oak herringbone parquet."}   # zwischen Sideboard und Vorhang, Bettwand
       kueche: {pos: [4.73, 0.65], target: [0.33, 3.2], lens: 18, h: 1.4, moebelplan: "view from the TV sideboard across the room: back wall oak kitchen run along the wall, from the entrance towards the window: wardrobe, oak tall cabinet 2.62 m with built-in microwave and three drawers below the worktop, base unit with a small 2-zone induction hob and a plain hinged door below it (no drawers under the hob), base unit with sink and brass tap, base unit with door; splashback of glossy bordeaux vertical fluted tiles up to the lowest shelf, three open oak shelves with LED strips, thin light-blue handle groove along the fronts; back right the built-in oak wardrobe up to 2.62 m (open shelves with LED, niche with olive-green seat cushion and coat hooks, hanging section with rail). Front left the round light-blue table with two olive-green chairs and three bordeaux pendants, window with linen curtain on the left. Right: partition wall with rounded corner. Floor in the room: oak herringbone parquet."}   # vor dem Sideboard, Kuechenzeile und Esstisch
       bad: {pos: [2.61, 4.25], target: [4.13, 5.9], lens: 16, h: 1.5, dz: 0.8, moebelplan: "bathroom: grooved oak vanity with round countertop basin and brass tap on the back wall, mirror above; WC on the right wall; walk-in shower with glass screen and beige tiles up to 2.21 m in the right foreground; ceiling and upper wall band matte bordeaux #5C1727. Floor: beige porcelain tiles (no wood, no herringbone in the bathroom)"}   # Badtuer, Waschtisch, WC, Dusche, Decke
+      # Runde 10 (Nutzer 22.11.2026: "den Plan des Apartments praezise umsetzen, verschiedene Winkel und Stimmung"):
+      fenster_gegenlicht: {pos: [4.55, 3.40], target: [0.60, 0.35], lens: 18, h: 1.35}          # aus der Bettecke diagonal zum Fenster mit Essplatz, Gegenlicht
+      eingang_tiefe: {pos: [1.25, 5.70], target: [1.10, 0.00], lens: 20, h: 1.50}              # von der Wohnungstuer durch den ganzen Raum zum Fenster
+      essplatz: {pos: [2.30, 2.00], target: [0.70, 0.55], lens: 26, h: 1.25}                   # runder Tisch, Pendel, Vorhang
+      bett_diagonal: {pos: [1.55, 1.70], target: [4.40, 3.70], lens: 22, h: 1.20}              # von der Kuechenseite auf Bett und Paneel
+      gesamt_morgen: {pos: [0.88, 5.80], target: [1.83, 0.20], lens: 16, h: 1.45, light: morgen, exposure: 1.2}
+      gesamt_abend: {pos: [0.88, 5.80], target: [1.83, 0.20], lens: 16, h: 1.45, light: blaue_stunde, exposure: 2.4}
+      bett_abend: {pos: [2.67, 0.30], target: [3.68, 4.00], lens: 18, h: 1.30, light: blaue_stunde, exposure: 2.4}
       kueche_fliesen: {pos: [2.33, 2.25], target: [0, 3.55], lens: 18, h: 1.4, moebelplan: "frontal view of the kitchen: oak kitchen run along the wall, from the entrance towards the window: wardrobe, oak tall cabinet 2.62 m with built-in microwave and three drawers below the worktop, base unit with a small 2-zone induction hob and a plain hinged door below it (no drawers under the hob), base unit with sink and brass tap, base unit with door; splashback of glossy bordeaux vertical fluted tiles up to the lowest shelf, three open oak shelves with LED strips, thin light-blue handle groove along the fronts; wardrobe at the back right; dining table cut off on the left. Floor in the room: oak herringbone parquet."}   # Kuechenzeile mit Fliesenspiegel, Garderobe hinten
 
 # Materialien der Apartments (Farbwerte aus der Farbpalette [INT S. 6] und den Ansichten [INT S. 13 bis 16], Naeherung)
 materialien:
+  glas_entspiegelt: {farbe: "#E4ECEA", art: glas, ior: 1.12, quelle: "Runde 10: HST-Glas mit schwacher Spiegelung, damit der Raum bei Tag lesbar ist (mac-neu 22.11.); ANN entspiegeltes Glas"}
   creme_wand: {farbe: "#E6DAC4", art: putz, quelle: "INT S. 6 Palette Warmes Creme"}           # Warmes Creme
   creme_decke: {farbe: "#EEE6D6", art: putz, quelle: "INT S. 6 Palette Warmes Creme, heller"}
   eiche_derenko: {farbe: "#A8743F", art: eiche, quelle: "INT S. 13 Materialtafel Eiche furniert; INT S. 6 Cognac Braun"}       # Eiche furniert, Cognac Braun
