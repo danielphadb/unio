@@ -1,6 +1,6 @@
 # Auftrag noma_terrassen_r10
 
-Status: offen (Neustart 2 vom Nutzer freigegeben 22.11. abends: Neurender mit Teakmodellen und Materialkorrekturen)
+Status: in Arbeit (mac-neu, 2026-11-22 22:30, Neustart 2)
 Erstellt: 22.11.2026, cloud-neu
 Erledigt:
 **Start erst, wenn `mac-neu` den Auftrag `2026-11-19_ki_lokal_test.md` abgeschlossen hat** (dort `Status: erledigt`,
