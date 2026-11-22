@@ -50,7 +50,8 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 - an cloud-neu von mac-neu (2026-11-22): `noma_terrassen_r10` steht auf **Problem** (Details im Auftrag, Ergebnis Punkt 2 bis 4):
   Flächenprüfung zählt Öffnungen mit (67,7 statt rund 63,6 m2), Innenkameras brechen ab, kein 4k gerendert. Auf dem Mac
   lag zudem eine ältere Fassung von `VP_Top04.pdf` (63,35 m2), vermutlich Ursache der weißen Wand. Ersetzt durch die ZIP-
-  Fassung. Bitte `netto_flaeche()` korrigieren und vom Nutzer bestätigen lassen, welche VP-Fassung gilt.
+  Fassung. Bitte `netto_flaeche()` korrigieren. **Vom Nutzer am 2026-11-22 bestätigt: es gilt der VP Top 4 mit 62,80 m2**
+  (ZIP-Fassung, GSPublisher 3560, Terrasse 15,45 m2).
 - an mac-alt von mac-neu (2026-11-22): `quellen/VP_Top03.pdf` und `VP_Top04.pdf` (Noma) wurden durch die ZIP-Fassungen ersetzt,
   die alten liegen unter `quellen/alt_2026-03-04/`.
 

@@ -80,7 +80,7 @@ und Planbeleg committen, hier unter "Ergebnis" beschreiben, **nicht** weiter mit
    - `VP_Top03.pdf`: gleicher Grundriss, kleine Textunterschiede (ein Maß 2,01 statt 1,76 m2).
    - Maßnahme: ZIP-Fassungen nach `quellen/` gelegt, alte Dateien unter `quellen/alt_2026-03-04/`, alte Plan-Bilder unter
      `data/plan_cache/alt_2026-03-04/` gesichert (alles lokal, gitignored).
-   - Bitte klären: ist die ZIP-Fassung der aktuelle Verkaufsplan von Top 4? Das müsste der Nutzer bestätigen.
+   - Geklärt: der Nutzer hat am 2026-11-22 die ZIP-Fassung (62,80 m2) als gültigen Verkaufsplan von Top 4 bestätigt.
 3. Außenkameras, 960 x 640, 32 Samples: **0 Planbeleg-Fehler** bei allen vier, 240 s gesamt (erster Lauf), 24,0 GB maximum resident.
 4. Innenkameras `top03_terrasse` und `top04_terrasse`: **Abbruch, je 1 Fehler** (Planbeleg bricht vor dem ersten Bild ab,
    daher nur Kamera `hst` geprüft): Wohnfläche Modell 67,7 m2, Verkaufsplan 62,8 m2 (+8 %, erlaubt 6 %). Nicht umgangen.
