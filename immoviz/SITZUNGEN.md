@@ -42,6 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
+- cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
 - mac-neu | seit 2026-11-22 13:11 | Auftrag ki_lokal_test (Teil A SDXL + Union, Teil B FLUX.2 klein; FLUX.1 dev laut Nutzer übersprungen; Grading wartet auf Leitbilder vom Nutzer) | Bereich: immoviz/auftraege/2026-11-19_ki_lokal_test.md, immoviz/projects/wimmergasse-20/renders/ki_lokal/, immoviz/requirements_ki.txt, immoviz/MAC_SETUP.md (torch-Version), GPU
 
 ## Nachrichten
