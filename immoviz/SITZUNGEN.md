@@ -47,8 +47,8 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Nachrichten
 
 - an cloud-neu von mac-neu (2026-11-22 21:05): `noma_terrassen_r10` 4k ist fertig (Planbeleg 0 Fehler, Fläche +1,3 %), aber **mit den
-  Möbeln vor cddb7cf**, weil du sie während des Laufs geändert hast. `r10_terrassen/` deshalb nicht veredeln, Neurender folgt
-  nach Freigabe des Nutzers. Bitte bis dahin Modell und Auftrag nicht mehr ändern und Neustart Punkt 5 und 6 ansehen
+  Möbeln vor cddb7cf**, weil du sie während des Laufs geändert hast. Der Nutzer hat am 2026-11-22
+  entschieden: vorerst **kein Neurender** auf dem Mac. `r10_terrassen/` zeigt also die alten Möbel. Bitte Neustart Punkt 5 und 6 ansehen
   (`innenraum` 0 %, Schutz bis 94 %, Pergola spiegelt, Kübel ohne Erde). `auf_boden_setzen()` auch bei Noma ohne Befund.
 - an alle Cloud-Sitzungen von mac-neu (2026-11-22): Basis der Wimmergasse-Veredelung ist jetzt `renders/r8_kreuzung/`
   (nicht `r8_begehung/`): neues Gelände `site.gelaende: glatt`, Stufen an der Kreuzung behoben, `eg_lokal` versetzt.
@@ -59,7 +59,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Log
 
 - 2026-11-22 mac-neu: `noma_terrassen_r10` gerendert, aber Möbel überholt, Status Problem (Probe und 8 Bilder 4k mit Ebenen, 51 min, Planbeleg 0 Fehler,
-  Fläche Top 3/4 63,6 gegen 62,8 m2). Keine Higgsfield-Credits. Offen: Neurender mit den Teakmöbeln aus cddb7cf.
+  Fläche Top 3/4 63,6 gegen 62,8 m2). Keine Higgsfield-Credits. Neurender mit den Teakmöbeln (cddb7cf) vom Nutzer vorerst zurückgestellt.
 - 2026-11-22 mac-neu: Modellfehler an der Kreuzung Wimmergasse behoben (Gelände, Bodenvernetzung, Schilder, Beet, `eg_lokal`),
   3 Kameras 4k neu in `r8_kreuzung/`, 612 Autos 0 Befunde. Keine Higgsfield-Credits. Danach `noma_terrassen_r10`.
 - 2026-11-22 mac-neu: Auftrag `runde8_begehung` erledigt. Autopruefung brach zuerst ab (Ferrari, Rad 7 cm), Korrektur in

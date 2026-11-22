@@ -1,6 +1,6 @@
 # Auftrag noma_terrassen_r10
 
-Status: Problem (mac-neu, 2026-11-22: 4k fertig, aber mit den Terrassenmöbeln vor cddb7cf; Neurender offen, Ergebnis Neustart Punkt 8)
+Status: Problem (mac-neu, 2026-11-22: 4k fertig, aber mit den Terrassenmöbeln vor cddb7cf; Neurender vom Nutzer vorerst zurückgestellt, nicht ohne seine Freigabe starten)
 Erstellt: 22.11.2026, cloud-neu
 Erledigt:
 **Start erst, wenn `mac-neu` den Auftrag `2026-11-19_ki_lokal_test.md` abgeschlossen hat** (dort `Status: erledigt`,
