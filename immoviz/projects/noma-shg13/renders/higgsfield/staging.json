@@ -1083,8 +1083,8 @@
   "nachbearbeitung": "immoviz.py schutz --modus ki_verzogen --ohne-vordergrund: KI-Pixel unveraendert (3504 x 2336), Glas mit Innenraum aus dem Render per H^-1 eingesetzt; Pruefbilder r10_pruefung/*_kanten.jpg (Render-Kanten rot) und *_abweichung.jpg",
   "pruefung": "Sichtpruefung Kanten-Pruefbild: Nachbarfenster, Lisenen, Dachkanten, Pergola, HST-Rahmen, Wandleuchten liegen auf den Render-Kanten; Massstab KI/Render 0,996 bis 1,012, Verschiebung unter 0,4 %. Abweichungskarte ist in Flaechen mit Wiederholmustern und Blattschatten verrauscht (17 bis 28 % ueber 6 px), daher nur Hinweis, nicht Abnahmekriterium",
   "credits": {
-   "verbraucht": 61.0,
-   "rechnung": "Kontostand 7081,63 auf 7020,63 fuer 8 Bilder (rund 7,6 je Bild bei quality high; Angebot ohne quality-Parameter hatte 3,25 genannt)"
+   "verbraucht": 26.0,
+   "rechnung": "8 x 3,25 (Transaktionen 20:34:36 bis 20:34:39); weitere Abzuege zur selben Zeit (Kling-Videos, GPT-Bilder um 19:36 und 20:48) stammen nicht aus dieser Sitzung"
   },
   "offen": [
    "Teakmoebel als echte Modelle erst nach Neurender (Mac)",
