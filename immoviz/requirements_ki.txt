@@ -6,7 +6,10 @@
 # --steuerung tiefe zusaetzlich klein-base-4B 16 GB), flux1_dev_depth/_canny je rund 34 GB (gated, nur intern). Lizenzen: lib/ki_lokal.py Kopf und auftraege/2026-11-19_ki_lokal_test.md.
 # Funktionstest in der Cloud am 18.11.2026 (CPU, Testmodell) mit torch 2.15.0, diffusers 0.43.0, transformers 5.23.0,
 # accelerate 1.16.0.
-torch>=2.6
+# Mac mit macOS 14: torch 2.15.0 bricht auf MPS ab (-[MPSNDArray arrayViewWithShape:strides:]: unrecognized selector),
+# 2.12.1 laeuft (Funktionstest 22.11.2026, macOS 14.4). 2.13 und 2.14 ungeprueft, deshalb unter 2.13 begrenzt.
+torch>=2.6,<2.13; sys_platform == "darwin"
+torch>=2.6; sys_platform != "darwin"
 diffusers>=0.38            # SDXL-ControlNet-Union Img2Img/Inpaint (0.36), Flux2KleinInpaintPipeline (0.38),
                            # FluxControlImg2ImgPipeline (FLUX.1 Depth/Canny dev); geprueft mit 0.43.0
 transformers>=4.51         # Qwen3 (Textkodierer FLUX.2 klein), T5 (FLUX.1)

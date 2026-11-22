@@ -69,6 +69,8 @@ Für die strukturgeführte Veredelung auf dem Mac (README, Abschnitt "Lokaler KI
 .venv-immoviz/bin/python -c "import torch; print(torch.__version__, torch.backends.mps.is_available())"   # erwartet True
 ```
 
+Auf macOS 14 nur torch unter 2.13 (2.15.0 bricht auf MPS ab, geprüft 22.11.2026; `requirements_ki.txt` begrenzt es).
+
 Die Modelle (SDXL, ControlNet-Union ProMax, VAE; rund 10 GB) lädt der erste Lauf nach `~/.cache/huggingface`,
 ohne Konto. Nichts davon ins Repo. Ein `ki-lokal`-Lauf belegt die Grafikeinheit: wie ein Render behandeln, also nie
 parallel zu `render` oder einem zweiten `ki-lokal` (`pgrep -f immoviz.py`). Erster Testlauf:
