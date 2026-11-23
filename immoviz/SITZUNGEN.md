@@ -42,7 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11. 23:15: Terrassen mit Teakmoebeln veredelt und geliefert; wartet auf Mac-Render noma_apartments_r10, danach Veredelung APT. 06) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
+(niemand)
 
 ## Nachrichten
 
@@ -64,6 +64,12 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-23 cloud-neu: APT. 06 V1/V2 veredelt (23 Bilder 4k, `renders/higgsfield/apt06_*_r10_final.jpg`, Pruefbilder
+  `r10_apt_pruefung/`). Kompakter Innenraum-Prompt mit Farbkorrektur gegen den Orangestich (Bordeaux #5C1727 weinrot),
+  Stuehle mit Beinen, Stimmungen Tag, Morgen, Gegenlicht, Abend. Variante b fuer 5 Bilder (4 Abendbilder dunkler, Fliesen in
+  der Garderobennische entfernt). schutz `ki_verzogen` mit `--ohne fenster_glas` (Fenster und Duschwand aus der KI).
+  91 Credits (28 x 3,25). Details `staging.json` runde_10_apartments. cloud-neu abgemeldet; offen beim Nutzer: Plaene EIN S. 8,
+  15, 23 und Derenko fuer die Gartenblick- und Eckapartments, 3 bis 5 Grading-Referenzbilder.
 - 2026-11-23 mac-neu: Auftrag `noma_apartments_r10` erledigt (APT. 06 V1/V2, 23 Kameras): Probe 2345 s, 4k mit Ebenen
   10819 s, 38,4 GB peak, Planbeleg 23 x 0, Ebenen Schutz 100 %. Optische Hinweise im Auftrag. Damit auch `noma_terrassen_r10`
   Neustart 2 abgeschlossen; mac-neu abgemeldet, GPU frei.
