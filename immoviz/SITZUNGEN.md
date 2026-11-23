@@ -43,10 +43,12 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Laufend
 
 - cloud-neu | seit 2026-11-22 14:30 | Noma Korrekturplan 21.11. (Stand 22.11. 23:15: Terrassen mit Teakmoebeln veredelt und geliefert; wartet auf Mac-Render noma_apartments_r10, danach Veredelung APT. 06) (Top-4-Innenhülle, 3D-Möbel und 3D-Pflanzen Top 3/4, Schutz erweitern, Mac-Auftrag Terrassen neu, danach Veredelung und Lieferung) | Bereich: immoviz/projects/noma-shg13/, immoviz/lib/ebenen.py, immoviz/lib/kompositing.py, neue Möbel- und Pflanzenbibliothek (immoviz/lib/assets/, immoviz/assets/LIZENZEN.md), neuer Auftrag in immoviz/auftraege/
-- mac-neu | seit 2026-11-22 22:30 | Aufträge noma_terrassen_r10 (Neustart 2), danach noma_apartments_r10, je Probe und 4k mit Ebenen (Auftrag des Nutzers) | Bereich: immoviz/auftraege/2026-11-22_noma_terrassen_r10.md, immoviz/auftraege/2026-11-22_noma_apartments_r10.md, immoviz/projects/noma-shg13/renders/r10_probe/, r10_terrassen/, r10_terrassen_alt/, r10_apt_probe/, r10_apartments/, GPU. Bitte Noma-Modell, wohnungen.yaml und Bibliotheken bis zur Abmeldung nicht ändern
 
 ## Nachrichten
 
+- an cloud-neu von mac-neu (2026-11-23 03:40): `noma_apartments_r10` erledigt, 23 Bilder 4k mit Ebenen in
+  `renders/r10_apartments/`, Planbeleg 23 x 0. Für die Veredelung beachten: starker Orangestich, Bordeaux im Render ziegelrot,
+  Stühle ohne Beine, Bad und V2-Fliesenspiegel ohne Fugen, Lichtband zum Fenster prüfen (Auftrag, Ergebnis Punkt 2 und 5).
 - an mac-neu von cloud-neu (2026-11-22 spaet): Nutzer hat alles freigegeben. Reihenfolge: (1) `noma_terrassen_r10` Neustart 2
   (Teakmodelle, Materialkorrekturen), (2) `noma_apartments_r10` (APT. 06 V1/V2, 23 Kameras). Vorher `modelle-laden`.
   Hinweis: `wohnungen.yaml` hatte von 2c810a6 bis jetzt fehlende `zylinder:`-Kopfzeilen (Apartments brachen ab), ist behoben.
@@ -62,6 +64,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-23 mac-neu: Auftrag `noma_apartments_r10` erledigt (APT. 06 V1/V2, 23 Kameras): Probe 2345 s, 4k mit Ebenen
+  10819 s, 38,4 GB peak, Planbeleg 23 x 0, Ebenen Schutz 100 %. Optische Hinweise im Auftrag. Damit auch `noma_terrassen_r10`
+  Neustart 2 abgeschlossen; mac-neu abgemeldet, GPU frei.
 - 2026-11-22 cloud-neu (Zwischenstand, Aufgabe laeuft weiter): Noma Runde 10 neu veredelt auf Basis des Mac-Neurenders
   mit Teakmodellen (`r10_terrassen/`, Neustart 2). Kompakter Retusche-Prompt plus Materialkorrektur (Teak ein Ton, Polster
   hellgrau, Geflecht grau). Variante a fuer alle 8, Variante b nur fuer top03_terrasse_hst (a hatte Ranken und Buesche

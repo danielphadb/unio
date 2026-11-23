@@ -1,0 +1,219 @@
+{
+ "kamera": "apt06_v2_bett_abend",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [],
+ "sichtbar": [
+  {
+   "objekt": "umgebung_boden",
+   "anteil_prozent": 35.7,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "apt06_v2_waende",
+   "anteil_prozent": 25.65,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Noma Apartment APT. 06 (Typ Derenko Top 1 gespiegelt), Variante 2 nach Mappe 28.10.2026 [EIN S. 15, S. 23, INT2]"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005378",
+   "anteil_prozent": 6.49,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005379",
+   "anteil_prozent": 4.88,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005379_masse",
+   "anteil_prozent": 3.56,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005379",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nb_umgebung_masse",
+   "anteil_prozent": 3.27,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nb_top4_masse",
+   "anteil_prozent": 2.8,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_top4",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005380_masse",
+   "anteil_prozent": 2.44,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005380",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nb_garten_gruen",
+   "anteil_prozent": 2.14,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_garten",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_garten_gelaender",
+   "anteil_prozent": 2.1,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_garten",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005379_glas",
+   "anteil_prozent": 0.97,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005379_innen",
+   "anteil_prozent": 0.8,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top3_masse",
+   "anteil_prozent": 0.64,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005380",
+   "anteil_prozent": 0.59,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top3_02__vegetation__efeu_wand_0",
+   "anteil_prozent": 0.27,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005380_glas",
+   "anteil_prozent": 0.23,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005379_rahmen",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005380_innen",
+   "anteil_prozent": 0.17,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top3_02__vegetation__efeu_wand_3",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top3",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005379_glas",
+   "anteil_prozent": 0.08,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005379",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005379_rahmen",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005379",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005379_innen",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005379",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nb_umgebung_erker_005380_glas",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_erker_005380",
+   "herkunft": "nachbarn"
+  }
+ ]
+}

@@ -1,8 +1,8 @@
 # Auftrag noma_apartments_r10
 
-Status: in Arbeit (mac-neu, 2026-11-22 23:32, 4k ab 2026-11-23 00:15)
+Status: erledigt
 Erstellt: 22.11.2026, cloud-neu
-Erledigt:
+Erledigt: 23.11.2026, mac-neu
 
 Start nach dem Terrassen-Neurender (`2026-11-22_noma_terrassen_r10.md`, Neustart 2), sobald keine andere Mac-Arbeit läuft (`SITZUNGEN.md` "Laufend", `pgrep -f immoviz.py`).
 Der Terrassen-Neurender läuft im eigenen Auftrag.
@@ -53,3 +53,12 @@ pgrep -f immoviz.py && echo "BELEGT: warten" || echo frei
      oder die gestrichene Stuckleiste. Im Bad keine Lichtleiste und kein Fensterschimmer mehr zu sehen.
    - V2 `kueche_fliesen`: Fliesenspiegel als glatte rote Fläche ohne Fugen.
    - Kein Abbruchgrund, weil die Veredelung in Runde 6 Möbel und Farben aus demselben Blockmodell geholt hat.
+3. 4k 3840 x 2560, 256 Samples, `--ebenen`: 23 Kameras in 10819 s (3 h 0 min, 00:12 bis 03:12), Metal GPU, 19,2 GB resident,
+   38,4 GB peak footprint, rc 0. **Planbeleg 23 x 0 Fehler, 0 Hinweise** (`r10_apartments/planbeleg/`).
+4. Ebenen: 23 Ordner, Schutz 100 %, `nicht_zugeordnet` leer, je rund 4 s. `normalen.png` nicht eingecheckt (Regel), PNG der
+   Endbilder lokal, eingecheckt sind die JPG (q92) und `r10_apartments/kontaktbogen.jpg`.
+5. Sichtprüfung 4k: Bild wie die Probe, nur rauschfrei; alle Hinweise aus Punkt 2 gelten weiter (Orangestich, Bordeaux
+   ziegelrot, Stühle ohne Beine, Bad und V2-Fliesenspiegel ohne Fugen, Lichtband zum Fenster). Bad: Decke und Wandband bordeaux
+   wie `wohnungen.yaml` [INT S. 10, 15], kein Fehler. Abendbilder (`*_abend`) sind innen fast so hell wie die Tagbilder, nur das
+   Fenster ist dunkel. Keine Stuckleiste als Profil sichtbar.
+6. Keine Credits verbraucht.

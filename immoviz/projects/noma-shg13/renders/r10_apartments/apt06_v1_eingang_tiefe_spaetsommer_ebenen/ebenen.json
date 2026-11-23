@@ -1,0 +1,138 @@
+{
+ "version": 1,
+ "groesse": [
+  3840,
+  2560
+ ],
+ "kamera": "apt06_v1_eingang_tiefe",
+ "licht": "spaetsommer",
+ "beauty": "immoviz/projects/noma-shg13/renders/r10_apartments/apt06_v1_eingang_tiefe_final.png",
+ "fassaden": {
+  "schlachthausgasse": {
+   "normale": [
+    0.0,
+    1.0
+   ],
+   "a": [
+    18.48,
+    0.0
+   ],
+   "b": [
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "kamera_pos": [
+  11.85213565826416,
+  -28.524385452270508,
+  1.7999999523162842
+ ],
+ "kamera_intern": {
+  "lens_mm": 20.0,
+  "sensor_mm": 36.0,
+  "shift_x": 0.0,
+  "shift_y": 0.0,
+  "f_px": 2133.3333333333335,
+  "typ": "PERSP"
+ },
+ "autos": "modelle",
+ "klassen": [
+  "gebaeude_objekt",
+  "fenster_glas",
+  "fenster_rahmen",
+  "gelaender",
+  "leuchten",
+  "strassenmoebel",
+  "autos",
+  "baeume",
+  "vegetation",
+  "ausstattung",
+  "menschen_platzhalter",
+  "nachbarn",
+  "boden",
+  "himmel",
+  "sonstige",
+  "innenraum",
+  "stoffe"
+ ],
+ "anteile_prozent": {
+  "gebaeude_objekt": 96.678,
+  "fenster_glas": 2.296,
+  "fenster_rahmen": 0.529,
+  "gelaender": 0.0,
+  "leuchten": 0.0,
+  "strassenmoebel": 0.0,
+  "autos": 0.0,
+  "baeume": 0.0,
+  "vegetation": 0.0,
+  "ausstattung": 0.497,
+  "menschen_platzhalter": 0.0,
+  "nachbarn": 0.0,
+  "boden": 0.0,
+  "himmel": 0.0,
+  "sonstige": 0.0,
+  "innenraum": 0.0,
+  "stoffe": 0.0
+ },
+ "schutz_klassen": [
+  "gebaeude_objekt",
+  "fenster_glas",
+  "fenster_rahmen",
+  "gelaender",
+  "leuchten",
+  "strassenmoebel",
+  "autos",
+  "nachbarn",
+  "innenraum",
+  "ausstattung",
+  "boden"
+ ],
+ "schutz_anteil_prozent": 100.0,
+ "schutz_kante_px": 2.0,
+ "dateien": {
+  "gebaeude_objekt": "gebaeude_objekt.png",
+  "fenster_glas": "fenster_glas.png",
+  "fenster_rahmen": "fenster_rahmen.png",
+  "gelaender": "gelaender.png",
+  "leuchten": "leuchten.png",
+  "strassenmoebel": "strassenmoebel.png",
+  "autos": "autos.png",
+  "baeume": "baeume.png",
+  "vegetation": "vegetation.png",
+  "ausstattung": "ausstattung.png",
+  "menschen_platzhalter": "menschen_platzhalter.png",
+  "nachbarn": "nachbarn.png",
+  "boden": "boden.png",
+  "himmel": "himmel.png",
+  "sonstige": "sonstige.png",
+  "innenraum": "innenraum.png",
+  "stoffe": "stoffe.png",
+  "klassen": "klassen.png",
+  "tiefe": "tiefe.png",
+  "normalen": "normalen.png",
+  "kanten": "kanten.png",
+  "schutz": "schutz.png"
+ },
+ "tiefe": {
+  "kodierung": "log",
+  "min_m": 0.1,
+  "max_m": 30000.0,
+  "formel": "d = min_m * (max_m/min_m) ** (v/65535)",
+  "himmel": 65535
+ },
+ "normalen": {
+  "raum": "Welt (Projektsystem, x Stolberggasse usw.)",
+  "formel": "n = rgb/127.5 - 1",
+  "himmel": [
+   0,
+   0,
+   0
+  ]
+ },
+ "kanten": {
+  "tiefe_relativ": 0.03,
+  "normale_grad": 25.0
+ },
+ "nicht_zugeordnet": []
+}
