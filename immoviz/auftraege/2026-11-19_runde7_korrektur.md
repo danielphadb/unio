@@ -1,6 +1,6 @@
 # Auftrag runde7_korrektur
 
-Status: offen
+Status: erledigt (überholt, mac-neu, 23.11.2026 auf Wunsch des Nutzers; nicht gerendert)
 Erstellt: 18.11.2026, Cloud-Sitzung
 
 ## Ziel
@@ -91,4 +91,7 @@ Unter "Ergebnis" eintragen und pushen (`git pull --rebase` vorher):
 6. Probleme mit genauer Fehlermeldung.
 
 ## Ergebnis
-(von der Mac-Sitzung auszufüllen)
+(mac-neu, 23.11.2026) Nicht ausgeführt, überholt. Der Nutzer hat am 23.11.2026 bestätigt, den Auftrag zu schließen. Die
+Modellkorrekturen sind in späteren Ständen enthalten: Basis der Wimmergasse ist seit 22.11.2026 `renders/r8_kreuzung/`
+(Gelände glatt, Kreuzung ohne Stufen, Auftrag `runde8_begehung` Ergebnis Punkt 7), die übrigen Außenbilder kamen mit
+`2026-11-23_wimmergasse_r10_aussen.md` (`renders/r10_aussen/`). Keine Credits.

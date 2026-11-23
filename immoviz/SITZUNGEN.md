@@ -70,6 +70,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-23 mac-neu: Auftrag `runde7_korrektur` auf Wunsch des Nutzers als überholt geschlossen (nicht gerendert; ersetzt durch `r8_kreuzung` und `wimmergasse_r10_aussen`).
 - 2026-11-23 mac-neu: Auftrag `wimmergasse_r10_aussen` erledigt: Masken r8_kreuzung nachgereicht, Probe 6 Bilder, 4k mit Ebenen
   für 3 Bilder in 21 min, Planbeleg 0 Fehler, 612 Autos 0 Befunde, Kreuzung ohne Stufen. mac-neu abgemeldet, GPU frei.
 - 2026-11-23 cloud-neu: APT. 06 V1/V2 veredelt (23 Bilder 4k, `renders/higgsfield/apt06_*_r10_final.jpg`, Pruefbilder
