@@ -1,0 +1,434 @@
+{
+ "kamera": "ecke",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [],
+ "sichtbar": [
+  {
+   "objekt": "umgebung_boden",
+   "anteil_prozent": 14.28,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "hero_masse",
+   "anteil_prozent": 12.06,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "hero_stuck",
+   "anteil_prozent": 9.35,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero_stuck",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "baeume_kronen_ahorn.035",
+   "anteil_prozent": 6.71,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "hero_glas",
+   "anteil_prozent": 5.0,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "strassenelemente_boden",
+   "anteil_prozent": 3.07,
+   "collections": [
+    "Strassenelemente"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_34",
+   "anteil_prozent": 2.72,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "hero_innen",
+   "anteil_prozent": 2.71,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "hero_rahmen",
+   "anteil_prozent": 2.7,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "auto_60e683e8_014",
+   "anteil_prozent": 1.61,
+   "collections": [
+    "auto_60e683e8"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "strassenmoebel.001",
+   "anteil_prozent": 1.11,
+   "collections": [
+    "Strassenmoebel.001"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_34_rahmen",
+   "anteil_prozent": 0.85,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 0.77,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_32",
+   "anteil_prozent": 0.75,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_22_stuck",
+   "anteil_prozent": 0.74,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "baeume_kronen_ahorn.008",
+   "anteil_prozent": 0.71,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_22",
+   "anteil_prozent": 0.69,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "baeume_holz.067",
+   "anteil_prozent": 0.63,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_34_glas",
+   "anteil_prozent": 0.6,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "auto_b6b859bd_027",
+   "anteil_prozent": 0.53,
+   "collections": [
+    "auto_b6b859bd"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "strassenleuchten",
+   "anteil_prozent": 0.5,
+   "collections": [
+    "Strassenleuchten"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_32_stuck",
+   "anteil_prozent": 0.5,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "auto_60e683e8_001",
+   "anteil_prozent": 0.47,
+   "collections": [
+    "auto_60e683e8"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "auto_60e683e8_000",
+   "anteil_prozent": 0.36,
+   "collections": [
+    "auto_60e683e8"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_24",
+   "anteil_prozent": 0.35,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_34_innen",
+   "anteil_prozent": 0.33,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_26",
+   "anteil_prozent": 0.31,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_24_stuck",
+   "anteil_prozent": 0.28,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_34_dach",
+   "anteil_prozent": 0.27,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_ramperstorffer_17",
+   "anteil_prozent": 0.27,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_22_rahmen",
+   "anteil_prozent": 0.26,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "auto_1dcca4af_035",
+   "anteil_prozent": 0.24,
+   "collections": [
+    "auto_1dcca4af"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_gegenueber_w_ecke_stuck",
+   "anteil_prozent": 0.21,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_gegenueber_w_31",
+   "anteil_prozent": 0.21,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "menschen_platzhalter",
+   "anteil_prozent": 0.18,
+   "collections": [
+    "menschen_platzhalter"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_26_stuck",
+   "anteil_prozent": 0.17,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "baeume_staemme",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "strassenelemente_markierung",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Strassenelemente"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_22_glas",
+   "anteil_prozent": 0.14,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_28_stuck",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "baeume_holz.024",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_gegenueber_w_33",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_30",
+   "anteil_prozent": 0.1,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_28",
+   "anteil_prozent": 0.08,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "auto_60e683e8_002",
+   "anteil_prozent": 0.08,
+   "collections": [
+    "auto_60e683e8"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_25_stuck",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "baeume_kronen_linde.067",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_daecher",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_24_rahmen",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "strassenmoebel_elemente",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Strassenelemente"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_32_rahmen",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "auto_b501e06a_127",
+   "anteil_prozent": 0.05,
+   "collections": [
+    "auto_b501e06a"
+   ],
+   "herkunft": "umgebung"
+  }
+ ]
+}

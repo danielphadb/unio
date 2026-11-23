@@ -1,8 +1,8 @@
 # Auftrag wimmergasse_r10_aussen
 
-Status: in Arbeit (mac-neu, 2026-11-23 20:17)
+Status: erledigt
 Erstellt: 23.11.2026, cloud-neu
-Erledigt:
+Erledigt: 23.11.2026, mac-neu
 
 Start, sobald keine andere Mac-Arbeit läuft (`SITZUNGEN.md` "Laufend", `pgrep -f immoviz.py`). Zuerst in `SITZUNGEN.md`
 anmelden und hier `Status: in Arbeit (<kennung>, <Datum Uhrzeit>)` setzen, pushen.
@@ -65,4 +65,26 @@ schon veredelten Bilder prüfen, während der Mac rendert.
 - Schritt 4: Liste der lokalen Plan-PDFs Wimmergasse (Mappe 24.04., Nutzwertgutachten, Verkaufspläne Top 7, 12, 35).
 
 ## Ergebnis
-(von der Mac-Sitzung auszufüllen)
+(mac-neu, 23.11.2026, Metal GPU auf Apple M3 Max, 36 GB)
+
+1. Schritt 5 vorgezogen (b577ad0): Masken und Planbeleg von `r8_kreuzung/` nachgereicht, je Kamera auch `hintergrund/`
+   (zweiter Durchgang ohne Platzhalter, Autos, Bäume davor), ohne `normalen.png`.
+2. Probe 960 x 640, 32 Samples: ecke 3 Lichter 278 s, ecke_erhoeht/eg_lokal/drohne 399 s; 17,9 GB resident, 43,6 GB peak.
+   **Planbeleg 0 Fehler**: ecke 52, ecke_erhoeht 52, eg_lokal 30, drohne 77 sichtbare Objekte (`r10_probe/planbeleg/`).
+3. 4k 3840 x 2560, 256 Samples, `--ebenen`: ecke herbst + blaue_stunde 846 s, drohne golden_hour 437 s (zusammen 21 min);
+   20,3 GB resident, 43,6 GB peak, rc 0. **Planbeleg ecke 52 x 0, drohne 77 x 0.** Autoprüfung je Lauf 612 Autos, 0 Befunde.
+   Ebenen: Schutz ecke 28,7 %, drohne 13,9 %, `nicht_zugeordnet` leer. Eingecheckt: JPG q92, Ebenen ohne `normalen.png`,
+   Planbeleg; PNG lokal.
+4. Sichtprüfung: Gelände an der Kreuzung glatt, keine Stufen, Gehsteigkanten durchgehend; Schilder (Fahrverbot, Vorrang geben)
+   und Poller stehen. Beet NW liegt außerhalb dieser Bildausschnitte. Drohne: Dachausbau und Nachbarn wie Runde 7. Blaue Stunde
+   sehr dunkel, Straße unter den Leuchten stark orange; Herbst mit orangem Baum, sonst wie golden_hour.
+5. Lokale Plan-PDFs Wimmergasse (nur Dateinamen, nichts eingecheckt):
+   - im Repo `quellen/`: `06_Wimmerg_Strassenansicht.pdf`, `260706_Nwga_Wimmergasse_20_01_inkl_Beilagen.pdf`
+     (`data/plan_cache/` gibt es nicht).
+   - auf dem Mac unter Downloads/Wimmergasse: `20260424_Mappe_Wimmerg20.pdf`, `20260410_Mappe_Wimmerg.20.pdf`,
+     `260706 Nwga Wimmergasse 20_01 inkl. Beilagen .pdf`, `06_Wimmerg_Straßenansicht.pdf`, `20251107-08_TOP 2-Lokal.pdf`,
+     `20251108-09_TOP 4-Lokal.pdf`, `260722 Das_Wimmer_Produktkatalog_reduziert.pdf`.
+   - Verkaufsplan Top 7: `Wimmer20_Top07_1OG_Rahmen_richtig_2026-11-12.pdf` (nur als Mail-Anhang in Outlook), außerdem
+     `Verkaufsplan-das-wimmer.pdf` (Masterlayout, mehrere Kopien in Downloads).
+   - **Nicht gefunden:** Verkaufspläne Top 12 und Top 35, Mappe 30.04., EIN-Pläne 07.05.2025.
+6. Keine Credits verbraucht.

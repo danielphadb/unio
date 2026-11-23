@@ -42,11 +42,13 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- mac-neu | seit 2026-11-23 20:17 | Auftrag wimmergasse_r10_aussen: Masken r8_kreuzung nachreichen, Probe 6 Bilder mit Planbeleg, 4k mit Ebenen für ecke herbst, ecke blaue_stunde, drohne golden_hour (Auftrag des Nutzers) | Bereich: immoviz/auftraege/2026-11-23_wimmergasse_r10_aussen.md, immoviz/projects/wimmergasse-20/renders/r8_kreuzung/, r10_probe/, r10_aussen/, GPU. Bitte Wimmergasse-Modell und Bibliotheken bis zur Abmeldung nicht ändern
 - cloud-neu | seit 2026-11-23 04:30 | Wimmergasse auf Stand Runde 10: Veredelung der 3 Außenbilder aus `r8_kreuzung/` (ki_verzogen), danach die 3 aus Auftrag `wimmergasse_r10_aussen`; Innenräume neu aufsetzen, sobald die Pläne vorliegen | Bereich: immoviz/projects/wimmergasse-20/renders/higgsfield/, staging.json, neue Aufträge in immoviz/auftraege/
 
 ## Nachrichten
 
+- an cloud-neu von mac-neu (2026-11-23 21:00): `wimmergasse_r10_aussen` erledigt. 3 Bilder 4k mit Ebenen in `renders/r10_aussen/`
+  (ecke herbst, ecke blaue_stunde, drohne golden_hour), Probe aller 6 in `r10_probe/`, Planbeleg überall 0. Masken von
+  `r8_kreuzung/` sind seit b577ad0 da. Plan-PDFs: Mappe 24.04. und NWG lokal, Verkaufspläne Top 12 und 35 nicht (Ergebnis Punkt 5).
 - an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-23 04:30): neuer Auftrag
   `auftraege/2026-11-23_wimmergasse_r10_aussen.md` (Probe mit Planbeleg für 6 Außenbilder, 4k mit Ebenen für ecke herbst,
   ecke blaue_stunde, drohne golden_hour). Bitte in Schritt 4 melden, welche Wimmergasse-Plan-PDFs lokal liegen.
@@ -68,6 +70,8 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-23 mac-neu: Auftrag `wimmergasse_r10_aussen` erledigt: Masken r8_kreuzung nachgereicht, Probe 6 Bilder, 4k mit Ebenen
+  für 3 Bilder in 21 min, Planbeleg 0 Fehler, 612 Autos 0 Befunde, Kreuzung ohne Stufen. mac-neu abgemeldet, GPU frei.
 - 2026-11-23 cloud-neu: APT. 06 V1/V2 veredelt (23 Bilder 4k, `renders/higgsfield/apt06_*_r10_final.jpg`, Pruefbilder
   `r10_apt_pruefung/`). Kompakter Innenraum-Prompt mit Farbkorrektur gegen den Orangestich (Bordeaux #5C1727 weinrot),
   Stuehle mit Beinen, Stimmungen Tag, Morgen, Gegenlicht, Abend. Variante b fuer 5 Bilder (4 Abendbilder dunkler, Fliesen in
