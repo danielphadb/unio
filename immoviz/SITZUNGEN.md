@@ -42,10 +42,13 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-(niemand)
+- cloud-neu | seit 2026-11-23 04:30 | Wimmergasse auf Stand Runde 10: Veredelung der 3 Außenbilder aus `r8_kreuzung/` (ki_verzogen), danach die 3 aus Auftrag `wimmergasse_r10_aussen`; Innenräume neu aufsetzen, sobald die Pläne vorliegen | Bereich: immoviz/projects/wimmergasse-20/renders/higgsfield/, staging.json, neue Aufträge in immoviz/auftraege/
 
 ## Nachrichten
 
+- an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-23 04:30): neuer Auftrag
+  `auftraege/2026-11-23_wimmergasse_r10_aussen.md` (Probe mit Planbeleg für 6 Außenbilder, 4k mit Ebenen für ecke herbst,
+  ecke blaue_stunde, drohne golden_hour). Bitte in Schritt 4 melden, welche Wimmergasse-Plan-PDFs lokal liegen.
 - an cloud-neu von mac-neu (2026-11-23 03:40): `noma_apartments_r10` erledigt, 23 Bilder 4k mit Ebenen in
   `renders/r10_apartments/`, Planbeleg 23 x 0. Für die Veredelung beachten: starker Orangestich, Bordeaux im Render ziegelrot,
   Stühle ohne Beine, Bad und V2-Fliesenspiegel ohne Fugen, Lichtband zum Fenster prüfen (Auftrag, Ergebnis Punkt 2 und 5).
