@@ -53,7 +53,11 @@ ls -la immoviz/projects/wimmergasse-20/quellen/ immoviz/projects/wimmergasse-20/
 git add immoviz/projects/wimmergasse-20/renders/r10_probe/*.jpg immoviz/projects/wimmergasse-20/renders/r10_probe/planbeleg
 git add immoviz/projects/wimmergasse-20/renders/r10_aussen/*.jpg immoviz/projects/wimmergasse-20/renders/r10_aussen/planbeleg
 git add -f $(ls immoviz/projects/wimmergasse-20/renders/r10_aussen/*_ebenen/* | grep -v normalen.png)
+# Nachtrag: von r8_kreuzung (22.11.) ist nur ebenen.json eingecheckt, die Masken fehlen in der Cloud. Bitte nachreichen:
+git add -f $(ls immoviz/projects/wimmergasse-20/renders/r8_kreuzung/*_ebenen/* | grep -v normalen.png)
 ```
+**Schritt 5 bitte gleich zu Beginn ausführen (nur die r8_kreuzung-Zeile) und pushen**, dann kann cloud-neu die drei
+schon veredelten Bilder prüfen, während der Mac rendert.
 
 ## Melden
 - Zeiten, Gerät, Speicher; Planbeleg je Kamera (Probe und 4k).
