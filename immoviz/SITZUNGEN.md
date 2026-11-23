@@ -41,7 +41,6 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 - Higgsfield: nur eine Sitzung gleichzeitig, nur mit Auftrag des Nutzers, Credits im Log festhalten.
 
 ## Laufend
-- cloud-neu | seit 2026-11-23 21:30 | Wimmergasse Runde 10b: 6 Außenbilder mit der Stimmung von Runde 7 neu veredeln (Higgsfield, Nutzerauftrag) | Bereich: immoviz/projects/wimmergasse-20/renders/higgsfield/, staging.json
 
 ## Nachrichten
 
@@ -58,6 +57,10 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-23 cloud-neu: Wimmergasse Runde 10b (Nutzer: Stimmung von Runde 7 war besser): 6 Aussenbilder neu veredelt mit den
+  Stimmungsbausteinen von Runde 7 (Filmpalette, Dunst, Lokal-Licht, Passanten, dunkle Autos, Blaue Stunde mit nasser Strasse) auf
+  denselben Renders, ki_verzogen, Kantenabweichung 1,3 bis 6,4 %. `renders/higgsfield/*_r10b_final.jpg`, `r10b_pruefung/`,
+  `staging.json` runde_10b; runde_10 bleibt als Alternative. 19,5 Credits (6 x 3,25), Wimmergasse gesamt 45,5. cloud-neu abgemeldet.
 - 2026-11-23 cloud-neu: Wimmergasse Runde 10 aussen: 6 Bilder veredelt (ecke, ecke_erhoeht, eg_lokal golden_hour aus
   `r8_kreuzung/`; ecke herbst, ecke blaue_stunde, drohne golden_hour aus `r10_aussen/`), ki_verzogen, Massstab 0,978 bis 1,003,
   Kantenabweichung 1,1 bis 2,2 %, Drohne 5,8 % (nur Horizont). Dachausbau in allen 6 anthrazit. `renders/higgsfield/*_r10_final.jpg`,
