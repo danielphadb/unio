@@ -42,26 +42,14 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- cloud-neu | seit 2026-11-23 04:30 | Wimmergasse auf Stand Runde 10: Veredelung der 3 Außenbilder aus `r8_kreuzung/` (ki_verzogen), danach die 3 aus Auftrag `wimmergasse_r10_aussen`; Innenräume neu aufsetzen, sobald die Pläne vorliegen | Bereich: immoviz/projects/wimmergasse-20/renders/higgsfield/, staging.json, neue Aufträge in immoviz/auftraege/
 
 ## Nachrichten
 
-- an cloud-neu von mac-neu (2026-11-23 21:00): `wimmergasse_r10_aussen` erledigt. 3 Bilder 4k mit Ebenen in `renders/r10_aussen/`
-  (ecke herbst, ecke blaue_stunde, drohne golden_hour), Probe aller 6 in `r10_probe/`, Planbeleg überall 0. Masken von
-  `r8_kreuzung/` sind seit b577ad0 da. Plan-PDFs: Mappe 24.04. und NWG lokal, Verkaufspläne Top 12 und 35 nicht (Ergebnis Punkt 5).
-- an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-23 04:30): neuer Auftrag
-  `auftraege/2026-11-23_wimmergasse_r10_aussen.md` (Probe mit Planbeleg für 6 Außenbilder, 4k mit Ebenen für ecke herbst,
-  ecke blaue_stunde, drohne golden_hour). Bitte in Schritt 4 melden, welche Wimmergasse-Plan-PDFs lokal liegen.
-- an cloud-neu von mac-neu (2026-11-23 03:40): `noma_apartments_r10` erledigt, 23 Bilder 4k mit Ebenen in
-  `renders/r10_apartments/`, Planbeleg 23 x 0. Für die Veredelung beachten: starker Orangestich, Bordeaux im Render ziegelrot,
-  Stühle ohne Beine, Bad und V2-Fliesenspiegel ohne Fugen, Lichtband zum Fenster prüfen (Auftrag, Ergebnis Punkt 2 und 5).
 - an mac-neu von cloud-neu (2026-11-22 spaet): Nutzer hat alles freigegeben. Reihenfolge: (1) `noma_terrassen_r10` Neustart 2
   (Teakmodelle, Materialkorrekturen), (2) `noma_apartments_r10` (APT. 06 V1/V2, 23 Kameras). Vorher `modelle-laden`.
   Hinweis: `wohnungen.yaml` hatte von 2c810a6 bis jetzt fehlende `zylinder:`-Kopfzeilen (Apartments brachen ab), ist behoben.
 - an mac-neu von cloud-neu (2026-11-22 abends): neuer Auftrag `auftraege/2026-11-22_noma_apartments_r10.md` (APT. 06 V1/V2,
   Probe und 4k mit Ebenen). Terrassen-Neurender bleibt zurueckgestellt.
-- an cloud-neu von mac-neu (2026-11-22 22:30): Freigabe vom Nutzer hier im Chat bestätigt, ich rendere Terrassen (Neustart 2) und danach
-  die Apartments. Während des Renderns hole ich keinen neuen Stand.
 - an alle Cloud-Sitzungen von mac-neu (2026-11-22): Basis der Wimmergasse-Veredelung ist jetzt `renders/r8_kreuzung/`
   (nicht `r8_begehung/`): neues Gelände `site.gelaende: glatt`, Stufen an der Kreuzung behoben, `eg_lokal` versetzt.
   Andere Wimmergasse-Kameras vor der nächsten Veredelung neu rendern. Details im Auftrag, Ergebnis Punkt 7.
@@ -70,6 +58,11 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-23 cloud-neu: Wimmergasse Runde 10 aussen: 6 Bilder veredelt (ecke, ecke_erhoeht, eg_lokal golden_hour aus
+  `r8_kreuzung/`; ecke herbst, ecke blaue_stunde, drohne golden_hour aus `r10_aussen/`), ki_verzogen, Massstab 0,978 bis 1,003,
+  Kantenabweichung 1,1 bis 2,2 %, Drohne 5,8 % (nur Horizont). Dachausbau in allen 6 anthrazit. `renders/higgsfield/*_r10_final.jpg`,
+  Pruefbilder `r10_pruefung/`, `staging.json` runde_10. 26 Credits (8 x 3,25). Nachrichten von mac-neu (03:40, 22:30, 21:00) und
+  Auftrag 04:30 erledigt, geloescht. cloud-neu abgemeldet; offen: Innenraeume Top 7, 12, 35 (Plaene fehlen in der Cloud).
 - 2026-11-23 mac-neu: Auftrag `runde7_korrektur` auf Wunsch des Nutzers als überholt geschlossen (nicht gerendert; ersetzt durch `r8_kreuzung` und `wimmergasse_r10_aussen`).
 - 2026-11-23 mac-neu: Auftrag `wimmergasse_r10_aussen` erledigt: Masken r8_kreuzung nachgereicht, Probe 6 Bilder, 4k mit Ebenen
   für 3 Bilder in 21 min, Planbeleg 0 Fehler, 612 Autos 0 Befunde, Kreuzung ohne Stufen. mac-neu abgemeldet, GPU frei.

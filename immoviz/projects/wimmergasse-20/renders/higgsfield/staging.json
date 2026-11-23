@@ -1531,5 +1531,62 @@
     "restfehler": "Verglasung des Dachaufbaus kupferfarben (Blender-Material), in R6 dunkles Glas; Fensterzahl-Fehlalarm 13 (kleine Fenster, 4k-Klassifikator)"
    }
   }
+ },
+ "runde_10": {
+  "stand": "2026-11-23",
+  "auftrag": "Nutzer 23.11.: Wimmergasse auf den Stand von Noma Runde 10 bringen; Auftrag wimmergasse_r10_aussen",
+  "eingang": "renders/r8_kreuzung (ecke, ecke_erhoeht, eg_lokal golden_hour, Mac 22.11., korrigiertes Modell) und renders/r10_aussen (ecke herbst, ecke blaue_stunde, drohne golden_hour, Mac 23.11.), alle 4k mit Ebenen; Planbeleg 0 Fehler je Kamera (r10_probe, r10_aussen)",
+  "modell": "gpt_image_2_6 quality high 4k 3:2, nur Bild 1 = Render, kompakter Retusche-Prompt",
+  "prompt": "Kopf pixelgenaue Retusche; Gebaeude (Gruenderzeit, Putz sandbeige wie Render, weisse Kastenfenster); Dachausbau Titanzink Stehfalz anthrazit #3A3D40 auf allen Flaechen, nie bronze, kupfer oder braun; Platzhalter werden Passanten ohne erkennbare Gesichter; Autos bleiben (Modelle), Kennzeichen ohne Zeichen; kein lesbarer Text; Licht je Stimmung",
+  "varianten": "a fuer alle 3 Kreuzungsbilder; b fuer ecke und ecke_erhoeht golden_hour (a hatte den Dachausbau auf der Sonnenseite bronze gefaerbt, b mit ausdruecklicher Zinkfarbe). Gewaehlt: b fuer ecke und ecke_erhoeht, a fuer die anderen 4. Blaue Stunde: Render sehr dunkel und Strasse orange, Prompt hebt leicht auf und macht das Licht warmweiss",
+  "nachbearbeitung": "immoviz.py schutz --modus ki_verzogen --ohne-vordergrund: KI-Pixel unveraendert, per Homographie auf den Render ausgerichtet; Pruefung ueber Kantenbild (r10_pruefung)",
+  "pruefung": {
+   "ecke_golden_hour": {
+    "variante": "b",
+    "massstab_ki_zu_render": 1.0028,
+    "verschiebung_prozent": 0.1,
+    "architekturkanten_abweichung_prozent": 1.24,
+    "p90_4k_px": 3.0
+   },
+   "ecke_erhoeht_golden_hour": {
+    "variante": "b",
+    "massstab_ki_zu_render": 1.0025,
+    "verschiebung_prozent": 0.09,
+    "architekturkanten_abweichung_prozent": 1.11,
+    "p90_4k_px": 3.0
+   },
+   "eg_lokal_golden_hour": {
+    "variante": "a",
+    "massstab_ki_zu_render": 0.997,
+    "verschiebung_prozent": 0.14,
+    "architekturkanten_abweichung_prozent": 1.9,
+    "p90_4k_px": 3.0
+   },
+   "ecke_herbst": {
+    "variante": "a",
+    "massstab_ki_zu_render": 1.0033,
+    "verschiebung_prozent": 0.06,
+    "architekturkanten_abweichung_prozent": 1.38,
+    "p90_4k_px": 3.0
+   },
+   "ecke_blaue_stunde": {
+    "variante": "a",
+    "massstab_ki_zu_render": 1.0021,
+    "verschiebung_prozent": 0.09,
+    "architekturkanten_abweichung_prozent": 2.22,
+    "p90_4k_px": 3.16
+   },
+   "drohne_golden_hour": {
+    "variante": "a",
+    "massstab_ki_zu_render": 0.9775,
+    "verschiebung_prozent": 0.89,
+    "architekturkanten_abweichung_prozent": 5.76,
+    "p90_4k_px": 5.0
+   }
+  },
+  "sicht": "Kantenlinien liegen auf Fassaden, Gesimsen, Fenstern, Schildern und Pollern; Dachausbau anthrazit in allen 6 Bildern; Gelaende an der Kreuzung glatt. Drohne: hoehere Abweichung kommt vom Horizont (Render hat dort flache Platzhalter-Bloecke, KI setzt Huegel und Stadtsilhouette), das Haus und der Block liegen auf den Kanten",
+  "credits": "8 Bilder x 3,25 = 26 (5 um 07:27/07:29, 3 um 20:48)",
+  "dateien": "<name>_r10_final.jpg (3504 x 2336, JPG q88), r10_pruefung/<name>_kanten.jpg und _abweichung.jpg (1920 px)",
+  "offen": "Innenraeume Top 7, 12, 35 (Plaene fehlen in der Cloud: Mappe 24.04., Nutzwertgutachten DG; Verkaufsplaene Top 12 und 35 laut Mac nicht vorhanden)"
  }
 }
