@@ -1,15 +1,15 @@
 {
- "autos": 580,
+ "autos": 612,
  "befunde_anzahl": 0,
  "raeder": {
-  "mittel_cm": 0.0,
+  "mittel_cm": -0.0,
   "max_schwebt_cm": 2.9,
   "max_sinkt_cm": 2.9,
   "ueber_grenze": 0
  },
  "ueberschneidungen": 0,
  "hindernisse": 0,
- "hindernis_punkte": 235,
+ "hindernis_punkte": 279,
  "grenzen_cm": {
   "schwebt": 3.0,
   "sinkt": 3.0
@@ -40,14 +40,6 @@
    "spur": 1.57
   },
   {
-   "modell": "Audi e-tron GT quattro Black",
-   "laenge": 4.99,
-   "breite": 2.15,
-   "hoehe": 1.35,
-   "radstand": 2.93,
-   "spur": 1.66
-  },
-  {
    "modell": "Audi rs6 avant 2024",
    "laenge": 5.0,
    "breite": 2.05,
@@ -62,14 +54,6 @@
    "hoehe": 1.44,
    "radstand": 2.87,
    "spur": 1.6
-  },
-  {
-   "modell": "Bmw",
-   "laenge": 5.12,
-   "breite": 2.21,
-   "hoehe": 1.38,
-   "radstand": 2.97,
-   "spur": 1.7
   },
   {
    "modell": "Bmw 5-series",
@@ -145,10 +129,10 @@
   }
  ],
  "frei_gruende": {
-  "belegung": 115,
-  "kante": 28,
-  "uneben": 3,
-  "hindernis": 2
+  "belegung": 109,
+  "kante": 0,
+  "uneben": 0,
+  "hindernis": 6
  },
  "befunde": []
 }
