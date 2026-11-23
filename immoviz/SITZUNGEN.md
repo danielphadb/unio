@@ -42,6 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
+- mac-neu | seit 2026-11-23 20:17 | Auftrag wimmergasse_r10_aussen: Masken r8_kreuzung nachreichen, Probe 6 Bilder mit Planbeleg, 4k mit Ebenen für ecke herbst, ecke blaue_stunde, drohne golden_hour (Auftrag des Nutzers) | Bereich: immoviz/auftraege/2026-11-23_wimmergasse_r10_aussen.md, immoviz/projects/wimmergasse-20/renders/r8_kreuzung/, r10_probe/, r10_aussen/, GPU. Bitte Wimmergasse-Modell und Bibliotheken bis zur Abmeldung nicht ändern
 - cloud-neu | seit 2026-11-23 04:30 | Wimmergasse auf Stand Runde 10: Veredelung der 3 Außenbilder aus `r8_kreuzung/` (ki_verzogen), danach die 3 aus Auftrag `wimmergasse_r10_aussen`; Innenräume neu aufsetzen, sobald die Pläne vorliegen | Bereich: immoviz/projects/wimmergasse-20/renders/higgsfield/, staging.json, neue Aufträge in immoviz/auftraege/
 
 ## Nachrichten

@@ -1,6 +1,6 @@
 # Auftrag wimmergasse_r10_aussen
 
-Status: offen
+Status: in Arbeit (mac-neu, 2026-11-23 20:17)
 Erstellt: 23.11.2026, cloud-neu
 Erledigt:
 
