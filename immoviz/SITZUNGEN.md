@@ -41,7 +41,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 - Higgsfield: nur eine Sitzung gleichzeitig, nur mit Auftrag des Nutzers, Credits im Log festhalten.
 
 ## Laufend
-
+- cloud-neu | seit 2026-11-23 21:30 | Wimmergasse Runde 10b: 6 Außenbilder mit der Stimmung von Runde 7 neu veredeln (Higgsfield, Nutzerauftrag) | Bereich: immoviz/projects/wimmergasse-20/renders/higgsfield/, staging.json
 
 ## Nachrichten
 
