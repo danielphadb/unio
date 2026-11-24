@@ -39,7 +39,12 @@ nicht ohne Freigabe veredelt.
   diesig bis golden, warmweißer Putz). Schwach: Erdgeschoss-Lokale wirken leer und dunkel (Referenz: Leben im EG,
   beleuchtete Schaufenster); im Drohnenbild die Fernsicht (W2). Vorschlag an den Mac (nach Freigabe): Lokale mit
   Interior Mapping warm beleuchtet (Galerie oder Showroom, ohne Schrift), dann `eg_lokal` und `ecke` neu veredeln.
-- [ ] W4 Innenräume: wartet auf Pläne; Moodkonzept (`mood_interior.md`) auf High-End-Niveau prüfen.
+- [x] W4 Innenräume (23:35): `mood_interior.md` ist schon High-End (Nuss, Quarzit, Vorhänge, ein großes Bild, Hero-Leuchte);
+  ergänzt um die Lehren aus Noma (kein Außenmöbel innen, Teppich, Vorhänge, Bild als Geometrie, Leuchten je Wohnung,
+  Fensterblick nach U12). Rendern erst mit Plänen.
+
+- [x] N6 Hofbilder Runde 10 (23:30): TrIIIple liegt laut `landmarken` im Bildwinkel der Hofkameras (x 0,41 bis 0,68,
+  rund 160 m), in den sechs gelieferten r10-Bildern aber vom Nahbereich verdeckt oder über dem Bildrand; keine Änderung nötig.
 
 ### Werkzeug
 - [x] A1 Befehl `immoviz.py landmarken <projekt>` (22:33): `lib/landmarken.py`, Liste `lib/landmarken_wien.yaml`

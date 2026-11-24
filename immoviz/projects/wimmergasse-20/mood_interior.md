@@ -190,3 +190,13 @@ No people, no animals, no clutter, no cool grey tones, no pure white, no recesse
 | Deko | nicht definiert | Sehr reduziert: Zweige statt Topfpflanzen, ein großes abstraktes Bild, keine Menschen | Styling-Regel neu aufnehmen |
 
 Empfehlung: Abschnitt "Einrichtungsstil" in WOHNUNGEN.md nach Freigabe durch Vertrieb entsprechend aktualisieren.
+
+## Lehren aus Noma Runde 11 (Nachtschicht 24./25.11.2026, cloud-neu)
+Vor dem ersten Innenrender prüfen, damit die Veredelung nicht raten muss:
+- Möbelmodell je Platzhalter ansehen: kein Außenmöbel innen (Noma: Gartentisch mit Lattenplatte im Wohnraum, in allen
+  veredelten Bildern sichtbar). Esstisch oval Nuss als echtes Modell, nicht über den Prompt.
+- Teppich unter Essplatz und Lounge, bodenlange Leinenvorhänge, ein großes Bild je Wohnraum als Geometrie im Modell; leere
+  Wandflächen im Bildausschnitt vermeiden (Noma: Penthaus-Terrassenblick nur mit Topfpflanze).
+- Pendelleuchten je Wohnung unterschiedlich; die skulpturale Hero-Leuchte nur einmal je Bild.
+- Fensterblick: Landmarken im Ausschnitt mit `immoviz.py landmarken` prüfen (REGELN U12); im Prompt nur aufzählen, was in
+  dieser Kamera liegt (Noma: KI erfand Türme, Gasometer und Fernsehturm, als sie im Prompt standen).
