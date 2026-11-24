@@ -385,7 +385,11 @@ def _hochhaus_spec(cfg, b, h):
     std = HH.get("standard") or {}
     per = (HH.get("gebaeude") or {}).get(str(b.get("bezug")))
     if per is not None:
-        return {**std, **per}
+        s = {**std, **per, "_explizit": True}
+        u = per.get("unter")      # anderer Stil fuer niedrigere Baukoerperteile (z. B. Sockelbau eines Turms)
+        if u and float(u.get("ab", 0.0)) <= h < float(u.get("hoehe", 0.0)):
+            s = {**s, **u}
+        return s
     if std and h >= float(std.get("ab_hoehe", 40.0)):
         return std
     return None
@@ -406,22 +410,38 @@ def _hh_mat(mats, s, key, default):
     return name
 
 
-def _hochhaus_fassade(walls, wins, poly, h, s, mats):
+def _hochhaus_fassade(walls, wins, poly, h, s, mats, ohne=()):
     """Glasbaender zwischen Geschossbaendern an allen Kanten, senkrechte Pfosten im Achsraster, Attika oben."""
     gh, e0 = float(s.get("geschoss", 3.5)), float(s.get("eg", 5.0))
     band, kr, achse = float(s.get("band", 0.9)), float(s.get("auskragung", 0.0)), float(s.get("achse", 1.5))
     gm = _hh_mat(mats, s, "glas", "fenster_dunkel")
     bm = _hh_mat(mats, s, "band", "nachbar_rahmen")
     n = len(poly)
+    cx, cy = sum(p[0] for p in poly) / n, sum(p[1] for p in poly) / n
+    # akzente: [{von, bis, farbe, pos, r}] zurueckliegende Farbbaender (z. B. Einschnitt unter einem auskragenden Kopf),
+    # nur fuer Teile mit Schwerpunkt im Kreis pos/r; dort entfallen Geschossplatten und Glas
+    ak = [a for a in (s.get("akzente") or [])
+          if not a.get("pos") or math.hypot(cx - a["pos"][0], cy - a["pos"][1]) <= float(a.get("r", 1e9))]
+    akm = [_hh_mat(mats, {"band_farbe": a["farbe"]}, "band", bm) for a in ak]
     for i in range(n):
         p1, p2 = poly[i], poly[(i + 1) % n]
         L = math.dist(p1, p2)
-        if L < 1.5:
+        if L < 0.3:      # Rundbauten bestehen aus kurzen Kanten
+            continue
+        mx, my = (p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2
+        if any(math.hypot(mx - ox, my - oy) < 0.05 for ox, oy in ohne):      # z. B. Rueckwaende eines Einschnitts
             continue
         f = K.Facade("hh", p1, p2)
-        K.quad_plane(wins, f, 0.0, L, 0.3, min(e0 - 0.6, h - 0.8), -0.02, gm)
+        if e0 > 1.0:
+            K.quad_plane(wins, f, 0.0, L, 0.3, min(e0 - 0.6, h - 0.8), -0.02, gm)
+        for a_, m_ in zip(ak, akm):
+            if float(a_["von"]) < h:
+                K.box(walls, f, 0.0, L, -0.06, 0.0, float(a_["von"]), min(float(a_["bis"]), h), m_)
         z = e0
         while z + gh <= h - 0.8:
+            if any(float(a_["von"]) - 0.01 < z + gh and z < float(a_["bis"]) + 0.01 for a_ in ak):
+                z += gh
+                continue
             if kr > 0:
                 K.box(walls, f, 0.0, L, -kr - 0.03, 0.0, z, z + band, bm)
             else:
@@ -435,6 +455,50 @@ def _hochhaus_fassade(walls, wins, poly, h, s, mats):
             for k in range(1, m):
                 u = k * L / m
                 K.box(wins, f, u - 0.035, u + 0.035, -0.07, 0.0, e0, z, bm)
+
+
+def _in_form(fo, b, cx, cy):
+    """Gehoert der Baukoerperteil zu einer Ersatzform (gleicher BEZUG, Schwerpunkt im Kreis, ab Mindesthoehe)?"""
+    if str(b.get("bezug")) != str(fo.get("bezug")):
+        return False
+    if math.hypot(cx - fo["pos"][0], cy - fo["pos"][1]) > float(fo.get("r", 15.0)):
+        return False
+    return b["ground"] - 4.15 + b["height"] >= float(fo.get("ab_hoehe", 0.0))
+
+
+def _form_bauen(walls, wins, fo, cfg, mats):
+    """Hochhaus aus gestapelten Teilen (project.yaml hochhaeuser.formen): je Teil Grundriss und Hoehen (z lokal),
+    Fassade im Stil des Gebaeudes, optional Untersicht (auskragender Kopf) und farbige Rueckwaende eines Einschnitts.
+    Das Baukoerpermodell ist 2,5D und kennt keine Ueberhaenge; die Form kommt aus Bildern (Quelle in project.yaml)."""
+    HH = (cfg or {}).get("hochhaeuser") or {}
+    s0 = {**(HH.get("standard") or {}), **((HH.get("gebaeude") or {}).get(str(fo.get("stil", fo.get("bezug")))) or {})}
+    s0 = {k: v for k, v in s0.items() if k not in ("unter", "akzente")}
+    bm = _hh_mat(mats, s0, "band", "nachbar_rahmen")
+    for te in fo.get("teile") or []:
+        poly = [tuple(p) for p in te["poly"]]
+        if K.polygon_area(poly) < 0:
+            poly = poly[::-1]
+        z0, z1 = float(te["z"][0]), float(te["z"][1])
+        tw, tf = K.MeshBuilder("t", walls.materials), K.MeshBuilder("t", wins.materials)
+        K.extrude(tw, poly, 0.0, z1 - z0, bm, _hh_mat(mats, {"band_farbe": te.get("dach", "#3A3D40")}, "band", bm),
+                  bottom=False)
+        s = dict(s0)
+        if z0 > 0.5:
+            s["eg"] = 0.0      # kein Erdgeschoss bei aufgesetzten Teilen
+        ohne = [((k[0][0] + k[1][0]) / 2, (k[0][1] + k[1][1]) / 2) for k in (te.get("rueckwand") or [])]
+        _hochhaus_fassade(tw, tf, poly, z1 - z0, s, mats, ohne)
+        if te.get("unterseite"):      # Untersicht des auskragenden Kopfs, 2 cm unter der Kante
+            um = _hh_mat(mats, {"band_farbe": te["unterseite"]}, "band", bm)
+            tw.poly([(x, y, -0.02) for x, y in poly[::-1]], None, um, (0, 0, -1))
+        for kante in te.get("rueckwand") or []:      # Rueckwaende eines Einschnitts, volle Hoehe des Teils
+            (ax, ay), (bx, by) = kante
+            rm = _hh_mat(mats, {"band_farbe": te.get("rueckwand_farbe", "#6B2E26")}, "band", bm)
+            f = K.Facade("rw", (ax, ay), (bx, by))
+            for sgn in (1, -1):      # beidseitig, die Kantenrichtung ist im Grundriss nicht festgelegt
+                K.quad_plane(tw, f, 0.0, math.dist((ax, ay), (bx, by)), 0.0, z1 - z0, -0.08 * sgn, rm, facing_out=sgn > 0)
+        for mb_ in (tw, tf):
+            mb_.verts = [(x, y, z + z0) for x, y, z in mb_.verts]
+        walls.merge(tw); wins.merge(tf)
 
 
 def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, terrain=None, cfg=None, roofdata=None):
@@ -461,12 +525,15 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     roof_by_id = (roofdata or {}).get("by_id", {})
     rov = R.Override((cfg or {}).get("roofs_override"))      # Dachkorrekturen von Hand (Material, Mansarde, Gauben ...)
     mans, auf_done = {}, set()
+    formen = ((cfg or {}).get("hochhaeuser") or {}).get("formen") or []
     for b in ctx["buildings"]:
         poly = b["poly"]
         if len(poly) < 3 or b["height"] < 1.0 or str(b.get("bezug")) in special:
             continue
         cx = sum(p[0] for p in poly) / len(poly)
         cy = sum(p[1] for p in poly) / len(poly)
+        if any(_in_form(fo, b, cx, cy) for fo in formen):
+            continue      # durch eine Form aus hochhaeuser.formen ersetzt (Ueberhaenge, Einschnitte)
         dist = math.hypot(cx, cy)
         if dist > radius:
             continue
@@ -506,6 +573,9 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
                   bottom=False, top_dz=-0.05 if faces else 0.0)
         n = len(poly)
         detailed = not (dist > detail or h < 5.0 or b.get("klasse") != 11)
+        hh = _hochhaus_spec(cfg, b, h)
+        if hh and hh.get("_explizit"):      # ausdruecklich genannte Gebaeude bekommen den Hochhausstil auch im Nahbereich
+            detailed = False
         for i in (range(n) if detailed else []):
             p1, p2 = poly[i], poly[(i + 1) % n]
             L = math.dist(p1, p2)
@@ -540,7 +610,6 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
                     K.box(wins, f, uc - 0.025, uc + 0.025, -0.02, 0.0, za, zb, "nachbar_rahmen")
             K.box(walls, f, 0.0, L, -0.35, 0.0, h - 0.55, h, col)
             K.box(walls, f, 0.0, L, -0.08, 0.0, 3.6, 3.9, col)
-        hh = _hochhaus_spec(cfg, b, h)
         if hh and not detailed:      # Hochhaeuser (Noma Runde 11d): Geschossbaender und Glas rundum statt glatter Kaesten
             _hochhaus_fassade(walls, wins, poly, h, hh, mats)
         if ov and ov.get("aufbauten") and id(ov) not in auf_done:      # Liftturm, Stiegenhaus, Dachterrasse
@@ -559,6 +628,8 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
             mb_.verts = [(x, y, z + zg) for x, y, z in mb_.verts]
         walls_.merge(walls); wins_.merge(wins); roofs_.merge(roofs)
         walls, wins, roofs = walls_, wins_, roofs_
+    for fo in formen:
+        _form_bauen(walls, wins, fo, cfg, mats)
     for me in mans.values():
         mm = me["ov"]["mansarde"] if isinstance(me["ov"]["mansarde"], dict) else {}
         R.mansarde(roofs, walls, me["polys"], me["ov"], me["zg"], me["col"], traufe=mm.get("traufe") or max(me["h"])[1])

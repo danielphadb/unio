@@ -64,8 +64,8 @@ neubau:
     nb_paneel: {color: "#B9ADB2", art: putz}
     nb_weiss_005378: {color: "#F5F1EB", faktor: 0.74, art: putz}   # wie hof_ost_005378 (Nachbarkarten rechnen Farbe x 0,74)
     # Runde 8 (Apple 13/14 des Kunden, 18.11.2026): Erkertuerme Schnirchgasse 4 und 6 in der Farbe der Hofkarten
-    nb_weiss_005379: {color: "#BDB6AB", faktor: 0.74, art: putz, quelle: "Fotos Hof 20.11.2026"}   # Runde 9: grau-beige wie die Hofkarte (Fotos)
-    nb_weiss_005380: {color: "#E2E2DF", faktor: 0.74, art: putz, quelle: "Fotos Hof 20.11.2026"}
+    nb_weiss_005379: {color: "#A39D93", faktor: 0.74, art: putz, quelle: "Fotos Hof 20.11.2026"}   # Runde 9: grau-beige wie die Hofkarte (Fotos); Runde 11e dunkler (Vergleich foto_7836: im Modell fast weiss, Foto deutlich grau)
+    nb_weiss_005380: {color: "#DCDDDB", faktor: 0.74, art: putz, quelle: "Fotos Hof 20.11.2026"}
     nb_weiss_005364: {color: "#E8ECF0", faktor: 0.74, art: putz, quelle: "Fotos Hof 20.11.2026"}   # Runde 9: wie Hofkarte Erdbergstrasse 125 (weiss mit Blaustich, Fotos)
     # Runde 6: Nr. 15 Gemeindebau, Balkone rotbraun und Markisen (Apple 9/8, Farbwerte geschaetzt aus dem Schatten zurueckgerechnet)
     nb_balkon_15: {color: "#3A1E17", art: putz, quelle: "Apple 9 (Balkonbruestungen rotbraun) ANN Farbwert, dunkel angesetzt, im Sonnenlicht rotbraun"}
@@ -1097,7 +1097,17 @@ neubau:
     - {gruppe: ausstattung_top25, typ: modell, modell: zimmerpflanze_klein, box: [9.65, -17.2, 10.25, -16.6], z: [18.94, 19.79], vorne: b+, skalierung: frei, klasse: vegetation, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche); Modell zimmerpflanze_klein (modelle_bibliothek.yaml)"}
 
 # ---------------------------------------------------------------- Umgebung
-neighbours: {}
+# Runde 11e (Street View 04 bis 05/2026, intern): Fassadenfarben der Nachbarn, die von den Dachterrassen sichtbar sind
+# (vorher Zufallspalette beige/lachs). Werte als Putzfarbe, der Code dunkelt sie fuer Cycles ab.
+neighbours:
+  "004966": "#D8D5CD"   # Schlachthausgasse 8: hellgrau, reicher Stuck
+  "004967": "#ECEAE4"   # Schlachthausgasse 10: weiss, Stuck, aufgestockt (siehe roofs_override)
+  "004968": "#C9C5BC"   # Schlachthausgasse 12: grau
+  "004969": "#E2DFD7"   # Schlachthausgasse 14: weiss-grau, Stuck
+  # 005362 (Schlachthausgasse 15/17, Erdbergstrasse 121) ist an Strasse und Hof orangerot (Street View, Foto IMG_7849), bleibt hier
+  # aber ohne Farbe: die Feuermauer ueber dem Dach von Nr. 13 (gross in dachterrasse_hof) ist nicht belegt
+  "005378": "#E9DCAE"   # Schlachthausgasse 11 / Schnirchgasse 2: cremegelb (Apotheke)
+  "005387": "#EDEDEA"   # Wuertzlerstrasse 12: weiss, Rustika im EG
 street:
   parking_material: asphalt
   cables: []
@@ -1274,7 +1284,7 @@ neighbour_facades:
     a: [23.0, -25.0]              # gemessen (Unterkanten +8,0/+14,1 am Strahlschnitt); Runde 8: Traufe wieder 15,9, Erker in neubau
     b: [26.4, -44.9]
     height: 15.9                  # Runde 8: Traufe 15,9 wie LOD2. Runde 9 (Fotos Hof 20.11.2026): EG + 3 OG (hohe Gruenderzeitgeschosse),
-    color: "#BDB6AB"              # Putz grau-beige verwittert (Fotos; vorher weiss nach der Vorlage), Fensterachsen am Foto IMG_7836
+    color: "#A39D93"              # Runde 11e dunkler (foto_7836). Putz grau-beige verwittert (Fotos; vorher weiss nach der Vorlage), Fensterachsen am Foto IMG_7836
     style: plain                  # abgemessen (u ab der Nordecke), weiss gerahmte Kastenfenster; Turm und Lisene in neubau
     frame: stuck
     axes: [1.8, 5.0, 16.5, 18.7]
@@ -1491,18 +1501,49 @@ roofs_override:
   # im LOD2 (Stand 2016, Bauzustand) ein Kegeldach bis +41,8, das von der Dachterrasse als "Pagode" erschien. Orthofoto 2024
   # [OGD lb2024] zeigt ein Flachdach mit Hubschrauberlandeplatz: flach je Baukoerperteil auf BKM-Hoehe
   - {bezug: "229182", material: blech_hell, dach: {form: flach}}
+  # Runde 11e (Street View 05/2026): Schlachthausgasse 10 ist aufgestockt: ueber dem Hauptgesims (+16,6, BKM) ein glattes
+  # Geschoss bis rund +19,7 und ein zurueckgesetztes Dachgeschoss mit dunkler Verglasung bis rund +22,9 (Hoehen aus dem
+  # Street-View-Bild ueber das Gesims abgeschaetzt [ANN]); LOD2 2016 zeigte noch das Steildach
+  - {bezug: "004967", material: blech_hell, dach: {form: flach, traufe: 19.7},
+     aufbauten: [{pos: [7.0, 26.1], l: 17.5, b: 9.0, drehung: 0, z0: 19.7, z1: 22.9, material: blech_dunkel}]}
 # Runde 11d (24.11.2026, Nutzer: "die Hochhaeuser muessen richtig sein"): Lage und Hoehe aus dem Baukoerpermodell [OGD] passen zum
 # Orthofoto 2024 [OGD lb2024] und zu den veroeffentlichten Hoehen (TrIIIple 108/117/120 m [CTBUH], BKM 110,8 bis 120,3; Austro Tower
 # 135 bis 136,6 m [Stadt Wien, CTBUH], BKM 135,1). Ausserhalb detail_radius_m waren sie glatte beige Kaesten ohne Fenster;
-# jetzt Geschossbaender, Glas und Pfosten rundum (lib/build.py _hochhaus_fassade). Farben und Raster [ANN nach Orthofoto/Fotos].
+# jetzt Geschossbaender, Glas und Pfosten rundum (lib/build.py _hochhaus_fassade). Farben nach Street View 06/2024 (Runde 11e), Raster [ANN].
+# Runde 11e (24.11.2026, Nutzer: "die Haeuser mit Google-Material verfeinern"): Street View 04/2026 nur als interne Referenz
+# (Bilder in renders/streetview/, nicht im Repo); Satellit und 3D-Kacheln sind fuer das Konto im EWR gesperrt.
+streetview_light: spaetsommer
+streetview_checks:
+  sv_shg_gegenueber:   {pos: [9.0, 9.0], target: [8.0, 28.0], pitch: 22, fov: 90}       # Schlachthausgasse 8 bis 12 gegenueber
+  sv_shg_nordost:      {pos: [9.0, 9.0], target: [60.0, 12.0], pitch: 12, fov: 90}      # Richtung Schnirchgasse, Eck Nr. 11
+  sv_shg_suedwest:     {pos: [0.0, 9.0], target: [-60.0, 6.0], pitch: 12, fov: 90}      # Richtung Erdbergstrasse, Nr. 14/16
+  sv_schnirch_4_6:     {pos: [42.0, -40.0], target: [28.0, -40.0], pitch: 22, fov: 90}  # Schnirchgasse 4 und 6 (Hofhaeuser Ost)
+  sv_schnirch_oeamtc:  {pos: [42.0, -60.0], target: [50.0, -114.0], pitch: 18, fov: 90} # OeAMTC-Rundbau, TrIIIple dahinter
+  sv_wuertzler:        {pos: [10.0, -95.0], target: [10.0, -72.0], pitch: 22, fov: 90}  # Wuertzlerstrasse 8 bis 12
+  sv_erdberg_121:      {pos: [-38.0, -15.0], target: [-20.0, -14.0], pitch: 22, fov: 90} # Erdbergstrasse 121 (Nachbar West)
+  sv_triiiple_nah:     {pos: [62.0, -100.0], target: [105.0, -130.0], pitch: 32, fov: 100} # TrIIIple von der Baumgasse
+  sv_triiiple_sued:    {pos: [80.0, -175.0], target: [105.0, -128.0], pitch: 35, fov: 100} # TrIIIple von Sueden
+  sv_austro_nah:       {pos: [118.0, -300.0], target: [142.0, -366.0], pitch: 35, fov: 100} # Austro Tower
+  sv_austro_fern:      {pos: [70.0, -180.0], target: [142.0, -366.0], pitch: 18, fov: 80}   # Austro Tower und TownTown aus Distanz
 # Runde 11d: Stephansdom (BKM-BEZUG 169932, in den Strukturdaten als "Curhauskapelle" gefuehrt), Suedturm 136,4 m ueber Gelaende
 # (oeffentliche Angabe), BKM-Oberkante 147,3 lokal bei Sockel 11,1: Turm bis rund +70 m ueber Gelaende, darauf der Helm als Pyramide
 fern_spitzen:
   - {bezug: "169932", name: Stephansdom Suedturm, basis: 81.0, spitze: 147.3, breite: 13.0}
 hochhaeuser:
   standard: {ab_hoehe: 40.0, geschoss: 3.6, eg: 5.0, band: 1.0, achse: 1.5, glas_farbe: "#2E3A44", band_farbe: "#C9CCCB"}
+  # Runde 11e (Nutzer: Landmarks so richtig wie moeglich): TrIIIple Turm 1 als gestapelte Form statt BKM-Prisma.
+  # Das Baukoerpermodell ist 2,5D und kennt keine Ueberhaenge. Aus Street View 04/2026 (sv_triiiple_nah/_sued, intern):
+  # 34 Geschosse [CTBUH]: Sockel 2 und Unterbau 7 Geschosse (beide Fassaden zurueckgesetzt), darueber 14 Geschosse mit
+  # auskragendem linkem Fluegel, rostrotem Eckschlitz und zurueckliegender rechter Fassade, oben ein Kopf mit 11 Geschossen,
+  # der ueber die rechte Fassade auskragt (Ecke lokal -x/+y). Grundriss = Huelle der BKM-Teile, Geschosse im Bild gezaehlt,
+  # Ruecksprung 5 m und 2,5 m, Schlitz 4 x 6 m [ANN aus dem Bild], Oberkante BKM 114,5.
+  formen:
+    - {name: TrIIIple Turm 1, bezug: Z43908, pos: [107.5, -132.0], r: 26.0, ab_hoehe: 100.0, stil: Z43908,
+       teile: [{poly: [[93.33, -121.27], [122.6, -116.57], [127.0, -143.9], [97.74, -148.61]], z: [-1.5, 31.0]},
+               {poly: [[96.89, -118.17], [122.2, -114.1], [127.0, -143.9], [97.74, -148.61], [93.89, -124.73], [97.84, -124.09]], z: [31.0, 79.0], unterseite: "#2A2522", rueckwand: [[[93.89, -124.73], [97.84, -124.09]], [[97.84, -124.09], [96.89, -118.17]]], rueckwand_farbe: "#56241E"},
+               {poly: [[88.0, -119.6], [122.2, -114.1], [127.0, -143.9], [92.8, -149.4]], z: [79.0, 114.5], unterseite: "#2A2522", dach: "#3A3D40"}]}
   gebaeude:
-    Z43908: {geschoss: 3.1, eg: 6.0, band: 0.45, auskragung: 1.2, achse: 0, glas_farbe: "#34404A", band_farbe: "#EDEBE6"}   # TrIIIple, Schnirchgasse 9 bis 12: Wohntuerme mit umlaufenden weissen Balkonbaendern
-    Z80306: {geschoss: 3.7, eg: 7.0, band: 0.25, achse: 1.35, glas_farbe: "#47606F", band_farbe: "#9AA3A8"}                 # Austro Tower, Schnirchgasse 17: Buero, Glasfassade
-    "229182": {geschoss: 3.8, eg: 5.0, band: 0.35, achse: 1.35, glas_farbe: "#5A7580", band_farbe: "#D9DCDC"}                # OeAMTC-Zentrale Baumgasse 129: runder Glasbau
+    Z43908: {geschoss: 3.1, eg: 6.0, band: 0.35, auskragung: 1.4, achse: 0, glas_farbe: "#171C21", band_farbe: "#55585A", unter: {ab: 30.0, hoehe: 70.0, geschoss: 3.1, band: 1.4, auskragung: 0.0, achse: 1.8, glas_farbe: "#151213", band_farbe: "#4A1F1C"}}   # TrIIIple, Schnirchgasse 9 bis 12: anthrazit, dunkle umlaufende Balkonplatten mit Glasbruestung; Sockelteil bis +65 dunkelrot; Turm 1 als Form (formen) (Street View 04/2026)
+    Z80306: {geschoss: 3.7, eg: 7.0, band: 0.2, achse: 1.35, glas_farbe: "#22364A", band_farbe: "#4F5B66"}                 # Austro Tower, Schnirchgasse 17: dunkelblaue Glasfassade (Street View 06/2024)
+    "229182": {geschoss: 3.7, eg: 5.0, band: 1.7, achse: 0, glas_farbe: "#262E35", band_farbe: "#E4E6E6"}                  # OeAMTC-Zentrale Baumgasse 129: silberweisse Baender, dunkle Fensterbaender (Street View 06/2024)
 schutz: {klassen: [gebaeude_objekt, fenster_glas, fenster_rahmen, gelaender, leuchten, strassenmoebel, autos, nachbarn, innenraum, ausstattung, boden], kante_px: 2}
