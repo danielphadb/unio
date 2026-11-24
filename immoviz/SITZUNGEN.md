@@ -46,10 +46,10 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
-- an mac-neu von cloud-neu (2026-11-24 23:15): zweiter Nachtrag in `noma_r11g` Schritt 4b: Innenausstattung (Gartentisch
+- an mac-neu von cloud-neu (2026-11-24 22:25): zweiter Nachtrag in `noma_r11g` Schritt 4b: Innenausstattung (Gartentisch
   innen ersetzen, Teppiche, Stores, Kunst, Deko, Penthaus-Terrassenblicke möblieren, `top26_2` mitrendern). Reihenfolge:
   Dach zuerst pushen, wenn 4b länger dauert. Liste der Nacht: `immoviz/qualitaet/2026-11-25_nachtschicht.md`.
-- an mac-neu von cloud-neu (2026-11-24 22:45): Nachtrag in `noma_r11g_triiiple_stimmung` Schritt 3b:
+- an mac-neu von cloud-neu (2026-11-24 22:10): Nachtrag in `noma_r11g_triiiple_stimmung` Schritt 3b:
   Fernsicht-Landmarken nach U12 (Karlskirche, Riesenrad, Gasometer, Kraftwerk Simmering, Arsenalturm, Stephansdom-Dach)
   vor dem 4k-Render, wenn noch nicht gerendert; sonst als eigener Durchgang danach. Nutzer will bis morgen früh laufend
   Qualitätsverbesserung.

@@ -4,21 +4,21 @@ Auftrag des Nutzers (24.11. spät): "Bis morgen früh die vorhandenen Projekte s
 Umgebung, Fernsicht, Materialien, Einrichtung analysieren, mit den Referenzen vergleichen, gerne recherchieren. Laufender
 Prozess für die nächsten 8 h, laufend schauen, ob der Mac Neues geliefert hat."
 
-Takt: stündlicher Check (geplanter Task), dazwischen Überwachung des Mac-Branches alle 10 min.
+Zeiten: Wien (MEZ). Takt: stündlicher Check (geplanter Task), dazwischen Überwachung des Mac-Branches alle 10 min.
 Credits: nur die angekündigten 16 x 3,25 für die r11g-Veredelung; alles andere wird vorbereitet (Prompts, Mac-Aufträge),
 nicht ohne Freigabe veredelt.
 
 ## Punkte (der Reihe nach, erledigte abhaken mit Uhrzeit und Ergebnis)
 
 ### Noma
-- [x] N1 Fernsicht-Landmarken je Dachkamera berechnet (22:45): Stephansdom x 0,49, Karlskirche x 0,26 (stadt, 23),
+- [x] N1 Fernsicht-Landmarken je Dachkamera berechnet (22:05): Stephansdom x 0,49, Karlskirche x 0,26 (stadt, 23),
   Riesenrad x 0,93 (vermutlich verdeckt), Gasometer x 0,67 und Kraftwerk Simmering x 0,48 (hof), Arsenalturm x 0,89
   (23_hof). Riesenrad fehlt im Modell, die anderen sind Prismen. Als Schritt 3b in `noma_r11g` an den Mac.
-- [x] N2 Stimmungs-Prompts (23:05): Dach 5 und Innen 11 als Entwurf (lokal, cloud): goldene Stunde kurz vor Sonnenuntergang,
+- [x] N2 Stimmungs-Prompts (22:15): Dach 5 und Innen 11 als Entwurf (lokal, cloud): goldene Stunde kurz vor Sonnenuntergang,
   warmes Innenlicht durch die Verglasung, Feuer, Windlichter, gedeckter Tisch, üppig bepflanzte vorhandene Tröge (keine
   neuen Tröge oder Möbel), TrIIIple burgunder hinter Glasbalkonen, Landmarken mit Stein, Ziegel, Beton; Blaue Stunde mit
   angestrahltem Dom. Bezug `mood_vorlagen.md` (Spätsommer, warm, Dunst, Terrakotta- und Salbei-Akzente).
-- [x] N3 Innenräume (23:15): Gartentisch `esstisch_aussen` mit Lattenplatte in Top 24, 25, 23-2; keine Teppiche, Vorhänge,
+- [x] N3 Innenräume (22:25): Gartentisch `esstisch_aussen` mit Lattenplatte in Top 24, 25, 23-2; keine Teppiche, Vorhänge,
   Kunst; überall dieselbe Pendelleuchte; Penthaus-Terrassenblicke fast leer. Als Schritt 4b in `noma_r11g` (massiver
   Eichentisch, Teppiche, Leinen-Stores, großformatige Kunst, Deko aus Poly Haven CC0, Lounge im Penthaus-Terrassenblick,
   Leuchten je Wohnung verschieden; `top26_2` neu rendern, Veredelung erst nach Freigabe).
@@ -27,13 +27,13 @@ nicht ohne Freigabe veredelt.
 - [ ] N5 r11g veredeln, sobald `r11g_dach` und `r11g_innen` da sind (16 Bilder), prüfen, liefern.
 
 ### Wimmergasse 20
-- [x] W1 Stand (23:40): Runde 10b geliefert (6 Außenbilder, 19,5 Credits), Innenräume warten auf Pläne.
-- [x] W2 Fernsicht (23:45, `landmarken`): drohne mit Rathaus, Votivkirche, Spittelau, Millennium Tower, Stephansdom, Uniqa,
+- [x] W1 Stand (22:30): Runde 10b geliefert (6 Außenbilder, 19,5 Credits), Innenräume warten auf Pläne.
+- [x] W2 Fernsicht (22:35, `landmarken`): drohne mit Rathaus, Votivkirche, Spittelau, Millennium Tower, Stephansdom, Uniqa,
   Donauturm im Bildwinkel, alle Prismen außer Dom; im r10b-Drohnenbild malt die KI bei x 0,75 einen Fernsehturm, wo der
   Millennium Tower steht, und nur einen Turm statt Rathaus und Votivkirche. Auftrag `wimmergasse_r11_fernsicht` (nach Noma).
 - [ ] W3 Fassade, Materialien, Straßenraum gegen Referenzen; Liste der Verbesserungen.
 - [ ] W4 Innenräume: wartet auf Pläne; Moodkonzept (`mood_interior.md`) auf High-End-Niveau prüfen.
 
 ### Werkzeug
-- [x] A1 Befehl `immoviz.py landmarken <projekt>` (23:35): `lib/landmarken.py`, Liste `lib/landmarken_wien.yaml`
+- [x] A1 Befehl `immoviz.py landmarken <projekt>` (22:33): `lib/landmarken.py`, Liste `lib/landmarken_wien.yaml`
   (18 Landmarken mit Quelle); nur erhöhte Außenkameras ab 10 m, Verdeckung nicht geprüft.
