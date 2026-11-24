@@ -42,7 +42,6 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- cloud-neu | seit 2026-11-24 15:00 | Noma Runde 11 veredeln (Higgsfield, Nutzer: "bitte weitermachen"): Top 24/25 und Dachterrassen jetzt, Penthäuser nach r11c | Bereich: immoviz/projects/noma-shg13/renders/higgsfield/ (r11_*), staging.json
 
 ## Nachrichten
 
@@ -74,6 +73,10 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-24 cloud-neu: Noma Runde 11 veredelt (Teil 2): Penthäuser 26-2 und 23-2 innen aus `r11c_innen/` (6),
+  Designerküche mit Calacatta-Platte, Designermöbel, Mittag und Morgen; ki_verzogen, Maßstab 0,991 bis 1,002;
+  `renders/higgsfield/top2?_2_*_r11_final.jpg`. 19,50 Credits (6 x 3,25), Runde 11 gesamt 61,75. Abgemeldet.
+  Offen: `noma_r11d_dachblick` (Mac), danach Dachterrassen und Stadtblick-Bilder neu veredeln.
 - 2026-11-24 mac-neu: Noma Penthäuser ohne die grauen Außen-Dachfenster und heller (Wunsch des Nutzers): `objekt_ausblenden`
   je Kamera in `lib/interior.py`, Belichtung 2,8/2,2; Probe 6 x 0, 4k 6 Bilder in 1 h 55 min mit Ebenen, Planbeleg 6 x 0.
 - 2026-11-24 cloud-neu: Noma Runde 11 veredelt (Teil 1): Top 24/25 Wohnzimmer und Balkon (8), Dachterrassen 26-3/23-3 (5),
