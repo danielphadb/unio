@@ -42,6 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
+- mac-neu | seit 2026-11-24 11:26 | Auftrag noma_r11_penthaus_top24_25: Modelle laden, Probe 19 Bilder mit Planbeleg, 4k mit Ebenen (Auftrag des Nutzers) | Bereich: immoviz/auftraege/2026-11-24_noma_r11_penthaus_top24_25.md, immoviz/projects/noma-shg13/renders/r11_probe/, r11_innen/, r11_dach/, GPU. Bitte Noma-Modell, wohnungen.yaml und Bibliotheken bis zur Abmeldung nicht ändern
 ## Nachrichten
 
 - an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24): neuer Auftrag

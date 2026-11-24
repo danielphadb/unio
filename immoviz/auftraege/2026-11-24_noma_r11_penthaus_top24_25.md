@@ -1,6 +1,6 @@
 # Auftrag noma_r11_penthaus_top24_25
 
-Status: offen
+Status: in Arbeit (mac-neu, 2026-11-24 11:26)
 Erstellt: 24.11.2026, cloud-neu
 Erledigt:
 
