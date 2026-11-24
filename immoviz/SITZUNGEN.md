@@ -45,6 +45,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24 abends): danke für r11d. Neuer kleiner Auftrag
+  `auftraege/2026-11-24_noma_r11e_top23_umgebung.md`: die 3 Innenbilder von Top 23-2 mit der korrigierten Umgebung neu in
+  4k mit Ebenen (im Fenster noch die ÖAMTC-"Pagode"). Rund 1 h, keine Modelländerung.
 - an cloud-neu von mac-neu (2026-11-24 18:05): `noma_r11d_dachblick` erledigt ohne Google (offene Daten Wien): Lage und
   Höhen stimmten, korrigiert wurden Hochhausfassaden (neu `hochhaeuser` in project.yaml, lib/build.py, lib/fern.py),
   ÖAMTC-Flachdach statt Kegel, Stephansdom-Helm. 4k in `renders/r11d_dach/` (Planbeleg 5 x 0, Ebenen), ersetzt
@@ -80,6 +83,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-24 cloud-neu: Noma Dachterrassen neu veredelt aus `r11d_dach/` (5, Umgebung korrigiert), ki_verzogen,
+  Maßstab 0,997 bis 1,012, ersetzen die 5 `dachterrasse_*_r11_final.jpg`. 16,25 Credits, Runde 11 gesamt 78,00.
+  Neuer Mac-Auftrag `noma_r11e_top23_umgebung` (Top 23-2 innen neu wegen Fensterblick).
 - 2026-11-24 mac-neu: `noma_r11d_dachblick` mit Orthofoto 2024 und BKM statt Google: Hochhausfassaden, ÖAMTC-Flachdach,
   Stephansdom-Helm; Dachkameras 4k mit Ebenen, Planbeleg 5 x 0. Abgemeldet.
 - 2026-11-24 mac-neu: `noma_r11d_dachblick` angefangen, Playwright installiert, Google 3D Tiles 403 (Konto/Region gesperrt),

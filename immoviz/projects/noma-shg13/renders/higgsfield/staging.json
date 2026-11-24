@@ -1178,9 +1178,9 @@
  "runde_11": {
   "stand": "2026-11-24",
   "auftrag": "Nutzer 24.11.2026: Renderings Penthäuser und Top 24/25 (Wohnzimmer und Terrasse); Runde 11b: High-End-Küchen mit Steinplatte, Designermöbel, Terrassen gemütlich, Whirlpool sichtbar, Outdoor-Küche, Hofblick mit Kamera ganz außen; 'bitte weitermachen' (Freigabe Credits)",
-  "eingang": "renders/r11_innen und r11_dach (Mac 4k mit Ebenen, Planbeleg 19 x 0); Modell aus der Planungsmappe EIN S. 12/13/14 (Vektor); Penthäuser aus renders/r11c_innen (Mac 4k mit Ebenen, Planbeleg 6 x 0, ohne äußere Dachfenster, heller)",
+  "eingang": "renders/r11_innen und r11_dach (Mac 4k mit Ebenen, Planbeleg 19 x 0); Modell aus der Planungsmappe EIN S. 12/13/14 (Vektor); Penthäuser aus renders/r11c_innen (Mac 4k mit Ebenen, Planbeleg 6 x 0, ohne äußere Dachfenster, heller); Dachterrassen neu aus renders/r11d_dach (Umgebung nach Orthofoto 2024 Wien korrigiert: ÖAMTC Flachdach, Hochhausfassaden, Stephansdom-Helm)",
   "modell": "gpt_image_2_6 quality high 4k 3:2, nur Bild 1 = Render",
-  "prompt": "Kopf pixelgenaue Retusche; innen Farbkorrektur gegen den Orangestich, Küche (Steinplatte, Wasserfall-Wange, grifflose Fronten), Designermöbel, Morgenlicht; Balkon gemütlich (Teak-Sessel, Teppich, Olivenbaum) Morgen und Blaue Stunde; Dachterrassen mit Lounge, Feuertisch, Tafel, Outdoor-Küche, Whirlpool mit türkisem Wasser; editoriale Filmpalette wie Wimmergasse r10b. Generator scratchpad noma_r11/hf/prompts.py; Penthäuser: Designerküche mit Calacatta-Platte und Wasserfall, Räuchereiche (26-2) bzw. Anthrazit (23-2), Designermöbel, Mittag und Morgen, Sicht durchs Glas leicht überbelichtet und ohne erfundene Gebäude. Generator scratchpad noma_r11/hf/prompts_ph.py",
+  "prompt": "Kopf pixelgenaue Retusche; innen Farbkorrektur gegen den Orangestich, Küche (Steinplatte, Wasserfall-Wange, grifflose Fronten), Designermöbel, Morgenlicht; Balkon gemütlich (Teak-Sessel, Teppich, Olivenbaum) Morgen und Blaue Stunde; Dachterrassen mit Lounge, Feuertisch, Tafel, Outdoor-Küche, Whirlpool mit türkisem Wasser; editoriale Filmpalette wie Wimmergasse r10b. Generator scratchpad noma_r11/hf/prompts.py; Penthäuser: Designerküche mit Calacatta-Platte und Wasserfall, Räuchereiche (26-2) bzw. Anthrazit (23-2), Designermöbel, Mittag und Morgen, Sicht durchs Glas leicht überbelichtet und ohne erfundene Gebäude. Generator scratchpad noma_r11/hf/prompts_ph.py; Dach r11d: zusätzlich Umgebung vermessen, kein Gebäude hinzufügen, entfernen oder umformen (scratchpad noma_r11/hf/d/prompts_r11d.json)",
   "nachbearbeitung": "immoviz.py schutz --modus ki_verzogen --ohne-vordergrund (innen zusätzlich --ohne fenster_glas)",
   "pruefung": {
    "top24_wohnzimmer": {
@@ -1232,34 +1232,39 @@
     "p90_4k_px": 5.0
    },
    "dachterrasse_stadt": {
-    "massstab_ki_zu_render": 1.0075,
-    "verschiebung_prozent": 0.18,
-    "kantenabweichung_prozent": 3.17,
-    "p90_4k_px": 3.16
+    "massstab_ki_zu_render": 0.9969,
+    "verschiebung_prozent": 0.0,
+    "kantenabweichung_prozent": 3.48,
+    "p90_4k_px": 5.0,
+    "quelle": "r11d_dach"
    },
    "dachterrasse_stadt_blaue_stunde": {
-    "massstab_ki_zu_render": 1.0138,
-    "verschiebung_prozent": 0.31,
-    "kantenabweichung_prozent": 0.29,
-    "p90_4k_px": 3.0
+    "massstab_ki_zu_render": 1.0117,
+    "verschiebung_prozent": 0.27,
+    "kantenabweichung_prozent": 5.74,
+    "p90_4k_px": 5.0,
+    "quelle": "r11d_dach"
    },
    "dachterrasse_hof": {
-    "massstab_ki_zu_render": 0.9945,
-    "verschiebung_prozent": 0.23,
-    "kantenabweichung_prozent": 6.85,
-    "p90_4k_px": 5.0
+    "massstab_ki_zu_render": 0.9999,
+    "verschiebung_prozent": 0.0,
+    "kantenabweichung_prozent": 3.03,
+    "p90_4k_px": 4.0,
+    "quelle": "r11d_dach"
    },
    "dachterrasse_23": {
-    "massstab_ki_zu_render": 0.9873,
-    "verschiebung_prozent": 0.53,
-    "kantenabweichung_prozent": 2.38,
-    "p90_4k_px": 3.61
+    "massstab_ki_zu_render": 0.9999,
+    "verschiebung_prozent": 0.0,
+    "kantenabweichung_prozent": 2.79,
+    "p90_4k_px": 3.0,
+    "quelle": "r11d_dach"
    },
    "dachterrasse_23_hof": {
     "massstab_ki_zu_render": 1.0019,
     "verschiebung_prozent": 0.0,
-    "kantenabweichung_prozent": 5.37,
-    "p90_4k_px": 5.0
+    "kantenabweichung_prozent": 5.45,
+    "p90_4k_px": 5.0,
+    "quelle": "r11d_dach"
    },
    "top26_2_wohnkueche_dachfenster": {
     "massstab_ki_zu_render": 0.997,
@@ -1308,11 +1313,11 @@
    "top25_essplatz": "db24f29f-6c6c-48c0-a37e-6733a08ef1a6",
    "top25_terrasse_hst": "52d19f77-46be-421f-9d09-5e2f51a5f55b",
    "top25_terrasse_abend": "5a2196f1-6e0b-4a4f-998d-4b514ea9efa1",
-   "dachterrasse_stadt": "43af03c4-1d49-4aeb-8f2c-b465d3b9141d",
-   "dachterrasse_stadt_blaue_stunde": "4565a346-f5c9-45c0-8ee3-c44e47ad98bb",
-   "dachterrasse_hof": "c9bbe61f-62c3-4e77-a0ec-dc7fba352311",
-   "dachterrasse_23": "2188974b-1896-41d6-89ee-beda1f8cc9db",
-   "dachterrasse_23_hof": "2e952c34-e891-45ba-b6f2-7148106135b6",
+   "dachterrasse_stadt": "d2a52122-97c1-4651-969d-6d7e603095a3",
+   "dachterrasse_stadt_blaue_stunde": "c3beafbe-c9f8-4275-9ce6-fec05fd38872",
+   "dachterrasse_hof": "e0f303da-b4bf-4cef-b114-8de434e36fab",
+   "dachterrasse_23": "b2f14161-fc3e-4062-939f-fcd2461591d5",
+   "dachterrasse_23_hof": "4b84a618-a456-48f1-9bea-2bc303f8e063",
    "top26_2_wohnkueche_dachfenster": "38ec48e2-c7fc-4f86-b957-9a38c7488020",
    "top26_2_wohnkueche_morgen": "3afc0737-8b29-432f-9dde-a8b7fde6d86f",
    "top26_2_wohnkueche_terrasse": "e757530b-ad2c-4ca4-921a-7b9e62836982",
@@ -1320,8 +1325,8 @@
    "top23_2_wohnkueche_morgen": "9b2f5d56-77df-4e36-91e8-ea0862a4e3c2",
    "top23_2_wohnkueche_terrasse": "531dec19-ade6-43f1-821a-0584b014b12f"
   },
-  "credits": "19 x 3,25 = 61,75 (13 um 14:02 bis 14:03; 6 Penthäuser um 15:58; ein Auftrag mit 503 abgewiesen, nicht berechnet)",
-  "offen": "Dachblick: Umgebung (Hofhäuser, Nachbarn, Hochhäuser) laut Nutzer falsch; Auftrag noma_r11d_dachblick (Mac, Google 3D Tiles), danach die 5 Dachterrassen-Bilder und die Penthaus-Bilder mit Stadtblick (vor allem Top 23-2) neu veredeln",
+  "credits": "24 x 3,25 = 78,00 (13 um 14:02; 6 Penthäuser um 15:58; 5 Dachterrassen r11d um 17:07; ein Auftrag mit 503 abgewiesen, nicht berechnet)",
+  "offen": "Top 23-2 innen (3) nach Mac-Auftrag noma_r11e_top23_umgebung neu veredeln (im Fenster noch die alte ÖAMTC-Pagode)",
   "dateien": "<name>_r11_final.jpg, r11_pruefung/<name>_kanten.jpg und _abweichung.jpg"
  }
 }
