@@ -379,13 +379,13 @@ wohnungen:
       - {modell: barhocker, c_px: [2.32, -10.52], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: barhocker, c_px: [2.86, -10.52], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
     material_ersatz: {innen_wand: creme_wand, decke: creme_decke}
-    objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof]   # Dach nach Plan bleibt sichtbar (Terrasse, Dachfenster), aus: Innenkarten und aeussere Hofschraegen
+    objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof]   # Dach nach Plan bleibt sichtbar (Terrasse, HST-Rahmen und -Glas im Einschnitt), aus: Innenkarten und aeussere Hofschraegen; Dachfenster-Kameras siehe dort
     light: spaetsommer_mittag
-    exposure: 2.0                    # Runde 11: Probe wirkte dunkel
+    exposure: 2.8                    # Runde 11c (Nutzer 24.11.2026: Zimmer muessen sehr hell wirken), vorher 2.0
     kameras:
-      wohnkueche_dachfenster: {pos: [5.0, -7.5], target: [2.2, -12.3], lens: 20, h: 1.45}   # Runde 11: von der Wand zum Bad ueber Sofa und Insel zu den Dachflaechenfenstern, Kueche rechts
-      wohnkueche_terrasse: {pos: [9.85, -11.05], target: [6.8, -13.6], lens: 18, h: 1.40}   # Runde 11: aus der Ecke an der Trennwand zu HST und Terrasse (von der Kueche verdeckte die Treppeneinhausung die HST)
-      wohnkueche_morgen: {pos: [5.0, -7.5], target: [2.2, -12.3], lens: 20, h: 1.45, light: morgen, exposure: 1.4}   # Runde 11: Morgensonne durch die Dachfenster
+      wohnkueche_dachfenster: {pos: [5.0, -7.5], target: [2.2, -12.3], lens: 20, h: 1.45, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # 11c (Nutzer 24.11.2026): aeussere Dachfenster aus (volle dunkle Rahmenflaeche plus getoente Scheibe 0,5 m ueber der Oeffnung wirkten wie graue Rollos); Runde 11: von der Wand zum Bad ueber Sofa und Insel zu den Dachflaechenfenstern, Kueche rechts
+      wohnkueche_terrasse: {pos: [9.85, -11.05], target: [6.8, -13.6], lens: 18, h: 1.40, exposure: 2.0}   # Runde 11: aus der Ecke an der Trennwand zu HST und Terrasse (von der Kueche verdeckte die Treppeneinhausung die HST)
+      wohnkueche_morgen: {pos: [5.0, -7.5], target: [2.2, -12.3], lens: 20, h: 1.45, light: morgen, exposure: 2.2, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Runde 11: Morgensonne durch die Dachfenster (11c: 1.4 auf 2.2, aeussere Dachfenster aus)
   # Runde 11: Top 23-2 (Maisonette 23, Wohnkueche im 2. DG) aus EIN S. 13 (Vektor), Aufbau wie Top 26-2 (gespiegelt).
   top23_2:
     plan: manuell
@@ -440,13 +440,13 @@ wohnungen:
       - {modell: barhocker, c_px: [16.33, -10.6], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: barhocker, c_px: [16.95, -10.6], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
     material_ersatz: {innen_wand: creme_wand, decke: creme_decke}
-    objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof]   # Dach nach Plan bleibt sichtbar (Terrasse, Dachfenster), aus: Innenkarten und aeussere Hofschraegen
+    objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof]   # Dach nach Plan bleibt sichtbar (Terrasse, HST-Rahmen und -Glas im Einschnitt), aus: Innenkarten und aeussere Hofschraegen; Dachfenster-Kameras siehe dort
     light: spaetsommer_mittag
-    exposure: 2.0                    # Runde 11: Probe wirkte dunkel
+    exposure: 2.8                    # Runde 11c (Nutzer 24.11.2026: Zimmer muessen sehr hell wirken), vorher 2.0
     kameras:
-      wohnkueche_dachfenster: {pos: [15.40, -7.50], target: [18.20, -12.30], lens: 20, h: 1.45}   # ueber den Esstisch zu Dachflaechenfenstern, Insel und Kueche
-      wohnkueche_terrasse: {pos: [10.95, -11.15], target: [13.60, -13.60], lens: 18, h: 1.40}   # aus der Ecke an der Trennwand zu HST und Terrasse
-      wohnkueche_morgen: {pos: [15.40, -7.50], target: [18.20, -12.30], lens: 20, h: 1.45, light: morgen, exposure: 1.4}
+      wohnkueche_dachfenster: {pos: [15.40, -7.50], target: [18.20, -12.30], lens: 20, h: 1.45, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # 11c: aeussere Dachfenster aus (wirkten wie graue Rollos); ueber den Esstisch zu Dachflaechenfenstern, Insel und Kueche
+      wohnkueche_terrasse: {pos: [10.95, -11.15], target: [13.60, -13.60], lens: 18, h: 1.40, exposure: 2.0}   # aus der Ecke an der Trennwand zu HST und Terrasse
+      wohnkueche_morgen: {pos: [15.40, -7.50], target: [18.20, -12.30], lens: 20, h: 1.45, light: morgen, exposure: 2.2, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # 11c: 1.4 auf 2.2, aeussere Dachfenster aus
 
   # Eigene Koordinaten aus dem Moeblierungsplan 1:50 [INT S. 3]: X = von der Wand zum Strassenhaus nach rechts (0 bis 5,03),
   # Y = von der Fensterwand (Gartenstreifen Sued) Richtung Gang (0 bis 5,936). Lage: Hofrahmen a = -10,70 bis -5,67,

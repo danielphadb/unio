@@ -681,6 +681,11 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
         for cam_name, cam in a["kameras"].items():
             if cams and f"{name}_{cam_name}" not in cams:
                 continue
+            # optional je Kamera (Noma Runde 11c): objekt_ausblenden ersetzt die Liste der Wohnung fuer diese Kamera
+            aus_k = tuple(cam.get("objekt_ausblenden", a.get("objekt_ausblenden", [])))
+            if objekt:
+                for o in objekt.objects:
+                    o.hide_render = o.name.startswith(aus_k) if aus_k else o.name not in keep
             px, py = cam.get("pos_px") or cam["pos"]
             tx, ty = cam.get("target_px") or cam["target"]
             x, y = apt.px_to_local(px, py)
@@ -694,7 +699,7 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
             B.setup_camera(scene, cfg, f"{name}_{cam_name}")
             from . import planbeleg as PB            # REGELN P10: nichts ohne Planbeleg, Huelle in der Grundflaeche
             PB.pruefen(scene, cfg, f"{name}_{cam_name}", out_dir / "planbeleg", huellen=huellen,
-                       ausgeblendet=tuple(a.get("objekt_ausblenden", [])), flaeche=flaeche)
+                       ausgeblendet=aus_k, flaeche=flaeche)
             tag = "vorschau" if preview else "final"
             path = out_dir / (f"{name}_{cam_name}_{tag}.png" if out_sub else f"{name}_{cam_name}_vorschau.png")
             scene.render.filepath = str(path)

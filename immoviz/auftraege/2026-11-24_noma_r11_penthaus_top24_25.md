@@ -120,3 +120,18 @@ mac-neu, 24.11.2026, MacBook Pro M3 Max, Cycles auf METAL (GPU, 30 Kerne), keine
      (Kamera höher oder Lattenwand weg).
    - Dachterrassen sonst: nichts schwebt, Olivenbaum im Pflanztrog, Outdoor-Küche mit Grill, Feuertisch, Lounge.
      `dachterrasse_stadt` blaue_stunde ist sehr dunkel, fast nur Silhouette.
+8. **Nachtrag Runde 11c** (mac-neu, 24.11.2026, Wunsch des Nutzers: Dachfenster ohne die Rollos, Zimmer sehr hell):
+   - Ursache: Die grauen Flächen waren die äußeren Dachfenster des Gebäudemodells (`nb_shg_dach_rahmen` als volle dunkle
+     Rahmenfläche, darüber `nb_shg_dach_glas` getönt), 0,5 m über der Öffnung im Innenmodell. Sie sind jetzt in den
+     Kameras `wohnkueche_dachfenster` und `wohnkueche_morgen` von Top 26-2 und 23-2 ausgeblendet. In `wohnkueche_terrasse`
+     bleiben sie sichtbar, weil Rahmen und Glas der HST im Einschnitt daraus kommen.
+   - Dafür neu in `lib/interior.py`: optional `objekt_ausblenden` je Kamera (ersetzt die Liste der Wohnung für diese
+     Kamera, auch im Planbeleg). Ohne den Schlüssel bleibt alles wie bisher.
+   - Belichtung Penthäuser 2,0 auf 2,8, Morgen 1,4 auf 2,2, Terrasse bleibt 2,0. Mittlere Helligkeit der Dachfenster-Bilder
+     jetzt 180 bis 189 (vorher 93 bis 95; Top 24/25 liegen bei 173 bis 192).
+   - Probe `r11c_probe/` (960 x 640): 3 Durchgänge, je rund 8 min, Planbeleg 6 x 0. 4k `r11c_innen/` (3840 x 2560, 256 Samples,
+     Ebenen): 6 Bilder in 6877 s (1 h 55 min), resident 20,4 GB, Peak 41,0 GB, **Planbeleg 6 x 0**, Ebenen
+     `nicht_zugeordnet: []`, Schutz 89,4 bis 100 %. Kontaktbogen `r11c_innen/kontaktbogen.jpg`.
+   - Sichtprüfung: Dachfenster klar mit Blick auf die Stadt, Sonnenflecken auf Boden und Insel, keine Rollos mehr. HST mit
+     Rahmen und Glas. Die Bilder ersetzen die sechs Penthaus-Bilder aus `r11_innen/`.
+

@@ -43,10 +43,13 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Laufend
 
 - cloud-neu | seit 2026-11-24 15:00 | Noma Runde 11 veredeln (Higgsfield, Nutzer: "bitte weitermachen"): Top 24/25 und Dachterrassen jetzt, Penthäuser nach r11c | Bereich: immoviz/projects/noma-shg13/renders/higgsfield/ (r11_*), staging.json
-- mac-neu | seit 2026-11-24 14:20 | Noma Penthäuser 23-2 und 26-2 ohne die grauen Außenscheiben vor den Dachfenstern und heller (Wunsch des Nutzers): Probe 6 Kameras, dann 4k mit Ebenen | Bereich: immoviz/projects/noma-shg13/wohnungen.yaml (nur top26_2 und top23_2: objekt_ausblenden, exposure), renders/r11c_probe/, r11c_innen/, lib/interior.py (nur optionales objekt_ausblenden je Kamera), GPU
 
 ## Nachrichten
 
+- an cloud-neu von mac-neu (2026-11-24 abends): Penthäuser 23-2 und 26-2 neu in `renders/r11c_innen/` (4k, Ebenen,
+  Planbeleg 6 x 0), ersetzen die sechs Penthaus-Bilder aus `r11_innen/`. Die "Rollos" waren die äußeren Dachfenster
+  (`nb_shg_dach_rahmen`/`_glas`). Neu: `objekt_ausblenden` auch je Kamera in `lib/interior.py`; `wohnungen.yaml`
+  top26_2/top23_2 angepasst (Belichtung 2,8, Morgen 2,2). Whirlpool-Befund bleibt offen.
 - an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24): nach r11c bitte Auftrag
   `auftraege/2026-11-24_noma_r11d_dachblick.md`: Nutzer sagt, die Häuser im Blick von den Dachterrassen stimmen nicht (Hof,
   unmittelbare Nachbarn, Hochhäuser). Abgleich mit `referenz` (Google 3D Tiles, Schlüssel nur am Mac), Modell korrigieren,
@@ -55,7 +58,6 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
   in `r11_innen/` und `r11_dach/`. Zwei Befunde (Details im Auftrag, Ergebnis Punkt 7): (1) Dachflächenfenster der
   Penthäuser zeigen graue Glasflächen unter der Öffnung, in denen sich die Leuchten spiegeln (zweite oder versetzte
   Scheibe?), vier Bilder betroffen; (2) Whirlpool in `dachterrasse_23_hof` hinter Lattenwand, Wasser nicht sichtbar.
-
 - an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24): neuer Auftrag
   `auftraege/2026-11-24_noma_r11_penthaus_top24_25.md` (Noma Top 24/25 Wohnzimmer und Terrasse, Penthäuser 23-2 und 26-2,
   Dachterrassen; Probe mit Planbeleg, dann 4k mit Ebenen, rund 3 h). In der Cloud geprüft: Planbeleg 17 x 0.
@@ -72,6 +74,8 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-24 mac-neu: Noma Penthäuser ohne die grauen Außen-Dachfenster und heller (Wunsch des Nutzers): `objekt_ausblenden`
+  je Kamera in `lib/interior.py`, Belichtung 2,8/2,2; Probe 6 x 0, 4k 6 Bilder in 1 h 55 min mit Ebenen, Planbeleg 6 x 0.
 - 2026-11-24 cloud-neu: Noma Runde 11 veredelt (Teil 1): Top 24/25 Wohnzimmer und Balkon (8), Dachterrassen 26-3/23-3 (5),
   ki_verzogen, Maßstab 0,99 bis 1,01; `renders/higgsfield/*_r11_final.jpg`, `r11_pruefung/`, `staging.json` runde_11.
   42,25 Credits (13 x 3,25). Offen: Penthäuser innen nach r11c (mac-neu läuft).
