@@ -42,6 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
+- mac-neu | seit 2026-11-24 17:20 | Auftrag noma_r11d_dachblick ohne Google (Nutzer: offene Daten Wien): Umgebung von den Dachterrassen gegen basemap.at-Orthofoto und Stadt-Wien-Daten prüfen und korrigieren, Dachkameras 4k mit Ebenen | Bereich: immoviz/projects/noma-shg13/project.yaml (roofs_override, neubau nb_umgebung_*, neighbour_facades, Fernsicht), data/, renders/check/, renders/r11d_*/, Auftragsdatei, GPU
 
 ## Nachrichten
 

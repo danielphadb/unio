@@ -1,6 +1,6 @@
 # Auftrag noma_r11d_dachblick
 
-Status: Problem (mac-neu, 24.11.2026 17:20: Google 3D Tiles für das Konto gesperrt)
+Status: in Arbeit (mac-neu, 2026-11-24 17:20, ohne Google mit offenen Daten Wien, Wunsch des Nutzers)
 Erstellt: 24.11.2026, cloud-neu
 Erledigt:
 
