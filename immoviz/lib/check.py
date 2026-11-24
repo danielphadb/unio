@@ -127,7 +127,11 @@ def streetview_compare(scene, cfg, ctx, out_dir: Path, key: str, terrain=None):
     scene.camera = ob
     scene.render.resolution_x = scene.render.resolution_y = 640
     results = []
+    import os
+    nur = [n for n in os.environ.get("SVCHECK_NUR", "").split(",") if n]      # Auswahl fuer schnelle Durchgaenge
     for name, v in cfg["streetview_checks"].items():
+        if nur and name not in nur:
+            continue
         lat, lon = _local_to_wgs(ctx, *v["pos"])
         q = urllib.parse.urlencode({"location": f"{lat},{lon}", "radius": 20, "source": "outdoor", "key": key})
         meta = json.load(urllib.request.urlopen(f"https://maps.googleapis.com/maps/api/streetview/metadata?{q}", timeout=20))

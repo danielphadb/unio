@@ -466,27 +466,125 @@ def _in_form(fo, b, cx, cy):
     return b["ground"] - 4.15 + b["height"] >= float(fo.get("ab_hoehe", 0.0))
 
 
+def _versatz(poly, off):
+    """Polygon (gegen den Uhrzeigersinn) mit je Kante eigenem Versatz nach aussen (off[i] fuer Kante i -> i+1)."""
+    n = len(poly)
+    lines = []
+    for i in range(n):
+        (x1, y1), (x2, y2) = poly[i], poly[(i + 1) % n]
+        L = math.hypot(x2 - x1, y2 - y1) or 1.0
+        nx, ny = (y2 - y1) / L, -(x2 - x1) / L
+        lines.append(((x1 + nx * off[i], y1 + ny * off[i]), ((x2 - x1) / L, (y2 - y1) / L)))
+    out = []
+    for j in range(n):
+        (p1, d1), (p2, d2) = lines[j - 1], lines[j]
+        den = d1[0] * d2[1] - d1[1] * d2[0]
+        if abs(den) < 1e-6:
+            out.append(p2)
+            continue
+        s = ((p2[0] - p1[0]) * d2[1] - (p2[1] - p1[1]) * d2[0]) / den
+        out.append((p1[0] + d1[0] * s, p1[1] + d1[1] * s))
+    return out
+
+
+def _turm_fassade(tw, tf, poly, h, typen, te, s, mats, bm):
+    """Fassade eines Turmteils je Kante: "balkon" (umlaufende Balkonplatte je Geschoss mit Glasbruestung, dahinter
+    Wand in wand_farbe mit raumhohen Fenstern im Achsraster), "loch" (Wand mit Lochfenstern), "keine"."""
+    gh = float(te.get("geschoss", s.get("geschoss", 3.2)))
+    e0 = float(te.get("eg", s.get("eg", 0.0)))
+    tiefe, platte = float(te.get("balkon_tiefe", 1.8)), float(te.get("platte", 0.24))
+    br = float(te.get("bruestung", 1.05))
+    wm = _hh_mat(mats, {"band_farbe": te.get("wand_farbe", s.get("wand_farbe", "#55262A"))}, "band", bm)
+    pm = _hh_mat(mats, {"band_farbe": te.get("platte_farbe", s.get("platte_farbe", "#B9BDBD"))}, "band", bm)
+    gm = _hh_mat(mats, {"glas_farbe": te.get("glas_farbe", s.get("glas_farbe", "#1C2329"))}, "glas", "fenster_dunkel")
+    egm = _hh_mat(mats, {"glas_farbe": te.get("eg_farbe", "#3A4650")}, "glas", "fenster_dunkel")
+    if "hh_bruestung" not in mats:
+        mats["hh_bruestung"] = M.glass(bpy, "hh_bruestung", (0.26, 0.29, 0.31), 0.08)
+    ewm = _hh_mat(mats, {"band_farbe": te.get("eg_wand", s.get("eg_wand", "#D4D5D3"))}, "band", bm)
+    n = len(poly)
+    off = [tiefe if typen[i] == "balkon" else -0.05 for i in range(n)]
+    ring = _versatz(poly, off) if "balkon" in typen else None
+    achse_b, achse_l = float(te.get("achse", 2.7)), float(te.get("loch_achse", 1.5))
+    fb_l, fh_l, bru_l = float(te.get("loch_breite", 0.8)), float(te.get("loch_hoehe", 2.55)), 0.35
+    for i in range(n):
+        p1, p2 = poly[i], poly[(i + 1) % n]
+        L = math.dist(p1, p2)
+        if L < 0.3 or typen[i] == "keine":
+            continue
+        f = K.Facade("tf", p1, p2)
+        K.quad_plane(tw, f, 0.0, L, min(e0, h), h, 0.0, wm)      # Wand ueber volle Hoehe (zwischen den Fenstern)
+        if e0 > 1.0:      # heller zweigeschossiger Sockel mit grossen Glasfeldern und Pfosten
+            K.quad_plane(tw, f, 0.0, L, 0.0, e0, 0.0, ewm)
+            m = max(1, round(L / 3.0))
+            for k in range(m):
+                for za, zb in ((0.15, e0 / 2 - 0.35), (e0 / 2 + 0.25, e0 - 0.45)):
+                    K.quad_plane(tf, f, k * L / m + 0.12, (k + 1) * L / m - 0.12, za, zb, -0.02, egm)
+        z = e0
+        while z + gh <= h + 0.01:
+            if typen[i] == "balkon":
+                m = max(1, round(L / achse_b))
+                w = L / m
+                for k in range(m):
+                    K.quad_plane(tf, f, k * w + 0.22, (k + 1) * w - 0.22, z + 0.05, z + gh - 0.35, -0.02, gm)
+            else:
+                m = max(1, int(L / achse_l))
+                w = L / m
+                for k in range(m):
+                    u = (k + 0.5) * w
+                    K.quad_plane(tf, f, u - fb_l / 2, u + fb_l / 2, z + bru_l, min(z + bru_l + fh_l, z + gh - 0.2),
+                                 -0.02, gm)
+            z += gh
+    if ring:
+        z = e0 if e0 > 1.0 else gh
+        while z <= h + 0.01:
+            K.extrude(tw, ring, z - platte, z, pm, pm)
+            if z < h - 0.5:
+                for i in range(n):
+                    if typen[i] != "balkon":
+                        continue
+                    q1, q2 = ring[i], ring[(i + 1) % n]
+                    f = K.Facade("br", q1, q2)
+                    K.quad_plane(tf, f, 0.0, math.dist(q1, q2), z, z + br, 0.03, "hh_bruestung")
+            z += gh
+
+
 def _form_bauen(walls, wins, fo, cfg, mats):
-    """Hochhaus aus gestapelten Teilen (project.yaml hochhaeuser.formen): je Teil Grundriss und Hoehen (z lokal),
-    Fassade im Stil des Gebaeudes, optional Untersicht (auskragender Kopf) und farbige Rueckwaende eines Einschnitts.
+    """Hochhaus aus gestapelten Teilen (project.yaml hochhaeuser.formen): je Teil Grundriss (Fassadenebene) und Hoehen
+    (z lokal), optional Untersicht (auskragender Kopf) und farbige Rueckwaende eines Einschnitts. Fassade je Teil:
+    `fassade` (balkon | loch | band, Standard band = Stil des Gebaeudes) und `kanten` (Liste je Kante, ueberschreibt).
     Das Baukoerpermodell ist 2,5D und kennt keine Ueberhaenge; die Form kommt aus Bildern (Quelle in project.yaml)."""
     HH = (cfg or {}).get("hochhaeuser") or {}
     s0 = {**(HH.get("standard") or {}), **((HH.get("gebaeude") or {}).get(str(fo.get("stil", fo.get("bezug")))) or {})}
     s0 = {k: v for k, v in s0.items() if k not in ("unter", "akzente")}
+    s0.update(fo.get("stil_daten") or {})
     bm = _hh_mat(mats, s0, "band", "nachbar_rahmen")
     for te in fo.get("teile") or []:
         poly = [tuple(p) for p in te["poly"]]
+        kanten = list(te.get("kanten") or [])
         if K.polygon_area(poly) < 0:
             poly = poly[::-1]
+            if kanten:      # Kante i lief von p_i nach p_i+1; umgedreht gehoert sie zu Index n-2-i
+                kanten = [kanten[(len(poly) - 2 - i) % len(poly)] for i in range(len(poly))]
         z0, z1 = float(te["z"][0]), float(te["z"][1])
         tw, tf = K.MeshBuilder("t", walls.materials), K.MeshBuilder("t", wins.materials)
-        K.extrude(tw, poly, 0.0, z1 - z0, bm, _hh_mat(mats, {"band_farbe": te.get("dach", "#3A3D40")}, "band", bm),
-                  bottom=False)
+        typ = te.get("fassade", "band")
+        typen = [kanten[i] if i < len(kanten) and kanten[i] else typ for i in range(len(poly))]
+        if te.get("aussen"):      # poly ist die Aussenkante der Balkonplatten; Fassadenebene um die Balkontiefe zurueck
+            ti = float(te.get("balkon_tiefe", 1.8))
+            poly = _versatz(poly, [-ti if ty == "balkon" else 0.0 for ty in typen])
+        dach = _hh_mat(mats, {"band_farbe": te.get("dach", "#3A3D40")}, "band", bm)
         s = dict(s0)
         if z0 > 0.5:
             s["eg"] = 0.0      # kein Erdgeschoss bei aufgesetzten Teilen
-        ohne = [((k[0][0] + k[1][0]) / 2, (k[0][1] + k[1][1]) / 2) for k in (te.get("rueckwand") or [])]
-        _hochhaus_fassade(tw, tf, poly, z1 - z0, s, mats, ohne)
+        if typ == "band" and not kanten:
+            K.extrude(tw, poly, 0.0, z1 - z0, bm, dach, bottom=False)
+            ohne = [((k[0][0] + k[1][0]) / 2, (k[0][1] + k[1][1]) / 2) for k in (te.get("rueckwand") or [])]
+            _hochhaus_fassade(tw, tf, poly, z1 - z0, s, mats, ohne)
+        else:
+            tw.poly([(x, y, z1 - z0) for x, y in poly], None, dach, (0, 0, 1))
+            if z0 > 0.5 and "eg" in te:
+                s["eg"] = te["eg"]
+            _turm_fassade(tw, tf, poly, z1 - z0, typen, te, s, mats, bm)
         if te.get("unterseite"):      # Untersicht des auskragenden Kopfs, 2 cm unter der Kante
             um = _hh_mat(mats, {"band_farbe": te["unterseite"]}, "band", bm)
             tw.poly([(x, y, -0.02) for x, y in poly[::-1]], None, um, (0, 0, -1))

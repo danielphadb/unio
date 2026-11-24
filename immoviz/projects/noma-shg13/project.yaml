@@ -1523,6 +1523,11 @@ streetview_checks:
   sv_erdberg_121:      {pos: [-38.0, -15.0], target: [-20.0, -14.0], pitch: 22, fov: 90} # Erdbergstrasse 121 (Nachbar West)
   sv_triiiple_nah:     {pos: [62.0, -100.0], target: [105.0, -130.0], pitch: 32, fov: 100} # TrIIIple von der Baumgasse
   sv_triiiple_sued:    {pos: [80.0, -175.0], target: [105.0, -128.0], pitch: 35, fov: 100} # TrIIIple von Sueden
+  tri_ost:             {pos: [255.0, -129.0], target: [130.0, -185.0], pitch: 23, fov: 100} # TrIIIple von der Erdberger Laende (Osten), alle drei Tuerme
+  tri_west:            {pos: [71.0, -112.0], target: [148.0, -185.0], pitch: 29, fov: 100}  # Turm 1 von Westen, Turm 2 und 3 dahinter
+  tri_suedwest:        {pos: [173.0, -294.0], target: [148.0, -185.0], pitch: 27, fov: 100} # Turm 3 vorn, Turm 2 dahinter
+  tri_suedost:         {pos: [198.0, -322.0], target: [129.0, -247.0], pitch: 33, fov: 100} # Turm 3 und Turm 2 von Suedosten
+  tri_t3_sw:           {pos: [70.0, -278.0], target: [148.0, -185.0], pitch: 25, fov: 100}  # Turm 3 von Suedwesten
   sv_austro_nah:       {pos: [118.0, -300.0], target: [142.0, -366.0], pitch: 35, fov: 100} # Austro Tower
   sv_austro_fern:      {pos: [70.0, -180.0], target: [142.0, -366.0], pitch: 18, fov: 80}   # Austro Tower und TownTown aus Distanz
 # Runde 11d: Stephansdom (BKM-BEZUG 169932, in den Strukturdaten als "Curhauskapelle" gefuehrt), Suedturm 136,4 m ueber Gelaende
@@ -1531,19 +1536,30 @@ fern_spitzen:
   - {bezug: "169932", name: Stephansdom Suedturm, basis: 81.0, spitze: 147.3, breite: 13.0}
 hochhaeuser:
   standard: {ab_hoehe: 40.0, geschoss: 3.6, eg: 5.0, band: 1.0, achse: 1.5, glas_farbe: "#2E3A44", band_farbe: "#C9CCCB"}
-  # Runde 11e (Nutzer: Landmarks so richtig wie moeglich): TrIIIple Turm 1 als gestapelte Form statt BKM-Prisma.
-  # Das Baukoerpermodell ist 2,5D und kennt keine Ueberhaenge. Aus Street View 04/2026 (sv_triiiple_nah/_sued, intern):
-  # 34 Geschosse [CTBUH]: Sockel 2 und Unterbau 7 Geschosse (beide Fassaden zurueckgesetzt), darueber 14 Geschosse mit
-  # auskragendem linkem Fluegel, rostrotem Eckschlitz und zurueckliegender rechter Fassade, oben ein Kopf mit 11 Geschossen,
-  # der ueber die rechte Fassade auskragt (Ecke lokal -x/+y). Grundriss = Huelle der BKM-Teile, Geschosse im Bild gezaehlt,
-  # Ruecksprung 5 m und 2,5 m, Schlitz 4 x 6 m [ANN aus dem Bild], Oberkante BKM 114,5.
+  # Runde 11g (Nutzer: TrIIIple Fassaden und Kanten wie in echt, REGELN U12): alle drei Tuerme als echte Geometrie.
+  # Quellen: Street View 2024 bis 2026 aus 23 Standpunkten rund um die Tuerme (lokal renders/streetview/triiiple/)
+  # [SV 04/2026]; Falter 17.03.2021: burgunderrote Fassade hinter umlaufenden Glasbalkonen, Tuerme springen in
+  # verschiedenen Hoehen zur Seite [Falter 2021]; Baukoerpermodell: Oberteil-Huellen und tiefere Dachflaechen des
+  # vorstehenden Schafts (T1 +65,3 Sued, T2 +62,4 Sued, T3 +72,3 West) [BKM]. Je Turm ein Oberteil (rund 34 x 30 m mit
+  # Balkonen, Glasbruestung, Platten hellgrau, dahinter burgunder Wand mit raumhohen Fenstern) auf einem schmaleren
+  # Schaft (rund 22 m), der zur Seite vorsteht. T2 und T3: Schaft burgunder mit Lochfenstern [SV]. T1: Schaft mit
+  # Balkonen, Hals unter dem Kopf mit burgunder Lochfassade nach Westen und Norden [SV]. Tiefe des Schafts, Hoehe des
+  # Halses (T1 +79), Achsraster und Fensterformate [ANN]; Turmraster um 9,1 Grad gedreht [BKM].
   formen:
-    - {name: TrIIIple Turm 1, bezug: Z43908, pos: [107.5, -132.0], r: 26.0, ab_hoehe: 100.0, stil: Z43908,
-       teile: [{poly: [[93.33, -121.27], [122.6, -116.57], [127.0, -143.9], [97.74, -148.61]], z: [-1.5, 31.0]},
-               {poly: [[96.89, -118.17], [122.2, -114.1], [127.0, -143.9], [97.74, -148.61], [93.89, -124.73], [97.84, -124.09]], z: [31.0, 79.0], unterseite: "#2A2522", rueckwand: [[[93.89, -124.73], [97.84, -124.09]], [[97.84, -124.09], [96.89, -118.17]]], rueckwand_farbe: "#56241E"},
-               {poly: [[88.0, -119.6], [122.2, -114.1], [127.0, -143.9], [92.8, -149.4]], z: [79.0, 114.5], unterseite: "#2A2522", dach: "#3A3D40"}]}
+    - {name: TrIIIple Turm 1, bezug: Z43908, pos: [107.0, -136.0], r: 28.0, ab_hoehe: 50.0, stil: Z43908,
+       teile: [{poly: [[98.43, -152.96], [121.83, -149.21], [121.14, -144.86], [126.96, -143.93], [122.58, -116.58], [93.35, -121.26]], z: [-1.5, 31.0], aussen: true, fassade: balkon, eg: 7.0},
+               {poly: [[98.43, -152.96], [121.83, -149.21], [121.14, -144.86], [126.96, -143.93], [122.19, -114.11], [98.88, -117.84], [100.31, -126.73], [94.38, -127.68]], z: [31.0, 65.3], aussen: true, kanten: [balkon, balkon, balkon, balkon, balkon, loch, loch, balkon]},
+               {poly: [[97.73, -148.61], [126.96, -143.93], [122.19, -114.11], [98.88, -117.84], [100.31, -126.73], [94.38, -127.68]], z: [65.3, 79.0], aussen: true, kanten: [balkon, balkon, balkon, loch, loch, balkon]},
+               {poly: [[92.8, -149.4], [127.06, -143.92], [122.28, -114.1], [88.02, -119.58]], z: [79.0, 114.5], aussen: true, fassade: balkon, unterseite: "#2E2224"}]}
+    - {name: TrIIIple Turm 2, bezug: Z43908, pos: [148.0, -188.0], r: 28.0, ab_hoehe: 50.0, stil: Z43908,
+       teile: [{poly: [[131.98, -207.54], [153.31, -204.12], [149.23, -178.65], [127.9, -182.06]], z: [-1.5, 62.4], aussen: true, kanten: [loch, balkon, balkon, loch], eg: 7.0},
+               {poly: [[125.14, -203.98], [158.61, -198.61], [153.88, -169.09], [120.41, -174.45]], z: [62.4, 105.0], aussen: true, fassade: balkon, unterseite: "#2E2224"}]}
+    - {name: TrIIIple Turm 3, bezug: Z43908, pos: [124.0, -250.0], r: 28.0, ab_hoehe: 50.0, stil: Z43908,
+       teile: [{poly: [[111.61, -264.98], [137.29, -260.87], [134.17, -241.42], [108.5, -245.53]], z: [-1.5, 72.3], aussen: true, kanten: [loch, loch, balkon, loch], eg: 7.0},
+               {poly: [[118.13, -269.0], [146.87, -264.4], [141.41, -230.33], [112.68, -234.94]], z: [72.3, 118.5], aussen: true, fassade: balkon, unterseite: "#2E2224"}]}
+
   gebaeude:
-    Z43908: {geschoss: 3.1, eg: 6.0, band: 0.35, auskragung: 1.4, achse: 0, glas_farbe: "#171C21", band_farbe: "#55585A", unter: {ab: 30.0, hoehe: 70.0, geschoss: 3.1, band: 1.4, auskragung: 0.0, achse: 1.8, glas_farbe: "#151213", band_farbe: "#4A1F1C"}}   # TrIIIple, Schnirchgasse 9 bis 12: anthrazit, dunkle umlaufende Balkonplatten mit Glasbruestung; Sockelteil bis +65 dunkelrot; Turm 1 als Form (formen) (Street View 04/2026)
+    Z43908: {geschoss: 3.15, eg: 5.0, band: 0.5, achse: 1.6, glas_farbe: "#1A2026", band_farbe: "#D6D8D7", wand_farbe: "#4A2226", platte_farbe: "#7F8385"}   # TrIIIple, Schnirchgasse 9 bis 12: Tuerme als formen (oben); Restteile (Sockelbauten) hell mit Glas [SV 04/2026]
     Z80306: {geschoss: 3.7, eg: 7.0, band: 0.2, achse: 1.35, glas_farbe: "#22364A", band_farbe: "#4F5B66"}                 # Austro Tower, Schnirchgasse 17: dunkelblaue Glasfassade (Street View 06/2024)
     "229182": {geschoss: 3.7, eg: 5.0, band: 1.7, achse: 0, glas_farbe: "#262E35", band_farbe: "#E4E6E6"}                  # OeAMTC-Zentrale Baumgasse 129: silberweisse Baender, dunkle Fensterbaender (Street View 06/2024)
 schutz: {klassen: [gebaeude_objekt, fenster_glas, fenster_rahmen, gelaender, leuchten, strassenmoebel, autos, nachbarn, innenraum, ausstattung, boden], kante_px: 2}
