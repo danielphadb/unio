@@ -42,6 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
+- mac-neu | seit 2026-11-24 18:11 | Noma Nachbarhäuser mit Google Street View 04/2026 verfeinern (Wunsch des Nutzers; Satellit/3D-Kacheln für das Konto gesperrt), Dachkameras neu | Bereich: immoviz/projects/noma-shg13/project.yaml (streetview_checks, neighbours, roofs_override, neighbour_facades, hochhaeuser), renders/streetview/ (lokal), renders/r11e_*/, GPU
 
 ## Nachrichten
 
