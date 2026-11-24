@@ -1,6 +1,6 @@
 # Auftrag noma_r11_penthaus_top24_25
 
-Status: in Arbeit (mac-neu, 2026-11-24 11:26)
+Status: erledigt (mac-neu, 24.11.2026 13:46)
 Erstellt: 24.11.2026, cloud-neu
 Erledigt:
 
@@ -91,4 +91,32 @@ Couchtische, Bogenleuchten, Pflanzen. 23-3: Esstisch aus der Sichtachse genommen
 mittig zeigt (Kamera in der äußersten Ecke an der Straßenseite, Blick diagonal über die ganze Terrasse zum Hof).
 
 ## Ergebnis
-(von der Mac-Sitzung auszufüllen)
+mac-neu, 24.11.2026, MacBook Pro M3 Max, Cycles auf METAL (GPU, 30 Kerne), keine Higgsfield-Credits.
+
+1. **Modelle laden:** 11:26 bis 11:27, ohne Fehler.
+2. **Probe** (`r11_probe/`, 960 x 640, 32 Samples): 14 Innenkameras in 1195 s (Peak 43,4 GB), 4 Dachkameras golden_hour in
+   318 s plus `dachterrasse_stadt` blaue_stunde in 139 s. **Planbeleg 19 x 0 Fehler.** Autoprüfung 233 Autos, 0 Befunde.
+3. **4k innen** (`r11_innen/`, 3840 x 2560, 256 Samples, mit Ebenen): 14 Bilder in 5814 s (1 h 37 min), resident 21,3 GB,
+   Peak 41,3 GB. **Planbeleg 14 x 0 Fehler** (top24_wohnzimmer 42, top24_wohnzimmer_tv 48, top24_terrasse_hst 23,
+   top24_terrasse_abend 23, top25_wohnzimmer 34, top25_essplatz 31, top25_terrasse_hst 28, top25_terrasse_abend 28,
+   top26_2_wohnkueche_dachfenster 27, _terrasse 29, _morgen 27, top23_2_wohnkueche_dachfenster 20, _terrasse 30,
+   _morgen 20 sichtbare Objekte).
+4. **4k Dach** (`r11_dach/`, `--no-blend`, mit Ebenen): 4 Kameras golden_hour in 744 s (Peak 43,9 GB), `dachterrasse_stadt`
+   blaue_stunde in 164 s (Peak 40,2 GB). **Planbeleg 5 x 0 Fehler** (stadt 25, hof 37, 23 20, 23_hof 50 sichtbare Objekte).
+5. **Ebenen:** alle 19 mit `nicht_zugeordnet: []`. Schutzanteil innen 82,6 bis 100 %, Dach 52 bis 77 % (Himmel und
+   Stadt sind nicht geschützt). Eingecheckt ohne `normalen.png`, lokale Pfade aus den JSON entfernt.
+6. **Kontaktbogen:** `r11_innen/kontaktbogen.jpg` (19 Bilder, 3600 x 5880).
+7. **Sichtprüfung 4k:**
+   - Top 24/25 gut: Schräge mit Nischen, HST und Fenster mit Fassadenrahmen und Glas, kein Doppelglas sichtbar, Balkon mit
+     Sesseln und Olivenbaum, Abendbilder mit Innenlicht. Küchen mit Steinplatte und Wasserfall-Wange, ohne Spalten.
+   - **Befund Penthäuser, Dachflächenfenster:** In allen vier `*_dachfenster` und `*_morgen` Bildern hängen unter den
+     Öffnungen graue Glasflächen, in denen sich die Pendelleuchten spiegeln. Durch die Öffnung darüber sieht man hellen
+     Himmel. Das sieht nach einer zweiten oder versetzt gesetzten Scheibe aus (Glas nicht in der Dachebene). Bitte im Modell
+     prüfen; bis dahin sind diese vier Bilder nicht kundentauglich.
+   - Penthäuser sonst: Licht fällt durch die Dachfenster, Kücheninsel mit Steinplatte, Essplatz und Sofa im Bild (Lage zu Feuermauer und Schräge nicht eindeutig zu erkennen). Die
+     Bilder `*_terrasse` zeigen nur eine leere Ecke mit HST und Topfpflanze; die Treppeneinhausung ist in keinem Bild zu sehen.
+   - **Befund Whirlpool:** In `dachterrasse_23_hof` steht hinter dem Tisch ein heller Kasten hinter einer Lattenwand mit
+     Geländer; die Wasserfläche ist nicht zu sehen. Die Vorgabe "Whirlpool mit Wasser sichtbar" ist nicht erfüllt
+     (Kamera höher oder Lattenwand weg).
+   - Dachterrassen sonst: nichts schwebt, Olivenbaum im Pflanztrog, Outdoor-Küche mit Grill, Feuertisch, Lounge.
+     `dachterrasse_stadt` blaue_stunde ist sehr dunkel, fast nur Silhouette.

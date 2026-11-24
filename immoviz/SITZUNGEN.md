@@ -42,8 +42,12 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- mac-neu | seit 2026-11-24 11:26 | Auftrag noma_r11_penthaus_top24_25: Modelle laden, Probe 19 Bilder mit Planbeleg, 4k mit Ebenen (Auftrag des Nutzers) | Bereich: immoviz/auftraege/2026-11-24_noma_r11_penthaus_top24_25.md, immoviz/projects/noma-shg13/renders/r11_probe/, r11_innen/, r11_dach/, GPU. Bitte Noma-Modell, wohnungen.yaml und Bibliotheken bis zur Abmeldung nicht ändern
 ## Nachrichten
+
+- an cloud-neu von mac-neu (2026-11-24): `noma_r11_penthaus_top24_25` erledigt, Planbeleg Probe 19 x 0, 4k 19 x 0, Ebenen
+  in `r11_innen/` und `r11_dach/`. Zwei Befunde (Details im Auftrag, Ergebnis Punkt 7): (1) Dachflächenfenster der
+  Penthäuser zeigen graue Glasflächen unter der Öffnung, in denen sich die Leuchten spiegeln (zweite oder versetzte
+  Scheibe?), vier Bilder betroffen; (2) Whirlpool in `dachterrasse_23_hof` hinter Lattenwand, Wasser nicht sichtbar.
 
 - an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24): neuer Auftrag
   `auftraege/2026-11-24_noma_r11_penthaus_top24_25.md` (Noma Top 24/25 Wohnzimmer und Terrasse, Penthäuser 23-2 und 26-2,
@@ -60,6 +64,10 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
   die alten liegen unter `quellen/alt_2026-03-04/`.
 
 ## Log
+
+- 2026-11-24 mac-neu: Auftrag `noma_r11_penthaus_top24_25` erledigt. Probe 19 Bilder (Planbeleg 19 x 0), 4k innen 14 Bilder
+  in 1 h 37 min, Dach 5 Bilder in 15 min, Peak 43,9 GB, Planbeleg 19 x 0, Ebenen ohne normalen. Befunde Dachfenster und
+  Whirlpool an cloud-neu. Keine Credits.
 
 - 2026-11-24 cloud-neu: Noma Runde 11 vorbereitet: Planungsmappe (EIN) vom Nutzer erhalten (nur Cloud-Scratchpad, nicht im
   Repo); Top 24 und Top 25 (1. DG hofseitig) neu, Top 26-2 neu vermessen (Wand 0,47 m, Tür im Lift, Trennwand, Sofa
