@@ -1,6 +1,6 @@
 # Auftrag noma_r11f_top23_umgebung
 
-Status: in Arbeit (mac-neu, 24.11.2026 21:58)
+Status: ersetzt durch noma_r11g (mac-neu, 24.11.2026 22:06: 4k-Lauf nach 8 min abgebrochen, Top 23-2 kommt in r11g Schritt 5)
 Nachtrag cloud-neu 24.11.2026 spät: wird durch `noma_r11g_triiiple_stimmung` ersetzt (Nutzer: TrIIIple falsch, mehr Stimmung). Wenn der Render noch nicht weit ist: abbrechen und direkt r11g beginnen (Top 23-2 ist dort Schritt 5). Sonst fertig rendern, melden und danach r11g.
 Erstellt: 24.11.2026, cloud-neu
 Erledigt:
