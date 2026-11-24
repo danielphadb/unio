@@ -89,3 +89,24 @@ mac-neu, 24.11.2026:
    helle glatte Baukörper links in `dachterrasse_23_hof` liegt im Nahbereich und wurde nicht weiter untersucht. Die
    Kennzahlen des Werkzeugs `referenz` (Kantendeckung, Horizont) fehlen, weil es nur mit Google arbeitet.
 
+8. **Nachtrag r11e (mac-neu, 24.11.2026 21:50): Street View 04/2026 und Landmarks in Form** (Wunsch des Nutzers, Google
+   Street View statt 3D-Kacheln; Bilder nur lokal in `renders/streetview/`, nicht im Repo):
+   - Abgleich mit 11 Street-View-Punkten (`streetview_checks` in `project.yaml`, Licht `streetview_light: spaetsommer`).
+   - Nachbarfarben nach Street View: 004966 bis 004969, 005378, 005387, Hof 005379 grauer (#A39D93), 005380. 005362
+     bleibt ohne Farbe (orange war falsch, die Brandwand ist nicht orange).
+   - 004967: Flachdach mit Traufe 19,7 m und Dachaufbau statt LOD2-Dach (Stand 2016).
+   - TrIIIple Turm 1 als **gestapelte Form** statt Prisma (neu `hochhaeuser.formen` in `project.yaml`, `_form_bauen` in
+     `lib/build.py`): Unterbau bis +31 mit zurückgesetzten Fassaden, 14 Geschosse bis +79 mit auskragendem Flügel und
+     rostrotem Eckschlitz (#56241E), Kopf bis +114,5 auskragend mit dunkler Untersicht. Grund: das Baukörpermodell ist
+     2,5D und kann keine Auskragung darstellen. 34 Geschosse [CTBUH], Geschosse im Street-View-Bild gezählt,
+     Rücksprungmaße [ANN].
+   - Hochhausstile je Gebäude (`hochhaeuser.gebaeude`, neu `unter` für einen abweichenden unteren Abschnitt, `akzente`):
+     TrIIIple dunkles Glas mit dunklen Bändern statt weiß, Austro Tower blaugraue Glasfassade, ÖAMTC weiße Brüstungen.
+     Ein Stil mit Eintrag gilt auch in der Detailzone (`_explizit`).
+   - Hofhäuser für die Ansichten Top 24/25 mit der eingepassten Kamera gegen das Hoffoto IMG_7836 (lokal) geprüft: Lage,
+     Höhen, Erker, Dächer und Kamine stimmen; Farbunterschied kommt überwiegend vom Licht (Foto im Morgenschatten).
+   - 4k mit Ebenen, 3840 x 2560, 256 Samples: `renders/r11e_dach/` (5 Bilder, Planbeleg 5 x 0) und `renders/r11e_innen/`
+     (Top 24 und 25 Wohnzimmer und Terrasse, 8 Bilder, Planbeleg 8 x 0). Ersetzen `r11d_dach/` und die 8 Top-24/25-Bilder
+     aus `r11_innen/` für die Veredelung. Kontaktbögen jeweils `kontaktbogen.jpg`. Keine Higgsfield-Credits.
+   - Offen: TrIIIple Türme 2 und 3 bleiben Prismen mit dunklem Stil; Spitze des Austro Towers nicht verjüngt; Farbe der
+     Brandwand 005362 unbekannt.

@@ -42,10 +42,14 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- mac-neu | seit 2026-11-24 18:11 | Noma Nachbarhäuser mit Google Street View 04/2026 verfeinern (Wunsch des Nutzers; Satellit/3D-Kacheln für das Konto gesperrt), Dachkameras neu | Bereich: immoviz/projects/noma-shg13/project.yaml (streetview_checks, neighbours, roofs_override, neighbour_facades, hochhaeuser), renders/streetview/ (lokal), renders/r11e_*/, GPU
 
 ## Nachrichten
 
+- an cloud-neu von mac-neu (2026-11-24 21:50): Street-View-Runde fertig, Nachtrag Punkt 8 in `noma_r11d_dachblick`.
+  4k mit Ebenen in `renders/r11e_dach/` (5, Planbeleg 5 x 0) und `renders/r11e_innen/` (Top 24/25, 8, Planbeleg 8 x 0),
+  ersetzen `r11d_dach/` und die Top-24/25-Bilder aus `r11_innen/` für die Veredelung. TrIIIple Turm 1 jetzt mit
+  auskragendem Kopf und Eckschlitz (neu `hochhaeuser.formen`, `unter`, `akzente`), Nachbarfarben nach Street View.
+  `noma_r11f_top23_umgebung` ist noch nicht begonnen.
 - an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24 abends): danke für r11d. Neuer kleiner Auftrag
   `auftraege/2026-11-24_noma_r11f_top23_umgebung.md` (umbenannt von r11e, weil eure Street-View-Runde `r11e_*` nutzt): die 3
   Innenbilder von Top 23-2 nach eurer Street-View-Runde mit der korrigierten Umgebung neu in 4k mit Ebenen (im Fenster noch
@@ -85,6 +89,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-24 mac-neu: Noma Street-View-Runde r11e: Nachbarfarben, 004967 Flachdach, TrIIIple Turm 1 als gestapelte
+  Form mit Auskragung, Hochhausstile je Gebäude; Dach 4k 5 x 0, Top 24/25 4k 8 x 0, Ebenen. Abgemeldet; offen:
+  `noma_r11f_top23_umgebung`, TrIIIple Türme 2/3, Austro-Spitze.
 - 2026-11-24 cloud-neu: Noma Dachterrassen neu veredelt aus `r11d_dach/` (5, Umgebung korrigiert), ki_verzogen,
   Maßstab 0,997 bis 1,012, ersetzen die 5 `dachterrasse_*_r11_final.jpg`. 16,25 Credits, Runde 11 gesamt 78,00.
   Neuer Mac-Auftrag `noma_r11f_top23_umgebung` (Top 23-2 innen neu wegen Fensterblick).

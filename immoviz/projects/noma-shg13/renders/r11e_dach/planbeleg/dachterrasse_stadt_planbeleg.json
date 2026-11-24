@@ -1,0 +1,233 @@
+{
+ "kamera": "dachterrasse_stadt",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [],
+ "sichtbar": [
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 10.94,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_shg_dach_masse",
+   "anteil_prozent": 8.2,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top26_35__ausstattung__esstisch_aussen_0",
+   "anteil_prozent": 7.98,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_shg_dach_gelaender",
+   "anteil_prozent": 6.14,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "umgebung_daecher",
+   "anteil_prozent": 5.54,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top26_masse",
+   "anteil_prozent": 3.72,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_40__vegetation__olivenbaum_1",
+   "anteil_prozent": 2.91,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_32__ausstattung__lounge_sofa_2",
+   "anteil_prozent": 2.08,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_37__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 1.87,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_39__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 1.59,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_38__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 1.45,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_35__ausstattung__esstisch_aussen_1",
+   "anteil_prozent": 1.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_34__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 0.68,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_36__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.66,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_34__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 0.53,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_40__vegetation__olivenbaum_0",
+   "anteil_prozent": 0.49,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_35__ausstattung__esstisch_aussen_2",
+   "anteil_prozent": 0.48,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "fern_markant",
+   "anteil_prozent": 0.46,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top26_38__ausstattung__esstuhl_aussen_3",
+   "anteil_prozent": 0.35,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "umgebung_fernzone",
+   "anteil_prozent": 0.26,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top26_32__ausstattung__lounge_sofa_0",
+   "anteil_prozent": 0.22,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_39__ausstattung__esstuhl_aussen_3",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "umgebung_fenster",
+   "anteil_prozent": 0.08,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top26_38__ausstattung__esstuhl_aussen_0",
+   "anteil_prozent": 0.08,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_37__ausstattung__esstuhl_aussen_3",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  }
+ ]
+}
