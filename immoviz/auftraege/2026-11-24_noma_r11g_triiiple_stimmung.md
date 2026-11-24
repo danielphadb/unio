@@ -78,10 +78,35 @@ Street View vor jedem Credit).
    - Feuertisch mit sichtbarer Flamme (Emission), Whirlpool mit Unterwasserlicht, Outdoor-Küche mit dezenter Unterbauleuchte,
      2 bis 3 Windlichter oder Laternen auf Tisch und Boden, wo Props in der Bibliothek vorhanden sind (sonst melden).
    - blaue_stunde für `dachterrasse_stadt` etwas heller als r11e (der Render war fast schwarz), Innenlicht und Feuer an.
+4b. **Nachtrag cloud-neu 24.11. spät: Innenausstattung auf High-End-Niveau** (Analyse der 14 Innenbilder Runde 11 gegen
+   `mood_vorlagen.md` und `interior_v2.md`; Modell, keine Credits). Wenn das länger als rund 1,5 h dauert: zuerst die Dachbilder
+   aus Schritt 5 rendern und pushen, dann 4b, dann die Innenbilder.
+   Befunde:
+   - In Top 24, Top 25 und Top 23-2 steht innen `esstisch_aussen` (BlenderKit "Cancun", Lattenplatte): in allen
+     veredelten Bildern sieht man einen Gartentisch mit Fugen im Wohnraum. Nicht High-End.
+   - Wände kahl, keine Teppiche unter Essplatz und Lounge, keine Vorhänge, keine Kunst, kaum Deko; dieselbe Glaskugel-
+     Pendelleuchte in jeder Wohnung.
+   - `top23_2_wohnkueche_terrasse` und `top26_2_wohnkueche_terrasse`: fast leerer Raum, nur eine Topfpflanze vor großer
+     weißer Wand.
+   Umsetzung (nur selbst erzeugte Geometrie oder Poly Haven CC0, je neue Quelle in `assets/LIZENZEN.md` und
+   `lib/assets/modelle_bibliothek.yaml`):
+   - Esstisch innen: massiver Eichentisch (rechteckig, Platte rund 4 bis 6 cm ohne Fugen, Kufen- oder Wangengestell),
+     parametrisch selbst gebaut oder Poly Haven `gallinera_table` (CC0, vorher ansehen), gleiche Lage und Maße wie jetzt.
+   - Teppiche: eigene Geometrie (rund 1 cm, Wolle/Jute prozedural, gedeckte Farbe) unter Lounge und Essplatz je Wohnraum.
+   - Vorhänge: leichte Leinen-Stores in Falten seitlich an HST und großen Fenstern (eigene Geometrie, halbtransparent).
+   - Kunst: ein großformatiges Bild (rund 1,2 x 1,6 m, schmaler Eichenrahmen, abstrakte prozedurale Fläche in Sand, Ocker,
+     Salbei) an der größten freien Wand je Wohnraum, in den beiden Terrassenblicken der Penthäuser über einem Sideboard.
+   - Penthaus-Terrassenblicke: zusätzlich `lounge_designer` mit Beistelltisch, Stehleuchte und Teppich, sodass der Raum
+     bewohnt wirkt; Blick zur Terrasse frei lassen.
+   - Deko (Poly Haven CC0): `decorative_book_set_01`, `ceramic_vase_01` bis `_04`, `wooden_bowl_01`, `brass_candleholders`,
+     `throw_pillows_01` sparsam auf Insel, Esstisch, Sideboard, Sofa.
+   - Pendelleuchten je Wohnung unterschiedlich (z. B. Top 24 Glaskugel, Top 25 flache Scheibe, Penthäuser Gruppen).
+   - Render-Liste in Schritt 5 um `top26_2` ergänzen (wegen des leeren Terrassenblicks); veredelt wird 26-2 erst nach
+     Freigabe des Nutzers.
 5. **4k mit Ebenen neu**, nacheinander:
    - Dach: die vier Dachkameras golden_hour und `dachterrasse_stadt` blaue_stunde nach `renders/r11g_dach/`
      (Befehle wie `noma_r11_penthaus_top24_25` Schritt 2, `--out r11g_dach`, `--no-blend --ebenen`).
-   - Innen: `--top top24,top24_terrasse,top25,top25_terrasse,top23_2 --final --res 3840x2560 --samples 256 --out r11g_innen --ebenen`
+   - Innen: `--top top24,top24_terrasse,top25,top25_terrasse,top23_2,top26_2 --final --res 3840x2560 --samples 256 --out r11g_innen --ebenen`
      (Top 24/25 wegen TrIIIple im Fensterblick, Top 23-2 wegen der alten "Pagode" aus r11c).
    - JPG-Fassungen, Kontaktbögen, einchecken: JPGs, Planbeleg, Ebenen ohne `normalen.png`.
 
