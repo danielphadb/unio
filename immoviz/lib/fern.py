@@ -241,7 +241,7 @@ def fernzone(mb, rng, radius: float, ground, bis: float = 1800.0, step: float = 
                      (x0 + t, y1 - t, zg + 0.2)], None, "hof", (0, 0, 1))
 
 
-def markante(mb, fern, ground, spitzen=None, fassade=None):
+def markante(mb, fern, ground, spitzen=None, fassade=None, ohne=()):
     """Hohe Baukoerper jenseits des Radius als Silhouette: Grundriss und Oberkante aus dem Baukoerpermodell
     (Hoehen absolut ueber Wiener Null), nach unten bis unter das grobe Gelaende gezogen.
 
@@ -268,6 +268,11 @@ def markante(mb, fern, ground, spitzen=None, fassade=None):
             top_teil[str(h["bezug"])] = h
     for h in (fern or {}).get("hoch", []):
         poly = h["poly"]
+        if ohne:      # durch eine Landmarke als echte Form ersetzt (lib/landmarken_bau.py, project.yaml fern_landmarken)
+            hx = sum(p[0] for p in poly) / len(poly)
+            hy = sum(p[1] for p in poly) / len(poly)
+            if any(str(h.get("bezug")) == bz and math.hypot(hx - ex, hy - ey) <= er for bz, ex, ey, er in ohne):
+                continue
         a = 0.0
         for i in range(len(poly)):
             (x1, y1), (x2, y2) = poly[i], poly[(i + 1) % len(poly)]

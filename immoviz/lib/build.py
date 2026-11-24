@@ -781,7 +781,31 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
                 for mb_ in (tw, tf):
                     mb_.verts = [(x, y, z + z0) for x, y, z in mb_.verts]
                 hw.merge(tw); hf.merge(tf)
-        FE.markante(mk, fern, far_ground, (cfg or {}).get("fern_spitzen"), fass)     # Turmhelme laut project.yaml
+        lm = (cfg or {}).get("fern_landmarken") or []
+        lage = None
+        if lm:
+            from . import landmarken_bau as LB
+            from pyproj import Transformer
+            _tr = Transformer.from_crs("EPSG:4326", (cfg.get("site") or {}).get("crs", "EPSG:31256"), always_xy=True)
+            _ox, _oy = cfg["site"]["origin_gk"]
+            _a = math.radians(cfg["site"]["x_axis_deg"])
+
+            def lage(lat, lon):
+                gx, gy = _tr.transform(lon, lat)
+                dx, dy = gx - _ox, gy - _oy
+                return dx * math.cos(_a) + dy * math.sin(_a), -dx * math.sin(_a) + dy * math.cos(_a)
+        FE.markante(mk, fern, far_ground, (cfg or {}).get("fern_spitzen"), fass,
+                    LB.ersetzt(lm, lage) if lm else ())     # Turmhelme laut project.yaml
+        if lm:      # Landmarken als echte Form (REGELN U12)
+
+            def lm_mat(farbe, rough=0.6):
+                name = f"fern_lm_{farbe.lstrip('#').lower()}_{int(rough * 100)}"
+                if name not in mats:
+                    mats[name] = M.simple(bpy, name, M.hex_rgb(farbe), rough)
+                if name not in mk.materials:
+                    mk.materials.append(name)
+                return name
+            LB.bauen(mk, lm, far_ground, lm_mat, lage)
         if HHc:
             hw.to_object(bpy, mats, coll); hf.to_object(bpy, mats, coll)
         FE.kulisse(mk, fern, extra=FE.gipfel(cfg))                            # Gipfel laut project.yaml

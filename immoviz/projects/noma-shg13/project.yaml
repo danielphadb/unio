@@ -86,6 +86,13 @@ neubau:
     aus_wasser: {color: "#7FB9C3", art: glas, rough: 0.02, quelle: "Ausstattung Runde 11b, Wasser im Whirlpool"}
     aus_bronze: {color: "#5E4A33", art: metall, rough: 0.45, metal: 0.7, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     aus_leuchte: {color: "#FFC98A", art: leuchte, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
+    aus_leuchte_glut: {color: "#7A1E05", art: leuchte, quelle: "Ausstattung Runde 11g (Stimmung): Glutbett Feuertisch, leuchtet mit dem Innenlicht"}
+    aus_leuchte_pool: {color: "#8FE0EE", art: leuchte, quelle: "Ausstattung Runde 11g (Stimmung): Unterwasserlicht Whirlpool"}
+    aus_leuchte_led: {color: "#FFC27A", art: leuchte, quelle: "Ausstattung Runde 11g (Stimmung): LED unter der Arbeitsplatte der Outdoor-Kueche, 2700 K"}
+    aus_flamme: {color: "#FFB040", art: flamme, staerke: 3.0, quelle: "Ausstattung Runde 11g (Stimmung): Flamme Feuertisch"}
+    aus_flamme_kerze: {color: "#FFB040", art: flamme, staerke: 8.0, quelle: "Ausstattung Runde 11g (Stimmung): Kerzenflamme Windlicht"}
+    aus_windlicht_glas: {color: "#F2EEE6", art: glas, rough: 0.02, quelle: "Ausstattung Runde 11g (Stimmung): Windlicht"}
+    aus_kerze: {color: "#F3EBDD", art: einfach, rough: 0.6, quelle: "Ausstattung Runde 11g (Stimmung): Kerze"}
     aus_laub: {color: "#3F5F2C", art: rasen, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     aus_gras: {color: "#7A8650", art: rasen, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
     aus_kletter: {color: "#365A27", art: rasen, quelle: "Ausstattung, Kundenwunsch 16.11.2026"}
@@ -1056,7 +1063,7 @@ neubau:
     - {gruppe: ausstattung_top23, typ: quader, box: [11.1, -9.85, 13.7, -6.55], z: [25.34, 25.352], mat: aus_teppich, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche) (Outdoor-Teppich)"}
     - {gruppe: ausstattung_top23, typ: modell, modell: lounge_sofa, box: [11.3, -7.04, 13.5, -5.95], z: 25.34, vorne: b-, farbe: "#C8C6C1", quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche); Modell lounge_sofa (modelle_bibliothek.yaml)"}
     - {gruppe: ausstattung_top23, typ: quader, box: [11.85, -8.1, 12.95, -7.4], z: [25.34, 25.72], mat: aus_stein_dunkel, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche) (Feuertisch Stein)"}
-    - {gruppe: ausstattung_top23, typ: quader, box: [12.05, -7.9, 12.75, -7.6], z: [25.72, 25.74], mat: aus_glut, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche) (Feuertisch Glutbett)"}
+    - {gruppe: ausstattung_top23, typ: quader, box: [12.05, -7.9, 12.75, -7.6], z: [25.72, 25.74], mat: aus_leuchte_glut, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche) (Feuertisch Glutbett)"}
     - {gruppe: ausstattung_top23, typ: modell, modell: lounge_sessel, box: [11.2, -9.55, 12.06, -8.55], z: 25.34, vorne: b+, farbe: "#C8C6C1", quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche); Modell lounge_sessel (modelle_bibliothek.yaml)"}
     - {gruppe: ausstattung_top23, typ: modell, modell: lounge_sessel, box: [12.74, -9.55, 13.6, -8.55], z: 25.34, vorne: b+, farbe: "#C8C6C1", quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche); Modell lounge_sessel (modelle_bibliothek.yaml)"}
     - {gruppe: ausstattung_top23, typ: zylinder, c: [13.72, -6.05], r: 0.32, z: [25.34, 25.89], mat: aus_kuebel, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche)"}
@@ -1065,7 +1072,7 @@ neubau:
     - {gruppe: ausstattung_top26, typ: quader, box: [1.6, -9.85, 4.2, -6.55], z: [25.34, 25.352], mat: aus_teppich, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche) (Outdoor-Teppich)"}
     - {gruppe: ausstattung_top26, typ: modell, modell: lounge_sofa, box: [1.8, -7.04, 4, -5.95], z: 25.34, vorne: b-, farbe: "#C8C6C1", quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche); Modell lounge_sofa (modelle_bibliothek.yaml)"}
     - {gruppe: ausstattung_top26, typ: quader, box: [2.35, -8.1, 3.45, -7.4], z: [25.34, 25.72], mat: aus_stein_dunkel, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche) (Feuertisch Stein)"}
-    - {gruppe: ausstattung_top26, typ: quader, box: [2.55, -7.9, 3.25, -7.6], z: [25.72, 25.74], mat: aus_glut, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche) (Feuertisch Glutbett)"}
+    - {gruppe: ausstattung_top26, typ: quader, box: [2.55, -7.9, 3.25, -7.6], z: [25.72, 25.74], mat: aus_leuchte_glut, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche) (Feuertisch Glutbett)"}
     - {gruppe: ausstattung_top26, typ: modell, modell: lounge_sessel, box: [1.7, -9.55, 2.56, -8.55], z: 25.34, vorne: b+, farbe: "#C8C6C1", quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche); Modell lounge_sessel (modelle_bibliothek.yaml)"}
     - {gruppe: ausstattung_top26, typ: modell, modell: lounge_sessel, box: [3.24, -9.55, 4.1, -8.55], z: 25.34, vorne: b+, farbe: "#C8C6C1", quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche); Modell lounge_sessel (modelle_bibliothek.yaml)"}
     - {gruppe: ausstattung_top26, typ: modell, modell: esstisch_aussen, box: [5.25, -9.3, 6.15, -7.7], z: [25.34, 26.11], vorne: a+, skalierung: frei, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche); Modell esstisch_aussen (modelle_bibliothek.yaml)"}
@@ -1079,6 +1086,36 @@ neubau:
     - {gruppe: ausstattung_top26, typ: zylinder, c: [1.4, -10.12], r: 0.32, z: [25.34, 25.89], mat: aus_kuebel, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche)"}
     - {gruppe: ausstattung_top26, typ: zylinder, c: [1.4, -10.12], r: 0.29, z: [25.89, 25.905], mat: nb_erde, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche)"}
     - {gruppe: ausstattung_top26, typ: modell, modell: olivenbaum, box: [0.85, -10.67, 1.95, -9.57], z: [25.89, 27.54], vorne: a-, skalierung: frei, klasse: vegetation, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche); Modell olivenbaum (modelle_bibliothek.yaml)"}
+    # Runde 11g (Auftrag noma_r11g Schritt 4, Nutzer: mehr High-End-Penthouse-Stimmung): Flammen auf den Feuertischen,    # Unterwasserlicht im Whirlpool, LED unter der Kuechenplatte, Windlichter auf den Tischen, Laternen am Boden
+    - {gruppe: ausstattung_top23, typ: flamme, c: [12.2, -7.76], z: [25.74, 25.95], breite: 0.2, ebenen: 3, drehung: 0.2, mat: aus_flamme, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: flamme, c: [12.4, -7.73], z: [25.74, 26.01], breite: 0.26, ebenen: 3, drehung: 0.7, mat: aus_flamme, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: flamme, c: [12.6, -7.77], z: [25.74, 25.93], breite: 0.2, ebenen: 3, drehung: 1.1, mat: aus_flamme, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top26, typ: flamme, c: [2.7, -7.76], z: [25.74, 25.95], breite: 0.2, ebenen: 3, drehung: 0.2, mat: aus_flamme, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top26, typ: flamme, c: [2.9, -7.73], z: [25.74, 26.01], breite: 0.26, ebenen: 3, drehung: 0.7, mat: aus_flamme, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top26, typ: flamme, c: [3.1, -7.77], z: [25.74, 25.93], breite: 0.2, ebenen: 3, drehung: 1.1, mat: aus_flamme, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: quader, box: [12.2, -12.0, 12.8, -11.45], z: [25.62, 25.625], mat: aus_leuchte_pool, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: quader, box: [14.02, -6.44, 16.78, -6.41], z: [26.19, 26.215], mat: aus_leuchte_led, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: zylinder, c: [15.8, -9.45], r: 0.06, z: [26.11, 26.31], mat: aus_windlicht_glas, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: zylinder, c: [15.8, -9.45], r: 0.028, z: [26.11, 26.17], mat: aus_kerze, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: flamme, c: [15.8, -9.45], z: [26.17, 26.22], breite: 0.022, ebenen: 2, drehung: 0.4, mat: aus_flamme_kerze, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: zylinder, c: [16.4, -9.45], r: 0.06, z: [26.11, 26.31], mat: aus_windlicht_glas, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: zylinder, c: [16.4, -9.45], r: 0.028, z: [26.11, 26.17], mat: aus_kerze, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: flamme, c: [16.4, -9.45], z: [26.17, 26.22], breite: 0.022, ebenen: 2, drehung: 0.4, mat: aus_flamme_kerze, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: zylinder, c: [17.0, -9.45], r: 0.06, z: [26.11, 26.31], mat: aus_windlicht_glas, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: zylinder, c: [17.0, -9.45], r: 0.028, z: [26.11, 26.17], mat: aus_kerze, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: flamme, c: [17.0, -9.45], z: [26.17, 26.22], breite: 0.022, ebenen: 2, drehung: 0.4, mat: aus_flamme_kerze, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top26, typ: zylinder, c: [5.7, -8.2], r: 0.06, z: [26.11, 26.31], mat: aus_windlicht_glas, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top26, typ: zylinder, c: [5.7, -8.2], r: 0.028, z: [26.11, 26.17], mat: aus_kerze, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top26, typ: flamme, c: [5.7, -8.2], z: [26.17, 26.22], breite: 0.022, ebenen: 2, drehung: 0.4, mat: aus_flamme_kerze, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top26, typ: zylinder, c: [5.7, -8.8], r: 0.06, z: [26.11, 26.31], mat: aus_windlicht_glas, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top26, typ: zylinder, c: [5.7, -8.8], r: 0.028, z: [26.11, 26.17], mat: aus_kerze, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top26, typ: flamme, c: [5.7, -8.8], z: [26.17, 26.22], breite: 0.022, ebenen: 2, drehung: 0.4, mat: aus_flamme_kerze, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: zylinder, c: [13.85, -8.9], r: 0.11, z: [25.34, 25.74], mat: aus_windlicht_glas, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: zylinder, c: [13.85, -8.9], r: 0.045, z: [25.34, 25.46], mat: aus_kerze, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top23, typ: flamme, c: [13.85, -8.9], z: [25.46, 25.53], breite: 0.03, ebenen: 2, drehung: 0.4, mat: aus_flamme_kerze, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top26, typ: zylinder, c: [4.35, -8.95], r: 0.11, z: [25.34, 25.74], mat: aus_windlicht_glas, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top26, typ: zylinder, c: [4.35, -8.95], r: 0.045, z: [25.34, 25.46], mat: aus_kerze, seg: 16, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
+    - {gruppe: ausstattung_top26, typ: flamme, c: [4.35, -8.95], z: [25.46, 25.53], breite: 0.03, ebenen: 2, drehung: 0.4, mat: aus_flamme_kerze, quelle: "Ausstattung Runde 11g, Auftrag noma_r11g Schritt 4 (Stimmung: Feuer, Unterwasserlicht, LED, Windlichter)"}
     - {gruppe: ausstattung_top24, typ: quader, box: [10.5, -17.15, 13.35, -15.6], z: [18.94, 18.952], mat: aus_teppich, quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche) (Outdoor-Teppich)"}
     - {gruppe: ausstattung_top24, typ: modell, modell: lounge_sessel, box: [10.7, -16.9, 11.56, -15.9], z: 18.94, vorne: a+, farbe: "#C8C6C1", quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche); Modell lounge_sessel (modelle_bibliothek.yaml)"}
     - {gruppe: ausstattung_top24, typ: modell, modell: lounge_sessel, box: [12.3, -16.9, 13.16, -15.9], z: 18.94, vorne: a-, farbe: "#C8C6C1", quelle: "Ausstattung (Staging) Runde 11b, Nutzer 24.11.2026 (Terrassen gemuetlich, Whirlpool und Outdoor-Kueche); Modell lounge_sessel (modelle_bibliothek.yaml)"}
@@ -1260,8 +1297,8 @@ cameras:
   foto_7836: {pos: [-25.7, -38.97, 21.53], target: [2.663, -37.469, 11.872], lens: 25.0, vertical: false, roll: -2.35}
 lights:
   spaetsommer:  {date: "2026-08-27", time: "16:20", tz: 2, exposure: 0.0, interior: 0.0, aerosol: 2.0, season: spaetsommer}   # Sonne 32,6 Grad, Azimut 246 Grad
-  golden_hour:  {date: "2026-08-27", time: "18:40", tz: 2, exposure: 0.3, interior: 0.2, aerosol: 2.5, season: spaetsommer}   # Sonne 10 Grad, Azimut 274 Grad
-  blaue_stunde: {date: "2026-08-27", time: "20:15", tz: 2, exposure: 1.8, interior: 1.0, aerosol: 2.0, season: spaetsommer}   # Sonne -5,4 Grad
+  golden_hour:  {date: "2026-08-27", time: "19:02", tz: 2, exposure: 0.5, interior: 0.5, aerosol: 2.8, season: spaetsommer}   # Runde 11g (mehr Stimmung): Sonne 6,3 Grad statt 10, waermer, Innenlicht und Leuchten an (vorher 18:40, exposure 0.3, interior 0.2, aerosol 2.5)
+  blaue_stunde: {date: "2026-08-27", time: "20:15", tz: 2, exposure: 2.6, interior: 1.0, aerosol: 2.0, season: spaetsommer}   # Sonne -5,4 Grad; Runde 11g: exposure 1.8 auf 2.6 (r11e fast schwarz)
 
 render:
   resolution: [2400, 1600]
@@ -1532,6 +1569,17 @@ streetview_checks:
   sv_austro_fern:      {pos: [70.0, -180.0], target: [142.0, -366.0], pitch: 18, fov: 80}   # Austro Tower und TownTown aus Distanz
 # Runde 11d: Stephansdom (BKM-BEZUG 169932, in den Strukturdaten als "Curhauskapelle" gefuehrt), Suedturm 136,4 m ueber Gelaende
 # (oeffentliche Angabe), BKM-Oberkante 147,3 lokal bei Sockel 11,1: Turm bis rund +70 m ueber Gelaende, darauf der Helm als Pyramide
+# Runde 11g (Auftrag noma_r11g Schritt 3b, REGELN U12): Fern-Landmarken als echte Form statt Prisma (lib/landmarken_bau.py).
+# Sichtbarkeit aus Probe r11g_probe (1440 x 960): Arsenalturm sichtbar in dachterrasse_23_hof (x rund 0,86, vorher duenner
+# Stab), Stephansdom und Karlskirche am Horizont von dachterrasse_stadt und _23, Gasometer in dachterrasse_hof zum groessten
+# Teil hinter dem Olivenbaum. Nicht gebaut: Riesenrad (in stadt und 23 vom Nachbarhaus rechts verdeckt), Kraftwerk Simmering
+# (in hof hinter dem TrIIIple). Lage aus Baukoerpermodell (fern.json) bzw. Orthofoto 2024, Formen nach Street View [SV].
+fern_landmarken:
+  - {typ: turm_korb, name: Arsenalturm, pos: [-1894.3, -449.5], grund: 37.1, hoehe: 155.0, schaft_r: 3.6, schaft_r_oben: 3.0, korb_r: 11.0, korb_unten: 0.62, korb_geschosse: 4, ersetzt: {bezug: "202565", radius: 5.0}, quelle: "Hoehe 155 m [Structurae]; Lage BKM-Teil 202565 (Schaft); weisser Betonschaft, Turmkorb aus Scheiben mit Fensterbaendern, Kappe und Antenne [SV 07/2024]; Masse Korb [ANN aus dem Bild]"}
+  - {typ: gasometer, name: Gasometer Simmering A bis D, zylinder: [[-112.8, -1353.9], [-68.4, -1407.6], [-6.4, -1486.8], [38.8, -1542.1]], r: 32.5, hoehe: 70.0, kuppel: 7.0, ersetzt: {bezug: "216923", radius: 30.0}, quelle: "Lage Orthofoto 2024 (Dachmitte, Neigung unberuecksichtigt, rund 5 m); 65 m Durchmesser, rund 70 m hoch, Ziegel mit Rundbogenfenstern, flache Glaskuppel [ANN, Literatur]"}
+  - {typ: kuppelkirche, name: Karlskirche, pos: [-1981.0, 1899.5], kuppel_pos: [-1981.0, 1899.5], front_pos: [-1976.7, 1923.1], achse_grad: 79.7, grund: 12.1, kuppel_r: [13.0, 16.0], kuppel_h: 19.0, schiff_l: 52.0, schiff_b: 30.0, pavillon_abstand: 30.0, ersetzt: {bezug: "160756", radius: 6.0}, quelle: "Lage Kuppel und Triumphsaeulen aus BKM 160756 (Saeulen bleiben aus dem BKM); gruene Kupferkuppel auf Tambour, Laterne, Portikus, Seitenpavillons mit kleinen Kuppeln [SV 06/2017]; Masse [ANN]"}
+  - {typ: steildach, name: Stephansdom Langhaus und Chor, pos: [-1217.6, 2735.3], von: [-1231.1, 2785.0], bis: [-1204.1, 2685.6], grund: 10.7, breite: 34.0, traufe: 26.0, first: 62.0, farbe: "#BDB3A0", dach_farbe: "#6B6446", quelle: "Achse aus BKM 169932 (Heidentuerme bis Mitte Nord- und Suedturm); Dach 111 m lang, 38 m ueber dem Gewoelbe [Literatur], Traufe und First [ANN]; Ziegeldach gelb, gruen, schwarz, aus der Ferne ocker-oliv [ANN]"}
+  - {typ: haube, name: Stephansdom Nordturm Haube, pos: [-1193.0, 2744.3], z: [78.2, 84.5], breite: 9.0, farbe: "#4C5A55", quelle: "Nordturm-Stumpf BKM 169932 (bis +78,2 lokal), Renaissancehaube [ANN aus Fotos]"}
 fern_spitzen:
   - {bezug: "169932", name: Stephansdom Suedturm, basis: 81.0, spitze: 147.3, breite: 13.0}
 hochhaeuser:
@@ -1559,7 +1607,7 @@ hochhaeuser:
                {poly: [[118.13, -269.0], [146.87, -264.4], [141.41, -230.33], [112.68, -234.94]], z: [72.3, 118.5], aussen: true, fassade: balkon, unterseite: "#2E2224"}]}
 
   gebaeude:
-    Z43908: {geschoss: 3.15, eg: 5.0, band: 0.5, achse: 1.6, glas_farbe: "#1A2026", band_farbe: "#D6D8D7", wand_farbe: "#4A2226", platte_farbe: "#7F8385"}   # TrIIIple, Schnirchgasse 9 bis 12: Tuerme als formen (oben); Restteile (Sockelbauten) hell mit Glas [SV 04/2026]
+    Z43908: {geschoss: 3.15, eg: 5.0, band: 0.5, achse: 1.6, glas_farbe: "#1A2026", band_farbe: "#D6D8D7", wand_farbe: "#3A1A1E", platte_farbe: "#7F8385"}   # TrIIIple, Schnirchgasse 9 bis 12: Tuerme als formen (oben); Restteile (Sockelbauten) hell mit Glas [SV 04/2026]
     Z80306: {geschoss: 3.7, eg: 7.0, band: 0.2, achse: 1.35, glas_farbe: "#22364A", band_farbe: "#4F5B66"}                 # Austro Tower, Schnirchgasse 17: dunkelblaue Glasfassade (Street View 06/2024)
     "229182": {geschoss: 3.7, eg: 5.0, band: 1.7, achse: 0, glas_farbe: "#262E35", band_farbe: "#E4E6E6"}                  # OeAMTC-Zentrale Baumgasse 129: silberweisse Baender, dunkle Fensterbaender (Street View 06/2024)
 schutz: {klassen: [gebaeude_objekt, fenster_glas, fenster_rahmen, gelaender, leuchten, strassenmoebel, autos, nachbarn, innenraum, ausstattung, boden], kante_px: 2}

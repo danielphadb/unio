@@ -240,6 +240,39 @@ def glass(bpy, name, tint=(0.82, 0.88, 0.86), rough=0.0):
     return m
 
 
+def flamme(bpy, name, staerke=30.0, seed=0.0):
+    """Flamme auf gekreuzten Ebenen (UV 0 bis 1, v nach oben): zungenfoermige Maske aus Rauschen, unten gelb, oben
+    orange; ausserhalb durchsichtig. Leuchtet unabhaengig vom Innenlicht (Feuertisch, Windlicht)."""
+    m = _new(bpy, name)
+    N = Nodes(m)
+    tc = N.new("ShaderNodeTexCoord")
+    s = N.sep(tc.outputs["UV"])
+    u, v = s[0], s[1]
+    noise = N.new("ShaderNodeTexNoise", Scale=3.5, Detail=3.0, Roughness=0.55)
+    vec = N.new("ShaderNodeCombineXYZ")
+    N.link(N.math("MULTIPLY", u, 1.6), vec.inputs[0])
+    N.link(N.math("MULTIPLY", v, 0.9), vec.inputs[1])
+    vec.inputs[2].default_value = seed
+    N.link(vec.outputs[0], noise.inputs["Vector"])
+    d = N.math("ABSOLUTE", N.math("SUBTRACT", u, 0.5))
+    huelle = N.math("POWER", N.math("SUBTRACT", 1.0, v), 0.75)
+    w = N.math("MULTIPLY", N.math("MULTIPLY", huelle, 0.40),
+               N.math("ADD", 0.25, N.math("MULTIPLY", noise.outputs["Fac"], 1.2)))
+    maske = N.math("MULTIPLY", N.math("MULTIPLY", N.math("SUBTRACT", w, d), 14.0, clamp=True),
+                   N.math("MULTIPLY", v, 10.0, clamp=True), clamp=True)
+    farbe = N.mix_rgb(N.math("POWER", v, 0.7), (1.0, 0.52, 0.12), (0.85, 0.16, 0.02))
+    em = N.new("ShaderNodeEmission")
+    N.link(farbe, em.inputs["Color"])
+    N.link(N.math("MULTIPLY", N.math("ADD", 0.35, N.math("SUBTRACT", 1.0, v)), staerke), em.inputs["Strength"])
+    tr = N.new("ShaderNodeBsdfTransparent")
+    mx = N.new("ShaderNodeMixShader")
+    N.link(maske, mx.inputs[0])
+    N.link(tr.outputs[0], mx.inputs[1])
+    N.link(em.outputs[0], mx.inputs[2])
+    N.link(mx.outputs[0], N.out.inputs["Surface"])
+    return m
+
+
 def zinc(bpy, name, color, seam=0.48):
     """Zink- und Blechdeckung mit Stehfalz (Falzabstand `seam`, gerundeter Falz als Relief), Patina-Wolken,
     leichte Beulen zwischen den Falzen und dunklere Laufspuren."""

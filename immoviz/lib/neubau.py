@@ -75,6 +75,8 @@ def _mat_lib(bpy, mats: dict, spec: dict):
             mats[name] = M.simple(bpy, name, c, 0.5, **{"Emission Color": (*c, 1.0), "Emission Strength": 0.0})
         elif art in ("rasen", "kies"):
             mats[name] = M.plaster(bpy, name, c, var=0.25 if art == "rasen" else 0.15, bump=0.6 if art == "rasen" else 0.35)
+        elif art == "flamme":      # Noma Runde 11g: Flamme (Feuertisch, Windlicht), leuchtet immer
+            mats[name] = M.flamme(bpy, name, s.get("staerke", 30.0))
         elif art == "glas":        # Noma Runde 11: Wasserflaeche im Whirlpool (getoentes Glas)
             mats[name] = M.glass(bpy, name, c, s.get("rough", 0.0))
         else:
@@ -317,6 +319,15 @@ class Neubau:
             (ca, cb), r, seg = e["c"], e["r"], e.get("seg", 20)
             pts = [T(ca + r * math.cos(2 * math.pi * k / seg), cb + r * math.sin(2 * math.pi * k / seg)) for k in range(seg)]
             K.extrude(mb, pts, e["z"][0], e["z"][1], mat, e.get("deckel", mat), bottom=True)
+        elif typ == "flamme":      # gekreuzte senkrechte Ebenen mit Flammenmaterial (UV 0 bis 1)
+            (ca, cb), br, n_ = e["c"], e.get("breite", 0.3), e.get("ebenen", 3)
+            z0, z1 = e["z"]
+            for k in range(n_):
+                w = math.pi * k / n_ + e.get("drehung", 0.0)
+                da, db = math.cos(w) * br / 2, math.sin(w) * br / 2
+                P1, P2 = T(ca - da, cb - db), T(ca + da, cb + db)
+                mb.poly([(P1[0], P1[1], z0), (P2[0], P2[1], z0), (P2[0], P2[1], z1), (P1[0], P1[1], z1)],
+                        [(0, 0), (1, 0), (1, 1), (0, 1)], mat, (db, -da, 0))
         elif typ == "pflanze":
             import bmesh
             bm = bmesh.new()
