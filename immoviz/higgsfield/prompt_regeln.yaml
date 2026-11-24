@@ -53,6 +53,14 @@ regeln:
       Neighbouring buildings keep the colours, storeys and window grid of image 1. Reference images are for mood and
       materials only, never for building geometry or colours of neighbours.
 
+  - id: horizont_sperre
+    gilt: [aussen, innen]
+    grund: "KI erfand Tuerme, Gasometer, Fernsehturm und Huegel im Stadthorizont, als Landmarken im Prompt aufgezaehlt waren (Noma r11g 24.11.2026, Stadtblick 19 % Kantenabweichung); Wimmergasse r10b Fernsehturm statt Millennium Tower. Landmarken nur im Prompt nennen, wenn `immoviz.py landmarken` sie fuer diese Kamera listet (REGELN U12)"
+    text: >-
+      SKYLINE LOCK: the distant skyline and horizon stay exactly as in image 1, at the same height and just as sparse.
+      Do not add any tower, high-rise, dome, spire, gasometer, chimney, TV tower, crane, hills or mountains that image 1
+      does not show; distant buildings only get realistic materials.
+
   - id: parkordnung
     gilt: [aussen]
     wenn: parkordnung

@@ -53,7 +53,8 @@ nicht ohne Freigabe veredelt.
 - [x] N7 Innen-Prompts (00:40): Horizontsperre je Kamera; das TrIIIple steht nur in den Prompts der Kameras, in deren Blick
   es liegt (Lehre aus dem Dach: sonst erfindet die KI es).
 - [ ] N8 Innenbilder r11g veredeln, sobald da (11 Bilder, 26-2 nach Freigabe).
-- [ ] W5 Wimmergasse Drohne: Prompt mit Horizontsperre vorbereiten (nach `wimmergasse_r11_fernsicht`).
+- [x] W5/A3 Horizontsperre als zentrale Regel `horizont_sperre` in `higgsfield/prompt_regeln.yaml` (00:50): wird an jeden
+  Veredelungs-Prompt angehängt (Studio, `immoviz.py prompt`), gilt damit auch für die Wimmergasse-Drohne.
 
 ### Werkzeug
 - [x] A1 Befehl `immoviz.py landmarken <projekt>` (22:33): `lib/landmarken.py`, Liste `lib/landmarken_wien.yaml`
