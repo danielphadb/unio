@@ -1,8 +1,8 @@
 # Auftrag noma_r11g_triiiple_stimmung
 
-Status: in Arbeit (mac-neu, 24.11.2026 22:06)
+Status: erledigt
 Erstellt: 24.11.2026, cloud-neu
-Erledigt:
+Erledigt: 25.11.2026 01:05, mac-neu
 
 Ersetzt `noma_r11f_top23_umgebung` (Top 23-2 innen ist hier Schritt 4). Start, sobald keine andere Mac-Arbeit läuft
 (`SITZUNGEN.md` "Laufend", `pgrep -f immoviz.py`). Zuerst in `SITZUNGEN.md` anmelden und hier
@@ -160,3 +160,7 @@ Street View vor jedem Credit).
    Penthäuser Dreiergruppen. Penthaus-Terrassenblicke: Konsole, Bild, Pflanze, Beistelltisch, Stehleuchte, Teppich; der
    Lounge-Sessel in Top 23-2 verdeckte in der Probe ein Viertel des Terrassenblicks und ist wieder entfernt, in Top 26-2
    ist in der Nische kein Platz.
+8. **Innen 4k** (`renders/r11g_innen/`, 3840 x 2560, 256 Samples, Ebenen): Top 24 und Top 25 je Wohnraum und Terrasse
+   (8 Bilder), Top 23-2 und Top 26-2 je 3 Bilder, zusammen 14 in 5588 s (4 bis 9 min je Bild), Peak 41,4 GB,
+   **Planbeleg 14 x 0**, `nicht_zugeordnet: []` in allen 14. Kontaktbogen `r11g_innen/kontaktbogen.jpg`. Top 26-2 erst
+   nach Freigabe des Nutzers veredeln (so im Auftrag). Proben `r11g_probe*`, `r11g_innen_probe` bleiben lokal.

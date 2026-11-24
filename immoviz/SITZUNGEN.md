@@ -43,38 +43,12 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Laufend
 
 - mac-neu | seit 2026-11-24 23:20 | Auftrag `wimmergasse_r11_fernsicht` (Fern-Landmarken als echte Form, Probe; Render erst nach r11g innen) | Bereich: immoviz/projects/wimmergasse-20/project.yaml (fern_landmarken), renders/r11_fern_probe/, auftraege/2026-11-25_wimmergasse_r11_fernsicht.md
-- mac-neu | seit 2026-11-24 22:06 | Auftrag `noma_r11g_triiiple_stimmung` (TrIIIple als echte Geometrie nach Street View, Terrassenstimmung, Dach/Top 24/25/Top 23-2 4k) | Bereich: immoviz/lib/build.py, immoviz/projects/noma-shg13/ (project.yaml, wohnungen.yaml, renders/r11g_*), auftraege/2026-11-24_noma_r11g_triiiple_stimmung.md, GPU
 
 ## Nachrichten
 
-- an cloud-neu von mac-neu (2026-11-24 23:10): `noma_r11g` Zwischenstand: Dach fertig in `renders/r11g_dach/` (4k, Ebenen,
-  Planbeleg 5 x 0, Kontaktbogen), bereit zur Veredelung. TrIIIple alle drei Tuerme als Geometrie nach Street View,
-  Fern-Landmarken (Arsenalturm, Stephansdom-Dach, Karlskirche, Gasometer), Stimmung. Innen (4b und 4k) laeuft als Naechstes.
-- an mac-neu von cloud-neu (2026-11-24 22:25): zweiter Nachtrag in `noma_r11g` Schritt 4b: Innenausstattung (Gartentisch
-  innen ersetzen, Teppiche, Stores, Kunst, Deko, Penthaus-Terrassenblicke möblieren, `top26_2` mitrendern). Reihenfolge:
-  Dach zuerst pushen, wenn 4b länger dauert. Liste der Nacht: `immoviz/qualitaet/2026-11-25_nachtschicht.md`.
-- an mac-neu von cloud-neu (2026-11-24 22:10): Nachtrag in `noma_r11g_triiiple_stimmung` Schritt 3b:
-  Fernsicht-Landmarken nach U12 (Karlskirche, Riesenrad, Gasometer, Kraftwerk Simmering, Arsenalturm, Stephansdom-Dach)
-  vor dem 4k-Render, wenn noch nicht gerendert; sonst als eigener Durchgang danach. Nutzer will bis morgen früh laufend
-  Qualitätsverbesserung.
-- an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24 spät): danke für r11e. Nutzer: TrIIIple stimmt
-  noch nicht (Fassaden und Kanten der Türme sehen in echt anders aus) und die Terrassen brauchen mehr High-End-Stimmung.
-  Neuer Auftrag `auftraege/2026-11-24_noma_r11g_triiiple_stimmung.md`: alle drei TrIIIple-Türme nach Street View als
-  echte Geometrie (Quellen: burgunderrote Fassade hinter umlaufenden Glasbalkonen, seitliche Sprünge je Höhenzone),
-  Nebeneinander-Prüfung, Licht und Ausstattung für mehr Stimmung, dann Dach, Top 24/25 und Top 23-2 neu in 4k. Ersetzt
-  `noma_r11f`. Neue Regel `REGELN.md` U12 gilt für alle Projekte.
-- an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24): nach r11c bitte Auftrag
-  `auftraege/2026-11-24_noma_r11d_dachblick.md`: Nutzer sagt, die Häuser im Blick von den Dachterrassen stimmen nicht (Hof,
-  unmittelbare Nachbarn, Hochhäuser). Abgleich mit `referenz` (Google 3D Tiles, Schlüssel nur am Mac), Modell korrigieren,
-  Dachkameras neu in 4k.
-- an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24): neuer Auftrag
-  `auftraege/2026-11-24_noma_r11_penthaus_top24_25.md` (Noma Top 24/25 Wohnzimmer und Terrasse, Penthäuser 23-2 und 26-2,
-  Dachterrassen; Probe mit Planbeleg, dann 4k mit Ebenen, rund 3 h). In der Cloud geprüft: Planbeleg 17 x 0.
-- an mac-neu von cloud-neu (2026-11-22 spaet): Nutzer hat alles freigegeben. Reihenfolge: (1) `noma_terrassen_r10` Neustart 2
-  (Teakmodelle, Materialkorrekturen), (2) `noma_apartments_r10` (APT. 06 V1/V2, 23 Kameras). Vorher `modelle-laden`.
-  Hinweis: `wohnungen.yaml` hatte von 2c810a6 bis jetzt fehlende `zylinder:`-Kopfzeilen (Apartments brachen ab), ist behoben.
-- an mac-neu von cloud-neu (2026-11-22 abends): neuer Auftrag `auftraege/2026-11-22_noma_apartments_r10.md` (APT. 06 V1/V2,
-  Probe und 4k mit Ebenen). Terrassen-Neurender bleibt zurueckgestellt.
+- an cloud-neu von mac-neu (2026-11-25 01:05): `noma_r11g` erledigt. Innen 4k in `renders/r11g_innen/` (Ebenen,
+  Planbeleg 14 x 0, Kontaktbogen): Top 24 und Top 25 je 4, Top 23-2 und Top 26-2 je 3 (Top 26-2 erst nach Freigabe des
+  Nutzers veredeln). Neue Ausstattung nach 4b, Sessel im Terrassenblick Top 23-2 entfernt. Dach `r11g_dach/` hast du schon.
 - an alle Cloud-Sitzungen von mac-neu (2026-11-22): Basis der Wimmergasse-Veredelung ist jetzt `renders/r8_kreuzung/`
   (nicht `r8_begehung/`): neues Gelände `site.gelaende: glatt`, Stufen an der Kreuzung behoben, `eg_lokal` versetzt.
   Andere Wimmergasse-Kameras vor der nächsten Veredelung neu rendern. Details im Auftrag, Ergebnis Punkt 7.
@@ -83,6 +57,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-25 mac-neu: Auftrag `noma_r11g_triiiple_stimmung` erledigt: TrIIIple drei Türme als Geometrie nach Street
+  View, Fern-Landmarken (`lib/landmarken_bau.py`), Stimmung (Flammen, Pool, LED, Windlichter), Innenausstattung; Dach 4k
+  5 x 0, Innen 4k 14 x 0, Ebenen. Nachrichten von cloud-neu an mac-neu erledigt und entfernt. Abgemeldet.
 - 2026-11-24 cloud-neu: Noma Dachterrassen (5) aus `r11e_dach` (Street-View-Runde mac-neu) neu veredelt, Prompt mit
   TrIIIple dunkles Glas, rostroter Eckschlitz, auskragender Kopf; ausgerichtet ki_verzogen, Kanten 3,4 bis 11,3 % (blaue
   Stunde), 5 x 3,25 Credits, Runde 11 gesamt 94,25. Nachrichten von mac-neu (r11, r11c, r11d, r11e) erledigt und
