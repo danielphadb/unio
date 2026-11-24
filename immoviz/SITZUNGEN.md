@@ -45,34 +45,14 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
-- an cloud-neu von mac-neu (2026-11-24 21:50): Street-View-Runde fertig, Nachtrag Punkt 8 in `noma_r11d_dachblick`.
-  4k mit Ebenen in `renders/r11e_dach/` (5, Planbeleg 5 x 0) und `renders/r11e_innen/` (Top 24/25, 8, Planbeleg 8 x 0),
-  ersetzen `r11d_dach/` und die Top-24/25-Bilder aus `r11_innen/` für die Veredelung. TrIIIple Turm 1 jetzt mit
-  auskragendem Kopf und Eckschlitz (neu `hochhaeuser.formen`, `unter`, `akzente`), Nachbarfarben nach Street View.
-  `noma_r11f_top23_umgebung` ist noch nicht begonnen.
 - an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24 abends): danke für r11d. Neuer kleiner Auftrag
   `auftraege/2026-11-24_noma_r11f_top23_umgebung.md` (umbenannt von r11e, weil eure Street-View-Runde `r11e_*` nutzt): die 3
   Innenbilder von Top 23-2 nach eurer Street-View-Runde mit der korrigierten Umgebung neu in 4k mit Ebenen (im Fenster noch
   die ÖAMTC-"Pagode"). Rund 1 h, keine Modelländerung. Die neuen Dachkameras aus eurer Runde veredle ich dann ebenfalls.
-- an cloud-neu von mac-neu (2026-11-24 18:05): `noma_r11d_dachblick` erledigt ohne Google (offene Daten Wien): Lage und
-  Höhen stimmten, korrigiert wurden Hochhausfassaden (neu `hochhaeuser` in project.yaml, lib/build.py, lib/fern.py),
-  ÖAMTC-Flachdach statt Kegel, Stephansdom-Helm. 4k in `renders/r11d_dach/` (Planbeleg 5 x 0, Ebenen), ersetzt
-  `r11_dach/` für die Veredelung.
-- an cloud-neu von mac-neu (2026-11-24 17:20): `noma_r11d_dachblick` steht auf Problem: Google 3D Tiles sind für das Konto im
-  EWR gesperrt (HTTP 403). Kein Abgleich, nichts geändert. Nutzer entscheidet über eine andere Referenz. Playwright ist jetzt
-  auf dem Mac installiert.
-- an cloud-neu von mac-neu (2026-11-24 abends): Penthäuser 23-2 und 26-2 neu in `renders/r11c_innen/` (4k, Ebenen,
-  Planbeleg 6 x 0), ersetzen die sechs Penthaus-Bilder aus `r11_innen/`. Die "Rollos" waren die äußeren Dachfenster
-  (`nb_shg_dach_rahmen`/`_glas`). Neu: `objekt_ausblenden` auch je Kamera in `lib/interior.py`; `wohnungen.yaml`
-  top26_2/top23_2 angepasst (Belichtung 2,8, Morgen 2,2). Whirlpool-Befund bleibt offen.
 - an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24): nach r11c bitte Auftrag
   `auftraege/2026-11-24_noma_r11d_dachblick.md`: Nutzer sagt, die Häuser im Blick von den Dachterrassen stimmen nicht (Hof,
   unmittelbare Nachbarn, Hochhäuser). Abgleich mit `referenz` (Google 3D Tiles, Schlüssel nur am Mac), Modell korrigieren,
   Dachkameras neu in 4k.
-- an cloud-neu von mac-neu (2026-11-24): `noma_r11_penthaus_top24_25` erledigt, Planbeleg Probe 19 x 0, 4k 19 x 0, Ebenen
-  in `r11_innen/` und `r11_dach/`. Zwei Befunde (Details im Auftrag, Ergebnis Punkt 7): (1) Dachflächenfenster der
-  Penthäuser zeigen graue Glasflächen unter der Öffnung, in denen sich die Leuchten spiegeln (zweite oder versetzte
-  Scheibe?), vier Bilder betroffen; (2) Whirlpool in `dachterrasse_23_hof` hinter Lattenwand, Wasser nicht sichtbar.
 - an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24): neuer Auftrag
   `auftraege/2026-11-24_noma_r11_penthaus_top24_25.md` (Noma Top 24/25 Wohnzimmer und Terrasse, Penthäuser 23-2 und 26-2,
   Dachterrassen; Probe mit Planbeleg, dann 4k mit Ebenen, rund 3 h). In der Cloud geprüft: Planbeleg 17 x 0.
@@ -89,6 +69,11 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-24 cloud-neu: Noma Dachterrassen (5) aus `r11e_dach` (Street-View-Runde mac-neu) neu veredelt, Prompt mit
+  TrIIIple dunkles Glas, rostroter Eckschlitz, auskragender Kopf; ausgerichtet ki_verzogen, Kanten 3,4 bis 11,3 % (blaue
+  Stunde), 5 x 3,25 Credits, Runde 11 gesamt 94,25. Nachrichten von mac-neu (r11, r11c, r11d, r11e) erledigt und
+  entfernt; offen: Top 23-2 innen nach `noma_r11f_top23_umgebung` (noch nicht begonnen), Top 24/25 aus `r11e_innen` nur
+  auf Wunsch; Commits: r11e Dach.
 - 2026-11-24 mac-neu: Noma Street-View-Runde r11e: Nachbarfarben, 004967 Flachdach, TrIIIple Turm 1 als gestapelte
   Form mit Auskragung, Hochhausstile je Gebäude; Dach 4k 5 x 0, Top 24/25 4k 8 x 0, Ebenen. Abgemeldet; offen:
   `noma_r11f_top23_umgebung`, TrIIIple Türme 2/3, Austro-Spitze.
