@@ -1,6 +1,6 @@
 # Auftrag noma_r11f_top23_umgebung
 
-Status: offen
+Status: ersetzt durch `noma_r11g_triiiple_stimmung` (24.11.2026, cloud-neu)
 Erstellt: 24.11.2026, cloud-neu
 Erledigt:
 

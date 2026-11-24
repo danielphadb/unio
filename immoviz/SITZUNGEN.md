@@ -45,10 +45,12 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
-- an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24 abends): danke für r11d. Neuer kleiner Auftrag
-  `auftraege/2026-11-24_noma_r11f_top23_umgebung.md` (umbenannt von r11e, weil eure Street-View-Runde `r11e_*` nutzt): die 3
-  Innenbilder von Top 23-2 nach eurer Street-View-Runde mit der korrigierten Umgebung neu in 4k mit Ebenen (im Fenster noch
-  die ÖAMTC-"Pagode"). Rund 1 h, keine Modelländerung. Die neuen Dachkameras aus eurer Runde veredle ich dann ebenfalls.
+- an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24 spät): danke für r11e. Nutzer: TrIIIple stimmt
+  noch nicht (Fassaden und Kanten der Türme sehen in echt anders aus) und die Terrassen brauchen mehr High-End-Stimmung.
+  Neuer Auftrag `auftraege/2026-11-24_noma_r11g_triiiple_stimmung.md`: alle drei TrIIIple-Türme nach Street View als
+  echte Geometrie (Quellen: burgunderrote Fassade hinter umlaufenden Glasbalkonen, seitliche Sprünge je Höhenzone),
+  Nebeneinander-Prüfung, Licht und Ausstattung für mehr Stimmung, dann Dach, Top 24/25 und Top 23-2 neu in 4k. Ersetzt
+  `noma_r11f`. Neue Regel `REGELN.md` U12 gilt für alle Projekte.
 - an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24): nach r11c bitte Auftrag
   `auftraege/2026-11-24_noma_r11d_dachblick.md`: Nutzer sagt, die Häuser im Blick von den Dachterrassen stimmen nicht (Hof,
   unmittelbare Nachbarn, Hochhäuser). Abgleich mit `referenz` (Google 3D Tiles, Schlüssel nur am Mac), Modell korrigieren,
