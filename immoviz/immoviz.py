@@ -105,6 +105,12 @@ def main():
                     help="nur die Pflichtliste ausgeben: in jede Straßenrichtung die ersten Häuser je Straßenseite "
                          "(ohne Blender, unabhängig vom Bildanteil)")
     si.add_argument("--anzahl", type=int, default=5, help="Häuser je Richtung und Straßenseite (Standard 5)")
+    lmk = sub.add_parser("landmarken", help="Fernsicht nach REGELN U12: Wiener Landmarken je Außenkamera (Bildposition, "
+                         "Entfernung, Stand im Modell); ohne Blender")
+    lmk.add_argument("project")
+    lmk.add_argument("--cam", default=None, help="Kameras, Komma-getrennt (Standard: alle mit 3D-Position)")
+    lmk.add_argument("--anker", default="169932", help="OGD-Bezug des Ankers in fern.json (Standard Stephansdom)")
+    lmk.add_argument("--json", action="store_true")
     it = sub.add_parser("interior", help="Innenräume aus dem Grundriss bauen und rendern (wohnungen.yaml)")
     it.add_argument("project")
     it.add_argument("--top", default="top07")
@@ -383,6 +389,10 @@ def main():
         print(json.dumps({"renders": res, "sekunden": round(time.time() - t)}, ensure_ascii=False, indent=1))
     elif a.cmd == "svcheck":
         _svcheck(pdir)
+    elif a.cmd == "landmarken":
+        from lib import landmarken as LM
+        res = LM.pruefen(pdir, a.cam.split(",") if a.cam else None, a.anker)
+        print(json.dumps(res, ensure_ascii=False, indent=1) if a.json else LM.text(res))
     elif a.cmd == "sichtbar":
         from lib.build import load_project, build_scene
         from lib import check as C

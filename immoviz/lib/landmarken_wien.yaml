@@ -1,0 +1,41 @@
+# Wiener Landmarken für die Fernsicht-Prüfung (REGELN.md U12, Befehl `immoviz.py landmarken`).
+# Lage WGS84 auf rund 20 bis 50 m genau (Prüfung, nicht Modell); wo das BKM den Bau enthält, über den Stephansdom-Anker
+# aus fern.json Noma rückgerechnet (24.11.2026). hoehe = Bauwerkshöhe über Grund in m mit Quelle.
+# form = woran man die Landmarke erkennt; das muss im Modell als echte Geometrie stehen, nicht als Prisma.
+# Ergänzen, wenn ein Projekt neue Blickrichtungen hat; jede Zeile mit Quelle oder [ANN].
+- {name: Stephansdom, lat: 48.20849, lon: 16.37315, hoehe: 136.4, quelle: "Stadt Wien, Structurae",
+   form: "Südturm mit Helm, hohes Steildach mit Ziegelmuster, Nordturm-Stumpf mit Haube"}
+- {name: Karlskirche, lat: 48.19854, lon: 16.37201, hoehe: 72.0, quelle: "[ANN, Literatur 72 m Kuppel]",
+   form: "ovale Kuppel mit Laterne, zwei Triumphsäulen, Portikus, zwei Seitentürme"}
+- {name: Riesenrad, lat: 48.21665, lon: 16.39591, hoehe: 64.75, quelle: "wien.info, austria.info",
+   form: "Speichenrad 60,96 m, 15 Gondeln, Stahlpylone"}
+- {name: Gasometer Simmering, lat: 48.18530, lon: 16.41970, hoehe: 70.0, quelle: "[ANN, mit Street View prüfen]",
+   form: "vier Ziegelzylinder rund 65 m Durchmesser, Rundbogenfenster, flache Kuppeldächer"}
+- {name: Kraftwerk Simmering, lat: 48.18100, lon: 16.43900, hoehe: null, quelle: "Höhe offen",
+   form: "Kesselhäuser und Schornsteine, Anzahl und Höhe nach Street View"}
+- {name: Arsenalturm, lat: 48.18280, lon: 16.39060, hoehe: 155.0, quelle: "Structurae",
+   form: "Stahlbetonschaft, Betriebsgeschosse oben, Antenne"}
+- {name: TrIIIple, lat: 48.19540, lon: 16.41104, hoehe: 117.2, quelle: "CTBUH, Falter 2021",
+   form: "drei Türme, burgunderrote Fassade hinter umlaufenden Glasbalkonen, seitliche Sprünge je Höhenzone"}
+- {name: Austro Tower, lat: 48.19300, lon: 16.41338, hoehe: 135.0, quelle: "Stadt Wien, CTBUH",
+   form: "blaugraue Glasfassade, Spitze verjüngt"}
+- {name: Donauturm, lat: 48.24053, lon: 16.41018, hoehe: 252.0, quelle: "donauturm.at",
+   form: "Betonschaft mit Turmkorb und Antenne"}
+- {name: DC Tower 1, lat: 48.23180, lon: 16.41330, hoehe: 250.0, quelle: "CTBUH",
+   form: "gefaltete schwarze Glasfassade (Plissee)"}
+- {name: Millennium Tower, lat: 48.24056, lon: 16.38703, hoehe: 202.0, quelle: "CTBUH",
+   form: "Glaszylinder aus zwei versetzten Kreisen, Antenne"}
+- {name: Uniqa Tower, lat: 48.21309, lon: 16.38020, hoehe: 75.0, quelle: "[ANN]",
+   form: "Glasturm mit LED-Medienfassade"}
+- {name: Rathaus, lat: 48.21096, lon: 16.35825, hoehe: 98.0, quelle: "Stadt Wien",
+   form: "neugotischer Mittelturm mit Rathausmann"}
+- {name: Votivkirche, lat: 48.21553, lon: 16.35963, hoehe: 99.0, quelle: "[ANN]",
+   form: "zwei neugotische Türme mit Helmen"}
+- {name: Wienerberg Twin Towers, lat: 48.16900, lon: 16.34400, hoehe: 138.0, quelle: "CTBUH",
+   form: "zwei Glastürme, im Grundriss keilförmig"}
+- {name: Fernheizwerk Spittelau, lat: 48.23489, lon: 16.35941, hoehe: 126.0, quelle: "[ANN]",
+   form: "Hundertwasser-Schornstein mit goldener Kugel"}
+- {name: Kahlenberg Sender, lat: 48.27710, lon: 16.33300, hoehe: 165.0, quelle: "[ANN]",
+   form: "Sendemast auf dem Kahlenberg, Wienerwald-Horizont"}
+- {name: Hauptbahnhof ICON, lat: 48.18550, lon: 16.37800, hoehe: 88.0, quelle: "[ANN]",
+   form: "drei Büroriegel, Bahnhofsdach mit Rautenmuster"}

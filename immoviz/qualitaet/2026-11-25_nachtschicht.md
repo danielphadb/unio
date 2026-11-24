@@ -27,11 +27,13 @@ nicht ohne Freigabe veredelt.
 - [ ] N5 r11g veredeln, sobald `r11g_dach` und `r11g_innen` da sind (16 Bilder), prüfen, liefern.
 
 ### Wimmergasse 20
-- [ ] W1 Stand der Außenbilder und offenen Punkte lesen (README, `umgebung_abgleich.md`, `mood.md`, staging).
-- [ ] W2 Fernsicht-Landmarken je Kamera berechnen wie N1 (Terrassen- und Drohnenblick).
+- [x] W1 Stand (23:40): Runde 10b geliefert (6 Außenbilder, 19,5 Credits), Innenräume warten auf Pläne.
+- [x] W2 Fernsicht (23:45, `landmarken`): drohne mit Rathaus, Votivkirche, Spittelau, Millennium Tower, Stephansdom, Uniqa,
+  Donauturm im Bildwinkel, alle Prismen außer Dom; im r10b-Drohnenbild malt die KI bei x 0,75 einen Fernsehturm, wo der
+  Millennium Tower steht, und nur einen Turm statt Rathaus und Votivkirche. Auftrag `wimmergasse_r11_fernsicht` (nach Noma).
 - [ ] W3 Fassade, Materialien, Straßenraum gegen Referenzen; Liste der Verbesserungen.
 - [ ] W4 Innenräume: wartet auf Pläne; Moodkonzept (`mood_interior.md`) auf High-End-Niveau prüfen.
 
 ### Werkzeug
-- [ ] A1 Landmarken-Liste je Kamera als Befehl (für U12 in allen Projekten): benannte Landmarken mit Bildposition,
-  Entfernung und Modellstand je Kamera.
+- [x] A1 Befehl `immoviz.py landmarken <projekt>` (23:35): `lib/landmarken.py`, Liste `lib/landmarken_wien.yaml`
+  (18 Landmarken mit Quelle); nur erhöhte Außenkameras ab 10 m, Verdeckung nicht geprüft.
