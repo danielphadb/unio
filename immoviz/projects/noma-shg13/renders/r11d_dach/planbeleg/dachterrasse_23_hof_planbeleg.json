@@ -1,0 +1,471 @@
+{
+ "kamera": "dachterrasse_23_hof",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [],
+ "sichtbar": [
+  {
+   "objekt": "ausstattung_top23_masse",
+   "anteil_prozent": 22.38,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_shg_dach_masse",
+   "anteil_prozent": 16.06,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 4.33,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_shg_dach_gelaender",
+   "anteil_prozent": 3.19,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top23_21__ausstattung__esstisch_aussen_0",
+   "anteil_prozent": 1.94,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_31__vegetation__olivenbaum_1",
+   "anteil_prozent": 1.79,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_sued_005387",
+   "anteil_prozent": 1.24,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top23_24__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 1.22,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_20__ausstattung__grill_einbau_0",
+   "anteil_prozent": 1.03,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_21__ausstattung__esstisch_aussen_2",
+   "anteil_prozent": 0.97,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_wue_masse",
+   "anteil_prozent": 0.92,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "umgebung_daecher",
+   "anteil_prozent": 0.89,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top23_19__vegetation__olivenbaum_1",
+   "anteil_prozent": 0.84,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_23__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.83,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "umgebung_fernzone",
+   "anteil_prozent": 0.74,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_sued_005387_dach",
+   "anteil_prozent": 0.59,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top23_22__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.57,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_21__ausstattung__esstisch_aussen_1",
+   "anteil_prozent": 0.47,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "fern_markant",
+   "anteil_prozent": 0.46,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top23_20__ausstattung__grill_einbau_8",
+   "anteil_prozent": 0.44,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_24__ausstattung__esstuhl_aussen_0",
+   "anteil_prozent": 0.42,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_30__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 0.41,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_shg_dach_gruen",
+   "anteil_prozent": 0.38,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "fern_hh_glas",
+   "anteil_prozent": 0.37,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top23_30__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 0.36,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_23__ausstattung__esstuhl_aussen_0",
+   "anteil_prozent": 0.33,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_umgebung_005363_masse",
+   "anteil_prozent": 0.33,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_005363",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "ausstattung_top23_27__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.26,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_umgebung_005364_masse",
+   "anteil_prozent": 0.23,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_005364",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "ausstattung_top23_20__ausstattung__grill_einbau_6",
+   "anteil_prozent": 0.23,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_29__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_24__ausstattung__esstuhl_aussen_3",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_29__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top26_41__vegetation__olivenbaum_1",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_27__ausstattung__esstuhl_aussen_0",
+   "anteil_prozent": 0.18,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_22__ausstattung__esstuhl_aussen_0",
+   "anteil_prozent": 0.18,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_26__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.17,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_wue_glas",
+   "anteil_prozent": 0.17,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_wue_rahmen",
+   "anteil_prozent": 0.16,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "fern_hh_baender",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_nord",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top23_25__ausstattung__esstuhl_aussen_1",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_19__vegetation__olivenbaum_0",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_wue_gelaender",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top23_23__ausstattung__esstuhl_aussen_3",
+   "anteil_prozent": 0.1,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_31__vegetation__olivenbaum_0",
+   "anteil_prozent": 0.1,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005364",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top23_20__ausstattung__grill_einbau_11",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_22__ausstattung__esstuhl_aussen_3",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top23_25__ausstattung__esstuhl_aussen_0",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_wue_innen",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top23_20__ausstattung__grill_einbau_9",
+   "anteil_prozent": 0.05,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top23",
+   "herkunft": "ausstattung"
+  }
+ ]
+}

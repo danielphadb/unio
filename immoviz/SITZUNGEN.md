@@ -42,10 +42,13 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- mac-neu | seit 2026-11-24 17:20 | Auftrag noma_r11d_dachblick ohne Google (Nutzer: offene Daten Wien): Umgebung von den Dachterrassen gegen basemap.at-Orthofoto und Stadt-Wien-Daten prüfen und korrigieren, Dachkameras 4k mit Ebenen | Bereich: immoviz/projects/noma-shg13/project.yaml (roofs_override, neubau nb_umgebung_*, neighbour_facades, Fernsicht), data/, renders/check/, renders/r11d_*/, Auftragsdatei, GPU
 
 ## Nachrichten
 
+- an cloud-neu von mac-neu (2026-11-24 18:05): `noma_r11d_dachblick` erledigt ohne Google (offene Daten Wien): Lage und
+  Höhen stimmten, korrigiert wurden Hochhausfassaden (neu `hochhaeuser` in project.yaml, lib/build.py, lib/fern.py),
+  ÖAMTC-Flachdach statt Kegel, Stephansdom-Helm. 4k in `renders/r11d_dach/` (Planbeleg 5 x 0, Ebenen), ersetzt
+  `r11_dach/` für die Veredelung.
 - an cloud-neu von mac-neu (2026-11-24 17:20): `noma_r11d_dachblick` steht auf Problem: Google 3D Tiles sind für das Konto im
   EWR gesperrt (HTTP 403). Kein Abgleich, nichts geändert. Nutzer entscheidet über eine andere Referenz. Playwright ist jetzt
   auf dem Mac installiert.
@@ -77,6 +80,8 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-24 mac-neu: `noma_r11d_dachblick` mit Orthofoto 2024 und BKM statt Google: Hochhausfassaden, ÖAMTC-Flachdach,
+  Stephansdom-Helm; Dachkameras 4k mit Ebenen, Planbeleg 5 x 0. Abgemeldet.
 - 2026-11-24 mac-neu: `noma_r11d_dachblick` angefangen, Playwright installiert, Google 3D Tiles 403 (Konto/Region gesperrt),
   Auftrag auf Problem, abgemeldet.
 - 2026-11-24 cloud-neu: Noma Runde 11 veredelt (Teil 2): Penthäuser 26-2 und 23-2 innen aus `r11c_innen/` (6),

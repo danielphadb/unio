@@ -1,6 +1,6 @@
 # Auftrag noma_r11d_dachblick
 
-Status: in Arbeit (mac-neu, 2026-11-24 17:20, ohne Google mit offenen Daten Wien, Wunsch des Nutzers)
+Status: erledigt (mac-neu, 24.11.2026 18:05, ohne Google mit offenen Daten Wien)
 Erstellt: 24.11.2026, cloud-neu
 Erledigt:
 
@@ -60,3 +60,32 @@ mac-neu, 24.11.2026:
    Schlüssel ist kein Google-Abgleich möglich; nichts gerendert, nichts am Modell geändert.
 3. Entscheidung beim Nutzer: andere Referenz (Fotos von der Dachterrasse, offene Daten wie basemap.at-Orthofoto und
    Stadt-Wien-Daten, ein Konto außerhalb des EWR) oder Abgleich ohne Referenz nur gegen die Stadt-Wien-Daten.
+4. **Abgleich ohne Google** (Nutzer: "Offene Daten Wien"): Baukörpermodell [OGD] über das Orthofoto 2024 der Stadt Wien
+   (WMTS lb2024, Zoom 18 und 20) gelegt, dazu eine Draufsicht des Modells (240 m, lokal, nicht eingecheckt).
+   - Nahbereich und Hof: Blockränder, Hofhäuser (Schnirchgasse 4/6, Würtzlerstraße, Erdbergstraße), Dachfarben und
+     Dachformen decken sich mit dem Orthofoto; keine fehlenden oder abgerissenen Baukörper gefunden.
+   - Hochhäuser: Lage und Höhe passen: TrIIIple (BKM Z43908) 110,8 bis 120,3 m, veröffentlicht 108/117/120 m (CTBUH);
+     Austro Tower (Z80306, Schnirchgasse 17) 135,1 m, veröffentlicht 135 bis 136,6 m (Stadt Wien, CTBUH); weitere Türme
+     B76421 109,7 m, Z22087 95,8 m, in 1,2 km Z01437/Z01440/Z01441 112 bis 133 m. Stephansdom (169932, in den
+     Strukturdaten als "Curhauskapelle") 136,2 m über Sockel, stimmt.
+   - Fehler 1: Außerhalb `detail_radius_m` (120 m) und in der Fernsicht waren alle Hochhäuser glatte beige bzw. graue
+     Kästen ohne Fenster.
+   - Fehler 2: ÖAMTC-Zentrale Baumgasse 129 (Rundbau, 2017) hatte aus dem LOD2 (Stand 2016, Bauzustand) ein Kegeldach bis
+     +41,8, das von der Terrasse als "Pagode" erschien; Orthofoto 2024 zeigt Flachdach mit Hubschrauberlandeplatz.
+   - Fehler 3: Stephansdom nur als dünne Säule ohne Helm.
+5. **Korrekturen** (Quelle in `project.yaml`):
+   - Neu `hochhaeuser` in `project.yaml` und `lib/build.py` (`_hochhaus_spec`, `_hochhaus_fassade`), `lib/fern.py`
+     (`markante(..., fassade)`): Geschossbänder, Glasbänder, Pfosten rundum für alle Baukörper ab 40 m bis 2 km.
+     TrIIIple mit weißen umlaufenden Balkonbändern (3,1 m Geschoss, 1,2 m Auskragung), Austro Tower Glasfassade blaugrau,
+     ÖAMTC runder Glasbau. Farben und Raster [ANN nach Orthofoto/Bildern], ohne Eintrag bleibt alles wie bisher.
+   - `roofs_override` 229182 (ÖAMTC): Flachdach je Baukörperteil auf BKM-Höhe statt Kegel.
+   - `fern_spitzen` 169932: Stephansdom-Südturm mit Helm (Turm bis +81, Spitze +147,3 lokal).
+6. **4k mit Ebenen** (`renders/r11d_dach/`, 3840 x 2560, 256 Samples, `--no-blend`): 4 Kameras golden_hour in 810 s,
+   `dachterrasse_stadt` blaue_stunde in 181 s, Peak 41,6 GB. **Planbeleg 5 x 0** (stadt 25, hof 39, 23 20, 23_hof 52
+   sichtbare Objekte), Ebenen `nicht_zugeordnet: []`, Schutz 52 bis 77 %. Kontaktbogen `r11d_dach/kontaktbogen.jpg`.
+   Proben `r11d_probe/` (1500 x 1000). Keine Higgsfield-Credits.
+7. **Unsicher:** Farben und Fassadenraster der Hochhäuser sind angenommen (kein Foto von oben); ob von der Terrasse
+   weitere Neubauten nach dem Stand des Baukörpermodells sichtbar wären, lässt sich ohne Schrägbild nicht prüfen. Der
+   helle glatte Baukörper links in `dachterrasse_23_hof` liegt im Nahbereich und wurde nicht weiter untersucht. Die
+   Kennzahlen des Werkzeugs `referenz` (Kantendeckung, Horizont) fehlen, weil es nur mit Google arbeitet.
+

@@ -241,7 +241,7 @@ def fernzone(mb, rng, radius: float, ground, bis: float = 1800.0, step: float = 
                      (x0 + t, y1 - t, zg + 0.2)], None, "hof", (0, 0, 1))
 
 
-def markante(mb, fern, ground, spitzen=None):
+def markante(mb, fern, ground, spitzen=None, fassade=None):
     """Hohe Baukoerper jenseits des Radius als Silhouette: Grundriss und Oberkante aus dem Baukoerpermodell
     (Hoehen absolut ueber Wiener Null), nach unten bis unter das grobe Gelaende gezogen.
 
@@ -290,6 +290,8 @@ def markante(mb, fern, ground, spitzen=None):
             (x1, y1), (x2, y2) = poly[i], poly[(i + 1) % len(poly)]
             mb.poly([(x1, y1, z0), (x2, y2, z0), (x2, y2, z1), (x1, y1, z1)], None, mat, (y2 - y1, -(x2 - x1), 0))
         mb.poly([(x, y, z1) for x, y in poly], None, "fern_dach", (0, 0, 1))
+        if fassade:      # optional (Noma Runde 11d): Geschossbaender und Glas wie bei den Hochhaeusern im Radius
+            fassade(poly, max(h["z0"], z0), z1, str(h["bezug"]), math.hypot(cx, cy))
 
 
 def _pyramide(mb, poly, z0, z1, breite=None, mat="fern_turm"):

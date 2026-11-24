@@ -1487,4 +1487,22 @@ roofs_override:
 # Innenraum hinter Glas; Runde 9 hatte Glas frei, daher der zu grosse Raum), Rahmen, Gelaender, Leuchten, Nachbarhaeuser
 # (Runde 9 frei, daher falsche Haeuser), Innenraum-Moebel, Terrassenmoebel/Pergola/Rankgitter (ausstattung), Boden.
 # Frei: himmel, vegetation (3D-Pflanzen geben Lage und Groesse vor), baeume, stoffe. Modus voll, nicht toleranz.
+  # Runde 11d (24.11.2026, Nutzer: Blick von der Dachterrasse stimmt nicht): ÖAMTC-Zentrale Baumgasse 129 (Rundbau, 2017) hat
+  # im LOD2 (Stand 2016, Bauzustand) ein Kegeldach bis +41,8, das von der Dachterrasse als "Pagode" erschien. Orthofoto 2024
+  # [OGD lb2024] zeigt ein Flachdach mit Hubschrauberlandeplatz: flach je Baukoerperteil auf BKM-Hoehe
+  - {bezug: "229182", material: blech_hell, dach: {form: flach}}
+# Runde 11d (24.11.2026, Nutzer: "die Hochhaeuser muessen richtig sein"): Lage und Hoehe aus dem Baukoerpermodell [OGD] passen zum
+# Orthofoto 2024 [OGD lb2024] und zu den veroeffentlichten Hoehen (TrIIIple 108/117/120 m [CTBUH], BKM 110,8 bis 120,3; Austro Tower
+# 135 bis 136,6 m [Stadt Wien, CTBUH], BKM 135,1). Ausserhalb detail_radius_m waren sie glatte beige Kaesten ohne Fenster;
+# jetzt Geschossbaender, Glas und Pfosten rundum (lib/build.py _hochhaus_fassade). Farben und Raster [ANN nach Orthofoto/Fotos].
+# Runde 11d: Stephansdom (BKM-BEZUG 169932, in den Strukturdaten als "Curhauskapelle" gefuehrt), Suedturm 136,4 m ueber Gelaende
+# (oeffentliche Angabe), BKM-Oberkante 147,3 lokal bei Sockel 11,1: Turm bis rund +70 m ueber Gelaende, darauf der Helm als Pyramide
+fern_spitzen:
+  - {bezug: "169932", name: Stephansdom Suedturm, basis: 81.0, spitze: 147.3, breite: 13.0}
+hochhaeuser:
+  standard: {ab_hoehe: 40.0, geschoss: 3.6, eg: 5.0, band: 1.0, achse: 1.5, glas_farbe: "#2E3A44", band_farbe: "#C9CCCB"}
+  gebaeude:
+    Z43908: {geschoss: 3.1, eg: 6.0, band: 0.45, auskragung: 1.2, achse: 0, glas_farbe: "#34404A", band_farbe: "#EDEBE6"}   # TrIIIple, Schnirchgasse 9 bis 12: Wohntuerme mit umlaufenden weissen Balkonbaendern
+    Z80306: {geschoss: 3.7, eg: 7.0, band: 0.25, achse: 1.35, glas_farbe: "#47606F", band_farbe: "#9AA3A8"}                 # Austro Tower, Schnirchgasse 17: Buero, Glasfassade
+    "229182": {geschoss: 3.8, eg: 5.0, band: 0.35, achse: 1.35, glas_farbe: "#5A7580", band_farbe: "#D9DCDC"}                # OeAMTC-Zentrale Baumgasse 129: runder Glasbau
 schutz: {klassen: [gebaeude_objekt, fenster_glas, fenster_rahmen, gelaender, leuchten, strassenmoebel, autos, nachbarn, innenraum, ausstattung, boden], kante_px: 2}

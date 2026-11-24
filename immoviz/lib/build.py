@@ -376,6 +376,67 @@ def park_cars(ctx, rng, terrain, radius, cfg=None):
 
 
 # ======================================================================= Umgebung
+def _hochhaus_spec(cfg, b, h):
+    """Fassadenstil fuer Hochhaeuser der Umgebung aus project.yaml `hochhaeuser` (optional):
+    standard: {ab_hoehe, geschoss, eg, band, auskragung, achse, glas_farbe, band_farbe} fuer alle Baukoerper ab
+    `ab_hoehe` Meter Hoehe; gebaeude: {<BEZUG>: {...}} ergaenzt oder ersetzt den Standard je Gebaeude (auch unter
+    ab_hoehe). Ohne Eintrag bleibt alles wie bisher."""
+    HH = (cfg or {}).get("hochhaeuser") or {}
+    std = HH.get("standard") or {}
+    per = (HH.get("gebaeude") or {}).get(str(b.get("bezug")))
+    if per is not None:
+        return {**std, **per}
+    if std and h >= float(std.get("ab_hoehe", 40.0)):
+        return std
+    return None
+
+
+def _hh_mat(mats, s, key, default):
+    """Material fuer Glas oder Band aus `<key>_farbe` (Hex), einmal je Farbe angelegt."""
+    farbe = s.get(f"{key}_farbe")
+    if not farbe:
+        return default
+    name = f"hh_{key}_{farbe.lstrip('#').lower()}"
+    if name not in mats:
+        rgb = M.hex_rgb(farbe)
+        if key == "glas":
+            mats[name] = M.simple(bpy, name, rgb, 0.06, 0.0, **{"Specular IOR Level": 0.9})
+        else:
+            mats[name] = M.simple(bpy, name, rgb, 0.7)
+    return name
+
+
+def _hochhaus_fassade(walls, wins, poly, h, s, mats):
+    """Glasbaender zwischen Geschossbaendern an allen Kanten, senkrechte Pfosten im Achsraster, Attika oben."""
+    gh, e0 = float(s.get("geschoss", 3.5)), float(s.get("eg", 5.0))
+    band, kr, achse = float(s.get("band", 0.9)), float(s.get("auskragung", 0.0)), float(s.get("achse", 1.5))
+    gm = _hh_mat(mats, s, "glas", "fenster_dunkel")
+    bm = _hh_mat(mats, s, "band", "nachbar_rahmen")
+    n = len(poly)
+    for i in range(n):
+        p1, p2 = poly[i], poly[(i + 1) % n]
+        L = math.dist(p1, p2)
+        if L < 1.5:
+            continue
+        f = K.Facade("hh", p1, p2)
+        K.quad_plane(wins, f, 0.0, L, 0.3, min(e0 - 0.6, h - 0.8), -0.02, gm)
+        z = e0
+        while z + gh <= h - 0.8:
+            if kr > 0:
+                K.box(walls, f, 0.0, L, -kr - 0.03, 0.0, z, z + band, bm)
+            else:
+                K.quad_plane(walls, f, 0.0, L, z, z + band, -0.03, bm)
+            K.quad_plane(wins, f, 0.0, L, z + band, z + gh, -0.02, gm)
+            z += gh
+        if h - z > 0.05:
+            K.quad_plane(walls, f, 0.0, L, z, h, -0.03, bm)
+        if achse > 0 and z > e0:
+            m = max(1, int(L / achse))
+            for k in range(1, m):
+                u = k * L / m
+                K.box(wins, f, u - 0.035, u + 0.035, -0.07, 0.0, e0, z, bm)
+
+
 def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, terrain=None, cfg=None, roofdata=None):
     rng = random.Random(7)
     terrain = terrain or (lambda x, y: 0.0)
@@ -479,6 +540,9 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
                     K.box(wins, f, uc - 0.025, uc + 0.025, -0.02, 0.0, za, zb, "nachbar_rahmen")
             K.box(walls, f, 0.0, L, -0.35, 0.0, h - 0.55, h, col)
             K.box(walls, f, 0.0, L, -0.08, 0.0, 3.6, 3.9, col)
+        hh = _hochhaus_spec(cfg, b, h)
+        if hh and not detailed:      # Hochhaeuser (Noma Runde 11d): Geschossbaender und Glas rundum statt glatter Kaesten
+            _hochhaus_fassade(walls, wins, poly, h, hh, mats)
         if ov and ov.get("aufbauten") and id(ov) not in auf_done:      # Liftturm, Stiegenhaus, Dachterrasse
             auf_done.add(id(ov))
             R.aufbauten(roofs, walls, ov, 0.0, col, poly)
@@ -533,7 +597,24 @@ def build_context(ctx, mats, coll, radius=150.0, detail=110.0, hero_poly=None, t
     far.to_object(bpy, mats, coll)
     if fern:
         mk = K.MeshBuilder("fern_markant", ["fern_bau"])
-        FE.markante(mk, fern, far_ground, (cfg or {}).get("fern_spitzen"))     # Turmhelme laut project.yaml
+        HHc = (cfg or {}).get("hochhaeuser") or {}
+        fass = None
+        if HHc:
+            hw, hf = K.MeshBuilder("fern_hh_baender", ["nachbar_rahmen"]), K.MeshBuilder("fern_hh_glas", ["fenster_dunkel"])
+            bis = float((HHc.get("standard") or {}).get("fern_bis_m", 2000.0))
+
+            def fass(poly, z0, z1, bezug, dist):
+                s = _hochhaus_spec(cfg, {"bezug": bezug}, z1 - z0)
+                if not s or dist > bis:
+                    return
+                tw, tf = K.MeshBuilder("t", hw.materials), K.MeshBuilder("t", hf.materials)
+                _hochhaus_fassade(tw, tf, poly, z1 - z0, s, mats)
+                for mb_ in (tw, tf):
+                    mb_.verts = [(x, y, z + z0) for x, y, z in mb_.verts]
+                hw.merge(tw); hf.merge(tf)
+        FE.markante(mk, fern, far_ground, (cfg or {}).get("fern_spitzen"), fass)     # Turmhelme laut project.yaml
+        if HHc:
+            hw.to_object(bpy, mats, coll); hf.to_object(bpy, mats, coll)
         FE.kulisse(mk, fern, extra=FE.gipfel(cfg))                            # Gipfel laut project.yaml
         mk.to_object(bpy, mats, coll)
     # Fahrbahnschwelle (FMZK) als Fahrbahn: vorher Loch im Boden (dunkle Rinne quer ueber die Einmuendung); Rampen und
