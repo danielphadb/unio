@@ -110,6 +110,7 @@ def main():
     lmk.add_argument("project")
     lmk.add_argument("--cam", default=None, help="Kameras, Komma-getrennt (Standard: alle mit 3D-Position)")
     lmk.add_argument("--anker", default="169932", help="OGD-Bezug des Ankers in fern.json (Standard Stephansdom)")
+    lmk.add_argument("--innen", action="store_true", help="auch Innenkameras aus wohnungen.yaml (Fensterblick, ab 10 m)")
     lmk.add_argument("--json", action="store_true")
     it = sub.add_parser("interior", help="Innenräume aus dem Grundriss bauen und rendern (wohnungen.yaml)")
     it.add_argument("project")
@@ -391,7 +392,7 @@ def main():
         _svcheck(pdir)
     elif a.cmd == "landmarken":
         from lib import landmarken as LM
-        res = LM.pruefen(pdir, a.cam.split(",") if a.cam else None, a.anker)
+        res = LM.pruefen(pdir, a.cam.split(",") if a.cam else None, a.anker, innen=a.innen)
         print(json.dumps(res, ensure_ascii=False, indent=1) if a.json else LM.text(res))
     elif a.cmd == "sichtbar":
         from lib.build import load_project, build_scene

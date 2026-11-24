@@ -46,6 +46,15 @@ nicht ohne Freigabe veredelt.
 - [x] N6 Hofbilder Runde 10 (23:30): TrIIIple liegt laut `landmarken` im Bildwinkel der Hofkameras (x 0,41 bis 0,68,
   rund 160 m), in den sechs gelieferten r10-Bildern aber vom Nahbereich verdeckt oder über dem Bildrand; keine Änderung nötig.
 
+### Runde 2 der Nacht
+- [x] A2 `landmarken --innen` (00:35): Fensterblicke der Innenkameras aus `wohnungen.yaml` (Wohnungen ab 10 m). Noma: TrIIIple
+  im Blick von top24/wohnzimmer_tv, top25/wohnzimmer und allen drei Top-23-2-Kameras; Stephansdom und Karlskirche von der
+  Top-24-Terrasse; DC Tower, Donauturm und Millennium Tower von der Top-25-Terrasse.
+- [x] N7 Innen-Prompts (00:40): Horizontsperre je Kamera; das TrIIIple steht nur in den Prompts der Kameras, in deren Blick
+  es liegt (Lehre aus dem Dach: sonst erfindet die KI es).
+- [ ] N8 Innenbilder r11g veredeln, sobald da (11 Bilder, 26-2 nach Freigabe).
+- [ ] W5 Wimmergasse Drohne: Prompt mit Horizontsperre vorbereiten (nach `wimmergasse_r11_fernsicht`).
+
 ### Werkzeug
 - [x] A1 Befehl `immoviz.py landmarken <projekt>` (22:33): `lib/landmarken.py`, Liste `lib/landmarken_wien.yaml`
   (18 Landmarken mit Quelle); nur erhöhte Außenkameras ab 10 m, Verdeckung nicht geprüft.

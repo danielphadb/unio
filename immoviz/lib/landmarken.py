@@ -29,8 +29,25 @@ def _anker(fern: dict, bezug: str) -> dict | None:
     return None
 
 
+def _innen_kameras(pdir: Path) -> dict:
+    """Innenkameras aus wohnungen.yaml mit Fensterblick (Wohnungen im Projektrahmen, ohne eigene Drehung, ab 10 m)."""
+    p = pdir / "wohnungen.yaml"
+    if not p.exists():
+        return {}
+    W = (yaml.safe_load(p.read_text(encoding="utf-8")) or {}).get("wohnungen") or {}
+    out = {}
+    for wn, w in W.items():
+        if not isinstance(w, dict) or "drehung_grad" in w or float(w.get("floor_z") or 0) < 10.0:
+            continue
+        for cn, c in (w.get("kameras") or {}).items():
+            if isinstance(c, dict) and len(c.get("pos") or []) == 2 and len(c.get("target") or []) == 2:
+                z = float(w["floor_z"]) + float(c.get("h", 1.5))
+                out[f"{wn}/{cn}"] = {"pos": [*c["pos"], z], "target": [*c["target"], z], "lens": c.get("lens", 18)}
+    return out
+
+
 def pruefen(pdir: Path, kameras: list[str] | None = None, anker_bezug: str = "169932",
-            anker_latlon: tuple[float, float] = (48.20849, 16.37315)) -> dict:
+            anker_latlon: tuple[float, float] = (48.20849, 16.37315), innen: bool = False) -> dict:
     cfg = yaml.safe_load((pdir / "project.yaml").read_text(encoding="utf-8"))
     site = cfg["site"]
     ox, oy = site["origin_gk"]
@@ -68,10 +85,13 @@ def pruefen(pdir: Path, kameras: list[str] | None = None, anker_bezug: str = "16
             top = max((t.get("z") or [0, 0])[1] for t in f.get("teile") or [{"z": [0, 0]}])
             objekte.append({"bezug": f.get("bezug"), "pos": f["pos"][:2], "top": top, "name": f.get("name")})
 
-    cams = cfg.get("cameras") or {}
+    cams = dict(cfg.get("cameras") or {})
+    innen_cams = _innen_kameras(pdir) if innen else {}
+    cams.update(innen_cams)
     # Standard: nur erhöhte Außenkameras (ab 10 m), von der Straße aus verdecken die Nachbarhäuser die Fernsicht
     namen = kameras or [k for k, v in cams.items()
-                        if isinstance(v, dict) and len(v.get("pos", [])) == 3 and v["pos"][2] >= 10.0]
+                        if isinstance(v, dict) and len(v.get("pos", [])) == 3 and v["pos"][2] >= 10.0
+                        and (innen or k not in innen_cams)]
     lm = _liste()
     out = {"anker": anker_bezug, "kameras": {}}
     for cn in namen:
