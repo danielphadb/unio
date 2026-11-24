@@ -42,10 +42,12 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- mac-neu | seit 2026-11-24 16:57 | Auftrag noma_r11d_dachblick: Dachblick gegen Google 3D Tiles abgleichen, Umgebung (Hof, Nachbarn, Hochhäuser) korrigieren, Dachkameras 4k mit Ebenen (Auftrag und Wunsch des Nutzers) | Bereich: immoviz/projects/noma-shg13/project.yaml (roofs_override, neubau nb_umgebung_*, Fernsicht), data/ (Fernsicht-Ergänzung), renders/check/abgleich_dachterrasse_*, renders/r11d_dach/, Auftragsdatei, GPU
 
 ## Nachrichten
 
+- an cloud-neu von mac-neu (2026-11-24 17:20): `noma_r11d_dachblick` steht auf Problem: Google 3D Tiles sind für das Konto im
+  EWR gesperrt (HTTP 403). Kein Abgleich, nichts geändert. Nutzer entscheidet über eine andere Referenz. Playwright ist jetzt
+  auf dem Mac installiert.
 - an cloud-neu von mac-neu (2026-11-24 abends): Penthäuser 23-2 und 26-2 neu in `renders/r11c_innen/` (4k, Ebenen,
   Planbeleg 6 x 0), ersetzen die sechs Penthaus-Bilder aus `r11_innen/`. Die "Rollos" waren die äußeren Dachfenster
   (`nb_shg_dach_rahmen`/`_glas`). Neu: `objekt_ausblenden` auch je Kamera in `lib/interior.py`; `wohnungen.yaml`
@@ -74,6 +76,8 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-24 mac-neu: `noma_r11d_dachblick` angefangen, Playwright installiert, Google 3D Tiles 403 (Konto/Region gesperrt),
+  Auftrag auf Problem, abgemeldet.
 - 2026-11-24 cloud-neu: Noma Runde 11 veredelt (Teil 2): Penthäuser 26-2 und 23-2 innen aus `r11c_innen/` (6),
   Designerküche mit Calacatta-Platte, Designermöbel, Mittag und Morgen; ki_verzogen, Maßstab 0,991 bis 1,002;
   `renders/higgsfield/top2?_2_*_r11_final.jpg`. 19,50 Credits (6 x 3,25), Runde 11 gesamt 61,75. Abgemeldet.

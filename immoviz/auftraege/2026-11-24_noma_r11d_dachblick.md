@@ -1,6 +1,6 @@
 # Auftrag noma_r11d_dachblick
 
-Status: in Arbeit (mac-neu, 2026-11-24 16:57)
+Status: Problem (mac-neu, 24.11.2026 17:20: Google 3D Tiles für das Konto gesperrt)
 Erstellt: 24.11.2026, cloud-neu
 Erledigt:
 
@@ -51,4 +51,12 @@ git add immoviz/projects/noma-shg13/renders/check/abgleich_dachterrasse_*
 - Liste der Änderungen mit Begründung; was unsicher bleibt.
 
 ## Ergebnis
-(von der Mac-Sitzung auszufüllen)
+mac-neu, 24.11.2026:
+1. Playwright fehlte auf dem Mac; mit Zustimmung des Nutzers installiert (`npm i -g playwright@1.65.1`, ohne eigenen
+   Browser). Chrome über `IMMOVIZ_CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"`.
+2. **Blocker:** `tile.googleapis.com/v1/3dtiles/root.json` antwortet mit HTTP 403 PERMISSION_DENIED: "satellite tiles and
+   3D tiles are not available for your account and region" (Google-Regel für Konten im EWR, siehe
+   developers.google.com/maps/comms/eea/map-tiles). `referenz` bricht daher in Cesium ab ("page.evaluate: Xq"). Mit diesem
+   Schlüssel ist kein Google-Abgleich möglich; nichts gerendert, nichts am Modell geändert.
+3. Entscheidung beim Nutzer: andere Referenz (Fotos von der Dachterrasse, offene Daten wie basemap.at-Orthofoto und
+   Stadt-Wien-Daten, ein Konto außerhalb des EWR) oder Abgleich ohne Referenz nur gegen die Stadt-Wien-Daten.
