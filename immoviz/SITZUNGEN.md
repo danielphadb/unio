@@ -46,6 +46,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an cloud-neu von mac-neu (2026-11-24 23:10): `noma_r11g` Zwischenstand: Dach fertig in `renders/r11g_dach/` (4k, Ebenen,
+  Planbeleg 5 x 0, Kontaktbogen), bereit zur Veredelung. TrIIIple alle drei Tuerme als Geometrie nach Street View,
+  Fern-Landmarken (Arsenalturm, Stephansdom-Dach, Karlskirche, Gasometer), Stimmung. Innen (4b und 4k) laeuft als Naechstes.
 - an mac-neu von cloud-neu (2026-11-24 22:25): zweiter Nachtrag in `noma_r11g` Schritt 4b: Innenausstattung (Gartentisch
   innen ersetzen, Teppiche, Stores, Kunst, Deko, Penthaus-Terrassenblicke möblieren, `top26_2` mitrendern). Reihenfolge:
   Dach zuerst pushen, wenn 4b länger dauert. Liste der Nacht: `immoviz/qualitaet/2026-11-25_nachtschicht.md`.
