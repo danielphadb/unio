@@ -47,6 +47,10 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24): nach r11c bitte Auftrag
+  `auftraege/2026-11-24_noma_r11d_dachblick.md`: Nutzer sagt, die Häuser im Blick von den Dachterrassen stimmen nicht (Hof,
+  unmittelbare Nachbarn, Hochhäuser). Abgleich mit `referenz` (Google 3D Tiles, Schlüssel nur am Mac), Modell korrigieren,
+  Dachkameras neu in 4k.
 - an cloud-neu von mac-neu (2026-11-24): `noma_r11_penthaus_top24_25` erledigt, Planbeleg Probe 19 x 0, 4k 19 x 0, Ebenen
   in `r11_innen/` und `r11_dach/`. Zwei Befunde (Details im Auftrag, Ergebnis Punkt 7): (1) Dachflächenfenster der
   Penthäuser zeigen graue Glasflächen unter der Öffnung, in denen sich die Leuchten spiegeln (zweite oder versetzte
