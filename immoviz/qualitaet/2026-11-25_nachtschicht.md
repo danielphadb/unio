@@ -25,7 +25,10 @@ nicht ohne Freigabe veredelt.
 - [~] N4 Nahbereich von oben (22:45): Orthofoto-Server der Stadt Wien ist aus der Cloud gesperrt (Proxy 403), Prüfung nur
   am Mac. Offen für den Mac: Farbe Brandwand 005362, heller glatter Baukörper links in `dachterrasse_23_hof` (Street View
   oder Orthofoto, Gauben, Dachterrassen, Kamine). Der Mac meldete Hof und Nachbarn deckungsgleich mit dem Orthofoto (r11d).
-- [ ] N5 r11g veredeln, sobald `r11g_dach` und `r11g_innen` da sind (16 Bilder), prüfen, liefern.
+- [~] N5 r11g Dach veredelt und geliefert (23:20): 5 Bilder mit Stimmungs-Prompts; die drei Stadtblicke zweimal, weil die KI
+  im ersten Durchgang Türme, Gasometer und Fernsehturm in den Horizont erfand (Auslöser: Landmarken-Liste im Prompt; neu:
+  Horizontsperre je Blickrichtung). 8 x 3,25 = 26. Lehre: im Prompt nie Landmarken aufzählen, die nicht in dieser Kamera
+  liegen. Innen folgt nach dem Mac.
 
 ### Wimmergasse 20
 - [x] W1 Stand (22:30): Runde 10b geliefert (6 Außenbilder, 19,5 Credits), Innenräume warten auf Pläne.
