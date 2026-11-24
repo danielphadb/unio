@@ -1174,5 +1174,112 @@
    "verbraucht": 91.0,
    "rechnung": "28 x 3,25 (2 Probe 03:04, 21 Rest 03:07 bis 03:08, 5 Variante b 03:30)"
   }
+ },
+ "runde_11": {
+  "stand": "2026-11-24",
+  "auftrag": "Nutzer 24.11.2026: Renderings Penthäuser und Top 24/25 (Wohnzimmer und Terrasse); Runde 11b: High-End-Küchen mit Steinplatte, Designermöbel, Terrassen gemütlich, Whirlpool sichtbar, Outdoor-Küche, Hofblick mit Kamera ganz außen; 'bitte weitermachen' (Freigabe Credits)",
+  "eingang": "renders/r11_innen und r11_dach (Mac 4k mit Ebenen, Planbeleg 19 x 0); Modell aus der Planungsmappe EIN S. 12/13/14 (Vektor)",
+  "modell": "gpt_image_2_6 quality high 4k 3:2, nur Bild 1 = Render",
+  "prompt": "Kopf pixelgenaue Retusche; innen Farbkorrektur gegen den Orangestich, Küche (Steinplatte, Wasserfall-Wange, grifflose Fronten), Designermöbel, Morgenlicht; Balkon gemütlich (Teak-Sessel, Teppich, Olivenbaum) Morgen und Blaue Stunde; Dachterrassen mit Lounge, Feuertisch, Tafel, Outdoor-Küche, Whirlpool mit türkisem Wasser; editoriale Filmpalette wie Wimmergasse r10b. Generator scratchpad noma_r11/hf/prompts.py",
+  "nachbearbeitung": "immoviz.py schutz --modus ki_verzogen --ohne-vordergrund (innen zusätzlich --ohne fenster_glas)",
+  "pruefung": {
+   "top24_wohnzimmer": {
+    "massstab_ki_zu_render": 1.0019,
+    "verschiebung_prozent": 0.0,
+    "kantenabweichung_prozent": 11.94,
+    "p90_4k_px": 7.0
+   },
+   "top24_wohnzimmer_tv": {
+    "massstab_ki_zu_render": 0.9943,
+    "verschiebung_prozent": 0.24,
+    "kantenabweichung_prozent": 9.99,
+    "p90_4k_px": 6.0
+   },
+   "top24_terrasse_hst": {
+    "massstab_ki_zu_render": 1.0105,
+    "verschiebung_prozent": 0.32,
+    "kantenabweichung_prozent": 5.75,
+    "p90_4k_px": 4.0
+   },
+   "top24_terrasse_abend": {
+    "massstab_ki_zu_render": 1.0012,
+    "verschiebung_prozent": 0.08,
+    "kantenabweichung_prozent": 10.5,
+    "p90_4k_px": 6.71
+   },
+   "top25_wohnzimmer": {
+    "massstab_ki_zu_render": 0.9978,
+    "verschiebung_prozent": 0.09,
+    "kantenabweichung_prozent": 4.02,
+    "p90_4k_px": 4.12
+   },
+   "top25_essplatz": {
+    "massstab_ki_zu_render": 0.9987,
+    "verschiebung_prozent": 0.12,
+    "kantenabweichung_prozent": 11.89,
+    "p90_4k_px": 7.0
+   },
+   "top25_terrasse_hst": {
+    "massstab_ki_zu_render": 1.0024,
+    "verschiebung_prozent": 0.08,
+    "kantenabweichung_prozent": 2.81,
+    "p90_4k_px": 3.61
+   },
+   "top25_terrasse_abend": {
+    "massstab_ki_zu_render": 1.0009,
+    "verschiebung_prozent": 0.07,
+    "kantenabweichung_prozent": 6.8,
+    "p90_4k_px": 5.0
+   },
+   "dachterrasse_stadt": {
+    "massstab_ki_zu_render": 1.0075,
+    "verschiebung_prozent": 0.18,
+    "kantenabweichung_prozent": 3.17,
+    "p90_4k_px": 3.16
+   },
+   "dachterrasse_stadt_blaue_stunde": {
+    "massstab_ki_zu_render": 1.0138,
+    "verschiebung_prozent": 0.31,
+    "kantenabweichung_prozent": 0.29,
+    "p90_4k_px": 3.0
+   },
+   "dachterrasse_hof": {
+    "massstab_ki_zu_render": 0.9945,
+    "verschiebung_prozent": 0.23,
+    "kantenabweichung_prozent": 6.85,
+    "p90_4k_px": 5.0
+   },
+   "dachterrasse_23": {
+    "massstab_ki_zu_render": 0.9873,
+    "verschiebung_prozent": 0.53,
+    "kantenabweichung_prozent": 2.38,
+    "p90_4k_px": 3.61
+   },
+   "dachterrasse_23_hof": {
+    "massstab_ki_zu_render": 1.0019,
+    "verschiebung_prozent": 0.0,
+    "kantenabweichung_prozent": 5.37,
+    "p90_4k_px": 5.0
+   }
+  },
+  "sicht": "Kantenlinien auf Fassaden, Fenstern, Küchen und Möbeln; innen zählt der Kantenwert Möbel mit (10 bis 12 %). Whirlpool in dachterrasse_23_hof mit Wasser sichtbar. KI ergänzt Kleinteile (Kissen, Decken, Vasen, Windlicht, Obstschale), keine Bauteile.",
+  "jobs": {
+   "top24_wohnzimmer": "5920e1ef-db5b-45b7-83de-bc39d618a78e",
+   "top24_wohnzimmer_tv": "394c5bc8-c974-461b-946a-ec51825edebd",
+   "top24_terrasse_hst": "cdb596ce-38c3-47a7-9495-8ecb71956875",
+   "top24_terrasse_abend": "4909fe78-79a2-4f30-9a08-8939b7f099c4",
+   "top25_wohnzimmer": "38aa6920-a277-43bf-b35b-e5ee13c65673",
+   "top25_essplatz": "db24f29f-6c6c-48c0-a37e-6733a08ef1a6",
+   "top25_terrasse_hst": "52d19f77-46be-421f-9d09-5e2f51a5f55b",
+   "top25_terrasse_abend": "5a2196f1-6e0b-4a4f-998d-4b514ea9efa1",
+   "dachterrasse_stadt": "43af03c4-1d49-4aeb-8f2c-b465d3b9141d",
+   "dachterrasse_stadt_blaue_stunde": "4565a346-f5c9-45c0-8ee3-c44e47ad98bb",
+   "dachterrasse_hof": "c9bbe61f-62c3-4e77-a0ec-dc7fba352311",
+   "dachterrasse_23": "2188974b-1896-41d6-89ee-beda1f8cc9db",
+   "dachterrasse_23_hof": "2e952c34-e891-45ba-b6f2-7148106135b6"
+  },
+  "credits": "13 x 3,25 = 42,25 (14:02 bis 14:03; ein Auftrag mit 503 abgewiesen, nicht berechnet)",
+  "offen": "Penthäuser 23-2 und 26-2 innen (6 Bilder) nach dem Neurender r11c des Mac (ohne graue Scheiben vor den Dachfenstern, heller)",
+  "dateien": "<name>_r11_final.jpg, r11_pruefung/<name>_kanten.jpg und _abweichung.jpg"
  }
 }

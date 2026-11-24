@@ -68,6 +68,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-24 cloud-neu: Noma Runde 11 veredelt (Teil 1): Top 24/25 Wohnzimmer und Balkon (8), Dachterrassen 26-3/23-3 (5),
+  ki_verzogen, Maßstab 0,99 bis 1,01; `renders/higgsfield/*_r11_final.jpg`, `r11_pruefung/`, `staging.json` runde_11.
+  42,25 Credits (13 x 3,25). Offen: Penthäuser innen nach r11c (mac-neu läuft).
 - 2026-11-24 mac-neu: Auftrag `noma_r11_penthaus_top24_25` erledigt. Probe 19 Bilder (Planbeleg 19 x 0), 4k innen 14 Bilder
   in 1 h 37 min, Dach 5 Bilder in 15 min, Peak 43,9 GB, Planbeleg 19 x 0, Ebenen ohne normalen. Befunde Dachfenster und
   Whirlpool an cloud-neu. Keine Credits.
