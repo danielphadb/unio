@@ -115,3 +115,48 @@ Street View vor jedem Credit).
 - Nebeneinander-Befund je Standpunkt in Worten (ohne Bild im Repo).
 - Zeit, Speicher, Planbeleg je Kamera, Ebenen `nicht_zugeordnet`.
 - Danach veredelt cloud-neu: 5 Dach, 8 Top 24/25, 3 Top 23-2 mit Stimmungs-Prompts (16 x 3,25 = 52 Credits).
+
+## Ergebnis (mac-neu, 24.11.2026)
+1. **Street View je Turm** (23 Standpunkte rund um die Türme plus die alten `sv_triiiple_*`, Bilder nur lokal in
+   `renders/streetview/triiiple/`; Türme im Bild über die Baukörper-Lage beschriftet, damit sie nicht verwechselt werden):
+   - Alle drei Türme: Oberteil rund 34 x 30 m mit umlaufenden Balkonplatten (helle bis mittelgraue Stirn, dünn) und
+     Glasbrüstungen auf allen Seiten, dahinter burgunderrote Wand mit raumhohen Fenstern; Ecken scharf, Balkone laufen um
+     die Ecke; flache Dachkante. Heller zweigeschossiger Glas-Sockel. Turmraster um 9,1 Grad gedreht [BKM].
+   - Turm 2 und Turm 3: schmalerer Schaft (rund 22 m) mit burgunderroter Lochfassade (hohe, schmale Fenster) auf den
+     vorstehenden Seiten, darüber der Oberteil seitlich versetzt und auskragend. Sprunghöhe aus den tieferen Dachflächen
+     des Baukörpermodells: Turm 2 +62,4 (Schaft steht nach Süden vor), Turm 3 +72,3 (Schaft steht nach Westen vor).
+   - Turm 1: Schaft mit Balkonen wie oben; Kopf ab +79 kragt nach Westen (rund 5 m) und über einem Einschnitt an der
+     Nordwestecke aus, Hals und Einschnitt burgunder mit Lochfenstern; Südseite bis +65,3 4,4 m vorstehend [BKM].
+   - Unsicher [ANN]: Tiefe der Schäfte, Achsraster und Fensterformate, genaue Höhe des Halses von Turm 1.
+2. **Modell**: alle drei Türme als `hochhaeuser.formen` mit Teilen je Höhenzone; neu in `lib/build.py` Fassade je Kante
+   (`fassade`/`kanten`: balkon | loch), Balkonplatte je Geschoss als eigener Ring mit Glasbrüstung, Wand dahinter,
+   Lochfassade, heller Sockel, `aussen: true` (Polygon = Plattenkante). Detailzone der Nachbarn unverändert.
+3. **Nebeneinander-Prüfung** (`svcheck`, neue Standpunkte `tri_ost`, `tri_west`, `tri_suedwest`, `tri_suedost`,
+   `tri_t3_sw`, Auswahl über `SVCHECK_NUR`): drei Durchgänge.
+   - Von Osten: drei Silhouetten richtig (T3 Oberteil breit auf schmalem Schaft, T2 mit großem Sprung, T1 gerade).
+   - Von Süden und Südwesten: T3 und T2 mit burgunderem Schaft und auskragendem Oberteil wie im Original.
+   - Von Nordwesten und Westen: T1 mit burgunderem Hals und Kopf, der nach Westen und Norden auskragt.
+   - Abweichung: im Modell wirkt die Fassade bei diffusem Licht heller als im Foto; die Farbe hängt stark vom Licht ab.
+   - Austro Tower: Spitze nicht verjüngt (in Street View aus der Nähe nicht deutlich), unverändert.
+4. **Fern-Landmarken (3b)**, Sichtbarkeit aus Proben 1440 x 960, neu `fern_landmarken` und `lib/landmarken_bau.py`:
+   - Arsenalturm: im Hofblick von 23 sichtbar (vorher dünner Stab), jetzt weißer Schaft 155 m [Structurae] mit Turmkorb,
+     Kappe und Antenne [SV 07/2024].
+   - Stephansdom: Langhaus mit hohem Satteldach (Traufe 26, First 62 m [ANN]) und Haube auf dem Nordturm; Südturm-Helm
+     wie r11d.
+   - Karlskirche: grüne ovale Kuppel auf Tambour mit Laterne, Portikus, Seitenpavillons [SV 06/2017]; Säulen aus dem BKM.
+   - Gasometer: vier Ziegelzylinder 65 m, 70 m hoch, Fensterreihen, flache Kuppel; im Hofblick größtenteils hinter dem
+     Olivenbaum.
+   - Nicht gebaut: Riesenrad (in stadt und 23 vom Nachbarhaus verdeckt), Kraftwerk Simmering (hinter dem TrIIIple).
+5. **Stimmung (4)**: golden_hour 19:02 statt 18:40 (Sonne 6,3 statt 10 Grad), aerosol 2,8, Innenlicht 0,5; Flammen
+   (neu `art: flamme`, Typ `flamme`) und Glut im Feuertisch, Unterwasserlicht im Whirlpool, LED unter der Platte der
+   Außenküche, je zwei bis drei Windlichter auf den Tischen und eine Laterne am Boden; blaue_stunde Belichtung 2,6 statt
+   1,8. Innenlicht hinter den Penthaus-Verglasungen: in den vier Dachkameras ist keine Verglasung der Penthäuser im Bild.
+6. **Dach 4k** (`renders/r11g_dach/`, 3840 x 2560, 256 Samples, Ebenen): 4 Kameras in 759 s, Blaue Stunde 177 s, Peak
+   41,2 GB, **Planbeleg 5 x 0**, `nicht_zugeordnet: []`. Kontaktbogen `r11g_dach/kontaktbogen.jpg`.
+7. **Innenausstattung (4b)**, nur eigene Geometrie (keine Downloads; `beistelltisch` war nicht geladen, selbst gebaut):
+   Eichentisch massiv statt `esstisch_aussen` (Top 24, 25, 23-2), Teppiche unter Essplatz und in den Terrassenblicken,
+   Leinen-Stores an HST und Fenstern, großformatiges Bild (Eichenrahmen, Sand, Ocker, Salbei, Terrakotta) je Wohnraum,
+   Bücher, Vasen, Holzschale, Messing-Kerzenhalter; Pendelleuchten: Top 24 Glaskugel, Top 25 flache Messingscheibe,
+   Penthäuser Dreiergruppen. Penthaus-Terrassenblicke: Konsole, Bild, Pflanze, Beistelltisch, Stehleuchte, Teppich; der
+   Lounge-Sessel in Top 23-2 verdeckte in der Probe ein Viertel des Terrassenblicks und ist wieder entfernt, in Top 26-2
+   ist in der Nische kein Platz.

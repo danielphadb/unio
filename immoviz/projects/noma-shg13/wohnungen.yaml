@@ -211,6 +211,43 @@ wohnungen:
       - {rect: [15.1, -10.4, 15.14, -9.5], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (Tuer Zimmer 80/200)"}
       - {rect: [12.84, -9.45, 13.74, -9.41], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (Tuer Vorraum)"}
       - {rect: [10.9, -14.3, 13.3, -12.3], z: [0.002, 0.012], mat: teppich_wolle, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Teppich Wolle)"}
+      - {rect: [13.28, -11.54, 15.02, -10.75], z: [0.71, 0.755], mat: eiche_tisch, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [13.44, -11.46, 13.5, -10.83], z: [0, 0.71], mat: eiche_tisch, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [14.8, -11.46, 14.86, -10.83], z: [0, 0.71], mat: eiche_tisch, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [13.5, -11.175, 14.8, -11.115], z: [0.12, 0.18], mat: eiche_tisch, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [12.75, -12.25, 15.04, -10.1], z: [0.002, 0.01], mat: teppich_jute, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [10.37, -14.606, 10.446, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [10.442, -14.556, 10.519, -14.544], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [10.515, -14.606, 10.591, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [10.588, -14.556, 10.664, -14.544], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [12.64, -14.606, 12.716, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [12.713, -14.556, 12.789, -14.544], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [12.785, -14.606, 12.861, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [12.857, -14.556, 12.934, -14.544], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [13.15, -14.606, 13.237, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [13.233, -14.556, 13.321, -14.544], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [13.317, -14.606, 13.404, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [14.68, -14.606, 14.767, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [14.763, -14.556, 14.851, -14.544], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [14.847, -14.606, 14.934, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [15.045, -14.44, 15.08, -12.84], z: [1.0, 2.1], mat: rahmen_eiche, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [15.04, -14.4, 15.08, -12.88], z: [1.04, 2.06], mat: kunst_sand, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [15.035, -14.248, 15.08, -13.608], z: [1.33, 1.968], mat: kunst_ocker, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [15.035, -13.688, 15.08, -13.16], z: [1.11, 1.605], mat: kunst_salbei, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [15.035, -14.312, 15.08, -14.184], z: [1.198, 1.88], mat: kunst_terrakotta, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [15.035, -13.48, 15.08, -13.0], z: [1.682, 1.946], mat: kunst_salbei_hell, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [14.74, -13.95, 14.98, -13.62], z: [0.5, 0.535], mat: buch_1, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [14.75, -13.94, 14.97, -13.63], z: [0.535, 0.563], mat: buch_2, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [14.76, -13.93, 14.96, -13.64], z: [0.563, 0.595], mat: buch_3, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [11.7, -13.48, 11.95, -13.27], z: [0.38, 0.415], mat: buch_1, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [11.71, -13.47, 11.94, -13.28], z: [0.415, 0.443], mat: buch_2, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [11.72, -13.46, 11.93, -13.29], z: [0.443, 0.475], mat: buch_3, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+    zylinder:
+      - {c: [14.86, -13.15], r: 0.085, z: [0.5, 0.84], mat: keramik_creme, seg: 20, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [14.88, -12.95], r: 0.06, z: [0.5, 0.66], mat: keramik_terrakotta, seg: 20, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [14.15, -11.15], r: 0.19, z: [0.755, 0.815], mat: holz_schale, seg: 28, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [12.03, -13.2], r: 0.022, z: [0.38, 0.56], mat: messing, seg: 10, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [12.1, -13.29], r: 0.022, z: [0.38, 0.5], mat: messing, seg: 10, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
     moebel:
       - {modell: sideboard, px: [14.68, -14.64, 15.08, -12.64], front: -x, skalierung: frei, h: 0.5, anlegen: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: sofa_cloud, px: [10.34, -14.48, 11.37, -12.21], front: +x, anlegen: true, farbe: "#D9D2C5", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
@@ -218,7 +255,7 @@ wohnungen:
       - {modell: lounge_designer, px: [12.45, -14.4, 13.64, -13.39], front: -x, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: stehleuchte_bogen, c_px: [10.62, -11.95], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: zimmerpflanze, c_px: [14.75, -12.3], d: 0.55, skalierung: hoehe, h: 1.35, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: esstisch_aussen, px: [13.28, -11.54, 15.07, -10.75], front: -y, skalierung: frei, h: 0.75, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 11g ersetzt: {modell: esstisch_aussen, px: [13.28, -11.54, 15.07, -10.75], front: -y, skalierung: frei, h: 0.75, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: stuhl_boucle, c_px: [14.78, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: stuhl_boucle, c_px: [14.17, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: stuhl_boucle, c_px: [13.58, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
@@ -293,12 +330,46 @@ wohnungen:
       - {rect: [6.3, -9.45, 7.2, -9.41], z: [0, 2.1], mat: tuer_eiche, quelle: "EIN S. 12 (Wohnungstuer)"}
       - {rect: [4.8, -13.3, 5.1, -12.7], z: [0.92, 0.925], mat: kochfeld, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Kochfeld flaechenbuendig)"}
       - {rect: [7.6, -14.3, 9, -11.9], z: [0.002, 0.012], mat: teppich_wolle, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Teppich Wolle)"}
+      - {rect: [6.19, -14.18, 6.98, -12.38], z: [0.71, 0.755], mat: eiche_tisch, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [6.27, -14.02, 6.9, -13.96], z: [0, 0.71], mat: eiche_tisch, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [6.27, -12.6, 6.9, -12.54], z: [0, 0.71], mat: eiche_tisch, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [6.555, -13.96, 6.615, -12.6], z: [0.12, 0.18], mat: eiche_tisch, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [5.45, -14.6, 7.55, -11.95], z: [0.002, 0.01], mat: teppich_jute, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [4.88, -14.606, 4.967, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [4.963, -14.556, 5.051, -14.544], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [5.047, -14.606, 5.134, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [6.41, -14.606, 6.497, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [6.493, -14.556, 6.581, -14.544], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [6.577, -14.606, 6.664, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.1, -14.606, 7.176, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.172, -14.556, 7.249, -14.544], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.245, -14.606, 7.321, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.317, -14.556, 7.394, -14.544], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [9.8, -14.606, 9.897, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [9.893, -14.556, 9.991, -14.544], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [9.987, -14.606, 10.084, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [4.53, -13.95, 4.565, -12.45], z: [1.0, 2.1], mat: rahmen_eiche, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [4.53, -13.91, 4.57, -12.49], z: [1.04, 2.06], mat: kunst_sand, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [4.53, -13.77, 4.575, -13.17], z: [1.33, 1.968], mat: kunst_ocker, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [4.53, -13.245, 4.575, -12.75], z: [1.11, 1.605], mat: kunst_salbei, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [4.53, -13.83, 4.575, -13.71], z: [1.198, 1.88], mat: kunst_terrakotta, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [4.53, -13.05, 4.575, -12.6], z: [1.682, 1.946], mat: kunst_salbei_hell, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [8.18, -13.2, 8.42, -13.0], z: [0.38, 0.415], mat: buch_1, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [8.19, -13.19, 8.41, -13.01], z: [0.415, 0.443], mat: buch_2, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [8.2, -13.18, 8.4, -13.02], z: [0.443, 0.475], mat: buch_3, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+    zylinder:
+      - {c: [6.585, -13.28], r: 0.24, z: [1.83, 1.86], mat: messing, seg: 32, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [6.585, -13.28], r: 0.21, z: [1.826, 1.83], mat: leuchte_warm, seg: 32, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [6.585, -13.28], r: 0.005, z: [1.86, 2.52], mat: schwarz, seg: 6, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [6.585, -12.85], r: 0.17, z: [0.755, 0.81], mat: holz_schale, seg: 28, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [6.6, -13.75], r: 0.07, z: [0.755, 1.02], mat: keramik_creme, seg: 20, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [8.45, -12.95], r: 0.022, z: [0.38, 0.55], mat: messing, seg: 10, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
     moebel:
       - {modell: sofa_cloud, px: [9.07, -14.24, 10.09, -11.96], front: -x, anlegen: true, farbe: "#CDBFAE", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: couchtisch_rund, c_px: [8.3, -13.1], d: 0.85, skalierung: frei, h: 0.38, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: stehleuchte_bogen, c_px: [9.65, -11.7], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: zimmerpflanze, c_px: [9.7, -14.35], d: 0.5, skalierung: hoehe, h: 1.3, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: esstisch_aussen, px: [6.19, -14.18, 6.98, -12.38], front: -x, skalierung: frei, h: 0.75, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 11g ersetzt: {modell: esstisch_aussen, px: [6.19, -14.18, 6.98, -12.38], front: -x, skalierung: frei, h: 0.75, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: stuhl_samt, c_px: [7.12, -12.69], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: stuhl_samt, c_px: [7.12, -13.28], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: stuhl_samt, c_px: [7.12, -13.88], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
@@ -307,7 +378,7 @@ wohnungen:
       - {modell: stuhl_samt, c_px: [6.05, -13.88], front: +x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: barhocker, c_px: [5.55, -10.2], front: -y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: barhocker, c_px: [6.15, -10.2], front: -y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: pendelleuchte, c_px: [6.585, -13.28], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 11g ersetzt: {modell: pendelleuchte, c_px: [6.585, -13.28], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: pendelleuchte, c_px: [5.55, -10.95], d: 0.3, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: pendelleuchte, c_px: [6.15, -10.95], d: 0.3, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
     leuchten:
@@ -365,9 +436,34 @@ wohnungen:
       - {rect: [7.75, -8.2, 7.79, -7.29], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 13 (Tuer zum Gang)"}
       - {rect: [1.96, -7.2, 2.76, -7.16], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 13 (Tuer Bad/WC)"}
       - {rect: [4.3, -10.05, 6.8, -7.75], z: [0.002, 0.012], mat: teppich_wolle, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Teppich Wolle)"}
+      - {rect: [7.2, -12.55, 9.6, -11.05], z: [0.002, 0.01], mat: teppich_jute, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [2.3, -12.4, 4.7, -10.15], z: [0.002, 0.01], mat: teppich_jute, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.39, -12.61, 7.464, -12.598], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.46, -12.56, 7.534, -12.548], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.53, -12.61, 7.604, -12.598], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.6, -12.56, 7.674, -12.548], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [9.79, -12.61, 9.884, -12.598], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [9.88, -12.56, 9.974, -12.548], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [9.97, -12.61, 10.064, -12.598], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.1, -12.05, 7.135, -11.15], z: [1.05, 2.25], mat: rahmen_eiche, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.1, -12.01, 7.14, -11.19], z: [1.09, 2.21], mat: kunst_sand, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.1, -11.942, 7.145, -11.582], z: [1.41, 2.106], mat: kunst_ocker, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.1, -11.627, 7.145, -11.33], z: [1.17, 1.71], mat: kunst_salbei, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.1, -11.978, 7.145, -11.906], z: [1.266, 2.01], mat: kunst_terrakotta, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.1, -11.51, 7.145, -11.24], z: [1.794, 2.082], mat: kunst_salbei_hell, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.18, -11.6, 7.42, -11.35], z: [0.55, 0.585], mat: buch_1, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.19, -11.59, 7.41, -11.36], z: [0.585, 0.613], mat: buch_2, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [7.2, -11.58, 7.4, -11.37], z: [0.613, 0.645], mat: buch_3, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+    zylinder:
+      - {c: [7.78, -11.4], r: 0.21, z: [0.475, 0.5], mat: eiche_tisch, seg: 28, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie (Beistelltisch)"}
+      - {c: [7.78, -11.4], r: 0.025, z: [0.02, 0.475], mat: messing, seg: 10, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie (Beistelltisch)"}
+      - {c: [7.78, -11.4], r: 0.16, z: [0.0, 0.02], mat: messing, seg: 24, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie (Beistelltisch)"}
+      - {c: [7.32, -11.2], r: 0.08, z: [0.55, 0.9], mat: keramik_creme, seg: 20, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [7.78, -11.4], r: 0.05, z: [0.5, 0.66], mat: keramik_terrakotta, seg: 20, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [3.51, -11.33], r: 0.17, z: [0.75, 0.8], mat: holz_schale, seg: 28, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
     moebel:
       - {modell: esstisch_rund, c_px: [3.51, -11.33], d: 1.2, skalierung: frei, h: 0.75, stuehle: {modell: stuhl_boucle, anzahl: 6, radius: 0.8, h: 0.78, start_grad: 30, farbe: "#E9E1D6"}, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: pendelleuchte, c_px: [3.51, -11.33], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 11g ersetzt: {modell: pendelleuchte, c_px: [3.51, -11.33], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: pendelleuchte, c_px: [2.58, -8.75], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: pendelleuchte, c_px: [2.58, -9.55], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: sofa_cloud, px: [4.29, -10.13, 6.69, -9.25], front: +y, farbe: "#E7DFD1", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
@@ -375,9 +471,15 @@ wohnungen:
       - {modell: lounge_designer, px: [5.05, -8.46, 6.06, -7.27], front: -y, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: stehleuchte_bogen, c_px: [6.95, -9.95], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: zimmerpflanze, c_px: [1.48, -7.62], d: 0.55, skalierung: hoehe, h: 1.4, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: zimmerpflanze_klein, c_px: [7.45, -12.30], d: 0.6, skalierung: hoehe, h: 0.85, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 11g ersetzt: {modell: zimmerpflanze_klein, c_px: [7.45, -12.30], d: 0.6, skalierung: hoehe, h: 0.85, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: barhocker, c_px: [2.32, -10.52], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: barhocker, c_px: [2.86, -10.52], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: sideboard, px: [7.1, -12.15, 7.5, -11.05], front: +x, skalierung: frei, h: 0.55, anlegen: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {modell: stehleuchte_bogen, c_px: [7.35, -10.75], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {modell: zimmerpflanze_klein, c_px: [7.3, -12.42], d: 0.4, skalierung: hoehe, h: 0.8, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {modell: pendelleuchte, c_px: [3.51, -11.03], d: 0.2, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {modell: pendelleuchte, c_px: [3.25, -11.48], d: 0.2, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {modell: pendelleuchte, c_px: [3.77, -11.48], d: 0.2, h: 0.9, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
     material_ersatz: {innen_wand: creme_wand, decke: creme_decke}
     objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof]   # Dach nach Plan bleibt sichtbar (Terrasse, HST-Rahmen und -Glas im Einschnitt), aus: Innenkarten und aeussere Hofschraegen; Dachfenster-Kameras siehe dort
     light: spaetsommer_mittag
@@ -420,15 +522,43 @@ wohnungen:
       - {rect: [10.33, -12.07, 10.76, -7.94], z: [0, 2.4], mat: front_anthrazit, quelle: "EIN S. 13 (Einbauschraenke 0,43 tief an der Trennwand, Schacht MR-Lue)"}
       - {rect: [15.92, -7.2, 16.73, -7.16], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 13 (Tuer Zimmer)"}
       - {rect: [11.3, -10.5, 13.95, -7.8], z: [0.002, 0.012], mat: teppich_wolle, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Teppich Wolle)"}
+      - {rect: [14.69, -10.13, 15.48, -8.32], z: [0.71, 0.755], mat: eiche_tisch, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [14.77, -9.97, 15.4, -9.91], z: [0, 0.71], mat: eiche_tisch, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [14.77, -8.54, 15.4, -8.48], z: [0, 0.71], mat: eiche_tisch, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [15.055, -9.91, 15.115, -8.54], z: [0.12, 0.18], mat: eiche_tisch, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [14.0, -10.85, 16.0, -7.75], z: [0.002, 0.01], mat: teppich_jute, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [11.0, -12.55, 13.25, -10.65], z: [0.002, 0.01], mat: teppich_jute, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [10.8, -12.61, 10.897, -12.598], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [10.893, -12.56, 10.991, -12.548], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [10.987, -12.61, 11.084, -12.598], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [12.65, -12.61, 12.747, -12.598], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [12.743, -12.56, 12.841, -12.548], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [12.837, -12.61, 12.934, -12.598], z: [0.01, 2.42], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [13.265, -12.0, 13.3, -11.1], z: [1.05, 2.25], mat: rahmen_eiche, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [13.26, -11.96, 13.3, -11.14], z: [1.09, 2.21], mat: kunst_sand, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [13.255, -11.892, 13.3, -11.532], z: [1.41, 2.106], mat: kunst_ocker, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [13.255, -11.577, 13.3, -11.28], z: [1.17, 1.71], mat: kunst_salbei, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [13.255, -11.928, 13.3, -11.856], z: [1.266, 2.01], mat: kunst_terrakotta, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [13.255, -11.46, 13.3, -11.19], z: [1.794, 2.082], mat: kunst_salbei_hell, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [12.97, -11.85, 13.22, -11.6], z: [0.55, 0.585], mat: buch_1, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [12.98, -11.84, 13.21, -11.61], z: [0.585, 0.613], mat: buch_2, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {rect: [12.99, -11.83, 13.2, -11.62], z: [0.613, 0.645], mat: buch_3, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+    zylinder:
+      - {c: [12.65, -12.05], r: 0.21, z: [0.475, 0.5], mat: eiche_tisch, seg: 28, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie (Beistelltisch)"}
+      - {c: [12.65, -12.05], r: 0.025, z: [0.02, 0.475], mat: messing, seg: 10, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie (Beistelltisch)"}
+      - {c: [12.65, -12.05], r: 0.16, z: [0.0, 0.02], mat: messing, seg: 24, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie (Beistelltisch)"}
+      - {c: [13.08, -11.3], r: 0.08, z: [0.55, 0.9], mat: keramik_creme, seg: 20, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [12.65, -12.05], r: 0.05, z: [0.5, 0.66], mat: keramik_terrakotta, seg: 20, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {c: [15.085, -9.225], r: 0.18, z: [0.755, 0.81], mat: holz_schale, seg: 28, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
     moebel:
-      - {modell: esstisch_aussen, px: [14.69, -10.13, 15.48, -8.32], front: -x, skalierung: frei, h: 0.75, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 11g ersetzt: {modell: esstisch_aussen, px: [14.69, -10.13, 15.48, -8.32], front: -x, skalierung: frei, h: 0.75, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: stuhl_boucle, c_px: [15.62, -8.61], front: -x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: stuhl_boucle, c_px: [15.62, -9.21], front: -x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: stuhl_boucle, c_px: [15.62, -9.81], front: -x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: stuhl_boucle, c_px: [14.55, -8.61], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: stuhl_boucle, c_px: [14.55, -9.21], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: stuhl_boucle, c_px: [14.55, -9.81], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: pendelleuchte, c_px: [15.085, -9.225], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 11g ersetzt: {modell: pendelleuchte, c_px: [15.085, -9.225], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: pendelleuchte, c_px: [16.635, -8.85], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: pendelleuchte, c_px: [16.635, -9.65], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: sofa_cloud, px: [11.58, -10.58, 13.84, -9.66], front: +y, farbe: "#D8CFC2", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
@@ -436,9 +566,16 @@ wohnungen:
       - {modell: lounge_designer, px: [12.1, -8.81, 13.11, -7.62], front: -y, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: stehleuchte_bogen, c_px: [11.05, -10.45], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: zimmerpflanze, c_px: [11.05, -7.58], d: 0.55, skalierung: hoehe, h: 1.4, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: zimmerpflanze_klein, c_px: [12.95, -12.30], d: 0.6, skalierung: hoehe, h: 0.85, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 11g ersetzt: {modell: zimmerpflanze_klein, c_px: [12.95, -12.30], d: 0.6, skalierung: hoehe, h: 0.85, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: barhocker, c_px: [16.33, -10.6], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: barhocker, c_px: [16.95, -10.6], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: sideboard, px: [12.9, -12.1, 13.3, -11.0], front: -x, skalierung: frei, h: 0.55, anlegen: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 11g Probe: Sessel verdeckte den Terrassenblick, entfernt: {modell: lounge_designer, px: [11.85, -11.75, 12.86, -10.62], front: -x, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {modell: stehleuchte_bogen, c_px: [13.05, -10.82], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {modell: pendelleuchte, c_px: [15.085, -8.62], d: 0.22, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie; Gruppe statt Einzelleuchte"}
+      - {modell: pendelleuchte, c_px: [15.085, -9.225], d: 0.22, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {modell: pendelleuchte, c_px: [15.085, -9.83], d: 0.22, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {modell: zimmerpflanze_klein, c_px: [13.05, -12.4], d: 0.4, skalierung: hoehe, h: 0.8, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
     material_ersatz: {innen_wand: creme_wand, decke: creme_decke}
     objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof]   # Dach nach Plan bleibt sichtbar (Terrasse, HST-Rahmen und -Glas im Einschnitt), aus: Innenkarten und aeussere Hofschraegen; Dachfenster-Kameras siehe dort
     light: spaetsommer_mittag
@@ -1296,6 +1433,24 @@ wohnungen:
 
 # Materialien der Apartments (Farbwerte aus der Farbpalette [INT S. 6] und den Ansichten [INT S. 13 bis 16], Naeherung)
 materialien:
+  # Runde 11g (Auftrag noma_r11g 4b, Innenausstattung High-End, eigene Geometrie)
+  eiche_tisch: {farbe: "#9A7350", art: eiche, quelle: "Runde 11g, massiver Eichentisch statt Gartentisch"}
+  rahmen_eiche: {farbe: "#A88158", art: eiche, quelle: "Runde 11g, Bilderrahmen Eiche"}
+  teppich_jute: {farbe: "#B5A283", rauh: 0.95, quelle: "Runde 11g, Teppich Jute/Wolle unter Essplatz und Lounge"}
+  leinen_store: {farbe: "#F1EBDF", art: glas, rauh: 0.65, quelle: "Runde 11g, Leinen-Store halbtransparent"}
+  kunst_sand: {farbe: "#D8C9AC", rauh: 0.9, quelle: "Runde 11g, Bild abstrakt"}
+  kunst_ocker: {farbe: "#C08A45", rauh: 0.9, quelle: "Runde 11g, Bild abstrakt"}
+  kunst_salbei: {farbe: "#8F9C7E", rauh: 0.9, quelle: "Runde 11g, Bild abstrakt"}
+  kunst_salbei_hell: {farbe: "#B9C2A8", rauh: 0.9, quelle: "Runde 11g, Bild abstrakt"}
+  kunst_terrakotta: {farbe: "#B4654A", rauh: 0.9, quelle: "Runde 11g, Bild abstrakt"}
+  keramik_creme: {farbe: "#E7DED0", rauh: 0.35, quelle: "Runde 11g, Vase Keramik"}
+  keramik_terrakotta: {farbe: "#B0644A", rauh: 0.5, quelle: "Runde 11g, Vase Terrakotta"}
+  holz_schale: {farbe: "#8A6440", art: eiche, quelle: "Runde 11g, Holzschale"}
+  messing: {farbe: "#B38E52", rauh: 0.3, metall: 0.9, quelle: "Runde 11g, Kerzenhalter und Pendelleuchte Messing"}
+  leuchte_warm: {farbe: "#FFD6A0", leuchten: 6.0, quelle: "Runde 11g, Lichtaustritt Scheibenleuchte"}
+  buch_1: {farbe: "#3F4A44", rauh: 0.7, quelle: "Runde 11g, Buecher"}
+  buch_2: {farbe: "#C9B79C", rauh: 0.7, quelle: "Runde 11g, Buecher"}
+  buch_3: {farbe: "#7A3B2E", rauh: 0.7, quelle: "Runde 11g, Buecher"}
   # Runde 11b (Nutzer 24.11.2026): High-End-Kuechen und Designermoebel Dachgeschoss [ANN Staging-Farbwerte]
   stein_calacatta: {farbe: "#ECE8E2", rauh: 0.12, quelle: "Ausstattung Runde 11b, Naturstein hell geadert (Calacatta-Typ)"}
   stein_travertin: {farbe: "#D9CBB4", rauh: 0.3, quelle: "Ausstattung Runde 11b, Travertin geschliffen"}

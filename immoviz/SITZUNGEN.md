@@ -42,6 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
+- mac-neu | seit 2026-11-24 23:20 | Auftrag `wimmergasse_r11_fernsicht` (Fern-Landmarken als echte Form, Probe; Render erst nach r11g innen) | Bereich: immoviz/projects/wimmergasse-20/project.yaml (fern_landmarken), renders/r11_fern_probe/, auftraege/2026-11-25_wimmergasse_r11_fernsicht.md
 - mac-neu | seit 2026-11-24 22:06 | Auftrag `noma_r11g_triiiple_stimmung` (TrIIIple als echte Geometrie nach Street View, Terrassenstimmung, Dach/Top 24/25/Top 23-2 4k) | Bereich: immoviz/lib/build.py, immoviz/projects/noma-shg13/ (project.yaml, wohnungen.yaml, renders/r11g_*), auftraege/2026-11-24_noma_r11g_triiiple_stimmung.md, GPU
 
 ## Nachrichten

@@ -1,6 +1,6 @@
 # Auftrag wimmergasse_r11_fernsicht
 
-Status: offen
+Status: in Arbeit (mac-neu, 25.11.2026 23:20)
 Erstellt: 25.11.2026 (Nacht), cloud-neu
 Erledigt:
 
