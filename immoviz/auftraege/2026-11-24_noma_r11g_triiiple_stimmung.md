@@ -47,6 +47,29 @@ Street View vor jedem Credit).
 3. **Nebeneinander-Prüfung** (lokal): Render aus mindestens zwei Street-View-Standpunkten (gleiche Richtung, Brennweite
    ungefähr) neben das Street-View-Bild legen. Je Turm Abweichungen in Worten melden; erst weiter, wenn Form, Balkone,
    Farbe und Kanten stimmen. Austro Tower nebenbei: Spitze verjüngt, wenn Street View das zeigt.
+3b. **Nachtrag cloud-neu 24.11. spät: Fernsicht-Landmarken nach U12** (vor dem 4k-Render, damit nur einmal gerendert und
+   veredelt wird). Berechnet aus Kameraposition, Blickrichtung und 20 mm (x = Bildposition von links, 0 bis 1; Lage über
+   den Stephansdom aus `fern.json` verankert, ±20 m):
+   | Landmarke | Kamera | x | Entfernung | heute im Modell |
+   |---|---|---|---|---|
+   | Stephansdom | stadt, 23 | 0,49 | 3,0 km | Turm mit Helm (r11d); Langhausdach fehlt als hohes Steildach |
+   | Karlskirche | stadt, 23 | 0,26 | 2,7 km | Prisma |
+   | Riesenrad | stadt, 23 | 0,93 | 2,5 km | fehlt ganz (nicht im BKM) |
+   | Gasometer Simmering | hof | 0,67 | 1,4 km | Prisma bis 49 m |
+   | Kraftwerk Simmering | hof | 0,48 | 2,8 km | nur niedrige Baukörper, kein Schornstein |
+   | Arsenalturm (Fernmeldeturm) | 23_hof | 0,89 | 2,0 km | dünner Stab |
+   Je Landmarke zuerst prüfen, ob sie im Bild überhaupt sichtbar ist (Probe 960 x 640 oder Objekt-ID-Ebene); nur sichtbare
+   bauen, als echte Form, Maße aus Quellen, Details nach Street View oder Fotos:
+   - Riesenrad: 64,75 m hoch, Rad 60,96 m Durchmesser, 15 Gondeln [wien.info, austria.info]; Speichenrad mit
+     Stahlpylonen, im Bild rechts vermutlich vom Nachbarhaus verdeckt: dann weglassen und melden.
+   - Karlskirche: ovale Kuppel (rund 72 m), zwei Triumphsäulen, Portikus, zwei Seitentürme [ANN aus Fotos].
+   - Gasometer: vier Zylinder aus Ziegel, rund 70 m hoch, rund 65 m Durchmesser, Rundbogenfenster, flache Kuppeldächer
+     [ANN, mit Street View prüfen].
+   - Arsenalturm: Stahlbetonschaft, 155 m [Structurae], Betriebsgeschosse und Antenne nach Street View.
+   - Kraftwerk Simmering: Schornsteine (Anzahl, Höhe, rot-weiße Ringe ja oder nein) nach Street View; Höhe in den
+     Quellen nicht gefunden.
+   - Stephansdom: hohes Steildach (Ziegelmuster, rund 38 m über Gewölbe) und Nordturm-Stumpf mit Haube [ANN aus Fotos].
+   Außerhalb der 7,5 km (Kahlenberg, Leopoldsberg) nur prüfen, ob der Wienerwald-Horizont im Stadtblick sichtbar ist.
 4. **Stimmung für die Terrassen** (Nutzer: mehr High-End-Penthouse), nur Licht und Ausstattung, keine Geometrie:
    - golden_hour: Sonne tiefer und wärmer (Höhe rund 5 bis 8 Grad), lange Schatten über die Terrasse, Himmel mit warmem
      Verlauf am Horizont.

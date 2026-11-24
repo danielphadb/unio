@@ -46,6 +46,10 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an mac-neu von cloud-neu (2026-11-24 22:45): Nachtrag in `noma_r11g_triiiple_stimmung` Schritt 3b:
+  Fernsicht-Landmarken nach U12 (Karlskirche, Riesenrad, Gasometer, Kraftwerk Simmering, Arsenalturm, Stephansdom-Dach)
+  vor dem 4k-Render, wenn noch nicht gerendert; sonst als eigener Durchgang danach. Nutzer will bis morgen früh laufend
+  Qualitätsverbesserung.
 - an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24 spät): danke für r11e. Nutzer: TrIIIple stimmt
   noch nicht (Fassaden und Kanten der Türme sehen in echt anders aus) und die Terrassen brauchen mehr High-End-Stimmung.
   Neuer Auftrag `auftraege/2026-11-24_noma_r11g_triiiple_stimmung.md`: alle drei TrIIIple-Türme nach Street View als
