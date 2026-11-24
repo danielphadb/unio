@@ -22,8 +22,9 @@ nicht ohne Freigabe veredelt.
   Kunst; überall dieselbe Pendelleuchte; Penthaus-Terrassenblicke fast leer. Als Schritt 4b in `noma_r11g` (massiver
   Eichentisch, Teppiche, Leinen-Stores, großformatige Kunst, Deko aus Poly Haven CC0, Lounge im Penthaus-Terrassenblick,
   Leuchten je Wohnung verschieden; `top26_2` neu rendern, Veredelung erst nach Freigabe).
-- [ ] N4 Nahbereich von oben: Brandwand 005362 (Farbe unbekannt), heller glatter Baukörper links in `dachterrasse_23_hof`,
-  Dachaufbauten, Kamine; Orthofoto und Street-View-Befund des Mac gegenlesen.
+- [~] N4 Nahbereich von oben (22:45): Orthofoto-Server der Stadt Wien ist aus der Cloud gesperrt (Proxy 403), Prüfung nur
+  am Mac. Offen für den Mac: Farbe Brandwand 005362, heller glatter Baukörper links in `dachterrasse_23_hof` (Street View
+  oder Orthofoto, Gauben, Dachterrassen, Kamine). Der Mac meldete Hof und Nachbarn deckungsgleich mit dem Orthofoto (r11d).
 - [ ] N5 r11g veredeln, sobald `r11g_dach` und `r11g_innen` da sind (16 Bilder), prüfen, liefern.
 
 ### Wimmergasse 20
@@ -31,7 +32,10 @@ nicht ohne Freigabe veredelt.
 - [x] W2 Fernsicht (22:35, `landmarken`): drohne mit Rathaus, Votivkirche, Spittelau, Millennium Tower, Stephansdom, Uniqa,
   Donauturm im Bildwinkel, alle Prismen außer Dom; im r10b-Drohnenbild malt die KI bei x 0,75 einen Fernsehturm, wo der
   Millennium Tower steht, und nur einen Turm statt Rathaus und Votivkirche. Auftrag `wimmergasse_r11_fernsicht` (nach Noma).
-- [ ] W3 Fassade, Materialien, Straßenraum gegen Referenzen; Liste der Verbesserungen.
+- [x] W3 Außenbilder r10b gegen `mood.md` (22:50): Licht, Farben, Passanten, Vertikalen passen zur Hauptreferenz (Pazelhof,
+  diesig bis golden, warmweißer Putz). Schwach: Erdgeschoss-Lokale wirken leer und dunkel (Referenz: Leben im EG,
+  beleuchtete Schaufenster); im Drohnenbild die Fernsicht (W2). Vorschlag an den Mac (nach Freigabe): Lokale mit
+  Interior Mapping warm beleuchtet (Galerie oder Showroom, ohne Schrift), dann `eg_lokal` und `ecke` neu veredeln.
 - [ ] W4 Innenräume: wartet auf Pläne; Moodkonzept (`mood_interior.md`) auf High-End-Niveau prüfen.
 
 ### Werkzeug
