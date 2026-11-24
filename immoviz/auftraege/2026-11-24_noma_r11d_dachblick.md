@@ -1,6 +1,6 @@
 # Auftrag noma_r11d_dachblick
 
-Status: offen
+Status: in Arbeit (mac-neu, 2026-11-24 16:57)
 Erstellt: 24.11.2026, cloud-neu
 Erledigt:
 
