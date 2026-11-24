@@ -1,6 +1,7 @@
 # Auftrag noma_r11f_top23_umgebung
 
-Status: ersetzt durch `noma_r11g_triiiple_stimmung` (24.11.2026, cloud-neu)
+Status: in Arbeit (mac-neu, 24.11.2026 21:58)
+Nachtrag cloud-neu 24.11.2026 spät: wird durch `noma_r11g_triiiple_stimmung` ersetzt (Nutzer: TrIIIple falsch, mehr Stimmung). Wenn der Render noch nicht weit ist: abbrechen und direkt r11g beginnen (Top 23-2 ist dort Schritt 5). Sonst fertig rendern, melden und danach r11g.
 Erstellt: 24.11.2026, cloud-neu
 Erledigt:
 
