@@ -42,7 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- mac-neu | seit 2026-11-24 14:20 | Noma Penthäuser 23-2 und 26-2 ohne die grauen Außenscheiben vor den Dachfenstern und heller (Wunsch des Nutzers): Probe 6 Kameras, dann 4k mit Ebenen | Bereich: immoviz/projects/noma-shg13/wohnungen.yaml (nur top26_2 und top23_2: objekt_ausblenden, exposure), renders/r11c_probe/, r11c_innen/, GPU
+- mac-neu | seit 2026-11-24 14:20 | Noma Penthäuser 23-2 und 26-2 ohne die grauen Außenscheiben vor den Dachfenstern und heller (Wunsch des Nutzers): Probe 6 Kameras, dann 4k mit Ebenen | Bereich: immoviz/projects/noma-shg13/wohnungen.yaml (nur top26_2 und top23_2: objekt_ausblenden, exposure), renders/r11c_probe/, r11c_innen/, lib/interior.py (nur optionales objekt_ausblenden je Kamera), GPU
 
 ## Nachrichten
 
