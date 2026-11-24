@@ -42,6 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
+- mac-neu | seit 2026-11-24 21:58 | Auftrag `noma_r11f_top23_umgebung` (Top 23-2 innen 4k) | Bereich: immoviz/projects/noma-shg13/renders/r11f_innen/, auftraege/2026-11-24_noma_r11f_top23_umgebung.md, GPU
 
 ## Nachrichten
 

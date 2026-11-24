@@ -1,6 +1,6 @@
 # Auftrag noma_r11f_top23_umgebung
 
-Status: offen
+Status: in Arbeit (mac-neu, 24.11.2026 21:58)
 Erstellt: 24.11.2026, cloud-neu
 Erledigt:
 
