@@ -75,6 +75,8 @@ def _mat_lib(bpy, mats: dict, spec: dict):
             mats[name] = M.simple(bpy, name, c, 0.5, **{"Emission Color": (*c, 1.0), "Emission Strength": 0.0})
         elif art in ("rasen", "kies"):
             mats[name] = M.plaster(bpy, name, c, var=0.25 if art == "rasen" else 0.15, bump=0.6 if art == "rasen" else 0.35)
+        elif art == "glas":        # Noma Runde 11: Wasserflaeche im Whirlpool (getoentes Glas)
+            mats[name] = M.glass(bpy, name, c, s.get("rough", 0.0))
         else:
             mats[name] = M.simple(bpy, name, c, 0.6)
     return mats

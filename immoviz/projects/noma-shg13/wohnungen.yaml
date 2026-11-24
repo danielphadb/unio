@@ -197,28 +197,39 @@ wohnungen:
       - {pts: [[13.4, -14.646, 20.56], [13.4, -14.646, 20.9], [13.4, -14.306, 20.9]], mat: decke, normal: [1, 0, 0], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
       - {pts: [[14.68, -14.646, 20.56], [14.68, -14.646, 20.9], [14.68, -14.306, 20.9]], mat: decke, normal: [-1, 0, 0], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
     einbauten:
-      - {rect: [10.34, -11.47, 12.04, -10.48], z: [0, 0.88], mat: t34_eiche, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuechenblock mit Kochfeld 1,0 x 1,7)"}
-      - {rect: [10.34, -11.47, 12.04, -10.48], z: [0.88, 0.92], mat: t34_marmor, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuechenblock, Arbeitsplatte)"}
-      - {rect: [10.77, -9.47, 12.67, -8.87], z: [0, 0.88], mat: t34_eiche, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuechenzeile in der Nische 1,90 x 0,60 mit Spuele)"}
-      - {rect: [10.77, -9.47, 12.67, -8.87], z: [0.88, 0.92], mat: t34_marmor, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuechenzeile Nische, Arbeitsplatte)"}
-      - {rect: [10.34, -9.69, 10.77, -9], z: [0, 2.52], mat: innen_wand, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Schacht MR-Lue, DD 0,20/0,33)"}
-      - {rect: [15.1, -10.4, 15.14, -9.5], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Tuer Zimmer 80/200)"}
-      - {rect: [12.84, -9.45, 13.74, -9.41], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Tuer Vorraum)"}
-    zylinder:
-      - {c: [11.42, -11.64], r: 0.18, z: [0, 0.65], mat: t34_eiche, seg: 24, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Barhocker am Kuechenblock)"}
-      - {c: [10.82, -11.64], r: 0.18, z: [0, 0.65], mat: t34_eiche, seg: 24, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Barhocker am Kuechenblock)"}
+      - {rect: [11.99, -11.47, 12.04, -10.48], z: [0, 0.94], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Wasserfall-Wange Stein)"}
+      - {rect: [10.34, -11.47, 11.99, -10.48], z: [0.08, 0.88], mat: front_raeuchereiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Fronten grifflos)"}
+      - {rect: [10.4, -11.41, 11.93, -10.54], z: [0, 0.08], mat: schwarz, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Sockel zurueckgesetzt)"}
+      - {rect: [10.34, -11.75, 12.04, -10.48], z: [0.88, 0.94], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Steinplatte 6 cm)"}
+      - {rect: [10.9, -11.375, 11.48, -10.575], z: [0.94, 0.945], mat: kochfeld, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Kochfeld flaechenbuendig)"}
+      - {rect: [10.77, -9.47, 12.67, -8.87], z: [0.08, 0.88], mat: front_raeuchereiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Fronten grifflos)"}
+      - {rect: [10.83, -9.41, 12.61, -8.87], z: [0, 0.08], mat: schwarz, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Sockel)"}
+      - {rect: [10.77, -9.47, 12.67, -8.87], z: [0.88, 0.92], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Steinplatte 4 cm)"}
+      - {rect: [10.77, -8.89, 12.67, -8.87], z: [0.92, 1.55], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Rueckwand Stein)"}
+      - {rect: [10.85, -9.12, 12.6, -8.89], z: [1.8, 1.84], mat: t34_eiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Wandboard Eiche)"}
+      - {rect: [10.34, -9.69, 10.77, -9], z: [0, 2.52], mat: innen_wand, quelle: "EIN S. 12 (Schacht MR-Lue, DD 0,20/0,33)"}
+      - {rect: [15.1, -10.4, 15.14, -9.5], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (Tuer Zimmer 80/200)"}
+      - {rect: [12.84, -9.45, 13.74, -9.41], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (Tuer Vorraum)"}
+      - {rect: [10.9, -14.3, 13.3, -12.3], z: [0.002, 0.012], mat: teppich_wolle, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Teppich Wolle)"}
     moebel:
-      - {modell: sideboard, px: [14.68, -14.64, 15.08, -12.64], front: -x, skalierung: frei, h: 0.5, anlegen: true, quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (TV-Board)"}
-      - {modell: sofa_cloud, px: [10.34, -14.48, 11.37, -12.21], front: +x, anlegen: true, farbe: "#D9D2C5", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Sofa 2,40)"}
-      - {modell: couchtisch, px: [11.53, -13.95, 12.13, -12.74], front: +x, skalierung: frei, h: 0.4, quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: esstisch_aussen, px: [13.28, -11.54, 15.07, -10.75], front: -y, skalierung: frei, h: 0.75, quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Esstisch 0,80 x 1,80, Eiche)"}
-      - {modell: stuhl_boucle, c_px: [14.78, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_boucle, c_px: [14.17, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_boucle, c_px: [13.58, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_boucle, c_px: [14.78, -11.74], front: +y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_boucle, c_px: [14.17, -11.74], front: +y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_boucle, c_px: [13.58, -11.74], front: +y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: pendelleuchte, c_px: [14.18, -11.15], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung (Staging), Lage ueber dem Esstisch laut EIN S. 12"}
+      - {modell: sideboard, px: [14.68, -14.64, 15.08, -12.64], front: -x, skalierung: frei, h: 0.5, anlegen: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: sofa_cloud, px: [10.34, -14.48, 11.37, -12.21], front: +x, anlegen: true, farbe: "#D9D2C5", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: couchtisch_rund, c_px: [11.85, -13.35], d: 0.85, skalierung: frei, h: 0.38, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: lounge_designer, px: [12.45, -14.4, 13.64, -13.39], front: -x, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stehleuchte_bogen, c_px: [10.62, -11.95], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: zimmerpflanze, c_px: [14.75, -12.3], d: 0.55, skalierung: hoehe, h: 1.35, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: esstisch_aussen, px: [13.28, -11.54, 15.07, -10.75], front: -y, skalierung: frei, h: 0.75, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_boucle, c_px: [14.78, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_boucle, c_px: [14.17, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_boucle, c_px: [13.58, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_boucle, c_px: [14.78, -11.74], front: +y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_boucle, c_px: [14.17, -11.74], front: +y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_boucle, c_px: [13.58, -11.74], front: +y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: barhocker, c_px: [10.8, -11.95], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: barhocker, c_px: [11.45, -11.95], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: pendelleuchte, c_px: [14.18, -11.15], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: pendelleuchte, c_px: [10.85, -10.98], d: 0.32, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: pendelleuchte, c_px: [11.55, -10.98], d: 0.32, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
     leuchten:
       - {pos: [14.18, -11.15, 1.75], w: 90, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
       - {pos: [11.20, -10.95, 2.30], w: 60, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
@@ -265,27 +276,40 @@ wohnungen:
       - {pts: [[7.39, -14.646, 21.24], [10.09, -14.646, 21.24], [10.09, -13.966, 21.24], [7.39, -13.966, 21.24]], mat: decke, normal: [0, 0, -1], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
       - {pts: [[7.39, -14.646, 20.56], [7.39, -14.646, 21.24], [7.39, -13.966, 21.24]], mat: decke, normal: [1, 0, 0], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
     einbauten:
-      - {rect: [4.53, -14.646, 5.13, -10.6], z: [0, 0.88], mat: t34_nuss, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuechenzeile 4,05 an der Zimmerwand: Spuele, Kochfeld)"}
-      - {rect: [4.53, -14.646, 5.13, -10.6], z: [0.88, 0.92], mat: t34_terrazzo, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuechenzeile, Arbeitsplatte)"}
-      - {rect: [5.13, -11.3, 6.54, -10.6], z: [0, 0.88], mat: t34_nuss, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuecheninsel/Tresen)"}
-      - {rect: [5.13, -11.3, 6.54, -10.6], z: [0.88, 0.92], mat: t34_terrazzo, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Tresen, Platte)"}
-      - {rect: [7.75, -11.33, 10.09, -10.93], z: [0, 2.3], mat: creme_wand, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Einbauschrank vor dem Lift, IW03)"}
-      - {rect: [4.37, -10.4, 4.41, -9.57], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Tuer Zimmer)"}
-      - {rect: [6.3, -9.45, 7.2, -9.41], z: [0, 2.1], mat: tuer_eiche, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Wohnungstuer)"}
-    zylinder:
-      - {c: [6.13, -10.43], r: 0.18, z: [0, 0.65], mat: t34_nuss, seg: 24, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Barhocker am Tresen)"}
-      - {c: [5.54, -10.43], r: 0.18, z: [0, 0.65], mat: t34_nuss, seg: 24, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Barhocker am Tresen)"}
+      - {rect: [4.53, -14.2, 5.13, -11.2], z: [0.08, 0.88], mat: front_creme, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Fronten grifflos)"}
+      - {rect: [4.53, -14.14, 5.07, -11.26], z: [0, 0.08], mat: schwarz, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Sockel)"}
+      - {rect: [4.53, -14.2, 5.13, -11.2], z: [0.88, 0.92], mat: stein_travertin, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Steinplatte 4 cm)"}
+      - {rect: [4.53, -14.2, 4.55, -11.2], z: [0.92, 1.55], mat: stein_travertin, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Rueckwand Stein)"}
+      - {rect: [4.53, -11.2, 5.13, -10.6], z: [0, 2.3], mat: front_creme, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Hochschrank mit Backofen und Kuehlschrank)"}
+      - {rect: [4.55, -13.9, 4.85, -11.4], z: [1.8, 1.84], mat: t34_eiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Wandboard Eiche)"}
+      - {rect: [4.53, -14.646, 5.13, -14.2], z: [0.08, 0.88], mat: front_creme, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Fronten)"}
+      - {rect: [4.53, -14.646, 5.13, -14.2], z: [0.88, 0.92], mat: stein_travertin, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Steinplatte)"}
+      - {rect: [6.49, -11.3, 6.54, -10.6], z: [0, 0.94], mat: stein_travertin, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Wasserfall-Wange Stein)"}
+      - {rect: [5.13, -11.3, 6.49, -10.6], z: [0.08, 0.88], mat: front_creme, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Fronten grifflos)"}
+      - {rect: [5.19, -11.24, 6.43, -10.66], z: [0, 0.08], mat: schwarz, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Sockel zurueckgesetzt)"}
+      - {rect: [5.13, -11.3, 6.54, -10.32], z: [0.88, 0.94], mat: stein_travertin, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Steinplatte 6 cm)"}
+      - {rect: [7.75, -11.33, 10.09, -10.93], z: [0, 2.3], mat: front_creme, quelle: "EIN S. 12 (Einbauschrank vor dem Lift, IW03)"}
+      - {rect: [4.37, -10.4, 4.41, -9.57], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (Tuer Zimmer)"}
+      - {rect: [6.3, -9.45, 7.2, -9.41], z: [0, 2.1], mat: tuer_eiche, quelle: "EIN S. 12 (Wohnungstuer)"}
+      - {rect: [4.8, -13.3, 5.1, -12.7], z: [0.92, 0.925], mat: kochfeld, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Kochfeld flaechenbuendig)"}
+      - {rect: [7.6, -14.3, 9, -11.9], z: [0.002, 0.012], mat: teppich_wolle, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Teppich Wolle)"}
     moebel:
-      - {modell: sofa_cloud, px: [9.07, -14.24, 10.09, -11.96], front: -x, anlegen: true, farbe: "#CDBFAE", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Ecksofa, Hauptteil an der Trennwand)"}
-      - {modell: couchtisch, px: [8.25, -13.7, 8.85, -12.5], front: -x, skalierung: frei, h: 0.4, quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: esstisch_aussen, px: [6.19, -14.18, 6.98, -12.38], front: -x, skalierung: frei, h: 0.75, quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Esstisch 0,80 x 1,80, Nuss)"}
-      - {modell: stuhl_samt, c_px: [7.12, -12.69], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_samt, c_px: [7.12, -13.28], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_samt, c_px: [7.12, -13.88], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_samt, c_px: [6.05, -12.69], front: +x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_samt, c_px: [6.05, -13.28], front: +x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_samt, c_px: [6.05, -13.88], front: +x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: pendelleuchte, c_px: [6.585, -13.28], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung (Staging), Lage ueber dem Esstisch laut EIN S. 12"}
+      - {modell: sofa_cloud, px: [9.07, -14.24, 10.09, -11.96], front: -x, anlegen: true, farbe: "#CDBFAE", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: couchtisch_rund, c_px: [8.3, -13.1], d: 0.85, skalierung: frei, h: 0.38, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stehleuchte_bogen, c_px: [9.65, -11.7], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: zimmerpflanze, c_px: [9.7, -14.35], d: 0.5, skalierung: hoehe, h: 1.3, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: esstisch_aussen, px: [6.19, -14.18, 6.98, -12.38], front: -x, skalierung: frei, h: 0.75, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_samt, c_px: [7.12, -12.69], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_samt, c_px: [7.12, -13.28], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_samt, c_px: [7.12, -13.88], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_samt, c_px: [6.05, -12.69], front: +x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_samt, c_px: [6.05, -13.28], front: +x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_samt, c_px: [6.05, -13.88], front: +x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: barhocker, c_px: [5.55, -10.2], front: -y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: barhocker, c_px: [6.15, -10.2], front: -y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: pendelleuchte, c_px: [6.585, -13.28], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: pendelleuchte, c_px: [5.55, -10.95], d: 0.3, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: pendelleuchte, c_px: [6.15, -10.95], d: 0.3, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
     leuchten:
       - {pos: [6.585, -13.28, 1.75], w: 90, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
       - {pos: [4.90, -12.50, 2.30], w: 60, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
@@ -327,20 +351,33 @@ wohnungen:
     slopes:
       - {x: [0.52, 5.63], from: [-12.40, 22.68], to: [-10.46, 24.62], quelle: "EIN S. 13 (2. DG, Vektor 1:100) (RH 1,50/2,10/2,50), S. 14/26", roof_windows: [{x: [1.93, 2.87], t: [0.02, 0.80]}, {x: [2.97, 3.91], t: [0.02, 0.80]}, {x: [4.01, 4.95], t: [0.02, 0.80]}]}
     einbauten:
-      - {rect: [0.52, -10.91, 1.12, -7.98], z: [0, 0.88], mat: t34_eiche, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Kuechenzeile an der Feuermauer)"}
-      - {rect: [0.52, -10.91, 1.12, -7.98], z: [0.88, 0.92], mat: t34_marmor, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Arbeitsplatte)"}
-      - {rect: [2.07, -10.03, 3.09, -8.23], z: [0, 0.88], mat: t34_eiche, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Kochinsel 1,0 x 1,8)"}
-      - {rect: [2.07, -10.03, 3.09, -8.23], z: [0.88, 0.92], mat: t34_marmor, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Kochinsel, Platte)"}
-      - {rect: [7.75, -8.2, 7.79, -7.29], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Tuer zum Gang)"}
-      - {rect: [1.96, -7.2, 2.76, -7.16], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Tuer Bad/WC)"}
-    zylinder:
-      - {c: [2.86, -10.18], r: 0.18, z: [0, 0.65], mat: t34_eiche, seg: 24, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Barhocker an der Insel)"}
-      - {c: [2.32, -10.18], r: 0.18, z: [0, 0.65], mat: t34_eiche, seg: 24, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Barhocker an der Insel)"}
+      - {rect: [0.52, -10.91, 1.12, -8.58], z: [0.08, 0.88], mat: front_raeuchereiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Fronten grifflos)"}
+      - {rect: [0.52, -10.85, 1.06, -8.64], z: [0, 0.08], mat: schwarz, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Sockel)"}
+      - {rect: [0.52, -10.91, 1.12, -8.58], z: [0.88, 0.92], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Steinplatte 4 cm)"}
+      - {rect: [0.52, -10.91, 0.54, -8.58], z: [0.92, 1.55], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Rueckwand Stein)"}
+      - {rect: [0.52, -8.58, 1.12, -7.98], z: [0, 2.3], mat: front_raeuchereiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Hochschrank mit Backofen und Kuehlschrank)"}
+      - {rect: [0.54, -10.6, 0.84, -8.8], z: [1.8, 1.84], mat: t34_eiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Wandboard Eiche)"}
+      - {rect: [2.07, -8.28, 3.09, -8.23], z: [0, 0.94], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Wasserfall-Wange Stein)"}
+      - {rect: [2.07, -10.03, 3.09, -8.28], z: [0.08, 0.88], mat: front_raeuchereiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Fronten grifflos)"}
+      - {rect: [2.13, -9.97, 3.03, -8.34], z: [0, 0.08], mat: schwarz, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Sockel zurueckgesetzt)"}
+      - {rect: [2.07, -10.31, 3.09, -8.23], z: [0.88, 0.94], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Steinplatte 6 cm)"}
+      - {rect: [2.18, -9.42, 2.98, -8.84], z: [0.94, 0.945], mat: kochfeld, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Kochfeld flaechenbuendig)"}
+      - {rect: [7.75, -8.2, 7.79, -7.29], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 13 (Tuer zum Gang)"}
+      - {rect: [1.96, -7.2, 2.76, -7.16], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 13 (Tuer Bad/WC)"}
+      - {rect: [4.3, -10.05, 6.8, -7.75], z: [0.002, 0.012], mat: teppich_wolle, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Teppich Wolle)"}
     moebel:
-      - {modell: esstisch_rund, c_px: [3.51, -11.33], d: 1.2, skalierung: frei, h: 0.75, stuehle: {modell: stuhl_boucle, anzahl: 6, radius: 0.8, h: 0.78, start_grad: 30, farbe: "#E9E1D6"}, quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (runder Tisch D 1,20, sechs Stuehle)"}
-      - {modell: pendelleuchte, c_px: [3.51, -11.33], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung (Staging), Lage ueber dem Esstisch laut EIN S. 13"}
-      - {modell: sofa_cloud, px: [4.29, -10.13, 6.69, -9.25], front: +y, farbe: "#E7DFD1", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Ecksofa 2,40, Ruecken zur Hofschraege; Runde 11: Lehne vorher auf der falschen Seite)"}
-      - {modell: couchtisch, px: [5.31, -9, 6.09, -8.61], front: +y, skalierung: frei, h: 0.4, quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: esstisch_rund, c_px: [3.51, -11.33], d: 1.2, skalierung: frei, h: 0.75, stuehle: {modell: stuhl_boucle, anzahl: 6, radius: 0.8, h: 0.78, start_grad: 30, farbe: "#E9E1D6"}, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: pendelleuchte, c_px: [3.51, -11.33], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: pendelleuchte, c_px: [2.58, -8.75], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: pendelleuchte, c_px: [2.58, -9.55], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: sofa_cloud, px: [4.29, -10.13, 6.69, -9.25], front: +y, farbe: "#E7DFD1", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: couchtisch_rund, c_px: [5.55, -8.83], d: 0.8, skalierung: frei, h: 0.38, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: lounge_designer, px: [5.05, -8.46, 6.06, -7.27], front: -y, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: stehleuchte_bogen, c_px: [6.95, -9.95], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: zimmerpflanze, c_px: [1.48, -7.62], d: 0.55, skalierung: hoehe, h: 1.4, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: zimmerpflanze_klein, c_px: [7.45, -12.30], d: 0.6, skalierung: hoehe, h: 0.85, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: barhocker, c_px: [2.32, -10.52], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: barhocker, c_px: [2.86, -10.52], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
     material_ersatz: {innen_wand: creme_wand, decke: creme_decke}
     objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof]   # Dach nach Plan bleibt sichtbar (Terrasse, Dachfenster), aus: Innenkarten und aeussere Hofschraegen
     light: spaetsommer_mittag
@@ -369,26 +406,39 @@ wohnungen:
     slopes:
       - {x: [14.77, 18.88], from: [-12.40, 22.68], to: [-10.46, 24.62], quelle: "EIN S. 13 (2. DG, Vektor 1:100) (RH 1,50/2,10/2,50), S. 14/26", roof_windows: [{x: [15.27, 16.21], t: [0.02, 0.80]}, {x: [16.31, 17.25], t: [0.02, 0.80]}, {x: [17.35, 18.29], t: [0.02, 0.80]}]}
     einbauten:
-      - {rect: [18.04, -10.94, 18.64, -7.94], z: [0, 0.88], mat: t34_nuss, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Kuechenzeile an der Feuermauer)"}
-      - {rect: [18.04, -10.94, 18.64, -7.94], z: [0.88, 0.92], mat: t34_marmor, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Arbeitsplatte)"}
-      - {rect: [16.13, -10.11, 17.14, -8.32], z: [0, 0.88], mat: t34_nuss, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Kochinsel 1,0 x 1,8)"}
-      - {rect: [16.13, -10.11, 17.14, -8.32], z: [0.88, 0.92], mat: t34_marmor, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Kochinsel, Platte)"}
-      - {rect: [10.33, -12.07, 10.76, -7.94], z: [0, 2.4], mat: creme_wand, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Einbauschraenke 0,43 tief an der Trennwand, Schacht MR-Lue)"}
-      - {rect: [15.92, -7.2, 16.73, -7.16], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Tuer Zimmer)"}
-    zylinder:
-      - {c: [16.95, -10.27], r: 0.18, z: [0, 0.65], mat: t34_nuss, seg: 24, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Barhocker an der Insel)"}
-      - {c: [16.33, -10.27], r: 0.18, z: [0, 0.65], mat: t34_nuss, seg: 24, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Barhocker an der Insel)"}
+      - {rect: [18.04, -10.94, 18.64, -8.54], z: [0.08, 0.88], mat: front_anthrazit, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Fronten grifflos)"}
+      - {rect: [18.1, -10.88, 18.64, -8.6], z: [0, 0.08], mat: schwarz, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Sockel)"}
+      - {rect: [18.04, -10.94, 18.64, -8.54], z: [0.88, 0.92], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Steinplatte 4 cm)"}
+      - {rect: [18.62, -10.94, 18.64, -8.54], z: [0.92, 1.55], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Rueckwand Stein)"}
+      - {rect: [18.04, -8.54, 18.64, -7.94], z: [0, 2.3], mat: front_anthrazit, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Hochschrank mit Backofen und Kuehlschrank)"}
+      - {rect: [18.32, -10.6, 18.62, -8.8], z: [1.8, 1.84], mat: t34_eiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Wandboard Eiche)"}
+      - {rect: [16.13, -8.37, 17.14, -8.32], z: [0, 0.94], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Wasserfall-Wange Stein)"}
+      - {rect: [16.13, -10.11, 17.14, -8.37], z: [0.08, 0.88], mat: front_anthrazit, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Fronten grifflos)"}
+      - {rect: [16.19, -10.05, 17.08, -8.43], z: [0, 0.08], mat: schwarz, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Sockel zurueckgesetzt)"}
+      - {rect: [16.13, -10.39, 17.14, -8.32], z: [0.88, 0.94], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Steinplatte 6 cm)"}
+      - {rect: [16.235, -9.505, 17.035, -8.925], z: [0.94, 0.945], mat: kochfeld, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Kochfeld flaechenbuendig)"}
+      - {rect: [10.33, -12.07, 10.76, -7.94], z: [0, 2.4], mat: front_anthrazit, quelle: "EIN S. 13 (Einbauschraenke 0,43 tief an der Trennwand, Schacht MR-Lue)"}
+      - {rect: [15.92, -7.2, 16.73, -7.16], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 13 (Tuer Zimmer)"}
+      - {rect: [11.3, -10.5, 13.95, -7.8], z: [0.002, 0.012], mat: teppich_wolle, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Teppich Wolle)"}
     moebel:
-      - {modell: esstisch_aussen, px: [14.69, -10.13, 15.48, -8.32], front: -x, skalierung: frei, h: 0.75, quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Esstisch 0,80 x 1,80, Nuss)"}
-      - {modell: stuhl_boucle, c_px: [15.62, -8.61], front: -x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_boucle, c_px: [15.62, -9.21], front: -x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_boucle, c_px: [15.62, -9.81], front: -x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_boucle, c_px: [14.55, -8.61], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_boucle, c_px: [14.55, -9.21], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: stuhl_boucle, c_px: [14.55, -9.81], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
-      - {modell: pendelleuchte, c_px: [15.085, -9.225], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung (Staging), Lage ueber dem Esstisch laut EIN S. 13"}
-      - {modell: sofa_cloud, px: [11.58, -10.58, 13.84, -9.66], front: +y, farbe: "#D8CFC2", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Ecksofa 2,26, Ruecken zur Hofschraege)"}
-      - {modell: couchtisch, px: [12.17, -9.45, 12.95, -9.05], front: +y, skalierung: frei, h: 0.4, quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: esstisch_aussen, px: [14.69, -10.13, 15.48, -8.32], front: -x, skalierung: frei, h: 0.75, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: stuhl_boucle, c_px: [15.62, -8.61], front: -x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: stuhl_boucle, c_px: [15.62, -9.21], front: -x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: stuhl_boucle, c_px: [15.62, -9.81], front: -x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: stuhl_boucle, c_px: [14.55, -8.61], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: stuhl_boucle, c_px: [14.55, -9.21], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: stuhl_boucle, c_px: [14.55, -9.81], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: pendelleuchte, c_px: [15.085, -9.225], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: pendelleuchte, c_px: [16.635, -8.85], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: pendelleuchte, c_px: [16.635, -9.65], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: sofa_cloud, px: [11.58, -10.58, 13.84, -9.66], front: +y, farbe: "#D8CFC2", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: couchtisch_rund, c_px: [12.6, -9.2], d: 0.8, skalierung: frei, h: 0.38, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: lounge_designer, px: [12.1, -8.81, 13.11, -7.62], front: -y, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: stehleuchte_bogen, c_px: [11.05, -10.45], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: zimmerpflanze, c_px: [11.05, -7.58], d: 0.55, skalierung: hoehe, h: 1.4, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: zimmerpflanze_klein, c_px: [12.95, -12.30], d: 0.6, skalierung: hoehe, h: 0.85, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: barhocker, c_px: [16.33, -10.6], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: barhocker, c_px: [16.95, -10.6], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
     material_ersatz: {innen_wand: creme_wand, decke: creme_decke}
     objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof]   # Dach nach Plan bleibt sichtbar (Terrasse, Dachfenster), aus: Innenkarten und aeussere Hofschraegen
     light: spaetsommer_mittag
@@ -1246,6 +1296,14 @@ wohnungen:
 
 # Materialien der Apartments (Farbwerte aus der Farbpalette [INT S. 6] und den Ansichten [INT S. 13 bis 16], Naeherung)
 materialien:
+  # Runde 11b (Nutzer 24.11.2026): High-End-Kuechen und Designermoebel Dachgeschoss [ANN Staging-Farbwerte]
+  stein_calacatta: {farbe: "#ECE8E2", rauh: 0.12, quelle: "Ausstattung Runde 11b, Naturstein hell geadert (Calacatta-Typ)"}
+  stein_travertin: {farbe: "#D9CBB4", rauh: 0.3, quelle: "Ausstattung Runde 11b, Travertin geschliffen"}
+  front_raeuchereiche: {farbe: "#4E3F33", art: eiche, quelle: "Ausstattung Runde 11b, Fronten Raeuchereiche grifflos"}
+  front_anthrazit: {farbe: "#2E2D2B", rauh: 0.45, quelle: "Ausstattung Runde 11b, Fronten anthrazit matt grifflos"}
+  front_creme: {farbe: "#D8CFC2", rauh: 0.5, quelle: "Ausstattung Runde 11b, Fronten creme matt grifflos"}
+  kochfeld: {farbe: "#0E0E0E", rauh: 0.05, quelle: "Ausstattung Runde 11b, Induktion Glaskeramik schwarz"}
+  teppich_wolle: {farbe: "#CFC5B6", rauh: 0.95, quelle: "Ausstattung Runde 11b, Teppich Wolle naturfarben"}
   glas_entspiegelt: {farbe: "#E4ECEA", art: glas, ior: 1.12, quelle: "Runde 10: HST-Glas mit schwacher Spiegelung, damit der Raum bei Tag lesbar ist (mac-neu 22.11.); ANN entspiegeltes Glas"}
   creme_wand: {farbe: "#E6DAC4", art: putz, quelle: "INT S. 6 Palette Warmes Creme"}           # Warmes Creme
   creme_decke: {farbe: "#EEE6D6", art: putz, quelle: "INT S. 6 Palette Warmes Creme, heller"}
