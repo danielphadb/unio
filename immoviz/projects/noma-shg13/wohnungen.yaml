@@ -1,4 +1,4 @@
-# immoviz Stufe 6: Innenraeume NOMA Schlachthausgasse 13 (Top 3, Top 4, Top 26-2)
+# immoviz Stufe 6: Innenraeume NOMA Schlachthausgasse 13 (Top 3, Top 4, Top 24, Top 25, Top 23-2, Top 26-2, Apartments)
 # Top 3 und Top 4: Waende aus den Verkaufsplaenen [VP] (Vektor-PDF, 300 dpi, dunkelgruene Wandfuellung).
 #   Massstab ueber die Pavillonmasse kalibriert: 11,95 m = 2355 px, 6,62 m = 1306 px -> 0,005072 m/px (rund 1:60).
 #   Die Massleiste 0 bis 5 m auf dem Blatt entspricht in Wahrheit rund 6 m und wird NICHT verwendet.
@@ -166,55 +166,237 @@ wohnungen:
       hst: {pos_px: [4505, 1335], target_px: [3992, 1937], lens: 18, h: 1.50, exposure: 0.0, moebelplan: "Terrasse: links Esstisch fuer vier unter der Pergola, rechts Hebeschiebetuer offen; innen hinter der Tuer Kueche an der Nordwand (rechts), Esstisch und Sofa wie Platzhalter"}   # Runde 7: Ecke NO (a 30,45 / b 5,45), vorher a 30,6 / b 1,5 (jetzt Stuhl und Trog)
       abend: {pos_px: [4505, 1335], target_px: [3992, 1937], lens: 18, h: 1.50, light: blaue_stunde, exposure: 1.8, moebelplan: "Terrasse: links Esstisch fuer vier unter der Pergola, rechts Hebeschiebetuer offen; innen hinter der Tuer Kueche an der Nordwand (rechts), Esstisch und Sofa wie Platzhalter"}   # Runde 7: Abendbild
 
+  # Runde 11 (Nutzer 24.11.2026: Wohnzimmer und Terrasse Top 24/25): 1. DG Strassenhaus hofseitig aus EIN S. 12 (Vektor),
+  # Lage im Projektsystem wie top26_2. FOK +18,94, RDUK +21,46 (RH 2,52) [EIN S. 23]. Oeffnungen als Loecher (type tuer):
+  # Rahmen und Glas kommen aus der Hoffassade (project.yaml neubau, gleiche Lage aus EIN S. 12/26).
+  top24: &top24
+    plan: manuell
+    titel: "Top 24, 1. DG hofseitig, 59,44 m2, Terrasse 5,45 m2, Balkon 8,54 m2, WoKue 25,52 m2 [EIN S. 12]"
+    floor_z: 18.94
+    height: 2.52                     # FOK +18,94, RDUK +21,46 [EIN S. 23]
+    fenster_stil: modern
+    slab_rects: [[10.34, -14.646, 15.08, -9.47], [10.34, -9.47, 12.69, -8.87]]
+    huelle_rect: [10.08, -14.99, 15.27, -8.76]
+    walls:
+      - {rect: [10.27, -14.98, 15.26, -14.646], openings: [{span: [10.35, 12.93], z: [0, 2.3], type: tuer}, {span: [13.4, 14.68], z: [0.6, 1.96], type: tuer}], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Aussenwand Hof 0,35, HST 248/230 FPH 0,00, Fenster 118/136 FPH 0,60"}
+      - {rect: [15.08, -14.65, 15.26, -9.37], openings: [{span: [-10.4, -9.5], z: [0, 2], type: tuer}], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Wand zum Zimmer (tragend), Tuer 80/200 am Gang"}
+      - {rect: [10.09, -14.65, 10.34, -8.77], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Wohnungstrennwand Top 24/25 mit Vorsatzschale"}
+      - {rect: [13.79, -9.47, 15.13, -9.37], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Wand Gang/AR"}
+      - {rect: [12.78, -9.47, 13.79, -9.37], openings: [{span: [12.84, 13.74], z: [0, 2], type: tuer}], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Durchgang zum Vorraum (Tuer geschlossen dargestellt)"}
+      - {rect: [12.69, -9.47, 12.78, -8.77], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Wand Vorraum/Kuechennische"}
+      - {rect: [10.34, -8.87, 12.69, -8.77], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Rueckwand Kuechennische"}
+    slopes:
+      - {x: [10.35, 12.93], from: [-13.966, 21.24], to: [-13.746, 21.46], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {x: [12.93, 13.4], from: [-14.646, 20.56], to: [-13.746, 21.46], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {x: [13.4, 14.68], from: [-14.306, 20.9], to: [-13.746, 21.46], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {x: [14.68, 15.08], from: [-14.646, 20.56], to: [-13.746, 21.46], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+    flaechen:
+      - {pts: [[10.35, -14.646, 21.24], [12.93, -14.646, 21.24], [12.93, -13.966, 21.24], [10.35, -13.966, 21.24]], mat: decke, normal: [0, 0, -1], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {pts: [[12.93, -14.646, 20.56], [12.93, -14.646, 21.24], [12.93, -13.966, 21.24]], mat: decke, normal: [-1, 0, 0], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {pts: [[13.4, -14.646, 20.9], [14.68, -14.646, 20.9], [14.68, -14.306, 20.9], [13.4, -14.306, 20.9]], mat: decke, normal: [0, 0, -1], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {pts: [[13.4, -14.646, 20.56], [13.4, -14.646, 20.9], [13.4, -14.306, 20.9]], mat: decke, normal: [1, 0, 0], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {pts: [[14.68, -14.646, 20.56], [14.68, -14.646, 20.9], [14.68, -14.306, 20.9]], mat: decke, normal: [-1, 0, 0], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+    einbauten:
+      - {rect: [10.34, -11.47, 12.04, -10.48], z: [0, 0.88], mat: t34_eiche, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuechenblock mit Kochfeld 1,0 x 1,7)"}
+      - {rect: [10.34, -11.47, 12.04, -10.48], z: [0.88, 0.92], mat: t34_marmor, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuechenblock, Arbeitsplatte)"}
+      - {rect: [10.77, -9.47, 12.67, -8.87], z: [0, 0.88], mat: t34_eiche, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuechenzeile in der Nische 1,90 x 0,60 mit Spuele)"}
+      - {rect: [10.77, -9.47, 12.67, -8.87], z: [0.88, 0.92], mat: t34_marmor, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuechenzeile Nische, Arbeitsplatte)"}
+      - {rect: [10.34, -9.69, 10.77, -9], z: [0, 2.52], mat: innen_wand, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Schacht MR-Lue, DD 0,20/0,33)"}
+      - {rect: [15.1, -10.4, 15.14, -9.5], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Tuer Zimmer 80/200)"}
+      - {rect: [12.84, -9.45, 13.74, -9.41], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Tuer Vorraum)"}
+    zylinder:
+      - {c: [11.42, -11.64], r: 0.18, z: [0, 0.65], mat: t34_eiche, seg: 24, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Barhocker am Kuechenblock)"}
+      - {c: [10.82, -11.64], r: 0.18, z: [0, 0.65], mat: t34_eiche, seg: 24, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Barhocker am Kuechenblock)"}
+    moebel:
+      - {modell: sideboard, px: [14.68, -14.64, 15.08, -12.64], front: -x, skalierung: frei, h: 0.5, anlegen: true, quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (TV-Board)"}
+      - {modell: sofa_cloud, px: [10.34, -14.48, 11.37, -12.21], front: +x, anlegen: true, farbe: "#D9D2C5", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Sofa 2,40)"}
+      - {modell: couchtisch, px: [11.53, -13.95, 12.13, -12.74], front: +x, skalierung: frei, h: 0.4, quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: esstisch_aussen, px: [13.28, -11.54, 15.07, -10.75], front: -y, skalierung: frei, h: 0.75, quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Esstisch 0,80 x 1,80, Eiche)"}
+      - {modell: stuhl_boucle, c_px: [14.78, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_boucle, c_px: [14.17, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_boucle, c_px: [13.58, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_boucle, c_px: [14.78, -11.74], front: +y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_boucle, c_px: [14.17, -11.74], front: +y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_boucle, c_px: [13.58, -11.74], front: +y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: pendelleuchte, c_px: [14.18, -11.15], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung (Staging), Lage ueber dem Esstisch laut EIN S. 12"}
+    leuchten:
+      - {pos: [14.18, -11.15, 1.75], w: 90, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
+      - {pos: [11.20, -10.95, 2.30], w: 60, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
+      - {pos: [10.75, -14.30, 1.50], w: 60, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
+    material_ersatz: {innen_wand: creme_wand, decke: creme_decke}
+    objekt_ausblenden: [nb_shg_innen, nb_shg_koerper, nb_shg_dach]   # Innenkarten, Baukoerper (Oberseite +21,00) und Dach (Terrassenblock 2. DG ragt bis +21,00) aus; Rahmen und Glas der Hoffassade bleiben
+    light: morgen                       # Hof liegt nach Suedost: Morgensonne durch HST und Fenster
+    exposure: 1.0
+    kameras:
+      wohnzimmer:    {pos: [14.85, -9.80], target: [11.20, -14.50], lens: 18, h: 1.45}     # vom Gang ueber den Esstisch zu Sofa, HST und Terrasse
+      wohnzimmer_tv: {pos: [11.30, -9.75], target: [14.60, -14.20], lens: 18, h: 1.45}     # von der Kueche zu Fenster, TV-Board und Esstisch
+  top24_terrasse:   # Balkon/Terrasse: Fassade und Dach bleiben, nur Block und Innenkarten aus
+    <<: *top24
+    objekt_ausblenden: [nb_shg_innen, nb_shg_koerper]
+    kameras:
+      hst: {pos: [14.90, -16.90], target: [11.00, -14.70], lens: 18, h: 1.50, exposure: 0.4}   # auf dem Balkon, Blick auf HST und Wohnraum
+      abend: {pos: [14.90, -16.90], target: [11.00, -14.70], lens: 18, h: 1.50, light: blaue_stunde, exposure: 1.8}
+  top25: &top25
+    plan: manuell
+    titel: "Top 25, 1. DG hofseitig, 58,38 m2, Terrasse 5,95 m2, Balkon 8,75 m2, WoKue 24,65 m2 [EIN S. 12]"
+    floor_z: 18.94
+    height: 2.52
+    fenster_stil: modern
+    slab_rects: [[4.53, -14.646, 10.09, -10.93], [4.38, -10.93, 7.75, -9.47]]
+    huelle_rect: [4.34, -14.99, 10.28, -9.36]
+    walls:
+      - {rect: [4.35, -14.98, 10.27, -14.646], openings: [{span: [5.13, 6.41], z: [0.6, 1.96], type: tuer}, {span: [7.39, 10.09], z: [0, 2.3], type: tuer}], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Aussenwand Hof 0,35, Fenster 118/136 FPH 0,60, HST 260/230 FPH 0,00"}
+      - {rect: [4.35, -14.65, 4.53, -10.5], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Wand zum Zimmer (tragend)"}
+      - {rect: [4.35, -10.5, 4.53, -9.47], openings: [{span: [-10.4, -9.57], z: [0, 2], type: tuer}], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Tuer Zimmer 80/200 am Gang"}
+      - {rect: [10.09, -14.65, 10.27, -10.84], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Wohnungstrennwand Top 24/25"}
+      - {rect: [7.75, -10.93, 10.09, -10.66], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Liftschacht mit Vorsatzschale"}
+      - {rect: [4.53, -10.6, 5.13, -10.5], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Wandstueck am Kuechenende"}
+      - {rect: [4.38, -9.47, 7.75, -9.37], openings: [{span: [6.3, 7.2], z: [0, 2.1], type: tuer}], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Vorraum, Wohnungstuer zum Stiegenhaus (geschlossen)"}
+      - {rect: [7.75, -10.66, 7.85, -9.47], quelle: "EIN S. 12 (1. DG, Vektor 1:100): Liftschacht Westseite"}
+    slopes:
+      - {x: [4.53, 5.13], from: [-14.646, 20.56], to: [-13.746, 21.46], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {x: [5.13, 6.41], from: [-14.306, 20.9], to: [-13.746, 21.46], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {x: [6.41, 7.39], from: [-14.646, 20.56], to: [-13.746, 21.46], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {x: [7.39, 10.09], from: [-13.966, 21.24], to: [-13.746, 21.46], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+    flaechen:
+      - {pts: [[5.13, -14.646, 20.9], [6.41, -14.646, 20.9], [6.41, -14.306, 20.9], [5.13, -14.306, 20.9]], mat: decke, normal: [0, 0, -1], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {pts: [[5.13, -14.646, 20.56], [5.13, -14.646, 20.9], [5.13, -14.306, 20.9]], mat: decke, normal: [1, 0, 0], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {pts: [[6.41, -14.646, 20.56], [6.41, -14.646, 20.9], [6.41, -14.306, 20.9]], mat: decke, normal: [-1, 0, 0], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {pts: [[7.39, -14.646, 21.24], [10.09, -14.646, 21.24], [10.09, -13.966, 21.24], [7.39, -13.966, 21.24]], mat: decke, normal: [0, 0, -1], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+      - {pts: [[7.39, -14.646, 20.56], [7.39, -14.646, 21.24], [7.39, -13.966, 21.24]], mat: decke, normal: [1, 0, 0], quelle: "EIN S. 12 (1. DG, Vektor 1:100): RH 2,10 / 2,50 an der Hofwand (45 Grad), Nischen ueber Fenster und HST (gestrichelt)"}
+    einbauten:
+      - {rect: [4.53, -14.646, 5.13, -10.6], z: [0, 0.88], mat: t34_nuss, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuechenzeile 4,05 an der Zimmerwand: Spuele, Kochfeld)"}
+      - {rect: [4.53, -14.646, 5.13, -10.6], z: [0.88, 0.92], mat: t34_terrazzo, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuechenzeile, Arbeitsplatte)"}
+      - {rect: [5.13, -11.3, 6.54, -10.6], z: [0, 0.88], mat: t34_nuss, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Kuecheninsel/Tresen)"}
+      - {rect: [5.13, -11.3, 6.54, -10.6], z: [0.88, 0.92], mat: t34_terrazzo, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Tresen, Platte)"}
+      - {rect: [7.75, -11.33, 10.09, -10.93], z: [0, 2.3], mat: creme_wand, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Einbauschrank vor dem Lift, IW03)"}
+      - {rect: [4.37, -10.4, 4.41, -9.57], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Tuer Zimmer)"}
+      - {rect: [6.3, -9.45, 7.2, -9.41], z: [0, 2.1], mat: tuer_eiche, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Wohnungstuer)"}
+    zylinder:
+      - {c: [6.13, -10.43], r: 0.18, z: [0, 0.65], mat: t34_nuss, seg: 24, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Barhocker am Tresen)"}
+      - {c: [5.54, -10.43], r: 0.18, z: [0, 0.65], mat: t34_nuss, seg: 24, quelle: "EIN S. 12 (1. DG, Vektor 1:100) (Barhocker am Tresen)"}
+    moebel:
+      - {modell: sofa_cloud, px: [9.07, -14.24, 10.09, -11.96], front: -x, anlegen: true, farbe: "#CDBFAE", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Ecksofa, Hauptteil an der Trennwand)"}
+      - {modell: couchtisch, px: [8.25, -13.7, 8.85, -12.5], front: -x, skalierung: frei, h: 0.4, quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: esstisch_aussen, px: [6.19, -14.18, 6.98, -12.38], front: -x, skalierung: frei, h: 0.75, quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Esstisch 0,80 x 1,80, Nuss)"}
+      - {modell: stuhl_samt, c_px: [7.12, -12.69], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_samt, c_px: [7.12, -13.28], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_samt, c_px: [7.12, -13.88], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_samt, c_px: [6.05, -12.69], front: +x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_samt, c_px: [6.05, -13.28], front: +x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_samt, c_px: [6.05, -13.88], front: +x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Lage und Mass laut EIN S. 12 (1. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: pendelleuchte, c_px: [6.585, -13.28], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung (Staging), Lage ueber dem Esstisch laut EIN S. 12"}
+    leuchten:
+      - {pos: [6.585, -13.28, 1.75], w: 90, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
+      - {pos: [4.90, -12.50, 2.30], w: 60, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
+      - {pos: [9.60, -11.75, 1.50], w: 60, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
+    material_ersatz: {innen_wand: creme_wand, decke: creme_decke}
+    objekt_ausblenden: [nb_shg_innen, nb_shg_koerper, nb_shg_dach]
+    light: morgen
+    exposure: 1.0
+    kameras:
+      wohnzimmer: {pos: [5.45, -11.55], target: [9.60, -14.00], lens: 18, h: 1.45}     # vom Tresen ueber den Esstisch zu Sofa und HST
+      essplatz:   {pos: [9.40, -11.55], target: [5.00, -14.30], lens: 18, h: 1.45}     # vom Sofa zu Esstisch, Kuechenzeile und Fenster
+  top25_terrasse:   # Balkon/Terrasse: Fassade und Dach bleiben, nur Block und Innenkarten aus
+    <<: *top25
+    objekt_ausblenden: [nb_shg_innen, nb_shg_koerper]
+    kameras:
+      hst: {pos: [4.75, -16.90], target: [8.80, -14.70], lens: 18, h: 1.50, exposure: 0.4}   # auf dem Balkon, Blick auf HST und Wohnraum
+      abend: {pos: [4.75, -16.90], target: [8.80, -14.70], lens: 18, h: 1.50, light: blaue_stunde, exposure: 1.8}
+  # Runde 11 (Nutzer 24.11.2026, Penthaeuser): Top 26-2 neu aus EIN S. 12/13 (Vektor) vermessen; Waende, Tueren und
+  # Moebel nach Plan, echte Moebelmodelle statt Platzhalter. Schraege, Kniestock und Treppe wie Runde 7.
   top26_2:
     plan: manuell
-    titel: Top 26-2, 2. DG, Wohnkueche 46,47 m2 unter der Hofschraege, Terrasse 6,08 m2 im Dacheinschnitt [EIN S. 13]
-    # Runde 7: an das Dach nach Runde 6 angepasst (vorher Gaubengruppe mit drei Fenstertueren 0,94 x 2,52 hinter der BFL, Runde 1).
-    # EIN S. 13/14/26: Hofseite 45 Grad, drei Dachflaechenfenster 0,94 x 2,52 (x 1,96 bis 5,02), Kniestock an der Dachdaemmung
-    # y -12,42, RH-Linien 1,50 / 2,10 / 2,50 bei y -11,78 / -11,19 / -10,77 (Neigung 45 Grad), Dacheinschnitt x 7,07 bis 10,12
-    # mit HST 260/230 in der Wand y -12,66 bis -12,97, Treppe 17 Stg. aufs Dach x 5,63 bis 7,07 (eingehaust, ANN).
+    titel: "Top 26-2, 2. DG, Wohnkueche 46,47 m2 unter der Hofschraege, Terrasse 6,08 m2 im Dacheinschnitt [EIN S. 13]"
     floor_z: 21.82                   # FOK 2. DG +21,82 [EIN S. 13, S. 23]
     height: 2.80                     # Flachteil 2,80 [ANN, RH 2,50 liegt noch in der Schraege]
     fenster_stil: modern
-    slab_rect: [0.40, -12.97, 10.35, -7.50]
+    slab_rects: [[0.32, -12.65, 7.73, -7.22], [7.73, -12.65, 10.07, -10.93]]
+    huelle_rect: [0.31, -12.99, 10.26, -7.11]
     walls:
-      - {rect: [0.40, -12.60, 0.55, -7.50], quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}                    # Feuermauer Suedwest (Kuechenzeile)
-      - rect: [0.55, -7.72, 7.75, -7.60]                     # Wand zu Bad, WC und Zimmer
-        quelle: "EIN S. 13 (Innenwand, Tuer 80/200; Lage aus Runde 1)"
-        openings: [{span: [1.15, 2.05], z: [0.0, 2.10], type: tuer}]
-      - rect: [7.75, -10.75, 7.87, -7.60]                    # Wand zum Gang
-        quelle: "EIN S. 13 (Innenwand, Tuer 80/200; Lage aus Runde 1)"
-        openings: [{span: [-9.70, -8.80], z: [0.0, 2.10], type: tuer}]
-      - rect: [8.00, -10.65, 10.05, -8.55]                   # Liftschacht
-      - {rect: [10.20, -12.97, 10.35, -10.65], quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}                 # Trennwand zu Top 23
-      - {rect: [0.55, -12.60, 5.63, -12.42], h: 0.86, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}          # Kniestock unter der Hofschraege (Daemmung innen, OK = Schraege)
-      - {rect: [5.63, -12.60, 7.07, -10.90], quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}                   # Einhausung der Treppe aufs Dach [ANN Lage aus S. 13]
-      - rect: [7.07, -12.97, 10.20, -12.66]                  # Wand zum Dacheinschnitt mit HST 260/230 FPH 0,00
-        quelle: "EIN S. 13 (260/230), S. 26 (Glas vektoriell)"
-        openings: [{span: [7.45, 10.05], z: [0.0, 2.30], type: glastuer}]
-    slopes:                                                  # Hofschraege 45 Grad aus den RH-Linien [EIN S. 13]
-      - x: [0.55, 5.63]
-        from: [-12.42, 22.68]
-        to: [-10.48, 24.62]
-        quelle: "EIN S. 13 (RH 1,50/2,10/2,50), S. 14/26 (Dachflaechenfenster 94/252)"
-        roof_windows:
-          - {x: [1.96, 2.94], t: [0.02, 0.80]}
-          - {x: [3.00, 3.98], t: [0.02, 0.80]}
-          - {x: [4.04, 5.02], t: [0.02, 0.80]}
-    # Grossmoebel als Platzhalter laut EIN S. 13 (Moeblierung): Zeile an der Feuermauer, Insel mit Kochfeld, runder Tisch, Sofa
+      - {rect: [0.32, -9.5, 0.52, -7.12], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Feuermauer Suedwest (Innenflaeche schraeg 0,32 bis 0,82, gestuft)"}
+      - {rect: [0.52, -12.65, 0.8, -9.5], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Feuermauer Suedwest (gestuft)"}
+      - {rect: [0.32, -7.22, 6.83, -7.12], openings: [{span: [1.96, 2.76], z: [0, 2], type: tuer}], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Wand zu Bad, WC und Zimmer (Runde 11: vorher y -7,60, 0,47 zu weit innen), Tuer 80/200"}
+      - {rect: [7.73, -8.27, 7.83, -7.22], openings: [{span: [-8.2, -7.29], z: [0, 2], type: tuer}], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Durchgang vom Gang (Tuer geschlossen dargestellt)"}
+      - {rect: [7.73, -10.93, 7.82, -8.27], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Liftschacht mit Vorsatzschale (Runde 11: keine Tuer, vorher Tuer y -9,70 bis -8,80)"}
+      - {rect: [7.73, -10.93, 10.07, -10.84], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Liftschacht Suedseite"}
+      - {rect: [10.07, -12.83, 10.25, -10.84], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Trennwand zu Top 23 (Runde 11: vorher x 10,20)"}
+      - {rect: [6.85, -12.98, 10.25, -12.65], openings: [{span: [7.37, 10.07], z: [0, 2.3], type: tuer}], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Wand zum Dacheinschnitt, HST 260/230 FPH 0,00 (Rahmen und Glas aus der Dachwand)"}
+      - {rect: [0.52, -12.68, 5.63, -12.4], h: 0.86, quelle: "EIN S. 13 (2. DG, Vektor 1:100): Kniestock 0,86 unter der Hofschraege"}
+      - {rect: [5.63, -12.65, 7.1, -10.9], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Treppe 17 Stg. aufs Dach, Einhausung [ANN Lage aus S. 13]"}
+    slopes:
+      - {x: [0.52, 5.63], from: [-12.40, 22.68], to: [-10.46, 24.62], quelle: "EIN S. 13 (2. DG, Vektor 1:100) (RH 1,50/2,10/2,50), S. 14/26", roof_windows: [{x: [1.93, 2.87], t: [0.02, 0.80]}, {x: [2.97, 3.91], t: [0.02, 0.80]}, {x: [4.01, 4.95], t: [0.02, 0.80]}]}
     einbauten:
-      - {rect: [0.55, -10.26, 1.15, -7.98], z: [0.0, 0.92], mat: t34_eiche, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
-      - {rect: [2.07, -10.01, 3.05, -8.23], z: [0.0, 0.92], mat: t34_marmor, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
-      - {rect: [4.28, -10.13, 6.65, -9.24], z: [0.0, 0.42], mat: t34_sofa_creme, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
-      - {rect: [4.28, -9.44, 6.65, -9.24], z: [0.42, 0.80], mat: t34_sofa_creme, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
+      - {rect: [0.52, -10.91, 1.12, -7.98], z: [0, 0.88], mat: t34_eiche, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Kuechenzeile an der Feuermauer)"}
+      - {rect: [0.52, -10.91, 1.12, -7.98], z: [0.88, 0.92], mat: t34_marmor, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Arbeitsplatte)"}
+      - {rect: [2.07, -10.03, 3.09, -8.23], z: [0, 0.88], mat: t34_eiche, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Kochinsel 1,0 x 1,8)"}
+      - {rect: [2.07, -10.03, 3.09, -8.23], z: [0.88, 0.92], mat: t34_marmor, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Kochinsel, Platte)"}
+      - {rect: [7.75, -8.2, 7.79, -7.29], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Tuer zum Gang)"}
+      - {rect: [1.96, -7.2, 2.76, -7.16], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Tuer Bad/WC)"}
     zylinder:
-      - {c: [3.47, -11.32], r: 0.6, z: [0.0, 0.75], mat: t34_eiche, seg: 32, quelle: "EIN S. 13 (2. DG, Vektor/Raster 300 dpi im Projektsystem), S. 14, S. 26"}
-    objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof]   # Runde 7: Dach nach Plan bleibt sichtbar (Terrasse, Dachfenster), aus: Innenkarten und die aeusseren Hofschraegen (sonst kein Licht durch die Dachflaechenfenster)
+      - {c: [2.86, -10.18], r: 0.18, z: [0, 0.65], mat: t34_eiche, seg: 24, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Barhocker an der Insel)"}
+      - {c: [2.32, -10.18], r: 0.18, z: [0, 0.65], mat: t34_eiche, seg: 24, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Barhocker an der Insel)"}
+    moebel:
+      - {modell: esstisch_rund, c_px: [3.51, -11.33], d: 1.2, skalierung: frei, h: 0.75, stuehle: {modell: stuhl_boucle, anzahl: 6, radius: 0.8, h: 0.78, start_grad: 30, farbe: "#E9E1D6"}, quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (runder Tisch D 1,20, sechs Stuehle)"}
+      - {modell: pendelleuchte, c_px: [3.51, -11.33], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung (Staging), Lage ueber dem Esstisch laut EIN S. 13"}
+      - {modell: sofa_cloud, px: [4.29, -10.13, 6.69, -9.25], front: +y, farbe: "#E7DFD1", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Ecksofa 2,40, Ruecken zur Hofschraege; Runde 11: Lehne vorher auf der falschen Seite)"}
+      - {modell: couchtisch, px: [5.31, -9, 6.09, -8.61], front: +y, skalierung: frei, h: 0.4, quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+    material_ersatz: {innen_wand: creme_wand, decke: creme_decke}
+    objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof]   # Dach nach Plan bleibt sichtbar (Terrasse, Dachfenster), aus: Innenkarten und aeussere Hofschraegen
     light: spaetsommer_mittag
-    exposure: 1.6
+    exposure: 2.0                    # Runde 11: Probe wirkte dunkel
     kameras:
-      wohnkueche_dachfenster: {pos: [7.2, -9.0], target: [2.5, -12.0], lens: 20, h: 1.45}   # Runde 7: neben dem Sofa, Dachflaechenfenster links, Kueche rechts
-      wohnkueche_terrasse: {pos: [1.6, -8.0], target: [8.7, -12.8], lens: 20, h: 1.40}     # Runde 7: Gegenblick zu HST und Terrasse im Dacheinschnitt
+      wohnkueche_dachfenster: {pos: [5.0, -7.5], target: [2.2, -12.3], lens: 20, h: 1.45}   # Runde 11: von der Wand zum Bad ueber Sofa und Insel zu den Dachflaechenfenstern, Kueche rechts
+      wohnkueche_terrasse: {pos: [9.85, -11.05], target: [6.8, -13.6], lens: 18, h: 1.40}   # Runde 11: aus der Ecke an der Trennwand zu HST und Terrasse (von der Kueche verdeckte die Treppeneinhausung die HST)
+      wohnkueche_morgen: {pos: [5.0, -7.5], target: [2.2, -12.3], lens: 20, h: 1.45, light: morgen, exposure: 1.4}   # Runde 11: Morgensonne durch die Dachfenster
+  # Runde 11: Top 23-2 (Maisonette 23, Wohnkueche im 2. DG) aus EIN S. 13 (Vektor), Aufbau wie Top 26-2 (gespiegelt).
+  top23_2:
+    plan: manuell
+    titel: "Top 23-2, 2. DG, Wohnkueche 50,87 m2 unter der Hofschraege, Terrasse 5,93 m2 im Dacheinschnitt [EIN S. 13]"
+    floor_z: 21.82                   # FOK 2. DG +21,82 [EIN S. 13, S. 23]
+    height: 2.80                     # Flachteil 2,80 [ANN, RH 2,50 liegt noch in der Schraege]
+    fenster_stil: modern
+    slab_rects: [[10.33, -12.65, 18.64, -7.22]]
+    huelle_rect: [10.06, -12.99, 19.09, -7.11]
+    walls:
+      - {rect: [18.64, -10.94, 18.84, -7.13], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Feuermauer Nordost (Innenflaeche schraeg 18,64 bis 19,01, gestuft)"}
+      - {rect: [18.88, -12.65, 19.08, -10.94], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Feuermauer Nordost (gestuft)"}
+      - {rect: [10.33, -7.22, 18.64, -7.12], openings: [{span: [15.92, 16.73], z: [0, 2], type: tuer}], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Wand zu Zimmer, Bad und AR, Tuer 80/200 zum Zimmer"}
+      - {rect: [10.07, -12.83, 10.33, -7.12], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Trennwand zu Top 26 mit Vorsatzschale"}
+      - {rect: [10.33, -12.98, 13.45, -12.65], openings: [{span: [10.35, 12.93], z: [0, 2.3], type: tuer}], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Wand zum Dacheinschnitt, HST 248/230 FPH 0,00 (Rahmen und Glas aus der Dachwand)"}
+      - {rect: [14.77, -12.68, 18.88, -12.4], h: 0.86, quelle: "EIN S. 13 (2. DG, Vektor 1:100): Kniestock 0,86 unter der Hofschraege"}
+      - {rect: [13.3, -12.65, 14.77, -10.9], quelle: "EIN S. 13 (2. DG, Vektor 1:100): Treppe 17 Stg. aufs Dach, Einhausung [ANN wie Top 26-2, gespiegelt]"}
+    slopes:
+      - {x: [14.77, 18.88], from: [-12.40, 22.68], to: [-10.46, 24.62], quelle: "EIN S. 13 (2. DG, Vektor 1:100) (RH 1,50/2,10/2,50), S. 14/26", roof_windows: [{x: [15.27, 16.21], t: [0.02, 0.80]}, {x: [16.31, 17.25], t: [0.02, 0.80]}, {x: [17.35, 18.29], t: [0.02, 0.80]}]}
+    einbauten:
+      - {rect: [18.04, -10.94, 18.64, -7.94], z: [0, 0.88], mat: t34_nuss, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Kuechenzeile an der Feuermauer)"}
+      - {rect: [18.04, -10.94, 18.64, -7.94], z: [0.88, 0.92], mat: t34_marmor, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Arbeitsplatte)"}
+      - {rect: [16.13, -10.11, 17.14, -8.32], z: [0, 0.88], mat: t34_nuss, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Kochinsel 1,0 x 1,8)"}
+      - {rect: [16.13, -10.11, 17.14, -8.32], z: [0.88, 0.92], mat: t34_marmor, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Kochinsel, Platte)"}
+      - {rect: [10.33, -12.07, 10.76, -7.94], z: [0, 2.4], mat: creme_wand, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Einbauschraenke 0,43 tief an der Trennwand, Schacht MR-Lue)"}
+      - {rect: [15.92, -7.2, 16.73, -7.16], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Tuer Zimmer)"}
+    zylinder:
+      - {c: [16.95, -10.27], r: 0.18, z: [0, 0.65], mat: t34_nuss, seg: 24, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Barhocker an der Insel)"}
+      - {c: [16.33, -10.27], r: 0.18, z: [0, 0.65], mat: t34_nuss, seg: 24, quelle: "EIN S. 13 (2. DG, Vektor 1:100) (Barhocker an der Insel)"}
+    moebel:
+      - {modell: esstisch_aussen, px: [14.69, -10.13, 15.48, -8.32], front: -x, skalierung: frei, h: 0.75, quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Esstisch 0,80 x 1,80, Nuss)"}
+      - {modell: stuhl_boucle, c_px: [15.62, -8.61], front: -x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_boucle, c_px: [15.62, -9.21], front: -x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_boucle, c_px: [15.62, -9.81], front: -x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_boucle, c_px: [14.55, -8.61], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_boucle, c_px: [14.55, -9.21], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: stuhl_boucle, c_px: [14.55, -9.81], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+      - {modell: pendelleuchte, c_px: [15.085, -9.225], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung (Staging), Lage ueber dem Esstisch laut EIN S. 13"}
+      - {modell: sofa_cloud, px: [11.58, -10.58, 13.84, -9.66], front: +y, farbe: "#D8CFC2", quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml (Ecksofa 2,26, Ruecken zur Hofschraege)"}
+      - {modell: couchtisch, px: [12.17, -9.45, 12.95, -9.05], front: +y, skalierung: frei, h: 0.4, quelle: "Lage und Mass laut EIN S. 13 (2. DG, Vektor 1:100) (Moeblierung), Modell modelle_bibliothek.yaml"}
+    material_ersatz: {innen_wand: creme_wand, decke: creme_decke}
+    objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof]   # Dach nach Plan bleibt sichtbar (Terrasse, Dachfenster), aus: Innenkarten und aeussere Hofschraegen
+    light: spaetsommer_mittag
+    exposure: 2.0                    # Runde 11: Probe wirkte dunkel
+    kameras:
+      wohnkueche_dachfenster: {pos: [15.40, -7.50], target: [18.20, -12.30], lens: 20, h: 1.45}   # ueber den Esstisch zu Dachflaechenfenstern, Insel und Kueche
+      wohnkueche_terrasse: {pos: [10.95, -11.15], target: [13.60, -13.60], lens: 18, h: 1.40}   # aus der Ecke an der Trennwand zu HST und Terrasse
+      wohnkueche_morgen: {pos: [15.40, -7.50], target: [18.20, -12.30], lens: 20, h: 1.45, light: morgen, exposure: 1.4}
 
   # Eigene Koordinaten aus dem Moeblierungsplan 1:50 [INT S. 3]: X = von der Wand zum Strassenhaus nach rechts (0 bis 5,03),
   # Y = von der Fensterwand (Gartenstreifen Sued) Richtung Gang (0 bis 5,936). Lage: Hofrahmen a = -10,70 bis -5,67,

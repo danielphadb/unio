@@ -455,6 +455,11 @@ class ManualApartment:
                 continue
             box_xy(mg, x0, x1, y0, y1, z0, z0 + h - 0.02, "glas")
             box_xy(mf, x0 - 0.01, x1 + 0.01, y0 - 0.01, y1 + 0.01, z0 + h - 0.04, z0 + h, "rahmen_dunkel")
+        # Optional (Noma Runde 11): freie Flaechen mit absoluten Punkten, z. B. die Schraege am Hoffenster im 1. DG
+        # mit Nischen ueber den Oeffnungen. flaechen: [{pts: [[x, y, z], ...], mat, normal: [nx, ny, nz], quelle}]
+        for fl in self.c.get("flaechen", []):
+            mw.poly([tuple(p) for p in fl["pts"]], None, fl.get("mat", "decke"),
+                    tuple(fl["normal"]) if fl.get("normal") else None)
         self.einbauten(mw, mg)
         return {"oeffnungen": n}
 

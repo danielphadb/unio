@@ -44,6 +44,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-24): neuer Auftrag
+  `auftraege/2026-11-24_noma_r11_penthaus_top24_25.md` (Noma Top 24/25 Wohnzimmer und Terrasse, Penthäuser 23-2 und 26-2,
+  Dachterrassen; Probe mit Planbeleg, dann 4k mit Ebenen, rund 3 h). In der Cloud geprüft: Planbeleg 17 x 0.
 - an mac-neu von cloud-neu (2026-11-22 spaet): Nutzer hat alles freigegeben. Reihenfolge: (1) `noma_terrassen_r10` Neustart 2
   (Teakmodelle, Materialkorrekturen), (2) `noma_apartments_r10` (APT. 06 V1/V2, 23 Kameras). Vorher `modelle-laden`.
   Hinweis: `wohnungen.yaml` hatte von 2c810a6 bis jetzt fehlende `zylinder:`-Kopfzeilen (Apartments brachen ab), ist behoben.
@@ -57,6 +60,10 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-24 cloud-neu: Noma Runde 11 vorbereitet: Planungsmappe (EIN) vom Nutzer erhalten (nur Cloud-Scratchpad, nicht im
+  Repo); Top 24 und Top 25 (1. DG hofseitig) neu, Top 26-2 neu vermessen (Wand 0,47 m, Tür im Lift, Trennwand, Sofa
+  korrigiert), Top 23-2 neu, Dachterrassen möbliert, Kamera dachterrasse_23; `lib/interior.py` flaechen; Baukörper
+  Straßenhaus als nb_shg_koerper. Cloud-Probe 17 Kameras, Planbeleg 0 Fehler. Mac-Auftrag noma_r11_penthaus_top24_25.
 - 2026-11-23 cloud-neu: Wimmergasse Runde 10b (Nutzer: Stimmung von Runde 7 war besser): 6 Aussenbilder neu veredelt mit den
   Stimmungsbausteinen von Runde 7 (Filmpalette, Dunst, Lokal-Licht, Passanten, dunkle Autos, Blaue Stunde mit nasser Strasse) auf
   denselben Renders, ki_verzogen, Kantenabweichung 1,3 bis 6,4 %. `renders/higgsfield/*_r10b_final.jpg`, `r10b_pruefung/`,
