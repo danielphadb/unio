@@ -42,6 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
+- mac-neu | seit 2026-11-24 16:57 | Auftrag noma_r11d_dachblick: Dachblick gegen Google 3D Tiles abgleichen, Umgebung (Hof, Nachbarn, Hochhäuser) korrigieren, Dachkameras 4k mit Ebenen (Auftrag und Wunsch des Nutzers) | Bereich: immoviz/projects/noma-shg13/project.yaml (roofs_override, neubau nb_umgebung_*, Fernsicht), data/ (Fernsicht-Ergänzung), renders/check/abgleich_dachterrasse_*, renders/r11d_dach/, Auftragsdatei, GPU
 
 ## Nachrichten
 
