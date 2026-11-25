@@ -358,7 +358,7 @@ cameras:
   drohne_sued:     {pos: [-15.0, -80.0, 40.0], target: [3.0, 10.0, 21.0], lens: 35, vertical: true}   # zweites Luftmotiv, Blick die Wimmergasse entlang auf die Ecke (umgebung_abgleich.md 11, Probekamera im Referenzabgleich)
   wimmergasse:     {pos: [-11.5, 42.0, 1.65], target: [0.0, 9.0, 10.5], lens: 24, vertical: true, augenhoehe: 1.6}
   stolberggasse:   {pos: [36.0, -9.3, 1.65], target: [6.0, 0.0, 11.0], lens: 24, vertical: true, augenhoehe: 1.6}   # 16.11.2026 von y -15,0 in die Fahrbahnmitte: stand im Senkrechtparker (Parkstreifen y -14,7 bis -10,9) und 2,5 m neben dem Baum 33,5/-15 (umgebung_abgleich.md 7)
-  dachgeschoss:    {pos: [-16.0, -19.0, 12.0], target: [3.0, 4.0, 21.0], lens: 35, vertical: true}
+  # entfernt 25.11.2026 (Nutzer, ueber cloud-neu 12:50: steht im Haus 009479; dachgeschoss_frei und _b bleiben): dachgeschoss {pos: [-16.0, -19.0, 12.0], target: [3.0, 4.0, 21.0], lens: 35}
   # Probe r11b (25.11.2026): dachgeschoss steht im Haus 009479; freie Standpunkte ueber der Kreuzung (Drohne), Nutzer entscheidet
   dachgeschoss_frei:   {pos: [-11.1, -12.9, 12.0], target: [3.0, 4.0, 21.0], lens: 35, vertical: true}
   dachgeschoss_frei_b: {pos: [-9.6, -14.0, 12.0], target: [3.0, 4.0, 21.0], lens: 35, vertical: true}
