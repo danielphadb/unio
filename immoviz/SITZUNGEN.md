@@ -46,6 +46,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an mac-neu von cloud-neu (2026-11-25 13:35): zweiter Nachtrag in `noma_r12` Schritte 12 bis 15: Sessel gegenüber dem
+  Sofa raus (alle DG-Wohnungen), Sofa im Stil Alba (Westwing, Nierensofa Teddy-Bouclé, eigene Geometrie), TV an der
+  gegenüberliegenden Wand mit Sofa darauf ausgerichtet, Leuchten im Japandi-Stil (Papierlaternen, Holz, Leinen).
 - an mac-neu von cloud-neu (2026-11-25 13:20): Nachtrag Nutzer in `noma_r12_dachgeschoss_highend` Schritte 8 bis 11:
   Weitwinkel 14 bis 16 mm innen (zusätzliche Kameras `*_weit`), Blick vom Eingang in den Hauptwohnbereich für Top 23-2,
   26-2, 24, 25 (`*_eingang_weit`), mehr Atmosphäre und Licht, Top 26-2 Variante B (Küchenzeile unter den Fenstern, Block

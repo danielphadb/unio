@@ -59,6 +59,24 @@ Wand vom Lift und Sofa dahin ausgerichtet."
     Wandstärke laut Plan plausibel), Sofa gegenüber auf den Fernseher ausgerichtet, Lounge-Sessel und Teppich dazu. Kameras:
     `eingang_weit`, Hauptblick und ein Blick von der Sofa-Position zur Küche. Variante A (Vorlage) bleibt.
 
+## Nachtrag Nutzer 25.11.2026 13:35: Sessel, Sofa, TV, Japandi-Leuchten (gilt für alle vier DG-Wohnungen)
+Wörtlich: "Bei den Wohnungen, wo der Sessel vis-à-vis vom Sofa steht, finde ich den Sessel echt nicht schön, der passt gar
+nicht zum Sofa. Hier z. B. die Sofa-Serie Alba von Westwing als Beispiel nehmen, eher auf die andere Seite einen Fernseher
+hängen und gemütlich gestalten, auch z. B. bei den Lampen mit Japandi-Stil arbeiten."
+
+12. **Sessel gegenüber dem Sofa entfernen** (Leder-Lounge-Sessel in Top 24, 23-2, 26-2 und überall, wo er dem Sofa
+    gegenübersteht; auch der Teddy-Sessel der Interior-Vorlage fällt hier weg, der Nutzer geht vor).
+13. **Sofa im Stil "Alba" (Westwing)**: geschwungenes, niedriges Nierensofa (Kidney-Form), weiche Rundungen, Bezug Teddy-
+    Bouclé oder samtiger Stoff in Creme, Sand oder warmem Greige; passender Pouf statt Sessel, falls Platz (gleiche Serie,
+    gleicher Stoff). Eigene Geometrie (geschwungener Körper, Rundpolster), kein Fremdmodell; im Prompt nur "kidney-shaped
+    curved boucle sofa", kein Markenname im Bild.
+14. **Fernseher an der gegenüberliegenden Wand**: flacher TV an der Wand (oder auf niedrigem Lowboard Eiche/Nuss), Sofa
+    darauf ausgerichtet, Teppich verbindet beides; gemütlich: Plaids, Kissen, Pflanze, Leuchte neben dem Sofa.
+15. **Leuchten Japandi**: Papier- oder Leinenlaternen (Typ Akari, rund oder oval) als Pendel über Tisch und Insel,
+    Stehleuchte mit Reispapier- oder Leinenschirm auf Holzfuß, Wandleuchte Holz/Leinen; Holz hell (Esche, Eiche), warme
+    2700 K; ersetzt Glaskugeln und Chrom-Bogenleuchte in den Wohnungen, wo es zum Stil passt (Top 23/26 Pendel mit drei
+    Stoffzylindern aus der Vorlage darf bleiben).
+
 ## Reihenfolge am Mac
 1. `wimmergasse_r11b` (Wienerwald-Test, Kamera dachgeschoss als Probe, Drohnen 4k), 2. dieser Auftrag.
 
