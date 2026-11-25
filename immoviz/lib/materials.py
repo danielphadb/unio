@@ -392,6 +392,44 @@ def stoff(bpy, name, color, rough=0.92, korn=380.0, relief=0.5, sheen=0.4):
     return m
 
 
+def tapete_damast(bpy, name, color, kontrast=0.10, rauh_grund=0.85, rauh_muster=0.55, sheen=0.5, relief=0.15,
+                  rapport=0.53):
+    """Damasttapete Ton in Ton (Auftrag noma_tapete_bettwand, 25.11.2026): eigenes Rapportbild aus
+    lib/assets/damast.py, Box-Projektion in Weltmass (Rapport in Metern, laeuft ueber Ecken und Rundungen durch),
+    Ornament um `kontrast` heller, Grund ebenso dunkler, Grund matt, Ornament samtig mit leichtem Glanz und Relief."""
+    from .assets import damast as DA
+    m = _new(bpy, name)
+    N = Nodes(m)
+    geo = N.new("ShaderNodeNewGeometry")
+    vec = N.vmath("SCALE", geo.outputs["Position"])
+    vec.node.inputs["Scale"].default_value = 1.0 / rapport
+    img = N.new("ShaderNodeTexImage")
+    img.image = _bild(bpy, DA.erzeugen(), farbe=False)
+    img.projection = "BOX"
+    img.projection_blend = 0.15
+    img.interpolation = "Cubic"
+    N.link(vec, img.inputs["Vector"])
+    muster = img.outputs["Color"]
+    bw = N.new("ShaderNodeRGBToBW")
+    N.link(muster, bw.inputs[0])
+    fac = bw.outputs[0]
+    dunkel = tuple(c * (1.0 - kontrast) for c in color)
+    hell = tuple(min(1.0, c * (1.0 + kontrast * 1.3)) for c in color)
+    farbe = N.mix_rgb(fac, dunkel, hell)
+    p = N.principled(farbe, rough=rauh_grund)
+    rauh = N.new("ShaderNodeMapRange")
+    N.link(fac, rauh.inputs["Value"])
+    rauh.inputs["To Min"].default_value = rauh_grund
+    rauh.inputs["To Max"].default_value = rauh_muster
+    N.link(rauh.outputs["Result"], p.inputs["Roughness"])
+    sh = N.math("MULTIPLY", fac, sheen)
+    N.link(sh, p.inputs["Sheen Weight"])
+    bmp = N.new("ShaderNodeBump", Strength=relief, Distance=0.0015)
+    N.link(fac, bmp.inputs["Height"])
+    N.link(bmp.outputs["Normal"], p.inputs["Normal"])
+    return m
+
+
 def interior(bpy, name, color, emit=(1.0, 0.62, 0.32)):
     """Innenraumkarte hinter Fenstern. Emission wird ueber das Lichtszenario gesetzt."""
     m = _new(bpy, name)

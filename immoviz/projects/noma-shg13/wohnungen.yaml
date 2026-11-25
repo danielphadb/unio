@@ -1545,7 +1545,7 @@ wohnungen:
       gesamt_abend: {pos: [0.88, 5.80], target: [1.83, 0.20], lens: 16, h: 1.45, light: blaue_stunde, exposure: 2.4}
       bett_abend: {pos: [2.67, 0.30], target: [3.68, 4.00], lens: 18, h: 1.30, light: blaue_stunde, exposure: 2.4}
 
-  apt06_v2:
+  apt06_v2: &apt06_v2
     plan: manuell
     titel: "Noma Apartment APT. 06 (Typ Derenko Top 1 gespiegelt), Variante 2 nach Mappe 28.10.2026 [EIN S. 15, S. 23, INT2]"
     quelle: "EIN S. 15 APT. 06 28,91 m2, ROK 3,34 RUK 3,14; EIN S. 23 RDUK +3,14 unter dem Pavillon; INT S. 3"
@@ -1727,6 +1727,13 @@ wohnungen:
       bett_abend: {pos: [2.67, 0.30], target: [3.68, 4.00], lens: 18, h: 1.30, light: blaue_stunde, exposure: 2.4}
       kueche_fliesen: {pos: [2.33, 2.25], target: [0, 3.55], lens: 18, h: 1.4, moebelplan: "frontal view of the kitchen: oak kitchen run along the wall, from the entrance towards the window: wardrobe, oak tall cabinet 2.62 m with built-in microwave and three drawers below the worktop, base unit with a small 2-zone induction hob and a plain hinged door below it (no drawers under the hob), base unit with sink and brass tap, base unit with door; splashback of glossy bordeaux vertical fluted tiles up to the lowest shelf, three open oak shelves with LED strips, thin light-blue handle groove along the fronts; wardrobe at the back right; dining table cut off on the left. Floor in the room: oak herringbone parquet."}   # Kuechenzeile mit Fliesenspiegel, Garderobe hinten
 
+  # Auftrag noma_tapete_bettwand (Nutzer 25.11.2026 23:20): wie apt06_v2, Bettwand und Rundung als Damasttapete
+  # Ton in Ton im Bordeaux der Wandfarbe (#5C1727) statt Farbe; alles andere gleich (Huelle, Moebel, Kameras, Licht)
+  apt06_v2_tapete:
+    <<: *apt06_v2
+    titel: "Noma Apartment APT. 06 Variante 2 mit Damasttapete an der Bettwand (Auftrag noma_tapete_bettwand)"
+    material_ersatz: {innen_wand: creme_wand, decke: creme_decke, bordeaux_wand: bordeaux_tapete}
+
 # Materialien der Apartments (Farbwerte aus der Farbpalette [INT S. 6] und den Ansichten [INT S. 13 bis 16], Naeherung)
 materialien:
   warmweiss_wand: {farbe: "#F3F1ED", art: putz, quelle: "Runde 12, Wand warmweiss wie Interior-Vorlage Top 23 (creme wirkte im Licht pfirsichfarben)"}
@@ -1799,6 +1806,7 @@ materialien:
   sockel_beige: {farbe: "#C9B79C", art: putz, quelle: "INT S. 11 Sockelzone beige; ANN Farbwert"}
   hecke: {farbe: "#3C5A28", rauh: 0.9, quelle: "ANN Hecke vor der Glastuer"}
   bordeaux_wand: {farbe: "#5C1727", rauh: 0.9, quelle: "INT2 S. 6 Palette Bordeaux Rot #5C1727 Vektor"}       # Runde 4: V2 Bettwand, Bordeaux Rot der Palette S. 6, matt; vorher #7A463B aus beleuchteter Ansicht
+  bordeaux_tapete: {farbe: "#5C1727", art: tapete, kontrast: 0.10, rauh: 0.85, rauh_muster: 0.55, sheen: 0.5, relief: 0.15, rapport: 0.53, quelle: "Auftrag noma_tapete_bettwand (Nutzer 25.11.2026: Damasttapete Ton in Ton im Rot der Bettwand), Muster eigen (lib/assets/damast.py), Rapport 53 cm"}
   fliese_bordeaux: {farbe: "#5D1F1B", rauh: 0.12, quelle: "INT2 S. 13 Materialtafel Rillenfliese, Produktfarbe #5D1F1B"}    # V2 Rillenfliese bordeaux glasiert [INT2 S. 13]
   t34_nuss: {farbe: "#5B3A26", art: eiche, quelle: "ANN Staging-Farbwert (Look Vorlagen 3Z HOF / Loft), Runde 7"}
   t34_nuss_hell: {farbe: "#7A5232", art: eiche, quelle: "ANN Staging-Farbwert (Look Vorlagen 3Z HOF / Loft), Runde 7"}

@@ -90,3 +90,9 @@ erscheinen keine Marken. Für Werbung mit einem Möbelstück im Vordergrund vorh
 Google Street View diente nur zum Ansehen (Leuchten-Inventar, Poller, Zeichen), Bilder in
 `projects/<objekt>/renders/streetview/leuchten/` (gitignored, nie im Repo, nie im Bild). Übernommen werden nur Zahlen
 (Lage, Höhe, Bauart) mit Quelle im Feld `quelle`.
+
+## Eigene Muster
+
+- Damast-Rapport (`assets/texturen/damast_rapport.png`, Auftrag noma_tapete_bettwand, 25.11.2026): eigen, per Skript
+  aus `lib/assets/damast.py` gezeichnet (Medaillon, Ranken, Rosetten), keine Fremdvorlage; die Datei ist gitignored und
+  wird beim ersten Gebrauch neu erzeugt.

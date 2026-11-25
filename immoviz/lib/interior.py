@@ -593,6 +593,10 @@ def build_custom_materials(bpy, mats, spec: dict | None):
         elif art == "stoff":
             mats[name] = M.stoff(bpy, name, rgb, s.get("rauh", 0.92), s.get("korn", 380.0), s.get("relief", 0.5),
                                  s.get("sheen", 0.4))
+        elif art == "tapete":       # Damasttapete Ton in Ton (Auftrag noma_tapete_bettwand)
+            mats[name] = M.tapete_damast(bpy, name, rgb, s.get("kontrast", 0.10), s.get("rauh", 0.85),
+                                         s.get("rauh_muster", 0.55), s.get("sheen", 0.5), s.get("relief", 0.15),
+                                         s.get("rapport", 0.53))
         elif art == "glas":
             mats[name] = M.glass(bpy, name, rgb, s.get("rauh", 0.0))
             if s.get("ior"):                  # entspiegelt: kleinerer Brechungsindex, schwaechere Spiegelung
