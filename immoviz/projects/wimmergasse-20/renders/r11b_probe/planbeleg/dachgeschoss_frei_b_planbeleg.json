@@ -1,0 +1,122 @@
+{
+ "kamera": "dachgeschoss_frei_b",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [],
+ "sichtbar": [
+  {
+   "objekt": "hero_masse",
+   "anteil_prozent": 25.22,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "hero_glas",
+   "anteil_prozent": 14.07,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "hero_stuck",
+   "anteil_prozent": 11.68,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero_stuck",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "hero_innen",
+   "anteil_prozent": 8.17,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "hero_rahmen",
+   "anteil_prozent": 4.98,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_34",
+   "anteil_prozent": 3.68,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_34_dach",
+   "anteil_prozent": 0.95,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "baeume_kronen_ahorn.035",
+   "anteil_prozent": 0.62,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_22_dach",
+   "anteil_prozent": 0.45,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_22_stuck",
+   "anteil_prozent": 0.34,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_22",
+   "anteil_prozent": 0.23,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_26_dach",
+   "anteil_prozent": 0.18,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_26",
+   "anteil_prozent": 0.14,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  }
+ ]
+}

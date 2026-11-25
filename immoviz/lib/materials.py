@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import colorsys
+import os
 
 
 def hex_rgb(h: str) -> tuple[float, float, float]:
@@ -942,7 +943,8 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     L["fern_bau"] = simple(bpy, "fern_bau", (0.36, 0.35, 0.33), 0.9)
     L["fern_turm"] = simple(bpy, "fern_turm", (0.22, 0.24, 0.27), 0.6)
     L["fern_dach"] = simple(bpy, "fern_dach", (0.06, 0.065, 0.07), 0.8)
-    L["fern_wald"] = simple(bpy, "fern_wald", (0.20, 0.245, 0.27), 1.0)      # hell und blaugrau: steht im Dunst vor dem Himmel
+    L["fern_wald"] = (simple(bpy, "fern_wald", (0.20, 0.245, 0.27), 1.0) if os.environ.get("IMMOVIZ_DUNST", "").lower() in ("aus", "0", "nein")
+                      else fern_wald(bpy, "fern_wald"))      # Dunst vor dem Himmel, Farbe folgt der Lichtstimmung (set_dunst)
     L["nachbar_rahmen"] = simple(bpy, "nachbar_rahmen", (0.75, 0.74, 0.7), 0.4)
     L["fenster_dunkel"] = simple(bpy, "fenster_dunkel", (0.012, 0.014, 0.016), 0.04, 0.0, **{"Specular IOR Level": 0.9})
     L["terrasse"] = plaster(bpy, "terrasse", (0.32, 0.31, 0.29), var=0.05, bump=0.1, detail=False)
@@ -964,6 +966,61 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     for i, h in enumerate(NEIGHBOUR_PALETTE):
         L[f"nachbar_{i}"] = plaster(bpy, f"nachbar_{i}", tuple(c * 0.66 for c in hex_rgb(h)), sockel=0.6)
     return L
+
+
+def fern_wald(bpy, name):
+    """Huegelkette am Horizont (lib/fern.py kulisse) als Dunst statt als beleuchtete Flaeche (Auftrag r11b,
+    25.11.2026): reine Emission in der Himmelsfarbe am Horizont in Blickrichtung (eigener Himmel im Material, den
+    set_dunst an die Welt angleicht), abgedunkelt je nach Entfernung (Luftperspektive: nah 2 km dunkler, ab 12 km
+    fast Himmel). Ohne Sonnenlicht keine Facetten und keine Schattenflecken auf dem Band."""
+    m = _new(bpy, name)
+    nt = m.node_tree
+    nt.nodes.clear()
+    out = nt.nodes.new("ShaderNodeOutputMaterial")
+    geo = nt.nodes.new("ShaderNodeNewGeometry")
+    # Blickrichtung waagrecht, knapp ueber dem Horizont (darunter zeigt der Himmel Boden)
+    flach = nt.nodes.new("ShaderNodeVectorMath"); flach.operation = "MULTIPLY"
+    flach.inputs[1].default_value = (-1.0, -1.0, 0.0)
+    nt.links.new(geo.outputs["Incoming"], flach.inputs[0])
+    norm = nt.nodes.new("ShaderNodeVectorMath"); norm.operation = "NORMALIZE"
+    nt.links.new(flach.outputs[0], norm.inputs[0])
+    hoch = nt.nodes.new("ShaderNodeVectorMath"); hoch.operation = "ADD"
+    hoch.inputs[1].default_value = (0.0, 0.0, 0.04)
+    nt.links.new(norm.outputs[0], hoch.inputs[0])
+    sky = nt.nodes.new("ShaderNodeTexSky"); sky.name = "dunst_himmel"
+    sky.sky_type = "MULTIPLE_SCATTERING"
+    sky.sun_disc = False
+    nt.links.new(hoch.outputs[0], sky.inputs["Vector"])
+    cam = nt.nodes.new("ShaderNodeCameraData")
+    mr = nt.nodes.new("ShaderNodeMapRange"); mr.name = "dunst_ferne"
+    mr.inputs["From Min"].default_value = 2000.0
+    mr.inputs["From Max"].default_value = 12000.0
+    mr.inputs["To Min"].default_value = 0.40
+    mr.inputs["To Max"].default_value = 0.72
+    nt.links.new(cam.outputs["View Distance"], mr.inputs["Value"])
+    tint = nt.nodes.new("ShaderNodeVectorMath"); tint.operation = "MULTIPLY"
+    tint.inputs[1].default_value = (0.90, 0.97, 1.0)      # Wald im Dunst: leicht kuehler als der Himmel
+    nt.links.new(sky.outputs[0], tint.inputs[0])
+    hell = nt.nodes.new("ShaderNodeMath"); hell.operation = "MULTIPLY"; hell.name = "dunst_staerke"
+    hell.inputs[1].default_value = 0.35
+    nt.links.new(mr.outputs[0], hell.inputs[0])
+    em = nt.nodes.new("ShaderNodeEmission")
+    nt.links.new(tint.outputs[0], em.inputs["Color"])
+    nt.links.new(hell.outputs[0], em.inputs["Strength"])
+    nt.links.new(em.outputs[0], out.inputs["Surface"])
+    m["immoviz_dunst"] = True
+    return m
+
+
+def set_dunst(bpy, sky_world, staerke: float):
+    """Himmel im Material fern_wald an den Welthimmel der Lichtstimmung angleichen (setup_light)."""
+    for m in bpy.data.materials:
+        if not (m.get("immoviz_dunst") and m.node_tree and "dunst_himmel" in m.node_tree.nodes):
+            continue
+        sk = m.node_tree.nodes["dunst_himmel"]
+        for a in ("sun_elevation", "sun_rotation", "air_density", "aerosol_density"):
+            setattr(sk, a, getattr(sky_world, a))
+        m.node_tree.nodes["dunst_staerke"].inputs[1].default_value = staerke
 
 
 def set_interior_emission(bpy, strength: float):

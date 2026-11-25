@@ -1361,6 +1361,7 @@ def setup_light(scene, cfg, ctx, name):
     nt.links.new(sky.outputs[0], bg.inputs[0])
     nt.links.new(bg.outputs[0], out.inputs[0])
     scene.view_settings.exposure = L.get("exposure", 0.0)
+    M.set_dunst(bpy, sky, bg.inputs["Strength"].default_value)      # Huegelkette im Dunst (fern_wald)
     M.set_interior_emission(bpy, L.get("interior", 0.0))
     M.set_season(bpy, L.get("season", "sommer"))
     from .assets import leuchten as LE
