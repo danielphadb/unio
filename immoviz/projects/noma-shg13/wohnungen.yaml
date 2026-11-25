@@ -308,6 +308,10 @@ wohnungen:
       # Runde 12 Nachtrag Schritte 8 und 9: Weitwinkel 15 mm, Blick vom Eingang (Durchgang Vorraum) durch den ganzen Raum
       wohnzimmer_weit: {pos: [15.0, -9.62], target: [11.2, -14.5], lens: 15, h: 1.40}
       eingang_weit: {pos: [13.29, -9.58], target: [12.2, -14.6], lens: 15, h: 1.40}
+      # Runde 12 Nachtrag 2 (Nutzer 25.11.2026: eingezeichnete Blickwinkel im Verkaufsplan, Kamera etwas hoeher, 1,60 m)
+      gang_tuer_hoch: {pos: [15.0, -9.95], target: [10.9, -13.4], lens: 15, h: 1.60}          # aus der Tuer vom Gang diagonal zu Sofa und HST
+      sofa_kueche_hoch: {pos: [11.45, -12.35], target: [11.2, -9.0], lens: 15, h: 1.60}       # vom Sofaende zu Kuechenblock und Kuechennische
+      fenster_terrasse_hoch: {pos: [14.75, -13.75], target: [12.6, -17.2], lens: 16, h: 1.60}  # aus der Ecke am Sideboard durch Fenster und HST auf Terrasse und Balkon
   top24_terrasse:   # Balkon/Terrasse: Fassade und Dach bleiben, nur Block und Innenkarten aus
     <<: *top24
     objekt_ausblenden: [nb_shg_innen, nb_shg_koerper]
@@ -530,7 +534,7 @@ wohnungen:
       # Runde 12 ersetzt: {modell: couchtisch_rund, c_px: [5.55, -8.83], d: 0.8, skalierung: frei, h: 0.38, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       # Runde 12 Nachtrag entfernt (Nutzer 25.11.2026: Sessel gegenueber dem Sofa passt nicht): {modell: lounge_designer, px: [5.05, -8.46, 6.06, -7.27], front: -y, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       # Runde 12 Nachtrag ersetzt (Stehleuchte Papier): {modell: stehleuchte_bogen, c_px: [6.95, -9.95], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: zimmerpflanze, c_px: [1.48, -7.62], d: 0.55, skalierung: hoehe, h: 1.4, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      - {modell: zimmerpflanze, c_px: [4.2, -7.55], d: 0.55, skalierung: hoehe, h: 1.4, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       # Runde 11g ersetzt: {modell: zimmerpflanze_klein, c_px: [7.45, -12.30], d: 0.6, skalierung: hoehe, h: 0.85, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: barhocker, c_px: [2.32, -10.52], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: barhocker, c_px: [2.86, -10.52], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
@@ -549,7 +553,7 @@ wohnungen:
       - {typ: laterne, c: [2.58, -8.75], d: 0.32, z_mitte: 1.75, form: rund}
       - {typ: laterne, c: [2.58, -9.55], d: 0.32, z_mitte: 1.75, form: rund}
       - {typ: laterne, c: [3.51, -11.2], d: 0.55, z_mitte: 1.45, oben: 2.06, form: oval}   # Kabel bis zur Schraege (RH 2,06 bei y -11,20)
-      - {typ: stehleuchte, c: [6.95, -10.0], d: 0.36, h: 1.45}
+      - {typ: stehleuchte, c: [4.0, -10.05], d: 0.36, h: 1.45}   # Nachtrag 2: vom Ostende ans Westende des Sofas (stand im Blick lift_ecke_hoch)
       - {typ: kerzen, c: [3.85, -11.45], z: 0.75, n: 3}
       - {typ: plaid, c: [6.2, -9.78], z: 0.445, front: 90}
     blattschatten:   # Dachflaechenfenster und HST
@@ -558,7 +562,7 @@ wohnungen:
     leuchten:   # Runde 12: Innenlicht fuer das Abendbild (2700 K)
       - {pos: [3.51, -11.2, 1.45], w: 60, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
       - {pos: [2.58, -9.15, 1.80], w: 40, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
-      - {pos: [6.95, -10.0, 1.25], w: 50, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
+      - {pos: [4.0, -10.05, 1.25], w: 50, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
       - {pos: [0.95, -9.7, 2.45], w: 50, farbe: "#FFD7A8", quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
     menschen:   # Runde 12: nur in Kameras mit `menschen: an`
       - {pos: [3.4, -9.1], drehung: 180, hoehe: 1.72, quelle: "Runde 12 (Auftrag noma_r12 Schritt 6), Platzhalter fuer KI-Personen"}
@@ -582,6 +586,13 @@ wohnungen:
       # Runde 12 Nachtrag Schritte 8 und 9: Weitwinkel 15 mm aus der Nordwestecke; Blick aus der Tuer zum Vorraum durch den ganzen Raum
       wohnkueche_weit: {pos: [2.1, -7.5], target: [7.0, -11.3], lens: 15, h: 1.35, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       eingang_weit: {pos: [7.66, -7.75], target: [1.0, -11.4], lens: 15, h: 1.40, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      # Runde 12 Nachtrag 2 (Nutzer 25.11.2026: eingezeichnete Blickwinkel im Verkaufsplan, Kamera etwas hoeher, 1,60 m)
+      eingang_hoch: {pos: [7.55, -7.7], target: [2.5, -12.0], lens: 15, h: 1.65, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Tuer zum Gang, diagonal zu Essplatz und Dachflaechenfenstern
+      tv_wand_hoch: {pos: [5.45, -7.8], target: [1.6, -11.6], lens: 15, h: 1.60, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}    # von der TV-Wand zu Insel, Kueche und Essplatz
+      lift_ecke_hoch: {pos: [7.5, -10.7], target: [1.5, -8.9], lens: 15, h: 1.60, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # vom Durchgang zur Terrasse (Liftwand) zurueck in den Raum
+      kueche_ecke_hoch: {pos: [0.95, -7.45], target: [7.6, -10.2], lens: 15, h: 1.60, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}  # aus der Kuechenecke diagonal durch den ganzen Raum
+      terrasse_tag: {pos: [9.75, -14.4], target: [7.6, -11.6], lens: 16, h: 1.60, light: spaetsommer_mittag, exposure: 0.4, objekt_ausblenden: [nb_shg_dach_innen]}   # von der Terrasse durch die HST hinein
+      terrasse_abend: {pos: [9.75, -14.4], target: [7.6, -11.6], lens: 16, h: 1.60, light: blaue_stunde, exposure: 1.8, objekt_ausblenden: [nb_shg_dach_innen]}
 
 
   # Runde 11: Top 23-2 (Maisonette 23, Wohnkueche im 2. DG) aus EIN S. 13 (Vektor), Aufbau wie Top 26-2 (gespiegelt).
