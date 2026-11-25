@@ -1184,52 +1184,60 @@
   "nachbearbeitung": "immoviz.py schutz --modus ki_verzogen --ohne-vordergrund (innen zusätzlich --ohne fenster_glas)",
   "pruefung": {
    "top24_wohnzimmer": {
-    "massstab_ki_zu_render": 1.0019,
-    "verschiebung_prozent": 0.0,
-    "kantenabweichung_prozent": 11.94,
-    "p90_4k_px": 7.0
+    "massstab_ki_zu_render": 1.0013,
+    "verschiebung_prozent": 0.05,
+    "kantenabweichung_prozent": 11.74,
+    "p90_4k_px": 7.0,
+    "quelle": "r11g_innen"
    },
    "top24_wohnzimmer_tv": {
-    "massstab_ki_zu_render": 0.9943,
-    "verschiebung_prozent": 0.24,
-    "kantenabweichung_prozent": 9.99,
-    "p90_4k_px": 6.0
+    "massstab_ki_zu_render": 0.9951,
+    "verschiebung_prozent": 0.2,
+    "kantenabweichung_prozent": 7.76,
+    "p90_4k_px": 5.83,
+    "quelle": "r11g_innen"
    },
    "top24_terrasse_hst": {
-    "massstab_ki_zu_render": 1.0105,
-    "verschiebung_prozent": 0.32,
-    "kantenabweichung_prozent": 5.75,
-    "p90_4k_px": 4.0
+    "massstab_ki_zu_render": 1.0016,
+    "verschiebung_prozent": 0.07,
+    "kantenabweichung_prozent": 2.13,
+    "p90_4k_px": 4.0,
+    "quelle": "r11g_innen"
    },
    "top24_terrasse_abend": {
-    "massstab_ki_zu_render": 1.0012,
+    "massstab_ki_zu_render": 1.0005,
     "verschiebung_prozent": 0.08,
-    "kantenabweichung_prozent": 10.5,
-    "p90_4k_px": 6.71
+    "kantenabweichung_prozent": 7.04,
+    "p90_4k_px": 4.47,
+    "quelle": "r11g_innen"
    },
    "top25_wohnzimmer": {
-    "massstab_ki_zu_render": 0.9978,
-    "verschiebung_prozent": 0.09,
-    "kantenabweichung_prozent": 4.02,
-    "p90_4k_px": 4.12
+    "massstab_ki_zu_render": 0.9971,
+    "verschiebung_prozent": 0.16,
+    "kantenabweichung_prozent": 7.13,
+    "p90_4k_px": 5.83,
+    "quelle": "r11g_innen"
    },
    "top25_essplatz": {
-    "massstab_ki_zu_render": 0.9987,
+    "massstab_ki_zu_render": 0.9985,
     "verschiebung_prozent": 0.12,
-    "kantenabweichung_prozent": 11.89,
-    "p90_4k_px": 7.0
+    "kantenabweichung_prozent": 16.19,
+    "p90_4k_px": 9.0,
+    "quelle": "r11g_innen"
    },
    "top25_terrasse_hst": {
-    "massstab_ki_zu_render": 1.0024,
-    "verschiebung_prozent": 0.08,
-    "kantenabweichung_prozent": 2.81,
-    "p90_4k_px": 3.61
+    "massstab_ki_zu_render": 1.0031,
+    "verschiebung_prozent": 0.15,
+    "kantenabweichung_prozent": 1.91,
+    "p90_4k_px": 4.0,
+    "quelle": "r11g_innen"
    },
    "top25_terrasse_abend": {
-    "massstab_ki_zu_render": 1.0009,
-    "verschiebung_prozent": 0.07,
-    "kantenabweichung_prozent": 6.8,
-    "p90_4k_px": 5.0
+    "massstab_ki_zu_render": 1.0015,
+    "verschiebung_prozent": 0.04,
+    "kantenabweichung_prozent": 5.11,
+    "p90_4k_px": 4.47,
+    "quelle": "r11g_innen"
    },
    "dachterrasse_stadt": {
     "massstab_ki_zu_render": 0.9432,
@@ -1285,34 +1293,37 @@
     "p90_4k_px": 6.0
    },
    "top23_2_wohnkueche_dachfenster": {
-    "massstab_ki_zu_render": 1.0019,
-    "verschiebung_prozent": 0.04,
-    "kantenabweichung_prozent": 3.96,
-    "p90_4k_px": 5.0
+    "massstab_ki_zu_render": 1.0048,
+    "verschiebung_prozent": 0.19,
+    "kantenabweichung_prozent": 17.0,
+    "p90_4k_px": 19.1,
+    "quelle": "r11g_innen"
    },
    "top23_2_wohnkueche_morgen": {
-    "massstab_ki_zu_render": 1.0019,
-    "verschiebung_prozent": 0.0,
-    "kantenabweichung_prozent": 13.64,
-    "p90_4k_px": 8.06
+    "massstab_ki_zu_render": 1.0077,
+    "verschiebung_prozent": 0.22,
+    "kantenabweichung_prozent": 19.18,
+    "p90_4k_px": 11.66,
+    "quelle": "r11g_innen"
    },
    "top23_2_wohnkueche_terrasse": {
-    "massstab_ki_zu_render": 0.9914,
-    "verschiebung_prozent": 0.26,
-    "kantenabweichung_prozent": 6.29,
-    "p90_4k_px": 4.24
+    "massstab_ki_zu_render": 0.9998,
+    "verschiebung_prozent": 0.05,
+    "kantenabweichung_prozent": 15.76,
+    "p90_4k_px": 10.0,
+    "quelle": "r11g_innen"
    }
   },
   "sicht": "Kantenlinien auf Fassaden, Fenstern, Küchen und Möbeln; innen zählt der Kantenwert Möbel mit (10 bis 12 %). Whirlpool in dachterrasse_23_hof mit Wasser sichtbar. KI ergänzt Kleinteile (Kissen, Decken, Vasen, Windlicht, Obstschale), keine Bauteile.",
   "jobs": {
-   "top24_wohnzimmer": "5920e1ef-db5b-45b7-83de-bc39d618a78e",
-   "top24_wohnzimmer_tv": "394c5bc8-c974-461b-946a-ec51825edebd",
-   "top24_terrasse_hst": "cdb596ce-38c3-47a7-9495-8ecb71956875",
-   "top24_terrasse_abend": "4909fe78-79a2-4f30-9a08-8939b7f099c4",
-   "top25_wohnzimmer": "38aa6920-a277-43bf-b35b-e5ee13c65673",
-   "top25_essplatz": "db24f29f-6c6c-48c0-a37e-6733a08ef1a6",
-   "top25_terrasse_hst": "52d19f77-46be-421f-9d09-5e2f51a5f55b",
-   "top25_terrasse_abend": "5a2196f1-6e0b-4a4f-998d-4b514ea9efa1",
+   "top24_wohnzimmer": "e49cf642-46ea-452c-9c94-4f1298174fc5",
+   "top24_wohnzimmer_tv": "2f4b5e61-f940-4a3d-a7af-b21280e711cb",
+   "top24_terrasse_hst": "d935eb5f-156d-4c77-b6e3-23a7000578b7",
+   "top24_terrasse_abend": "674b6073-ca75-483f-bcc9-09073e6218eb",
+   "top25_wohnzimmer": "7aca4642-7c5b-4f32-91c0-bb3dccc8fa6e",
+   "top25_essplatz": "86a07862-46de-4122-893d-0c067cfc0a3d",
+   "top25_terrasse_hst": "7f059f3a-2da9-4fe4-8d17-be46e06af43b",
+   "top25_terrasse_abend": "b49ae93a-d62c-43b1-bcae-6edc38780ff6",
    "dachterrasse_stadt": "2595b336-eb58-4d59-b287-f0d7090f62f9",
    "dachterrasse_stadt_blaue_stunde": "b8888a6e-47d4-40bc-9071-dc7b045e4e46",
    "dachterrasse_hof": "e1a53e40-7082-453a-9f7d-ed5d83dc7914",
@@ -1321,13 +1332,14 @@
    "top26_2_wohnkueche_dachfenster": "38ec48e2-c7fc-4f86-b957-9a38c7488020",
    "top26_2_wohnkueche_morgen": "3afc0737-8b29-432f-9dde-a8b7fde6d86f",
    "top26_2_wohnkueche_terrasse": "e757530b-ad2c-4ca4-921a-7b9e62836982",
-   "top23_2_wohnkueche_dachfenster": "850c8268-e333-4f51-b7a9-1bc0cad55216",
-   "top23_2_wohnkueche_morgen": "9b2f5d56-77df-4e36-91e8-ea0862a4e3c2",
-   "top23_2_wohnkueche_terrasse": "531dec19-ade6-43f1-821a-0584b014b12f"
+   "top23_2_wohnkueche_dachfenster": "b30286b8-b294-4941-a69f-cb3fac99427e",
+   "top23_2_wohnkueche_morgen": "09b3b010-7785-4ea9-912c-657d1fe45c93",
+   "top23_2_wohnkueche_terrasse": "1cfae22d-aa04-4c85-808e-7aba8f5ed51f"
   },
-  "credits": "37 x 3,25 = 120,25 (13 um 14:02; 6 Penthäuser 15:58; 5 Dach r11d 17:07; 5 Dach r11e 21:46; 5 Dach r11g 23:13 und 3 Stadtblicke r11g neu 23:20, weil die KI im ersten Durchgang Türme, Gasometer und Fernsehturm in den Stadthorizont erfand; ein Auftrag mit 503 abgewiesen, nicht berechnet)",
-  "offen": "r11g innen (Top 24/25, 23-2, 26-2) nach Mac; 26-2 nur nach Freigabe. Wimmergasse Fernsicht nach Auftrag wimmergasse_r11_fernsicht.",
+  "credits": "48 x 3,25 = 156,00 (bis r11e 29 Bilder = 94,25; r11g Dach 5 + 3 Neuversuche Stadtblick = 26,00; r11g innen 11 = 35,75 um 01:00; angekündigt waren für r11g 16 x 3,25 = 52, Mehrbetrag 9,75 durch die Neuversuche; ein Auftrag mit 503 abgewiesen, nicht berechnet)",
+  "offen": "Top 26-2 (3 Bilder, r11g_innen gerendert) nur nach Freigabe des Nutzers veredeln (9,75). Wimmergasse Fernsicht nach Auftrag wimmergasse_r11_fernsicht.",
   "dateien": "<name>_r11_final.jpg, r11_pruefung/<name>_kanten.jpg und _abweichung.jpg",
-  "r11g_dach_prompt": "Stimmung High-End-Penthouse: goldene Stunde kurz vor Sonnenuntergang, warmes Innenlicht, Feuer, Windlichter, gedeckter Tisch, vorhandene Tröge üppig bepflanzt, keine neuen Möbel oder Tröge; Stadtblicke mit Horizontsperre (nur Dom, Kuppel und die Türme aus Bild 1, keine Hügel)"
+  "r11g_dach_prompt": "Stimmung High-End-Penthouse: goldene Stunde kurz vor Sonnenuntergang, warmes Innenlicht, Feuer, Windlichter, gedeckter Tisch, vorhandene Tröge üppig bepflanzt, keine neuen Möbel oder Tröge; Stadtblicke mit Horizontsperre (nur Dom, Kuppel und die Türme aus Bild 1, keine Hügel)",
+  "r11g_innen_befund": "KI ergänzte bei Top 23-2 ein Bild über dem Wandbord und einen Leinenvorhang neben dem Dachfenster, Marmor-Rückwand (Prompt); Kanten 15 bis 19 % durch diese Deko; Fenster, Wände und Möbel auf den Kanten. Top 24/25 Terrassen 2 bis 7 %, Wohnräume 7 bis 16 %."
  }
 }

@@ -25,7 +25,7 @@ nicht ohne Freigabe veredelt.
 - [~] N4 Nahbereich von oben (22:45): Orthofoto-Server der Stadt Wien ist aus der Cloud gesperrt (Proxy 403), Prüfung nur
   am Mac. Offen für den Mac: Farbe Brandwand 005362, heller glatter Baukörper links in `dachterrasse_23_hof` (Street View
   oder Orthofoto, Gauben, Dachterrassen, Kamine). Der Mac meldete Hof und Nachbarn deckungsgleich mit dem Orthofoto (r11d).
-- [~] N5 r11g Dach veredelt und geliefert (23:20): 5 Bilder mit Stimmungs-Prompts; die drei Stadtblicke zweimal, weil die KI
+- [x] N5 r11g Dach veredelt und geliefert (23:20): 5 Bilder mit Stimmungs-Prompts; die drei Stadtblicke zweimal, weil die KI
   im ersten Durchgang Türme, Gasometer und Fernsehturm in den Horizont erfand (Auslöser: Landmarken-Liste im Prompt; neu:
   Horizontsperre je Blickrichtung). 8 x 3,25 = 26. Lehre: im Prompt nie Landmarken aufzählen, die nicht in dieser Kamera
   liegen. Innen folgt nach dem Mac.
@@ -52,7 +52,8 @@ nicht ohne Freigabe veredelt.
   Top-24-Terrasse; DC Tower, Donauturm und Millennium Tower von der Top-25-Terrasse.
 - [x] N7 Innen-Prompts (00:40): Horizontsperre je Kamera; das TrIIIple steht nur in den Prompts der Kameras, in deren Blick
   es liegt (Lehre aus dem Dach: sonst erfindet die KI es).
-- [ ] N8 Innenbilder r11g veredeln, sobald da (11 Bilder, 26-2 nach Freigabe).
+- [x] N8 Innenbilder r11g veredelt (02:05): 11 Bilder mit Styling-Satz (Bild, Stores, Teppich, Bücher, Vasen, Eichentisch
+  ohne Fugen) und Horizontsperre je Kamera; 11 x 3,25 = 35,75. Top 26-2 gerendert, Veredelung nach Freigabe.
 - [x] W5/A3 Horizontsperre als zentrale Regel `horizont_sperre` in `higgsfield/prompt_regeln.yaml` (00:50): wird an jeden
   Veredelungs-Prompt angehängt (Studio, `immoviz.py prompt`), gilt damit auch für die Wimmergasse-Drohne.
 
