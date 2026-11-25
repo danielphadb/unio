@@ -1,6 +1,6 @@
 # Auftrag noma_tapete_bettwand
 
-Status: offen
+Status: in Arbeit (mac-neu, ab 25.11.2026 23:30: Muster, Material und Variante apt06_v2_tapete fertig; Probe und 4k automatisch nach r12h und Wimmergasse, etwa 05:15 bis 06:30)
 Erstellt: 25.11.2026 23:30, cloud-neu
 Erledigt:
 
