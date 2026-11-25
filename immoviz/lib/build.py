@@ -1361,6 +1361,19 @@ def setup_light(scene, cfg, ctx, name):
     nt.links.new(sky.outputs[0], bg.inputs[0])
     nt.links.new(bg.outputs[0], out.inputs[0])
     scene.view_settings.exposure = L.get("exposure", 0.0)
+    # Runde 12h (Nutzer 25.11.2026: hell, weiss, lichtdurchflutet wie die Kundenvisualisierungen): optionaler
+    # Weissabgleich in Kelvin (kleiner als 6500 nimmt den Gelbstich der Sonne heraus) und eigener AgX-Look je Lichtstimmung
+    vs = scene.view_settings
+    wb = L.get("weissabgleich")
+    vs.use_white_balance = bool(wb)
+    if wb:
+        vs.white_balance_temperature = float(wb)
+        vs.white_balance_tint = float(L.get("weissabgleich_tint", 0.0))
+    if L.get("look"):
+        try:
+            vs.look = L["look"]
+        except TypeError:
+            pass
     M.set_dunst(bpy, sky, bg.inputs["Strength"].default_value)      # Huegelkette im Dunst (fern_wald)
     M.set_interior_emission(bpy, L.get("interior", 0.0))
     M.set_season(bpy, L.get("season", "sommer"))
@@ -1389,6 +1402,12 @@ def setup_camera(scene, cfg, name):
     r = math.hypot(dx, dy)
     cam.lens = c.get("lens", 24)
     cam.sensor_width = 36
+    # Runde 12h: Tiefenschaerfe fuer Detailblicke im Stil eines Interior-Magazins (`blende`: f-Zahl, `fokus`: Meter,
+    # Standard Abstand zum Zielpunkt in der Ebene)
+    cam.dof.use_dof = bool(c.get("blende"))
+    if c.get("blende"):
+        cam.dof.aperture_fstop = float(c["blende"])
+        cam.dof.focus_distance = float(c.get("fokus") or max(0.3, math.hypot(tx - px, ty - py)))
     cam.clip_end = 30000      # Fernsicht: markante Gebaeude und Huegelkette liegen bis ueber 10 km entfernt
     # Optional (kameramatch): `format: [b, h]` = Seitenverhaeltnis der Referenzvisualisierung, Breite bleibt
     # (nur aktiv mit `format`; die naechste Kamera ohne `format` bekommt die vorherige Aufloesung zurueck)
