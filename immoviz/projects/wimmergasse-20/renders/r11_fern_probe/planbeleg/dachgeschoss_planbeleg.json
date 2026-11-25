@@ -1,0 +1,37 @@
+{
+ "kamera": "dachgeschoss",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [],
+ "sichtbar": [
+  {
+   "objekt": "nachbar_diagonal_s",
+   "anteil_prozent": 52.37,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "baeume_kronen_ahorn.034",
+   "anteil_prozent": 46.59,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "baeume_holz.065",
+   "anteil_prozent": 1.04,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  }
+ ]
+}

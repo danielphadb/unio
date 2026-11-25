@@ -1,8 +1,8 @@
 # Auftrag wimmergasse_r11_fernsicht
 
-Status: in Arbeit (mac-neu, 25.11.2026 23:20)
+Status: Probe fertig, 4k wartet auf Freigabe des Nutzers
 Erstellt: 25.11.2026 (Nacht), cloud-neu
-Erledigt:
+Erledigt: Probe 25.11.2026 01:10, mac-neu
 
 Start erst nach `noma_r11g_triiiple_stimmung` und sobald keine andere Mac-Arbeit läuft (`SITZUNGEN.md` "Laufend",
 `pgrep -f immoviz.py`). Zuerst in `SITZUNGEN.md` anmelden und hier `Status: in Arbeit (<kennung>, <Datum Uhrzeit>)` setzen,
@@ -45,3 +45,32 @@ Türmen der Votivkirche. Die KI bekommt Prismen und rät die Form.
 ## Melden
 - Je Landmarke: sichtbar ja oder nein, gebaut wie, Quelle; was unsicher bleibt.
 - Probe-Kontaktbogen `renders/r11_fern_probe/kontaktbogen.jpg`.
+
+## Ergebnis (mac-neu, 25.11.2026)
+Neu in `project.yaml` Block `fern_landmarken` (Bauteile aus `lib/landmarken_bau.py`, aus `noma_r11g`); die Prismen des
+Baukörpermodells werden je Eintrag über `ersetzt` ausgeblendet. Lage aus dem Baukörpermodell (fern.json), da die Lagen in
+`landmarken` rund 20 bis 30 m abweichen. Probe 960 x 640, golden_hour, 96 Samples, Planbeleg drohne 77 x 0, drohne_sued
+72 x 0. Kontaktbogen mit Ausschnitten `renders/r11_fern_probe/kontaktbogen.jpg`.
+
+| Landmarke | sichtbar | gebaut | Quelle |
+|---|---|---|---|
+| Rathaus | ja, drohne und drohne_sued | bleibt `fern_spitzen` Rathausturm (Körper und Helm bis +93,7), als schlanker Turm mit Helm gut lesbar; Ecktürmchen nicht gebaut (unter einem Pixel) | Stadt Wien, Messung 3D-Abgleich 16.11. |
+| Votivkirche | ja, beide | `doppelturm`: zwei Türme 99 m, Abstand 20,5 m, Achse nach BKM, Helme | ANN, BKM 128619 |
+| Fernheizwerk Spittelau | ja, beide, Kugel als goldener Punkt erkennbar | `schornstein` 126 m, goldene Kugel r 7 m auf +98 m | ANN, BKM 142265 |
+| Millennium Tower | ja, drohne | `zylinderturm` aus zwei versetzten Glaskreisen, Antenne, 202 m | CTBUH, BKM 063994 |
+| Stephansdom | ja, drohne | unverändert (`fern_spitzen` Südturm mit Helm) | Messung 3D-Abgleich 16.11. |
+| Donauturm | ja, drohne am rechten Rand | `turm_korb`: Schaft, Korb auf 0,6 H, Antenne, 252 m | donauturm.at, BKM 073723 |
+| Uniqa Tower | ja, drohne, als Block | Prisma (3,5 km, Medienfassade ohne Wirkung bei Tag) | BKM 137033 |
+| Sender Kahlenberg | kaum, unter einem Pixel breit (wie in echt bei 32 mm) | neu `schornstein` als Mast 165 m auf 484 m ü. A.; Lage nur auf rund 200 m genau, Farbe unsicher | ANN, Literatur |
+| Wienerberg Twin Towers | nicht geprüft (nur Vorschau `ausblick_terrasse`) | Prisma | |
+
+Unsicher bzw. offen:
+- **Wienerwald-Kulisse**: Silhouette und Lage passen (Abgleich 16.11.), aber das Band aus senkrechten Flächen zeigt im
+  Streiflicht harte hell-dunkel-Facetten (blau und grau). Die Veredelung sollte sie als dunstige Hügel malen; im Modell
+  wäre ein geneigtes, einheitlich getöntes Band besser (nicht geändert, betrifft alle Projekte über `lib/fern.py`).
+- **Kamera `dachgeschoss`**: bisher nie gerendert; sie steht in `nachbar_diagonal_s` und einer Ahornkrone, das Bild ist
+  schwarz (Planbeleg: 3 Objekte). Vom Standpunkt +12 m ragen ohnehin keine Landmarken über die Traufen. Neue Position
+  braucht eine Vorgabe (Motiv), daher nicht verschoben.
+- Ecktürmchen des Rathauses und Turmhelme der Votivkirche sind bei 960 px nur wenige Pixel; in 4k prüfen.
+- 4k erst nach Freigabe des Nutzers (dann neue Veredelung nötig); Befehl wie Probe mit `--res 3840x2560 --samples 256
+  --ebenen --out r11_fern`.

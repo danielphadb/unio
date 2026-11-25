@@ -1348,6 +1348,16 @@ fern_gipfel:
   - {name: Bisamberg, lat: 48.3210, lon: 16.3700, hoehe: 358, radius: 2200, abfall: 110}
 # Turmhelme: das Baukoerpermodell fuehrt den Suedturm von St. Stephan als Prisma bis zur Spitze und den Rathausturm
 # nur bis zu den Fialen. Hoehen: Stephansdom 136,4 m, Rathausturm 98 m ueber Gelaende.
+# Runde 11 (Auftrag wimmergasse_r11_fernsicht, REGELN U12): Fern-Landmarken als echte Form statt Prisma (lib/landmarken_bau.py).
+# Lage aus dem Baukoerpermodell (fern.json, hoechster Teil je BEZUG), Hoehen aus Quellen, Formen [ANN aus Fotos].
+# Rathaus bleibt der Eintrag Rathausturm in fern_spitzen (Koerper und Helm bis +93,7); Uniqa Tower (75 m, 3,5 km) und
+# Wienerberg Twin Towers (nur Vorschau ausblick_terrasse) vorerst als Prisma.
+fern_landmarken:
+  - {typ: doppelturm, name: Votivkirche, pos: [2039.8, 2630.6], grund: -8.2, hoehe: 99.0, abstand: 20.5, breite: 9.5, achse_grad: 112.9, ersetzt: {bezug: "128619", radius: 14.0}, quelle: "zwei Tuerme 99 m [ANN, Literatur]; Lage und Abstand der Tuerme BKM 128619; Langhaus hinter der Fassade nach Osten [ANN]"}
+  - {typ: zylinderturm, name: Millennium Tower, pos: [5326.0, 3655.0], grund: -23.7, hoehe: 202.0, kreise: [[0, 0, 19.0, 0.85], [7.5, 6.5, 16.5, 0.78]], ersetzt: {bezug: "063994", radius: 25.0}, quelle: "202 m mit Antenne [CTBUH]; Glaszylinder aus zwei versetzten Kreisen [ANN aus Fotos]; Lage BKM 063994"}
+  - {typ: schornstein, name: Fernheizwerk Spittelau, pos: [3306.9, 4374.1], grund: -21.7, hoehe: 126.0, r: 3.8, r_oben: 3.0, kugel_r: 7.0, kugel_z: 98.0, farbe: "#C9C4BB", ersetzt: {bezug: "142265", radius: 6.0}, quelle: "Schornstein 126 m mit goldener Kugel [ANN]; Lage BKM 142265"}
+  - {typ: schornstein, name: Sender Kahlenberg, lat: 48.2746, lon: 16.3334, grund: 278.2, hoehe: 185.0, r: 2.0, r_oben: 0.6, farbe: "#B9B7B2", quelle: "Stahlfachwerkmast rund 165 m auf dem Kahlenberg (484 m ue. A.) [ANN, Literatur]; Lage wie fern_gipfel Kahlenberg, auf rund 200 m genau; Fuss 20 m tiefer angesetzt, damit er in der geglaetteten Kulisse steht; Farbe unsicher"}
+  - {typ: turm_korb, name: Donauturm, pos: [6707.3, 2644.0], grund: -20.3, hoehe: 252.0, schaft_r: 4.2, schaft_r_oben: 3.4, korb_r: 15.5, korb_unten: 0.6, korb_geschosse: 3, ersetzt: {bezug: "073723", radius: 8.0}, quelle: "252 m [donauturm.at]; Turmkorb mit Restaurant [ANN]; Lage BKM 073723"}
 fern_spitzen:
   - {bezug: "169932", name: Stephansdom Suedturm, basis: 54.0, breite: 14.0}
   - {name: Rathausturm, pos: [1661.5, 2281.5], koerper_von: 40.0, basis: 58.8, spitze: 93.7, breite: 7.0}
