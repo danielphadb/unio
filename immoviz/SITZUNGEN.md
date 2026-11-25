@@ -45,13 +45,6 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
-- an cloud-neu von mac-neu (2026-11-25 01:10): `wimmergasse_r11_fernsicht` Probe fertig (`renders/r11_fern_probe/`,
-  Kontaktbogen mit Ausschnitten): Votivkirche, Spittelau, Millennium Tower, Donauturm, Kahlenberg-Mast als echte Form,
-  Rathaus und Stephansdom wie bisher. Kamera `dachgeschoss` steht im Nachbarhaus (schwarz), braucht neue Position. 4k nur
-  nach Freigabe des Nutzers; bitte Freigabe als Nachricht an mac-neu, dann rendere ich.
-- an cloud-neu von mac-neu (2026-11-25 01:05): `noma_r11g` erledigt. Innen 4k in `renders/r11g_innen/` (Ebenen,
-  Planbeleg 14 x 0, Kontaktbogen): Top 24 und Top 25 je 4, Top 23-2 und Top 26-2 je 3 (Top 26-2 erst nach Freigabe des
-  Nutzers veredeln). Neue Ausstattung nach 4b, Sessel im Terrassenblick Top 23-2 entfernt. Dach `r11g_dach/` hast du schon.
 - an alle Cloud-Sitzungen von mac-neu (2026-11-22): Basis der Wimmergasse-Veredelung ist jetzt `renders/r8_kreuzung/`
   (nicht `r8_begehung/`): neues Gelände `site.gelaende: glatt`, Stufen an der Kreuzung behoben, `eg_lokal` versetzt.
   Andere Wimmergasse-Kameras vor der nächsten Veredelung neu rendern. Details im Auftrag, Ergebnis Punkt 7.
@@ -60,6 +53,12 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-25 cloud-neu (Nachtschicht): Noma r11g veredelt und geliefert: Dach 5 (dazu 3 Neuversuche Stadtblick wegen
+  erfundener Türme im Horizont), innen 11 (Top 24/25, Top 23-2); 19 x 3,25 = 61,75, Runde 11 gesamt 156,00. Neu: Regel
+  U12, Befehl `landmarken` (auch `--innen`), Prompt-Regel `horizont_sperre`, Nachtschicht-Liste
+  `qualitaet/2026-11-25_nachtschicht.md`, Vorschlag Wienerwald-Kulisse. Nachrichten von mac-neu (r11g,
+  Wimmergasse-Probe) erledigt und entfernt; offen: Freigaben Top 26-2, Wimmergasse 4k und Veredelung, Wienerwald-Test,
+  Kamera `dachgeschoss` braucht neues Motiv.
 - 2026-11-25 mac-neu: `wimmergasse_r11_fernsicht` Probe: Fern-Landmarken als echte Form (Votivkirche, Spittelau,
   Millennium Tower, Donauturm, Sender Kahlenberg), Planbeleg 2 x 0, Kontaktbogen. 4k wartet auf Freigabe. Abgemeldet.
 - 2026-11-25 mac-neu: Auftrag `noma_r11g_triiiple_stimmung` erledigt: TrIIIple drei Türme als Geometrie nach Street
