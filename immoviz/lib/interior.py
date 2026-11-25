@@ -619,6 +619,7 @@ def add_lamps(bpy, coll, apt, a: dict):
         ld.shadow_soft_size = L.get("r", 0.08)
         ob = bpy.data.objects.new(f"lampe_{i}", ld)
         ob.location = (x, y, a["floor_z"] + L["pos"][2])
+        ob["w"] = float(L.get("w", 40))
         coll.objects.link(ob)
         obs.append(ob)
     return obs
@@ -640,6 +641,8 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
     mats = {m.name: m for m in bpy.data.materials}
     build_materials(bpy, mats)
     build_custom_materials(bpy, mats, W.get("materialien"))
+    from .assets import japandi as JP            # Runde 12 Nachtrag: eigene Japandi-Moebel und Leuchtstoffe (j_led ...)
+    JP.materialien(bpy, mats)
     coll = bpy.data.collections.new("Innen")
     scene.collection.children.link(coll)
     res = tuple(res) if res else (W["render"]["preview_resolution"] if preview else W["render"]["resolution"])
@@ -682,7 +685,9 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
             o["quelle"] = quelle
         from .assets import modelle as IA        # 3D-Moebel und -Pflanzen nach Verkaufsplan (wohnungen.yaml moebel)
         objs += IA.einrichten(bpy, coll, apt, a, name, project_dir)
-        objs += add_lamps(bpy, coll, apt, a)
+        objs += JP.bauen(bpy, coll, apt, a, name, mats)   # Nierensofa, Laternen, TV, Kerzen (wohnungen.yaml eigene_moebel)
+        lampen = add_lamps(bpy, coll, apt, a)
+        objs += lampen
         # Runde 12: Personen-Platzhalter (wohnungen.yaml menschen: [{pos, drehung, hoehe, haltung}]); sichtbar nur in
         # Kameras mit `menschen: an` (Variante mit Personen), sonst ausgeblendet; die KI macht daraus Personen
         menschen_ob = None
@@ -727,7 +732,15 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
             cfg["cameras"][f"{name}_{cam_name}"] = {"pos": [x, y, z], "target": [X, Y, z + cam.get("dz", 0.0)],
                                                      "lens": cam.get("lens", 24), "vertical": True}
             lname = cam.get("light", a.get("light", "golden_hour"))
-            B.setup_light(scene, cfg, ctx, lname)
+            elev, az = B.setup_light(scene, cfg, ctx, lname)
+            # Runde 12 Nachtrag: Leuchten folgen dem Innenlicht der Lichtstimmung (tagsueber gedimmt auf lampen_tag, Standard 0,4); Lichter ohne
+            # `interior` behalten die volle Leistung (fruehere Runden)
+            Lk = cfg["lights"][lname]
+            for lo in lampen:
+                lo.data.energy = lo["w"] * (max(float(Lk["interior"]), float(a.get("lampen_tag", 0.4))) if "interior" in Lk else 1.0)
+            from .sun import sun_vector_local       # Blattschatten je Kamera zur Sonne (wohnungen.yaml blattschatten)
+            JP.blattschatten(bpy, scene, apt, a if str(cam.get("blattschatten", "an")).lower() not in ("aus", "nein", "false") else {},
+                             name, sun_vector_local(elev, az, cfg["site"]["x_axis_deg"]))
             scene.view_settings.exposure = cam.get("exposure", a.get("exposure", 2.0))
             B.setup_camera(scene, cfg, f"{name}_{cam_name}")
             from . import planbeleg as PB            # REGELN P10: nichts ohne Planbeleg, Huelle in der Grundflaeche

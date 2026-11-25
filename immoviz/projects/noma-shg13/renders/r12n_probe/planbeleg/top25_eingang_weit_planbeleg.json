@@ -1,0 +1,366 @@
+{
+ "kamera": "top25_eingang_weit",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [
+  {
+   "objekt": "top25_00__innenraum__couchtisch_rund_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_01__innenraum__zimmerpflanze_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_01__innenraum__zimmerpflanze_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_01__innenraum__zimmerpflanze_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_01__innenraum__zimmerpflanze_3",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_02__innenraum__stuhl_samt_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_03__innenraum__stuhl_samt_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_04__innenraum__stuhl_samt_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_05__innenraum__stuhl_samt_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_06__innenraum__stuhl_samt_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_07__innenraum__stuhl_samt_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_08__innenraum__barhocker_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_09__innenraum__barhocker_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_glas",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_j00__stoffe__sofa_niere",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_j01__innenraum__laterne",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_j02__innenraum__laterne",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_j03__innenraum__laterne",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_j04__innenraum__stehleuchte",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_j05__innenraum__kerzen",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_j06__stoffe__plaid",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_rahmen",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top25_waende",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  }
+ ],
+ "sichtbar": [
+  {
+   "objekt": "top25_waende",
+   "anteil_prozent": 88.37,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Top 25, 1. DG hofseitig, 58,38 m2, Terrasse 5,95 m2, Balkon 8,75 m2, WoKue 24,65 m2 [EIN S. 12]"
+  },
+  {
+   "objekt": "nb_shg_glas",
+   "anteil_prozent": 4.9,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "top25_j03__innenraum__laterne",
+   "anteil_prozent": 2.15,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 12 Nachtrag (Nutzer 25.11.2026: Nierensofa, TV gegenueber, Japandi-Leuchten), eigene Geometrie"
+  },
+  {
+   "objekt": "top25_blattmaske_0",
+   "anteil_prozent": 1.04,
+   "collections": [
+    "Atmosphaere"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_sued_005387",
+   "anteil_prozent": 0.98,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_shg_rahmen",
+   "anteil_prozent": 0.97,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "top25_j01__innenraum__laterne",
+   "anteil_prozent": 0.7,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 12 Nachtrag (Nutzer 25.11.2026: Nierensofa, TV gegenueber, Japandi-Leuchten), eigene Geometrie"
+  },
+  {
+   "objekt": "top25_02__innenraum__stuhl_samt_0",
+   "anteil_prozent": 0.64,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "nb_shg_gelaender",
+   "anteil_prozent": 0.57,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_shg_masse",
+   "anteil_prozent": 0.51,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top25_50__vegetation__olivenbaum_1",
+   "anteil_prozent": 0.49,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top25",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top25_masse",
+   "anteil_prozent": 0.44,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top25",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 0.42,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top25_05__innenraum__stuhl_samt_0",
+   "anteil_prozent": 0.34,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "top25_00__innenraum__couchtisch_rund_0",
+   "anteil_prozent": 0.31,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "nachbar_hof_nord_005382",
+   "anteil_prozent": 0.29,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_wue_masse",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "top25_06__innenraum__stuhl_samt_0",
+   "anteil_prozent": 0.19,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "top25_blattmaske_1",
+   "anteil_prozent": 0.16,
+   "collections": [
+    "Atmosphaere"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top25_03__innenraum__stuhl_samt_0",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "ausstattung_top25_48__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top25",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "top25_07__innenraum__stuhl_samt_0",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "ausstattung_top25_48__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top25",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "top25_j05__innenraum__kerzen",
+   "anteil_prozent": 0.1,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 12 Nachtrag (Nutzer 25.11.2026: Nierensofa, TV gegenueber, Japandi-Leuchten), eigene Geometrie"
+  },
+  {
+   "objekt": "ausstattung_top25_50__vegetation__olivenbaum_0",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top25",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "top25_04__innenraum__stuhl_samt_0",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "nachbar_hof_sued_005387_dach",
+   "anteil_prozent": 0.08,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  }
+ ]
+}

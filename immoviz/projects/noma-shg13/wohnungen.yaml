@@ -209,6 +209,7 @@ wohnungen:
       - {rect: [10.77, -9.47, 12.67, -8.87], z: [0.88, 0.92], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Steinplatte 4 cm)"}
       - {rect: [10.77, -8.89, 12.67, -8.87], z: [0.92, 1.55], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Rueckwand Stein)"}
       - {rect: [10.85, -9.12, 12.6, -8.89], z: [1.8, 1.84], mat: t34_eiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Wandboard Eiche)"}
+      - {rect: [10.85, -9.12, 12.6, -8.89], z: [1.795, 1.80], mat: j_led, quelle: "Runde 12 Nachtrag (Auftrag noma_r12 Schritt 10: LED unter dem Bord)"}
       - {rect: [10.34, -9.69, 10.77, -9], z: [0, 2.52], mat: innen_wand, quelle: "EIN S. 12 (Schacht MR-Lue, DD 0,20/0,33)"}
       - {rect: [15.1, -10.4, 15.14, -9.5], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (Tuer Zimmer 80/200)"}
       - {rect: [12.84, -9.45, 13.74, -9.41], z: [0, 2], mat: tuer_eiche, quelle: "EIN S. 12 (Tuer Vorraum)"}
@@ -232,12 +233,12 @@ wohnungen:
       - {rect: [14.68, -14.606, 14.767, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       - {rect: [14.763, -14.556, 14.851, -14.544], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       - {rect: [14.847, -14.606, 14.934, -14.594], z: [0.01, 2.46], mat: leinen_store, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {rect: [15.045, -14.44, 15.08, -12.84], z: [1.0, 2.1], mat: rahmen_eiche, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {rect: [15.04, -14.4, 15.08, -12.88], z: [1.04, 2.06], mat: kunst_sand, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {rect: [15.035, -14.248, 15.08, -13.608], z: [1.33, 1.968], mat: kunst_ocker, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {rect: [15.035, -13.688, 15.08, -13.16], z: [1.11, 1.605], mat: kunst_salbei, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {rect: [15.035, -14.312, 15.08, -14.184], z: [1.198, 1.88], mat: kunst_terrakotta, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {rect: [15.035, -13.48, 15.08, -13.0], z: [1.682, 1.946], mat: kunst_salbei_hell, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag entfernt (TV an dieser Wand): {rect: [15.045, -14.44, 15.08, -12.84], z: [1.0, 2.1], mat: rahmen_eiche, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag entfernt (TV an dieser Wand): {rect: [15.04, -14.4, 15.08, -12.88], z: [1.04, 2.06], mat: kunst_sand, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag entfernt (TV an dieser Wand): {rect: [15.035, -14.248, 15.08, -13.608], z: [1.33, 1.968], mat: kunst_ocker, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag entfernt (TV an dieser Wand): {rect: [15.035, -13.688, 15.08, -13.16], z: [1.11, 1.605], mat: kunst_salbei, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag entfernt (TV an dieser Wand): {rect: [15.035, -14.312, 15.08, -14.184], z: [1.198, 1.88], mat: kunst_terrakotta, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag entfernt (TV an dieser Wand): {rect: [15.035, -13.48, 15.08, -13.0], z: [1.682, 1.946], mat: kunst_salbei_hell, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       - {rect: [14.74, -13.95, 14.98, -13.62], z: [0.5, 0.535], mat: buch_1, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       - {rect: [14.75, -13.94, 14.97, -13.63], z: [0.535, 0.563], mat: buch_2, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       - {rect: [14.76, -13.93, 14.96, -13.64], z: [0.563, 0.595], mat: buch_3, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
@@ -252,10 +253,10 @@ wohnungen:
       - {c: [12.1, -13.29], r: 0.022, z: [0.38, 0.5], mat: messing, seg: 10, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
     moebel:
       - {modell: sideboard, px: [14.68, -14.64, 15.08, -12.64], front: -x, skalierung: frei, h: 0.5, anlegen: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: sofa_cloud, px: [10.34, -14.48, 11.37, -12.21], front: +x, anlegen: true, farbe: "#D9D2C5", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: couchtisch_rund, c_px: [11.85, -13.35], d: 0.85, skalierung: frei, h: 0.38, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: lounge_designer, px: [12.45, -14.4, 13.64, -13.39], front: -x, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: stehleuchte_bogen, c_px: [10.62, -11.95], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 12 Nachtrag ersetzt (Nierensofa, eigene_moebel): {modell: sofa_cloud, px: [10.34, -14.48, 11.37, -12.21], front: +x, anlegen: true, farbe: "#D9D2C5", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: couchtisch_rund, c_px: [12.0, -13.35], d: 0.85, skalierung: frei, h: 0.38, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 12 Nachtrag entfernt (Nutzer 25.11.2026: Sessel gegenueber dem Sofa passt nicht): {modell: lounge_designer, px: [12.45, -14.4, 13.64, -13.39], front: -x, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 12 Nachtrag ersetzt (Stehleuchte Papier): {modell: stehleuchte_bogen, c_px: [10.62, -11.95], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: zimmerpflanze, c_px: [14.75, -12.3], d: 0.55, skalierung: hoehe, h: 1.35, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       # Runde 11g ersetzt: {modell: esstisch_aussen, px: [13.28, -11.54, 15.07, -10.75], front: -y, skalierung: frei, h: 0.75, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: stuhl_boucle, c_px: [14.78, -10.55], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
@@ -266,13 +267,28 @@ wohnungen:
       - {modell: stuhl_boucle, c_px: [13.58, -11.74], front: +y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: barhocker, c_px: [10.8, -11.95], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: barhocker, c_px: [11.45, -11.95], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: pendelleuchte, c_px: [14.18, -11.15], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: pendelleuchte, c_px: [10.85, -10.98], d: 0.32, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: pendelleuchte, c_px: [11.55, -10.98], d: 0.32, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne): {modell: pendelleuchte, c_px: [14.18, -11.15], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne): {modell: pendelleuchte, c_px: [10.85, -10.98], d: 0.32, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne): {modell: pendelleuchte, c_px: [11.55, -10.98], d: 0.32, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+    # Runde 12 Nachtrag (Nutzer 25.11.2026): Nierensofa Boucle, Pouf statt Sessel, TV an der Wand gegenueber (ueber dem Sideboard),
+    # Papierlaternen statt Glaspendel, Stehleuchte Papier auf Eschenfuss, Kerzen, Plaid (lib/assets/japandi.py)
+    eigene_moebel:
+      - {typ: sofa_niere, c: [10.995, -13.33], front: 0, breite: 2.3, farbe: "#E6DDCF"}
+      - {typ: pouf, c: [12.95, -12.55], r: 0.27, farbe: "#E6DDCF"}
+      - {typ: tv, c: [15.08, -13.64], front: 180, unterkante: 0.95}
+      - {typ: laterne, c: [14.18, -11.15], d: 0.5, z_mitte: 1.83, form: oval}
+      - {typ: laterne, c: [10.85, -10.98], d: 0.3, z_mitte: 1.75, form: rund}
+      - {typ: laterne, c: [11.55, -10.98], d: 0.3, z_mitte: 1.75, form: rund}
+      - {typ: stehleuchte, c: [10.62, -11.97], d: 0.36, h: 1.45}
+      - {typ: kerzen, c: [14.45, -11.0], z: 0.755, n: 3}
+      - {typ: plaid, c: [11.0, -12.62], z: 0.445, front: 0}
+    blattschatten:   # Morgensonne durch HST und Fenster (Lichtflecken, Blattschatten am Boden)
+      - {fenster: [11.64, -14.8, 1.2], normal: [0, -1], abstand: 2.5, groesse: 4.5, dichte: 0.5}
+      - {fenster: [14.04, -14.8, 1.3], normal: [0, -1], abstand: 2.5, groesse: 3.5, dichte: 0.5}
     leuchten:
       - {pos: [14.18, -11.15, 1.75], w: 90, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
       - {pos: [11.20, -10.95, 2.30], w: 60, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
-      - {pos: [10.75, -14.30, 1.50], w: 60, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
+      - {pos: [10.62, -11.97, 1.25], w: 60, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
     menschen:   # Runde 12: nur in Kameras mit `menschen: an`
       - {pos: [12.3, -11.1], drehung: 180, hoehe: 1.72, quelle: "Runde 12 (Auftrag noma_r12 Schritt 6), Platzhalter fuer KI-Personen"}
       - {pos: [13.3, -12.9], drehung: 200, hoehe: 1.66, quelle: "Runde 12 (Auftrag noma_r12 Schritt 6), Platzhalter fuer KI-Personen"}
@@ -289,6 +305,9 @@ wohnungen:
       wohnzimmer_gold: {pos: [14.85, -9.80], target: [11.20, -14.50], lens: 18, h: 1.45, light: goldene_stunde, exposure: 1.1}
       wohnzimmer_abend: {pos: [14.85, -9.80], target: [11.20, -14.50], lens: 18, h: 1.45, light: abend, exposure: 0.9}
       wohnzimmer_personen: {pos: [14.85, -9.80], target: [11.20, -14.50], lens: 18, h: 1.45, menschen: an}
+      # Runde 12 Nachtrag Schritte 8 und 9: Weitwinkel 15 mm, Blick vom Eingang (Durchgang Vorraum) durch den ganzen Raum
+      wohnzimmer_weit: {pos: [15.0, -9.62], target: [11.2, -14.5], lens: 15, h: 1.40}
+      eingang_weit: {pos: [13.29, -9.58], target: [12.2, -14.6], lens: 15, h: 1.40}
   top24_terrasse:   # Balkon/Terrasse: Fassade und Dach bleiben, nur Block und Innenkarten aus
     <<: *top24
     objekt_ausblenden: [nb_shg_innen, nb_shg_koerper]
@@ -330,6 +349,7 @@ wohnungen:
       - {rect: [4.53, -14.2, 4.55, -11.2], z: [0.92, 1.55], mat: stein_travertin, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Rueckwand Stein)"}
       - {rect: [4.53, -11.2, 5.13, -10.6], z: [0, 2.3], mat: front_creme, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Hochschrank mit Backofen und Kuehlschrank)"}
       - {rect: [4.55, -13.9, 4.85, -11.4], z: [1.8, 1.84], mat: t34_eiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Wandboard Eiche)"}
+      - {rect: [4.55, -13.9, 4.85, -11.4], z: [1.795, 1.80], mat: j_led, quelle: "Runde 12 Nachtrag (Auftrag noma_r12 Schritt 10: LED unter dem Bord)"}
       - {rect: [4.53, -14.646, 5.13, -14.2], z: [0.08, 0.88], mat: front_creme, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Fronten)"}
       - {rect: [4.53, -14.646, 5.13, -14.2], z: [0.88, 0.92], mat: stein_travertin, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Steinplatte)"}
       - {rect: [6.49, -11.3, 6.54, -10.6], z: [0, 0.94], mat: stein_travertin, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12 (Wasserfall-Wange Stein)"}
@@ -369,16 +389,16 @@ wohnungen:
       - {rect: [8.19, -13.19, 8.41, -13.01], z: [0.415, 0.443], mat: buch_2, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       - {rect: [8.2, -13.18, 8.4, -13.02], z: [0.443, 0.475], mat: buch_3, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
     zylinder:
-      - {c: [6.585, -13.28], r: 0.24, z: [1.83, 1.86], mat: messing, seg: 32, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {c: [6.585, -13.28], r: 0.21, z: [1.826, 1.83], mat: leuchte_warm, seg: 32, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {c: [6.585, -13.28], r: 0.005, z: [1.86, 2.52], mat: schwarz, seg: 6, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne ueber dem Esstisch): {c: [6.585, -13.28], r: 0.24, z: [1.83, 1.86], mat: messing, seg: 32, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne ueber dem Esstisch): {c: [6.585, -13.28], r: 0.21, z: [1.826, 1.83], mat: leuchte_warm, seg: 32, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne ueber dem Esstisch): {c: [6.585, -13.28], r: 0.005, z: [1.86, 2.52], mat: schwarz, seg: 6, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       - {c: [6.585, -12.85], r: 0.17, z: [0.755, 0.81], mat: holz_schale, seg: 28, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       - {c: [6.6, -13.75], r: 0.07, z: [0.755, 1.02], mat: keramik_creme, seg: 20, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       - {c: [8.45, -12.95], r: 0.022, z: [0.38, 0.55], mat: messing, seg: 10, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
     moebel:
-      - {modell: sofa_cloud, px: [9.07, -14.24, 10.09, -11.96], front: -x, anlegen: true, farbe: "#CDBFAE", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 12 Nachtrag ersetzt (Nierensofa, eigene_moebel): {modell: sofa_cloud, px: [9.07, -14.24, 10.09, -11.96], front: -x, anlegen: true, farbe: "#CDBFAE", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: couchtisch_rund, c_px: [8.3, -13.1], d: 0.85, skalierung: frei, h: 0.38, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: stehleuchte_bogen, c_px: [9.65, -11.7], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 12 Nachtrag ersetzt (Stehleuchte Papier): {modell: stehleuchte_bogen, c_px: [9.65, -11.7], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: zimmerpflanze, c_px: [9.7, -14.35], d: 0.5, skalierung: hoehe, h: 1.3, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       # Runde 11g ersetzt: {modell: esstisch_aussen, px: [6.19, -14.18, 6.98, -12.38], front: -x, skalierung: frei, h: 0.75, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: stuhl_samt, c_px: [7.12, -12.69], front: -x, skalierung: hoehe, h: 0.75, farbe: "#7A5A44", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
@@ -390,12 +410,25 @@ wohnungen:
       - {modell: barhocker, c_px: [5.55, -10.2], front: -y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: barhocker, c_px: [6.15, -10.2], front: -y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       # Runde 11g ersetzt: {modell: pendelleuchte, c_px: [6.585, -13.28], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: pendelleuchte, c_px: [5.55, -10.95], d: 0.3, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: pendelleuchte, c_px: [6.15, -10.95], d: 0.3, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne): {modell: pendelleuchte, c_px: [5.55, -10.95], d: 0.3, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne): {modell: pendelleuchte, c_px: [6.15, -10.95], d: 0.3, h: 0.8, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+    # Runde 12 Nachtrag (Nutzer 25.11.2026): Nierensofa Boucle, Papierlaternen, Stehleuchte Papier, Kerzen. Kein Sessel gegenueber;
+    # TV entfaellt hier: das Sofa blickt ueber Essplatz und Kueche, gegenueber liegt keine freie Wand (Kuechenzeile)
+    eigene_moebel:
+      - {typ: sofa_niere, c: [9.435, -13.1], front: 180, breite: 2.3, farbe: "#DCCFBE"}
+      - {typ: laterne, c: [6.585, -13.28], d: 0.5, z_mitte: 1.83, form: oval}
+      - {typ: laterne, c: [5.55, -10.95], d: 0.3, z_mitte: 1.75, form: rund}
+      - {typ: laterne, c: [6.15, -10.95], d: 0.3, z_mitte: 1.75, form: rund}
+      - {typ: stehleuchte, c: [9.70, -11.70], d: 0.36, h: 1.45}
+      - {typ: kerzen, c: [6.62, -12.9], z: 0.755, n: 3}
+      - {typ: plaid, c: [9.5, -11.95], z: 0.445, front: 180}
+    blattschatten:
+      - {fenster: [8.74, -14.8, 1.2], normal: [0, -1], abstand: 2.5, groesse: 4.5, dichte: 0.5}
+      - {fenster: [5.77, -14.8, 1.3], normal: [0, -1], abstand: 2.5, groesse: 3.5, dichte: 0.5}
     leuchten:
       - {pos: [6.585, -13.28, 1.75], w: 90, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
       - {pos: [4.90, -12.50, 2.30], w: 60, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
-      - {pos: [9.60, -11.75, 1.50], w: 60, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
+      - {pos: [9.70, -11.70, 1.25], w: 60, quelle: "Ausstattung (Staging), Innenlicht fuer das Abendbild"}
     menschen:   # Runde 12: nur in Kameras mit `menschen: an`
       - {pos: [7.55, -12.0], drehung: -60, hoehe: 1.70, quelle: "Runde 12 (Auftrag noma_r12 Schritt 6), Platzhalter fuer KI-Personen"}
       - {pos: [8.6, -12.5], drehung: -45, hoehe: 1.78, quelle: "Runde 12 (Auftrag noma_r12 Schritt 6), Platzhalter fuer KI-Personen"}
@@ -411,6 +444,9 @@ wohnungen:
       wohnzimmer_gold: {pos: [5.45, -11.55], target: [9.60, -14.00], lens: 18, h: 1.45, light: goldene_stunde, exposure: 1.1}
       wohnzimmer_abend: {pos: [5.45, -11.55], target: [9.60, -14.00], lens: 18, h: 1.45, light: abend, exposure: 0.9}
       wohnzimmer_personen: {pos: [5.45, -11.55], target: [9.60, -14.00], lens: 18, h: 1.45, menschen: an}
+      # Runde 12 Nachtrag Schritte 8 und 9: Weitwinkel 15 mm, Blick vom Eingang (Tuer Vorraum) durch den ganzen Raum zur HST
+      wohnzimmer_weit: {pos: [5.35, -11.6], target: [9.6, -14.0], lens: 15, h: 1.40}
+      eingang_weit: {pos: [6.95, -9.62], target: [7.9, -14.6], lens: 15, h: 1.45}
       essplatz:   {pos: [9.40, -11.55], target: [5.00, -14.30], lens: 18, h: 1.45}     # vom Sofa zu Esstisch, Kuechenzeile und Fenster
   top25_terrasse:   # Balkon/Terrasse: Fassade und Dach bleiben, nur Block und Innenkarten aus
     <<: *top25
@@ -420,7 +456,7 @@ wohnungen:
       abend: {pos: [4.75, -16.90], target: [8.80, -14.70], lens: 18, h: 1.50, light: blaue_stunde, exposure: 1.8}
   # Runde 11 (Nutzer 24.11.2026, Penthaeuser): Top 26-2 neu aus EIN S. 12/13 (Vektor) vermessen; Waende, Tueren und
   # Moebel nach Plan, echte Moebelmodelle statt Platzhalter. Schraege, Kniestock und Treppe wie Runde 7.
-  top26_2:
+  top26_2: &top26_2
     plan: manuell
     titel: "Top 26-2, 2. DG, Wohnkueche 46,47 m2 unter der Hofschraege, Terrasse 6,08 m2 im Dacheinschnitt [EIN S. 13]"
     floor_z: 21.82                   # FOK 2. DG +21,82 [EIN S. 13, S. 23]
@@ -448,6 +484,7 @@ wohnungen:
       - {rect: [0.52, -10.91, 0.54, -8.58], z: [0.92, 1.55], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Rueckwand Stein)"}
       - {rect: [0.52, -8.58, 1.12, -7.98], z: [0, 2.3], mat: front_raeuchereiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Hochschrank mit Backofen und Kuehlschrank)"}
       - {rect: [0.54, -10.6, 0.84, -8.8], z: [1.8, 1.84], mat: t34_eiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Wandboard Eiche)"}
+      - {rect: [0.54, -10.6, 0.84, -8.8], z: [1.795, 1.80], mat: j_led, quelle: "Runde 12 Nachtrag (Auftrag noma_r12 Schritt 10: LED unter dem Bord)"}
       - {rect: [2.07, -8.28, 3.09, -8.23], z: [0, 0.94], mat: stein_calacatta, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Wasserfall-Wange Stein)"}
       - {rect: [2.07, -10.03, 3.09, -8.28], z: [0.08, 0.88], mat: front_raeuchereiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Fronten grifflos)"}
       - {rect: [2.13, -9.97, 3.03, -8.34], z: [0, 0.08], mat: schwarz, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Sockel zurueckgesetzt)"}
@@ -482,31 +519,46 @@ wohnungen:
       - {c: [7.78, -11.4], r: 0.05, z: [0.5, 0.66], mat: keramik_terrakotta, seg: 20, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       - {c: [3.51, -11.33], r: 0.17, z: [0.75, 0.8], mat: holz_schale, seg: 28, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       # Runde 12: Couchtisch rund aus Travertin, Schale schwarz
-      - {c: [5.55, -8.83], r: 0.45, z: [0.0, 0.35], mat: stein_travertin, seg: 48, quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
-      - {c: [5.4, -8.9], r: 0.12, r_oben: 0.14, z: [0.35, 0.40], mat: schwarz, seg: 28, quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
+      - {c: [5.55, -8.62], r: 0.45, z: [0.0, 0.35], mat: stein_travertin, seg: 48, quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
+      - {c: [5.4, -8.69], r: 0.12, r_oben: 0.14, z: [0.35, 0.40], mat: schwarz, seg: 28, quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
     moebel:
       - {modell: esstisch_rund, c_px: [3.51, -11.33], d: 1.2, skalierung: frei, h: 0.75, stuehle: {modell: stuhl_boucle, anzahl: 6, radius: 0.8, h: 0.78, start_grad: 30, farbe: "#E9E1D6"}, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       # Runde 11g ersetzt: {modell: pendelleuchte, c_px: [3.51, -11.33], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: pendelleuchte, c_px: [2.58, -8.75], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: pendelleuchte, c_px: [2.58, -9.55], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: sofa_cloud, px: [4.29, -10.13, 6.69, -9.25], front: +y, farbe: "#E7DFD1", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne): {modell: pendelleuchte, c_px: [2.58, -8.75], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne): {modell: pendelleuchte, c_px: [2.58, -9.55], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 12 Nachtrag ersetzt (Nierensofa, eigene_moebel): {modell: sofa_cloud, px: [4.29, -10.13, 6.69, -9.25], front: +y, farbe: "#E7DFD1", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       # Runde 12 ersetzt: {modell: couchtisch_rund, c_px: [5.55, -8.83], d: 0.8, skalierung: frei, h: 0.38, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: lounge_designer, px: [5.05, -8.46, 6.06, -7.27], front: -y, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: stehleuchte_bogen, c_px: [6.95, -9.95], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 12 Nachtrag entfernt (Nutzer 25.11.2026: Sessel gegenueber dem Sofa passt nicht): {modell: lounge_designer, px: [5.05, -8.46, 6.06, -7.27], front: -y, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 12 Nachtrag ersetzt (Stehleuchte Papier): {modell: stehleuchte_bogen, c_px: [6.95, -9.95], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: zimmerpflanze, c_px: [1.48, -7.62], d: 0.55, skalierung: hoehe, h: 1.4, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       # Runde 11g ersetzt: {modell: zimmerpflanze_klein, c_px: [7.45, -12.30], d: 0.6, skalierung: hoehe, h: 0.85, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: barhocker, c_px: [2.32, -10.52], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: barhocker, c_px: [2.86, -10.52], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: sideboard, px: [7.1, -12.15, 7.5, -11.05], front: +x, skalierung: frei, h: 0.55, anlegen: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {modell: stehleuchte_bogen, c_px: [7.35, -10.75], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag entfernt: {modell: stehleuchte_bogen, c_px: [7.35, -10.75], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       - {modell: zimmerpflanze_klein, c_px: [7.3, -12.42], d: 0.4, skalierung: hoehe, h: 0.8, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {modell: pendelleuchte, c_px: [3.51, -11.03], d: 0.2, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {modell: pendelleuchte, c_px: [3.25, -11.48], d: 0.2, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {modell: pendelleuchte, c_px: [3.77, -11.48], d: 0.2, h: 0.9, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne): {modell: pendelleuchte, c_px: [3.51, -11.03], d: 0.2, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne): {modell: pendelleuchte, c_px: [3.25, -11.48], d: 0.2, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne): {modell: pendelleuchte, c_px: [3.77, -11.48], d: 0.2, h: 0.9, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+    # Runde 12 Nachtrag (Nutzer 25.11.2026): Nierensofa Boucle, Pouf statt Sessel, TV an der Nordwand gegenueber auf Lowboard Eiche,
+    # Papierlaternen (Insel, grosse Laterne von der Schraege ueber dem Esstisch), Stehleuchte Papier, Kerzen, Plaid
+    eigene_moebel:
+      - {typ: sofa_niere, c: [5.49, -9.495], front: 90, breite: 2.3, farbe: "#E6DDCF"}
+      - {typ: pouf, c: [4.05, -8.15], r: 0.27, farbe: "#E6DDCF"}
+      - {typ: tv, c: [5.49, -7.22], front: -90, unterkante: 0.85, lowboard: {breite: 1.8, tiefe: 0.40, h: 0.45}}
+      - {typ: laterne, c: [2.58, -8.75], d: 0.32, z_mitte: 1.75, form: rund}
+      - {typ: laterne, c: [2.58, -9.55], d: 0.32, z_mitte: 1.75, form: rund}
+      - {typ: laterne, c: [3.51, -11.2], d: 0.55, z_mitte: 1.45, oben: 2.06, form: oval}   # Kabel bis zur Schraege (RH 2,06 bei y -11,20)
+      - {typ: stehleuchte, c: [6.95, -10.0], d: 0.36, h: 1.45}
+      - {typ: kerzen, c: [3.85, -11.45], z: 0.75, n: 3}
+      - {typ: plaid, c: [6.2, -9.78], z: 0.445, front: 90}
+    blattschatten:   # Dachflaechenfenster und HST
+      - {fenster: [3.44, -11.6, 1.9], normal: [0, -1], abstand: 3.0, groesse: 5.0, dichte: 0.45}
+      - {fenster: [8.72, -12.9, 1.2], normal: [0, -1], abstand: 2.5, groesse: 4.5, dichte: 0.5}
     leuchten:   # Runde 12: Innenlicht fuer das Abendbild (2700 K)
-      - {pos: [3.51, -11.3, 1.65], w: 60, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
+      - {pos: [3.51, -11.2, 1.45], w: 60, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
       - {pos: [2.58, -9.15, 1.80], w: 40, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
-      - {pos: [6.7, -9.9, 1.75], w: 50, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
+      - {pos: [6.95, -10.0, 1.25], w: 50, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
       - {pos: [0.95, -9.7, 2.45], w: 50, farbe: "#FFD7A8", quelle: "Runde 12 (Auftrag noma_r12: Linie der Interior-Vorlage SHG13_TOP23_WK, Top 26 mit Raeuchereiche und eigenem Essplatz), eigene Geometrie"}
     menschen:   # Runde 12: nur in Kameras mit `menschen: an`
       - {pos: [3.4, -9.1], drehung: 180, hoehe: 1.72, quelle: "Runde 12 (Auftrag noma_r12 Schritt 6), Platzhalter fuer KI-Personen"}
@@ -527,6 +579,9 @@ wohnungen:
       wohnkueche_vorlage_personen: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: goldene_stunde, exposure: 1.5, menschen: an, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       insel_detail: {pos: [2.6, -7.5], target: [2.6, -10.9], lens: 35, h: 1.35, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Insel laengs zu den Dachflaechenfenstern
       lounge_terrasse: {pos: [4.0, -7.6], target: [8.4, -12.9], lens: 20, h: 1.45, light: goldene_stunde, exposure: 1.4, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Probe 1: aeusseres Dachfenster verdeckte die Sicht   # ueber Lounge und Sofa zu HST und Terrasse
+      # Runde 12 Nachtrag Schritte 8 und 9: Weitwinkel 15 mm aus der Nordwestecke; Blick aus der Tuer zum Vorraum durch den ganzen Raum
+      wohnkueche_weit: {pos: [2.1, -7.5], target: [7.0, -11.3], lens: 15, h: 1.35, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      eingang_weit: {pos: [7.66, -7.75], target: [1.0, -11.4], lens: 15, h: 1.40, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
 
 
   # Runde 11: Top 23-2 (Maisonette 23, Wohnkueche im 2. DG) aus EIN S. 13 (Vektor), Aufbau wie Top 26-2 (gespiegelt).
@@ -555,6 +610,7 @@ wohnungen:
       - {rect: [18.62, -10.94, 18.64, -8.54], z: [0.92, 1.55], mat: stein_taj, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Rueckwand Stein)"}
       - {rect: [18.04, -8.54, 18.64, -7.94], z: [0, 2.3], mat: front_eiche_hell, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Hochschrank mit Backofen und Kuehlschrank)"}
       - {rect: [18.32, -10.6, 18.62, -8.8], z: [1.8, 1.84], mat: t34_eiche, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Wandboard Eiche)"}
+      - {rect: [18.32, -10.6, 18.62, -8.8], z: [1.795, 1.80], mat: j_led, quelle: "Runde 12 Nachtrag (Auftrag noma_r12 Schritt 10: LED unter dem Bord)"}
       - {rect: [16.13, -8.37, 17.14, -8.32], z: [0, 0.94], mat: stein_taj, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Wasserfall-Wange Stein)"}
       - {rect: [16.13, -10.11, 17.14, -8.37], z: [0.08, 0.88], mat: stein_taj, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Fronten grifflos)"}
       - {rect: [16.13, -10.11, 17.14, -8.37], z: [0, 0.08], mat: stein_taj, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13 (Sockel zurueckgesetzt)"}
@@ -590,8 +646,8 @@ wohnungen:
       - {rect: [15.083, -9.227, 15.087, -9.223], z: [1.84, 2.36], mat: schwarz, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
       - {rect: [15.083, -8.622, 15.087, -8.618], z: [1.84, 2.36], mat: schwarz, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
       # Buecher und Schale auf dem Travertin-Couchtisch
-      - {rect: [12.35, -9.3, 12.65, -9.08], z: [0.36, 0.39], mat: buch_2, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
-      - {rect: [12.37, -9.28, 12.62, -9.1], z: [0.39, 0.41], mat: buch_1, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
+      - {rect: [12.35, -9.18, 12.65, -8.96], z: [0.36, 0.39], mat: buch_2, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
+      - {rect: [12.37, -9.16, 12.62, -8.98], z: [0.39, 0.41], mat: buch_1, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
     zylinder:
       - {c: [12.65, -12.05], r: 0.21, z: [0.475, 0.5], mat: eiche_tisch, seg: 28, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie (Beistelltisch)"}
       - {c: [12.65, -12.05], r: 0.025, z: [0.02, 0.475], mat: messing, seg: 10, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie (Beistelltisch)"}
@@ -614,8 +670,8 @@ wohnungen:
       - {c: [15.085, -8.62], r: 0.17, z: [1.55, 1.66], mat: schirm_taupe, seg: 32, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
       - {c: [15.085, -8.62], r: 0.15, z: [1.545, 1.55], mat: leuchte_warm, seg: 24, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
       # Couchtisch: ovaler Block Travertin, schwarze Schale
-      - {c: [12.62, -9.17], r: 0.4, oval: [1.5, 1.0], z: [0.0, 0.36], mat: stein_travertin_poren, seg: 48, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
-      - {c: [12.85, -9.25], r: 0.11, r_oben: 0.13, z: [0.36, 0.41], mat: schwarz, seg: 28, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
+      - {c: [12.62, -9.05], r: 0.4, oval: [1.5, 1.0], z: [0.0, 0.36], mat: stein_travertin_poren, seg: 48, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
+      - {c: [12.85, -9.13], r: 0.11, r_oben: 0.13, z: [0.36, 0.41], mat: schwarz, seg: 28, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
       # Skulpturvasen Kreide an der Treppeneinhausung (Vorlage: Vasen am Fenster)
       - {c: [14.0, -10.75], r: 0.12, r_oben: 0.07, z: [0.0, 0.62], mat: keramik_creme, seg: 24, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
       - {c: [14.25, -10.72], r: 0.09, r_oben: 0.1, z: [0.0, 0.42], mat: keramik_creme, seg: 24, quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
@@ -628,28 +684,42 @@ wohnungen:
       - {modell: stuhl_boucle, c_px: [14.55, -9.21], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: stuhl_boucle, c_px: [14.55, -9.81], front: +x, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       # Runde 11g ersetzt: {modell: pendelleuchte, c_px: [15.085, -9.225], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: pendelleuchte, c_px: [16.635, -8.85], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: pendelleuchte, c_px: [16.635, -9.65], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: sofa_cloud, px: [11.58, -10.58, 13.84, -9.66], front: +y, farbe: "#ECE6DC", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne): {modell: pendelleuchte, c_px: [16.635, -8.85], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 12 Nachtrag ersetzt (Papierlaterne): {modell: pendelleuchte, c_px: [16.635, -9.65], d: 0.32, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 12 Nachtrag ersetzt (Nierensofa, eigene_moebel): {modell: sofa_cloud, px: [11.58, -10.58, 13.84, -9.66], front: +y, farbe: "#ECE6DC", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       # Runde 12 ersetzt: {modell: couchtisch_rund, c_px: [12.6, -9.2], d: 0.8, skalierung: frei, h: 0.38, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: lounge_designer, px: [12.1, -8.81, 13.11, -7.62], front: -y, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
-      - {modell: stehleuchte_bogen, c_px: [11.05, -10.45], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 12 Nachtrag entfernt (Nutzer 25.11.2026: Sessel gegenueber dem Sofa passt nicht): {modell: lounge_designer, px: [12.1, -8.81, 13.11, -7.62], front: -y, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
+      # Runde 12 Nachtrag ersetzt (Stehleuchte Papier): {modell: stehleuchte_bogen, c_px: [11.05, -10.45], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: zimmerpflanze, c_px: [11.2, -12.1], d: 0.55, skalierung: hoehe, h: 1.4, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       # Runde 11g ersetzt: {modell: zimmerpflanze_klein, c_px: [12.95, -12.30], d: 0.6, skalierung: hoehe, h: 0.85, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: barhocker, c_px: [16.33, -10.6], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: barhocker, c_px: [16.95, -10.6], front: +y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 13"}
       - {modell: sideboard, px: [12.9, -12.1, 13.3, -11.0], front: -x, skalierung: frei, h: 0.55, anlegen: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       # Runde 11g Probe: Sessel verdeckte den Terrassenblick, entfernt: {modell: lounge_designer, px: [11.85, -11.75, 12.86, -10.62], front: -x, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
-      - {modell: stehleuchte_bogen, c_px: [13.05, -10.82], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      # Runde 12 Nachtrag entfernt: {modell: stehleuchte_bogen, c_px: [13.05, -10.82], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       # Runde 12 ersetzt: {modell: pendelleuchte, c_px: [15.085, -8.62], d: 0.22, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie; Gruppe statt Einzelleuchte"}
       # Runde 12 ersetzt: {modell: pendelleuchte, c_px: [15.085, -9.225], d: 0.22, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       # Runde 12 ersetzt: {modell: pendelleuchte, c_px: [15.085, -9.83], d: 0.22, h: 0.85, haengend: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
       - {modell: zimmerpflanze_klein, c_px: [13.05, -12.4], d: 0.4, skalierung: hoehe, h: 0.8, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+    # Runde 12 Nachtrag (Nutzer 25.11.2026): Nierensofa Boucle, Pouf statt Sessel, TV an der Nordwand gegenueber auf Lowboard Eiche,
+    # Papierlaternen ueber der Insel (Stoffzylinder ueber dem Tisch bleiben), Stehleuchte Papier, Kerzen, Plaid
+    eigene_moebel:
+      - {typ: sofa_niere, c: [12.71, -9.945], front: 90, breite: 2.3, farbe: "#ECE6DC"}
+      - {typ: pouf, c: [11.2, -8.2], r: 0.27, farbe: "#ECE6DC"}
+      - {typ: tv, c: [12.71, -7.22], front: -90, unterkante: 0.85, lowboard: {breite: 1.9, tiefe: 0.40, h: 0.45}}
+      - {typ: laterne, c: [16.635, -8.85], d: 0.32, z_mitte: 1.75, form: rund}
+      - {typ: laterne, c: [16.635, -9.65], d: 0.32, z_mitte: 1.75, form: rund}
+      - {typ: stehleuchte, c: [11.0, -10.45], d: 0.36, h: 1.45}
+      - {typ: kerzen, c: [15.0, -8.75], z: 0.75, n: 3}
+      - {typ: plaid, c: [13.4, -10.23], z: 0.445, front: 90}
+    blattschatten:   # Dachflaechenfenster und HST
+      - {fenster: [16.78, -11.6, 1.9], normal: [0, -1], abstand: 3.0, groesse: 5.0, dichte: 0.45}
+      - {fenster: [11.64, -12.9, 1.2], normal: [0, -1], abstand: 2.5, groesse: 4.5, dichte: 0.5}
     leuchten:   # Runde 12: Innenlicht fuer das Abendbild (2700 K): drei Pendel, Bogenleuchten, Kueche
       - {pos: [15.085, -9.83, 1.60], w: 45, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
       - {pos: [15.085, -9.225, 1.60], w: 45, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
       - {pos: [15.085, -8.62, 1.60], w: 45, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
-      - {pos: [11.6, -10.2, 1.75], w: 50, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
+      - {pos: [11.0, -10.45, 1.25], w: 50, farbe: "#FFC98A", quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
       - {pos: [17.6, -9.7, 2.45], w: 60, farbe: "#FFD7A8", quelle: "Runde 12 (Auftrag noma_r12: Einrichtung nach Interior-Vorlage SHG13_TOP23_WK, mood_vorlagen.md Abschnitt Penthaus), eigene Geometrie"}
     menschen:   # Runde 12: nur in Kameras mit `menschen: an`
       - {pos: [15.85, -9.0], drehung: 0, hoehe: 1.70, quelle: "Runde 12 (Auftrag noma_r12 Schritt 6), Platzhalter fuer KI-Personen"}
@@ -670,6 +740,88 @@ wohnungen:
       wohnkueche_vorlage_personen: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: goldene_stunde, exposure: 1.5, menschen: an, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       insel_detail: {pos: [16.6, -7.5], target: [16.6, -10.9], lens: 35, h: 1.35, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Insel laengs zu den Dachflaechenfenstern (Probe 1: Pendel verdeckte das Bild)
       sofa_terrasse: {pos: [13.95, -7.7], target: [11.4, -12.9], lens: 20, h: 1.45, light: goldene_stunde, exposure: 1.4}   # ueber das Sofa zu HST und Terrasse
+      # Runde 12 Nachtrag Schritte 8 und 9: Weitwinkel 15 mm wie die Vorlage; Blick aus der Tuer zum Vorraum durch den ganzen Raum
+      wohnkueche_vorlage_weit: {pos: [10.85, -7.45], target: [17.6, -10.5], lens: 15, h: 1.35, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      eingang_weit: {pos: [16.33, -7.40], target: [11.0, -12.2], lens: 15, h: 1.40, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+
+  # Runde 12 Nachtrag (Nutzer 25.11.2026, Auftrag noma_r12 Schritt 11): Top 26-2 Variante B, gleiche Huelle, andere
+  # Moebelstellung: Kuechenzeile unter den Dachflaechenfenstern (Kniestock 0,86, Arbeitsplatte 0,92 schliesst an die
+  # Schraege an, keine Oberschraenke; Kopffreiheit an der Arbeitskante rund 1,54 m, daher Kochfeld in der Insel und
+  # Spuele unter dem Fenster), davor der Kochblock (Durchgang 0,92 m), davor der Esstisch Eiche oval; Fernseher an der
+  # Liftwand (Ostwand x 7,73) auf Lowboard Eiche, Nierensofa davor auf den Fernseher ausgerichtet, Teppich verbindet beides.
+  top26_2_b:
+    <<: *top26_2
+    einbauten:
+      - {rect: [0.80, -12.30, 5.63, -11.72], z: [0.08, 0.88], mat: front_raeuchereiche}
+      - {rect: [0.80, -12.24, 5.63, -11.78], z: [0, 0.08], mat: schwarz}
+      - {rect: [0.80, -12.32, 5.63, -11.70], z: [0.88, 0.92], mat: stein_calacatta}
+      - {rect: [2.95, -12.18, 3.55, -11.84], z: [0.92, 0.924], mat: schwarz}
+      - {rect: [0.80, -10.45, 1.40, -9.50], z: [0, 2.3], mat: front_raeuchereiche}
+      - {rect: [1.75, -10.78, 4.45, -9.92], z: [0.08, 0.88], mat: front_raeuchereiche}
+      - {rect: [1.81, -10.72, 4.39, -9.98], z: [0, 0.08], mat: schwarz}
+      - {rect: [1.75, -10.78, 4.45, -9.92], z: [0.88, 0.94], mat: stein_calacatta}
+      - {rect: [1.75, -10.78, 1.80, -9.92], z: [0, 0.88], mat: stein_calacatta}
+      - {rect: [4.40, -10.78, 4.45, -9.92], z: [0, 0.88], mat: stein_calacatta}
+      - {rect: [2.70, -10.62, 3.50, -10.08], z: [0.94, 0.945], mat: kochfeld}
+      - {rect: [7.75, -8.2, 7.79, -7.29], z: [0, 2], mat: tuer_eiche}
+      - {rect: [1.96, -7.2, 2.76, -7.16], z: [0, 2], mat: tuer_eiche}
+      - {rect: [5.15, -10.65, 7.30, -8.25], z: [0.002, 0.012], mat: teppich_wolle}
+      - {rect: [7.2, -12.55, 9.6, -11.05], z: [0.002, 0.01], mat: teppich_jute}
+      - {rect: [7.39, -12.61, 7.464, -12.598], z: [0.01, 2.42], mat: leinen_store}
+      - {rect: [7.46, -12.56, 7.534, -12.548], z: [0.01, 2.42], mat: leinen_store}
+      - {rect: [7.53, -12.61, 7.604, -12.598], z: [0.01, 2.42], mat: leinen_store}
+      - {rect: [7.6, -12.56, 7.674, -12.548], z: [0.01, 2.42], mat: leinen_store}
+      - {rect: [9.79, -12.61, 9.884, -12.598], z: [0.01, 2.42], mat: leinen_store}
+      - {rect: [9.88, -12.56, 9.974, -12.548], z: [0.01, 2.42], mat: leinen_store}
+      - {rect: [9.97, -12.61, 10.064, -12.598], z: [0.01, 2.42], mat: leinen_store}
+      - {rect: [7.1, -12.05, 7.135, -11.15], z: [1.05, 2.25], mat: rahmen_eiche}
+      - {rect: [7.1, -12.01, 7.14, -11.19], z: [1.09, 2.21], mat: kunst_sand}
+      - {rect: [7.1, -11.942, 7.145, -11.582], z: [1.41, 2.106], mat: kunst_ocker}
+      - {rect: [7.1, -11.627, 7.145, -11.33], z: [1.17, 1.71], mat: kunst_salbei}
+      - {rect: [7.1, -11.978, 7.145, -11.906], z: [1.266, 2.01], mat: kunst_terrakotta}
+      - {rect: [7.1, -11.51, 7.145, -11.24], z: [1.794, 2.082], mat: kunst_salbei_hell}
+      - {rect: [7.18, -11.6, 7.42, -11.35], z: [0.55, 0.585], mat: buch_1}
+      - {rect: [7.19, -11.59, 7.41, -11.36], z: [0.585, 0.613], mat: buch_2}
+      - {rect: [7.2, -11.58, 7.4, -11.37], z: [0.613, 0.645], mat: buch_3}
+    zylinder:
+      - {c: [3.25, -12.24], r: 0.012, z: [0.92, 1.18], mat: messing, seg: 10}
+      - {c: [3.5, -8.5], r: 0.48, oval: [2.0, 1.0], z: [0.715, 0.75], mat: eiche_tisch, seg: 56}
+      - {c: [2.95, -8.5], r: 0.2, r_oben: 0.12, z: [0.0, 0.715], mat: eiche_tisch, seg: 32}
+      - {c: [4.05, -8.5], r: 0.2, r_oben: 0.12, z: [0.0, 0.715], mat: eiche_tisch, seg: 32}
+      - {c: [3.3, -8.5], r: 0.17, r_oben: 0.19, z: [0.75, 0.80], mat: holz_schale, seg: 28}
+      - {c: [6.87, -9.45], r: 0.26, z: [0.0, 0.38], mat: stein_travertin, seg: 40}
+      - {c: [6.82, -9.5], r: 0.07, z: [0.38, 0.58], mat: keramik_creme, seg: 20}
+      - {c: [7.78, -11.4], r: 0.21, z: [0.475, 0.5], mat: eiche_tisch, seg: 28}
+      - {c: [7.78, -11.4], r: 0.025, z: [0.02, 0.475], mat: messing, seg: 10}
+      - {c: [7.78, -11.4], r: 0.16, z: [0.0, 0.02], mat: messing, seg: 24}
+      - {c: [7.32, -11.2], r: 0.08, z: [0.55, 0.9], mat: keramik_creme, seg: 20}
+    moebel:
+      - {modell: stuhl_boucle, c_px: [3.05, -9.2], front: +y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Runde 12 Nachtrag Variante B (Nutzer 25.11.2026: Tisch vor dem Kochblock)"}
+      - {modell: stuhl_boucle, c_px: [3.95, -9.2], front: +y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Runde 12 Nachtrag Variante B (Nutzer 25.11.2026: Tisch vor dem Kochblock)"}
+      - {modell: stuhl_boucle, c_px: [3.05, -7.8], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Runde 12 Nachtrag Variante B (Nutzer 25.11.2026: Tisch vor dem Kochblock)"}
+      - {modell: stuhl_boucle, c_px: [3.95, -7.8], front: -y, skalierung: hoehe, h: 0.78, farbe: "#E9E1D6", quelle: "Runde 12 Nachtrag Variante B (Nutzer 25.11.2026: Tisch vor dem Kochblock)"}
+      - {modell: zimmerpflanze, c_px: [0.8, -7.62], d: 0.55, skalierung: hoehe, h: 1.5, quelle: "Runde 12 Nachtrag Variante B, Ausstattung"}
+      - {modell: sideboard, px: [7.1, -12.15, 7.5, -11.05], front: +x, skalierung: frei, h: 0.55, anlegen: true, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+      - {modell: zimmerpflanze_klein, c_px: [7.3, -12.42], d: 0.4, skalierung: hoehe, h: 0.8, quelle: "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"}
+    eigene_moebel:
+      - {typ: sofa_niere, c: [6.035, -9.45], front: 0, breite: 2.3, farbe: "#E6DDCF"}
+      - {typ: tv, c: [7.73, -9.6], front: 180, unterkante: 0.85, lowboard: {breite: 1.8, tiefe: 0.40, h: 0.45}}
+      - {typ: laterne, c: [2.6, -10.35], d: 0.34, z_mitte: 1.75, form: rund}
+      - {typ: laterne, c: [3.6, -10.35], d: 0.34, z_mitte: 1.75, form: rund}
+      - {typ: laterne, c: [3.5, -8.5], d: 0.55, z_mitte: 1.55, form: oval}
+      - {typ: stehleuchte, c: [5.05, -10.95], d: 0.36, h: 1.45}
+      - {typ: kerzen, c: [3.8, -8.4], z: 0.75, n: 3}
+      - {typ: plaid, c: [5.85, -8.72], z: 0.445, front: 0}
+    leuchten:
+      - {pos: [3.5, -8.5, 1.50], w: 60, farbe: "#FFC98A"}
+      - {pos: [3.1, -10.35, 1.70], w: 40, farbe: "#FFC98A"}
+      - {pos: [5.05, -10.95, 1.25], w: 45, farbe: "#FFC98A"}
+      - {pos: [3.0, -11.4, 2.0], w: 40, farbe: "#FFD7A8"}
+    menschen: []
+    kameras:
+      eingang_weit: {pos: [7.66, -7.75], target: [1.0, -11.6], lens: 15, h: 1.40, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      hauptblick: {pos: [1.35, -7.45], target: [6.6, -11.6], lens: 16, h: 1.40, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      sofa_kueche: {pos: [5.3, -9.45], target: [0.8, -11.8], lens: 16, h: 1.25, light: goldene_stunde, exposure: 1.5, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
 
 
   # Eigene Koordinaten aus dem Moeblierungsplan 1:50 [INT S. 3]: X = von der Wand zum Strassenhaus nach rechts (0 bis 5,03),

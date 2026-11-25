@@ -1106,6 +1106,10 @@ def set_interior_emission(bpy, strength: float):
     for m in bpy.data.materials:
         if m.get("immoviz_innenraum") and m.node_tree and "nacht" in m.node_tree.nodes:
             m.node_tree.nodes["nacht"].outputs[0].default_value = max(0.0, min(1.0, strength))
+    # Runde 12 Nachtrag (lib/assets/japandi.py): Papierlaternen, Kerzenflammen, LED-Leisten leuchten mit dem Innenlicht
+    for m in bpy.data.materials:
+        if m.get("immoviz_lampe") and m.node_tree and "lampe" in m.node_tree.nodes:
+            m.node_tree.nodes["lampe"].inputs["Strength"].default_value = strength * float(m["immoviz_lampe"])
     # Optional (neubau.ausstattung, Materialart leuchte): Aussenleuchten an, sobald das Licht Innenlicht verlangt
     for m in bpy.data.materials:
         if m.name.startswith("aus_leuchte") and m.node_tree:
