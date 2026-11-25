@@ -285,7 +285,7 @@ wohnungen:
       wohnzimmer_tv: {pos: [11.30, -9.75], target: [14.60, -14.20], lens: 18, h: 1.45}     # von der Kueche zu Fenster, TV-Board und Esstisch
       # Runde 12 (Auftrag noma_r12 Schritt 4 bis 6): Gegenschuss von der HST, Kuechendetail, Abend, Variante mit Personen
       gegenschuss: {pos: [13.9, -14.3], target: [10.8, -10.0], lens: 18, h: 1.45}     # von der HST zurueck in Wohnraum und Kueche
-      kueche_detail: {pos: [13.4, -11.4], target: [11.4, -9.0], lens: 35, h: 1.40}   # Insel vor der Kuechenzeile (Probe 1 mit 50 mm: nur Wand)
+      # Runde 12 verworfen (zwei Proben: Kuechenzeile zu kurz, Bild zeigt nur Wand, Steinrueckwand oder Bild): kueche_detail: {pos: [13.4, -11.4], target: [11.4, -9.0], lens: 35, h: 1.40}   # Insel vor der Kuechenzeile (Probe 1 mit 50 mm: nur Wand)
       wohnzimmer_gold: {pos: [14.85, -9.80], target: [11.20, -14.50], lens: 18, h: 1.45, light: goldene_stunde, exposure: 1.1}
       wohnzimmer_abend: {pos: [14.85, -9.80], target: [11.20, -14.50], lens: 18, h: 1.45, light: abend, exposure: 0.9}
       wohnzimmer_personen: {pos: [14.85, -9.80], target: [11.20, -14.50], lens: 18, h: 1.45, menschen: an}
@@ -407,7 +407,7 @@ wohnungen:
       wohnzimmer: {pos: [5.45, -11.55], target: [9.60, -14.00], lens: 18, h: 1.45}     # vom Tresen ueber den Esstisch zu Sofa und HST
       # Runde 12 (Auftrag noma_r12 Schritt 4 bis 6): Gegenschuss von der HST, Kuechendetail, Abend, Variante mit Personen
       gegenschuss: {pos: [8.2, -14.35], target: [5.0, -10.6], lens: 18, h: 1.45}     # von der HST zurueck zu Esstisch und Kueche
-      kueche_detail: {pos: [7.3, -13.3], target: [4.6, -12.6], lens: 35, h: 1.40}    # vom Esstisch zur Kuechenzeile (Probe 1: nur Wand und Tuer)
+      # Runde 12 verworfen (zwei Proben: Kuechenzeile zu kurz, Bild zeigt nur Wand, Steinrueckwand oder Bild): kueche_detail: {pos: [7.3, -13.3], target: [4.6, -12.6], lens: 35, h: 1.40}    # vom Esstisch zur Kuechenzeile (Probe 1: nur Wand und Tuer)
       wohnzimmer_gold: {pos: [5.45, -11.55], target: [9.60, -14.00], lens: 18, h: 1.45, light: goldene_stunde, exposure: 1.1}
       wohnzimmer_abend: {pos: [5.45, -11.55], target: [9.60, -14.00], lens: 18, h: 1.45, light: abend, exposure: 0.9}
       wohnzimmer_personen: {pos: [5.45, -11.55], target: [9.60, -14.00], lens: 18, h: 1.45, menschen: an}
