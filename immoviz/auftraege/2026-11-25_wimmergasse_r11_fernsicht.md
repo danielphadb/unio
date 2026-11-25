@@ -69,7 +69,9 @@ Unsicher bzw. offen:
   Streiflicht harte hell-dunkel-Facetten (blau und grau). Die Veredelung sollte sie als dunstige Hügel malen; im Modell
   wäre ein einheitlich getöntes Band besser. Versuch 25.11. 01:07: Oberkante entlang des Sehstrahls 15 % zur Mitte
   gezogen (geneigter Hang, Silhouette gleich); Ergebnis fast schwarz statt dunstig, daher verworfen und nicht committed.
-  Besserer Weg vermutlich über das Material (Dunstfarbe, wenig Abhängigkeit vom Licht), betrifft alle Projekte.
+  Versuch 01:13: feste Schattierungsnormale nach oben im Material `fern_wald` ergab harte dreieckige Schattenflecken,
+  ebenfalls verworfen. Nächster Weg: Dunstfarbe mit wenig Abhängigkeit vom Licht (Material), bei Tag in Ruhe testen,
+  betrifft alle Projekte.
 - **Kamera `dachgeschoss`**: bisher nie gerendert; sie steht in `nachbar_diagonal_s` und einer Ahornkrone, das Bild ist
   schwarz (Planbeleg: 3 Objekte). Vom Standpunkt +12 m ragen ohnehin keine Landmarken über die Traufen. Neue Position
   braucht eine Vorgabe (Motiv), daher nicht verschoben.
