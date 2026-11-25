@@ -42,7 +42,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- mac-neu | seit 2026-11-25 10:00 | Auftrag noma_r12_dachgeschoss_highend (Vorbereitung, Render erst nach r11b) | Bereich: projects/noma-shg13/wohnungen.yaml, mood_vorlagen.md, auftraege/2026-11-25_noma_r12_dachgeschoss_highend.md
+- mac-neu | seit 2026-11-25 10:00 | Auftrag noma_r12_dachgeschoss_highend, ab 14:45 mit Nachtraegen 13:20 und 13:35 (Schritte 8 bis 15; 4k Teil 1 fertig, Rest neu) | Bereich: projects/noma-shg13/wohnungen.yaml, lib/assets/japandi.py, lib/interior.py, lib/materials.py, auftraege/2026-11-25_noma_r12_dachgeschoss_highend.md
 
 ## Nachrichten
 
