@@ -321,6 +321,77 @@ def oak(bpy, name, color, rough=0.45, coat=0.25):
     return m
 
 
+def stein(bpy, name, color, ader=None, rough=0.14, skala=1.0):
+    """Naturstein hell geadert (Calacatta, Taj Mahal; Runde 12): Adern als duenne Linien einer verzerrten
+    3D-Welle in Objektkoordinaten (laeuft ueber Wasserfallkanten weiter), zweite feinere Aderschar, wolkige
+    Grundfarbe, leichter Lack. Statt Flaechenfarbe (Auftrag noma_r12 Schritt 3)."""
+    m = _new(bpy, name)
+    N = Nodes(m)
+    tc = N.new("ShaderNodeTexCoord")
+    ader = ader or tuple(c * 0.55 for c in color)
+    wolke = N.noise(tc.outputs["Object"], 1.2 * skala, 5.0, 0.6)
+    grund = N.mix_rgb(N.math("MULTIPLY", wolke.outputs["Fac"], 0.5), color, tuple(c * 0.9 for c in color))
+
+    def adern(scale, dist, breite, seed):
+        w = N.new("ShaderNodeTexWave", Scale=scale * skala, Distortion=dist, Detail=6.0)
+        w.wave_type = "BANDS"
+        w.bands_direction = "DIAGONAL"
+        w.inputs["Phase Offset"].default_value = seed
+        N.link(tc.outputs["Object"], w.inputs["Vector"])
+        d = N.math("ABSOLUTE", N.math("SUBTRACT", w.outputs["Fac"], 0.5))
+        return N.math("SUBTRACT", 1.0, N.math("DIVIDE", d, breite, clamp=True))
+
+    a1 = adern(0.9, 9.0, 0.035, 0.0)
+    a2 = adern(2.3, 14.0, 0.018, 2.1)
+    farbe = N.mix_rgb(N.math("MULTIPLY", a1, 0.85), grund, ader)
+    farbe = N.mix_rgb(N.math("MULTIPLY", a2, 0.45), farbe, ader)
+    p = N.principled(farbe, rough=rough, **{"Coat Weight": 0.15})
+    bev = N.new("ShaderNodeBevel", Radius=0.004)
+    bev.samples = 4
+    N.link(bev.outputs["Normal"], p.inputs["Normal"])
+    return m
+
+
+def travertin(bpy, name, color, rough=0.35):
+    """Travertin geschliffen (Runde 12): liegende Baender, offene Poren (dunkler, im Relief), gerundete Kanten."""
+    m = _new(bpy, name)
+    N = Nodes(m)
+    tc = N.new("ShaderNodeTexCoord")
+    w = N.new("ShaderNodeTexWave", Scale=3.0, Distortion=4.0, Detail=4.0)
+    w.bands_direction = "Z"
+    N.link(tc.outputs["Object"], w.inputs["Vector"])
+    grund = N.mix_rgb(N.math("MULTIPLY", w.outputs["Fac"], 0.35), color, tuple(c * 0.86 for c in color))
+    vor = N.new("ShaderNodeTexVoronoi", Scale=55.0)
+    N.link(tc.outputs["Object"], vor.inputs["Vector"])
+    pore = N.math("SUBTRACT", 1.0, N.math("DIVIDE", vor.outputs["Distance"], 0.12, clamp=True))
+    farbe = N.mix_rgb(N.math("MULTIPLY", pore, 0.7), grund, tuple(c * 0.62 for c in color))
+    p = N.principled(farbe, rough=rough)
+    bmp = N.new("ShaderNodeBump", Strength=0.35, Distance=0.002, invert=True)
+    N.link(pore, bmp.inputs["Height"])
+    bev = N.new("ShaderNodeBevel", Radius=0.006)
+    bev.samples = 4
+    N.link(bev.outputs["Normal"], bmp.inputs["Normal"])
+    N.link(bmp.outputs["Normal"], p.inputs["Normal"])
+    return m
+
+
+def stoff(bpy, name, color, rough=0.92, korn=380.0, relief=0.5, sheen=0.4):
+    """Textil (Boucle, Leinen, Teppich; Runde 12): feines Korn im Relief und in der Farbe, Glanz der Fasern
+    (Sheen) statt glatter Flaechenfarbe. korn = Schlingen je Meter (Boucle 380, Teppich 220, Leinen 900)."""
+    m = _new(bpy, name)
+    N = Nodes(m)
+    tc = N.new("ShaderNodeTexCoord")
+    k = N.noise(tc.outputs["Object"], korn, 3.0, 0.7)
+    gross = N.noise(tc.outputs["Object"], 4.0, 3.0, 0.5)
+    farbe = N.mix_rgb(N.math("MULTIPLY", k.outputs["Fac"], 0.5), color, tuple(c * 0.78 for c in color))
+    farbe = N.mix_rgb(N.math("MULTIPLY", gross.outputs["Fac"], 0.25), farbe, tuple(min(1.0, c * 1.08) for c in color))
+    p = N.principled(farbe, rough=rough, **{"Sheen Weight": sheen})
+    bmp = N.new("ShaderNodeBump", Strength=relief, Distance=0.002)
+    N.link(k.outputs["Fac"], bmp.inputs["Height"])
+    N.link(bmp.outputs["Normal"], p.inputs["Normal"])
+    return m
+
+
 def interior(bpy, name, color, emit=(1.0, 0.62, 0.32)):
     """Innenraumkarte hinter Fenstern. Emission wird ueber das Lichtszenario gesetzt."""
     m = _new(bpy, name)
