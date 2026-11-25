@@ -89,3 +89,10 @@ Ziel: einheitlich dunstiger Ton ohne Facetten, unabhängig vom Sonnenstand. In `
 - Kein Licht-abhängiger Schattenwurf auf dem Band (Objekt: Schatten empfangen aus, Ray Visibility Shadow aus), damit keine
   dreieckigen Flecken entstehen.
 - Prüfen an `drohne` (Wimmergasse) und `dachterrasse_stadt` (Noma), golden_hour und blaue_stunde, Probe 960 x 640.
+
+## Vorschlag cloud-neu (25.11. 03:35) für die Kamera `dachgeschoss`
+Geprüft gegen die Baukörper und den Baumkataster in `data/context.json` (nur Lage, ohne Render): der heutige Standpunkt
+(-16,0/-19,0/12) liegt im Haus 009479 (15,9 m). Frei sind Standpunkte über der Kreuzung im gleichen Blick auf den
+Dachausbau (Ziel 3/4/21 unverändert), z. B. `pos: [-11.1, -12.9, 12.0]` (22 m, 220 Grad) oder `[-9.6, -14.0, 12.0]`
+(22 m, 215 Grad), beide außerhalb von Häusern und Baumkronen. Das ist ein Drohnen- oder Hubsteiger-Standpunkt, kein Fenster
+gegenüber. Vor dem Ändern Probe 960 x 640 und mit dem Nutzer klären, ob das Motiv so gewünscht ist.

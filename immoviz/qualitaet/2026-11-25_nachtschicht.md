@@ -66,6 +66,9 @@ nicht ohne Freigabe veredelt.
   im Auftrag `wimmergasse_r11_fernsicht` (Emission mit Dunstfarbe je Licht, Luftperspektive über die Entfernung, kein
   Schattenempfang). Test am Mac bei Tag.
 
+- [x] W8 Kamera `dachgeschoss` (03:35): Standpunkt liegt im Haus 009479; freie Standpunkte über der Kreuzung aus Baukörpern
+  und Baumkataster berechnet und im Auftrag vorgeschlagen (Motiv mit dem Nutzer klären).
+
 ### Werkzeug
 - [x] A1 Befehl `immoviz.py landmarken <projekt>` (22:33): `lib/landmarken.py`, Liste `lib/landmarken_wien.yaml`
   (18 Landmarken mit Quelle); nur erhöhte Außenkameras ab 10 m, Verdeckung nicht geprüft.
