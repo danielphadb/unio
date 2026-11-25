@@ -1,6 +1,6 @@
 # Auftrag noma_r12_dachgeschoss_highend
 
-Status: offen (Freigabe Credits und Referenzen siehe unten)
+Status: offen (Credits freigegeben: Rahmen rund 25 Bilder, rund 80 Credits; Referenzen gesichtet)
 Erstellt: 25.11.2026 früh, cloud-neu
 Erledigt:
 
@@ -16,12 +16,9 @@ einen Step nach oben. Eventuell auch mit Personen (mit und ohne)."
 Betroffen: Dachgeschoss Top 24, Top 25, Penthaus Top 23-2, Penthaus Top 26-2 (Wohnräume, Terrassen, Dachterrassen).
 
 ## Schritte
-1. **Referenzen Interior (Top 23 und 26)**: die Penthaus- und Dachterrassen-Visualisierungen aus dem Kundenordner
-   `08 Visualisierungen/` (siehe `mood_vorlagen.md`: "Penthouse und Dachterrasse nur zum Abgleich"), falls am Mac lokal
-   vorhanden. Je Bild in `mood_vorlagen.md` neuer Abschnitt "Penthaus (Interior)": Möbel (Typ, Material, Farbe, Lage),
-   Materialien (Boden, Wände, Küche, Stein), Leuchten, Deko, Licht, Kamera. Nur Stil, Möbel und Materialien übernehmen,
-   nie Grundriss oder Fenster (Modell bleibt maßgeblich, REGELN V2). Bilder bleiben lokal. Falls nicht vorhanden: melden,
-   cloud-neu holt sie über Google Drive oder vom Nutzer.
+1. **Referenzen Interior (Top 23 und 26)**: gesichtet von cloud-neu, Beschreibung je Bereich in `mood_vorlagen.md`,
+   Abschnitt "Penthaus Top 23 und 26 (Interior-Visualisierungen)". Danach bauen; die Bilder selbst nutzt cloud-neu bei der
+   Veredelung als Stilreferenz (Bild 2). Nur Stil, Möbel, Materialien, Leuchten, Licht; nie Grundriss, Fenster oder Umgebung.
 2. **Einrichtung Top 23-2 und 26-2 nach den Referenzen** umbauen (`wohnungen.yaml` `moebel`, Poly Haven CC0 oder eigene
    Geometrie): Sofa, Esstisch, Stühle, Küche, Leuchten, Teppich, Kunst, Vorhänge wie in den Referenzen; Lage nach Plan.
    Top 24 und 25: Einrichtung eine Stufe hochwertiger (Designer-Leuchten, Stein, Textilien, Kunst je Wohnung verschieden).

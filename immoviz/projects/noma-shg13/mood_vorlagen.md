@@ -58,3 +58,20 @@ Gesichtet: `SHG13_Hof_fin`, `_Hof_fin-3`, `_Hof_fin-4`, `3Z HOF/Wohnzimmer`, `3Z
 | Kamera | Augenhöhe bis leicht erhöht, gerade Senkrechte, viel Raum vor dem Objekt, Objekt nie formatfüllend; innen Durchblick mit angeschnittenem Vordergrund (Lamellen, Insel, Bett) | Kameras Runde 3: Ecke, Diagonale, Vordergrund angeschnitten |
 | Menschen | sehr wenige, klein, ruhig (Paar am Balkon) | höchstens zwei Personen klein im Hintergrund, meist keine |
 | Abweichung zur Realität | Vorlagen zeigen Glas-Sheddächer auf den Pavillons und Bäume im Nachbargarten, die es nicht gibt (Orthofoto/Google, siehe umgebung_abgleich.md Abschnitt 7); Nachbarn rechts dort lachsfarben, real weiß | Modell bleibt maßgeblich: Flachdach mit PV, Nachbarbäume nur laut Luftbild, Hoftrakte Schlachthausgasse 15 weiß |
+
+## Penthaus Top 23 und 26 (Interior-Visualisierungen, Kundenordner `Wohnungstypen/Penthouse`, gesichtet 25.11.2026)
+Gesichtet: `Wohnzimmer eingerichtet`, `Küche`, `Wohnzimmer dinner` (mit Gästen), `Dachview`, `Dachterrasse` (mit Person).
+Bilder bleiben lokal (cloud-neu Scratchpad), nicht im Repo. Nutzer 25.11.: "bei Top 23 und 26 an den vorhandenen Innenvisus
+anhalten". Übernehmen: Möbel, Materialien, Leuchten, Deko, Licht. Nicht übernehmen: Grundriss, Fenster, Gauben, Umgebung
+(die Vorlagen zeigen eine fremde Skyline mit Wald und Fernsehturm; Umgebung bleibt nach Modell und U12).
+
+| Bereich | Wohnraum und Küche | Dachterrasse |
+|---|---|---|
+| Boden | breite Eichendielen, natur-honig, matt | großformatige Betonplatten hellgrau, Teakdeck um den Whirlpool |
+| Küche | grifflose Hochschränke und Oberschränke Eiche hell (raumhoch), Rückwand und Insel mit Wasserfallkante in hellem Travertin/Quarzit (beige mit grauer Wolkenmaserung), LED-Band unter den Oberschränken, Armatur Edelstahl gebürstet, offene Fächer in der Dachschräge | Outdoor-Küche in Terrazzo mit Einbaugrill und Spüle |
+| Essplatz | ovaler Steintisch (Travertin) auf zwei Kegelfüßen, Stühle im Stil "Chandigarh" (Nuss dunkel mit Wiener Geflecht), Barhocker Schale salbeigrün an der Insel, Pendelleuchte mit drei Stoffzylindern (Leinen, gestuft) an Chromschiene | runder Holztisch auf geripptem Säulenfuß, Holzstühle mit hellen Polstern |
+| Lounge | geschwungenes Modulsofa Bouclé creme, Strickplaid salbei, ovaler Couchtisch Travertin, Lounge-Sessel Lammfell beige (Togo-Form), Bogenleuchte Chrom, grauer Vintage-Teppich, Geigenfeige, Travertin-Skulpturen, schwarzes Marmor-Sideboard | Modul-Loungesofa taupe mit vielen Kissen, Beistelltische Travertin, Laternen (schwarzer Rahmen mit Glaszylinder) und Rattan-Zylinderleuchten |
+| Fenster, Decke | bodenlange Leinen-Stores weiß und Vorhänge taupe, weiße Aufbau-Zylinderspots an der Decke | Sonnensegel weiß an Edelstahlmasten (nur nach Freigabe, Bauteil) |
+| Pflanzen | Geigenfeige, Zweige | Ziergräser, Hortensien rotbraun, Palmen, üppig in Trögen |
+| Licht | tiefe warme Sonne, Blattschatten auf dem Boden; Abend: Kerzen, warme Pendel, Stadt bei Nacht im Fenster | goldene Stunde im Gegenlicht mit Lichtstrahlen, warme Laternen, Unterwasserlicht im Whirlpool |
+| Personen | Abendessen mit sechs Gästen, elegant, Wein, Kerzen | eine Frau im rostfarbenen Kleid mit Rotwein an der Brüstung |
