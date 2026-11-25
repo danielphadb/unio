@@ -87,6 +87,8 @@ korrigiert, nie per Prompt. Was die KI dazuerfindet, wird verworfen, nicht schö
 | R2 | Möbelplan je Kamera schriftlich (links/Mitte/rechts, welche Wand) in `wohnungen.yaml` unter `kameras.<k>.moebelplan` | dto. | auto: `immoviz.py prompt` warnt "Möbelplan fehlt" |
 | R3 | Kein Rand ohne Grund: Planausschnitt darf keine Wand vor Fenstern erzeugen (`rand_offen`) | N Wand 1 m vor HST verdeckte Ausblicke (Runde 3) | manuell: Vorschau |
 | R4 | Deckungsgleiche Flächen um 2 cm versetzen | N schwarze Flächen in Cycles | manuell |
+| R5 | Bildstandard Innen: hell, weiß, lichtdurchflutet wie die Kundenvisualisierungen. Tageslicht mit direkter Sonne im Raum (Lichtstimmung `hell_vormittag` oder eine andere mit `weissabgleich` und `lampen_tag: 0`), Leuchten tagsüber aus, Wände und Decke weiß, Einrichtung hell (Eiche hell, weiße oder helle Fronten, heller Stein, helle Stoffe, Grün als Akzent). Goldene Stunde und dunkle Hölzer nur auf ausdrücklichen Wunsch | N Runde 12 noma: Goldene Stunde, Räuchereiche, warme Leuchten wirkten dunkel und gelbstichig (Nutzer 25.11.2026) | manuell: Probe neben die Kundenvisualisierungen legen; Richtwert Median-Helligkeit 160 bis 180 von 255, Blau minus Rot zwischen -40 und 0 |
+| R6 | Leuchten sparsam: höchstens eine Leuchtengruppe je Zone (Esstisch, Insel), keine Stehleuchte frei im Raum, nur an Wand oder Sofaecke. Türblätter weiß, flächenbündig, Drücker schwarz | N Runde 12 noma: Laternen und Stehleuchte zu viel, Türen Eiche wirkten billig (Nutzer 25.11.2026) | manuell |
 
 ## 5. Kameras
 
@@ -97,6 +99,7 @@ korrigiert, nie per Prompt. Was die KI dazuerfindet, wird verworfen, nicht schö
 | K3 | Bei Vorlagen-Wunsch Standpunkt der Vorlage nachbauen und vergleichen | N `hof_vorlage` | auto: `kameramatch` (paralleler Ausbau) |
 | K4 | Innenkameras diagonal mit Durchblick, Kameraname = Bildname (`<wohnung>_<kamera>`) | N Bad frontal statt diagonal verworfen | manuell |
 | K5 | Straßenkameras mit `augenhoehe: 1.6` (Höhe über Gelände am Standpunkt), nie mit absolutem z; Kamerahöhe über Gelände im Bericht nennen | W `ecke` stand nur 0,5 m über dem Gehsteig, `ecke_tele` auf Bodenhöhe, `wimmergasse` 2,1 m (19.11.2026) | auto: `setup_camera` rechnet `augenhoehe` aus dem Gelände |
+| K6 | Jeder Innenblick folgt einer von zwei Prämissen. **Raum:** den großen Raum zeigen, 14 bis 16 mm, Kamera 1,4 bis 1,6 m, Senkrechte gerade. **Detail:** schöne Details (Küche, Essplatz mit Ausblick, Sofaecke, Material) im Anspruch eines High-End-Interior-Magazins: 35 bis 50 mm, Kamera 1,0 bis 1,25 m, Senkrechte gerade, `blende: 2.8` für Tiefenschärfe, wenige gezielt gestellte Objekte, Drittelregel. Magazine als Inspiration nutzen | Nutzer 25.11.2026 | manuell: Kameraliste je Wohnung mit Prämisse |
 
 ## 6. Freigabe (vor jedem Credit)
 
