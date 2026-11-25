@@ -1,0 +1,513 @@
+{
+ "kamera": "top24_essplatz_ausblick",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [
+  {
+   "objekt": "top24_00__innenraum__sideboard_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_00__innenraum__sideboard_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_00__innenraum__sideboard_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_01__innenraum__couchtisch_rund_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_02__innenraum__zimmerpflanze_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_02__innenraum__zimmerpflanze_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_02__innenraum__zimmerpflanze_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_02__innenraum__zimmerpflanze_3",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_03__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_03__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_04__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_04__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_05__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_05__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_06__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_06__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_07__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_07__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_08__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_08__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_09__innenraum__barhocker_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_10__innenraum__barhocker_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_glas",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_j00__stoffe__sofa_niere",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_j01__stoffe__pouf",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_j02__innenraum__tv",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_j03__innenraum__laterne",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_j04__innenraum__kerzen",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_j05__stoffe__plaid",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_rahmen",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_waende",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  }
+ ],
+ "sichtbar": [
+  {
+   "objekt": "top24_waende",
+   "anteil_prozent": 54.17,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Top 24, 1. DG hofseitig, 59,44 m2, Terrasse 5,45 m2, Balkon 8,54 m2, WoKue 25,52 m2 [EIN S. 12]"
+  },
+  {
+   "objekt": "nb_shg_glas",
+   "anteil_prozent": 23.28,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "top24_blattmaske_0",
+   "anteil_prozent": 8.91,
+   "collections": [
+    "Atmosphaere"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_shg_rahmen",
+   "anteil_prozent": 4.01,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "top24_02__innenraum__zimmerpflanze_3",
+   "anteil_prozent": 3.72,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "nb_shg_masse",
+   "anteil_prozent": 3.55,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "top24_j02__innenraum__tv",
+   "anteil_prozent": 3.07,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 12 Nachtrag (Nutzer 25.11.2026: Nierensofa, TV gegenueber, Japandi-Leuchten), eigene Geometrie"
+  },
+  {
+   "objekt": "ausstattung_top24_45__vegetation__olivenbaum_1",
+   "anteil_prozent": 2.6,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top24_masse",
+   "anteil_prozent": 2.08,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "top24_07__innenraum__stuhl_boucle_0",
+   "anteil_prozent": 2.07,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "top24_08__innenraum__stuhl_boucle_0",
+   "anteil_prozent": 1.88,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "nb_shg_gelaender",
+   "anteil_prozent": 1.25,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "top24_06__innenraum__stuhl_boucle_0",
+   "anteil_prozent": 1.21,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "top24_j04__innenraum__kerzen",
+   "anteil_prozent": 1.16,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 12 Nachtrag (Nutzer 25.11.2026: Nierensofa, TV gegenueber, Japandi-Leuchten), eigene Geometrie"
+  },
+  {
+   "objekt": "nachbar_hof_sued_005387",
+   "anteil_prozent": 1.14,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top24_01__innenraum__couchtisch_rund_0",
+   "anteil_prozent": 1.07,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 0.97,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top24_42__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 0.88,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "top24_00__innenraum__sideboard_2",
+   "anteil_prozent": 0.81,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "nb_wue_masse",
+   "anteil_prozent": 0.74,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top24_42__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 0.65,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "top24_02__innenraum__zimmerpflanze_0",
+   "anteil_prozent": 0.47,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "ausstattung_top24_46__vegetation__zimmerpflanze_klein_1",
+   "anteil_prozent": 0.33,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top24_45__vegetation__olivenbaum_0",
+   "anteil_prozent": 0.3,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "fern_hh_glas",
+   "anteil_prozent": 0.27,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_wue_glas",
+   "anteil_prozent": 0.21,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "fern_markant",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_daecher",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top24_44__ausstattung__couchtisch_rund_0",
+   "anteil_prozent": 0.18,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "top24_07__innenraum__stuhl_boucle_1",
+   "anteil_prozent": 0.14,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "nb_wue_innen",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "fern_hh_baender",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top24_06__innenraum__stuhl_boucle_1",
+   "anteil_prozent": 0.12,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "top24_00__innenraum__sideboard_0",
+   "anteil_prozent": 0.12,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "top24_08__innenraum__stuhl_boucle_1",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "top24_02__innenraum__zimmerpflanze_2",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "top24_02__innenraum__zimmerpflanze_1",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"
+  },
+  {
+   "objekt": "nb_wue_gelaender",
+   "anteil_prozent": 0.1,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_wue_rahmen",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_wue",
+   "herkunft": "plan"
+  }
+ ]
+}
