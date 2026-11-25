@@ -67,7 +67,9 @@ Baukörpermodells werden je Eintrag über `ersetzt` ausgeblendet. Lage aus dem B
 Unsicher bzw. offen:
 - **Wienerwald-Kulisse**: Silhouette und Lage passen (Abgleich 16.11.), aber das Band aus senkrechten Flächen zeigt im
   Streiflicht harte hell-dunkel-Facetten (blau und grau). Die Veredelung sollte sie als dunstige Hügel malen; im Modell
-  wäre ein geneigtes, einheitlich getöntes Band besser (nicht geändert, betrifft alle Projekte über `lib/fern.py`).
+  wäre ein einheitlich getöntes Band besser. Versuch 25.11. 01:07: Oberkante entlang des Sehstrahls 15 % zur Mitte
+  gezogen (geneigter Hang, Silhouette gleich); Ergebnis fast schwarz statt dunstig, daher verworfen und nicht committed.
+  Besserer Weg vermutlich über das Material (Dunstfarbe, wenig Abhängigkeit vom Licht), betrifft alle Projekte.
 - **Kamera `dachgeschoss`**: bisher nie gerendert; sie steht in `nachbar_diagonal_s` und einer Ahornkrone, das Bild ist
   schwarz (Planbeleg: 3 Objekte). Vom Standpunkt +12 m ragen ohnehin keine Landmarken über die Traufen. Neue Position
   braucht eine Vorgabe (Motiv), daher nicht verschoben.
