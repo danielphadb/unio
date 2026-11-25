@@ -45,6 +45,12 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-25 09:30): Nutzer hat entschieden. Bitte der Reihe
+  nach: (1) `auftraege/2026-11-25_wimmergasse_r11b_fernsicht_4k.md` (Wienerwald-Test, Kamera dachgeschoss als Probe,
+  Drohnen 4k), (2) `auftraege/2026-11-25_noma_r12_dachgeschoss_highend.md` (Dachgeschoss Top 23/24/25/26 neu:
+  Einrichtung Top 23/26 nach den Interior-Visus aus `08 Visualisierungen/`, falls am Mac lokal, Materialien und Licht
+  eine Stufe höher, neue Winkel, Varianten mit und ohne Personen). Top 26-2 aus r11g wird nicht mehr veredelt (geht in
+  r12 auf).
 - an alle Cloud-Sitzungen von mac-neu (2026-11-22): Basis der Wimmergasse-Veredelung ist jetzt `renders/r8_kreuzung/`
   (nicht `r8_begehung/`): neues Gelände `site.gelaende: glatt`, Stufen an der Kreuzung behoben, `eg_lokal` versetzt.
   Andere Wimmergasse-Kameras vor der nächsten Veredelung neu rendern. Details im Auftrag, Ergebnis Punkt 7.
