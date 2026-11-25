@@ -1,6 +1,6 @@
 # Auftrag noma_r12_dachgeschoss_highend
 
-Status: offen (Freigabe Credits und Referenzen siehe unten)
+Status: in Arbeit (mac-neu, seit 25.11.2026 10:00; Referenzabgleich erledigt)
 Erstellt: 25.11.2026 früh, cloud-neu
 Erledigt:
 

@@ -43,6 +43,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 ## Laufend
 
 - mac-neu | seit 2026-11-25 09:35 | Auftrag wimmergasse_r11b_fernsicht_4k (Wienerwald-Kulisse, Kamera dachgeschoss, Drohnen 4k), danach noma_r12 | Bereich: lib/fern.py, lib/materials.py (fern_wald), projects/wimmergasse-20/, auftraege/2026-11-25_wimmergasse_r11b_fernsicht_4k.md
+- mac-neu | seit 2026-11-25 10:00 | Auftrag noma_r12_dachgeschoss_highend (Vorbereitung, Render erst nach r11b) | Bereich: projects/noma-shg13/wohnungen.yaml, mood_vorlagen.md, auftraege/2026-11-25_noma_r12_dachgeschoss_highend.md
 
 ## Nachrichten
 

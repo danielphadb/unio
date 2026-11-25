@@ -58,3 +58,60 @@ Gesichtet: `SHG13_Hof_fin`, `_Hof_fin-3`, `_Hof_fin-4`, `3Z HOF/Wohnzimmer`, `3Z
 | Kamera | Augenhöhe bis leicht erhöht, gerade Senkrechte, viel Raum vor dem Objekt, Objekt nie formatfüllend; innen Durchblick mit angeschnittenem Vordergrund (Lamellen, Insel, Bett) | Kameras Runde 3: Ecke, Diagonale, Vordergrund angeschnitten |
 | Menschen | sehr wenige, klein, ruhig (Paar am Balkon) | höchstens zwei Personen klein im Hintergrund, meist keine |
 | Abweichung zur Realität | Vorlagen zeigen Glas-Sheddächer auf den Pavillons und Bäume im Nachbargarten, die es nicht gibt (Orthofoto/Google, siehe umgebung_abgleich.md Abschnitt 7); Nachbarn rechts dort lachsfarben, real weiß | Modell bleibt maßgeblich: Flachdach mit PV, Nachbarbäume nur laut Luftbild, Hoftrakte Schlachthausgasse 15 weiß |
+
+## Penthaus (Interior), Abgleich für Runde 12 (25.11.2026, mac-neu)
+
+Gesichtet am Mac (lokal, nicht im Repo, Ordner der Kundenrenderings): `SHG13_TOP23_WK_fin.jpg` (Wohnküche),
+`SHG13_TOP23_DT_fin.jpg` (Dachterrasse), `SHG13_TOP23_Bad_fin.jpg` (Bad), dazu zwei Varianten mit Personen
+(Wohnküche abends mit Abendessen, Dachterrasse mit einer Frau am Geländer). Für Top 26 liegt keine eigene Vorlage vor; der
+Nutzer nennt Top 23 und 26 gemeinsam, also gilt die Top-23-Vorlage für beide Penthäuser (je Wohnung leicht variiert).
+Übernommen werden nur Stil, Möbel, Materialien und Licht, nie Grundriss, Fenster oder Gaupen (REGELN V2).
+
+### Wohnküche (Top 23, Tag und Abend)
+
+| Merkmal | Befund |
+|---|---|
+| Boden | Eiche-Landhausdiele hell bis honigfarben, breite Dielen, matt geölt |
+| Wände, Decke | warmweiß, Dachschräge glatt verputzt, Deckenspots als kleine weiße Aufbauzylinder in einer Reihe über der Küche |
+| Küche | Hochschrankzeile und Unterschränke Eiche hell grifflos, Rückwand und Arbeitsplatte heller Naturstein mit grauer Wolkenzeichnung (Taj Mahal oder Calacatta hell), Insel als Monolith im selben Stein mit Wasserfallkanten, offene Nische mit Deko, schwarze Armatur |
+| Esstisch | ovaler Tisch, Platte heller Marmor, zwei konische Säulenfüße aus Stein; sechs Armlehnstühle Holz dunkel (Nussbaum) mit Wiener Geflecht in Sitz und Lehne (Typ Chandigarh) |
+| Pendel | drei Zylinderschirme Stoff in Weiß und Taupe gestuft an einer Messing- oder Chromschiene über dem Tisch |
+| Sofa | großes Ecksofa geschwungen in Bouclé cremeweiß, Plaid salbeigrün, Rundkissen |
+| Sessel | Loungesessel ohne Gestell in langflorigem Teddy-Bouclé sandbraun (Typ Togo) im Vordergrund angeschnitten |
+| Couchtisch | ovaler Block aus Travertin oder Kalkstein, Bücher und Schale darauf |
+| Leuchten | Bogenleuchte mit Chromschirm über dem Sofa (Typ Arco) |
+| Textilien | Vorhänge Leinen sand bodenlang, Teppich grau meliert mit Struktur |
+| Deko | großer Feigenbaum (Ficus lyrata) am Fenster, Skulpturvasen in Kreide, grüne Keramik und schwarzer Marmor im Vordergrund links |
+| Licht Tag | späte Sonne flach durch die Terrassentür, Schattenwurf der Pflanze auf dem Boden, warm, Schatten neutral |
+| Licht Abend | Pendel und Spots warm (rund 2700 K), Kerzen auf Tisch und Couchtisch, draußen blaue Stunde mit Stephansdom und beleuchteten Fenstern |
+| Kamera | rund 24 mm, Augenhöhe, aus der Sofaecke diagonal über Sessel und Couchtisch Richtung Essplatz, Küche und Dachflächenfenster; Terrassentür rechts angeschnitten |
+| Personen (Variante) | sechs Gäste am Esstisch, Wein, Kerzen; keine Person im Vordergrund |
+
+### Dachterrasse (Top 23)
+
+| Merkmal | Befund |
+|---|---|
+| Belag | großformatige helle Betonplatten, um den Whirlpool Holzdeck (Thermoesche oder Teak) |
+| Whirlpool | eingelassen, Edelstahlrand, Unterwasserlicht, sprudelnd |
+| Outdoorküche | Block aus Terrazzo oder Kalkstein mit Grill in Edelstahl, Spüle |
+| Essplatz | runder Tisch Holz mit Lamellen-Säulenfuß, vier Stühle Holz dunkel mit Polster hell |
+| Lounge | Ecksofa niedrig in Taupe mit vielen Kissen in Sand und Beige, zwei kleine Beistelltische aus Stein |
+| Sonnensegel | dreieckig, hell, an Edelstahlmasten |
+| Leuchten | Laternen mit Kerze (Rattan oder Metall, rauchglas), Kerzen auf dem Tisch |
+| Bepflanzung | Hortensien rostrot, Gräser (Pennisetum) hoch, Buchs, Kübel; dichter Rahmen im Vordergrund |
+| Geländer | dunkles Stabgeländer an der Treppe |
+| Licht | goldene Stunde mit Gegenlicht, Sonnenstrahlen im Dunst, warm |
+| Personen (Variante) | eine Frau mit Weinglas am Geländer, Rücken halb zur Kamera |
+
+### Bad (Top 23)
+
+Großformatfliesen Kalkstein beige an Wand und Boden, Doppelwaschtisch mit zwei Aufsatzbecken weiß auf Nussbaum-Unterschrank,
+Armaturen Bronze gebürstet, Spiegel mit indirektem Lichtband, freistehende Wanne oval weiß unter dem Dachflächenfenster,
+bodengleiche Dusche mit Regenbrause, Juteteppiche rund, Holzhocker dunkel, Pflanze.
+
+### Folgerung für Runde 12
+
+- Top 23-2 und 26-2: Wohnküche nach der Tabelle oben möblieren (Lage nach Plan), Top 26-2 mit gleicher Linie, aber anderer
+  Akzentfarbe (zum Beispiel Plaid terrakotta statt salbei) und anderem Pendel, damit die Penthäuser nicht gleich aussehen.
+- Top 24 und 25: dieselbe Materialwelt (Eiche hell, Stein hell, Bouclé, Leinen), Möbel je Wohnung verschieden.
+- Dachterrassen: Whirlpool nur dort, wo der Plan ihn vorsieht; Sonnensegel, Lounge, Outdoorküche und Laternen wie oben.
