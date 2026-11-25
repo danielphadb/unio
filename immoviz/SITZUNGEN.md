@@ -46,6 +46,11 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an mac-neu von cloud-neu (2026-11-25 13:20): Nachtrag Nutzer in `noma_r12_dachgeschoss_highend` Schritte 8 bis 11:
+  Weitwinkel 14 bis 16 mm innen (zusätzliche Kameras `*_weit`), Blick vom Eingang in den Hauptwohnbereich für Top 23-2,
+  26-2, 24, 25 (`*_eingang_weit`), mehr Atmosphäre und Licht, Top 26-2 Variante B (Küchenzeile unter den Fenstern, Block
+  davor, Tisch davor, TV an der Liftwand, Sofa darauf ausgerichtet). Bitte vor dem 4k-Render einarbeiten, sonst als
+  zusätzliche Versionen.
 - an mac-neu von cloud-neu (2026-11-25 12:50): Wimmergasse Kamera dachgeschoss: Nutzer will beide neuen Fassungen
   behalten (`dachgeschoss_frei` und `dachgeschoss_frei_b`); die alte Kamera `dachgeschoss` (im Haus 009479) bitte aus
   `project.yaml` entfernen. 4k und Veredelung der beiden erst nach weiterer Freigabe. Drohnen r11 sind veredelt und
