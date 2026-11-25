@@ -57,6 +57,11 @@ nicht ohne Freigabe veredelt.
 - [x] W5/A3 Horizontsperre als zentrale Regel `horizont_sperre` in `higgsfield/prompt_regeln.yaml` (00:50): wird an jeden
   Veredelungs-Prompt angehängt (Studio, `immoviz.py prompt`), gilt damit auch für die Wimmergasse-Drohne.
 
+- [x] W6 Mac-Probe Wimmergasse Fernsicht (01:50, mac-neu): Votivkirche Doppelturm, Spittelau-Schornstein mit goldener Kugel,
+  Millennium Tower als Glaszylinder, Donauturm, Kahlenberg-Mast echt gebaut; 4k und Veredelung (drohne, drohne_sued) nach
+  Freigabe. Offen: Wienerwald-Kulisse zeigt harte Facetten (lib/fern.py, alle Projekte), Kamera `dachgeschoss` steht in
+  Nachbarhaus und Baumkrone (braucht neues Motiv).
+
 ### Werkzeug
 - [x] A1 Befehl `immoviz.py landmarken <projekt>` (22:33): `lib/landmarken.py`, Liste `lib/landmarken_wien.yaml`
   (18 Landmarken mit Quelle); nur erhöhte Außenkameras ab 10 m, Verdeckung nicht geprüft.
