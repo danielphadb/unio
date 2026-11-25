@@ -730,14 +730,15 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
             X, Y = apt.px_to_local(tx, ty)
             z = a["floor_z"] + cam.get("h", 1.45)
             cfg["cameras"][f"{name}_{cam_name}"] = {"pos": [x, y, z], "target": [X, Y, z + cam.get("dz", 0.0)],
-                                                     "lens": cam.get("lens", 24), "vertical": True}
+                                                     "lens": cam.get("lens", 24), "vertical": True,
+                                                     **{k: cam[k] for k in ("blende", "fokus", "format") if cam.get(k)}}
             lname = cam.get("light", a.get("light", "golden_hour"))
             elev, az = B.setup_light(scene, cfg, ctx, lname)
             # Runde 12 Nachtrag: Leuchten folgen dem Innenlicht der Lichtstimmung (tagsueber gedimmt auf lampen_tag, Standard 0,4); Lichter ohne
             # `interior` behalten die volle Leistung (fruehere Runden)
             Lk = cfg["lights"][lname]
             for lo in lampen:
-                lo.data.energy = lo["w"] * (max(float(Lk["interior"]), float(a.get("lampen_tag", 0.4))) if "interior" in Lk else 1.0)
+                lo.data.energy = lo["w"] * (max(float(Lk["interior"]), float(Lk.get("lampen_tag", a.get("lampen_tag", 0.4)))) if "interior" in Lk else 1.0)
             from .sun import sun_vector_local       # Blattschatten je Kamera zur Sonne (wohnungen.yaml blattschatten)
             JP.blattschatten(bpy, scene, apt, a if str(cam.get("blattschatten", "an")).lower() not in ("aus", "nein", "false") else {},
                              name, sun_vector_local(elev, az, cfg["site"]["x_axis_deg"]))
