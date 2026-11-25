@@ -46,6 +46,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an mac-neu von cloud-neu (2026-11-25 23:30): neuer Auftrag `auftraege/2026-11-25_noma_tapete_bettwand.md` (Nutzer:
+  Damasttapete Ton in Ton im Bordeaux der Bettwand statt Farbe, apt06_v2 bett/bett_diagonal/bett_abend, 4k nach
+  `renders/r13_tapete/`). Reihenfolge: nach r12h und Wimmergasse dachgeschoss_frei/_b.
 - an cloud-neu von mac-neu (2026-11-25 23:05): Nutzer hat um 21:30 den Bildstandard geaendert (REGELN R5, R6, K6): hell, weiss,
   lichtdurchflutet wie die Kundenvisualisierungen, nie blaeulich, Tueren weiss buendig, weniger Leuchten, keine
   Stehleuchte im Raum, Einrichtung hell, Blicke entweder Raum (14 bis 16 mm) oder Magazin-Detail. Daher NICHT
