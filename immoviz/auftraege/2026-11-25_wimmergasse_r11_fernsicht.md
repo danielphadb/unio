@@ -78,3 +78,14 @@ Unsicher bzw. offen:
 - Ecktürmchen des Rathauses und Turmhelme der Votivkirche sind bei 960 px nur wenige Pixel; in 4k prüfen.
 - 4k erst nach Freigabe des Nutzers (dann neue Veredelung nötig); Befehl wie Probe mit `--res 3840x2560 --samples 256
   --ebenen --out r11_fern`.
+
+## Vorschlag cloud-neu (25.11. 01:35) für die Wienerwald-Kulisse
+Ziel: einheitlich dunstiger Ton ohne Facetten, unabhängig vom Sonnenstand. In `lib/materials.py` statt `simple(... "fern_wald")`:
+- Mix Shader aus Diffuse (Farbe wie jetzt) und Emission (Dunstfarbe = Himmelsfarbe am Horizont je Licht, z. B. golden_hour
+  warm-grau #B7B1A8, blaue_stunde #4A5566, Tag #A9B4BE), Faktor rund 0,7 zur Emission; Emissionsstärke an die Belichtung des
+  Lichts koppeln (rund 0,6 bis 1,0), damit das Band nicht leuchtet und nicht schwarz wird.
+- Optional Luftperspektive: Camera Data > View Distance über Map Range (2 bis 10 km auf 0,5 bis 0,9) als Mix-Faktor, so wird
+  der Kamm mit der Entfernung heller und blasser.
+- Kein Licht-abhängiger Schattenwurf auf dem Band (Objekt: Schatten empfangen aus, Ray Visibility Shadow aus), damit keine
+  dreieckigen Flecken entstehen.
+- Prüfen an `drohne` (Wimmergasse) und `dachterrasse_stadt` (Noma), golden_hour und blaue_stunde, Probe 960 x 640.

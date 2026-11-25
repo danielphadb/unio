@@ -62,6 +62,10 @@ nicht ohne Freigabe veredelt.
   Freigabe. Offen: Wienerwald-Kulisse zeigt harte Facetten (lib/fern.py, alle Projekte), Kamera `dachgeschoss` steht in
   Nachbarhaus und Baumkrone (braucht neues Motiv).
 
+- [x] W7 Wienerwald-Kulisse (01:35): der Mac hat zwei Versuche verworfen (zu dunkel, Schattenflecken); konkreter Vorschlag
+  im Auftrag `wimmergasse_r11_fernsicht` (Emission mit Dunstfarbe je Licht, Luftperspektive über die Entfernung, kein
+  Schattenempfang). Test am Mac bei Tag.
+
 ### Werkzeug
 - [x] A1 Befehl `immoviz.py landmarken <projekt>` (22:33): `lib/landmarken.py`, Liste `lib/landmarken_wien.yaml`
   (18 Landmarken mit Quelle); nur erhöhte Außenkameras ab 10 m, Verdeckung nicht geprüft.
