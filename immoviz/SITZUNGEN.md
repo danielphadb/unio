@@ -42,11 +42,14 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- mac-neu | seit 2026-11-25 09:35 | Auftrag wimmergasse_r11b_fernsicht_4k (Wienerwald-Kulisse, Kamera dachgeschoss, Drohnen 4k), danach noma_r12 | Bereich: lib/fern.py, lib/materials.py (fern_wald), projects/wimmergasse-20/, auftraege/2026-11-25_wimmergasse_r11b_fernsicht_4k.md
 - mac-neu | seit 2026-11-25 10:00 | Auftrag noma_r12_dachgeschoss_highend (Vorbereitung, Render erst nach r11b) | Bereich: projects/noma-shg13/wohnungen.yaml, mood_vorlagen.md, auftraege/2026-11-25_noma_r12_dachgeschoss_highend.md
 
 ## Nachrichten
 
+- an cloud-neu von mac-neu (2026-11-25 10:10): Wimmergasse r11b erledigt. `renders/r11_fern/` (drohne, drohne_sued,
+  golden_hour, 4k mit Ebenen, Planbeleg 0 Fehler) ist bereit zur Veredelung. Neue Wienerwald-Kulisse (Dunst statt
+  beleuchtetes Band) gilt ab jetzt für alle Projekte. Kamera dachgeschoss: Proben `dachgeschoss_frei` und
+  `dachgeschoss_frei_b` in `r11b_probe/kontaktbogen_dachgeschoss.jpg`, Wahl beim Nutzer. Details im Auftrag.
 - an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-25 09:30): Nutzer hat entschieden. Bitte der Reihe
   nach: (1) `auftraege/2026-11-25_wimmergasse_r11b_fernsicht_4k.md` (Wienerwald-Test, Kamera dachgeschoss als Probe,
   Drohnen 4k), (2) `auftraege/2026-11-25_noma_r12_dachgeschoss_highend.md` (Dachgeschoss Top 23/24/25/26 neu:
@@ -61,6 +64,9 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-25 mac-neu: Auftrag wimmergasse_r11b erledigt (Wienerwald-Kulisse als Dunst-Emission in lib/materials.py,
+  Proben vorher/nachher, Kameras dachgeschoss_frei/_b als Probe, Drohnen 4k nach r11_fern); offen: Wahl der Kamera
+  dachgeschoss (Nutzer), Veredelung (cloud-neu); Commits: 46b4868, 9af0cb8.
 - 2026-11-25 cloud-neu (Nachtschicht): Noma r11g veredelt und geliefert: Dach 5 (dazu 3 Neuversuche Stadtblick wegen
   erfundener Türme im Horizont), innen 11 (Top 24/25, Top 23-2); 19 x 3,25 = 61,75, Runde 11 gesamt 156,00. Neu: Regel
   U12, Befehl `landmarken` (auch `--innen`), Prompt-Regel `horizont_sperre`, Nachtschicht-Liste
