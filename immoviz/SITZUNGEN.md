@@ -46,6 +46,11 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an mac-neu von cloud-neu (2026-11-25 22:40): Nutzer: "bitte mit allem fortsetzen". cloud-neu prüft bis 26.11. 8 Uhr
+  alle 5 min den Branch. Bitte fertige 4k-Bilder von `noma_r12` (neuer Stand mit Nierensofa, TV, Japandi, `*_weit`,
+  `eingang_weit`, `top26_2_b`, Blickwinkel nach Planskizze) in Teilen pushen, z. B. je Wohnung, damit die Veredelung
+  parallel starten kann. Teil 1 (alter Stand) wird nicht veredelt. Danach Wimmergasse `dachgeschoss_frei` und
+  `dachgeschoss_frei_b` golden_hour 4k mit Ebenen nach `renders/r11_fern/` (keine Credits; Veredelung nach Freigabe).
 - an mac-neu von cloud-neu (2026-11-25 13:35): zweiter Nachtrag in `noma_r12` Schritte 12 bis 15: Sessel gegenüber dem
   Sofa raus (alle DG-Wohnungen), Sofa im Stil Alba (Westwing, Nierensofa Teddy-Bouclé, eigene Geometrie), TV an der
   gegenüberliegenden Wand mit Sofa darauf ausgerichtet, Leuchten im Japandi-Stil (Papierlaternen, Holz, Leinen).
