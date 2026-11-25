@@ -44,8 +44,8 @@ lichter:
   morgen: {date: "2026-08-27", time: "09:40", tz: 2, exposure: 0.2, interior: 0.0, aerosol: 2.2, season: spaetsommer}   # Runde 10 APT. 06: Morgensonne flach von Suedost durch das Suedfenster
   spaetsommer_mittag: {date: "2026-08-27", time: "13:15", tz: 2, exposure: 0.0, interior: 0.0, aerosol: 2.0, season: spaetsommer}   # Sonne ca. 50 Grad aus Sued, fuer die Hofgauben Top 26
   goldene_stunde: {date: "2026-08-27", time: "18:50", tz: 2, exposure: 0.0, interior: 0.0, aerosol: 2.2, season: spaetsommer}   # Runde 12: spaete goldene Stunde (Vorlage Top 23 WK)
-  hell_vormittag: {date: "2026-08-27", time: "09:50", tz: 2, exposure: 0.0, interior: 0.0, lampen_tag: 0.0, aerosol: 1.3, season: spaetsommer, weissabgleich: 5400, look: "AgX - Base Contrast"}   # Runde 12h Standard (Nutzer 25.11.2026: hell, weiss, lichtdurchflutet wie die Kundenvisualisierungen; Leuchten tagsueber aus)
-  hell_nachmittag: {date: "2026-08-27", time: "15:30", tz: 2, exposure: 0.0, interior: 0.0, lampen_tag: 0.0, aerosol: 1.3, season: spaetsommer, weissabgleich: 5400, look: "AgX - Base Contrast"}   # Runde 12h: Sonne von Suedwest; Probe 2 ohne Sonne in den Dachfenstern Top 23-2/26-2 (blaustichig), dort hell_vormittag
+  hell_vormittag: {date: "2026-08-27", time: "09:50", tz: 2, exposure: 0.0, interior: 0.0, lampen_tag: 0.0, aerosol: 1.3, season: spaetsommer, weissabgleich: 5900, look: "AgX - Base Contrast"}   # Runde 12h Standard (Nutzer 25.11.2026: hell, weiss, lichtdurchflutet wie die Kundenvisualisierungen; Leuchten tagsueber aus)
+  hell_nachmittag: {date: "2026-08-27", time: "15:30", tz: 2, exposure: 0.0, interior: 0.0, lampen_tag: 0.0, aerosol: 1.3, season: spaetsommer, weissabgleich: 5900, look: "AgX - Base Contrast"}   # Runde 12h: Sonne von Suedwest; Probe 2 ohne Sonne in den Dachfenstern Top 23-2/26-2 (blaustichig), dort hell_vormittag
   abend: {date: "2026-10-15", time: "18:55", tz: 2, exposure: 0.0, interior: 1.0, season: herbst}   # Runde 12: blaue Stunde mit Innenlicht 2700 K (Vorlage dg people)
 
 render:
@@ -423,12 +423,12 @@ wohnungen:
       # Runde 12 Nachtrag ersetzt (Stehleuchte Papier): {modell: stehleuchte_bogen, c_px: [9.65, -11.7], d: 0.35, skalierung: hoehe, h: 1.6, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: zimmerpflanze, c_px: [9.7, -14.35], d: 0.5, skalierung: hoehe, h: 1.3, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       # Runde 11g ersetzt: {modell: esstisch_aussen, px: [6.19, -14.18, 6.98, -12.38], front: -x, skalierung: frei, h: 0.75, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: stuhl_samt, c_px: [7.12, -12.69], front: -x, skalierung: hoehe, h: 0.75, farbe: "#D8CCBC", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: stuhl_samt, c_px: [7.12, -13.28], front: -x, skalierung: hoehe, h: 0.75, farbe: "#D8CCBC", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: stuhl_samt, c_px: [7.12, -13.88], front: -x, skalierung: hoehe, h: 0.75, farbe: "#D8CCBC", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: stuhl_samt, c_px: [6.05, -12.69], front: +x, skalierung: hoehe, h: 0.75, farbe: "#D8CCBC", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: stuhl_samt, c_px: [6.05, -13.28], front: +x, skalierung: hoehe, h: 0.75, farbe: "#D8CCBC", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
-      - {modell: stuhl_samt, c_px: [6.05, -13.88], front: +x, skalierung: hoehe, h: 0.75, farbe: "#D8CCBC", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_boucle, c_px: [7.12, -12.69], front: -x, skalierung: hoehe, h: 0.75, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_boucle, c_px: [7.12, -13.28], front: -x, skalierung: hoehe, h: 0.75, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_boucle, c_px: [7.12, -13.88], front: -x, skalierung: hoehe, h: 0.75, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_boucle, c_px: [6.05, -12.69], front: +x, skalierung: hoehe, h: 0.75, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_boucle, c_px: [6.05, -13.28], front: +x, skalierung: hoehe, h: 0.75, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
+      - {modell: stuhl_boucle, c_px: [6.05, -13.88], front: +x, skalierung: hoehe, h: 0.75, farbe: "#E9E1D6", quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: barhocker, c_px: [5.55, -10.2], front: -y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       - {modell: barhocker, c_px: [6.15, -10.2], front: -y, skalierung: hoehe, h: 0.76, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
       # Runde 11g ersetzt: {modell: pendelleuchte, c_px: [6.585, -13.28], d: 0.43, h: 0.95, haengend: true, quelle: "Ausstattung Runde 11b (Nutzer 24.11.2026: High-End-Kueche mit Steinplatte, Designermoebel), Lage nach EIN S. 12"}
@@ -580,7 +580,7 @@ wohnungen:
       - {typ: tv, c: [5.49, -7.22], front: -90, unterkante: 0.85, lowboard: {breite: 1.8, tiefe: 0.40, h: 0.45}}
       # Runde 12h (Nutzer 25.11.2026: weniger Leuchten, keine Stehleuchte im Raum): {typ: laterne, c: [2.58, -8.75], d: 0.32, z_mitte: 1.75, form: rund}
       # Runde 12h (Nutzer 25.11.2026: weniger Leuchten, keine Stehleuchte im Raum): {typ: laterne, c: [2.58, -9.55], d: 0.32, z_mitte: 1.75, form: rund}
-      - {typ: laterne, c: [3.51, -11.2], d: 0.55, z_mitte: 1.45, oben: 2.06, form: oval}   # Kabel bis zur Schraege (RH 2,06 bei y -11,20)
+      - {typ: laterne, c: [3.51, -11.2], d: 0.40, z_mitte: 1.45, oben: 2.06, form: oval}   # Kabel bis zur Schraege (RH 2,06 bei y -11,20)
       # Runde 12h (Nutzer 25.11.2026: weniger Leuchten, keine Stehleuchte im Raum): {typ: stehleuchte, c: [4.0, -10.05], d: 0.36, h: 1.45}   # Nachtrag 2: vom Ostende ans Westende des Sofas (stand im Blick lift_ecke_hoch)
       - {typ: kerzen, c: [3.85, -11.45], z: 0.75, n: 3}
       - {typ: plaid, c: [6.2, -9.78], z: 0.445, front: 90}
@@ -601,27 +601,27 @@ wohnungen:
     exposure: 2.8                    # Runde 11c (Nutzer 24.11.2026: Zimmer muessen sehr hell wirken), vorher 2.0
     kameras:
       # Runde 12h Detail (Nutzer 25.11.2026: Details im Anspruch eines High-End-Interior-Magazins, 35 bis 45 mm, Senkrechte gerade, Tiefenschaerfe)
-      essplatz_dachfenster: {pos: [5.0, -11.6], target: [2.5, -11.0], lens: 35, h: 1.25, blende: 2.8, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      sofa_detail: {pos: [6.6, -8.4], target: [5.3, -9.8], lens: 45, h: 1.0, blende: 2.8, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      essplatz_dachfenster: {pos: [5.0, -11.6], target: [2.5, -11.0], lens: 35, h: 1.25, blende: 2.8, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      sofa_detail: {pos: [6.6, -8.4], target: [5.3, -9.8], lens: 45, h: 1.0, blende: 2.8, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       wohnkueche_dachfenster: {pos: [5.0, -7.5], target: [2.2, -12.3], lens: 20, h: 1.45, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # 11c (Nutzer 24.11.2026): aeussere Dachfenster aus (volle dunkle Rahmenflaeche plus getoente Scheibe 0,5 m ueber der Oeffnung wirkten wie graue Rollos); Runde 11: von der Wand zum Bad ueber Sofa und Insel zu den Dachflaechenfenstern, Kueche rechts
       wohnkueche_terrasse: {pos: [9.85, -11.05], target: [6.8, -13.6], lens: 18, h: 1.40, exposure: 2.0}   # Runde 11: aus der Ecke an der Trennwand zu HST und Terrasse (von der Kueche verdeckte die Treppeneinhausung die HST)
-      wohnkueche_morgen: {pos: [5.0, -7.5], target: [2.2, -12.3], lens: 20, h: 1.45, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Runde 11: Morgensonne durch die Dachfenster (11c: 1.4 auf 2.2, aeussere Dachfenster aus)
+      wohnkueche_morgen: {pos: [5.0, -7.5], target: [2.2, -12.3], lens: 20, h: 1.45, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Runde 11: Morgensonne durch die Dachfenster (11c: 1.4 auf 2.2, aeussere Dachfenster aus)
       # Runde 12 (Auftrag noma_r12 Schritt 4 und 5): Blick wie die Interior-Vorlage, von der Gangwand ueber Lounge und
       # Couchtisch zu Insel, Kueche und Essplatz unter den Dachflaechenfenstern; drei Stimmungen, Variante mit Personen
-      wohnkueche_vorlage: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      wohnkueche_vorlage_morgen: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      wohnkueche_vorlage: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      wohnkueche_vorlage_morgen: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       wohnkueche_vorlage_abend: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: abend, exposure: 0.8, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      wohnkueche_vorlage_personen: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.3, menschen: an, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      insel_detail: {pos: [2.6, -7.5], target: [2.6, -10.9], lens: 45, h: 1.15, blende: 2.8, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Insel laengs zu den Dachflaechenfenstern
-      lounge_terrasse: {pos: [4.0, -7.6], target: [8.4, -12.9], lens: 20, h: 1.45, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Probe 1: aeusseres Dachfenster verdeckte die Sicht   # ueber Lounge und Sofa zu HST und Terrasse
+      wohnkueche_vorlage_personen: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.0, menschen: an, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      insel_detail: {pos: [2.6, -7.5], target: [2.6, -10.9], lens: 45, h: 1.15, blende: 2.8, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Insel laengs zu den Dachflaechenfenstern
+      lounge_terrasse: {pos: [4.0, -7.6], target: [8.4, -12.9], lens: 20, h: 1.45, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Probe 1: aeusseres Dachfenster verdeckte die Sicht   # ueber Lounge und Sofa zu HST und Terrasse
       # Runde 12 Nachtrag Schritte 8 und 9: Weitwinkel 15 mm aus der Nordwestecke; Blick aus der Tuer zum Vorraum durch den ganzen Raum
-      wohnkueche_weit: {pos: [2.1, -7.5], target: [7.0, -11.3], lens: 15, h: 1.35, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      eingang_weit: {pos: [7.66, -7.75], target: [1.0, -11.4], lens: 15, h: 1.40, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      wohnkueche_weit: {pos: [2.1, -7.5], target: [7.0, -11.3], lens: 15, h: 1.35, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      eingang_weit: {pos: [7.66, -7.75], target: [1.0, -11.4], lens: 15, h: 1.40, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       # Runde 12 Nachtrag 2 (Nutzer 25.11.2026: eingezeichnete Blickwinkel im Verkaufsplan, Kamera etwas hoeher, 1,60 m)
-      eingang_hoch: {pos: [7.55, -7.7], target: [2.5, -12.0], lens: 15, h: 1.65, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Tuer zum Gang, diagonal zu Essplatz und Dachflaechenfenstern
-      tv_wand_hoch: {pos: [5.45, -7.8], target: [1.6, -11.6], lens: 15, h: 1.60, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}    # von der TV-Wand zu Insel, Kueche und Essplatz
-      lift_ecke_hoch: {pos: [7.5, -10.3], target: [1.5, -8.9], lens: 15, h: 1.60, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # vom Durchgang zur Terrasse (Liftwand) zurueck in den Raum
-      kueche_ecke_hoch: {pos: [0.95, -7.45], target: [7.6, -10.2], lens: 15, h: 1.60, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}  # aus der Kuechenecke diagonal durch den ganzen Raum
+      eingang_hoch: {pos: [7.55, -7.7], target: [2.5, -12.0], lens: 15, h: 1.65, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Tuer zum Gang, diagonal zu Essplatz und Dachflaechenfenstern
+      tv_wand_hoch: {pos: [5.45, -7.8], target: [1.6, -11.6], lens: 15, h: 1.60, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}    # von der TV-Wand zu Insel, Kueche und Essplatz
+      lift_ecke_hoch: {pos: [7.5, -10.3], target: [1.5, -8.9], lens: 15, h: 1.60, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # vom Durchgang zur Terrasse (Liftwand) zurueck in den Raum
+      kueche_ecke_hoch: {pos: [0.95, -7.45], target: [7.6, -10.2], lens: 15, h: 1.60, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}  # aus der Kuechenecke diagonal durch den ganzen Raum
       terrasse_tag: {pos: [9.75, -14.4], target: [7.6, -11.6], lens: 16, h: 1.60, light: spaetsommer_mittag, exposure: 0.4, blattschatten: "aus", objekt_ausblenden: [nb_shg_dach_innen]}   # von der Terrasse durch die HST hinein
       terrasse_abend: {pos: [9.75, -14.4], target: [7.6, -11.6], lens: 16, h: 1.60, light: blaue_stunde, exposure: 2.6, blattschatten: "aus", objekt_ausblenden: [nb_shg_dach_innen]}
 
@@ -775,22 +775,22 @@ wohnungen:
     exposure: 2.8                    # Runde 11c (Nutzer 24.11.2026: Zimmer muessen sehr hell wirken), vorher 2.0
     kameras:
       # Runde 12h Detail (Nutzer 25.11.2026: Details im Anspruch eines High-End-Interior-Magazins, 35 bis 45 mm, Senkrechte gerade, Tiefenschaerfe)
-      essplatz_detail: {pos: [13.6, -10.9], target: [15.6, -8.8], lens: 40, h: 1.2, blende: 2.8, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      sofa_detail: {pos: [13.9, -8.6], target: [12.6, -10.2], lens: 45, h: 1.0, blende: 2.8, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      essplatz_detail: {pos: [13.6, -10.9], target: [15.6, -8.8], lens: 40, h: 1.2, blende: 2.8, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      sofa_detail: {pos: [13.9, -8.6], target: [12.6, -10.2], lens: 45, h: 1.0, blende: 2.8, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       wohnkueche_dachfenster: {pos: [15.40, -7.50], target: [18.20, -12.30], lens: 20, h: 1.45, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # 11c: aeussere Dachfenster aus (wirkten wie graue Rollos); ueber den Esstisch zu Dachflaechenfenstern, Insel und Kueche
       wohnkueche_terrasse: {pos: [10.95, -11.15], target: [13.60, -13.60], lens: 18, h: 1.40, exposure: 2.0}   # aus der Ecke an der Trennwand zu HST und Terrasse
-      wohnkueche_morgen: {pos: [15.40, -7.50], target: [18.20, -12.30], lens: 20, h: 1.45, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # 11c: 1.4 auf 2.2, aeussere Dachfenster aus
+      wohnkueche_morgen: {pos: [15.40, -7.50], target: [18.20, -12.30], lens: 20, h: 1.45, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # 11c: 1.4 auf 2.2, aeussere Dachfenster aus
       # Runde 12 (Auftrag noma_r12 Schritt 4 und 5): Blick wie die Interior-Vorlage SHG13_TOP23_WK, aus der Ecke an der
       # Trennwand ueber Loungesessel und Couchtisch zu Essplatz, Insel, Kueche und Dachflaechenfenstern; drei Stimmungen
-      wohnkueche_vorlage: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      wohnkueche_vorlage_morgen: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      wohnkueche_vorlage: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      wohnkueche_vorlage_morgen: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       wohnkueche_vorlage_abend: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: abend, exposure: 0.8, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      wohnkueche_vorlage_personen: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.3, menschen: an, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      insel_detail: {pos: [16.6, -7.5], target: [16.6, -10.9], lens: 45, h: 1.15, blende: 2.8, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Insel laengs zu den Dachflaechenfenstern (Probe 1: Pendel verdeckte das Bild)
-      sofa_terrasse: {pos: [13.95, -7.7], target: [11.4, -12.9], lens: 20, h: 1.45, light: hell_vormittag, exposure: 2.3}   # ueber das Sofa zu HST und Terrasse
+      wohnkueche_vorlage_personen: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.0, menschen: an, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      insel_detail: {pos: [16.6, -7.5], target: [16.6, -10.9], lens: 45, h: 1.15, blende: 2.8, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Insel laengs zu den Dachflaechenfenstern (Probe 1: Pendel verdeckte das Bild)
+      sofa_terrasse: {pos: [13.95, -7.7], target: [11.4, -12.9], lens: 20, h: 1.45, light: hell_vormittag, exposure: 2.0}   # ueber das Sofa zu HST und Terrasse
       # Runde 12 Nachtrag Schritte 8 und 9: Weitwinkel 15 mm wie die Vorlage; Blick aus der Tuer zum Vorraum durch den ganzen Raum
-      wohnkueche_vorlage_weit: {pos: [10.85, -7.45], target: [17.6, -10.5], lens: 15, h: 1.35, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      eingang_weit: {pos: [16.33, -7.40], target: [11.0, -12.2], lens: 15, h: 1.40, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      wohnkueche_vorlage_weit: {pos: [10.85, -7.45], target: [17.6, -10.5], lens: 15, h: 1.35, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      eingang_weit: {pos: [16.33, -7.40], target: [11.0, -12.2], lens: 15, h: 1.40, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
 
   # Runde 12 Nachtrag (Nutzer 25.11.2026, Auftrag noma_r12 Schritt 11): Top 26-2 Variante B, gleiche Huelle, andere
   # Moebelstellung: Kuechenzeile unter den Dachflaechenfenstern (Kniestock 0,86, Arbeitsplatte 0,92 schliesst an die
@@ -862,7 +862,7 @@ wohnungen:
       - {typ: tv, c: [7.73, -9.6], front: 180, unterkante: 0.85, lowboard: {breite: 1.8, tiefe: 0.40, h: 0.45}}
       # Runde 12h (Nutzer 25.11.2026: weniger Leuchten, keine Stehleuchte im Raum): {typ: laterne, c: [2.6, -10.35], d: 0.34, z_mitte: 1.75, form: rund}
       # Runde 12h (Nutzer 25.11.2026: weniger Leuchten, keine Stehleuchte im Raum): {typ: laterne, c: [3.6, -10.35], d: 0.34, z_mitte: 1.75, form: rund}
-      - {typ: laterne, c: [3.5, -8.5], d: 0.55, z_mitte: 1.55, form: oval}
+      - {typ: laterne, c: [3.5, -8.5], d: 0.40, z_mitte: 1.55, form: oval}
       # Runde 12h (Nutzer 25.11.2026: weniger Leuchten, keine Stehleuchte im Raum): {typ: stehleuchte, c: [5.05, -10.95], d: 0.36, h: 1.45}
       - {typ: kerzen, c: [3.8, -8.4], z: 0.75, n: 3}
       - {typ: plaid, c: [5.85, -8.72], z: 0.445, front: 0}
@@ -874,11 +874,11 @@ wohnungen:
     menschen: []
     kameras:
       # Runde 12h Detail (Nutzer 25.11.2026: Details im Anspruch eines High-End-Interior-Magazins, 35 bis 45 mm, Senkrechte gerade, Tiefenschaerfe)
-      kueche_detail: {pos: [5.0, -10.35], target: [1.5, -10.5], lens: 40, h: 1.15, blende: 2.8, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      esstisch_detail: {pos: [5.2, -7.6], target: [2.6, -9.3], lens: 40, h: 1.2, blende: 2.8, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      eingang_weit: {pos: [7.66, -7.75], target: [1.0, -11.6], lens: 15, h: 1.40, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      hauptblick: {pos: [1.35, -7.45], target: [6.6, -11.6], lens: 16, h: 1.40, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      sofa_kueche: {pos: [5.3, -9.45], target: [0.8, -11.8], lens: 16, h: 1.25, light: hell_vormittag, exposure: 2.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      kueche_detail: {pos: [5.0, -10.35], target: [1.5, -10.5], lens: 40, h: 1.15, blende: 2.8, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      esstisch_detail: {pos: [5.2, -7.6], target: [2.6, -9.3], lens: 40, h: 1.2, blende: 2.8, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      eingang_weit: {pos: [7.66, -7.75], target: [1.0, -11.6], lens: 15, h: 1.40, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      hauptblick: {pos: [1.35, -7.45], target: [6.6, -11.6], lens: 16, h: 1.40, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      sofa_kueche: {pos: [5.3, -9.45], target: [0.8, -11.8], lens: 16, h: 1.25, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
 
 
   # Eigene Koordinaten aus dem Moeblierungsplan 1:50 [INT S. 3]: X = von der Wand zum Strassenhaus nach rechts (0 bis 5,03),
