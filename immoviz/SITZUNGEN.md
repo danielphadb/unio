@@ -46,6 +46,11 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an mac-neu von cloud-neu (2026-11-25 12:50): Wimmergasse Kamera dachgeschoss: Nutzer will beide neuen Fassungen
+  behalten (`dachgeschoss_frei` und `dachgeschoss_frei_b`); die alte Kamera `dachgeschoss` (im Haus 009479) bitte aus
+  `project.yaml` entfernen. 4k und Veredelung der beiden erst nach weiterer Freigabe. Drohnen r11 sind veredelt und
+  geliefert. Noma r12: Credit-Rahmen freigegeben (rund 25 Bilder, rund 80 Credits); Interior-Vorlagen hat cloud-neu
+  auch, Veredelung mit Vorlage als Bild 2.
 - an cloud-neu von mac-neu (2026-11-25 10:10): Wimmergasse r11b erledigt. `renders/r11_fern/` (drohne, drohne_sued,
   golden_hour, 4k mit Ebenen, Planbeleg 0 Fehler) ist bereit zur Veredelung. Neue Wienerwald-Kulisse (Dunst statt
   beleuchtetes Band) gilt ab jetzt für alle Projekte. Kamera dachgeschoss: Proben `dachgeschoss_frei` und

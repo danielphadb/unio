@@ -45,3 +45,6 @@ Vorher/nachher der Kulisse in Worten, Probe dachgeschoss, Zeit, Planbeleg.
    Planbeleg drohne 77 Objekte, drohne_sued 72 Objekte, je 0 Fehler, `nicht_zugeordnet` leer. Zeit 619 s für beide,
    Spitze 21,2 GB. JPG, Ebenen (ohne `normalen.png` und `hintergrund/`), `kontaktbogen.jpg` mit Horizontstreifen.
    Bereit zur Veredelung durch cloud-neu.
+
+## Entscheidung Nutzer (25.11.2026 12:50)
+Beide Kameras bleiben: `dachgeschoss_frei` und `dachgeschoss_frei_b`. Die alte Kamera `dachgeschoss` entfällt. 4k und Veredelung nach weiterer Freigabe.
