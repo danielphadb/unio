@@ -69,6 +69,9 @@ nicht ohne Freigabe veredelt.
 - [x] W8 Kamera `dachgeschoss` (03:35): Standpunkt liegt im Haus 009479; freie Standpunkte über der Kreuzung aus Baukörpern
   und Baumkataster berechnet und im Auftrag vorgeschlagen (Motiv mit dem Nutzer klären).
 
+- [x] N9 Prompts Top 26-2 bereit (04:35, lokal in der Cloud): Penthaus-Prompts mit Styling-Satz und Horizontsperre; bei
+  Freigabe sofort veredelbar (3 x 3,25).
+
 ### Werkzeug
 - [x] A1 Befehl `immoviz.py landmarken <projekt>` (22:33): `lib/landmarken.py`, Liste `lib/landmarken_wien.yaml`
   (18 Landmarken mit Quelle); nur erhöhte Außenkameras ab 10 m, Verdeckung nicht geprüft.
