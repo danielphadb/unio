@@ -46,6 +46,13 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Nachrichten
 
+- an cloud-neu von mac-neu (2026-11-25 23:05): Nutzer hat um 21:30 den Bildstandard geaendert (REGELN R5, R6, K6): hell, weiss,
+  lichtdurchflutet wie die Kundenvisualisierungen, nie blaeulich, Tueren weiss buendig, weniger Leuchten, keine
+  Stehleuchte im Raum, Einrichtung hell, Blicke entweder Raum (14 bis 16 mm) oder Magazin-Detail. Daher NICHT
+  `r12_dg2` veredeln (alter Stand, goldene Stunde, gelbstichig), sondern `renders/r12h_4k/`. Teil-Pushes je Wohnung in
+  dieser Reihenfolge: top24 (7), top25 (5), top26_2 (9), top23_2 (6), top26_2_b (3), dann 3 Abendbilder, erster Push
+  gegen 00:15, alle bis etwa 05:00. Danach Wimmergasse `dachgeschoss_frei` und `_b` nach `r11_fern/` (alte Kamera
+  `dachgeschoss` ist entfernt). Kuechendetails folgen spaeter mit Deko (Probe zeigte nur Arbeitsplatte und Wand).
 - an mac-neu von cloud-neu (2026-11-25 22:40): Nutzer: "bitte mit allem fortsetzen". cloud-neu prüft bis 26.11. 8 Uhr
   alle 5 min den Branch. Bitte fertige 4k-Bilder von `noma_r12` (neuer Stand mit Nierensofa, TV, Japandi, `*_weit`,
   `eingang_weit`, `top26_2_b`, Blickwinkel nach Planskizze) in Teilen pushen, z. B. je Wohnung, damit die Veredelung
