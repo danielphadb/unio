@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import colorsys
+import os
 
 
 def hex_rgb(h: str) -> tuple[float, float, float]:
@@ -316,6 +317,77 @@ def oak(bpy, name, color, rough=0.45, coat=0.25):
     bev = N.new("ShaderNodeBevel", Radius=0.006)
     bev.samples = 4
     N.link(bev.outputs["Normal"], bmp.inputs["Normal"])
+    N.link(bmp.outputs["Normal"], p.inputs["Normal"])
+    return m
+
+
+def stein(bpy, name, color, ader=None, rough=0.14, skala=1.0):
+    """Naturstein hell geadert (Calacatta, Taj Mahal; Runde 12): Adern als duenne Linien einer verzerrten
+    3D-Welle in Objektkoordinaten (laeuft ueber Wasserfallkanten weiter), zweite feinere Aderschar, wolkige
+    Grundfarbe, leichter Lack. Statt Flaechenfarbe (Auftrag noma_r12 Schritt 3)."""
+    m = _new(bpy, name)
+    N = Nodes(m)
+    tc = N.new("ShaderNodeTexCoord")
+    ader = ader or tuple(c * 0.55 for c in color)
+    wolke = N.noise(tc.outputs["Object"], 1.2 * skala, 5.0, 0.6)
+    grund = N.mix_rgb(N.math("MULTIPLY", wolke.outputs["Fac"], 0.5), color, tuple(c * 0.9 for c in color))
+
+    def adern(scale, dist, breite, seed):
+        w = N.new("ShaderNodeTexWave", Scale=scale * skala, Distortion=dist, Detail=6.0)
+        w.wave_type = "BANDS"
+        w.bands_direction = "DIAGONAL"
+        w.inputs["Phase Offset"].default_value = seed
+        N.link(tc.outputs["Object"], w.inputs["Vector"])
+        d = N.math("ABSOLUTE", N.math("SUBTRACT", w.outputs["Fac"], 0.5))
+        return N.math("SUBTRACT", 1.0, N.math("DIVIDE", d, breite, clamp=True))
+
+    a1 = adern(0.9, 9.0, 0.035, 0.0)
+    a2 = adern(2.3, 14.0, 0.018, 2.1)
+    farbe = N.mix_rgb(N.math("MULTIPLY", a1, 0.85), grund, ader)
+    farbe = N.mix_rgb(N.math("MULTIPLY", a2, 0.45), farbe, ader)
+    p = N.principled(farbe, rough=rough, **{"Coat Weight": 0.15})
+    bev = N.new("ShaderNodeBevel", Radius=0.004)
+    bev.samples = 4
+    N.link(bev.outputs["Normal"], p.inputs["Normal"])
+    return m
+
+
+def travertin(bpy, name, color, rough=0.35):
+    """Travertin geschliffen (Runde 12): liegende Baender, offene Poren (dunkler, im Relief), gerundete Kanten."""
+    m = _new(bpy, name)
+    N = Nodes(m)
+    tc = N.new("ShaderNodeTexCoord")
+    w = N.new("ShaderNodeTexWave", Scale=3.0, Distortion=4.0, Detail=4.0)
+    w.bands_direction = "Z"
+    N.link(tc.outputs["Object"], w.inputs["Vector"])
+    grund = N.mix_rgb(N.math("MULTIPLY", w.outputs["Fac"], 0.35), color, tuple(c * 0.86 for c in color))
+    vor = N.new("ShaderNodeTexVoronoi", Scale=55.0)
+    N.link(tc.outputs["Object"], vor.inputs["Vector"])
+    pore = N.math("SUBTRACT", 1.0, N.math("DIVIDE", vor.outputs["Distance"], 0.12, clamp=True))
+    farbe = N.mix_rgb(N.math("MULTIPLY", pore, 0.7), grund, tuple(c * 0.62 for c in color))
+    p = N.principled(farbe, rough=rough)
+    bmp = N.new("ShaderNodeBump", Strength=0.35, Distance=0.002, invert=True)
+    N.link(pore, bmp.inputs["Height"])
+    bev = N.new("ShaderNodeBevel", Radius=0.006)
+    bev.samples = 4
+    N.link(bev.outputs["Normal"], bmp.inputs["Normal"])
+    N.link(bmp.outputs["Normal"], p.inputs["Normal"])
+    return m
+
+
+def stoff(bpy, name, color, rough=0.92, korn=380.0, relief=0.5, sheen=0.4):
+    """Textil (Boucle, Leinen, Teppich; Runde 12): feines Korn im Relief und in der Farbe, Glanz der Fasern
+    (Sheen) statt glatter Flaechenfarbe. korn = Schlingen je Meter (Boucle 380, Teppich 220, Leinen 900)."""
+    m = _new(bpy, name)
+    N = Nodes(m)
+    tc = N.new("ShaderNodeTexCoord")
+    k = N.noise(tc.outputs["Object"], korn, 3.0, 0.7)
+    gross = N.noise(tc.outputs["Object"], 4.0, 3.0, 0.5)
+    farbe = N.mix_rgb(N.math("MULTIPLY", k.outputs["Fac"], 0.5), color, tuple(c * 0.78 for c in color))
+    farbe = N.mix_rgb(N.math("MULTIPLY", gross.outputs["Fac"], 0.25), farbe, tuple(min(1.0, c * 1.08) for c in color))
+    p = N.principled(farbe, rough=rough, **{"Sheen Weight": sheen})
+    bmp = N.new("ShaderNodeBump", Strength=relief, Distance=0.002)
+    N.link(k.outputs["Fac"], bmp.inputs["Height"])
     N.link(bmp.outputs["Normal"], p.inputs["Normal"])
     return m
 
@@ -942,7 +1014,8 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     L["fern_bau"] = simple(bpy, "fern_bau", (0.36, 0.35, 0.33), 0.9)
     L["fern_turm"] = simple(bpy, "fern_turm", (0.22, 0.24, 0.27), 0.6)
     L["fern_dach"] = simple(bpy, "fern_dach", (0.06, 0.065, 0.07), 0.8)
-    L["fern_wald"] = simple(bpy, "fern_wald", (0.20, 0.245, 0.27), 1.0)      # hell und blaugrau: steht im Dunst vor dem Himmel
+    L["fern_wald"] = (simple(bpy, "fern_wald", (0.20, 0.245, 0.27), 1.0) if os.environ.get("IMMOVIZ_DUNST", "").lower() in ("aus", "0", "nein")
+                      else fern_wald(bpy, "fern_wald"))      # Dunst vor dem Himmel, Farbe folgt der Lichtstimmung (set_dunst)
     L["nachbar_rahmen"] = simple(bpy, "nachbar_rahmen", (0.75, 0.74, 0.7), 0.4)
     L["fenster_dunkel"] = simple(bpy, "fenster_dunkel", (0.012, 0.014, 0.016), 0.04, 0.0, **{"Specular IOR Level": 0.9})
     L["terrasse"] = plaster(bpy, "terrasse", (0.32, 0.31, 0.29), var=0.05, bump=0.1, detail=False)
@@ -964,6 +1037,61 @@ def build_library(bpy, cfg_mats: dict) -> dict:
     for i, h in enumerate(NEIGHBOUR_PALETTE):
         L[f"nachbar_{i}"] = plaster(bpy, f"nachbar_{i}", tuple(c * 0.66 for c in hex_rgb(h)), sockel=0.6)
     return L
+
+
+def fern_wald(bpy, name):
+    """Huegelkette am Horizont (lib/fern.py kulisse) als Dunst statt als beleuchtete Flaeche (Auftrag r11b,
+    25.11.2026): reine Emission in der Himmelsfarbe am Horizont in Blickrichtung (eigener Himmel im Material, den
+    set_dunst an die Welt angleicht), abgedunkelt je nach Entfernung (Luftperspektive: nah 2 km dunkler, ab 12 km
+    fast Himmel). Ohne Sonnenlicht keine Facetten und keine Schattenflecken auf dem Band."""
+    m = _new(bpy, name)
+    nt = m.node_tree
+    nt.nodes.clear()
+    out = nt.nodes.new("ShaderNodeOutputMaterial")
+    geo = nt.nodes.new("ShaderNodeNewGeometry")
+    # Blickrichtung waagrecht, knapp ueber dem Horizont (darunter zeigt der Himmel Boden)
+    flach = nt.nodes.new("ShaderNodeVectorMath"); flach.operation = "MULTIPLY"
+    flach.inputs[1].default_value = (-1.0, -1.0, 0.0)
+    nt.links.new(geo.outputs["Incoming"], flach.inputs[0])
+    norm = nt.nodes.new("ShaderNodeVectorMath"); norm.operation = "NORMALIZE"
+    nt.links.new(flach.outputs[0], norm.inputs[0])
+    hoch = nt.nodes.new("ShaderNodeVectorMath"); hoch.operation = "ADD"
+    hoch.inputs[1].default_value = (0.0, 0.0, 0.04)
+    nt.links.new(norm.outputs[0], hoch.inputs[0])
+    sky = nt.nodes.new("ShaderNodeTexSky"); sky.name = "dunst_himmel"
+    sky.sky_type = "MULTIPLE_SCATTERING"
+    sky.sun_disc = False
+    nt.links.new(hoch.outputs[0], sky.inputs["Vector"])
+    cam = nt.nodes.new("ShaderNodeCameraData")
+    mr = nt.nodes.new("ShaderNodeMapRange"); mr.name = "dunst_ferne"
+    mr.inputs["From Min"].default_value = 2000.0
+    mr.inputs["From Max"].default_value = 12000.0
+    mr.inputs["To Min"].default_value = 0.40
+    mr.inputs["To Max"].default_value = 0.72
+    nt.links.new(cam.outputs["View Distance"], mr.inputs["Value"])
+    tint = nt.nodes.new("ShaderNodeVectorMath"); tint.operation = "MULTIPLY"
+    tint.inputs[1].default_value = (0.90, 0.97, 1.0)      # Wald im Dunst: leicht kuehler als der Himmel
+    nt.links.new(sky.outputs[0], tint.inputs[0])
+    hell = nt.nodes.new("ShaderNodeMath"); hell.operation = "MULTIPLY"; hell.name = "dunst_staerke"
+    hell.inputs[1].default_value = 0.35
+    nt.links.new(mr.outputs[0], hell.inputs[0])
+    em = nt.nodes.new("ShaderNodeEmission")
+    nt.links.new(tint.outputs[0], em.inputs["Color"])
+    nt.links.new(hell.outputs[0], em.inputs["Strength"])
+    nt.links.new(em.outputs[0], out.inputs["Surface"])
+    m["immoviz_dunst"] = True
+    return m
+
+
+def set_dunst(bpy, sky_world, staerke: float):
+    """Himmel im Material fern_wald an den Welthimmel der Lichtstimmung angleichen (setup_light)."""
+    for m in bpy.data.materials:
+        if not (m.get("immoviz_dunst") and m.node_tree and "dunst_himmel" in m.node_tree.nodes):
+            continue
+        sk = m.node_tree.nodes["dunst_himmel"]
+        for a in ("sun_elevation", "sun_rotation", "air_density", "aerosol_density"):
+            setattr(sk, a, getattr(sky_world, a))
+        m.node_tree.nodes["dunst_staerke"].inputs[1].default_value = staerke
 
 
 def set_interior_emission(bpy, strength: float):

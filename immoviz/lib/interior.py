@@ -466,7 +466,7 @@ class ManualApartment:
     def einbauten(self, mw, mg):
         """Optional (wohnungen.yaml): feste Einbauten und Möbel als Platzhalter, damit Lage und Größe in der
         Vorschau gesperrt sind. einbauten: [{rect: [x0, y0, x1, y1], z: [z0, z1] ueber FOK, mat}],
-        zylinder: [{c: [x, y], r, z: [z0, z1], mat, seg}], boegen: [{c, r: [ri, ro], winkel: [a0, a1], z, mat}].
+        zylinder: [{c: [x, y], r, z: [z0, z1], mat, seg, oval: [sx, sy], r_oben}], boegen: [{c, r: [ri, ro], winkel: [a0, a1], z, mat}].
         Material "glas" landet im Glasobjekt."""
         z0 = self.c["floor_z"]
         for e in self.c.get("einbauten", []):
@@ -479,12 +479,18 @@ class ManualApartment:
             r, seg = c["r"], c.get("seg", 24)
             za, zb = z0 + c.get("z", [0.0, 0.75])[0], z0 + c.get("z", [0.0, 0.75])[1]
             mat = c.get("mat", "innen_wand")
-            pts = [(cx + r * math.cos(2 * math.pi * k / seg), cy + r * math.sin(2 * math.pi * k / seg)) for k in range(seg)]
-            mw.poly([(x, y, zb) for x, y in pts], None, mat, (0, 0, 1))
+            # Runde 12: `oval: [sx, sy]` (Ellipse, Tischplatte, Couchtisch), `r_oben` (Kegelstumpf, Tischfuss, Schirm)
+            sx, sy = c.get("oval", [1.0, 1.0])
+            fo = c.get("r_oben", r) / r
+            ring = [(math.cos(2 * math.pi * k / seg) * r * sx, math.sin(2 * math.pi * k / seg) * r * sy) for k in range(seg)]
+            pts = [(cx + x, cy + y) for x, y in ring]
+            top = [(cx + x * fo, cy + y * fo) for x, y in ring]
+            mw.poly([(x, y, zb) for x, y in top], None, mat, (0, 0, 1))
             mw.poly([(x, y, za) for x, y in pts], None, mat, (0, 0, -1))
             for k in range(seg):
                 (ax, ay), (bx, by) = pts[k], pts[(k + 1) % seg]
-                mw.poly([(ax, ay, za), (bx, by, za), (bx, by, zb), (ax, ay, zb)], None, mat,
+                (tx, ty), (ux, uy) = top[k], top[(k + 1) % seg]
+                mw.poly([(ax, ay, za), (bx, by, za), (ux, uy, zb), (tx, ty, zb)], None, mat,
                         ((ax + bx) / 2 - cx, (ay + by) / 2 - cy, 0))
         for b in self.c.get("boegen", []):
             self._bogen(mg if b.get("mat") == "glas" else mw, b, z0)
@@ -569,7 +575,8 @@ def build_materials(bpy, mats):
 
 def build_custom_materials(bpy, mats, spec: dict | None):
     """Optional (wohnungen.yaml materialien): {name: {farbe: "#hex", art: eiche|putz|glas|einfach, rauh, metall,
-    leuchten: Stärke}} für Einbauten, Wand- und Deckenfarben einzelner Wohnungen."""
+    leuchten: Stärke; Runde 12 auch art stein (ader, skala), travertin, stoff (korn, relief,
+    sheen)}} für Einbauten, Wand- und Deckenfarben einzelner Wohnungen."""
     from . import materials as M
     for name, s in (spec or {}).items():
         rgb = M.hex_rgb(s.get("farbe", "#cccccc"))
@@ -578,6 +585,14 @@ def build_custom_materials(bpy, mats, spec: dict | None):
             mats[name] = M.oak(bpy, name, rgb)
         elif art == "putz":
             mats[name] = M.plaster(bpy, name, rgb, var=0.03, bump=0.05)
+        elif art == "stein":         # Runde 12: geaderter Naturstein, Travertin, Textil (lib/materials.py)
+            mats[name] = M.stein(bpy, name, rgb, M.hex_rgb(s["ader"]) if s.get("ader") else None, s.get("rauh", 0.14),
+                                 s.get("skala", 1.0))
+        elif art == "travertin":
+            mats[name] = M.travertin(bpy, name, rgb, s.get("rauh", 0.35))
+        elif art == "stoff":
+            mats[name] = M.stoff(bpy, name, rgb, s.get("rauh", 0.92), s.get("korn", 380.0), s.get("relief", 0.5),
+                                 s.get("sheen", 0.4))
         elif art == "glas":
             mats[name] = M.glass(bpy, name, rgb, s.get("rauh", 0.0))
             if s.get("ior"):                  # entspiegelt: kleinerer Brechungsindex, schwaechere Spiegelung
@@ -668,6 +683,21 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
         from .assets import modelle as IA        # 3D-Moebel und -Pflanzen nach Verkaufsplan (wohnungen.yaml moebel)
         objs += IA.einrichten(bpy, coll, apt, a, name, project_dir)
         objs += add_lamps(bpy, coll, apt, a)
+        # Runde 12: Personen-Platzhalter (wohnungen.yaml menschen: [{pos, drehung, hoehe, haltung}]); sichtbar nur in
+        # Kameras mit `menschen: an` (Variante mit Personen), sonst ausgeblendet; die KI macht daraus Personen
+        menschen_ob = None
+        if a.get("menschen"):
+            from . import meshkit as K2
+            from .assets import moebel as MO
+            MO._mats(mats)
+            mbm = K2.MeshBuilder(f"{name}_menschen_platzhalter", ["menschen_platzhalter"])
+            for k, e in enumerate(a["menschen"]):
+                ex, ey = apt.px_to_local(*e["pos"][:2])
+                MO._mensch(mbm, ex, ey, a["floor_z"] + float(e.get("dz", 0.0)), float(e.get("hoehe", 1.72)),
+                           float(e.get("drehung", 0.0)), e.get("haltung", "stehen"), k)
+            menschen_ob = mbm.to_object(bpy, mats, coll, smooth=True)
+            menschen_ob["quelle"] = "Personen-Platzhalter (Auftrag noma_r12 Schritt 6)"
+            objs.append(menschen_ob)
         # Grundflaechenpruefung nur, wo die Wohnung eine harte Huellgrenze hat (huelle_px / huelle_rect)
         huellen = {f"{name}_": apt.abstand_aussen()} if (a.get("huelle_px") or a.get("huelle_rect")) else {}
         flaeche = None
@@ -686,6 +716,9 @@ def render_apartments(project_dir: Path, names: list[str], preview: bool = True,
             if objekt:
                 for o in objekt.objects:
                     o.hide_render = o.name.startswith(aus_k) if aus_k else o.name not in keep
+            if menschen_ob is not None:
+                menschen_ob.hide_render = str(cam.get("menschen", "aus")).lower() not in ("an", "true", "ja") or \
+                    os.environ.get("IMMOVIZ_MENSCHEN", "").lower() in ("aus", "0", "nein", "false")
             px, py = cam.get("pos_px") or cam["pos"]
             tx, ty = cam.get("target_px") or cam["target"]
             x, y = apt.px_to_local(px, py)

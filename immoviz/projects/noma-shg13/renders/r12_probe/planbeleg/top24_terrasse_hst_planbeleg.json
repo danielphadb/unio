@@ -1,0 +1,390 @@
+{
+ "kamera": "top24_terrasse_hst",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [
+  {
+   "objekt": "top24_terrasse_00__innenraum__sideboard_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_00__innenraum__sideboard_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_00__innenraum__sideboard_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_01__innenraum__sofa_cloud_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_01__innenraum__sofa_cloud_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_02__innenraum__couchtisch_rund_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_03__innenraum__lounge_designer_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_04__innenraum__stehleuchte_bogen_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_04__innenraum__stehleuchte_bogen_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_04__innenraum__stehleuchte_bogen_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_04__innenraum__stehleuchte_bogen_3",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_05__innenraum__zimmerpflanze_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_05__innenraum__zimmerpflanze_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_05__innenraum__zimmerpflanze_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_05__innenraum__zimmerpflanze_3",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_06__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_06__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_07__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_07__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_08__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_08__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_09__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_09__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_10__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_10__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_11__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_11__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_12__innenraum__barhocker_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_13__innenraum__barhocker_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_14__innenraum__pendelleuchte_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_15__innenraum__pendelleuchte_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_16__innenraum__pendelleuchte_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_glas",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_rahmen",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top24_terrasse_waende",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  }
+ ],
+ "sichtbar": [
+  {
+   "objekt": "nb_shg_masse",
+   "anteil_prozent": 35.89,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_shg_glas",
+   "anteil_prozent": 17.05,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_shg_dach_masse",
+   "anteil_prozent": 10.7,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_shg_rahmen",
+   "anteil_prozent": 5.56,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 4.92,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top24_43__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 4.73,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_shg_gelaender",
+   "anteil_prozent": 4.43,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top24_masse",
+   "anteil_prozent": 3.65,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_shg_dach_gelaender",
+   "anteil_prozent": 2.54,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363",
+   "anteil_prozent": 1.97,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top24_45__vegetation__olivenbaum_1",
+   "anteil_prozent": 1.72,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "umgebung_fenster",
+   "anteil_prozent": 1.38,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "ausstattung_top24_42__ausstattung__lounge_sessel_1",
+   "anteil_prozent": 1.16,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top24_43__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 1.16,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_b",
+   "anteil_prozent": 0.69,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_daecher",
+   "anteil_prozent": 0.31,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_ost_005362_fluegel",
+   "anteil_prozent": 0.28,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nb_shg_dach_glas",
+   "anteil_prozent": 0.27,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "ausstattung_top24_45__vegetation__olivenbaum_0",
+   "anteil_prozent": 0.22,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "ausstattung_top24_42__ausstattung__lounge_sessel_0",
+   "anteil_prozent": 0.21,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top24",
+   "herkunft": "ausstattung"
+  },
+  {
+   "objekt": "nb_shg_dach_rahmen",
+   "anteil_prozent": 0.12,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_shg_dach_innen",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_umgebung_gruen",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung",
+   "herkunft": "nachbarn"
+  }
+ ]
+}
