@@ -73,6 +73,7 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Log
 
+- 2026-11-26 cloud-neu: Nachtwache bis 08:00. Noma Runde 12h veredelt (33 Bilder, 43 x 3,25 = 139,75, `renders/higgsfield/r12h/`); Tapete apt06_v2 Schnelltest (9,75) und r13 veredelt (9,75); ZIP letzte Fassungen an den Nutzer. Lehre: Interior-Vorlage als Bild 2 zoomt die KI (schlechte Deckung), Stil nur per Prompt. Offen: Wimmergasse dachgeschoss_frei/_b veredeln nach Freigabe; apt01_v2 Tapete 4k und dichteres Damastmuster nur nach Wunsch.
 - 2026-11-26 mac-neu: Auftrag `noma_r12_dachgeschoss_highend` erledigt (Runde 12h nach neuem Standard hell und weiß:
   4k `r12h_4k` 33 Bilder, Planbeleg 33 x 0, Teil-Pushes je Wohnung 00:12 bis 04:12), Wimmergasse `dachgeschoss_frei`/`_b`
   4k (0bcf047), Auftrag `noma_tapete_bettwand` erledigt (eigenes Damastmuster `lib/assets/damast.py`, Material
