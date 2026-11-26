@@ -1,8 +1,8 @@
 # Auftrag noma_tapete_bettwand
 
-Status: in Arbeit (mac-neu, ab 25.11.2026 23:30: Muster, Material und Variante apt06_v2_tapete fertig; Probe und 4k automatisch nach r12h und Wimmergasse, etwa 05:15 bis 06:30)
+Status: erledigt (mac-neu, 26.11.2026 04:55)
 Erstellt: 25.11.2026 23:30, cloud-neu
-Erledigt:
+Erledigt: 26.11.2026 04:55, mac-neu
 
 Start nach `noma_r12_dachgeschoss_highend` (r12h) und Wimmergasse `dachgeschoss_frei`/`_b`, sobald keine andere Mac-Arbeit
 läuft. Zuerst anmelden, Status setzen, pushen. Nie zwei Renders parallel. Keine Credits.
@@ -35,3 +35,25 @@ Probe-Kontaktbogen, Rapport und Materialwerte, Zeit, Planbeleg. Danach veredelt 
 ## Stand cloud-neu
 Schnelltest mit KI auf den gelieferten r10-Bildern (`apt06_v2_bett`, `bett_diagonal`, `bett_abend`), damit der Nutzer den
 Look vorab sieht; der echte Render mit Material bleibt maßgeblich (REGELN: Geometrie und Material im Modell, nicht per Prompt).
+
+## Ergebnis (mac-neu, 26.11.2026)
+
+1. **Muster:** eigenes Damastmuster per Skript (`lib/assets/damast.py`, keine Fremdvorlage, Eintrag "Eigene Muster" in
+   `assets/LIZENZEN.md`): gespiegeltes Medaillon mit Spitzbogen-Doppelkontur, Mittelstiel mit Blattpaaren, Ranken mit
+   Spiralen, Lilienkrone, äußere Akanthus-S-Ranken, Rosette auf Versatz (halbe Bahn). Graustufen-Rapport 1024 px,
+   wird bei Bedarf erzeugt (`assets/texturen/`, nicht im Repo).
+2. **Material `bordeaux_tapete`** (`materials.tapete_damast`, `art: tapete` in der Materialliste): Grund #5C1727,
+   Rapport 0,53 m in Weltmaß (Box-Projektion, läuft über Ecke und Rundung), Kontrast 0,075 (Muster etwa 8 % dunkler bzw.
+   10 % heller; Probe mit 0,10 wirkte im Abendlicht leicht rosa in den Linien), Rauheit Grund 0,85, Ornament 0,55,
+   Sheen 0,5 nur auf dem Ornament, Bump 0,15.
+3. **Variante `apt06_v2_tapete`** (YAML-Anker auf `apt06_v2`, nur `material_ersatz bordeaux_wand: bordeaux_tapete`).
+4. **Probe** 960 x 640 (`renders/r13_tapete_probe/`, lokal): Farbe Bordeaux, nicht rosa, nicht braun; Maßstab plausibel
+   (etwa drei Medaillons über die Wandhöhe über der Verkleidung); in der kleinen Probe leichte Unruhe in feinen Linien.
+5. **4k mit Ebenen** `renders/r13_tapete/`: `bett`, `bett_diagonal`, `bett_abend`, 3840 x 2560, 256 Samples, Lichtstimmungen
+   wie r10. Zeit 23 Minuten für alle drei (04:30 bis 04:53). Planbeleg je 0 Fehler. In 4k kein Moiré, Muster scharf und
+   Ton in Ton. `kontaktbogen_vorher_nachher.jpg` (r10 Wandfarbe links, Tapete rechts), `kontaktbogen_apt06_v2_tapete.jpg`.
+   Bereit zur Veredelung durch cloud-neu.
+6. `apt01_v2` noch nicht (optional, folgt als Probe, wenn die Nacht reicht).
+
+Hinweis: Das Ornament wirkt eher wie ein grafisches Blatt- und Rankenmuster als ein dichter barocker Damast. Wenn der
+Nutzer es dichter und flächiger will: in `damast.py` Strichbreiten erhöhen und Blätter füllen, dann neu erzeugen.
