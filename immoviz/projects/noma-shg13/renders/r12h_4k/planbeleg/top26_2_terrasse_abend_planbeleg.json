@@ -1,0 +1,308 @@
+{
+ "kamera": "top26_2_terrasse_abend",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [
+  {
+   "objekt": "top26_2_00__innenraum__esstisch_rund_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_00s0__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_00s0__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_00s1__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_00s1__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_00s2__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_00s2__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_00s3__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_00s3__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_00s4__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_00s4__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_00s5__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_00s5__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_01__innenraum__zimmerpflanze_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_01__innenraum__zimmerpflanze_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_01__innenraum__zimmerpflanze_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_01__innenraum__zimmerpflanze_3",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_02__innenraum__barhocker_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_03__innenraum__barhocker_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_04__innenraum__sideboard_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_04__innenraum__sideboard_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_04__innenraum__sideboard_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_05__innenraum__zimmerpflanze_klein_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_05__innenraum__zimmerpflanze_klein_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_05__innenraum__zimmerpflanze_klein_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_glas",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_j00__stoffe__sofa_niere",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_j01__stoffe__pouf",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_j02__innenraum__tv",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_j03__innenraum__laterne",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_j04__innenraum__kerzen",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_j05__stoffe__plaid",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_rahmen",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_waende",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  }
+ ],
+ "sichtbar": [
+  {
+   "objekt": "top26_2_waende",
+   "anteil_prozent": 42.5,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Top 26-2, 2. DG, Wohnkueche 46,47 m2 unter der Hofschraege, Terrasse 6,08 m2 im Dacheinschnitt [EIN S. 13]"
+  },
+  {
+   "objekt": "nb_shg_dach_masse",
+   "anteil_prozent": 28.09,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_shg_dach_glas",
+   "anteil_prozent": 27.1,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_shg_dach_rahmen",
+   "anteil_prozent": 10.99,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_shg_dach_gelaender",
+   "anteil_prozent": 3.52,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nb_shg_dach_hof_masse",
+   "anteil_prozent": 2.68,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_shg_dach_hof",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 1.82,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top26_2_04__innenraum__sideboard_2",
+   "anteil_prozent": 0.91,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"
+  },
+  {
+   "objekt": "umgebung_daecher",
+   "anteil_prozent": 0.27,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top26_2_05__innenraum__zimmerpflanze_klein_1",
+   "anteil_prozent": 0.25,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"
+  },
+  {
+   "objekt": "top26_2_05__innenraum__zimmerpflanze_klein_0",
+   "anteil_prozent": 0.2,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"
+  },
+  {
+   "objekt": "top26_2_04__innenraum__sideboard_0",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 11g (Auftrag noma_r11g Schritt 4b: Innenausstattung High-End), eigene Geometrie"
+  },
+  {
+   "objekt": "top26_2_j00__stoffe__sofa_niere",
+   "anteil_prozent": 0.07,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Ausstattung Runde 12 Nachtrag (Nutzer 25.11.2026: Nierensofa, TV gegenueber, Japandi-Leuchten), eigene Geometrie"
+  },
+  {
+   "objekt": "ausstattung_top26_41__vegetation__olivenbaum_1",
+   "anteil_prozent": 0.05,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "ausstattung_top26",
+   "herkunft": "ausstattung"
+  }
+ ]
+}
