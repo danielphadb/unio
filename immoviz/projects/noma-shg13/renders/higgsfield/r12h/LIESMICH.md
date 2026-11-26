@@ -34,7 +34,10 @@ Freigabe Nutzer 25.11.2026 23:10: alle Bilder veredeln.
 | top26_2_b_eingang_weit | 9c2fd1e3 | 12,6 | 8,1 | Variante B |
 | top26_2_b_hauptblick | 65ab1bef | 7,4 | 5,4 | Variante B |
 | top26_2_b_sofa_kueche | 191a02d8 | 11,5 | 7,0 | Variante B |
+| top23_2_wohnkueche_vorlage_abend | cc105e66 | 8,2 | 5,1 | Abend |
+| top24_wohnzimmer_abend | 19d33ef5 | 7,9 | 5,0 | Abend |
+| top26_2_terrasse_abend | 5c014f81 | 3,8 | 3,6 | Blaue Stunde |
 
-Credits Top 24: 8 x 3,25 = 26,00. Top 25: 6 x 3,25 = 19,50. Top 26-2: 17 x 3,25 = 55,25. Top 23-2: 6 x 3,25 = 19,50. Top 26-2 B: 3 x 3,25 = 9,75.
+Credits Top 24: 8 x 3,25 = 26,00. Top 25: 6 x 3,25 = 19,50. Top 26-2: 17 x 3,25 = 55,25. Top 23-2: 6 x 3,25 = 19,50. Top 26-2 B: 3 x 3,25 = 9,75. Abend: 3 x 3,25 = 9,75. Summe Runde 12h: 43 x 3,25 = 139,75 (33 Bilder, 10 Wiederholungen).
 
 Lehre: die Interior-Vorlage als Bild 2 zoomt die KI ins Bild (Maßstab 1,02 bis 1,05, Kanten 15 bis 24 %); ohne Bild 2 liegen die Ergebnisse bei 1 bis 6 %. Stil kommt über den Prompt.
