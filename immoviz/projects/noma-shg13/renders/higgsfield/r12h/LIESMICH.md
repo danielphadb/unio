@@ -25,7 +25,13 @@ Freigabe Nutzer 25.11.2026 23:10: alle Bilder veredeln.
 | top26_2_tv_wand_hoch | 2f159340 | 6,2 | 4,0 | 2. Versuch ohne Stilbild |
 | top26_2_wohnkueche_vorlage | 906d6082 | 5,7 | 4,5 | 2. Versuch ohne Stilbild |
 | top26_2_wohnkueche_weit | 6e7d887e | 15,5 | 8,5 | 1. Versuch mit Stilbild (2. Versuch 8ae787da schlechter) |
+| top23_2_eingang_weit | d34204c7 | 7,1 | 5,1 | |
+| top23_2_essplatz_detail | 2d4ccff4 | 14,1 | 7,1 | Detail (Tiefenschärfe) |
+| top23_2_sofa_detail | e699964f | 10,7 | 6,4 | Detail |
+| top23_2_sofa_terrasse | 333b6f77 | 11,7 | 8,0 | |
+| top23_2_wohnkueche_vorlage | 97e6770d | 5,1 | 4,0 | |
+| top23_2_wohnkueche_vorlage_weit | 16eb4dbe | 8,2 | 5,1 | |
 
-Credits Top 24: 8 x 3,25 = 26,00. Top 25: 6 x 3,25 = 19,50. Top 26-2: 17 x 3,25 = 55,25.
+Credits Top 24: 8 x 3,25 = 26,00. Top 25: 6 x 3,25 = 19,50. Top 26-2: 17 x 3,25 = 55,25. Top 23-2: 6 x 3,25 = 19,50.
 
 Lehre: die Interior-Vorlage als Bild 2 zoomt die KI ins Bild (Maßstab 1,02 bis 1,05, Kanten 15 bis 24 %); ohne Bild 2 liegen die Ergebnisse bei 1 bis 6 %. Stil kommt über den Prompt.
