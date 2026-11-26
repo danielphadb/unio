@@ -1,8 +1,8 @@
 # Auftrag noma_r12_dachgeschoss_highend
 
-Status: in Arbeit (mac-neu, seit 25.11.2026 10:00; Referenzabgleich erledigt)
+Status: erledigt (mac-neu, 26.11.2026 04:15; Abendbilder siehe Ergebnis Punkt 6)
 Erstellt: 25.11.2026 früh, cloud-neu
-Erledigt:
+Erledigt: 26.11.2026 04:15, mac-neu
 
 Start, sobald keine andere Mac-Arbeit läuft (`SITZUNGEN.md` "Laufend", `pgrep -f immoviz.py`). Zuerst anmelden, Status
 setzen, pushen. Nie zwei Renders parallel. Vorher bzw. parallel `wimmergasse_r11b` beachten (Reihenfolge unten).
@@ -83,3 +83,32 @@ hängen und gemütlich gestalten, auch z. B. bei den Lampen mit Japandi-Stil arb
 ## Melden
 Referenz-Abgleich in Worten, Liste der Kameras mit Probe, Zeit, Planbeleg. Danach veredelt cloud-neu (Anzahl und Credits
 vorher mit dem Nutzer abgestimmt).
+
+## Ergebnis (mac-neu, 26.11.2026)
+
+1. **Referenzen und Einrichtung (Schritte 1 bis 3, 12 bis 15):** Referenzabgleich der Interior-Visualisierungen in
+   `mood_vorlagen.md` (Bilder bleiben lokal). Einrichtung Top 23-2, 26-2, 24, 25 neu: Nierensofa in Bouclé mit Pouf (eigene
+   Geometrie in `lib/assets/japandi.py`, kein Fremdmodell, statt Poly Haven), Sessel gegenüber dem Sofa entfernt, TV an der
+   Gegenwand mit Lowboard, Japandi-Leuchten (Papierlaternen rund und oval, Pendel mit drei Stoffzylindern in Top 23/26).
+   Top 25 ohne TV (keine passende Gegenwand ohne Tür oder Fenster).
+2. **Runde 12h, neuer Standard des Nutzers (25.11.2026 21:30, REGELN R5, R6, K6):** hell, weiß, lichtdurchflutet wie die
+   Kundenvisualisierungen, nie bläulich (Lichtstimmung `hell_vormittag`, Weißabgleich 5900 K, AgX Base Contrast, Leuchten
+   tagsüber aus); Türblätter weiß und flächenbündig mit schwarzem Drücker und Schattenfuge; keine freie Stehleuchte,
+   weniger Laternen; Fronten weiß bzw. Eiche hell, Parkett und Tische Eiche hell, Wände wärmer weiß. Die Stimmungen
+   Morgen und goldene Stunde aus Schritt 5 sind damit für die Tagbilder ersetzt.
+3. **Kameras (Schritte 4, 8, 9, 11):** Raumblicke 15 mm (`*_weit`, `*_eingang_weit`, Nachtrag 2 mit 1,60 bis 1,65 m:
+   `*_hoch`), Detailblicke 35 bis 45 mm mit Blende 2,8. Verworfen nach Probe: alle `kueche_detail`, `insel_detail`,
+   `sofa_detail` Top 24/25, `esstisch_detail` Top 26-2 B, `essplatz_dachfenster` Top 26-2 (nur Arbeitsplatte und Wand,
+   brauchen Deko auf der Arbeitsplatte, folgt). Top 26-2 Variante B: Küchenzeile unter den Dachflächenfenstern, Kopfhöhe
+   über der Arbeitsplatte dort nur 1,54 m (Schräge laut Plan), daher Block davor und Tisch davor wie bestellt.
+4. **4k mit Ebenen** `renders/r12h_4k/` (3840 x 2560, 256 Samples), Teil-Pushes je Wohnung: Top 24 7 Bilder (00:12),
+   Top 25 5 (00:58), Top 26-2 9 (02:21), Top 23-2 6 (03:16), Top 26-2 B 3 (03:45), Abend 3 (04:12); 33 Bilder,
+   Planbeleg 33 x 0 Fehler. Helligkeit (Median) 151 bis 208 von 255, Blau minus Rot -12 bis -45 (Ziel -35 bis -15;
+   knapp darüber nur einzelne Bilder mit viel Himmel). Kontaktbogen je Wohnung.
+5. **Personen (Schritt 6):** Kamera `top26_2_wohnkueche_vorlage_personen` angelegt, nicht in `r12h_4k`.
+6. **Abendbilder:** `top24_wohnzimmer_abend` war mit den hellen Materialien überbelichtet (Median 203),
+   `top26_2_terrasse_abend` fast schwarz (Median 12, Terrasse tief im Dacheinschnitt). cloud-neu hat beide bereits
+   veredelt (Belichtung von der KI gerettet). Belichtung in `wohnungen.yaml` angepasst (0,9 auf 0,3; 0,8 auf 1,3;
+   Terrasse Lichtstimmung `abend`, 3,4); lokale Probe `renders/r12h_abend_probe/`, neue 4k nur nach Wunsch des Nutzers.
+7. Offen: Küchen- und Inseldetails mit Deko (Schale, Vase, Brett, Kräuter) neu proben; Top 24 `gang_tuer_hoch` ähnelt
+   `wohnzimmer_weit`, Top 25 `eingang_weit` mit Wand im linken Drittel, beide bei Bedarf neu setzen.

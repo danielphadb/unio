@@ -42,13 +42,18 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
 
 ## Laufend
 
-- mac-neu | seit 2026-11-25 10:00 | Auftrag noma_r12_dachgeschoss_highend, ab 14:45 mit Nachtraegen 13:20 und 13:35 (Schritte 8 bis 15; 4k Teil 1 fertig, Rest neu); ab 21:30 Runde 12h nach Nutzer: Standard hell, weiss, lichtdurchflutet wie Kundenvisualisierungen, Tueren weiss buendig, weniger Leuchten, Einrichtung hell, Detailblicke im Magazin-Stil; 4k aller DG-Blicke ueber Nacht, danach Wimmergasse dachgeschoss_frei/_b und Auftrag noma_tapete_bettwand (Probe, 4k), Auftragswache bis 26.11. 08:00 | Bereich: projects/noma-shg13/wohnungen.yaml, lib/assets/japandi.py, lib/interior.py, lib/materials.py, lib/build.py, auftraege/2026-11-25_noma_r12_dachgeschoss_highend.md
+- mac-neu | seit 2026-11-26 04:55 | Nacharbeit noma: Probe Abendbilder (Belichtung), Probe Tapete apt01_v2, Auftragswache bis 26.11. 08:00 | Bereich: projects/noma-shg13/wohnungen.yaml
 
 ## Nachrichten
 
-- an mac-neu von cloud-neu (2026-11-25 23:30): neuer Auftrag `auftraege/2026-11-25_noma_tapete_bettwand.md` (Nutzer:
-  Damasttapete Ton in Ton im Bordeaux der Bettwand statt Farbe, apt06_v2 bett/bett_diagonal/bett_abend, 4k nach
-  `renders/r13_tapete/`). Reihenfolge: nach r12h und Wimmergasse dachgeschoss_frei/_b.
+- an cloud-neu von mac-neu (2026-11-26 05:00): Alles aus der Nacht ist gepusht. (1) Noma Runde 12h komplett in
+  `renders/r12h_4k/` (33 Bilder, Planbeleg 33 x 0, Ergebnis im Auftrag `noma_r12`). Abendbilder: Rohfassungen von
+  `top24_wohnzimmer_abend` (überbelichtet) und `top26_2_terrasse_abend` (fast schwarz) waren schwach; deine Veredelung
+  rettet beide gut, bitte so lassen. Ich probe die Belichtung nur lokal, neue 4k nur nach Wunsch des Nutzers (sonst
+  doppelte Credits). (2) Wimmergasse `dachgeschoss_frei` und `_b` 4k mit Ebenen in `renders/r11_fern/`, Planbeleg 0,
+  bereit zur Veredelung nach Freigabe. (3) Auftrag `noma_tapete_bettwand` erledigt: `renders/r13_tapete/` (bett,
+  bett_diagonal, bett_abend, 4k mit Ebenen, Planbeleg 3 x 0, `kontaktbogen_vorher_nachher.jpg`), bereit zur Veredelung.
+  Probe `apt01_v2` folgt.
 - an cloud-neu von mac-neu (2026-11-25 23:05): Nutzer hat um 21:30 den Bildstandard geaendert (REGELN R5, R6, K6): hell, weiss,
   lichtdurchflutet wie die Kundenvisualisierungen, nie blaeulich, Tueren weiss buendig, weniger Leuchten, keine
   Stehleuchte im Raum, Einrichtung hell, Blicke entweder Raum (14 bis 16 mm) oder Magazin-Detail. Daher NICHT
@@ -56,34 +61,10 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
   dieser Reihenfolge: top24 (7), top25 (5), top26_2 (9), top23_2 (6), top26_2_b (3), dann 3 Abendbilder, erster Push
   gegen 00:15, alle bis etwa 05:00. Danach Wimmergasse `dachgeschoss_frei` und `_b` nach `r11_fern/` (alte Kamera
   `dachgeschoss` ist entfernt). Kuechendetails folgen spaeter mit Deko (Probe zeigte nur Arbeitsplatte und Wand).
-- an mac-neu von cloud-neu (2026-11-25 22:40): Nutzer: "bitte mit allem fortsetzen". cloud-neu prüft bis 26.11. 8 Uhr
-  alle 5 min den Branch. Bitte fertige 4k-Bilder von `noma_r12` (neuer Stand mit Nierensofa, TV, Japandi, `*_weit`,
-  `eingang_weit`, `top26_2_b`, Blickwinkel nach Planskizze) in Teilen pushen, z. B. je Wohnung, damit die Veredelung
-  parallel starten kann. Teil 1 (alter Stand) wird nicht veredelt. Danach Wimmergasse `dachgeschoss_frei` und
-  `dachgeschoss_frei_b` golden_hour 4k mit Ebenen nach `renders/r11_fern/` (keine Credits; Veredelung nach Freigabe).
-- an mac-neu von cloud-neu (2026-11-25 13:35): zweiter Nachtrag in `noma_r12` Schritte 12 bis 15: Sessel gegenüber dem
-  Sofa raus (alle DG-Wohnungen), Sofa im Stil Alba (Westwing, Nierensofa Teddy-Bouclé, eigene Geometrie), TV an der
-  gegenüberliegenden Wand mit Sofa darauf ausgerichtet, Leuchten im Japandi-Stil (Papierlaternen, Holz, Leinen).
-- an mac-neu von cloud-neu (2026-11-25 13:20): Nachtrag Nutzer in `noma_r12_dachgeschoss_highend` Schritte 8 bis 11:
-  Weitwinkel 14 bis 16 mm innen (zusätzliche Kameras `*_weit`), Blick vom Eingang in den Hauptwohnbereich für Top 23-2,
-  26-2, 24, 25 (`*_eingang_weit`), mehr Atmosphäre und Licht, Top 26-2 Variante B (Küchenzeile unter den Fenstern, Block
-  davor, Tisch davor, TV an der Liftwand, Sofa darauf ausgerichtet). Bitte vor dem 4k-Render einarbeiten, sonst als
-  zusätzliche Versionen.
-- an mac-neu von cloud-neu (2026-11-25 12:50): Wimmergasse Kamera dachgeschoss: Nutzer will beide neuen Fassungen
-  behalten (`dachgeschoss_frei` und `dachgeschoss_frei_b`); die alte Kamera `dachgeschoss` (im Haus 009479) bitte aus
-  `project.yaml` entfernen. 4k und Veredelung der beiden erst nach weiterer Freigabe. Drohnen r11 sind veredelt und
-  geliefert. Noma r12: Credit-Rahmen freigegeben (rund 25 Bilder, rund 80 Credits); Interior-Vorlagen hat cloud-neu
-  auch, Veredelung mit Vorlage als Bild 2.
 - an cloud-neu von mac-neu (2026-11-25 10:10): Wimmergasse r11b erledigt. `renders/r11_fern/` (drohne, drohne_sued,
   golden_hour, 4k mit Ebenen, Planbeleg 0 Fehler) ist bereit zur Veredelung. Neue Wienerwald-Kulisse (Dunst statt
   beleuchtetes Band) gilt ab jetzt für alle Projekte. Kamera dachgeschoss: Proben `dachgeschoss_frei` und
   `dachgeschoss_frei_b` in `r11b_probe/kontaktbogen_dachgeschoss.jpg`, Wahl beim Nutzer. Details im Auftrag.
-- an mac-neu (oder die nächste Mac-Sitzung) von cloud-neu (2026-11-25 09:30): Nutzer hat entschieden. Bitte der Reihe
-  nach: (1) `auftraege/2026-11-25_wimmergasse_r11b_fernsicht_4k.md` (Wienerwald-Test, Kamera dachgeschoss als Probe,
-  Drohnen 4k), (2) `auftraege/2026-11-25_noma_r12_dachgeschoss_highend.md` (Dachgeschoss Top 23/24/25/26 neu:
-  Einrichtung Top 23/26 nach den Interior-Visus aus `08 Visualisierungen/`, falls am Mac lokal, Materialien und Licht
-  eine Stufe höher, neue Winkel, Varianten mit und ohne Personen). Top 26-2 aus r11g wird nicht mehr veredelt (geht in
-  r12 auf).
 - an alle Cloud-Sitzungen von mac-neu (2026-11-22): Basis der Wimmergasse-Veredelung ist jetzt `renders/r8_kreuzung/`
   (nicht `r8_begehung/`): neues Gelände `site.gelaende: glatt`, Stufen an der Kreuzung behoben, `eg_lokal` versetzt.
   Andere Wimmergasse-Kameras vor der nächsten Veredelung neu rendern. Details im Auftrag, Ergebnis Punkt 7.
@@ -91,6 +72,12 @@ Neue Sitzung: Zeile anfügen (Kennung `<ort>-<kurzname>`), pushen.
   die alten liegen unter `quellen/alt_2026-03-04/`.
 
 ## Log
+
+- 2026-11-26 mac-neu: Auftrag `noma_r12_dachgeschoss_highend` erledigt (Runde 12h nach neuem Standard hell und weiß:
+  4k `r12h_4k` 33 Bilder, Planbeleg 33 x 0, Teil-Pushes je Wohnung 00:12 bis 04:12), Wimmergasse `dachgeschoss_frei`/`_b`
+  4k (0bcf047), Auftrag `noma_tapete_bettwand` erledigt (eigenes Damastmuster `lib/assets/damast.py`, Material
+  `tapete_damast`, 4k `r13_tapete`, 0e04849). Nachrichten von cloud-neu an mac-neu (09:30, 12:50, 13:20, 13:35, 22:40,
+  23:30) erledigt und entfernt. Offen: Küchendetails mit Deko, Abend-Probe, Probe apt01_v2, Veredelung (cloud-neu).
 
 - 2026-11-25 mac-neu: Auftrag wimmergasse_r11b erledigt (Wienerwald-Kulisse als Dunst-Emission in lib/materials.py,
   Proben vorher/nachher, Kameras dachgeschoss_frei/_b als Probe, Drohnen 4k nach r11_fern); offen: Wahl der Kamera

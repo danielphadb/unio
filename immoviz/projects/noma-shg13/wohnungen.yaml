@@ -1127,7 +1127,7 @@ wohnungen:
   # interior_v2.md. Grundriss, Moebel und Kameras wie apt01; geaendert: Bettwand bordeaux (Bordeaux Rot der Palette),
   # Kuechenspiegel bordeauxrote Rillenfliese, Hochschrank neben der Garderobe [INT2 S. 13]. Zusatzkamera kueche_fliesen.
   # Runde 4 (Kunde 15.11.: Kueche zu klein, kein Stuck, Rot falsch, Ecke Bett/Gang): siehe interior_v2.md Abschnitt 6.
-  apt01_v2:
+  apt01_v2: &apt01_v2
     plan: manuell
     titel: Noma Apartment Top 1, Variante 2 nach Interior Derenko Stand 28.10.2026 [EIN S. 8, INT2]
     floor_z: 0.30                         # Rechenhoehe: Gelaendemodell liegt hier ueber +-0,00 (sonst verdeckt es den Boden); relativ unveraendert
@@ -1732,6 +1732,10 @@ wohnungen:
   apt06_v2_tapete:
     <<: *apt06_v2
     titel: "Noma Apartment APT. 06 Variante 2 mit Damasttapete an der Bettwand (Auftrag noma_tapete_bettwand)"
+    material_ersatz: {innen_wand: creme_wand, decke: creme_decke, bordeaux_wand: bordeaux_tapete}
+  apt01_v2_tapete:   # Auftrag noma_tapete_bettwand Schritt 5 (Probe): Top 1 Variante 2, Bettwand als Damasttapete
+    <<: *apt01_v2
+    titel: "Noma Apartment Top 1 Variante 2 mit Damasttapete an der Bettwand (Auftrag noma_tapete_bettwand)"
     material_ersatz: {innen_wand: creme_wand, decke: creme_decke, bordeaux_wand: bordeaux_tapete}
 
 # Materialien der Apartments (Farbwerte aus der Farbpalette [INT S. 6] und den Ansichten [INT S. 13 bis 16], Naeherung)
