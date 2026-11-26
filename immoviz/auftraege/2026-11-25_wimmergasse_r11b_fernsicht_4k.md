@@ -48,3 +48,9 @@ Vorher/nachher der Kulisse in Worten, Probe dachgeschoss, Zeit, Planbeleg.
 
 ## Entscheidung Nutzer (25.11.2026 12:50)
 Beide Kameras bleiben: `dachgeschoss_frei` und `dachgeschoss_frei_b`. Die alte Kamera `dachgeschoss` entfällt. 4k und Veredelung nach weiterer Freigabe.
+
+## Ergebnis 4k dachgeschoss (mac-neu, 26.11.2026)
+Nach Auftrag cloud-neu (Nachricht 22:40): `dachgeschoss_frei` und `dachgeschoss_frei_b` golden_hour, 3840 x 2560,
+256 Samples, mit Ebenen nach `renders/r11_fern/`. Zeit je etwa 6 bis 7 Minuten (04:12 bis 04:25). Planbeleg je
+0 Fehler. JPG, Ebenen (ohne `normalen.png`), `kontaktbogen_dachgeschoss.jpg`. Alte Kamera `dachgeschoss` in
+`project.yaml` auskommentiert. Bereit zur Veredelung durch cloud-neu nach Freigabe des Nutzers (keine Credits).

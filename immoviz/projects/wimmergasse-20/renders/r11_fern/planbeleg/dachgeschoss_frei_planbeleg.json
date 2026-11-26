@@ -1,0 +1,138 @@
+{
+ "kamera": "dachgeschoss_frei",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [],
+ "sichtbar": [
+  {
+   "objekt": "hero_masse",
+   "anteil_prozent": 25.14,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "hero_glas",
+   "anteil_prozent": 13.71,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "hero_stuck",
+   "anteil_prozent": 11.67,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero_stuck",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "hero_innen",
+   "anteil_prozent": 8.1,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "hero_rahmen",
+   "anteil_prozent": 5.13,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "hero",
+   "herkunft": "plan"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_34",
+   "anteil_prozent": 4.39,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_34_dach",
+   "anteil_prozent": 1.21,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_22_dach",
+   "anteil_prozent": 0.67,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "baeume_kronen_ahorn.035",
+   "anteil_prozent": 0.59,
+   "collections": [
+    "Baumkronen"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_22_stuck",
+   "anteil_prozent": 0.32,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_22",
+   "anteil_prozent": 0.31,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_34_glas",
+   "anteil_prozent": 0.19,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_34_rahmen",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_stolberggasse_34_innen",
+   "anteil_prozent": 0.09,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_wimmergasse_26",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  }
+ ]
+}
