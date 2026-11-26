@@ -53,7 +53,8 @@ Look vorab sieht; der echte Render mit Material bleibt maßgeblich (REGELN: Geom
    wie r10. Zeit 23 Minuten für alle drei (04:30 bis 04:53). Planbeleg je 0 Fehler. In 4k kein Moiré, Muster scharf und
    Ton in Ton. `kontaktbogen_vorher_nachher.jpg` (r10 Wandfarbe links, Tapete rechts), `kontaktbogen_apt06_v2_tapete.jpg`.
    Bereit zur Veredelung durch cloud-neu.
-6. `apt01_v2` noch nicht (optional, folgt als Probe, wenn die Nacht reicht).
+6. **`apt01_v2` als Probe** (Variante `apt01_v2_tapete`, Kamera `bett`, 960 x 640, lokal in `r13_tapete_probe/`):
+   Muster läuft über Ecke und Rundung, Bordeaux wie APT. 06, Planbeleg 0 Fehler. 4k nur nach Wunsch des Nutzers.
 
 Hinweis: Das Ornament wirkt eher wie ein grafisches Blatt- und Rankenmuster als ein dichter barocker Damast. Wenn der
 Nutzer es dichter und flächiger will: in `damast.py` Strichbreiten erhöhen und Blätter füllen, dann neu erzeugen.

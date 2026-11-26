@@ -315,7 +315,7 @@ wohnungen:
       gegenschuss: {pos: [13.9, -14.3], target: [10.8, -10.0], lens: 18, h: 1.45}     # von der HST zurueck in Wohnraum und Kueche
       # Runde 12 verworfen (zwei Proben: Kuechenzeile zu kurz, Bild zeigt nur Wand, Steinrueckwand oder Bild): kueche_detail: {pos: [13.4, -11.4], target: [11.4, -9.0], lens: 35, h: 1.40}   # Insel vor der Kuechenzeile (Probe 1 mit 50 mm: nur Wand)
       wohnzimmer_gold: {pos: [14.85, -9.80], target: [11.20, -14.50], lens: 18, h: 1.45, light: hell_vormittag, exposure: 2.3}
-      wohnzimmer_abend: {pos: [14.85, -9.80], target: [11.20, -14.50], lens: 18, h: 1.45, light: abend, exposure: 0.3}   # Runde 12h: helle Materialien, 0.9 ueberbelichtet (Median 203)
+      wohnzimmer_abend: {pos: [14.85, -9.80], target: [11.20, -14.50], lens: 18, h: 1.45, light: abend, exposure: -0.5}   # Runde 12h: helle Materialien, 0.9 ueberbelichtet (Median 203), 0.3 noch 186
       wohnzimmer_personen: {pos: [14.85, -9.80], target: [11.20, -14.50], lens: 18, h: 1.45, menschen: an}
       # Runde 12 Nachtrag Schritte 8 und 9: Weitwinkel 15 mm, Blick vom Eingang (Durchgang Vorraum) durch den ganzen Raum
       wohnzimmer_weit: {pos: [15.0, -9.62], target: [11.2, -14.5], lens: 15, h: 1.40}
@@ -610,7 +610,7 @@ wohnungen:
       # Couchtisch zu Insel, Kueche und Essplatz unter den Dachflaechenfenstern; drei Stimmungen, Variante mit Personen
       wohnkueche_vorlage: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       wohnkueche_vorlage_morgen: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      wohnkueche_vorlage_abend: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: abend, exposure: 1.3, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      wohnkueche_vorlage_abend: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: abend, exposure: 0.8, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       wohnkueche_vorlage_personen: {pos: [7.45, -7.6], target: [1.2, -10.6], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.0, menschen: an, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       insel_detail: {pos: [2.6, -7.5], target: [2.6, -10.9], lens: 45, h: 1.15, blende: 2.8, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Insel laengs zu den Dachflaechenfenstern
       lounge_terrasse: {pos: [4.0, -7.6], target: [8.4, -12.9], lens: 20, h: 1.45, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Probe 1: aeusseres Dachfenster verdeckte die Sicht   # ueber Lounge und Sofa zu HST und Terrasse
@@ -784,7 +784,7 @@ wohnungen:
       # Trennwand ueber Loungesessel und Couchtisch zu Essplatz, Insel, Kueche und Dachflaechenfenstern; drei Stimmungen
       wohnkueche_vorlage: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       wohnkueche_vorlage_morgen: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
-      wohnkueche_vorlage_abend: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: abend, exposure: 0.8, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
+      wohnkueche_vorlage_abend: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: abend, exposure: 1.4, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       wohnkueche_vorlage_personen: {pos: [10.95, -7.65], target: [17.6, -10.5], lens: 20, h: 1.35, light: hell_vormittag, exposure: 2.0, menschen: an, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}
       insel_detail: {pos: [16.6, -7.5], target: [16.6, -10.9], lens: 45, h: 1.15, blende: 2.8, light: hell_vormittag, exposure: 2.0, objekt_ausblenden: [nb_shg_dach_innen, nb_shg_dach_hof, nb_shg_dach_glas, nb_shg_dach_rahmen]}   # Insel laengs zu den Dachflaechenfenstern (Probe 1: Pendel verdeckte das Bild)
       sofa_terrasse: {pos: [13.95, -7.7], target: [11.4, -12.9], lens: 20, h: 1.45, light: hell_vormittag, exposure: 2.0}   # ueber das Sofa zu HST und Terrasse

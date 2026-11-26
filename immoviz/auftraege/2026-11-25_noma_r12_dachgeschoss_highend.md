@@ -109,6 +109,9 @@ vorher mit dem Nutzer abgestimmt).
 6. **Abendbilder:** `top24_wohnzimmer_abend` war mit den hellen Materialien überbelichtet (Median 203),
    `top26_2_terrasse_abend` fast schwarz (Median 12, Terrasse tief im Dacheinschnitt). cloud-neu hat beide bereits
    veredelt (Belichtung von der KI gerettet). Belichtung in `wohnungen.yaml` angepasst (0,9 auf 0,3; 0,8 auf 1,3;
-   Terrasse Lichtstimmung `abend`, 3,4); lokale Probe `renders/r12h_abend_probe/`, neue 4k nur nach Wunsch des Nutzers.
+   Terrasse Lichtstimmung `abend`, 3,4). Probe 2 (`renders/r12h_abend_probe2/`, lokal, 05:04): Top 24 mit -0,5
+   Median 157, Top 23-2 mit 1,4 Median 135, beide warm und stimmig. Terrasse Top 26-2 bleibt auch mit 3,4 fast schwarz
+   (Median 20): Innenlicht reicht nicht nach außen, braucht Außenleuchten auf der Terrasse. Neue 4k nur nach Wunsch des
+   Nutzers (Veredelung von cloud-neu liegt schon vor).
 7. Offen: Küchen- und Inseldetails mit Deko (Schale, Vase, Brett, Kräuter) neu proben; Top 24 `gang_tuer_hoch` ähnelt
    `wohnzimmer_weit`, Top 25 `eingang_weit` mit Wand im linken Drittel, beide bei Bedarf neu setzen.
