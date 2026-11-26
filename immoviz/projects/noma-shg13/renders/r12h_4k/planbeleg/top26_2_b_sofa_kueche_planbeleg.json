@@ -1,0 +1,348 @@
+{
+ "kamera": "top26_2_b_sofa_kueche",
+ "raster": [
+  192,
+  128
+ ],
+ "fehler": [],
+ "hinweise": [],
+ "flaeche_m2": null,
+ "huellen": [
+  {
+   "objekt": "top26_2_b_00__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_00__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_01__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_01__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_02__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_02__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_03__innenraum__stuhl_boucle_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_03__innenraum__stuhl_boucle_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_04__innenraum__zimmerpflanze_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_04__innenraum__zimmerpflanze_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_04__innenraum__zimmerpflanze_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_04__innenraum__zimmerpflanze_3",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_05__innenraum__sideboard_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_05__innenraum__sideboard_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_05__innenraum__sideboard_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_06__innenraum__zimmerpflanze_klein_0",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_06__innenraum__zimmerpflanze_klein_1",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_06__innenraum__zimmerpflanze_klein_2",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_glas",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_j00__stoffe__sofa_niere",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_j01__innenraum__tv",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_j02__innenraum__laterne",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_j03__innenraum__kerzen",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_j04__stoffe__plaid",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_rahmen",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  },
+  {
+   "objekt": "top26_2_b_waende",
+   "punkte_ausserhalb": 0,
+   "max_abstand_m": 0.0
+  }
+ ],
+ "sichtbar": [
+  {
+   "objekt": "top26_2_b_waende",
+   "anteil_prozent": 77.32,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Top 26-2, 2. DG, Wohnkueche 46,47 m2 unter der Hofschraege, Terrasse 6,08 m2 im Dacheinschnitt [EIN S. 13]"
+  },
+  {
+   "objekt": "top26_2_b_glas",
+   "anteil_prozent": 23.66,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Top 26-2, 2. DG, Wohnkueche 46,47 m2 unter der Hofschraege, Terrasse 6,08 m2 im Dacheinschnitt [EIN S. 13]"
+  },
+  {
+   "objekt": "top26_2_b_blattmaske_0",
+   "anteil_prozent": 6.31,
+   "collections": [
+    "Atmosphaere"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_gebaeude",
+   "anteil_prozent": 2.31,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top26_2_b_01__innenraum__stuhl_boucle_0",
+   "anteil_prozent": 1.97,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Runde 12 Nachtrag Variante B (Nutzer 25.11.2026: Tisch vor dem Kochblock)"
+  },
+  {
+   "objekt": "top26_2_b_rahmen",
+   "anteil_prozent": 1.59,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Top 26-2, 2. DG, Wohnkueche 46,47 m2 unter der Hofschraege, Terrasse 6,08 m2 im Dacheinschnitt [EIN S. 13]"
+  },
+  {
+   "objekt": "top26_2_b_00__innenraum__stuhl_boucle_0",
+   "anteil_prozent": 0.99,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Runde 12 Nachtrag Variante B (Nutzer 25.11.2026: Tisch vor dem Kochblock)"
+  },
+  {
+   "objekt": "nb_umgebung_005363_masse",
+   "anteil_prozent": 0.57,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_005363",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "top26_2_b_00__innenraum__stuhl_boucle_1",
+   "anteil_prozent": 0.5,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Runde 12 Nachtrag Variante B (Nutzer 25.11.2026: Tisch vor dem Kochblock)"
+  },
+  {
+   "objekt": "top26_2_b_01__innenraum__stuhl_boucle_1",
+   "anteil_prozent": 0.39,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Runde 12 Nachtrag Variante B (Nutzer 25.11.2026: Tisch vor dem Kochblock)"
+  },
+  {
+   "objekt": "nb_umgebung_005364_masse",
+   "anteil_prozent": 0.31,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_005364",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_nord",
+   "anteil_prozent": 0.27,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_daecher",
+   "anteil_prozent": 0.25,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "fern_hh_glas",
+   "anteil_prozent": 0.24,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_fenster",
+   "anteil_prozent": 0.23,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "fern_markant",
+   "anteil_prozent": 0.23,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363",
+   "anteil_prozent": 0.22,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "fern_hh_baender",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "top26_2_b_04__innenraum__zimmerpflanze_3",
+   "anteil_prozent": 0.15,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Runde 12 Nachtrag Variante B, Ausstattung"
+  },
+  {
+   "objekt": "nb_umgebung_005364_gelaender",
+   "anteil_prozent": 0.14,
+   "collections": [
+    "Objekt"
+   ],
+   "gruppe": "nb_umgebung_005364",
+   "herkunft": "nachbarn"
+  },
+  {
+   "objekt": "top26_2_b_04__innenraum__zimmerpflanze_1",
+   "anteil_prozent": 0.13,
+   "collections": [
+    "Innen"
+   ],
+   "herkunft": "innen",
+   "quelle": "Runde 12 Nachtrag Variante B, Ausstattung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005364",
+   "anteil_prozent": 0.11,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "umgebung_fernzone",
+   "anteil_prozent": 0.08,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  },
+  {
+   "objekt": "nachbar_hof_west_005363_glas",
+   "anteil_prozent": 0.06,
+   "collections": [
+    "Umgebung"
+   ],
+   "herkunft": "umgebung"
+  }
+ ]
+}
