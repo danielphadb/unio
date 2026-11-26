@@ -16,5 +16,16 @@ Freigabe Nutzer 25.11.2026 23:10: alle Bilder veredeln.
 | top25_essplatz | fe659043 | 10,9 | 7,0 | 2. Versuch (1. Versuch cde2600b veränderte den Ausblick, verworfen) |
 | top25_gegenschuss | 44e1fced | 10,9 | 6,1 | |
 | top25_wohnzimmer_weit | adfd0b26 | 6,2 | 5,0 | |
+| top26_2_eingang_hoch | 5030cab1 | 4,5 | 4,0 | 2. Versuch ohne Stilbild |
+| top26_2_eingang_weit | e877afb8 | 14,7 | 30,4 | 2. Versuch ohne Stilbild (p90 von TV-Spiegelung) |
+| top26_2_kueche_ecke_hoch | 9b7054d1 | 12,1 | 8,0 | 2. Versuch ohne Stilbild |
+| top26_2_lift_ecke_hoch | 056f176d | 4,9 | 4,1 | 2. Versuch ohne Stilbild |
+| top26_2_sofa_detail | 165148b7 | 1,3 | 2,8 | Detail, 2. Versuch ohne Stilbild |
+| top26_2_terrasse_tag | fd067bb1 | 4,2 | 5,0 | |
+| top26_2_tv_wand_hoch | 2f159340 | 6,2 | 4,0 | 2. Versuch ohne Stilbild |
+| top26_2_wohnkueche_vorlage | 906d6082 | 5,7 | 4,5 | 2. Versuch ohne Stilbild |
+| top26_2_wohnkueche_weit | 6e7d887e | 15,5 | 8,5 | 1. Versuch mit Stilbild (2. Versuch 8ae787da schlechter) |
 
-Credits Top 24: 8 x 3,25 = 26,00. Top 25: 6 x 3,25 = 19,50.
+Credits Top 24: 8 x 3,25 = 26,00. Top 25: 6 x 3,25 = 19,50. Top 26-2: 17 x 3,25 = 55,25.
+
+Lehre: die Interior-Vorlage als Bild 2 zoomt die KI ins Bild (Maßstab 1,02 bis 1,05, Kanten 15 bis 24 %); ohne Bild 2 liegen die Ergebnisse bei 1 bis 6 %. Stil kommt über den Prompt.
