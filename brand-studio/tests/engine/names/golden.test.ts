@@ -16,9 +16,9 @@ import { alternativenFuer, pruefeEigenenNamen, type NameInput } from "../../../s
 
 const dir = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "golden", "names");
 const files = readdirSync(dir).filter((f) => f.endsWith(".json"));
-const inputs = JSON.parse(
-  readFileSync(join(dir, "..", "inputs.json"), "utf8"),
-) as { marken: Array<{ slug: string; rawName: string }> };
+const inputs = JSON.parse(readFileSync(join(dir, "..", "inputs.json"), "utf8")) as {
+  marken: Array<{ slug: string; rawName: string }>;
+};
 
 type Lauf = {
   form: NameFinderForm & { batches: Parameters<typeof generateBatches>[2] };
