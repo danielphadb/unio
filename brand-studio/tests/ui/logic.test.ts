@@ -106,7 +106,7 @@ describe("Namenspruefung und Texte (glyphs.ts, text.ts)", () => {
     same(glyphs.describeChars, ix.Ek, [["ŦǄ"], ["á̂"], ["​"], ["ŦŊŋǄǅ​́"]]);
   });
   it("Gedankenstriche, Slug, Datum", () => {
-    same(text.plainDashes, ix.ua, [["a – b — c − d"]]);
+    same(text.plainDashes, ix.ua, [["a \u2013 b \u2014 c \u2212 d"]]);
     same(text.slugify, ix.Lk, [["Anna Berger"], ["Müller & Söhne"], ["   "], ["Ærø Café"]]);
     same(text.padNumber, ix.lL, [[1], [42], [1234]]);
     for (const d of [0, 1, 2, 40]) same(text.formatSavedAt, ix.Fk, [[T - d * 864e5, T]]);

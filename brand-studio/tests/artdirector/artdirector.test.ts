@@ -302,7 +302,7 @@ describe("Server /api/brand-art-director", () => {
 
   it("Modellaufruf mit Bildern, structured outputs, Cache und Token-Buchung", async () => {
     const { client, create } = fakeClient([
-      { id: "k2", wert: 88.4, grund: "Klar – und eigenstaendig", ausschluss: "" },
+      { id: "k2", wert: 88.4, grund: "Klar \u2013 und eigenstaendig", ausschluss: "" },
       { id: "k2", wert: 10, grund: "doppelt", ausschluss: "" },
       { id: "k5", wert: 120, grund: "stark", ausschluss: "" },
       { id: "k9", wert: 50, grund: "unbekannt", ausschluss: "" },
@@ -331,7 +331,7 @@ describe("Server /api/brand-art-director", () => {
       format: { type: "json_schema", schema: ANTWORT_SCHEMA },
     });
     expect(params.system[0].cache_control).toEqual({ type: "ephemeral" });
-    expect(params.system[0].text).not.toMatch(/[–—]/);
+    expect(params.system[0].text).not.toMatch(/[\u2013\u2014]/);
     const bilder = params.messages[0].content.filter((b: { type: string }) => b.type === "image");
     expect(bilder).toHaveLength(8);
     expect(bilder[0].source).toEqual({ type: "base64", media_type: "image/png", data: PNG });
