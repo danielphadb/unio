@@ -1,0 +1,832 @@
+[
+  {
+    "id": "sig-luenette",
+    "titel": "Lünette",
+    "idee": "Der Name wölbt sich unter einem Halbkreis wie die Schrift im Oberlicht eines Hauseingangs; in der Mitte die Initialen kursiv, darunter Zusatz und Ort.",
+    "herleitung": "Lünette und Oberlicht über Wiener Haustoren, in denen oft Hausname oder Baujahr steht. Kreisschrift im Korpus steht in geschlossenen Rundsiegeln; ein offener Halbkreis mit Grundlinie kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Offener Halbkreis mit Grundlinie über einer Initiale; Kreisschrift im Korpus steht in geschlossenen Rundsiegeln.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 1,
+      "stile": [
+        "warm",
+        "elegant"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "fraunces",
+          "weight": 400
+        },
+        {
+          "key": "castoro",
+          "weight": 400
+        },
+        {
+          "key": "brygada",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "figtree",
+          "weight": 400
+        },
+        {
+          "key": "dmsans",
+          "weight": 400
+        },
+        {
+          "key": "jakarta",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "fraunces",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "castoro",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "newsreader",
+          "weight": 400,
+          "style": "italic"
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "terrakotta",
+        "salbei",
+        "burgund"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "bogen",
+      "position": "um",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "badge"
+    },
+    "elemente": [
+      {
+        "typ": "bogen",
+        "zeichen": true,
+        "cx": 0,
+        "cy": 0,
+        "r": 470,
+        "von": 180,
+        "bis": 360,
+        "staerke": 5,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "zeichen": true,
+        "x1": -500,
+        "x2": 500,
+        "y1": 0,
+        "y2": 0,
+        "staerke": 5,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.1,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "bogen": {
+          "cx": 0,
+          "cy": 0,
+          "r": 330,
+          "lage": "oben",
+          "spanne": 166,
+          "minVersal": 44
+        },
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "ini",
+        "feld": "initialen",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0.02,
+        "versal": 150,
+        "x": 0,
+        "y": -52,
+        "ausrichtung": "mitte",
+        "rolle": "akzent",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 38,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": 0,
+        "y": 84
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-graetzlsiegel",
+    "titel": "Grätzlsiegel",
+    "idee": "Ein Rundsiegel, in dessen Mitte der Ort groß und kursiv steht, wie ein Stempel des eigenen Grätzls; Name und Zusatz laufen im Kreis.",
+    "herleitung": "Gemeinde- und Pfarrstempel, bei denen der Ort im Zentrum steht. Das Korpus-Rundsiegel trägt ein Monogramm in der Mitte und Antiqua-Umschrift; hier stehen Grotesk-Umschrift und kursiver Ortsname im Zentrum.",
+    "referenzen": [
+      "Coldwell Banker Global Luxury"
+    ],
+    "abgrenzung": "Dort ein Monogramm im Rundsiegel mit Antiqua-Umschrift; hier steht der Ort kursiv im Zentrum, die Umschrift ist Grotesk.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "pflicht",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "warm",
+        "natur"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "familjen",
+          "weight": 400
+        },
+        {
+          "key": "figtree",
+          "weight": 400
+        },
+        {
+          "key": "dmsans",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "familjen",
+          "weight": 400
+        },
+        {
+          "key": "figtree",
+          "weight": 400
+        },
+        {
+          "key": "dmsans",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "fraunces",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "castoro",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "newsreader",
+          "weight": 400,
+          "style": "italic"
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "rost",
+        "salbei",
+        "taupe"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "siegel",
+      "position": "allein",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "badge"
+    },
+    "elemente": [
+      {
+        "typ": "kreis",
+        "zeichen": true,
+        "cx": 0,
+        "cy": 0,
+        "r": 530,
+        "kontur": 6,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.16,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "bogen": {
+          "cx": 0,
+          "cy": 0,
+          "r": 390,
+          "lage": "oben",
+          "spanne": 160,
+          "minVersal": 46
+        },
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatz",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": 56,
+        "x": 0,
+        "y": 0,
+        "bogen": {
+          "cx": 0,
+          "cy": 0,
+          "r": 476,
+          "lage": "unten",
+          "spanne": 100
+        },
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "zeichen": true
+      },
+      {
+        "typ": "kreis",
+        "zeichen": true,
+        "cx": -444,
+        "cy": 0,
+        "r": 9,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "kreis",
+        "zeichen": true,
+        "cx": 444,
+        "cy": 0,
+        "r": 9,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "text",
+        "id": "ort",
+        "feld": "ort",
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": 120,
+        "x": 0,
+        "y": 48,
+        "ausrichtung": "mitte",
+        "rolle": "akzent",
+        "zeichen": true,
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 640,
+          "minVersal": 46
+        }
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-fischgrat",
+    "titel": "Fischgrät",
+    "idee": "Ein quadratischer Ausschnitt Fischgrätparkett, Stab an Stab, steht als warmes Zeichen links vom Namen: der Boden, auf dem man wohnt.",
+    "herleitung": "Fischgrätparkett der Wiener Altbauwohnung, als Ausschnitt aus zehn Stäben. Muster kommen im Korpus nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Ausschnitt aus Fischgrätparkett; Muster kommen im Korpus nicht vor.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "warm",
+        "natur"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "fraunces",
+          "weight": 400
+        },
+        {
+          "key": "castoro",
+          "weight": 400
+        },
+        {
+          "key": "youngserif",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "figtree",
+          "weight": 400
+        },
+        {
+          "key": "dmsans",
+          "weight": 400
+        },
+        {
+          "key": "jakarta",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "espresso",
+        "rost",
+        "terrakotta"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "muster",
+      "position": "links",
+      "schrift": "serif",
+      "schreibung": "mixed",
+      "layout": "inline"
+    },
+    "elemente": [
+      {
+        "typ": "pfad",
+        "id": "mark",
+        "zeichen": true,
+        "d": "M2.55 0L18.67 0L30.03 11.36L21.97 19.42ZM0 18.67L0 2.55L30.03 32.57L21.97 40.63ZM0 39.88L0 23.76L30.03 53.79L21.97 61.85ZM0 61.09L0 44.97L30.03 75L21.97 83.06ZM0 82.31L0 66.19L30.03 96.21L21.97 104.27ZM0 103.52L0 87.4L30.03 117.43L21.97 125.49ZM0 124.73L0 108.61L30.03 138.64L21.97 146.7ZM4.05 150L0 145.95L0 129.82L20.18 150ZM25.27 0L41.39 0L32.57 8.81L24.51 0.75ZM103.52 0L114.88 11.36L106.82 19.42L87.4 0ZM46.48 0L62.6 0L32.57 30.03L24.51 21.97ZM67.69 0L82.31 0L114.88 32.57L106.82 40.63L66.94 0.75ZM64.39 3.3L72.45 11.36L32.57 51.24L24.51 43.18ZM75 13.91L114.88 53.79L106.82 61.85L66.94 21.97ZM64.39 24.51L72.45 32.57L32.57 72.45L24.51 64.39ZM75 35.12L114.88 75L106.82 83.06L66.94 43.18ZM64.39 45.73L72.45 53.79L32.57 93.67L24.51 85.61ZM75 56.33L114.88 96.21L106.82 104.27L66.94 64.39ZM64.39 66.94L72.45 75L32.57 114.88L24.51 106.82ZM75 77.55L114.88 117.43L106.82 125.49L66.94 85.61ZM64.39 88.15L72.45 96.21L32.57 136.09L24.51 128.03ZM75 98.76L114.88 138.64L106.82 146.7L66.94 106.82ZM64.39 109.37L72.45 117.43L39.88 150L25.27 150L24.51 149.25ZM75 119.97L105.03 150L88.91 150L66.94 128.03ZM44.97 150L64.39 130.58L72.45 138.64L61.09 150ZM75 141.19L83.81 150L67.69 150L66.94 149.25ZM117.43 8.81L109.37 0.75L110.12 0L126.24 0ZM117.43 30.03L109.37 21.97L131.33 0L147.45 0ZM109.37 43.18L149.25 3.3L150 4.05L150 18.67L117.43 51.24ZM109.37 64.39L149.25 24.51L150 25.27L150 39.88L117.43 72.45ZM109.37 85.61L149.25 45.73L150 46.48L150 61.09L117.43 93.67ZM109.37 106.82L149.25 66.94L150 67.69L150 82.31L117.43 114.88ZM109.37 128.03L149.25 88.15L150 88.91L150 103.52L117.43 136.09ZM110.12 150L109.37 149.25L149.25 109.37L150 110.12L150 124.73L124.73 150ZM129.82 150L149.25 130.58L150 131.33L150 145.95L145.95 150Z",
+        "x": 0,
+        "y": 0,
+        "massstab": 1.3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "schrift": "haupt",
+        "schreibung": "asis",
+        "laufweite": -0.01,
+        "versal": 100,
+        "x": "mark.r+56",
+        "y": "mark.t+100",
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.l",
+        "y": "mark.b-2"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-hausnummer",
+    "titel": "Hausnummer",
+    "idee": "Ein Schild wie die Wiener Hausnummerntafel, mit hellem Rand, Bezirk oben und den Initialen statt der Nummer; darunter der Name.",
+    "herleitung": "Emailschild der Wiener Hausnummern (abgerundetes Rechteck, heller Rand, Bezirk über der Nummer), ohne Wiener Farbcode und ohne Stadtwappen. Im Korpus gibt es Flächen um den ganzen Namen, aber kein Schild als Zeichen über dem Namen.",
+    "referenzen": [],
+    "abgrenzung": "Abgeleitet vom Wiener Hausnummernschild ohne Stadtfarben und Wappen; im Korpus gibt es kein Schild als Zeichen über dem Namen.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 1,
+      "stile": [
+        "warm",
+        "mutig"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "fraunces",
+          "weight": 400
+        },
+        {
+          "key": "castoro",
+          "weight": 400
+        },
+        {
+          "key": "youngserif",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "figtree",
+          "weight": 400
+        },
+        {
+          "key": "dmsans",
+          "weight": 400
+        },
+        {
+          "key": "jakarta",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "fraunces",
+          "weight": 600
+        },
+        {
+          "key": "youngserif",
+          "weight": 400
+        },
+        {
+          "key": "castoro",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "navysand",
+        "terrakotta",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "flaeche",
+      "position": "oben",
+      "schrift": "serif",
+      "schreibung": "mixed",
+      "layout": "stacked"
+    },
+    "elemente": [
+      {
+        "typ": "pfad",
+        "id": "tafel",
+        "zeichen": true,
+        "d": "M-124 -230H124A26 26 0 0 1 150 -204V-26A26 26 0 0 1 124 0H-124A26 26 0 0 1 -150 -26V-204A26 26 0 0 1 -124 -230Z",
+        "x": 0,
+        "y": 0,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "pfad",
+        "zeichen": true,
+        "d": "M-121 -217H121A16 16 0 0 1 137 -201V-29A16 16 0 0 1 121 -13H-121A16 16 0 0 1 -137 -29V-201A16 16 0 0 1 -121 -217Z",
+        "x": 0,
+        "y": 0,
+        "kontur": 4.5,
+        "rolle": "grund"
+      },
+      {
+        "typ": "text",
+        "id": "ort",
+        "feld": "ort",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.18,
+        "versal": 24,
+        "x": 0,
+        "y": -172,
+        "ausrichtung": "mitte",
+        "rolle": "grund",
+        "zeichen": true,
+        "einpassen": {
+          "maxBreite": 230,
+          "minVersal": 16
+        }
+      },
+      {
+        "typ": "text",
+        "id": "ini",
+        "feld": "initialen",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0.02,
+        "versal": 92,
+        "x": 0,
+        "y": -52,
+        "ausrichtung": "mitte",
+        "rolle": "grund",
+        "zeichen": true,
+        "pflicht": true,
+        "wenn": "ort",
+        "einpassen": {
+          "maxBreite": 230,
+          "minVersal": 70
+        }
+      },
+      {
+        "typ": "text",
+        "id": "ini2",
+        "feld": "initialen",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0.02,
+        "versal": 100,
+        "x": 0,
+        "y": -66,
+        "ausrichtung": "mitte",
+        "rolle": "grund",
+        "zeichen": true,
+        "pflicht": true,
+        "wennNicht": "ort",
+        "einpassen": {
+          "maxBreite": 230,
+          "minVersal": 70
+        }
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "schrift": "haupt",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 0,
+        "y": 184,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 60,
+          "umbruch": true
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatz",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 32,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": 0,
+        "y": "name.b+80"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-fensterpunkt",
+    "titel": "Fensterpunkt",
+    "idee": "Der Name endet mit einem kleinen Rundbogenfenster statt eines Punkts, warm in der Akzentfarbe.",
+    "herleitung": "Rundbogenfenster der Vorstadthäuser und Heurigen, verkleinert zum Satzzeichen. Korpusmarken mit Schlusspunkt nutzen einen runden Punkt nach Grotesk-Versalien; ein Fensterzeichen nach gemischter Antiqua kommt nicht vor.",
+    "referenzen": [
+      "SERHANT.",
+      "vitra."
+    ],
+    "abgrenzung": "Dort ein runder Punkt nach Grotesk; hier ein kleines Rundbogenfenster nach gemischter Antiqua.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "warm",
+        "elegant"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "fraunces",
+          "weight": 400
+        },
+        {
+          "key": "castoro",
+          "weight": 400
+        },
+        {
+          "key": "youngserif",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "figtree",
+          "weight": 400
+        },
+        {
+          "key": "dmsans",
+          "weight": 400
+        },
+        {
+          "key": "jakarta",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "terrakotta",
+        "burgund",
+        "salbei"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "punkt-wortende",
+      "position": "im Wort",
+      "schrift": "serif",
+      "schreibung": "mixed",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "schrift": "haupt",
+        "schreibung": "asis",
+        "laufweite": -0.01,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 62
+        }
+      },
+      {
+        "typ": "pfad",
+        "zeichen": true,
+        "d": "M0 0V-40A17 17 0 0 1 34 -40V0ZM18.5 -6V-44H15.5V-6Z",
+        "x": "name.r+16",
+        "y": "name.b",
+        "rolle": "akzent"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 32,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "name.u+76"
+      }
+    ],
+    "mischung": false,
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  }
+]

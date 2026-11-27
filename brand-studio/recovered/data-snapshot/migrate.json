@@ -1,0 +1,10 @@
+{
+  "F": "unio-brand:project:",
+  "x": 1,
+  "D": "unio-brand-studio",
+  "R": ["logo","visitenkarte","instagram","schild","unio-flyer"],
+  "$": ["symbol","schrift","farbe","aufbau"],
+  "K": ["full","upper","surname","stacked","initial","monogram","district"],
+  "L": ["Immobilien","Real Estate","Immobilienberatung","none","custom"],
+  "b": {"$regexp":"^[A-Za-z0-9_@.-]{1,160}$","flags":""}
+}

@@ -1,0 +1,1594 @@
+[
+  {
+    "id": "kapital",
+    "label": "Investment und Anlage",
+    "triggers": [
+      "invest",
+      "anlage",
+      "anleger",
+      "kapital",
+      "rendite",
+      "vermoegen",
+      "portfolio",
+      "ertrag",
+      "asset",
+      "wertanlage"
+    ],
+    "zusatz": "Anlageimmobilien",
+    "words": [
+      [
+        "Substanz",
+        "de",
+        "w",
+        "das Wesentliche, das bleibt"
+      ],
+      [
+        "Sachwert",
+        "de",
+        "w",
+        "Wert, der in Grund und Gebäude steckt"
+      ],
+      [
+        "Grundstock",
+        "de",
+        "w",
+        "der Anfang jedes Vermögens"
+      ],
+      [
+        "Ertrag",
+        "de",
+        "w",
+        "was eine Anlage Jahr für Jahr abwirft"
+      ],
+      [
+        "Fundament",
+        "de",
+        "w",
+        "das, worauf alles ruht"
+      ],
+      [
+        "Wertkontor",
+        "de",
+        "w",
+        "Handelsbüro für Werte"
+      ],
+      [
+        "Kapital",
+        "de",
+        "w",
+        "Vermögen, das für dich arbeitet"
+      ],
+      [
+        "Wert",
+        "de",
+        "w",
+        "was am Ende zählt"
+      ],
+      [
+        "Basis",
+        "de",
+        "w",
+        "die Grundlage jeder Entscheidung"
+      ],
+      [
+        "Valor",
+        "la",
+        "f",
+        "Wert, auch Standhaftigkeit"
+      ],
+      [
+        "Fundus",
+        "la",
+        "f",
+        "Grundstock, Bestand"
+      ],
+      [
+        "Capitale",
+        "it",
+        "f",
+        "Kapital, auch Hauptstadt"
+      ],
+      [
+        "Patrimonio",
+        "it",
+        "f",
+        "Vermögen, das Erbe einer Familie"
+      ],
+      [
+        "Solidus",
+        "la",
+        "f",
+        "fest, gediegen; die römische Goldmünze"
+      ],
+      [
+        "Valeur",
+        "fr",
+        "f",
+        "Wert"
+      ],
+      [
+        "Rendita",
+        "it",
+        "f",
+        "Ertrag, regelmäßige Einnahme"
+      ],
+      [
+        "Aurum",
+        "la",
+        "f",
+        "Gold"
+      ],
+      [
+        "Sicherer Hafen",
+        "de",
+        "b",
+        "Anlage, die auch in unruhigen Zeiten hält"
+      ],
+      [
+        "Ruhepol",
+        "de",
+        "b",
+        "Beständigkeit, die Anleger suchen"
+      ],
+      [
+        "Weitsicht",
+        "de",
+        "b",
+        "der Blick über den nächsten Zyklus hinaus"
+      ],
+      [
+        "Gute Substanz",
+        "de",
+        "b",
+        "was Gutachter an einem Haus loben"
+      ],
+      [
+        "valor",
+        "la",
+        "r",
+        "Wert",
+        "val"
+      ],
+      [
+        "caput",
+        "la",
+        "r",
+        "Haupt, daraus Kapital",
+        "cap"
+      ],
+      [
+        "fundus",
+        "la",
+        "r",
+        "Grundstock",
+        "fund"
+      ],
+      [
+        "solidus",
+        "la",
+        "r",
+        "fest, gediegen",
+        "sol"
+      ],
+      [
+        "aurum",
+        "la",
+        "r",
+        "Gold",
+        "aur"
+      ],
+      [
+        "firmus",
+        "la",
+        "r",
+        "fest, beständig",
+        "firm"
+      ],
+      [
+        "stabilis",
+        "la",
+        "r",
+        "beständig",
+        "stab"
+      ]
+    ]
+  },
+  {
+    "id": "gewerbe",
+    "label": "Gewerbe und Büro",
+    "triggers": [
+      "gewerb",
+      "buero",
+      "office",
+      "handel",
+      "retail",
+      "logistik",
+      "halle",
+      "lager",
+      "praxis",
+      "praxen",
+      "geschaeft",
+      "laden",
+      "flaeche",
+      "commercial",
+      "betrieb"
+    ],
+    "zusatz": "Gewerbeimmobilien",
+    "words": [
+      [
+        "Kontor",
+        "de",
+        "w",
+        "Handelsbüro der Kaufleute"
+      ],
+      [
+        "Areal",
+        "de",
+        "w",
+        "zusammenhängende Fläche mit Potenzial"
+      ],
+      [
+        "Speicher",
+        "de",
+        "w",
+        "alter Lagerbau, heute Loft und Büro"
+      ],
+      [
+        "Manufaktur",
+        "de",
+        "w",
+        "Werkstatt, in der mit der Hand gearbeitet wird"
+      ],
+      [
+        "Handelshaus",
+        "de",
+        "w",
+        "Haus der Kaufleute"
+      ],
+      [
+        "Werkhof",
+        "de",
+        "w",
+        "Hof, in dem gearbeitet wird"
+      ],
+      [
+        "Stadtkontor",
+        "de",
+        "w",
+        "Kontor mitten in der Stadt"
+      ],
+      [
+        "Kopfbau",
+        "de",
+        "w",
+        "markanter Eckbau eines Blocks"
+      ],
+      [
+        "Remise",
+        "de",
+        "w",
+        "frühere Wagenhalle, heute Atelier oder Büro"
+      ],
+      [
+        "Werk",
+        "de",
+        "w",
+        "Ort, an dem gearbeitet wird"
+      ],
+      [
+        "Halle",
+        "de",
+        "w",
+        "offener, großer Raum"
+      ],
+      [
+        "Fondaco",
+        "it",
+        "f",
+        "venezianisches Handelshaus"
+      ],
+      [
+        "Officina",
+        "it",
+        "f",
+        "Werkstatt"
+      ],
+      [
+        "Comptoir",
+        "fr",
+        "f",
+        "Kontor, Ladentisch"
+      ],
+      [
+        "Mercato",
+        "it",
+        "f",
+        "Markt"
+      ],
+      [
+        "Emporium",
+        "la",
+        "f",
+        "Handelsplatz"
+      ],
+      [
+        "Bottega",
+        "it",
+        "f",
+        "Werkstatt, Laden"
+      ],
+      [
+        "Forum",
+        "la",
+        "f",
+        "Marktplatz"
+      ],
+      [
+        "Kurze Wege",
+        "de",
+        "b",
+        "eine Lage, die Kunden und Teams schätzen"
+      ],
+      [
+        "Gute Adresse",
+        "de",
+        "b",
+        "eine Lage, die für dein Unternehmen spricht"
+      ],
+      [
+        "mercatus",
+        "la",
+        "r",
+        "Markt",
+        "merc"
+      ],
+      [
+        "officium",
+        "la",
+        "r",
+        "Dienst, Werkstatt",
+        "off"
+      ],
+      [
+        "fabrica",
+        "la",
+        "r",
+        "Werkstatt",
+        "fabr"
+      ],
+      [
+        "portus",
+        "la",
+        "r",
+        "Hafen, Umschlagplatz",
+        "port"
+      ]
+    ]
+  },
+  {
+    "id": "zinshaus",
+    "label": "Zinshaus",
+    "triggers": [
+      "zinshaus",
+      "zinshaeus",
+      "mietshaus",
+      "mehrparteien",
+      "anlagehaus"
+    ],
+    "zusatz": "Zinshäuser",
+    "words": [
+      [
+        "Zinshaus",
+        "de",
+        "w",
+        "das Wiener Mietshaus der Gründerzeit"
+      ],
+      [
+        "Hofstiege",
+        "de",
+        "w",
+        "die Stiege im Hof eines Zinshauses"
+      ],
+      [
+        "Gründerzeit",
+        "de",
+        "w",
+        "die Bauepoche um 1900"
+      ],
+      [
+        "Substanz",
+        "de",
+        "w",
+        "das Wesentliche, das bleibt"
+      ],
+      [
+        "Ertrag",
+        "de",
+        "w",
+        "was ein Haus Jahr für Jahr abwirft"
+      ],
+      [
+        "Zins",
+        "de",
+        "w",
+        "der laufende Ertrag eines Hauses"
+      ],
+      [
+        "Palazzo",
+        "it",
+        "f",
+        "Stadtpalast"
+      ],
+      [
+        "Rendita",
+        "it",
+        "f",
+        "Ertrag, regelmäßige Einnahme"
+      ],
+      [
+        "Beletage",
+        "fr",
+        "f",
+        "die schöne Etage, das noble Obergeschoß"
+      ],
+      [
+        "Gute Substanz",
+        "de",
+        "b",
+        "was Gutachter an einem Haus loben"
+      ],
+      [
+        "Alte Mauern",
+        "de",
+        "b",
+        "Häuser mit Geschichte und Charakter"
+      ],
+      [
+        "Hohe Räume",
+        "de",
+        "b",
+        "Altbau mit Stuck und Flügeltüren"
+      ],
+      [
+        "palatium",
+        "la",
+        "r",
+        "Palast",
+        "pal"
+      ],
+      [
+        "census",
+        "la",
+        "r",
+        "Schätzung, Vermögen",
+        "cens"
+      ]
+    ]
+  },
+  {
+    "id": "altbau",
+    "label": "Altbau",
+    "triggers": [
+      "altbau",
+      "gruenderzeit",
+      "stilaltbau",
+      "stuck",
+      "historisch",
+      "jahrhundertwende",
+      "biedermeier",
+      "denkmal"
+    ],
+    "zusatz": "Altbau",
+    "words": [
+      [
+        "Stuckdecke",
+        "de",
+        "w",
+        "die verzierte Decke im Altbau"
+      ],
+      [
+        "Flügeltür",
+        "de",
+        "w",
+        "die zweiflügelige Tür im Altbau"
+      ],
+      [
+        "Kastenfenster",
+        "de",
+        "w",
+        "das doppelte Fenster der Gründerzeit"
+      ],
+      [
+        "Risalit",
+        "de",
+        "w",
+        "vorspringender Teil einer Fassade"
+      ],
+      [
+        "Hochparterre",
+        "de",
+        "w",
+        "das erhöhte Erdgeschoß im Altbau"
+      ],
+      [
+        "Patina",
+        "de",
+        "w",
+        "die Spur der Zeit, die Wert anzeigt"
+      ],
+      [
+        "Erker",
+        "de",
+        "w",
+        "der Vorbau mit Fenstern an der Fassade"
+      ],
+      [
+        "Stuck",
+        "de",
+        "w",
+        "Zierwerk an Decke und Fassade"
+      ],
+      [
+        "Beletage",
+        "fr",
+        "f",
+        "die schöne Etage, das noble Obergeschoß"
+      ],
+      [
+        "Piano Nobile",
+        "it",
+        "f",
+        "das noble Hauptgeschoß eines Palais"
+      ],
+      [
+        "Palazzo",
+        "it",
+        "f",
+        "Stadtpalast"
+      ],
+      [
+        "Hohe Räume",
+        "de",
+        "b",
+        "Altbau mit Stuck und Flügeltüren"
+      ],
+      [
+        "Alte Mauern",
+        "de",
+        "b",
+        "Häuser mit Geschichte und Charakter"
+      ],
+      [
+        "Lichte Höhe",
+        "de",
+        "b",
+        "die Raumhöhe, die Altbau ausmacht"
+      ]
+    ]
+  },
+  {
+    "id": "vorsorge",
+    "label": "Vorsorge und Sicherheit",
+    "triggers": [
+      "vorsorge",
+      "pension",
+      "altersvorsorge",
+      "sicherheit",
+      "sicher",
+      "zukunft",
+      "generation",
+      "absicherung"
+    ],
+    "zusatz": "Vorsorgewohnungen",
+    "words": [
+      [
+        "Weitsicht",
+        "de",
+        "w",
+        "der Blick weit nach vorn"
+      ],
+      [
+        "Grundstock",
+        "de",
+        "w",
+        "der Anfang jedes Vermögens"
+      ],
+      [
+        "Rücklage",
+        "de",
+        "w",
+        "Reserve für später"
+      ],
+      [
+        "Fundament",
+        "de",
+        "w",
+        "das, worauf alles ruht"
+      ],
+      [
+        "Horizont",
+        "de",
+        "w",
+        "was du im Blick hast"
+      ],
+      [
+        "Basis",
+        "de",
+        "w",
+        "die Grundlage jeder Entscheidung"
+      ],
+      [
+        "Halt",
+        "de",
+        "w",
+        "Sicherheit, auf die man bauen kann"
+      ],
+      [
+        "Anker",
+        "de",
+        "w",
+        "Halt in bewegten Zeiten"
+      ],
+      [
+        "Tutela",
+        "la",
+        "f",
+        "Schutz, Obhut"
+      ],
+      [
+        "Cura",
+        "la",
+        "f",
+        "Sorge, Fürsorge"
+      ],
+      [
+        "Prudentia",
+        "la",
+        "f",
+        "Klugheit, Voraussicht"
+      ],
+      [
+        "Fundus",
+        "la",
+        "f",
+        "Grundstock, Bestand"
+      ],
+      [
+        "Lange Sicht",
+        "de",
+        "b",
+        "auf lange Sicht gedacht"
+      ],
+      [
+        "Sicherer Hafen",
+        "de",
+        "b",
+        "eine Anlage, die auch in unruhigen Zeiten hält"
+      ],
+      [
+        "Fester Grund",
+        "de",
+        "b",
+        "Sicherheit, ohne sie zu behaupten"
+      ],
+      [
+        "tutela",
+        "la",
+        "r",
+        "Schutz",
+        "tut"
+      ],
+      [
+        "cura",
+        "la",
+        "r",
+        "Sorge, Fürsorge",
+        "cur"
+      ],
+      [
+        "providentia",
+        "la",
+        "r",
+        "Voraussicht",
+        "prov"
+      ],
+      [
+        "firmus",
+        "la",
+        "r",
+        "fest, beständig",
+        "firm"
+      ]
+    ]
+  },
+  {
+    "id": "neubau",
+    "label": "Neubau und Projekte",
+    "triggers": [
+      "neubau",
+      "projekt",
+      "erstbezug",
+      "bautraeger",
+      "entwicklung",
+      "wohnbau",
+      "neu"
+    ],
+    "zusatz": "Neubau",
+    "words": [
+      [
+        "Erstbezug",
+        "de",
+        "w",
+        "die erste Schlüsselübergabe"
+      ],
+      [
+        "Grundstein",
+        "de",
+        "w",
+        "der Anfang jedes Hauses"
+      ],
+      [
+        "Planwerk",
+        "de",
+        "w",
+        "das Werk aus Plänen"
+      ],
+      [
+        "Baufeld",
+        "de",
+        "w",
+        "die Fläche, auf der Neues entsteht"
+      ],
+      [
+        "Quartier",
+        "de",
+        "w",
+        "ein Stück Stadt, das neu entsteht"
+      ],
+      [
+        "Plan",
+        "de",
+        "w",
+        "der Entwurf vor dem Bau"
+      ],
+      [
+        "Novum",
+        "la",
+        "f",
+        "das Neue"
+      ],
+      [
+        "Nuovo",
+        "it",
+        "f",
+        "neu"
+      ],
+      [
+        "Initium",
+        "la",
+        "f",
+        "Anfang"
+      ],
+      [
+        "Neue Mitte",
+        "de",
+        "b",
+        "ein Ort, an dem etwas entsteht"
+      ],
+      [
+        "Klare Linie",
+        "de",
+        "b",
+        "Architektur ohne Umwege"
+      ],
+      [
+        "novus",
+        "la",
+        "r",
+        "neu",
+        "nov"
+      ],
+      [
+        "creare",
+        "la",
+        "r",
+        "erschaffen",
+        "cre"
+      ]
+    ]
+  },
+  {
+    "id": "luxus",
+    "label": "Luxus und gehobenes Wohnen",
+    "triggers": [
+      "luxus",
+      "luxur",
+      "exklusiv",
+      "premium",
+      "hochwertig",
+      "edel",
+      "villa",
+      "villen",
+      "penthouse",
+      "prestige",
+      "gehoben",
+      "highend"
+    ],
+    "words": [
+      [
+        "Salon",
+        "de",
+        "w",
+        "der Empfangsraum für Gäste"
+      ],
+      [
+        "Noblesse",
+        "de",
+        "w",
+        "vornehme Zurückhaltung"
+      ],
+      [
+        "Beletage",
+        "fr",
+        "f",
+        "die schöne Etage, das noble Obergeschoß"
+      ],
+      [
+        "Dimora",
+        "it",
+        "f",
+        "Wohnsitz, Herrenhaus"
+      ],
+      [
+        "Piano Nobile",
+        "it",
+        "f",
+        "das noble Hauptgeschoß eines Palais"
+      ],
+      [
+        "Grandezza",
+        "it",
+        "f",
+        "Größe und Würde"
+      ],
+      [
+        "Signum",
+        "la",
+        "f",
+        "Zeichen, Siegel"
+      ],
+      [
+        "Aurum",
+        "la",
+        "f",
+        "Gold"
+      ],
+      [
+        "Stille Größe",
+        "de",
+        "b",
+        "Klasse, die nicht laut sein muss"
+      ],
+      [
+        "Feine Lage",
+        "de",
+        "b",
+        "eine Adresse, die man nicht erklären muss"
+      ],
+      [
+        "Lichte Höhe",
+        "de",
+        "b",
+        "hohe, helle Räume"
+      ],
+      [
+        "aurum",
+        "la",
+        "r",
+        "Gold",
+        "aur"
+      ],
+      [
+        "nobilis",
+        "la",
+        "r",
+        "edel",
+        "nob"
+      ],
+      [
+        "signum",
+        "la",
+        "r",
+        "Zeichen",
+        "sign"
+      ],
+      [
+        "dignitas",
+        "la",
+        "r",
+        "Würde",
+        "dign"
+      ]
+    ]
+  },
+  {
+    "id": "grund",
+    "label": "Grund und Boden",
+    "triggers": [
+      "grund",
+      "boden",
+      "bauland",
+      "parzelle",
+      "liegenschaft",
+      "flur",
+      "acker",
+      "baugrund"
+    ],
+    "zusatz": "Grundstücke",
+    "words": [
+      [
+        "Scholle",
+        "de",
+        "w",
+        "das eigene Stück Land"
+      ],
+      [
+        "Gemarkung",
+        "de",
+        "w",
+        "das Flurgebiet einer Gemeinde"
+      ],
+      [
+        "Grundstock",
+        "de",
+        "w",
+        "der Anfang jedes Vermögens"
+      ],
+      [
+        "Anger",
+        "de",
+        "w",
+        "die Dorfwiese"
+      ],
+      [
+        "Flur",
+        "de",
+        "w",
+        "das offene Land um den Ort"
+      ],
+      [
+        "Feld",
+        "de",
+        "w",
+        "offenes Land"
+      ],
+      [
+        "Terreno",
+        "it",
+        "f",
+        "Grundstück, Gelände"
+      ],
+      [
+        "Campo",
+        "it",
+        "f",
+        "Feld"
+      ],
+      [
+        "Solum",
+        "la",
+        "f",
+        "Boden, Grundstück"
+      ],
+      [
+        "Terra Firma",
+        "la",
+        "f",
+        "fester Boden"
+      ],
+      [
+        "Fester Grund",
+        "de",
+        "b",
+        "Sicherheit, ohne sie zu behaupten"
+      ],
+      [
+        "Weiter Grund",
+        "de",
+        "b",
+        "Grundstücke mit Platz und Horizont"
+      ],
+      [
+        "terra",
+        "la",
+        "r",
+        "Erde, Grund",
+        "terr"
+      ],
+      [
+        "solum",
+        "la",
+        "r",
+        "Boden",
+        "sol"
+      ],
+      [
+        "campus",
+        "la",
+        "r",
+        "Feld",
+        "camp"
+      ]
+    ]
+  },
+  {
+    "id": "familie",
+    "label": "Familie und Zuhause",
+    "triggers": [
+      "famil",
+      "kinder",
+      "zuhause",
+      "eigenheim",
+      "einfamilien",
+      "heim"
+    ],
+    "words": [
+      [
+        "Daheim",
+        "de",
+        "w",
+        "das österreichische Wort für Zuhause"
+      ],
+      [
+        "Nest",
+        "de",
+        "w",
+        "der geschützte Ort für die Familie"
+      ],
+      [
+        "Gartenseite",
+        "de",
+        "w",
+        "die Seite des Hauses, auf der gespielt wird"
+      ],
+      [
+        "Familiensitz",
+        "de",
+        "w",
+        "das Haus, in dem eine Familie über Generationen lebt"
+      ],
+      [
+        "Stammhaus",
+        "de",
+        "w",
+        "das Haus, von dem alles ausgeht"
+      ],
+      [
+        "Elternhaus",
+        "de",
+        "w",
+        "das Haus, an das man sich ein Leben lang erinnert"
+      ],
+      [
+        "Heimstatt",
+        "de",
+        "w",
+        "das alte Wort für Zuhause und Bleibe"
+      ],
+      [
+        "Volles Haus",
+        "de",
+        "b",
+        "Leben, Besuch und Kinderlachen"
+      ],
+      [
+        "Focolare",
+        "it",
+        "f",
+        "Herd, das Familienheim"
+      ],
+      [
+        "Offenes Haus",
+        "de",
+        "b",
+        "Gastfreundschaft und Besichtigungstag"
+      ],
+      [
+        "Gute Nachbarn",
+        "de",
+        "b",
+        "das wärmste Bild eines neuen Zuhauses"
+      ],
+      [
+        "casa",
+        "it",
+        "r",
+        "Haus",
+        "cas"
+      ],
+      [
+        "domus",
+        "la",
+        "r",
+        "Haus",
+        "dom"
+      ]
+    ]
+  },
+  {
+    "id": "natur",
+    "label": "Natur und Garten",
+    "triggers": [
+      "natur",
+      "gruen",
+      "garten",
+      "wald",
+      "park",
+      "laendlich",
+      "wiese"
+    ],
+    "words": [
+      [
+        "Lichtung",
+        "de",
+        "w",
+        "die helle Stelle im Wald"
+      ],
+      [
+        "Sonnhang",
+        "de",
+        "w",
+        "der Hang auf der Sonnenseite"
+      ],
+      [
+        "Waldrand",
+        "de",
+        "w",
+        "wo das Grün beginnt"
+      ],
+      [
+        "Hain",
+        "de",
+        "w",
+        "kleiner, lichter Wald"
+      ],
+      [
+        "Hortus",
+        "la",
+        "f",
+        "Garten"
+      ],
+      [
+        "Selva",
+        "it",
+        "f",
+        "Wald"
+      ],
+      [
+        "Prato",
+        "it",
+        "f",
+        "Wiese"
+      ],
+      [
+        "Grüne Mitte",
+        "de",
+        "b",
+        "Wohnen im Grünen, ohne aufs Land zu ziehen"
+      ],
+      [
+        "silva",
+        "la",
+        "r",
+        "Wald",
+        "silv"
+      ],
+      [
+        "hortus",
+        "la",
+        "r",
+        "Garten",
+        "hort"
+      ],
+      [
+        "pratum",
+        "la",
+        "r",
+        "Wiese",
+        "prat"
+      ]
+    ]
+  },
+  {
+    "id": "wasser",
+    "label": "See und Wasser",
+    "triggers": [
+      "see",
+      "wasser",
+      "ufer",
+      "fluss",
+      "donau",
+      "meer",
+      "strand",
+      "lake"
+    ],
+    "words": [
+      [
+        "Seeufer",
+        "de",
+        "w",
+        "der Rand des Sees"
+      ],
+      [
+        "Uferhaus",
+        "de",
+        "w",
+        "das Haus direkt am Wasser"
+      ],
+      [
+        "Bootshaus",
+        "de",
+        "w",
+        "das Haus für Boote am Ufer"
+      ],
+      [
+        "Badehaus",
+        "de",
+        "w",
+        "das alte Haus am Badeplatz"
+      ],
+      [
+        "Ufer",
+        "de",
+        "w",
+        "wo das Land das Wasser trifft"
+      ],
+      [
+        "Steg",
+        "de",
+        "w",
+        "der Weg ans Wasser"
+      ],
+      [
+        "Bucht",
+        "de",
+        "w",
+        "die geschützte Stelle am Wasser"
+      ],
+      [
+        "Riva",
+        "it",
+        "f",
+        "Ufer"
+      ],
+      [
+        "Lago",
+        "it",
+        "f",
+        "See"
+      ],
+      [
+        "Rive",
+        "fr",
+        "f",
+        "Ufer"
+      ],
+      [
+        "Stilles Wasser",
+        "de",
+        "b",
+        "Ruhe am See"
+      ],
+      [
+        "ripa",
+        "la",
+        "r",
+        "Ufer",
+        "riv"
+      ],
+      [
+        "lacus",
+        "la",
+        "r",
+        "See",
+        "lag"
+      ]
+    ]
+  },
+  {
+    "id": "berg",
+    "label": "Berge und Alpen",
+    "triggers": [
+      "berg",
+      "alpen",
+      "alpin",
+      "gebirge",
+      "alm",
+      "ski",
+      "huette"
+    ],
+    "words": [
+      [
+        "Hochalm",
+        "de",
+        "w",
+        "die Weide hoch oben"
+      ],
+      [
+        "Sonnhang",
+        "de",
+        "w",
+        "der Hang auf der Sonnenseite"
+      ],
+      [
+        "Grat",
+        "de",
+        "w",
+        "der Kamm des Berges"
+      ],
+      [
+        "Monte",
+        "it",
+        "f",
+        "Berg"
+      ],
+      [
+        "Cima",
+        "it",
+        "f",
+        "Gipfel"
+      ],
+      [
+        "Freie Sicht",
+        "de",
+        "b",
+        "Weite und Klarheit"
+      ],
+      [
+        "Klare Luft",
+        "de",
+        "b",
+        "die Luft, die man in den Bergen atmet"
+      ],
+      [
+        "mons",
+        "la",
+        "r",
+        "Berg",
+        "mont"
+      ],
+      [
+        "alpes",
+        "la",
+        "r",
+        "die Alpen",
+        "alp"
+      ]
+    ]
+  },
+  {
+    "id": "stadt",
+    "label": "Stadt und Lage",
+    "triggers": [
+      "stadt",
+      "urban",
+      "city",
+      "innenstadt",
+      "zentrum",
+      "zentral",
+      "lage"
+    ],
+    "words": [
+      [
+        "Quartier",
+        "de",
+        "w",
+        "eine Nachbarschaft mit eigenem Charakter"
+      ],
+      [
+        "Stadtkontor",
+        "de",
+        "w",
+        "Kontor mitten in der Stadt"
+      ],
+      [
+        "Civitas",
+        "la",
+        "f",
+        "Bürgerschaft, Stadt"
+      ],
+      [
+        "Urbs",
+        "la",
+        "f",
+        "die Stadt"
+      ],
+      [
+        "Kurze Wege",
+        "de",
+        "b",
+        "was eine gute Lage ausmacht"
+      ],
+      [
+        "Neue Mitte",
+        "de",
+        "b",
+        "ein Ort, an dem etwas entsteht"
+      ],
+      [
+        "urbs",
+        "la",
+        "r",
+        "Stadt",
+        "urb"
+      ],
+      [
+        "civitas",
+        "la",
+        "r",
+        "Bürgerschaft",
+        "civ"
+      ]
+    ]
+  },
+  {
+    "id": "licht",
+    "label": "Licht und Aussicht",
+    "triggers": [
+      "licht",
+      "hell",
+      "sonne",
+      "sonnig",
+      "dachgeschoss",
+      "dachterrasse",
+      "terrasse",
+      "penthouse",
+      "aussicht",
+      "blick"
+    ],
+    "words": [
+      [
+        "Lichthof",
+        "de",
+        "w",
+        "der helle Hof im Inneren des Hauses"
+      ],
+      [
+        "Sonnseite",
+        "de",
+        "w",
+        "die helle Seite"
+      ],
+      [
+        "Fernsicht",
+        "de",
+        "w",
+        "Aussicht bis zum Horizont"
+      ],
+      [
+        "Weitblick",
+        "de",
+        "w",
+        "der Blick in die Ferne"
+      ],
+      [
+        "Licht",
+        "de",
+        "w",
+        "was jeder Raum braucht"
+      ],
+      [
+        "Luce",
+        "it",
+        "f",
+        "Licht"
+      ],
+      [
+        "Lichte Höhe",
+        "de",
+        "b",
+        "hohe, helle Räume"
+      ],
+      [
+        "Freie Sicht",
+        "de",
+        "b",
+        "Weite und Klarheit"
+      ],
+      [
+        "lux",
+        "la",
+        "r",
+        "Licht",
+        "luc"
+      ],
+      [
+        "clarus",
+        "la",
+        "r",
+        "hell, klar",
+        "clar"
+      ],
+      [
+        "lumen",
+        "la",
+        "r",
+        "Licht",
+        "lum"
+      ]
+    ]
+  },
+  {
+    "id": "vertrauen",
+    "label": "Vertrauen und Tradition",
+    "triggers": [
+      "vertrau",
+      "tradition",
+      "familienbetrieb",
+      "erfahrung",
+      "regional",
+      "persoenlich",
+      "diskret",
+      "beratung",
+      "ehrlich"
+    ],
+    "words": [
+      [
+        "Handschlag",
+        "de",
+        "w",
+        "ein Abschluss per Handschlag"
+      ],
+      [
+        "Leumund",
+        "de",
+        "w",
+        "der gute Ruf"
+      ],
+      [
+        "Gewähr",
+        "de",
+        "w",
+        "Sicherheit, für die man einsteht"
+      ],
+      [
+        "Fides",
+        "la",
+        "f",
+        "Vertrauen, Treue"
+      ],
+      [
+        "Fiducia",
+        "it",
+        "f",
+        "Vertrauen"
+      ],
+      [
+        "Bona Fide",
+        "la",
+        "f",
+        "in gutem Glauben"
+      ],
+      [
+        "Auf Handschlag",
+        "de",
+        "b",
+        "Vereinbarungen, die halten"
+      ],
+      [
+        "fides",
+        "la",
+        "r",
+        "Vertrauen",
+        "fid"
+      ],
+      [
+        "certus",
+        "la",
+        "r",
+        "sicher, gewiss",
+        "cert"
+      ]
+    ]
+  }
+]

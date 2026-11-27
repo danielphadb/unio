@@ -1,0 +1,279 @@
+{
+  "klischeeMuster": [
+    {
+      "$regexp": "traumimmobilie",
+      "flags": "i"
+    },
+    {
+      "$regexp": "traumhaus",
+      "flags": "i"
+    },
+    {
+      "$regexp": "traumwohnung",
+      "flags": "i"
+    },
+    {
+      "$regexp": "\\b(ihr|dein) partner für",
+      "flags": "i"
+    },
+    {
+      "$regexp": "mit leidenschaft",
+      "flags": "i"
+    },
+    {
+      "$regexp": "kompetent(e|es|er)? und zuverlässig",
+      "flags": "i"
+    },
+    {
+      "$regexp": "immobilienprofi",
+      "flags": "i"
+    },
+    {
+      "$regexp": "maßgeschneidert",
+      "flags": "i"
+    },
+    {
+      "$regexp": "rundum.?sorglos",
+      "flags": "i"
+    },
+    {
+      "$regexp": "auf augenhöhe",
+      "flags": "i"
+    },
+    {
+      "$regexp": "mehrwert",
+      "flags": "i"
+    },
+    {
+      "$regexp": "ganzheitlich",
+      "flags": "i"
+    },
+    {
+      "$regexp": "individuelle lösung",
+      "flags": "i"
+    },
+    {
+      "$regexp": "zuhause ist unsere mission",
+      "flags": "i"
+    },
+    {
+      "$regexp": "seriös",
+      "flags": "i"
+    },
+    {
+      "$regexp": "experte an (ihrer|deiner) seite",
+      "flags": "i"
+    },
+    {
+      "$regexp": "einzigartig",
+      "flags": "i"
+    },
+    {
+      "$regexp": "einmalige gelegenheit",
+      "flags": "i"
+    },
+    {
+      "$regexp": "revolutionär",
+      "flags": "i"
+    },
+    {
+      "$regexp": "game.?changer",
+      "flags": "i"
+    },
+    {
+      "$regexp": "aus einer hand",
+      "flags": "i"
+    },
+    {
+      "$regexp": "\\bluxus",
+      "flags": "i"
+    },
+    {
+      "$regexp": "\\bpremium",
+      "flags": "i"
+    },
+    {
+      "$regexp": "hochwertig",
+      "flags": "i"
+    },
+    {
+      "$regexp": "wohlfühl",
+      "flags": "i"
+    },
+    {
+      "$regexp": "\\bperfekt",
+      "flags": "i"
+    },
+    {
+      "$regexp": "garantiert",
+      "flags": "i"
+    },
+    {
+      "$regexp": "exklusiv",
+      "flags": "i"
+    },
+    {
+      "$regexp": "bestpreis",
+      "flags": "i"
+    },
+    {
+      "$regexp": "top.?lage",
+      "flags": "i"
+    },
+    {
+      "$regexp": "schnäppchen",
+      "flags": "i"
+    },
+    {
+      "$regexp": "\\boase\\b",
+      "flags": "i"
+    },
+    {
+      "$regexp": "paradies",
+      "flags": "i"
+    }
+  ],
+  "alternativeText": {
+    "franchise": {
+      "nominativ": "die großen Netzwerke",
+      "von": "von den großen Netzwerken"
+    },
+    "bank": {
+      "nominativ": "der Makler der Hausbank",
+      "von": "vom Makler der Hausbank"
+    },
+    "platzhirsch": {
+      "nominativ": "der Platzhirsch am Ort",
+      "von": "vom Platzhirsch am Ort"
+    },
+    "online": {
+      "nominativ": "Online-Makler mit Fixpreis",
+      "von": "von Online-Maklern"
+    },
+    "privat": {
+      "nominativ": "der Privatverkauf über Portale",
+      "von": "vom Privatverkauf über Portale"
+    }
+  },
+  "referenzGenitiv": {
+    "verlag": "eines Verlags",
+    "uhrmacher": "eines Uhrmachers",
+    "architektur": "eines Architekturbüros",
+    "privatbank": "einer Privatbank",
+    "hotel": "eines Hotels",
+    "cafe": "eines Cafés",
+    "galerie": "einer Galerie",
+    "tech": "eines Tech-Unternehmens",
+    "manufaktur": "einer Manufaktur",
+    "weingut": "eines Weinguts",
+    "sport": "des Sports",
+    "mode": "der Mode"
+  },
+  "achsenText": {
+    "serif": {
+      "a": "du klare Schriften ohne Füßchen magst",
+      "b": "du Schriften mit Serifen magst"
+    },
+    "contrast": {
+      "a": "du einen ruhigen Strich magst",
+      "b": "du Spannung im Strich magst"
+    },
+    "caps": {
+      "a": "dein Name wie im Satz stehen soll",
+      "b": "dein Name in Großbuchstaben stehen soll"
+    },
+    "width": {
+      "a": "du schmale Formen magst",
+      "b": "du breite Formen magst"
+    },
+    "symbol": {
+      "a": "dein Name allein stehen soll",
+      "b": "du ein Zeichen zum Namen willst"
+    },
+    "dark": {
+      "a": "du helle Flächen magst",
+      "b": "du einen dunklen Grund magst"
+    }
+  },
+  "onlynessSatz": {
+    "graetzl": "das eigene Viertel Haus für Haus kennt",
+    "bewertung": "jeden Preis mit Vergleichsdaten begründet",
+    "substanz": "alte Häuser bis zur Widmung und zum Dachboden versteht",
+    "verhandlung": "für Eigentümer vorbereitet und mit einem Plan für das zweite Angebot verhandelt",
+    "diskret": "verkauft, ohne dass die Nachbarschaft davon erfährt",
+    "lebenslagen": "Erbe, Trennung und Umzug mit allen Beteiligten ruhig begleitet",
+    "rendite": "jedes Haus wie ein Anleger durchrechnet",
+    "inszenierung": "Häuser mit eigenen Bildern und Texten zeigt, die man zu Ende liest",
+    "vorgemerkt": "passende Käufer kennt, bevor ein Inserat erscheint",
+    "projekt": "Projekte vom Plan weg verkauft",
+    "region": "Grund, Widmung und Gemeinde der Region aus eigener Anschauung kennt",
+    "nachher": "auch nach der Unterschrift erreichbar bleibt"
+  },
+  "onlynessNutzen": {
+    "graetzl": "Nähe zum Viertel die passenden Käufer schneller findet.",
+    "bewertung": "ein begründeter Preis in der Verhandlung hält.",
+    "substanz": "der Zustand eines alten Hauses den Preis stärker bestimmt als jede Beschreibung.",
+    "verhandlung": "eine vorbereitete Verhandlung am Ende den Unterschied macht.",
+    "diskret": "ein Haus, das nicht überall zu sehen ist, seinen Wert behält.",
+    "lebenslagen": "hinter vielen Verkäufen eine Lebenslage steht, die Ruhe und Erfahrung braucht.",
+    "rendite": "Anleger eine Rechnung brauchen und keine Beschreibung.",
+    "inszenierung": "ein Haus, das gut gezeigt wird, die richtigen Käufer anzieht.",
+    "vorgemerkt": "die passenden Käufer oft schon warten, bevor ein Inserat erscheint.",
+    "projekt": "Projekte Käufer brauchen, lange bevor es etwas zu besichtigen gibt.",
+    "region": "auf dem Land Grund, Widmung und Nachbarn den Preis bestimmen.",
+    "nachher": "ein Verkauf erst gut ist, wenn auch die Übergabe gelingt."
+  },
+  "nichtIchText": {
+    "gold-schwarz": "Nie Gold auf Schwarz.",
+    "haus-icon": "Kein Haus, kein Dach und keine Tür als Zeichen.",
+    "skyline": "Keine Skyline.",
+    "schluessel": "Kein Schlüssel als Zeichen.",
+    "schreibschrift": "Keine Schreibschrift.",
+    "monogramm-kreis": "Kein Monogramm im Kreis oder Ring."
+  },
+  "themen": {
+    "persoenlich": [
+      "Was an diesem Beruf nach all den Jahren noch überrascht.",
+      "Eine Frage, die man sich vor jedem Termin stellt.",
+      "Was nach einem langen Tag im Notizbuch steht.",
+      "Ein Fehler, aus dem viel gelernt wurde."
+    ],
+    "lokal": [
+      "Ein Ort in {ort}, der eine eigene Geschichte verdient.",
+      "Was sich in {ort} gerade verändert.",
+      "Eine Straße in {ort}, aus der Nähe betrachtet.",
+      "Was das Leben in {ort} ausmacht."
+    ],
+    "immobilien": [
+      "Ein Haus und das eine Detail, das es ausmacht.",
+      "Was Käufer bei einer Besichtigung zuerst ansehen.",
+      "Ein Grundriss, kurz erklärt.",
+      "Was vor einem Verkauf geklärt sein sollte."
+    ]
+  },
+  "formate": {
+    "reel": {
+      "gesicht": "Du sprichst direkt in die Kamera, eine Aussage in weniger als einer Minute.",
+      "stimme": "Bilder vom Haus und aus der Gegend, deine Stimme erklärt aus dem Off.",
+      "objekte": "Ein Rundgang in bewegten Bildern, der Text steht im Bild statt einer Stimme.",
+      "standard": "Kurze Clips mit genau einer Aussage."
+    },
+    "karussell": {
+      "standard": "Fünf bis acht Bilder mit einer Geschichte, der erste Satz zieht in die Strecke."
+    },
+    "foto": {
+      "standard": "Ein starkes Bild mit einem Satz, der mehr verrät als das Bild."
+    },
+    "story": {
+      "gesicht": "Kurze Einblicke aus deinem Tag, ohne großen Aufwand.",
+      "standard": "Kurze Einblicke hinter die Kulissen, ohne großen Aufwand."
+    },
+    "text": {
+      "standard": "Ein längerer Beitrag, der einordnet, ideal für LinkedIn oder den Newsletter."
+    },
+    "live": {
+      "gesicht": "Live aus einer Besichtigung oder mit Antworten auf Fragen deiner Community.",
+      "standard": "Live mit Antworten auf Fragen, ohne Schnitt."
+    }
+  }
+}

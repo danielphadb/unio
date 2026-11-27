@@ -1,0 +1,1076 @@
+[
+  {
+    "id": "sig-gesims",
+    "titel": "Gesims",
+    "idee": "Über dem Namen liegt ein Kranzgesims aus Sima, Hängeplatte und Zahnschnitt, gezeichnet wie auf einem Fassadenplan und genau so breit wie die längste Namenszeile.",
+    "herleitung": "Hauptgesims der Wiener Gründerzeitfassade (Sima, Hängeplatte, Zahnschnitt), auf zwei Linien und eine Reihe reduziert. Profile mit Zahnschnitt kommen im Korpus nicht vor; Linien stehen dort glatt unter oder neben dem Namen.",
+    "referenzen": [],
+    "abgrenzung": "Ornamentales Fassadenprofil über dem Namen; keine Korpusmarke nutzt ein Gesims oder einen Zahnschnitt als Zeichen.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "ibarra",
+          "weight": 400
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "tanne",
+        "bordeaux",
+        "anthrazit"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "gesims",
+      "position": "oben",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.1,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1700,
+          "minVersal": 62,
+          "umbruch": true
+        }
+      },
+      {
+        "typ": "linie",
+        "x1": "name.l",
+        "x2": "name.r",
+        "y1": "min(name.t,name.o)-100",
+        "y2": "min(name.t,name.o)-100",
+        "staerke": 4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "name.l+12",
+        "x2": "name.r-12",
+        "y1": "min(name.t,name.o)-83",
+        "y2": "min(name.t,name.o)-83",
+        "staerke": 14,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "reihe",
+        "x1": "name.l+24",
+        "x2": "name.r-24",
+        "y": "min(name.t,name.o)-71",
+        "motiv": "M0 0H11V18H0Z",
+        "teilung": 21,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "name.b+84"
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-gesims-unten",
+    "titel": "Gesims unten",
+    "idee": "Der Name steht auf einem Sockelprofil aus Zahnschnitt, Platte und Abschlusslinie, so breit wie die längste Namenszeile; der Zusatz steht als Kopfzeile darüber.",
+    "herleitung": "Sockel- und Gurtgesims der Gründerzeitfassade, umgedreht als Profil unter dem Namen (Variante zu sig-gesims nach Wunsch des Owner-Teams, 21.10.2026). Ein Profil mit Zahnschnitt unter dem Namen kommt im Korpus nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Profil mit Zahnschnitt unter dem Namen; im Korpus liegen unter Namen nur glatte Linien oder Balken.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus"
+      ],
+      "nurLang": 9
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "ibarra",
+          "weight": 400
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "bordeaux",
+        "tanne",
+        "anthrazit"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "gesims",
+      "position": "unter",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.1,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1700,
+          "minVersal": 62,
+          "umbruch": true
+        }
+      },
+      {
+        "typ": "reihe",
+        "x1": "name.l+24",
+        "x2": "name.r-24",
+        "y": "max(name.b,name.u)+40",
+        "motiv": "M0 0H11V18H0Z",
+        "teilung": 21,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "name.l+12",
+        "x2": "name.r-12",
+        "y1": "max(name.b,name.u)+70",
+        "y2": "max(name.b,name.u)+70",
+        "staerke": 14,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "name.l",
+        "x2": "name.r",
+        "y1": "max(name.b,name.u)+87",
+        "y2": "max(name.b,name.u)+87",
+        "staerke": 4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "min(name.t,name.o)-62"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-gesims-mitte",
+    "titel": "Gesims Mitte",
+    "idee": "Zwischen Name und Zusatz läuft ein Gurtgesims aus zwei Linien und Zahnschnitt, genau so breit wie die längste Namenszeile, und trennt die Geschoße der Marke.",
+    "herleitung": "Gurtgesims zwischen Beletage und Obergeschoß der Gründerzeitfassade (Variante zu sig-gesims nach Wunsch des Owner-Teams, 21.10.2026). Im Korpus trennen glatte Linien Name und Zusatz; ein Fries mit Zahnschnitt kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Gurtgesims mit Zahnschnitt zwischen Name und Zusatz; im Korpus trennen dort nur glatte Haarlinien.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus"
+      ],
+      "nurLang": 9
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "ibarra",
+          "weight": 400
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "anthrazit",
+        "tanne",
+        "bordeaux"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "gesims",
+      "position": "zwischen",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.1,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1700,
+          "minVersal": 62,
+          "umbruch": true
+        }
+      },
+      {
+        "typ": "linie",
+        "x1": "name.l",
+        "x2": "name.r",
+        "y1": "max(name.b,name.u)+42",
+        "y2": "max(name.b,name.u)+42",
+        "staerke": 3.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "reihe",
+        "x1": "name.l+10",
+        "x2": "name.r-10",
+        "y": "max(name.b,name.u)+52",
+        "motiv": "M0 0H10V15H0Z",
+        "teilung": 19,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "name.l",
+        "x2": "name.r",
+        "y1": "max(name.b,name.u)+77",
+        "y2": "max(name.b,name.u)+77",
+        "staerke": 3.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "max(name.b,name.u)+150"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-serliana",
+    "titel": "Serliana",
+    "idee": "Ein palladianisches Fenster aus wenigen Haarlinien, Rundbogen in der Mitte und zwei schmale Seitenöffnungen, steht wie eine Bildmarke über dem Namen.",
+    "herleitung": "Serliana (Palladio-Motiv) aus Renaissance und Wiener Historismus, als reine Linienzeichnung ohne Rahmen. Keine Korpusmarke nutzt ein Fenstermotiv über dem Namen; Fensterzeichen im Korpus sind Quadrate mit Kreuz links vom Namen.",
+    "referenzen": [],
+    "abgrenzung": "Historisches Fenstermotiv als Linienzeichnung über dem Namen; Fensterzeichen im Korpus sind Quadrate mit Kreuz links vom Namen.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "ibarra",
+          "weight": 400
+        },
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "gilda",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "navysand",
+        "tanne",
+        "graphit"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "fenster",
+      "position": "oben",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.12,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 62,
+          "umbruch": true
+        }
+      },
+      {
+        "typ": "pfad",
+        "zeichen": true,
+        "d": "M-120 0V-96M-46 0V-96M46 0V-96M120 0V-96M-120 -96H120M-46 -96A46 46 0 0 1 46 -96M-136 0H136M-128 -108H-58M58 -108H128",
+        "x": "name.cx",
+        "y": "min(name.t,name.o)-78",
+        "massstab": 1.5,
+        "kontur": 3.6,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "name.b+84"
+      }
+    ],
+    "mischung": false,
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-lisenen",
+    "titel": "Lisenen",
+    "idee": "Zwei schmale Doppellinien mit Kapitell- und Sockelstrich fassen Name und Zusatz links und rechts wie Lisenen eine Fassadenachse.",
+    "herleitung": "Lisenen (flache Wandstreifen) gliedern Wiener Biedermeier- und Gründerzeitfassaden in Achsen. Im Korpus flankieren Linien nur den Zusatz waagrecht; senkrechte Fassung des ganzen Textblocks kommt nicht vor.",
+    "referenzen": [
+      "EMILE GARCIN PROPRIÉTÉS"
+    ],
+    "abgrenzung": "Garcin flankiert nur den Zusatz mit waagrechten Linien; hier fassen senkrechte Doppellinien mit Kapitell und Sockel den ganzen Block.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "gilda",
+          "weight": 400
+        },
+        {
+          "key": "bellefair",
+          "weight": 400
+        },
+        {
+          "key": "cormorant",
+          "weight": 500
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "bordeaux",
+        "taubenblau",
+        "anthrazit"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "linien-flankierend",
+      "position": "um",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.14,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1400,
+          "minVersal": 60,
+          "umbruch": true
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "name.b+82"
+      },
+      {
+        "typ": "linie",
+        "x1": "min(name.l,zusatz.l)-60|name.l-60",
+        "x2": "min(name.l,zusatz.l)-60|name.l-60",
+        "y1": "min(name.t,name.o)-52",
+        "y2": "zusatz.b+44|name.b+44",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "min(name.l,zusatz.l)-72|name.l-72",
+        "x2": "min(name.l,zusatz.l)-72|name.l-72",
+        "y1": "min(name.t,name.o)-52",
+        "y2": "zusatz.b+44|name.b+44",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "min(name.l,zusatz.l)-52|name.l-52",
+        "x2": "min(name.l,zusatz.l)-80|name.l-80",
+        "y1": "min(name.t,name.o)-54",
+        "y2": "min(name.t,name.o)-54",
+        "staerke": 4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "min(name.l,zusatz.l)-52|name.l-52",
+        "x2": "min(name.l,zusatz.l)-80|name.l-80",
+        "y1": "zusatz.b+44+2|name.b+44+2",
+        "y2": "zusatz.b+44+2|name.b+44+2",
+        "staerke": 4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "max(name.r,zusatz.r)+60|name.r+60",
+        "x2": "max(name.r,zusatz.r)+60|name.r+60",
+        "y1": "min(name.t,name.o)-52",
+        "y2": "zusatz.b+44|name.b+44",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "max(name.r,zusatz.r)+72|name.r+72",
+        "x2": "max(name.r,zusatz.r)+72|name.r+72",
+        "y1": "min(name.t,name.o)-52",
+        "y2": "zusatz.b+44|name.b+44",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "max(name.r,zusatz.r)+52|name.r+52",
+        "x2": "max(name.r,zusatz.r)+80|name.r+80",
+        "y1": "min(name.t,name.o)-54",
+        "y2": "min(name.t,name.o)-54",
+        "staerke": 4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "max(name.r,zusatz.r)+52|name.r+52",
+        "x2": "max(name.r,zusatz.r)+80|name.r+80",
+        "y1": "zusatz.b+44+2|name.b+44+2",
+        "y2": "zusatz.b+44+2|name.b+44+2",
+        "staerke": 4,
+        "rolle": "zeichen"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-bogenfries",
+    "titel": "Bogenfries",
+    "idee": "Unter dem Namen hängt ein Rundbogenfries, eine Reihe kleiner Bögen an einer Linie, wie unter dem Traufgesims eines alten Stadthauses.",
+    "herleitung": "Rundbogenfries der Romanik und des Wiener Historismus (Ringstraßenbauten), als Reihe aus Halbkreisen. Kein Korpus-Logo nutzt ein Ornamentband; Linien unter dem Namen sind dort immer glatt.",
+    "referenzen": [],
+    "abgrenzung": "Ornamentband aus Halbkreisen unter einem gemischt gesetzten Namen; im Korpus gibt es keine Ornamentbänder.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "warm"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        },
+        {
+          "key": "newsreader",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "salbei",
+        "bordeaux",
+        "taupe"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "linie",
+      "position": "unter",
+      "schrift": "serif",
+      "schreibung": "mixed",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "schrift": "haupt",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 64,
+          "umbruch": true
+        }
+      },
+      {
+        "typ": "linie",
+        "id": "fries",
+        "x1": "name.l",
+        "x2": "name.r",
+        "y1": "name.b+56",
+        "y2": "name.b+56",
+        "staerke": 3.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "reihe",
+        "x1": "name.l",
+        "x2": "name.r",
+        "y": "name.b+57",
+        "motiv": "M3 30V19A14 14 0 0 1 31 19V30",
+        "teilung": 36,
+        "kontur": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "name.b+156"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-kursivligatur",
+    "titel": "Kursivligatur",
+    "idee": "Die beiden Initialen stehen kursiv ineinander verschränkt, freigestellt wie ein gravierter Siegelring, daneben Name und Zusatz in ruhigen Grotesk-Versalien.",
+    "herleitung": "Verschränkte Initialen aus der Tradition der Briefpapier- und Wäschemonogramme, hier mit kursiver Antiqua und Freistellung statt Ornament. Korpus-Monogramme sind aufrecht und stehen in Kreis oder Quadrat; verschlungene Paare im Korpus (Hotel- und Möbelmarken) stehen vor Antiqua-Namen; hier stehen kursive Initialen vor einem Grotesk-Namen.",
+    "referenzen": [
+      "ST. REGIS",
+      "StacomSilverstein"
+    ],
+    "abgrenzung": "Dort aufrechte, verschlungene Monogramme vor Antiqua-Namen; hier zwei kursive Initialen mit Freistellung vor einem Grotesk-Namen.",
+    "legal": "gelb",
+    "nahe": [
+      "ST. REGIS"
+    ],
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        2,
+        3
+      ],
+      "initialen": 2,
+      "stile": [
+        "elegant",
+        "luxus"
+      ],
+      "initialenAkzent": false
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "cormorant",
+          "weight": 500,
+          "style": "italic"
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "ibarra",
+          "weight": 400,
+          "style": "italic"
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "bordeaux",
+        "tanne",
+        "navysand"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "monogramm-verschraenkt",
+      "position": "links",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "inline"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "i1",
+        "feld": "initial1",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 150,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "zeichen",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "i2",
+        "feld": "initial2",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 150,
+        "x": "i1.r-40",
+        "y": 36,
+        "ausrichtung": "links",
+        "rolle": "zeichen",
+        "zeichen": true,
+        "hof": 7,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.16,
+        "versal": 100,
+        "x": "max(i1.r,i2.r)+64",
+        "y": "i1.t+100",
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.l",
+        "y": "i2.b"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  }
+]

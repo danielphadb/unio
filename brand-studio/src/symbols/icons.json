@@ -1,0 +1,1449 @@
+{
+  "haus": [
+    {
+      "id": "haus-negativraum",
+      "label": "Haus im Negativraum",
+      "themes": [
+        "haus",
+        "abstrakt"
+      ],
+      "styles": [
+        "modern",
+        "mutig",
+        "luxus"
+      ],
+      "keywords": [
+        "haus",
+        "negativ",
+        "quadrat",
+        "tor",
+        "modern",
+        "zuhause"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(ne([[12,12],[88,12],[88,88],[67,88],[67,54],[50,37],[33,54],[33,88],[12,88]],[7,7,7,0,0,.6,0,0,7]),e.main)"
+      }
+    },
+    {
+      "id": "haus-sprossenfenster",
+      "label": "Haus mit Sprossenfenster",
+      "themes": [
+        "haus"
+      ],
+      "styles": [
+        "warm",
+        "modern",
+        "natur"
+      ],
+      "keywords": [
+        "haus",
+        "fenster",
+        "zuhause",
+        "heim",
+        "familie"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>{let i=\"\";for(const a of[0,10+3.5])for(const o of[0,10+3.5])i+=we(38.25+a,54.25+o,10,10,1.2);return W(ne(It(50,10,44,38,90),[3,2.5,3,3,2.5])+i,e.main)}"
+      }
+    },
+    {
+      "id": "haus-herz",
+      "label": "Haus mit Herz",
+      "themes": [
+        "haus"
+      ],
+      "styles": [
+        "warm",
+        "natur"
+      ],
+      "keywords": [
+        "haus",
+        "herz",
+        "liebe",
+        "familie",
+        "zuhause",
+        "geborgenheit"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(ne(It(50,10,44,38,90),[3,2.5,3,3,2.5])+PS(50,65,30),e.main)"
+      }
+    },
+    {
+      "id": "haus-etagen",
+      "label": "Haus aus Etagen",
+      "themes": [
+        "haus",
+        "abstrakt"
+      ],
+      "styles": [
+        "modern",
+        "mutig"
+      ],
+      "keywords": [
+        "haus",
+        "etagen",
+        "streifen",
+        "linien",
+        "wohnbau",
+        "stockwerk"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(sT(3,5),e.main)"
+      }
+    },
+    {
+      "id": "haus-offen",
+      "label": "Offenes Haus",
+      "themes": [
+        "haus",
+        "dach"
+      ],
+      "styles": [
+        "elegant",
+        "modern",
+        "warm"
+      ],
+      "keywords": [
+        "haus",
+        "offen",
+        "willkommen",
+        "tür",
+        "dach",
+        "linie"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M9 51L50 14L91 51\",e.main)+G(\"M23 39V86H41M59 86H77V39\",e.main)"
+      }
+    },
+    {
+      "id": "haus-3d",
+      "label": "Haus in Schrägansicht",
+      "themes": [
+        "haus",
+        "abstrakt"
+      ],
+      "styles": [
+        "modern",
+        "mutig",
+        "warm"
+      ],
+      "keywords": [
+        "haus",
+        "3d",
+        "raum",
+        "perspektive",
+        "bau",
+        "objekt"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>{const n=Jo([[10,52],[28,29],[46,52],[46,89],[10,89]],0,-9),r=Jo([[28,29],[74,29],[92,52],[46,52]],0,-9),s=Jo([[46,52],[92,52],[92,89],[46,89]],0,-9);return W(ca([n,r,s],4.5)+at(28,55,5.5),e.main)}"
+      }
+    },
+    {
+      "id": "haus-villa",
+      "label": "Moderne Villa",
+      "themes": [
+        "haus"
+      ],
+      "styles": [
+        "modern",
+        "luxus",
+        "mutig"
+      ],
+      "keywords": [
+        "villa",
+        "modern",
+        "bauhaus",
+        "architektur",
+        "flachdach",
+        "luxus"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(we(26,16,66,34,1.5)+we(34.5,24.5,49,17,.8),e.main)+W(we(8,55,58,33,1.5),e.main)+W(we(72,55,7,33,1),e.accent)"
+      }
+    },
+    {
+      "id": "haus-standort",
+      "label": "Standort Haus",
+      "themes": [
+        "haus",
+        "stadt"
+      ],
+      "styles": [
+        "modern",
+        "warm",
+        "mutig"
+      ],
+      "keywords": [
+        "standort",
+        "pin",
+        "lage",
+        "karte",
+        "haus",
+        "adresse"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>{const i=Math.acos(.5849056603773585),a=31*Math.sin(i),o=39+31*Math.cos(i),l=`M50 92L${(50-a).toFixed(2)} ${o.toFixed(2)}A31 31 0 1 1 ${(50+a).toFixed(2)} ${o.toFixed(2)}Z`;return W(l+ne(It(50,22,36,15,55),1.2),e.main)}"
+      }
+    }
+  ],
+  "dach": [
+    {
+      "id": "dach-fenster",
+      "label": "Dach mit Fenster",
+      "themes": [
+        "dach",
+        "haus"
+      ],
+      "styles": [
+        "modern",
+        "warm",
+        "elegant"
+      ],
+      "keywords": [
+        "dach",
+        "fenster",
+        "haus",
+        "giebel",
+        "zuhause"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>{let i=\"\";for(const a of[0,9.5+3])for(const o of[0,9.5+3])i+=we(39+a,53+o,9.5,9.5,1);return G(\"M11 60L50 24L89 60\",e.main,7.5)+W(i,e.accent)}"
+      }
+    },
+    {
+      "id": "dach-doppelgiebel",
+      "label": "Doppelgiebel",
+      "themes": [
+        "dach"
+      ],
+      "styles": [
+        "modern",
+        "elegant",
+        "luxus"
+      ],
+      "keywords": [
+        "dach",
+        "giebel",
+        "linien",
+        "doppelt",
+        "aufstieg"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M13 54L50 20L87 54\",e.main)+G(\"M13 80L50 46L87 80\",e.main)"
+      }
+    },
+    {
+      "id": "dach-sparren",
+      "label": "Gekreuzte Sparren",
+      "themes": [
+        "dach",
+        "haus"
+      ],
+      "styles": [
+        "elegant",
+        "natur",
+        "warm"
+      ],
+      "keywords": [
+        "dach",
+        "sparren",
+        "holz",
+        "giebel",
+        "kreuz",
+        "zimmerei"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M13 82L55.5 27M87 82L44.5 27\",e.main,7.5)+Wn(50,62,7,e.accent)"
+      }
+    },
+    {
+      "id": "dach-tympanon",
+      "label": "Giebel mit Okulus",
+      "themes": [
+        "dach",
+        "stadt"
+      ],
+      "styles": [
+        "elegant",
+        "luxus"
+      ],
+      "keywords": [
+        "giebel",
+        "tympanon",
+        "klassisch",
+        "altbau",
+        "palais",
+        "rundfenster"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(ne([[50,20],[92,60],[8,60]],[3,2,2])+at(50,45,7),e.main)+W(we(8,67,84,9,1.2),e.main)"
+      }
+    },
+    {
+      "id": "dach-haeuserzeile",
+      "label": "Häuserzeile",
+      "themes": [
+        "dach",
+        "stadt",
+        "haus"
+      ],
+      "styles": [
+        "warm",
+        "modern",
+        "natur"
+      ],
+      "keywords": [
+        "häuser",
+        "reihenhaus",
+        "siedlung",
+        "dach",
+        "nachbarschaft",
+        "zeile"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M10 82V56L23 43L36 56V36L50 20L64 36V56L77 43L90 56V82ZM36 56V82M64 56V82\",e.main,6.5)"
+      }
+    },
+    {
+      "id": "dach-schornstein",
+      "label": "Dach mit Kamin",
+      "themes": [
+        "dach",
+        "haus"
+      ],
+      "styles": [
+        "warm",
+        "mutig",
+        "modern"
+      ],
+      "keywords": [
+        "dach",
+        "kamin",
+        "schornstein",
+        "wärme",
+        "heim",
+        "zuhause"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>{const t=n=>24+(n-50)*38/40;return W(ne([[9,62],[50,23],[91,62],[91,78],[50,39],[9,78]],[1.5,2.5,1.5,1.5,.5,1.5]),e.main)+W(ne([[66,20],[77,20],[77,t(77)-4.5],[66,t(66)-4.5]],[1.2,1.2,0,0]),e.main)}"
+      }
+    },
+    {
+      "id": "dach-morgensonne",
+      "label": "Dach mit Sonne",
+      "themes": [
+        "dach",
+        "natur"
+      ],
+      "styles": [
+        "warm",
+        "natur"
+      ],
+      "keywords": [
+        "sonne",
+        "dach",
+        "morgen",
+        "licht",
+        "horizont",
+        "zuhause"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M10 54L50 18L90 54\",e.main)+G(\"M22 82H78\",e.main)+W(\"M33 74A17 17 0 0 1 67 74Z\",e.accent)"
+      }
+    }
+  ],
+  "schluessel": [
+    {
+      "id": "schluessel-hausreide",
+      "label": "Schlüssel mit Hausreide",
+      "themes": [
+        "schluessel",
+        "haus"
+      ],
+      "styles": [
+        "modern",
+        "warm",
+        "elegant"
+      ],
+      "keywords": [
+        "schlüssel",
+        "haus",
+        "übergabe",
+        "kauf",
+        "einzug",
+        "zuhause"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(ur(It(50,9,29,21,51)),e.main)+G(\"M50 51V91M50 73H62M50 84H62\",e.main)"
+      }
+    },
+    {
+      "id": "schluesselloch-bogen",
+      "label": "Schlüsselloch im Bogen",
+      "themes": [
+        "schluessel",
+        "tuer"
+      ],
+      "styles": [
+        "elegant",
+        "luxus",
+        "modern"
+      ],
+      "keywords": [
+        "schlüsselloch",
+        "bogen",
+        "tür",
+        "sicherheit",
+        "vertrauen",
+        "eingang"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(nn(21,79,43,88)+tl(50,48,9.5,25,6.5),e.main)"
+      }
+    },
+    {
+      "id": "schluessel-klassisch",
+      "label": "Klassischer Schlüssel",
+      "themes": [
+        "schluessel"
+      ],
+      "styles": [
+        "elegant",
+        "luxus",
+        "warm"
+      ],
+      "keywords": [
+        "schlüssel",
+        "klassisch",
+        "vintage",
+        "übergabe",
+        "tradition"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>oT(G(at(50,25,15),e.main)+`<circle cx=\"50\" cy=\"25\" r=\"4.5\" fill=\"${e.accent}\"/>`+G(\"M50 40V90M50 70H63V86H50\",e.main))"
+      }
+    },
+    {
+      "id": "haus-schluesselloch",
+      "label": "Haus mit Schlüsselloch",
+      "themes": [
+        "schluessel",
+        "haus"
+      ],
+      "styles": [
+        "modern",
+        "mutig",
+        "warm"
+      ],
+      "keywords": [
+        "haus",
+        "schlüsselloch",
+        "sicherheit",
+        "eigentum",
+        "zuhause"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(ne(It(50,10,44,38,90),[3,2.5,3,3,2.5])+tl(50,59,9,21,6),e.main)"
+      }
+    },
+    {
+      "id": "dach-schluesselloch",
+      "label": "Dach mit Schlüsselloch",
+      "themes": [
+        "schluessel",
+        "dach"
+      ],
+      "styles": [
+        "modern",
+        "elegant",
+        "luxus"
+      ],
+      "keywords": [
+        "dach",
+        "schlüsselloch",
+        "haus",
+        "sicherheit",
+        "makler"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M11 54L50 18L89 54\",e.main,7.5)+W(tl(50,57,10,28,7),e.accent)"
+      }
+    },
+    {
+      "id": "schluessel-hausbart",
+      "label": "Schlüsselbart als Haus",
+      "themes": [
+        "schluessel",
+        "haus"
+      ],
+      "styles": [
+        "modern",
+        "mutig",
+        "warm"
+      ],
+      "keywords": [
+        "schlüssel",
+        "bart",
+        "haus",
+        "übergabe",
+        "einzug",
+        "kauf"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(at(25,61,17)+at(25,61,7),e.main)+W(we(38,56,54,10,3),e.main)+W(ne(It(78,24,38,14,58),[1.5,1,0,0,1])+we(74.5,40,7,7,.6),e.main)"
+      }
+    }
+  ],
+  "tuer": [
+    {
+      "id": "tuer-gruenderzeit",
+      "label": "Gründerzeit-Portal",
+      "themes": [
+        "tuer",
+        "stadt"
+      ],
+      "styles": [
+        "elegant",
+        "luxus",
+        "warm"
+      ],
+      "keywords": [
+        "tür",
+        "portal",
+        "altbau",
+        "gründerzeit",
+        "wien",
+        "eingang",
+        "oberlicht"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>{const t=[50,41],n=[225,270,315].map(r=>{const s=ei(t,24,r);return`M50 41L${M(s[0])} ${M(s[1])}`}).join(\"\");return G(nn(26,74,41,87,!1),e.main,6)+G(\"M26 41H74M50 41V87\"+n,e.main,6)+Wn(44.5,64,2.6,e.accent)+Wn(55.5,64,2.6,e.accent)}"
+      }
+    },
+    {
+      "id": "tuer-offen",
+      "label": "Offene Tür",
+      "themes": [
+        "tuer",
+        "haus"
+      ],
+      "styles": [
+        "modern",
+        "warm",
+        "mutig"
+      ],
+      "keywords": [
+        "tür",
+        "offen",
+        "willkommen",
+        "eingang",
+        "einzug",
+        "zuhause"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(ne([[20,90],[20,10],[80,10],[80,90],[70,90],[70,20],[30,20],[30,90]],[0,2.5,2.5,0,0,.5,.5,0]),e.main)+W(ne([[34.5,24],[57,31],[57,83],[34.5,90]],.8)+at(51.5,58,2.8),e.main)"
+      }
+    },
+    {
+      "id": "tuer-arkaden",
+      "label": "Arkaden",
+      "themes": [
+        "tuer",
+        "stadt"
+      ],
+      "styles": [
+        "elegant",
+        "luxus",
+        "natur"
+      ],
+      "keywords": [
+        "arkaden",
+        "bogen",
+        "säulengang",
+        "innenhof",
+        "palais",
+        "architektur"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>{const t=13.333333333333334,n=[10,10+2*t,10+4*t,90],r=`M10 47A${M(t)} ${M(t)} 0 0 1 ${M(n[1])} 47A${M(t)} ${M(t)} 0 0 1 ${M(n[2])} 47A${M(t)} ${M(t)} 0 0 1 90 47`;return G(\"M10 83V17H90V83\"+r+`M${M(n[1])} 47V83M${M(n[2])} 47V83`,e.main,6)}"
+      }
+    },
+    {
+      "id": "tuer-portal",
+      "label": "Portal mit Bögen",
+      "themes": [
+        "tuer"
+      ],
+      "styles": [
+        "elegant",
+        "luxus",
+        "modern"
+      ],
+      "keywords": [
+        "portal",
+        "bogen",
+        "tür",
+        "eingang",
+        "tor",
+        "durchgang"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>G(nn(17.5,82.5,48,88,!1),e.main,7,\"butt\")+G(nn(29.5,70.5,48,88,!1),e.main,7,\"butt\")+W(nn(38,62,48,88),e.main)"
+      }
+    },
+    {
+      "id": "tuer-sprossenfenster",
+      "label": "Sprossenfenster",
+      "themes": [
+        "tuer",
+        "haus"
+      ],
+      "styles": [
+        "warm",
+        "natur",
+        "elegant"
+      ],
+      "keywords": [
+        "fenster",
+        "sprossen",
+        "altbau",
+        "licht",
+        "aussicht",
+        "wohnung"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(we(26,9,48,66,2.5),e.main)+G(\"M50 9V75M26 31H74\",e.main)+W(we(17,82,66,8,2),e.main)"
+      }
+    },
+    {
+      "id": "tuer-torbogen",
+      "label": "Torbogen mit Schlussstein",
+      "themes": [
+        "tuer",
+        "stadt"
+      ],
+      "styles": [
+        "elegant",
+        "luxus",
+        "natur"
+      ],
+      "keywords": [
+        "torbogen",
+        "schlussstein",
+        "stein",
+        "tor",
+        "durchgang",
+        "altbau"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>{const t=uT([50,51],22,36,3.5);return W(t.side+we(14,54.5,14,31.5,.8)+we(72,54.5,14,31.5,.8),e.main)+W(t.key,e.accent)}"
+      }
+    }
+  ],
+  "stadt": [
+    {
+      "id": "stadt-silhouette",
+      "label": "Stadtsilhouette",
+      "themes": [
+        "stadt"
+      ],
+      "styles": [
+        "modern",
+        "mutig",
+        "warm"
+      ],
+      "keywords": [
+        "stadt",
+        "skyline",
+        "silhouette",
+        "wien",
+        "urban",
+        "kuppel",
+        "turm"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(ne([[9,88],[9,62],[18.5,52],[28,62],[28,88]],[0,.8,1,.8,0])+we(32,28,15,60,.8)+\"M51 88V57A10 10 0 0 1 71 57V88Z\"+ne([[75,88],[75,38],[82.5,12],[90,38],[90,88]],[0,.5,.8,.5,0]),e.main)"
+      }
+    },
+    {
+      "id": "stadt-dom",
+      "label": "Domspitze",
+      "themes": [
+        "stadt"
+      ],
+      "styles": [
+        "elegant",
+        "luxus",
+        "mutig"
+      ],
+      "keywords": [
+        "dom",
+        "turm",
+        "spitze",
+        "wien",
+        "gotik",
+        "innenstadt",
+        "zentrum"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>{const t=(n,r,s,i)=>ur([[n,r-i],[n+s,r],[n,r+i],[n-s,r]]);return W(ne([[50,8],[58,44],[58,88],[42,88],[42,44]],[.6,.6,0,0,.6])+nn(46.5,53.5,62,76),e.main)+W(ne([[12,88],[12,70],[37,48],[37,88]],[0,1,.6,0])+t(25,74,4.2,6.5),e.main)+W(ne([[63,48],[88,70],[88,88],[63,88]],[.6,1,0,0])+t(75,74,4.2,6.5),e.main)}"
+      }
+    },
+    {
+      "id": "stadt-tuerme",
+      "label": "Drei Türme",
+      "themes": [
+        "stadt"
+      ],
+      "styles": [
+        "modern",
+        "mutig",
+        "luxus"
+      ],
+      "keywords": [
+        "hochhaus",
+        "türme",
+        "skyline",
+        "modern",
+        "projekt",
+        "bauträger",
+        "büro"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>{const t=(n,r)=>ne([[n,r],[n+20,r-9],[n+20,88],[n,88]],[1,1,0,0]);return W(t(14,47)+t(40,22)+t(66,58),e.main)}"
+      }
+    },
+    {
+      "id": "stadt-bruecke",
+      "label": "Brücke",
+      "themes": [
+        "stadt",
+        "natur"
+      ],
+      "styles": [
+        "modern",
+        "elegant",
+        "natur"
+      ],
+      "keywords": [
+        "brücke",
+        "donau",
+        "fluss",
+        "verbindung",
+        "wasser",
+        "stadt"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>{const t=[[18,52],[30,14],[70,14],[82,52]];let n=\"\";for(const r of[.25,.5,.75]){const s=dT(...t,r);n+=`M${M(s[0])} ${M(s[1])}V52`}return G(\"M18 52C30 14 70 14 82 52\"+n,e.main,6)+G(\"M8 52H92M18 52V72M82 52V72\",e.main,6)+G(\"M12 84Q21.5 78 31 84T50 84T69 84T88 84\",e.accent,6)}"
+      }
+    },
+    {
+      "id": "stadt-riesenrad",
+      "label": "Riesenrad",
+      "themes": [
+        "stadt"
+      ],
+      "styles": [
+        "warm",
+        "mutig",
+        "elegant"
+      ],
+      "keywords": [
+        "riesenrad",
+        "prater",
+        "wien",
+        "freizeit",
+        "rad",
+        "wahrzeichen"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>{const t=[50,38];let n=\"\",r=\"\";for(let s=0;s<8;s++){const i=ei(t,27,s*45+22.5);n+=`M50 38L${M(i[0])} ${M(i[1])}`,r+=at(i[0],i[1],4)}return G(n,e.main,3.5)+G(at(50,38,27),e.main,6)+W(r,e.main)+G(\"M50 38L33 88M50 38L67 88M24 88H76\",e.main,6)+Wn(50,38,5,e.accent)}"
+      }
+    },
+    {
+      "id": "stadt-fassade",
+      "label": "Altbau-Fassade",
+      "themes": [
+        "stadt",
+        "haus"
+      ],
+      "styles": [
+        "elegant",
+        "warm",
+        "luxus"
+      ],
+      "keywords": [
+        "altbau",
+        "fassade",
+        "zinshaus",
+        "gründerzeit",
+        "wien",
+        "wohnung",
+        "fenster"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>{let t=\"\";for(const n of[26,45.5,65])t+=nn(n,n+9,38.5,48),t+=we(n,55,9,12,.6),t+=we(n,73,9,12,.6);return W(we(12,12,76,8,1.2),e.main)+W(we(17,24,66,66,.8)+t,e.main)}"
+      }
+    },
+    {
+      "id": "stadt-kompass",
+      "label": "Kompass",
+      "themes": [
+        "stadt",
+        "abstrakt"
+      ],
+      "styles": [
+        "modern",
+        "elegant",
+        "natur"
+      ],
+      "keywords": [
+        "kompass",
+        "orientierung",
+        "richtung",
+        "lage",
+        "navigation",
+        "beratung"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(at(50,50,38),e.main,6)+W(ur([[50,20],[58.5,50],[41.5,50]]),e.accent)+W(ur([[41.5,50],[58.5,50],[50,80]]),e.main)"
+      }
+    },
+    {
+      "id": "stadt-treppe",
+      "label": "Treppe",
+      "themes": [
+        "stadt",
+        "abstrakt"
+      ],
+      "styles": [
+        "modern",
+        "mutig"
+      ],
+      "keywords": [
+        "treppe",
+        "stufen",
+        "aufstieg",
+        "wachstum",
+        "treppenhaus",
+        "wertsteigerung"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M12 82H28V66H44V50H60V34H76V18H88\",e.main,7.5,\"square\",\"miter\")"
+      }
+    },
+    {
+      "id": "stadt-standort",
+      "label": "Standort",
+      "themes": [
+        "stadt"
+      ],
+      "styles": [
+        "modern",
+        "warm",
+        "natur"
+      ],
+      "keywords": [
+        "standort",
+        "pin",
+        "lage",
+        "karte",
+        "adresse",
+        "region"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(fT(50,38,27,90),e.main)+Wn(50,38,9,e.accent)"
+      }
+    }
+  ],
+  "natur": [
+    {
+      "id": "natur-haus-blatt",
+      "label": "Haus mit Blatt",
+      "themes": [
+        "natur",
+        "haus"
+      ],
+      "styles": [
+        "natur",
+        "warm",
+        "modern"
+      ],
+      "keywords": [
+        "haus",
+        "blatt",
+        "grün",
+        "nachhaltig",
+        "öko",
+        "garten",
+        "natur"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(ne(It(50,10,44,38,90),[3,2.5,3,3,2.5])+DS([36,80],[64,52],20,3.2),e.main)"
+      }
+    },
+    {
+      "id": "natur-blattdach",
+      "label": "Blatt mit Dachlinien",
+      "themes": [
+        "natur",
+        "dach"
+      ],
+      "styles": [
+        "natur",
+        "warm",
+        "elegant"
+      ],
+      "keywords": [
+        "blatt",
+        "dach",
+        "nachhaltig",
+        "grün",
+        "wachstum",
+        "natur"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(cu([50,8],[50,92],54)+el([[35,47],[50,33],[65,47]],5)+el([[31,69],[50,51],[69,69]],5)+el([[50,70],[50,84]],5),e.main)"
+      }
+    },
+    {
+      "id": "natur-huegel-sonne",
+      "label": "Hügel und Sonne",
+      "themes": [
+        "natur"
+      ],
+      "styles": [
+        "natur",
+        "warm",
+        "elegant"
+      ],
+      "keywords": [
+        "hügel",
+        "sonne",
+        "landschaft",
+        "land",
+        "weinberg",
+        "ruhe"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>Wn(57,31,13,e.accent)+G(\"M9 70C24 54 40 53 56 66M42 84C56 68 76 66 91 78\",e.main)"
+      }
+    },
+    {
+      "id": "natur-wellen",
+      "label": "Wellen",
+      "themes": [
+        "natur",
+        "abstrakt"
+      ],
+      "styles": [
+        "natur",
+        "modern",
+        "elegant"
+      ],
+      "keywords": [
+        "welle",
+        "wasser",
+        "donau",
+        "see",
+        "fluss",
+        "meer",
+        "ruhe"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(ms(10,90,32,40,5)+ms(10,90,50,40,5)+ms(10,90,68,40,5),e.main)"
+      }
+    },
+    {
+      "id": "natur-haus-wasser",
+      "label": "Wohnen am Wasser",
+      "themes": [
+        "natur",
+        "dach"
+      ],
+      "styles": [
+        "natur",
+        "elegant",
+        "modern"
+      ],
+      "keywords": [
+        "wasser",
+        "see",
+        "donau",
+        "dach",
+        "haus",
+        "welle",
+        "ufer"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M12 50L50 16L88 50\",e.main)+G(ms(18,82,66,32,4.5)+ms(18,82,83,32,4.5),e.accent)"
+      }
+    },
+    {
+      "id": "natur-tanne",
+      "label": "Tanne",
+      "themes": [
+        "natur"
+      ],
+      "styles": [
+        "natur",
+        "warm",
+        "mutig"
+      ],
+      "keywords": [
+        "tanne",
+        "baum",
+        "wald",
+        "alpen",
+        "natur",
+        "berg",
+        "land"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(pT(),e.main)"
+      }
+    },
+    {
+      "id": "natur-berge",
+      "label": "Bergpanorama",
+      "themes": [
+        "natur"
+      ],
+      "styles": [
+        "natur",
+        "mutig",
+        "modern"
+      ],
+      "keywords": [
+        "berg",
+        "alpen",
+        "gipfel",
+        "panorama",
+        "land",
+        "tirol",
+        "salzburg"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(mT(),e.main)"
+      }
+    },
+    {
+      "id": "natur-zweig",
+      "label": "Zweig",
+      "themes": [
+        "natur"
+      ],
+      "styles": [
+        "elegant",
+        "luxus",
+        "natur"
+      ],
+      "keywords": [
+        "zweig",
+        "olive",
+        "blatt",
+        "natur",
+        "garten",
+        "eleganz"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>G(\"M30 90Q40 46 70 14\",e.main,4.5)+gT(e.main)"
+      }
+    },
+    {
+      "id": "natur-haus-baum",
+      "label": "Haus im Grünen",
+      "themes": [
+        "natur",
+        "dach",
+        "haus"
+      ],
+      "styles": [
+        "natur",
+        "warm"
+      ],
+      "keywords": [
+        "baum",
+        "haus",
+        "garten",
+        "grün",
+        "familie",
+        "eigenheim",
+        "land"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M9 76H91M16 76V46L36 28L56 46V76M74 76V56\",e.main)+Wn(74,45,14,e.accent)"
+      }
+    }
+  ],
+  "abstrakt": [
+    {
+      "id": "abstrakt-kreis-dach",
+      "label": "Kreis mit Dachfuge",
+      "themes": [
+        "abstrakt",
+        "dach"
+      ],
+      "styles": [
+        "modern",
+        "mutig",
+        "warm"
+      ],
+      "keywords": [
+        "kreis",
+        "dach",
+        "fuge",
+        "geometrisch",
+        "modern",
+        "haus"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>{const t=yT(42,34,5.5);return W(t.cap,e.main)+W(t.body,e.main)}"
+      }
+    },
+    {
+      "id": "abstrakt-quadrate",
+      "label": "Verschränkte Quadrate",
+      "themes": [
+        "abstrakt"
+      ],
+      "styles": [
+        "modern",
+        "elegant",
+        "luxus"
+      ],
+      "keywords": [
+        "quadrate",
+        "verbindung",
+        "partner",
+        "verschränkt",
+        "geometrisch",
+        "team"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M45 62H62V14H14V62H31M69 38H86V86H38V38H55\",e.main,7,\"butt\",\"miter\")"
+      }
+    },
+    {
+      "id": "abstrakt-linienbuendel",
+      "label": "Linienbündel",
+      "themes": [
+        "abstrakt",
+        "haus",
+        "dach"
+      ],
+      "styles": [
+        "modern",
+        "elegant",
+        "luxus"
+      ],
+      "keywords": [
+        "linien",
+        "bündel",
+        "giebel",
+        "haus",
+        "minimal",
+        "streifen"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>{let t=\"\";for(let n=14;n<=86;n+=12)t+=`M${n} 86V${14+Math.abs(n-50)}`;return G(t,e.main,6.5)}"
+      }
+    },
+    {
+      "id": "abstrakt-diamant",
+      "label": "Diamant",
+      "themes": [
+        "abstrakt"
+      ],
+      "styles": [
+        "luxus",
+        "elegant",
+        "mutig"
+      ],
+      "keywords": [
+        "diamant",
+        "juwel",
+        "luxus",
+        "wert",
+        "premium",
+        "facetten"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>{const t=[31,17],n=[69,17],r=[8,40],s=[92,40],i=[50,89],a=[31,40],o=[50,40],l=[69,40];return W(ca([[r,t,a],[t,o,a],[t,n,o],[n,l,o],[n,s,l],[r,a,i],[a,o,i],[o,l,i],[l,s,i]],3.2),e.main)}"
+      }
+    },
+    {
+      "id": "abstrakt-quader",
+      "label": "Gestapelte Quader",
+      "themes": [
+        "abstrakt",
+        "stadt"
+      ],
+      "styles": [
+        "modern",
+        "mutig",
+        "luxus"
+      ],
+      "keywords": [
+        "quader",
+        "bauträger",
+        "projekt",
+        "ebenen",
+        "stockwerke",
+        "entwicklung"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>{const t=Nh(36,13,3);return W(ca([t.top,...t.faces],4.5),e.main)}"
+      }
+    },
+    {
+      "id": "abstrakt-raum",
+      "label": "Raum",
+      "themes": [
+        "abstrakt"
+      ],
+      "styles": [
+        "modern",
+        "elegant",
+        "luxus"
+      ],
+      "keywords": [
+        "raum",
+        "ecken",
+        "rahmen",
+        "fläche",
+        "minimal",
+        "architektur"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M14 44V14H44M86 56V86H56\",e.main,7,\"square\",\"miter\")+Wn(50,50,8.5,e.accent)"
+      }
+    },
+    {
+      "id": "abstrakt-wuerfel",
+      "label": "Würfel",
+      "themes": [
+        "abstrakt"
+      ],
+      "styles": [
+        "modern",
+        "mutig"
+      ],
+      "keywords": [
+        "würfel",
+        "kubus",
+        "raum",
+        "3d",
+        "bau",
+        "projekt"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>{const t=Nh(37,42,1),n=ca([t.top,...t.faces],4.5).split(\"Z\").filter(Boolean);return W(n[0]+\"Z\",e.accent)+W(n.slice(1).join(\"Z\")+\"Z\",e.main)}"
+      }
+    },
+    {
+      "id": "abstrakt-raute-haus",
+      "label": "Raute mit Haus",
+      "themes": [
+        "abstrakt",
+        "haus"
+      ],
+      "styles": [
+        "mutig",
+        "modern",
+        "luxus"
+      ],
+      "keywords": [
+        "raute",
+        "haus",
+        "diamant",
+        "negativ",
+        "geometrisch"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(ne([[50,7],[93,50],[50,93],[7,50]],6)+ne(It(50,31,46,15,68),[1,.8,.8,.8,.8]),e.main)"
+      }
+    },
+    {
+      "id": "abstrakt-kreissegmente",
+      "label": "Kreissegmente",
+      "themes": [
+        "abstrakt",
+        "natur"
+      ],
+      "styles": [
+        "modern",
+        "elegant",
+        "mutig"
+      ],
+      "keywords": [
+        "kreis",
+        "segmente",
+        "geometrisch",
+        "bauhaus",
+        "quadrat",
+        "blatt"
+      ],
+      "form": "solid",
+      "render": {
+        "$fn": "e=>W(\"M47 47H9A38 38 0 0 1 47 9Z\"+we(53,9,38,38,1.5)+we(9,53,38,38,1.5),e.main)+W(\"M53 53H91A38 38 0 0 1 53 91Z\",e.accent)"
+      }
+    }
+  ],
+  "initialen": [
+    {
+      "id": "initial-a-giebel",
+      "label": "A als Giebel",
+      "themes": [
+        "initialen",
+        "dach"
+      ],
+      "styles": [
+        "modern",
+        "elegant",
+        "mutig"
+      ],
+      "keywords": [
+        "a",
+        "buchstabe",
+        "giebel",
+        "dach",
+        "initiale"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M16 88L50 14L84 88\",e.main,7.5)+G(\"M26.5 68L50 50L73.5 68\",e.accent,7.5)"
+      }
+    },
+    {
+      "id": "initial-m-giebel",
+      "label": "M aus zwei Giebeln",
+      "themes": [
+        "initialen",
+        "dach",
+        "haus"
+      ],
+      "styles": [
+        "modern",
+        "warm",
+        "mutig"
+      ],
+      "keywords": [
+        "m",
+        "buchstabe",
+        "zwei häuser",
+        "doppelhaus",
+        "giebel",
+        "initiale"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M14 81V39L32 19L50 39L68 19L86 39V81\",e.main)"
+      }
+    },
+    {
+      "id": "initial-h-haus",
+      "label": "H mit Dach",
+      "themes": [
+        "initialen",
+        "haus"
+      ],
+      "styles": [
+        "modern",
+        "elegant",
+        "warm"
+      ],
+      "keywords": [
+        "h",
+        "buchstabe",
+        "haus",
+        "dach",
+        "initiale"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M12 50L50 16L88 50\",e.main)+G(\"M26 40V86M74 40V86M26 64H74\",e.main)"
+      }
+    },
+    {
+      "id": "initial-u-haus",
+      "label": "U mit Haus",
+      "themes": [
+        "initialen",
+        "haus"
+      ],
+      "styles": [
+        "modern",
+        "warm",
+        "elegant"
+      ],
+      "keywords": [
+        "u",
+        "buchstabe",
+        "haus",
+        "geborgenheit",
+        "hand",
+        "initiale",
+        "unio"
+      ],
+      "form": "outline",
+      "render": {
+        "$fn": "e=>G(\"M24 16V56A26 26 0 0 0 76 56V16\",e.main,8)+W(ne(It(50,32,44,12,64),1.2),e.accent)"
+      }
+    }
+  ]
+}

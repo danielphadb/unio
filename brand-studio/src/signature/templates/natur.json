@@ -1,0 +1,529 @@
+[
+  {
+    "id": "sig-spiegelung",
+    "titel": "Spiegelung",
+    "idee": "Der Name spiegelt sich wie in stillem Wasser, gestaucht und von Wasserlinien durchzogen; darüber Zusatz oder Ort.",
+    "herleitung": "Spiegelung am Seeufer (Salzkammergut, Alte Donau), typografisch umgesetzt mit gestauchtem Spiegelbild und ausgesparten Wellenlinien. Der Korpus enthält keine Spiegelung.",
+    "referenzen": [],
+    "abgrenzung": "Gestauchtes Spiegelbild mit Wasserlinien; im Korpus kommt keine Spiegelung vor.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "natur",
+        "elegant"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "jost",
+          "weight": 300
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "geist",
+          "weight": 300
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "petrol",
+        "taubenblau",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "spiegelung",
+      "position": "unter",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "spiegel": {
+          "abstand": 16,
+          "stauchung": 0.5,
+          "linien": 4,
+          "rolle": "akzent"
+        },
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 62
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.26,
+        "versal": 34,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "min(name.t,name.o)-62"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-hoehenlinien",
+    "titel": "Höhenlinien",
+    "idee": "Fünf Höhenlinien um einen versetzten Gipfel, zur Steilseite dichter, gezeichnet wie auf der Wanderkarte, stehen als ruhiges Zeichen neben dem Namen.",
+    "herleitung": "Höhenlinien der topografischen Karte (ÖK 1:50 000). Bildzeichen im Korpus sind Bäume, Blätter, Wappen oder Monogramme; Höhenlinien kommen nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Topografische Höhenlinien als Zeichen; Bildzeichen im Korpus sind Bäume, Blätter, Wappen oder Monogramme.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "natur",
+        "modern"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "crimson",
+          "weight": 400
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        },
+        {
+          "key": "newsreader",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "tanne",
+        "oliv",
+        "petrol"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "hoehenlinien",
+      "position": "links",
+      "schrift": "serif",
+      "schreibung": "mixed",
+      "layout": "inline"
+    },
+    "elemente": [
+      {
+        "typ": "pfad",
+        "id": "mark",
+        "zeichen": true,
+        "d": "M207.07 104C208.55 114.03 208.26 125.93 204.86 135.41C201.47 144.88 193.72 153.76 186.69 160.83C179.67 167.9 170.53 172.47 162.72 177.83C154.91 183.19 147.94 188.56 139.85 193C131.76 197.44 123.09 203.13 114.16 204.48C105.24 205.83 94.62 204.57 86.31 201.09C78.01 197.62 70.76 189.59 64.34 183.65C57.92 177.7 53.64 170.99 47.82 165.42C42.01 159.85 35.58 156.04 29.45 150.25C23.31 144.45 15.95 138.36 11.02 130.65C6.1 122.94 2.25 113.59 -0.11 104C-2.46 94.41 -3.62 83.73 -3.12 73.12C-2.62 62.51 -1.63 50.1 2.89 40.34C7.42 30.59 14.96 19.87 24.02 14.56C33.08 9.26 46.59 7.78 57.25 8.52C67.92 9.27 79.12 15.74 88.02 19.03C96.93 22.32 103.18 26.38 110.68 28.26C118.17 30.14 125.16 28.99 133.01 30.28C140.85 31.57 150.05 32.38 157.76 36.01C165.48 39.63 172.93 45.48 179.3 52.02C185.67 58.56 191.36 66.59 195.99 75.25C200.62 83.92 205.59 93.97 207.07 104ZM198.98 93.8C198.87 101.91 195.63 110.95 191.77 118.05C187.91 125.15 181.12 130.82 175.82 136.42C170.51 142.02 165.39 146.7 159.95 151.65C154.51 156.61 149.53 162.69 143.19 166.14C136.84 169.59 128.95 172.45 121.87 172.35C114.79 172.24 107.02 168.57 100.69 165.49C94.37 162.41 89.46 157.29 83.91 153.85C78.37 150.41 73.21 148.13 67.44 144.84C61.66 141.56 54.74 138.84 49.26 134.14C43.79 129.43 38.45 123.34 34.6 116.62C30.76 109.9 28 101.94 26.21 93.8C24.42 85.66 22.82 76.32 23.86 67.76C24.9 59.2 27.28 49.08 32.44 42.43C37.6 35.79 46.64 30.24 54.83 27.91C63.01 25.58 73.63 27.57 81.53 28.43C89.43 29.29 95.9 32.51 102.24 33.06C108.57 33.61 113.35 32.29 119.55 31.75C125.75 31.21 132.72 29.12 139.44 29.82C146.17 30.53 153.54 32.63 159.92 35.98C166.3 39.33 172.3 44.37 177.71 49.94C183.13 55.5 188.85 62.05 192.39 69.36C195.93 76.67 199.08 85.69 198.98 93.8ZM184.85 84.96C183.67 90.96 179.77 96.81 176.77 101.91C173.76 107.01 170.06 111.07 166.84 115.56C163.62 120.05 161.19 124.94 157.45 128.86C153.71 132.78 149.31 137.17 144.39 139.09C139.48 141 133.18 141 127.97 140.34C122.75 139.67 117.8 136.73 113.09 135.12C108.38 133.51 104.4 132.11 99.69 130.68C94.98 129.26 89.68 128.77 84.81 126.58C79.94 124.39 74.6 121.47 70.47 117.53C66.34 113.6 62.85 108.4 60.02 102.97C57.2 97.54 54.62 91.29 53.52 84.96C52.43 78.63 51.61 71.05 53.46 64.98C55.32 58.92 59.6 52.38 64.66 48.58C69.71 44.78 77.75 43.22 83.82 42.18C89.89 41.14 96.08 42.73 101.07 42.33C106.07 41.93 109.42 41.12 113.79 39.78C118.16 38.44 122.38 35.39 127.3 34.3C132.22 33.21 138.02 32.45 143.31 33.26C148.6 34.07 154.04 36.38 159.05 39.18C164.06 41.99 169.25 45.62 173.38 50.07C177.51 54.53 181.9 60.08 183.81 65.9C185.73 71.71 186.02 78.96 184.85 84.96ZM168.64 78.16C167.48 82.12 165.18 85.54 163.6 89.02C162.03 92.49 160.93 95.77 159.2 99.03C157.46 102.28 155.83 106.1 153.17 108.55C150.52 110.99 146.75 112.9 143.28 113.71C139.8 114.53 135.78 113.69 132.33 113.43C128.88 113.17 125.91 112.42 122.57 112.16C119.23 111.89 115.85 112.35 112.29 111.82C108.72 111.29 104.63 110.68 101.19 108.97C97.75 107.26 94.43 104.57 91.64 101.57C88.85 98.58 86.32 94.91 84.45 91.01C82.58 87.11 80.6 82.5 80.41 78.16C80.21 73.82 81.03 68.61 83.28 64.96C85.53 61.3 90.1 58.2 93.9 56.23C97.71 54.26 102.62 54.13 106.12 53.15C109.62 52.17 112.16 51.76 114.91 50.36C117.67 48.96 119.69 46.43 122.65 44.75C125.61 43.08 129.11 40.99 132.7 40.31C136.28 39.63 140.35 39.87 144.15 40.66C147.94 41.46 151.91 43 155.46 45.09C159.01 47.17 162.93 49.84 165.45 53.19C167.96 56.55 170.01 61.07 170.54 65.23C171.08 69.39 169.8 74.2 168.64 78.16ZM152.82 73.4C152.35 75.44 151.9 77.19 151.4 79.09C150.91 81 150.72 83.1 149.83 84.83C148.93 86.55 147.6 88.36 146.03 89.45C144.46 90.53 142.26 90.93 140.43 91.32C138.59 91.72 136.79 91.56 134.99 91.8C133.2 92.04 131.57 92.55 129.67 92.76C127.77 92.97 125.61 93.38 123.6 93.06C121.58 92.74 119.42 91.95 117.58 90.85C115.73 89.75 114 88.16 112.5 86.44C111.01 84.72 109.43 82.7 108.6 80.53C107.78 78.35 107.13 75.65 107.53 73.4C107.94 71.15 109.45 68.67 111.04 67C112.64 65.33 115.29 64.36 117.11 63.38C118.92 62.39 120.57 62.06 121.94 61.08C123.3 60.11 124.02 58.79 125.3 57.54C126.58 56.28 127.91 54.53 129.6 53.55C131.3 52.56 133.42 51.86 135.47 51.63C137.52 51.4 139.78 51.64 141.91 52.17C144.04 52.69 146.39 53.47 148.24 54.76C150.08 56.05 151.98 57.89 152.98 59.91C153.98 61.93 154.25 64.62 154.22 66.86C154.2 69.11 153.29 71.36 152.82 73.4Z",
+        "x": 0,
+        "y": 0,
+        "massstab": 1.2,
+        "kontur": 3.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "schrift": "haupt",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": 100,
+        "x": "mark.r+56",
+        "y": "mark.cy+8",
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.l",
+        "y": "name.b+84"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-parzelle",
+    "titel": "Parzelle",
+    "idee": "Ein Ausschnitt aus der Katastralmappe: ein unregelmäßiger Block mit schief geteilten Grundstücken, eines davon gefüllt, das eigene.",
+    "herleitung": "Katastralmappe (BEV), Grundstücksgrenzen mit leicht schiefen Teilungslinien. Flächen im Korpus sind regelmäßige Quadrate oder Rechtecke um den Namen; ein Parzellenplan kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Ausschnitt aus der Katastralmappe; Flächen im Korpus sind regelmäßige Quadrate und Rechtecke.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "natur",
+        "modern"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "geist",
+          "weight": 300
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "ink",
+      "akzent": "primary",
+      "paletten": [
+        "oliv",
+        "salbei",
+        "terrakotta"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "parzelle",
+      "position": "oben",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "stacked"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.16,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 60,
+          "umbruch": true
+        }
+      },
+      {
+        "typ": "pfad",
+        "zeichen": true,
+        "d": "M78 12.5L150 0L177.4 62L87 50Z",
+        "x": "name.cx-127",
+        "y": "min(name.t,name.o)-252",
+        "massstab": 1.3,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "pfad",
+        "zeichen": true,
+        "d": "M0 24L150 0L196 104L12 140ZM78 12.5L104 122M6.2 84L93.6 78M87 50L177.4 62M132 56L146 113.8",
+        "x": "name.cx-127",
+        "y": "min(name.t,name.o)-252",
+        "massstab": 1.3,
+        "kontur": 3.6,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 32,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "name.b+82"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-flur",
+    "titel": "Flur",
+    "idee": "Feldstücke von oben gesehen, jedes in eigener Richtung gepflügt und schraffiert, eines voll: die Flur, in der das eigene Grundstück liegt.",
+    "herleitung": "Luftbild der Flurlandschaft (Weinviertel, Innviertel) und Signaturen der Landnutzung in Karten. Im Korpus kommen Schraffuren und Flurmuster nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Schraffierte Feldstücke als Luftbild; Schraffuren und Flurmuster kommen im Korpus nicht vor.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "natur",
+        "warm"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "crimson",
+          "weight": 400
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        },
+        {
+          "key": "lora",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "oliv",
+        "espresso",
+        "salbei"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "muster",
+      "position": "links",
+      "schrift": "serif",
+      "schreibung": "mixed",
+      "layout": "inline"
+    },
+    "elemente": [
+      {
+        "typ": "pfad",
+        "id": "mark",
+        "zeichen": true,
+        "d": "M52.85 10.79L87.73 26.32M23.21 14.02L89.2 43.39M7.25 23.33L90.66 60.46M8.19 40.16L68.84 67.17M9.12 57L40.18 70.83M109.75 23.06L116.48 10.4M111.44 51.83L132.39 12.43M122.87 62.28L148.3 14.46M140.53 61.02L164.21 16.49M158.19 59.76L180.11 18.52M175.85 58.49L186.52 38.42M63.9 87.29L63.9 162.22M48.9 89.1L48.9 163.13M33.9 90.92L33.9 164.04M18.9 92.74L18.9 164.95M163.33 82.29L184.93 82.29M164.33 97.29L184.25 97.29M165.33 112.29L183.57 112.29M166.33 127.29L182.89 127.29M167.33 142.29L182.21 142.29",
+        "x": 0,
+        "y": 0,
+        "massstab": 1.2,
+        "kontur": 3.8,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "pfad",
+        "zeichen": true,
+        "d": "M80.79 82.13L145.82 76.85L151.21 155.87L86.18 161.15Z",
+        "x": 0,
+        "y": 0,
+        "massstab": 1.2,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "schrift": "haupt",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": 100,
+        "x": "mark.r+56",
+        "y": "mark.t+102",
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.l",
+        "y": "mark.b-4"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  }
+]

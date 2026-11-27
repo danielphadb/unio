@@ -1,0 +1,3725 @@
+[
+  {
+    "id": "R01",
+    "titel": "Didone-Versalien eng, Grotesk-Zusatz weit",
+    "belege": [
+      "barnes",
+      "christies-ire",
+      "diptyque"
+    ],
+    "regeln": [
+      "L03",
+      "T01",
+      "L05"
+    ],
+    "styles": [
+      "luxus",
+      "elegant",
+      "modern"
+    ],
+    "name": {
+      "forms": [
+        "didone"
+      ],
+      "case": "upper",
+      "tracking": [
+        -0.03,
+        0.02
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.3
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R02",
+    "titel": "Didone gemischt, kraeftig und eng",
+    "belege": [
+      "minotti",
+      "hamptons",
+      "daniel-feau"
+    ],
+    "regeln": [
+      "L03",
+      "T09"
+    ],
+    "styles": [
+      "luxus",
+      "elegant",
+      "warm",
+      "mutig",
+      "modern"
+    ],
+    "name": {
+      "forms": [
+        "didone"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R03",
+    "titel": "Klassische Antiqua-Versalien, leicht gesperrt",
+    "belege": [
+      "john-taylor",
+      "the-peninsula",
+      "dahler",
+      "von-poll"
+    ],
+    "regeln": [
+      "T02",
+      "L05"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "natur"
+    ],
+    "name": {
+      "forms": [
+        "antiqua"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.08,
+        0.14
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R04",
+    "titel": "Antiqua gemischt, Zusatz zwischen zwei Linien",
+    "belege": [
+      "emile-garcin",
+      "sothebys-ir"
+    ],
+    "regeln": [
+      "K08",
+      "L05"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "warm",
+      "natur",
+      "modern"
+    ],
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone"
+      ],
+      "weight": "notbold",
+      "case": "title",
+      "tracking": [
+        -0.01,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "line",
+    "typo": "plain",
+    "color": "mono",
+    "needsSuffix": true
+  },
+  {
+    "id": "R05",
+    "titel": "Personenname mit Haarlinie zwischen Vor- und Nachname",
+    "belege": [
+      "aaron-kirman"
+    ],
+    "regeln": [
+      "L09",
+      "K08"
+    ],
+    "styles": [
+      "luxus",
+      "elegant",
+      "modern",
+      "natur"
+    ],
+    "person": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone",
+        "geometric"
+      ],
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.17
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "hairline",
+    "formats": [
+      "full",
+      "upper"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R06",
+    "titel": "Vorname kursiv, Nachname aufrecht",
+    "belege": [
+      "daniel-feau",
+      "corcoran"
+    ],
+    "regeln": [
+      "L11"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "warm",
+      "natur"
+    ],
+    "multi": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.01,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "italic",
+    "color": "mono"
+  },
+  {
+    "id": "R07",
+    "titel": "Leichte geometrische Grotesk, sehr weit, ohne Zeichen",
+    "belege": [
+      "the-row",
+      "aman",
+      "glorit"
+    ],
+    "regeln": [
+      "T05",
+      "L04",
+      "L01"
+    ],
+    "styles": [
+      "luxus",
+      "elegant",
+      "modern",
+      "natur"
+    ],
+    "name": {
+      "forms": [
+        "geometric",
+        "grotesk"
+      ],
+      "weight": "light",
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.2
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.2,
+        0.3
+      ],
+      "font": "same"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R08",
+    "titel": "Geometrische Grotesk-Versalien weit",
+    "belege": [
+      "compass",
+      "celine",
+      "lemaire",
+      "belmond",
+      "aston-chase"
+    ],
+    "regeln": [
+      "T04"
+    ],
+    "styles": [
+      "modern",
+      "luxus",
+      "elegant",
+      "natur"
+    ],
+    "name": {
+      "forms": [
+        "geometric"
+      ],
+      "weight": "notbold",
+      "case": "upper",
+      "tracking": [
+        0.11,
+        0.17
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R09",
+    "titel": "Fette Grotesk eng mit Schlusspunkt",
+    "belege": [
+      "serhant",
+      "vitra"
+    ],
+    "regeln": [
+      "T06",
+      "K07"
+    ],
+    "styles": [
+      "mutig"
+    ],
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "weight": "bold",
+      "case": "upper",
+      "tracking": [
+        -0.04,
+        -0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.14,
+        0.22
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "dot",
+    "color": "accent-mark"
+  },
+  {
+    "id": "R10",
+    "titel": "Fette Grotesk-Versalien luftig",
+    "belege": [
+      "the-modern-house",
+      "rosewood"
+    ],
+    "regeln": [
+      "T07"
+    ],
+    "styles": [
+      "mutig",
+      "luxus"
+    ],
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "weight": "bold",
+      "case": "upper",
+      "tracking": [
+        0.15,
+        0.18
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R11",
+    "titel": "Neo-Grotesk gemischt, ungesperrt",
+    "belege": [
+      "chipperfield",
+      "john-pawson",
+      "snohetta"
+    ],
+    "regeln": [
+      "T09"
+    ],
+    "styles": [
+      "modern",
+      "elegant"
+    ],
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "weight": "notbold",
+      "case": "title",
+      "tracking": [
+        -0.01,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.14,
+        0.22
+      ],
+      "font": "same"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R12",
+    "titel": "Kleinschreibung fett und eng",
+    "belege": [
+      "querkraft",
+      "vitra",
+      "savills"
+    ],
+    "regeln": [
+      "T09",
+      "A03"
+    ],
+    "styles": [
+      "mutig"
+    ],
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "weight": "bold",
+      "case": "lower",
+      "tracking": [
+        -0.04,
+        -0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.14,
+        0.22
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R13",
+    "titel": "Ganzer Name kursiv",
+    "belege": [
+      "corcoran"
+    ],
+    "regeln": [
+      "L11"
+    ],
+    "styles": [
+      "elegant",
+      "warm",
+      "luxus"
+    ],
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.01,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "italicAll",
+    "color": "mono"
+  },
+  {
+    "id": "R14",
+    "titel": "Zeichen oben zentriert, Name weit gesperrt",
+    "belege": [
+      "six-senses",
+      "four-seasons",
+      "beauchamp-estates"
+    ],
+    "regeln": [
+      "L07",
+      "K02"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "natur",
+      "warm"
+    ],
+    "name": {
+      "forms": [
+        "geometric",
+        "antiqua",
+        "grotesk"
+      ],
+      "weight": "notbold",
+      "case": "upper",
+      "tracking": [
+        0.11,
+        0.2
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "icon",
+    "layout": "stacked",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R15",
+    "titel": "Monogramm klein oben, Name in Versalien",
+    "belege": [
+      "glorit",
+      "the-agency"
+    ],
+    "regeln": [
+      "L07",
+      "K02"
+    ],
+    "styles": [
+      "luxus",
+      "elegant",
+      "modern",
+      "natur"
+    ],
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone",
+        "geometric",
+        "grotesk"
+      ],
+      "weight": "notbold",
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.2
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "monogram",
+    "layout": "stacked",
+    "symbolSize": "small",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R16",
+    "titel": "Monogramm links mit senkrechter Linie",
+    "belege": [
+      "von-poll"
+    ],
+    "regeln": [
+      "L08",
+      "K04"
+    ],
+    "styles": [
+      "elegant",
+      "modern",
+      "warm",
+      "luxus",
+      "natur"
+    ],
+    "name": {
+      "forms": [
+        "antiqua",
+        "grotesk",
+        "geometric",
+        "didone"
+      ],
+      "weight": "notbold",
+      "case": "title",
+      "tracking": [
+        -0.01,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "monogram",
+    "layout": "inline",
+    "divider": "line",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R17",
+    "titel": "Monogramm im Kreis links, Textblockhoehe",
+    "belege": [
+      "douglas-elliman"
+    ],
+    "regeln": [
+      "L08",
+      "K03"
+    ],
+    "styles": [
+      "luxus",
+      "elegant"
+    ],
+    "name": {
+      "forms": [
+        "didone",
+        "antiqua"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "monogram",
+    "container": "circle",
+    "layout": "inline",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R18",
+    "titel": "Ruhiges Zeichen rechts",
+    "belege": [
+      "otto-immobilien"
+    ],
+    "regeln": [
+      "K05"
+    ],
+    "styles": [
+      "modern",
+      "mutig"
+    ],
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.17
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.14,
+        0.24
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "monogram",
+    "layout": "inline",
+    "symbolPosition": "right",
+    "divider": "none",
+    "typo": "plain",
+    "color": "free"
+  },
+  {
+    "id": "R19",
+    "titel": "Feine Linie ueber dem Namen",
+    "belege": [
+      "corcoran",
+      "emile-garcin"
+    ],
+    "regeln": [
+      "K08",
+      "K10"
+    ],
+    "styles": [
+      "elegant",
+      "modern",
+      "natur",
+      "luxus"
+    ],
+    "name": {
+      "forms": [
+        "antiqua",
+        "geometric",
+        "grotesk",
+        "didone"
+      ],
+      "weight": "notbold",
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.2
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "rule",
+    "color": "mono"
+  },
+  {
+    "id": "R20",
+    "titel": "Zwei Namen mit kursivem Et-Zeichen als einzigem Akzent",
+    "belege": [
+      "engel-voelkers",
+      "strutt-parker",
+      "foster-partners"
+    ],
+    "regeln": [
+      "K07",
+      "L02"
+    ],
+    "styles": [
+      "elegant",
+      "warm",
+      "luxus",
+      "modern"
+    ],
+    "amp": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.01,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "amp",
+    "color": "accent-mark"
+  },
+  {
+    "id": "R21",
+    "titel": "Nachname mit Zusatz, Versalien",
+    "belege": [
+      "barnes",
+      "dahler",
+      "lemaire",
+      "soravia"
+    ],
+    "regeln": [
+      "L11",
+      "N01",
+      "N08"
+    ],
+    "styles": [
+      "luxus",
+      "elegant",
+      "modern"
+    ],
+    "person": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone",
+        "geometric"
+      ],
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.17
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "surname"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R22",
+    "titel": "Initial und Nachname",
+    "belege": [
+      "daniel-feau"
+    ],
+    "regeln": [
+      "N04"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "modern",
+      "natur"
+    ],
+    "person": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone",
+        "geometric"
+      ],
+      "weight": "notbold",
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.17
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "line",
+    "typo": "plain",
+    "formats": [
+      "initial"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R23",
+    "titel": "Ort als Zusatz",
+    "belege": [
+      "le-labo",
+      "diptyque"
+    ],
+    "regeln": [
+      "N19",
+      "L05"
+    ],
+    "styles": [
+      "luxus",
+      "elegant",
+      "modern",
+      "natur",
+      "warm"
+    ],
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone",
+        "geometric",
+        "grotesk"
+      ],
+      "weight": "notbold",
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.17
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "district"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R24",
+    "titel": "Kleiner Vorname gesperrt ueber grossem Nachnamen",
+    "belege": [
+      "douglas-elliman",
+      "john-taylor"
+    ],
+    "regeln": [
+      "L11"
+    ],
+    "styles": [
+      "luxus",
+      "elegant"
+    ],
+    "multi": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "geometric",
+        "didone",
+        "grotesk"
+      ],
+      "weight": "notbold",
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.17
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "stack",
+    "color": "mono"
+  },
+  {
+    "id": "R26",
+    "titel": "Schnittmischung leicht und kraeftig",
+    "belege": [
+      "huebl-partner"
+    ],
+    "regeln": [
+      "L13"
+    ],
+    "styles": [
+      "modern",
+      "mutig",
+      "warm"
+    ],
+    "gewicht": 1.5,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.17
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.14,
+        0.22
+      ],
+      "font": "same"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "weight",
+    "color": "mono"
+  },
+  {
+    "id": "R28",
+    "titel": "Schmale Grotesk-Versalien eng, zweizeilig",
+    "belege": [
+      "ace-hotel",
+      "bb-italia"
+    ],
+    "regeln": [
+      "T06"
+    ],
+    "styles": [
+      "mutig"
+    ],
+    "multi": true,
+    "name": {
+      "forms": [
+        "condensed"
+      ],
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.04
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "stacked"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R29",
+    "titel": "Monospace sachlich",
+    "belege": [
+      "oma",
+      "chipperfield"
+    ],
+    "regeln": [
+      "T09"
+    ],
+    "styles": [
+      "modern"
+    ],
+    "name": {
+      "forms": [
+        "mono"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.14,
+        0.22
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R30",
+    "titel": "Bogen-Emblem mit Antiqua",
+    "belege": [
+      "hotel-sacher"
+    ],
+    "regeln": [
+      "K09"
+    ],
+    "styles": [
+      "warm"
+    ],
+    "name": {
+      "forms": [
+        "antiqua"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.08,
+        0.14
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "monogram",
+    "layout": "badge",
+    "badge": "arch",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R31",
+    "titel": "Antiqua-Versalien eng (Wien)",
+    "belege": [
+      "christies-ire",
+      "aaron-kirman",
+      "emile-garcin"
+    ],
+    "regeln": [
+      "T01"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "warm",
+      "natur",
+      "modern"
+    ],
+    "name": {
+      "forms": [
+        "antiqua"
+      ],
+      "weight": "notbold",
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.02
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "line",
+    "typo": "plain",
+    "color": "mono",
+    "needsSuffix": true
+  },
+  {
+    "id": "R32",
+    "titel": "Schreibschrift-Vorname, Nachname in gesperrten Versalien",
+    "belege": [
+      "loro-piana"
+    ],
+    "regeln": [
+      "A10"
+    ],
+    "styles": [
+      "elegant",
+      "warm"
+    ],
+    "multi": true,
+    "name": {
+      "forms": [
+        "script"
+      ],
+      "case": "title",
+      "tracking": [
+        0,
+        0
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "mix",
+    "color": "mono"
+  },
+  {
+    "id": "R33",
+    "titel": "Zeichen frei links, Name gemischt",
+    "belege": [
+      "knight-frank",
+      "modesta"
+    ],
+    "regeln": [
+      "L08",
+      "K03"
+    ],
+    "styles": [
+      "modern",
+      "natur",
+      "warm"
+    ],
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric",
+        "antiqua"
+      ],
+      "weight": "notbold",
+      "case": "title",
+      "tracking": [
+        -0.01,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.14,
+        0.24
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "icon",
+    "layout": "inline",
+    "divider": "none",
+    "typo": "plain",
+    "color": "accent-suffix"
+  },
+  {
+    "id": "R34",
+    "titel": "Grosses Zeichen oben, kleiner Name",
+    "belege": [
+      "four-seasons",
+      "mandarin-oriental"
+    ],
+    "regeln": [
+      "K11",
+      "L07"
+    ],
+    "styles": [
+      "natur",
+      "warm",
+      "elegant"
+    ],
+    "name": {
+      "forms": [
+        "geometric",
+        "antiqua",
+        "grotesk"
+      ],
+      "weight": "notbold",
+      "case": "upper",
+      "tracking": [
+        0.11,
+        0.2
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "icon",
+    "layout": "stacked",
+    "symbolSize": "large",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R35",
+    "titel": "Grotesk-Versalien weit, Zusatz zwischen zwei Linien",
+    "belege": [
+      "emile-garcin",
+      "celine",
+      "lemaire"
+    ],
+    "regeln": [
+      "T04",
+      "K08",
+      "L05"
+    ],
+    "styles": [
+      "modern",
+      "natur"
+    ],
+    "name": {
+      "forms": [
+        "geometric",
+        "grotesk"
+      ],
+      "weight": "notbold",
+      "case": "upper",
+      "tracking": [
+        0.11,
+        0.17
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "same"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "line",
+    "typo": "plain",
+    "color": "mono",
+    "needsSuffix": true
+  },
+  {
+    "id": "R36",
+    "titel": "Natur: leichte Antiqua gemischt, Zusatz gesperrt",
+    "belege": [
+      "sothebys-ir",
+      "spiegelfeld",
+      "junot",
+      "toogood"
+    ],
+    "regeln": [
+      "T01",
+      "L05"
+    ],
+    "styles": [
+      "natur"
+    ],
+    "name": {
+      "forms": [
+        "antiqua"
+      ],
+      "weight": "notbold",
+      "case": "title",
+      "tracking": [
+        -0.01,
+        0.02
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R37",
+    "titel": "Natur: leichte Grotesk-Versalien sehr weit mit feiner Linie",
+    "belege": [
+      "aman",
+      "elmau",
+      "edlauer"
+    ],
+    "regeln": [
+      "T05",
+      "L04"
+    ],
+    "styles": [
+      "natur"
+    ],
+    "name": {
+      "forms": [
+        "geometric",
+        "grotesk"
+      ],
+      "weight": "light",
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.2
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.2,
+        0.3
+      ],
+      "font": "same"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "rule",
+    "color": "mono"
+  },
+  {
+    "id": "R38",
+    "titel": "Natur: kursive Antiqua mit Ortszeile",
+    "belege": [
+      "corcoran",
+      "corcoran-sunshine"
+    ],
+    "regeln": [
+      "L11",
+      "L05"
+    ],
+    "styles": [
+      "natur"
+    ],
+    "name": {
+      "forms": [
+        "antiqua"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.01,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "italicAll",
+    "formats": [
+      "district",
+      "full"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R39",
+    "titel": "Natur: Antiqua-Versalien mit Linie und Ort",
+    "belege": [
+      "augarten",
+      "tschuggen",
+      "six-senses"
+    ],
+    "regeln": [
+      "T01",
+      "L05"
+    ],
+    "styles": [
+      "natur"
+    ],
+    "name": {
+      "forms": [
+        "antiqua"
+      ],
+      "weight": "notbold",
+      "case": "upper",
+      "tracking": [
+        0.08,
+        0.16
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.2,
+        0.3
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "rule",
+    "formats": [
+      "district",
+      "full",
+      "stacked"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R40",
+    "titel": "Mutig: kraeftige Didone-Versalien grosszuegig gesperrt, Zusatz leicht",
+    "belege": [
+      "goyard",
+      "lange",
+      "prada"
+    ],
+    "regeln": [
+      "T02",
+      "L05",
+      "L12"
+    ],
+    "styles": [
+      "mutig"
+    ],
+    "gewicht": 2,
+    "name": {
+      "forms": [
+        "didone"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.08,
+        0.11
+      ],
+      "tag": "kräftig"
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.22,
+        0.3
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "stacked",
+      "full"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R41",
+    "titel": "Mutig: schwere Didone-Kursive gross und eng",
+    "belege": [
+      "oneandonly",
+      "sirhotels",
+      "artemide"
+    ],
+    "regeln": [
+      "L11",
+      "L05"
+    ],
+    "styles": [
+      "mutig"
+    ],
+    "gewicht": 2,
+    "multi": true,
+    "name": {
+      "forms": [
+        "didone"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.22,
+        0.3
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "italicAll",
+    "formats": [
+      "stacked",
+      "full"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R42",
+    "titel": "Mutig: extrabreite Grotesk-Versalien, leichter Zusatz, viel Weissraum",
+    "belege": [
+      "mclaren",
+      "related",
+      "wearstler"
+    ],
+    "regeln": [
+      "T07",
+      "L05",
+      "L06"
+    ],
+    "styles": [
+      "mutig"
+    ],
+    "gewicht": 2,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.02,
+        0.12
+      ],
+      "tag": "breit"
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.24,
+        0.32
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R43",
+    "titel": "Zwei Woerter: fett und regular in einer Zeile",
+    "belege": [
+      "huebl-partner",
+      "occhio"
+    ],
+    "regeln": [
+      "L13",
+      "T09"
+    ],
+    "styles": [
+      "modern",
+      "mutig",
+      "warm",
+      "elegant"
+    ],
+    "multi": true,
+    "gewicht": 1.5,
+    "formats": [
+      "full",
+      "district"
+    ],
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric",
+        "antiqua",
+        "didone"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "weight",
+    "color": "mono"
+  },
+  {
+    "id": "R44",
+    "titel": "Zwei Woerter: gerade und kursiv in einer Zeile",
+    "belege": [
+      "daniel-feau",
+      "oneandonly"
+    ],
+    "regeln": [
+      "L11",
+      "L13"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "warm",
+      "natur",
+      "mutig"
+    ],
+    "multi": true,
+    "gewicht": 1.5,
+    "formats": [
+      "full",
+      "district"
+    ],
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "italic",
+    "color": "mono"
+  },
+  {
+    "id": "R45",
+    "titel": "Zwei Woerter: Antiqua kursiv plus Grotesk-Versalien",
+    "belege": [
+      "daniel-feau",
+      "marcus-millichap"
+    ],
+    "regeln": [
+      "L11",
+      "L05"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "warm",
+      "natur",
+      "modern"
+    ],
+    "multi": true,
+    "gewicht": 1.5,
+    "formats": [
+      "full",
+      "district"
+    ],
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "mix",
+    "color": "mono"
+  },
+  {
+    "id": "R46",
+    "titel": "Zwei Woerter zusammengeschrieben mit Schnittwechsel",
+    "belege": [
+      "occhio",
+      "oneandonly"
+    ],
+    "regeln": [
+      "L13"
+    ],
+    "styles": [
+      "modern",
+      "mutig",
+      "warm"
+    ],
+    "multi": true,
+    "gewicht": 1.2,
+    "formats": [
+      "full"
+    ],
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric",
+        "antiqua"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "camel",
+    "color": "mono"
+  },
+  {
+    "id": "R47",
+    "titel": "Kurz: Mode-Versalien sehr weit",
+    "belege": [
+      "the-row",
+      "aman",
+      "celine"
+    ],
+    "regeln": [
+      "T05",
+      "L04"
+    ],
+    "styles": [
+      "luxus",
+      "elegant",
+      "modern"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "name": {
+      "forms": [
+        "geometric",
+        "grotesk"
+      ],
+      "weight": "light",
+      "case": "upper",
+      "tracking": [
+        0.22,
+        0.26
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R48",
+    "titel": "Kurz: Magazin-Didone eng",
+    "belege": [
+      "barnes",
+      "flos",
+      "loewe"
+    ],
+    "regeln": [
+      "L03",
+      "T01"
+    ],
+    "styles": [
+      "luxus",
+      "elegant",
+      "mutig"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "name": {
+      "forms": [
+        "didone"
+      ],
+      "case": "upper",
+      "tracking": [
+        -0.01,
+        0.02
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R49",
+    "titel": "Kurz: Kleinschreibung fette Geometrie",
+    "belege": [
+      "halter",
+      "vitra",
+      "querkraft"
+    ],
+    "regeln": [
+      "T09",
+      "A03"
+    ],
+    "styles": [
+      "modern",
+      "mutig",
+      "warm"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "name": {
+      "forms": [
+        "geometric",
+        "grotesk"
+      ],
+      "weight": "bold",
+      "case": "lower",
+      "tracking": [
+        -0.04,
+        -0.02
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R50",
+    "titel": "Kurz: kursive Antiqua klein",
+    "belege": [
+      "corcoran",
+      "arnold",
+      "baxter"
+    ],
+    "regeln": [
+      "L11"
+    ],
+    "styles": [
+      "elegant",
+      "warm",
+      "natur",
+      "luxus"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone"
+      ],
+      "case": "lower",
+      "tracking": [
+        -0.01,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "italicAll",
+    "color": "mono"
+  },
+  {
+    "id": "R51",
+    "titel": "Kurz: eine Silbe fett",
+    "belege": [
+      "occhio",
+      "huebl-partner"
+    ],
+    "regeln": [
+      "L13"
+    ],
+    "styles": [
+      "modern",
+      "mutig",
+      "warm",
+      "natur",
+      "elegant"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric",
+        "antiqua"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "weight",
+    "color": "mono"
+  },
+  {
+    "id": "R52",
+    "titel": "Kurz: Schlusspunkt",
+    "belege": [
+      "serhant",
+      "vitra"
+    ],
+    "regeln": [
+      "K07"
+    ],
+    "styles": [
+      "modern",
+      "mutig",
+      "warm",
+      "elegant",
+      "natur"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "name": {
+      "forms": [
+        "geometric",
+        "grotesk",
+        "antiqua",
+        "didone"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "dot",
+    "color": "mono"
+  },
+  {
+    "id": "R53",
+    "titel": "Impressum: Name und grosser Zusatz gleichrangig untereinander",
+    "belege": [
+      "von-poll",
+      "motto",
+      "modesta"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "modern",
+      "warm",
+      "natur"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone",
+        "grotesk",
+        "geometric"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.02
+      ]
+    },
+    "suffix": {
+      "case": "title",
+      "tracking": [
+        -0.01,
+        0.01
+      ],
+      "font": "same",
+      "pairing": "gross"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R54",
+    "quellen": [
+      "docs/15 M6 Ortsachse (Le Labo)"
+    ],
+    "titel": "Didone- oder Antiqua-Versalien mit Mono-Zusatz (Koordinaten)",
+    "belege": [],
+    "regeln": [
+      "L03",
+      "L05"
+    ],
+    "styles": [
+      "luxus",
+      "elegant",
+      "modern"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "didone",
+        "antiqua"
+      ],
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.03
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.1,
+        0.18
+      ],
+      "font": "grotesk",
+      "pairing": "mono"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono",
+    "gewicht": 3
+  },
+  {
+    "id": "R55",
+    "quellen": [
+      "docs/14 Regel 5 (echte Kursive als Kontrastschrift)"
+    ],
+    "titel": "Grotesk-Versalien mit kleiner kursiver Antiqua als Zusatz",
+    "belege": [],
+    "regeln": [
+      "L05",
+      "L11"
+    ],
+    "styles": [
+      "elegant",
+      "modern",
+      "warm",
+      "natur"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.1,
+        0.18
+      ]
+    },
+    "suffix": {
+      "case": "title",
+      "tracking": [
+        0,
+        0.02
+      ],
+      "font": "grotesk",
+      "pairing": "kursiv"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R56",
+    "quellen": [
+      "docs/14 Regel 4 (Zusatz lesbar, nie winzig)"
+    ],
+    "titel": "Leichter Name, fetter kleiner Zusatz in Versalien",
+    "belege": [],
+    "regeln": [
+      "L05"
+    ],
+    "styles": [
+      "modern",
+      "elegant",
+      "luxus",
+      "natur",
+      "warm"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone",
+        "grotesk",
+        "geometric"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ],
+      "weight": "notbold"
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.14,
+        0.22
+      ],
+      "font": "grotesk",
+      "pairing": "fett-klein"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R57",
+    "titel": "Grotesk-Versalien weit mit Mono-Zusatz (Ortszeile)",
+    "belege": [
+      "le-labo"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M6 Ortsachse (Le Labo)"
+    ],
+    "styles": [
+      "modern"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.1,
+        0.18
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.1,
+        0.18
+      ],
+      "font": "grotesk",
+      "pairing": "mono"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono",
+    "gewicht": 3
+  },
+  {
+    "id": "R58",
+    "titel": "Antiqua gemischt mit Mono-Zusatz",
+    "belege": [
+      "le-labo",
+      "diptyque"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M6 Ortsachse"
+    ],
+    "styles": [
+      "elegant",
+      "luxus"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "antiqua"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.1,
+        0.18
+      ],
+      "font": "grotesk",
+      "pairing": "mono"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono",
+    "gewicht": 3
+  },
+  {
+    "id": "R59",
+    "titel": "Grotesk gemischt mit Kapitaelchen-Zusatz",
+    "belege": [
+      "four-seasons"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 Abschnitt 5 (Kapitaelchen-Familie)"
+    ],
+    "styles": [
+      "elegant",
+      "modern"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "title",
+      "tracking": [
+        0.04,
+        0.1
+      ],
+      "font": "grotesk",
+      "pairing": "kapitaelchen"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono",
+    "gewicht": 3
+  },
+  {
+    "id": "R60",
+    "titel": "Impressum in Versalien: Name und Zusatz gleich gross untereinander",
+    "belege": [
+      "von-poll",
+      "motto",
+      "modesta"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M4 Impressum (Editions de Parfums Frederic Malle)"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "modern"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "grotesk",
+        "geometric"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.09,
+        0.14
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.06,
+        0.14
+      ],
+      "font": "same",
+      "pairing": "gross"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R61",
+    "titel": "Kurz: leichter Name, fetter kleiner Zusatz (Gewichtskontrast)",
+    "belege": [
+      "occhio"
+    ],
+    "regeln": [
+      "L05",
+      "K07"
+    ],
+    "quellen": [
+      "docs/15 4.3 Kurzer Kunstname"
+    ],
+    "styles": [
+      "modern",
+      "elegant",
+      "natur",
+      "warm"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric",
+        "antiqua"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.12,
+        0.2
+      ],
+      "weight": "notbold"
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.14,
+        0.22
+      ],
+      "font": "grotesk",
+      "pairing": "fett-klein"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R62",
+    "titel": "Kurz: Grotesk-Name mit kleiner kursiver Antiqua als Zusatz",
+    "belege": [
+      "jil-sander"
+    ],
+    "regeln": [
+      "L05",
+      "L11"
+    ],
+    "quellen": [
+      "docs/14 Regel 5 (echte Kursive als Kontrastschrift)"
+    ],
+    "styles": [
+      "modern",
+      "warm"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.03,
+        0
+      ]
+    },
+    "suffix": {
+      "case": "title",
+      "tracking": [
+        0,
+        0.02
+      ],
+      "font": "grotesk",
+      "pairing": "kursiv"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R63",
+    "titel": "Fussnote: Sternchen am Namen, Zusatz als Anmerkung",
+    "belege": [
+      "mclaren"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M2 Fussnote (Wallpaper*, abgegrenzt: keine schmale Grotesk)"
+    ],
+    "styles": [
+      "elegant",
+      "modern",
+      "warm"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone",
+        "grotesk"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "sup": "stern",
+      "fussnote": true
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R64",
+    "titel": "Kurz: hochgestellter Kreis am Namen",
+    "belege": [
+      "mclaren"
+    ],
+    "regeln": [
+      "K07"
+    ],
+    "quellen": [
+      "docs/15 M2 Fussnote"
+    ],
+    "styles": [
+      "modern",
+      "natur",
+      "elegant"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric",
+        "antiqua"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.12,
+        0.2
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "sup": "grad"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R65",
+    "titel": "Bezirksnummer klein hochgestellt, Antiqua gemischt",
+    "belege": [
+      "onehotels"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M23 Postleitzahl als Marke (25hours, 500W21)"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "warm"
+    ],
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "sup": "bezirk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R66",
+    "titel": "Grotesk-Versalien mit hochgestellter Bezirksnummer",
+    "belege": [
+      "onehotels",
+      "mclaren"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M23"
+    ],
+    "styles": [
+      "modern",
+      "mutig"
+    ],
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric",
+        "condensed"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.02,
+        0.12
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "sup": "bezirk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R67",
+    "titel": "Zusatz in Klammern unter dem Namen",
+    "belege": [
+      "coop-himmelblau"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M28 Zitat (abgegrenzt: Klammer statt Anfuehrungszeichen)"
+    ],
+    "styles": [
+      "modern",
+      "warm",
+      "natur"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric",
+        "antiqua"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "klammer": true
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R68",
+    "titel": "Schraegstrich-Trennung in einer Zeile, Versalien",
+    "belege": [
+      "lange"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M6 Ortsachse"
+    ],
+    "styles": [
+      "modern",
+      "mutig"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric",
+        "condensed"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.06,
+        0.14
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "trenner": "slash"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "inline",
+    "color": "mono",
+    "formats": [
+      "full"
+    ]
+  },
+  {
+    "id": "R69",
+    "titel": "Schraegstrich-Trennung in einer Zeile, Antiqua gemischt",
+    "belege": [
+      "lange"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M6 Ortsachse"
+    ],
+    "styles": [
+      "elegant",
+      "warm"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "antiqua"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "trenner": "slash"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "inline",
+    "color": "mono",
+    "formats": [
+      "full"
+    ]
+  },
+  {
+    "id": "R70",
+    "titel": "Breitlauf: Lexend-Zetta-Versalien leicht, normal gesperrt, leichter Zusatz",
+    "belege": [
+      "rosewood",
+      "related",
+      "modesta"
+    ],
+    "regeln": [
+      "T07",
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M11 Breitlauf"
+    ],
+    "styles": [
+      "modern",
+      "luxus"
+    ],
+    "name": {
+      "forms": [
+        "extended"
+      ],
+      "case": "upper",
+      "tracking": [
+        0,
+        0.04
+      ],
+      "weight": "light"
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.2,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R71",
+    "titel": "Weich und klein: runde Antiqua in Kleinbuchstaben, eng",
+    "belege": [
+      "the-hoxton"
+    ],
+    "regeln": [
+      "L11"
+    ],
+    "quellen": [
+      "docs/15 M25 Weich und klein (Apartamento)"
+    ],
+    "styles": [
+      "warm",
+      "natur"
+    ],
+    "name": {
+      "forms": [
+        "antiqua"
+      ],
+      "case": "lower",
+      "tracking": [
+        -0.02,
+        0
+      ],
+      "tag": "rund"
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R72",
+    "titel": "Grotesk-Versalien eng, Zusatz gleichrangig gross",
+    "belege": [
+      "motto",
+      "modesta"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M4 Impressum"
+    ],
+    "styles": [
+      "modern",
+      "natur"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "case": "upper",
+      "tracking": [
+        -0.02,
+        0.02
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.06,
+        0.14
+      ],
+      "font": "same",
+      "pairing": "gross"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R73",
+    "titel": "Kurz: weit gesperrte Versalien mit Mono-Zusatz",
+    "belege": [
+      "le-labo"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M6"
+    ],
+    "styles": [
+      "modern",
+      "luxus",
+      "elegant"
+    ],
+    "kurz": true,
+    "gewicht": 3,
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric",
+        "didone",
+        "antiqua"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.14,
+        0.22
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.1,
+        0.18
+      ],
+      "font": "grotesk",
+      "pairing": "mono"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R74",
+    "titel": "Kurz: Fussnote mit Sternchen",
+    "belege": [
+      "mclaren"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M2 Fussnote"
+    ],
+    "styles": [
+      "modern",
+      "warm",
+      "elegant",
+      "natur"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone",
+        "grotesk",
+        "geometric"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "sup": "stern",
+      "fussnote": true
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R75",
+    "titel": "Kurz: Zusatz in Klammern",
+    "belege": [
+      "coop-himmelblau"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M28 (abgegrenzt)"
+    ],
+    "styles": [
+      "modern",
+      "warm",
+      "natur",
+      "mutig"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric",
+        "antiqua"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.1,
+        0.18
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "klammer": true
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R76",
+    "titel": "Kurz: Schraegstrich-Trennung in einer Zeile",
+    "belege": [
+      "lange"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M6"
+    ],
+    "styles": [
+      "modern",
+      "mutig",
+      "warm"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.06,
+        0.14
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "trenner": "slash"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "inline",
+    "color": "mono",
+    "formats": [
+      "full"
+    ]
+  },
+  {
+    "id": "R77",
+    "titel": "Kursive Antiqua mit Mono-Zusatz",
+    "belege": [
+      "oneandonly",
+      "le-labo"
+    ],
+    "regeln": [
+      "L11",
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M6"
+    ],
+    "styles": [
+      "elegant",
+      "luxus"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "didone"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.1,
+        0.18
+      ],
+      "font": "grotesk",
+      "pairing": "mono"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "italicAll",
+    "color": "mono",
+    "gewicht": 3
+  },
+  {
+    "id": "R78",
+    "titel": "Zusatz in Klammern in einer Zeile",
+    "belege": [
+      "coop-himmelblau"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M28 (abgegrenzt)"
+    ],
+    "styles": [
+      "elegant",
+      "modern"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "antiqua",
+        "grotesk",
+        "geometric"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "trenner": "klammer"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "inline",
+    "color": "mono",
+    "formats": [
+      "full"
+    ]
+  },
+  {
+    "id": "R79",
+    "titel": "Kurz: Bezirksnummer hochgestellt",
+    "belege": [
+      "onehotels"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M23"
+    ],
+    "styles": [
+      "modern",
+      "elegant",
+      "warm",
+      "natur"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "name": {
+      "forms": [
+        "grotesk",
+        "geometric",
+        "antiqua",
+        "didone"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.1,
+        0.18
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "sup": "bezirk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R80",
+    "titel": "Didone-Versalien mit Fussnote",
+    "belege": [
+      "barnes",
+      "mclaren"
+    ],
+    "regeln": [
+      "L03",
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M2 Fussnote"
+    ],
+    "styles": [
+      "luxus",
+      "elegant"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "didone"
+      ],
+      "case": "upper",
+      "tracking": [
+        -0.01,
+        0.02
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "sup": "stern",
+      "fussnote": true
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R81",
+    "titel": "Antiqua-Versalien gesperrt, Zusatz in Klammern",
+    "belege": [
+      "coop-himmelblau",
+      "john-taylor"
+    ],
+    "regeln": [
+      "L03",
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M28 (abgegrenzt: Klammer statt Anfuehrungszeichen)"
+    ],
+    "styles": [
+      "luxus",
+      "elegant"
+    ],
+    "needsSuffix": true,
+    "name": {
+      "forms": [
+        "antiqua"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.08,
+        0.16
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.16,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "extras": {
+      "klammer": true
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R82",
+    "titel": "Kurz: Breitlauf in leichten Extended-Versalien",
+    "belege": [
+      "rosewood",
+      "related",
+      "mclaren"
+    ],
+    "regeln": [
+      "T07",
+      "K07"
+    ],
+    "quellen": [
+      "docs/15 M11 Breitlauf"
+    ],
+    "styles": [
+      "modern",
+      "luxus"
+    ],
+    "kurz": true,
+    "gewicht": 2.5,
+    "name": {
+      "forms": [
+        "extended"
+      ],
+      "case": "upper",
+      "tracking": [
+        0,
+        0.04
+      ],
+      "weight": "light"
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.2,
+        0.28
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "color": "mono"
+  },
+  {
+    "id": "R83",
+    "titel": "Slab-Versalien mit Herkunftszeile in weit gesperrter Grotesk",
+    "belege": [
+      "goyard",
+      "diptyque"
+    ],
+    "regeln": [
+      "L05",
+      "T02"
+    ],
+    "quellen": [
+      "docs/15 M9 Slab-Versalien mit Herkunftszeile (abgegrenzt: kein Bildzeichen, kein Akzent als Schmuck)"
+    ],
+    "styles": [
+      "mutig",
+      "modern",
+      "warm"
+    ],
+    "name": {
+      "forms": [
+        "slab"
+      ],
+      "case": "upper",
+      "tracking": [
+        0.08,
+        0.14
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.22,
+        0.3
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "district",
+      "full"
+    ],
+    "color": "mono"
+  },
+  {
+    "id": "R84",
+    "titel": "Slab gemischt, ruhig, Zusatz in Grotesk-Versalien",
+    "belege": [
+      "spiegelfeld"
+    ],
+    "regeln": [
+      "L05"
+    ],
+    "quellen": [
+      "docs/15 M9"
+    ],
+    "styles": [
+      "modern",
+      "warm"
+    ],
+    "name": {
+      "forms": [
+        "slab"
+      ],
+      "case": "title",
+      "tracking": [
+        -0.02,
+        0.01
+      ]
+    },
+    "suffix": {
+      "case": "upper",
+      "tracking": [
+        0.18,
+        0.26
+      ],
+      "font": "grotesk"
+    },
+    "symbol": "none",
+    "layout": "wordmark",
+    "divider": "none",
+    "typo": "plain",
+    "formats": [
+      "full",
+      "stacked"
+    ],
+    "color": "mono"
+  }
+]

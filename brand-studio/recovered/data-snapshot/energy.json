@@ -1,0 +1,4 @@
+{
+  "u": "2026-07-01",
+  "d": {"leer":"Energieausweis fehlt: Trag HWB, EEB und Effizienzklasse in den Objektangaben ein. Sie sind in Objektwerbung Pflicht. Bis dahin lassen wir den Block in den Druckdateien weg.","teil":"Energieausweis unvollständig: Ergänze HWB, EEB und Effizienzklasse (bei älteren Ausweisen ohne EEB: fGEE und Klasse) in den Objektangaben. Fehlende Werte stehen sonst als \"...\" im Druck."}
+}

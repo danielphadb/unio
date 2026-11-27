@@ -1,0 +1,17 @@
+{
+  "I": ["A++","A+","A","B","C","D","E","F","G"],
+  "i": {"objects":40,"photos":20,"title":80,"address":120,"lage":60,"description":600,"price":40,"commission":80,"url":200,"credit":80,"factLabel":30,"factValue":30,"facts":8,"externalId":80},
+  "z": ["neu","reserviert","verkauft","vermietet","preis-angepasst"],
+  "N": {"neu":"Neu","reserviert":"Reserviert","verkauft":"Verkauft","vermietet":"Vermietet","preis-angepasst":"Preis angepasst"},
+  "E": ["kauf","miete"],
+  "L": ["studio","kit","unio"],
+  "v": {"x":0.5,"y":0.5,"zoom":1},
+  "P": 2.5,
+  "h": {"hwb":"","fgee":"","klasse":"","eeb":"","eebKlasse":"","ausweisDatum":""},
+  "O": {"$regexp":"^[a-z0-9]{6,40}$","flags":""},
+  "B": {"$regexp":"^[a-z0-9]{4,40}$","flags":""},
+  "d": {"$regexp":"^\\d{1,4}([.,]\\d{1,2})?$","flags":""},
+  "A": {"$regexp":"^(19|20)\\d\\d-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$","flags":""},
+  "D": {"$regexp":"^(A\\+\\+|A\\+|A|B|C|D|E|F|G)( [a-zäöüß]{3,20})?$","flags":"i"},
+  "c": {"title":"Gib dem Objekt einen kurzen Titel, z. B. „Dachgeschoss mit Weitblick“.","address":"Die Adresse ist zu lang (höchstens 120 Zeichen).","lage":"Die Lage ist zu lang (höchstens 60 Zeichen).","price":"Der Preis ist zu lang (höchstens 40 Zeichen).","previousPrice":"Trag den bisherigen Preis ein, z. B. € 590.000.","commission":"Die Provision ist zu lang (höchstens 80 Zeichen).","description":"Die Beschreibung ist zu lang (höchstens 600 Zeichen).","url":"Diese Adresse sieht nicht wie eine Website aus, z. B. „beispiel-immobilien.at/objekt-12“.","hwb":"Gib den HWB als Zahl ein, z. B. 45 oder 45,3.","eeb":"Gib den EEB als Zahl ein, z. B. 62 oder 62,4.","eebKlasse":"Wähle die Klasse aus deinem Energieausweis, z. B. C oder C fossil.","fgee":"Gib den fGEE als Zahl ein, z. B. 0,85.","ausweisDatum":"Gib das Datum aus dem Energieausweis ein.","facts":"Kennzahlen höchstens 30 Zeichen je Feld.","photos":"Höchstens 20 Fotos je Objekt."}
+}

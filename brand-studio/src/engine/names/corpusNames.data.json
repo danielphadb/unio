@@ -1,0 +1,2784 @@
+{
+  "corpus": [
+    {
+      "id": "sothebys-ir",
+      "name": "Sotheby's International Realty",
+      "kern": "Sotheby's",
+      "person": true
+    },
+    {
+      "id": "christies-ire",
+      "name": "Christie's International Real Estate",
+      "kern": "Christie's",
+      "person": true
+    },
+    {
+      "id": "knight-frank",
+      "name": "Knight Frank",
+      "kern": "Knight Frank",
+      "person": true
+    },
+    {
+      "id": "savills",
+      "name": "savills",
+      "kern": "savills",
+      "person": true
+    },
+    {
+      "id": "engel-voelkers",
+      "name": "ENGEL&VÖLKERS",
+      "kern": "ENGEL&VÖLKERS",
+      "person": true
+    },
+    {
+      "id": "the-agency",
+      "name": "THE AGENCY",
+      "kern": "THE AGENCY"
+    },
+    {
+      "id": "compass",
+      "name": "COMPASS",
+      "kern": "COMPASS"
+    },
+    {
+      "id": "douglas-elliman",
+      "name": "Douglas Elliman",
+      "kern": "Douglas Elliman",
+      "person": true
+    },
+    {
+      "id": "corcoran",
+      "name": "corcoran",
+      "kern": "corcoran",
+      "person": true
+    },
+    {
+      "id": "hamptons",
+      "name": "Hamptons",
+      "kern": "Hamptons"
+    },
+    {
+      "id": "strutt-parker",
+      "name": "Strutt & Parker",
+      "kern": "Strutt & Parker",
+      "person": true
+    },
+    {
+      "id": "barnes",
+      "name": "BARNES",
+      "kern": "BARNES",
+      "person": true
+    },
+    {
+      "id": "daniel-feau",
+      "name": "Daniel FÉAU",
+      "kern": "Daniel FÉAU",
+      "person": true
+    },
+    {
+      "id": "john-taylor",
+      "name": "JOHN TAYLOR",
+      "kern": "JOHN TAYLOR",
+      "person": true
+    },
+    {
+      "id": "dahler",
+      "name": "DAHLER",
+      "kern": "DAHLER",
+      "person": true
+    },
+    {
+      "id": "von-poll",
+      "name": "VON POLL IMMOBILIEN",
+      "kern": "VON POLL",
+      "person": true
+    },
+    {
+      "id": "the-modern-house",
+      "name": "THE MODERN HOUSE",
+      "kern": "THE MODERN HOUSE"
+    },
+    {
+      "id": "inigo",
+      "name": "INIGO",
+      "kern": "INIGO",
+      "person": true
+    },
+    {
+      "id": "aston-chase",
+      "name": "ASTON CHASE",
+      "kern": "ASTON CHASE"
+    },
+    {
+      "id": "beauchamp-estates",
+      "name": "BEAUCHAMP ESTATES",
+      "kern": "BEAUCHAMP ESTATES"
+    },
+    {
+      "id": "emile-garcin",
+      "name": "EMILE GARCIN PROPRIÉTÉS",
+      "kern": "EMILE GARCIN",
+      "person": true
+    },
+    {
+      "id": "lionard",
+      "name": "LIONARD Luxury Real Estate",
+      "kern": "LIONARD"
+    },
+    {
+      "id": "serhant",
+      "name": "SERHANT.",
+      "kern": "SERHANT.",
+      "person": true
+    },
+    {
+      "id": "aaron-kirman",
+      "name": "AARON|KIRMAN",
+      "kern": "AARON|KIRMAN",
+      "person": true
+    },
+    {
+      "id": "otto-immobilien",
+      "name": "OTTO IMMOBILIEN",
+      "kern": "OTTO",
+      "person": true
+    },
+    {
+      "id": "marschall",
+      "name": "MARSCHALL REAL ESTATE",
+      "kern": "MARSCHALL",
+      "person": true
+    },
+    {
+      "id": "spiegelfeld",
+      "name": "Spiegelfeld IMMOBILIEN",
+      "kern": "Spiegelfeld",
+      "person": true
+    },
+    {
+      "id": "3si",
+      "name": "3SI",
+      "kern": "3SI"
+    },
+    {
+      "id": "arnold",
+      "name": "arnold INVESTMENTS",
+      "kern": "arnold",
+      "person": true
+    },
+    {
+      "id": "huebl-partner",
+      "name": "HÜBL & PARTNER",
+      "kern": "HÜBL & PARTNER",
+      "person": true
+    },
+    {
+      "id": "winegg",
+      "name": "WINEGG",
+      "kern": "WINEGG"
+    },
+    {
+      "id": "jp-immobilien",
+      "name": "JP",
+      "kern": "JP"
+    },
+    {
+      "id": "ehl",
+      "name": "EHL",
+      "kern": "EHL"
+    },
+    {
+      "id": "modesta",
+      "name": "MODESTA REAL ESTATE",
+      "kern": "MODESTA"
+    },
+    {
+      "id": "marlies-muhr",
+      "name": "MARLIES MUHR REAL ESTATE",
+      "kern": "MARLIES MUHR",
+      "person": true
+    },
+    {
+      "id": "value-one",
+      "name": "value one",
+      "kern": "value one"
+    },
+    {
+      "id": "glorit",
+      "name": "GLORIT",
+      "kern": "GLORIT"
+    },
+    {
+      "id": "soravia",
+      "name": "SORAVIA",
+      "kern": "SORAVIA",
+      "person": true
+    },
+    {
+      "id": "wertinvest",
+      "name": "WERTINVEST",
+      "kern": "WERTINVEST"
+    },
+    {
+      "id": "buwog",
+      "name": "BUWOG",
+      "kern": "BUWOG"
+    },
+    {
+      "id": "aman",
+      "name": "AMAN",
+      "kern": "AMAN"
+    },
+    {
+      "id": "rosewood",
+      "name": "ROSEWOOD",
+      "kern": "ROSEWOOD"
+    },
+    {
+      "id": "six-senses",
+      "name": "SIX SENSES",
+      "kern": "SIX SENSES"
+    },
+    {
+      "id": "ace-hotel",
+      "name": "ACE HOTEL",
+      "kern": "ACE HOTEL"
+    },
+    {
+      "id": "four-seasons",
+      "name": "FOUR SEASONS",
+      "kern": "FOUR SEASONS"
+    },
+    {
+      "id": "mandarin-oriental",
+      "name": "MANDARIN ORIENTAL",
+      "kern": "MANDARIN ORIENTAL"
+    },
+    {
+      "id": "the-peninsula",
+      "name": "THE PENINSULA",
+      "kern": "THE PENINSULA"
+    },
+    {
+      "id": "the-hoxton",
+      "name": "the hoxton",
+      "kern": "the hoxton"
+    },
+    {
+      "id": "hotel-sacher",
+      "name": "SACHER",
+      "kern": "SACHER",
+      "person": true
+    },
+    {
+      "id": "belmond",
+      "name": "BELMOND",
+      "kern": "BELMOND"
+    },
+    {
+      "id": "celine",
+      "name": "CELINE",
+      "kern": "CELINE",
+      "person": true
+    },
+    {
+      "id": "jil-sander",
+      "name": "JILSANDER",
+      "kern": "JILSANDER",
+      "person": true
+    },
+    {
+      "id": "the-row",
+      "name": "THE ROW",
+      "kern": "THE ROW"
+    },
+    {
+      "id": "byredo",
+      "name": "BYREDO",
+      "kern": "BYREDO"
+    },
+    {
+      "id": "bottega-veneta",
+      "name": "BOTTEGA VENETA",
+      "kern": "BOTTEGA VENETA"
+    },
+    {
+      "id": "loro-piana",
+      "name": "Loro Piana",
+      "kern": "Loro Piana",
+      "person": true
+    },
+    {
+      "id": "toteme",
+      "name": "TOTEME",
+      "kern": "TOTEME"
+    },
+    {
+      "id": "lemaire",
+      "name": "LEMAIRE",
+      "kern": "LEMAIRE",
+      "person": true
+    },
+    {
+      "id": "acne-studios",
+      "name": "Acne Studios",
+      "kern": "Acne Studios"
+    },
+    {
+      "id": "le-labo",
+      "name": "LE LABO",
+      "kern": "LE LABO"
+    },
+    {
+      "id": "diptyque",
+      "name": "DIPTYQUE PARIS",
+      "kern": "DIPTYQUE"
+    },
+    {
+      "id": "vitra",
+      "name": "vitra.",
+      "kern": "vitra."
+    },
+    {
+      "id": "minotti",
+      "name": "Minotti",
+      "kern": "Minotti",
+      "person": true
+    },
+    {
+      "id": "bb-italia",
+      "name": "B&B ITALIA",
+      "kern": "B&B ITALIA"
+    },
+    {
+      "id": "herzog-de-meuron",
+      "name": "H&dM",
+      "kern": "H&dM",
+      "person": true
+    },
+    {
+      "id": "foster-partners",
+      "name": "Foster + Partners",
+      "kern": "Foster + Partners",
+      "person": true
+    },
+    {
+      "id": "chipperfield",
+      "name": "David Chipperfield Architects",
+      "kern": "David Chipperfield Architects",
+      "person": true
+    },
+    {
+      "id": "snohetta",
+      "name": "Snøhetta",
+      "kern": "Snøhetta"
+    },
+    {
+      "id": "oma",
+      "name": "OMA",
+      "kern": "OMA"
+    },
+    {
+      "id": "coop-himmelblau",
+      "name": "COOP HIMMELB(L)AU",
+      "kern": "COOP HIMMELB(L)AU"
+    },
+    {
+      "id": "delugan-meissl",
+      "name": "DMAA",
+      "kern": "DMAA"
+    },
+    {
+      "id": "john-pawson",
+      "name": "John Pawson",
+      "kern": "John Pawson",
+      "person": true
+    },
+    {
+      "id": "querkraft",
+      "name": "querkraft",
+      "kern": "querkraft"
+    },
+    {
+      "id": "coldwell-lux",
+      "name": "Coldwell Banker Global Luxury",
+      "kern": "Coldwell Banker",
+      "person": true
+    },
+    {
+      "id": "hilton-hyland",
+      "name": "HILTON & HYLAND",
+      "kern": "HILTON & HYLAND",
+      "person": true
+    },
+    {
+      "id": "nestseekers",
+      "name": "NestSeekers INTERNATIONAL",
+      "kern": "NestSeekers"
+    },
+    {
+      "id": "marsh-parsons",
+      "name": "MARSH & PARSONS",
+      "kern": "MARSH & PARSONS",
+      "person": true
+    },
+    {
+      "id": "winkworth",
+      "name": "Winkworth",
+      "kern": "Winkworth",
+      "person": true
+    },
+    {
+      "id": "foxtons",
+      "name": "Foxtons",
+      "kern": "Foxtons",
+      "person": true
+    },
+    {
+      "id": "dexters",
+      "name": "Dexters",
+      "kern": "Dexters",
+      "person": true
+    },
+    {
+      "id": "carter-jonas",
+      "name": "Carter Jonas",
+      "kern": "Carter Jonas",
+      "person": true
+    },
+    {
+      "id": "property-vision",
+      "name": "Vision Property Vision",
+      "kern": "Vision"
+    },
+    {
+      "id": "vaneau",
+      "name": "VANEAU Luxury Real Estate",
+      "kern": "VANEAU"
+    },
+    {
+      "id": "middleton",
+      "name": "MIDDLETON ADVISORS",
+      "kern": "MIDDLETON",
+      "person": true
+    },
+    {
+      "id": "junot",
+      "name": "Junot",
+      "kern": "Junot"
+    },
+    {
+      "id": "kretz",
+      "name": "KRETZ",
+      "kern": "KRETZ",
+      "person": true
+    },
+    {
+      "id": "cimalpes",
+      "name": "CIMALPES",
+      "kern": "CIMALPES"
+    },
+    {
+      "id": "romolini",
+      "name": "ROMOLINI IMMOBILIARE",
+      "kern": "ROMOLINI",
+      "person": true
+    },
+    {
+      "id": "drumelia",
+      "name": "DRUMELIA REAL ESTATE",
+      "kern": "DRUMELIA"
+    },
+    {
+      "id": "great-estate",
+      "name": "GREAT ESTATE",
+      "kern": "GREAT ESTATE"
+    },
+    {
+      "id": "betterhomes",
+      "name": "betterhomes",
+      "kern": "betterhomes"
+    },
+    {
+      "id": "driven",
+      "name": "DRIVEN",
+      "kern": "DRIVEN"
+    },
+    {
+      "id": "luxhabitat",
+      "name": "LUXHABITAT",
+      "kern": "LUXHABITAT"
+    },
+    {
+      "id": "miells",
+      "name": "MIELLS MONACO REAL ESTATE",
+      "kern": "MIELLS",
+      "person": true
+    },
+    {
+      "id": "fam",
+      "name": "fäm Properties",
+      "kern": "fäm"
+    },
+    {
+      "id": "cbre",
+      "name": "CBRE",
+      "kern": "CBRE"
+    },
+    {
+      "id": "jll",
+      "name": "JLL",
+      "kern": "JLL"
+    },
+    {
+      "id": "cushman",
+      "name": "CUSHMAN & WAKEFIELD",
+      "kern": "CUSHMAN & WAKEFIELD",
+      "person": true
+    },
+    {
+      "id": "exp",
+      "name": "eXp REALTY",
+      "kern": "eXp"
+    },
+    {
+      "id": "marcus-millichap",
+      "name": "Marcus & Millichap",
+      "kern": "Marcus & Millichap",
+      "person": true
+    },
+    {
+      "id": "mcgrath",
+      "name": "McGrath",
+      "kern": "McGrath",
+      "person": true
+    },
+    {
+      "id": "bnp-re",
+      "name": "BNP PARIBAS REAL ESTATE",
+      "kern": "BNP PARIBAS"
+    },
+    {
+      "id": "rayw",
+      "name": "RayWhite.",
+      "kern": "RayWhite.",
+      "person": true
+    },
+    {
+      "id": "kollosche",
+      "name": "KOLLOSCHE",
+      "kern": "KOLLOSCHE",
+      "person": true
+    },
+    {
+      "id": "corcoran-sunshine",
+      "name": "corcoran sunshine",
+      "kern": "corcoran sunshine",
+      "person": true
+    },
+    {
+      "id": "ddre",
+      "name": "DDRE GLOBAL",
+      "kern": "DDRE"
+    },
+    {
+      "id": "stacom",
+      "name": "StacomSilverstein",
+      "kern": "StacomSilverstein",
+      "person": true
+    },
+    {
+      "id": "jade-mills",
+      "name": "Jade Mills",
+      "kern": "Jade Mills",
+      "person": true
+    },
+    {
+      "id": "remus",
+      "name": "MARCEL REMUS REAL ESTATE",
+      "kern": "MARCEL REMUS",
+      "person": true
+    },
+    {
+      "id": "tutor",
+      "name": "Tracy Tutor TEAM",
+      "kern": "Tracy Tutor",
+      "person": true
+    },
+    {
+      "id": "bkrea",
+      "name": "BKREA",
+      "kern": "BKREA"
+    },
+    {
+      "id": "grossmann-berger",
+      "name": "Grossmann & Berger Immobilien",
+      "kern": "Grossmann & Berger",
+      "person": true
+    },
+    {
+      "id": "kensington",
+      "name": "KENSINGTON Finest Properties International",
+      "kern": "KENSINGTON"
+    },
+    {
+      "id": "riedel",
+      "name": "RIEDEL",
+      "kern": "RIEDEL",
+      "person": true
+    },
+    {
+      "id": "rohrer",
+      "name": "ROHRER IMMOBILIENMAKLER SEIT 1919",
+      "kern": "ROHRER",
+      "person": true
+    },
+    {
+      "id": "accentro",
+      "name": "ACCENTRO",
+      "kern": "ACCENTRO"
+    },
+    {
+      "id": "wentzel",
+      "name": "Wentzel Dr. IMMOBILIEN SEIT 1820",
+      "kern": "Wentzel Dr.",
+      "person": true
+    },
+    {
+      "id": "homeday",
+      "name": "HOMEDAY Mein Immobilienmakler",
+      "kern": "HOMEDAY"
+    },
+    {
+      "id": "diamona",
+      "name": "D&H",
+      "kern": "D&H",
+      "person": true
+    },
+    {
+      "id": "mcmakler",
+      "name": "McMakler",
+      "kern": "McMakler"
+    },
+    {
+      "id": "walde",
+      "name": "WALDE",
+      "kern": "WALDE",
+      "person": true
+    },
+    {
+      "id": "naef",
+      "name": "naef",
+      "kern": "naef",
+      "person": true
+    },
+    {
+      "id": "privera",
+      "name": "PRIVERA",
+      "kern": "PRIVERA"
+    },
+    {
+      "id": "wuest",
+      "name": "wüestpartner",
+      "kern": "wüestpartner",
+      "person": true
+    },
+    {
+      "id": "livit",
+      "name": "livit",
+      "kern": "livit"
+    },
+    {
+      "id": "neho",
+      "name": "neho",
+      "kern": "neho"
+    },
+    {
+      "id": "wincasa",
+      "name": "wincasa",
+      "kern": "wincasa"
+    },
+    {
+      "id": "bernasconi",
+      "name": "Swissroc",
+      "kern": "Swissroc"
+    },
+    {
+      "id": "kwag",
+      "name": "KWAG",
+      "kern": "KWAG"
+    },
+    {
+      "id": "kirchhoff",
+      "name": "Kirchhoff Immobilien",
+      "kern": "Kirchhoff",
+      "person": true
+    },
+    {
+      "id": "immocontract",
+      "name": "IMMOCONTRACT",
+      "kern": "IMMOCONTRACT"
+    },
+    {
+      "id": "raiffeisen-immo",
+      "name": "Raiffeisen Immobilien",
+      "kern": "Raiffeisen",
+      "person": true
+    },
+    {
+      "id": "oerag",
+      "name": "ÖRAG Immobilien Seit 1871",
+      "kern": "ÖRAG Immobilien Seit 1871"
+    },
+    {
+      "id": "wpb-immo",
+      "name": "WIENER PRIVATBANK",
+      "kern": "WIENER PRIVATBANK"
+    },
+    {
+      "id": "peges",
+      "name": "PEGES IMMOBILIEN",
+      "kern": "PEGES"
+    },
+    {
+      "id": "oberndorfer",
+      "name": "IMMO Oberndorfer",
+      "kern": "IMMO Oberndorfer",
+      "person": true
+    },
+    {
+      "id": "rustler",
+      "name": "RUSTLER REAL ESTATE EXPERTS",
+      "kern": "RUSTLER",
+      "person": true
+    },
+    {
+      "id": "edlauer",
+      "name": "EDLAUER Immobilien",
+      "kern": "EDLAUER",
+      "person": true
+    },
+    {
+      "id": "krefina",
+      "name": "KREFINA IMMOBILIEN",
+      "kern": "KREFINA"
+    },
+    {
+      "id": "grosschaedl",
+      "name": "Grosschädl Immobilien",
+      "kern": "Grosschädl Immobilien",
+      "person": true
+    },
+    {
+      "id": "niki-gold",
+      "name": "Niki Gold Immobilien",
+      "kern": "Niki Gold Immobilien",
+      "person": true
+    },
+    {
+      "id": "avantgarde",
+      "name": "AvantGarde Properties",
+      "kern": "AvantGarde"
+    },
+    {
+      "id": "kollitsch",
+      "name": "KOLLITSCH GRUPPE",
+      "kern": "KOLLITSCH",
+      "person": true
+    },
+    {
+      "id": "are",
+      "name": "ARE AUSTRIAN REAL ESTATE",
+      "kern": "ARE"
+    },
+    {
+      "id": "ubm",
+      "name": "ubm development",
+      "kern": "ubm"
+    },
+    {
+      "id": "kallco",
+      "name": "Kallco",
+      "kern": "Kallco"
+    },
+    {
+      "id": "oesw",
+      "name": "ÖSW",
+      "kern": "ÖSW"
+    },
+    {
+      "id": "rhomberg",
+      "name": "RHOMBERG",
+      "kern": "RHOMBERG",
+      "person": true
+    },
+    {
+      "id": "ir-bau",
+      "name": "i+R GRUPPE",
+      "kern": "i+R GRUPPE"
+    },
+    {
+      "id": "prisma",
+      "name": "PRISMA",
+      "kern": "PRISMA"
+    },
+    {
+      "id": "haring",
+      "name": "HARING GROUP",
+      "kern": "HARING",
+      "person": true
+    },
+    {
+      "id": "arwag",
+      "name": "ARWAG",
+      "kern": "ARWAG"
+    },
+    {
+      "id": "migra",
+      "name": "migra WOHNEN. FÜHLEN. LEBEN.",
+      "kern": "migra"
+    },
+    {
+      "id": "bwsg",
+      "name": "bwsg besser wohnen seit 1911",
+      "kern": "bwsg besser wohnen seit 1911"
+    },
+    {
+      "id": "heimat-oe",
+      "name": "HEIMAT ÖSTERREICH",
+      "kern": "HEIMAT ÖSTERREICH"
+    },
+    {
+      "id": "wiensued",
+      "name": "WIEN SÜD",
+      "kern": "WIEN SÜD"
+    },
+    {
+      "id": "bonava",
+      "name": "BONAVA",
+      "kern": "BONAVA"
+    },
+    {
+      "id": "pandion",
+      "name": "PANDION Partner für Lebensräume",
+      "kern": "PANDION"
+    },
+    {
+      "id": "instone",
+      "name": "Instone Real Estate",
+      "kern": "Instone"
+    },
+    {
+      "id": "quarterback",
+      "name": "QUARTERBACK IMMOBILIEN AG.",
+      "kern": "QUARTERBACK"
+    },
+    {
+      "id": "groth",
+      "name": "GROTH GRUPPE",
+      "kern": "GROTH",
+      "person": true
+    },
+    {
+      "id": "bauwens",
+      "name": "BAUWENS",
+      "kern": "BAUWENS",
+      "person": true
+    },
+    {
+      "id": "bauwerk",
+      "name": "bauwerk.",
+      "kern": "bauwerk."
+    },
+    {
+      "id": "bayerische-hausbau",
+      "name": "BAYERISCHE HAUSBAU WERTE, DIE BLEIBEN.",
+      "kern": "BAYERISCHE HAUSBAU"
+    },
+    {
+      "id": "related",
+      "name": "RELATED",
+      "kern": "RELATED"
+    },
+    {
+      "id": "emaar",
+      "name": "EMAAR",
+      "kern": "EMAAR"
+    },
+    {
+      "id": "berkeley",
+      "name": "Berkeley Group",
+      "kern": "Berkeley"
+    },
+    {
+      "id": "grosvenor",
+      "name": "GROSVENOR",
+      "kern": "GROSVENOR",
+      "person": true
+    },
+    {
+      "id": "native-land",
+      "name": "Native Land",
+      "kern": "Native Land"
+    },
+    {
+      "id": "halter",
+      "name": "halter",
+      "kern": "halter",
+      "person": true
+    },
+    {
+      "id": "aldar",
+      "name": "ALDAR",
+      "kern": "ALDAR"
+    },
+    {
+      "id": "lendlease",
+      "name": "lendlease",
+      "kern": "lendlease"
+    },
+    {
+      "id": "galliard",
+      "name": "Galliard Homes",
+      "kern": "Galliard"
+    },
+    {
+      "id": "allreal",
+      "name": "allreal",
+      "kern": "allreal"
+    },
+    {
+      "id": "implenia",
+      "name": "Implenia",
+      "kern": "Implenia"
+    },
+    {
+      "id": "mobimo",
+      "name": "MOBIMO",
+      "kern": "MOBIMO"
+    },
+    {
+      "id": "hrs",
+      "name": "hrs",
+      "kern": "hrs"
+    },
+    {
+      "id": "sps",
+      "name": "SWISS PRIME SITE",
+      "kern": "SWISS PRIME SITE"
+    },
+    {
+      "id": "vonovia",
+      "name": "VONOVIA",
+      "kern": "VONOVIA"
+    },
+    {
+      "id": "ritz",
+      "name": "THE RITZ-CARLTON",
+      "kern": "THE RITZ-CARLTON",
+      "person": true
+    },
+    {
+      "id": "stregis",
+      "name": "ST. REGIS",
+      "kern": "ST. REGIS",
+      "person": true
+    },
+    {
+      "id": "raffles",
+      "name": "RAFFLES",
+      "kern": "RAFFLES",
+      "person": true
+    },
+    {
+      "id": "kempinski",
+      "name": "Kempinski",
+      "kern": "Kempinski",
+      "person": true
+    },
+    {
+      "id": "onehotels",
+      "name": "1 HOTELS",
+      "kern": "1"
+    },
+    {
+      "id": "dorchester",
+      "name": "Dorchester Collection",
+      "kern": "Dorchester Collection"
+    },
+    {
+      "id": "nobu",
+      "name": "NOBU",
+      "kern": "NOBU",
+      "person": true
+    },
+    {
+      "id": "oneandonly",
+      "name": "One&Only",
+      "kern": "One&Only"
+    },
+    {
+      "id": "banyantree",
+      "name": "Banyan Tree",
+      "kern": "Banyan Tree"
+    },
+    {
+      "id": "como",
+      "name": "COMO HOTELS AND RESORTS",
+      "kern": "COMO"
+    },
+    {
+      "id": "auberge",
+      "name": "Auberge Collection",
+      "kern": "Auberge"
+    },
+    {
+      "id": "elmau",
+      "name": "SCHLOSS ELMAU",
+      "kern": "SCHLOSS ELMAU"
+    },
+    {
+      "id": "slh",
+      "name": "SLH",
+      "kern": "SLH"
+    },
+    {
+      "id": "relais",
+      "name": "RELAIS & CHATEAUX",
+      "kern": "RELAIS & CHATEAUX"
+    },
+    {
+      "id": "25hours",
+      "name": "25h",
+      "kern": "25h"
+    },
+    {
+      "id": "chedi",
+      "name": "THE CHEDI ANDERMATT, SWITZERLAND",
+      "kern": "THE CHEDI"
+    },
+    {
+      "id": "citizenm",
+      "name": "citizenM",
+      "kern": "citizenM"
+    },
+    {
+      "id": "grand-ferdinand",
+      "name": "GRAND FERDINAND",
+      "kern": "GRAND FERDINAND"
+    },
+    {
+      "id": "altstadt",
+      "name": "ALTSTADT VIENNA",
+      "kern": "ALTSTADT"
+    },
+    {
+      "id": "stanglwirt",
+      "name": "Stanglwirt",
+      "kern": "Stanglwirt"
+    },
+    {
+      "id": "interalpen",
+      "name": "INTERALPEN-HOTEL TYROL",
+      "kern": "INTERALPEN-HOTEL TYROL"
+    },
+    {
+      "id": "tschuggen",
+      "name": "TSCHUGGEN GRAND HOTEL AROSA",
+      "kern": "TSCHUGGEN GRAND HOTEL"
+    },
+    {
+      "id": "kranzbach",
+      "name": "DAS KRANZBACH",
+      "kern": "DAS KRANZBACH"
+    },
+    {
+      "id": "motto",
+      "name": "HOTEL MOTTO VIENNA",
+      "kern": "HOTEL MOTTO"
+    },
+    {
+      "id": "schani",
+      "name": "SCHANI HOTELS",
+      "kern": "SCHANI"
+    },
+    {
+      "id": "sirhotels",
+      "name": "SiR",
+      "kern": "SiR"
+    },
+    {
+      "id": "mamashelter",
+      "name": "MAMA SHELTER",
+      "kern": "MAMA SHELTER"
+    },
+    {
+      "id": "kuma",
+      "name": "KKAA",
+      "kern": "KKAA",
+      "person": true
+    },
+    {
+      "id": "unstudio",
+      "name": "UNS",
+      "kern": "UNS"
+    },
+    {
+      "id": "mvrdv",
+      "name": "MVRDV",
+      "kern": "MVRDV",
+      "person": true
+    },
+    {
+      "id": "maxbrown",
+      "name": "MAX BROWN HOTELS",
+      "kern": "MAX BROWN",
+      "person": true
+    },
+    {
+      "id": "3xn",
+      "name": "3XN",
+      "kern": "3XN"
+    },
+    {
+      "id": "henninglarsen",
+      "name": "Henning Larsen",
+      "kern": "Henning Larsen",
+      "person": true
+    },
+    {
+      "id": "gmp",
+      "name": "gmp",
+      "kern": "gmp",
+      "person": true
+    },
+    {
+      "id": "studiogang",
+      "name": "Studio Gang",
+      "kern": "Studio Gang"
+    },
+    {
+      "id": "som",
+      "name": "SOM",
+      "kern": "SOM"
+    },
+    {
+      "id": "kpf",
+      "name": "KPF",
+      "kern": "KPF"
+    },
+    {
+      "id": "gensler",
+      "name": "Gensler",
+      "kern": "Gensler",
+      "person": true
+    },
+    {
+      "id": "adjaye",
+      "name": "Adjaye Associates",
+      "kern": "Adjaye Associates",
+      "person": true
+    },
+    {
+      "id": "behf",
+      "name": "BEHF ARCHITECTS",
+      "kern": "BEHF"
+    },
+    {
+      "id": "lainer",
+      "name": "Rüdiger Lainer + Partner RLP",
+      "kern": "Rüdiger Lainer + Partner RLP",
+      "person": true
+    },
+    {
+      "id": "henke",
+      "name": "HENKE SCHREIECK ARCHITEKTEN",
+      "kern": "HENKE SCHREIECK ARCHITEKTEN",
+      "person": true
+    },
+    {
+      "id": "be",
+      "name": "be baumschlager eberle architekten",
+      "kern": "be baumschlager eberle",
+      "person": true
+    },
+    {
+      "id": "artec",
+      "name": "ARTEC",
+      "kern": "ARTEC"
+    },
+    {
+      "id": "pt",
+      "name": "p×t",
+      "kern": "p×t",
+      "person": true
+    },
+    {
+      "id": "bp",
+      "name": "BERGER+PARKKINEN",
+      "kern": "BERGER+PARKKINEN",
+      "person": true
+    },
+    {
+      "id": "kleihues",
+      "name": "Kleihues + Kleihues",
+      "kern": "Kleihues + Kleihues",
+      "person": true
+    },
+    {
+      "id": "grafton",
+      "name": "grafton architects",
+      "kern": "grafton architects"
+    },
+    {
+      "id": "mahdavi",
+      "name": "india mahdavi",
+      "kern": "india mahdavi",
+      "person": true
+    },
+    {
+      "id": "wearstler",
+      "name": "KELLY WEARSTLER",
+      "kern": "KELLY WEARSTLER",
+      "person": true
+    },
+    {
+      "id": "toogood",
+      "name": "Faye Toogood",
+      "kern": "Faye Toogood",
+      "person": true
+    },
+    {
+      "id": "studioilse",
+      "name": "STUDIOILSE",
+      "kern": "STUDIOILSE"
+    },
+    {
+      "id": "brudnizki",
+      "name": "MBDS",
+      "kern": "MBDS",
+      "person": true
+    },
+    {
+      "id": "yabu",
+      "name": "yabu pushelberg",
+      "kern": "yabu pushelberg",
+      "person": true
+    },
+    {
+      "id": "pietboon",
+      "name": "STUDIO PIETBOON",
+      "kern": "PIETBOON"
+    },
+    {
+      "id": "stilin",
+      "name": "Robert Stilin",
+      "kern": "Robert Stilin",
+      "person": true
+    },
+    {
+      "id": "gachot",
+      "name": "GACHOT",
+      "kern": "GACHOT",
+      "person": true
+    },
+    {
+      "id": "cassina",
+      "name": "Cassina",
+      "kern": "Cassina",
+      "person": true
+    },
+    {
+      "id": "destilat",
+      "name": "destilat Architecture+Design",
+      "kern": "destilat"
+    },
+    {
+      "id": "bwm",
+      "name": "be we em p",
+      "kern": "be we em p"
+    },
+    {
+      "id": "poltrona",
+      "name": "Poltrona Frau 1912",
+      "kern": "Poltrona Frau 1912",
+      "person": true
+    },
+    {
+      "id": "flexform",
+      "name": "FLEXFORM",
+      "kern": "FLEXFORM"
+    },
+    {
+      "id": "poliform",
+      "name": "Poliform",
+      "kern": "Poliform"
+    },
+    {
+      "id": "bouroullec",
+      "name": "Ronan & Erwan Bouroullec",
+      "kern": "Ronan & Erwan Bouroullec",
+      "person": true
+    },
+    {
+      "id": "rimadesio",
+      "name": "Rimadesio",
+      "kern": "Rimadesio",
+      "person": true
+    },
+    {
+      "id": "gaggenau",
+      "name": "GAGGENAU",
+      "kern": "GAGGENAU"
+    },
+    {
+      "id": "carlhansen",
+      "name": "CARL HANSEN & SØN",
+      "kern": "CARL HANSEN & SØN",
+      "person": true
+    },
+    {
+      "id": "bulthaup",
+      "name": "bulthaup",
+      "kern": "bulthaup",
+      "person": true
+    },
+    {
+      "id": "hay",
+      "name": "HAY",
+      "kern": "HAY",
+      "person": true
+    },
+    {
+      "id": "muuto",
+      "name": "MUUTO",
+      "kern": "MUUTO"
+    },
+    {
+      "id": "thonet",
+      "name": "THONET",
+      "kern": "THONET",
+      "person": true
+    },
+    {
+      "id": "augarten",
+      "name": "AUGARTEN WIEN",
+      "kern": "AUGARTEN"
+    },
+    {
+      "id": "wittmann",
+      "name": "WITTMANN",
+      "kern": "WITTMANN",
+      "person": true
+    },
+    {
+      "id": "walterknoll",
+      "name": "WALTER KNOLL",
+      "kern": "WALTER KNOLL",
+      "person": true
+    },
+    {
+      "id": "lobmeyr",
+      "name": "J. & L. LOBMEYR",
+      "kern": "J. & L. LOBMEYR",
+      "person": true
+    },
+    {
+      "id": "classicon",
+      "name": "ClassiCon",
+      "kern": "ClassiCon"
+    },
+    {
+      "id": "e15",
+      "name": "e15",
+      "kern": "e15"
+    },
+    {
+      "id": "cor",
+      "name": "COR",
+      "kern": "COR"
+    },
+    {
+      "id": "artemide",
+      "name": "Artemide",
+      "kern": "Artemide"
+    },
+    {
+      "id": "flos",
+      "name": "FLOS",
+      "kern": "FLOS"
+    },
+    {
+      "id": "occhio",
+      "name": "Occhio",
+      "kern": "Occhio"
+    },
+    {
+      "id": "dornbracht",
+      "name": "DORN BRACHT",
+      "kern": "DORN BRACHT",
+      "person": true
+    },
+    {
+      "id": "louispoulsen",
+      "name": "louis poulsen",
+      "kern": "louis poulsen",
+      "person": true
+    },
+    {
+      "id": "santacole",
+      "name": "SANTA & COLE",
+      "kern": "SANTA & COLE",
+      "person": true
+    },
+    {
+      "id": "vola",
+      "name": "vola",
+      "kern": "vola"
+    },
+    {
+      "id": "dinesen",
+      "name": "Dinesen",
+      "kern": "Dinesen",
+      "person": true
+    },
+    {
+      "id": "mafi",
+      "name": "mafi",
+      "kern": "mafi"
+    },
+    {
+      "id": "salvatori",
+      "name": "SALVATORI",
+      "kern": "SALVATORI",
+      "person": true
+    },
+    {
+      "id": "paolalenti",
+      "name": "PAOLA LENTI",
+      "kern": "PAOLA LENTI",
+      "person": true
+    },
+    {
+      "id": "tribu",
+      "name": "TRIBÙ",
+      "kern": "TRIBÙ"
+    },
+    {
+      "id": "dedon",
+      "name": "DEDON",
+      "kern": "DEDON"
+    },
+    {
+      "id": "promemoria",
+      "name": "PROMEMORIA",
+      "kern": "PROMEMORIA"
+    },
+    {
+      "id": "ligneroset",
+      "name": "ligne roset depuis 1860",
+      "kern": "ligne roset"
+    },
+    {
+      "id": "baxter",
+      "name": "baxter MADE IN ITALY",
+      "kern": "baxter",
+      "person": true
+    },
+    {
+      "id": "gubi",
+      "name": "GUBI",
+      "kern": "GUBI",
+      "person": true
+    },
+    {
+      "id": "riedel-glas",
+      "name": "RIEDEL THE WINE GLASS COMPANY",
+      "kern": "RIEDEL",
+      "person": true
+    },
+    {
+      "id": "chanel",
+      "name": "CHANEL",
+      "kern": "CHANEL",
+      "person": true
+    },
+    {
+      "id": "lv",
+      "name": "LOUIS VUITTON",
+      "kern": "LOUIS VUITTON",
+      "person": true
+    },
+    {
+      "id": "vca",
+      "name": "Van Cleef & Arpels",
+      "kern": "Van Cleef & Arpels",
+      "person": true
+    },
+    {
+      "id": "cartier",
+      "name": "Cartier",
+      "kern": "Cartier",
+      "person": true
+    },
+    {
+      "id": "rolex",
+      "name": "ROLEX",
+      "kern": "ROLEX"
+    },
+    {
+      "id": "patek",
+      "name": "PATEK PHILIPPE GENEVE",
+      "kern": "PATEK PHILIPPE",
+      "person": true
+    },
+    {
+      "id": "tiffany",
+      "name": "TIFFANY&CO.",
+      "kern": "TIFFANY&CO.",
+      "person": true
+    },
+    {
+      "id": "lange",
+      "name": "A. LANGE & SÖHNE GLASHÜTTE I/SA",
+      "kern": "A. LANGE & SÖHNE",
+      "person": true
+    },
+    {
+      "id": "jlc",
+      "name": "JAEGER-LECOULTRE",
+      "kern": "JAEGER-LECOULTRE",
+      "person": true
+    },
+    {
+      "id": "vc",
+      "name": "VACHERON CONSTANTIN",
+      "kern": "VACHERON CONSTANTIN",
+      "person": true
+    },
+    {
+      "id": "montblanc",
+      "name": "MONTBLANC",
+      "kern": "MONTBLANC"
+    },
+    {
+      "id": "goyard",
+      "name": "GOYARD PARIS",
+      "kern": "GOYARD",
+      "person": true
+    },
+    {
+      "id": "moynat",
+      "name": "MOYNAT",
+      "kern": "MOYNAT",
+      "person": true
+    },
+    {
+      "id": "zegna",
+      "name": "ZEGNA",
+      "kern": "ZEGNA",
+      "person": true
+    },
+    {
+      "id": "tomford",
+      "name": "TOM FORD",
+      "kern": "TOM FORD",
+      "person": true
+    },
+    {
+      "id": "kiton",
+      "name": "Kiton",
+      "kern": "Kiton"
+    },
+    {
+      "id": "valentino",
+      "name": "VALENTINO GARAVANI",
+      "kern": "VALENTINO",
+      "person": true
+    },
+    {
+      "id": "miumiu",
+      "name": "miu miu",
+      "kern": "miu miu",
+      "person": true
+    },
+    {
+      "id": "prada",
+      "name": "PRADA",
+      "kern": "PRADA",
+      "person": true
+    },
+    {
+      "id": "balenciaga",
+      "name": "BALENCIAGA",
+      "kern": "BALENCIAGA",
+      "person": true
+    },
+    {
+      "id": "givenchy",
+      "name": "GIVENCHY",
+      "kern": "GIVENCHY",
+      "person": true
+    },
+    {
+      "id": "maxmara",
+      "name": "MaxMara",
+      "kern": "MaxMara",
+      "person": true
+    },
+    {
+      "id": "burberry",
+      "name": "BURBERRY",
+      "kern": "BURBERRY",
+      "person": true
+    },
+    {
+      "id": "loewe",
+      "name": "LOEWE",
+      "kern": "LOEWE",
+      "person": true
+    },
+    {
+      "id": "mulberry",
+      "name": "Mulberry",
+      "kern": "Mulberry"
+    },
+    {
+      "id": "malle",
+      "name": "EDITIONS DE PARFUMS FREDERIC MALLE",
+      "kern": "FREDERIC MALLE",
+      "person": true
+    },
+    {
+      "id": "smythson",
+      "name": "SMYTHSON OF BOND STREET EST. 1887",
+      "kern": "SMYTHSON  EST. 1887",
+      "person": true
+    },
+    {
+      "id": "bader",
+      "name": "AB Augustinus Bader",
+      "kern": "AB Augustinus Bader",
+      "person": true
+    },
+    {
+      "id": "rollsroyce",
+      "name": "Rolls-Royce",
+      "kern": "Rolls-Royce",
+      "person": true
+    },
+    {
+      "id": "bentley",
+      "name": "BENTLEY",
+      "kern": "BENTLEY",
+      "person": true
+    },
+    {
+      "id": "sisley",
+      "name": "sisley PARIS",
+      "kern": "sisley"
+    },
+    {
+      "id": "mclaren",
+      "name": "McLAREN",
+      "kern": "McLAREN",
+      "person": true
+    },
+    {
+      "id": "demel",
+      "name": "DEMEL K.u.K. HOFZUCKERBÄCKER WIEN 1786",
+      "kern": "DEMEL",
+      "person": true
+    },
+    {
+      "id": "riva",
+      "name": "Riva",
+      "kern": "Riva",
+      "person": true
+    },
+    {
+      "id": "knize",
+      "name": "KNIZE",
+      "kern": "KNIZE",
+      "person": true
+    },
+    {
+      "id": "muehlbauer",
+      "name": "Mühlbauer",
+      "kern": "Mühlbauer",
+      "person": true
+    },
+    {
+      "id": "koechert",
+      "name": "A.E. KÖCHERT SEIT 1814",
+      "kern": "A.E. KÖCHERT",
+      "person": true
+    },
+    {
+      "id": "wienersilber",
+      "name": "WIENER SILBER MANUFACTUR 1882",
+      "kern": "WIENER SILBER MANUFACTUR"
+    },
+    {
+      "id": "leica",
+      "name": "Leica",
+      "kern": "Leica"
+    },
+    {
+      "id": "asket",
+      "name": "Asket",
+      "kern": "Asket"
+    },
+    {
+      "id": "ysl",
+      "name": "SAINT LAURENT",
+      "kern": "SAINT LAURENT",
+      "person": true
+    },
+    {
+      "id": "sunspel",
+      "name": "SUNSPEL ENGLAND 1860",
+      "kern": "SUNSPEL"
+    },
+    {
+      "id": "borger",
+      "name": "Oswald H. Borger GmbH",
+      "kern": "Oswald H. Borger GmbH",
+      "person": true
+    },
+    {
+      "id": "immodienst",
+      "name": "ImmoDienst",
+      "kern": "ImmoDienst"
+    },
+    {
+      "id": "moser",
+      "name": "www.immobilienbewegen.at",
+      "kern": "www.immobilienbewegen.at"
+    },
+    {
+      "id": "kib",
+      "name": "KIB Kostmann Immobilien",
+      "kern": "KIB"
+    },
+    {
+      "id": "rit",
+      "name": "RIT",
+      "kern": "RIT"
+    },
+    {
+      "id": "wild",
+      "name": "Wild IMMOBILIEN",
+      "kern": "Wild",
+      "person": true
+    },
+    {
+      "id": "realbuero",
+      "name": "Realbüro Dr. Schmid GmbH",
+      "kern": "Realbüro"
+    },
+    {
+      "id": "schnellinger",
+      "name": "SCHNELLINGER & PARTNER",
+      "kern": "SCHNELLINGER",
+      "person": true
+    },
+    {
+      "id": "egger",
+      "name": "EGGERIMMO.AT",
+      "kern": "EGGERIMMO.AT",
+      "person": true
+    },
+    {
+      "id": "realwert",
+      "name": "REALWERT Immobilientreuhand GmbH",
+      "kern": "REALWERT"
+    },
+    {
+      "id": "da-immo",
+      "name": "DIANA AIGNER IMMOBILIEN",
+      "kern": "DIANA AIGNER",
+      "person": true
+    },
+    {
+      "id": "pilz",
+      "name": "PILZ & PARTNER",
+      "kern": "PILZ & PARTNER",
+      "person": true
+    },
+    {
+      "id": "simon",
+      "name": "SIMON IMMOBILIEN",
+      "kern": "SIMON",
+      "person": true
+    }
+  ],
+  "tech": [
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "kern": "Stripe"
+    },
+    {
+      "id": "vercel",
+      "name": "Vercel",
+      "kern": "Vercel"
+    },
+    {
+      "id": "linear",
+      "name": "Linear",
+      "kern": "Linear"
+    },
+    {
+      "id": "figma",
+      "name": "Figma",
+      "kern": "Figma"
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "kern": "Notion"
+    },
+    {
+      "id": "loom",
+      "name": "Loom",
+      "kern": "Loom"
+    },
+    {
+      "id": "miro",
+      "name": "Miro",
+      "kern": "Miro",
+      "person": true
+    },
+    {
+      "id": "asana",
+      "name": "Asana",
+      "kern": "Asana"
+    },
+    {
+      "id": "slack",
+      "name": "Slack",
+      "kern": "Slack"
+    },
+    {
+      "id": "zoom",
+      "name": "Zoom",
+      "kern": "Zoom"
+    },
+    {
+      "id": "canva",
+      "name": "Canva",
+      "kern": "Canva"
+    },
+    {
+      "id": "airtable",
+      "name": "Airtable",
+      "kern": "Airtable"
+    },
+    {
+      "id": "zapier",
+      "name": "Zapier",
+      "kern": "Zapier"
+    },
+    {
+      "id": "retool",
+      "name": "Retool",
+      "kern": "Retool"
+    },
+    {
+      "id": "supabase",
+      "name": "Supabase",
+      "kern": "Supabase"
+    },
+    {
+      "id": "raycast",
+      "name": "Raycast",
+      "kern": "Raycast"
+    },
+    {
+      "id": "arc",
+      "name": "Arc",
+      "kern": "Arc"
+    },
+    {
+      "id": "framer",
+      "name": "Framer",
+      "kern": "Framer"
+    },
+    {
+      "id": "webflow",
+      "name": "Webflow",
+      "kern": "Webflow"
+    },
+    {
+      "id": "pitch",
+      "name": "Pitch",
+      "kern": "Pitch"
+    },
+    {
+      "id": "mural",
+      "name": "Mural",
+      "kern": "Mural"
+    },
+    {
+      "id": "dropbox",
+      "name": "Dropbox",
+      "kern": "Dropbox"
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "kern": "GitHub"
+    },
+    {
+      "id": "gitlab",
+      "name": "GitLab",
+      "kern": "GitLab"
+    },
+    {
+      "id": "shopify",
+      "name": "Shopify",
+      "kern": "Shopify"
+    },
+    {
+      "id": "squarespace",
+      "name": "Squarespace",
+      "kern": "Squarespace"
+    },
+    {
+      "id": "wix",
+      "name": "Wix",
+      "kern": "Wix"
+    },
+    {
+      "id": "mailchimp",
+      "name": "Mailchimp",
+      "kern": "Mailchimp"
+    },
+    {
+      "id": "hubspot",
+      "name": "HubSpot",
+      "kern": "HubSpot"
+    },
+    {
+      "id": "atlassian",
+      "name": "Atlassian",
+      "kern": "Atlassian"
+    },
+    {
+      "id": "trello",
+      "name": "Trello",
+      "kern": "Trello"
+    },
+    {
+      "id": "docker",
+      "name": "Docker",
+      "kern": "Docker"
+    },
+    {
+      "id": "twilio",
+      "name": "Twilio",
+      "kern": "Twilio"
+    },
+    {
+      "id": "datadog",
+      "name": "Datadog",
+      "kern": "Datadog"
+    },
+    {
+      "id": "postman",
+      "name": "Postman",
+      "kern": "Postman"
+    },
+    {
+      "id": "netlify",
+      "name": "Netlify",
+      "kern": "Netlify"
+    },
+    {
+      "id": "cloudflare",
+      "name": "Cloudflare",
+      "kern": "Cloudflare"
+    },
+    {
+      "id": "intercom",
+      "name": "Intercom",
+      "kern": "Intercom"
+    },
+    {
+      "id": "typeform",
+      "name": "Typeform",
+      "kern": "Typeform"
+    },
+    {
+      "id": "calendly",
+      "name": "Calendly",
+      "kern": "Calendly"
+    },
+    {
+      "id": "discord",
+      "name": "Discord",
+      "kern": "Discord"
+    },
+    {
+      "id": "basecamp",
+      "name": "Basecamp",
+      "kern": "Basecamp"
+    },
+    {
+      "id": "clickup",
+      "name": "ClickUp",
+      "kern": "ClickUp"
+    },
+    {
+      "id": "monday",
+      "name": "monday.com",
+      "kern": "monday"
+    },
+    {
+      "id": "superhuman",
+      "name": "Superhuman",
+      "kern": "Superhuman"
+    },
+    {
+      "id": "grammarly",
+      "name": "Grammarly",
+      "kern": "Grammarly"
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "kern": "Obsidian"
+    },
+    {
+      "id": "todoist",
+      "name": "Todoist",
+      "kern": "Todoist"
+    },
+    {
+      "id": "personio",
+      "name": "Personio",
+      "kern": "Personio"
+    },
+    {
+      "id": "celonis",
+      "name": "Celonis",
+      "kern": "Celonis"
+    },
+    {
+      "id": "contentful",
+      "name": "Contentful",
+      "kern": "Contentful"
+    },
+    {
+      "id": "n8n",
+      "name": "n8n",
+      "kern": "n8n"
+    },
+    {
+      "id": "sevdesk",
+      "name": "sevdesk",
+      "kern": "sevdesk"
+    },
+    {
+      "id": "deel",
+      "name": "Deel",
+      "kern": "Deel"
+    },
+    {
+      "id": "gusto",
+      "name": "Gusto",
+      "kern": "Gusto"
+    },
+    {
+      "id": "spotify",
+      "name": "Spotify",
+      "kern": "Spotify"
+    },
+    {
+      "id": "apple",
+      "name": "Apple",
+      "kern": "Apple"
+    },
+    {
+      "id": "sonos",
+      "name": "Sonos",
+      "kern": "Sonos"
+    },
+    {
+      "id": "nothing",
+      "name": "Nothing",
+      "kern": "Nothing"
+    },
+    {
+      "id": "teenage-engineering",
+      "name": "teenage engineering",
+      "kern": "teenage engineering"
+    },
+    {
+      "id": "oura",
+      "name": "Oura",
+      "kern": "Oura"
+    },
+    {
+      "id": "peloton",
+      "name": "Peloton",
+      "kern": "Peloton"
+    },
+    {
+      "id": "dyson",
+      "name": "Dyson",
+      "kern": "Dyson",
+      "person": true
+    },
+    {
+      "id": "google",
+      "name": "Google",
+      "kern": "Google"
+    },
+    {
+      "id": "tesla",
+      "name": "Tesla",
+      "kern": "Tesla",
+      "person": true
+    },
+    {
+      "id": "garmin",
+      "name": "Garmin",
+      "kern": "Garmin"
+    },
+    {
+      "id": "fitbit",
+      "name": "Fitbit",
+      "kern": "Fitbit"
+    },
+    {
+      "id": "whoop",
+      "name": "WHOOP",
+      "kern": "WHOOP"
+    },
+    {
+      "id": "kobo",
+      "name": "Kobo",
+      "kern": "Kobo"
+    },
+    {
+      "id": "roku",
+      "name": "Roku",
+      "kern": "Roku"
+    },
+    {
+      "id": "gopro",
+      "name": "GoPro",
+      "kern": "GoPro"
+    },
+    {
+      "id": "fairphone",
+      "name": "Fairphone",
+      "kern": "Fairphone"
+    },
+    {
+      "id": "native-instruments",
+      "name": "Native Instruments",
+      "kern": "Native Instruments"
+    },
+    {
+      "id": "tonies",
+      "name": "tonies",
+      "kern": "tonies"
+    },
+    {
+      "id": "nuki",
+      "name": "Nuki",
+      "kern": "Nuki"
+    },
+    {
+      "id": "loxone",
+      "name": "Loxone",
+      "kern": "Loxone"
+    },
+    {
+      "id": "ledger",
+      "name": "Ledger",
+      "kern": "Ledger"
+    },
+    {
+      "id": "rabbit",
+      "name": "rabbit",
+      "kern": "rabbit"
+    },
+    {
+      "id": "kindle",
+      "name": "Kindle",
+      "kern": "Kindle"
+    },
+    {
+      "id": "klarna",
+      "name": "Klarna",
+      "kern": "Klarna"
+    },
+    {
+      "id": "revolut",
+      "name": "Revolut",
+      "kern": "Revolut"
+    },
+    {
+      "id": "n26",
+      "name": "N26",
+      "kern": "N26"
+    },
+    {
+      "id": "monzo",
+      "name": "Monzo",
+      "kern": "Monzo"
+    },
+    {
+      "id": "wise",
+      "name": "Wise",
+      "kern": "Wise"
+    },
+    {
+      "id": "trade-republic",
+      "name": "Trade Republic",
+      "kern": "Trade Republic"
+    },
+    {
+      "id": "qonto",
+      "name": "Qonto",
+      "kern": "Qonto"
+    },
+    {
+      "id": "pliant",
+      "name": "Pliant",
+      "kern": "Pliant"
+    },
+    {
+      "id": "robinhood",
+      "name": "Robinhood",
+      "kern": "Robinhood",
+      "person": true
+    },
+    {
+      "id": "venmo",
+      "name": "Venmo",
+      "kern": "Venmo"
+    },
+    {
+      "id": "paypal",
+      "name": "PayPal",
+      "kern": "PayPal"
+    },
+    {
+      "id": "block",
+      "name": "Block",
+      "kern": "Block"
+    },
+    {
+      "id": "chime",
+      "name": "Chime",
+      "kern": "Chime"
+    },
+    {
+      "id": "nubank",
+      "name": "Nubank",
+      "kern": "Nubank"
+    },
+    {
+      "id": "starling",
+      "name": "Starling",
+      "kern": "Starling"
+    },
+    {
+      "id": "adyen",
+      "name": "Adyen",
+      "kern": "Adyen"
+    },
+    {
+      "id": "mollie",
+      "name": "Mollie",
+      "kern": "Mollie",
+      "person": true
+    },
+    {
+      "id": "sumup",
+      "name": "SumUp",
+      "kern": "SumUp"
+    },
+    {
+      "id": "scalable",
+      "name": "Scalable Capital",
+      "kern": "Scalable Capital"
+    },
+    {
+      "id": "raisin",
+      "name": "Raisin",
+      "kern": "Raisin"
+    },
+    {
+      "id": "coinbase",
+      "name": "Coinbase",
+      "kern": "Coinbase"
+    },
+    {
+      "id": "kraken",
+      "name": "Kraken",
+      "kern": "Kraken"
+    },
+    {
+      "id": "ramp",
+      "name": "Ramp",
+      "kern": "Ramp"
+    },
+    {
+      "id": "brex",
+      "name": "Brex",
+      "kern": "Brex"
+    },
+    {
+      "id": "mercury",
+      "name": "Mercury",
+      "kern": "Mercury"
+    },
+    {
+      "id": "plaid",
+      "name": "Plaid",
+      "kern": "Plaid"
+    },
+    {
+      "id": "opendoor",
+      "name": "Opendoor",
+      "kern": "Opendoor"
+    },
+    {
+      "id": "zillow",
+      "name": "Zillow",
+      "kern": "Zillow"
+    },
+    {
+      "id": "redfin",
+      "name": "Redfin",
+      "kern": "Redfin"
+    },
+    {
+      "id": "airbnb",
+      "name": "Airbnb",
+      "kern": "Airbnb"
+    },
+    {
+      "id": "rightmove",
+      "name": "Rightmove",
+      "kern": "Rightmove"
+    },
+    {
+      "id": "idealista",
+      "name": "idealista",
+      "kern": "idealista"
+    },
+    {
+      "id": "immoscout24",
+      "name": "ImmoScout24",
+      "kern": "ImmoScout24"
+    },
+    {
+      "id": "propstack",
+      "name": "Propstack",
+      "kern": "Propstack"
+    },
+    {
+      "id": "onoffice",
+      "name": "onOffice",
+      "kern": "onOffice"
+    },
+    {
+      "id": "exporo",
+      "name": "Exporo",
+      "kern": "Exporo"
+    },
+    {
+      "id": "evernest",
+      "name": "Evernest",
+      "kern": "Evernest"
+    },
+    {
+      "id": "casafari",
+      "name": "Casafari",
+      "kern": "Casafari"
+    },
+    {
+      "id": "matterport",
+      "name": "Matterport",
+      "kern": "Matterport"
+    },
+    {
+      "id": "justimmo",
+      "name": "JUSTIMMO",
+      "kern": "JUSTIMMO"
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "kern": "OpenAI"
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "kern": "Anthropic"
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral AI",
+      "kern": "Mistral"
+    },
+    {
+      "id": "cohere",
+      "name": "Cohere",
+      "kern": "Cohere"
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "kern": "Perplexity"
+    },
+    {
+      "id": "runway",
+      "name": "Runway",
+      "kern": "Runway"
+    },
+    {
+      "id": "midjourney",
+      "name": "Midjourney",
+      "kern": "Midjourney"
+    },
+    {
+      "id": "hugging-face",
+      "name": "Hugging Face",
+      "kern": "Hugging Face"
+    },
+    {
+      "id": "elevenlabs",
+      "name": "ElevenLabs",
+      "kern": "ElevenLabs"
+    },
+    {
+      "id": "lovable",
+      "name": "Lovable",
+      "kern": "Lovable"
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "kern": "Cursor"
+    },
+    {
+      "id": "deepl",
+      "name": "DeepL",
+      "kern": "DeepL"
+    },
+    {
+      "id": "aleph-alpha",
+      "name": "Aleph Alpha",
+      "kern": "Aleph Alpha"
+    },
+    {
+      "id": "black-forest-labs",
+      "name": "Black Forest Labs",
+      "kern": "Black Forest Labs"
+    },
+    {
+      "id": "stability",
+      "name": "Stability AI",
+      "kern": "Stability"
+    },
+    {
+      "id": "synthesia",
+      "name": "Synthesia",
+      "kern": "Synthesia"
+    },
+    {
+      "id": "replit",
+      "name": "Replit",
+      "kern": "Replit"
+    },
+    {
+      "id": "harvey",
+      "name": "Harvey",
+      "kern": "Harvey",
+      "person": true
+    },
+    {
+      "id": "glean",
+      "name": "Glean",
+      "kern": "Glean"
+    },
+    {
+      "id": "suno",
+      "name": "Suno",
+      "kern": "Suno"
+    },
+    {
+      "id": "deepmind",
+      "name": "Google DeepMind",
+      "kern": "DeepMind"
+    },
+    {
+      "id": "character-ai",
+      "name": "Character.AI",
+      "kern": "Character.AI"
+    },
+    {
+      "id": "granola",
+      "name": "Granola",
+      "kern": "Granola"
+    },
+    {
+      "id": "uber",
+      "name": "Uber",
+      "kern": "Uber"
+    },
+    {
+      "id": "lyft",
+      "name": "Lyft",
+      "kern": "Lyft"
+    },
+    {
+      "id": "bolt",
+      "name": "Bolt",
+      "kern": "Bolt"
+    },
+    {
+      "id": "tier",
+      "name": "TIER",
+      "kern": "TIER"
+    },
+    {
+      "id": "flix",
+      "name": "Flix",
+      "kern": "Flix"
+    },
+    {
+      "id": "etsy",
+      "name": "Etsy",
+      "kern": "Etsy"
+    },
+    {
+      "id": "zalando",
+      "name": "Zalando",
+      "kern": "Zalando"
+    },
+    {
+      "id": "willhaben",
+      "name": "willhaben",
+      "kern": "willhaben"
+    },
+    {
+      "id": "lime",
+      "name": "Lime",
+      "kern": "Lime"
+    },
+    {
+      "id": "voi",
+      "name": "Voi",
+      "kern": "Voi"
+    },
+    {
+      "id": "blablacar",
+      "name": "BlaBlaCar",
+      "kern": "BlaBlaCar"
+    },
+    {
+      "id": "deliveroo",
+      "name": "Deliveroo",
+      "kern": "Deliveroo"
+    },
+    {
+      "id": "wolt",
+      "name": "Wolt",
+      "kern": "Wolt"
+    },
+    {
+      "id": "glovo",
+      "name": "Glovo",
+      "kern": "Glovo"
+    },
+    {
+      "id": "doordash",
+      "name": "DoorDash",
+      "kern": "DoorDash"
+    },
+    {
+      "id": "instacart",
+      "name": "Instacart",
+      "kern": "Instacart"
+    },
+    {
+      "id": "vinted",
+      "name": "Vinted",
+      "kern": "Vinted"
+    },
+    {
+      "id": "depop",
+      "name": "Depop",
+      "kern": "Depop"
+    },
+    {
+      "id": "ebay",
+      "name": "eBay",
+      "kern": "eBay"
+    },
+    {
+      "id": "amazon",
+      "name": "Amazon",
+      "kern": "Amazon"
+    },
+    {
+      "id": "booking",
+      "name": "Booking.com",
+      "kern": "Booking"
+    },
+    {
+      "id": "trivago",
+      "name": "trivago",
+      "kern": "trivago"
+    },
+    {
+      "id": "omio",
+      "name": "Omio",
+      "kern": "Omio"
+    },
+    {
+      "id": "freenow",
+      "name": "FREENOW",
+      "kern": "FREENOW"
+    },
+    {
+      "id": "miles",
+      "name": "MILES",
+      "kern": "MILES"
+    },
+    {
+      "id": "grover",
+      "name": "Grover",
+      "kern": "Grover"
+    },
+    {
+      "id": "pinterest",
+      "name": "Pinterest",
+      "kern": "Pinterest"
+    },
+    {
+      "id": "bitpanda",
+      "name": "Bitpanda",
+      "kern": "Bitpanda"
+    },
+    {
+      "id": "gostudent",
+      "name": "GoStudent",
+      "kern": "GoStudent"
+    },
+    {
+      "id": "refurbed",
+      "name": "refurbed",
+      "kern": "refurbed"
+    },
+    {
+      "id": "runtastic",
+      "name": "Runtastic",
+      "kern": "Runtastic"
+    },
+    {
+      "id": "storyblok",
+      "name": "Storyblok",
+      "kern": "Storyblok"
+    },
+    {
+      "id": "tractive",
+      "name": "Tractive",
+      "kern": "Tractive"
+    },
+    {
+      "id": "anyline",
+      "name": "Anyline",
+      "kern": "Anyline"
+    },
+    {
+      "id": "bergfuerst",
+      "name": "BERGFÜRST",
+      "kern": "BERGFÜRST"
+    },
+    {
+      "id": "shpock",
+      "name": "Shpock",
+      "kern": "Shpock"
+    },
+    {
+      "id": "adverity",
+      "name": "Adverity",
+      "kern": "Adverity"
+    },
+    {
+      "id": "prewave",
+      "name": "Prewave",
+      "kern": "Prewave"
+    },
+    {
+      "id": "blockpit",
+      "name": "Blockpit",
+      "kern": "Blockpit"
+    },
+    {
+      "id": "hokify",
+      "name": "hokify",
+      "kern": "hokify"
+    },
+    {
+      "id": "durchblicker",
+      "name": "durchblicker",
+      "kern": "durchblicker"
+    },
+    {
+      "id": "kununu",
+      "name": "kununu",
+      "kern": "kununu"
+    },
+    {
+      "id": "mysugr",
+      "name": "mySugr",
+      "kern": "mySugr"
+    },
+    {
+      "id": "dynatrace",
+      "name": "Dynatrace",
+      "kern": "Dynatrace"
+    },
+    {
+      "id": "tricentis",
+      "name": "Tricentis",
+      "kern": "Tricentis"
+    },
+    {
+      "id": "bitmovin",
+      "name": "Bitmovin",
+      "kern": "Bitmovin"
+    },
+    {
+      "id": "planradar",
+      "name": "PlanRadar",
+      "kern": "PlanRadar"
+    },
+    {
+      "id": "playbrush",
+      "name": "Playbrush",
+      "kern": "Playbrush"
+    },
+    {
+      "id": "fabasoft",
+      "name": "Fabasoft",
+      "kern": "Fabasoft"
+    },
+    {
+      "id": "byrd",
+      "name": "byrd",
+      "kern": "byrd"
+    }
+  ]
+}

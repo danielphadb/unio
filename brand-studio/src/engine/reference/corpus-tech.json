@@ -1,0 +1,1750 @@
+{
+  "meta": {
+    "hinweis": "Rekonstruiert am 27.11.2026 aus corpusNames.tech und corpusTechMarks. Laut naming-rules hatte das Original 195 Marken, davon 192 nicht im Hauptkorpus; nur diese 192 stehen im Bundle. Logo-Merkmale liegen fuer die Marken vor, die corpusTechMarks enthaelt.",
+    "anzahl": 192,
+    "mitLogoMerkmalen": 155
+  },
+  "marken": [
+    {
+      "id": "stripe",
+      "name": "Stripe",
+      "kern": "Stripe",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "vercel",
+      "name": "Vercel",
+      "kern": "Vercel"
+    },
+    {
+      "id": "linear",
+      "name": "Linear",
+      "kern": "Linear",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "figma",
+      "name": "Figma",
+      "kern": "Figma"
+    },
+    {
+      "id": "notion",
+      "name": "Notion",
+      "kern": "Notion"
+    },
+    {
+      "id": "loom",
+      "name": "Loom",
+      "kern": "Loom",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "miro",
+      "name": "Miro",
+      "kern": "Miro",
+      "person": true,
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "asana",
+      "name": "Asana",
+      "kern": "Asana",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "slack",
+      "name": "Slack",
+      "kern": "Slack",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "zoom",
+      "name": "Zoom",
+      "kern": "Zoom",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "canva",
+      "name": "Canva",
+      "kern": "Canva",
+      "schrift": "script",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "script"
+    },
+    {
+      "id": "airtable",
+      "name": "Airtable",
+      "kern": "Airtable",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "zapier",
+      "name": "Zapier",
+      "kern": "Zapier",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "retool",
+      "name": "Retool",
+      "kern": "Retool",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "supabase",
+      "name": "Supabase",
+      "kern": "Supabase",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "raycast",
+      "name": "Raycast",
+      "kern": "Raycast",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "arc",
+      "name": "Arc",
+      "kern": "Arc"
+    },
+    {
+      "id": "framer",
+      "name": "Framer",
+      "kern": "Framer",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "webflow",
+      "name": "Webflow",
+      "kern": "Webflow",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "pitch",
+      "name": "Pitch",
+      "kern": "Pitch",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "mural",
+      "name": "Mural",
+      "kern": "Mural",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": ""
+    },
+    {
+      "id": "dropbox",
+      "name": "Dropbox",
+      "kern": "Dropbox",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "github",
+      "name": "GitHub",
+      "kern": "GitHub"
+    },
+    {
+      "id": "gitlab",
+      "name": "GitLab",
+      "kern": "GitLab"
+    },
+    {
+      "id": "shopify",
+      "name": "Shopify",
+      "kern": "Shopify",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "squarespace",
+      "name": "Squarespace",
+      "kern": "Squarespace",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "weit",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "wix",
+      "name": "Wix",
+      "kern": "Wix",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "mailchimp",
+      "name": "Mailchimp",
+      "kern": "Mailchimp",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "hubspot",
+      "name": "HubSpot",
+      "kern": "HubSpot",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "atlassian",
+      "name": "Atlassian",
+      "kern": "Atlassian",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "trello",
+      "name": "Trello",
+      "kern": "Trello",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "docker",
+      "name": "Docker",
+      "kern": "Docker"
+    },
+    {
+      "id": "twilio",
+      "name": "Twilio",
+      "kern": "Twilio",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "datadog",
+      "name": "Datadog",
+      "kern": "Datadog",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "postman",
+      "name": "Postman",
+      "kern": "Postman"
+    },
+    {
+      "id": "netlify",
+      "name": "Netlify",
+      "kern": "Netlify",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "cloudflare",
+      "name": "Cloudflare",
+      "kern": "Cloudflare",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "weit",
+      "bildzeichen": 1,
+      "schriftform": "extended"
+    },
+    {
+      "id": "intercom",
+      "name": "Intercom",
+      "kern": "Intercom",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "typeform",
+      "name": "Typeform",
+      "kern": "Typeform",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "calendly",
+      "name": "Calendly",
+      "kern": "Calendly",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "discord",
+      "name": "Discord",
+      "kern": "Discord",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "extended"
+    },
+    {
+      "id": "basecamp",
+      "name": "Basecamp",
+      "kern": "Basecamp"
+    },
+    {
+      "id": "clickup",
+      "name": "ClickUp",
+      "kern": "ClickUp",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "monday",
+      "name": "monday.com",
+      "kern": "monday",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "superhuman",
+      "name": "Superhuman",
+      "kern": "Superhuman",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "weit",
+      "bildzeichen": 1,
+      "schriftform": "extended"
+    },
+    {
+      "id": "grammarly",
+      "name": "Grammarly",
+      "kern": "Grammarly",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "obsidian",
+      "name": "Obsidian",
+      "kern": "Obsidian",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "todoist",
+      "name": "Todoist",
+      "kern": "Todoist",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "personio",
+      "name": "Personio",
+      "kern": "Personio"
+    },
+    {
+      "id": "celonis",
+      "name": "Celonis",
+      "kern": "Celonis",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "contentful",
+      "name": "Contentful",
+      "kern": "Contentful"
+    },
+    {
+      "id": "n8n",
+      "name": "n8n",
+      "kern": "n8n",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "sevdesk",
+      "name": "sevdesk",
+      "kern": "sevdesk",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "deel",
+      "name": "Deel",
+      "kern": "Deel",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "gusto",
+      "name": "Gusto",
+      "kern": "Gusto",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "spotify",
+      "name": "Spotify",
+      "kern": "Spotify"
+    },
+    {
+      "id": "apple",
+      "name": "Apple",
+      "kern": "Apple"
+    },
+    {
+      "id": "sonos",
+      "name": "Sonos",
+      "kern": "Sonos",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "weit",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "nothing",
+      "name": "Nothing",
+      "kern": "Nothing",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "weit",
+      "bildzeichen": 0,
+      "schriftform": ""
+    },
+    {
+      "id": "teenage-engineering",
+      "name": "teenage engineering",
+      "kern": "teenage engineering",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "oura",
+      "name": "Oura",
+      "kern": "Oura",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "peloton",
+      "name": "Peloton",
+      "kern": "Peloton",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "weit",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "dyson",
+      "name": "Dyson",
+      "kern": "Dyson",
+      "person": true,
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "google",
+      "name": "Google",
+      "kern": "Google",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "tesla",
+      "name": "Tesla",
+      "kern": "Tesla",
+      "person": true
+    },
+    {
+      "id": "garmin",
+      "name": "Garmin",
+      "kern": "Garmin",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "fitbit",
+      "name": "Fitbit",
+      "kern": "Fitbit"
+    },
+    {
+      "id": "whoop",
+      "name": "WHOOP",
+      "kern": "WHOOP",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "kobo",
+      "name": "Kobo",
+      "kern": "Kobo"
+    },
+    {
+      "id": "roku",
+      "name": "Roku",
+      "kern": "Roku",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "gopro",
+      "name": "GoPro",
+      "kern": "GoPro",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": ""
+    },
+    {
+      "id": "fairphone",
+      "name": "Fairphone",
+      "kern": "Fairphone",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "native-instruments",
+      "name": "Native Instruments",
+      "kern": "Native Instruments",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "extended"
+    },
+    {
+      "id": "tonies",
+      "name": "tonies",
+      "kern": "tonies",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "nuki",
+      "name": "Nuki",
+      "kern": "Nuki",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "weit",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "loxone",
+      "name": "Loxone",
+      "kern": "Loxone",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "ledger",
+      "name": "Ledger",
+      "kern": "Ledger",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "rabbit",
+      "name": "rabbit",
+      "kern": "rabbit",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "kindle",
+      "name": "Kindle",
+      "kern": "Kindle",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "klarna",
+      "name": "Klarna",
+      "kern": "Klarna",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "revolut",
+      "name": "Revolut",
+      "kern": "Revolut",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "n26",
+      "name": "N26",
+      "kern": "N26",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "monzo",
+      "name": "Monzo",
+      "kern": "Monzo",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "wise",
+      "name": "Wise",
+      "kern": "Wise",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "extended"
+    },
+    {
+      "id": "trade-republic",
+      "name": "Trade Republic",
+      "kern": "Trade Republic",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "qonto",
+      "name": "Qonto",
+      "kern": "Qonto",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "pliant",
+      "name": "Pliant",
+      "kern": "Pliant",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "robinhood",
+      "name": "Robinhood",
+      "kern": "Robinhood",
+      "person": true,
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "venmo",
+      "name": "Venmo",
+      "kern": "Venmo",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "paypal",
+      "name": "PayPal",
+      "kern": "PayPal"
+    },
+    {
+      "id": "block",
+      "name": "Block",
+      "kern": "Block"
+    },
+    {
+      "id": "chime",
+      "name": "Chime",
+      "kern": "Chime",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "nubank",
+      "name": "Nubank",
+      "kern": "Nubank",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "starling",
+      "name": "Starling",
+      "kern": "Starling",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "condensed"
+    },
+    {
+      "id": "adyen",
+      "name": "Adyen",
+      "kern": "Adyen",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": ""
+    },
+    {
+      "id": "mollie",
+      "name": "Mollie",
+      "kern": "Mollie",
+      "person": true,
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "sumup",
+      "name": "SumUp",
+      "kern": "SumUp",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "scalable",
+      "name": "Scalable Capital",
+      "kern": "Scalable Capital",
+      "schrift": "serif",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "antiqua"
+    },
+    {
+      "id": "raisin",
+      "name": "Raisin",
+      "kern": "Raisin",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "coinbase",
+      "name": "Coinbase",
+      "kern": "Coinbase"
+    },
+    {
+      "id": "kraken",
+      "name": "Kraken",
+      "kern": "Kraken"
+    },
+    {
+      "id": "ramp",
+      "name": "Ramp",
+      "kern": "Ramp",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "brex",
+      "name": "Brex",
+      "kern": "Brex",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "mercury",
+      "name": "Mercury",
+      "kern": "Mercury",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "weit",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "plaid",
+      "name": "Plaid",
+      "kern": "Plaid",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "opendoor",
+      "name": "Opendoor",
+      "kern": "Opendoor",
+      "schrift": "serif",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "antiqua"
+    },
+    {
+      "id": "zillow",
+      "name": "Zillow",
+      "kern": "Zillow"
+    },
+    {
+      "id": "redfin",
+      "name": "Redfin",
+      "kern": "Redfin",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "airbnb",
+      "name": "Airbnb",
+      "kern": "Airbnb",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "rightmove",
+      "name": "Rightmove",
+      "kern": "Rightmove",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "idealista",
+      "name": "idealista",
+      "kern": "idealista"
+    },
+    {
+      "id": "immoscout24",
+      "name": "ImmoScout24",
+      "kern": "ImmoScout24",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "propstack",
+      "name": "Propstack",
+      "kern": "Propstack",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "onoffice",
+      "name": "onOffice",
+      "kern": "onOffice",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "exporo",
+      "name": "Exporo",
+      "kern": "Exporo",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "weit",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "evernest",
+      "name": "Evernest",
+      "kern": "Evernest",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "casafari",
+      "name": "Casafari",
+      "kern": "Casafari",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "weit",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "matterport",
+      "name": "Matterport",
+      "kern": "Matterport",
+      "schrift": "serif",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "antiqua"
+    },
+    {
+      "id": "justimmo",
+      "name": "JUSTIMMO",
+      "kern": "JUSTIMMO",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "kern": "OpenAI"
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "kern": "Anthropic",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "extended"
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral AI",
+      "kern": "Mistral",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "cohere",
+      "name": "Cohere",
+      "kern": "Cohere",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "perplexity",
+      "name": "Perplexity",
+      "kern": "Perplexity"
+    },
+    {
+      "id": "runway",
+      "name": "Runway",
+      "kern": "Runway",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "midjourney",
+      "name": "Midjourney",
+      "kern": "Midjourney"
+    },
+    {
+      "id": "hugging-face",
+      "name": "Hugging Face",
+      "kern": "Hugging Face",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "elevenlabs",
+      "name": "ElevenLabs",
+      "kern": "ElevenLabs",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "lovable",
+      "name": "Lovable",
+      "kern": "Lovable",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor",
+      "kern": "Cursor",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "extended"
+    },
+    {
+      "id": "deepl",
+      "name": "DeepL",
+      "kern": "DeepL",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "aleph-alpha",
+      "name": "Aleph Alpha",
+      "kern": "Aleph Alpha",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "extended"
+    },
+    {
+      "id": "black-forest-labs",
+      "name": "Black Forest Labs",
+      "kern": "Black Forest Labs",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "stability",
+      "name": "Stability AI",
+      "kern": "Stability",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "synthesia",
+      "name": "Synthesia",
+      "kern": "Synthesia",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "replit",
+      "name": "Replit",
+      "kern": "Replit",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "harvey",
+      "name": "Harvey",
+      "kern": "Harvey",
+      "person": true,
+      "schrift": "serif",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "antiqua"
+    },
+    {
+      "id": "glean",
+      "name": "Glean",
+      "kern": "Glean",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "suno",
+      "name": "Suno",
+      "kern": "Suno",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "extended"
+    },
+    {
+      "id": "deepmind",
+      "name": "Google DeepMind",
+      "kern": "DeepMind",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "character-ai",
+      "name": "Character.AI",
+      "kern": "Character.AI"
+    },
+    {
+      "id": "granola",
+      "name": "Granola",
+      "kern": "Granola",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "uber",
+      "name": "Uber",
+      "kern": "Uber",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "lyft",
+      "name": "Lyft",
+      "kern": "Lyft",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": ""
+    },
+    {
+      "id": "bolt",
+      "name": "Bolt",
+      "kern": "Bolt",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "tier",
+      "name": "TIER",
+      "kern": "TIER"
+    },
+    {
+      "id": "flix",
+      "name": "Flix",
+      "kern": "Flix",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "etsy",
+      "name": "Etsy",
+      "kern": "Etsy",
+      "schrift": "serif",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 0,
+      "schriftform": "slab"
+    },
+    {
+      "id": "zalando",
+      "name": "Zalando",
+      "kern": "Zalando"
+    },
+    {
+      "id": "willhaben",
+      "name": "willhaben",
+      "kern": "willhaben",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "lime",
+      "name": "Lime",
+      "kern": "Lime",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "voi",
+      "name": "Voi",
+      "kern": "Voi",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "blablacar",
+      "name": "BlaBlaCar",
+      "kern": "BlaBlaCar",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "deliveroo",
+      "name": "Deliveroo",
+      "kern": "Deliveroo",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "wolt",
+      "name": "Wolt",
+      "kern": "Wolt",
+      "schrift": "script",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "script"
+    },
+    {
+      "id": "glovo",
+      "name": "Glovo",
+      "kern": "Glovo",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "doordash",
+      "name": "DoorDash",
+      "kern": "DoorDash"
+    },
+    {
+      "id": "instacart",
+      "name": "Instacart",
+      "kern": "Instacart",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "vinted",
+      "name": "Vinted",
+      "kern": "Vinted",
+      "schrift": "script",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "script"
+    },
+    {
+      "id": "depop",
+      "name": "Depop",
+      "kern": "Depop",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": ""
+    },
+    {
+      "id": "ebay",
+      "name": "eBay",
+      "kern": "eBay"
+    },
+    {
+      "id": "amazon",
+      "name": "Amazon",
+      "kern": "Amazon",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "booking",
+      "name": "Booking.com",
+      "kern": "Booking"
+    },
+    {
+      "id": "trivago",
+      "name": "trivago",
+      "kern": "trivago"
+    },
+    {
+      "id": "omio",
+      "name": "Omio",
+      "kern": "Omio",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "freenow",
+      "name": "FREENOW",
+      "kern": "FREENOW"
+    },
+    {
+      "id": "miles",
+      "name": "MILES",
+      "kern": "MILES",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": ""
+    },
+    {
+      "id": "grover",
+      "name": "Grover",
+      "kern": "Grover",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "pinterest",
+      "name": "Pinterest",
+      "kern": "Pinterest",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "bitpanda",
+      "name": "Bitpanda",
+      "kern": "Bitpanda",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "gostudent",
+      "name": "GoStudent",
+      "kern": "GoStudent",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "refurbed",
+      "name": "refurbed",
+      "kern": "refurbed",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "runtastic",
+      "name": "Runtastic",
+      "kern": "Runtastic"
+    },
+    {
+      "id": "storyblok",
+      "name": "Storyblok",
+      "kern": "Storyblok",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "tractive",
+      "name": "Tractive",
+      "kern": "Tractive",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "anyline",
+      "name": "Anyline",
+      "kern": "Anyline",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "weit",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "bergfuerst",
+      "name": "BERGFÜRST",
+      "kern": "BERGFÜRST"
+    },
+    {
+      "id": "shpock",
+      "name": "Shpock",
+      "kern": "Shpock",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "extended"
+    },
+    {
+      "id": "adverity",
+      "name": "Adverity",
+      "kern": "Adverity",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "prewave",
+      "name": "Prewave",
+      "kern": "Prewave",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "blockpit",
+      "name": "Blockpit",
+      "kern": "Blockpit",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "hokify",
+      "name": "hokify",
+      "kern": "hokify",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "durchblicker",
+      "name": "durchblicker",
+      "kern": "durchblicker",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "kununu",
+      "name": "kununu",
+      "kern": "kununu"
+    },
+    {
+      "id": "mysugr",
+      "name": "mySugr",
+      "kern": "mySugr",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "dynatrace",
+      "name": "Dynatrace",
+      "kern": "Dynatrace",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "tricentis",
+      "name": "Tricentis",
+      "kern": "Tricentis",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "bitmovin",
+      "name": "Bitmovin",
+      "kern": "Bitmovin",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    },
+    {
+      "id": "planradar",
+      "name": "PlanRadar",
+      "kern": "PlanRadar",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 1,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "playbrush",
+      "name": "Playbrush",
+      "kern": "Playbrush"
+    },
+    {
+      "id": "fabasoft",
+      "name": "Fabasoft",
+      "kern": "Fabasoft",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "laufweite": "eng",
+      "bildzeichen": 0,
+      "schriftform": "grotesk"
+    },
+    {
+      "id": "byrd",
+      "name": "byrd",
+      "kern": "byrd",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "laufweite": "normal",
+      "bildzeichen": 1,
+      "schriftform": "geometric"
+    }
+  ]
+}

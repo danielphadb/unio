@@ -1,0 +1,440 @@
+{
+  "moods": {
+    "gold": {
+      "label": "Gold",
+      "swatch": "#B8955A",
+      "hint": "Champagner, Messing, Gold mit Anthrazit"
+    },
+    "navy": {
+      "label": "Navy",
+      "swatch": "#1F3A5F",
+      "hint": "Marineblau mit Sand oder Kupfer"
+    },
+    "gruen": {
+      "label": "Grün",
+      "swatch": "#6F8466",
+      "hint": "Salbei, Tanne, Oliv"
+    },
+    "terra": {
+      "label": "Terrakotta",
+      "swatch": "#B5643C",
+      "hint": "Terrakotta, Rost, Ziegel"
+    },
+    "schwarz": {
+      "label": "Schwarz-Weiß",
+      "swatch": "#1A1A1A",
+      "hint": "Schwarz, Anthrazit, Graphit"
+    },
+    "blau": {
+      "label": "Blau",
+      "swatch": "#2E5A87",
+      "hint": "Petrol, Stahlblau, Taubenblau"
+    },
+    "bordeaux": {
+      "label": "Bordeaux",
+      "swatch": "#6E1E2B",
+      "hint": "Bordeaux, Weinrot, Burgund"
+    },
+    "sand": {
+      "label": "Sand",
+      "swatch": "#B9A27F",
+      "hint": "Sand, Greige, Taupe"
+    }
+  },
+  "stilMoods": {
+    "elegant": [
+      "navy",
+      "bordeaux",
+      "sand",
+      "schwarz",
+      "gruen"
+    ],
+    "modern": [
+      "schwarz",
+      "navy",
+      "blau",
+      "gruen",
+      "sand",
+      "terra"
+    ],
+    "luxus": [
+      "schwarz",
+      "bordeaux",
+      "gruen",
+      "navy"
+    ],
+    "warm": [
+      "terra",
+      "sand",
+      "gruen",
+      "bordeaux"
+    ],
+    "mutig": [
+      "schwarz",
+      "blau",
+      "terra",
+      "navy",
+      "bordeaux"
+    ],
+    "natur": [
+      "gruen",
+      "sand",
+      "terra",
+      "blau"
+    ]
+  },
+  "paletten": [
+    {
+      "id": "champagner",
+      "mood": "gold",
+      "name": "Champagner und Anthrazit",
+      "primary": "#A88B5C",
+      "secondary": "#E9DFCE",
+      "accent": "#8C7148",
+      "ink": "#2A2A2C",
+      "paper": "#FAF7F2",
+      "styles": [
+        "luxus",
+        "elegant"
+      ]
+    },
+    {
+      "id": "goldschwarz",
+      "mood": "gold",
+      "name": "Gold und Schwarz",
+      "primary": "#A6852F",
+      "secondary": "#1C1C1C",
+      "accent": "#C9AE6A",
+      "ink": "#141414",
+      "paper": "#FBFAF7",
+      "styles": [
+        "luxus",
+        "mutig"
+      ]
+    },
+    {
+      "id": "messing",
+      "mood": "gold",
+      "name": "Messing und Nachtblau",
+      "primary": "#9A7B3F",
+      "secondary": "#1F2A44",
+      "accent": "#C2A56E",
+      "ink": "#1A2236",
+      "paper": "#F9F6EF",
+      "styles": [
+        "elegant",
+        "luxus",
+        "warm"
+      ]
+    },
+    {
+      "id": "navysand",
+      "mood": "navy",
+      "name": "Navy und Sand",
+      "primary": "#1F3A5F",
+      "secondary": "#D8C9AE",
+      "accent": "#7E8696",
+      "ink": "#16243A",
+      "paper": "#F8F5EF",
+      "styles": [
+        "elegant",
+        "modern",
+        "warm"
+      ]
+    },
+    {
+      "id": "kupfer",
+      "mood": "navy",
+      "name": "Mitternacht und Kupfer",
+      "primary": "#1B2A41",
+      "secondary": "#E6DCCD",
+      "accent": "#B06B3E",
+      "ink": "#141E2E",
+      "paper": "#FAF8F4",
+      "styles": [
+        "elegant",
+        "mutig"
+      ]
+    },
+    {
+      "id": "marine",
+      "mood": "navy",
+      "name": "Marine und Silbergrau",
+      "primary": "#25406A",
+      "secondary": "#C9CED6",
+      "accent": "#7D8796",
+      "ink": "#18233A",
+      "paper": "#F7F8FA",
+      "styles": [
+        "modern",
+        "elegant"
+      ]
+    },
+    {
+      "id": "salbei",
+      "mood": "gruen",
+      "name": "Salbei und Creme",
+      "primary": "#6B7F5E",
+      "secondary": "#E4DCC8",
+      "accent": "#7F8577",
+      "ink": "#2A3226",
+      "paper": "#F7F4EC",
+      "styles": [
+        "natur",
+        "warm",
+        "elegant"
+      ]
+    },
+    {
+      "id": "tanne",
+      "mood": "gruen",
+      "name": "Tannengrün und Leinen",
+      "primary": "#2F4A3A",
+      "secondary": "#DCD3BF",
+      "accent": "#7C8A7F",
+      "ink": "#1E2B23",
+      "paper": "#F8F6F0",
+      "styles": [
+        "elegant",
+        "luxus",
+        "natur"
+      ]
+    },
+    {
+      "id": "oliv",
+      "mood": "gruen",
+      "name": "Oliv und Leinen",
+      "primary": "#5D6A3C",
+      "secondary": "#E8E0CF",
+      "accent": "#7E7A6E",
+      "ink": "#2B2E22",
+      "paper": "#FAF8F2",
+      "styles": [
+        "natur",
+        "warm"
+      ]
+    },
+    {
+      "id": "terrakotta",
+      "mood": "terra",
+      "name": "Terrakotta und Warmgrau",
+      "primary": "#B0603A",
+      "secondary": "#D9D2CA",
+      "accent": "#7E746B",
+      "ink": "#2E2724",
+      "paper": "#FAF6F1",
+      "styles": [
+        "warm",
+        "natur",
+        "modern"
+      ]
+    },
+    {
+      "id": "rost",
+      "mood": "terra",
+      "name": "Rost und Sand",
+      "primary": "#9C4F2C",
+      "secondary": "#E3D5BE",
+      "accent": "#A67A5E",
+      "ink": "#2C211B",
+      "paper": "#FAF6EE",
+      "styles": [
+        "warm",
+        "mutig",
+        "natur"
+      ]
+    },
+    {
+      "id": "ziegel",
+      "mood": "terra",
+      "name": "Ziegel und Anthrazit",
+      "primary": "#9E4A33",
+      "secondary": "#3A3735",
+      "accent": "#C8A68A",
+      "ink": "#252322",
+      "paper": "#F9F7F4",
+      "styles": [
+        "mutig",
+        "modern",
+        "warm"
+      ]
+    },
+    {
+      "id": "schwarzweiss",
+      "mood": "schwarz",
+      "name": "Schwarz und Weiß",
+      "primary": "#151515",
+      "secondary": "#E6E6E6",
+      "accent": "#6B6B6B",
+      "ink": "#111111",
+      "paper": "#FFFFFF",
+      "styles": [
+        "modern",
+        "mutig",
+        "luxus"
+      ]
+    },
+    {
+      "id": "anthrazit",
+      "mood": "schwarz",
+      "name": "Anthrazit und Stein",
+      "primary": "#2E2E2E",
+      "secondary": "#D7D2C8",
+      "accent": "#8E877B",
+      "ink": "#1E1E1E",
+      "paper": "#F6F4F0",
+      "styles": [
+        "modern",
+        "elegant",
+        "natur",
+        "luxus"
+      ]
+    },
+    {
+      "id": "graphit",
+      "mood": "gold",
+      "name": "Graphit und Champagner",
+      "primary": "#1E1E20",
+      "secondary": "#E8DFCF",
+      "accent": "#A88B5C",
+      "ink": "#161618",
+      "paper": "#FAF8F4",
+      "styles": [
+        "luxus",
+        "elegant"
+      ]
+    },
+    {
+      "id": "petrol",
+      "mood": "blau",
+      "name": "Petrol und Sand",
+      "primary": "#1D5C63",
+      "secondary": "#E2D6BF",
+      "accent": "#9A7F6E",
+      "ink": "#16302F",
+      "paper": "#F8F6F1",
+      "styles": [
+        "modern",
+        "natur",
+        "elegant"
+      ]
+    },
+    {
+      "id": "stahlblau",
+      "mood": "blau",
+      "name": "Stahlblau und Weiß",
+      "primary": "#2D5A86",
+      "secondary": "#D5DEE8",
+      "accent": "#6F8BA6",
+      "ink": "#14243A",
+      "paper": "#FFFFFF",
+      "styles": [
+        "modern",
+        "mutig"
+      ]
+    },
+    {
+      "id": "taubenblau",
+      "mood": "blau",
+      "name": "Taubenblau und Greige",
+      "primary": "#4A6580",
+      "secondary": "#DDD8CF",
+      "accent": "#9C8F7E",
+      "ink": "#1F2A36",
+      "paper": "#F7F6F3",
+      "styles": [
+        "elegant",
+        "natur",
+        "warm"
+      ]
+    },
+    {
+      "id": "bordeaux",
+      "mood": "bordeaux",
+      "name": "Bordeaux und Kreide",
+      "primary": "#6E1E2B",
+      "secondary": "#EAE4DA",
+      "accent": "#9C8A85",
+      "ink": "#2A1A1D",
+      "paper": "#FAF7F2",
+      "styles": [
+        "luxus",
+        "elegant"
+      ]
+    },
+    {
+      "id": "weinrot",
+      "mood": "bordeaux",
+      "name": "Weinrot und Grau",
+      "primary": "#7A2433",
+      "secondary": "#D8D5D2",
+      "accent": "#8E8A86",
+      "ink": "#241C1E",
+      "paper": "#F8F7F6",
+      "styles": [
+        "modern",
+        "mutig",
+        "elegant"
+      ]
+    },
+    {
+      "id": "burgund",
+      "mood": "bordeaux",
+      "name": "Burgund und Creme",
+      "primary": "#5C1A26",
+      "secondary": "#EFE6D6",
+      "accent": "#8F7B70",
+      "ink": "#2B1D1F",
+      "paper": "#FBF8F1",
+      "styles": [
+        "warm",
+        "luxus"
+      ]
+    },
+    {
+      "id": "espresso",
+      "mood": "sand",
+      "name": "Sand und Espresso",
+      "primary": "#8F7556",
+      "secondary": "#E3D7C3",
+      "accent": "#9C8670",
+      "ink": "#2F251D",
+      "paper": "#FAF7F1",
+      "styles": [
+        "warm",
+        "natur",
+        "elegant"
+      ]
+    },
+    {
+      "id": "greige",
+      "mood": "sand",
+      "name": "Greige und Schwarz",
+      "primary": "#857B6E",
+      "secondary": "#E2DDD4",
+      "accent": "#3A3632",
+      "ink": "#1B1A18",
+      "paper": "#F8F7F4",
+      "styles": [
+        "modern",
+        "elegant",
+        "luxus"
+      ]
+    },
+    {
+      "id": "taupe",
+      "mood": "sand",
+      "name": "Taupe und Creme",
+      "primary": "#7E6E62",
+      "secondary": "#EDE5D8",
+      "accent": "#8F8072",
+      "ink": "#2C2622",
+      "paper": "#FBF8F2",
+      "styles": [
+        "warm",
+        "natur",
+        "elegant"
+      ]
+    }
+  ]
+}

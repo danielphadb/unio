@@ -1,0 +1,8 @@
+{
+  "f": 1200,
+  "I": 200,
+  "k": ["pointerdown","keydown","wheel","touchstart","scroll"],
+  "l": 0,
+  "m": {"$set":[]},
+  "w": false
+}

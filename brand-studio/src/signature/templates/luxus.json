@@ -1,0 +1,910 @@
+[
+  {
+    "id": "sig-schlussstein",
+    "titel": "Schlussstein",
+    "idee": "Der Name endet mit einem Schlussstein statt eines Punkts: dem Keilstein, der einen Bogen zusammenhält.",
+    "herleitung": "Wortspiel und Bauteil zugleich: Der Schlussstein schließt den Bogen, hier schließt er den Namen. Korpusmarken mit Schlusszeichen setzen einen runden Punkt in Grotesk; ein trapezförmiger Keil nach einer Antiqua kommt nicht vor.",
+    "referenzen": [
+      "SERHANT.",
+      "vitra."
+    ],
+    "abgrenzung": "Dort ein runder Punkt nach Grotesk; hier ein trapezförmiger Keilstein nach Didone-Versalien.",
+    "legal": "gelb",
+    "nahe": [
+      "SERHANT."
+    ],
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 18,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "luxus",
+        "elegant"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "bodoni",
+          "weight": 500
+        },
+        {
+          "key": "playfair",
+          "weight": 400
+        },
+        {
+          "key": "librebodoni",
+          "weight": 500
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "bordeaux",
+        "graphit",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "punkt-wortende",
+      "position": "im Wort",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1400,
+          "minVersal": 64
+        }
+      },
+      {
+        "typ": "pfad",
+        "zeichen": true,
+        "d": "M-12 -54H12L7.5 0H-7.5Z",
+        "x": "name.r+30",
+        "y": "name.b",
+        "rolle": "akzent"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": 36,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "name.b+82"
+      }
+    ],
+    "mischung": false,
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-verschraenkt",
+    "titel": "Verschränkt",
+    "idee": "Zwei große Didone-Initialen greifen ineinander, die erste liegt mit einem feinen Hof über der zweiten; darunter der Name in weit gesperrter Grotesk.",
+    "herleitung": "Prägestempel und Hausmonogramm der Wiener Ringstraßenpalais, ohne Krone und ohne Rahmen. Korpus-Monogramme stehen in Kreis, Quadrat oder Balken; verschlungene Paare im Korpus stehen über oder neben Antiqua-Namen; hier trägt ein Didone-Paar mit Freistellung einen Grotesk-Namen.",
+    "referenzen": [
+      "ST. REGIS",
+      "JAEGER-LECOULTRE"
+    ],
+    "abgrenzung": "Dort verschlungene Monogramme über oder neben Antiqua-Namen; hier ein Didone-Paar mit Freistellung über einem weit gesperrten Grotesk-Namen.",
+    "legal": "gelb",
+    "nahe": [
+      "ST. REGIS",
+      "JAEGER-LECOULTRE"
+    ],
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        2,
+        3
+      ],
+      "initialen": 2,
+      "stile": [
+        "luxus",
+        "elegant"
+      ],
+      "initialenAkzent": false
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "geist",
+          "weight": 300
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "intertight",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "bodoni",
+          "weight": 500
+        },
+        {
+          "key": "playfair",
+          "weight": 400
+        },
+        {
+          "key": "notoserifdisplay",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "ink",
+      "akzent": "accent",
+      "paletten": [
+        "graphit",
+        "bordeaux",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "monogramm-verschraenkt",
+      "position": "oben",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "stacked"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "i1",
+        "feld": "initial1",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 230,
+        "x": 26,
+        "y": 0,
+        "ausrichtung": "rechts",
+        "rolle": "zeichen",
+        "zeichen": true,
+        "hof": 9,
+        "ebene": 1,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "i2",
+        "feld": "initial2",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 230,
+        "x": -26,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "zeichen",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 100,
+        "x": "(min(i1.l,i2.l)+max(i1.r,i2.r))/2",
+        "y": "max(i1.u,i2.u)+170",
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 60,
+          "umbruch": true
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 32,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "name.b+80"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-durchschuss",
+    "titel": "Durchschuss",
+    "idee": "Eine sehr große Didone-Initiale wird waagrecht aufgetrennt; durch den Spalt läuft der Name, die Initiale bleibt oben und unten stehen.",
+    "herleitung": "Titelblätter der Wiener Moderne und Plakate der Secession, bei denen Schrift durch große Buchstaben läuft. Im Korpus stehen große Einzelbuchstaben frei über oder neben dem Namen; eine vom Namen durchtrennte Initiale kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Eine vom Namen durchtrennte Didone-Initiale kommt im Korpus nicht vor; große Einzelbuchstaben stehen dort frei.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 18,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "luxus",
+        "elegant",
+        "mutig"
+      ],
+      "initialenAkzent": false,
+      "nameZuInitial": 2.5
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "bodoni",
+          "weight": 500
+        },
+        {
+          "key": "playfair",
+          "weight": 400
+        },
+        {
+          "key": "librebodoni",
+          "weight": 500
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "bordeaux",
+        "graphit",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "initial-durchschuss",
+      "position": "hinter",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "ini",
+        "feld": "initial1",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 540,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "zeichen",
+        "zeichen": true,
+        "fugen": [
+          {
+            "bei": 0.5,
+            "staerke": 146
+          }
+        ],
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.02,
+        "versal": 100,
+        "x": 0,
+        "y": -220,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 62
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": 36,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": 0,
+        "y": "ini.u+130"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-konstruktion",
+    "titel": "Konstruktion",
+    "idee": "Die Initiale steht in ihrer eigenen Konstruktionszeichnung aus Quadrat, Kreis und Diagonalen, wie in den Alphabeten der Renaissance; darunter der Name.",
+    "herleitung": "Buchstabenkonstruktion nach Pacioli und Dürer (Quadrat, Inkreis, Diagonalen) als feine Akzentlinien hinter einer Didone-Initiale. Im Korpus stehen Monogramme in geschlossenen Formen ohne Hilfslinien; eine sichtbare Konstruktion kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Sichtbare Konstruktionslinien (Quadrat, Kreis, Diagonalen) hinter der Initiale kommen im Korpus nicht vor.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 1,
+      "stile": [
+        "luxus",
+        "elegant"
+      ],
+      "initialenAkzent": false
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "ibarra",
+          "weight": 400
+        },
+        {
+          "key": "gilda",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "intertight",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "bodoni",
+          "weight": 500
+        },
+        {
+          "key": "playfair",
+          "weight": 400
+        },
+        {
+          "key": "notoserifdisplay",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "ink",
+      "akzent": "accent",
+      "paletten": [
+        "graphit",
+        "tanne",
+        "bordeaux"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "konstruktion",
+      "position": "oben",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked"
+    },
+    "elemente": [
+      {
+        "typ": "rechteck",
+        "zeichen": true,
+        "x": -150,
+        "y": -265,
+        "b": 300,
+        "h": 300,
+        "kontur": 2.4,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "kreis",
+        "zeichen": true,
+        "cx": 0,
+        "cy": -115,
+        "r": 150,
+        "kontur": 2.4,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "linie",
+        "zeichen": true,
+        "x1": -150,
+        "y1": -265,
+        "x2": 150,
+        "y2": 35,
+        "staerke": 2.4,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "linie",
+        "zeichen": true,
+        "x1": 150,
+        "y1": -265,
+        "x2": -150,
+        "y2": 35,
+        "staerke": 2.4,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "text",
+        "id": "ini",
+        "feld": "initial1",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 230,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "zeichen",
+        "zeichen": true,
+        "hof": 8,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.16,
+        "versal": 100,
+        "x": 0,
+        "y": 212,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 60,
+          "umbruch": true
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": 0,
+        "y": "name.b+82"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-kassette",
+    "titel": "Kassette",
+    "idee": "Name und Zusatz stehen in einer doppelt profilierten Füllung mit eingezogenen Ecken, wie das Kassettenfeld einer Wiener Altbautür.",
+    "herleitung": "Füllungsrahmen mit eingezogenen (konkaven) Ecken aus Kassettentüren und Wandvertäfelungen der Gründerzeit. Rahmen im Korpus sind rechteckig um Grotesk-Namen; ein Füllungsprofil mit eingezogenen Ecken um einen Antiqua-Namen kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Füllungsrahmen mit eingezogenen Ecken um einen Antiqua-Namen; Rahmen im Korpus sind rechteckig um Grotesk-Namen.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "luxus",
+        "elegant"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "ibarra",
+          "weight": 400
+        },
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "gilda",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "intertight",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "tanne",
+        "bordeaux",
+        "navysand"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "rahmen",
+      "position": "um",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "badge"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.14,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1400,
+          "minVersal": 60,
+          "umbruch": true
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "name.b+80"
+      },
+      {
+        "typ": "linie",
+        "x1": "min(name.l,zusatz.l)-76+24|name.l-76+24",
+        "x2": "max(name.r,zusatz.r)+76-24|name.r+76-24",
+        "y1": "min(name.t,name.o)-58+0",
+        "y2": "min(name.t,name.o)-58+0",
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "min(name.l,zusatz.l)-76+24|name.l-76+24",
+        "x2": "max(name.r,zusatz.r)+76-24|name.r+76-24",
+        "y1": "zusatz.b+52-0|name.b+52-0",
+        "y2": "zusatz.b+52-0|name.b+52-0",
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "min(name.l,zusatz.l)-76+0|name.l-76+0",
+        "x2": "min(name.l,zusatz.l)-76+0|name.l-76+0",
+        "y1": "min(name.t,name.o)-58+24",
+        "y2": "zusatz.b+52-24|name.b+52-24",
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "max(name.r,zusatz.r)+76-0|name.r+76-0",
+        "x2": "max(name.r,zusatz.r)+76-0|name.r+76-0",
+        "y1": "min(name.t,name.o)-58+24",
+        "y2": "zusatz.b+52-24|name.b+52-24",
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "bogen",
+        "cx": "min(name.l,zusatz.l)-76+0|name.l-76+0",
+        "cy": "min(name.t,name.o)-58",
+        "r": 24,
+        "von": 0,
+        "bis": 90,
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "bogen",
+        "cx": "max(name.r,zusatz.r)+76-0|name.r+76-0",
+        "cy": "min(name.t,name.o)-58",
+        "r": 24,
+        "von": 90,
+        "bis": 180,
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "bogen",
+        "cx": "max(name.r,zusatz.r)+76-0|name.r+76-0",
+        "cy": "zusatz.b+52-0|name.b+52-0",
+        "r": 24,
+        "von": 180,
+        "bis": 270,
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "bogen",
+        "cx": "min(name.l,zusatz.l)-76+0|name.l-76+0",
+        "cy": "zusatz.b+52-0|name.b+52-0",
+        "r": 24,
+        "von": 270,
+        "bis": 360,
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "min(name.l,zusatz.l)-76+35|name.l-76+35",
+        "x2": "max(name.r,zusatz.r)+76-35|name.r+76-35",
+        "y1": "min(name.t,name.o)-58+11",
+        "y2": "min(name.t,name.o)-58+11",
+        "staerke": 1.6,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "min(name.l,zusatz.l)-76+35|name.l-76+35",
+        "x2": "max(name.r,zusatz.r)+76-35|name.r+76-35",
+        "y1": "zusatz.b+52-11|name.b+52-11",
+        "y2": "zusatz.b+52-11|name.b+52-11",
+        "staerke": 1.6,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "min(name.l,zusatz.l)-76+11|name.l-76+11",
+        "x2": "min(name.l,zusatz.l)-76+11|name.l-76+11",
+        "y1": "min(name.t,name.o)-58+35",
+        "y2": "zusatz.b+52-35|name.b+52-35",
+        "staerke": 1.6,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "max(name.r,zusatz.r)+76-11|name.r+76-11",
+        "x2": "max(name.r,zusatz.r)+76-11|name.r+76-11",
+        "y1": "min(name.t,name.o)-58+35",
+        "y2": "zusatz.b+52-35|name.b+52-35",
+        "staerke": 1.6,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "bogen",
+        "cx": "min(name.l,zusatz.l)-76+0|name.l-76+0",
+        "cy": "min(name.t,name.o)-58",
+        "r": 35,
+        "von": 0,
+        "bis": 90,
+        "staerke": 1.6,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "bogen",
+        "cx": "max(name.r,zusatz.r)+76-0|name.r+76-0",
+        "cy": "min(name.t,name.o)-58",
+        "r": 35,
+        "von": 90,
+        "bis": 180,
+        "staerke": 1.6,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "bogen",
+        "cx": "max(name.r,zusatz.r)+76-0|name.r+76-0",
+        "cy": "zusatz.b+52-0|name.b+52-0",
+        "r": 35,
+        "von": 180,
+        "bis": 270,
+        "staerke": 1.6,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "bogen",
+        "cx": "min(name.l,zusatz.l)-76+0|name.l-76+0",
+        "cy": "zusatz.b+52-0|name.b+52-0",
+        "r": 35,
+        "von": 270,
+        "bis": 360,
+        "staerke": 1.6,
+        "rolle": "zeichen"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  }
+]

@@ -1,0 +1,932 @@
+{
+  "bezirke": [
+    {
+      "name": "Innere Stadt",
+      "kind": "bezirk",
+      "district": 1,
+      "adj": {
+        "$undefined": true
+      },
+      "loc": "in der Inneren Stadt",
+      "parent": "Wien",
+      "marks": {
+        "$undefined": true
+      },
+      "aliases": [
+        "city",
+        "erster bezirk",
+        "innenstadt"
+      ]
+    },
+    {
+      "name": "Leopoldstadt",
+      "kind": "bezirk",
+      "district": 2,
+      "adj": "Leopoldstädter",
+      "loc": "in der Leopoldstadt",
+      "parent": "Wien",
+      "marks": [
+        {
+          "name": "Augarten",
+          "at": "am Augarten"
+        },
+        {
+          "name": "Prater",
+          "at": "am Prater"
+        }
+      ],
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Landstraße",
+      "kind": "bezirk",
+      "district": 3,
+      "adj": "Landstraßer",
+      "loc": "auf der Landstraße",
+      "parent": "Wien",
+      "marks": [
+        {
+          "name": "Belvedere",
+          "at": "am Belvedere"
+        }
+      ],
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Wieden",
+      "kind": "bezirk",
+      "district": 4,
+      "adj": "Wiedner",
+      "loc": "auf der Wieden",
+      "parent": "Wien",
+      "marks": {
+        "$undefined": true
+      },
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Margareten",
+      "kind": "bezirk",
+      "district": 5,
+      "adj": "Margaretner",
+      "loc": "in Margareten",
+      "parent": "Wien",
+      "marks": {
+        "$undefined": true
+      },
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Mariahilf",
+      "kind": "bezirk",
+      "district": 6,
+      "adj": "Mariahilfer",
+      "loc": "in Mariahilf",
+      "parent": "Wien",
+      "marks": {
+        "$undefined": true
+      },
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Neubau",
+      "kind": "bezirk",
+      "district": 7,
+      "adj": "Neubauer",
+      "loc": "in Neubau",
+      "parent": "Wien",
+      "marks": [
+        {
+          "name": "Spittelberg",
+          "at": "am Spittelberg"
+        }
+      ],
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Josefstadt",
+      "kind": "bezirk",
+      "district": 8,
+      "adj": "Josefstädter",
+      "loc": "in der Josefstadt",
+      "parent": "Wien",
+      "marks": {
+        "$undefined": true
+      },
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Alsergrund",
+      "kind": "bezirk",
+      "district": 9,
+      "adj": "Alsergrunder",
+      "loc": "am Alsergrund",
+      "parent": "Wien",
+      "marks": {
+        "$undefined": true
+      },
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Favoriten",
+      "kind": "bezirk",
+      "district": 10,
+      "adj": "Favoritner",
+      "loc": "in Favoriten",
+      "parent": "Wien",
+      "marks": {
+        "$undefined": true
+      },
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Simmering",
+      "kind": "bezirk",
+      "district": 11,
+      "adj": "Simmeringer",
+      "loc": "in Simmering",
+      "parent": "Wien",
+      "marks": {
+        "$undefined": true
+      },
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Meidling",
+      "kind": "bezirk",
+      "district": 12,
+      "adj": "Meidlinger",
+      "loc": "in Meidling",
+      "parent": "Wien",
+      "marks": {
+        "$undefined": true
+      },
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Hietzing",
+      "kind": "bezirk",
+      "district": 13,
+      "villa": true,
+      "adj": "Hietzinger",
+      "loc": "in Hietzing",
+      "parent": "Wien",
+      "marks": [
+        {
+          "name": "Ober St. Veit",
+          "at": "in Ober St. Veit"
+        }
+      ],
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Penzing",
+      "kind": "bezirk",
+      "district": 14,
+      "adj": "Penzinger",
+      "loc": "in Penzing",
+      "parent": "Wien",
+      "marks": [
+        {
+          "name": "Hütteldorf",
+          "at": "in Hütteldorf",
+          "adj": "Hütteldorfer"
+        }
+      ],
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Rudolfsheim-Fünfhaus",
+      "kind": "bezirk",
+      "district": 15,
+      "adj": {
+        "$undefined": true
+      },
+      "loc": "in Rudolfsheim-Fünfhaus",
+      "parent": "Wien",
+      "marks": {
+        "$undefined": true
+      },
+      "aliases": [
+        "rudolfsheim",
+        "fuenfhaus"
+      ]
+    },
+    {
+      "name": "Ottakring",
+      "kind": "bezirk",
+      "district": 16,
+      "adj": "Ottakringer",
+      "loc": "in Ottakring",
+      "parent": "Wien",
+      "marks": [
+        {
+          "name": "Wilhelminenberg",
+          "at": "am Wilhelminenberg"
+        }
+      ],
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Hernals",
+      "kind": "bezirk",
+      "district": 17,
+      "adj": "Hernalser",
+      "loc": "in Hernals",
+      "parent": "Wien",
+      "marks": {
+        "$undefined": true
+      },
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Währing",
+      "kind": "bezirk",
+      "district": 18,
+      "villa": true,
+      "adj": "Währinger",
+      "loc": "in Währing",
+      "parent": "Wien",
+      "marks": [
+        {
+          "name": "Türkenschanzpark",
+          "at": "am Türkenschanzpark"
+        },
+        {
+          "name": "Gersthof",
+          "at": "in Gersthof",
+          "adj": "Gersthofer"
+        }
+      ],
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Döbling",
+      "kind": "bezirk",
+      "district": 19,
+      "villa": true,
+      "adj": "Döblinger",
+      "loc": "in Döbling",
+      "parent": "Wien",
+      "marks": [
+        {
+          "name": "Kahlenberg",
+          "at": "am Kahlenberg"
+        },
+        {
+          "name": "Hohe Warte",
+          "at": "an der Hohen Warte"
+        },
+        {
+          "name": "Grinzing",
+          "at": "in Grinzing",
+          "adj": "Grinzinger"
+        },
+        {
+          "name": "Sievering",
+          "at": "in Sievering",
+          "adj": "Sieveringer"
+        },
+        {
+          "name": "Nussdorf",
+          "at": "in Nussdorf",
+          "adj": "Nussdorfer"
+        }
+      ],
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Brigittenau",
+      "kind": "bezirk",
+      "district": 20,
+      "adj": "Brigittenauer",
+      "loc": "in der Brigittenau",
+      "parent": "Wien",
+      "marks": {
+        "$undefined": true
+      },
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Floridsdorf",
+      "kind": "bezirk",
+      "district": 21,
+      "adj": "Floridsdorfer",
+      "loc": "in Floridsdorf",
+      "parent": "Wien",
+      "marks": [
+        {
+          "name": "Stammersdorf",
+          "at": "in Stammersdorf",
+          "adj": "Stammersdorfer"
+        }
+      ],
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Donaustadt",
+      "kind": "bezirk",
+      "district": 22,
+      "adj": "Donaustädter",
+      "loc": "in der Donaustadt",
+      "parent": "Wien",
+      "marks": [
+        {
+          "name": "Alte Donau",
+          "at": "an der Alten Donau"
+        }
+      ],
+      "aliases": {
+        "$undefined": true
+      }
+    },
+    {
+      "name": "Liesing",
+      "kind": "bezirk",
+      "district": 23,
+      "adj": "Liesinger",
+      "loc": "in Liesing",
+      "parent": "Wien",
+      "marks": [
+        {
+          "name": "Rodaun",
+          "at": "in Rodaun",
+          "adj": "Rodauner"
+        }
+      ],
+      "aliases": {
+        "$undefined": true
+      }
+    }
+  ],
+  "laender": [
+    {
+      "name": "Niederösterreich",
+      "kind": "land",
+      "loc": "in Niederösterreich",
+      "rural": true,
+      "aliases": [
+        "noe"
+      ]
+    },
+    {
+      "name": "Oberösterreich",
+      "kind": "land",
+      "loc": "in Oberösterreich",
+      "rural": true,
+      "aliases": [
+        "ooe"
+      ]
+    },
+    {
+      "name": "Steiermark",
+      "kind": "land",
+      "loc": "in der Steiermark",
+      "rural": true
+    },
+    {
+      "name": "Kärnten",
+      "kind": "land",
+      "loc": "in Kärnten",
+      "adj": "Kärntner",
+      "rural": true,
+      "marks": [
+        {
+          "name": "Wörthersee",
+          "at": "am Wörthersee"
+        }
+      ]
+    },
+    {
+      "name": "Tirol",
+      "kind": "land",
+      "loc": "in Tirol",
+      "adj": "Tiroler",
+      "rural": true
+    },
+    {
+      "name": "Vorarlberg",
+      "kind": "land",
+      "loc": "in Vorarlberg",
+      "adj": "Vorarlberger",
+      "rural": true,
+      "marks": [
+        {
+          "name": "Bodensee",
+          "at": "am Bodensee"
+        }
+      ]
+    },
+    {
+      "name": "Burgenland",
+      "kind": "land",
+      "loc": "im Burgenland",
+      "rural": true,
+      "marks": [
+        {
+          "name": "Neusiedler See",
+          "at": "am Neusiedler See"
+        }
+      ]
+    }
+  ],
+  "staedte": [
+    {
+      "name": "Wien",
+      "kind": "stadt",
+      "loc": "in Wien",
+      "adj": "Wiener",
+      "aliases": [
+        "vienna"
+      ]
+    },
+    {
+      "name": "Graz",
+      "kind": "stadt",
+      "loc": "in Graz",
+      "adj": "Grazer",
+      "marks": [
+        {
+          "name": "Schloßberg",
+          "at": "am Schloßberg"
+        },
+        {
+          "name": "Mur",
+          "at": "an der Mur"
+        },
+        {
+          "name": "Ruckerlberg",
+          "at": "am Ruckerlberg"
+        },
+        {
+          "name": "Rosenhain",
+          "at": "am Rosenhain"
+        }
+      ]
+    },
+    {
+      "name": "Linz",
+      "kind": "stadt",
+      "loc": "in Linz",
+      "adj": "Linzer",
+      "marks": [
+        {
+          "name": "Pöstlingberg",
+          "at": "am Pöstlingberg"
+        },
+        {
+          "name": "Donau",
+          "at": "an der Donau"
+        }
+      ]
+    },
+    {
+      "name": "Salzburg",
+      "kind": "stadt",
+      "loc": "in Salzburg",
+      "adj": "Salzburger",
+      "marks": [
+        {
+          "name": "Mönchsberg",
+          "at": "am Mönchsberg"
+        },
+        {
+          "name": "Gaisberg",
+          "at": "am Gaisberg"
+        },
+        {
+          "name": "Salzach",
+          "at": "an der Salzach"
+        }
+      ]
+    },
+    {
+      "name": "Innsbruck",
+      "kind": "stadt",
+      "loc": "in Innsbruck",
+      "adj": "Innsbrucker",
+      "marks": [
+        {
+          "name": "Nordkette",
+          "at": "an der Nordkette"
+        },
+        {
+          "name": "Inn",
+          "at": "am Inn"
+        }
+      ]
+    },
+    {
+      "name": "Klagenfurt",
+      "kind": "stadt",
+      "loc": "in Klagenfurt",
+      "adj": "Klagenfurter",
+      "marks": [
+        {
+          "name": "Wörthersee",
+          "at": "am Wörthersee"
+        },
+        {
+          "name": "Kreuzbergl",
+          "at": "am Kreuzbergl"
+        }
+      ]
+    },
+    {
+      "name": "St. Pölten",
+      "kind": "stadt",
+      "loc": "in St. Pölten",
+      "adj": "St. Pöltner",
+      "aliases": [
+        "sankt poelten",
+        "st poelten"
+      ]
+    },
+    {
+      "name": "Bregenz",
+      "kind": "stadt",
+      "loc": "in Bregenz",
+      "adj": "Bregenzer",
+      "marks": [
+        {
+          "name": "Bodensee",
+          "at": "am Bodensee"
+        },
+        {
+          "name": "Pfänder",
+          "at": "am Pfänder"
+        }
+      ]
+    },
+    {
+      "name": "Eisenstadt",
+      "kind": "stadt",
+      "loc": "in Eisenstadt",
+      "adj": "Eisenstädter"
+    },
+    {
+      "name": "Villach",
+      "kind": "stadt",
+      "loc": "in Villach",
+      "adj": "Villacher"
+    },
+    {
+      "name": "Wels",
+      "kind": "stadt",
+      "loc": "in Wels",
+      "adj": "Welser"
+    },
+    {
+      "name": "Steyr",
+      "kind": "stadt",
+      "loc": "in Steyr",
+      "adj": "Steyrer"
+    },
+    {
+      "name": "Leoben",
+      "kind": "stadt",
+      "loc": "in Leoben",
+      "adj": "Leobener"
+    },
+    {
+      "name": "Krems",
+      "kind": "stadt",
+      "loc": "in Krems",
+      "adj": "Kremser",
+      "marks": [
+        {
+          "name": "Donau",
+          "at": "an der Donau"
+        }
+      ]
+    },
+    {
+      "name": "Baden",
+      "kind": "stadt",
+      "loc": "in Baden",
+      "adj": "Badener"
+    },
+    {
+      "name": "Mödling",
+      "kind": "stadt",
+      "loc": "in Mödling",
+      "adj": "Mödlinger"
+    },
+    {
+      "name": "Klosterneuburg",
+      "kind": "stadt",
+      "loc": "in Klosterneuburg",
+      "adj": "Klosterneuburger"
+    },
+    {
+      "name": "Wiener Neustadt",
+      "kind": "stadt",
+      "loc": "in Wiener Neustadt",
+      "adj": "Wiener Neustädter"
+    },
+    {
+      "name": "Tulln",
+      "kind": "stadt",
+      "loc": "in Tulln",
+      "adj": "Tullner",
+      "marks": [
+        {
+          "name": "Donau",
+          "at": "an der Donau"
+        }
+      ]
+    },
+    {
+      "name": "Perchtoldsdorf",
+      "kind": "stadt",
+      "loc": "in Perchtoldsdorf",
+      "adj": "Perchtoldsdorfer"
+    },
+    {
+      "name": "Dornbirn",
+      "kind": "stadt",
+      "loc": "in Dornbirn",
+      "adj": "Dornbirner"
+    },
+    {
+      "name": "Feldkirch",
+      "kind": "stadt",
+      "loc": "in Feldkirch",
+      "adj": "Feldkircher"
+    },
+    {
+      "name": "Kitzbühel",
+      "kind": "stadt",
+      "loc": "in Kitzbühel",
+      "adj": "Kitzbüheler",
+      "rural": true
+    },
+    {
+      "name": "Gmunden",
+      "kind": "stadt",
+      "loc": "in Gmunden",
+      "adj": "Gmundner",
+      "rural": true,
+      "marks": [
+        {
+          "name": "Traunsee",
+          "at": "am Traunsee"
+        }
+      ]
+    },
+    {
+      "name": "Bad Ischl",
+      "kind": "stadt",
+      "loc": "in Bad Ischl",
+      "adj": "Ischler",
+      "rural": true
+    },
+    {
+      "name": "Zell am See",
+      "kind": "stadt",
+      "loc": "in Zell am See",
+      "rural": true,
+      "marks": [
+        {
+          "name": "Zeller See",
+          "at": "am Zeller See"
+        }
+      ]
+    },
+    {
+      "name": "Hallein",
+      "kind": "stadt",
+      "loc": "in Hallein",
+      "adj": "Halleiner"
+    }
+  ],
+  "regionen": [
+    {
+      "name": "Salzkammergut",
+      "kind": "region",
+      "loc": "im Salzkammergut",
+      "rural": true,
+      "marks": [
+        {
+          "name": "Traunsee",
+          "at": "am Traunsee"
+        },
+        {
+          "name": "Attersee",
+          "at": "am Attersee"
+        },
+        {
+          "name": "Wolfgangsee",
+          "at": "am Wolfgangsee"
+        },
+        {
+          "name": "Mondsee",
+          "at": "am Mondsee"
+        },
+        {
+          "name": "Traunstein",
+          "at": "am Traunstein"
+        }
+      ]
+    },
+    {
+      "name": "Wachau",
+      "kind": "region",
+      "loc": "in der Wachau",
+      "adj": "Wachauer",
+      "rural": true,
+      "marks": [
+        {
+          "name": "Donau",
+          "at": "an der Donau"
+        }
+      ]
+    },
+    {
+      "name": "Weinviertel",
+      "kind": "region",
+      "loc": "im Weinviertel",
+      "adj": "Weinviertler",
+      "rural": true
+    },
+    {
+      "name": "Waldviertel",
+      "kind": "region",
+      "loc": "im Waldviertel",
+      "adj": "Waldviertler",
+      "rural": true
+    },
+    {
+      "name": "Mostviertel",
+      "kind": "region",
+      "loc": "im Mostviertel",
+      "adj": "Mostviertler",
+      "rural": true
+    },
+    {
+      "name": "Mühlviertel",
+      "kind": "region",
+      "loc": "im Mühlviertel",
+      "adj": "Mühlviertler",
+      "rural": true
+    },
+    {
+      "name": "Innviertel",
+      "kind": "region",
+      "loc": "im Innviertel",
+      "adj": "Innviertler",
+      "rural": true
+    },
+    {
+      "name": "Wienerwald",
+      "kind": "region",
+      "loc": "im Wienerwald",
+      "rural": true
+    },
+    {
+      "name": "Thermenregion",
+      "kind": "region",
+      "loc": "in der Thermenregion",
+      "rural": true
+    },
+    {
+      "name": "Südsteiermark",
+      "kind": "region",
+      "loc": "in der Südsteiermark",
+      "rural": true
+    },
+    {
+      "name": "Pinzgau",
+      "kind": "region",
+      "loc": "im Pinzgau",
+      "adj": "Pinzgauer",
+      "rural": true
+    },
+    {
+      "name": "Pongau",
+      "kind": "region",
+      "loc": "im Pongau",
+      "adj": "Pongauer",
+      "rural": true
+    },
+    {
+      "name": "Lungau",
+      "kind": "region",
+      "loc": "im Lungau",
+      "adj": "Lungauer",
+      "rural": true
+    },
+    {
+      "name": "Ennstal",
+      "kind": "region",
+      "loc": "im Ennstal",
+      "adj": "Ennstaler",
+      "rural": true
+    },
+    {
+      "name": "Ausseerland",
+      "kind": "region",
+      "loc": "im Ausseerland",
+      "adj": "Ausseer",
+      "rural": true
+    },
+    {
+      "name": "Zillertal",
+      "kind": "region",
+      "loc": "im Zillertal",
+      "adj": "Zillertaler",
+      "rural": true
+    },
+    {
+      "name": "Ötztal",
+      "kind": "region",
+      "loc": "im Ötztal",
+      "adj": "Ötztaler",
+      "rural": true
+    },
+    {
+      "name": "Montafon",
+      "kind": "region",
+      "loc": "im Montafon",
+      "adj": "Montafoner",
+      "rural": true
+    },
+    {
+      "name": "Bregenzerwald",
+      "kind": "region",
+      "loc": "im Bregenzerwald",
+      "adj": "Bregenzerwälder",
+      "rural": true
+    },
+    {
+      "name": "Arlberg",
+      "kind": "region",
+      "loc": "am Arlberg",
+      "adj": "Arlberger",
+      "rural": true
+    },
+    {
+      "name": "Marchfeld",
+      "kind": "region",
+      "loc": "im Marchfeld",
+      "adj": "Marchfelder",
+      "rural": true
+    },
+    {
+      "name": "Semmering",
+      "kind": "region",
+      "loc": "am Semmering",
+      "rural": true
+    },
+    {
+      "name": "Wörthersee",
+      "kind": "region",
+      "loc": "am Wörthersee",
+      "rural": true
+    },
+    {
+      "name": "Neusiedler See",
+      "kind": "region",
+      "loc": "am Neusiedler See",
+      "rural": true
+    }
+  ]
+}

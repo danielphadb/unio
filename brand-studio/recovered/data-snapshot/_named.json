@@ -1,0 +1,167 @@
+{
+  "named": {
+    "src/engine/reference/keyword-fields.json": {
+      "eintraege": 2,
+      "markierungen": 0
+    },
+    "src/engine/reference/naming-rules.json": {
+      "eintraege": 14,
+      "markierungen": 0
+    },
+    "src/engine/names/wordsDb.data.json": {
+      "eintraege": 5342,
+      "markierungen": 0
+    },
+    "src/engine/names/kwFields.data.json": {
+      "eintraege": 15,
+      "markierungen": 0
+    },
+    "src/engine/names/corpusNames.data.json": {
+      "eintraege": 2,
+      "markierungen": 0
+    },
+    "src/engine/corpusMarks.data.json": {
+      "eintraege": 330,
+      "markierungen": 0
+    },
+    "src/engine/corpusTechMarks.data.json": {
+      "eintraege": 155,
+      "markierungen": 0
+    },
+    "src/engine/reference/recipes.json": {
+      "eintraege": 82,
+      "markierungen": 0
+    },
+    "src/engine/suffixPairings.json": {
+      "eintraege": 6,
+      "markierungen": 0
+    },
+    "src/engine/fonts.json": {
+      "eintraege": 105,
+      "markierungen": 0
+    },
+    "src/engine/coverage.json": {
+      "eintraege": 105,
+      "markierungen": 0
+    },
+    "src/engine/palettes.json": {
+      "eintraege": 3,
+      "markierungen": 0
+    },
+    "src/symbols/icons.json": {
+      "eintraege": 8,
+      "markierungen": 58
+    },
+    "src/symbols/containers.snapshot.json": {
+      "eintraege": 10,
+      "markierungen": 10
+    },
+    "src/engine/orte.json": {
+      "eintraege": 4,
+      "markierungen": 35
+    },
+    "src/signature/templates/elegant.json": {
+      "eintraege": 7,
+      "markierungen": 0
+    },
+    "src/signature/templates/luxus.json": {
+      "eintraege": 5,
+      "markierungen": 0
+    },
+    "src/signature/templates/modern.json": {
+      "eintraege": 4,
+      "markierungen": 0
+    },
+    "src/signature/templates/mutig.json": {
+      "eintraege": 6,
+      "markierungen": 0
+    },
+    "src/signature/templates/natur.json": {
+      "eintraege": 4,
+      "markierungen": 0
+    },
+    "src/signature/templates/warm.json": {
+      "eintraege": 5,
+      "markierungen": 0
+    },
+    "src/signature/templates/kurz.json": {
+      "eintraege": 14,
+      "markierungen": 0
+    },
+    "src/signature/templates/mischung.json": {
+      "eintraege": 6,
+      "markierungen": 0
+    },
+    "src/signature/templates/kit.json": {
+      "eintraege": 23,
+      "markierungen": 0
+    },
+    "src/signature/templates/partner.json": {
+      "eintraege": 12,
+      "markierungen": 0
+    },
+    "src/signature/templates/verworfen.json": {
+      "eintraege": 2,
+      "markierungen": 0
+    },
+    "src/signature/orte.json": {
+      "eintraege": 4,
+      "markierungen": 0
+    },
+    "src/signature/varianten.snapshot.json": {
+      "eintraege": 2,
+      "markierungen": 4
+    },
+    "src/strategy/territories.json": {
+      "eintraege": 12,
+      "markierungen": 0
+    },
+    "src/strategy/axes.json": {
+      "eintraege": 8,
+      "markierungen": 0
+    },
+    "src/strategy/catalog.json": {
+      "eintraege": 18,
+      "markierungen": 0
+    },
+    "src/strategy/texts.snapshot.json": {
+      "eintraege": 9,
+      "markierungen": 33
+    },
+    "src/postings/occasions.snapshot.json": {
+      "eintraege": 7,
+      "markierungen": 11
+    }
+  },
+  "snapshot": {
+    "nameFinder-CLppxXuz.js": 217,
+    "engine-BhDRZEfO.js": 161,
+    "index-BER2gtDe.js": 605,
+    "kompass-bTkyDSpk.js": 33,
+    "texts-B92agAAM.js": 41,
+    "kitAssets-CN7deWlx.js": 164,
+    "svg-CrwnZnJY.js": 10,
+    "describe-CrBWccON.js": 9,
+    "library-D1LkGQVN.js": 15,
+    "objectData-DW9yI24T.js": 11,
+    "own-CMBusp3y.js": 40,
+    "energy-DRQ_36b-.js": 2,
+    "imagesize-BHC6N02v.js": 8,
+    "PostingsScreen-DENTHyqT.js": 26,
+    "ObjectEditor-2EvMWoQa.js": 17,
+    "NameCard-BpHDImep.js": 12,
+    "Gallery-DQhL1__5.js": 37,
+    "Editor-DVnOl_QT.js": 47,
+    "Kit-DOg_4MCc.js": 24,
+    "Kompass-15lKj4KF.js": 29,
+    "Routes-DauRWys7.js": 15,
+    "NameFinder-a2JCuNBt.js": 16,
+    "StyleScreen-C_6L_v_z.js": 6,
+    "migrate-yTmcZ5Wq.js": 8,
+    "prewarm-B0dvGBZL.js": 6,
+    "photoStore-D5-LfIN5.js": 6,
+    "ObjectsScreen-Brex7erJ.js": 6,
+    "ProjectPreview-C5WC5Zuf.js": 2,
+    "LogoView-CG3DXWdO.js": 3
+  }
+}

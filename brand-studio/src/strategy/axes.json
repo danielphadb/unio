@@ -1,0 +1,335 @@
+{
+  "achsen": [
+    "serif",
+    "contrast",
+    "width",
+    "weight",
+    "caps",
+    "tracking",
+    "warmth",
+    "saturation",
+    "dark",
+    "symbol"
+  ],
+  "gewichte": {
+    "logoPaar": 1,
+    "farbPaar": 1,
+    "referenz": 0.6,
+    "stimme": 0.5,
+    "segment": 0.3
+  },
+  "referenzen": {
+    "verlag": {
+      "serif": 0.8,
+      "contrast": 0.4,
+      "caps": -0.3,
+      "weight": -0.2,
+      "warmth": 0.2,
+      "saturation": -0.3,
+      "dark": -0.3,
+      "symbol": -0.4
+    },
+    "uhrmacher": {
+      "serif": 0.5,
+      "contrast": 0.7,
+      "caps": 0.6,
+      "tracking": 0.6,
+      "weight": -0.5,
+      "warmth": -0.2,
+      "saturation": -0.4,
+      "dark": 0.4,
+      "symbol": 0.3,
+      "width": 0.2
+    },
+    "architektur": {
+      "serif": -0.8,
+      "contrast": -0.6,
+      "caps": 0.3,
+      "tracking": 0.4,
+      "weight": -0.3,
+      "warmth": -0.3,
+      "saturation": -0.6,
+      "dark": -0.2,
+      "symbol": 0.2,
+      "width": 0.3
+    },
+    "privatbank": {
+      "serif": 0.8,
+      "contrast": 0.5,
+      "caps": 0.5,
+      "tracking": 0.5,
+      "warmth": -0.2,
+      "saturation": -0.3,
+      "dark": 0.5,
+      "symbol": 0.3,
+      "width": 0.2
+    },
+    "hotel": {
+      "serif": 0.6,
+      "contrast": 0.5,
+      "caps": 0.3,
+      "tracking": 0.3,
+      "warmth": 0.6,
+      "saturation": 0.3,
+      "dark": 0.1,
+      "symbol": 0.4,
+      "width": 0.1
+    },
+    "cafe": {
+      "serif": 0.4,
+      "caps": -0.4,
+      "tracking": -0.2,
+      "weight": 0.2,
+      "warmth": 0.8,
+      "saturation": 0.3,
+      "dark": -0.4,
+      "symbol": 0.2,
+      "width": 0.1
+    },
+    "galerie": {
+      "serif": -0.4,
+      "contrast": -0.2,
+      "caps": -0.2,
+      "tracking": 0.2,
+      "weight": -0.6,
+      "warmth": -0.1,
+      "saturation": -0.8,
+      "dark": -0.6,
+      "symbol": -0.6
+    },
+    "tech": {
+      "serif": -1,
+      "contrast": -0.8,
+      "caps": -0.5,
+      "tracking": -0.3,
+      "weight": 0.3,
+      "warmth": -0.6,
+      "saturation": 0.5,
+      "dark": -0.1,
+      "symbol": 0.6,
+      "width": 0.1
+    },
+    "manufaktur": {
+      "serif": 0.3,
+      "contrast": -0.4,
+      "caps": 0.3,
+      "tracking": 0.3,
+      "weight": 0.3,
+      "warmth": 0.7,
+      "saturation": -0.1,
+      "symbol": 0.5,
+      "width": 0.3
+    },
+    "weingut": {
+      "serif": 0.6,
+      "contrast": 0.2,
+      "caps": 0.2,
+      "tracking": 0.3,
+      "warmth": 0.6,
+      "saturation": -0.2,
+      "dark": 0.2,
+      "symbol": 0.5,
+      "width": 0.1
+    },
+    "sport": {
+      "serif": -0.8,
+      "contrast": -0.6,
+      "caps": 0.8,
+      "tracking": -0.2,
+      "weight": 0.9,
+      "warmth": 0.2,
+      "saturation": 0.9,
+      "dark": 0.3,
+      "symbol": 0.4,
+      "width": -0.6
+    },
+    "mode": {
+      "serif": 0.6,
+      "contrast": 0.9,
+      "caps": 0.8,
+      "tracking": 0.7,
+      "weight": -0.2,
+      "warmth": -0.3,
+      "saturation": -0.8,
+      "dark": 0.5,
+      "symbol": -0.2,
+      "width": 0.2
+    }
+  },
+  "stimme": {
+    "formell": {
+      "serif": -0.6,
+      "caps": -0.5,
+      "tracking": -0.4,
+      "warmth": 0.4,
+      "contrast": -0.3
+    },
+    "ernst": {
+      "saturation": 0.5,
+      "warmth": 0.4,
+      "dark": -0.5,
+      "weight": 0.2
+    },
+    "sachlich": {
+      "contrast": 0.5,
+      "saturation": 0.4,
+      "warmth": 0.3,
+      "serif": 0.2
+    },
+    "leise": {
+      "weight": 0.7,
+      "symbol": 0.4,
+      "dark": 0.3,
+      "width": 0.2,
+      "saturation": 0.3,
+      "contrast": 0.3
+    }
+  },
+  "segment": {
+    "einstieg": {
+      "serif": -0.5,
+      "contrast": -0.5,
+      "warmth": 0.5,
+      "saturation": 0.5,
+      "dark": -0.5,
+      "weight": 0.3
+    },
+    "mitte": {
+      "warmth": 0.3,
+      "dark": -0.3,
+      "contrast": -0.2
+    },
+    "premium": {
+      "serif": 0.5,
+      "contrast": 0.4,
+      "dark": 0.2,
+      "saturation": -0.3,
+      "tracking": 0.3
+    },
+    "luxus": {
+      "serif": 0.7,
+      "contrast": 0.7,
+      "caps": 0.5,
+      "tracking": 0.6,
+      "dark": 0.5,
+      "saturation": -0.5,
+      "weight": -0.4
+    }
+  },
+  "schriftformen": {
+    "didone": {
+      "serif": 1,
+      "contrast": 1
+    },
+    "antiqua": {
+      "serif": 0.8,
+      "contrast": 0.2
+    },
+    "slab": {
+      "serif": 0.5,
+      "contrast": -0.6,
+      "weight": 0.4
+    },
+    "grotesk": {
+      "serif": -1,
+      "contrast": -0.4
+    },
+    "geometric": {
+      "serif": -1,
+      "contrast": -0.6,
+      "width": 0.3
+    },
+    "condensed": {
+      "serif": -0.8,
+      "width": -1,
+      "weight": 0.5
+    },
+    "extended": {
+      "serif": -0.8,
+      "width": 1
+    },
+    "mono": {
+      "serif": -0.6,
+      "contrast": -1
+    },
+    "script": {
+      "serif": 0.3,
+      "contrast": 0.5
+    },
+    "stencil": {
+      "serif": -0.6,
+      "weight": 0.6
+    }
+  },
+  "nichtIch": {
+    "haus-icon": {
+      "avoidThemes": [
+        "haus",
+        "dach",
+        "tuer"
+      ]
+    },
+    "schluessel": {
+      "avoidThemes": [
+        "schluessel"
+      ]
+    },
+    "skyline": {
+      "avoidThemes": [
+        "stadt"
+      ]
+    },
+    "schreibschrift": {
+      "avoidFontForms": [
+        "script"
+      ]
+    },
+    "monogramm-kreis": {
+      "avoidContainers": [
+        "circle",
+        "ring"
+      ]
+    }
+  },
+  "onlynessFokus": {
+    "graetzl": [
+      "wohnen"
+    ],
+    "bewertung": [
+      "bewertung"
+    ],
+    "substanz": [
+      "altbau",
+      "zinshaus"
+    ],
+    "verhandlung": [
+      "kapital"
+    ],
+    "diskret": [
+      "vertrauen"
+    ],
+    "lebenslagen": [
+      "erbe",
+      "familie"
+    ],
+    "rendite": [
+      "kapital"
+    ],
+    "inszenierung": [
+      "licht"
+    ],
+    "vorgemerkt": [
+      "vertrauen"
+    ],
+    "projekt": [
+      "neubau"
+    ],
+    "region": [
+      "grund",
+      "natur"
+    ],
+    "nachher": [
+      "familie"
+    ]
+  }
+}

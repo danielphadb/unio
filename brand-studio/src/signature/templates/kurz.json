@@ -1,0 +1,1950 @@
+[
+  {
+    "id": "sig-weitsperrung",
+    "titel": "Weit gesperrt",
+    "idee": "Leichte Versalien mit extremer Sperrung von einer halben Geviertbreite: der Name wird zur ruhigen Zeile wie bei Modehäusern und Resorts, der Zusatz folgt im selben Rhythmus.",
+    "herleitung": "Typografische Klasse der leichten, sehr weit gesperrten Grotesk-Versalien (Korpus T05, dort bis 0,22 em), hier deutlich weiter (0,5 em) und in einer Versalschrift ohne Kleinbuchstaben. Keine bestimmte Wortmarke ist nachgebaut; Korpusnamen sind über die Namenssperre ausgeschlossen.",
+    "referenzen": [
+      "AMAN",
+      "THE ROW"
+    ],
+    "abgrenzung": "Gleiche Klasse leichter, weit gesperrter Versalien, aber deutlich weiter (0,5 em) und ohne Zeichen; keine bestimmte Wortmarke nachgebaut, Korpusnamen gesperrt.",
+    "legal": "gelb",
+    "nahe": [
+      "AMAN",
+      "THE ROW"
+    ],
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 12,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "luxus",
+        "elegant",
+        "modern"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "julius",
+          "weight": 400
+        },
+        {
+          "key": "aboreto",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 300
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "graphit",
+        "greige",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "sperrung-extrem",
+      "position": "im Wort",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.5,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1900,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.42,
+        "versal": 32,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "max(name.w,760)",
+          "minVersal": 22
+        },
+        "x": "name.cx",
+        "y": "name.b+96"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-titelkopf",
+    "titel": "Titelkopf",
+    "idee": "Der Name steht wie der Titel eines Magazins in kontrastreichen Didone-Versalien, eng gesetzt; darunter eine Linie mit Zusatz links und Ort rechts wie die Datumszeile einer Ausgabe.",
+    "herleitung": "Zeitschriftenkopf (Titel, Linie, Datumszeile), eine verbreitete Gattung seit dem 19. Jahrhundert. Didone-Versalien eng kommen im Korpus vor (T01), eine zweigeteilte Datumszeile unter einer Linie nicht; kein bestimmter Titelkopf ist nachgebaut.",
+    "referenzen": [
+      "BARNES",
+      "Christie's International Real Estate"
+    ],
+    "abgrenzung": "Gleiche Klasse enger Didone-Versalien, ergänzt um Linie und zweigeteilte Datumszeile, die im Korpus nicht vorkommt; Korpusnamen gesperrt.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 12,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "luxus",
+        "mutig",
+        "elegant"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "bodoni",
+          "weight": 700
+        },
+        {
+          "key": "playfair",
+          "weight": 700
+        },
+        {
+          "key": "librebodoni",
+          "weight": 700
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "ink",
+      "akzent": "primary",
+      "paletten": [
+        "schwarzweiss",
+        "bordeaux",
+        "graphit"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "datumszeile",
+      "position": "unter",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": -0.005,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 64
+        }
+      },
+      {
+        "typ": "linie",
+        "x1": "name.l",
+        "x2": "name.r",
+        "y1": "name.b+30",
+        "y2": "name.b+30",
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zus",
+        "feld": "zusatz",
+        "wenn": "ort",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 30,
+        "x": "name.l",
+        "y": "name.b+84",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "name.w/2-20",
+          "minVersal": 18
+        }
+      },
+      {
+        "typ": "text",
+        "id": "ort",
+        "feld": "ort",
+        "wenn": "zusatz",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": "zus.cap|30",
+        "x": "name.r",
+        "y": "name.b+84",
+        "ausrichtung": "rechts",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "name.w/2-20",
+          "minVersal": 18
+        }
+      },
+      {
+        "typ": "text",
+        "id": "eins",
+        "feld": "zusatzOderOrt",
+        "wennNicht": "ort",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 30,
+        "x": "name.cx",
+        "y": "name.b+84",
+        "ausrichtung": "mitte",
+        "rolle": "neben"
+      },
+      {
+        "typ": "text",
+        "id": "eins2",
+        "feld": "ort",
+        "wennNicht": "zusatz",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 30,
+        "x": "name.cx",
+        "y": "name.b+84",
+        "ausrichtung": "mitte",
+        "rolle": "neben"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-kleinfett",
+    "titel": "Kleinschrift fett",
+    "idee": "Der Name in fetter geometrischer Grotesk, ganz klein geschrieben und eng: freundlich, direkt und sehr gut lesbar, wie Marken aus Technik und Lifestyle.",
+    "herleitung": "Gattung der fetten, kleingeschriebenen geometrischen Wortmarken (Korpus: klein 9 % der Luxusmarken, meist Grotesk). Ohne Punkt, Farbwechsel oder andere Sonderzeichen bekannter Marken; Korpusnamen sind über die Namenssperre ausgeschlossen.",
+    "referenzen": [
+      "savills",
+      "value one"
+    ],
+    "abgrenzung": "Gleiche Klasse kleingeschriebener Grotesk, aber fett geometrisch und ohne Fläche, Punkt oder Zeichen im Buchstaben.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 12,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "mutig",
+        "warm"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "outfit",
+          "weight": 600
+        },
+        {
+          "key": "urbanist",
+          "weight": 700
+        },
+        {
+          "key": "sora",
+          "weight": 600
+        },
+        {
+          "key": "jakarta",
+          "weight": 700
+        }
+      ],
+      "neben": [
+        {
+          "key": "outfit",
+          "weight": 400
+        },
+        {
+          "key": "urbanist",
+          "weight": 500
+        },
+        {
+          "key": "sora",
+          "weight": 400
+        },
+        {
+          "key": "jakarta",
+          "weight": 400
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "primary",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "petrol",
+        "ziegel",
+        "stahlblau"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "kleinschrift-fett",
+      "position": "im Wort",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "lower",
+        "laufweite": -0.03,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 64
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOderOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 30,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.l+4",
+        "y": "max(name.b+66,name.u+46)"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-ligatur",
+    "titel": "Ligatur",
+    "idee": "Die ersten beiden Buchstaben greifen ineinander, der erste liegt mit feinem Hof über dem zweiten, der Rest des Namens läuft im normalen Satz weiter.",
+    "herleitung": "Verschränkte Anfangsbuchstaben aus Exlibris und Firmenschildern des Jugendstils, hier als Teil des laufenden Wortes in Didone-Versalien. Im Korpus stehen verschlungene Monogramme getrennt vom Namen; eine Ligatur am Wortanfang kommt nicht vor.",
+    "referenzen": [
+      "ST. REGIS"
+    ],
+    "abgrenzung": "Dort ein freistehendes verschlungenes Monogramm; hier greifen nur die ersten beiden Buchstaben im laufenden Wort ineinander.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 10,
+      "wortzahl": [
+        1,
+        1
+      ],
+      "initialen": 0,
+      "stile": [
+        "luxus",
+        "elegant"
+      ],
+      "initialenAkzent": false
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "bodoni",
+          "weight": 500
+        },
+        {
+          "key": "playfair",
+          "weight": 400
+        },
+        {
+          "key": "notoserifdisplay",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "intertight",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "ink",
+      "akzent": "accent",
+      "paletten": [
+        "bordeaux",
+        "graphit",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "ligatur",
+      "position": "im Wort",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "erster",
+        "feld": "erster",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "stift": true,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "hof": 7,
+        "ebene": 1,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "zweiter",
+        "feld": "zweiter",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": 100,
+        "x": "erster.a-0.34*erster.w",
+        "y": 0,
+        "stift": true,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "rest2",
+        "feld": "rest2",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": 100,
+        "x": "zweiter.a",
+        "y": 0,
+        "stift": true,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": 32,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "(erster.l+rest2.r)/2",
+        "y": "erster.b+84"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-betonung",
+    "titel": "Betonung",
+    "idee": "Ein kurzer Strich in der Akzentfarbe liegt unter dem ersten Vokal, wie die Betonungsangabe im Wörterbuch: der Kunstname wird richtig ausgesprochen und bekommt ein eigenes Detail.",
+    "herleitung": "Betonungszeichen des Wörterbuchs (Strich unter dem langen Vokal). Akzente im Korpus stehen über dem Buchstaben (Querstrich über A und É); ein Strich unter einem einzelnen Vokal kommt nicht vor.",
+    "referenzen": [
+      "AMAN",
+      "Daniel FÉAU"
+    ],
+    "abgrenzung": "Dort ein Querstrich über einem Vokal; hier ein Betonungsstrich unter dem ersten Vokal.",
+    "legal": "gelb",
+    "nahe": [
+      "AMAN"
+    ],
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 12,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "natur",
+        "luxus"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "ibarra",
+          "weight": 400
+        },
+        {
+          "key": "gilda",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "tanne",
+        "bordeaux",
+        "petrol"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "akzent",
+      "position": "unter",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.14,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "markierung": {
+          "an": "vokal1",
+          "motiv": "",
+          "abstand": 22,
+          "rolle": "akzent",
+          "unten": true,
+          "balken": 10
+        },
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 62
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "name.b+104"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-hoehengrad",
+    "titel": "Höhengrad",
+    "idee": "Ein kleiner hochgestellter Kreis steht wie das Gradzeichen einer Höhenangabe am Ende des Namens: ruhig, technisch, ein Hinweis auf Lage und Aussicht.",
+    "herleitung": "Hochgestellte Zeichen der Kartografie (Grad, Höhenpunkt). Im Korpus gibt es hochgestellte Zeichen nur als Markenzeichen im Kreis mit Buchstabe; ein leerer Ring als Gradzeichen kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Ein leerer Ring als hochgestelltes Gradzeichen; hochgestellte Korpuszeichen sind Buchstaben im Kreis.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 12,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "natur",
+        "modern"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "geist",
+          "weight": 300
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "oliv",
+        "petrol",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "hochzeichen",
+      "position": "rechts",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.14,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 62
+        }
+      },
+      {
+        "typ": "kreis",
+        "cx": "name.r+28",
+        "cy": "name.t+13",
+        "r": 13,
+        "kontur": 4.4,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "name.b+84"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-kreisinitial",
+    "titel": "Kreis-Initial",
+    "idee": "Eine volle Kreisfläche mit ausgesparter Initiale steht vor dem Namen in fetter, kleingeschriebener Grotesk: Zeichen und Wort sind gleich stark, das Zeichen trägt allein als App- und Profilbild.",
+    "herleitung": "Runde Firmenstempel und Plaketten, reduziert auf Kreis und Buchstabe. Im Korpus stehen Monogramme im Kreis vor gemischt oder in Versalien gesetzten Namen; hier eine ausgesparte Initiale vor einem kleingeschriebenen Namen.",
+    "referenzen": [
+      "NestSeekers INTERNATIONAL",
+      "Douglas Elliman"
+    ],
+    "abgrenzung": "Dort Kreis-Monogramme vor gemischt gesetzten Namen; hier eine ausgesparte Initiale in voller Fläche vor einem fett kleingeschriebenen Namen.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 12,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 1,
+      "stile": [
+        "modern",
+        "warm",
+        "mutig"
+      ],
+      "initialenAkzent": false
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "figtree",
+          "weight": 700
+        },
+        {
+          "key": "jakarta",
+          "weight": 700
+        },
+        {
+          "key": "outfit",
+          "weight": 600
+        }
+      ],
+      "neben": [
+        {
+          "key": "figtree",
+          "weight": 400
+        },
+        {
+          "key": "jakarta",
+          "weight": 400
+        },
+        {
+          "key": "outfit",
+          "weight": 400
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "terrakotta",
+        "petrol",
+        "stahlblau"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "monogramm",
+      "position": "links",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "layout": "inline"
+    },
+    "elemente": [
+      {
+        "typ": "kreis",
+        "id": "kreis",
+        "zeichen": true,
+        "cx": 0,
+        "cy": -40,
+        "r": 74,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "ini",
+        "feld": "initial1",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 72,
+        "x": 0,
+        "y": -4,
+        "ausrichtung": "mitte",
+        "rolle": "grund",
+        "zeichen": true,
+        "ebene": 1,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "lower",
+        "laufweite": -0.03,
+        "versal": 100,
+        "x": 112,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 64
+        }
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-banderole",
+    "titel": "Banderole",
+    "idee": "Der Name steht in kräftiger Antiqua, darunter eine volle Banderole genau in Namensbreite, aus der der Zusatz ausgespart ist, wie das Band einer Weinflasche oder eines Ladenschilds.",
+    "herleitung": "Banderolen von Etiketten und Ladenschildern um 1900. Im Korpus liegen unter Namen Balken ohne Schrift; ein Band mit ausgespartem Zusatz unter einer kräftigen Antiqua kommt nicht vor.",
+    "referenzen": [
+      "BUWOG"
+    ],
+    "abgrenzung": "BUWOG setzt einen glatten Balken ohne Schrift; hier ein Band mit ausgespartem Zusatz unter kräftiger Antiqua.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 12,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "mutig",
+        "warm"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "dmserif",
+          "weight": 400
+        },
+        {
+          "key": "youngserif",
+          "weight": 400
+        },
+        {
+          "key": "abrilfatface",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 700
+        },
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "archivo",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "burgund",
+        "tanne",
+        "rost"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "banderole",
+      "position": "unter",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1400,
+          "minVersal": 64
+        }
+      },
+      {
+        "typ": "rechteck",
+        "id": "band",
+        "x": "name.l",
+        "y": "name.b+28",
+        "b": "name.w",
+        "h": 60,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOderOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.3,
+        "versal": 28,
+        "x": "name.cx",
+        "y": "name.b+72",
+        "ausrichtung": "mitte",
+        "rolle": "grund",
+        "ebene": 1,
+        "einpassen": {
+          "maxBreite": "name.w-56",
+          "minVersal": 18
+        }
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-schmalhoch",
+    "titel": "Schmal und hoch",
+    "idee": "Schmale, hohe Versalien stehen eng wie eine Häuserzeile; der Zusatz ist exakt auf die Breite des Namens ausgetrieben und schließt den Block.",
+    "herleitung": "Schmale Plakat- und Bauschild-Versalien der Zwischenkriegszeit, mit auf Namensbreite ausgetriebenem Zusatz (Korpus T08). Schmale Versalien eng kommen im Korpus vor, der Block aus Name und ausgetriebenem Zusatz in Schmalschrift nicht.",
+    "referenzen": [],
+    "abgrenzung": "Schmale Plakatversalien mit auf Namensbreite ausgetriebenem Zusatz; im Korpus kommt dieser Block nicht vor.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 12,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "mutig",
+        "modern"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "antonio",
+          "weight": 700
+        },
+        {
+          "key": "oswald",
+          "weight": 700
+        },
+        {
+          "key": "bebas",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "archivo",
+          "weight": 400
+        },
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "hostgrotesk",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "schwarzweiss",
+        "stahlblau",
+        "rost"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "schmal-hoch",
+      "position": "im Wort",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.02,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 64
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOderOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 28,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "name.w",
+          "minVersal": 16
+        },
+        "x": "name.l",
+        "y": "name.b+58",
+        "austreiben": "name.w"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-silbe",
+    "titel": "Erste Silbe",
+    "idee": "Die erste Silbe des Kunstnamens steht fett, der Rest leicht im selben Schnitt, ohne Lücke: das Wort bekommt einen Takt und bleibt doch ein Wort.",
+    "herleitung": "Schnittwechsel im Wort aus der Plakat- und Leitsystemtypografie. Im Korpus gibt es den Schnittwechsel nur zwischen zwei Wörtern; ein Wechsel an der Silbengrenze eines Kunstnamens kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Schnittwechsel an der Silbengrenze eines Kunstnamens; im Korpus wechselt das Gewicht höchstens zwischen zwei Wörtern.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 10,
+      "wortzahl": [
+        1,
+        1
+      ],
+      "initialen": 0,
+      "stile": [
+        "mutig",
+        "modern"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "intertight",
+          "weight": 800
+        },
+        {
+          "key": "hostgrotesk",
+          "weight": 700
+        },
+        {
+          "key": "archivo",
+          "weight": 800
+        }
+      ],
+      "neben": [
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "hostgrotesk",
+          "weight": 400
+        },
+        {
+          "key": "archivo",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "hostgrotesk",
+          "weight": 400
+        },
+        {
+          "key": "archivo",
+          "weight": 400
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "stahlblau",
+        "ziegel",
+        "schwarzweiss"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "schnittmischung",
+      "position": "im Wort",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "silbe1",
+        "feld": "silbe1",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.02,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "stift": true,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "silbe2",
+        "feld": "silbe2",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0.02,
+        "versal": 100,
+        "x": "silbe1.a",
+        "y": 0,
+        "stift": true,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": 30,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "silbe1.l+2",
+        "y": "silbe1.b+74"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-silbenpunkt",
+    "titel": "Silbenpunkt",
+    "idee": "Ein runder Punkt in der Akzentfarbe teilt den kleingeschriebenen Kunstnamen in seine Silben, wie im Wörterbuch: man liest den Namen langsamer und merkt ihn sich.",
+    "herleitung": "Silbentrennpunkt der Wörterbücher und Ausspracheangaben. Im Korpus stehen Punkte am Wortende oder über dem i; ein Mittelpunkt an der Silbengrenze kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Mittelpunkt an der Silbengrenze; Punkte im Korpus stehen am Wortende oder über dem i.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 10,
+      "wortzahl": [
+        1,
+        1
+      ],
+      "initialen": 0,
+      "stile": [
+        "warm",
+        "natur"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "fraunces",
+          "weight": 400
+        },
+        {
+          "key": "castoro",
+          "weight": 400
+        },
+        {
+          "key": "youngserif",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "figtree",
+          "weight": 400
+        },
+        {
+          "key": "dmsans",
+          "weight": 400
+        },
+        {
+          "key": "jakarta",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "terrakotta",
+        "salbei",
+        "burgund"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "silbenpunkt",
+      "position": "im Wort",
+      "schrift": "serif",
+      "schreibung": "lower",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "silbe1",
+        "feld": "silbe1",
+        "schrift": "haupt",
+        "schreibung": "lower",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "stift": true,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true
+      },
+      {
+        "typ": "kreis",
+        "cx": "silbe1.a+18",
+        "cy": "-0.36*silbe1.cap",
+        "r": 8.5,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "text",
+        "id": "silbe2",
+        "feld": "silbe2",
+        "schrift": "haupt",
+        "schreibung": "lower",
+        "laufweite": 0,
+        "versal": 100,
+        "x": "silbe1.a+36",
+        "y": 0,
+        "stift": true,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.22,
+        "versal": 30,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "(silbe1.l+silbe2.r)/2",
+        "y": "max(silbe1.u,silbe2.u,silbe1.b+20)+62"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-kapitaelchen",
+    "titel": "Kapitälchen",
+    "idee": "Der Anfangsbuchstabe steht in voller Versalhöhe, der Rest in Kapitälchen derselben Antiqua: die klassische Auszeichnung für Eigennamen, als Wortmarke.",
+    "herleitung": "Kapitälchen-Satz für Eigennamen aus der Buchtypografie. Im Korpus gibt es Kapitälchen-Schriften (Korpus T07 Spielart), aber kein Wort mit großem Anfangsbuchstaben und eigens verkleinerten Versalien als Marke.",
+    "referenzen": [
+      "FOUR SEASONS",
+      "JAEGER-LECOULTRE"
+    ],
+    "abgrenzung": "Dort durchgehende Kapitälchen-Schriften; hier ein großer Anfangsbuchstabe mit eigens verkleinerten Versalien als Kunstnamen-Wortmarke.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 10,
+      "wortzahl": [
+        1,
+        1
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        },
+        {
+          "key": "ibarra",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "tanne",
+        "taubenblau",
+        "bordeaux"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "kapitaelchen",
+      "position": "im Wort",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "erster",
+        "feld": "erster",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.04,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "stift": true,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "rest",
+        "feld": "rest",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.07,
+        "versal": 74,
+        "x": "erster.a",
+        "y": 0,
+        "stift": true,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOderOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 30,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "(erster.l+rest.r)/2",
+        "y": "erster.b+80"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-kursivinitial",
+    "titel": "Kursiv-Initial",
+    "idee": "Nur der erste Buchstabe steht kursiv und etwas größer, der Rest aufrecht in derselben Antiqua: ein Schwung am Anfang, sonst Ruhe.",
+    "herleitung": "Kursive Initiale aus Briefköpfen und Visitenkarten des Biedermeier, in einer Familie mit echter Kursive. Im Korpus gibt es kursive Vornamen vor Versal-Nachnamen, aber keinen kursiven Anfangsbuchstaben im aufrechten Wort.",
+    "referenzen": [],
+    "abgrenzung": "Nur der Anfangsbuchstabe kursiv im aufrechten Wort; im Korpus sind höchstens ganze Vornamen kursiv.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 10,
+      "wortzahl": [
+        1,
+        1
+      ],
+      "initialen": 0,
+      "stile": [
+        "warm",
+        "elegant"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "fraunces",
+          "weight": 400
+        },
+        {
+          "key": "castoro",
+          "weight": 400
+        },
+        {
+          "key": "newsreader",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "figtree",
+          "weight": 400
+        },
+        {
+          "key": "dmsans",
+          "weight": 400
+        },
+        {
+          "key": "jakarta",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "fraunces",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "castoro",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "newsreader",
+          "weight": 400,
+          "style": "italic"
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "burgund",
+        "terrakotta",
+        "salbei"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "stilmischung",
+      "position": "im Wort",
+      "schrift": "serif",
+      "schreibung": "mixed",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "erster",
+        "feld": "erster",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 120,
+        "x": 0,
+        "y": 0,
+        "stift": true,
+        "ausrichtung": "links",
+        "rolle": "akzent",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "rest",
+        "feld": "rest",
+        "schrift": "haupt",
+        "schreibung": "asis",
+        "laufweite": -0.005,
+        "versal": 100,
+        "x": "erster.a+2",
+        "y": 0,
+        "stift": true,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.22,
+        "versal": 30,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "(erster.l+rest.r)/2",
+        "y": "max(erster.u,rest.u,erster.b+20)+62"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-etikett",
+    "titel": "Etikett",
+    "idee": "Ein leicht hochformatiges, doppelt gerahmtes Etikett wie auf einem Flakon: oben der Ort, in der Mitte der Name in gesperrter Antiqua, darunter ein kurzer Strich und unten der Zusatz.",
+    "herleitung": "Etiketten von Apotheken- und Parfumflakons um 1900, hochformatig und doppelt gerahmt. Rahmen im Korpus sind querformatig um Grotesk-Namen gelegt; ein hochformatiges Etikett um eine Antiqua kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Hochformatiges, doppelt gerahmtes Etikett um eine Antiqua; Rahmen im Korpus sind querformatig um Grotesk-Namen.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 10,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "luxus",
+        "elegant",
+        "warm"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "ibarra",
+          "weight": 400
+        },
+        {
+          "key": "gilda",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "graphit",
+        "bordeaux",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "rahmen",
+      "position": "um",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "badge"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.16,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1100,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "rechteck",
+        "x": "name.l-70",
+        "y": "name.cy-0.6*(name.w+140)",
+        "b": "name.w+140",
+        "h": "1.2*(name.w+140)",
+        "kontur": 3.6,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "rechteck",
+        "x": "name.l-56",
+        "y": "name.cy-0.6*(name.w+140)+14",
+        "b": "name.w+112",
+        "h": "1.2*(name.w+140)-28",
+        "kontur": 1.8,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "ort",
+        "feld": "ort",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": 32,
+        "x": "name.cx",
+        "y": "name.cy-0.3*(name.w+140)+16",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "name.w+60",
+          "minVersal": 18
+        }
+      },
+      {
+        "typ": "linie",
+        "x1": "name.cx-40",
+        "x2": "name.cx+40",
+        "y1": "name.b+60",
+        "y2": "name.b+60",
+        "staerke": 3,
+        "rolle": "akzent",
+        "wenn": "zusatz"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatz",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": 32,
+        "x": "name.cx",
+        "y": "name.cy+0.3*(name.w+140)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "name.w+60",
+          "minVersal": 18
+        }
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  }
+]

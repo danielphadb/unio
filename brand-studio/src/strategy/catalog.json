@@ -1,0 +1,2341 @@
+{
+  "schritte": [
+    {
+      "nr": 1,
+      "titel": "Du und deine Marke",
+      "dauer": "30 Sekunden",
+      "fragen": [
+        {
+          "id": "architecture",
+          "feld": "architecture",
+          "typ": "wahl",
+          "titel": "Wer steht im Mittelpunkt deiner Marke?",
+          "hilfe": "Davon hängt ab, ob deine Person vorn steht oder ein Name, der für ein Team trägt.",
+          "optionen": [
+            {
+              "id": "person",
+              "label": "Ich bin die Marke",
+              "hint": "Kunden empfehlen dich als Person weiter, dein Name steht vorn."
+            },
+            {
+              "id": "buero",
+              "label": "Ein Büro ist die Marke",
+              "hint": "Ein eigener Name, der auch ohne dich trägt."
+            },
+            {
+              "id": "person-dann-buero",
+              "label": "Erst ich, später ein Team",
+              "hint": "Dein Name jetzt, mit Platz für Kolleginnen und Kollegen."
+            }
+          ]
+        },
+        {
+          "id": "person",
+          "feld": "person",
+          "typ": "text",
+          "titel": "Wie heißt du?",
+          "hilfe": "Vor- und Nachname, so wie Kunden dich nennen.",
+          "platzhalter": "Anna Berger",
+          "nurOhneName": true,
+          "zeigenWenn": {
+            "feld": "architecture",
+            "werte": [
+              "person",
+              "person-dann-buero"
+            ]
+          }
+        },
+        {
+          "id": "erfahrung",
+          "feld": "erfahrung",
+          "typ": "wahl",
+          "titel": "Wie lange bist du schon Makler?",
+          "hilfe": "Ein Fakt, keine Wertung. Wir schreiben nie eine Jahreszahl, die du nicht selbst angibst.",
+          "optionen": [
+            {
+              "id": "neu",
+              "label": "Weniger als drei Jahre",
+              "hint": "Du baust dir gerade deinen Namen auf."
+            },
+            {
+              "id": "einige",
+              "label": "Drei bis zehn Jahre",
+              "hint": "Du hast einen Stamm, der dich weiterempfiehlt."
+            },
+            {
+              "id": "lange",
+              "label": "Mehr als zehn Jahre",
+              "hint": "Man kennt dich, oft schon in der zweiten Generation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nr": 2,
+      "titel": "Markt und Wunschkunden",
+      "dauer": "1,5 Minuten",
+      "fragen": [
+        {
+          "id": "place",
+          "feld": "place",
+          "typ": "text",
+          "titel": "Wo ist dein Kerngebiet?",
+          "hilfe": "Bezirk, Ort oder Region, so wie deine Kunden es sagen.",
+          "platzhalter": "Döbling",
+          "vorbefuellt": true
+        },
+        {
+          "id": "focus",
+          "feld": "focus",
+          "typ": "chips",
+          "titel": "Womit hast du am meisten zu tun?",
+          "hilfe": "Höchstens drei.",
+          "optionen": [
+            {
+              "id": "wohnen",
+              "label": "Wohnungen"
+            },
+            {
+              "id": "haeuser",
+              "label": "Häuser"
+            },
+            {
+              "id": "luxus",
+              "label": "Villen und Penthäuser"
+            },
+            {
+              "id": "anleger",
+              "label": "Anlage und Zinshaus"
+            },
+            {
+              "id": "neubau",
+              "label": "Neubau und Projekte"
+            },
+            {
+              "id": "gewerbe",
+              "label": "Gewerbe und Büro"
+            },
+            {
+              "id": "land",
+              "label": "Land und Grund"
+            }
+          ],
+          "max": 3,
+          "vorbefuellt": true
+        },
+        {
+          "id": "segment",
+          "feld": "segment",
+          "typ": "wahl",
+          "titel": "In welchem Preisband bist du meistens unterwegs?",
+          "optionen": [
+            {
+              "id": "einstieg",
+              "label": "Erste eigene Wohnung",
+              "hint": "Starter, junge Familien, kleinere Budgets"
+            },
+            {
+              "id": "mitte",
+              "label": "Solide Mitte",
+              "hint": "Familienwohnung, Reihenhaus, Vorsorge"
+            },
+            {
+              "id": "premium",
+              "label": "Gehoben",
+              "hint": "Altbau mit Stil, Dachgeschoss, Haus mit Garten"
+            },
+            {
+              "id": "luxus",
+              "label": "Spitze",
+              "hint": "Villa, Penthouse, Liegenschaften mit Geschichte"
+            }
+          ]
+        },
+        {
+          "id": "side",
+          "feld": "side",
+          "typ": "skala",
+          "titel": "Für wen arbeitest du meistens?",
+          "hilfe": "Es gibt keine richtige Antwort, nur deine.",
+          "optionen": [
+            {
+              "id": "-2",
+              "label": "Fast nur Eigentümer"
+            },
+            {
+              "id": "-1",
+              "label": "Eher Eigentümer"
+            },
+            {
+              "id": "0",
+              "label": "Beide gleich"
+            },
+            {
+              "id": "1",
+              "label": "Eher Käufer"
+            },
+            {
+              "id": "2",
+              "label": "Fast nur Käufer"
+            }
+          ]
+        },
+        {
+          "id": "wunschkunde",
+          "feld": "wunschkunde",
+          "typ": "mehrfach",
+          "titel": "Bei welchen Kunden bist du in deinem Element?",
+          "hilfe": "Denk an die zwei Aufträge, die du sofort wieder machen würdest. Höchstens zwei.",
+          "optionen": [
+            {
+              "id": "erstkauf",
+              "label": "Die erste eigene Wohnung",
+              "hint": "Junge Paare, die zum ersten Mal kaufen und viel fragen.",
+              "felder": [
+                "wohnen"
+              ],
+              "territorien": [
+                "graetzl",
+                "system",
+                "herausforderer"
+              ],
+              "wer": "Paare, die ihre erste eigene Wohnung kaufen"
+            },
+            {
+              "id": "familie",
+              "label": "Die Familie braucht mehr Platz",
+              "hint": "Ein Kind kommt, das Zimmer reicht nicht mehr.",
+              "felder": [
+                "familie"
+              ],
+              "territorien": [
+                "graetzl",
+                "herkunft",
+                "weite"
+              ],
+              "wer": "Familien, die mehr Platz brauchen"
+            },
+            {
+              "id": "verkleinern",
+              "label": "Die Kinder sind aus dem Haus",
+              "hint": "Das große Haus wird zu viel, eine Wohnung in der Nähe soll her.",
+              "felder": [
+                "senioren"
+              ],
+              "territorien": [
+                "rat",
+                "stille",
+                "herkunft"
+              ],
+              "wer": "Paare, deren Kinder aus dem Haus sind und die kleiner wohnen wollen"
+            },
+            {
+              "id": "erbe",
+              "label": "Das Elternhaus ist geerbt",
+              "hint": "Mehrere Erben, Erinnerungen und eine Entscheidung.",
+              "felder": [
+                "erbe"
+              ],
+              "territorien": [
+                "rat",
+                "herkunft",
+                "haus_zahl"
+              ],
+              "wer": "Erbengemeinschaften mit einem Elternhaus"
+            },
+            {
+              "id": "trennung",
+              "label": "Eine Trennung",
+              "hint": "Das gemeinsame Zuhause muss fair geregelt werden.",
+              "felder": [
+                "scheidung"
+              ],
+              "territorien": [
+                "rat",
+                "stille",
+                "instanz"
+              ],
+              "wer": "Menschen in Trennung, die das gemeinsame Zuhause fair regeln wollen"
+            },
+            {
+              "id": "anleger",
+              "label": "Die Anlage mit Rendite",
+              "hint": "Zinshaus oder Vorsorgewohnung, gerechnet und geprüft.",
+              "felder": [
+                "kapital"
+              ],
+              "territorien": [
+                "instanz",
+                "haus_zahl",
+                "system"
+              ],
+              "wer": "Anleger, die mit spitzem Stift rechnen"
+            },
+            {
+              "id": "zuzug",
+              "label": "Neu in der Stadt",
+              "hint": "Zuzug für den Job, die Gegend ist noch fremd.",
+              "felder": [
+                "relocation"
+              ],
+              "territorien": [
+                "graetzl",
+                "signatur",
+                "system"
+              ],
+              "wer": "Menschen, die neu in die Stadt ziehen und die Gegend erst kennenlernen"
+            },
+            {
+              "id": "landwunsch",
+              "label": "Raus aufs Land",
+              "hint": "Mehr Grün, ein Garten, vielleicht ein Zweitwohnsitz.",
+              "felder": [
+                "natur"
+              ],
+              "territorien": [
+                "weite",
+                "herkunft",
+                "handwerk"
+              ],
+              "wer": "Menschen, die raus aufs Land wollen"
+            },
+            {
+              "id": "unternehmer",
+              "label": "Unternehmer mit Plänen",
+              "hint": "Büro, Praxis oder Geschäftslokal, oft unter Zeitdruck.",
+              "felder": [
+                "gewerbe"
+              ],
+              "territorien": [
+                "instanz",
+                "system",
+                "signatur"
+              ],
+              "wer": "Unternehmer, die Fläche für ihre Pläne suchen"
+            },
+            {
+              "id": "bautraeger",
+              "label": "Bauträger mit einem Projekt",
+              "hint": "Vom Plan bis zur letzten Einheit, mit Zahlen und Tempo.",
+              "felder": [
+                "neubau"
+              ],
+              "territorien": [
+                "system",
+                "handwerk",
+                "instanz"
+              ],
+              "wer": "Bauträger, die ihre Projekte vom Plan weg verkaufen"
+            }
+          ],
+          "max": 2
+        }
+      ]
+    },
+    {
+      "nr": 3,
+      "titel": "Haltung und Unterschied",
+      "dauer": "2 Minuten",
+      "fragen": [
+        {
+          "id": "alternative",
+          "feld": "alternative",
+          "typ": "wahl",
+          "titel": "Wen würde dein Kunde nehmen, wenn es dich nicht gäbe?",
+          "hilfe": "Denk an deinen letzten Auftrag.",
+          "optionen": [
+            {
+              "id": "franchise",
+              "label": "Einen großen Franchise-Makler",
+              "hint": "Bekannte Marke, viele Büros, einheitlicher Auftritt."
+            },
+            {
+              "id": "bank",
+              "label": "Den Makler der eigenen Bank",
+              "hint": "Vertraut über das Konto, Verkauf als Nebenleistung."
+            },
+            {
+              "id": "platzhirsch",
+              "label": "Den lokalen Platzhirsch",
+              "hint": "Seit Jahren im Ort, jeder kennt das Schild."
+            },
+            {
+              "id": "online",
+              "label": "Einen Online-Makler",
+              "hint": "Fixpreis, Plattform, wenig persönlicher Kontakt."
+            },
+            {
+              "id": "privat",
+              "label": "Niemanden, sie verkaufen privat",
+              "hint": "Inserat selbst schalten, Provision sparen."
+            }
+          ]
+        },
+        {
+          "id": "onlyness",
+          "feld": "onlyness",
+          "typ": "mehrfach",
+          "titel": "Was kannst du, was der nicht kann?",
+          "hilfe": "Wähle höchstens zwei. Oder sag es in einem Satz.",
+          "optionen": [
+            {
+              "id": "graetzl",
+              "label": "Ich kenne mein Viertel Haus für Haus",
+              "hint": "Welche Seite der Gasse ruhiger ist, wer verkaufen will, bevor es jemand weiß."
+            },
+            {
+              "id": "bewertung",
+              "label": "Mein Preis hält",
+              "hint": "Ich bewerte mit Vergleichsdaten und sage auch, wenn eine Erwartung zu hoch ist."
+            },
+            {
+              "id": "substanz",
+              "label": "Ich verstehe alte Häuser",
+              "hint": "Substanz, Widmung, Dachausbau, Denkmalschutz, Mietrecht."
+            },
+            {
+              "id": "verhandlung",
+              "label": "Ich verhandle für den Eigentümer",
+              "hint": "Ruhig, vorbereitet, mit einem Plan für das zweite Angebot."
+            },
+            {
+              "id": "diskret",
+              "label": "Ich verkaufe, ohne dass es jemand merkt",
+              "hint": "Ausgewählte Käufer statt Portal und Schild am Zaun."
+            },
+            {
+              "id": "lebenslagen",
+              "label": "Ich begleite schwierige Lebenslagen",
+              "hint": "Erbe, Trennung, Umzug ins Kleinere, wenn mehrere Menschen entscheiden."
+            },
+            {
+              "id": "rendite",
+              "label": "Ich rechne wie ein Anleger",
+              "hint": "Rendite, Mietvertrag, Steuer und Zustand in einer Rechnung."
+            },
+            {
+              "id": "inszenierung",
+              "label": "Ich zeige Häuser so, dass man sie will",
+              "hint": "Eigene Bilder, Film und ein Text, den man zu Ende liest."
+            },
+            {
+              "id": "vorgemerkt",
+              "label": "Die Käufer sind schon da",
+              "hint": "Vorgemerkte Interessenten, bevor ein Inserat online geht."
+            },
+            {
+              "id": "projekt",
+              "label": "Ich verkaufe Projekte vom Plan weg",
+              "hint": "Für Bauträger, von der ersten Skizze bis zur letzten Einheit."
+            },
+            {
+              "id": "region",
+              "label": "Ich kenne Land und Leute",
+              "hint": "Grund, Widmung, Gemeinde, Nachbarn und was hier wirklich zählt."
+            },
+            {
+              "id": "nachher",
+              "label": "Ich bleibe nach dem Verkauf",
+              "hint": "Übergabe, Zählerstände, die erste Abrechnung, der Anruf ein Jahr später."
+            }
+          ],
+          "max": 2
+        },
+        {
+          "id": "onlynessText",
+          "feld": "onlynessText",
+          "typ": "text",
+          "titel": "In deinen Worten",
+          "hilfe": "Ein Satz reicht. Gern auch gesprochen.",
+          "platzhalter": "Ich weiß, welche Altbauten in Döbling einen Dachausbau tragen.",
+          "optional": true
+        },
+        {
+          "id": "proof",
+          "feld": "proof",
+          "typ": "text",
+          "titel": "Ein Fall, auf den du stolz bist",
+          "hilfe": "Ein Satz mit Ort und Zahl. Wir verwenden nur, was du hier schreibst.",
+          "platzhalter": "Zinshaus in Ottakring, 14 Parteien, in neun Wochen verkauft.",
+          "optional": true
+        },
+        {
+          "id": "werte",
+          "feld": "werte",
+          "typ": "mehrfach",
+          "titel": "Welche zwei Werte merkt man dir bei der Arbeit an?",
+          "hilfe": "Nicht, was gut klingt, sondern was deine Kunden erleben. Höchstens zwei.",
+          "optionen": [
+            {
+              "id": "ehrlichkeit",
+              "label": "Ehrlichkeit",
+              "hint": "Du sagst auch, was nicht geht.",
+              "territorien": [
+                "rat",
+                "herausforderer",
+                "instanz"
+              ],
+              "versprechen": "Sie hören von Anfang an, was geht und was nicht."
+            },
+            {
+              "id": "verlaesslichkeit",
+              "label": "Verlässlichkeit",
+              "hint": "Zusagen halten, erreichbar sein, Fristen einhalten.",
+              "territorien": [
+                "rat",
+                "system",
+                "herkunft"
+              ],
+              "versprechen": "Was wir zusagen, halten wir, vom ersten Termin bis zur Übergabe."
+            },
+            {
+              "id": "genauigkeit",
+              "label": "Genauigkeit",
+              "hint": "Zahlen prüfen, Unterlagen vollständig, nichts dem Zufall überlassen.",
+              "territorien": [
+                "haus_zahl",
+                "instanz",
+                "handwerk"
+              ],
+              "versprechen": "Jede Zahl ist geprüft, jede Unterlage vollständig, bevor ein Käufer fragt."
+            },
+            {
+              "id": "diskretion",
+              "label": "Diskretion",
+              "hint": "Vertrauliches bleibt vertraulich, auch in der Nachbarschaft.",
+              "territorien": [
+                "stille",
+                "signatur",
+                "rat"
+              ],
+              "versprechen": "Ihr Verkauf bleibt so leise, wie Sie es wünschen."
+            },
+            {
+              "id": "naehe",
+              "label": "Nähe",
+              "hint": "Ansprechbar, vor Ort, mit Zeit für ein Gespräch.",
+              "territorien": [
+                "graetzl",
+                "herkunft",
+                "weite"
+              ],
+              "versprechen": "Sie haben eine Person vor Ort, die Ihre Gegend und Sie kennt."
+            },
+            {
+              "id": "tempo",
+              "label": "Tempo",
+              "hint": "Schnell entscheiden, schnell handeln, ohne Hast.",
+              "territorien": [
+                "system",
+                "herausforderer",
+                "signatur"
+              ],
+              "versprechen": "Sie wissen jede Woche, was passiert ist und was als Nächstes kommt."
+            },
+            {
+              "id": "gestaltung",
+              "label": "Sinn für Gestaltung",
+              "hint": "Häuser zeigen, wie sie es verdienen.",
+              "territorien": [
+                "verlag",
+                "handwerk",
+                "stille"
+              ],
+              "versprechen": "Ihr Haus wird so gezeigt, wie es gebaut und gelebt wurde."
+            },
+            {
+              "id": "mut",
+              "label": "Mut",
+              "hint": "Unbequemes ansprechen, Neues ausprobieren.",
+              "territorien": [
+                "herausforderer",
+                "signatur",
+                "verlag"
+              ],
+              "versprechen": "Sie bekommen eine klare Empfehlung, auch wenn sie unbequem ist."
+            },
+            {
+              "id": "bestaendigkeit",
+              "label": "Beständigkeit",
+              "hint": "Langfristig denken, über einen Verkauf hinaus.",
+              "territorien": [
+                "herkunft",
+                "weite",
+                "rat"
+              ],
+              "versprechen": "Wir begleiten Sie über diesen Verkauf hinaus, so lange Sie uns brauchen."
+            },
+            {
+              "id": "offenheit",
+              "label": "Offenheit",
+              "hint": "Preis, Provision und Ablauf liegen auf dem Tisch.",
+              "territorien": [
+                "herausforderer",
+                "system",
+                "instanz"
+              ],
+              "versprechen": "Preis, Provision und Ablauf liegen von Anfang an offen auf dem Tisch."
+            }
+          ],
+          "max": 2
+        }
+      ]
+    },
+    {
+      "nr": 4,
+      "titel": "Persönlichkeit und Stimme",
+      "dauer": "1,5 Minuten",
+      "fragen": [
+        {
+          "id": "fremdbild",
+          "feld": "fremdbild",
+          "typ": "mehrfach",
+          "titel": "Was sagen Kunden über dich, wenn sie dich weiterempfehlen?",
+          "hilfe": "Denk an die letzte Empfehlung, die du mitbekommen hast. Höchstens zwei.",
+          "optionen": [
+            {
+              "id": "aufrichtig",
+              "label": "„Da weiß man, woran man ist.“",
+              "eigenschaft": "Aufrichtig",
+              "satz": "Sagt, was ist, auch wenn es unbequem ist.",
+              "territorien": [
+                "rat",
+                "herausforderer",
+                "instanz"
+              ]
+            },
+            {
+              "id": "kompetent",
+              "label": "„Kennt den Markt wie kaum jemand.“",
+              "eigenschaft": "Kundig",
+              "satz": "Kennt Preise, Lagen und Häuser aus eigener Anschauung.",
+              "territorien": [
+                "instanz",
+                "haus_zahl",
+                "handwerk"
+              ]
+            },
+            {
+              "id": "kultiviert",
+              "label": "„Hat ein Gespür für schöne Häuser.“",
+              "eigenschaft": "Stilsicher",
+              "satz": "Erkennt Qualität und zeigt sie mit Sorgfalt.",
+              "territorien": [
+                "verlag",
+                "stille",
+                "signatur"
+              ]
+            },
+            {
+              "id": "begeisternd",
+              "label": "„Mit dieser Energie macht sogar der Umzug Spaß.“",
+              "eigenschaft": "Mitreißend",
+              "satz": "Bringt Schwung in jeden Termin und steckt damit an.",
+              "territorien": [
+                "herausforderer",
+                "graetzl",
+                "signatur"
+              ]
+            },
+            {
+              "id": "bodenstaendig",
+              "label": "„Spricht unsere Sprache.“",
+              "eigenschaft": "Bodenständig",
+              "satz": "Erklärt ohne Fachchinesisch und bleibt auf dem Boden.",
+              "territorien": [
+                "graetzl",
+                "weite",
+                "herkunft"
+              ]
+            },
+            {
+              "id": "ruhig",
+              "label": "„Bleibt ruhig, auch wenn es kompliziert wird.“",
+              "eigenschaft": "Gelassen",
+              "satz": "Behält den Überblick, wenn es eng wird.",
+              "territorien": [
+                "stille",
+                "rat",
+                "herkunft"
+              ]
+            },
+            {
+              "id": "durchsetzungsstark",
+              "label": "„Hat hart und fair für uns verhandelt.“",
+              "eigenschaft": "Entschlossen",
+              "satz": "Verhandelt vorbereitet und gibt nicht vorschnell nach.",
+              "territorien": [
+                "signatur",
+                "herausforderer",
+                "instanz"
+              ]
+            },
+            {
+              "id": "herzlich",
+              "label": "„Hat sich um uns gekümmert wie um Familie.“",
+              "eigenschaft": "Herzlich",
+              "satz": "Nimmt sich Zeit für Menschen, nicht nur für Häuser.",
+              "territorien": [
+                "herkunft",
+                "graetzl",
+                "rat"
+              ]
+            },
+            {
+              "id": "organisiert",
+              "label": "„Alles klar, alles pünktlich, nie etwas gesucht.“",
+              "eigenschaft": "Organisiert",
+              "satz": "Führt jeden Verkauf mit klaren Schritten und offenen Unterlagen.",
+              "territorien": [
+                "system",
+                "haus_zahl",
+                "handwerk"
+              ]
+            }
+          ],
+          "max": 2
+        },
+        {
+          "id": "wirkung",
+          "feld": "wirkung",
+          "typ": "mehrfach",
+          "titel": "Und was sollen sie in Zukunft über dich sagen?",
+          "hilfe": "Darf dasselbe sein oder etwas, das du stärker zeigen willst. Höchstens zwei.",
+          "optionen": [
+            {
+              "id": "aufrichtig",
+              "label": "„Da weiß man, woran man ist.“",
+              "eigenschaft": "Aufrichtig",
+              "satz": "Sagt, was ist, auch wenn es unbequem ist.",
+              "territorien": [
+                "rat",
+                "herausforderer",
+                "instanz"
+              ]
+            },
+            {
+              "id": "kompetent",
+              "label": "„Kennt den Markt wie kaum jemand.“",
+              "eigenschaft": "Kundig",
+              "satz": "Kennt Preise, Lagen und Häuser aus eigener Anschauung.",
+              "territorien": [
+                "instanz",
+                "haus_zahl",
+                "handwerk"
+              ]
+            },
+            {
+              "id": "kultiviert",
+              "label": "„Hat ein Gespür für schöne Häuser.“",
+              "eigenschaft": "Stilsicher",
+              "satz": "Erkennt Qualität und zeigt sie mit Sorgfalt.",
+              "territorien": [
+                "verlag",
+                "stille",
+                "signatur"
+              ]
+            },
+            {
+              "id": "begeisternd",
+              "label": "„Mit dieser Energie macht sogar der Umzug Spaß.“",
+              "eigenschaft": "Mitreißend",
+              "satz": "Bringt Schwung in jeden Termin und steckt damit an.",
+              "territorien": [
+                "herausforderer",
+                "graetzl",
+                "signatur"
+              ]
+            },
+            {
+              "id": "bodenstaendig",
+              "label": "„Spricht unsere Sprache.“",
+              "eigenschaft": "Bodenständig",
+              "satz": "Erklärt ohne Fachchinesisch und bleibt auf dem Boden.",
+              "territorien": [
+                "graetzl",
+                "weite",
+                "herkunft"
+              ]
+            },
+            {
+              "id": "ruhig",
+              "label": "„Bleibt ruhig, auch wenn es kompliziert wird.“",
+              "eigenschaft": "Gelassen",
+              "satz": "Behält den Überblick, wenn es eng wird.",
+              "territorien": [
+                "stille",
+                "rat",
+                "herkunft"
+              ]
+            },
+            {
+              "id": "durchsetzungsstark",
+              "label": "„Hat hart und fair für uns verhandelt.“",
+              "eigenschaft": "Entschlossen",
+              "satz": "Verhandelt vorbereitet und gibt nicht vorschnell nach.",
+              "territorien": [
+                "signatur",
+                "herausforderer",
+                "instanz"
+              ]
+            },
+            {
+              "id": "herzlich",
+              "label": "„Hat sich um uns gekümmert wie um Familie.“",
+              "eigenschaft": "Herzlich",
+              "satz": "Nimmt sich Zeit für Menschen, nicht nur für Häuser.",
+              "territorien": [
+                "herkunft",
+                "graetzl",
+                "rat"
+              ]
+            },
+            {
+              "id": "organisiert",
+              "label": "„Alles klar, alles pünktlich, nie etwas gesucht.“",
+              "eigenschaft": "Organisiert",
+              "satz": "Führt jeden Verkauf mit klaren Schritten und offenen Unterlagen.",
+              "territorien": [
+                "system",
+                "haus_zahl",
+                "handwerk"
+              ]
+            }
+          ],
+          "max": 2
+        },
+        {
+          "id": "voice.formell",
+          "feld": "voice",
+          "pfad": "voice.formell",
+          "typ": "paar",
+          "titel": "Welcher Satz klingt eher nach dir?",
+          "optionen": [
+            {
+              "id": "a",
+              "label": "Gerne bereite ich bis Donnerstag eine Bewertung Ihrer Wohnung vor und erläutere sie Ihnen persönlich."
+            },
+            {
+              "id": "b",
+              "label": "Ich schau mir deine Wohnung am Donnerstag an, und danach reden wir in Ruhe über den Preis."
+            },
+            {
+              "id": "egal",
+              "label": "Beides"
+            }
+          ]
+        },
+        {
+          "id": "voice.ernst",
+          "feld": "voice",
+          "pfad": "voice.ernst",
+          "typ": "paar",
+          "titel": "Welcher Satz klingt eher nach dir?",
+          "optionen": [
+            {
+              "id": "a",
+              "label": "Ein Verkauf ist eine große Entscheidung. Wir nehmen uns die Zeit, die sie braucht."
+            },
+            {
+              "id": "b",
+              "label": "Ein Verkauf muss kein Kraftakt sein. Mit einem guten Plan wird er fast entspannt."
+            },
+            {
+              "id": "egal",
+              "label": "Beides"
+            }
+          ]
+        },
+        {
+          "id": "voice.sachlich",
+          "feld": "voice",
+          "pfad": "voice.sachlich",
+          "typ": "paar",
+          "titel": "Welcher Satz klingt eher nach dir?",
+          "optionen": [
+            {
+              "id": "a",
+              "label": "Drei Besichtigungen, zwei Angebote, unterschrieben nach sechs Wochen."
+            },
+            {
+              "id": "b",
+              "label": "Als die Familie zum ersten Mal auf dem Balkon stand, war die Sache entschieden."
+            },
+            {
+              "id": "egal",
+              "label": "Beides"
+            }
+          ]
+        },
+        {
+          "id": "voice.leise",
+          "feld": "voice",
+          "pfad": "voice.leise",
+          "typ": "paar",
+          "titel": "Welcher Satz klingt eher nach dir?",
+          "optionen": [
+            {
+              "id": "a",
+              "label": "Ich sage Ihnen, was Ihre Wohnung wert ist. Entscheiden tun Sie."
+            },
+            {
+              "id": "b",
+              "label": "Dieser Preis ist zu niedrig angesetzt, und ich sage Ihnen auch, warum."
+            },
+            {
+              "id": "egal",
+              "label": "Beides"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nr": 5,
+      "titel": "Sichtbarkeit und Inhalte",
+      "dauer": "1 Minute",
+      "fragen": [
+        {
+          "id": "social.channels",
+          "feld": "social",
+          "pfad": "social.channels",
+          "typ": "chips",
+          "titel": "Wo willst du gesehen werden?",
+          "hilfe": "Höchstens drei. Lieber zwei Kanäle gut als vier halb.",
+          "max": 3,
+          "optionen": [
+            {
+              "id": "instagram",
+              "label": "Instagram"
+            },
+            {
+              "id": "linkedin",
+              "label": "LinkedIn"
+            },
+            {
+              "id": "facebook",
+              "label": "Facebook"
+            },
+            {
+              "id": "tiktok",
+              "label": "TikTok"
+            },
+            {
+              "id": "youtube",
+              "label": "YouTube"
+            },
+            {
+              "id": "newsletter",
+              "label": "Newsletter"
+            }
+          ]
+        },
+        {
+          "id": "social.camera",
+          "feld": "social",
+          "pfad": "social.camera",
+          "typ": "wahl",
+          "titel": "Wie viel von dir darf man sehen?",
+          "optionen": [
+            {
+              "id": "gesicht",
+              "label": "Mein Gesicht",
+              "hint": "Ich spreche gern in die Kamera."
+            },
+            {
+              "id": "stimme",
+              "label": "Meine Stimme",
+              "hint": "Ich erkläre lieber aus dem Off."
+            },
+            {
+              "id": "objekte",
+              "label": "Nur die Häuser",
+              "hint": "Ich bleibe hinter der Kamera."
+            }
+          ]
+        },
+        {
+          "id": "social.hoursPerWeek",
+          "feld": "social",
+          "pfad": "social.hoursPerWeek",
+          "typ": "wahl",
+          "titel": "Wie viel Zeit hast du pro Woche dafür?",
+          "hilfe": "Ehrlich geschätzt. Der Plan richtet sich danach.",
+          "optionen": [
+            {
+              "id": "0.5",
+              "label": "Unter einer Stunde"
+            },
+            {
+              "id": "1",
+              "label": "Etwa eine Stunde"
+            },
+            {
+              "id": "2",
+              "label": "Zwei bis drei Stunden"
+            },
+            {
+              "id": "4",
+              "label": "Mehr als drei Stunden"
+            }
+          ]
+        },
+        {
+          "id": "social.formats",
+          "feld": "social",
+          "pfad": "social.formats",
+          "typ": "chips",
+          "titel": "Welche Formate machst du gern?",
+          "optional": true,
+          "max": 3,
+          "optionen": [
+            {
+              "id": "reel",
+              "label": "Kurzes Video"
+            },
+            {
+              "id": "karussell",
+              "label": "Bilderstrecke"
+            },
+            {
+              "id": "foto",
+              "label": "Einzelbild"
+            },
+            {
+              "id": "story",
+              "label": "Story"
+            },
+            {
+              "id": "text",
+              "label": "Längerer Text"
+            },
+            {
+              "id": "live",
+              "label": "Live"
+            }
+          ]
+        },
+        {
+          "id": "social.formatsNie",
+          "feld": "social",
+          "pfad": "social.formatsNie",
+          "typ": "chips",
+          "titel": "Und welche nie?",
+          "optional": true,
+          "max": 3,
+          "optionen": [
+            {
+              "id": "reel",
+              "label": "Kurzes Video"
+            },
+            {
+              "id": "karussell",
+              "label": "Bilderstrecke"
+            },
+            {
+              "id": "foto",
+              "label": "Einzelbild"
+            },
+            {
+              "id": "story",
+              "label": "Story"
+            },
+            {
+              "id": "text",
+              "label": "Längerer Text"
+            },
+            {
+              "id": "live",
+              "label": "Live"
+            }
+          ]
+        },
+        {
+          "id": "social.never",
+          "feld": "social",
+          "pfad": "social.never",
+          "typ": "chips",
+          "titel": "Was zeigst du nie?",
+          "optional": true,
+          "max": 4,
+          "optionen": [
+            {
+              "id": "familie",
+              "label": "Meine Familie"
+            },
+            {
+              "id": "zuhause",
+              "label": "Mein Zuhause"
+            },
+            {
+              "id": "kunden",
+              "label": "Kunden"
+            },
+            {
+              "id": "preise",
+              "label": "Preise"
+            },
+            {
+              "id": "tanz",
+              "label": "Tanz und Trends"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nr": 6,
+      "titel": "Dein Look",
+      "dauer": "1,5 Minuten",
+      "fragen": [
+        {
+          "id": "reference",
+          "feld": "reference",
+          "typ": "wahl",
+          "titel": "In welcher Welt würdest du dich wohlfühlen?",
+          "hilfe": "Ganz aus dem Bauch. Es geht um die Stimmung, nicht um die Branche.",
+          "optionen": [
+            {
+              "id": "verlag",
+              "label": "Verlag",
+              "hint": "Eine Geschichte, gut erzählt",
+              "bild": "Aufgeschlagenes Magazin, große Antiqua-Überschrift, viel Weißraum, ein einzelnes Foto"
+            },
+            {
+              "id": "uhrmacher",
+              "label": "Uhrmacher",
+              "hint": "Präzision bis ins Kleinste",
+              "bild": "Werkbank mit Lupe und geöffnetem Uhrwerk, feine Linien, Messing und Stahl"
+            },
+            {
+              "id": "architektur",
+              "label": "Architekturbüro",
+              "hint": "Raster, Plan und Material",
+              "bild": "Grundriss auf Transparentpapier, Modell aus weißem Karton, Betonmuster"
+            },
+            {
+              "id": "privatbank",
+              "label": "Privatbank",
+              "hint": "Vertrauen über Generationen",
+              "bild": "Schwere Holztür mit Messingschild, ruhiger Empfang, gebundene Mappe"
+            },
+            {
+              "id": "hotel",
+              "label": "Hotel",
+              "hint": "Gastgeber aus Leidenschaft",
+              "bild": "Rezeption mit Glocke, Schlüsselbrett aus Holz, frische Blumen, warmes Licht"
+            },
+            {
+              "id": "cafe",
+              "label": "Café",
+              "hint": "Jeder kennt dich beim Namen",
+              "bild": "Marmortisch am Fenster, Tasse mit Untertasse, Zeitung, Blick auf die Gasse"
+            },
+            {
+              "id": "galerie",
+              "label": "Galerie",
+              "hint": "Ein Werk, viel Raum",
+              "bild": "Weiße Wand mit einem einzigen Bild, kleine Beschriftung, Betonboden"
+            },
+            {
+              "id": "tech",
+              "label": "Tech",
+              "hint": "Einfach, schnell, durchdacht",
+              "bild": "Klare Oberfläche auf einem Bildschirm, Raster, eine Signalfarbe, viel Luft"
+            },
+            {
+              "id": "manufaktur",
+              "label": "Manufaktur",
+              "hint": "Mit der Hand gemacht",
+              "bild": "Lederschürze, Holzspäne, Werkzeug an der Wand, ein gestempeltes Etikett"
+            },
+            {
+              "id": "weingut",
+              "label": "Weingut",
+              "hint": "Herkunft und Geduld",
+              "bild": "Rebzeilen am Hang, Kellergewölbe, Etikett mit Jahrgang und Lage"
+            },
+            {
+              "id": "sport",
+              "label": "Sport",
+              "hint": "Tempo, Training, Ziel",
+              "bild": "Laufbahn mit weißen Linien, Startnummer, kräftige Farbe, Bewegung"
+            },
+            {
+              "id": "mode",
+              "label": "Mode",
+              "hint": "Haltung und Schnitt",
+              "bild": "Laufsteg in Schwarzweiß, Stoffmuster, ein Schnitt mit Kreide angezeichnet"
+            }
+          ]
+        },
+        {
+          "id": "logoPairs.serif",
+          "feld": "logoPairs",
+          "pfad": "logoPairs.serif",
+          "typ": "paar",
+          "titel": "Welche Schrift wirkt mehr nach dir?",
+          "hilfe": "Gezeigt mit deinem Namen. Wenn dir beides recht ist, wähle Egal.",
+          "optionen": [
+            {
+              "id": "a",
+              "label": "Klar, ohne Füßchen"
+            },
+            {
+              "id": "b",
+              "label": "Mit feinen Serifen"
+            },
+            {
+              "id": "egal",
+              "label": "Egal"
+            }
+          ]
+        },
+        {
+          "id": "logoPairs.contrast",
+          "feld": "logoPairs",
+          "pfad": "logoPairs.contrast",
+          "typ": "paar",
+          "titel": "Wie soll der Strich sein?",
+          "hilfe": "Gezeigt mit deinem Namen. Wenn dir beides recht ist, wähle Egal.",
+          "optionen": [
+            {
+              "id": "a",
+              "label": "Gleichmäßig und ruhig"
+            },
+            {
+              "id": "b",
+              "label": "Mit Spannung zwischen dick und dünn"
+            },
+            {
+              "id": "egal",
+              "label": "Egal"
+            }
+          ]
+        },
+        {
+          "id": "logoPairs.caps",
+          "feld": "logoPairs",
+          "pfad": "logoPairs.caps",
+          "typ": "paar",
+          "titel": "Wie soll dein Name stehen?",
+          "hilfe": "Gezeigt mit deinem Namen. Wenn dir beides recht ist, wähle Egal.",
+          "optionen": [
+            {
+              "id": "a",
+              "label": "Geschrieben wie im Satz"
+            },
+            {
+              "id": "b",
+              "label": "In Großbuchstaben, mit Luft dazwischen"
+            },
+            {
+              "id": "egal",
+              "label": "Egal"
+            }
+          ]
+        },
+        {
+          "id": "logoPairs.width",
+          "feld": "logoPairs",
+          "pfad": "logoPairs.width",
+          "typ": "paar",
+          "titel": "Welche Form passt besser?",
+          "hilfe": "Gezeigt mit deinem Namen. Wenn dir beides recht ist, wähle Egal.",
+          "optionen": [
+            {
+              "id": "a",
+              "label": "Schmal und aufrecht"
+            },
+            {
+              "id": "b",
+              "label": "Breit und gelassen"
+            },
+            {
+              "id": "egal",
+              "label": "Egal"
+            }
+          ]
+        },
+        {
+          "id": "logoPairs.symbol",
+          "feld": "logoPairs",
+          "pfad": "logoPairs.symbol",
+          "typ": "paar",
+          "titel": "Name allein oder mit Zeichen?",
+          "hilfe": "Gezeigt mit deinem Namen. Wenn dir beides recht ist, wähle Egal.",
+          "optionen": [
+            {
+              "id": "a",
+              "label": "Nur der Name"
+            },
+            {
+              "id": "b",
+              "label": "Der Name mit Zeichen oder Monogramm"
+            },
+            {
+              "id": "egal",
+              "label": "Egal"
+            }
+          ]
+        },
+        {
+          "id": "logoPairs.dark",
+          "feld": "logoPairs",
+          "pfad": "logoPairs.dark",
+          "typ": "paar",
+          "titel": "Auf welchem Grund fühlt sich dein Name wohler?",
+          "hilfe": "Gezeigt mit deinem Namen. Wenn dir beides recht ist, wähle Egal.",
+          "optionen": [
+            {
+              "id": "a",
+              "label": "Hell, wie auf gutem Papier"
+            },
+            {
+              "id": "b",
+              "label": "Dunkel, auf tiefem Grund"
+            },
+            {
+              "id": "egal",
+              "label": "Egal"
+            }
+          ]
+        },
+        {
+          "id": "colorPairs.warmth",
+          "feld": "colorPairs",
+          "pfad": "colorPairs.warmth",
+          "typ": "paar",
+          "titel": "Welche Farben ziehen dich an?",
+          "optionen": [
+            {
+              "id": "a",
+              "label": "Kühl, wie Stein und Wasser"
+            },
+            {
+              "id": "b",
+              "label": "Warm, wie Holz und Ziegel"
+            },
+            {
+              "id": "egal",
+              "label": "Egal"
+            }
+          ]
+        },
+        {
+          "id": "colorPairs.saturation",
+          "feld": "colorPairs",
+          "pfad": "colorPairs.saturation",
+          "typ": "paar",
+          "titel": "Wie kräftig darf es sein?",
+          "optionen": [
+            {
+              "id": "a",
+              "label": "Gedeckt, mit Grau gebrochen"
+            },
+            {
+              "id": "b",
+              "label": "Satt, mit voller Farbe"
+            },
+            {
+              "id": "egal",
+              "label": "Egal"
+            }
+          ]
+        },
+        {
+          "id": "avoidColors",
+          "feld": "avoidColors",
+          "typ": "mehrfach",
+          "titel": "Welche Farben gehen für dich gar nicht?",
+          "hilfe": "Höchstens drei. Diese Farben kommen nie vor.",
+          "optionen": [
+            {
+              "id": "gold",
+              "label": "Gold und Messing"
+            },
+            {
+              "id": "schwarz",
+              "label": "Schwarz und Anthrazit"
+            },
+            {
+              "id": "navy",
+              "label": "Marineblau"
+            },
+            {
+              "id": "blau",
+              "label": "Blau und Petrol"
+            },
+            {
+              "id": "gruen",
+              "label": "Grün"
+            },
+            {
+              "id": "terra",
+              "label": "Terrakotta und Rost"
+            },
+            {
+              "id": "sand",
+              "label": "Sand und Taupe"
+            },
+            {
+              "id": "bordeaux",
+              "label": "Bordeaux"
+            }
+          ],
+          "max": 3,
+          "optional": true
+        },
+        {
+          "id": "avoidCliches",
+          "feld": "avoidCliches",
+          "typ": "mehrfach",
+          "titel": "Was bist du sicher nicht?",
+          "hilfe": "Alles, was du hier wählst, kommt in keinem Vorschlag vor.",
+          "optionen": [
+            {
+              "id": "gold-schwarz",
+              "label": "Gold auf Schwarz",
+              "hint": "Der Klassiker für Luxus, den jeder schon hat."
+            },
+            {
+              "id": "haus-icon",
+              "label": "Haus-Symbol",
+              "hint": "Dach, Haus oder Tür als Zeichen."
+            },
+            {
+              "id": "skyline",
+              "label": "Skyline",
+              "hint": "Stadtsilhouette mit Türmen."
+            },
+            {
+              "id": "schluessel",
+              "label": "Schlüssel",
+              "hint": "Der Schlüssel als Zeichen der Übergabe."
+            },
+            {
+              "id": "schreibschrift",
+              "label": "Schreibschrift",
+              "hint": "Geschwungene Handschrift als Logo."
+            },
+            {
+              "id": "monogramm-kreis",
+              "label": "Monogramm im Kreis",
+              "hint": "Initialen in einem Ring oder Kreis."
+            }
+          ],
+          "max": 6,
+          "optional": true
+        }
+      ]
+    }
+  ],
+  "onlyness": [
+    {
+      "id": "graetzl",
+      "label": "Ich kenne mein Viertel Haus für Haus",
+      "hint": "Welche Seite der Gasse ruhiger ist, wer verkaufen will, bevor es jemand weiß."
+    },
+    {
+      "id": "bewertung",
+      "label": "Mein Preis hält",
+      "hint": "Ich bewerte mit Vergleichsdaten und sage auch, wenn eine Erwartung zu hoch ist."
+    },
+    {
+      "id": "substanz",
+      "label": "Ich verstehe alte Häuser",
+      "hint": "Substanz, Widmung, Dachausbau, Denkmalschutz, Mietrecht."
+    },
+    {
+      "id": "verhandlung",
+      "label": "Ich verhandle für den Eigentümer",
+      "hint": "Ruhig, vorbereitet, mit einem Plan für das zweite Angebot."
+    },
+    {
+      "id": "diskret",
+      "label": "Ich verkaufe, ohne dass es jemand merkt",
+      "hint": "Ausgewählte Käufer statt Portal und Schild am Zaun."
+    },
+    {
+      "id": "lebenslagen",
+      "label": "Ich begleite schwierige Lebenslagen",
+      "hint": "Erbe, Trennung, Umzug ins Kleinere, wenn mehrere Menschen entscheiden."
+    },
+    {
+      "id": "rendite",
+      "label": "Ich rechne wie ein Anleger",
+      "hint": "Rendite, Mietvertrag, Steuer und Zustand in einer Rechnung."
+    },
+    {
+      "id": "inszenierung",
+      "label": "Ich zeige Häuser so, dass man sie will",
+      "hint": "Eigene Bilder, Film und ein Text, den man zu Ende liest."
+    },
+    {
+      "id": "vorgemerkt",
+      "label": "Die Käufer sind schon da",
+      "hint": "Vorgemerkte Interessenten, bevor ein Inserat online geht."
+    },
+    {
+      "id": "projekt",
+      "label": "Ich verkaufe Projekte vom Plan weg",
+      "hint": "Für Bauträger, von der ersten Skizze bis zur letzten Einheit."
+    },
+    {
+      "id": "region",
+      "label": "Ich kenne Land und Leute",
+      "hint": "Grund, Widmung, Gemeinde, Nachbarn und was hier wirklich zählt."
+    },
+    {
+      "id": "nachher",
+      "label": "Ich bleibe nach dem Verkauf",
+      "hint": "Übergabe, Zählerstände, die erste Abrechnung, der Anruf ein Jahr später."
+    }
+  ],
+  "alternativen": [
+    {
+      "id": "franchise",
+      "label": "Einen großen Franchise-Makler",
+      "hint": "Bekannte Marke, viele Büros, einheitlicher Auftritt."
+    },
+    {
+      "id": "bank",
+      "label": "Den Makler der eigenen Bank",
+      "hint": "Vertraut über das Konto, Verkauf als Nebenleistung."
+    },
+    {
+      "id": "platzhirsch",
+      "label": "Den lokalen Platzhirsch",
+      "hint": "Seit Jahren im Ort, jeder kennt das Schild."
+    },
+    {
+      "id": "online",
+      "label": "Einen Online-Makler",
+      "hint": "Fixpreis, Plattform, wenig persönlicher Kontakt."
+    },
+    {
+      "id": "privat",
+      "label": "Niemanden, sie verkaufen privat",
+      "hint": "Inserat selbst schalten, Provision sparen."
+    }
+  ],
+  "referenzwelten": [
+    {
+      "id": "verlag",
+      "label": "Verlag",
+      "hint": "Eine Geschichte, gut erzählt",
+      "bild": "Aufgeschlagenes Magazin, große Antiqua-Überschrift, viel Weißraum, ein einzelnes Foto"
+    },
+    {
+      "id": "uhrmacher",
+      "label": "Uhrmacher",
+      "hint": "Präzision bis ins Kleinste",
+      "bild": "Werkbank mit Lupe und geöffnetem Uhrwerk, feine Linien, Messing und Stahl"
+    },
+    {
+      "id": "architektur",
+      "label": "Architekturbüro",
+      "hint": "Raster, Plan und Material",
+      "bild": "Grundriss auf Transparentpapier, Modell aus weißem Karton, Betonmuster"
+    },
+    {
+      "id": "privatbank",
+      "label": "Privatbank",
+      "hint": "Vertrauen über Generationen",
+      "bild": "Schwere Holztür mit Messingschild, ruhiger Empfang, gebundene Mappe"
+    },
+    {
+      "id": "hotel",
+      "label": "Hotel",
+      "hint": "Gastgeber aus Leidenschaft",
+      "bild": "Rezeption mit Glocke, Schlüsselbrett aus Holz, frische Blumen, warmes Licht"
+    },
+    {
+      "id": "cafe",
+      "label": "Café",
+      "hint": "Jeder kennt dich beim Namen",
+      "bild": "Marmortisch am Fenster, Tasse mit Untertasse, Zeitung, Blick auf die Gasse"
+    },
+    {
+      "id": "galerie",
+      "label": "Galerie",
+      "hint": "Ein Werk, viel Raum",
+      "bild": "Weiße Wand mit einem einzigen Bild, kleine Beschriftung, Betonboden"
+    },
+    {
+      "id": "tech",
+      "label": "Tech",
+      "hint": "Einfach, schnell, durchdacht",
+      "bild": "Klare Oberfläche auf einem Bildschirm, Raster, eine Signalfarbe, viel Luft"
+    },
+    {
+      "id": "manufaktur",
+      "label": "Manufaktur",
+      "hint": "Mit der Hand gemacht",
+      "bild": "Lederschürze, Holzspäne, Werkzeug an der Wand, ein gestempeltes Etikett"
+    },
+    {
+      "id": "weingut",
+      "label": "Weingut",
+      "hint": "Herkunft und Geduld",
+      "bild": "Rebzeilen am Hang, Kellergewölbe, Etikett mit Jahrgang und Lage"
+    },
+    {
+      "id": "sport",
+      "label": "Sport",
+      "hint": "Tempo, Training, Ziel",
+      "bild": "Laufbahn mit weißen Linien, Startnummer, kräftige Farbe, Bewegung"
+    },
+    {
+      "id": "mode",
+      "label": "Mode",
+      "hint": "Haltung und Schnitt",
+      "bild": "Laufsteg in Schwarzweiß, Stoffmuster, ein Schnitt mit Kreide angezeichnet"
+    }
+  ],
+  "klischees": [
+    {
+      "id": "gold-schwarz",
+      "label": "Gold auf Schwarz",
+      "hint": "Der Klassiker für Luxus, den jeder schon hat."
+    },
+    {
+      "id": "haus-icon",
+      "label": "Haus-Symbol",
+      "hint": "Dach, Haus oder Tür als Zeichen."
+    },
+    {
+      "id": "skyline",
+      "label": "Skyline",
+      "hint": "Stadtsilhouette mit Türmen."
+    },
+    {
+      "id": "schluessel",
+      "label": "Schlüssel",
+      "hint": "Der Schlüssel als Zeichen der Übergabe."
+    },
+    {
+      "id": "schreibschrift",
+      "label": "Schreibschrift",
+      "hint": "Geschwungene Handschrift als Logo."
+    },
+    {
+      "id": "monogramm-kreis",
+      "label": "Monogramm im Kreis",
+      "hint": "Initialen in einem Ring oder Kreis."
+    }
+  ],
+  "stimmproben": [
+    {
+      "pol": "formell",
+      "a": "Gerne bereite ich bis Donnerstag eine Bewertung Ihrer Wohnung vor und erläutere sie Ihnen persönlich.",
+      "b": "Ich schau mir deine Wohnung am Donnerstag an, und danach reden wir in Ruhe über den Preis."
+    },
+    {
+      "pol": "ernst",
+      "a": "Ein Verkauf ist eine große Entscheidung. Wir nehmen uns die Zeit, die sie braucht.",
+      "b": "Ein Verkauf muss kein Kraftakt sein. Mit einem guten Plan wird er fast entspannt."
+    },
+    {
+      "pol": "sachlich",
+      "a": "Drei Besichtigungen, zwei Angebote, unterschrieben nach sechs Wochen.",
+      "b": "Als die Familie zum ersten Mal auf dem Balkon stand, war die Sache entschieden."
+    },
+    {
+      "pol": "leise",
+      "a": "Ich sage Ihnen, was Ihre Wohnung wert ist. Entscheiden tun Sie.",
+      "b": "Dieser Preis ist zu niedrig angesetzt, und ich sage Ihnen auch, warum."
+    }
+  ],
+  "logoPaare": [
+    {
+      "id": "serif",
+      "frage": "Welche Schrift wirkt mehr nach dir?",
+      "a": "Klar, ohne Füßchen",
+      "b": "Mit feinen Serifen",
+      "muster": {
+        "a": {
+          "font": "hanken",
+          "weight": 400,
+          "caps": false,
+          "tracking": 0,
+          "symbol": false,
+          "dark": false
+        },
+        "b": {
+          "font": "newsreader",
+          "weight": 400,
+          "caps": false,
+          "tracking": 0,
+          "symbol": false,
+          "dark": false
+        }
+      }
+    },
+    {
+      "id": "contrast",
+      "frage": "Wie soll der Strich sein?",
+      "a": "Gleichmäßig und ruhig",
+      "b": "Mit Spannung zwischen dick und dünn",
+      "muster": {
+        "a": {
+          "font": "lora",
+          "weight": 400,
+          "caps": false,
+          "tracking": 0,
+          "symbol": false,
+          "dark": false
+        },
+        "b": {
+          "font": "bodoni",
+          "weight": 400,
+          "caps": false,
+          "tracking": 0,
+          "symbol": false,
+          "dark": false
+        }
+      }
+    },
+    {
+      "id": "caps",
+      "frage": "Wie soll dein Name stehen?",
+      "a": "Geschrieben wie im Satz",
+      "b": "In Großbuchstaben, mit Luft dazwischen",
+      "muster": {
+        "a": {
+          "font": "newsreader",
+          "weight": 400,
+          "caps": false,
+          "tracking": 0,
+          "symbol": false,
+          "dark": false
+        },
+        "b": {
+          "font": "newsreader",
+          "weight": 400,
+          "caps": true,
+          "tracking": 0.18,
+          "symbol": false,
+          "dark": false
+        }
+      }
+    },
+    {
+      "id": "width",
+      "frage": "Welche Form passt besser?",
+      "a": "Schmal und aufrecht",
+      "b": "Breit und gelassen",
+      "muster": {
+        "a": {
+          "font": "antonio",
+          "weight": 400,
+          "caps": true,
+          "tracking": 0.04,
+          "symbol": false,
+          "dark": false
+        },
+        "b": {
+          "font": "lexendzetta",
+          "weight": 400,
+          "caps": true,
+          "tracking": 0.04,
+          "symbol": false,
+          "dark": false
+        }
+      }
+    },
+    {
+      "id": "symbol",
+      "frage": "Name allein oder mit Zeichen?",
+      "a": "Nur der Name",
+      "b": "Der Name mit Zeichen oder Monogramm",
+      "muster": {
+        "a": {
+          "font": "newsreader",
+          "weight": 400,
+          "caps": false,
+          "tracking": 0,
+          "symbol": false,
+          "dark": false
+        },
+        "b": {
+          "font": "newsreader",
+          "weight": 400,
+          "caps": false,
+          "tracking": 0,
+          "symbol": true,
+          "dark": false
+        }
+      }
+    },
+    {
+      "id": "dark",
+      "frage": "Auf welchem Grund fühlt sich dein Name wohler?",
+      "a": "Hell, wie auf gutem Papier",
+      "b": "Dunkel, auf tiefem Grund",
+      "muster": {
+        "a": {
+          "font": "newsreader",
+          "weight": 400,
+          "caps": false,
+          "tracking": 0,
+          "symbol": false,
+          "dark": false
+        },
+        "b": {
+          "font": "newsreader",
+          "weight": 400,
+          "caps": false,
+          "tracking": 0,
+          "symbol": false,
+          "dark": true
+        }
+      }
+    }
+  ],
+  "farbPaare": [
+    {
+      "id": "warmth",
+      "frage": "Welche Farben ziehen dich an?",
+      "a": "Kühl, wie Stein und Wasser",
+      "b": "Warm, wie Holz und Ziegel",
+      "farben": {
+        "a": [
+          "#2D5A86",
+          "#4A6580",
+          "#C9CED6"
+        ],
+        "b": [
+          "#B0603A",
+          "#8F7556",
+          "#E3D5BE"
+        ]
+      }
+    },
+    {
+      "id": "saturation",
+      "frage": "Wie kräftig darf es sein?",
+      "a": "Gedeckt, mit Grau gebrochen",
+      "b": "Satt, mit voller Farbe",
+      "farben": {
+        "a": [
+          "#6B7F5E",
+          "#857B6E",
+          "#7E8696"
+        ],
+        "b": [
+          "#1D5C63",
+          "#9E4A33",
+          "#6E1E2B"
+        ]
+      }
+    }
+  ],
+  "antiFarben": [
+    {
+      "id": "gold",
+      "label": "Gold und Messing"
+    },
+    {
+      "id": "schwarz",
+      "label": "Schwarz und Anthrazit"
+    },
+    {
+      "id": "navy",
+      "label": "Marineblau"
+    },
+    {
+      "id": "blau",
+      "label": "Blau und Petrol"
+    },
+    {
+      "id": "gruen",
+      "label": "Grün"
+    },
+    {
+      "id": "terra",
+      "label": "Terrakotta und Rost"
+    },
+    {
+      "id": "sand",
+      "label": "Sand und Taupe"
+    },
+    {
+      "id": "bordeaux",
+      "label": "Bordeaux"
+    }
+  ],
+  "fokus": [
+    {
+      "id": "wohnen",
+      "label": "Wohnungen"
+    },
+    {
+      "id": "haeuser",
+      "label": "Häuser"
+    },
+    {
+      "id": "luxus",
+      "label": "Villen und Penthäuser"
+    },
+    {
+      "id": "anleger",
+      "label": "Anlage und Zinshaus"
+    },
+    {
+      "id": "neubau",
+      "label": "Neubau und Projekte"
+    },
+    {
+      "id": "gewerbe",
+      "label": "Gewerbe und Büro"
+    },
+    {
+      "id": "land",
+      "label": "Land und Grund"
+    }
+  ],
+  "architektur": [
+    {
+      "id": "person",
+      "label": "Ich bin die Marke",
+      "hint": "Kunden empfehlen dich als Person weiter, dein Name steht vorn."
+    },
+    {
+      "id": "buero",
+      "label": "Ein Büro ist die Marke",
+      "hint": "Ein eigener Name, der auch ohne dich trägt."
+    },
+    {
+      "id": "person-dann-buero",
+      "label": "Erst ich, später ein Team",
+      "hint": "Dein Name jetzt, mit Platz für Kolleginnen und Kollegen."
+    }
+  ],
+  "erfahrung": [
+    {
+      "id": "neu",
+      "label": "Weniger als drei Jahre",
+      "hint": "Du baust dir gerade deinen Namen auf."
+    },
+    {
+      "id": "einige",
+      "label": "Drei bis zehn Jahre",
+      "hint": "Du hast einen Stamm, der dich weiterempfiehlt."
+    },
+    {
+      "id": "lange",
+      "label": "Mehr als zehn Jahre",
+      "hint": "Man kennt dich, oft schon in der zweiten Generation."
+    }
+  ],
+  "segment": [
+    {
+      "id": "einstieg",
+      "label": "Erste eigene Wohnung",
+      "hint": "Starter, junge Familien, kleinere Budgets"
+    },
+    {
+      "id": "mitte",
+      "label": "Solide Mitte",
+      "hint": "Familienwohnung, Reihenhaus, Vorsorge"
+    },
+    {
+      "id": "premium",
+      "label": "Gehoben",
+      "hint": "Altbau mit Stil, Dachgeschoss, Haus mit Garten"
+    },
+    {
+      "id": "luxus",
+      "label": "Spitze",
+      "hint": "Villa, Penthouse, Liegenschaften mit Geschichte"
+    }
+  ],
+  "zielgruppen": [
+    {
+      "id": "erstkauf",
+      "label": "Die erste eigene Wohnung",
+      "hint": "Junge Paare, die zum ersten Mal kaufen und viel fragen.",
+      "felder": [
+        "wohnen"
+      ],
+      "territorien": [
+        "graetzl",
+        "system",
+        "herausforderer"
+      ],
+      "wer": "Paare, die ihre erste eigene Wohnung kaufen"
+    },
+    {
+      "id": "familie",
+      "label": "Die Familie braucht mehr Platz",
+      "hint": "Ein Kind kommt, das Zimmer reicht nicht mehr.",
+      "felder": [
+        "familie"
+      ],
+      "territorien": [
+        "graetzl",
+        "herkunft",
+        "weite"
+      ],
+      "wer": "Familien, die mehr Platz brauchen"
+    },
+    {
+      "id": "verkleinern",
+      "label": "Die Kinder sind aus dem Haus",
+      "hint": "Das große Haus wird zu viel, eine Wohnung in der Nähe soll her.",
+      "felder": [
+        "senioren"
+      ],
+      "territorien": [
+        "rat",
+        "stille",
+        "herkunft"
+      ],
+      "wer": "Paare, deren Kinder aus dem Haus sind und die kleiner wohnen wollen"
+    },
+    {
+      "id": "erbe",
+      "label": "Das Elternhaus ist geerbt",
+      "hint": "Mehrere Erben, Erinnerungen und eine Entscheidung.",
+      "felder": [
+        "erbe"
+      ],
+      "territorien": [
+        "rat",
+        "herkunft",
+        "haus_zahl"
+      ],
+      "wer": "Erbengemeinschaften mit einem Elternhaus"
+    },
+    {
+      "id": "trennung",
+      "label": "Eine Trennung",
+      "hint": "Das gemeinsame Zuhause muss fair geregelt werden.",
+      "felder": [
+        "scheidung"
+      ],
+      "territorien": [
+        "rat",
+        "stille",
+        "instanz"
+      ],
+      "wer": "Menschen in Trennung, die das gemeinsame Zuhause fair regeln wollen"
+    },
+    {
+      "id": "anleger",
+      "label": "Die Anlage mit Rendite",
+      "hint": "Zinshaus oder Vorsorgewohnung, gerechnet und geprüft.",
+      "felder": [
+        "kapital"
+      ],
+      "territorien": [
+        "instanz",
+        "haus_zahl",
+        "system"
+      ],
+      "wer": "Anleger, die mit spitzem Stift rechnen"
+    },
+    {
+      "id": "zuzug",
+      "label": "Neu in der Stadt",
+      "hint": "Zuzug für den Job, die Gegend ist noch fremd.",
+      "felder": [
+        "relocation"
+      ],
+      "territorien": [
+        "graetzl",
+        "signatur",
+        "system"
+      ],
+      "wer": "Menschen, die neu in die Stadt ziehen und die Gegend erst kennenlernen"
+    },
+    {
+      "id": "landwunsch",
+      "label": "Raus aufs Land",
+      "hint": "Mehr Grün, ein Garten, vielleicht ein Zweitwohnsitz.",
+      "felder": [
+        "natur"
+      ],
+      "territorien": [
+        "weite",
+        "herkunft",
+        "handwerk"
+      ],
+      "wer": "Menschen, die raus aufs Land wollen"
+    },
+    {
+      "id": "unternehmer",
+      "label": "Unternehmer mit Plänen",
+      "hint": "Büro, Praxis oder Geschäftslokal, oft unter Zeitdruck.",
+      "felder": [
+        "gewerbe"
+      ],
+      "territorien": [
+        "instanz",
+        "system",
+        "signatur"
+      ],
+      "wer": "Unternehmer, die Fläche für ihre Pläne suchen"
+    },
+    {
+      "id": "bautraeger",
+      "label": "Bauträger mit einem Projekt",
+      "hint": "Vom Plan bis zur letzten Einheit, mit Zahlen und Tempo.",
+      "felder": [
+        "neubau"
+      ],
+      "territorien": [
+        "system",
+        "handwerk",
+        "instanz"
+      ],
+      "wer": "Bauträger, die ihre Projekte vom Plan weg verkaufen"
+    }
+  ],
+  "werte": [
+    {
+      "id": "ehrlichkeit",
+      "label": "Ehrlichkeit",
+      "hint": "Du sagst auch, was nicht geht.",
+      "territorien": [
+        "rat",
+        "herausforderer",
+        "instanz"
+      ],
+      "versprechen": "Sie hören von Anfang an, was geht und was nicht."
+    },
+    {
+      "id": "verlaesslichkeit",
+      "label": "Verlässlichkeit",
+      "hint": "Zusagen halten, erreichbar sein, Fristen einhalten.",
+      "territorien": [
+        "rat",
+        "system",
+        "herkunft"
+      ],
+      "versprechen": "Was wir zusagen, halten wir, vom ersten Termin bis zur Übergabe."
+    },
+    {
+      "id": "genauigkeit",
+      "label": "Genauigkeit",
+      "hint": "Zahlen prüfen, Unterlagen vollständig, nichts dem Zufall überlassen.",
+      "territorien": [
+        "haus_zahl",
+        "instanz",
+        "handwerk"
+      ],
+      "versprechen": "Jede Zahl ist geprüft, jede Unterlage vollständig, bevor ein Käufer fragt."
+    },
+    {
+      "id": "diskretion",
+      "label": "Diskretion",
+      "hint": "Vertrauliches bleibt vertraulich, auch in der Nachbarschaft.",
+      "territorien": [
+        "stille",
+        "signatur",
+        "rat"
+      ],
+      "versprechen": "Ihr Verkauf bleibt so leise, wie Sie es wünschen."
+    },
+    {
+      "id": "naehe",
+      "label": "Nähe",
+      "hint": "Ansprechbar, vor Ort, mit Zeit für ein Gespräch.",
+      "territorien": [
+        "graetzl",
+        "herkunft",
+        "weite"
+      ],
+      "versprechen": "Sie haben eine Person vor Ort, die Ihre Gegend und Sie kennt."
+    },
+    {
+      "id": "tempo",
+      "label": "Tempo",
+      "hint": "Schnell entscheiden, schnell handeln, ohne Hast.",
+      "territorien": [
+        "system",
+        "herausforderer",
+        "signatur"
+      ],
+      "versprechen": "Sie wissen jede Woche, was passiert ist und was als Nächstes kommt."
+    },
+    {
+      "id": "gestaltung",
+      "label": "Sinn für Gestaltung",
+      "hint": "Häuser zeigen, wie sie es verdienen.",
+      "territorien": [
+        "verlag",
+        "handwerk",
+        "stille"
+      ],
+      "versprechen": "Ihr Haus wird so gezeigt, wie es gebaut und gelebt wurde."
+    },
+    {
+      "id": "mut",
+      "label": "Mut",
+      "hint": "Unbequemes ansprechen, Neues ausprobieren.",
+      "territorien": [
+        "herausforderer",
+        "signatur",
+        "verlag"
+      ],
+      "versprechen": "Sie bekommen eine klare Empfehlung, auch wenn sie unbequem ist."
+    },
+    {
+      "id": "bestaendigkeit",
+      "label": "Beständigkeit",
+      "hint": "Langfristig denken, über einen Verkauf hinaus.",
+      "territorien": [
+        "herkunft",
+        "weite",
+        "rat"
+      ],
+      "versprechen": "Wir begleiten Sie über diesen Verkauf hinaus, so lange Sie uns brauchen."
+    },
+    {
+      "id": "offenheit",
+      "label": "Offenheit",
+      "hint": "Preis, Provision und Ablauf liegen auf dem Tisch.",
+      "territorien": [
+        "herausforderer",
+        "system",
+        "instanz"
+      ],
+      "versprechen": "Preis, Provision und Ablauf liegen von Anfang an offen auf dem Tisch."
+    }
+  ],
+  "persoenlichkeit": [
+    {
+      "id": "aufrichtig",
+      "label": "„Da weiß man, woran man ist.“",
+      "eigenschaft": "Aufrichtig",
+      "satz": "Sagt, was ist, auch wenn es unbequem ist.",
+      "territorien": [
+        "rat",
+        "herausforderer",
+        "instanz"
+      ]
+    },
+    {
+      "id": "kompetent",
+      "label": "„Kennt den Markt wie kaum jemand.“",
+      "eigenschaft": "Kundig",
+      "satz": "Kennt Preise, Lagen und Häuser aus eigener Anschauung.",
+      "territorien": [
+        "instanz",
+        "haus_zahl",
+        "handwerk"
+      ]
+    },
+    {
+      "id": "kultiviert",
+      "label": "„Hat ein Gespür für schöne Häuser.“",
+      "eigenschaft": "Stilsicher",
+      "satz": "Erkennt Qualität und zeigt sie mit Sorgfalt.",
+      "territorien": [
+        "verlag",
+        "stille",
+        "signatur"
+      ]
+    },
+    {
+      "id": "begeisternd",
+      "label": "„Mit dieser Energie macht sogar der Umzug Spaß.“",
+      "eigenschaft": "Mitreißend",
+      "satz": "Bringt Schwung in jeden Termin und steckt damit an.",
+      "territorien": [
+        "herausforderer",
+        "graetzl",
+        "signatur"
+      ]
+    },
+    {
+      "id": "bodenstaendig",
+      "label": "„Spricht unsere Sprache.“",
+      "eigenschaft": "Bodenständig",
+      "satz": "Erklärt ohne Fachchinesisch und bleibt auf dem Boden.",
+      "territorien": [
+        "graetzl",
+        "weite",
+        "herkunft"
+      ]
+    },
+    {
+      "id": "ruhig",
+      "label": "„Bleibt ruhig, auch wenn es kompliziert wird.“",
+      "eigenschaft": "Gelassen",
+      "satz": "Behält den Überblick, wenn es eng wird.",
+      "territorien": [
+        "stille",
+        "rat",
+        "herkunft"
+      ]
+    },
+    {
+      "id": "durchsetzungsstark",
+      "label": "„Hat hart und fair für uns verhandelt.“",
+      "eigenschaft": "Entschlossen",
+      "satz": "Verhandelt vorbereitet und gibt nicht vorschnell nach.",
+      "territorien": [
+        "signatur",
+        "herausforderer",
+        "instanz"
+      ]
+    },
+    {
+      "id": "herzlich",
+      "label": "„Hat sich um uns gekümmert wie um Familie.“",
+      "eigenschaft": "Herzlich",
+      "satz": "Nimmt sich Zeit für Menschen, nicht nur für Häuser.",
+      "territorien": [
+        "herkunft",
+        "graetzl",
+        "rat"
+      ]
+    },
+    {
+      "id": "organisiert",
+      "label": "„Alles klar, alles pünktlich, nie etwas gesucht.“",
+      "eigenschaft": "Organisiert",
+      "satz": "Führt jeden Verkauf mit klaren Schritten und offenen Unterlagen.",
+      "territorien": [
+        "system",
+        "haus_zahl",
+        "handwerk"
+      ]
+    }
+  ],
+  "kanaele": [
+    {
+      "id": "instagram",
+      "label": "Instagram"
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn"
+    },
+    {
+      "id": "facebook",
+      "label": "Facebook"
+    },
+    {
+      "id": "tiktok",
+      "label": "TikTok"
+    },
+    {
+      "id": "youtube",
+      "label": "YouTube"
+    },
+    {
+      "id": "newsletter",
+      "label": "Newsletter"
+    }
+  ],
+  "einleitung": {
+    "text": "Wofür du stehst, wen du erreichst und wie du auftrittst. Logo, Social Media und Unterlagen folgen daraus.",
+    "dauer": "etwa 8 Minuten",
+    "hinweis": "Es gibt keine falschen Antworten. Wenn du etwas nicht weißt, lass es offen oder geh direkt zu deinen drei Richtungen."
+  }
+}

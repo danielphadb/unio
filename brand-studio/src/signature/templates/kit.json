@@ -1,0 +1,3675 @@
+[
+  {
+    "id": "sig-koordinaten",
+    "titel": "Koordinaten",
+    "idee": "Unter dem Namen in ruhigen Antiqua-Versalien steht nach einer Haarlinie die geografische Lage des Ortes in Mono-Ziffern: die Marke liest sich wie ein Vermessungsvermerk, nicht wie Werbung.",
+    "herleitung": "Vermessungs- und Grundbuchvermerke (Koordinaten, Haarlinie) und Herkunftsangaben der Parfumhäuser. Der Wert kommt aus einer festen Ortstabelle (Bezirkszentrum, zwei Dezimalstellen) und wird in der Oberfläche zur Bestätigung gezeigt. Im Korpus führt keine Marke Koordinaten.",
+    "referenzen": [],
+    "abgrenzung": "Koordinaten als Markenteil kommen im Korpus nicht vor; Name in Antiqua-Versalien ohne Zeichen, Lageangabe in Mono statt Ortsname in Versalien.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "pflicht",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 22,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus",
+        "modern",
+        "natur"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "gilda",
+          "weight": 400
+        },
+        {
+          "key": "caslon",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "dmmono",
+          "weight": 300
+        },
+        {
+          "key": "geistmono",
+          "weight": 300
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "primary",
+      "zeichen": "ink",
+      "akzent": "primary",
+      "paletten": [
+        "tanne",
+        "navysand",
+        "greige"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "koordinaten",
+      "position": "unter",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "koordinaten"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.04,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "linie",
+        "id": "linie",
+        "x1": "name.l",
+        "x2": "name.r",
+        "y1": "max(name.b,name.u-14)+36",
+        "y2": "max(name.b,name.u-14)+36",
+        "staerke": 1.5,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "kz",
+        "feld": "koordinaten",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.08,
+        "y": "max(name.b,name.u-14)+60+max(28,0.032*name.w)",
+        "versal": "max(28,0.032*name.w)",
+        "x": "name.cx",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": "max(name.w,420)",
+          "minVersal": 18
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zus",
+        "feld": "zusatz",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.08,
+        "versal": "kz.cap",
+        "y": "kz.b+1.8*kz.cap",
+        "x": "name.cx",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "max(name.w,420)",
+          "minVersal": 16
+        }
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-spannweite",
+    "titel": "Spannweite",
+    "idee": "Vorname links, Nachname rechts, dazwischen eine Haarlinie wie ein Träger: die Marke beansprucht Raum und dehnt sich mit dem Format, der Zusatz steht klein und gesperrt darunter.",
+    "herleitung": "Spannweite eines Trägers im Bauwesen und dehnbare Zeichen großer Architekturbüros. Im Korpus steht kein Name an beiden Enden einer Linie; die Linie ist Raum, kein Ornament.",
+    "referenzen": [
+      "Snøhetta"
+    ],
+    "abgrenzung": "Dort dehnt sich ein Zeichen für Titel; hier stehen die zwei Namensteile in geometrischen Versalien an den Enden einer Linie, ohne Sonderzeichen.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 14,
+      "wortzahl": [
+        2,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "elegant",
+        "luxus"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "tenor",
+          "weight": 400
+        },
+        {
+          "key": "josefin",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 300
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "anthrazit",
+        "petrol",
+        "messing"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "linie",
+      "position": "zwischen",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "inline",
+      "kunstgriff": "spannweite"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "t1",
+        "feld": "teil1",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.14,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 900,
+          "minVersal": 70
+        }
+      },
+      {
+        "typ": "text",
+        "id": "m2",
+        "feld": "teil2",
+        "nurMessen": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.14,
+        "versal": "t1.cap",
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name"
+      },
+      {
+        "typ": "text",
+        "id": "t2",
+        "feld": "teil2",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.14,
+        "versal": "t1.cap",
+        "x": "t1.r+88+max(180,0.3*(t1.w+m2.w))+m2.w",
+        "y": 0,
+        "ausrichtung": "rechts",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 900,
+          "minVersal": 70
+        }
+      },
+      {
+        "typ": "linie",
+        "x1": "t1.r+44",
+        "x2": "t2.l-44",
+        "y1": "-0.5*t1.cap",
+        "y2": "-0.5*t1.cap",
+        "staerke": 1.2,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.3,
+        "versal": "max(26,0.02*(t2.r-t1.l))",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "(t1.l+t2.r)/2",
+        "y": "max(t1.b,t1.u-14,t2.u-14)+46+max(26,0.02*(t2.r-t1.l))"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-unterschrift",
+    "titel": "Unterschrift über Versalien",
+    "idee": "Der Vorname als Schreibschrift-Unterschrift liegt über dem Nachnamen in ruhigen Antiqua-Versalien und greift mit den Unterlängen leicht in ihn hinein: persönlich und trotzdem gesetzt.",
+    "herleitung": "Briefkopf und Visitenkarte alter Handelshäuser: gedruckter Familienname, darüber die Unterschrift des Inhabers. Schreibschrift nur als Akzent für den Vornamen (Anti-Muster A10 bleibt eingehalten); die Unterschrift ist zugleich die Bildmarke.",
+    "referenzen": [],
+    "abgrenzung": "Im Korpus stehen Schreibschriften als ganze Namen; hier trägt die Schreibschrift nur den Vornamen über einem gesetzten Nachnamen.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        2,
+        3
+      ],
+      "initialen": 2,
+      "stile": [
+        "elegant",
+        "luxus",
+        "warm"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "bodoni",
+          "weight": 500
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ],
+      "akzent": [
+        {
+          "key": "pinyon",
+          "weight": 400
+        },
+        {
+          "key": "italianno",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "messing",
+        "bordeaux",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "unterschrift",
+      "position": "oben",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "unterschrift"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "teil2",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.1,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "vor",
+        "feld": "teil1",
+        "ohneTitel": true,
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": 110,
+        "x": "name.l+12",
+        "y": "name.t-24",
+        "ausrichtung": "links",
+        "rolle": "akzent",
+        "hof": 5,
+        "ebene": 1,
+        "zeichen": true,
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": "max(1.1*name.w,520)",
+          "minVersal": 70
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.3,
+        "versal": "max(26,0.032*name.w)",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "max(name.w,600)",
+          "minVersal": 18
+        },
+        "x": "name.l",
+        "y": "max(name.b,name.u-14)+46+max(26,0.032*name.w)"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-impressum",
+    "titel": "Impressum",
+    "idee": "Zwei Zeilen gleich groß und gleich fett, linksbündig und eng wie ein Buchrücken: oben die Funktion wie ein Verlag, unten der Name wie ein Autor. Ohne Zusatz stehen die zwei Namensteile übereinander.",
+    "herleitung": "Verlagsimpressum und Buchrücken (Verlag über Autor). Im Korpus nutzt ein Parfumhaus die Verlagsanmutung mit französischem Funktionswort und mittiger Achse; hier deutsche Funktion, linksbündig, ohne Funktionswort wie Editions.",
+    "referenzen": [
+      "EDITIONS DE PARFUMS FREDERIC MALLE"
+    ],
+    "abgrenzung": "Gleiche Idee der Verlagszeile, aber deutsche Funktion statt Editions, linksbündig, zwei gleich große Zeilen statt fünf Wörter.",
+    "legal": "gelb",
+    "nahe": [
+      "EDITIONS DE PARFUMS FREDERIC MALLE"
+    ],
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "mutig",
+        "elegant"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "schibsted",
+          "weight": 700
+        },
+        {
+          "key": "hanken",
+          "weight": 700
+        }
+      ],
+      "neben": [
+        {
+          "key": "schibsted",
+          "weight": 700
+        },
+        {
+          "key": "hanken",
+          "weight": 700
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "primary",
+      "zeichen": "ink",
+      "akzent": "primary",
+      "paletten": [
+        "schwarzweiss",
+        "navysand",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": null,
+      "position": null,
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "impressum"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "z2",
+        "feld": "name",
+        "wenn": "zusatz",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "z1",
+        "feld": "zusatz",
+        "wenn": "zusatz",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": "z2.cap",
+        "x": 0,
+        "y": "-1.16*z2.cap",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 40
+        }
+      },
+      {
+        "typ": "text",
+        "id": "w2",
+        "feld": "teil2",
+        "wennNicht": "zusatz",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "w1",
+        "feld": "teil1",
+        "wennNicht": "zusatz",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": "w2.cap",
+        "x": 0,
+        "y": "-1.16*w2.cap",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 40
+        }
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-numero",
+    "titel": "Numero",
+    "idee": "Neben dem Namen steht wie auf einem Flakon oder einer Hausnummer das Zeichen Nº mit der Wiener Bezirksnummer, darunter Zusatz und Bezirk: die Lage wird zur Nummer.",
+    "herleitung": "Numero-Zeichen der Druckerei, Hausnummern und nummerierte Editionen. Die Nummer kommt aus dem Wiener Bezirk (Ortstabelle) und steht nie allein: der Bezirk wird darunter ausgeschrieben.",
+    "referenzen": [
+      "CHANEL"
+    ],
+    "abgrenzung": "Nie Nº 5 (Bezirk 5 gesperrt), nie Nº vor einer Zahl ohne Ort, Antiqua-Versalien in Farbe statt schwarzer Grotesk; die Zahl ist ein echter Bezirk.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "pflicht",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 18,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "luxus",
+        "elegant"
+      ],
+      "werteAus": {
+        "nummer": [
+          "5"
+        ]
+      }
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "italiana",
+          "weight": 400
+        },
+        {
+          "key": "bodoni",
+          "weight": 500
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ]
+    },
+    "farben": {
+      "name": "primary",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "bordeaux",
+        "tanne",
+        "navysand"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "numero",
+      "position": "rechts",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "inline",
+      "kunstgriff": "numero"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.02,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "no",
+        "feld": "nummer",
+        "fest": "Nº",
+        "schrift": "haupt",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": "0.7*name.cap",
+        "x": "name.r+0.6*name.cap",
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "akzent",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "num",
+        "feld": "nummer",
+        "schrift": "haupt",
+        "schreibung": "asis",
+        "laufweite": 0.02,
+        "versal": "name.cap",
+        "x": "no.r+0.16*name.cap",
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": "max(28,0.032*name.w)",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "max(num.r-name.l,700)",
+          "minVersal": 18
+        },
+        "x": "name.l",
+        "y": "max(name.b,name.u-14)+50+max(28,0.032*name.w)"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-spiegelmonogramm",
+    "titel": "Spiegelmonogramm",
+    "idee": "Die Initiale des Nachnamens steht neben ihrem Spiegelbild, die senkrechten Stämme liegen genau aufeinander: ein symmetrisches Zeichen wie eine Prägung, darunter der Name in leichten Versalien.",
+    "herleitung": "Symmetrische Beschläge, Prägestempel und Spiegelschrift der Steinmetze. Nur Buchstaben mit senkrechtem Stamm, die gespiegelt eine neue Figur ergeben (B, E, K, N, P, R); C, D, F, G und L sind wegen bekannter Hausmonogramme gesperrt.",
+    "referenzen": [
+      "CHANEL",
+      "LOEWE"
+    ],
+    "abgrenzung": "Keine verschränkten Rundformen, keine Kreisform, nie C, D, F, G oder L; Antiqua-Initiale mit geteiltem Stamm über einer leichten Grotesk in Farbe.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "luxus",
+        "elegant"
+      ],
+      "kennbuchstaben": "BEKNPR"
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "jost",
+          "weight": 300
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 300
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ],
+      "akzent": [
+        {
+          "key": "bodoni",
+          "weight": 500
+        },
+        {
+          "key": "cinzel",
+          "weight": 500
+        }
+      ]
+    },
+    "farben": {
+      "name": "primary",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "bordeaux",
+        "tanne",
+        "navysand"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "monogramm",
+      "position": "oben",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "spiegelmonogramm"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "ini",
+        "feld": "kennbuchstabe",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 220,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "zeichen",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "spi",
+        "feld": "kennbuchstabe",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 220,
+        "x": "ini.l+ini.sl",
+        "y": 0,
+        "ausrichtung": "rechts",
+        "spiegeln": true,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": 100,
+        "x": "(spi.l+ini.r)/2",
+        "y": "ini.b+180",
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": "max(30,0.032*name.w)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "max(name.b,name.u-14)+52+max(30,0.032*name.w)"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-wortquadrat",
+    "titel": "Wortquadrat",
+    "idee": "Die Buchstaben eines kurzen Kunstnamens stehen einzeln in einem Raster aus gleich großen Zellen mit Haarlinien (2 x 2, 3 x 2 oder 3 x 3): Ordnung statt Ornament, das Quadrat ist zugleich Bildmarke und Stempel.",
+    "herleitung": "Setzkasten, Rasterplan und Stempel. Sichtbare Haarlinien, kräftige Grotesk und Farbe statt leichter Geometrie ohne Linien; keine erzwungene Symmetrie, das Raster folgt nur der Buchstabenzahl.",
+    "referenzen": [
+      "TOTEME"
+    ],
+    "abgrenzung": "Dort sechs leichte geometrische Versalien ohne Linien; hier kräftige Grotesk in Farbe in einem sichtbaren Haarlinien-Raster, auch mit vier und neun Buchstaben.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 9,
+      "wortzahl": [
+        1,
+        1
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "mutig"
+      ],
+      "laengen": [
+        4,
+        6,
+        9
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "spacegrotesk",
+          "weight": 700
+        },
+        {
+          "key": "archivo",
+          "weight": 800
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "primary",
+      "neben": "ink",
+      "zeichen": "ink",
+      "akzent": "primary",
+      "paletten": [
+        "petrol",
+        "ziegel",
+        "stahlblau"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "raster",
+      "position": "um",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "badge",
+      "kunstgriff": "wortquadrat"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "b1",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 70,
+        "y": 120,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b4",
+        "wennNicht": "b5"
+      },
+      {
+        "typ": "text",
+        "id": "q1",
+        "feld": "b2",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 210,
+        "y": 120,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b4",
+        "wennNicht": "b5"
+      },
+      {
+        "typ": "text",
+        "id": "q2",
+        "feld": "b3",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 70,
+        "y": 260,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b4",
+        "wennNicht": "b5"
+      },
+      {
+        "typ": "text",
+        "id": "q3",
+        "feld": "b4",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 210,
+        "y": 260,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b4",
+        "wennNicht": "b5"
+      },
+      {
+        "typ": "rechteck",
+        "id": "raster",
+        "x": 0,
+        "y": 0,
+        "b": 280,
+        "h": 280,
+        "kontur": 1.4,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "wenn": "b4",
+        "wennNicht": "b5"
+      },
+      {
+        "typ": "linie",
+        "x1": 140,
+        "x2": 140,
+        "y1": 0,
+        "y2": 280,
+        "staerke": 1.4,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "wenn": "b4",
+        "wennNicht": "b5"
+      },
+      {
+        "typ": "linie",
+        "x1": 0,
+        "x2": 280,
+        "y1": 140,
+        "y2": 140,
+        "staerke": 1.4,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "wenn": "b4",
+        "wennNicht": "b5"
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "b1",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 70,
+        "y": 120,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b6",
+        "wennNicht": "b7"
+      },
+      {
+        "typ": "text",
+        "id": "q1",
+        "feld": "b2",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 210,
+        "y": 120,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b6",
+        "wennNicht": "b7"
+      },
+      {
+        "typ": "text",
+        "id": "q2",
+        "feld": "b3",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 350,
+        "y": 120,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b6",
+        "wennNicht": "b7"
+      },
+      {
+        "typ": "text",
+        "id": "q3",
+        "feld": "b4",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 70,
+        "y": 260,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b6",
+        "wennNicht": "b7"
+      },
+      {
+        "typ": "text",
+        "id": "q4",
+        "feld": "b5",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 210,
+        "y": 260,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b6",
+        "wennNicht": "b7"
+      },
+      {
+        "typ": "text",
+        "id": "q5",
+        "feld": "b6",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 350,
+        "y": 260,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b6",
+        "wennNicht": "b7"
+      },
+      {
+        "typ": "rechteck",
+        "id": "raster",
+        "x": 0,
+        "y": 0,
+        "b": 420,
+        "h": 280,
+        "kontur": 1.4,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "wenn": "b6",
+        "wennNicht": "b7"
+      },
+      {
+        "typ": "linie",
+        "x1": 140,
+        "x2": 140,
+        "y1": 0,
+        "y2": 280,
+        "staerke": 1.4,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "wenn": "b6",
+        "wennNicht": "b7"
+      },
+      {
+        "typ": "linie",
+        "x1": 280,
+        "x2": 280,
+        "y1": 0,
+        "y2": 280,
+        "staerke": 1.4,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "wenn": "b6",
+        "wennNicht": "b7"
+      },
+      {
+        "typ": "linie",
+        "x1": 0,
+        "x2": 420,
+        "y1": 140,
+        "y2": 140,
+        "staerke": 1.4,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "wenn": "b6",
+        "wennNicht": "b7"
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "b1",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 70,
+        "y": 120,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "text",
+        "id": "q1",
+        "feld": "b2",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 210,
+        "y": 120,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "text",
+        "id": "q2",
+        "feld": "b3",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 350,
+        "y": 120,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "text",
+        "id": "q3",
+        "feld": "b4",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 70,
+        "y": 260,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "text",
+        "id": "q4",
+        "feld": "b5",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 210,
+        "y": 260,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "text",
+        "id": "q5",
+        "feld": "b6",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 350,
+        "y": 260,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "text",
+        "id": "q6",
+        "feld": "b7",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 70,
+        "y": 400,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "text",
+        "id": "q7",
+        "feld": "b8",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 210,
+        "y": 400,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "text",
+        "id": "q8",
+        "feld": "b9",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 100,
+        "x": 350,
+        "y": 400,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "rechteck",
+        "id": "raster",
+        "x": 0,
+        "y": 0,
+        "b": 420,
+        "h": 420,
+        "kontur": 1.4,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "linie",
+        "x1": 140,
+        "x2": 140,
+        "y1": 0,
+        "y2": 420,
+        "staerke": 1.4,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "linie",
+        "x1": 280,
+        "x2": 280,
+        "y1": 0,
+        "y2": 420,
+        "staerke": 1.4,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "linie",
+        "x1": 0,
+        "x2": 420,
+        "y1": 140,
+        "y2": 140,
+        "staerke": 1.4,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "linie",
+        "x1": 0,
+        "x2": 420,
+        "y1": 280,
+        "y2": 280,
+        "staerke": 1.4,
+        "rolle": "zeichen",
+        "zeichen": true,
+        "wenn": "b9"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatz",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 26,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 700,
+          "minVersal": 18
+        },
+        "x": "raster.r+40",
+        "y": "raster.t",
+        "anker": "oben"
+      },
+      {
+        "typ": "text",
+        "id": "ort",
+        "feld": "ort",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 26,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 700,
+          "minVersal": 18
+        },
+        "x": "raster.r+40",
+        "y": "zusatz.b+20|raster.t",
+        "anker": "oben"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-postleitzahl",
+    "titel": "Postleitzahl",
+    "idee": "Die Postleitzahl des Bezirks steht in großen, kräftigen Ziffern als Bildmarke links, nach einer Haarlinie folgt der Name in zwei Zeilen: die Lage ist das Produkt.",
+    "herleitung": "Adressen als Markennamen von Häusern und Hotels und Postleitzahlen als Zugehörigkeit in Wien (1010, 1190). Die Zahl kommt aus der Ortstabelle; ohne Tafel und Rosette, anders als die Hausnummern-Vorlage.",
+    "referenzen": [
+      "25h",
+      "1 HOTELS"
+    ],
+    "abgrenzung": "Dort Hausnummern und Zimmerzahlen im Namen; hier die echte Postleitzahl als Zeichen neben einem zweizeiligen Namen in Versalien.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "pflicht",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "mutig"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "hostgrotesk",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "hostgrotesk",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "intertight",
+          "weight": 800
+        },
+        {
+          "key": "spacegrotesk",
+          "weight": 700
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "petrol",
+        "ziegel",
+        "navysand"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "zahl",
+      "position": "links",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "inline",
+      "kunstgriff": "zahlmarke"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "plz",
+        "feld": "plz",
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": -0.02,
+        "versal": 300,
+        "x": 0,
+        "y": 0,
+        "anker": "oben",
+        "ausrichtung": "links",
+        "rolle": "zeichen",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "linie",
+        "x1": "plz.r+40",
+        "x2": "plz.r+40",
+        "y1": "plz.t",
+        "y2": "plz.b",
+        "staerke": 1.6,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "t1",
+        "feld": "teil1",
+        "wenn": "teil2",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.04,
+        "versal": 100,
+        "x": "plz.r+80",
+        "y": "plz.t",
+        "anker": "oben",
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1100,
+          "minVersal": 50
+        }
+      },
+      {
+        "typ": "text",
+        "id": "t2",
+        "feld": "teil2",
+        "wenn": "teil2",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.04,
+        "versal": "t1.cap",
+        "x": "plz.r+80",
+        "y": "t1.b+1.26*t1.cap",
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1100,
+          "minVersal": 50
+        }
+      },
+      {
+        "typ": "text",
+        "id": "n1",
+        "feld": "name",
+        "wennNicht": "teil2",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.04,
+        "versal": 100,
+        "x": "plz.r+80",
+        "y": "plz.t",
+        "anker": "oben",
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1100,
+          "minVersal": 50
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOderOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 40,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1100,
+          "minVersal": 24
+        },
+        "x": "plz.r+80",
+        "y": "plz.b"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-ortsachse",
+    "titel": "Ortsachse",
+    "idee": "Unter dem Namen stehen zwei Orte, verbunden durch einen kurzen Strich: Herkunft und Wirkungsort, Stadt und Land, zwei Bezirke. Zwei Orte erzählen eine Geschichte.",
+    "herleitung": "Herkunftszeilen der Parfum- und Modehäuser und Fahrpläne (Ort, Strich, Ort). Der zweite Ort ist Pflicht, sonst wäre es nur Name mit Ort; Name in Antiqua statt Schablone oder Schreibmaschine.",
+    "referenzen": [
+      "LE LABO",
+      "DIPTYQUE PARIS"
+    ],
+    "abgrenzung": "Dort Schablonen- bzw. Übergangsantiqua mit Stadtnamen; hier kontrastreiche Antiqua-Versalien und ein Ortspaar mit kurzem Strich, keine Schablone, keine Schreibmaschine.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "pflicht",
+        "zusatz": "nein"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 22,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus",
+        "natur"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "caslon",
+          "weight": 400
+        },
+        {
+          "key": "gloock",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "tanne",
+        "messing",
+        "taubenblau"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "ortsachse",
+      "position": "unter",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "ortsachse"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.02,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "m1",
+        "feld": "ort",
+        "nurMessen": true,
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.28,
+        "versal": "max(24,0.028*name.w)",
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "neben"
+      },
+      {
+        "typ": "text",
+        "id": "m2",
+        "feld": "ort2",
+        "nurMessen": true,
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.28,
+        "versal": "max(24,0.028*name.w)",
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "neben"
+      },
+      {
+        "typ": "text",
+        "id": "o1",
+        "feld": "ort",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.28,
+        "versal": "max(24,0.028*name.w)",
+        "x": "name.cx-(m1.w+96+m2.w)/2",
+        "y": "max(name.b,name.u-14)+46+max(24,0.028*name.w)",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "pflicht": true
+      },
+      {
+        "typ": "linie",
+        "x1": "o1.r+28",
+        "x2": "o1.r+68",
+        "y1": "o1.b-0.5*o1.cap",
+        "y2": "o1.b-0.5*o1.cap",
+        "staerke": 2,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "o2",
+        "feld": "ort2",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.28,
+        "versal": "o1.cap",
+        "x": "o1.r+96",
+        "y": "o1.b",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "pflicht": true
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-fussnote",
+    "titel": "Fußnote",
+    "idee": "Am Ende des Namens steht ein eigenes Sternchen aus sechs Haarlinien; darunter folgt mit demselben Zeichen eine Fußnote in kursiver Antiqua: der Zusatz wird zur Anmerkung statt zur Werbezeile.",
+    "herleitung": "Fußnotenapparat von Buch und Magazin. Das Sternchen ist eine eigene Form aus Haarlinien (kein Schriftzeichen), der Name steht in Antiqua-Versalien, und die Fußnote ist Pflicht.",
+    "referenzen": [],
+    "abgrenzung": "Anders als ein Magazinkopf mit Sternchen (nicht im Korpus): Antiqua-Versalien statt schmaler Grotesk, eigenes Haarlinien-Sternchen, Fußnotenzeile immer da.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus",
+        "warm"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "caslontext",
+          "weight": 400
+        },
+        {
+          "key": "newsreader",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "caslontext",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "newsreader",
+          "weight": 400,
+          "style": "italic"
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "bordeaux",
+        "tanne",
+        "messing"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "fussnote",
+      "position": "rechts",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "fussnote"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1400,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "pfad",
+        "d": "M0 -17L0 17M-14.72 -8.5L14.72 8.5M-14.72 8.5L14.72 -8.5",
+        "x": "name.r+30",
+        "y": "name.t+4",
+        "kontur": 3,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "text",
+        "id": "fn",
+        "feld": "zusatz",
+        "wenn": "ort",
+        "fest": "{zusatz} in {ort}",
+        "schrift": "neben",
+        "schreibung": "asis",
+        "laufweite": 0.01,
+        "versal": "max(28,0.034*name.w)",
+        "x": "name.l+28",
+        "y": "max(name.b,name.u-14)+56+max(28,0.034*name.w)",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 18
+        }
+      },
+      {
+        "typ": "text",
+        "id": "fn",
+        "feld": "zusatzOderOrt",
+        "wennFehlt": "fn",
+        "schrift": "neben",
+        "schreibung": "asis",
+        "laufweite": 0.01,
+        "versal": "max(28,0.034*name.w)",
+        "x": "name.l+28",
+        "y": "max(name.b,name.u-14)+56+max(28,0.034*name.w)",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 18
+        }
+      },
+      {
+        "typ": "pfad",
+        "d": "M0 -9L0 9M-7.79 -4.5L7.79 4.5M-7.79 4.5L7.79 -4.5",
+        "massstab": "fn.cap/28",
+        "x": "name.l+9",
+        "y": "fn.t+4",
+        "kontur": 1.8,
+        "rolle": "akzent"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-breitlauf",
+    "titel": "Breitlauf",
+    "idee": "Versalien aus einer breiten Grotesk, die Breite steckt in den Buchstaben, nicht in den Lücken: ruhig, horizontal, wie eine Fassadeninschrift; der Zusatz läuft exakt auf Namensbreite.",
+    "herleitung": "Fassadeninschriften und Gravuren in breiten Groteskformen. Leichtes bzw. normales Gewicht in Farbe statt fetter Versalien in Schwarz.",
+    "referenzen": [
+      "CHANEL",
+      "ROSEWOOD",
+      "CELINE"
+    ],
+    "abgrenzung": "Dort fette geometrische Versalien in Schwarz mit sechs bzw. acht Buchstaben; hier breite Grotesk leicht oder normal in Farbe, die Breite steckt in den Formen.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 12,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "luxus"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "lexendzetta",
+          "weight": 300
+        },
+        {
+          "key": "michroma",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 300
+        },
+        {
+          "key": "jost",
+          "weight": 300
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "primary",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "petrol",
+        "bordeaux",
+        "champagner"
+      ]
+    },
+    "merkmale": {
+      "zeichen": null,
+      "position": null,
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "wordmark",
+      "kunstgriff": "breitlauf"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.4,
+        "versal": "max(26,0.032*name.w)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "max(name.w,520)",
+          "minVersal": 18
+        },
+        "x": "name.cx",
+        "y": "max(name.b,name.u-14)+46+max(26,0.032*name.w)",
+        "austreiben": "name.w"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-querstrichlos",
+    "titel": "Querstrichlos",
+    "idee": "In jedem A des Namens fehlt der Querbalken, die Schenkel stehen wie ein Giebel: ein Eingriff in die Schrift, den man erst beim zweiten Blick sieht. Sonst bleibt alles unverändert.",
+    "herleitung": "Giebel und Dachstuhl ohne Kehlbalken; in der Schriftgeschichte das Lambda-A früher Inschriften. Ohne Strich oder Makron über dem A (gesperrt), normale Laufweite, in Farbe statt Schwarz.",
+    "referenzen": [
+      "AMAN"
+    ],
+    "abgrenzung": "Dort A ohne Balken mit Makron in leichter, sehr weit gesperrter Geometrie und vier Buchstaben; hier kein Akzent, normale Laufweite, Farbe statt Schwarz.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 18,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus",
+        "modern"
+      ],
+      "enthaelt": "AÁÀÂ"
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "julius",
+          "weight": 400
+        },
+        {
+          "key": "tenor",
+          "weight": 400
+        },
+        {
+          "key": "cormorant",
+          "weight": 500
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "primary",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "tanne",
+        "bordeaux",
+        "petrol"
+      ]
+    },
+    "merkmale": {
+      "zeichen": null,
+      "position": null,
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "wordmark",
+      "kunstgriff": "querstrichlos"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.16,
+        "versal": 100,
+        "ohneQuerbalken": "A",
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.26,
+        "versal": "max(28,0.032*name.w)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "max(name.b,name.u-14)+50+max(28,0.032*name.w)"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-et-achse",
+    "titel": "Et-Achse",
+    "idee": "Zwei Partnernamen stehen untereinander in ruhigen Antiqua-Versalien, ein großes kursives Et-Zeichen hält beide Zeilen links zusammen: Partnerschaft als Form.",
+    "herleitung": "Kanzlei- und Verlagsschilder mit zwei Namen; das kursive Et ist die schönste Glyphe vieler Antiquas. Gestapelt, Et über zwei Zeilen in der Hausfarbe, nie rot und nie in einer Zeile zwischen Grotesk-Versalien.",
+    "referenzen": [
+      "ENGEL&VÖLKERS",
+      "H&dM",
+      "Strutt & Parker"
+    ],
+    "abgrenzung": "Dort ein farbiges Et in einer Zeile zwischen Grotesk-Versalien bzw. Kürzel; hier ein großes kursives Et als Achse links von zwei gestapelten Antiqua-Zeilen, ohne Rot.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 30,
+      "wortzahl": [
+        3,
+        7
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus",
+        "warm"
+      ],
+      "partner": true
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ],
+      "akzent": [
+        {
+          "key": "cormorant",
+          "weight": 500,
+          "style": "italic"
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400,
+          "style": "italic"
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "tanne",
+        "navysand",
+        "messing"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "et-achse",
+      "position": "links",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "et-achse"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "et",
+        "feld": "partner1",
+        "fest": "&",
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": 250,
+        "x": 0,
+        "y": 150,
+        "ausrichtung": "links",
+        "rolle": "akzent",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "p1",
+        "feld": "partner1",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": 100,
+        "x": "et.r+34",
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "p2",
+        "feld": "partner2",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": "p1.cap",
+        "x": "et.r+34",
+        "y": "1.5*p1.cap",
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": 28,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "p1.l",
+        "y": "p2.b+76"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-umlaut",
+    "titel": "Umlaut-Signatur",
+    "idee": "Die zwei Punkte des ersten Umlauts im Namen werden zu zwei kleinen Quadraten in der Akzentfarbe: das Detail gehört dem Namen, nicht dem Gestalter. Österreichische Namen haben es oft.",
+    "herleitung": "Diakritische Zeichen als Eigenart österreichischer Namen (Köchl, Größ, Hübl). Nur dort, wo der Name einen Umlaut hat, und nur Quadrate, keine Striche (Abstand zu Makron und Querstrich bekannter Marken).",
+    "referenzen": [
+      "ENGEL&VÖLKERS",
+      "Daniel FÉAU"
+    ],
+    "abgrenzung": "Dort Ö im Namen bzw. Querstrich über dem É; hier nur zwei farbige Quadrate an Stelle der Umlautpunkte, kein Strich, kein Akzent als Schmuck.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 22,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "mutig",
+        "elegant",
+        "warm"
+      ],
+      "umlaut": true
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "librebodoni",
+          "weight": 500
+        },
+        {
+          "key": "archivo",
+          "weight": 800
+        },
+        {
+          "key": "rokkitt",
+          "weight": 700
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "archivo",
+          "weight": 400
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "ziegel",
+        "messing",
+        "petrol"
+      ]
+    },
+    "merkmale": {
+      "zeichen": null,
+      "position": null,
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark",
+      "kunstgriff": "umlaut-signatur"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": 100,
+        "umlaut": {
+          "kante": 0.19,
+          "rolle": "akzent"
+        },
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.22,
+        "versal": "max(30,0.032*name.w)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "max(name.b,name.u-14)+52+max(30,0.032*name.w)"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-gruendung",
+    "titel": "Gründungszeile",
+    "idee": "Unter dem Namen in klassischen Antiqua-Versalien folgen nach einer kleinen Raute das echte Gründungsjahr und der Ort: Dauer ist das stärkste Vertrauenssignal im Immobiliengeschäft.",
+    "herleitung": "Gründungsvermerke traditionsreicher Häuser (seit, gegründet). Das Jahr ist eine Pflichteingabe und muss stimmen (Irreführungsverbot); die Vorlage erfindet nie ein Jahr.",
+    "referenzen": [
+      "SUNSPEL ENGLAND 1860",
+      "ROHRER IMMOBILIENMAKLER SEIT 1919",
+      "ÖRAG Immobilien Seit 1871",
+      "A.E. KÖCHERT SEIT 1814"
+    ],
+    "abgrenzung": "Dort Gründungsjahr in der Namenszeile, in Grotesk oder in schwarzer Antiqua mit Landesname; hier Name in Hausfarbe, eigene kleine Zeile mit Raute als Trenner und dem Ort.",
+    "legal": "gelb",
+    "nahe": [
+      "SUNSPEL ENGLAND 1860"
+    ],
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus",
+        "warm"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "ebgaramond",
+          "weight": 600
+        },
+        {
+          "key": "caslontext",
+          "weight": 700
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ]
+    },
+    "farben": {
+      "name": "primary",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "bordeaux",
+        "tanne",
+        "navysand"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "gruendungszeile",
+      "position": "unter",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "gruendungszeile"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.08,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "pfad",
+        "d": "M0 -7L7 0L0 7L-7 0Z",
+        "x": "name.cx",
+        "y": "max(name.b,name.u-14)+44",
+        "rolle": "akzent"
+      },
+      {
+        "typ": "text",
+        "id": "seit",
+        "feld": "jahr",
+        "fest": "Seit {jahr}",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.4,
+        "y": "max(name.b,name.u-14)+76+max(24,0.028*name.w)",
+        "versal": "max(24,0.028*name.w)",
+        "x": "name.cx",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.3,
+        "versal": "max(26,0.03*name.w)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "seit.b+24+max(26,0.03*name.w)"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-schablone",
+    "titel": "Schablone",
+    "idee": "Der Name in schmaler Schablonenschrift, jede geschlossene Form mit Stegen, weit gesetzt wie auf Lieferkisten und Bauzäunen; darunter Zusatz und Ort in Mono: ehrlich, nach Material und Baustelle.",
+    "herleitung": "Schablonenbeschriftung von Kisten, Baustellen und Lagern. Schmale Schablone mit weiter Laufweite und Zusatz als Pflicht (Abstand zu einer bekannten Duftmarke mit breiter, fetter Schablone).",
+    "referenzen": [
+      "BYREDO",
+      "LE LABO"
+    ],
+    "abgrenzung": "Dort normal breite, fette Schablonen-Versalien mit sechs Buchstaben bzw. Schreibmaschinen-Schablone; hier schmale Schablone, weit gesperrt, Zusatz immer da.",
+    "legal": "gelb",
+    "nahe": [
+      "BYREDO",
+      "LE LABO"
+    ],
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "pflicht"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 18,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "mutig",
+        "modern",
+        "natur"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "bigshouldersstencil",
+          "weight": 700
+        },
+        {
+          "key": "sairastencil",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "dmmono",
+          "weight": 300
+        },
+        {
+          "key": "courierprime",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "schwarzweiss",
+        "oliv",
+        "ziegel"
+      ]
+    },
+    "merkmale": {
+      "zeichen": null,
+      "position": null,
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "wordmark",
+      "kunstgriff": "schablone"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.1,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.14,
+        "versal": "max(26,0.032*name.w)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "max(name.w,640)",
+          "minVersal": 18
+        },
+        "x": "name.cx",
+        "y": "max(name.b,name.u-14)+40+max(26,0.032*name.w)",
+        "pflicht": true
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-wortbruecke",
+    "titel": "Wortbrücke",
+    "idee": "Vor- und Nachname stehen ohne Abstand, der letzte Buchstabe des ersten Wortes und der erste des zweiten teilen sich einen senkrechten Stamm: ein einziges, präzises Detail, das nur bei diesem Namen funktioniert.",
+    "herleitung": "Ligaturen im Bleisatz und gemeinsame Stämme in Inschriften. Nur Paare mit zwei senkrechten Stämmen (Ende N oder H, Anfang N, H, B, D, E, F, K, L, P, R); das Paar T-L ist immer gesperrt.",
+    "referenzen": [
+      "SAINT LAURENT"
+    ],
+    "abgrenzung": "Dort teilen T und L einen Strich in schmaler Grotesk; hier nie T-L, nur senkrechte Stämme, Inschriften-Antiqua in Farbe.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 18,
+      "wortzahl": [
+        2,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus"
+      ],
+      "fuge": {
+        "enden": "NH",
+        "anfaenge": "NHBDEFKLPR"
+      }
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cinzel",
+          "weight": 500
+        },
+        {
+          "key": "marcellus",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ]
+    },
+    "farben": {
+      "name": "primary",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "bordeaux",
+        "tanne",
+        "navysand"
+      ]
+    },
+    "merkmale": {
+      "zeichen": null,
+      "position": null,
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark",
+      "kunstgriff": "wortbruecke"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "t1",
+        "feld": "teil1",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 800,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "t2",
+        "feld": "teil2",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": "t1.cap",
+        "x": "t1.r-t1.sr",
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.3,
+        "versal": "max(26,0.016*t1.w)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "(t1.l+t2.r)/2",
+        "y": "max(t1.b,t1.u-14)+50+max(26,0.016*t1.w)"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-fundament",
+    "titel": "Fundament",
+    "idee": "Ein Buchstabe mit geradem Stamm aus der zweiten Hälfte des Namens reicht unter die Grundlinie und durchstößt eine feine Geländelinie: ein Fundament, erzählt ohne Bildzeichen.",
+    "herleitung": "Schnitt durch Gebäude und Gelände im Bauplan (Fundament unter der Geländelinie). Nur Buchstaben mit senkrechtem Stamm (I, L, M, N, H, T, U); eine waagrechte Fuge durch alle Buchstaben (sig-fuge) ist etwas anderes.",
+    "referenzen": [],
+    "abgrenzung": "Im Korpus sinkt kein einzelner Buchstabe unter eine Geländelinie; fette Grotesk ohne Zeichen, das Detail ist ein verlängerter Stamm.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 16,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "mutig",
+        "modern"
+      ],
+      "enthaelt": "ILMNHTU"
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "intertight",
+          "weight": 800
+        },
+        {
+          "key": "archivo",
+          "weight": 800
+        }
+      ],
+      "neben": [
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "archivo",
+          "weight": 400
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "ziegel",
+        "petrol",
+        "anthrazit"
+      ]
+    },
+    "merkmale": {
+      "zeichen": null,
+      "position": null,
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "wordmark",
+      "kunstgriff": "fundament"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": -0.01,
+        "versal": 100,
+        "fundament": {
+          "buchstaben": "ILMNHTU",
+          "tiefe": 40,
+          "rolle": "name"
+        },
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "linie",
+        "x1": "name.l",
+        "x2": "name.r",
+        "y1": "name.b+18",
+        "y2": "name.b+18",
+        "staerke": 2.5,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.22,
+        "versal": "max(28,0.03*name.w)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.cx",
+        "y": "name.b+84+max(28,0.03*name.w)"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-kastenmarke",
+    "titel": "Kastenmarke",
+    "idee": "Schmale Versalien in einem kräftigen Rahmen, Rahmen und Schrift gleich stark, der Zusatz steht außerhalb rechts auf der Grundlinie: Schildcharakter, Stempel und Bauschild in einem.",
+    "herleitung": "Firmenschilder, Stempel und Kistenmarken. Rahmen nur als Kontur, mittleres statt fettes Gewicht, Farbe statt Schwarz, Zusatz immer außerhalb des Kastens; keine Fläche, keine Kursive.",
+    "referenzen": [
+      "ACE HOTEL",
+      "THE AGENCY"
+    ],
+    "abgrenzung": "Dort fette schmale Versalien im schwarzen Rahmen bzw. Fläche mit Monogramm; hier mittleres Gewicht in Farbe, Kontur statt Fläche, Zusatz außerhalb.",
+    "legal": "gelb",
+    "nahe": [
+      "ACE HOTEL"
+    ],
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 11,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "mutig",
+        "modern"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "oswald",
+          "weight": 500
+        },
+        {
+          "key": "bigshoulders",
+          "weight": 500
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ]
+    },
+    "farben": {
+      "name": "primary",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "petrol",
+        "ziegel",
+        "oliv"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "rahmen",
+      "position": "um",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "badge",
+      "kunstgriff": "kastenmarke"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.02,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "zeichen": true,
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "rechteck",
+        "id": "kasten",
+        "x": "name.l-36",
+        "y": "name.t-28",
+        "b": "name.w+72",
+        "h": "name.h+56",
+        "kontur": 12,
+        "rolle": "name",
+        "zeichen": true
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOderOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.16,
+        "versal": "max(30,0.045*name.w)",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 700,
+          "minVersal": 20
+        },
+        "x": "kasten.r+30",
+        "y": "name.b"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-reiter",
+    "titel": "Reiter",
+    "idee": "Eine hochformatige Farbfläche hängt wie ein Karteireiter an einer feinen Kante, der Name steht klein geschrieben unten in der Fläche ausgespart: Wiedererkennung durch Platzierung statt Form.",
+    "herleitung": "Karteireiter und Registerblätter. Hochformat statt Quadrat, Haarlinie als Blattkante bündig mit der Fläche, keine Palette mit Gelb und Rot zugleich (Sperre, gleiche Branche).",
+    "referenzen": [
+      "savills"
+    ],
+    "abgrenzung": "Dort Name in einer quadratischen Fläche in Gelb und Rot; hier hochformatiger Reiter an einer Kante, nie Gelb mit Rot.",
+    "legal": "gelb",
+    "nahe": [
+      "savills"
+    ],
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 16,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "warm",
+        "mutig"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "hanken",
+          "weight": 700
+        },
+        {
+          "key": "instrumentsans",
+          "weight": 600
+        }
+      ],
+      "neben": [
+        {
+          "key": "hanken",
+          "weight": 400
+        },
+        {
+          "key": "instrumentsans",
+          "weight": 400
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "primary",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "tanne",
+        "petrol",
+        "navysand"
+      ],
+      "ohneGelbRot": true
+    },
+    "merkmale": {
+      "zeichen": "flaeche",
+      "position": "um",
+      "schrift": "sans",
+      "schreibung": "lower",
+      "layout": "badge",
+      "kunstgriff": "reiter"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "lower",
+        "laufweite": -0.01,
+        "versal": 100,
+        "x": 34,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "grund",
+        "ebene": 1,
+        "zeichen": true,
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 320,
+          "minVersal": 44,
+          "umbruch": true,
+          "zeilenabstand": 1.1
+        }
+      },
+      {
+        "typ": "rechteck",
+        "id": "tab",
+        "x": 0,
+        "y": "name.b+34-430",
+        "b": "max(300,name.w+68)",
+        "h": 430,
+        "rolle": "zeichen",
+        "zeichen": true
+      },
+      {
+        "typ": "linie",
+        "x1": "tab.l",
+        "x2": "tab.r",
+        "y1": "tab.t-14",
+        "y2": "tab.t-14",
+        "staerke": 1.5,
+        "rolle": "name"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 28,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": 0,
+        "y": "tab.b+64"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-weichklein",
+    "titel": "Weich und klein",
+    "idee": "Fette Antiqua mit weichen, runden Formen, ganz klein geschrieben und eng: wie ein Wort aus einem Satz, warm und gebildet zugleich; der Zusatz folgt klein auf derselben Grundlinie.",
+    "herleitung": "Wohnmagazine und Buchumschläge mit kleingeschriebenen Titeln in weicher Antiqua. Ergänzt die fette kleingeschriebene Grotesk (sig-kleinfett) um eine warme Antiqua; Name in Farbe.",
+    "referenzen": [
+      "the hoxton"
+    ],
+    "abgrenzung": "Dort weiche fette Antiqua klein in Dunkelgrau mit Artikel; hier in Hausfarbe, ohne Artikel, mit kleinem Zusatz auf der Grundlinie.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 12,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "warm",
+        "natur",
+        "modern"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "fraunces",
+          "weight": 800
+        },
+        {
+          "key": "fraunces",
+          "weight": 600
+        },
+        {
+          "key": "youngserif",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ]
+    },
+    "farben": {
+      "name": "primary",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "terrakotta",
+        "oliv",
+        "rost"
+      ]
+    },
+    "merkmale": {
+      "zeichen": null,
+      "position": null,
+      "schrift": "serif",
+      "schreibung": "lower",
+      "layout": "inline",
+      "kunstgriff": "weich-klein"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "lower",
+        "laufweite": -0.01,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOderOrt",
+        "schrift": "neben",
+        "schreibung": "lower",
+        "laufweite": 0.04,
+        "versal": "max(30,0.04*name.w)",
+        "x": "name.r+30",
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 520,
+          "minVersal": 22
+        }
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-vollhohl",
+    "titel": "Voll und hohl",
+    "idee": "Der Name fett gefüllt, der Zusatz in derselben Schrift und Größe nur als Kontur daneben (bei langen Namen darunter): Bestand und Entwurf wie im Plan, gebaut und geplant.",
+    "herleitung": "Bestand und Planung im Architekturplan (voll und hohl) und Plakattypografie. Die Kontur ist ein ganzes Wort in voller Größe mit deutlichem Strich, kein Wasserzeichen-Initial.",
+    "referenzen": [
+      "OMA"
+    ],
+    "abgrenzung": "Dort sehr fette Grotesk-Versalien mit drei Buchstaben in Schwarz; hier Name in Farbe, ab vier Buchstaben, mit einem Kontur-Wort in voller Größe.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 16,
+      "wortzahl": [
+        1,
+        2
+      ],
+      "initialen": 0,
+      "stile": [
+        "mutig",
+        "modern"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "archivo",
+          "weight": 800
+        },
+        {
+          "key": "intertight",
+          "weight": 800
+        }
+      ],
+      "neben": [
+        {
+          "key": "archivo",
+          "weight": 800
+        },
+        {
+          "key": "intertight",
+          "weight": 800
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "primary",
+      "neben": "primary",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "ziegel",
+        "petrol",
+        "oliv"
+      ]
+    },
+    "merkmale": {
+      "zeichen": null,
+      "position": null,
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "inline",
+      "kunstgriff": "voll-hohl"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": -0.02,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1400,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zi",
+        "feld": "zusatzOderOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": -0.02,
+        "versal": "name.cap",
+        "kontur": 3,
+        "x": "name.r+0.36*name.cap",
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "1500-name.w-0.36*name.cap",
+          "minVersal": 99
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zs",
+        "feld": "zusatzOderOrt",
+        "wennFehlt": "zi",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": -0.02,
+        "versal": "name.cap",
+        "kontur": 3,
+        "x": 0,
+        "y": "name.b+1.3*name.cap",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 60
+        }
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-kuerzel",
+    "titel": "Kürzel mit Punkten",
+    "idee": "Zwei Initialen mit Punkten als Hauptmarke, kräftig und eng, wie ein Haus, das man nur noch beim Kürzel nennt; der volle Name steht klein und gesperrt auf Kürzelbreite darunter.",
+    "herleitung": "Kürzel alter Handelshäuser und Juweliere (Initialen mit Punkten über dem Namen). Immer genau zwei Buchstaben, nie drei (Abstand zu einer bekannten Modemarke mit drei Buchstaben).",
+    "referenzen": [
+      "A.E. KÖCHERT SEIT 1814",
+      "J. & L. LOBMEYR"
+    ],
+    "abgrenzung": "Dort Kürzel in der Namenszeile bzw. als Gitter-Monogramm; hier zwei Initialen mit Punkten als große Hauptmarke über dem gesperrten vollen Namen, nie drei Buchstaben.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 22,
+      "wortzahl": [
+        2,
+        3
+      ],
+      "initialen": 2,
+      "stile": [
+        "mutig",
+        "luxus",
+        "modern"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "archivo",
+          "weight": 800
+        },
+        {
+          "key": "librebodoni",
+          "weight": 700
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "graphit",
+        "bordeaux",
+        "petrol"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "kuerzel",
+      "position": "oben",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "kuerzel-punkte"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "k",
+        "feld": "kuerzel",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": -0.02,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "voll",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.3,
+        "versal": 20,
+        "austreiben": "k.w",
+        "x": "k.cx",
+        "y": "k.b+52",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": "max(k.w,420)",
+          "minVersal": 14
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.3,
+        "versal": 16,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "max(k.w,420)",
+          "minVersal": 12
+        },
+        "x": "k.cx",
+        "y": "voll.b+40"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  }
+]

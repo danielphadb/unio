@@ -1,0 +1,13 @@
+{
+  "j": "2026-07-01",
+  "t": {"title":80,"address":120,"description":600,"price":40,"url":200,"factLabel":30,"factValue":30,"facts":8,"photos":4},
+  "k": ["A++","A+","A","B","C","D","E","F","G"],
+  "B": {"$regexp":"^(A\\+\\+|A\\+|A|B|C|D|E|F|G)( [a-zäöüß]{3,20})?$","flags":"i"},
+  "y": {"$regexp":"^(19|20)\\d\\d-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$","flags":""},
+  "F": ["Wohnfläche","Zimmer","Freifläche","Baujahr","Grundfläche","Stockwerk","Stellplatz","Heizung"],
+  "T": {"Wohnfläche":"z. B. 84 m²","Zimmer":"z. B. 3","Freifläche":"z. B. 12 m² Balkon","Baujahr":"z. B. 1908","Grundfläche":"z. B. 640 m²","Stockwerk":"z. B. 3. Stock","Stellplatz":"z. B. Tiefgarage","Heizung":"z. B. Fernwärme"},
+  "S": {"$regexp":"^[a-z0-9]{6,40}$","flags":""},
+  "b": {"$regexp":"^\\d{1,4}([.,]\\d{1,2})?$","flags":""},
+  "a": {"title":"Gib dem Objekt einen kurzen Titel, z. B. „Dachgeschoss mit Weitblick“.","address":"Die Adresse ist zu lang (höchstens 120 Zeichen).","description":"Die Beschreibung ist zu lang (höchstens 600 Zeichen).","price":"Der Preis ist zu lang (höchstens 40 Zeichen).","url":"Diese Adresse sieht nicht wie eine Website aus, z. B. „berger-immobilien.at/objekt-12“.","hwb":"Gib den HWB als Zahl ein, z. B. 45 oder 45,3.","fgee":"Gib den fGEE als Zahl ein, z. B. 0,85.","klasse":"Wähle die Klasse aus deinem Energieausweis.","eeb":"Gib den EEB als Zahl ein, z. B. 62 oder 61,8.","eebKlasse":"Wähle die Klasse zum EEB. Der Zusatz ist ein Wort, z. B. fossil.","ausweisDatum":"Gib das Datum wie auf dem Ausweis ein.","facts":"Kennzahlen höchstens 30 Zeichen je Feld.","photos":"Höchstens 4 Fotos."},
+  "h": null
+}

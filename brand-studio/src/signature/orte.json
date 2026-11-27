@@ -1,0 +1,660 @@
+{
+  "bezirke": [
+    {
+      "name": "Innere Stadt",
+      "alias": [
+        "innere stadt",
+        "1. bezirk",
+        "erster bezirk",
+        "city"
+      ],
+      "lat": 48.21,
+      "lon": 16.37,
+      "plz": "1010",
+      "bezirk": 1
+    },
+    {
+      "name": "Leopoldstadt",
+      "lat": 48.22,
+      "lon": 16.4,
+      "plz": "1020",
+      "bezirk": 2
+    },
+    {
+      "name": "Landstraße",
+      "alias": [
+        "landstrasse"
+      ],
+      "lat": 48.2,
+      "lon": 16.39,
+      "plz": "1030",
+      "bezirk": 3
+    },
+    {
+      "name": "Wieden",
+      "lat": 48.19,
+      "lon": 16.37,
+      "plz": "1040",
+      "bezirk": 4
+    },
+    {
+      "name": "Margareten",
+      "lat": 48.19,
+      "lon": 16.36,
+      "plz": "1050",
+      "bezirk": 5
+    },
+    {
+      "name": "Mariahilf",
+      "lat": 48.2,
+      "lon": 16.35,
+      "plz": "1060",
+      "bezirk": 6
+    },
+    {
+      "name": "Neubau",
+      "lat": 48.2,
+      "lon": 16.35,
+      "plz": "1070",
+      "bezirk": 7
+    },
+    {
+      "name": "Josefstadt",
+      "lat": 48.21,
+      "lon": 16.35,
+      "plz": "1080",
+      "bezirk": 8
+    },
+    {
+      "name": "Alsergrund",
+      "lat": 48.22,
+      "lon": 16.36,
+      "plz": "1090",
+      "bezirk": 9
+    },
+    {
+      "name": "Favoriten",
+      "lat": 48.17,
+      "lon": 16.38,
+      "plz": "1100",
+      "bezirk": 10
+    },
+    {
+      "name": "Simmering",
+      "lat": 48.17,
+      "lon": 16.42,
+      "plz": "1110",
+      "bezirk": 11
+    },
+    {
+      "name": "Meidling",
+      "lat": 48.18,
+      "lon": 16.33,
+      "plz": "1120",
+      "bezirk": 12
+    },
+    {
+      "name": "Hietzing",
+      "lat": 48.19,
+      "lon": 16.3,
+      "plz": "1130",
+      "bezirk": 13
+    },
+    {
+      "name": "Penzing",
+      "lat": 48.2,
+      "lon": 16.3,
+      "plz": "1140",
+      "bezirk": 14
+    },
+    {
+      "name": "Rudolfsheim-Fünfhaus",
+      "alias": [
+        "rudolfsheim",
+        "fünfhaus",
+        "rudolfsheim fünfhaus"
+      ],
+      "lat": 48.19,
+      "lon": 16.33,
+      "plz": "1150",
+      "bezirk": 15
+    },
+    {
+      "name": "Ottakring",
+      "lat": 48.21,
+      "lon": 16.31,
+      "plz": "1160",
+      "bezirk": 16
+    },
+    {
+      "name": "Hernals",
+      "lat": 48.22,
+      "lon": 16.32,
+      "plz": "1170",
+      "bezirk": 17
+    },
+    {
+      "name": "Währing",
+      "alias": [
+        "waehring"
+      ],
+      "lat": 48.23,
+      "lon": 16.33,
+      "plz": "1180",
+      "bezirk": 18
+    },
+    {
+      "name": "Döbling",
+      "alias": [
+        "doebling"
+      ],
+      "lat": 48.24,
+      "lon": 16.35,
+      "plz": "1190",
+      "bezirk": 19
+    },
+    {
+      "name": "Brigittenau",
+      "lat": 48.24,
+      "lon": 16.37,
+      "plz": "1200",
+      "bezirk": 20
+    },
+    {
+      "name": "Floridsdorf",
+      "lat": 48.26,
+      "lon": 16.4,
+      "plz": "1210",
+      "bezirk": 21
+    },
+    {
+      "name": "Donaustadt",
+      "lat": 48.23,
+      "lon": 16.45,
+      "plz": "1220",
+      "bezirk": 22
+    },
+    {
+      "name": "Liesing",
+      "lat": 48.14,
+      "lon": 16.29,
+      "plz": "1230",
+      "bezirk": 23
+    }
+  ],
+  "staedte": [
+    {
+      "name": "Wien",
+      "alias": [
+        "vienna"
+      ],
+      "lat": 48.21,
+      "lon": 16.37,
+      "plz": ""
+    },
+    {
+      "name": "Graz",
+      "lat": 47.07,
+      "lon": 15.44,
+      "plz": "8010"
+    },
+    {
+      "name": "Linz",
+      "lat": 48.31,
+      "lon": 14.29,
+      "plz": "4020"
+    },
+    {
+      "name": "Salzburg",
+      "lat": 47.8,
+      "lon": 13.04,
+      "plz": "5020"
+    },
+    {
+      "name": "Innsbruck",
+      "lat": 47.27,
+      "lon": 11.39,
+      "plz": "6020"
+    },
+    {
+      "name": "Klagenfurt",
+      "alias": [
+        "klagenfurt am wörthersee"
+      ],
+      "lat": 46.62,
+      "lon": 14.31,
+      "plz": "9020"
+    },
+    {
+      "name": "Villach",
+      "lat": 46.61,
+      "lon": 13.85,
+      "plz": "9500"
+    },
+    {
+      "name": "Wels",
+      "lat": 48.16,
+      "lon": 14.03,
+      "plz": "4600"
+    },
+    {
+      "name": "St. Pölten",
+      "alias": [
+        "sankt pölten",
+        "st pölten"
+      ],
+      "lat": 48.2,
+      "lon": 15.62,
+      "plz": "3100"
+    },
+    {
+      "name": "Dornbirn",
+      "lat": 47.41,
+      "lon": 9.74,
+      "plz": "6850"
+    },
+    {
+      "name": "Wiener Neustadt",
+      "lat": 47.81,
+      "lon": 16.24,
+      "plz": "2700"
+    },
+    {
+      "name": "Steyr",
+      "lat": 48.04,
+      "lon": 14.42,
+      "plz": "4400"
+    },
+    {
+      "name": "Feldkirch",
+      "lat": 47.24,
+      "lon": 9.6,
+      "plz": "6800"
+    },
+    {
+      "name": "Bregenz",
+      "lat": 47.5,
+      "lon": 9.75,
+      "plz": "6900"
+    },
+    {
+      "name": "Leonding",
+      "lat": 48.28,
+      "lon": 14.25,
+      "plz": "4060"
+    },
+    {
+      "name": "Klosterneuburg",
+      "lat": 48.31,
+      "lon": 16.33,
+      "plz": "3400"
+    },
+    {
+      "name": "Baden",
+      "alias": [
+        "baden bei wien"
+      ],
+      "lat": 48.01,
+      "lon": 16.23,
+      "plz": "2500"
+    },
+    {
+      "name": "Leoben",
+      "lat": 47.38,
+      "lon": 15.09,
+      "plz": "8700"
+    },
+    {
+      "name": "Wolfsberg",
+      "lat": 46.84,
+      "lon": 14.84,
+      "plz": "9400"
+    },
+    {
+      "name": "Krems",
+      "alias": [
+        "krems an der donau"
+      ],
+      "lat": 48.41,
+      "lon": 15.61,
+      "plz": "3500"
+    },
+    {
+      "name": "Traun",
+      "lat": 48.22,
+      "lon": 14.24,
+      "plz": "4050"
+    },
+    {
+      "name": "Amstetten",
+      "lat": 48.12,
+      "lon": 14.87,
+      "plz": "3300"
+    },
+    {
+      "name": "Lustenau",
+      "lat": 47.43,
+      "lon": 9.66,
+      "plz": "6890"
+    },
+    {
+      "name": "Kapfenberg",
+      "lat": 47.44,
+      "lon": 15.29,
+      "plz": "8605"
+    },
+    {
+      "name": "Mödling",
+      "alias": [
+        "moedling"
+      ],
+      "lat": 48.09,
+      "lon": 16.29,
+      "plz": "2340"
+    },
+    {
+      "name": "Hallein",
+      "lat": 47.68,
+      "lon": 13.1,
+      "plz": "5400"
+    },
+    {
+      "name": "Kufstein",
+      "lat": 47.58,
+      "lon": 12.17,
+      "plz": "6330"
+    },
+    {
+      "name": "Traiskirchen",
+      "lat": 48.02,
+      "lon": 16.29,
+      "plz": "2514"
+    },
+    {
+      "name": "Schwechat",
+      "lat": 48.14,
+      "lon": 16.47,
+      "plz": "2320"
+    },
+    {
+      "name": "Braunau am Inn",
+      "alias": [
+        "braunau"
+      ],
+      "lat": 48.26,
+      "lon": 13.03,
+      "plz": "5280"
+    },
+    {
+      "name": "Eisenstadt",
+      "lat": 47.85,
+      "lon": 16.52,
+      "plz": "7000"
+    },
+    {
+      "name": "Kitzbühel",
+      "alias": [
+        "kitzbuehel"
+      ],
+      "lat": 47.45,
+      "lon": 12.39,
+      "plz": "6370"
+    },
+    {
+      "name": "Velden am Wörthersee",
+      "alias": [
+        "velden"
+      ],
+      "lat": 46.61,
+      "lon": 14.04,
+      "plz": "9220"
+    },
+    {
+      "name": "Pörtschach am Wörthersee",
+      "alias": [
+        "pörtschach"
+      ],
+      "lat": 46.64,
+      "lon": 14.17,
+      "plz": "9210"
+    }
+  ],
+  "orte": [
+    {
+      "name": "Bad Ischl",
+      "lat": 47.71,
+      "lon": 13.62,
+      "plz": "4820"
+    },
+    {
+      "name": "Gmunden",
+      "lat": 47.92,
+      "lon": 13.8,
+      "plz": "4810"
+    },
+    {
+      "name": "Hallstatt",
+      "lat": 47.56,
+      "lon": 13.65,
+      "plz": "4830"
+    },
+    {
+      "name": "St. Wolfgang",
+      "alias": [
+        "sankt wolfgang",
+        "st. wolfgang im salzkammergut"
+      ],
+      "lat": 47.74,
+      "lon": 13.45,
+      "plz": "5360"
+    },
+    {
+      "name": "St. Gilgen",
+      "alias": [
+        "sankt gilgen"
+      ],
+      "lat": 47.77,
+      "lon": 13.37,
+      "plz": "5340"
+    },
+    {
+      "name": "Strobl",
+      "lat": 47.72,
+      "lon": 13.48,
+      "plz": "5350"
+    },
+    {
+      "name": "Fuschl am See",
+      "alias": [
+        "fuschl"
+      ],
+      "lat": 47.8,
+      "lon": 13.3,
+      "plz": "5330"
+    },
+    {
+      "name": "Mondsee",
+      "lat": 47.86,
+      "lon": 13.35,
+      "plz": "5310"
+    },
+    {
+      "name": "Attersee am Attersee",
+      "alias": [
+        "attersee"
+      ],
+      "lat": 47.91,
+      "lon": 13.54,
+      "plz": "4864"
+    },
+    {
+      "name": "Unterach am Attersee",
+      "alias": [
+        "unterach"
+      ],
+      "lat": 47.8,
+      "lon": 13.49,
+      "plz": "4866"
+    },
+    {
+      "name": "Traunkirchen",
+      "lat": 47.84,
+      "lon": 13.79,
+      "plz": "4801"
+    },
+    {
+      "name": "Altmünster",
+      "lat": 47.9,
+      "lon": 13.76,
+      "plz": "4813"
+    },
+    {
+      "name": "Ebensee",
+      "alias": [
+        "ebensee am traunsee"
+      ],
+      "lat": 47.81,
+      "lon": 13.77,
+      "plz": "4802"
+    },
+    {
+      "name": "Bad Goisern",
+      "alias": [
+        "bad goisern am hallstättersee"
+      ],
+      "lat": 47.64,
+      "lon": 13.62,
+      "plz": "4822"
+    },
+    {
+      "name": "Bad Aussee",
+      "lat": 47.61,
+      "lon": 13.78,
+      "plz": "8990"
+    },
+    {
+      "name": "Altaussee",
+      "lat": 47.64,
+      "lon": 13.76,
+      "plz": "8992"
+    },
+    {
+      "name": "Grundlsee",
+      "lat": 47.63,
+      "lon": 13.83,
+      "plz": "8993"
+    },
+    {
+      "name": "Vöcklabruck",
+      "lat": 48.01,
+      "lon": 13.66,
+      "plz": "4840"
+    }
+  ],
+  "bezirksnummern": [
+    [
+      "innere stadt",
+      1
+    ],
+    [
+      "leopoldstadt",
+      2
+    ],
+    [
+      "landstraße",
+      3
+    ],
+    [
+      "landstrasse",
+      3
+    ],
+    [
+      "wieden",
+      4
+    ],
+    [
+      "margareten",
+      5
+    ],
+    [
+      "mariahilf",
+      6
+    ],
+    [
+      "neubau",
+      7
+    ],
+    [
+      "josefstadt",
+      8
+    ],
+    [
+      "alsergrund",
+      9
+    ],
+    [
+      "favoriten",
+      10
+    ],
+    [
+      "simmering",
+      11
+    ],
+    [
+      "meidling",
+      12
+    ],
+    [
+      "hietzing",
+      13
+    ],
+    [
+      "penzing",
+      14
+    ],
+    [
+      "rudolfsheim-fünfhaus",
+      15
+    ],
+    [
+      "rudolfsheim",
+      15
+    ],
+    [
+      "fünfhaus",
+      15
+    ],
+    [
+      "ottakring",
+      16
+    ],
+    [
+      "hernals",
+      17
+    ],
+    [
+      "währing",
+      18
+    ],
+    [
+      "döbling",
+      19
+    ],
+    [
+      "brigittenau",
+      20
+    ],
+    [
+      "floridsdorf",
+      21
+    ],
+    [
+      "donaustadt",
+      22
+    ],
+    [
+      "liesing",
+      23
+    ]
+  ]
+}

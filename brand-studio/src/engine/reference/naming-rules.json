@@ -1,0 +1,2680 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "stand": "2026-10-21",
+    "zweck": "Regeldatenbank für Kunstwörter und abgewandelte Namen im Namensgenerator des UNIO Brand Studio (Immobilienmakler in Österreich). Daten, kein Code: die Engine (src/engine/names/**) liest sie, die Gewichte sind Startwerte für die Eichung an der Jury.",
+    "begleitdokument": "docs/17-namensdatenbank.md",
+    "quellen": [
+      "eigene Regeln aus Referenzkorpus (src/engine/reference/corpus.json: Kernname Median 8 Buchstaben, 3 Silben; Anti-Muster immo_kurzform, gold_code, domain_als_logo, rechtsform_im_logo)",
+      "Klischee-, Schutz- und Silbenlisten der Engine (src/engine/names/rules.ts: NAME_CLICHES, PROTECTED_PARTS, BAD_PARTS), hier nicht dupliziert, sondern referenziert",
+      "Phonotaktik des Deutschen, Italienischen, Französischen und Englischen (redaktionell zusammengefasst)",
+      "Domain-Vorgaben der nic.at (Zeichensatz a bis z, 0 bis 9, Bindestrich; IDN möglich)"
+    ],
+    "felder": {
+      "endungen, klischee_muster": "Kompatibilitätsschlüssel (flache Listen) für den Einleser der Engine; inhaltlich identisch mit endungen_nach_ton, verbotene_endungen und negative_muster",
+      "gewicht": "0 bis 1; 0 = nie verwenden, 1 = bevorzugt. Startwerte, nicht geeicht",
+      "ton": "weich, klar, edel, warm: Zuordnung des Bausteins zu einer Klangrichtung (Mapping zu Stilen: weich zu warm und natur, klar zu modern und mutig, edel zu elegant und luxus)",
+      "warnung": "Zusatzbedingung für die Verwendung",
+      "muster": "Regex (JavaScript-Syntax, kleingeschrieben anwenden) oder Verweis auf eine Liste der Engine",
+      "schwelle": "Grenzwert der Prüfregel"
+    },
+    "grenzen": "Regeln sichern Sprechbarkeit und Stil, nicht die Rechtslage. Jeder Kunstname braucht vor Verwendung eine Marken- und Firmenbuchrecherche (EUIPO, ÖPA, Firmenbuch) und eine Domainabfrage.",
+    "ergaenzungen": [
+      "27.10.2026: Abschnitt tech_muster (additiv) aus 194 Tech- und Software-Marken (src/engine/reference/corpus-tech.json, docs/21-tech-marken-research.md). Noch nicht von der Engine gelesen; Gewichte sind Startwerte.",
+      "27.10.2026: Abschnitt tech_muster (additiv) aus 195 Tech- und Software-Marken (src/engine/reference/corpus-tech.json, docs/21-tech-marken-research.md). Noch nicht von der Engine gelesen; Gewichte sind Startwerte."
+    ]
+  },
+  "silbenbausteine": {
+    "anlaute": [
+      {
+        "laut": "",
+        "gewicht": 0.9,
+        "ton": [
+          "weich",
+          "edel"
+        ],
+        "beispiel": "Aleno, Orea",
+        "begruendung": "Vokalischer Anfang wirkt offen und international, im Deutschen ohne Knacklaut-Problem lesbar."
+      },
+      {
+        "laut": "l",
+        "gewicht": 1,
+        "ton": [
+          "weich",
+          "edel"
+        ],
+        "beispiel": "Lavena, Lirano",
+        "begruendung": "Liquid, weich, in allen Zielsprachen gleich ausgesprochen."
+      },
+      {
+        "laut": "m",
+        "gewicht": 0.9,
+        "ton": [
+          "weich",
+          "warm"
+        ],
+        "beispiel": "Mareo, Milan nicht (Stadt)",
+        "begruendung": "Nasal, warm, gleich in DE, EN, IT, FR."
+      },
+      {
+        "laut": "n",
+        "gewicht": 0.8,
+        "ton": [
+          "weich",
+          "klar"
+        ],
+        "beispiel": "Novera",
+        "begruendung": "Nasal, ruhig, international eindeutig."
+      },
+      {
+        "laut": "r",
+        "gewicht": 0.6,
+        "ton": [
+          "klar",
+          "edel"
+        ],
+        "beispiel": "Rivano",
+        "begruendung": "Kräftig, aber im Deutschen und Englischen verschieden gerollt; als Anlaut gut, in Häufung nicht."
+      },
+      {
+        "laut": "s",
+        "gewicht": 0.7,
+        "ton": [
+          "weich",
+          "edel"
+        ],
+        "beispiel": "Selora",
+        "begruendung": "Im Deutschen stimmhaft vor Vokal, im Englischen stimmlos; beide angenehm."
+      },
+      {
+        "laut": "f",
+        "gewicht": 0.6,
+        "ton": [
+          "weich",
+          "klar"
+        ],
+        "beispiel": "Fiora",
+        "begruendung": "Weicher Reibelaut, eindeutig."
+      },
+      {
+        "laut": "h",
+        "gewicht": 0.5,
+        "ton": [
+          "warm"
+        ],
+        "beispiel": "Halveno",
+        "begruendung": "Hauchlaut, in Französisch und Italienisch stumm: nur für deutschsprachige Marken."
+      },
+      {
+        "laut": "v",
+        "gewicht": 0.5,
+        "ton": [
+          "edel"
+        ],
+        "beispiel": "Valena",
+        "begruendung": "Im Deutschen f oder w gelesen; nur wenn beide Lesarten gut klingen (Valena, Verano).",
+        "warnung": "mehrdeutig f/w"
+      },
+      {
+        "laut": "b",
+        "gewicht": 0.6,
+        "ton": [
+          "klar",
+          "warm"
+        ],
+        "beispiel": "Barela",
+        "begruendung": "Stimmhafter Verschlusslaut, kräftig aber nicht hart."
+      },
+      {
+        "laut": "d",
+        "gewicht": 0.6,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Doreno",
+        "begruendung": "Klarer Verschlusslaut."
+      },
+      {
+        "laut": "t",
+        "gewicht": 0.6,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Tavero",
+        "begruendung": "Klar und präzise; nicht mit weiterem t in der nächsten Silbe kombinieren."
+      },
+      {
+        "laut": "k",
+        "gewicht": 0.5,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Karelo",
+        "begruendung": "Klar, im Deutschen eindeutiger als c."
+      },
+      {
+        "laut": "p",
+        "gewicht": 0.4,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Pareno",
+        "begruendung": "Präzise, aber plosiv; sparsam."
+      },
+      {
+        "laut": "g",
+        "gewicht": 0.4,
+        "ton": [
+          "klar",
+          "warm"
+        ],
+        "beispiel": "Galeno",
+        "begruendung": "Im Italienischen vor e und i weich (dsch): nur vor a, o, u.",
+        "warnung": "g vor e/i mehrdeutig"
+      },
+      {
+        "laut": "bl",
+        "gewicht": 0.4,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Blavo",
+        "begruendung": "Zweierverbindung, gut sprechbar."
+      },
+      {
+        "laut": "br",
+        "gewicht": 0.4,
+        "ton": [
+          "klar",
+          "warm"
+        ],
+        "beispiel": "Brena",
+        "begruendung": "Zweierverbindung, gut sprechbar."
+      },
+      {
+        "laut": "fl",
+        "gewicht": 0.4,
+        "ton": [
+          "weich"
+        ],
+        "beispiel": "Florea",
+        "begruendung": "Fließend, Assoziation Blüte (lateinisch flos)."
+      },
+      {
+        "laut": "fr",
+        "gewicht": 0.3,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Freno",
+        "begruendung": "Gut sprechbar, im Italienischen freno = Bremse: Bedeutung prüfen."
+      },
+      {
+        "laut": "gl",
+        "gewicht": 0.3,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Glarea",
+        "begruendung": "Gut sprechbar, Assoziation Glanz."
+      },
+      {
+        "laut": "gr",
+        "gewicht": 0.3,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Granea",
+        "begruendung": "Kräftig; mit weichem Rest kombinieren."
+      },
+      {
+        "laut": "kl",
+        "gewicht": 0.3,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Klaro",
+        "begruendung": "Klar, Assoziation klar; nicht mit Klischee klar+Endung kombinieren."
+      },
+      {
+        "laut": "pl",
+        "gewicht": 0.2,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Plaven",
+        "begruendung": "Selten, gut sprechbar."
+      },
+      {
+        "laut": "pr",
+        "gewicht": 0.2,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Proven",
+        "begruendung": "Gut sprechbar, aber pro wirkt werblich."
+      },
+      {
+        "laut": "st",
+        "gewicht": 0.4,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Stavena",
+        "begruendung": "Im Deutschen scht, im Englischen st: beide gut."
+      },
+      {
+        "laut": "tr",
+        "gewicht": 0.3,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Travo",
+        "begruendung": "Gut sprechbar."
+      },
+      {
+        "laut": "dr",
+        "gewicht": 0.2,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Dreva",
+        "begruendung": "Gut sprechbar, selten."
+      },
+      {
+        "laut": "sch",
+        "gewicht": 0.1,
+        "ton": [
+          "warm"
+        ],
+        "beispiel": "Schalea",
+        "begruendung": "Nur für rein deutschsprachige Marken; international schwer.",
+        "warnung": "nur deutsch"
+      },
+      {
+        "laut": "z",
+        "gewicht": 0.1,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Zarea",
+        "begruendung": "Im Deutschen ts, im Englischen und Italienischen anders: vermeiden.",
+        "warnung": "mehrdeutig"
+      },
+      {
+        "laut": "j",
+        "gewicht": 0.1,
+        "ton": [
+          "weich"
+        ],
+        "beispiel": "Jalea",
+        "begruendung": "Im Deutschen j, im Englischen dsch, im Französischen sch: vermeiden.",
+        "warnung": "mehrdeutig"
+      },
+      {
+        "laut": "c",
+        "gewicht": 0.1,
+        "ton": [
+          "edel"
+        ],
+        "beispiel": "Calora",
+        "begruendung": "Nur vor a, o, u (k gelesen); vor e, i im Deutschen ts, im Italienischen tsch.",
+        "warnung": "nur vor a, o, u"
+      },
+      {
+        "laut": "q",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Quavo",
+        "begruendung": "Nur mit u, wirkt konstruiert; nicht verwenden."
+      },
+      {
+        "laut": "x",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Xelo",
+        "begruendung": "Baukasten-Wirkung (Tech, Pharma); nicht verwenden."
+      },
+      {
+        "laut": "y",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Yvera",
+        "begruendung": "Im Deutschen ü oder j gelesen; nicht verwenden."
+      }
+    ],
+    "kerne": [
+      {
+        "laut": "a",
+        "gewicht": 1,
+        "ton": [
+          "warm",
+          "edel",
+          "klar"
+        ],
+        "beispiel": "Lavena",
+        "begruendung": "Offenster Vokal, in allen Sprachen gleich, trägt Betonung gut."
+      },
+      {
+        "laut": "e",
+        "gewicht": 0.9,
+        "ton": [
+          "weich",
+          "edel"
+        ],
+        "beispiel": "Selora",
+        "begruendung": "Neutral, verbindet Silben; im Auslaut im Englischen stumm, daher nicht als einziger Endvokal."
+      },
+      {
+        "laut": "o",
+        "gewicht": 0.9,
+        "ton": [
+          "warm",
+          "klar"
+        ],
+        "beispiel": "Corvo",
+        "begruendung": "Rund, warm, international gleich."
+      },
+      {
+        "laut": "i",
+        "gewicht": 0.7,
+        "ton": [
+          "klar",
+          "weich"
+        ],
+        "beispiel": "Liviano",
+        "begruendung": "Hell, präzise; im Englischen als ai gelesen, wenn betont vor Konsonant+e."
+      },
+      {
+        "laut": "u",
+        "gewicht": 0.4,
+        "ton": [
+          "warm"
+        ],
+        "beispiel": "Lunea",
+        "begruendung": "Dunkel; im Englischen oft ju gelesen, im Französischen ü: sparsam.",
+        "warnung": "mehrdeutig in EN, FR"
+      },
+      {
+        "laut": "ei",
+        "gewicht": 0.3,
+        "ton": [
+          "warm"
+        ],
+        "beispiel": "Leiven",
+        "begruendung": "Deutscher Diphthong; im Englischen anders gelesen: nur deutsch.",
+        "warnung": "nur deutsch"
+      },
+      {
+        "laut": "au",
+        "gewicht": 0.4,
+        "ton": [
+          "warm"
+        ],
+        "beispiel": "Auren",
+        "begruendung": "In DE, IT, LA gleich; im Französischen o. Wirkt warm.",
+        "warnung": "Gold-Assoziation aurum prüfen"
+      },
+      {
+        "laut": "ia",
+        "gewicht": 0.5,
+        "ton": [
+          "weich"
+        ],
+        "beispiel": "Livia",
+        "begruendung": "Zwei Silben, weich; nur im Wortinneren oder als Endung mit Vorsicht (Abnutzung)."
+      },
+      {
+        "laut": "ea",
+        "gewicht": 0.5,
+        "ton": [
+          "weich",
+          "edel"
+        ],
+        "beispiel": "Orea",
+        "begruendung": "Zwei Silben, edel, typisch lateinisch."
+      },
+      {
+        "laut": "eo",
+        "gewicht": 0.4,
+        "ton": [
+          "weich"
+        ],
+        "beispiel": "Leora",
+        "begruendung": "Zwei Silben, melodisch."
+      },
+      {
+        "laut": "ä",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Lärino",
+        "begruendung": "Umlaute nie in Kunstwörtern: Domain und Versalien (AE) leiden."
+      },
+      {
+        "laut": "ö",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Sörel",
+        "begruendung": "Umlaute nie in Kunstwörtern."
+      },
+      {
+        "laut": "ü",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Lünar",
+        "begruendung": "Umlaute nie in Kunstwörtern."
+      },
+      {
+        "laut": "y",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Lyra",
+        "begruendung": "y als Vokal im Deutschen ü, im Englischen ai: nur in echten Fremdwörtern (Lyra), nicht in Kunstwörtern."
+      },
+      {
+        "laut": "aa",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Laavo",
+        "begruendung": "Doppelvokale wirken holländisch oder nordisch und stören die Domain."
+      },
+      {
+        "laut": "ee",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Seeva",
+        "begruendung": "Doppelvokale vermeiden (siehe aa)."
+      },
+      {
+        "laut": "ae",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Laeva",
+        "begruendung": "Liest sich wie ersetzter Umlaut."
+      },
+      {
+        "laut": "oe",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Soera",
+        "begruendung": "Liest sich wie ersetzter Umlaut."
+      },
+      {
+        "laut": "ue",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Luera",
+        "begruendung": "Liest sich wie ersetzter Umlaut."
+      }
+    ],
+    "auslaute": [
+      {
+        "laut": "",
+        "gewicht": 1,
+        "ton": [
+          "weich",
+          "edel"
+        ],
+        "beispiel": "La-ve-na",
+        "begruendung": "Offene Silben (Konsonant + Vokal) sind am leichtesten sprechbar und am melodischsten."
+      },
+      {
+        "laut": "n",
+        "gewicht": 0.8,
+        "ton": [
+          "klar",
+          "weich"
+        ],
+        "beispiel": "Laven",
+        "begruendung": "Weicher Abschluss, im Deutschen sehr natürlich (-en)."
+      },
+      {
+        "laut": "l",
+        "gewicht": 0.7,
+        "ton": [
+          "weich",
+          "edel"
+        ],
+        "beispiel": "Savel",
+        "begruendung": "Fließender Abschluss."
+      },
+      {
+        "laut": "r",
+        "gewicht": 0.6,
+        "ton": [
+          "klar",
+          "edel"
+        ],
+        "beispiel": "Tavor",
+        "begruendung": "Kräftiger Abschluss; im Englischen oft verschluckt."
+      },
+      {
+        "laut": "s",
+        "gewicht": 0.5,
+        "ton": [
+          "edel"
+        ],
+        "beispiel": "Laris",
+        "begruendung": "Lateinische Anmutung; nicht als Pluralform lesbar machen."
+      },
+      {
+        "laut": "m",
+        "gewicht": 0.4,
+        "ton": [
+          "warm"
+        ],
+        "beispiel": "Velum",
+        "begruendung": "Ruhig; -um wirkt lateinisch, sparsam einsetzen."
+      },
+      {
+        "laut": "t",
+        "gewicht": 0.4,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Calet",
+        "begruendung": "Präzise; im Französischen stumm."
+      },
+      {
+        "laut": "nd",
+        "gewicht": 0.3,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Larend",
+        "begruendung": "Deutsch natürlich, kräftig."
+      },
+      {
+        "laut": "nt",
+        "gewicht": 0.3,
+        "ton": [
+          "klar",
+          "edel"
+        ],
+        "beispiel": "Valent",
+        "begruendung": "Edel, lateinisch-französisch."
+      },
+      {
+        "laut": "st",
+        "gewicht": 0.2,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Navest",
+        "begruendung": "Kräftig; nur am Wortende."
+      },
+      {
+        "laut": "rn",
+        "gewicht": 0.2,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Tavern nicht",
+        "begruendung": "Möglich, aber Nähe zu echten englischen Wörtern prüfen."
+      },
+      {
+        "laut": "k",
+        "gewicht": 0.2,
+        "ton": [
+          "klar"
+        ],
+        "beispiel": "Larik",
+        "begruendung": "Hart; nur für ton klar."
+      },
+      {
+        "laut": "x",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Valex",
+        "begruendung": "Baukasten-Endung -ex, -ix, -ox: verboten."
+      },
+      {
+        "laut": "ng",
+        "gewicht": 0.1,
+        "ton": [
+          "warm"
+        ],
+        "beispiel": "Lorang",
+        "begruendung": "Deutsch und englisch gut, italienisch und französisch unüblich."
+      },
+      {
+        "laut": "ch",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Larech",
+        "begruendung": "Im Deutschen ach oder ich, international unklar: nicht im Auslaut."
+      },
+      {
+        "laut": "ck",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Lavick",
+        "begruendung": "Deutsche Schreibung, wirkt hart und konstruiert."
+      },
+      {
+        "laut": "tz",
+        "gewicht": 0,
+        "ton": [],
+        "beispiel": "Savitz",
+        "begruendung": "Hart, wirkt wie Familienname."
+      }
+    ],
+    "hinweis": "Silbe = Anlaut + Kern + Auslaut; leerer Laut bedeutet: ohne. Ein Kunstwort hat 2 bis 3 Silben (Regel M02); die letzte Silbe kommt aus endungen_nach_ton."
+  },
+  "lautfolgen": {
+    "erlaubt": [
+      {
+        "muster": "KV-KV-KV",
+        "beispiel": "La-ve-na",
+        "begruendung": "Wechsel aus Konsonant und Vokal ist das sprechbarste Muster in allen Zielsprachen."
+      },
+      {
+        "muster": "V-KV-KV",
+        "beispiel": "O-re-a",
+        "begruendung": "Vokalischer Anfang, danach offene Silben: edel und weich."
+      },
+      {
+        "muster": "KV-KVK",
+        "beispiel": "La-ven",
+        "begruendung": "Geschlossene Endsilbe gibt Halt und klingt deutsch natürlich."
+      },
+      {
+        "muster": "KKV-KV",
+        "beispiel": "Bla-vo",
+        "begruendung": "Eine Zweierverbindung am Anfang ist erlaubt (bl, br, fl, fr, gl, gr, kl, kr, pl, pr, st, tr, dr)."
+      },
+      {
+        "muster": "KV-KKV-KV",
+        "beispiel": "Sa-ve-ndra nicht; Lo-ren-za",
+        "begruendung": "An der Silbengrenze höchstens zwei Konsonanten (n+z, r+v, l+d)."
+      },
+      {
+        "muster": "Doppelkonsonant zwischen Vokalen",
+        "beispiel": "Novella, Savanna nicht (echtes Wort)",
+        "begruendung": "ll, nn, ss, tt zeigen einen kurzen Vokal; höchstens einmal je Wort."
+      }
+    ],
+    "verboten": [
+      {
+        "muster": "[bcdfghjklmnpqrstvwxz]{3,}",
+        "ausnahmen": [
+          "str",
+          "spr",
+          "nst",
+          "ndr",
+          "ntr",
+          "rst",
+          "lst"
+        ],
+        "beispiel": "Valkrsen",
+        "begruendung": "Drei und mehr Konsonanten in Folge sind harte Häufungen; nur die genannten, im Deutschen geläufigen Folgen sind zulässig."
+      },
+      {
+        "muster": "[aeiou]{3,}",
+        "beispiel": "Laeia",
+        "begruendung": "Drei Vokale in Folge zerfallen beim Sprechen."
+      },
+      {
+        "muster": "(.)\\1\\1",
+        "beispiel": "Seeeck",
+        "begruendung": "Dreifache Buchstaben sind unlesbar und entstehen oft an Wortfugen."
+      },
+      {
+        "muster": "^(.{2,3})\\1",
+        "beispiel": "Lalavo",
+        "begruendung": "Silbenverdopplung am Anfang wirkt kindlich (Lala, Momo)."
+      },
+      {
+        "muster": "[kptbdg][kptbdg]",
+        "beispiel": "Valkt, Sabdo",
+        "begruendung": "Zwei Verschlusslaute in Folge sind hart; Ausnahme ck und tt sind ebenfalls ausgeschlossen."
+      },
+      {
+        "muster": "(ae|oe|ue)",
+        "beispiel": "Laevo",
+        "begruendung": "Liest sich wie ersetzter Umlaut; in Kunstwörtern nie."
+      },
+      {
+        "muster": "[äöüß]",
+        "beispiel": "Lörena",
+        "begruendung": "Umlaute und ß zerstören Domain und Versalsatz (SS)."
+      },
+      {
+        "muster": "(c[ei]|ch|sch|tsch|zsch)",
+        "beispiel": "Cerano, Lachora",
+        "begruendung": "Aussprache in DE, IT, EN, FR verschieden (ts, tsch, s, ch); im Kunstwort vermeiden."
+      },
+      {
+        "muster": "(q|x|y|j)",
+        "beispiel": "Quarel, Lyxa",
+        "begruendung": "Buchstaben mit Baukasten- oder Mehrdeutigkeitswirkung."
+      },
+      {
+        "muster": "(w)",
+        "beispiel": "Waleno",
+        "begruendung": "w ist im Deutschen w, im Englischen u-ähnlich, im Italienischen und Französischen fremd; in Kunstwörtern meiden."
+      },
+      {
+        "muster": "BAD_PARTS",
+        "quelle": "src/engine/names/rules.ts",
+        "beispiel": "Mortalo, Pestino, Malora",
+        "begruendung": "Silben mit negativer oder vulgärer Bedeutung im Deutschen oder Italienischen (mort, pest, mal, fick, kack ...): die Liste der Engine gilt unverändert."
+      },
+      {
+        "muster": "PROTECTED_PARTS",
+        "quelle": "src/engine/names/rules.ts",
+        "beispiel": "Finanzia, Bankora, Wienova",
+        "begruendung": "Geschützte oder irreführende Begriffe (Bank, Kredit, Fonds, Notar, Wien im Kunstwort) sind rechtlich heikel."
+      }
+    ]
+  },
+  "endungen_nach_ton": {
+    "weich": [
+      {
+        "endung": "a",
+        "gewicht": 1,
+        "beispiel": "Lavena",
+        "begruendung": "Offen, melodisch, italienisch-lateinisch; in DE als weiblich und weich empfunden."
+      },
+      {
+        "endung": "ea",
+        "gewicht": 0.7,
+        "beispiel": "Orea",
+        "begruendung": "Edel lateinisch, zwei Silben."
+      },
+      {
+        "endung": "ena",
+        "gewicht": 0.7,
+        "beispiel": "Savena",
+        "begruendung": "Weich und gut betonbar (Sa-VE-na)."
+      },
+      {
+        "endung": "ola",
+        "gewicht": 0.5,
+        "beispiel": "Mirola",
+        "begruendung": "Weich, leicht verspielt; nicht mit Diminutiv-Doppelung (-olina)."
+      },
+      {
+        "endung": "ina",
+        "gewicht": 0.4,
+        "beispiel": "Larina",
+        "begruendung": "Sehr häufig in Vornamen: Verwechslung mit Personennamen prüfen."
+      },
+      {
+        "endung": "ve",
+        "gewicht": 0.4,
+        "beispiel": "Salve nicht (Wort); Nareve",
+        "begruendung": "Im Deutschen zweisilbig, im Englischen einsilbig: nur wenn beide klingen."
+      },
+      {
+        "endung": "elle",
+        "gewicht": 0.3,
+        "beispiel": "Lavelle",
+        "begruendung": "Französisch weich; im Deutschen -elle wie Kelle: Klang prüfen."
+      }
+    ],
+    "klar": [
+      {
+        "endung": "en",
+        "gewicht": 1,
+        "beispiel": "Laven",
+        "begruendung": "Natürlich deutsch, ruhig, gut als Versal."
+      },
+      {
+        "endung": "o",
+        "gewicht": 0.8,
+        "beispiel": "Tavero",
+        "begruendung": "Klar und rund, italienisch, international lesbar."
+      },
+      {
+        "endung": "an",
+        "gewicht": 0.7,
+        "beispiel": "Corvan",
+        "begruendung": "Kräftig, offen."
+      },
+      {
+        "endung": "el",
+        "gewicht": 0.6,
+        "beispiel": "Savel",
+        "begruendung": "Deutsch natürlich (Giebel, Hügel)."
+      },
+      {
+        "endung": "ar",
+        "gewicht": 0.5,
+        "beispiel": "Lunar nicht (Wort); Velar",
+        "begruendung": "Klar; Nähe zu echten Adjektiven prüfen."
+      },
+      {
+        "endung": "on",
+        "gewicht": 0.4,
+        "beispiel": "Mareon",
+        "begruendung": "Klar; nicht als -ion lesbar machen."
+      },
+      {
+        "endung": "et",
+        "gewicht": 0.3,
+        "beispiel": "Calet",
+        "begruendung": "Präzise; französisch stumm."
+      }
+    ],
+    "edel": [
+      {
+        "endung": "is",
+        "gewicht": 0.6,
+        "beispiel": "Laris",
+        "begruendung": "Lateinische Anmutung, kurz und edel."
+      },
+      {
+        "endung": "or",
+        "gewicht": 0.6,
+        "beispiel": "Tavor",
+        "begruendung": "Lateinisch (Agens), würdig."
+      },
+      {
+        "endung": "ane",
+        "gewicht": 0.5,
+        "beispiel": "Solane",
+        "begruendung": "Französisch-elegant, im Deutschen dreisilbig lesbar."
+      },
+      {
+        "endung": "ent",
+        "gewicht": 0.5,
+        "beispiel": "Valent",
+        "begruendung": "Lateinisch-französisch, Haltung."
+      },
+      {
+        "endung": "eum",
+        "gewicht": 0.3,
+        "beispiel": "Orneum",
+        "begruendung": "Lateinisch (Museum, Atheneum); sparsam, sonst Baukasten-Nähe zu -ium."
+      },
+      {
+        "endung": "ara",
+        "gewicht": 0.5,
+        "beispiel": "Velara",
+        "begruendung": "Weit und edel."
+      },
+      {
+        "endung": "ora",
+        "gewicht": 0.5,
+        "beispiel": "Selora",
+        "begruendung": "Edel; Nähe zu Aurora prüfen."
+      }
+    ]
+  },
+  "verbotene_endungen": [
+    {
+      "endung": "ion",
+      "beispiel": "Domion",
+      "begruendung": "Baukasten-Endung (Pharma, Tech), wirkt wie Konzernname."
+    },
+    {
+      "endung": "ex",
+      "beispiel": "Valex",
+      "begruendung": "Baukasten-Endung (Pharma, Industrie)."
+    },
+    {
+      "endung": "ix",
+      "beispiel": "Domix",
+      "begruendung": "Baukasten-Endung, wirkt technisch und billig."
+    },
+    {
+      "endung": "ox",
+      "beispiel": "Livox",
+      "begruendung": "Baukasten-Endung."
+    },
+    {
+      "endung": "ify",
+      "beispiel": "Homify",
+      "begruendung": "Startup-Klischee, englisch."
+    },
+    {
+      "endung": "ly",
+      "beispiel": "Roomly",
+      "begruendung": "Startup-Klischee, englisch."
+    },
+    {
+      "endung": "io",
+      "beispiel": "Casio nicht (Marke); Domio",
+      "begruendung": "Tech-Domain-Endung (.io), wirkt wie App."
+    },
+    {
+      "endung": "ium",
+      "beispiel": "Domium",
+      "begruendung": "Pseudo-lateinischer Baukasten (Aquarium-Effekt)."
+    },
+    {
+      "endung": "ia",
+      "beispiel": "Lumia (Marke)",
+      "begruendung": "Stark abgenutzt (Telekom, Pharma, Möbel); nur in echten Wörtern."
+    },
+    {
+      "endung": "us",
+      "beispiel": "Domus nicht (Wort); Valus",
+      "begruendung": "Wirkt wie Arzneimittel oder Asterix-Latein."
+    },
+    {
+      "endung": "oo",
+      "beispiel": "Livoo",
+      "begruendung": "Tech-Klischee."
+    },
+    {
+      "endung": "sy",
+      "beispiel": "Homesy",
+      "begruendung": "Verkleinerung, unernst."
+    },
+    {
+      "endung": "ster",
+      "beispiel": "Roomster",
+      "begruendung": "Plattform-Klischee."
+    },
+    {
+      "endung": "tec",
+      "beispiel": "Bautec",
+      "begruendung": "Technik-Baukasten, Branche Industrie."
+    },
+    {
+      "endung": "real",
+      "beispiel": "Wohnreal",
+      "begruendung": "Immo-Kurzform, Anti-Muster des Korpus (immo_kurzform)."
+    },
+    {
+      "endung": "immo",
+      "beispiel": "Lichtimmo",
+      "begruendung": "Immo-Kurzform, Anti-Muster."
+    },
+    {
+      "endung": "invest",
+      "beispiel": "Seeinvest",
+      "begruendung": "Beschreibend, schwach als Marke, Rechtsnähe zu Fonds."
+    },
+    {
+      "endung": "concept",
+      "beispiel": "Wohnconcept",
+      "begruendung": "Austauschbares Anhängsel."
+    }
+  ],
+  "schreibvarianten": [
+    {
+      "id": "SV01",
+      "regel": "c statt k",
+      "von": "k",
+      "zu": "c",
+      "bedingung": "nur vor a, o, u und nur am Wortanfang oder nach Vokal",
+      "erlaubt": true,
+      "beispiel": "Kasa zu Casa (echtes Wort), Karavel zu Caravel",
+      "begruendung": "Vor a, o, u wird c in allen Zielsprachen k gelesen; wirkt romanisch und edler. Vor e, i nie (Deutsch ts, Italienisch tsch)."
+    },
+    {
+      "id": "SV02",
+      "regel": "k statt c",
+      "von": "c",
+      "zu": "k",
+      "bedingung": "nur wenn ein bestehendes Wort damit eigenständig wird und der Klang gleich bleibt",
+      "erlaubt": true,
+      "beispiel": "Lucent zu Lukent",
+      "begruendung": "Macht ein Fremdwort deutsch und markenfähig; sparsam, wirkt schnell gewollt."
+    },
+    {
+      "id": "SV03",
+      "regel": "ph statt f",
+      "von": "f",
+      "zu": "ph",
+      "bedingung": "nur bei griechischen Wurzeln (philo, phos, phyt)",
+      "erlaubt": false,
+      "beispiel": "Filo zu Philo",
+      "begruendung": "Wirkt altmodisch oder nach Pharma; am Telefon nicht eindeutig. Standard: nicht verwenden."
+    },
+    {
+      "id": "SV04",
+      "regel": "f statt ph",
+      "von": "ph",
+      "zu": "f",
+      "bedingung": "immer, wenn ein Fremdwort eingedeutscht wird",
+      "erlaubt": true,
+      "beispiel": "Sphaera zu Sfera nicht (italienisches Wort); Phos zu Fos",
+      "begruendung": "Eindeutig beim Hören und Schreiben."
+    },
+    {
+      "id": "SV05",
+      "regel": "i statt y",
+      "von": "y",
+      "zu": "i",
+      "bedingung": "immer im Kunstwort",
+      "erlaubt": true,
+      "beispiel": "Lyra zu Lira (echtes Wort), Myra zu Mira",
+      "begruendung": "y wird im Deutschen ü, im Englischen ai gelesen; i ist eindeutig."
+    },
+    {
+      "id": "SV06",
+      "regel": "y statt i",
+      "von": "i",
+      "zu": "y",
+      "bedingung": "nie im Kunstwort; nur in echten Fremdwörtern belassen",
+      "erlaubt": false,
+      "beispiel": "Liria zu Lyria",
+      "begruendung": "Dekoratives y ist ein Klischee der 2000er und mehrdeutig."
+    },
+    {
+      "id": "SV07",
+      "regel": "Konsonant verdoppeln",
+      "von": "l, n, s, t, r",
+      "zu": "ll, nn, ss, tt, rr",
+      "bedingung": "höchstens einmal je Wort, nur zwischen Vokalen, nur wenn der Vokal davor kurz gesprochen werden soll",
+      "erlaubt": true,
+      "beispiel": "Novela zu Novella, Savena zu Savenna nicht (bringt nichts)",
+      "begruendung": "Steuert die Aussprache im Deutschen; doppelt zweimal wirkt verspielt."
+    },
+    {
+      "id": "SV08",
+      "regel": "Verdopplung entfernen",
+      "von": "ll, nn, ss",
+      "zu": "l, n, s",
+      "bedingung": "wenn der Vokal davor lang klingen soll oder die Domain kürzer wird",
+      "erlaubt": true,
+      "beispiel": "Pinnella zu Pinela",
+      "begruendung": "Verkürzt und beruhigt das Schriftbild."
+    },
+    {
+      "id": "SV09",
+      "regel": "v statt w",
+      "von": "w",
+      "zu": "v",
+      "bedingung": "nur wenn die f-Lesung im Deutschen ebenfalls gut klingt",
+      "erlaubt": true,
+      "beispiel": "Weida zu Veida",
+      "begruendung": "v ist international verständlich; im Deutschen aber f oder w."
+    },
+    {
+      "id": "SV10",
+      "regel": "Umlaut auflösen",
+      "von": "ä, ö, ü, ß",
+      "zu": "ae, oe, ue, ss",
+      "bedingung": "nur im Domain-Teil, nie im Markennamen selbst",
+      "erlaubt": true,
+      "beispiel": "Grätzl: Marke Grätzl, Domain graetzl.at",
+      "begruendung": "Domains ohne Umlaut sind Standard; im Logo bleibt das echte Wort."
+    },
+    {
+      "id": "SV11",
+      "regel": "Endungs-e weglassen",
+      "von": "e",
+      "zu": "",
+      "bedingung": "nur wenn ein Konsonant (n, l, r) übrig bleibt und das Wort erkennbar bleibt",
+      "erlaubt": true,
+      "beispiel": "Lichte zu Licht (Wort), Lavende zu Lavend",
+      "begruendung": "Kürzt und macht das Wort markiger; Bedeutung muss erkennbar bleiben."
+    },
+    {
+      "id": "SV12",
+      "regel": "qu statt k",
+      "von": "k",
+      "zu": "qu",
+      "bedingung": "nie",
+      "erlaubt": false,
+      "beispiel": "Kvarto zu Quarto",
+      "begruendung": "Wirkt konstruiert; nur in echten Wörtern (Quartier)."
+    },
+    {
+      "id": "SV13",
+      "regel": "z statt s",
+      "von": "s",
+      "zu": "z",
+      "bedingung": "nie",
+      "erlaubt": false,
+      "beispiel": "Salora zu Zalora (Marke)",
+      "begruendung": "Mehrdeutig (ts, s, ds) und oft bereits Marke."
+    }
+  ],
+  "zusammensetzung": [
+    {
+      "id": "Z01",
+      "regel": "Nomen + Nomen",
+      "wortarten": [
+        "Nomen",
+        "Nomen"
+      ],
+      "max_silben": 4,
+      "max_buchstaben": 12,
+      "beispiel": "Lichthof, Seewerk",
+      "begruendung": "Das natürlichste deutsche Muster; Bildwort vorn, Ort oder Tätigkeit hinten."
+    },
+    {
+      "id": "Z02",
+      "regel": "Adjektiv + Nomen",
+      "wortarten": [
+        "Adjektiv",
+        "Nomen"
+      ],
+      "max_silben": 4,
+      "max_buchstaben": 12,
+      "beispiel": "Hellgrund, Stillhof",
+      "begruendung": "Gibt dem Nomen eine Haltung; nur Adjektive ohne Klischee (hell, still, weit, klar, fein)."
+    },
+    {
+      "id": "Z03",
+      "regel": "Baustein Anfang + Nomen",
+      "wortarten": [
+        "Baustein anfang",
+        "Nomen"
+      ],
+      "max_silben": 3,
+      "max_buchstaben": 11,
+      "beispiel": "Lindhof, Eichgrund",
+      "begruendung": "Bausteine aus names.json (typ baustein, position anfang) sind Ortsnamenmuster und klingen gewachsen."
+    },
+    {
+      "id": "Z04",
+      "regel": "Nomen + Baustein Ende",
+      "wortarten": [
+        "Nomen",
+        "Baustein ende"
+      ],
+      "max_silben": 3,
+      "max_buchstaben": 11,
+      "beispiel": "Sonnleiten, Birkenau",
+      "begruendung": "Wie Ortsnamen; wirkt regional verankert."
+    },
+    {
+      "id": "Z05",
+      "regel": "keine zwei Bausteine",
+      "wortarten": [],
+      "beispiel": "Lindhof-au",
+      "begruendung": "Zwei Bausteine ergeben Kunst-Ortsnamen ohne Bedeutung."
+    },
+    {
+      "id": "Z06",
+      "regel": "keine Dopplung der Bildwelt",
+      "wortarten": [],
+      "beispiel": "Bergkogel, Seeteich",
+      "begruendung": "Zwei Wörter derselben Bedeutung sind redundant."
+    },
+    {
+      "id": "Z07",
+      "regel": "Sprachmischung nur mit eingebürgerten Fremdwörtern",
+      "wortarten": [],
+      "beispiel": "Villengrund ja, Lumenhof nein",
+      "begruendung": "Mischformen aus Latein und Deutsch wirken gebastelt, außer das Fremdwort ist im Deutschen geläufig (Villa, Atrium, Loggia)."
+    },
+    {
+      "id": "Z08",
+      "regel": "Fugenelement nur, wenn natürlich",
+      "wortarten": [],
+      "beispiel": "Sonnenhof ja, Seesblick nein",
+      "begruendung": "Fugen-s und -en nur, wenn sie im echten Deutsch vorkommen (Lindenhof, Wiesenrand)."
+    },
+    {
+      "id": "Z09",
+      "regel": "keine Klischee- oder Gattungswörter als Teil",
+      "wortarten": [],
+      "beispiel": "Traumhof, Immowerk, Wohnwelt",
+      "begruendung": "Klischees (NAME_CLICHES) und Gattungswörter (Immobilien, Haus allein, Home, Living) machen Namen austauschbar."
+    },
+    {
+      "id": "Z10",
+      "regel": "keine Buchstaben-Dreifachung an der Fuge",
+      "wortarten": [],
+      "beispiel": "Seeeck, Schifffahrt",
+      "begruendung": "Unlesbar in Versalien und in der Domain."
+    },
+    {
+      "id": "Z11",
+      "regel": "Ortsname nicht als Präfix im Kunstwort",
+      "wortarten": [],
+      "beispiel": "Wienova, Grazwerk",
+      "begruendung": "Ortsnamen gehören in den Zusatz (Lichthof Döbling), nicht ins Kunstwort; Wien im Kunstwort ist laut Engine geschützt."
+    }
+  ],
+  "pruefregeln": {
+    "aussprechbarkeit": [
+      {
+        "id": "A01",
+        "regel": "jede Silbe hat genau einen Vokal oder Diphthong",
+        "beispiel": "Lavena ja, Lavnsa nein",
+        "begruendung": "Silben ohne Vokal sind nicht sprechbar."
+      },
+      {
+        "id": "A02",
+        "regel": "höchstens zwei Konsonanten an einer Silbengrenze (Ausnahmen str, spr, nst)",
+        "schwelle": 2,
+        "beispiel": "Lorenza ja, Lorkstra nein",
+        "begruendung": "Harte Häufungen bremsen das Sprechen."
+      },
+      {
+        "id": "A03",
+        "regel": "Vokalanteil zwischen 35 und 60 Prozent",
+        "schwelle": [
+          0.35,
+          0.6
+        ],
+        "beispiel": "Savena 50 %, Strandk 17 %",
+        "begruendung": "Unter 35 % hart und deutsch-kantig, über 60 % zerfließend."
+      },
+      {
+        "id": "A04",
+        "regel": "höchstens ein mehrdeutiger Buchstabe (c, g vor e/i, j, v, y, z, ch)",
+        "schwelle": 1,
+        "beispiel": "Valena ja (v), Vyzena nein",
+        "begruendung": "Jeder mehrdeutige Buchstabe halbiert die Chance, dass DE- und EN-Sprecher gleich aussprechen."
+      },
+      {
+        "id": "A05",
+        "regel": "Betonung eindeutig auf der vorletzten oder ersten Silbe",
+        "beispiel": "Sa-VE-na, LA-ven",
+        "begruendung": "Deutsch betont die erste, Italienisch die vorletzte Silbe; Wörter, bei denen beide passen, sind ideal."
+      },
+      {
+        "id": "A06",
+        "regel": "Telefontest: einmal gehört, richtig geschrieben",
+        "beispiel": "Laven ja; Lavehn, Lawen, Laffen nein",
+        "begruendung": "Mündliche Empfehlung ist der wichtigste Kanal von Maklern; Schreibvarianten kosten Anfragen."
+      },
+      {
+        "id": "A07",
+        "regel": "keine stummen Buchstaben",
+        "beispiel": "Laveh, Savenhe",
+        "begruendung": "Stumme Buchstaben brechen den Telefontest."
+      }
+    ],
+    "merkfaehigkeit": [
+      {
+        "id": "M01",
+        "regel": "Länge 4 bis 9 Buchstaben, ideal 5 bis 7",
+        "schwelle": [
+          4,
+          9
+        ],
+        "beispiel": "Laven (5), Savena (6)",
+        "begruendung": "Korpus: Kernnamen Median 8 Buchstaben, kurze Kunstwörter funktionieren mit 5 bis 7 am besten."
+      },
+      {
+        "id": "M02",
+        "regel": "2 bis 3 Silben",
+        "schwelle": [
+          2,
+          3
+        ],
+        "beispiel": "La-ven, Sa-ve-na",
+        "begruendung": "Korpus: Median 3 Silben; einsilbige Kunstwörter wirken wie Abkürzungen."
+      },
+      {
+        "id": "M03",
+        "regel": "Bildbezug: mindestens eine Wurzel mit Bedeutung",
+        "beispiel": "Lumena (lumen = Licht), Terrava (terra = Erde)",
+        "begruendung": "Eine erzählbare Herkunft macht das Wort merkbar und gibt dem Makler eine Geschichte."
+      },
+      {
+        "id": "M04",
+        "regel": "trochäischer oder daktylischer Rhythmus",
+        "beispiel": "LA-ven, SA-ve-na",
+        "begruendung": "Betont-unbetont ist das natürlichste deutsche Muster und prägt sich ein."
+      },
+      {
+        "id": "M05",
+        "regel": "keine Ziffern, Bindestriche, Binnenmajuskeln",
+        "beispiel": "Lav3n, La-Ven, LaVen",
+        "begruendung": "Schreibvarianten erschweren Suche und Empfehlung."
+      },
+      {
+        "id": "M06",
+        "regel": "Abstand zu bekannten Marken: Levenshtein mindestens 3 zu Korpus, Wettbewerbern und Unternehmen",
+        "schwelle": 3,
+        "beispiel": "Lumina vs. Lumia: 1, gesperrt",
+        "begruendung": "Ähnlichkeitssperre wie in src/engine/names/rules.ts (findConflict, findCorpusSimilar)."
+      },
+      {
+        "id": "M07",
+        "regel": "kein echtes Wort mit unpassender Bedeutung in DE, EN, IT, FR",
+        "beispiel": "Malora (mal = schlecht), Morena (it. brünett, Ortsname)",
+        "begruendung": "Kunstwörter landen oft zufällig auf echten Wörtern; Prüfung über names.json und ein Wörterbuch."
+      }
+    ],
+    "domain": [
+      {
+        "id": "D01",
+        "regel": "nur a bis z, 0 bis 9 und Bindestrich",
+        "beispiel": "lavena.at",
+        "begruendung": "Technische Vorgabe der Registrierungsstellen (IDN möglich, aber unpraktisch)."
+      },
+      {
+        "id": "D02",
+        "regel": "Umlaute ersetzen: ä zu ae, ö zu oe, ü zu ue, ß zu ss",
+        "beispiel": "Grätzl zu graetzl.at, Söller zu soeller.at",
+        "begruendung": "Umlaut-Domains (IDN) werden in Mails und Browsern oft falsch dargestellt; Ersatzschreibung ist üblich."
+      },
+      {
+        "id": "D03",
+        "regel": "Name ohne Umlaut bevorzugen, wenn Domain und Marke gleich sein sollen",
+        "beispiel": "Lichthof statt Lärchenhof",
+        "begruendung": "Marke und Adresse sind dann identisch und leichter weiterzugeben."
+      },
+      {
+        "id": "D04",
+        "regel": "höchstens 15 Zeichen vor der Endung",
+        "schwelle": 15,
+        "beispiel": "savena.at, lichthof-immobilien.at (21) nur als Zweitdomain",
+        "begruendung": "Kurze Domains sind merkbar und passen auf Visitenkarten und Schilder."
+      },
+      {
+        "id": "D05",
+        "regel": "kein Bindestrich im Normalfall",
+        "beispiel": "lichthof.at statt licht-hof.at",
+        "begruendung": "Bindestriche werden beim Weitersagen vergessen."
+      },
+      {
+        "id": "D06",
+        "regel": "keine Verwechslungspaare (rn/m, l/I, 0/o, vv/w)",
+        "beispiel": "Lirnea",
+        "begruendung": "Verwechslungsgefahr in serifenlosen Schriften und bei Phishing-Prüfung."
+      },
+      {
+        "id": "D07",
+        "regel": "Endung .at zuerst, .com und .eu prüfen",
+        "beispiel": "savena.at, savena.com",
+        "begruendung": "Österreichische Zielgruppe; .com für internationale Käufer."
+      },
+      {
+        "id": "D08",
+        "regel": "Zusatz -immobilien oder -realitaeten nur als Domain-Zusatz, nicht im Kunstwort",
+        "beispiel": "savena-immobilien.at als Ausweichdomain",
+        "begruendung": "Gattungswörter gehören nicht in den Markennamen, sind aber als Domain-Zusatz akzeptiert."
+      },
+      {
+        "id": "D09",
+        "regel": "Verfügbarkeit ist keine Freigabe",
+        "beispiel": "freie Domain, aber Marke eingetragen",
+        "begruendung": "Domain frei heißt nicht Marke frei; Registerprüfung bleibt Pflicht."
+      }
+    ]
+  },
+  "negative_muster": [
+    {
+      "muster": "traum",
+      "art": "klischee",
+      "beispiel": "Traumhaus, Wohntraum",
+      "begruendung": "Meistgenutztes Klischee der Branche, austauschbar."
+    },
+    {
+      "muster": "premium",
+      "art": "klischee",
+      "beispiel": "Premium Immobilien",
+      "begruendung": "Selbstlob ohne Beleg; High-End-Marken nutzen es nie."
+    },
+    {
+      "muster": "home",
+      "art": "klischee",
+      "beispiel": "Home4You, Homestory",
+      "begruendung": "Anglizismus ohne Haltung, tausendfach registriert."
+    },
+    {
+      "muster": "living",
+      "art": "klischee",
+      "beispiel": "Urban Living, Living Wien",
+      "begruendung": "Projektnamen-Floskel, austauschbar."
+    },
+    {
+      "muster": "^immo",
+      "art": "klischee",
+      "beispiel": "Immowert, ImmoVision",
+      "begruendung": "Immo- als Präfix ist das Anti-Muster immo_kurzform des Korpus; wirkt nach Marktsegment, nicht nach Luxus."
+    },
+    {
+      "muster": "lux|luxus|luxury",
+      "art": "klischee",
+      "beispiel": "Luxhaus",
+      "begruendung": "Selbstbeschreibung; Luxusmarken sprechen nicht über Luxus."
+    },
+    {
+      "muster": "exklusiv|exclusive|elite|prestige|royal|deluxe|supreme|excellence",
+      "art": "klischee",
+      "beispiel": "Exklusiv Realitäten",
+      "begruendung": "Superlative wirken unsicher."
+    },
+    {
+      "muster": "gold|platin|diamant|juwel|perle|aurum|oro",
+      "art": "klischee",
+      "beispiel": "Goldstein, Juwelhaus",
+      "begruendung": "Schmuckwörter: Gold-Code ist Anti-Muster im Korpus (gold_code)."
+    },
+    {
+      "muster": "oase|paradies|paradise|wohlfühl|glück",
+      "art": "klischee",
+      "beispiel": "Wohnoase",
+      "begruendung": "Werbesprache der 1990er."
+    },
+    {
+      "muster": "top|best|first|prime|star|vip|nr 1|no 1",
+      "art": "klischee",
+      "beispiel": "TopImmo, Prime Estate",
+      "begruendung": "Ranglisten-Behauptungen, rechtlich angreifbar (Irreführung)."
+    },
+    {
+      "muster": "experte|expert|profi|kompetenz|leidenschaft",
+      "art": "klischee",
+      "beispiel": "Immoprofi",
+      "begruendung": "Eigenlob statt Bild."
+    },
+    {
+      "muster": "heimat|dein zuhause|ihr zuhause|herzstück|schmuckstück",
+      "art": "klischee",
+      "beispiel": "Heimatwert",
+      "begruendung": "Emotionale Floskeln; Heimat zudem politisch besetzt."
+    },
+    {
+      "muster": "schlüssel|key",
+      "art": "klischee",
+      "beispiel": "Schlüsselfertig, KeyEstate",
+      "begruendung": "Branchen-Symbol, wie das Haus-Dach-Zeichen."
+    },
+    {
+      "muster": "haus allein",
+      "art": "gattung",
+      "beispiel": "Das Haus",
+      "begruendung": "Gattungswort, nicht schutzfähig."
+    },
+    {
+      "muster": "real$|realty|estate",
+      "art": "gattung",
+      "beispiel": "Wohnreal, Viennarealty",
+      "begruendung": "Gattungswörter als Endung, Anti-Muster."
+    },
+    {
+      "muster": "24|360|4you|4u",
+      "art": "anti_muster",
+      "beispiel": "Immo24, Wohnen360",
+      "begruendung": "Plattform- und Domain-Optik (domain_als_logo), Nähe zu ImmoScout24."
+    },
+    {
+      "muster": "& partner|consult|concept|solutions|group",
+      "art": "anti_muster",
+      "beispiel": "Haus & Partner",
+      "begruendung": "Austauschbare Anhängsel; rechtsform_im_logo-Nähe."
+    },
+    {
+      "muster": "Binnenmajuskel",
+      "art": "anti_muster",
+      "beispiel": "ImmoWERT, WohnRaum",
+      "begruendung": "Typografische Spielerei, die beim Sprechen verloren geht."
+    },
+    {
+      "muster": "Initialen ohne Bedeutung",
+      "art": "anti_muster",
+      "beispiel": "ABC Immobilien",
+      "begruendung": "Nicht merkbar, nur als Monogramm zur Personenmarke sinnvoll."
+    }
+  ],
+  "wurzeln": [
+    {
+      "wurzel": "lum",
+      "sprache": "la",
+      "bedeutung": "Licht",
+      "felder": [
+        "licht"
+      ],
+      "gewicht": 0.8,
+      "beispiel": "Lumena",
+      "begruendung": "Häufig genutzt (Lumen, Lumia gesperrt): nur mit eigenständiger Endung."
+    },
+    {
+      "wurzel": "luc",
+      "sprache": "la",
+      "bedeutung": "Licht",
+      "felder": [
+        "licht"
+      ],
+      "gewicht": 0.6,
+      "beispiel": "Lucavo",
+      "begruendung": "c vor a, o, u eindeutig."
+    },
+    {
+      "wurzel": "clar",
+      "sprache": "la",
+      "bedeutung": "hell, klar",
+      "felder": [
+        "licht"
+      ],
+      "gewicht": 0.6,
+      "beispiel": "Clareno",
+      "begruendung": "Klar und edel."
+    },
+    {
+      "wurzel": "sol",
+      "sprache": "la",
+      "bedeutung": "Sonne, fest",
+      "felder": [
+        "licht",
+        "wert"
+      ],
+      "gewicht": 0.7,
+      "beispiel": "Solavo",
+      "begruendung": "Doppelbedeutung Sonne und solide."
+    },
+    {
+      "wurzel": "ser",
+      "sprache": "la",
+      "bedeutung": "heiter, abendlich",
+      "felder": [
+        "licht"
+      ],
+      "gewicht": 0.6,
+      "beispiel": "Serena nicht (Vorname); Seravo",
+      "begruendung": "Ruhig, edel."
+    },
+    {
+      "wurzel": "ver",
+      "sprache": "la",
+      "bedeutung": "Frühling, wahr",
+      "felder": [
+        "landschaft",
+        "wert"
+      ],
+      "gewicht": 0.6,
+      "beispiel": "Verano nicht (span. Wort); Veralo",
+      "begruendung": "Frisch und vertrauenswürdig."
+    },
+    {
+      "wurzel": "terr",
+      "sprache": "la",
+      "bedeutung": "Erde, Land",
+      "felder": [
+        "landschaft",
+        "wert"
+      ],
+      "gewicht": 0.7,
+      "beispiel": "Terrava",
+      "begruendung": "Boden, Grund: passt zu Grundstück."
+    },
+    {
+      "wurzel": "fund",
+      "sprache": "la",
+      "bedeutung": "Grund, Boden",
+      "felder": [
+        "wert",
+        "bau"
+      ],
+      "gewicht": 0.5,
+      "beispiel": "Fundara",
+      "begruendung": "Grundlage; nicht als fund (englisch Fonds) lesbar machen."
+    },
+    {
+      "wurzel": "dom",
+      "sprache": "la",
+      "bedeutung": "Haus",
+      "felder": [
+        "wohnen"
+      ],
+      "gewicht": 0.6,
+      "beispiel": "Domavo",
+      "begruendung": "Klassische Hauswurzel; Domus und Domizil im Bestand."
+    },
+    {
+      "wurzel": "cas",
+      "sprache": "it",
+      "bedeutung": "Haus",
+      "felder": [
+        "wohnen"
+      ],
+      "gewicht": 0.5,
+      "beispiel": "Casavel",
+      "begruendung": "Sehr häufig; nur mit starker Endung."
+    },
+    {
+      "wurzel": "hab",
+      "sprache": "la",
+      "bedeutung": "wohnen, haben",
+      "felder": [
+        "wohnen"
+      ],
+      "gewicht": 0.3,
+      "beispiel": "Habiro",
+      "begruendung": "Im Deutschen habe: eher schwach."
+    },
+    {
+      "wurzel": "nov",
+      "sprache": "la",
+      "bedeutung": "neu",
+      "felder": [
+        "bau"
+      ],
+      "gewicht": 0.6,
+      "beispiel": "Novena nicht (kirchlich); Novaro",
+      "begruendung": "Neubau, Aufbruch."
+    },
+    {
+      "wurzel": "fid",
+      "sprache": "la",
+      "bedeutung": "Vertrauen",
+      "felder": [
+        "wert"
+      ],
+      "gewicht": 0.6,
+      "beispiel": "Fidara",
+      "begruendung": "Vertrauen, Treue; nicht Fido (Hundename)."
+    },
+    {
+      "wurzel": "val",
+      "sprache": "la",
+      "bedeutung": "Wert, Tal",
+      "felder": [
+        "wert",
+        "landschaft"
+      ],
+      "gewicht": 0.8,
+      "beispiel": "Valena",
+      "begruendung": "Doppelbedeutung Wert und Tal: ideal für Makler."
+    },
+    {
+      "wurzel": "mont",
+      "sprache": "la",
+      "bedeutung": "Berg",
+      "felder": [
+        "landschaft"
+      ],
+      "gewicht": 0.6,
+      "beispiel": "Montavo",
+      "begruendung": "Berg, Alpen."
+    },
+    {
+      "wurzel": "silv",
+      "sprache": "la",
+      "bedeutung": "Wald",
+      "felder": [
+        "landschaft"
+      ],
+      "gewicht": 0.6,
+      "beispiel": "Silvara",
+      "begruendung": "Wald, Wienerwald."
+    },
+    {
+      "wurzel": "aqu",
+      "sprache": "la",
+      "bedeutung": "Wasser",
+      "felder": [
+        "landschaft"
+      ],
+      "gewicht": 0.3,
+      "beispiel": "Aquavo",
+      "begruendung": "qu ist gesperrt (SV12): nur in echten Wörtern."
+    },
+    {
+      "wurzel": "lac",
+      "sprache": "la",
+      "bedeutung": "See",
+      "felder": [
+        "landschaft"
+      ],
+      "gewicht": 0.5,
+      "beispiel": "Lacora",
+      "begruendung": "See, Seelage."
+    },
+    {
+      "wurzel": "rip",
+      "sprache": "la",
+      "bedeutung": "Ufer",
+      "felder": [
+        "landschaft"
+      ],
+      "gewicht": 0.5,
+      "beispiel": "Ripavo",
+      "begruendung": "Ufer; rip im Englischen reißen: Klang prüfen."
+    },
+    {
+      "wurzel": "mar",
+      "sprache": "la",
+      "bedeutung": "Meer",
+      "felder": [
+        "landschaft"
+      ],
+      "gewicht": 0.4,
+      "beispiel": "Marelo",
+      "begruendung": "Meer: für Österreich nur als Bild."
+    },
+    {
+      "wurzel": "arc",
+      "sprache": "la",
+      "bedeutung": "Bogen",
+      "felder": [
+        "bau"
+      ],
+      "gewicht": 0.6,
+      "beispiel": "Arcavo",
+      "begruendung": "Bogen, Arkade."
+    },
+    {
+      "wurzel": "port",
+      "sprache": "la",
+      "bedeutung": "Tor, Hafen",
+      "felder": [
+        "bau"
+      ],
+      "gewicht": 0.6,
+      "beispiel": "Portava",
+      "begruendung": "Tor und Ankunft."
+    },
+    {
+      "wurzel": "col",
+      "sprache": "la",
+      "bedeutung": "Säule, Hügel",
+      "felder": [
+        "bau",
+        "landschaft"
+      ],
+      "gewicht": 0.5,
+      "beispiel": "Colavo",
+      "begruendung": "Säule (columna), Hügel (collis)."
+    },
+    {
+      "wurzel": "orn",
+      "sprache": "la",
+      "bedeutung": "Schmuck",
+      "felder": [
+        "kultur"
+      ],
+      "gewicht": 0.4,
+      "beispiel": "Ornela",
+      "begruendung": "Zierde."
+    },
+    {
+      "wurzel": "cant",
+      "sprache": "la",
+      "bedeutung": "Gesang",
+      "felder": [
+        "kultur"
+      ],
+      "gewicht": 0.5,
+      "beispiel": "Cantavo",
+      "begruendung": "Musik, Wien."
+    },
+    {
+      "wurzel": "arm",
+      "sprache": "la",
+      "bedeutung": "Harmonie (gr.)",
+      "felder": [
+        "kultur"
+      ],
+      "gewicht": 0.3,
+      "beispiel": "Armena",
+      "begruendung": "arm im Deutschen negativ: sparsam."
+    },
+    {
+      "wurzel": "viv",
+      "sprache": "la",
+      "bedeutung": "Leben",
+      "felder": [
+        "wohnen"
+      ],
+      "gewicht": 0.5,
+      "beispiel": "Vivara",
+      "begruendung": "Leben, lebendig."
+    },
+    {
+      "wurzel": "lin",
+      "sprache": "la",
+      "bedeutung": "Linie, Lein, Linde",
+      "felder": [
+        "bau",
+        "landschaft"
+      ],
+      "gewicht": 0.7,
+      "beispiel": "Linavo",
+      "begruendung": "Linie und Linde: Bau und Natur."
+    },
+    {
+      "wurzel": "aer",
+      "sprache": "la",
+      "bedeutung": "Luft",
+      "felder": [
+        "licht"
+      ],
+      "gewicht": 0.3,
+      "beispiel": "Aerila",
+      "begruendung": "ae ist verboten (Umlaut-Ersatz): nur als a."
+    },
+    {
+      "wurzel": "alt",
+      "sprache": "la",
+      "bedeutung": "hoch",
+      "felder": [
+        "raum"
+      ],
+      "gewicht": 0.5,
+      "beispiel": "Altavo",
+      "begruendung": "Höhe; Altana gesperrt, Abstand halten."
+    },
+    {
+      "wurzel": "prat",
+      "sprache": "la",
+      "bedeutung": "Wiese",
+      "felder": [
+        "landschaft"
+      ],
+      "gewicht": 0.5,
+      "beispiel": "Pratela",
+      "begruendung": "Wiese, Grün."
+    },
+    {
+      "wurzel": "flor",
+      "sprache": "la",
+      "bedeutung": "Blüte",
+      "felder": [
+        "landschaft"
+      ],
+      "gewicht": 0.5,
+      "beispiel": "Floravel",
+      "begruendung": "Blüte; Flora als Vorname häufig."
+    },
+    {
+      "wurzel": "hort",
+      "sprache": "la",
+      "bedeutung": "Garten",
+      "felder": [
+        "landschaft"
+      ],
+      "gewicht": 0.5,
+      "beispiel": "Hortavo",
+      "begruendung": "Garten."
+    },
+    {
+      "wurzel": "quer",
+      "sprache": "la",
+      "bedeutung": "Eiche",
+      "felder": [
+        "landschaft"
+      ],
+      "gewicht": 0.2,
+      "beispiel": "Querna",
+      "begruendung": "qu gesperrt; Beispiel für ausgeschlossene Wurzel."
+    },
+    {
+      "wurzel": "lar",
+      "sprache": "la",
+      "bedeutung": "Hausgott, Herd",
+      "felder": [
+        "wohnen"
+      ],
+      "gewicht": 0.6,
+      "beispiel": "Larena",
+      "begruendung": "Lares: Schutz des Hauses."
+    },
+    {
+      "wurzel": "fac",
+      "sprache": "la",
+      "bedeutung": "machen, Fassade",
+      "felder": [
+        "bau"
+      ],
+      "gewicht": 0.3,
+      "beispiel": "Facero",
+      "begruendung": "c vor a eindeutig; Nähe zu fake prüfen."
+    },
+    {
+      "wurzel": "cur",
+      "sprache": "la",
+      "bedeutung": "Sorge, Pflege",
+      "felder": [
+        "wert"
+      ],
+      "gewicht": 0.4,
+      "beispiel": "Curavel",
+      "begruendung": "Verwaltung, Obhut; im Englischen cure."
+    },
+    {
+      "wurzel": "pac",
+      "sprache": "la",
+      "bedeutung": "Frieden",
+      "felder": [
+        "wohnen"
+      ],
+      "gewicht": 0.4,
+      "beispiel": "Pacela",
+      "begruendung": "Frieden, Ruhe; Pack im Deutschen abwertend."
+    },
+    {
+      "wurzel": "calm",
+      "sprache": "it",
+      "bedeutung": "Ruhe",
+      "felder": [
+        "wohnen"
+      ],
+      "gewicht": 0.4,
+      "beispiel": "Calmena",
+      "begruendung": "Ruhe."
+    },
+    {
+      "wurzel": "chiar",
+      "sprache": "it",
+      "bedeutung": "hell",
+      "felder": [
+        "licht"
+      ],
+      "gewicht": 0.2,
+      "beispiel": "Chiarel",
+      "begruendung": "ch mehrdeutig: nur italienische Marken."
+    },
+    {
+      "wurzel": "dim",
+      "sprache": "it",
+      "bedeutung": "Wohnsitz (dimora)",
+      "felder": [
+        "wohnen"
+      ],
+      "gewicht": 0.4,
+      "beispiel": "Dimavel",
+      "begruendung": "dim im Englischen trüb: Klang prüfen."
+    }
+  ],
+  "endungen": {
+    "hinweis": "Kompatibilitätsschlüssel für den Einleser in src/engine/names/brandable.ts: dieselben Endungen wie endungen_nach_ton, flach; verboten wie verbotene_endungen",
+    "gut": [
+      {
+        "endung": "a",
+        "gewicht": 1,
+        "beispiel": "Lavena",
+        "begruendung": "Offen, melodisch, italienisch-lateinisch; in DE als weiblich und weich empfunden.",
+        "ton": "weich"
+      },
+      {
+        "endung": "ea",
+        "gewicht": 0.7,
+        "beispiel": "Orea",
+        "begruendung": "Edel lateinisch, zwei Silben.",
+        "ton": "weich"
+      },
+      {
+        "endung": "ena",
+        "gewicht": 0.7,
+        "beispiel": "Savena",
+        "begruendung": "Weich und gut betonbar (Sa-VE-na).",
+        "ton": "weich"
+      },
+      {
+        "endung": "ola",
+        "gewicht": 0.5,
+        "beispiel": "Mirola",
+        "begruendung": "Weich, leicht verspielt; nicht mit Diminutiv-Doppelung (-olina).",
+        "ton": "weich"
+      },
+      {
+        "endung": "ina",
+        "gewicht": 0.4,
+        "beispiel": "Larina",
+        "begruendung": "Sehr häufig in Vornamen: Verwechslung mit Personennamen prüfen.",
+        "ton": "weich"
+      },
+      {
+        "endung": "ve",
+        "gewicht": 0.4,
+        "beispiel": "Salve nicht (Wort); Nareve",
+        "begruendung": "Im Deutschen zweisilbig, im Englischen einsilbig: nur wenn beide klingen.",
+        "ton": "weich"
+      },
+      {
+        "endung": "elle",
+        "gewicht": 0.3,
+        "beispiel": "Lavelle",
+        "begruendung": "Französisch weich; im Deutschen -elle wie Kelle: Klang prüfen.",
+        "ton": "weich"
+      },
+      {
+        "endung": "en",
+        "gewicht": 1,
+        "beispiel": "Laven",
+        "begruendung": "Natürlich deutsch, ruhig, gut als Versal.",
+        "ton": "klar"
+      },
+      {
+        "endung": "o",
+        "gewicht": 0.8,
+        "beispiel": "Tavero",
+        "begruendung": "Klar und rund, italienisch, international lesbar.",
+        "ton": "klar"
+      },
+      {
+        "endung": "an",
+        "gewicht": 0.7,
+        "beispiel": "Corvan",
+        "begruendung": "Kräftig, offen.",
+        "ton": "klar"
+      },
+      {
+        "endung": "el",
+        "gewicht": 0.6,
+        "beispiel": "Savel",
+        "begruendung": "Deutsch natürlich (Giebel, Hügel).",
+        "ton": "klar"
+      },
+      {
+        "endung": "ar",
+        "gewicht": 0.5,
+        "beispiel": "Lunar nicht (Wort); Velar",
+        "begruendung": "Klar; Nähe zu echten Adjektiven prüfen.",
+        "ton": "klar"
+      },
+      {
+        "endung": "on",
+        "gewicht": 0.4,
+        "beispiel": "Mareon",
+        "begruendung": "Klar; nicht als -ion lesbar machen.",
+        "ton": "klar"
+      },
+      {
+        "endung": "et",
+        "gewicht": 0.3,
+        "beispiel": "Calet",
+        "begruendung": "Präzise; französisch stumm.",
+        "ton": "klar"
+      },
+      {
+        "endung": "is",
+        "gewicht": 0.6,
+        "beispiel": "Laris",
+        "begruendung": "Lateinische Anmutung, kurz und edel.",
+        "ton": "edel"
+      },
+      {
+        "endung": "or",
+        "gewicht": 0.6,
+        "beispiel": "Tavor",
+        "begruendung": "Lateinisch (Agens), würdig.",
+        "ton": "edel"
+      },
+      {
+        "endung": "ane",
+        "gewicht": 0.5,
+        "beispiel": "Solane",
+        "begruendung": "Französisch-elegant, im Deutschen dreisilbig lesbar.",
+        "ton": "edel"
+      },
+      {
+        "endung": "ent",
+        "gewicht": 0.5,
+        "beispiel": "Valent",
+        "begruendung": "Lateinisch-französisch, Haltung.",
+        "ton": "edel"
+      },
+      {
+        "endung": "eum",
+        "gewicht": 0.3,
+        "beispiel": "Orneum",
+        "begruendung": "Lateinisch (Museum, Atheneum); sparsam, sonst Baukasten-Nähe zu -ium.",
+        "ton": "edel"
+      },
+      {
+        "endung": "ara",
+        "gewicht": 0.5,
+        "beispiel": "Velara",
+        "begruendung": "Weit und edel.",
+        "ton": "edel"
+      },
+      {
+        "endung": "ora",
+        "gewicht": 0.5,
+        "beispiel": "Selora",
+        "begruendung": "Edel; Nähe zu Aurora prüfen.",
+        "ton": "edel"
+      }
+    ],
+    "verboten": [
+      "ion",
+      "ex",
+      "ix",
+      "ox",
+      "ify",
+      "ly",
+      "io",
+      "ium",
+      "ia",
+      "us",
+      "oo",
+      "sy",
+      "ster",
+      "tec",
+      "real",
+      "immo",
+      "invest",
+      "concept"
+    ]
+  },
+  "klischee_muster": [
+    "traum",
+    "dream",
+    "premium",
+    "home",
+    "living",
+    "immo",
+    "luxus",
+    "luxury",
+    "exklusiv",
+    "elite",
+    "prestige",
+    "royal",
+    "deluxe",
+    "gold",
+    "platin",
+    "diamant",
+    "juwel",
+    "perle",
+    "oase",
+    "paradies",
+    "wohlfühl",
+    "glück",
+    "heimat",
+    "experte",
+    "profi",
+    "kompetenz",
+    "schlüssel",
+    "realty",
+    "estate"
+  ],
+  "bewertung": {
+    "hinweis": "Vorschlag für eine Punktwertung je Kunstwort (0 bis 100); Gewichte sind Startwerte, vor Einsatz an der Jury eichen.",
+    "gewichte": {
+      "aussprechbarkeit": 0.3,
+      "merkfaehigkeit": 0.25,
+      "bedeutung": 0.2,
+      "domain": 0.1,
+      "ton_passung": 0.15
+    },
+    "ausschluss": [
+      "verbotene Lautfolge",
+      "verbotene Endung",
+      "negatives Muster",
+      "BAD_PARTS",
+      "PROTECTED_PARTS",
+      "Abstand zu Marke unter 3"
+    ]
+  },
+  "tech_muster": {
+    "hinweis": "Muster kurzer, kreativer Tech-Namen, gefiltert auf das, was für Maklermarken trägt (Makler verkaufen Vertrauen, nicht Apps). Begleitdokument docs/21-tech-marken-research.md. Gewichte 0 bis 1 sind Startwerte, vor dem Einsatz an der Jury eichen. Gilt zusätzlich zu verbotene_endungen, negative_muster und den Sperren der Engine (quality.ts, rules.ts).",
+    "quelle": "src/engine/reference/corpus-tech.json (195 Marken, davon 192 nicht im Hauptkorpus, 174 mit gesichtetem Logo), Auswertung 27.10.2026",
+    "befund": {
+      "technik_anteil_pct": {
+        "zusammensetzung": 29,
+        "echtes-wort": 17,
+        "kunstwort": 12,
+        "abgewandelt": 11,
+        "echtes-wort-umgedeutet": 9,
+        "fremdsprache": 6,
+        "verschmelzung": 5,
+        "verkuerzung": 4,
+        "personenname": 4,
+        "zahl": 1,
+        "akronym": 1,
+        "satz": 1
+      },
+      "laenge_median": 6,
+      "silben_median": 2,
+      "silben_verteilung_pct": {
+        "1": 13,
+        "2": 46,
+        "3": 30,
+        "4": 8,
+        "5": 2
+      },
+      "kurz_bis_6_buchstaben": {
+        "anzahl": 99,
+        "echte_woerter_pct": 35,
+        "kunstwort_pct": 18,
+        "abgewandelt_pct": 12
+      },
+      "auslaut_offen_pct": 39,
+      "vergleich_hauptkorpus": "High-End-Korpus (corpus.json): Kernname Median 8 Buchstaben und 3 Silben, 52 % Personennamen, 28 % Antiqua, 61 % Versalien. Tech: Median 6 Buchstaben und 2 Silben, 4 % Personennamen, 3 % Antiqua, 23 % Versalien, 71 % mit Bildzeichen."
+    },
+    "techniken": [
+      {
+        "technik": "echtes-wort",
+        "gewicht": 1,
+        "beispiele_tech": "Stripe, Slack, Loom, Ledger, Runway, Glean, Arc",
+        "uebertragung": "Substanz, Schwelle, Bogen, Erker, Fundus",
+        "begruendung": "Kurzes echtes Wort mit konkretem Bild; die Jury zeigte genau solche Namen (Substanz, Haltung, Bedacht)."
+      },
+      {
+        "technik": "fremdsprache",
+        "gewicht": 0.9,
+        "beispiele_tech": "Klarna, Asana, Roku, Mistral, Peloton, kununu, Adyen",
+        "uebertragung": "Corte, Arco, Soglia, Cardo, Altura",
+        "begruendung": "Echtes Fremdwort mit belegbarer Bedeutung erzählt eine Geschichte; Klarna (schwedisch aufklaren) zeigt, wie ein Zweisilber auf -a als Wort und nicht als Erfindung wirkt."
+      },
+      {
+        "technik": "zusammensetzung",
+        "gewicht": 0.8,
+        "beispiele_tech": "Opendoor, Evernest, Rightmove, Dropbox, Bergfürst, durchblicker",
+        "uebertragung": "Nestbau, Seelage, Lichthof",
+        "begruendung": "Häufigste Tech-Technik und im Proptech besonders verbreitet; für Makler nur deutsch oder eingebürgert, Bild vorn, Ort oder Tätigkeit hinten (wie zusammensetzung Z01)."
+      },
+      {
+        "technik": "personenname",
+        "gewicht": 0.8,
+        "beispiele_tech": "Harvey, Miro, Tesla, Dyson, Robinhood",
+        "uebertragung": "Nachname der Person",
+        "begruendung": "Im Hauptkorpus Standard der Luxusmarken; Harvey (Rechts-KI) setzt den Namen in Antiqua, um Vertrauen zu signalisieren."
+      },
+      {
+        "technik": "echtes-wort-umgedeutet",
+        "gewicht": 0.4,
+        "beispiele_tech": "Apple, Amazon, Mercury, Kraken, Plaid, Granola",
+        "uebertragung": "nur mit Wohnbezug: Nest, Hain",
+        "begruendung": "Trägt bei neuen Produkten, weil das Bild frei besetzt wird; ein Makler ohne Werbebudget braucht ein Bild, das sofort zum Wohnen passt."
+      },
+      {
+        "technik": "verkuerzung",
+        "gewicht": 0.3,
+        "beispiele_tech": "Canva, Trello, Revolut, refurbed, Airbnb",
+        "uebertragung": "sparsam, nur an der Silbengrenze und wenn das Ausgangswort hörbar bleibt",
+        "begruendung": "Die Jury fand Abwandlungen schwach (26 von 26); Verkürzung ist eine Abwandlung."
+      },
+      {
+        "technik": "verschmelzung",
+        "gewicht": 0.3,
+        "beispiele_tech": "Zillow, Pinterest, Venmo, Shpock, Casafari, Garmin",
+        "uebertragung": "nur wenn beide Teile echte Wörter sind und sich eine Silbe teilen (Casafari: casa und safari)",
+        "begruendung": "Kofferwörter wirken schnell wie ein Wortspiel; Zillow funktioniert über eine Geschichte (zillions und pillow), die ein Makler nicht nebenbei erzählen kann."
+      },
+      {
+        "technik": "abgewandelt",
+        "gewicht": 0.1,
+        "beispiele_tech": "Lyft, Flix, byrd, mySugr, Storyblok, Qonto, Google",
+        "uebertragung": "keine",
+        "begruendung": "Tippfehler-Schreibweisen sind das deutlichste Signal für App und Startup; im Telefontest scheitern sie."
+      },
+      {
+        "technik": "kunstwort",
+        "gewicht": 0.1,
+        "beispiele_tech": "Vercel, Wix, Brex, Celonis, Tricentis, Exporo, Loxone",
+        "uebertragung": "keine auf der ersten Seite",
+        "begruendung": "Kunstwörter ohne Bild brauchen Werbedruck; der unabhängige Bewerter zeigte 0 von 141 erfundenen Kunstwörtern."
+      },
+      {
+        "technik": "akronym",
+        "gewicht": 0,
+        "beispiele_tech": "Replit, n8n",
+        "uebertragung": "keine",
+        "begruendung": "Nur für Fachpublikum lesbar."
+      },
+      {
+        "technik": "zahl",
+        "gewicht": 0,
+        "beispiele_tech": "N26, ImmoScout24, n8n",
+        "uebertragung": "keine",
+        "begruendung": "Ziffern sind im Leitfaden ausgeschlossen und wirken technisch."
+      },
+      {
+        "technik": "satz",
+        "gewicht": 0.2,
+        "beispiele_tech": "willhaben, BlaBlaCar",
+        "uebertragung": "nur kurze Haltung in drei Wörtern (bestehender Stil satz)",
+        "begruendung": "Marktplatz-Ton, für Makler selten passend."
+      }
+    ],
+    "laenge": {
+      "ideal_min": 4,
+      "ideal_max": 7,
+      "max_kurz": 5,
+      "begruendung": "Tech-Median 6 Buchstaben; im Hauptkorpus 8. Kurze echte Wörter bis 7 Buchstaben tragen auch als Monogramm."
+    },
+    "silben": [
+      {
+        "silben": 2,
+        "gewicht": 1,
+        "beispiele": "Klarna, Canva, Roku, Gusto, Sonos",
+        "begruendung": "46 % der Tech-Marken; leicht zu sagen und zu merken."
+      },
+      {
+        "silben": 1,
+        "gewicht": 0.7,
+        "beispiele": "Arc, Bolt, Loom, Wise",
+        "begruendung": "Stark, aber nur als echtes Wort (Nest, Hain, Maß); einsilbige Kunstwörter wirken wie Kürzel."
+      },
+      {
+        "silben": 3,
+        "gewicht": 0.7,
+        "beispiele": "Asana, Peloton, Revolut",
+        "begruendung": "30 % der Tech-Marken; im Hauptkorpus der Median."
+      },
+      {
+        "silben": 4,
+        "gewicht": 0.3,
+        "beispiele": "Superhuman, Casafari",
+        "begruendung": "Selten und schwer als kurze Marke."
+      }
+    ],
+    "vokalmuster_bevorzugt": [
+      {
+        "muster": "KVKKV",
+        "gewicht": 1,
+        "beispiele_tech": "Canva, Figma, Gusto, Monzo, Tesla, Venmo",
+        "beispiele_makler": "Corte, Ponte",
+        "begruendung": "Zweisilber mit Konsonantenpaar in der Mitte und offener Endung: klar betont auf der ersten Silbe."
+      },
+      {
+        "muster": "KVKV",
+        "gewicht": 0.9,
+        "beispiele_tech": "Miro, Roku, Kobo, Nuki, Suno, Lime",
+        "beispiele_makler": "Sala, Lume",
+        "begruendung": "Kürzestes offenes Muster; nur als echtes Wort, sonst Spielzeugklang."
+      },
+      {
+        "muster": "KVKVK",
+        "gewicht": 0.8,
+        "beispiele_tech": "Sonos, Mural, Depop",
+        "beispiele_makler": "Bogen, Limen",
+        "begruendung": "Geschlossene Endsilbe gibt Halt; im Deutschen natürlich."
+      },
+      {
+        "muster": "KVKKVK",
+        "gewicht": 0.8,
+        "beispiele_tech": "Garmin, Docker, Ledger",
+        "beispiele_makler": "Fundus, Sockel",
+        "begruendung": "Häufigstes Muster kurzer Tech-Namen (16 von 99)."
+      },
+      {
+        "muster": "VKKV",
+        "gewicht": 0.8,
+        "beispiele_tech": "Arco (nicht Tech)",
+        "beispiele_makler": "Arco, Erker (VKKVK)",
+        "begruendung": "Vokalischer Anfang wirkt offen; im Tech selten (28 von 195 Marken beginnen mit Vokal)."
+      },
+      {
+        "muster": "KKVKKV",
+        "gewicht": 0.6,
+        "beispiele_tech": "Klarna",
+        "beispiele_makler": "kaum Kandidaten",
+        "begruendung": "Anlaut-Paar plus Mittelpaar ist kräftig; höchstens ein harter Verschlusslaut."
+      }
+    ],
+    "endungen": [
+      {
+        "endung": "a",
+        "gewicht": 0.9,
+        "beispiele": "Klarna, Canva, Asana, Figma",
+        "begruendung": "Offen und warm; als Fremdwort mit Bedeutung stark, als Kunstwort nur mit Abzug."
+      },
+      {
+        "endung": "o",
+        "gewicht": 0.8,
+        "beispiele": "Miro, Roku, Gusto, Monzo",
+        "begruendung": "Offen und klar; italienische Wörter auf -o tragen (Arco, Ponte auf -e)."
+      },
+      {
+        "endung": "e",
+        "gewicht": 0.7,
+        "beispiele": "Stripe, Apple, Schwelle",
+        "begruendung": "Deutsches Schluss-e weich; englisches stummes e nur in echten Wörtern."
+      },
+      {
+        "endung": "er",
+        "gewicht": 0.6,
+        "beispiele": "Docker, Ledger, Erker",
+        "begruendung": "Nur echte Wörter; als Kunstwort-Endung klingt -er nach Person oder Gerät."
+      },
+      {
+        "endung": "n",
+        "gewicht": 0.6,
+        "beispiele": "Notion, Garmin, Bogen",
+        "begruendung": "Nur echte Wörter; -on in Kunstwörtern ist Pharma-Klang (verbotene_endungen ion)."
+      },
+      {
+        "endung": "t",
+        "gewicht": 0.5,
+        "beispiele": "Bolt, Pliant, Takt",
+        "begruendung": "Harter Abschluss, entschlossen; höchstens ein weiterer harter Laut im Wort."
+      },
+      {
+        "endung": "y",
+        "gewicht": 0.1,
+        "beispiele": "Etsy, Calendly, Grammarly",
+        "begruendung": "Englisch und verspielt; im Deutschen falsch betont."
+      },
+      {
+        "endung": "x",
+        "gewicht": 0.1,
+        "beispiele": "Wix, Brex, Flix",
+        "begruendung": "Baukasten-Klang, in verbotene_endungen schon ix, ex, ox."
+      }
+    ],
+    "gesperrte_app_endungen": [
+      {
+        "endung": "ify",
+        "beispiele": "Shopify, Spotify, Netlify, hokify",
+        "begruendung": "Startup-Klischee schlechthin."
+      },
+      {
+        "endung": "ly",
+        "beispiele": "Calendly, Grammarly",
+        "begruendung": "Englische Adverb-Endung als App-Muster."
+      },
+      {
+        "endung": "io",
+        "beispiele": "Personio, Twilio",
+        "begruendung": "Domain-Endung als Wortende."
+      },
+      {
+        "endung": "oo",
+        "beispiele": "Deliveroo",
+        "begruendung": "Verspielt."
+      },
+      {
+        "endung": "ist",
+        "beispiele": "Todoist",
+        "begruendung": "Personen-Endung an Tätigkeitswort, App-Klang."
+      },
+      {
+        "endung": "ful",
+        "beispiele": "Contentful",
+        "begruendung": "Englische Adjektiv-Endung an Fachwort."
+      },
+      {
+        "endung": "hub",
+        "beispiele": "GitHub, HubSpot",
+        "begruendung": "Plattform-Wort."
+      },
+      {
+        "endung": "stack",
+        "beispiele": "Propstack",
+        "begruendung": "Software-Fachwort."
+      },
+      {
+        "endung": "base",
+        "beispiele": "Supabase, Coinbase",
+        "begruendung": "Datenbank-Wort."
+      },
+      {
+        "endung": "labs",
+        "beispiele": "ElevenLabs, Black Forest Labs",
+        "begruendung": "Labor-Anhängsel der Start-up-Welt."
+      },
+      {
+        "endung": "ai",
+        "beispiele": "OpenAI, Character.AI, Stability AI",
+        "begruendung": "Technik als Namensteil."
+      },
+      {
+        "endung": "app",
+        "beispiele": "Glovoapp (Domain)",
+        "begruendung": "Technik als Namensteil."
+      },
+      {
+        "endung": "r",
+        "nach_konsonant": true,
+        "beispiele": "Flickr, mySugr",
+        "begruendung": "Weggelassenes e vor r ist eine Tippfehler-Schreibweise."
+      }
+    ],
+    "gesperrte_app_muster": [
+      {
+        "muster": "[a-z][A-Z]",
+        "art": "binnenmajuskel",
+        "beispiele": "GitHub, PlanRadar, McMakler, ImmoScout24, GoStudent",
+        "begruendung": "20 der 195 Tech-Marken; im Hauptkorpus ein Anti-Muster."
+      },
+      {
+        "muster": "[0-9]",
+        "art": "ziffer",
+        "beispiele": "N26, n8n, ImmoScout24",
+        "begruendung": "Leitfaden Regel 6: keine Ziffern."
+      },
+      {
+        "muster": "\\.(com|ai|io|app|de|at)$",
+        "art": "domain",
+        "beispiele": "monday.com, stability.ai",
+        "begruendung": "Domain als Logo ist Anti-Muster des Hauptkorpus."
+      },
+      {
+        "muster": "^(get|go|my|insta|open|smart|e-|i-)",
+        "art": "app_praefix",
+        "beispiele": "GoStudent, GoPro, mySugr, Instacart, Opendoor",
+        "begruendung": "Imperativ- und Besitz-Präfixe sind App-Ton."
+      },
+      {
+        "muster": "y(?=[^aeiou]|$)",
+        "art": "y_statt_i",
+        "beispiele": "Lyft, byrd",
+        "begruendung": "Tippfehler-Schreibweise; Ausnahme echte Wörter und Personennamen.",
+        "nur_kunstwort": true
+      },
+      {
+        "muster": "(.)\\1\\1",
+        "art": "dreifach",
+        "beispiele": "BlaBlaBla",
+        "begruendung": "Lautmalerei."
+      }
+    ],
+    "anlaut": {
+      "befund": "Tech: s 17, r 14, m, c, p, d je 13, Vokal 28 von 195. Harte Anlaute (k, t, p, b, d, g) geben Tempo.",
+      "regel": "Für Makler höchstens ein harter Verschlusslaut im ganzen Namen; weiche Anlaute (l, m, n, s, v, w) und Vokale bevorzugen, wie silbenbausteine.anlaute.",
+      "harte_verschlusslaute": [
+        "k",
+        "t",
+        "p",
+        "b",
+        "d",
+        "g"
+      ],
+      "max_harte_verschlusslaute": 1
+    },
+    "wortfelder_echtes_wort": [
+      {
+        "feld": "raum",
+        "bild": "Raum und Grundriss",
+        "tech_vorbild": "Loom, Arc, Framer",
+        "woerter": [
+          "Erker",
+          "Loggia",
+          "Diele",
+          "Salon",
+          "Foyer",
+          "Kabinett",
+          "Enfilade",
+          "Beletage",
+          "Mezzanin",
+          "Remise",
+          "Alkoven"
+        ]
+      },
+      {
+        "feld": "form",
+        "bild": "tragende Form, Linie",
+        "tech_vorbild": "Linear, Stripe, Arc",
+        "woerter": [
+          "Achse",
+          "Bogen",
+          "Fuge",
+          "Joch",
+          "Sockel",
+          "Pfeiler",
+          "Arkade",
+          "Portikus",
+          "Gefüge"
+        ]
+      },
+      {
+        "feld": "orientierung",
+        "bild": "Richtung und Weitblick",
+        "tech_vorbild": "Compass, Cursor, Runway",
+        "woerter": [
+          "Kurs",
+          "Zenit",
+          "Meridian",
+          "Fluchtpunkt",
+          "Weitsicht",
+          "Ausblick"
+        ]
+      },
+      {
+        "feld": "haltung",
+        "bild": "Qualität und Sorgfalt",
+        "tech_vorbild": "Notion, Wise, Ledger, Glean",
+        "woerter": [
+          "Substanz",
+          "Haltung",
+          "Bedacht",
+          "Maß",
+          "Sorgfalt",
+          "Fundus",
+          "Gewicht",
+          "Takt"
+        ]
+      },
+      {
+        "feld": "ankommen",
+        "bild": "Ankommen und Bleiben",
+        "tech_vorbild": "Opendoor, Evernest, Homeday",
+        "woerter": [
+          "Nest",
+          "Nestbau",
+          "Schwelle",
+          "Herd",
+          "Refugium",
+          "Seelage",
+          "Salettl"
+        ]
+      },
+      {
+        "feld": "landschaft",
+        "bild": "Lage und Natur",
+        "tech_vorbild": "Amazon, Mistral, Black Forest Labs",
+        "woerter": [
+          "Hain",
+          "Lichtung",
+          "Anhöhe",
+          "Au",
+          "Hang"
+        ]
+      },
+      {
+        "feld": "fremd_kurz",
+        "bild": "kurzes Fremdwort mit Raum",
+        "tech_vorbild": "Klarna, Asana, Roku, Peloton",
+        "woerter": [
+          "Corte",
+          "Arco",
+          "Soglia",
+          "Cardo",
+          "Ponte",
+          "Sala",
+          "Limen",
+          "Spazio",
+          "Altura",
+          "Vista",
+          "Lume",
+          "Atrio"
+        ]
+      }
+    ],
+    "wortfelder_hinweis": "Kandidaten am 27.10.2026 gegen quality.ts (wortSchwaeche, istGattungswort), findCliche, findCompany, findProtected, corpusMatch und findConflict geprüft: keiner gesperrt oder schwach. Nicht aufgenommen: Giebel, Lisene, Tetto (schwach), Altana (Firma), Riva (Korpusmarke), Casa, Domus (abgenutzt laut Leitfaden), Anker, Halt, Basis, Schutz (gesperrt oder schwach). Bucht nur bei Wasser in der Region (bestehende Regel).",
+    "logo": {
+      "befund": "Tech-Logos: 157 Wortmarken, 90 % Grotesk, 39 % klein, 38 % gemischt, 23 % Versalien, 70 % fett oder schwarz, 55 % eng, 71 % mit Bildzeichen (meist App-Symbol links). Nur 5 Antiqua-Marken, alle mit Vertrauensthema: Opendoor, Matterport, Scalable Capital, Harvey, Etsy.",
+      "uebertragbar": [
+        "Akzent im Wort statt Bildzeichen (Oura Makron, Casafari und Anyline A ohne Querbalken, Nuki gelber i-Punkt, Bolt Punkt unter dem o): bestätigt Muster M12 und M15 in docs/15",
+        "Antiqua als Vertrauenssignal in Proptech und Finanzen (Opendoor, Matterport, Scalable Capital, Harvey)",
+        "eine Farbe (129 von 174 Logos einfarbig)"
+      ],
+      "nicht_uebertragbar": [
+        "fettes App-Symbol links neben dem Namen (85 von 174)",
+        "fette Kleinbuchstaben-Grotesk eng (Stripe, Twilio, Monzo)",
+        "Verläufe und Mehrfarbigkeit (Figma, Slack, Mural)",
+        "Domain-Endung im Logo (monday.com, stability.ai)"
+      ]
+    }
+  }
+}

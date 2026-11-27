@@ -1,0 +1,82 @@
+{
+  "feinheit": [
+    {
+      "code": "f1",
+      "titel": "kompakter, feinere Linien",
+      "abstand": 0.88,
+      "staerke": 0.88,
+      "zeichen": 0.92,
+      "zusatz": 1,
+      "laufweite": 0
+    },
+    {
+      "code": "f2",
+      "titel": "luftiger, kräftigere Linien",
+      "abstand": 1.12,
+      "staerke": 1.12,
+      "zeichen": 1.08,
+      "zusatz": 1,
+      "laufweite": 0
+    },
+    {
+      "code": "f3",
+      "titel": "größerer Zusatz, weiter gesperrt",
+      "abstand": 0.92,
+      "staerke": 1,
+      "zeichen": 1,
+      "zusatz": 1.1,
+      "laufweite": 0.03
+    },
+    {
+      "code": "f4",
+      "titel": "kleineres Zeichen, mehr Luft",
+      "abstand": 1.1,
+      "staerke": 1.06,
+      "zeichen": 0.9,
+      "zusatz": 1,
+      "laufweite": -0.02
+    }
+  ],
+  "varianten": [
+    {
+      "code": "s1",
+      "titel": "Zusatz über dem Namen",
+      "achsen": [
+        "Lage des Zusatzes"
+      ],
+      "bau": {
+        "$fn": "bau(e){const n=Mt(e).filter(jr);if(n.length!==1)return null;const t=n[0];if(typeof t.y!=\"string\"||!/name\\.(b|u)/.test(t.y)||t.wennFehlt||t.drehung||t.bogen||pl(e,Ir(t),[t])||e.elemente.some(s=>s!==t&&/name\\.(t|o)\\s*-/.test(_r(s))))return null;const r=kl(t.y)??80,i=typeof t.versal==\"number\"?t.versal:36,a=`min(name.t,name.o)-${cs(Math.max(i*1.5,r*.75))}`;return e.elemente.map(s=>s===t?{...t,y:a}:s)}"
+      }
+    },
+    {
+      "code": "s2",
+      "titel": "Zeichen rechts vom Namen",
+      "achsen": [
+        "Lage des Zeichens"
+      ],
+      "bau": {
+        "$fn": "bau(e){const n=e.elemente.find(s=>s.typ!==\"text\"&&s.zeichen&&\"x\"in s&&(s.x===0||s.x===\"0\")),t=Mt(e).find(s=>Ir(s)===\"name\");if(!n||!t||!n.id||t.ausrichtung!==\"links\"||typeof t.x!=\"string\")return null;const r=new RegExp(`^${n.id}\\\\.r\\\\+(\\\\d+(\\\\.\\\\d+)?)$`).exec(t.x);if(!r||e.elemente.some(s=>s!==t&&s!==n&&new RegExp(`${n.id}\\\\.(l|r|cx|w)`).test(_r(s))))return null;const{stift:i,...a}=t;return e.elemente.map(s=>s===t?{...a,ausrichtung:\"rechts\",x:`${n.id}.l-${r[1]}`}:s)}"
+      }
+    },
+    {
+      "code": "s3",
+      "titel": "Zusatz linksbündig",
+      "achsen": [
+        "Ausrichtung des Zusatzes"
+      ],
+      "bau": {
+        "$fn": "bau(e){const n=Mt(e).find(r=>Ir(r)===\"name\"),t=Mt(e).filter(r=>jr(r)&&r.ausrichtung===\"mitte\"&&r.x===\"name.cx\"&&!r.drehung&&!r.bogen);return!n||n.ausrichtung!==\"mitte\"||!t.length?null:e.elemente.map(r=>t.includes(r)?{...r,ausrichtung:\"links\",x:\"name.l\"}:r)}"
+      }
+    },
+    {
+      "code": "s4",
+      "titel": "Zeichen deutlich größer",
+      "achsen": [
+        "Proportion Zeichen zu Name"
+      ],
+      "bau": {
+        "$fn": "bau(e){const n=e.elemente.filter(t=>t.typ===\"pfad\"&&t.zeichen&&(typeof t.massstab==\"number\"||t.massstab===void 0));return n.length?e.elemente.map(t=>n.includes(t)&&t.typ===\"pfad\"?{...t,massstab:Math.round((t.massstab??1)*1.32*1e3)/1e3}:t):null}"
+      }
+    }
+  ]
+}

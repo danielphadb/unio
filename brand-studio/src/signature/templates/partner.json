@@ -1,0 +1,2259 @@
+[
+  {
+    "id": "sig-et-diagonale",
+    "titel": "Et-Diagonale",
+    "idee": "Der Hauptname steht oben links, die Endung unten rechts bündig mit seinem Ende; ein großes kursives Et hält die Treppe zusammen, die Marke liest sich als Diagonale.",
+    "herleitung": "Treppensatz zweizeiliger Titel aus dem Buchdruck (die zweite Zeile rückt ein, bis beide Zeilen eine Diagonale bilden); das Et sitzt in der Stufe und gehört beiden Zeilen. Es steht frei mit eigenem Hof, nie in einer Zeile zwischen den Namen.",
+    "referenzen": [
+      "ENGEL&VÖLKERS",
+      "Strutt & Parker",
+      "HÜBL & PARTNER"
+    ],
+    "abgrenzung": "Dort steht das Et in einer Zeile zwischen den Namen; hier zwei Zeilen im Treppensatz mit großem kursiven Et in der Stufe, ohne Rot.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 32,
+      "wortzahl": [
+        2,
+        8
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus",
+        "warm"
+      ],
+      "partnerArten": [
+        "partner",
+        "soehne",
+        "toechter",
+        "co",
+        "kollegen",
+        "team",
+        "zwei"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        },
+        {
+          "key": "caslontext",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "cormorant",
+          "weight": 500,
+          "style": "italic"
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "caslontext",
+          "weight": 400,
+          "style": "italic"
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "tanne",
+        "navysand",
+        "bordeaux"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "et-diagonale",
+      "position": "zwischen",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "et-diagonale"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "p1",
+        "feld": "partnerName",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "m2",
+        "feld": "partnerEndung",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": "p1.cap",
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "nurMessen": true
+      },
+      {
+        "typ": "text",
+        "id": "me",
+        "feld": "partnerVerbinder",
+        "fest": "&",
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": "1.45*p1.cap",
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "akzent",
+        "nurMessen": true
+      },
+      {
+        "typ": "text",
+        "id": "et",
+        "feld": "partnerVerbinder",
+        "fest": "&",
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": "1.45*p1.cap",
+        "x": "max(p1.r,p1.l+0.35*p1.w+me.w+30+m2.w)-m2.w-30",
+        "y": "1.78*p1.cap",
+        "ausrichtung": "rechts",
+        "rolle": "akzent",
+        "zeichen": true,
+        "pflicht": true,
+        "hof": 6,
+        "ebene": 1
+      },
+      {
+        "typ": "text",
+        "id": "p2",
+        "feld": "partnerEndung",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": "p1.cap",
+        "x": "et.r+30",
+        "y": "1.78*p1.cap",
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "partnerZeile",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": "max(28,0.03*max(p1.w,p2.w))",
+        "ausrichtung": "rechts",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "p2.r",
+        "y": "max(p2.b,p2.u-14)+56+max(28,0.03*max(p1.w,p2.w))"
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-partner-klammer",
+    "titel": "Klammer",
+    "idee": "Der Hauptname steht groß in einer Zeile, die Endung und der Zusatz stehen klein in einer feinen eckigen Klammer rechts daneben, so hoch wie die Versalien: die Gemeinschaft als Anmerkung zum Namen.",
+    "herleitung": "Firmenbuch und Verzeichnis: dort steht der Familienname vorn und die Gesellschaftsform in Klammern dahinter (\"Haider (Gebrüder)\"). Die Klammer ist gezeichnet, als Haarlinie in der Stärke der Zusatzschrift, nicht als Schriftzeichen.",
+    "referenzen": [
+      "SCHNELLINGER & PARTNER",
+      "PILZ & PARTNER"
+    ],
+    "abgrenzung": "Dort steht \"& PARTNER\" in gleicher Größe in der Zeile; hier rückt die Endung klein in eine gezeichnete Klammer rechts vom Namen, zusammen mit dem Zusatz.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 32,
+      "wortzahl": [
+        2,
+        8
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "elegant",
+        "mutig"
+      ],
+      "partnerArten": [
+        "partner",
+        "soehne",
+        "toechter",
+        "co",
+        "kollegen",
+        "team",
+        "gebrueder",
+        "partners"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "hanken",
+          "weight": 400
+        },
+        {
+          "key": "instrumentsans",
+          "weight": 400
+        },
+        {
+          "key": "geist",
+          "weight": 300
+        }
+      ],
+      "neben": [
+        {
+          "key": "hanken",
+          "weight": 400
+        },
+        {
+          "key": "instrumentsans",
+          "weight": 400
+        },
+        {
+          "key": "geist",
+          "weight": 300
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "graphit",
+        "petrol",
+        "stahlblau"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "klammer",
+      "position": "rechts",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "inline",
+      "kunstgriff": "klammer"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "p1",
+        "feld": "partnerName",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.08,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1100,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "linie",
+        "x1": "p1.r+44",
+        "x2": "p1.r+44",
+        "y1": "p1.t",
+        "y2": "p1.b",
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "p1.r+44",
+        "x2": "p1.r+62",
+        "y1": "p1.t",
+        "y2": "p1.t",
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "p1.r+44",
+        "x2": "p1.r+62",
+        "y1": "p1.b",
+        "y2": "p1.b",
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zw",
+        "feld": "partnerZweit",
+        "wenn": "partnerZeile",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.16,
+        "versal": 36,
+        "x": "p1.r+80",
+        "y": "p1.t+36",
+        "ausrichtung": "links",
+        "rolle": "akzent",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 640,
+          "minVersal": 24
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zw",
+        "feld": "partnerZweit",
+        "wennNicht": "partnerZeile",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.16,
+        "versal": 36,
+        "x": "p1.r+80",
+        "y": "p1.b-32",
+        "ausrichtung": "links",
+        "rolle": "akzent",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 640,
+          "minVersal": 24
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zeile",
+        "feld": "partnerZeile",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 30,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 640,
+          "minVersal": 20
+        },
+        "x": "p1.r+80",
+        "y": "p1.b"
+      },
+      {
+        "typ": "linie",
+        "x1": "max(zw.r,zeile.r)+30|zw.r+30",
+        "x2": "max(zw.r,zeile.r)+30|zw.r+30",
+        "y1": "p1.t",
+        "y2": "p1.b",
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "max(zw.r,zeile.r)+12|zw.r+12",
+        "x2": "max(zw.r,zeile.r)+30|zw.r+30",
+        "y1": "p1.t",
+        "y2": "p1.t",
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "max(zw.r,zeile.r)+12|zw.r+12",
+        "x2": "max(zw.r,zeile.r)+30|zw.r+30",
+        "y1": "p1.b",
+        "y2": "p1.b",
+        "staerke": 3,
+        "rolle": "zeichen"
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-kanzleischild",
+    "titel": "Kanzleischild",
+    "idee": "Der Hauptname in ruhigen Antiqua-Versalien, darunter die Endung kursiv und bündig mit seinem rechten Ende wie eine Unterschrift; der Zusatz beginnt links. Klare Hierarchie: erst der Name, dann die Gemeinschaft.",
+    "herleitung": "Messingschilder von Kanzleien und Ordinationen, auf denen \"& Partner\" kleiner und kursiv unter dem Familiennamen steht. Recte und Kursive aus derselben Familie, die Kursive in der Hausfarbe, kein Rahmen und kein Schild als Form.",
+    "referenzen": [
+      "HÜBL & PARTNER",
+      "SCHNELLINGER & PARTNER"
+    ],
+    "abgrenzung": "Dort steht \"& PARTNER\" in Versalien in derselben Zeile; hier steht die Endung kursiv und kleiner unter dem Namen, rechtsbündig wie eine Unterschrift.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 32,
+      "wortzahl": [
+        2,
+        8
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus",
+        "warm"
+      ],
+      "partnerArten": [
+        "partner",
+        "soehne",
+        "toechter",
+        "co",
+        "kollegen",
+        "team",
+        "partners"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "newsreader",
+          "weight": 400
+        },
+        {
+          "key": "castoro",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "cormorant",
+          "weight": 500,
+          "style": "italic"
+        },
+        {
+          "key": "newsreader",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "castoro",
+          "weight": 400,
+          "style": "italic"
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "navysand",
+        "tanne",
+        "messing"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "kanzleischild",
+      "position": "unter",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "kanzleischild"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "p1",
+        "feld": "partnerName",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.07,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zw",
+        "feld": "partnerZweit",
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": 0.01,
+        "versal": 62,
+        "x": "p1.r",
+        "y": "max(p1.b,p1.u-14)+40+62",
+        "ausrichtung": "rechts",
+        "rolle": "akzent",
+        "pflicht": true,
+        "zeichen": true,
+        "einpassen": {
+          "maxBreite": "max(p1.w,560)",
+          "minVersal": 40
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "partnerZeile",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.22,
+        "versal": "max(28,0.03*p1.w)",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "p1.l",
+        "y": "max(zw.b,zw.u-14)+48+max(28,0.03*p1.w)"
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-titelblatt",
+    "titel": "Titelblatt",
+    "idee": "Beide Teile in Antiqua-Versalien in einer Zeile, dazwischen der Verbinder klein, kursiv und erhöht, so wie er geschrieben ist (\"&\", \"und\"): der Satz eines alten Titelblatts.",
+    "herleitung": "Titelblätter und Verlagssignets des Buchdrucks setzen \"und\" und \"&\" zwischen Versalien klein und kursiv, damit die Namen tragen. Hier in der Hausfarbe und auf halber Höhe der Versalien, nicht farbig rot und nicht in Grotesk.",
+    "referenzen": [
+      "ENGEL&VÖLKERS",
+      "Van Cleef & Arpels",
+      "Strutt & Parker"
+    ],
+    "abgrenzung": "Dort ein Et in voller Größe zwischen Grotesk-Versalien bzw. in gleicher Schrift; hier ein kleiner, erhöhter kursiver Verbinder zwischen Antiqua-Versalien, bei \"und\" ausgeschrieben.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 32,
+      "wortzahl": [
+        2,
+        8
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus",
+        "warm"
+      ],
+      "partnerArten": [
+        "partner",
+        "soehne",
+        "toechter",
+        "co",
+        "kollegen",
+        "team",
+        "zwei"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        },
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "crimson",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "ebgaramond",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "cormorant",
+          "weight": 500,
+          "style": "italic"
+        },
+        {
+          "key": "crimson",
+          "weight": 400,
+          "style": "italic"
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "bordeaux",
+        "tanne",
+        "navysand"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "verbinder-klein",
+      "position": "im Wort",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "wordmark",
+      "kunstgriff": "verbinder-klein"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "p1",
+        "feld": "partnerName",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.08,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 900,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "vb",
+        "feld": "partnerVerbinder",
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": "0.56*p1.cap",
+        "x": "p1.r+0.4*p1.cap",
+        "y": "-0.22*p1.cap",
+        "ausrichtung": "links",
+        "rolle": "akzent",
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "p2",
+        "feld": "partnerEndung",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.08,
+        "versal": "p1.cap",
+        "x": "vb.r+0.4*p1.cap",
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 900,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "partnerZeile",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.26,
+        "versal": "max(28,0.022*p2.r-0.022*p1.l)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "0.5*p1.l+0.5*p2.r",
+        "y": "max(p1.b,p1.u-14,p2.b,p2.u-14)+64+max(28,0.022*p2.r-0.022*p1.l)"
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-exponent",
+    "titel": "Exponent",
+    "idee": "Der Hauptname kräftig in Grotesk-Versalien, die Endung klein und hochgestellt an seiner rechten oberen Ecke wie ein Exponent: die Gemeinschaft hebt den Namen, ohne ihn zu verdoppeln.",
+    "herleitung": "Hochgestellte Zeichen aus Formelsatz und Fußnoten (Exponent, Index). Gesetzt in derselben Familie, auf Versalhöhe bündig, in der Hausfarbe; kein Schutzzeichen und keine Ziffer.",
+    "referenzen": [
+      "Foster + Partners",
+      "PILZ & PARTNER"
+    ],
+    "abgrenzung": "Dort steht die Endung in gleicher Größe auf der Grundlinie; hier hängt sie klein an der oberen Ecke des Namens, bündig mit der Versalhöhe.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 32,
+      "wortzahl": [
+        2,
+        8
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "mutig",
+        "warm"
+      ],
+      "partnerArten": [
+        "partner",
+        "soehne",
+        "toechter",
+        "co",
+        "kollegen",
+        "team",
+        "partners"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "hostgrotesk",
+          "weight": 700
+        },
+        {
+          "key": "archivo",
+          "weight": 800
+        },
+        {
+          "key": "mona",
+          "weight": 700
+        }
+      ],
+      "neben": [
+        {
+          "key": "hostgrotesk",
+          "weight": 400
+        },
+        {
+          "key": "archivo",
+          "weight": 400
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "ziegel",
+        "petrol",
+        "anthrazit"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "exponent",
+      "position": "rechts",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "wordmark",
+      "kunstgriff": "exponent"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "p1",
+        "feld": "partnerName",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.03,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "ex",
+        "feld": "partnerZweit",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.16,
+        "versal": 38,
+        "x": "p1.r+18",
+        "y": "p1.t+38",
+        "ausrichtung": "links",
+        "rolle": "akzent",
+        "pflicht": true,
+        "zeichen": true,
+        "einpassen": {
+          "maxBreite": 700,
+          "minVersal": 24
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "partnerZeile",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.22,
+        "versal": "max(28,0.03*p1.w)",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "p1.l",
+        "y": "max(p1.b,p1.u-14)+48+max(28,0.03*p1.w)"
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-versatz",
+    "titel": "Versatz",
+    "idee": "Zwei gleich große Zeilen links und rechts einer unsichtbaren Achse versetzt, das Et sitzt genau im Drehpunkt dazwischen: zwei gleichrangige Partner, keiner steht über dem anderen.",
+    "herleitung": "Versetzte Zeilen aus dem Plakat- und Ausstellungssatz der Moderne (Achsensatz); das Et als Gelenk zwischen den Zeilen. Gleiche Größe für beide Teile, die Achse bleibt Leerraum und wird nicht gezeichnet.",
+    "referenzen": [
+      "Kleihues + Kleihues",
+      "Marcus & Millichap"
+    ],
+    "abgrenzung": "Dort stehen beide Namen in einer Zeile mit Verbinder; hier sind sie an einer Achse versetzt übereinander, das Et steht im Drehpunkt.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 32,
+      "wortzahl": [
+        2,
+        8
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "elegant"
+      ],
+      "partnerArten": [
+        "partner",
+        "soehne",
+        "toechter",
+        "co",
+        "kollegen",
+        "team",
+        "zwei"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "instrumentsans",
+          "weight": 400
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ],
+      "neben": [
+        {
+          "key": "instrumentsans",
+          "weight": 400
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        }
+      ],
+      "akzent": [
+        {
+          "key": "newsreader",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "cormorant",
+          "weight": 500,
+          "style": "italic"
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "petrol",
+        "graphit",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "versatz",
+      "position": "zwischen",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "versatz"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "p1",
+        "feld": "partnerName",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.08,
+        "versal": 100,
+        "x": -70,
+        "y": 0,
+        "ausrichtung": "rechts",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1000,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "et",
+        "feld": "partnerVerbinder",
+        "fest": "&",
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": "0.9*p1.cap",
+        "x": 0,
+        "y": "0.76*p1.cap",
+        "ausrichtung": "mitte",
+        "rolle": "akzent",
+        "pflicht": true,
+        "zeichen": true
+      },
+      {
+        "typ": "text",
+        "id": "p2",
+        "feld": "partnerEndung",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.08,
+        "versal": "p1.cap",
+        "x": 70,
+        "y": "1.62*p1.cap",
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1000,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "partnerZeile",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.22,
+        "versal": "max(28,0.016*p1.w+0.016*p2.w)",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "p2.l",
+        "y": "max(p2.b,p2.u-14)+52+max(28,0.016*p1.w+0.016*p2.w)"
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-gebrueder-achse",
+    "titel": "Gebrüder-Achse",
+    "idee": "\"Gebrüder\" läuft senkrecht von unten nach oben an der linken Kante von Name und Zusatz entlang, genau so hoch wie der Block: der Vorsatz wird zur Achse, an der die Familie steht.",
+    "herleitung": "Rückenschilder von Folianten und senkrechte Firmenschriften an Hausecken von Handwerksbetrieben. Der Vorsatz in derselben Antiqua, ausgetrieben auf die Blockhöhe; ohne Zusatzzeile steht er waagrecht und gesperrt über dem Namen.",
+    "referenzen": [
+      "A. LANGE & SÖHNE GLASHÜTTE I/SA"
+    ],
+    "abgrenzung": "Dort steht die Familienangabe in der Zeile hinter dem Namen; hier steht der Vorsatz senkrecht als Achse links vom Namen und seiner Zusatzzeile.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 32,
+      "wortzahl": [
+        2,
+        8
+      ],
+      "initialen": 0,
+      "stile": [
+        "warm",
+        "mutig",
+        "natur"
+      ],
+      "partnerArten": [
+        "gebrueder"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "youngserif",
+          "weight": 400
+        },
+        {
+          "key": "fraunces",
+          "weight": 400
+        },
+        {
+          "key": "castoro",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "figtree",
+          "weight": 400
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "terrakotta",
+        "oliv",
+        "rost"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "vorsatz-achse",
+      "position": "links",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "vorsatz-achse"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "p1",
+        "feld": "partnerName",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.06,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zeile",
+        "feld": "partnerZeile",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.22,
+        "versal": "max(30,0.03*p1.w)",
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "p1.l",
+        "y": "max(p1.b,p1.u-14)+50+max(30,0.03*p1.w)"
+      },
+      {
+        "typ": "text",
+        "id": "v",
+        "feld": "partnerEndung",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.12,
+        "versal": 28,
+        "x": "p1.l-34",
+        "y": "zeile.b",
+        "ausrichtung": "links",
+        "drehung": -90,
+        "rolle": "akzent",
+        "zeichen": true,
+        "einpassen": {
+          "maxBreite": "zeile.b-p1.t",
+          "minVersal": 22
+        },
+        "austreiben": "zeile.b-p1.t"
+      },
+      {
+        "typ": "text",
+        "id": "v2",
+        "feld": "partnerEndung",
+        "wennFehlt": "v",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.3,
+        "versal": 30,
+        "x": "p1.l",
+        "y": "p1.t-40",
+        "ausrichtung": "links",
+        "rolle": "akzent",
+        "zeichen": true
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-et-kuerzel",
+    "titel": "Kürzel-Et",
+    "idee": "Die beiden Anfangsbuchstaben mit einem kursiven Et dazwischen bilden das Zeichen (B&P, K&H), rechts davon nach einer feinen senkrechten Linie der ganze Name klein in zwei Zeilen.",
+    "herleitung": "Verschlungene Firmenkürzel auf Briefköpfen und Siegeln von Handelshäusern, hier ohne Verschlingung: zwei Versalien und ein kursives Et auf einer Grundlinie, das Kürzel taugt allein als Profilbild.",
+    "referenzen": [
+      "H&dM",
+      "D&H",
+      "B&B ITALIA"
+    ],
+    "abgrenzung": "Dort Kürzel aus Grotesk- bzw. gemischten Buchstaben ohne ausgeschriebenen Namen; hier Antiqua-Versalien mit kursivem Et und daneben der ganze Name.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 32,
+      "wortzahl": [
+        2,
+        8
+      ],
+      "initialen": 0,
+      "stile": [
+        "luxus",
+        "elegant"
+      ],
+      "partnerArten": [
+        "partner",
+        "soehne",
+        "toechter",
+        "co",
+        "kollegen",
+        "team",
+        "zwei"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        },
+        {
+          "key": "caslontext",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "cormorant",
+          "weight": 500,
+          "style": "italic"
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "caslontext",
+          "weight": 400,
+          "style": "italic"
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "navysand",
+        "bordeaux",
+        "tanne"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "et-kuerzel",
+      "position": "links",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "inline",
+      "kunstgriff": "et-kuerzel"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "i1",
+        "feld": "partnerInitial1",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 150,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "et",
+        "feld": "partnerVerbinder",
+        "fest": "&",
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": "0.62*i1.cap",
+        "x": "i1.r+14",
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "akzent",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "i2",
+        "feld": "partnerInitial2",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": "i1.cap",
+        "x": "et.r+14",
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "linie",
+        "x1": "i2.r+46",
+        "x2": "i2.r+46",
+        "y1": "i1.t",
+        "y2": "i1.b",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "n1",
+        "feld": "partnerName",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.12,
+        "versal": 38,
+        "x": "i2.r+88",
+        "y": "i1.t+38",
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 900,
+          "minVersal": 28
+        }
+      },
+      {
+        "typ": "text",
+        "id": "n2",
+        "feld": "partnerZweit",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.12,
+        "versal": "n1.cap",
+        "x": "n1.l",
+        "y": "n1.b+1.4*n1.cap",
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 900,
+          "minVersal": 28
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "partnerZeile",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.22,
+        "versal": 26,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 900,
+          "minVersal": 20
+        },
+        "x": "n1.l",
+        "y": "i1.b"
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-familienband",
+    "titel": "Familienband",
+    "idee": "Der Familienname groß und mittig, darunter \"& Söhne\" bzw. \"& Töchter\" kursiv zwischen zwei Haarlinien, die genau mit dem Namen enden: die nächste Generation trägt den Namen weiter.",
+    "herleitung": "Firmenschilder alter Familienbetriebe (Bäcker, Uhrmacher, Weinhändler), auf denen die Generation als eigene Zeile unter dem Namen steht. Die Linien enden mit der Namensbreite, die Kursive aus derselben Familie.",
+    "referenzen": [
+      "A. LANGE & SÖHNE GLASHÜTTE I/SA",
+      "CARL HANSEN & SØN"
+    ],
+    "abgrenzung": "Dort steht \"& Söhne\" bzw. \"& Søn\" in Versalien in der Zeile des Namens; hier kursiv und kleiner als eigenes Band zwischen zwei Haarlinien unter dem Namen.",
+    "legal": "gelb",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 32,
+      "wortzahl": [
+        2,
+        8
+      ],
+      "initialen": 0,
+      "stile": [
+        "warm",
+        "elegant",
+        "natur"
+      ],
+      "partnerArten": [
+        "soehne",
+        "toechter"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "castoro",
+          "weight": 400
+        },
+        {
+          "key": "newsreader",
+          "weight": 400
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "castoro",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "newsreader",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400,
+          "style": "italic"
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "terrakotta",
+        "tanne",
+        "bordeaux"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "familienband",
+      "position": "unter",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "familienband"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "p1",
+        "feld": "partnerName",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.08,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "band",
+        "feld": "partnerZweit",
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": 0.01,
+        "versal": 50,
+        "x": "p1.cx",
+        "y": "max(p1.b,p1.u-14)+44+50",
+        "ausrichtung": "mitte",
+        "rolle": "akzent",
+        "pflicht": true,
+        "zeichen": true,
+        "einpassen": {
+          "maxBreite": "p1.w-120",
+          "minVersal": 34
+        }
+      },
+      {
+        "typ": "linie",
+        "x1": "p1.l",
+        "x2": "band.l-24",
+        "y1": "band.b-0.36*band.cap",
+        "y2": "band.b-0.36*band.cap",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "band.r+24",
+        "x2": "p1.r",
+        "y1": "band.b-0.36*band.cap",
+        "y2": "band.b-0.36*band.cap",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "partnerZeile",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": "max(28,0.03*p1.w)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "p1.cx",
+        "y": "max(band.b,band.u-14)+46+max(28,0.03*p1.w)"
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-et-zeile",
+    "titel": "Et-Zeile",
+    "idee": "Zwei gleich große Zeilen übereinander, mittig; dazwischen eine eigene Zeile aus Haarlinie, kursivem Et und Haarlinie, so breit wie die längere Zeile: der Verbinder bekommt seine eigene Zeile.",
+    "herleitung": "Briefköpfe von Sozietäten, in denen die Namen gleichrangig untereinander stehen und das Et als Trennzeile dazwischen; die Linien folgen der Breite des längeren Namens und enden dort.",
+    "referenzen": [
+      "Strutt & Parker",
+      "Marcus & Millichap",
+      "CUSHMAN & WAKEFIELD"
+    ],
+    "abgrenzung": "Dort stehen beide Namen mit Et in einer Zeile; hier stehen sie untereinander, das Et steht zwischen zwei Haarlinien in einer eigenen Zeile.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 32,
+      "wortzahl": [
+        2,
+        8
+      ],
+      "initialen": 0,
+      "stile": [
+        "elegant",
+        "luxus"
+      ],
+      "partnerArten": [
+        "partner",
+        "soehne",
+        "toechter",
+        "co",
+        "kollegen",
+        "team",
+        "zwei"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "ebgaramond",
+          "weight": 400
+        },
+        {
+          "key": "cormorant",
+          "weight": 500
+        },
+        {
+          "key": "crimson",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "ebgaramond",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "cormorant",
+          "weight": 500,
+          "style": "italic"
+        },
+        {
+          "key": "crimson",
+          "weight": 400,
+          "style": "italic"
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "tanne",
+        "bordeaux",
+        "navysand"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "et-zeile",
+      "position": "zwischen",
+      "schrift": "serif",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "et-zeile"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "p1",
+        "feld": "partnerName",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.08,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "et",
+        "feld": "partnerVerbinder",
+        "fest": "&",
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": "0.8*p1.cap",
+        "x": 0,
+        "y": "max(p1.b,p1.u-14)+40+0.8*p1.cap",
+        "ausrichtung": "mitte",
+        "rolle": "akzent",
+        "pflicht": true,
+        "zeichen": true
+      },
+      {
+        "typ": "text",
+        "id": "p2",
+        "feld": "partnerEndung",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.08,
+        "versal": "p1.cap",
+        "x": 0,
+        "y": "et.b+48+p1.cap",
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "linie",
+        "x1": "min(p1.l,p2.l)",
+        "x2": "et.l-28",
+        "y1": "et.b-0.4*et.cap",
+        "y2": "et.b-0.4*et.cap",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "et.r+28",
+        "x2": "max(p1.r,p2.r)",
+        "y1": "et.b-0.4*et.cap",
+        "y2": "et.b-0.4*et.cap",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "partnerZeile",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": "max(28,0.03*max(p1.w,p2.w))",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": 0,
+        "y": "max(p2.b,p2.u-14)+50+max(28,0.03*max(p1.w,p2.w))"
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-pfeiler",
+    "titel": "Pfeiler",
+    "idee": "Beide Teile in einer Zeile links und rechts einer senkrechten Haarlinie in Versalhöhe, darüber ein kleines kursives Et wie ein Kapitell: zwei Seiten, ein tragender Pfeiler.",
+    "herleitung": "Säule und Kapitell aus der Architektur, übersetzt in Satz: die Linie trennt und verbindet zugleich, das Et sitzt oben auf. Linie in der Stärke der Zusatzschrift, nicht höher als die Versalien.",
+    "referenzen": [
+      "Kleihues + Kleihues",
+      "HILTON & HYLAND"
+    ],
+    "abgrenzung": "Dort stehen die Namen mit Verbinder in einer Zeile; hier trennt eine senkrechte Haarlinie die Teile und das Et steht klein darüber.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 32,
+      "wortzahl": [
+        2,
+        8
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "mutig",
+        "elegant"
+      ],
+      "partnerArten": [
+        "partner",
+        "soehne",
+        "toechter",
+        "co",
+        "kollegen",
+        "team",
+        "zwei"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "hanken",
+          "weight": 400
+        },
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "geist",
+          "weight": 300
+        }
+      ],
+      "neben": [
+        {
+          "key": "hanken",
+          "weight": 400
+        },
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "geist",
+          "weight": 300
+        }
+      ],
+      "akzent": [
+        {
+          "key": "newsreader",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "ebgaramond",
+          "weight": 400,
+          "style": "italic"
+        },
+        {
+          "key": "cormorant",
+          "weight": 500,
+          "style": "italic"
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "anthrazit",
+        "petrol",
+        "stahlblau"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "pfeiler",
+      "position": "zwischen",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "inline",
+      "kunstgriff": "pfeiler"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "p1",
+        "feld": "partnerName",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.1,
+        "versal": 100,
+        "x": -60,
+        "y": 0,
+        "ausrichtung": "rechts",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 900,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "p2",
+        "feld": "partnerEndung",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.1,
+        "versal": "p1.cap",
+        "x": 60,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 900,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "linie",
+        "x1": 0,
+        "x2": 0,
+        "y1": "p1.t",
+        "y2": "p1.b",
+        "staerke": 3,
+        "rolle": "zeichen",
+        "zeichen": true
+      },
+      {
+        "typ": "text",
+        "id": "et",
+        "feld": "partnerVerbinder",
+        "fest": "&",
+        "schrift": "akzent",
+        "schreibung": "asis",
+        "laufweite": 0,
+        "versal": "0.5*p1.cap",
+        "x": 0,
+        "y": "p1.t-26",
+        "ausrichtung": "mitte",
+        "rolle": "akzent",
+        "pflicht": true,
+        "zeichen": true
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "partnerZeile",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": "max(28,0.016*p1.w+0.016*p2.w)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": 0,
+        "y": "max(p1.b,p1.u-14,p2.b,p2.u-14)+52+max(28,0.016*p1.w+0.016*p2.w)"
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-sockel",
+    "titel": "Sockel",
+    "idee": "Der Hauptname groß, darunter die Endung in weit gesperrten kleinen Versalien genau so breit wie der Name: die Gemeinschaft als Sockel, auf dem der Name steht.",
+    "herleitung": "Inschriften auf Sockeln und Gebälk, deren untere Zeile auf die Breite der oberen gesperrt ist. Die Sperrung ergibt sich aus der Namensbreite (Blocksatz); trägt sie nicht, ist die Vorlage für den Namen ungeeignet. \"& Co.\" ist für einen Sockel zu kurz und bleibt außen vor.",
+    "referenzen": [
+      "HÜBL & PARTNER",
+      "Foster + Partners"
+    ],
+    "abgrenzung": "Dort steht \"& PARTNER\" bzw. \"+ Partners\" in der Zeile; hier steht die Endung als gesperrte Sockelzeile in der Breite des Namens darunter.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 32,
+      "wortzahl": [
+        2,
+        8
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "elegant",
+        "luxus"
+      ],
+      "partnerArten": [
+        "partner",
+        "soehne",
+        "toechter",
+        "kollegen",
+        "team",
+        "partners"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "kumbh",
+          "weight": 400
+        },
+        {
+          "key": "tenor",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "jost",
+          "weight": 300
+        },
+        {
+          "key": "kumbh",
+          "weight": 400
+        },
+        {
+          "key": "tenor",
+          "weight": 400
+        }
+      ],
+      "akzent": [
+        {
+          "key": "jost",
+          "weight": 300
+        },
+        {
+          "key": "kumbh",
+          "weight": 400
+        },
+        {
+          "key": "tenor",
+          "weight": 400
+        }
+      ],
+      "paare": true
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "primary",
+      "paletten": [
+        "graphit",
+        "tanne",
+        "greige"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "sockel",
+      "position": "unter",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "stacked",
+      "kunstgriff": "sockel"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "p1",
+        "feld": "partnerName",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.04,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1200,
+          "minVersal": 56
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zw",
+        "feld": "partnerZweit",
+        "schrift": "akzent",
+        "schreibung": "upper",
+        "laufweite": 0.5,
+        "versal": 36,
+        "x": "p1.cx",
+        "y": "max(p1.b,p1.u-14)+96",
+        "ausrichtung": "mitte",
+        "rolle": "akzent",
+        "pflicht": true,
+        "zeichen": true,
+        "blocksatz": {
+          "breite": "p1.w",
+          "minVersal": 26,
+          "maxVersal": 62
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "partnerZeile",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.24,
+        "versal": "max(28,0.03*p1.w)",
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "p1.cx",
+        "y": "max(zw.b,zw.u-14)+46+max(28,0.03*p1.w)"
+      }
+    ],
+    "freigabe": "entwurf",
+    "quelle": "team"
+  }
+]

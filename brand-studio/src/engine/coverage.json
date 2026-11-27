@@ -1,0 +1,527 @@
+{
+  "playfair": {
+    "ext": true,
+    "missing": "µ",
+    "capSharpS": true
+  },
+  "cormorant": {
+    "ext": true,
+    "missing": "µ",
+    "capSharpS": true
+  },
+  "dmserif": {
+    "ext": true,
+    "missing": "ĈĉĊċĔĕĜĝĠġĤĥĦħĨĩĬĭĲĳĴĵĸŉŊŋŎŏŜŝŦŧŨũŬŭŴŵŶŷſ",
+    "capSharpS": false
+  },
+  "baskerville": {
+    "ext": true,
+    "missing": "­ŉſ",
+    "capSharpS": true
+  },
+  "fraunces": {
+    "ext": true,
+    "missing": "ŉſ",
+    "capSharpS": true
+  },
+  "bodoni": {
+    "ext": true,
+    "missing": "­",
+    "capSharpS": true
+  },
+  "cinzel": {
+    "ext": true,
+    "missing": "ĈĉĔĕĜĝĤĥĨĩĬĭĴĵĸŉŎŏŜŝŨũŬŭſ",
+    "capSharpS": false
+  },
+  "marcellus": {
+    "ext": true,
+    "missing": "ſȘșȚț",
+    "capSharpS": false
+  },
+  "italiana": {
+    "ext": false,
+    "missing": " ­ĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſȘșȚț€",
+    "capSharpS": false
+  },
+  "tenor": {
+    "ext": true,
+    "missing": "²³¹¼½¾ĭĲĳŊŋſ",
+    "capSharpS": false
+  },
+  "inter": {
+    "ext": true,
+    "missing": "­ŉ",
+    "capSharpS": true
+  },
+  "manrope": {
+    "ext": true,
+    "missing": "ĔĕĬĭĲĳĸĿŀŉŎŏſ",
+    "capSharpS": true
+  },
+  "montserrat": {
+    "ext": true,
+    "missing": "­",
+    "capSharpS": true
+  },
+  "poppins": {
+    "ext": true,
+    "missing": "ĈĉĜĝĤĥĦħĲĳĴĵĸŉŊŋŜŝŦŧſ",
+    "capSharpS": false
+  },
+  "outfit": {
+    "ext": true,
+    "missing": "­ĈĉĔĕĜĝĤĥĨĩĬĭĴĵĸĿŀŉŎŏŜŝŢţŦŧŨũſ",
+    "capSharpS": true
+  },
+  "sora": {
+    "ext": true,
+    "missing": "ĤĥĲĳĸĿŀŉſ",
+    "capSharpS": true
+  },
+  "spacegrotesk": {
+    "ext": true,
+    "missing": "",
+    "capSharpS": true
+  },
+  "worksans": {
+    "ext": true,
+    "missing": "ŉ",
+    "capSharpS": true
+  },
+  "raleway": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": true
+  },
+  "josefin": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": true
+  },
+  "urbanist": {
+    "ext": true,
+    "missing": "ĐđĔĕģĦħĬĭĸĿŀŁłŉŊŋŎŏŦŧſ",
+    "capSharpS": true
+  },
+  "jakarta": {
+    "ext": true,
+    "missing": "­ŉſ",
+    "capSharpS": true
+  },
+  "syne": {
+    "ext": true,
+    "missing": "ĈĉĔĕĜĝĤĥĨĩĬĭĴĵĸŉŎŏŜŝŨũŬŭſ",
+    "capSharpS": false
+  },
+  "archivo": {
+    "ext": true,
+    "missing": "",
+    "capSharpS": true
+  },
+  "nunito": {
+    "ext": true,
+    "missing": "ĳſ",
+    "capSharpS": true
+  },
+  "quicksand": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": true
+  },
+  "comfortaa": {
+    "ext": true,
+    "missing": "ŉ",
+    "capSharpS": true
+  },
+  "bebas": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": true
+  },
+  "oswald": {
+    "ext": true,
+    "missing": "­",
+    "capSharpS": true
+  },
+  "parisienne": {
+    "ext": true,
+    "missing": "ſȘșȚț",
+    "capSharpS": false
+  },
+  "greatvibes": {
+    "ext": true,
+    "missing": "­ŉſ",
+    "capSharpS": true
+  },
+  "lora": {
+    "ext": true,
+    "missing": "­ĸ",
+    "capSharpS": true
+  },
+  "dmsans": {
+    "ext": true,
+    "missing": "­ĈĉĜĝĤĥĴĵĸŉŜŝŦŧſ",
+    "capSharpS": true
+  },
+  "karla": {
+    "ext": true,
+    "missing": "­ĈĉĔĕĜĝĤĥĨĩĬĭĴĵĸĿŀŉŎŏŜŝŨũſ",
+    "capSharpS": true
+  },
+  "lexend": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": true
+  },
+  "ebgaramond": {
+    "ext": true,
+    "missing": "²³¹",
+    "capSharpS": true
+  },
+  "spectral": {
+    "ext": true,
+    "missing": "­ŉ",
+    "capSharpS": true
+  },
+  "newsreader": {
+    "ext": true,
+    "missing": "Ĳĳŉſ",
+    "capSharpS": true
+  },
+  "gloock": {
+    "ext": true,
+    "missing": "­ĈĉĔĕĜĝĤĥĨĩĬĭĴĵĸĿŀŉŎŏŜŝŢţŦŧŨũſ",
+    "capSharpS": true
+  },
+  "youngserif": {
+    "ext": true,
+    "missing": "­ſ",
+    "capSharpS": true
+  },
+  "instrumentserif": {
+    "ext": true,
+    "missing": "¤¦¬­±²³µ¹¼½¾ĈĉĔĕĜĝĤĥĨĩĬĭĴĵĸĿŀŉŎŏŜŝŢţŦŧŨũſ",
+    "capSharpS": true
+  },
+  "caslon": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": false
+  },
+  "gilda": {
+    "ext": true,
+    "missing": "­ſ",
+    "capSharpS": false
+  },
+  "castoro": {
+    "ext": true,
+    "missing": "ŉ",
+    "capSharpS": true
+  },
+  "figtree": {
+    "ext": true,
+    "missing": "­ĔĕĨĩĬĭĸĿŀŉŎŏŢţŦŧŨũſ",
+    "capSharpS": true
+  },
+  "albertsans": {
+    "ext": true,
+    "missing": "ĦħĲĳĸŉŦŧſ",
+    "capSharpS": false
+  },
+  "hanken": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": true
+  },
+  "schibsted": {
+    "ext": true,
+    "missing": "­ſ",
+    "capSharpS": true
+  },
+  "familjen": {
+    "ext": true,
+    "missing": "Ĳĳŉſ",
+    "capSharpS": true
+  },
+  "mona": {
+    "ext": true,
+    "missing": "­µĸŉŎŏſ",
+    "capSharpS": true
+  },
+  "instrumentsans": {
+    "ext": true,
+    "missing": "¤¦¬­±²³µ¹¼½¾ĈĉĔĕĜĝĤĥĨĩĬĭĴĵĸĿŀŉŎŏŜŝŢţŦŧŨũſ",
+    "capSharpS": true
+  },
+  "bricolage": {
+    "ext": true,
+    "missing": "¤­ĈĉĔĕĜĝĤĥĬĭĴĵĸĿŀŉŎŏŜŝŢţŦŧſ",
+    "capSharpS": true
+  },
+  "unbounded": {
+    "ext": true,
+    "missing": "µ",
+    "capSharpS": true
+  },
+  "bigshoulders": {
+    "ext": true,
+    "missing": "Ĳĳŉſ",
+    "capSharpS": true
+  },
+  "fjalla": {
+    "ext": true,
+    "missing": "ŉſ",
+    "capSharpS": true
+  },
+  "pinyon": {
+    "ext": true,
+    "missing": "­ŉ",
+    "capSharpS": true
+  },
+  "allura": {
+    "ext": true,
+    "missing": "",
+    "capSharpS": true
+  },
+  "italianno": {
+    "ext": true,
+    "missing": "ĔĕĬĭĲĳĿŀŉŎŏ",
+    "capSharpS": true
+  },
+  "notoserifdisplay": {
+    "ext": true,
+    "missing": "",
+    "capSharpS": true
+  },
+  "librebodoni": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": false
+  },
+  "ibarra": {
+    "ext": true,
+    "missing": "ĈĉĔĕĜĝĤĥĨĩĬĭĲĳĸĿŀŉŎŏŜŝŨũŬŭ",
+    "capSharpS": false
+  },
+  "caslontext": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": false
+  },
+  "crimson": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": true
+  },
+  "cormorantsc": {
+    "ext": true,
+    "missing": "µ",
+    "capSharpS": true
+  },
+  "bellefair": {
+    "ext": true,
+    "missing": "",
+    "capSharpS": true
+  },
+  "jost": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": true
+  },
+  "kumbh": {
+    "ext": true,
+    "missing": "Ĭĭ",
+    "capSharpS": true
+  },
+  "intertight": {
+    "ext": true,
+    "missing": "ŉ",
+    "capSharpS": true
+  },
+  "geist": {
+    "ext": true,
+    "missing": "­ĔĕĬĭĸĿŀŉŎŏſ",
+    "capSharpS": true
+  },
+  "hostgrotesk": {
+    "ext": true,
+    "missing": "­ĈĉĜĝĤĥĴĵĸŉŜŝŦŧſ",
+    "capSharpS": true
+  },
+  "julius": {
+    "ext": true,
+    "missing": "ĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİĲĳĴĵĶķĸĹĺĻļĽľĿŀŃńŅņŇňŉŊŋŌōŎŏŐőŔŕŖŗŘřŚśŜŝŞşŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŹźŻżſȘșȚț",
+    "capSharpS": false
+  },
+  "abrilfatface": {
+    "ext": true,
+    "missing": "",
+    "capSharpS": false
+  },
+  "yeseva": {
+    "ext": true,
+    "missing": "ĦĲŉŊŋŢţŦŧſ",
+    "capSharpS": false
+  },
+  "rozha": {
+    "ext": true,
+    "missing": "ª­ºĈĉĤĸŉſȚț",
+    "capSharpS": false
+  },
+  "oldstandard": {
+    "ext": true,
+    "missing": "Ĳĳŉſ",
+    "capSharpS": true
+  },
+  "rufina": {
+    "ext": true,
+    "missing": " ­ĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŔŕŖŗŘřŚśŜŝŞşŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŹźŻżſȘșȚț",
+    "capSharpS": false
+  },
+  "bonanova": {
+    "ext": true,
+    "missing": "ŉſ",
+    "capSharpS": true
+  },
+  "brygada": {
+    "ext": true,
+    "missing": "Ĳĳŉſ",
+    "capSharpS": true
+  },
+  "forum": {
+    "ext": true,
+    "missing": "ª²³µ¹º¼½¾Ĳĳſ",
+    "capSharpS": false
+  },
+  "lindenhill": {
+    "ext": true,
+    "missing": "ĸŊŋ",
+    "capSharpS": false
+  },
+  "sortsmill": {
+    "ext": true,
+    "missing": "ĸŊŋ",
+    "capSharpS": false
+  },
+  "poiret": {
+    "ext": true,
+    "missing": " ª²³¹º¼½¾ĲĳĸŊŋſȚț",
+    "capSharpS": false
+  },
+  "aboreto": {
+    "ext": true,
+    "missing": "ŉſ",
+    "capSharpS": true
+  },
+  "redhat": {
+    "ext": true,
+    "missing": "­Ŀŀŉſ",
+    "capSharpS": true
+  },
+  "afacad": {
+    "ext": true,
+    "missing": "­ŉſ",
+    "capSharpS": true
+  },
+  "epilogue": {
+    "ext": true,
+    "missing": "Ĳĳŉſ",
+    "capSharpS": true
+  },
+  "wixmadefor": {
+    "ext": true,
+    "missing": "ĈĉĔĕĜĝĤĥĬĭĴĵĿŀŉŌōŎŏŖŗŜŝŬŭſ",
+    "capSharpS": true
+  },
+  "funnel": {
+    "ext": true,
+    "missing": "­µĈĉĔĕĜĝĤĥĨĩĬĭĴĵĸĿŀŉŎŏŜŝŢţŦŧŨũſ",
+    "capSharpS": true
+  },
+  "archivonarrow": {
+    "ext": true,
+    "missing": "",
+    "capSharpS": true
+  },
+  "barlowcondensed": {
+    "ext": true,
+    "missing": "ĔĕĬĲĸĿŉŎſ",
+    "capSharpS": false
+  },
+  "antonio": {
+    "ext": true,
+    "missing": "ŉŊŋŢţŦŧſ",
+    "capSharpS": false
+  },
+  "krona": {
+    "ext": true,
+    "missing": "ŉſȚț",
+    "capSharpS": false
+  },
+  "dmmono": {
+    "ext": true,
+    "missing": "ĈĉĜĝĤĥĦħĲĳĴĵĸŉŊŋŜŝŦŧſ",
+    "capSharpS": false
+  },
+  "plexmono": {
+    "ext": true,
+    "missing": "",
+    "capSharpS": true
+  },
+  "geistmono": {
+    "ext": true,
+    "missing": "­ĔĕĬĭĲĳĸĿŀŉŎŏſ",
+    "capSharpS": true
+  },
+  "zillaslab": {
+    "ext": true,
+    "missing": "­ĸſ",
+    "capSharpS": false
+  },
+  "rokkitt": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": true
+  },
+  "bigshouldersstencil": {
+    "ext": true,
+    "missing": "Ĳĳŉſ",
+    "capSharpS": true
+  },
+  "sairastencil": {
+    "ext": true,
+    "missing": "",
+    "capSharpS": true
+  },
+  "lexendzetta": {
+    "ext": true,
+    "missing": "ſ",
+    "capSharpS": true
+  },
+  "michroma": {
+    "ext": true,
+    "missing": "­Ţţſ",
+    "capSharpS": true
+  },
+  "courierprime": {
+    "ext": true,
+    "missing": "ĸŉſ",
+    "capSharpS": false
+  },
+  "belleza": {
+    "ext": true,
+    "missing": "­ſ",
+    "capSharpS": false
+  },
+  "playfairsc": {
+    "ext": true,
+    "missing": "µŉ",
+    "capSharpS": true
+  },
+  "bodonisc": {
+    "ext": true,
+    "missing": "­",
+    "capSharpS": true
+  }
+}

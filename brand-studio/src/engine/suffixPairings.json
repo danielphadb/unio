@@ -1,0 +1,216 @@
+[
+  {
+    "id": "standard",
+    "titel": "Grotesk-Versalien, weit gesperrt",
+    "hinweis": "Der Klassiker unter jedem Namen: ruhig, klein, weit gesperrt.",
+    "nameForms": [
+      "antiqua",
+      "didone",
+      "geometric",
+      "grotesk",
+      "condensed",
+      "slab",
+      "extended",
+      "mono",
+      "script",
+      "stencil"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "modern",
+      "warm",
+      "mutig",
+      "natur"
+    ],
+    "font": "grotesk",
+    "vorschlaege": [
+      "manrope",
+      "inter",
+      "tenor",
+      "raleway",
+      "worksans",
+      "jost",
+      "hanken"
+    ],
+    "schnitt": "leicht",
+    "case": "upper",
+    "tracking": [
+      0.16,
+      0.28
+    ],
+    "scale": [
+      0.36,
+      0.42
+    ]
+  },
+  {
+    "id": "mono",
+    "titel": "Mono-Zusatz (Koordinaten)",
+    "hinweis": "Unter Didone oder Antiqua wirkt eine Monospace wie eine Ortsangabe oder Koordinate, unter weiten Grotesk-Versalien wie eine Planbeschriftung.",
+    "nameForms": [
+      "didone",
+      "antiqua",
+      "grotesk",
+      "geometric"
+    ],
+    "styles": [
+      "luxus",
+      "elegant",
+      "modern"
+    ],
+    "font": "mono",
+    "vorschlaege": [
+      "dmmono",
+      "geistmono",
+      "plexmono"
+    ],
+    "schnitt": "leicht",
+    "case": "upper",
+    "tracking": [
+      0.1,
+      0.18
+    ],
+    "scale": [
+      0.32,
+      0.38
+    ]
+  },
+  {
+    "id": "kursiv",
+    "titel": "Kursive Antiqua, klein",
+    "hinweis": "Unter einer Grotesk bringt eine kleine kursive Antiqua Waerme und Handschrift.",
+    "nameForms": [
+      "grotesk",
+      "geometric",
+      "condensed",
+      "extended"
+    ],
+    "styles": [
+      "elegant",
+      "modern",
+      "warm",
+      "natur",
+      "luxus"
+    ],
+    "font": "antiqua-kursiv",
+    "vorschlaege": [
+      "cormorant",
+      "ebgaramond",
+      "playfair",
+      "lora",
+      "newsreader",
+      "spectral"
+    ],
+    "schnitt": "kursiv",
+    "case": "title",
+    "tracking": [
+      0,
+      0.02
+    ],
+    "scale": [
+      0.44,
+      0.5
+    ]
+  },
+  {
+    "id": "gross",
+    "titel": "Grosser Zusatz als zweite Zeile",
+    "hinweis": "Name und Zusatz gleichrangig untereinander, wie ein Impressum.",
+    "nameForms": [
+      "antiqua",
+      "didone",
+      "geometric",
+      "grotesk",
+      "condensed",
+      "slab",
+      "extended"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "modern",
+      "warm",
+      "natur"
+    ],
+    "font": "name",
+    "vorschlaege": [
+      "name"
+    ],
+    "schnitt": "leicht",
+    "case": "title",
+    "caseWieName": true,
+    "tracking": [
+      0.06,
+      0.14
+    ],
+    "scale": [
+      0.55,
+      0.75
+    ]
+  },
+  {
+    "id": "fett-klein",
+    "titel": "Fetter kleiner Zusatz in Versalien",
+    "hinweis": "Sehr klein und fett unter einem leichten Namen: wirkt wie ein Stempel oder Kapitaelchen.",
+    "nameForms": [
+      "antiqua",
+      "didone",
+      "grotesk",
+      "geometric"
+    ],
+    "styles": [
+      "modern",
+      "elegant",
+      "luxus",
+      "natur",
+      "warm"
+    ],
+    "font": "grotesk-fett",
+    "vorschlaege": [
+      "inter",
+      "manrope",
+      "archivo",
+      "schibsted",
+      "worksans"
+    ],
+    "schnitt": "fett",
+    "case": "upper",
+    "tracking": [
+      0.14,
+      0.22
+    ],
+    "scale": [
+      0.3,
+      0.32
+    ]
+  },
+  {
+    "id": "kapitaelchen",
+    "titel": "Kapitaelchen-Zusatz",
+    "hinweis": "Echte Kapitaelchen unter einer Grotesk: klassisch, aber leise.",
+    "nameForms": [
+      "grotesk",
+      "geometric"
+    ],
+    "styles": [
+      "elegant",
+      "luxus",
+      "modern"
+    ],
+    "font": "kapitaelchen",
+    "vorschlaege": [
+      "cormorantsc"
+    ],
+    "schnitt": "leicht",
+    "case": "title",
+    "tracking": [
+      0.04,
+      0.1
+    ],
+    "scale": [
+      0.42,
+      0.48
+    ]
+  }
+]

@@ -1,0 +1,685 @@
+[
+  {
+    "id": "sig-masslinie",
+    "titel": "Maßlinie",
+    "idee": "Unter dem Namen liegt eine Maßkette wie im Bauplan, genau so breit wie der Name; der Zusatz steht als Maßzahl in der Linie.",
+    "herleitung": "Bemaßung nach Bauzeichnungs-Norm (Maßlinie, Maßhilfslinien, Schrägstrich als Begrenzung). Linien unter dem Namen gibt es im Korpus nur als glatte Unterstreichung; eine unterbrochene Maßkette mit Begrenzungen kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Unterbrochene Maßkette mit Begrenzungen nach Bauzeichnungsnorm; Linien im Korpus sind glatte Unterstreichungen.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "elegant"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "jost",
+          "weight": 300
+        },
+        {
+          "key": "geist",
+          "weight": 300
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "anthrazit",
+        "petrol",
+        "marine"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "masslinie",
+      "position": "unter",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.18,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "mitte",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1500,
+          "minVersal": 62
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.22,
+        "versal": 33,
+        "ausrichtung": "mitte",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "name.w-150",
+          "minVersal": 24
+        },
+        "x": "name.cx",
+        "y": "name.b+84"
+      },
+      {
+        "typ": "linie",
+        "x1": "name.l",
+        "x2": "zusatz.l-22",
+        "y1": "name.b+67",
+        "y2": "name.b+67",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "zusatz.r+22",
+        "x2": "name.r",
+        "y1": "name.b+67",
+        "y2": "name.b+67",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "name.l",
+        "x2": "name.r",
+        "y1": "name.b+67",
+        "y2": "name.b+67",
+        "staerke": 2.4,
+        "rolle": "zeichen",
+        "wennFehlt": "zusatz"
+      },
+      {
+        "typ": "linie",
+        "x1": "name.l",
+        "x2": "name.l",
+        "y1": "name.b+42",
+        "y2": "name.b+92",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "name.r",
+        "x2": "name.r",
+        "y1": "name.b+42",
+        "y2": "name.b+92",
+        "staerke": 2.4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "name.l-11",
+        "x2": "name.l+11",
+        "y1": "name.b+78",
+        "y2": "name.b+56",
+        "staerke": 4,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "x1": "name.r-11",
+        "x2": "name.r+11",
+        "y1": "name.b+78",
+        "y2": "name.b+56",
+        "staerke": 4,
+        "rolle": "zeichen"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-grundriss",
+    "titel": "Grundriss",
+    "idee": "Die Initialen wohnen in einem Raum aus Grundrisslinien, mit Türöffnung und Türanschlag wie im Einreichplan.",
+    "herleitung": "Grundriss-Zeichnung (Wandstärke, Öffnung, Türflügel mit Schwenkbogen) aus dem Planverzeichnis jedes Maklers. Im Korpus stehen Monogramme in geschlossenen Kreisen oder Quadraten; ein offener Grundriss mit Türanschlag kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Offener Grundriss mit Türanschlag um die Initialen; Korpus-Monogramme stehen in geschlossenen Kreisen oder Quadraten.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 1,
+      "stile": [
+        "modern",
+        "mutig"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        },
+        {
+          "key": "instrumentsans",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        },
+        {
+          "key": "instrumentsans",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "ink",
+      "akzent": "primary",
+      "paletten": [
+        "petrol",
+        "anthrazit",
+        "stahlblau"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "grundriss",
+      "position": "links",
+      "schrift": "sans",
+      "schreibung": "mixed",
+      "layout": "inline"
+    },
+    "elemente": [
+      {
+        "typ": "zug",
+        "zeichen": true,
+        "punkte": [
+          [
+            106,
+            224
+          ],
+          [
+            0,
+            224
+          ],
+          [
+            0,
+            0
+          ],
+          [
+            224,
+            0
+          ],
+          [
+            224,
+            224
+          ],
+          [
+            204,
+            224
+          ]
+        ],
+        "staerke": 12,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "linie",
+        "zeichen": true,
+        "x1": 204,
+        "y1": 224,
+        "x2": 204,
+        "y2": 126,
+        "staerke": 5,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "bogen",
+        "zeichen": true,
+        "cx": 204,
+        "cy": 224,
+        "r": 98,
+        "von": 180,
+        "bis": 270,
+        "staerke": 2.6,
+        "rolle": "akzent"
+      },
+      {
+        "typ": "text",
+        "id": "ini",
+        "feld": "initialen",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.04,
+        "versal": 66,
+        "x": 86,
+        "y": 104,
+        "ausrichtung": "mitte",
+        "rolle": "zeichen",
+        "zeichen": true,
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 128,
+          "minVersal": 46
+        }
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "schrift": "haupt",
+        "schreibung": "asis",
+        "laufweite": -0.01,
+        "versal": 100,
+        "x": 296,
+        "y": 112,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1300,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.l",
+        "y": 218
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-raumplan",
+    "titel": "Raumplan",
+    "idee": "Vor- und Nachname stehen auf zwei Ebenen, eine Schnittlinie führt mit einer Stufe von der oberen zur unteren, wie die versetzten Geschoße im Raumplan von Adolf Loos.",
+    "herleitung": "Raumplan von Adolf Loos (Villa Müller, Haus Moller): Räume auf versetzten Höhen, im Schnitt als Stufenlinie. Ein Namenssatz auf zwei versetzten Ebenen mit Schnittlinie kommt im Korpus nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Zwei Namensteile auf versetzten Ebenen mit Stufenlinie kommen im Korpus nicht vor.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 22,
+      "wortzahl": [
+        2,
+        3
+      ],
+      "initialen": 0,
+      "stile": [
+        "modern",
+        "elegant"
+      ]
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "intertight",
+          "weight": 400
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "petrol",
+        "anthrazit",
+        "greige"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "versatz",
+      "position": "unter",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "wordmark"
+    },
+    "elemente": [
+      {
+        "typ": "text",
+        "id": "teil1",
+        "feld": "teil1",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.12,
+        "versal": 100,
+        "x": 0,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 900,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "teil2",
+        "feld": "teil2",
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.12,
+        "versal": 100,
+        "x": "teil1.r+64",
+        "y": 184,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 900,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "zug",
+        "punkte": [
+          [
+            "teil1.l",
+            34
+          ],
+          [
+            "teil1.r+32",
+            34
+          ],
+          [
+            "teil1.r+32",
+            218
+          ],
+          [
+            "teil2.r",
+            218
+          ]
+        ],
+        "staerke": 3,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.22,
+        "versal": 32,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": "teil1.w+20",
+          "minVersal": 22
+        },
+        "x": "teil1.l",
+        "y": 104
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  },
+  {
+    "id": "sig-planachse",
+    "titel": "Planachse",
+    "idee": "Eine strichpunktierte Achse mit Achskreis wie im Bauplan läuft senkrecht neben Name und Zusatz; im Kreis steht die Initiale als Achsbezeichnung.",
+    "herleitung": "Achsraster der Ausführungsplanung (Strichpunktlinie, Achskreis mit Buchstabe). Im Korpus stehen Initialen in Kreisen links vom Namen, aber ohne Achse; eine Planachse mit Achskreis über dem Textblock kommt nicht vor.",
+    "referenzen": [],
+    "abgrenzung": "Achskreis mit Strichpunktachse aus der Ausführungsplanung; Kreis-Initialen im Korpus haben keine Achse.",
+    "legal": "gruen",
+    "passt": {
+      "arten": [
+        "person",
+        "firma"
+      ],
+      "profile": {
+        "ort": "optional",
+        "zusatz": "optional"
+      },
+      "minZeichen": 4,
+      "maxZeichen": 20,
+      "wortzahl": [
+        1,
+        3
+      ],
+      "initialen": 1,
+      "stile": [
+        "modern",
+        "elegant"
+      ],
+      "initialenAkzent": false
+    },
+    "schriften": {
+      "haupt": [
+        {
+          "key": "jost",
+          "weight": 300
+        },
+        {
+          "key": "geist",
+          "weight": 300
+        },
+        {
+          "key": "albertsans",
+          "weight": 400
+        }
+      ],
+      "neben": [
+        {
+          "key": "albertsans",
+          "weight": 400
+        },
+        {
+          "key": "jost",
+          "weight": 500
+        },
+        {
+          "key": "hanken",
+          "weight": 400
+        }
+      ]
+    },
+    "farben": {
+      "name": "ink",
+      "neben": "ink",
+      "zeichen": "primary",
+      "akzent": "accent",
+      "paletten": [
+        "marine",
+        "petrol",
+        "anthrazit"
+      ]
+    },
+    "merkmale": {
+      "zeichen": "planachse",
+      "position": "links",
+      "schrift": "sans",
+      "schreibung": "upper",
+      "layout": "inline"
+    },
+    "elemente": [
+      {
+        "typ": "kreis",
+        "zeichen": true,
+        "cx": 0,
+        "cy": -186,
+        "r": 60,
+        "kontur": 4.2,
+        "rolle": "zeichen"
+      },
+      {
+        "typ": "text",
+        "id": "ini",
+        "feld": "initial1",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0,
+        "versal": 56,
+        "x": 0,
+        "y": -158,
+        "ausrichtung": "mitte",
+        "rolle": "zeichen",
+        "zeichen": true,
+        "pflicht": true
+      },
+      {
+        "typ": "text",
+        "id": "name",
+        "feld": "name",
+        "ohneTitel": true,
+        "schrift": "haupt",
+        "schreibung": "upper",
+        "laufweite": 0.18,
+        "versal": 100,
+        "x": 70,
+        "y": 0,
+        "ausrichtung": "links",
+        "rolle": "name",
+        "pflicht": true,
+        "einpassen": {
+          "maxBreite": 1400,
+          "minVersal": 60
+        }
+      },
+      {
+        "typ": "text",
+        "id": "zusatz",
+        "feld": "zusatzOrt",
+        "schrift": "neben",
+        "schreibung": "upper",
+        "laufweite": 0.2,
+        "versal": 36,
+        "ausrichtung": "links",
+        "rolle": "neben",
+        "einpassen": {
+          "maxBreite": 1600,
+          "minVersal": 26
+        },
+        "x": "name.l",
+        "y": "name.b+86"
+      },
+      {
+        "typ": "reihe",
+        "senkrecht": true,
+        "x1": -116,
+        "x2": "zusatz.b+30|name.b+30",
+        "y": 0,
+        "motiv": "M0 -2.2H32V2.2H0ZM41 -2.2H46V2.2H41Z",
+        "teilung": 55,
+        "rolle": "zeichen"
+      }
+    ],
+    "freigabe": "freigegeben",
+    "quelle": "team"
+  }
+]
