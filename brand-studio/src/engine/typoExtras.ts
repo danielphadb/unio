@@ -3,9 +3,9 @@
  * der Namenssetzung (Gewicht, Kursiv, Mix, Stapel, Punkt, Haarlinie, Buchstabentausch ...), deren Auswahl
  * und die Optionen im Editor (engine `Du` ... `Wu`, `kc` ... `Am`).
  */
-import type { BrandInput, LogoConcept } from "../types";
+import type { LogoConcept } from "../types";
 import type { Rng } from "./rng";
-import type { TypoOption } from "./logoTypes";
+import type { TypoOption, LogoInput } from "./logoTypes";
 import { CONTAINERS } from "../symbols/containers";
 import { HIGH_END_STYLES } from "./highend";
 import {
@@ -67,14 +67,14 @@ function districtNumber(place: string | undefined) {
   return null;
 }
 
-function supText(art: string, input: BrandInput) {
+function supText(art: string, input: LogoInput) {
   if (art === "stern") return "*";
   if (art === "grad") return "°";
   const t = districtNumber(input.place);
   return t === null ? null : String(t);
 }
 
-export function typoExtrasFit(extras: any, input: BrandInput) {
+export function typoExtrasFit(extras: any, input: LogoInput) {
   return extras
     ? !(
         (extras.sup && supText(extras.sup, input) === null) ||
@@ -89,7 +89,7 @@ export function typoExtrasFit(extras: any, input: BrandInput) {
 export function applyTypoExtras(
   concept: LogoConcept,
   extras: any,
-  input: BrandInput,
+  input: LogoInput,
 ) {
   if (!extras) return concept;
   if (
@@ -720,7 +720,7 @@ export function typoKind(concept: LogoConcept) {
         : "plain";
 }
 
-export function editorOptions(concept: LogoConcept, input: BrandInput) {
+export function editorOptions(concept: LogoConcept, input: LogoInput) {
   const t = getFont(concept.name.font.key);
   const r = t.cat === "script";
   const i = nameWords(input.name);

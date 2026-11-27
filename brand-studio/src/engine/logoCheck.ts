@@ -2,8 +2,8 @@
  * Logo-Check: Punkte fuer Zeichen, Lesbarkeit in kleinen Groessen, Kontrast, Eigenstaendigkeit,
  * Balance, Komplexitaet, Schriften und Laenge; Gesamtwert 0 bis 100 (engine `jn`, Export `K`).
  */
-import type { Lockup } from "./logoTypes";
-import type { BrandInput, LogoConcept, Palette, SymbolTheme } from "../types";
+import type { Lockup, LogoInput } from "./logoTypes";
+import type { LogoConcept, Palette, SymbolTheme } from "../types";
 import type { FontStore } from "./fontStore";
 import { CAP, renderLogo, resolveColors } from "./renderLogo";
 import { CLICHE_THEMES, COMMON_FONTS, getFont } from "./fonts";
@@ -43,7 +43,7 @@ const CHECK_WEIGHTS = {
 
 function capHeightAt(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   width: number = DEFAULT_WIDTH,
   lockup: Lockup = "auto",
@@ -92,7 +92,7 @@ function monogramPx(concept: LogoConcept) {
 
 export function checkLogo(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
 ) {
   const r = [];

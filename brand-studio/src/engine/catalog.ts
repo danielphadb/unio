@@ -2,8 +2,8 @@
  * Katalog der Generierung: Stile und Layouts, Zufallshelfer, Saat und ID eines Konzepts, Schriftlisten
  * je Stil (Namen, Zusatz, Fliesstext, Monogramm) und ihre Gewichte (engine `Fi` ... `ct`).
  */
+import type { LogoInput } from "./logoTypes";
 import type {
-  BrandInput,
   FontMeta,
   FontRef,
   LayoutKey,
@@ -66,7 +66,7 @@ export const heaviest = (font: FontMeta): FontRef => ({
   weight: Math.max(...font.weights),
 });
 
-export function inputSeed(input: BrandInput) {
+export function inputSeed(input: LogoInput) {
   return hash(
     [
       cleanText(input.name).toLowerCase(),
@@ -330,7 +330,7 @@ export const MONOGRAM_SERIFS = [
   "ibarra",
 ];
 
-export function fontFitsName(font: FontMeta, input: BrandInput) {
+export function fontFitsName(font: FontMeta, input: LogoInput) {
   const t = cleanText(input.name);
   return fontCovers(font.key, t) && !(font.cat === "script" && t.length >= 25);
 }
@@ -347,7 +347,7 @@ function fontFitsStyle(font: FontMeta, style: string) {
         : true;
 }
 
-export function fontsForStyle(style: string, input?: BrandInput): FontMeta[] {
+export function fontsForStyle(style: string, input?: LogoInput): FontMeta[] {
   const t = FONTS.filter(
     (o) =>
       o.styles.includes(style as StyleKey) &&

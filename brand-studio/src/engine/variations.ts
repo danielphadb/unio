@@ -2,12 +2,8 @@
  * Varianten eines Konzepts: "Aehnlich wie" in der Galerie (`similarConcepts`) und Varianten im
  * Editor (`editorVariants`) (engine `Yc` ... `Qc`).
  */
-import type {
-  BrandInput,
-  FontRef,
-  IconSymbol,
-  LogoConcept,
-} from "../types";
+import type { LogoInput } from "./logoTypes";
+import type { FontRef, IconSymbol, LogoConcept } from "../types";
 import { ALL_ICONS } from "../symbols/Icons";
 import {
   FILLED_CHANCE,
@@ -50,7 +46,7 @@ function sharedTraits(first: LogoConcept, second: LogoConcept) {
 
 export function editorVariants(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   count: number,
 ): LogoConcept[] {
   const i = rng(mixSeed(concept.seed, 61)).shuffle([
@@ -108,7 +104,7 @@ function sameJson(a: any, b: any) {
 
 export function similarConcepts(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   axis: string,
   count: number,
 ): LogoConcept[] {

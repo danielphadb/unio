@@ -4,8 +4,8 @@
  * `useFontsReady` (engine `pn` ... `Cm`).
  */
 import * as React from "react";
-import type { BrandInput, FontRef, LogoConcept } from "../types";
-import type { SvgOptions } from "./logoTypes";
+import type { FontRef, LogoConcept } from "../types";
+import type { SvgOptions, LogoInput } from "./logoTypes";
 import { createFontStore } from "./fontStore";
 import { fontKey } from "./fonts";
 import { fontsNeeded } from "./generator";
@@ -105,7 +105,7 @@ const SVG_CACHE_SIZE = 900;
 
 function svgCacheKey(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   options: SvgOptions,
 ) {
   return [
@@ -126,7 +126,7 @@ function svgCacheKey(
 
 function renderLogoDocument(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   options: SvgOptions = {},
 ) {
   const r = renderLogo(concept, input, fontStore, {
@@ -164,7 +164,7 @@ function renderLogoDocument(
 
 export function renderLogoSvg(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   options: SvgOptions = {},
 ) {
   const r = svgCacheKey(concept, input, options);
@@ -255,7 +255,7 @@ export function enqueueRender(run: any, prio = "normal") {
 
 export function useLogoSvg(
   concept: LogoConcept | null | undefined,
-  input: BrandInput,
+  input: LogoInput,
   options: SvgOptions = {},
   enabled: boolean = true,
   prio = "normal",

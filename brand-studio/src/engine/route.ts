@@ -3,14 +3,8 @@
  * Themen, Schriftformen, Rahmen und Vorlagen (`templateBlocked`, `templateInRoute`), Achsen-Merkmale
  * und die Leit-Merkmale (`LEIT_KLASSE`, `leitMerkmale`, `leitAbstand`) (engine `se` ... `Gr`).
  */
-import type {
-  BrandInput,
-  ColorMoodKey,
-  FontRef,
-  LogoConcept,
-  Palette,
-} from "../types";
-import type { LeitMerkmale } from "./logoTypes";
+import type { ColorMoodKey, FontRef, LogoConcept, Palette } from "../types";
+import type { LeitMerkmale, LogoInput } from "./logoTypes";
 import type { RouteParams } from "../strategy/types";
 import { contrast } from "./color";
 import { fontForm } from "./tracking";
@@ -34,7 +28,7 @@ const ALL_MOODS = [
   "sand",
 ];
 
-export function routedInput(input: BrandInput) {
+export function routedInput(input: LogoInput) {
   const n = routeOf(input);
   if (!n) return input;
   const t = new Set(n.avoidColorMoods ?? []);
@@ -52,7 +46,7 @@ export function routedInput(input: BrandInput) {
 
 export function allowedMoods(
   moods: string[],
-  input: BrandInput,
+  input: LogoInput,
 ): ColorMoodKey[] {
   const t = routeOf(input);
   if (!t?.avoidColorMoods?.length) return moods as ColorMoodKey[];
@@ -63,7 +57,7 @@ export function allowedMoods(
   ) as ColorMoodKey[];
 }
 
-export function paletteBlocked(palette: Palette, input: BrandInput) {
+export function paletteBlocked(palette: Palette, input: LogoInput) {
   const t = routeOf(input);
   if (!t) return false;
   const r = paletteBaseId(palette);
@@ -74,7 +68,7 @@ export function paletteBlocked(palette: Palette, input: BrandInput) {
   return !!i && t.avoidColorMoods.includes(i);
 }
 
-export function themesBlocked(themes: readonly string[], input: BrandInput) {
+export function themesBlocked(themes: readonly string[], input: LogoInput) {
   const t = routeOf(input);
   return (
     !!t?.avoidThemes?.length &&
@@ -82,7 +76,7 @@ export function themesBlocked(themes: readonly string[], input: BrandInput) {
   );
 }
 
-export function fontBlocked(font: any, input: BrandInput) {
+export function fontBlocked(font: any, input: LogoInput) {
   const t = routeOf(input);
   if (!t?.avoidFontForms?.length) return false;
   const r = getFont(typeof font == "string" ? font : font.key);
@@ -91,7 +85,7 @@ export function fontBlocked(font: any, input: BrandInput) {
 
 const SEAL_CONTAINERS = ["circle", "ring"];
 
-export function containerBlocked(container: string, input: BrandInput) {
+export function containerBlocked(container: string, input: LogoInput) {
   const t = routeOf(input);
   return t
     ? container === "arch" &&
@@ -107,7 +101,7 @@ export function containerBlocked(container: string, input: BrandInput) {
 
 export const templateBaseId = (id: string) => splitVariantId(id)[0];
 
-export function templateInRoute(template: any, input: BrandInput) {
+export function templateInRoute(template: any, input: LogoInput) {
   const t = routeOf(input)?.signatureIds;
   return t
     ? t.includes(templateBaseId(template.id)) ||
@@ -122,7 +116,7 @@ const THEME_SIGNS = {
   haus: ["bogen", "fenster"],
 };
 
-export function templateBlocked(template: any, input: BrandInput) {
+export function templateBlocked(template: any, input: LogoInput) {
   const t = routeOf(input);
   if (!t) return false;
   if (
@@ -343,7 +337,7 @@ export function axisFit(axes: any, values: any, keys?: any): number {
 
 export function routeFit(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   templateAxesOf?: any,
 ) {
   const r = routeOf(input);

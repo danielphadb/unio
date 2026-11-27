@@ -2,7 +2,8 @@
  * Qualitaetsmodell: Merkmale eines Konzepts und gewichtete Summe (Score 0 bis 100) fuer die
  * Kuratierung (engine `Ru` ... `_n`).
  */
-import type { BrandInput, LogoConcept } from "../types";
+import type { LogoInput } from "./logoTypes";
+import type { LogoConcept } from "../types";
 import { NEUTRAL_ICONS, antiPatterns, corpusTwin } from "./highend";
 import { applyNameFormat } from "./renderLogo";
 import { cleanText } from "./cleanText";
@@ -11,7 +12,7 @@ import { getFont } from "./fonts";
 import { isFineWeight } from "./logoCheck";
 import { isPersonName } from "./personName";
 
-function qualityFeatures(concept: LogoConcept, input: BrandInput) {
+function qualityFeatures(concept: LogoConcept, input: LogoInput) {
   const { concept: t, input: r } = applyNameFormat(concept, input);
   const i = t.typo;
   const a = i?.split;
@@ -178,6 +179,6 @@ export function scoreFeatures(features: any, model = QUALITY_MODEL) {
   return Math.max(0, Math.min(100, Math.round(t * 20)));
 }
 
-export function qualityScore(concept: LogoConcept, input: BrandInput) {
+export function qualityScore(concept: LogoConcept, input: LogoInput) {
   return scoreFeatures(qualityFeatures(concept, input));
 }

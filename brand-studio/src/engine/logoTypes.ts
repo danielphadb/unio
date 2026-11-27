@@ -2,7 +2,7 @@
  * Typen der Logo-Engine, die nicht im gemeinsamen Vertrag (src/types.ts) stehen:
  * Optionen der Einstiegsfunktionen, Farbvarianten, Geschmacksprofil.
  */
-import type { FontRef, LogoConcept } from "../types";
+import type { BrandInput, FontRef, LogoConcept } from "../types";
 import type { Rng } from "./rng";
 
 /** Farbvariante beim Rendern (`color` auf Papier, `reverse` auf dunkler Flaeche, einfarbig hell/dunkel). */
@@ -109,3 +109,13 @@ export interface TypoOption {
   weight: number;
   make: (rnd: Rng) => TypoChoice;
 }
+
+/**
+ * Eingabe der Logo-Engine: wie `BrandInput`, aber nur Name, Stile, Farbstimmungen und Themen
+ * sind Pflicht (Namenskarten und Routen-Vorschau rufen die Engine ohne Zusatz und Tagline auf).
+ */
+export type LogoInput = Pick<
+  BrandInput,
+  "name" | "styles" | "colorMoods" | "themes"
+> &
+  Partial<Omit<BrandInput, "name" | "styles" | "colorMoods" | "themes">>;

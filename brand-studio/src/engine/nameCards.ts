@@ -3,8 +3,8 @@
  * Konzepte fuer einen Namen (`nameCardConcepts`) und je Karte (`nameCardConcept`, Budget je Seite)
  * (engine `qc` ... `Nm`, `Im`, `Om`, `Bm`, `Vm`).
  */
-import type { BrandInput, FontMeta, FontRef, LogoConcept } from "../types";
-import type { FontPlan, TasteProfile } from "./logoTypes";
+import type { FontMeta, FontRef, LogoConcept } from "../types";
+import type { FontPlan, TasteProfile, LogoInput } from "./logoTypes";
 import type { Rng } from "./rng";
 import {
   COMMON_FONTS,
@@ -100,7 +100,7 @@ function cutForStyle(meta: FontMeta, style: string, rnd: Rng): FontRef {
 }
 
 export function fontPlan(
-  input: BrandInput,
+  input: LogoInput,
   seed: number,
   page: number,
   taste: TasteProfile | null = null,
@@ -235,7 +235,7 @@ export function fontPlan(
 
 export function nameCardConcepts(
   name: string,
-  input: BrandInput,
+  input: LogoInput,
   count: number,
   seed: number | undefined,
 ) {
@@ -312,7 +312,7 @@ export function nameCardConcepts(
   return g;
 }
 
-export function cardVariant(concept: LogoConcept, input: BrandInput) {
+export function cardVariant(concept: LogoConcept, input: LogoInput) {
   if (concept.layout === "badge") return concept;
   const t =
     concept.symbol &&
@@ -345,7 +345,7 @@ export function cardVariant(concept: LogoConcept, input: BrandInput) {
 }
 
 export function nameCardFonts(
-  input: BrandInput,
+  input: LogoInput,
   seed: number,
   count: number = NAME_FONTS_PER_PAGE,
 ) {
@@ -365,7 +365,7 @@ export function nameCardFonts(
   };
 }
 
-export function nameCardConcept(input: BrandInput, seed: number, options: any) {
+export function nameCardConcept(input: LogoInput, seed: number, options: any) {
   const r = rng(mixSeed(seed, 51837));
   const i = [...options.plan.names, options.plan.suffix];
   const a = (A: any) => fontCovers(A.key, input.name, input.suffix);

@@ -4,16 +4,10 @@
  * Wortmarke, nebeneinander, gestapelt, Emblem und Siegel bauen (engine `Z` ... `Ti`).
  * Ergebnis: `{ body, width, height }` in SVG-Einheiten, mit Zwischenspeicher je FontStore.
  */
-import type {
-  BrandInput,
-  LogoConcept,
-  MonogramSymbol,
-  Palette,
-  TypoSplit,
-} from "../types";
+import type { LogoConcept, MonogramSymbol, Palette, TypoSplit } from "../types";
 import type { Font } from "opentype.js";
 import type { FontStore } from "./fontStore";
-import type { RenderOptions } from "./logoTypes";
+import type { RenderOptions, LogoInput } from "./logoTypes";
 import {
   INLINE_GAPS,
   LARGE_SUFFIX_SCALE,
@@ -535,7 +529,7 @@ const isValidJoint = (joint: unknown, word: string | undefined) =>
   joint >= 2 &&
   joint <= Array.from(word).length - 2;
 
-function hasStyledTokens(concept: LogoConcept, input: BrandInput) {
+function hasStyledTokens(concept: LogoConcept, input: LogoInput) {
   const t = concept.typo;
   if (!t) return false;
   const r = cleanText(input.name).split(" ");
@@ -548,7 +542,7 @@ function hasStyledTokens(concept: LogoConcept, input: BrandInput) {
   );
 }
 
-function styledTokens(concept: LogoConcept, input: BrandInput, colors: any) {
+function styledTokens(concept: LogoConcept, input: LogoInput, colors: any) {
   const i = (cleanText(input.name) || "Name").split(" ");
   let a = 0;
   for (; a < i.length - 1 && TITLE_RE.test(i[a]!); ) a++;
@@ -882,7 +876,7 @@ function breakLines(tokens: any[], options: any, layout: any): any {
 
 function nameLines(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   options: any,
 ) {
@@ -1045,7 +1039,7 @@ function nameLines(
 
 function layoutNameBlock(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   options: any,
 ) {
@@ -1381,7 +1375,7 @@ function symbolCacheKey(symbol: any, boost: boolean) {
 
 function fallbackMonogram(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
 ): MonogramSymbol {
   return {
     kind: "monogram",
@@ -1420,7 +1414,7 @@ function renderSymbolArt(
 
 function symbolArt(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   colors: any,
   filled: boolean,
@@ -1938,7 +1932,7 @@ function sealOps(ctx: any) {
 
 function renderContext(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   variant: string,
   ground?: string,
@@ -1974,8 +1968,8 @@ const displayName = (name: string | undefined) =>
 
 export function applyNameFormat(
   concept: LogoConcept,
-  input: BrandInput,
-): { concept: LogoConcept; input: BrandInput } {
+  input: LogoInput,
+): { concept: LogoConcept; input: LogoInput } {
   const format = concept.nameFormat ?? "full";
   const name = cleanText(input.name);
   const suffix = cleanText(input.suffix);
@@ -2152,7 +2146,7 @@ export function applyNameFormat(
 
 export function renderLogo(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   options: RenderOptions = {},
 ) {
@@ -2202,7 +2196,7 @@ const renderCache = new WeakMap();
 
 function renderUncached(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   options: RenderOptions,
 ) {
@@ -2288,7 +2282,7 @@ function renderUncached(
 
 export function renderTagline(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   variant: string = "color",
   ground?: string,
@@ -2337,7 +2331,7 @@ export function renderTagline(
 
 export function conceptFonts(
   concept: LogoConcept,
-  input: BrandInput | undefined,
+  input: LogoInput | undefined,
 ) {
   const t = [
     concept.name.font,
@@ -2355,7 +2349,7 @@ export function conceptFonts(
   return t;
 }
 
-const EMPTY_INPUT: BrandInput = {
+const EMPTY_INPUT: LogoInput = {
   name: "",
   suffix: "",
   tagline: "",

@@ -3,7 +3,8 @@
  * Aehnlichkeit zum Referenzkorpus (Zwilling, rechtliche Naehe) und Namenssperre fuer Vorlagen
  * (engine `Qe` ... `Al`). `NEUTRAL_ICONS` und `BLOCKED_ICONS` sind in der gesicherten Fassung leer.
  */
-import type { BrandInput, LogoConcept } from "../types";
+import type { LogoInput } from "./logoTypes";
+import type { LogoConcept } from "../types";
 import { CORPUS_MARKS } from "./corpusMarks";
 import { CORPUS_TECH_MARKS } from "./corpusTechMarks";
 import { GENERIC_WORDS } from "./personName";
@@ -36,7 +37,7 @@ export const BLOCKED_ICONS: string[] = [];
 
 const CHEAP_CONTAINERS = ["shield", "hexagon", "diamond", "house"];
 
-export function fontFamilies(concept: LogoConcept, input: BrandInput) {
+export function fontFamilies(concept: LogoConcept, input: LogoInput) {
   const t = new Set([concept.name.font.key]);
   if (cleanText(input.suffix)) {
     t.add(concept.suffix.font.key);
@@ -48,7 +49,7 @@ export function fontFamilies(concept: LogoConcept, input: BrandInput) {
   return t;
 }
 
-export function antiPatterns(concept: LogoConcept, input: BrandInput) {
+export function antiPatterns(concept: LogoConcept, input: LogoInput) {
   if (concept.signature) return [];
   const { concept: t, input: r } = applyNameFormat(concept, input);
   const i = [];
@@ -249,16 +250,16 @@ const corpusIndex = () =>
 const trackingClass = (tracking: number) =>
   tracking < 0.03 ? 0 : tracking < 0.09 ? 1 : 2;
 
-export function corpusTwin(concept: LogoConcept, input: BrandInput) {
+export function corpusTwin(concept: LogoConcept, input: LogoInput) {
   return corpusMatch(concept, input)?.twin ?? null;
 }
 
-export function legalProximity(concept: LogoConcept, input: BrandInput) {
+export function legalProximity(concept: LogoConcept, input: LogoInput) {
   const t = corpusMatch(concept, input);
   return t && !t.twin ? t.near : null;
 }
 
-function corpusMatch(concept: LogoConcept, input: BrandInput) {
+function corpusMatch(concept: LogoConcept, input: LogoInput) {
   if (concept.signature) return null;
   const { concept: t, input: r } = applyNameFormat(concept, input);
   const i = cleanText(r.name);
@@ -334,7 +335,7 @@ function corpusMatch(concept: LogoConcept, input: BrandInput) {
     : null;
 }
 
-export function corpusTwinName(template: any, input: Pick<BrandInput, "name">) {
+export function corpusTwinName(template: any, input: Pick<LogoInput, "name">) {
   const t = foldName(cleanText(input.name));
   if (t.length < 2) return null;
   for (const [r, i, a, s, o] of [...CORPUS_MARKS, ...CORPUS_TECH_MARKS]) {

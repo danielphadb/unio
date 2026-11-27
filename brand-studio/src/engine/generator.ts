@@ -5,7 +5,6 @@
  * Seiten-Pakete (`curatedPackage`). Bitgenau wie der engine-Chunk der gesicherten Fassung.
  */
 import type {
-  BrandInput,
   CaseKey,
   Eingriff,
   FontMeta,
@@ -20,6 +19,7 @@ import type {
   CandidateOptions,
   CurateOptions,
   GenerateOptions,
+  LogoInput,
 } from "./logoTypes";
 import type { FontStore } from "./fontStore";
 import type { Rng } from "./rng";
@@ -305,7 +305,7 @@ export function typography(
   meta: FontMeta,
   style: string,
   rnd: Rng,
-  input?: BrandInput,
+  input?: LogoInput,
   slot?: any,
 ) {
   const a = nameTypography(meta, style, rnd);
@@ -621,7 +621,7 @@ export function monogramFont(
 }
 
 function pickSymbol(
-  input: BrandInput,
+  input: LogoInput,
   style: string,
   font: FontRef,
   rnd: Rng,
@@ -884,7 +884,7 @@ export function cardFace(concept: LogoConcept) {
         };
 }
 
-export function buildConcept(input: BrandInput, seed: number, options: any) {
+export function buildConcept(input: LogoInput, seed: number, options: any) {
   const rnd = rng(seed);
   const style = options.style;
   const hasSuffix = !!cleanText(input.suffix);
@@ -1106,11 +1106,11 @@ export function buildConcept(input: BrandInput, seed: number, options: any) {
   );
 }
 
-export function finishConcept(concept: LogoConcept, input: BrandInput) {
+export function finishConcept(concept: LogoConcept, input: LogoInput) {
   return withId(withLegalProximity(repairConcept(concept, input), input));
 }
 
-export function withLegalProximity(concept: LogoConcept, input: BrandInput) {
+export function withLegalProximity(concept: LogoConcept, input: LogoInput) {
   const t = legalProximity(
     {
       ...concept,
@@ -1135,7 +1135,7 @@ const SUFFIX_PAIRING_CHANCE = 0.3;
 
 function maybeSuffixPairing(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   options: any,
   seed: number,
 ) {
@@ -1186,7 +1186,7 @@ function maybeSuffixPairing(
 function applyRecipeTypography(
   typo: any,
   recipe: any,
-  input: BrandInput,
+  input: LogoInput,
   rnd: Rng,
 ) {
   const i = getFont(typo.name.font.key);
@@ -1243,7 +1243,7 @@ function recipeColors(recipe: any, colors: any, palette: Palette) {
 
 export function repairConcept(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
 ): LogoConcept {
   return fixSharpS(
     fixTypography(
@@ -1254,7 +1254,7 @@ export function repairConcept(
   );
 }
 
-export function allowsRule(input: BrandInput) {
+export function allowsRule(input: LogoInput) {
   const n = nameWords(input.name);
   const t = Array.from(cleanText(input.name)).filter((r) =>
     new RegExp("\\p{L}", "u").test(r),
@@ -1279,7 +1279,7 @@ const NO_BADGE_ICONS = ["abstrakt-kreissegmente"];
 
 const NO_STAMP_CONTAINERS = ["circle", "ring", "hexagon", "arch"];
 
-function fixLayout(concept: LogoConcept, input: BrandInput): LogoConcept {
+function fixLayout(concept: LogoConcept, input: LogoInput): LogoConcept {
   let t: any = concept;
   if (t.symbol && NO_STAMP_CONTAINERS.includes(t.symbol.container)) {
     t = {
@@ -1414,7 +1414,7 @@ function fixLayout(concept: LogoConcept, input: BrandInput): LogoConcept {
   return t;
 }
 
-function fixTypography(concept: LogoConcept, input: BrandInput) {
+function fixTypography(concept: LogoConcept, input: LogoInput) {
   const t = fixLayout(concept, input);
   const r = {
     ...t,
@@ -1632,7 +1632,7 @@ function fixTypography(concept: LogoConcept, input: BrandInput) {
   return r;
 }
 
-function fixSharpS(concept: LogoConcept, input: BrandInput) {
+function fixSharpS(concept: LogoConcept, input: LogoInput) {
   const t = cleanText(input.name);
   if (!t.includes("ß")) return concept;
   let r = concept;
@@ -1681,7 +1681,7 @@ function fixSharpS(concept: LogoConcept, input: BrandInput) {
   return r;
 }
 
-function fixScript(concept: LogoConcept, input: BrandInput) {
+function fixScript(concept: LogoConcept, input: LogoInput) {
   if (getFont(concept.name.font.key).cat !== "script") return concept;
   const t = concept.typo?.split;
   if (t?.font && getFont(t.font.key).cat !== "script") return concept;
@@ -1712,7 +1712,7 @@ function fixScript(concept: LogoConcept, input: BrandInput) {
   };
 }
 
-function avoidCorpusTwin(concept: LogoConcept, input: BrandInput) {
+function avoidCorpusTwin(concept: LogoConcept, input: LogoInput) {
   let t = concept;
   const r = (a: any) =>
     [a.suffix.font, a.body].find(
@@ -1850,7 +1850,7 @@ export function dropInvisibleAccents(concept: LogoConcept) {
 }
 
 export function generateConcepts(
-  rawInput: BrandInput,
+  rawInput: LogoInput,
   options: GenerateOptions,
 ) {
   const input = routedInput(rawInput);
@@ -2377,7 +2377,7 @@ export const hasSymbol = (concept: LogoConcept) =>
 
 function medianQuality(
   concepts: LogoConcept[],
-  input: BrandInput,
+  input: LogoInput,
 ): number | null {
   const t = concepts
     .filter((r) => !r.signature && !hasSymbol(r))
@@ -2388,7 +2388,7 @@ function medianQuality(
 
 function qualityThreshold(
   concepts: LogoConcept[],
-  input: BrandInput,
+  input: LogoInput,
   pinned: any,
   size: number = PAGE_SIZE,
 ) {
@@ -2552,7 +2552,7 @@ function routeRecipeFactor(recipe: any, input: any) {
   return Math.exp(2 * axisFit(t.axes, s));
 }
 
-function kindsFromMix(count: number, mix: any, input: BrandInput) {
+function kindsFromMix(count: number, mix: any, input: LogoInput) {
   const [r, i, a] = splitByShares(count, [
     mix.wortmarke,
     mix.monogramm,
@@ -2610,7 +2610,7 @@ function kindsFromThemes(
 
 function planNameFormats(
   kinds: string[],
-  input: BrandInput,
+  input: LogoInput,
   rnd: Rng,
   nameFonts: number = NAME_FONTS_PER_PAGE,
   firstPage: boolean = false,
@@ -2704,7 +2704,7 @@ const nameFormatOf = (e: any) => e.nameFormat ?? "full";
 
 function curationFacts(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   recipeId?: any,
 ) {
@@ -2764,7 +2764,7 @@ const proportionCache = new Map();
 
 function measureProportion(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
 ) {
   if (proportionCache.has(concept.id)) return;
@@ -2776,7 +2776,7 @@ function measureProportion(
   proportionCache.set(concept.id, i < 2.2 ? "block" : i < 4.5 ? "mid" : "line");
 }
 
-function typoFixes(concept: LogoConcept, input: BrandInput) {
+function typoFixes(concept: LogoConcept, input: LogoInput) {
   const t = [];
   const r = getFont(concept.name.font.key);
   const { concept: i } = applyNameFormat(concept, input);
@@ -2982,7 +2982,7 @@ function mixOk(
 
 export function curateConcepts(
   pool: LogoConcept[],
-  rawInput: BrandInput,
+  rawInput: LogoInput,
   fonts: FontStore,
   size: number = PAGE_SIZE,
   options: CurateOptions = {},
@@ -3022,7 +3022,7 @@ export function curateConcepts(
 function leitPass(
   page: LogoConcept[],
   pool: LogoConcept[],
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   size: number,
   options: CurateOptions,
@@ -3147,7 +3147,7 @@ const isDrawn = (concept: LogoConcept) =>
 
 function curateWithDrawn(
   pool: LogoConcept[],
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   size: number,
   options: CurateOptions,
@@ -3206,7 +3206,7 @@ function curateWithDrawn(
 
 function curateWithSignature(
   pool: LogoConcept[],
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   size: number,
   options: CurateOptions,
@@ -3365,7 +3365,7 @@ const MAX_SIGNATURE = 4;
 
 function curateRecipes(
   pool: LogoConcept[],
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   size: number = PAGE_SIZE,
   options: CurateOptions = {},
@@ -3380,7 +3380,7 @@ function curateRecipes(
 
 function curatePage(
   pool: LogoConcept[],
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
   size: number = PAGE_SIZE,
   options: CurateOptions = {},
@@ -3709,7 +3709,7 @@ function balanceFontGroups(
 const SIGNATURE_PER_PACKAGE = [12, 8];
 
 function signatureConcepts(
-  input: BrandInput,
+  input: LogoInput,
   pkg: number,
   entwuerfe: boolean = false,
   seed: number | undefined,
@@ -3760,7 +3760,7 @@ function signatureConcepts(
 
 export function pickTemplateVariant(
   template: any,
-  input: BrandInput,
+  input: LogoInput,
   seed: number,
   entwuerfe: boolean = false,
 ) {
@@ -3777,7 +3777,7 @@ export function pickTemplateVariant(
   return i[a.int(0, i.length - 1)];
 }
 
-function templatePalettes(template: any, input: BrandInput, seed: number) {
+function templatePalettes(template: any, input: LogoInput, seed: number) {
   const r = basePalettes();
   const i = (w: any) => r.find((x) => x.id.split("-")[0] === w);
   const a = routeOf(input);
@@ -3828,7 +3828,7 @@ function templatePalettes(template: any, input: BrandInput, seed: number) {
 
 export function templateWeight(
   template: any,
-  input: BrandInput,
+  input: LogoInput,
   styles = input.styles,
 ) {
   const r = routeOf(input);
@@ -3845,7 +3845,7 @@ export function templateWeight(
 
 export function templateConcept(
   template: any,
-  input: BrandInput,
+  input: LogoInput,
   palette: Palette,
   style: any,
 ) {
@@ -3908,7 +3908,7 @@ function styleBalance(template: any, styles: any) {
 
 export function rankTemplates(
   templates: any,
-  input: BrandInput,
+  input: LogoInput,
   seed: number,
   bonus: (t: any) => number = () => 0,
   weight: (t: any) => number = (a) => styleBalance(a, input.styles),
@@ -3946,7 +3946,7 @@ export function curatedPackage(page: number) {
 }
 
 export function curationCandidates(
-  input: BrandInput,
+  input: LogoInput,
   options: CandidateOptions = {},
 ) {
   const { pkg } = curatedPackage(options.page ?? 0);
@@ -3983,7 +3983,7 @@ export function curationCandidates(
 }
 
 function drawnMonogramConcepts(
-  input: BrandInput,
+  input: LogoInput,
   pool: LogoConcept[],
   seed: number,
 ) {
@@ -4026,7 +4026,7 @@ function drawnMonogramConcepts(
 }
 
 function eingriffeConcepts(
-  input: BrandInput,
+  input: LogoInput,
   pool: LogoConcept[],
   seed: number,
 ) {
@@ -4074,7 +4074,7 @@ function eingriffeConcepts(
 
 function drawnRenders(
   concept: LogoConcept,
-  input: BrandInput,
+  input: LogoInput,
   fonts: FontStore,
 ) {
   const r = konstruktionOf(concept);
@@ -4102,7 +4102,7 @@ function drawnRenders(
   return true;
 }
 
-export function fitsRoute(concept: LogoConcept, input: BrandInput) {
+export function fitsRoute(concept: LogoConcept, input: LogoInput) {
   if (!routeOf(input)) return true;
   if (
     paletteBlocked(concept.palette, input) ||
@@ -4133,7 +4133,7 @@ export function fitsRoute(concept: LogoConcept, input: BrandInput) {
   return true;
 }
 
-function darkenForRoute(concepts: LogoConcept[], input: BrandInput) {
+function darkenForRoute(concepts: LogoConcept[], input: LogoInput) {
   const t = routeOf(input)?.axes?.dark;
   if (!t || !(t.sicher > 0)) return concepts;
   const r = Math.max(0, Math.min(1, 0.35 + 0.55 * t.v * t.sicher));
@@ -4144,11 +4144,7 @@ function darkenForRoute(concepts: LogoConcept[], input: BrandInput) {
   });
 }
 
-function recipePool(
-  input: BrandInput,
-  page: number,
-  options: CandidateOptions,
-) {
+function recipePool(input: LogoInput, page: number, options: CandidateOptions) {
   const r = options.pool ?? POOL_SIZE;
   const i = generateConcepts(input, {
     count: r,
