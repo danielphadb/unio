@@ -1,0 +1,973 @@
+{
+ "konzept": {
+  "seed": 1502373130,
+  "style": "elegant",
+  "layout": "wordmark",
+  "symbol": {
+   "kind": "monogram",
+   "letters": "AB",
+   "container": "none",
+   "font": {
+    "key": "librebodoni",
+    "weight": 500
+   }
+  },
+  "name": {
+   "font": {
+    "key": "librebodoni",
+    "weight": 500,
+    "style": "italic"
+   },
+   "case": "title",
+   "tracking": -0.01
+  },
+  "suffix": {
+   "font": {
+    "key": "geistmono",
+    "weight": 300
+   },
+   "case": "upper",
+   "tracking": 0.14
+  },
+  "tagline": {
+   "font": {
+    "key": "geistmono",
+    "weight": 300
+   },
+   "case": "asis",
+   "tracking": 0.02
+  },
+  "body": {
+   "key": "spectral",
+   "weight": 300
+  },
+  "palette": {
+   "id": "oliv-5A673C7AF2",
+   "name": "Oliv und Leinen",
+   "primary": "#5A673C",
+   "secondary": "#E6E0CE",
+   "accent": "#7A756A",
+   "ink": "#2B2E22",
+   "paper": "#FAF8F2"
+  },
+  "colors": {
+   "symbol": "primary",
+   "name": "ink",
+   "suffix": "ink"
+  },
+  "divider": "none",
+  "symbolFilled": false,
+  "cardBackground": "ink",
+  "recipeId": "R77",
+  "typo": {
+   "suffixScale": 0.37
+  },
+  "id": "coektwz"
+ },
+ "sets": {
+  "unio": {
+   "logo-color": {
+    "label": "Logo farbig",
+    "group": "logo",
+    "seiten": [
+     {
+      "label": "Hauptlogo",
+      "datei": "unterlagen/svg/unio/logo-color-1.svg.gz",
+      "sha256": "15d14e1265415cc70c8a0a6b720554034d6e79f8cc8285a04ea5c01d02db60df",
+      "bytes": 11301
+     },
+     {
+      "label": "Liegend",
+      "datei": "unterlagen/svg/unio/logo-color-2.svg.gz",
+      "sha256": "44c547540d0483172103b9d3b2b7473dd89b309853a9a08af6f4bd7ab8cc0c27",
+      "bytes": 11299
+     },
+     {
+      "label": "Gestapelt",
+      "datei": "unterlagen/svg/unio/logo-color-3.svg.gz",
+      "sha256": "f6eedb960a2b60f748f6bc842aab69586ff2914c085cbbe35e493e959fd34f57",
+      "bytes": 11270
+     },
+     {
+      "label": "Monogramm",
+      "datei": "unterlagen/svg/unio/logo-color-4.svg.gz",
+      "sha256": "d6effec22222906aeecd1cb8d3b910710ee288c2417603d617bb7ef0c84e7f07",
+      "bytes": 1536
+     }
+    ]
+   },
+   "logo-reverse": {
+    "label": "Logo auf dunkel",
+    "group": "logo",
+    "seiten": [
+     {
+      "label": "Hauptlogo",
+      "datei": "unterlagen/svg/unio/logo-reverse-1.svg.gz",
+      "sha256": "da9ab65903baea0ae28d1a3d24c6511932abd6763da9c4eccc379ebcca1c9721",
+      "bytes": 11301
+     },
+     {
+      "label": "Liegend",
+      "datei": "unterlagen/svg/unio/logo-reverse-2.svg.gz",
+      "sha256": "c2f6ab824cf2229df9093cb5a14f803bff25032d9a4039de016703dd8d284266",
+      "bytes": 11299
+     },
+     {
+      "label": "Gestapelt",
+      "datei": "unterlagen/svg/unio/logo-reverse-3.svg.gz",
+      "sha256": "3ed884c22a6da07363087ad3ccac26f13ba751821e39af9f3a8682be7e4008ed",
+      "bytes": 11270
+     },
+     {
+      "label": "Monogramm",
+      "datei": "unterlagen/svg/unio/logo-reverse-4.svg.gz",
+      "sha256": "69d798d9d21df44d9560426e9109631c14ccc347621a15a593f305f0c2d092d2",
+      "bytes": 1536
+     }
+    ]
+   },
+   "logo-mono-dark": {
+    "label": "Logo schwarz",
+    "group": "logo",
+    "seiten": [
+     {
+      "label": "Hauptlogo",
+      "datei": "unterlagen/svg/unio/logo-mono-dark-1.svg.gz",
+      "sha256": "6351a04eca8ae9b843ba95facdae2013aab67b43ac7d5b5f6ad1d195345d6d02",
+      "bytes": 11301
+     },
+     {
+      "label": "Liegend",
+      "datei": "unterlagen/svg/unio/logo-mono-dark-2.svg.gz",
+      "sha256": "2ea7d0dc45540602bec82d304f3b2455c1dc02b7d149ce4f08158f1e89cec74e",
+      "bytes": 11299
+     },
+     {
+      "label": "Gestapelt",
+      "datei": "unterlagen/svg/unio/logo-mono-dark-3.svg.gz",
+      "sha256": "0263fb57e35b9b9bb372cd8c8d76021aec2f32ce28af53dfeab0c6e49d3c0d18",
+      "bytes": 11270
+     },
+     {
+      "label": "Monogramm",
+      "datei": "unterlagen/svg/unio/logo-mono-dark-4.svg.gz",
+      "sha256": "45d474623cce9c0390349f94b37b27d712c8cb4a9dac65823e93045a85942782",
+      "bytes": 1536
+     }
+    ]
+   },
+   "logo-mono-light": {
+    "label": "Logo weiß",
+    "group": "logo",
+    "seiten": [
+     {
+      "label": "Hauptlogo",
+      "datei": "unterlagen/svg/unio/logo-mono-light-1.svg.gz",
+      "sha256": "7ba10157a68a7bf81e39295562dade415eba10c122aa9c4eba2b1a4582c0ae79",
+      "bytes": 11301
+     },
+     {
+      "label": "Liegend",
+      "datei": "unterlagen/svg/unio/logo-mono-light-2.svg.gz",
+      "sha256": "3ac45be6a25adef0df7002197b211dac41d33f113b127b7aa8bd71323e2eae87",
+      "bytes": 11299
+     },
+     {
+      "label": "Gestapelt",
+      "datei": "unterlagen/svg/unio/logo-mono-light-3.svg.gz",
+      "sha256": "f033e237746c532b91cb907916bc34ee3230df8eabacb610af7bedbe2779fe2a",
+      "bytes": 11270
+     },
+     {
+      "label": "Monogramm",
+      "datei": "unterlagen/svg/unio/logo-mono-light-4.svg.gz",
+      "sha256": "6bcdef6eab8adee8cf6f83a448a62970ebf78d87c330ece139a42fe4b8b9642d",
+      "bytes": 1536
+     }
+    ]
+   },
+   "logo-symbol": {
+    "verfuegbar": false
+   },
+   "favicon": {
+    "label": "Favicon und App-Icon",
+    "group": "digital",
+    "seiten": [
+     {
+      "label": "Favicon und App-Icon",
+      "datei": "unterlagen/svg/unio/favicon.svg.gz",
+      "sha256": "96fdde35bef73db66df0177bfed7103f8fc120305079444b07f0479fdb8a43fb",
+      "bytes": 29225
+     }
+    ]
+   },
+   "unio-email-signature": {
+    "label": "E-Mail-Signatur",
+    "group": "digital",
+    "seiten": [
+     {
+      "label": "Signatur",
+      "datei": "unterlagen/svg/unio/unio-email-signature.svg.gz",
+      "sha256": "267808d1e3a46c80c2d734487d9daaa7f463e087798ffe7ef59826d01bf76fdb",
+      "bytes": 66714
+     }
+    ]
+   },
+   "unio-social-profile": {
+    "label": "Profilbild",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Profilbild",
+      "datei": "unterlagen/svg/unio/unio-social-profile.svg.gz",
+      "sha256": "469759620419ec8995aafc17e334bf311d4ef7d2780349f4a76e47ad3aee8dc3",
+      "bytes": 2531
+     }
+    ]
+   },
+   "unio-social-new": {
+    "label": "Instagram-Post „Neu im Angebot“",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Post",
+      "datei": "unterlagen/svg/unio/unio-social-new.svg.gz",
+      "sha256": "bb017c356b558e3271023b65440335b867744d157545a5fdf1fdbf48016092b6",
+      "bytes": 87590
+     }
+    ]
+   },
+   "unio-social-sold": {
+    "label": "Instagram-Post „Verkauft“",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Post",
+      "datei": "unterlagen/svg/unio/unio-social-sold.svg.gz",
+      "sha256": "52a4e7bb8b3e021e548e45569e4025220f4ea10c6108415d045b455d922c9e07",
+      "bytes": 100245
+     }
+    ]
+   },
+   "unio-social-viewing": {
+    "label": "Instagram-Post „Besichtigung“",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Post",
+      "datei": "unterlagen/svg/unio/unio-social-viewing.svg.gz",
+      "sha256": "1cc072b0a10f863c6f319d65e72180f35d441a721f5b53eeb512bf9713343df8",
+      "bytes": 101999
+     }
+    ]
+   },
+   "unio-social-intro": {
+    "label": "Instagram-Post „Über mich“",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Post",
+      "datei": "unterlagen/svg/unio/unio-social-intro.svg.gz",
+      "sha256": "7ad4f0f1750626099b71c2151fb84873d5f2f1ed83759da5ed153f38a5516162",
+      "bytes": 216347
+     }
+    ]
+   },
+   "unio-social-story": {
+    "label": "Instagram-Story",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Story",
+      "datei": "unterlagen/svg/unio/unio-social-story.svg.gz",
+      "sha256": "e86ce7bd1f81eadd23992354dbcc69b22868be41648ab9e9e793ffc70b9649cb",
+      "bytes": 88242
+     }
+    ]
+   },
+   "unio-social-linkedin": {
+    "label": "LinkedIn-Banner",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Banner",
+      "datei": "unterlagen/svg/unio/unio-social-linkedin.svg.gz",
+      "sha256": "3fdeeabb51bffe657485b86c0cd2651624bc9b19363e6be0c9a489307823ef63",
+      "bytes": 56898
+     }
+    ]
+   },
+   "unio-social-facebook": {
+    "label": "Facebook-Titelbild",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Titelbild",
+      "datei": "unterlagen/svg/unio/unio-social-facebook.svg.gz",
+      "sha256": "838ad0db1480decd0642540b08924fccebaa128da530c9e78bc79d379860f5e4",
+      "bytes": 62162
+     }
+    ]
+   },
+   "unio-business-card": {
+    "label": "Visitenkarte",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Vorderseite",
+      "datei": "unterlagen/svg/unio/unio-business-card-1.svg.gz",
+      "sha256": "2463ff5746bb67974311bad256cd020b23e9908dc2257e73e2c700aa3a919952",
+      "bytes": 24319
+     },
+     {
+      "label": "Rückseite",
+      "datei": "unterlagen/svg/unio/unio-business-card-2.svg.gz",
+      "sha256": "b3f44cb040c64882ef249fdac49cd99aa63d2d9623ef3d825757341987baf808",
+      "bytes": 62745
+     }
+    ]
+   },
+   "unio-letterhead": {
+    "label": "Briefpapier A4",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Briefbogen",
+      "datei": "unterlagen/svg/unio/unio-letterhead.svg.gz",
+      "sha256": "c11fc2c6f62605dca2f39e4f9df818167e4c4f32758a905e308675d46792aebb",
+      "bytes": 140104
+     }
+    ]
+   },
+   "unio-expose": {
+    "label": "Exposé-Deckblatt A4",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Deckblatt",
+      "datei": "unterlagen/svg/unio/unio-expose.svg.gz",
+      "sha256": "c617686ea67a215205092fd5712b8a22f90d2e4d0eed90acd0b4dec905ee876a",
+      "bytes": 194024
+     }
+    ]
+   },
+   "unio-sign": {
+    "label": "Verkaufsschild",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Zu verkaufen",
+      "datei": "unterlagen/svg/unio/unio-sign-1.svg.gz",
+      "sha256": "1e89b85f1d257170efdc0b70acf2de2dcd54684efae1ee4444c52ad520914b68",
+      "bytes": 92886
+     },
+     {
+      "label": "Zu vermieten",
+      "datei": "unterlagen/svg/unio/unio-sign-2.svg.gz",
+      "sha256": "4490abc4c118812ea9107a4e73f6a68a58219901286d0e604ea23b822509f45a",
+      "bytes": 89253
+     }
+    ]
+   },
+   "unio-brand-guide": {
+    "label": "Brand Guide",
+    "group": "guide",
+    "seiten": [
+     {
+      "label": "Titel",
+      "datei": "unterlagen/svg/unio/unio-brand-guide-1.svg.gz",
+      "sha256": "ce115518964da81a705015e3f0dcf6725083af30cfff424e7989886efc508053",
+      "bytes": 104875
+     },
+     {
+      "label": "Schutzraum",
+      "datei": "unterlagen/svg/unio/unio-brand-guide-2.svg.gz",
+      "sha256": "d703a22d0bc276c3cc1e7cde3d93b8efa0e3b281171a226857e49ae7a73e8945",
+      "bytes": 183735
+     },
+     {
+      "label": "Mindestgröße",
+      "datei": "unterlagen/svg/unio/unio-brand-guide-3.svg.gz",
+      "sha256": "cd14db79b87076e8b66e50419a8e3468c61dc0df551ed0115a6383882311762c",
+      "bytes": 282601
+     },
+     {
+      "label": "Varianten",
+      "datei": "unterlagen/svg/unio/unio-brand-guide-4.svg.gz",
+      "sha256": "99333e4bb49533210cb0197ed79c2cdcb454415a08428eb114afef9af0c4e799",
+      "bytes": 221681
+     },
+     {
+      "label": "Fehlanwendungen",
+      "datei": "unterlagen/svg/unio/unio-brand-guide-5.svg.gz",
+      "sha256": "51133de0f0dc23e75e608ea5b77259e20ea843af0bbe979e3f688832c12a2efd",
+      "bytes": 153975
+     },
+     {
+      "label": "Farben",
+      "datei": "unterlagen/svg/unio/unio-brand-guide-6.svg.gz",
+      "sha256": "041ecedf37ae5e7ac3202559d0542bca272962fe2a675ccddb15ce8160960007",
+      "bytes": 249298
+     },
+     {
+      "label": "Typografie",
+      "datei": "unterlagen/svg/unio/unio-brand-guide-7.svg.gz",
+      "sha256": "d107c21e5221d25734c87e923733daee194986e6529610805a5808e902333bbf",
+      "bytes": 386972
+     },
+     {
+      "label": "Anwendung",
+      "datei": "unterlagen/svg/unio/unio-brand-guide-8.svg.gz",
+      "sha256": "9a0212743d432f60efdd61b2067a40ec91735637870d22df2cb0bedf03295570",
+      "bytes": 310953
+     }
+    ]
+   },
+   "unio-flyer-a5-v1": {
+    "label": "Flyer A5 · Objekt zuerst",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Seite 1 · Objekt",
+      "datei": "unterlagen/svg/unio/unio-flyer-a5-v1-1.svg.gz",
+      "sha256": "f1b5aa9764e6da78d3693b66b6cdb3059774af1e58f33be69919a54fb030058e",
+      "bytes": 232797
+     },
+     {
+      "label": "Seite 2 · Persönlich",
+      "datei": "unterlagen/svg/unio/unio-flyer-a5-v1-2.svg.gz",
+      "sha256": "bd918141d850db3faba63fb851a6c8f82edf73f7258e65b7d1060021210911d8",
+      "bytes": 228469
+     }
+    ]
+   },
+   "unio-flyer-a5-v2": {
+    "label": "Flyer A5 · Bild zuerst",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Seite 1 · Objekt",
+      "datei": "unterlagen/svg/unio/unio-flyer-a5-v2-1.svg.gz",
+      "sha256": "70b82c573505f43511c48bca92b8ff758dc6b776265f661ed5f80cf61bda4322",
+      "bytes": 244929
+     },
+     {
+      "label": "Seite 2 · Persönlich",
+      "datei": "unterlagen/svg/unio/unio-flyer-a5-v2-2.svg.gz",
+      "sha256": "beb25ec74e872a6df0544bbefdd528f040e45018059d40fa596cb3135ec0c1fd",
+      "bytes": 236559
+     }
+    ]
+   },
+   "unio-zeitung-a4-v1": {
+    "label": "Zeitungsinserat A4 · Objekt zuerst",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Inserat",
+      "datei": "unterlagen/svg/unio/unio-zeitung-a4-v1.svg.gz",
+      "sha256": "b68e21f0452e351b3656a5afd83dcc845efb9f8d873ebb35c29a1f18bf6461b9",
+      "bytes": 367837
+     }
+    ]
+   },
+   "unio-zeitung-a4-v2": {
+    "label": "Zeitungsinserat A4 · Makler zuerst",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Inserat",
+      "datei": "unterlagen/svg/unio/unio-zeitung-a4-v2.svg.gz",
+      "sha256": "99b30512a4e5f069b6307bba15c022d086ff07eef0ad83972fb472d54918a687",
+      "bytes": 337744
+     }
+    ]
+   },
+   "unio-inserat-a4": {
+    "label": "Inserat A4 · Detailseite",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Inserat",
+      "datei": "unterlagen/svg/unio/unio-inserat-a4.svg.gz",
+      "sha256": "6ee61a1a6e87f765bc12b0658ce2fdc45fd5252e677474bbcd4c033cd7679a2b",
+      "bytes": 387670
+     }
+    ]
+   },
+   "unio-aushang-a4": {
+    "label": "Aushang A4 mit Abrisszetteln",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Aushang",
+      "datei": "unterlagen/svg/unio/unio-aushang-a4.svg.gz",
+      "sha256": "36fd893435f1b1569d368be05037eb32eb4bbe2eb5547e9ed5f09b604a4548ac",
+      "bytes": 571377
+     }
+    ]
+   },
+   "unio-plakat-a1": {
+    "label": "Plakat A1",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Plakat",
+      "datei": "unterlagen/svg/unio/unio-plakat-a1.svg.gz",
+      "sha256": "f9cd9a544ee553a5c8d21d7f03a72e3662897291dd8bc312726efa1246725ca8",
+      "bytes": 138715
+     }
+    ]
+   },
+   "unio-magazin-a4": {
+    "label": "Inserat A4 · Magazin",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Inserat",
+      "datei": "unterlagen/svg/unio/unio-magazin-a4.svg.gz",
+      "sha256": "23a5473cf588165cfd094ebb294e175b0e876b245416caf826df23d1c42f75d4",
+      "bytes": 404026
+     }
+    ]
+   },
+   "unio-gesicht-a4": {
+    "label": "Inserat A4 · Gesicht",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Inserat",
+      "datei": "unterlagen/svg/unio/unio-gesicht-a4.svg.gz",
+      "sha256": "bd7d864167e059b95f7aaefc10b5ea1eb832a7901690b2382febc567135c500d",
+      "bytes": 333639
+     }
+    ]
+   },
+   "unio-faltschild": {
+    "label": "Faltschild",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Teil 1",
+      "datei": "unterlagen/svg/unio/unio-faltschild-1.svg.gz",
+      "sha256": "7e04b250c65cddcd5fdfc36fc4b8a9c644244a466a1b8b6b845bf3b647b6ad55",
+      "bytes": 75924
+     },
+     {
+      "label": "Teil 2",
+      "datei": "unterlagen/svg/unio/unio-faltschild-2.svg.gz",
+      "sha256": "a67a8c2d2e190e75e00a19019c26f30fede0f147affb11bc68fcf1dbc20998b5",
+      "bytes": 75927
+     }
+    ]
+   },
+   "unio-banner": {
+    "label": "Banner 4 x 2 m",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Banner",
+      "datei": "unterlagen/svg/unio/unio-banner.svg.gz",
+      "sha256": "0d510a2761d25b0667cf9cc6c5139b22414c72a72d10e500056924b84ee7f8d7",
+      "bytes": 84687
+     }
+    ]
+   }
+  },
+  "eigen": {
+   "logo-color": {
+    "label": "Logo farbig",
+    "group": "logo",
+    "seiten": [
+     {
+      "label": "Hauptlogo",
+      "datei": "unterlagen/svg/eigen/logo-color-1.svg.gz",
+      "sha256": "15d14e1265415cc70c8a0a6b720554034d6e79f8cc8285a04ea5c01d02db60df",
+      "bytes": 11301
+     },
+     {
+      "label": "Liegend",
+      "datei": "unterlagen/svg/eigen/logo-color-2.svg.gz",
+      "sha256": "44c547540d0483172103b9d3b2b7473dd89b309853a9a08af6f4bd7ab8cc0c27",
+      "bytes": 11299
+     },
+     {
+      "label": "Gestapelt",
+      "datei": "unterlagen/svg/eigen/logo-color-3.svg.gz",
+      "sha256": "f6eedb960a2b60f748f6bc842aab69586ff2914c085cbbe35e493e959fd34f57",
+      "bytes": 11270
+     },
+     {
+      "label": "Monogramm",
+      "datei": "unterlagen/svg/eigen/logo-color-4.svg.gz",
+      "sha256": "d6effec22222906aeecd1cb8d3b910710ee288c2417603d617bb7ef0c84e7f07",
+      "bytes": 1536
+     }
+    ]
+   },
+   "logo-reverse": {
+    "label": "Logo auf dunkel",
+    "group": "logo",
+    "seiten": [
+     {
+      "label": "Hauptlogo",
+      "datei": "unterlagen/svg/eigen/logo-reverse-1.svg.gz",
+      "sha256": "da9ab65903baea0ae28d1a3d24c6511932abd6763da9c4eccc379ebcca1c9721",
+      "bytes": 11301
+     },
+     {
+      "label": "Liegend",
+      "datei": "unterlagen/svg/eigen/logo-reverse-2.svg.gz",
+      "sha256": "c2f6ab824cf2229df9093cb5a14f803bff25032d9a4039de016703dd8d284266",
+      "bytes": 11299
+     },
+     {
+      "label": "Gestapelt",
+      "datei": "unterlagen/svg/eigen/logo-reverse-3.svg.gz",
+      "sha256": "3ed884c22a6da07363087ad3ccac26f13ba751821e39af9f3a8682be7e4008ed",
+      "bytes": 11270
+     },
+     {
+      "label": "Monogramm",
+      "datei": "unterlagen/svg/eigen/logo-reverse-4.svg.gz",
+      "sha256": "69d798d9d21df44d9560426e9109631c14ccc347621a15a593f305f0c2d092d2",
+      "bytes": 1536
+     }
+    ]
+   },
+   "logo-mono-dark": {
+    "label": "Logo schwarz",
+    "group": "logo",
+    "seiten": [
+     {
+      "label": "Hauptlogo",
+      "datei": "unterlagen/svg/eigen/logo-mono-dark-1.svg.gz",
+      "sha256": "6351a04eca8ae9b843ba95facdae2013aab67b43ac7d5b5f6ad1d195345d6d02",
+      "bytes": 11301
+     },
+     {
+      "label": "Liegend",
+      "datei": "unterlagen/svg/eigen/logo-mono-dark-2.svg.gz",
+      "sha256": "2ea7d0dc45540602bec82d304f3b2455c1dc02b7d149ce4f08158f1e89cec74e",
+      "bytes": 11299
+     },
+     {
+      "label": "Gestapelt",
+      "datei": "unterlagen/svg/eigen/logo-mono-dark-3.svg.gz",
+      "sha256": "0263fb57e35b9b9bb372cd8c8d76021aec2f32ce28af53dfeab0c6e49d3c0d18",
+      "bytes": 11270
+     },
+     {
+      "label": "Monogramm",
+      "datei": "unterlagen/svg/eigen/logo-mono-dark-4.svg.gz",
+      "sha256": "45d474623cce9c0390349f94b37b27d712c8cb4a9dac65823e93045a85942782",
+      "bytes": 1536
+     }
+    ]
+   },
+   "logo-mono-light": {
+    "label": "Logo weiß",
+    "group": "logo",
+    "seiten": [
+     {
+      "label": "Hauptlogo",
+      "datei": "unterlagen/svg/eigen/logo-mono-light-1.svg.gz",
+      "sha256": "7ba10157a68a7bf81e39295562dade415eba10c122aa9c4eba2b1a4582c0ae79",
+      "bytes": 11301
+     },
+     {
+      "label": "Liegend",
+      "datei": "unterlagen/svg/eigen/logo-mono-light-2.svg.gz",
+      "sha256": "3ac45be6a25adef0df7002197b211dac41d33f113b127b7aa8bd71323e2eae87",
+      "bytes": 11299
+     },
+     {
+      "label": "Gestapelt",
+      "datei": "unterlagen/svg/eigen/logo-mono-light-3.svg.gz",
+      "sha256": "f033e237746c532b91cb907916bc34ee3230df8eabacb610af7bedbe2779fe2a",
+      "bytes": 11270
+     },
+     {
+      "label": "Monogramm",
+      "datei": "unterlagen/svg/eigen/logo-mono-light-4.svg.gz",
+      "sha256": "6bcdef6eab8adee8cf6f83a448a62970ebf78d87c330ece139a42fe4b8b9642d",
+      "bytes": 1536
+     }
+    ]
+   },
+   "logo-symbol": {
+    "verfuegbar": false
+   },
+   "favicon": {
+    "label": "Favicon und App-Icon",
+    "group": "digital",
+    "seiten": [
+     {
+      "label": "Favicon und App-Icon",
+      "datei": "unterlagen/svg/eigen/favicon.svg.gz",
+      "sha256": "e64e2be846be3ec1f8e5faa9e7975adcf96c829222d9e9ce8baa207eb56aedac",
+      "bytes": 29227
+     }
+    ]
+   },
+   "email-signature": {
+    "label": "E-Mail-Signatur",
+    "group": "digital",
+    "seiten": [
+     {
+      "label": "E-Mail-Signatur",
+      "datei": "unterlagen/svg/eigen/email-signature.svg.gz",
+      "sha256": "b7b9d37a53f6270cbbe7747c6e60c8f0ab5e22c4430df8a615ae45bf06cfae3f",
+      "bytes": 64737
+     }
+    ]
+   },
+   "social-profile": {
+    "label": "Profilbild",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Monogramm dunkel",
+      "datei": "unterlagen/svg/eigen/social-profile-1.svg.gz",
+      "sha256": "fdd39d1c89d6d3322a1fa32df2bde7283a0518ea9af7077ddf926ed362183f25",
+      "bytes": 1518
+     },
+     {
+      "label": "Monogramm hell",
+      "datei": "unterlagen/svg/eigen/social-profile-2.svg.gz",
+      "sha256": "de422506f2fb9075afe465b1cd0a1b687f311b717078b1f3e9153ab432118613",
+      "bytes": 1518
+     }
+    ]
+   },
+   "social-new": {
+    "label": "Instagram-Post „Neu im Angebot“",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Hell",
+      "datei": "unterlagen/svg/eigen/social-new-1.svg.gz",
+      "sha256": "fef00da6d174035125769885f5cc263b7aa518307f6623400a10c8bf46e82ce7",
+      "bytes": 77739
+     },
+     {
+      "label": "Dunkel",
+      "datei": "unterlagen/svg/eigen/social-new-2.svg.gz",
+      "sha256": "919257ea285f77a435c1d0fd3d26e23a921f74bea3650591719dcaf94013977a",
+      "bytes": 77739
+     }
+    ]
+   },
+   "social-sold": {
+    "label": "Instagram-Post „Verkauft“",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Hell",
+      "datei": "unterlagen/svg/eigen/social-sold-1.svg.gz",
+      "sha256": "0fe4e75d82e5de9dfff58d0a41cd40e40b71598d71616543d064ba97023bc349",
+      "bytes": 55251
+     },
+     {
+      "label": "Dunkel",
+      "datei": "unterlagen/svg/eigen/social-sold-2.svg.gz",
+      "sha256": "ac2d11653ec8be09d869ef7085c330e5c4d77928c3689f4f9401611a69c29712",
+      "bytes": 55251
+     }
+    ]
+   },
+   "social-viewing": {
+    "label": "Instagram-Post „Besichtigung“",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Hell",
+      "datei": "unterlagen/svg/eigen/social-viewing-1.svg.gz",
+      "sha256": "56b2963a982a8e2113e2680b4ca7a302ec24d4c77d46888cd1fa59fe57d5916e",
+      "bytes": 96196
+     },
+     {
+      "label": "Dunkel",
+      "datei": "unterlagen/svg/eigen/social-viewing-2.svg.gz",
+      "sha256": "095cfc24d460ead214a09dc7f1badf91613459b9e4808577e263a8a09cad383f",
+      "bytes": 96196
+     }
+    ]
+   },
+   "social-intro": {
+    "label": "Instagram-Post „Über mich“",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Hell",
+      "datei": "unterlagen/svg/eigen/social-intro-1.svg.gz",
+      "sha256": "7a38d5a85c2e23e6012c142a70dfaed9749e134b56bd376df79aef2ee6f5c18a",
+      "bytes": 59268
+     },
+     {
+      "label": "Dunkel",
+      "datei": "unterlagen/svg/eigen/social-intro-2.svg.gz",
+      "sha256": "b3c435434299162896e5a07bd0a2e916214c094dc2caa8cb62e88ab610ea4715",
+      "bytes": 59268
+     }
+    ]
+   },
+   "social-story": {
+    "label": "Instagram-Story",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Hell",
+      "datei": "unterlagen/svg/eigen/social-story-1.svg.gz",
+      "sha256": "44067574ef889f37f74bd482a465dc535ac0d53728fa01294cab2c4cbd5ccecf",
+      "bytes": 92650
+     },
+     {
+      "label": "Dunkel",
+      "datei": "unterlagen/svg/eigen/social-story-2.svg.gz",
+      "sha256": "7cda57bb24de6852cbc7c3c3be4a93d85a6a3c89cc6e6d14bfc7b3d6711a5912",
+      "bytes": 92650
+     }
+    ]
+   },
+   "social-linkedin": {
+    "label": "LinkedIn-Banner",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "LinkedIn-Banner",
+      "datei": "unterlagen/svg/eigen/social-linkedin.svg.gz",
+      "sha256": "4837e8cd3c95948c734fd60dd27e0a71bf1e41cc985e48621e84f75b75b4de47",
+      "bytes": 12211
+     }
+    ]
+   },
+   "social-facebook": {
+    "label": "Facebook-Titelbild",
+    "group": "social",
+    "seiten": [
+     {
+      "label": "Facebook-Titelbild",
+      "datei": "unterlagen/svg/eigen/social-facebook.svg.gz",
+      "sha256": "6f4e5a711cc52c05555e2f33de480ff1b57ad39bf393625c48b6525cd38b46ad",
+      "bytes": 12786
+     }
+    ]
+   },
+   "business-card": {
+    "label": "Visitenkarte",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Vorderseite",
+      "datei": "unterlagen/svg/eigen/business-card-1.svg.gz",
+      "sha256": "dca46ca5e8533774abaca7b974a1004c11f0d072efdc85dbdd3f0fdcf773806e",
+      "bytes": 11288
+     },
+     {
+      "label": "Rückseite",
+      "datei": "unterlagen/svg/eigen/business-card-2.svg.gz",
+      "sha256": "34b3e3cbba81d9bd0f6fee5fd0098a05480d9f6144150445d2bb1b90353ded6a",
+      "bytes": 80159
+     }
+    ]
+   },
+   "letterhead": {
+    "label": "Briefpapier A4",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Briefpapier A4",
+      "datei": "unterlagen/svg/eigen/letterhead.svg.gz",
+      "sha256": "9fab0e182bdd0ba2f62dba3013771dc3d2beaa945302a3dadd4eb394de8b25f3",
+      "bytes": 131438
+     }
+    ]
+   },
+   "expose": {
+    "label": "Exposé-Deckblatt A4",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Exposé-Deckblatt A4",
+      "datei": "unterlagen/svg/eigen/expose.svg.gz",
+      "sha256": "e1856e8d7728a8fcc3295300038858e2f9b8fa0426fde6e7854167a4c47a8a13",
+      "bytes": 161594
+     }
+    ]
+   },
+   "sign": {
+    "label": "Verkaufsschild",
+    "group": "print",
+    "seiten": [
+     {
+      "label": "Zu verkaufen",
+      "datei": "unterlagen/svg/eigen/sign-1.svg.gz",
+      "sha256": "9c58afa6e28ffe311d43dca834b7e44e317383a3a103c473b44890475db6e343",
+      "bytes": 86787
+     },
+     {
+      "label": "Zu vermieten",
+      "datei": "unterlagen/svg/eigen/sign-2.svg.gz",
+      "sha256": "b2bbb18d27bf746b6228762ac6b17ba0a5e395f4b19b002f268bd3728ead4372",
+      "bytes": 81872
+     }
+    ]
+   },
+   "brand-guide": {
+    "label": "Brand Guide",
+    "group": "guide",
+    "seiten": [
+     {
+      "label": "Titel",
+      "datei": "unterlagen/svg/eigen/brand-guide-1.svg.gz",
+      "sha256": "7efa2bfce45731e9bfce0e15db843a54457b5b94c73d6d79cc14997a82ba0d13",
+      "bytes": 94523
+     },
+     {
+      "label": "Schutzraum",
+      "datei": "unterlagen/svg/eigen/brand-guide-2.svg.gz",
+      "sha256": "1dbc851530cefbce24f9896a56859c9f0e70a7f731282698edd783a6ea68709b",
+      "bytes": 186981
+     },
+     {
+      "label": "Mindestgröße",
+      "datei": "unterlagen/svg/eigen/brand-guide-3.svg.gz",
+      "sha256": "0f3de436ad81e77791360c8b3ef164e62d929bcc22249ec63c2eabda448a32e2",
+      "bytes": 280447
+     },
+     {
+      "label": "Varianten",
+      "datei": "unterlagen/svg/eigen/brand-guide-4.svg.gz",
+      "sha256": "80f7d4f59a6d66263a5305fda59756d346810360175bbeda8dc111889f57d213",
+      "bytes": 219624
+     },
+     {
+      "label": "Fehlanwendungen",
+      "datei": "unterlagen/svg/eigen/brand-guide-5.svg.gz",
+      "sha256": "f074868e68fd350ac3405bf847c69d0e7539649635daf59252ef95fb6a2179e6",
+      "bytes": 155425
+     },
+     {
+      "label": "Farben",
+      "datei": "unterlagen/svg/eigen/brand-guide-6.svg.gz",
+      "sha256": "4349f1eefc99f3d8b138c80611430bebbd550924e38e9740b63359de7c65c437",
+      "bytes": 240898
+     },
+     {
+      "label": "Typografie",
+      "datei": "unterlagen/svg/eigen/brand-guide-7.svg.gz",
+      "sha256": "d48bd6b0b180b4cd4661368f3630334df208e2f0e0a4156fddb197f35a9bcca4",
+      "bytes": 381979
+     },
+     {
+      "label": "Anwendung",
+      "datei": "unterlagen/svg/eigen/brand-guide-8.svg.gz",
+      "sha256": "289c956e9d59fa6db49de2cdd1f7be7140989f18b97f07acc80abd09dd2be9f4",
+      "bytes": 317904
+     }
+    ]
+   }
+  }
+ }
+}

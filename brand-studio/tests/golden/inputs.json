@@ -1,0 +1,233 @@
+{
+  "hinweis": "Feste Eingaben fuer die Referenz-Ausgaben (W2). Alle Namen, Personen, Adressen und Kontakte sind erfunden. Aenderungen hier aendern alle Referenzdateien.",
+  "zeitpunkt": "2026-10-27T10:00:00+01:00",
+  "zeitzone": "Europe/Vienna",
+  "seeds": [1, 20261027, 987654321],
+  "einstellungen": { "kiFunktionen": false, "intern": true, "signatureEntwuerfe": true },
+  "galerie": { "seiten": 3, "seitengroesse": 6, "svgJeLauf": 6 },
+  "generateConcepts": { "count": 12, "pages": [0, 1] },
+  "marken": [
+    {
+      "slug": "anna-berger",
+      "rawName": "Anna Berger",
+      "suffix": "Immobilien",
+      "nameKind": "person",
+      "place": "Wien",
+      "styles": ["elegant"],
+      "brief": {
+        "architecture": "person",
+        "person": "Anna Berger",
+        "place": "Wien",
+        "focus": ["wohnen", "luxus"],
+        "segment": "premium",
+        "side": -1,
+        "alternative": "franchise",
+        "onlyness": ["graetzl", "bewertung"],
+        "voice": { "formell": 1, "ernst": 0, "sachlich": 1, "leise": 1 },
+        "reference": "verlag"
+      },
+      "namensfinder": { "focus": ["wohnen", "luxus"], "style": "elegant", "keywords": "Altbau, Innenhof" }
+    },
+    {
+      "slug": "philipp-trattner",
+      "rawName": "Philipp Trattner",
+      "suffix": "Immobilien",
+      "nameKind": "person",
+      "place": "Graz",
+      "styles": ["modern"],
+      "brief": {
+        "architecture": "person-dann-buero",
+        "person": "Philipp Trattner",
+        "place": "Graz",
+        "focus": ["wohnen", "neubau"],
+        "segment": "mitte",
+        "side": 0,
+        "alternative": "online",
+        "onlyness": ["verhandlung"],
+        "voice": { "formell": -1, "ernst": 0, "sachlich": 1, "leise": -1 },
+        "logoPairs": { "serif": "a", "symbol": "a" },
+        "reference": "architektur"
+      },
+      "namensfinder": { "focus": ["wohnen", "neubau"], "style": "modern", "keywords": "Neubau, Effizienz" }
+    },
+    {
+      "slug": "wiener-wohnwerk",
+      "rawName": "Wiener Wohnwerk",
+      "suffix": "",
+      "nameKind": "company",
+      "place": "Wien",
+      "styles": ["mutig"],
+      "brief": {
+        "architecture": "buero",
+        "place": "Wien",
+        "focus": ["wohnen", "anleger"],
+        "segment": "mitte",
+        "side": 1,
+        "alternative": "platzhirsch",
+        "onlyness": ["substanz"],
+        "voice": { "formell": -1, "ernst": -1, "sachlich": 0, "leise": -1 },
+        "avoidCliches": ["haus-icon", "skyline"],
+        "reference": "tech"
+      },
+      "namensfinder": { "focus": ["wohnen", "anleger"], "style": "mutig", "keywords": "Zinshaus, Sanierung" }
+    },
+    {
+      "slug": "seeblick-realitaeten",
+      "rawName": "Seeblick Realitäten",
+      "suffix": "",
+      "nameKind": "company",
+      "place": "Gmunden",
+      "styles": ["natur"],
+      "brief": {
+        "architecture": "buero",
+        "place": "Gmunden",
+        "focus": ["haeuser", "land"],
+        "segment": "premium",
+        "side": -2,
+        "alternative": "privat",
+        "onlyness": ["graetzl"],
+        "voice": { "formell": 0, "ernst": 1, "sachlich": -1, "leise": 1 },
+        "colorPairs": { "warmth": "a" },
+        "reference": "weingut"
+      },
+      "namensfinder": { "focus": ["haeuser", "land"], "style": "natur", "keywords": "See, Seegrund, Salzkammergut" }
+    },
+    {
+      "slug": "kalmar",
+      "rawName": "Kalmar",
+      "suffix": "Immobilien",
+      "nameKind": "company",
+      "place": "Salzburg",
+      "styles": ["luxus"],
+      "brief": {
+        "architecture": "buero",
+        "place": "Salzburg",
+        "focus": ["luxus"],
+        "segment": "luxus",
+        "side": -1,
+        "alternative": "bank",
+        "onlyness": ["diskret"],
+        "voice": { "formell": 1, "ernst": 1, "sachlich": 0, "leise": 1 },
+        "avoidColors": ["gold"],
+        "avoidCliches": ["gold-schwarz"],
+        "reference": "uhrmacher"
+      },
+      "namensfinder": { "focus": ["luxus"], "style": "luxus", "keywords": "Villa, Diskretion" }
+    },
+    {
+      "slug": "lena-hofer-partner",
+      "rawName": "Lena Hofer & Partner",
+      "suffix": "Immobilien",
+      "nameKind": "company",
+      "place": "Linz",
+      "styles": ["warm"],
+      "brief": {
+        "architecture": "person-dann-buero",
+        "person": "Lena Hofer",
+        "place": "Linz",
+        "focus": ["wohnen", "haeuser"],
+        "segment": "mitte",
+        "side": 0,
+        "alternative": "franchise",
+        "onlyness": ["verhandlung", "graetzl"],
+        "voice": { "formell": -1, "ernst": 0, "sachlich": 0, "leise": 0 },
+        "reference": "cafe"
+      },
+      "namensfinder": { "focus": ["wohnen", "haeuser"], "style": "warm", "keywords": "Familie, Garten" }
+    },
+    {
+      "slug": "brandl-soehne",
+      "rawName": "Brandl & Söhne",
+      "suffix": "Immobilien",
+      "nameKind": "company",
+      "place": "Innsbruck",
+      "styles": ["elegant", "luxus"],
+      "brief": {
+        "architecture": "buero",
+        "place": "Innsbruck",
+        "focus": ["haeuser", "luxus"],
+        "segment": "premium",
+        "side": -1,
+        "alternative": "platzhirsch",
+        "onlyness": ["substanz", "diskret"],
+        "voice": { "formell": 1, "ernst": 1, "sachlich": 1, "leise": 1 },
+        "reference": "manufaktur"
+      },
+      "namensfinder": { "focus": ["haeuser", "luxus"], "style": "elegant", "keywords": "Tradition, Familie, Berge" }
+    },
+    {
+      "slug": "gebrueder-kogler",
+      "rawName": "Gebrüder Kogler",
+      "suffix": "Immobilien",
+      "nameKind": "company",
+      "place": "Klagenfurt",
+      "styles": ["warm", "modern"],
+      "brief": {
+        "architecture": "buero",
+        "place": "Klagenfurt",
+        "focus": ["gewerbe", "anleger"],
+        "segment": "mitte",
+        "side": 1,
+        "alternative": "bank",
+        "onlyness": ["bewertung"],
+        "voice": { "formell": 0, "ernst": 1, "sachlich": 1, "leise": -1 },
+        "reference": "sport"
+      },
+      "namensfinder": { "focus": ["gewerbe", "anleger"], "style": "egal", "keywords": "Gewerbe, Rendite, Wörthersee" }
+    }
+  ],
+  "zusatzBriefe": [
+    {
+      "slug": "ohne-name-wien",
+      "brief": {
+        "architecture": "person",
+        "person": "Clara Wimmer",
+        "place": "Wien",
+        "focus": ["wohnen"],
+        "segment": "einstieg",
+        "side": 1,
+        "alternative": "online",
+        "onlyness": ["bewertung"],
+        "voice": { "formell": -1, "ernst": -1, "sachlich": 0, "leise": 0 },
+        "reference": "cafe"
+      }
+    },
+    {
+      "slug": "nur-schnellstart",
+      "brief": { "architecture": "buero", "place": "Weinviertel" }
+    }
+  ],
+  "routenSeeds": [null, 7],
+  "postings": {
+    "marke": "anna-berger",
+    "kontakt": {
+      "person": "Anna Berger",
+      "role": "Immobilienmaklerin",
+      "phone": "+43 660 000 00 00",
+      "email": "anna@beispiel.at",
+      "web": "beispiel.at",
+      "street": "Musterstraße 1",
+      "city": "1010 Wien",
+      "unioPartner": true,
+      "legal": ""
+    },
+    "objekt": {
+      "id": "obj4711golden",
+      "title": "Dachgeschoss mit Weitblick",
+      "address": "Musterstraße 1, 1070 Wien",
+      "lage": "Wien-Neubau",
+      "kind": "kauf",
+      "status": "neu",
+      "price": "690.000",
+      "commission": "3 % zzgl. USt.",
+      "description": "Helle Dachgeschosswohnung mit Terrasse und Blick über die Dächer. Ruhige Lage im Innenhof, zwei Gehminuten zur U-Bahn.",
+      "facts": [
+        { "label": "Wohnfläche", "value": "84 m²" },
+        { "label": "Zimmer", "value": "3" },
+        { "label": "Freifläche", "value": "18 m² Terrasse" }
+      ],
+      "energy": { "hwb": "32", "fgee": "0,78", "klasse": "B", "eeb": "", "eebKlasse": "", "ausweisDatum": "2025-03-14" }
+    },
+    "looks": ["unio", "eigen"]
+  }
+}

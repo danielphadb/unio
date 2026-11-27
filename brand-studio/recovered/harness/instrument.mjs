@@ -17,6 +17,19 @@ rmSync(out, { recursive: true, force: true });
 mkdirSync(out, { recursive: true });
 cpSync(build, out, { recursive: true });
 
+// Markenschriften (W1 Schritt 4) mitliefern, damit Logos mit echten Schriften rendern.
+const brandFonts = join(here, "..", "..", "public", "fonts", "brand");
+try {
+  cpSync(brandFonts, join(out, "fonts", "brand"), { recursive: true });
+} catch {
+  console.warn("Hinweis: public/fonts/brand fehlt, erst `npm run recovered:fonts` ausfuehren.");
+}
+
+// Das Haupt-Stylesheet ist in index.html eingebettet; Vite verweist beim Nachladen
+// (jsPDF, svg2pdf) trotzdem auf assets/index-C94v3gle.css. Ohne Datei bricht das
+// Vorladen ab. Leere Datei anlegen (die Stile stehen schon im Dokument).
+writeFileSync(join(out, "assets", "index-C94v3gle.css"), "/* eingebettet in index.html */\n");
+
 const report = {};
 for (const f of readdirSync(join(build, "assets"))) {
   if (!f.endsWith(".js")) continue;

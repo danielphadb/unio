@@ -44,7 +44,11 @@ export function startServer(root) {
   });
 }
 
-export async function openStudio({ root = join(here, "instrumented"), timezone = "Europe/Vienna" } = {}) {
+export async function openStudio({
+  root = join(here, "instrumented"),
+  timezone = "Europe/Vienna",
+  fixedTime = null,
+} = {}) {
   const { server, url } = await startServer(root);
   const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });
   const context = await browser.newContext({ locale: "de-AT", timezoneId: timezone, viewport: { width: 1280, height: 900 } });
@@ -54,6 +58,7 @@ export async function openStudio({ root = join(here, "instrumented"), timezone =
   page.on("console", (m) => {
     if (m.type() === "error") errors.push(m.text());
   });
+  if (fixedTime) await page.clock.setFixedTime(new Date(fixedTime));
   await page.goto(url, { waitUntil: "load" });
   await page.waitForTimeout(300);
   return {
