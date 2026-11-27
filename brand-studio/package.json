@@ -21,7 +21,8 @@
     "recovered:extract": "node recovered/harness/extract-data.mjs",
     "recovered:fonts": "node recovered/harness/copy-fonts.mjs",
     "golden": "node recovered/harness/golden.mjs",
-    "golden:check": "node recovered/harness/golden.mjs --check"
+    "golden:check": "node recovered/harness/golden.mjs --check",
+    "recovered:modulkarte": "node recovered/harness/survey.mjs && node recovered/harness/modulkarte-roh.mjs && node recovered/harness/modulkarte.mjs"
   },
   "dependencies": {
     "jspdf": "4.2.1",
