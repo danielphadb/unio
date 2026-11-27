@@ -223,24 +223,33 @@ Bei der Oberfläche: Projekt-Typ und Prüfungen (`Ik`, `PL`, `DL`, migrate `C`),
 
 ### Signature-Vorlagen (src/signature, Entwickler "Signature")
 
-Stand: in Arbeit. Die Logo-Engine importiert nur aus `src/signature` (index.ts bündelt alles).
-Geplante Exporte (alter Name im engine-Chunk, Export-Buchstabe):
+Stand: fertig, bitgenau. Zuständig für engine-Chunk Zeilen 236 bis 2274 und 3495 bis 11069
+(Abstimmung mit der Logo-Engine über den Koordinator). Die Logo-Engine importiert aus
+`src/signature` (index.ts bündelt alle Module). Die Vorlagen bleiben Daten in
+`src/signature/templates/<gruppe>.json` (elegant, luxus, modern, mutig, natur, warm, kurz,
+mischung, kit, partner; `verworfen.json` = zurückgezogen).
 
-| Modul | Stand | Exporte (alter Name im Bundle) | Tests |
+| Modul | Stand | Exporte (alter Name im Bundle, Export-Buchstabe) | Tests |
 |---|---|---|---|
-| src/signature/types.ts | in Arbeit | `SignatureTemplate`, `Element` (`TextElement`, `LinieElement`, `ZugElement`, `RechteckElement`, `KreisElement`, `BogenElement`, `PfadElement`, `ReiheElement`), `Passt` (inkl. `partnerArten`, `nameZuInitial`), `Freigabe`, `Merkmale`, `SignatureFields`, `SignatureLayout`, `SignatureOp`, `SignatureBox`, `SignatureColors`, `FitResult`, `Variante`; `SignatureParams` aus src/types.ts | |
-| src/signature/orte.ts | in Arbeit | `ORTE` (`ns`), `findOrt` (`xi`), `koordinaten` (`Bo`), `postleitzahl` (`Vo`), `bezirksnummer` (`Fo`), `bezirkAusText` (`Hu`, für die Hochzahl der Logo-Engine) | |
-| src/signature/partner.ts | in Arbeit | `partnerName` (`vi`), `PARTNER_LABEL` (`$o`) | |
-| src/signature/render.ts | in Arbeit | `fieldTexts` (`Mn`, Export `ae`), `splitSyllable` (`ts`), `signatureFonts` (`sr`, `H`), `signatureFontRefs` (`rs`), `ZUSATZ_FELDER` (`ur`, `Z`), `zusatzSchreibungen` (`qo`, `I`), `layoutSignature` (`ft`), `signatureColors` (`tl`), `renderSignature` (`il`), `checkFit` (`hl`) | |
-| src/signature/similarity.ts | in Arbeit | `aehnlichkeitsSperre` (`Al`), `markenNaehe` (`bs`), `namensZwilling` (`Ei`), `naheMarken` (`Ml`), `normMarke` (`hn`) | |
-| src/signature/varianten.ts | in Arbeit | `FEINHEIT` (`ls`), `STRUKTUR` (`ms`), `STRUKTUR_FREIGEGEBEN` (`gl`), `splitVariantId` (`hs`, `Y`), `buildVariant` (`fs`), `variantsOf` (`bl`), `varianteUeberlappt` (`Yl`) | |
-| src/signature/index.ts | in Arbeit | `SIGNATURE_TEMPLATES` (`cr`, `V`), `ZURUECKGEZOGEN` (`jl`), `KURZNAMEN` (`ws`, `ad`), `getSignatureTemplate` (`Ae`, `G`), `fits` (`qt`, `W`), `signatureConcept` (`ba`, `J`), `renderConceptSignature` (`Ql`), `conceptSignatureFonts` (`Ni`) | |
+| src/signature/types.ts | fertig | `SignatureTemplate`, `Element` = `TextElement` oder `FormElement` (`LinieElement`, `ZugElement`, `RechteckElement`, `KreisElement`, `BogenElement`, `PfadElement`, `ReiheElement`), `Passt` (inkl. `partnerArten`, `nameZuInitial`), `Freigabe`, `Merkmale`, `Schriften`, `Farben`, `Variante`, `Ausdruck`, `Kante`, `Kanten`, `Rolle`, `SignatureOp`, `SignatureLayout`, `SignatureFontSet`, `SignatureColors`, `FitResult`, `FitOptions`, `RenderOptions`, `Rect`; `SignatureParams` (mit `zusatzMassstab`, `zusatzSchreibung`) aus src/types.ts | tests/signature/signature.test.ts (Daten mit `toStrictEqual` gegen `Il` ... `Wl`) |
+| src/signature/partner.ts | fertig, bitgenau | `partnerName` (`vi`), `PARTNER_LABEL` (`$o`), Typen `PartnerArt`, `PartnerName` | dto. |
+| src/signature/orte.ts | fertig, bitgenau | `ORTE` (`ns`), `BEZIRKE`, `STAEDTE`, `ORTE_LAND` (`To`, `Io`, `Oo`), `BEZIRKSNUMMERN` (`Du`), `normOrt` (`Dt`), `findOrt` (`xi`), `koordinaten` (`Bo`), `postleitzahl` (`Vo`), `bezirksnummer` (`Fo`), `bezirkAusText` (`Hu`, Angebot an die Logo-Engine für die Hochzahl) | dto. |
+| src/signature/nameParts.ts | fertig, bitgenau | `nameParts` (`Mn`, `ae`), `splitSyllables` (`ts`, Silbentrennung nach deutschen Regeln), `splitTitles` (`st`), `initialOf` (`We`), `partnerPair` (`Do`), Typen `NameParts`, `FieldName` | dto. |
+| src/signature/render.ts | fertig, bitgenau | `layoutSignature` (`ft`), `renderTemplate` (`il`, mit Zwischenspeicher je Schriftspeicher), `templateFonts` (`sr`, `H`), `templateFontRefs` (`rs`), `signatureColors` (`tl`), `signatureInitials` (`os`), `hasYellowAndRed` (`ss`), `ZUSATZ_FELDER` (`ur`, `Z`), `zusatzSchreibungen` (`qo`, `I`), `checkFit` (`hl`), Typen `FontSource`, `SignatureInput` | dto.: Layout und SVG aller 86 Vorlagen und ihrer Varianten mit 25 Testmarken (auch Partner-Namen), mehrere Varianten und Ausschnitte |
+| src/signature/varianten.ts | fertig, bitgenau | `FEINHEIT` (`ls`, f1 bis f4 live), `STRUKTUR` (`ms`, s1 bis s4 als Entwurf), `STRUKTUR_FREIGEGEBEN` (`gl`), `VARIANT_SEP`, `splitVariantId` (`hs`, `Y`), `buildVariant` (`fs`), `templateVariants` (`bl`), `varianteBleibtFrei` (`Yl`); IDs `<vorlage>--<code>` | dto. |
+| src/signature/index.ts | fertig, bitgenau | `ALL_TEMPLATES` (`cr`, `V`), `TEMPLATE_GROUPS` (`Il` ... `Wl`), `KIT_TEMPLATES` = `KURZNAMEN` (`ws`, `ad`), `ZURUECKGEZOGEN` (`jl`), `withZusatzSchriften` (`Ul`), `getSignatureTemplate` (`Ae`, `G`), `fits` (`qt`, `W`), `signatureConcept` (`ba`, `J`), `renderSignature` (`Ql`), `signatureFonts` (`Ni`) | dto. und tests/signature/golden.test.ts (alle Signature-Logos in tests/golden/logo und tests/golden/names byte-gleich) |
+| src/signature/uebergang.ts | Übergang | Kopien von `cleanText` (`$`), `resolveColors` (`Nn`), `corpusTwinName` (`Al`), `fontMonogramSvg` (index `p4`), bis die Logo-Engine sie liefert (src/engine/cleanText.ts, renderLogo.ts, highend.ts, src/symbols/monogram.ts); danach wird die Datei entfernt | bitgenau geprüft in signature.test.ts |
 
-Für die Signature nötig und deshalb von "Signature" mitgeschrieben (die Logo-Engine nutzt sie bitte
-mit, statt sie doppelt zu bauen): `src/engine/resolveColors.ts` mit `resolveColors` (engine `Nn`,
-Export `al`) und `src/symbols/fontMonogram.ts` mit `fontMonogramSvg` (index `p4`, Export `b0`).
+Designer-Regeln als Tests (tests/signature/regeln.test.ts): Laufweiten (gemischt und klein höchstens
+0,06 em, alles zwischen -0,05 und 0,5 em), Paletten vorhanden, Ausdrücke beziehen sich nur auf
+Elemente der Vorlage, bei passenden Marken keine Probleme und endliche Lage, der Zusatz überlappt
+weder Namen noch gefüllte Zeichen, Linien von `name.l` bis `name.r` genau in Namensbreite, kleiner
+Zusatz mit Abstand zur Unterlänge, feine Varianten mit Mindest-Linienstärke 2,4 und Zusatz-Laufweite
+0,16 bis 0,28 em, Varianten-IDs und Freigabe.
+
 Bleiben bei der Logo-Engine (hängen an Route und Galerie): `am`, `om`, `sm`, `lm`, `Js`, `um`,
-`Qs`, `Hr` (Auswahl und Gewichtung der Vorlagen je Seite).
+`Qs`, `Hr` (Auswahl und Gewichtung der Vorlagen je Seite), Konzept-Ähnlichkeit `bs`, `Ei`, `Ml`
+und die Ähnlichkeitssperre `Al` (highend.ts). `similarity.ts` entfällt deshalb in src/signature.
 
 ### Strategie (src/strategy, server, Entwickler "Strategie")
 
