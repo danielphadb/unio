@@ -192,6 +192,17 @@ for (const [area, rows] of Object.entries(CORE)) {
   for (const r of rows) md += `| ${r.map(esc).join(" | ")} |\n`;
 }
 
+// Der Abschnitt "Status W3" wird von Hand gepflegt (Entwickler tragen ihre Module ein)
+// und beim Neuerzeugen aus der vorhandenen Datei uebernommen.
+function statusW3() {
+  let alt = "";
+  try {
+    alt = readFileSync(join(studioRoot, "docs/23-modulkarte.md"), "utf8");
+  } catch {}
+  const m = alt.match(/<!-- status-w3:start -->[\s\S]*?<!-- status-w3:end -->\n\n/);
+  return m ? m[0] : "";
+}
+
 md += `
 ## 4. Daten (W1, verlustfrei gezogen)
 
@@ -211,7 +222,7 @@ md += `
 | src/strategy/territories.json, axes.json, catalog.json | kompass \`mn\` u. a., texts | 12 Territorien |
 | recovered/data-snapshot/*.json | jede Daten-Bindung jedes App-Moduls | Funktionen als \`{"$fn": Quelltext}\` |
 
-## 5. Anhang: alle Exporte und größte Funktionen je Chunk
+${statusW3()}## 5. Anhang: alle Exporte und größte Funktionen je Chunk
 
 Spalten: Name im Bundle, Export, Art, Größe in Zeichen, Hinweis (erste deutsche Zeichenkette).
 `;

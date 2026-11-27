@@ -189,6 +189,40 @@ als Referenz in `tests/golden/`.
 | src/strategy/territories.json, axes.json, catalog.json | kompass `mn` u. a., texts | 12 Territorien |
 | recovered/data-snapshot/*.json | jede Daten-Bindung jedes App-Moduls | Funktionen als `{"$fn": Quelltext}` |
 
+<!-- status-w3:start -->
+## Status W3 (neuer Quellcode)
+
+Von Hand gepflegt; `modulkarte.mjs` übernimmt diesen Abschnitt beim Neuerzeugen. Jede Entwicklerin
+und jeder Entwickler trägt fertige Module hier ein. "bitgenau" = Tests vergleichen mit den
+Funktionen der gesicherten Fassung (Test-Lader `tests/helpers/recovered.ts`:
+`const old = await recovered("svg")` liefert alle Bindungen eines Chunks; für `index` und alles,
+was index lädt, die Testdatei mit `// @vitest-environment jsdom` beginnen).
+
+### Fundament (Teil 1)
+
+| Modul | Stand | Exporte (alter Name im Bundle) | Tests |
+|---|---|---|---|
+| src/types.ts | fertig | Grundbegriffe `StyleKey`, `ColorMoodKey`, `SymbolTheme`, `ContainerKey`, `LayoutKey`, `BadgeKey`, `CaseKey`, `Divider`, `CardBackground`, `NameFormat`, `InputNameKind`, `NameKind`, `NameFocus`; Schriften `FontCat`, `FontForm`, `FontTag`, `FontRef`, `FontMeta`, `FontCoverage`; Farbe `Palette`, `PaletteRole`, `ConceptColors`, `SymbolColors`; Konzept `MonogramKonstruktion`, `IconSymbol`, `MonogramSymbol`, `SymbolSpec`, `TextStyle`, `TypoSup`, `TypoSplit`, `Eingriff`, `TypoDetails`, `SignatureRef`, `SignatureParams`, `LegalNaehe`, `LogoConcept`; `BrandInput`; `Contact`, `EnergyData`, `EnergyClass`, `Fact`, `ObjectData`, `KitObject`, `BrandAssets`, `NameCandidate`, `NameContext`; Wertelisten `STYLE_KEYS`, `COLOR_MOOD_KEYS`, `SYMBOL_THEMES`, `FONT_FORMS`, `NAME_FORMATS`, `NAME_FOCUS` (aus den Prüfungen `PL`, `IT`, `NT`, `OT`, `DL`, `UL`, objectData `L`) | tests/types.test.ts: Wertelisten wie alt, alle Referenz-Konzepte, Eingaben und Routen laufen unverändert durch die alten Prüfungen |
+| src/strategy/types.ts | fertig | `AxisKey`, `AXIS_KEYS`, `AxisValue`, `AxisVector`, `Architecture`, `Erfahrung`, `Segment`, `Alternative`, `ReferenceWorld`, `Cliche`, `Wunschkunde`, `Wert`, `Wirkung`, `LogoPair`, `ColorPair`, `PairChoice`, `VoicePole`, `SocialBrief`, `BrandBrief`, `KompassState`, `KindMix`, `RouteParams`, `SocialKit`, `PersoenlichkeitsZug`, `FormatEmpfehlung`, `RouteTexts`, `RouteArt`, `RouteId`, `BrandRoute`, `Betonung`, `RouteRolle`, `Hauptachse`, `PostFormat`, `Territory` (aus `Lg`, `Fg`, `YT`, `JT`, `pC`, kompass `K`, texts `xe`) | wie oben |
+| src/engine/rng.ts | fertig, bitgenau | `rng(seed): Rng` (`et`), `hash(text)` (`nt`) | tests/engine/rng-color-palettes.test.ts |
+| src/engine/color.ts | fertig, bitgenau | `clamp01` (`H`), `normalizeHex` (`I`), `safeHex` (`P`), `sanitizePalette` (`yt`), `hexToRgb` (`q`), `rgbToHex` (`K`), `hexToHsl` (`T`), `hslToHex` (`W`), `mix` (`Q`), `luminance` (`G`), `contrast` (`Z`), `isDark` (`st`), `readableAccent` (`gt`), `ensureContrast` (`L`), `capSaturation` (`Y`) | dto. |
+| src/engine/palettes.ts | fertig, bitgenau | `COLOR_MOODS` (`rt`), `COLOR_MOOD_KEYS` (`ot`), `STYLE_MOODS` (`ct`), `PALETTES` (`z`), `paletteBaseId` (`J`), `paletteMood` (`it`), `moodOfPaletteId` (`bt`), `finalizePalette` (`tt`), `jitterColor` (`j`), `varyPalette` (`U`), `pickPaletteForStyle` (`dt`), `paletteForMood` (`kt`), `moodsFor` (`ht`), `alternativePalettes` (`At`), `basePalettes` (`Et`); Typen `ColorMood`, `PaletteDef` | dto. |
+| src/engine/svg.ts | fertig, bitgenau | `fmt` (`D`), `svgDocument` (`wt`), `placePart` (`Mt`), `parseTransform` (`mt`), `parseAttributes` (`pt`), `pathPoints` (`ft`), `arcPoints` (`Ft`), `svgBounds` (`xt`), `countShapes` (`Ct`); Typen `SvgPart`, `Box`, `Matrix`, `SvgDocumentOptions` | tests/engine/svg.test.ts (600 Referenz-SVGs, 400 Zufallspfade) |
+| src/engine/fonts.ts | fertig, bitgenau | `ALL_FONTS` (`Mn`), `COVERAGE` (`hk`), `FONTS` (`pk`, wählbar), `getFont` (`Yn`), `getSelectableFont` (`QC`), `isSelectableVariant` (`JC`), `COMMON_FONTS` (`eL`), `CLICHE_THEMES` (`tL`), `fontFileName` (`gk`), `fontExtFileName` (`yk`), `fontKey` (`vk`), `hasSerifItalic` (`nL`), `italicVariant` (`rL`), `supportsCapSharpS` (`sL`), `FONT_GROUPS` (`iL`), `fontGroupOf` (`aL`) | tests/engine/fonts.test.ts |
+| src/engine/charset.ts | fertig, bitgenau | `SUPPORTED_CHARS` (`kk`), `missingChars` (`pi`), `fontCovers` (`oL`), `needsExtendedCharset` (`Sk`) | dto. |
+| src/engine/fontStore.ts | fertig, bitgenau | `class FontStore` (`r4`: `has`, `get`, `ensure`, `load`, `loadExt`, `setTexts`, `wantExt`, `subscribe`, `needsExt`, `version`), `mergeGlyphs` (`s4`), `createFontStore(base)` (`CL`), Typ `FontLoader`. Die Engine legt ihre Instanz selbst an (`pn = createFontStore()`) | dto. (Pfade mit und ohne latin-ext) |
+| src/engine/text.ts | fertig, bitgenau | `applyCase` (`LL`), `normalizeText` (`pg`), `textPath` (`FL`), `textAdvance` (`o4`), `capHeight` (`ai`), `forgetTextPaths` (leert `Su`), Typ `TextPath` | dto. |
+| src/engine/personName.ts | fertig, bitgenau | `TITLE_RE` (`bS`), `GENERIC_WORDS` (`ES`), `cleanName` (`g0`), `nameTokens` (`Ic`), `looksLikeCompany` (`v0`), `looksLikePerson` (`y0`), `isPersonName` (`TL`) | tests/engine/personName.test.ts |
+
+Abweichungen zur Modulkarte oben: FontStore und Text-Pfade liegen in eigenen Dateien
+(`fontStore.ts`, `text.ts`), damit es keinen Kreis zwischen Katalog und Zwischenspeicher gibt; der
+Zufall heißt `rng.ts` (nicht `random.ts`), Farbe `color.ts` getrennt von `palettes.ts`.
+Nicht im Fundament (bleiben bei der Logo-Engine): Symbole, Icons und Rahmen (`iT` ... `kT`, `fu`,
+`ST`, `wT`, `OL`, `IL`), Monogramm aus Schrift (`p4`, `ML`), Polygon-Operationen (`xs`, `br`, ...).
+Bei der Oberfläche: Projekt-Typ und Prüfungen (`Ik`, `PL`, `DL`, migrate `C`), Namens-Prüfung (`Tk`, `ou`).
+
+<!-- status-w3:end -->
+
 ## 5. Anhang: alle Exporte und größte Funktionen je Chunk
 
 Spalten: Name im Bundle, Export, Art, Größe in Zeichen, Hinweis (erste deutsche Zeichenkette).

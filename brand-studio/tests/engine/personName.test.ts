@@ -33,7 +33,7 @@ const NAMES = [
   "Gebrüder Kogler",
   "Anna O'Brien",
   "Anna O’Brien",
-  "Anna – Berger",
+  "Anna \u2013 Berger",
   "Berger Immobilien",
   "Palais Coburg",
   "Max Mustermann 2",

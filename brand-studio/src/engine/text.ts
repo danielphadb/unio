@@ -41,7 +41,7 @@ export function applyCase(
 
 /** NFC und lange Striche als Bindestrich (die Logo-Schriften setzen sie einheitlich) (`pg`, Export `be`). */
 export function normalizeText(text: string): string {
-  return text.normalize("NFC").replace(/[–—]/g, "-");
+  return text.normalize("NFC").replace(/[\u2013\u2014]/g, "-");
 }
 
 const hasGlyph = (font: Font, ch: string): boolean =>

@@ -34,7 +34,7 @@ const TEXTS = [
   "Łódź Ševčík Đorđe",
   "Ştefan Țară",
   "Ĳssel ŉ ſ",
-  "„Zitat“ – Strich — Ende…",
+  "„Zitat“ \u2013 Strich \u2014 Ende…",
   "Café 1180 Wien",
   "日本 😀 ́e",
   "Mag. Dr. Anna-Lena von Berg",
