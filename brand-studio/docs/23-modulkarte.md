@@ -378,6 +378,29 @@ braucht; die Oberfläche nutzt ihn mit. Offen: `reference/names.json` hat nur di
 verdichteten Datenbank (id, typ, position, stichwort_felder des Originals fehlen, Spalte 6 wird
 nicht gelesen).
 
+### Oberfläche (src/ui, src/artdirector, server/brand-art-director.js, Entwicklerin "Oberfläche")
+
+Vorgehen: Die Bindungen der UI-Chunks wurden mit einem Konverter (Babel) in lesbare TSX-Module
+überführt: Importe auf die neuen Module der anderen Bereiche aufgelöst, sprechende Namen für alle
+Bindungen der obersten Ebene, JSX statt `jsx()`-Aufrufen, optionale Verkettung (`?.`) statt der
+ausgeschriebenen Null-Prüfungen, Namen aus Destrukturierungen, strict-TypeScript. Danach
+Handkorrekturen. Abgleich im Browser (Playwright, Desktop 1280 und Handy 390, gleiche
+localStorage-Voreinstellung, fester Zufall und feste Uhr) gegen recovered/build.
+
+| Modul | Stand | Inhalt (alter Name im Bundle) | Tests |
+|---|---|---|---|
+| src/main.tsx, src/ui/App.tsx, store.tsx, bridge.ts, uiFonts.ts, styles.css | fertig | App-Rahmen (`BC`, `_C`, `jC`), Store (`Qk`, `Zt`, `Xk`), Brücke zur Plattform (`FC`, `LC`, `qL`), UI-Schriften (`HC`, `VC`), CSS aus recovered/build/index.html | Bildvergleich |
+| src/ui/logic/route, project, persist, contact, glyphs, text, validate, nameDraft, kompassDraft, settings, describe, nameFinder, artDirector, history | fertig, bitgenau | Router (`wn`, `za`, `Zk`), Projekt (`Ik`, `l0`, `pL`, `mL`, `gL`, `vL`, `yL`, `xL`, `Uk`, Typ `Project`), Speicher (`zk`, `jk`, `Mc`, `Hk`), Kontakt (`u1`, `p1`, `qC`), Prüfungen (`PL`, `DL`, `UL`, `AL`, `BL`, `Lg`, `JT`; Grund-Helfer aus validators.ts weitergereicht), Namensfinder-Zustand (`Mg`, `rC`), Kompass-Zustand (`Rg`, `pC`), Einstellungen (NameCard `_`, `Y`), Beschreibungen (describe) | tests/ui/logic.test.ts, tests/ui/validate.test.ts (Annahme und Ablehnung mit über 1000 Abwandlungen gleich) |
+| src/ui/logic/kompass.ts | fertig, bitgenau | `previewInput` (`Zn`), `previewInputFor` (`Xn`), `routesForState` (`Yn`), `shiftMutiger` (`er`), `projectFromRoute` (`nr`), `nameFinderFromRoute` (`rr`); `routeLogos` und `applyRouteToInput` kommen aus src/engine/kompassProbe.ts, `briefPreviewParams` (`Qn`) aus src/strategy/axes.ts | tests/ui/logic.test.ts |
+| src/ui/screens/NameFinder, NameScreen, StyleScreen, Gallery, Kompass, Home; components/* | fertig | Namensfinder (`ds`), eigener Name (`Ah`), Stilwahl, Galerie (`kt`), Kompass (`Ye`), Deine Marken (`dS`), Namenskarte, Namensdetail, Namen auf die Probe stellen, KI-Einwilligung, Kopfzeile, Hilfe, Dialoge, Bedienelemente | Bildvergleich pixelgleich |
+| src/artdirector/client.ts, thumbnails.ts; server/brand-art-director.js (+ .d.ts) | fertig, Server neu | Client (`An`, `Ie`, `$n`), Vorschaubilder (`Pn`, `Vn`); Server nach dem Client-Schema neu (Prüfung, Testmodus, Bremsen, ein Modellaufruf mit allen Bildern, strukturierte Ausgabe) | tests/artdirector/artdirector.test.ts |
+| vite.config.ts | fertig | Dev- und Preview-Endpunkte /api/brand-art-director, /api/brand-namen, /api/brand-strategie im Testmodus | |
+| src/ui/screens/Routes, Editor, Kit, src/ui/editor/*, src/ui/kit/*, src/ui/postings/*, logic/migrate.ts | in Arbeit | warten auf src/deliverables (kitAssets) und src/postings; bis dahin Platzhalter | |
+
+Abgleich mit der gesicherten Fassung (Bildschirmfotos, DOM-Text): Start, Namen vorschlagen, Detail,
+Logos für diesen Namen, eigener Name, Stilwahl, Galerie, Namen auf die Probe stellen, Kompass alle
+6 Schritte, Richtungen; Desktop und Handy pixelgleich bis auf Kantenglättung in zwei Aufnahmen.
+
 <!-- status-w3:end -->
 
 ## 5. Anhang: alle Exporte und größte Funktionen je Chunk
