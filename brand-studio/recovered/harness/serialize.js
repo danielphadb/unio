@@ -26,6 +26,7 @@ function __serialize(value, opts = {}) {
     if (typeof v === "function") return mark({ $fn: Function.prototype.toString.call(v) });
     if (depth > maxDepth) return mark({ $depth: true });
     if (--budget < 0) throw new Error("__budget__");
+    if (typeof window !== "undefined" && v === window) return mark({ $global: "window" });
     if (stack.has(v)) return mark({ $cycle: true });
     stack.add(v);
     try {

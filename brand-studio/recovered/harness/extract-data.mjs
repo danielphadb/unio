@@ -160,6 +160,13 @@ for (const [k, f] of Object.entries(MODULES)) {
     return out;
   }, f);
 }
+// Laufzeit-Zustand, der sich bei jedem Laden aendert (React-Schluessel, Zeitmessung,
+// Server-Adresse): als fluechtig markieren, damit der Snapshot reproduzierbar ist.
+const VOLATILE = {
+  "index-BER2gtDe.js": ["Mi", "ss", "Wt", "Vs", "un", "_l", "Ty", "Cy", "xc", "Jr", "ud"],
+};
+for (const [f, names] of Object.entries(VOLATILE))
+  for (const n of names) if (n in snapshot[f]) snapshot[f][n] = { $volatile: true };
 res.snapshot = snapshot;
 await s.close();
 
