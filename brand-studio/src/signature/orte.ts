@@ -6,7 +6,7 @@
  * Felder `koordinaten`, `plz` und `nummer` in nameParts.ts kommen von hier.
  */
 import orteData from "./orte.json";
-import { cleanText } from "./uebergang";
+import { cleanText } from "../engine/cleanText";
 
 export interface Ort {
   name: string;

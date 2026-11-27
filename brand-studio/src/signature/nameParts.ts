@@ -5,7 +5,7 @@
  */
 import type { BrandInput } from "../types";
 import { TITLE_RE, isPersonName } from "../engine/personName";
-import { cleanText } from "./uebergang";
+import { cleanText } from "../engine/cleanText";
 import { bezirksnummer, koordinaten, postleitzahl } from "./orte";
 import { partnerName } from "./partner";
 

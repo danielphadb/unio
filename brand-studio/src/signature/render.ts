@@ -6,7 +6,13 @@
  * Bitgenau wie die gesicherte Fassung: Rechenreihenfolge und Rundung bleiben gleich.
  */
 import type { Font } from "opentype.js";
-import type { BrandInput, CaseKey, FontRef, Palette } from "../types";
+import type {
+  BrandInput,
+  CaseKey,
+  FontRef,
+  LogoConcept,
+  Palette,
+} from "../types";
 import type { SvgPart } from "../engine/svg";
 import { fmt, svgBounds } from "../engine/svg";
 import { fontKey, getFont } from "../engine/fonts";
@@ -14,12 +20,11 @@ import { fontCovers } from "../engine/charset";
 import { applyCase, capHeight, textPath, type TextPath } from "../engine/text";
 import { isPersonName } from "../engine/personName";
 import { basePalettes } from "../engine/palettes";
-import {
-  cleanText,
-  corpusTwinName,
-  fontMonogramSvg,
-  resolveColors,
-} from "./uebergang";
+import { cleanText } from "../engine/cleanText";
+import { resolveColors } from "../engine/renderLogo";
+import { corpusTwinName } from "../engine/highend";
+import { fontMonogramSvg } from "../symbols/monogram";
+import { ZUSATZ_FELDER } from "./felder";
 import { nameParts, splitTitles, type NameParts } from "./nameParts";
 import { partnerName, PARTNER_LABEL } from "./partner";
 import type {
@@ -454,17 +459,7 @@ const circlePath = (cx: number, cy: number, r: number): string =>
 // ---------------------------------------------------------------------------
 // Zusatz
 
-/** Felder des Zusatzes (Nebenschrift); hier wirken Zusatz-Größe und -Schreibung (`ur`, Export `Z`). */
-export const ZUSATZ_FELDER: readonly string[] = [
-  "zusatz",
-  "ort",
-  "zusatzOrt",
-  "zusatzOderOrt",
-  "ortOderZusatz",
-  "ort2",
-  "jahr",
-  "partnerZeile",
-];
+export { ZUSATZ_FELDER };
 
 /**
  * Schreibungen, die der Editor für den Zusatz anbietet (`qo`, Export `I`): aus der
@@ -1497,19 +1492,17 @@ export function signatureColors(
   variant = "color",
   ground?: string,
 ): SignatureColors {
-  const c = resolveColors(
-    {
-      palette,
-      colors: {
-        name: t.farben.name,
-        suffix: t.farben.neben,
-        symbol: t.farben.zeichen,
-      },
-      typo: { markColor: t.farben.akzent },
+  // resolveColors liest vom Konzept nur Palette, Farbrollen und Typo-Farben
+  const colorSource = {
+    palette,
+    colors: {
+      name: t.farben.name,
+      suffix: t.farben.neben,
+      symbol: t.farben.zeichen,
     },
-    variant,
-    ground,
-  );
+    typo: { markColor: t.farben.akzent },
+  } as Pick<LogoConcept, "palette" | "colors" | "typo"> as LogoConcept;
+  const c = resolveColors(colorSource, variant, ground);
   return {
     name: c.name,
     neben: c.suffix,
@@ -1930,6 +1923,3 @@ export function checkFit(
   }
   return { passt: true, grund: "Passt nach Regeln (Einpassung ungeprüft)." };
 }
-
-/** Ähnlichkeitssperre: gleicher Name und gleiche Merkmale wie eine Korpusmarke (`Al`, aus der Logo-Engine). */
-export { corpusTwinName };

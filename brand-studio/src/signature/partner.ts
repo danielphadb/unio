@@ -6,7 +6,7 @@
  * Felder `partnerName`, `partnerEndung`, `partnerVerbinder`, `partnerZweit`,
  * `partnerZeile`, `partnerInitial1`, `partnerInitial2` (siehe nameParts.ts).
  */
-import { cleanText } from "./uebergang";
+import { cleanText } from "../engine/cleanText";
 
 /** Art der Partner-Endung (`passt.partnerArten` einer Vorlage). */
 export type PartnerArt =

@@ -6,7 +6,10 @@ import { beforeAll, describe, expect, it } from "vitest";
 import { recovered } from "../helpers/recovered";
 import { BRANDS, WORDS, loadFont, newStore } from "./helpers";
 import * as sig from "../../src/signature";
-import * as ueb from "../../src/signature/uebergang";
+import { cleanText } from "../../src/engine/cleanText";
+import { resolveColors } from "../../src/engine/renderLogo";
+import { corpusTwinName } from "../../src/engine/highend";
+import { fontMonogramSvg } from "../../src/symbols/monogram";
 import { basePalettes } from "../../src/engine/palettes";
 import type { FontRef } from "../../src/types";
 import type { SignatureTemplate } from "../../src/signature/types";
@@ -174,9 +177,9 @@ describe("Bausteine", () => {
         old.Mn({ name: w, suffix: "" }),
       );
   });
-  it("Übergang: cleanText, corpusTwinName", () => {
+  it("Logo-Engine: cleanText, corpusTwinName", () => {
     for (const t of ["", "  a  b ", "Ä\u2013B", undefined])
-      expect(ueb.cleanText(t)).toBe(old.$(t));
+      expect(cleanText(t)).toBe(old.$(t));
     const extra = [
       { name: "Savills", suffix: "" },
       { name: "savills", suffix: "" },
@@ -185,9 +188,9 @@ describe("Bausteine", () => {
     ];
     for (const t of sig.ALL_TEMPLATES)
       for (const inp of [...BRANDS, ...extra])
-        expect(ueb.corpusTwinName(t, inp)).toBe(old.Al(t, inp));
+        expect(corpusTwinName(t, inp)).toBe(old.Al(t, inp));
   });
-  it("Übergang: resolveColors und Farben der Vorlagen", () => {
+  it("Logo-Engine: resolveColors und Farben der Vorlagen", () => {
     const pals = basePalettes();
     for (const p of pals) {
       expect(sig.hasYellowAndRed(p)).toBe(old.ss(p));
@@ -208,9 +211,7 @@ describe("Bausteine", () => {
               suffixScale: 0.75,
             },
           };
-          expect(ueb.resolveColors(c as any, v, g)).toStrictEqual(
-            old.Nn(c, v, g),
-          );
+          expect(resolveColors(c as any, v, g)).toStrictEqual(old.Nn(c, v, g));
         }
     }
   });
@@ -349,7 +350,7 @@ describe("Layout und SVG", () => {
     for (const inp of BRANDS)
       expect(sig.signatureInitials(inp)).toBe(old.os(inp));
   });
-  it("Übergang: Monogramm aus Schrift", () => {
+  it("Logo-Engine: Monogramm aus Schrift", () => {
     const refs: FontRef[] = [
       { key: "cormorant", weight: 500 },
       { key: "jost", weight: 500 },
@@ -360,7 +361,7 @@ describe("Layout und SVG", () => {
       for (const txt of ["AB", "Q", "äö", "W M", ""])
         for (const kind of ["sans", "serif", "script", "display"])
           expect(
-            ueb.fontMonogramSvg(
+            fontMonogramSvg(
               mine.get(r),
               txt,
               { x: 0, y: 0, w: 100, h: 100 },

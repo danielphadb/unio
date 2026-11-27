@@ -34,20 +34,45 @@ import type {
 } from "./types";
 import {
   checkFit,
-  corpusTwinName,
   renderTemplate,
   templateFontRefs,
   templateFonts,
-  ZUSATZ_FELDER,
   type FontSource,
   type SignatureInput,
   type FitInput,
 } from "./render";
+import { ZUSATZ_FELDER } from "./felder";
+import { corpusTwinName } from "../engine/highend";
 import { buildVariant, splitVariantId, varianteBleibtFrei } from "./varianten";
 
 export * from "./types";
-export * from "./render";
-export * from "./varianten";
+export * from "./felder";
+// render.ts und varianten.ts liegen im Importkreis mit der Logo-Engine
+// (render.ts, engine/renderLogo.ts, index.ts): benannt weiterreichen, damit die
+// Bindungen auch dann stimmen, wenn render.ts zuerst geladen wird.
+export {
+  templateFonts,
+  templateFontRefs,
+  zusatzSchreibungen,
+  layoutSignature,
+  signatureColors,
+  hasYellowAndRed,
+  renderTemplate,
+  signatureInitials,
+  checkFit,
+} from "./render";
+export type { FontSource, SignatureInput, FitInput } from "./render";
+export {
+  FEINHEIT,
+  STRUKTUR,
+  STRUKTUR_FREIGEGEBEN,
+  VARIANT_SEP,
+  splitVariantId,
+  buildVariant,
+  templateVariants,
+  varianteBleibtFrei,
+} from "./varianten";
+export type { Feinheit, Struktur } from "./varianten";
 export * from "./nameParts";
 export * from "./partner";
 export * from "./orte";
