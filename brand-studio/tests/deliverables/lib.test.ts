@@ -39,7 +39,7 @@ describe("lib: Farben", () => {
         expect(C.contrastRatio(a, b)).toBe(old.X(a, b));
         expect(C.isDarkHex(a)).toBe(old._(a));
         expect(C.hexToCmyk(a)).toEqual(old.N(a));
-        expect(C.luminance(a)).toBe(old.M(a));
+        expect(C.luminanceOf(a)).toBe(old.M(a));
       }
     for (const a of FARBEN) if (typeof a === "string") expect(C.safeFill(a)).toBe(old.f(a));
   });

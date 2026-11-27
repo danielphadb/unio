@@ -1,7 +1,9 @@
-/** Bildgroesse aus einer data-URL lesen (PNG, JPEG, WebP), ohne das Bild zu dekodieren. */
+/** Bildgroesse aus einer data-URL lesen (PNG, JPEG, WebP), ohne das Bild zu dekodieren (imagesize-Chunk der gesicherten Fassung). */
 import type { ImageSize } from "./drawTypes";
 
+/** Bildgroessen je data-URL (`y`). */
 export const sizeCache = new Map<string, ImageSize | null>();
+/** Die ersten Bytes einer Base64-Zeichenkette (`k`). */
 export function base64Bytes(b64: string, bytes: number) {
   const head = b64.slice(0, Math.ceil(bytes / 3) * 4);
   const bin =
@@ -10,6 +12,7 @@ export function base64Bytes(b64: string, bytes: number) {
   for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
   return out;
 }
+/** Groesse aus dem JPEG-Kopf ("more": mehr Bytes noetig) (`Z`). */
 export function jpegSize(bytes: Uint8Array): ImageSize | null | "more" {
   if (bytes[0] !== 255 || bytes[1] !== 216) return null;
   let pos = 2;
@@ -26,6 +29,7 @@ export function jpegSize(bytes: Uint8Array): ImageSize | null | "more" {
   }
   return "more";
 }
+/** Bildgroesse einer data-URL (PNG, JPEG, WebP) (`gt`, Export `q`). */
 export function imageSize(dataUrl: string): ImageSize | null {
   const key = `${dataUrl.length}|${dataUrl.slice(0, 80)}|${dataUrl.slice(-40)}`;
   if (sizeCache.has(key)) return sizeCache.get(key) ?? null;

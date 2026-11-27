@@ -8,19 +8,28 @@ import { capHeight, textAdvance, textPath, type TextPath } from "../../engine/te
 import { fmt } from "../../engine/svg";
 import { safeFill } from "./colors";
 
+/** 6 pt in mm (`Y`, Export `C`). */
 export const PT6 = 6 * 0.3528;
+/** 7 pt in mm (`J`, Export `B`). */
 export const PT7 = 7 * 0.3528;
+/** 8 pt in mm (`K`, Export `P`). */
 export const PT8 = 8 * 0.3528;
+/** Groesse, in der Textpfade zwischengespeichert werden (`b`). */
 export const UNITS = 200;
+/** Textpfade je Schrift (`A`). */
 export const pathCache = new WeakMap<Font, Map<string, TextPath>>();
+/** Ersatzschrift je Schrift (latin-ext) (`j`). */
 export const fallbackFonts = new WeakMap<Font, Font>();
+/** Ersatzschrift fuer fehlende Zeichen setzen (`Q`, Export `r`). */
 export function setFallbackFont(font: Font, fallback: Font) {
   if (font !== fallback) {
     fallbackFonts.set(font, fallback);
   }
 }
+/** Schrift hat ein Zeichen fuer ch (`x`). */
 export const hasGlyph = (font: Font, ch: string) =>
   ch.trim() === "" || font.charToGlyphIndex(ch) > 0;
+/** Text in Abschnitte je Schrift zerlegen (`B`). */
 export function fontRuns(font: Font, text: string): FontRun[] {
   const fallback = fallbackFonts.get(font);
   if (!fallback || [...text].every((ch) => hasGlyph(font, ch))) return [{ font, text }];
@@ -36,6 +45,7 @@ export function fontRuns(font: Font, text: string): FontRun[] {
   }
   return runs;
 }
+/** Textpfad aus dem Zwischenspeicher (`z`). */
 export function cachedPath(font: Font, text: string, tracking: number) {
   let cache = pathCache.get(font);
   if (!cache) {
@@ -50,11 +60,13 @@ export function cachedPath(font: Font, text: string, tracking: number) {
   }
   return path;
 }
+/** Breite eines Textes (`F`, Export `i`). */
 export function measureText(font: Font, text: string, size: number, tracking: number = 0) {
   return fontRuns(font, text).length === 1
     ? (cachedPath(font, text, tracking).width * size) / UNITS
     : drawText(font, text, { x: 0, y: 0, size, fill: "#000", tracking }).width;
 }
+/** Text als SVG-Pfad (`d`, Export `m`). */
 export function drawText(font: Font, text: string, opts: TextOptions): DrawnText {
   const runs = fontRuns(font, text);
   if (runs.length > 1) return drawRuns(runs, opts);
@@ -74,6 +86,7 @@ export function drawText(font: Font, text: string, opts: TextOptions): DrawnText
     descent: (path.height - path.ascent) * scale,
   };
 }
+/** Text mit mehreren Schriften als SVG (`V`). */
 export function drawRuns(runs: FontRun[], opts: TextOptions): DrawnText {
   const tracking = opts.tracking ?? 0;
   const parts: Array<{ svg: string; asc: number; desc: number }> = [];
@@ -114,6 +127,7 @@ export function drawRuns(runs: FontRun[], opts: TextOptions): DrawnText {
     descent: Math.max(0, ...parts.map((run) => run.desc)),
   };
 }
+/** Schriftgroesse, damit der Text in maxWidth passt (nicht unter minSize) (`tt`, Export `p`). */
 export function fitFontSize(
   font: Font,
   text: string,
@@ -125,6 +139,7 @@ export function fitFontSize(
   const width = measureText(font, text, size, tracking);
   return width <= maxWidth || width === 0 ? size : Math.max(minSize, (size * maxWidth) / width);
 }
+/** Text in Zeilen umbrechen (`W`, Export `w`). */
 export function wrapLines(
   font: Font,
   text: string,
@@ -149,7 +164,9 @@ export function wrapLines(
   }
   return lines;
 }
+/** Versalhoehe bei der Groesse (`nt`, Export `c`). */
 export const capHeightOf = (font: Font, size: number) => capHeight(font, size);
+/** Text in Versalien mit Laufweite 0,14 (`et`, Export `k`). */
 export function capsLabel(
   font: Font,
   text: string,
@@ -157,6 +174,7 @@ export function capsLabel(
 ) {
   return drawText(font, text.toLocaleUpperCase("de-AT"), { tracking: 0.14, ...opts });
 }
+/** Absatz mit Umbruch (`st`, Export `x`). */
 export function paragraph(font: Font, text: string, opts: ParagraphOptions) {
   const leading = opts.leading ?? opts.size * 1.45;
   const lines = text
@@ -175,9 +193,12 @@ export function paragraph(font: Font, text: string, opts: ParagraphOptions) {
   });
   return { svg, h: (lines.length - 1) * leading, lines: lines.length };
 }
+/** XML maskieren (`m`). */
 export const escapeXml = (text: string) =>
   text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+/** wie escapeXml (`it`, Export `t`). */
 export const esc = escapeXml;
+/** SVG-Dokument (px oder mm) (`H`, Export `n`). */
 export function svgDoc(w: number, h: number, body: string, opts: SvgDocOptions = {}) {
   const size =
     (opts.unit ?? "px") === "mm"
@@ -190,12 +211,14 @@ export function svgDoc(w: number, h: number, body: string, opts: SvgDocOptions =
     : "";
   return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${fmt(w)} ${fmt(h)}"${size}>${title}${defs}${background}${body}</svg>`;
 }
+/** viewBox eines SVG (`I`). */
 export function viewBoxOf(svg: string): { x: number; y: number; w: number; h: number } | null {
   const m = svg.match(/<svg\b[^>]*\bviewBox="([^"]+)"/);
   if (!m) return null;
   const [x, y, w, h] = m[1]!.split(/[\s,]+/).map(Number) as [number, number, number, number];
   return { x, y, w, h };
 }
+/** Breite und Hoehe eines SVG setzen (`rt`, Export `s`). */
 export function resizeSvg(svg: string, w: number, h: number) {
   return svg.replace(
     /<svg\b([^>]*)>/,
@@ -203,11 +226,14 @@ export function resizeSvg(svg: string, w: number, h: number) {
       `<svg${attrs.replace(/\s(width|height)="[^"]*"/g, "")} width="${fmt(w)}" height="${fmt(h)}">`,
   );
 }
+/** Zaehler der laufenden IDs (`v`). */
 export let idCounter = 0;
+/** Laufende ID mit Praefix (Basis 36) (`T`, Export `u`). */
 export function uid(prefix: string) {
   idCounter = (idCounter + 1) % 1000000000;
   return `${prefix}${idCounter.toString(36)}`;
 }
+/** Rechteck (`ct`, Export `f`). */
 export const rect = (
   x: number,
   y: number,
@@ -217,6 +243,7 @@ export const rect = (
   attrs: string = "",
 ) =>
   `<rect x="${fmt(x, 3)}" y="${fmt(y, 3)}" width="${fmt(w, 3)}" height="${fmt(h, 3)}" fill="${safeFill(fill)}"${attrs ? " " + attrs : ""}/>`;
+/** Waagrechte Linie (`P`, Export `o`). */
 export const hLine = (
   x1: number,
   x2: number,
@@ -226,6 +253,7 @@ export const hLine = (
   attrs: string = "",
 ) =>
   `<line x1="${fmt(x1, 3)}" y1="${fmt(y, 3)}" x2="${fmt(x2, 3)}" y2="${fmt(y, 3)}" stroke="${safeFill(stroke)}" stroke-width="${fmt(width, 3)}"${attrs ? " " + attrs : ""}/>`;
+/** Senkrechte Linie (`C`, Export `v`). */
 export const vLine = (
   x: number,
   y1: number,
@@ -235,13 +263,17 @@ export const vLine = (
   attrs: string = "",
 ) =>
   `<line x1="${fmt(x, 3)}" y1="${fmt(y1, 3)}" x2="${fmt(x, 3)}" y2="${fmt(y2, 3)}" stroke="${safeFill(stroke)}" stroke-width="${fmt(width, 3)}"${attrs ? " " + attrs : ""}/>`;
+/** Kreis (`at`, Export `j`). */
 export const circle = (cx: number, cy: number, r: number, fill: string, attrs: string = "") =>
   `<circle cx="${fmt(cx, 3)}" cy="${fmt(cy, 3)}" r="${fmt(r, 3)}" fill="${safeFill(fill)}"${attrs ? " " + attrs : ""}/>`;
+/** Gruppe mit Transformation (`ot`, Export `D`). */
 export const group = (transform: string, body: string) => `<g transform="${transform}">${body}</g>`;
+/** Pfad eines abgerundeten Rechtecks (`lt`, Export `h`). */
 export function roundedRectPath(x: number, y: number, w: number, h: number, radius: number) {
   const r = Math.min(radius, w / 2, h / 2);
   return `M${fmt(x + r, 3)} ${fmt(y, 3)}H${fmt(x + w - r, 3)}A${fmt(r, 3)} ${fmt(r, 3)} 0 0 1 ${fmt(x + w, 3)} ${fmt(y + r, 3)}V${fmt(y + h - r, 3)}A${fmt(r, 3)} ${fmt(r, 3)} 0 0 1 ${fmt(x + w - r, 3)} ${fmt(y + h, 3)}H${fmt(x + r, 3)}A${fmt(r, 3)} ${fmt(r, 3)} 0 0 1 ${fmt(x, 3)} ${fmt(y + h - r, 3)}V${fmt(y + r, 3)}A${fmt(r, 3)} ${fmt(r, 3)} 0 0 1 ${fmt(x + r, 3)} ${fmt(y, 3)}Z`;
 }
+/** Schnittmarken (`$t`, Export `E`). */
 export function cropMarks(
   x: number,
   y: number,
@@ -267,11 +299,13 @@ export function cropMarks(
     );
   return out.join("");
 }
+/** Bild (nur PNG, JPEG, WebP als data-URL) (`ut`, Export `g`). */
 export function imageTag(href: string, x: number, y: number, w: number, h: number, attrs = "") {
   return /^data:image\/(png|jpe?g|webp);base64,[A-Za-z0-9+/=\s]+$/.test(href)
     ? `<image x="${fmt(x, 3)}" y="${fmt(y, 3)}" width="${fmt(w, 3)}" height="${fmt(h, 3)}" preserveAspectRatio="xMidYMid slice" href="${escapeXml(href)}" xlink:href="${escapeXml(href)}"${attrs ? " " + attrs : ""}/>`
     : "";
 }
+/** SVG in Breite einbetten (mit Ausschnitt) (`ft`, Export `A`). */
 export function embedSvg(svg: string, x: number, y: number, width: number) {
   const box = viewBoxOf(svg) ?? { x: 0, y: 0, w: 100, h: 100 };
   const inner = svg
@@ -285,6 +319,7 @@ export function embedSvg(svg: string, x: number, y: number, width: number) {
     h: box.h * scale,
   };
 }
+/** SVG in mm mit Beschnitt (`ht`, Export `F`). */
 export function bleedDocument(w: number, h: number, bleed: number, body: string) {
   const clipId = uid("bd");
   const outerW = w + 2 * bleed;
