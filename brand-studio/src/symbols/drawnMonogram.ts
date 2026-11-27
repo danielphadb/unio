@@ -106,90 +106,98 @@ export function drawnMonogram(
   letters: string,
   konstruktion: string,
 ) {
-  const r = Array.from(letters.replace(/\s+/g, "").toLocaleUpperCase("de-AT"));
-  if (r.length !== 2 || !r.every((p) => /^[A-Z]$/.test(p))) return null;
-  const s = CAP / capRatio(font);
-  const i = letterGeom(font, r[0]!, s);
-  const a = letterGeom(font, r[1]!, s);
-  if (!i || !a) return null;
-  const o = Math.min(i.w, a.w);
-  const l = Math.min(i.a, a.a);
-  let u = null;
+  const chars = Array.from(
+    letters.replace(/\s+/g, "").toLocaleUpperCase("de-AT"),
+  );
+  if (chars.length !== 2 || !chars.every((p) => /^[A-Z]$/.test(p))) return null;
+  const scale = CAP / capRatio(font);
+  const first = letterGeom(font, chars[0]!, scale);
+  const second = letterGeom(font, chars[1]!, scale);
+  if (!first || !second) return null;
+  const minWidth = Math.min(first.w, second.w);
+  const minArea = Math.min(first.a, second.a);
+  let geom = null;
   if (konstruktion === "stamm") {
-    const p = stemOf(i, "rechts");
-    const g = stemOf(a, "links");
+    const p = stemOf(first, "rechts");
+    const g = stemOf(second, "links");
     if (!p || !g || Math.abs(p.x1 - p.x0 - (g.x1 - g.x0)) > CAP * 0.05)
       return null;
     const v = p.x0 - g.x0;
-    const S = translateGeom(a.g, v, 0);
+    const S = translateGeom(second.g, v, 0);
     if (
-      geomArea(difference(i.g, S)) < i.a * 0.4 ||
-      geomArea(difference(S, i.g)) < a.a * 0.4
+      geomArea(difference(first.g, S)) < first.a * 0.4 ||
+      geomArea(difference(S, first.g)) < second.a * 0.4
     )
       return null;
-    u = union(i.g, S);
+    geom = union(first.g, S);
   } else if (konstruktion === "ligatur") {
-    const p = i.r - a.l;
-    const g = pairContact(i, a, p);
+    const p = first.r - second.l;
+    const g = pairContact(first, second, p);
     const v = p - g.min - CAP * 0.03;
-    const S = pairContact(i, a, v);
+    const S = pairContact(first, second, v);
     if (!(S.contact > 0.03 && S.contact <= 0.34)) return null;
-    const b = translateGeom(a.g, v, 0);
+    const b = translateGeom(second.g, v, 0);
     if (
-      geomArea(difference(i.g, b)) < i.a * 0.8 ||
-      geomArea(difference(b, i.g)) < a.a * 0.8 ||
-      ((u = union(i.g, b)), partCount(u) > partCount(i.g) + partCount(a.g) - 1)
+      geomArea(difference(first.g, b)) < first.a * 0.8 ||
+      geomArea(difference(b, first.g)) < second.a * 0.8 ||
+      ((geom = union(first.g, b)),
+      partCount(geom) > partCount(first.g) + partCount(second.g) - 1)
     )
       return null;
   } else if (konstruktion === "verschraenkt" || konstruktion === "negativ") {
     const p = konstruktion === "verschraenkt" ? 0.34 : 0.45;
-    const g = i.r - p * o - a.l;
-    const v = translateGeom(a.g, g, 0);
-    const S = geomArea(intersection(i.g, v));
+    const g = first.r - p * minWidth - second.l;
+    const v = translateGeom(second.g, g, 0);
+    const S = geomArea(intersection(first.g, v));
     if (konstruktion === "verschraenkt") {
       if (
-        !r.some((q) => ROUND_LETTERS.includes(q)) ||
-        S < l * 0.03 ||
-        o < CAP * 0.45
+        !chars.some((q) => ROUND_LETTERS.includes(q)) ||
+        S < minArea * 0.03 ||
+        minWidth < CAP * 0.45
       )
         return null;
       const b = CAP * 0.05;
       const L = -CAP / 2;
       const T = rectGeom(-1e4, -1e4, 2e4, 1e4 + L);
       const E = rectGeom(-1e4, L, 2e4, 2e4);
-      const I = union(i.g, difference(v, dilateGeom(i.g, b)));
-      const P = union(v, difference(i.g, dilateGeom(v, b)));
-      u = union(intersection(I, T), intersection(P, E));
+      const I = union(first.g, difference(v, dilateGeom(first.g, b)));
+      const P = union(v, difference(first.g, dilateGeom(v, b)));
+      geom = union(intersection(I, T), intersection(P, E));
     } else {
-      if (S < l * 0.06 || S > l * 0.35 || partCount(intersection(i.g, v)) > 2)
+      if (
+        S < minArea * 0.06 ||
+        S > minArea * 0.35 ||
+        partCount(intersection(first.g, v)) > 2
+      )
         return null;
-      u = xor(i.g, v);
+      geom = xor(first.g, v);
     }
   }
-  if (!u || !u.length) return null;
-  const c = geomBounds(u);
-  if (!c) return null;
-  const [f] = geomCentroid(u);
-  const d = (c.x + c.w / 2 + f!) / 2;
-  const h = translateGeom(u, -(d - c.w / 2), -c.y);
-  const m = minStroke(h);
-  const x =
+  if (!geom || !geom.length) return null;
+  const bounds = geomBounds(geom);
+  if (!bounds) return null;
+  const [centroidX] = geomCentroid(geom);
+  const centerX = (bounds.x + bounds.w / 2 + centroidX!) / 2;
+  const placed = translateGeom(geom, -(centerX - bounds.w / 2), -bounds.y);
+  const stroke = minStroke(placed);
+  const gap =
     konstruktion === "verschraenkt" || konstruktion === "negativ"
-      ? minStroke(h, true)
+      ? minStroke(placed, true)
       : Infinity;
-  const k =
-    (Math.max(1 / m!, x === Infinity ? 0 : 0.8 / x!) * Math.max(c.w, c.h)) /
+  const minPx =
+    (Math.max(1 / stroke!, gap === Infinity ? 0 : 0.8 / gap!) *
+      Math.max(bounds.w, bounds.h)) /
     0.8;
   return {
-    minPx: Math.round(k * 10) / 10,
+    minPx: Math.round(minPx * 10) / 10,
     konstruktion,
-    geom: h,
-    d: geomToPath(h),
-    w: c.w,
-    h: c.h,
-    strich: m,
-    luecke: x,
-    favicon: k <= FAVICON_PX / 0.8,
+    geom: placed,
+    d: geomToPath(placed),
+    w: bounds.w,
+    h: bounds.h,
+    strich: stroke,
+    luecke: gap,
+    favicon: minPx <= FAVICON_PX / 0.8,
   };
 }
 

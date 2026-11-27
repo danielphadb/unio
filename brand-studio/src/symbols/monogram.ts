@@ -182,54 +182,54 @@ export function fontMonogramSvg(
   fill: string,
   cat: string = "sans",
 ) {
-  const i = Array.from(firstTwoLetters(letters));
-  if (!i.length) return "";
-  const a = capHeight(font, GLYPH_SIZE);
-  const o = i.map((I) => glyphOutline(font, I));
-  const l = [0];
-  if (o.length === 2) {
-    l.push(pairOffset(o[0], o[1], a, cat));
+  const chars = Array.from(firstTwoLetters(letters));
+  if (!chars.length) return "";
+  const cap = capHeight(font, GLYPH_SIZE);
+  const glyphs = chars.map((I) => glyphOutline(font, I));
+  const offsets = [0];
+  if (glyphs.length === 2) {
+    offsets.push(pairOffset(glyphs[0], glyphs[1], cap, cat));
   }
-  let u = Infinity;
-  let c = -Infinity;
-  let f = Infinity;
-  let d = -Infinity;
-  o.forEach((I, P) => {
+  let minX = Infinity;
+  let maxX = -Infinity;
+  let minY = Infinity;
+  let maxY = -Infinity;
+  glyphs.forEach((I, P) => {
     if (I.pts.length) {
-      u = Math.min(u, I.minX + l[P]!);
-      c = Math.max(c, I.maxX + l[P]!);
-      f = Math.min(f, I.minY);
-      d = Math.max(d, I.maxY);
+      minX = Math.min(minX, I.minX + offsets[P]!);
+      maxX = Math.max(maxX, I.maxX + offsets[P]!);
+      minY = Math.min(minY, I.minY);
+      maxY = Math.max(maxY, I.maxY);
     }
   });
-  if (!isFinite(u)) return "";
-  let h = -a;
-  let m = 0;
+  if (!isFinite(minX)) return "";
+  let top = -cap;
+  let bottom = 0;
   if (cat === "script") {
-    h = f;
-    m = d;
+    top = minY;
+    bottom = maxY;
   } else {
-    if (f < -a * 1.1) {
-      h = (-a + f) / 2;
+    if (minY < -cap * 1.1) {
+      top = (-cap + minY) / 2;
     }
-    if (d > a * 0.08) {
-      m = d / 2;
+    if (maxY > cap * 0.08) {
+      bottom = maxY / 2;
     }
   }
-  const x = m - h;
-  const k = c - u;
-  const p = d - f;
-  const g = o.length === 1;
-  const v = Math.min(
-    (box.w * (g ? 0.72 : cat === "script" ? 0.92 : 0.84)) / k,
-    (box.h * (g || cat === "script" ? 0.66 : 0.6)) / x,
-    (box.h * 0.9) / p,
+  const heightSpan = bottom - top;
+  const width = maxX - minX;
+  const inkHeight = maxY - minY;
+  const single = glyphs.length === 1;
+  const scale = Math.min(
+    (box.w * (single ? 0.72 : cat === "script" ? 0.92 : 0.84)) / width,
+    (box.h * (single || cat === "script" ? 0.66 : 0.6)) / heightSpan,
+    (box.h * 0.9) / inkHeight,
   );
-  const S = box.x + box.w / 2;
-  const b = box.y + box.h / 2;
-  const L = S - ((u + c) / 2) * v;
-  const T = b - ((h + m) / 2) * v;
-  return `<path d="${o.map((I, P) => font.getPath(I.ch, L + l[P]! * v, T, GLYPH_SIZE * v).toPathData(2)).join("")}" fill="${fill}"/>`;
+  const cx = box.x + box.w / 2;
+  const cy = box.y + box.h / 2;
+  const originX = cx - ((minX + maxX) / 2) * scale;
+  const originY = cy - ((top + bottom) / 2) * scale;
+  return `<path d="${glyphs.map((I, P) => font.getPath(I.ch, originX + offsets[P]! * scale, originY, GLYPH_SIZE * scale).toPathData(2)).join("")}" fill="${fill}"/>`;
 }
 
 const LEGAL_WORDS = new Set([

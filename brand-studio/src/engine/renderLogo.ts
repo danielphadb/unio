@@ -628,20 +628,20 @@ function styledTokens(concept: LogoConcept, input: LogoInput, colors: any) {
 }
 
 function layoutLine(tokens: any[], fonts: FontStore, swap: any, hair: any) {
-  const i = [];
-  let a = 0;
-  let s = Infinity;
-  let o = -Infinity;
-  let l = 0;
-  let u = 0;
-  let m = 0;
-  let h = true;
-  const p = (x: any, y: any) => {
+  const ops = [];
+  let cursor = 0;
+  let minX = Infinity;
+  let maxX = -Infinity;
+  let ascent = 0;
+  let descent = 0;
+  let cap = 0;
+  let allUpper = true;
+  const addRun = (x: any, y: any) => {
     if (!x) return;
     const f = fonts.get(y.font);
     const d = sizeForCap(f, y.font.key, CAP * y.scale);
     const b = outline(f, x, d, y.tracking);
-    const z = a + (b.left ?? 0);
+    const z = cursor + (b.left ?? 0);
     const k = Array.from(x as string).every(
       (M) => M === " " || f.charToGlyphIndex(M) > 0,
     );
@@ -665,7 +665,7 @@ function layoutLine(tokens: any[], fonts: FontStore, swap: any, hair: any) {
       activeEingriff.done = true;
       const M = -b.ascent - v.top;
       const S = b.height + v.top + v.bottom;
-      i.push({
+      ops.push({
         k: "shape",
         d: v.d,
         x: z,
@@ -675,7 +675,7 @@ function layoutLine(tokens: any[], fonts: FontStore, swap: any, hair: any) {
         fill: y.color,
       });
       if (v.mark) {
-        i.push({
+        ops.push({
           k: "shape",
           d: v.mark,
           x: z,
@@ -685,12 +685,12 @@ function layoutLine(tokens: any[], fonts: FontStore, swap: any, hair: any) {
           fill: activeEingriff.mark,
         });
       }
-      s = Math.min(s, z);
-      o = Math.max(o, z + b.width);
-      l = Math.max(l, b.ascent + v.top);
-      u = Math.max(u, b.height - b.ascent + v.bottom);
+      minX = Math.min(minX, z);
+      maxX = Math.max(maxX, z + b.width);
+      ascent = Math.max(ascent, b.ascent + v.top);
+      descent = Math.max(descent, b.height - b.ascent + v.bottom);
     } else if (b.d) {
-      i.push({
+      ops.push({
         k: "shape",
         d: b.d,
         x: z,
@@ -699,18 +699,18 @@ function layoutLine(tokens: any[], fonts: FontStore, swap: any, hair: any) {
         h: b.height,
         fill: y.color,
       });
-      s = Math.min(s, z);
-      o = Math.max(o, z + b.width);
-      l = Math.max(l, b.ascent);
-      u = Math.max(u, b.height - b.ascent);
+      minX = Math.min(minX, z);
+      maxX = Math.max(maxX, z + b.width);
+      ascent = Math.max(ascent, b.ascent);
+      descent = Math.max(descent, b.height - b.ascent);
     }
-    a += b.advance ?? b.width;
+    cursor += b.advance ?? b.width;
   };
-  let g = 0;
-  for (; g < tokens.length; ) {
-    const x = tokens[g].style;
+  let start = 0;
+  for (; start < tokens.length; ) {
+    const x = tokens[start].style;
     let y = "";
-    let f = g;
+    let f = start;
     const d = (z: any) => !!swap && z === swap.token;
     const b = (z: any) =>
       d(z) || (hair?.hair !== undefined && z === hair.hair + 1);
@@ -718,8 +718,8 @@ function layoutLine(tokens: any[], fonts: FontStore, swap: any, hair: any) {
       ;
       f < tokens.length &&
       tokens[f].style === x &&
-      !(f > g && b(f)) &&
-      !(f > g && d(f - 1));
+      !(f > start && b(f)) &&
+      !(f > start && d(f - 1));
     ) {
       y +=
         tokens[f].text +
@@ -731,50 +731,50 @@ function layoutLine(tokens: any[], fonts: FontStore, swap: any, hair: any) {
           : "");
       f++;
     }
-    if (f === g) {
-      f = g + 1;
+    if (f === start) {
+      f = start + 1;
     }
-    if (swap && g === swap.token) {
-      const z = tokens[g].text;
+    if (swap && start === swap.token) {
+      const z = tokens[start].text;
       const k = z.indexOf("O");
       const v = fonts.get(x.font);
       const M = sizeForCap(v, x.font.key, CAP * x.scale);
       const S = outline(v, "O", M, 0);
       const N = S.width / Math.max(1, S.height);
-      if (N < 0.82 || N > 1.3 || !S.d) p(z, x);
+      if (N < 0.82 || N > 1.3 || !S.d) addRun(z, x);
       else {
-        p(z.slice(0, k), x);
+        addRun(z.slice(0, k), x);
         const A = Math.min(S.width / swap.art.ink.w, S.height / swap.art.ink.h);
-        const R = a + (S.left ?? 0) + S.width / 2;
+        const R = cursor + (S.left ?? 0) + S.width / 2;
         const L = -S.ascent + S.height / 2;
-        i.push(placeSymbol(swap.art, R, L, A));
-        s = Math.min(s, R - (swap.art.ink.w * A) / 2);
-        o = Math.max(o, R + (swap.art.ink.w * A) / 2);
-        l = Math.max(l, -L + (swap.art.ink.h * A) / 2);
-        a += advance(v, "O", M, x.tracking);
-        p(z.slice(k + 1), x);
+        ops.push(placeSymbol(swap.art, R, L, A));
+        minX = Math.min(minX, R - (swap.art.ink.w * A) / 2);
+        maxX = Math.max(maxX, R + (swap.art.ink.w * A) / 2);
+        ascent = Math.max(ascent, -L + (swap.art.ink.h * A) / 2);
+        cursor += advance(v, "O", M, x.tracking);
+        addRun(z.slice(k + 1), x);
       }
-    } else p(y, x);
-    m = Math.max(m, CAP * x.scale);
-    for (let z = g; z < f; z++) {
+    } else addRun(y, x);
+    cap = Math.max(cap, CAP * x.scale);
+    for (let z = start; z < f; z++) {
       if (tokens[z].text !== tokens[z].text.toLocaleUpperCase("de-AT")) {
-        h = false;
+        allUpper = false;
       }
     }
     if (hair?.hair !== undefined && f === hair.hair + 1 && f < tokens.length) {
       const z = CAP * 0.34;
       const k = Math.max(1.4, CAP * 0.022) * strokeBoost;
-      i.push({
+      ops.push({
         k: "rect",
-        x: a + z,
+        x: cursor + z,
         y: -CAP * 1.1,
         w: k,
         h: CAP * 1.25,
         fill: hair.color,
       });
-      l = Math.max(l, CAP * 1.1);
-      u = Math.max(u, CAP * 0.15);
-      a += z * 2 + k;
+      ascent = Math.max(ascent, CAP * 1.1);
+      descent = Math.max(descent, CAP * 0.15);
+      cursor += z * 2 + k;
     } else if (f < tokens.length && tokens[f - 1].gap === " ") {
       const z = (v: any) => {
         const M = fonts.get(v.font);
@@ -790,24 +790,24 @@ function layoutLine(tokens: any[], fonts: FontStore, swap: any, hair: any) {
           new RegExp("\\p{L}", "u").test(v.text) &&
           v.text === v.text.toLocaleUpperCase("de-AT"),
       );
-      a += Math.max(
+      cursor += Math.max(
         z(tokens[f - 1].style),
         z(tokens[f].style),
         CAP * (k ? 0.5 : 0.33),
       );
     }
-    g = f;
+    start = f;
   }
-  const w = tokens.some((x, y) => y < tokens.length - 1 && x.gap === " ");
-  return isFinite(s)
+  const multi = tokens.some((x, y) => y < tokens.length - 1 && x.gap === " ");
+  return isFinite(minX)
     ? {
-        ops: translateOps(i, -s, 0),
-        width: o - s,
-        ascent: l,
-        descent: u,
-        cap: m || CAP,
-        upper: h,
-        multi: w,
+        ops: translateOps(ops, -minX, 0),
+        width: maxX - minX,
+        ascent: ascent,
+        descent: descent,
+        cap: cap || CAP,
+        upper: allUpper,
+        multi: multi,
       }
     : {
         ops: [],
@@ -815,44 +815,44 @@ function layoutLine(tokens: any[], fonts: FontStore, swap: any, hair: any) {
         ascent: 0,
         descent: 0,
         cap: CAP,
-        upper: h,
-        multi: w,
+        upper: allUpper,
+        multi: multi,
       };
 }
 
 function breakLines(tokens: any[], options: any, layout: any): any {
-  const r = tokens.filter((m) => m.first);
-  const i = tokens.filter((m) => !m.first);
-  if (options.stack && r.length && i.length) {
-    const m = layout([r])[0];
+  const firstPart = tokens.filter((m) => m.first);
+  const restPart = tokens.filter((m) => !m.first);
+  if (options.stack && firstPart.length && restPart.length) {
+    const m = layout([firstPart])[0];
     const h: any = breakLines(
-      i,
+      restPart,
       {
         ...options,
         stack: false,
         forceTwo: false,
       },
-      (p: any) => layout([r, ...p]).slice(1),
+      (p: any) => layout([firstPart, ...p]).slice(1),
     );
     return [m, ...h];
   }
-  const a: any[] = [];
-  tokens.forEach((m, h) => h < tokens.length - 1 && a.push(h + 1));
-  const s = layout([tokens]);
-  const o = tokens.map((m) => m.text).join(" ").length;
+  const breaks: any[] = [];
+  tokens.forEach((m, h) => h < tokens.length - 1 && breaks.push(h + 1));
+  const single = layout([tokens]);
+  const length = tokens.map((m) => m.text).join(" ").length;
   if (
-    !a.length ||
+    !breaks.length ||
     (!options.forceTwo &&
-      (o < options.minChars || s[0].width <= options.wrapAt * CAP))
+      (length < options.minChars || single[0].width <= options.wrapAt * CAP))
   )
-    return s;
-  let l = s;
-  let u = options.forceTwo ? Infinity : s[0].width;
+    return single;
+  let best = single;
+  let bestScore = options.forceTwo ? Infinity : single[0].width;
   for (let m = 2; m <= (options.forceTwo ? 2 : 3); m++) {
     const h: any[] = [];
     const p = (g: any, w: any) => {
       if (w.length === m - 1) return void h.push(w);
-      for (let x = g; x < a.length; x++) p(x + 1, [...w, a[x]]);
+      for (let x = g; x < breaks.length; x++) p(x + 1, [...w, breaks[x]]);
     };
     p(0, []);
     for (const g of h) {
@@ -865,15 +865,18 @@ function breakLines(tokens: any[], options: any, layout: any): any {
       const y = layout(w);
       const f = Math.max(...y.map((b: any) => b.width));
       const d = f + (f - Math.min(...y.map((b: any) => b.width))) * 0.15;
-      if (d < u) {
-        l = y;
-        u = d;
+      if (d < bestScore) {
+        best = y;
+        bestScore = d;
       }
     }
-    if (Math.max(...l.map((g: any) => g.width)) <= options.wrapAt * CAP * 1.3)
+    if (
+      Math.max(...best.map((g: any) => g.width)) <=
+      options.wrapAt * CAP * 1.3
+    )
       break;
   }
-  return l;
+  return best;
 }
 
 function nameLines(
@@ -885,9 +888,9 @@ function nameLines(
   if (activeEingriff) {
     activeEingriff.done = false;
   }
-  const i = concept.name.font;
-  const a = fonts.get(i);
-  const s = sizeForCap(a, i.key, CAP);
+  const font = concept.name.font;
+  const fontData = fonts.get(font);
+  const size = sizeForCap(fontData, font.key, CAP);
   if (hasStyledTokens(concept, input)) {
     const f = styledTokens(concept, input, options.colors);
     let d = -1;
@@ -939,33 +942,33 @@ function nameLines(
       k,
     );
     return {
-      size: s,
+      size: size,
       lines: v,
       upper: v.every((M: any) => M.upper),
       swapped: d >= 0,
     };
   }
-  const o = cleanText(input.name) || "Name";
-  const l = applyCase(o, concept.name.case, i.key);
-  const u = boostedTracking(concept.name.tracking);
-  const m = options.forceTwoLines
-    ? wrapText(a, l, s, u, 0, 2)
-    : l.length < (options.minWrapChars ?? 0)
-      ? [l]
-      : wrapText(a, l, s, u, options.wrapAt * CAP);
-  const h = l === l.toLocaleUpperCase("de-AT");
-  const p = m.map((f) => {
-    const d = outline(a, f, s, u);
+  const name = cleanText(input.name) || "Name";
+  const cased = applyCase(name, concept.name.case, font.key);
+  const tracking = boostedTracking(concept.name.tracking);
+  const lines = options.forceTwoLines
+    ? wrapText(fontData, cased, size, tracking, 0, 2)
+    : cased.length < (options.minWrapChars ?? 0)
+      ? [cased]
+      : wrapText(fontData, cased, size, tracking, options.wrapAt * CAP);
+  const upper = cased === cased.toLocaleUpperCase("de-AT");
+  const lineParts = lines.map((f) => {
+    const d = outline(fontData, f, size, tracking);
     const b =
       activeEingriff &&
       !activeEingriff.done &&
       d.d &&
-      Array.from(f).every((z) => z === " " || a.charToGlyphIndex(z) > 0)
+      Array.from(f).every((z) => z === " " || fontData.charToGlyphIndex(z) > 0)
         ? applyEingriff(
-            a,
+            fontData,
             f,
-            s,
-            u,
+            size,
+            tracking,
             {
               left: d.left ?? 0,
               ascent: d.ascent,
@@ -1007,7 +1010,7 @@ function nameLines(
         ascent: d.ascent + b.top,
         descent: d.height - d.ascent + b.bottom,
         cap: CAP,
-        upper: h,
+        upper: upper,
         multi: f.includes(" "),
       };
     }
@@ -1027,14 +1030,14 @@ function nameLines(
       ascent: d.ascent,
       descent: d.height - d.ascent,
       cap: CAP,
-      upper: h,
+      upper: upper,
       multi: f.includes(" "),
     };
   });
   return {
-    size: s,
-    lines: p,
-    upper: h,
+    size: size,
+    lines: lineParts,
+    upper: upper,
     swapped: false,
   };
 }
@@ -1045,63 +1048,69 @@ function layoutNameBlock(
   fonts: FontStore,
   options: any,
 ) {
-  const i = [];
+  const ops = [];
   const { lines, size, upper } = nameLines(concept, input, fonts, options);
-  const l = Math.max(...lines.map((L: any) => L.width));
-  const u = (L: any) => (options.align === "center" ? -L / 2 : 0);
-  let m = lines[0].cap;
-  let h = -Infinity;
-  let p = 0;
+  const nameWidth = Math.max(...lines.map((L: any) => L.width));
+  const alignX = (L: any) => (options.align === "center" ? -L / 2 : 0);
+  let baseline = lines[0].cap;
+  let bottom = -Infinity;
+  let right = 0;
   for (let L = 0; L < lines.length; L++) {
     const E = lines[L];
     if (L > 0) {
-      m += E.upper
+      baseline += E.upper
         ? CAP * 0.42 + E.cap
         : Math.max(CAP * 0.5 + E.cap, size * 1.05 * (E.cap / CAP));
-      const I = m - E.ascent;
+      const I = baseline - E.ascent;
       const T = E.ascent > E.cap * 1.12 ? CAP * 0.32 : CAP * 0.1;
-      if (I < h + T) {
-        m += h + T - I;
+      if (I < bottom + T) {
+        baseline += bottom + T - I;
       }
     }
-    i.push(...translateOps(E.ops, u(E.width), m));
-    h = m + E.descent;
-    p = u(E.width) + E.width;
+    ops.push(...translateOps(E.ops, alignX(E.width), baseline));
+    bottom = baseline + E.descent;
+    right = alignX(E.width) + E.width;
   }
-  const g = m;
-  const w = h;
-  let x = g;
-  let y = CAP * 0.32;
-  let f = options.align === "center" ? -l / 2 : 0;
-  let d = options.align === "center" ? l / 2 : l;
-  const b = options.divider;
-  const z = Math.max(1.6, CAP * 0.028) * strokeBoost;
-  const k = concept.typo;
-  let v = firstSeparatorOnly(cleanText(input.suffix));
-  if (v && k?.fussnote && k.sup?.art === "stern" && !k.inlineSuffix) {
-    v = `${k.sup.text} ${v}`;
+  const lastBaseline = baseline;
+  const lastBottom = bottom;
+  let blockBottom = lastBaseline;
+  let suffixCap = CAP * 0.32;
+  let left = options.align === "center" ? -nameWidth / 2 : 0;
+  let rightEdge = options.align === "center" ? nameWidth / 2 : nameWidth;
+  const divider = options.divider;
+  const rule = Math.max(1.6, CAP * 0.028) * strokeBoost;
+  const typo = concept.typo;
+  let suffix = firstSeparatorOnly(cleanText(input.suffix));
+  if (
+    suffix &&
+    typo?.fussnote &&
+    typo.sup?.art === "stern" &&
+    !typo.inlineSuffix
+  ) {
+    suffix = `${typo.sup.text} ${suffix}`;
   }
-  if (v && k?.suffixWrap === "klammer" && !k.inlineSuffix) {
-    v = `(${v})`;
+  if (suffix && typo?.suffixWrap === "klammer" && !typo.inlineSuffix) {
+    suffix = `(${suffix})`;
   }
-  let M = -Infinity;
-  if (k?.sup?.text) {
+  let supRight = -Infinity;
+  if (typo?.sup?.text) {
     const L = lines[lines.length - 1];
-    const E = fontCovers(concept.name.font.key, k.sup.text)
+    const E = fontCovers(concept.name.font.key, typo.sup.text)
       ? concept.name.font
       : concept.suffix.font;
     const I = fonts.get(E);
-    const T = k.sup.art === "stern" ? 0.5 : k.sup.art === "grad" ? 0.36 : 0.42;
+    const T =
+      typo.sup.art === "stern" ? 0.5 : typo.sup.art === "grad" ? 0.36 : 0.42;
     const K = outline(
       I,
-      k.sup.text,
+      typo.sup.text,
       sizeForCap(I, E.key, L.cap * T),
-      k.sup.art === "bezirk" ? 0.02 : 0,
+      typo.sup.art === "bezirk" ? 0.02 : 0,
     );
     if (K.d) {
-      const F = p + L.cap * (k.sup.art === "bezirk" ? 0.1 : 0.07);
-      const D = g - L.cap;
-      i.push({
+      const F = right + L.cap * (typo.sup.art === "bezirk" ? 0.1 : 0.07);
+      const D = lastBaseline - L.cap;
+      ops.push({
         k: "shape",
         d: K.d,
         x: F,
@@ -1109,23 +1118,23 @@ function layoutNameBlock(
         w: K.width,
         h: K.height,
         fill:
-          k.sup.art === "bezirk" ? options.colors.name : options.colors.mark,
+          typo.sup.art === "bezirk" ? options.colors.name : options.colors.mark,
       });
-      M = F + K.width;
+      supRight = F + K.width;
     }
   }
-  const S = (L: any) => {
+  const ruleBox = (L: any) => {
     const E = L.width;
     return {
       x: options.align === "center" ? -E / 2 : 0,
       w: E,
-      h: z,
+      h: rule,
     };
   };
-  if (k?.rule === "over" || (k?.mark === "macron" && !k.rule)) {
-    const L = Math.min(0, ...i.map((I) => opBox(I).y));
-    const E = S(lines[0]);
-    i.push({
+  if (typo?.rule === "over" || (typo?.mark === "macron" && !typo.rule)) {
+    const L = Math.min(0, ...ops.map((I) => opBox(I).y));
+    const E = ruleBox(lines[0]);
+    ops.push({
       k: "rect",
       x: E.x,
       y: L - CAP * 0.34 - E.h,
@@ -1134,36 +1143,36 @@ function layoutNameBlock(
       fill: options.colors.divider,
     });
   }
-  if (v && k?.inlineSuffix && lines.length === 1) {
+  if (suffix && typo?.inlineSuffix && lines.length === 1) {
     const L = concept.suffix.font;
     const E = fonts.get(L);
     const I = applyCase(
-      k.inlineSep === "klammer" ? `(${v})` : v,
+      typo.inlineSep === "klammer" ? `(${suffix})` : suffix,
       concept.suffix.case,
       L.key,
     );
     const T = I === I.toLocaleUpperCase("de-AT");
-    const K = clampSuffixScale(k.suffixScale) ?? (T ? 0.4 : 0.46);
+    const K = clampSuffixScale(typo.suffixScale) ?? (T ? 0.4 : 0.46);
     const F = outline(
       E,
       I,
       sizeForCap(E, L.key, CAP * K),
       Math.min(0.3, boostedTracking(concept.suffix.tracking)),
     );
-    const D = Math.max(u(l) + l, M);
+    const D = Math.max(alignX(nameWidth) + nameWidth, supRight);
     const Y = CAP * 0.42;
     const _ = CAP * 1.05;
-    const te = m - CAP / 2;
+    const te = baseline - CAP / 2;
     const X = D + Y;
-    let O = X + z + Y;
-    if (k.inlineSep === "slash") {
+    let O = X + rule + Y;
+    if (typo.inlineSep === "slash") {
       const ee = fonts.get(concept.name.font);
       const Q = outline(
         ee,
         "/",
         sizeForCap(ee, concept.name.font.key, CAP * 0.92),
       );
-      i.push({
+      ops.push({
         k: "shape",
         d: Q.d,
         x: D + Y * 0.8,
@@ -1173,20 +1182,20 @@ function layoutNameBlock(
         fill: options.colors.divider,
       });
       O = D + Y * 1.6 + Q.width;
-    } else if (k.inlineSep === "klammer") {
+    } else if (typo.inlineSep === "klammer") {
       O = D + Y * 0.9;
     } else {
-      i.push({
+      ops.push({
         k: "rect",
         x: X,
         y: te - _ / 2,
-        w: z,
+        w: rule,
         h: _,
         fill: options.colors.divider,
       });
     }
     const H = te + (CAP * K) / 2;
-    i.push({
+    ops.push({
       k: "shape",
       d: F.d,
       x: O,
@@ -1195,33 +1204,33 @@ function layoutNameBlock(
       h: F.height,
       fill: options.colors.suffix,
     });
-    const G = O + F.width - u(l);
-    const U = options.align === "center" ? (l - G) / 2 : 0;
+    const G = O + F.width - alignX(nameWidth);
+    const U = options.align === "center" ? (nameWidth - G) / 2 : 0;
     return {
-      ops: translateOps(i, U, 0),
+      ops: translateOps(ops, U, 0),
       top: 0,
-      bottom: m,
-      left: u(l) + U,
-      right: u(l) + U + G,
-      nameWidth: l,
+      bottom: baseline,
+      left: alignX(nameWidth) + U,
+      right: alignX(nameWidth) + U + G,
+      nameWidth: nameWidth,
       suffixCap: CAP * K,
     };
   }
-  if (v) {
+  if (suffix) {
     const L = concept.suffix.font;
     const E = fonts.get(L);
-    const I = applyCase(v, concept.suffix.case, L.key);
+    const I = applyCase(suffix, concept.suffix.case, L.key);
     const T = I === I.toLocaleUpperCase("de-AT");
     let K = T ? (upper ? 0.42 : 0.4) : 0.45;
     if (getFont(concept.name.font.key).cat === "script") {
       K = T ? 0.36 : 0.42;
     }
-    const F = clampSuffixScale(k?.suffixScale);
+    const F = clampSuffixScale(typo?.suffixScale);
     if (F !== undefined) {
       K = F;
     }
     let D = boostedTracking(concept.suffix.tracking);
-    const Y = l * (b === "line" ? 0.86 : 1);
+    const Y = nameWidth * (divider === "line" ? 0.86 : 1);
     let _ = outline(E, I, sizeForCap(E, L.key, CAP * K), D);
     for (let he = 0; he < 16 && _.width > Y; he++) {
       if (D > 0.06) D = Math.max(0.06, D - 0.04);
@@ -1229,8 +1238,8 @@ function layoutNameBlock(
       else break;
       _ = outline(E, I, sizeForCap(E, L.key, CAP * K), D);
     }
-    y = CAP * K;
-    const te = Math.max(0, w - g);
+    suffixCap = CAP * K;
+    const te = Math.max(0, lastBottom - lastBaseline);
     let X = Math.max(CAP * (T ? 0.42 : 0.36), te + CAP * 0.2);
     if (te < CAP * 0.05) {
       const he = cleanText(input.name).split(" ");
@@ -1242,22 +1251,22 @@ function layoutNameBlock(
         0.14 * shareOfLetters(oe, OPEN_BOTTOM_LETTERS) -
         0.08 * shareOfLetters(I, OPEN_TOP_LETTERS);
     }
-    const O = F === undefined ? 0 : Math.max(0, _.ascent - y);
+    const O = F === undefined ? 0 : Math.max(0, _.ascent - suffixCap);
     X += O;
     if ((F ?? 0) >= LARGE_SUFFIX_SCALE) {
       X = Math.max(X, te + CAP * 0.3 + O);
     }
-    const H = (l - _.width) / 2 - y * 1.2;
+    const H = (nameWidth - _.width) / 2 - suffixCap * 1.2;
     const G = options.align === "center";
-    const U = G && b === "line" && H > CAP * 0.35;
-    const J = (b === "line" && !U) || (!G && b === "line");
+    const U = G && divider === "line" && H > CAP * 0.35;
+    const J = (divider === "line" && !U) || (!G && divider === "line");
     if (J) {
       X += CAP * 0.32;
     }
-    const ee = g + X;
-    const Q = ee + y;
+    const ee = lastBaseline + X;
+    const Q = ee + suffixCap;
     const me = G ? -_.width / 2 : 0;
-    i.push({
+    ops.push({
       k: "shape",
       d: _.d,
       x: me,
@@ -1266,86 +1275,91 @@ function layoutNameBlock(
       h: _.height,
       fill: options.colors.suffix,
     });
-    const fe = ee + y / 2;
-    if (U && b === "line") {
-      const he = y * 1.1;
-      const oe = Math.min(H + y * 0.1, CAP * 2.6);
-      i.push({
+    const fe = ee + suffixCap / 2;
+    if (U && divider === "line") {
+      const he = suffixCap * 1.1;
+      const oe = Math.min(H + suffixCap * 0.1, CAP * 2.6);
+      ops.push({
         k: "rect",
         x: me - he - oe,
-        y: fe - z / 2,
+        y: fe - rule / 2,
         w: oe,
-        h: z,
+        h: rule,
         fill: options.colors.divider,
       });
-      i.push({
+      ops.push({
         k: "rect",
         x: me + _.width + he,
-        y: fe - z / 2,
+        y: fe - rule / 2,
         w: oe,
-        h: z,
+        h: rule,
         fill: options.colors.divider,
       });
     } else if (J) {
-      const he = G ? Math.min(l * 0.3, CAP * 1.3) : Math.min(l * 0.22, CAP * 1);
+      const he = G
+        ? Math.min(nameWidth * 0.3, CAP * 1.3)
+        : Math.min(nameWidth * 0.22, CAP * 1);
       const oe =
-        g +
+        lastBaseline +
         Math.max(
           te + CAP * 0.12,
-          (X - z) / 2 + (te > CAP * 0.1 ? CAP * 0.06 : 0),
+          (X - rule) / 2 + (te > CAP * 0.1 ? CAP * 0.06 : 0),
         );
-      i.push({
+      ops.push({
         k: "rect",
         x: G ? -he / 2 : 0,
         y: Math.min(oe, ee - CAP * 0.2),
         w: he,
-        h: z,
+        h: rule,
         fill: options.colors.divider,
       });
     }
-    x = Q;
-    f = Math.min(f, me);
-    d = Math.max(d, me + _.width);
+    blockBottom = Q;
+    left = Math.min(left, me);
+    rightEdge = Math.max(rightEdge, me + _.width);
   }
-  if (k?.mark === "dot" && !(v && k?.inlineSuffix && lines.length === 1)) {
+  if (
+    typo?.mark === "dot" &&
+    !(suffix && typo?.inlineSuffix && lines.length === 1)
+  ) {
     const L = lines[lines.length - 1];
     const E = concept.name.font.weight >= 600;
     const I = L.cap * (E ? 0.1 : 0.075);
-    const T = p + L.cap * 0.1 + I;
-    i.push({
+    const T = right + L.cap * 0.1 + I;
+    ops.push({
       k: "circle",
       cx: T,
-      cy: g - I,
+      cy: lastBaseline - I,
       r: I,
       fill: options.colors.mark,
     });
-    d = Math.max(d, T + I);
+    rightEdge = Math.max(rightEdge, T + I);
   }
-  const N = k?.mark === "dot";
-  if (!v && !N && b === "dot" && !upper) {
+  const hasDotMark = typo?.mark === "dot";
+  if (!suffix && !hasDotMark && divider === "dot" && !upper) {
     const L = CAP * 0.085;
-    const E = p + CAP * 0.1 + L;
-    i.push({
+    const E = right + CAP * 0.1 + L;
+    ops.push({
       k: "circle",
       cx: E,
-      cy: g - L,
+      cy: lastBaseline - L,
       r: L,
       fill: options.colors.divider,
     });
-    d = Math.max(d, E + L);
+    rightEdge = Math.max(rightEdge, E + L);
   } else if (
-    !v &&
-    !N &&
-    (k?.rule === "under" ||
-      (b === "line" &&
+    !suffix &&
+    !hasDotMark &&
+    (typo?.rule === "under" ||
+      (divider === "line" &&
         options.align === "center" &&
         lines.length === 1 &&
         !upper))
   ) {
-    const L = Math.max(0, w - g);
-    const E = S(lines[lines.length - 1]);
-    const I = g + Math.max(CAP * 0.38, L + CAP * 0.22);
-    i.push({
+    const L = Math.max(0, lastBottom - lastBaseline);
+    const E = ruleBox(lines[lines.length - 1]);
+    const I = lastBaseline + Math.max(CAP * 0.38, L + CAP * 0.22);
+    ops.push({
       k: "rect",
       x: E.x,
       y: I,
@@ -1353,17 +1367,17 @@ function layoutNameBlock(
       h: E.h,
       fill: options.colors.divider,
     });
-    x = I + E.h;
+    blockBottom = I + E.h;
   }
-  d = Math.max(d, M);
+  rightEdge = Math.max(rightEdge, supRight);
   return {
-    ops: i,
+    ops: ops,
     top: 0,
-    bottom: x,
-    left: f,
-    right: d,
-    nameWidth: l,
-    suffixCap: y,
+    bottom: blockBottom,
+    left: left,
+    right: rightEdge,
+    nameWidth: nameWidth,
+    suffixCap: suffixCap,
   };
 }
 
@@ -1393,20 +1407,20 @@ function renderSymbolArt(
   fonts: FontStore,
   filled: boolean,
 ) {
-  const i = boostStrokes(renderSymbol(symbol, colors, fonts, filled));
-  const a = `${symbolCacheKey(symbol, filled)}:${strokeBoost}`;
-  let s = symbolBoundsCache.get(a);
-  if (s === undefined) {
-    s = svgBounds(i);
+  const markup = boostStrokes(renderSymbol(symbol, colors, fonts, filled));
+  const key = `${symbolCacheKey(symbol, filled)}:${strokeBoost}`;
+  let bounds = symbolBoundsCache.get(key);
+  if (bounds === undefined) {
+    bounds = svgBounds(markup);
     if (symbolBoundsCache.size > 2e3) {
       symbolBoundsCache.clear();
     }
-    symbolBoundsCache.set(a, s);
+    symbolBoundsCache.set(key, bounds);
   }
-  return s
+  return bounds
     ? {
-        markup: i,
-        ink: s,
+        markup: markup,
+        ink: bounds,
         hasContainer:
           symbol.container !== "none" &&
           getContainer(symbol.container)!.key !== "none",
@@ -1465,7 +1479,7 @@ function textColors(colors: any) {
 }
 
 function wordmarkOps(ctx: any, align = "center", lines = "auto") {
-  const r =
+  const swapArt =
     ctx.concept.typo?.letterSwap && ctx.concept.symbol
       ? (symbolArt(
           ctx.concept,
@@ -1475,168 +1489,183 @@ function wordmarkOps(ctx: any, align = "center", lines = "auto") {
           ctx.filled,
         ) ?? undefined)
       : undefined;
-  const i = (h: any, p: any) =>
+  const build = (h: any, p: any) =>
     layoutNameBlock(h, ctx.input, ctx.fonts, {
       align,
       wrapAt: p,
       forceTwoLines: lines === "two",
       colors: textColors(ctx.vc),
       divider: h.divider,
-      swapArt: r,
+      swapArt: swapArt,
     }).ops;
-  const a = i(ctx.concept, lines === "single" ? Infinity : 15);
-  if (lines !== "auto") return a;
-  const s = (h: any) => {
+  const ops = build(ctx.concept, lines === "single" ? Infinity : 15);
+  if (lines !== "auto") return ops;
+  const ratio = (h: any) => {
     const p = opsBounds(h);
     return p.w / Math.max(1, p.h);
   };
-  if (s(a) <= 11) return a;
-  const o = ctx.concept.typo?.inlineSuffix
+  if (ratio(ops) <= 11) return ops;
+  const typo = ctx.concept.typo?.inlineSuffix
     ? {
         ...ctx.concept.typo,
         inlineSuffix: false,
       }
     : ctx.concept.typo;
-  const l = i(
+  const alternative = build(
     {
       ...ctx.concept,
-      typo: o,
+      typo: typo,
     },
     9,
   );
-  return s(l) < s(a) ? l : a;
+  return ratio(alternative) < ratio(ops) ? alternative : ops;
 }
 
 function inlineOps(ctx: any, single: boolean = false) {
-  const t = inlineLockup(ctx, single ? Infinity : 12.5, 16);
-  if (single) return t;
-  const r = (a: any) => {
+  const ops = inlineLockup(ctx, single ? Infinity : 12.5, 16);
+  if (single) return ops;
+  const ratio = (a: any) => {
     const s = opsBounds(a);
     return s.w / Math.max(1, s.h);
   };
-  if (r(t) <= 11) return t;
-  const i = inlineLockup(ctx, 7, 0);
-  return r(i) < r(t) ? i : t;
+  if (ratio(ops) <= 11) return ops;
+  const alternative = inlineLockup(ctx, 7, 0);
+  return ratio(alternative) < ratio(ops) ? alternative : ops;
 }
 
 function inlineLockup(ctx: any, wrapAt: number, minWrapChars: number) {
-  const r = symbolArt(
+  const art = symbolArt(
     ctx.concept,
     ctx.input,
     ctx.fonts,
     ctx.symColors,
     ctx.filled,
   );
-  const i = ctx.concept.divider;
-  const a = ctx.concept.symbolPosition === "right";
-  const s = layoutNameBlock(ctx.concept, ctx.input, ctx.fonts, {
+  const divider = ctx.concept.divider;
+  const symbolRight = ctx.concept.symbolPosition === "right";
+  const text = layoutNameBlock(ctx.concept, ctx.input, ctx.fonts, {
     align: "left",
     wrapAt,
     minWrapChars,
     colors: textColors(ctx.vc),
-    divider: i === "line" ? "none" : i,
+    divider: divider === "line" ? "none" : divider,
   });
-  if (!r) return s.ops;
-  const o = s.bottom - s.top;
-  let u = !!cleanText(ctx.input.suffix) || o > CAP * 1.5 ? o * 1.08 : CAP * 1.5;
-  if (r.hasContainer) {
-    u *= 1.1;
+  if (!art) return text.ops;
+  const textHeight = text.bottom - text.top;
+  let symbolHeight =
+    !!cleanText(ctx.input.suffix) || textHeight > CAP * 1.5
+      ? textHeight * 1.08
+      : CAP * 1.5;
+  if (art.hasContainer) {
+    symbolHeight *= 1.1;
   }
-  u = Math.max(u, CAP * 1.4);
-  const m = symbolScale(r.ink, u);
-  const h = r.ink.w * m;
-  const p = r.ink.h * m;
-  const g = (s.top + s.bottom) / 2;
-  const w =
+  symbolHeight = Math.max(symbolHeight, CAP * 1.4);
+  const scale = symbolScale(art.ink, symbolHeight);
+  const artWidth = art.ink.w * scale;
+  const artHeight = art.ink.h * scale;
+  const centerY = (text.top + text.bottom) / 2;
+  const isMonogram =
     (
       ctx.concept.symbol ?? {
         kind: "monogram",
       }
-    ).kind === "monogram" && !r.hasContainer;
-  const x = i === "line" || w;
-  const y = Math.max(1.6, CAP * 0.026) * strokeBoost;
-  const f = Math.max(o, p * 0.9);
-  const d = [];
-  if (!a) {
-    d.push(placeSymbol(r, h / 2, g, m));
-    let z =
-      h +
-      CAP * (x ? INLINE_GAPS.lineGap : INLINE_GAPS.gap) +
-      (r.hasContainer ? CAP * 0.08 : 0);
-    if (x) {
-      d.push({
+    ).kind === "monogram" && !art.hasContainer;
+  const withLine = divider === "line" || isMonogram;
+  const stroke = Math.max(1.6, CAP * 0.026) * strokeBoost;
+  const lineHeight = Math.max(textHeight, artHeight * 0.9);
+  const ops = [];
+  if (!symbolRight) {
+    ops.push(placeSymbol(art, artWidth / 2, centerY, scale));
+    let leftCursor =
+      artWidth +
+      CAP * (withLine ? INLINE_GAPS.lineGap : INLINE_GAPS.gap) +
+      (art.hasContainer ? CAP * 0.08 : 0);
+    if (withLine) {
+      ops.push({
         k: "rect",
-        x: z,
-        y: g - f / 2,
-        w: y,
-        h: f,
+        x: leftCursor,
+        y: centerY - lineHeight / 2,
+        w: stroke,
+        h: lineHeight,
         fill: ctx.vc.divider,
       });
-      z += y + CAP * INLINE_GAPS.textGap;
+      leftCursor += stroke + CAP * INLINE_GAPS.textGap;
     }
-    d.push(...translateOps(s.ops, z, 0));
-    return d;
+    ops.push(...translateOps(text.ops, leftCursor, 0));
+    return ops;
   }
-  d.push(...s.ops);
-  let b =
-    s.right +
-    CAP * (x ? INLINE_GAPS.textGap : INLINE_GAPS.gap) +
-    (r.hasContainer ? CAP * 0.08 : 0);
-  if (x) {
-    d.push({
+  ops.push(...text.ops);
+  let rightCursor =
+    text.right +
+    CAP * (withLine ? INLINE_GAPS.textGap : INLINE_GAPS.gap) +
+    (art.hasContainer ? CAP * 0.08 : 0);
+  if (withLine) {
+    ops.push({
       k: "rect",
-      x: b,
-      y: g - f / 2,
-      w: y,
-      h: f,
+      x: rightCursor,
+      y: centerY - lineHeight / 2,
+      w: stroke,
+      h: lineHeight,
       fill: ctx.vc.divider,
     });
-    b += y + CAP * INLINE_GAPS.lineGap;
+    rightCursor += stroke + CAP * INLINE_GAPS.lineGap;
   }
-  d.push(placeSymbol(r, b + h / 2, g, m));
-  return d;
+  ops.push(placeSymbol(art, rightCursor + artWidth / 2, centerY, scale));
+  return ops;
 }
 
 function stackedOps(ctx: any) {
-  const n = symbolArt(
+  const art = symbolArt(
     ctx.concept,
     ctx.input,
     ctx.fonts,
     ctx.symColors,
     ctx.filled,
   );
-  const t = layoutNameBlock(ctx.concept, ctx.input, ctx.fonts, {
+  const text = layoutNameBlock(ctx.concept, ctx.input, ctx.fonts, {
     align: "center",
     wrapAt: 13,
     colors: textColors(ctx.vc),
     divider: ctx.concept.divider,
   });
-  if (!n) return t.ops;
-  const r = ctx.concept.symbolSize;
-  let i =
+  if (!art) return text.ops;
+  const size = ctx.concept.symbolSize;
+  let height =
     CAP *
-    (r === "small" ? STACK_SYMBOL.min : r === "large" ? 4 : STACK_SYMBOL.typ);
-  if (n.hasContainer) {
-    i *= 1.06;
+    (size === "small"
+      ? STACK_SYMBOL.min
+      : size === "large"
+        ? 4
+        : STACK_SYMBOL.typ);
+  if (art.hasContainer) {
+    height *= 1.06;
   }
-  const a = t.right - t.left;
-  let s = symbolScale(n.ink, i);
-  const o = a * (r === "large" ? 1.3 : 0.9);
-  if (n.ink.w * s > o) {
-    s = Math.max(o / n.ink.w, symbolScale(n.ink, CAP * 1.6));
+  const textWidth = text.right - text.left;
+  let scale = symbolScale(art.ink, height);
+  const maxWidth = textWidth * (size === "large" ? 1.3 : 0.9);
+  if (art.ink.w * scale > maxWidth) {
+    scale = Math.max(maxWidth / art.ink.w, symbolScale(art.ink, CAP * 1.6));
   }
-  const l = n.ink.h * s;
-  const u = CAP * (r === "large" ? 0.85 : STACK_SYMBOL.gap);
+  const artHeight = art.ink.h * scale;
+  const gap = CAP * (size === "large" ? 0.85 : STACK_SYMBOL.gap);
   if (ctx.concept.symbolPosition === "below") {
-    const p = t.ops.reduce(
+    const p = text.ops.reduce(
       (g, w) => Math.max(g, opBox(w).y + opBox(w).h),
       -Infinity,
     );
-    return [...t.ops, placeSymbol(n, 0, Math.max(t.bottom, p) + u + l / 2, s)];
+    return [
+      ...text.ops,
+      placeSymbol(
+        art,
+        0,
+        Math.max(text.bottom, p) + gap + artHeight / 2,
+        scale,
+      ),
+    ];
   }
-  const m = t.ops.reduce((p, g) => Math.min(p, opBox(g).y), Infinity);
-  const h = Math.min(t.top, m) - u - l / 2;
-  return [placeSymbol(n, 0, h, s), ...t.ops];
+  const top = text.ops.reduce((p, g) => Math.min(p, opBox(g).y), Infinity);
+  const artY = Math.min(text.top, top) - gap - artHeight / 2;
+  return [placeSymbol(art, 0, artY, scale), ...text.ops];
 }
 
 function strokeRect(
@@ -1681,12 +1710,12 @@ function badgeKind(ctx: any) {
 }
 
 function badgeOps(ctx: any) {
-  const n = badgeKind(ctx);
-  if (n === "seal") return sealOps(ctx);
+  const kind = badgeKind(ctx);
+  if (kind === "seal") return sealOps(ctx);
   const { vc } = ctx;
-  const r = !!ctx.concept.symbolFilled;
-  const i = vc.symbol;
-  const a = r
+  const filled = !!ctx.concept.symbolFilled;
+  const frameColor = vc.symbol;
+  const colors = filled
     ? {
         ...vc,
         name: vc.knockout,
@@ -1698,91 +1727,103 @@ function badgeOps(ctx: any) {
         mark: vc.knockout,
       }
     : vc;
-  const s = r
+  const symColors = filled
     ? {
         main: vc.knockout,
         accent: vc.knockout,
-        knockout: i,
+        knockout: frameColor,
       }
     : ctx.symColors;
-  const o = layoutNameBlock(ctx.concept, ctx.input, ctx.fonts, {
+  const text = layoutNameBlock(ctx.concept, ctx.input, ctx.fonts, {
     align: "center",
-    wrapAt: n === "arch" ? 6.5 : 12,
-    colors: textColors(a),
+    wrapAt: kind === "arch" ? 6.5 : 12,
+    colors: textColors(colors),
     divider: ctx.concept.divider,
   });
-  const l = symbolArt(ctx.concept, ctx.input, ctx.fonts, s, false);
-  const u = o.right - o.left;
-  const m = opsBounds(o.ops);
-  const h = [...o.ops];
-  let p = Math.min(o.top, m.y);
-  if (l) {
-    let k = symbolScale(l.ink, l.hasContainer ? CAP * 1.7 : CAP * 1.5);
-    if (l.ink.w * k > u * 0.7) {
-      k = (u * 0.7) / l.ink.w;
+  const art = symbolArt(ctx.concept, ctx.input, ctx.fonts, symColors, false);
+  const textWidth = text.right - text.left;
+  const bounds = opsBounds(text.ops);
+  const ops = [...text.ops];
+  let top = Math.min(text.top, bounds.y);
+  if (art) {
+    let k = symbolScale(art.ink, art.hasContainer ? CAP * 1.7 : CAP * 1.5);
+    if (art.ink.w * k > textWidth * 0.7) {
+      k = (textWidth * 0.7) / art.ink.w;
     }
-    const v = l.ink.h * k;
-    const M = p - CAP * 0.45 - v / 2;
-    h.push(placeSymbol(l, 0, M, k));
-    p = M - v / 2;
+    const v = art.ink.h * k;
+    const M = top - CAP * 0.45 - v / 2;
+    ops.push(placeSymbol(art, 0, M, k));
+    top = M - v / 2;
   }
-  const g = Math.max(o.bottom, m.y + m.h);
-  const w = Math.max(2, CAP * 0.045) * strokeBoost;
-  const x = CAP * 0.85;
-  const y = CAP * 0.7;
-  let f = Math.max(u, CAP * 3) + x * 2;
-  const d = -f / 2;
-  if (n === "arch" && f <= CAP * 10.5) {
-    const k = f / 2;
-    const v = p - y * 0.5 - k * 0.3;
-    const S = g + y - v;
-    const N = archOutline(d, v, f, Math.max(S, k + CAP));
-    if (r) {
-      h.unshift({
+  const bottom = Math.max(text.bottom, bounds.y + bounds.h);
+  const stroke = Math.max(2, CAP * 0.045) * strokeBoost;
+  const padX = CAP * 0.85;
+  const padY = CAP * 0.7;
+  let width = Math.max(textWidth, CAP * 3) + padX * 2;
+  const left = -width / 2;
+  if (kind === "arch" && width <= CAP * 10.5) {
+    const k = width / 2;
+    const v = top - padY * 0.5 - k * 0.3;
+    const S = bottom + padY - v;
+    const N = archOutline(left, v, width, Math.max(S, k + CAP));
+    if (filled) {
+      ops.unshift({
         k: "stroke",
-        markup: (A: any, R: any) => `<path d="${N(A, R)}" fill="${i}"/>`,
+        markup: (A: any, R: any) =>
+          `<path d="${N(A, R)}" fill="${frameColor}"/>`,
         box: {
-          x: d,
+          x: left,
           y: v,
-          w: f,
+          w: width,
           h: Math.max(S, k + CAP),
         },
       });
     } else {
-      h.unshift({
+      ops.unshift({
         k: "stroke",
         markup: (A: any, R: any) =>
-          `<path d="${N(A, R)}" fill="none" stroke="${i}" stroke-width="${fmt(w)}"/>`,
+          `<path d="${N(A, R)}" fill="none" stroke="${frameColor}" stroke-width="${fmt(stroke)}"/>`,
         box: {
-          x: d - w / 2,
-          y: v - w / 2,
-          w: f + w,
-          h: Math.max(S, k + CAP) + w,
+          x: left - stroke / 2,
+          y: v - stroke / 2,
+          w: width + stroke,
+          h: Math.max(S, k + CAP) + stroke,
         },
       });
     }
-    return h;
+    return ops;
   }
-  f = Math.max(f, g - p + y * 2);
-  const b = p - y;
-  const z = g + y - b;
-  if (r)
-    h.unshift({
+  width = Math.max(width, bottom - top + padY * 2);
+  const frameTop = top - padY;
+  const frameHeight = bottom + padY - frameTop;
+  if (filled)
+    ops.unshift({
       k: "rect",
-      x: d,
-      y: b,
-      w: f,
-      h: z,
-      fill: i,
+      x: left,
+      y: frameTop,
+      w: width,
+      h: frameHeight,
+      fill: frameColor,
     });
   else {
-    h.unshift(strokeRect(d, b, f, z, w, i));
+    ops.unshift(
+      strokeRect(left, frameTop, width, frameHeight, stroke, frameColor),
+    );
     if (ctx.concept.style === "luxus" || ctx.concept.style === "elegant") {
       const k = CAP * 0.2;
-      h.unshift(strokeRect(d + k, b + k, f - k * 2, z - k * 2, w * 0.45, i));
+      ops.unshift(
+        strokeRect(
+          left + k,
+          frameTop + k,
+          width - k * 2,
+          frameHeight - k * 2,
+          stroke * 0.45,
+          frameColor,
+        ),
+      );
     }
   }
-  return h;
+  return ops;
 }
 
 function textOnArc(
@@ -1831,105 +1872,140 @@ function textOnArc(
 
 function sealOps(ctx: any) {
   const { concept, input, fonts, vc } = ctx;
-  const a = !!concept.symbolFilled;
-  const s = vc.symbol;
-  const o = a ? vc.knockout : vc.name;
-  const l = a ? vc.knockout : vc.suffix;
-  const u = concept.name.font;
-  const m = fonts.get(u);
-  const h = applyCase(cleanText(input.name), "upper", u.key);
-  const p = CAP * 0.62;
-  const g = sizeForCap(m, u.key, p);
-  const w = Math.max(0.14, boostedTracking(concept.name.tracking));
-  const x = concept.suffix.font;
-  const y = fonts.get(x);
-  const f = applyCase(
+  const filled = !!concept.symbolFilled;
+  const ringColor = vc.symbol;
+  const nameColor = filled ? vc.knockout : vc.name;
+  const suffixColor = filled ? vc.knockout : vc.suffix;
+  const nameFont = concept.name.font;
+  const nameFontData = fonts.get(nameFont);
+  const nameText = applyCase(cleanText(input.name), "upper", nameFont.key);
+  const nameCap = CAP * 0.62;
+  const nameSize = sizeForCap(nameFontData, nameFont.key, nameCap);
+  const nameTracking = Math.max(0.14, boostedTracking(concept.name.tracking));
+  const suffixFont = concept.suffix.font;
+  const suffixFontData = fonts.get(suffixFont);
+  const suffixText = applyCase(
     firstSeparatorOnly(cleanText(input.suffix)),
     "upper",
-    x.key,
+    suffixFont.key,
   );
-  const d = clampSuffixScale(concept.typo?.suffixScale);
-  const b =
-    p * (d === undefined ? 0.62 : Math.min(0.75, Math.max(0.45, d * 1.5)));
-  const z = sizeForCap(y, x.key, b);
-  const k = Math.max(0.2, boostedTracking(concept.suffix.tracking));
-  const v = advance(m, h, g, w);
-  const M = advance(y, f, z, k);
-  const S = Math.max(
+  const suffixScale = clampSuffixScale(concept.typo?.suffixScale);
+  const suffixCap =
+    nameCap *
+    (suffixScale === undefined
+      ? 0.62
+      : Math.min(0.75, Math.max(0.45, suffixScale * 1.5)));
+  const suffixSize = sizeForCap(suffixFontData, suffixFont.key, suffixCap);
+  const suffixTrack = Math.max(0.2, boostedTracking(concept.suffix.tracking));
+  const nameAdvance = advance(nameFontData, nameText, nameSize, nameTracking);
+  const suffixAdvance = advance(
+    suffixFontData,
+    suffixText,
+    suffixSize,
+    suffixTrack,
+  );
+  const radius = Math.max(
     CAP * 2.6,
-    v / ((150 * Math.PI) / 180),
-    M / ((110 * Math.PI) / 180),
+    nameAdvance / ((150 * Math.PI) / 180),
+    suffixAdvance / ((110 * Math.PI) / 180),
   );
-  const N = p * 1;
-  const A = S + p / 2;
-  const R = A + N / 2 + CAP * 0.32;
-  const L = A - N / 2 - CAP * 0.3;
-  const E = Math.max(2, CAP * 0.05) * strokeBoost;
-  const I = [];
-  if (a) {
-    I.push({
+  const band = nameCap * 1;
+  const textRadius = radius + nameCap / 2;
+  const outerRadius = textRadius + band / 2 + CAP * 0.32;
+  const innerRadius = textRadius - band / 2 - CAP * 0.3;
+  const stroke = Math.max(2, CAP * 0.05) * strokeBoost;
+  const ops = [];
+  if (filled) {
+    ops.push({
       k: "circle",
       cx: 0,
       cy: 0,
-      r: R + E / 2,
-      fill: s,
+      r: outerRadius + stroke / 2,
+      fill: ringColor,
     });
   } else {
-    I.push({
+    ops.push({
       k: "stroke",
       markup: (te: any, X: any) =>
-        `<circle cx="${fmt(te)}" cy="${fmt(X)}" r="${fmt(R)}" fill="none" stroke="${s}" stroke-width="${fmt(E)}"/>`,
+        `<circle cx="${fmt(te)}" cy="${fmt(X)}" r="${fmt(outerRadius)}" fill="none" stroke="${ringColor}" stroke-width="${fmt(stroke)}"/>`,
       box: {
-        x: -R - E / 2,
-        y: -R - E / 2,
-        w: 2 * R + E,
-        h: 2 * R + E,
+        x: -outerRadius - stroke / 2,
+        y: -outerRadius - stroke / 2,
+        w: 2 * outerRadius + stroke,
+        h: 2 * outerRadius + stroke,
       },
     });
   }
-  const T = a ? vc.knockout : s;
-  const K = E * 0.5;
-  I.push({
+  const innerColor = filled ? vc.knockout : ringColor;
+  const innerStroke = stroke * 0.5;
+  ops.push({
     k: "stroke",
     markup: (te: any, X: any) =>
-      `<circle cx="${fmt(te)}" cy="${fmt(X)}" r="${fmt(L)}" fill="none" stroke="${T}" stroke-width="${fmt(K)}"/>`,
+      `<circle cx="${fmt(te)}" cy="${fmt(X)}" r="${fmt(innerRadius)}" fill="none" stroke="${innerColor}" stroke-width="${fmt(innerStroke)}"/>`,
     box: {
-      x: -L - K / 2,
-      y: -L - K / 2,
-      w: 2 * L + K,
-      h: 2 * L + K,
+      x: -innerRadius - innerStroke / 2,
+      y: -innerRadius - innerStroke / 2,
+      w: 2 * innerRadius + innerStroke,
+      h: 2 * innerRadius + innerStroke,
     },
   });
-  I.push(...textOnArc(m, h, g, w, 0, 0, A - p / 2, true, o));
-  I.push(...textOnArc(y, f, z, k, 0, 0, A + b / 2, false, l));
-  const F = CAP * 0.075;
-  I.push({
+  ops.push(
+    ...textOnArc(
+      nameFontData,
+      nameText,
+      nameSize,
+      nameTracking,
+      0,
+      0,
+      textRadius - nameCap / 2,
+      true,
+      nameColor,
+    ),
+  );
+  ops.push(
+    ...textOnArc(
+      suffixFontData,
+      suffixText,
+      suffixSize,
+      suffixTrack,
+      0,
+      0,
+      textRadius + suffixCap / 2,
+      false,
+      suffixColor,
+    ),
+  );
+  const dotRadius = CAP * 0.075;
+  ops.push({
     k: "circle",
-    cx: -A,
+    cx: -textRadius,
     cy: 0,
-    r: F,
-    fill: a ? vc.knockout : vc.divider,
+    r: dotRadius,
+    fill: filled ? vc.knockout : vc.divider,
   });
-  I.push({
+  ops.push({
     k: "circle",
-    cx: A,
+    cx: textRadius,
     cy: 0,
-    r: F,
-    fill: a ? vc.knockout : vc.divider,
+    r: dotRadius,
+    fill: filled ? vc.knockout : vc.divider,
   });
-  const D = a
+  const artColors = filled
     ? {
         main: vc.knockout,
         accent: vc.knockout,
-        knockout: s,
+        knockout: ringColor,
       }
     : ctx.symColors;
-  const Y = symbolArt(concept, input, fonts, D, false);
-  if (Y) {
-    const te = symbolScale(Y.ink, L * (Y.hasContainer ? 1.15 : 0.85));
-    I.push(placeSymbol(Y, 0, 0, te));
+  const art = symbolArt(concept, input, fonts, artColors, false);
+  if (art) {
+    const te = symbolScale(
+      art.ink,
+      innerRadius * (art.hasContainer ? 1.15 : 0.85),
+    );
+    ops.push(placeSymbol(art, 0, 0, te));
   }
-  return I;
+  return ops;
 }
 
 function renderContext(
@@ -1939,16 +2015,16 @@ function renderContext(
   variant: string,
   ground?: string,
 ) {
-  const a = resolveColors(concept, variant, ground);
+  const colors = resolveColors(concept, variant, ground);
   return {
     concept,
     input,
     fonts,
-    vc: a,
+    vc: colors,
     symColors: {
-      main: a.symbol,
-      accent: a.symbolAccent,
-      knockout: a.knockout,
+      main: colors.symbol,
+      accent: colors.symbolAccent,
+      knockout: colors.knockout,
     },
     filled: !!concept.symbolFilled,
   };

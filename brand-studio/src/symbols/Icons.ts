@@ -62,44 +62,44 @@ export function renderSymbol(
   fonts: FontStore,
   filled: boolean = false,
 ) {
-  const s = getContainer(symbol.container);
-  const i = filled && s!.key !== "none";
-  const a = i
+  const container = getContainer(symbol.container);
+  const knockout = filled && container!.key !== "none";
+  const artColors = knockout
     ? {
         main: colors.knockout,
         accent: colors.knockout,
         knockout: colors.main,
       }
     : colors;
-  const o = s!.inner;
-  let l;
+  const inner = container!.inner;
+  let art;
   if (symbol.kind === "icon") {
-    const u = o.w / 100;
-    const c = getIcon(symbol.id).render(a);
-    l =
-      u === 1 && o.x === 0 && o.y === 0
+    const u = inner.w / 100;
+    const c = getIcon(symbol.id).render(artColors);
+    art =
+      u === 1 && inner.x === 0 && inner.y === 0
         ? c
-        : `<g transform="translate(${o.x} ${o.y}) scale(${u} ${o.h / 100})">${c}</g>`;
+        : `<g transform="translate(${inner.x} ${inner.y}) scale(${u} ${inner.h / 100})">${c}</g>`;
   } else {
     const u = symbol.konstruktion;
-    l =
+    art =
       (u
         ? drawnMonogramSvg(
             fonts.get(symbol.font),
             `${symbol.font.key}@${symbol.font.weight}${symbol.font.style ?? ""}`,
             symbol.letters,
-            o,
-            a.main,
+            inner,
+            artColors.main,
             u,
           )
         : "") ||
       fontMonogramSvg(
         fonts.get(symbol.font),
         symbol.letters,
-        o,
-        a.main,
+        inner,
+        artColors.main,
         fontCategory(symbol.font.key),
       );
   }
-  return s!.render(colors, i) + l;
+  return container!.render(colors, knockout) + art;
 }

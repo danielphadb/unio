@@ -265,44 +265,44 @@ export function legalProximity(concept: LogoConcept, input: LogoInput) {
 function corpusMatch(concept: LogoConcept, input: LogoInput) {
   if (concept.signature) return null;
   const { concept: t, input: r } = applyNameFormat(concept, input);
-  const i = cleanText(r.name);
-  const a = new Set(
-    [foldName(i), foldName(withoutGenericWords(i))].filter(
+  const name = cleanText(r.name);
+  const nameKeys = new Set(
+    [foldName(name), foldName(withoutGenericWords(name))].filter(
       (g) => g.length >= 2,
     ),
   );
-  if (!a.size) return null;
-  const s = getFont(t.name.font.key);
-  const o =
-    s.cat === "serif" ? "serif" : s.cat === "script" ? "script" : "sans";
-  const l = isCaps(t.name.font, t.name.case)
+  if (!nameKeys.size) return null;
+  const meta = getFont(t.name.font.key);
+  const schrift =
+    meta.cat === "serif" ? "serif" : meta.cat === "script" ? "script" : "sans";
+  const schreibung = isCaps(t.name.font, t.name.case)
     ? "upper"
     : t.name.case === "lower"
       ? "lower"
       : "mixed";
-  const u = trackingClass(t.name.tracking);
-  const m = t.layout === "wordmark" || !t.symbol;
-  const h = fontForm(t.name.font.key);
-  let p = null;
+  const trackingStufe = trackingClass(t.name.tracking);
+  const isWordmark = t.layout === "wordmark" || !t.symbol;
+  const form = fontForm(t.name.font.key);
+  let near = null;
   for (const { row, names } of corpusIndex()) {
-    if (![...a].some((S) => names.has(S))) continue;
+    if (![...nameKeys].some((S) => names.has(S))) continue;
     const [x, , , y, f, d, b, z] = row;
     const k = d === "eng" ? 0 : d === "normal" ? 1 : 2;
     const v = ["Name"];
-    if (y === o) {
+    if (y === schrift) {
       v.push("Schriftart");
     }
-    if (z && z === h) {
+    if (z && z === form) {
       v.push("Schriftform");
     }
-    if (f === l) {
+    if (f === schreibung) {
       v.push("Schreibung");
     }
-    if (k === u) {
+    if (k === trackingStufe) {
       v.push("Laufweite");
     }
-    if (!!b == !m) {
-      v.push(m ? "ohne Bildzeichen" : "mit Bildzeichen");
+    if (!!b == !isWordmark) {
+      v.push(isWordmark ? "ohne Bildzeichen" : "mit Bildzeichen");
     }
     if (v.length === 6)
       return {
@@ -313,27 +313,27 @@ function corpusMatch(concept: LogoConcept, input: LogoInput) {
         },
       };
     let M = 0;
-    if (y === o) {
+    if (y === schrift) {
       M += 1;
     }
-    if (f === l) {
+    if (f === schreibung) {
       M += 1;
     }
-    M += k === u ? 1 : Math.abs(k - u) === 1 ? 0.5 : 0;
-    if (!b && m) {
+    M += k === trackingStufe ? 1 : Math.abs(k - trackingStufe) === 1 ? 0.5 : 0;
+    if (!b && isWordmark) {
       M += 0.5;
     }
-    if (!p && f === l && M >= 2.5) {
-      p = {
+    if (!near && f === schreibung && M >= 2.5) {
+      near = {
         marke: x,
         merkmale: v,
       };
     }
   }
-  return p
+  return near
     ? {
         twin: null,
-        near: p,
+        near: near,
       }
     : null;
 }

@@ -2398,24 +2398,27 @@ export function qualityThreshold(
   pinned: any,
   size: number = PAGE_SIZE,
 ) {
-  const i = medianQuality(concepts, input);
-  if (i === null) return concepts;
-  const a = (u: any) => qualityScore(u, input);
-  const s = new Set(
-    concepts.filter((u) => u === pinned || !hasSymbol(u) || a(u) >= i),
+  const median = medianQuality(concepts, input);
+  if (median === null) return concepts;
+  const score = (c: LogoConcept) => qualityScore(c, input);
+  const keep = new Set(
+    concepts.filter((c) => c === pinned || !hasSymbol(c) || score(c) >= median),
   );
-  const o = concepts.filter((u) => s.has(u));
-  const l = concepts.filter((u) => !s.has(u)).sort((u, m) => a(m) - a(u));
-  for (
+  const kept = concepts.filter((c) => keep.has(c));
+  const rest = concepts
+    .filter((c) => !keep.has(c))
+    .sort((a, b) => score(b) - score(a));
+  // Ohne Route und mit Themen: mindestens ein Konzept mit Zeichen behalten.
+  if (
     !routeOf(input) &&
-    input.themes.some((u) => u !== "initialen") &&
-    !o.some(hasSymbol) &&
-    l.length &&
-    s.add(l.shift()!);
-    s.size < Math.min(size, concepts.length) && l.length;
+    input.themes.some((t) => t !== "initialen") &&
+    !kept.some(hasSymbol) &&
+    rest.length
   )
-    s.add(l.shift()!);
-  return concepts.filter((u) => s.has(u));
+    keep.add(rest.shift()!);
+  while (keep.size < Math.min(size, concepts.length) && rest.length)
+    keep.add(rest.shift()!);
+  return concepts.filter((c) => keep.has(c));
 }
 
 function spreadCardBackgrounds(concepts: LogoConcept[]) {
@@ -3165,53 +3168,65 @@ function curateWithDrawn(
 ) {
   if (!pool.some(isDrawn))
     return curateWithSignature(pool, input, fonts, size, options, mix);
-  const s = pool.filter((f) => !isDrawn(f) || drawnRenders(f, input, fonts));
-  const o = curateWithSignature(s, input, fonts, size, options, mix);
-  const l = new Set(options.exclude ?? []);
-  const u =
+  const candidates = pool.filter(
+    (f) => !isDrawn(f) || drawnRenders(f, input, fonts),
+  );
+  const page = curateWithSignature(
+    candidates,
+    input,
+    fonts,
+    size,
+    options,
+    mix,
+  );
+  const excluded = new Set(options.exclude ?? []);
+  const medianScore =
     medianQuality(
-      s.filter((f) => !f.signature && !isDrawn(f)),
+      candidates.filter((f) => !f.signature && !isDrawn(f)),
       input,
     ) ?? 0;
-  const m = s.filter(
+  const drawn = candidates.filter(
     (f) =>
       isDrawn(f) &&
-      !l.has(f.id) &&
-      !o.includes(f) &&
+      !excluded.has(f.id) &&
+      !page.includes(f) &&
       checkLogo(f, input, fonts).score >=
         QUALITY_STEPS[QUALITY_STEPS.length - 1]! &&
-      (!hasSymbol(f) || qualityScore(f, input) >= u),
+      (!hasSymbol(f) || qualityScore(f, input) >= medianScore),
   );
-  if (size < 4 || o.some((c) => isDrawn(c!)) || !m.length) return o;
-  const h = MIN_DIVERSE + MAX_SIGNATURE;
-  const p = options.pinFirst ? 1 : 0;
-  const g = o
+  if (size < 4 || page.some((c) => isDrawn(c!)) || !drawn.length) return page;
+  const maxFonts = MIN_DIVERSE + MAX_SIGNATURE;
+  const firstFree = options.pinFirst ? 1 : 0;
+  const slots = page
     .map((f, d) => ({
       c: f,
       k: d,
     }))
-    .filter(({ c: f, k: d }) => d >= p && !f!.signature);
-  const w = g.filter(({ c: f }) => {
+    .filter(({ c: f, k: d }) => d >= firstFree && !f!.signature);
+  const monogramSlots = slots.filter(({ c: f }) => {
     return f!.layout !== "wordmark" && f!.symbol?.kind === "monogram";
   });
-  const x = [...w, ...g.filter((f) => !w.includes(f)).reverse()];
-  const y = m
+  const slotOrder = [
+    ...monogramSlots,
+    ...slots.filter((f) => !monogramSlots.includes(f)).reverse(),
+  ];
+  const ranked = drawn
     .map((f) => ({
       c: f,
       v: qualityScore(f, input),
     }))
     .sort((f, d) => d.v - f.v);
-  for (const { c } of y) {
-    for (const { k: d } of x) {
-      const b = o.map((z, k) => (k === d ? c : z));
+  for (const { c } of ranked) {
+    for (const { k: d } of slotOrder) {
+      const b = page.map((z, k) => (k === d ? c : z));
       if (
-        fontsNeeded(b as LogoConcept[], "logo", input).length <= h &&
+        fontsNeeded(b as LogoConcept[], "logo", input).length <= maxFonts &&
         lookIsNew(c, b as LogoConcept[])
       )
         return b;
     }
   }
-  return o;
+  return page;
 }
 
 function curateWithSignature(
@@ -3726,47 +3741,51 @@ export function signatureConcepts(
   seed: number | undefined,
   varianten: boolean = true,
 ) {
-  const a = SIGNATURE_PER_PACKAGE[pkg] ?? 0;
-  if (!a) return [];
-  const s = routedInput(input);
-  const o = routeOf(s);
-  const l = ALL_TEMPLATES.filter(
+  const perPackage = SIGNATURE_PER_PACKAGE[pkg] ?? 0;
+  if (!perPackage) return [];
+  const routed = routedInput(input);
+  const route = routeOf(routed);
+  const candidates = ALL_TEMPLATES.filter(
     (y) =>
       (entwuerfe ? true : y.freigabe === "freigegeben") &&
       y.mischung !== false &&
-      fits(y, s).passt &&
-      !templateBlocked(y, s) &&
-      templateInRoute(y, s),
+      fits(y, routed).passt &&
+      !templateBlocked(y, routed) &&
+      templateInRoute(y, routed),
   );
-  const u = isShortBrandName(s) ? KIT_TEMPLATE_IDS : null;
-  const m = seed ?? inputSeed(s);
-  const h = rankTemplates(
-    l,
-    s,
-    m,
-    (y) => (u?.has(y.id) ? 0 : 1),
-    o ? (y) => templateWeight(y, s) : undefined,
+  const kitIds = isShortBrandName(routed) ? KIT_TEMPLATE_IDS : null;
+  const rankSeed = seed ?? inputSeed(routed);
+  const ranked = rankTemplates(
+    candidates,
+    routed,
+    rankSeed,
+    (y) => (kitIds?.has(y.id) ? 0 : 1),
+    route ? (y) => templateWeight(y, routed) : undefined,
   );
-  const p = pkg === 0 ? 0 : 6;
-  const g =
-    pkg === 0 ? Math.min(a, Math.max(6, Math.round(h.length * 0.7))) : a;
-  const w = Array.from(
+  const offset = pkg === 0 ? 0 : 6;
+  const take =
+    pkg === 0
+      ? Math.min(perPackage, Math.max(6, Math.round(ranked.length * 0.7)))
+      : perPackage;
+  const chosen = Array.from(
     {
-      length: Math.min(g, h.length),
+      length: Math.min(take, ranked.length),
     },
-    (y, f) => h[(p + f) % h.length],
+    (y, f) => ranked[(offset + f) % ranked.length],
   );
-  const x: any[] = [];
-  w.forEach((y, f) => {
-    const d = varianten ? pickTemplateVariant(y, s, m, entwuerfe) : y;
-    const b = templatePalettes(d, s, f + pkg);
-    const z = s.styles.find((v) => d.passt.stile.includes(v));
-    const k = templateConcept(d, s, b!, z);
+  const concepts: any[] = [];
+  chosen.forEach((y, f) => {
+    const d = varianten
+      ? pickTemplateVariant(y, routed, rankSeed, entwuerfe)
+      : y;
+    const b = templatePalettes(d, routed, f + pkg);
+    const z = routed.styles.find((v) => d.passt.stile.includes(v));
+    const k = templateConcept(d, routed, b!, z);
     if (k) {
-      x.push(k);
+      concepts.push(k);
     }
   });
-  return x;
+  return concepts;
 }
 
 export function pickTemplateVariant(
