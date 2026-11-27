@@ -23,17 +23,24 @@ const SLUGS = [
   "brandl-soehne",
   "gebrueder-kogler",
 ];
-const read = (rel: string) => JSON.parse(readFileSync(join(golden, rel), "utf8"));
+const read = (rel: string) =>
+  JSON.parse(readFileSync(join(golden, rel), "utf8"));
 const sha = (s: string) => createHash("sha256").update(s).digest("hex");
 
 const store = newStore();
 
 /** Wie die Logo-Engine (`zm`) ein Logo als Dokument ausgibt. */
-async function logoSvg(c: LogoConcept, input: any, opts: { variant?: string; ground?: string }) {
+async function logoSvg(
+  c: LogoConcept,
+  input: any,
+  opts: { variant?: string; ground?: string },
+) {
   await store.ensure(signatureFonts(c, input));
   const part = renderSignature(c, input, store, opts);
   if (!part || !part.width) return "";
-  return svgDocument(part, { padding: Math.max(part.width, part.height) * 0.02 }).replace(
+  return svgDocument(part, {
+    padding: Math.max(part.width, part.height) * 0.02,
+  }).replace(
     "<svg ",
     '<svg aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid meet" ',
   );
@@ -81,7 +88,10 @@ describe("Golden Master: Signature-Logos", () => {
             n++;
             const input = nf.Gt(first[i], styles);
             const face = en.qs(c);
-            const svg = await logoSvg(c, input, { variant: face?.variant, ground: face?.ground });
+            const svg = await logoSvg(c, input, {
+              variant: face?.variant,
+              ground: face?.ground,
+            });
             expect(sha(svg), `${slug} ${c.id}`).toBe(ref.sha256);
           }
         }

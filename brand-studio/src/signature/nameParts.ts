@@ -160,10 +160,9 @@ export function partnerPair(name: string): [string, string] {
     : ["", ""];
 }
 
-type NameInput = Pick<
-  BrandInput,
-  "name" | "suffix" | "place" | "nameKind" | "ort2" | "jahr"
->;
+/** Eingabe für die Namensteile: nur der Name ist Pflicht. */
+export type NameInput = Pick<BrandInput, "name"> &
+  Partial<Pick<BrandInput, "suffix" | "place" | "nameKind" | "ort2" | "jahr">>;
 
 /** Alle Platzhalter einer Marke (`Mn`, Export `ae`); `ohneTitel` lässt Titel weg. */
 export function nameParts(input: NameInput, ohneTitel = false): NameParts {

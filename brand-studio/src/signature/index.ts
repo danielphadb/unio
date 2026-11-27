@@ -41,6 +41,7 @@ import {
   ZUSATZ_FELDER,
   type FontSource,
   type SignatureInput,
+  type FitInput,
 } from "./render";
 import { buildVariant, splitVariantId, varianteBleibtFrei } from "./varianten";
 
@@ -155,7 +156,7 @@ export function getSignatureTemplate(
  */
 export function fits(
   t: SignatureTemplate,
-  input: SignatureInput,
+  input: FitInput,
   fonts?: FontSource | null,
   opts: FitOptions = {},
 ): FitResult {
@@ -206,10 +207,7 @@ function bodyFont(f: FontRef): FontRef {
  */
 export function signatureConcept(
   t: SignatureTemplate,
-  input: Pick<
-    BrandInput,
-    "name" | "suffix" | "place" | "nameKind" | "ort2" | "jahr" | "styles"
-  >,
+  input: FitInput,
   palette: Palette,
   params: SignatureParams = {},
   style?: StyleKey,

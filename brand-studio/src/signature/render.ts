@@ -49,10 +49,16 @@ export interface FontSource {
   version?: number;
 }
 
-export type SignatureInput = Pick<
-  BrandInput,
-  "name" | "suffix" | "place" | "nameKind" | "ort2" | "jahr" | "styles"
->;
+/** Eingabe für Layout und Rendern: nur der Name ist Pflicht. */
+export type SignatureInput = Pick<BrandInput, "name"> &
+  Partial<
+    Pick<
+      BrandInput,
+      "suffix" | "place" | "nameKind" | "ort2" | "jahr" | "styles"
+    >
+  >;
+/** Eingabe für die Passung und das Konzept: mit den gewählten Stilen. */
+export type FitInput = SignatureInput & Pick<BrandInput, "styles">;
 
 /** Bezugsgröße: Versalhöhe des Namens in der Ausgabe (`ar`). */
 const UNIT = 100;
@@ -1640,12 +1646,7 @@ function draw(
  * Initialen für das Monogramm (`os`): bei Personen beide (wenn A bis Z), sonst
  * die erste; `null`, wenn keine einfache Initiale da ist.
  */
-export function signatureInitials(
-  input: Pick<
-    BrandInput,
-    "name" | "suffix" | "place" | "nameKind" | "ort2" | "jahr"
-  >,
-): string | null {
+export function signatureInitials(input: SignatureInput): string | null {
   const f = nameParts(input);
   const ok = (c: string) => /^[A-Z]$/.test(c);
   return isPersonName(input)
@@ -1733,7 +1734,7 @@ const no = (grund: string): FitResult => ({ passt: false, grund });
  */
 export function checkFit(
   t: SignatureTemplate,
-  input: SignatureInput,
+  input: FitInput,
   fonts?: FontSource | null,
   opts: FitOptions = {},
 ): FitResult {

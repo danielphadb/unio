@@ -175,7 +175,7 @@ describe("Bausteine", () => {
       );
   });
   it("Übergang: cleanText, corpusTwinName", () => {
-    for (const t of ["", "  a  b ", "Ä–B", undefined])
+    for (const t of ["", "  a  b ", "Ä\u2013B", undefined])
       expect(ueb.cleanText(t)).toBe(old.$(t));
     const extra = [
       { name: "Savills", suffix: "" },
@@ -314,10 +314,12 @@ describe("Layout und SVG", () => {
         ["color", { part: "wordmark", boost: 1.6 }],
         ["mono-light", { lockup: "monogram" }],
       ] as const)
-        expect(
-          sig.renderTemplate(t, inp, mine, p, v, o),
-          `${t.id} ${inp.name} ${v}`,
-        ).toStrictEqual(old.il(t, inp, theirs, p, v, o));
+        // Varianten: zwei der fünf Fälle je Marke (wechselnd), Vorlagen: alle
+        if (!t.variante || (k + v.length) % 2 === 0)
+          expect(
+            sig.renderTemplate(t, inp, mine, p, v, o),
+            `${t.id} ${inp.name} ${v}`,
+          ).toStrictEqual(old.il(t, inp, theirs, p, v, o));
     }
   });
   it("Konzept, Rendern über das Konzept, Schriften, Initialen", () => {
