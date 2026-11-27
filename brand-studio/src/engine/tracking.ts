@@ -74,6 +74,7 @@ export function isCaps(font: FontRef, kase?: string) {
   return kase === "upper" || !!getFont(font.key).capsOnly;
 }
 
+/** Erlaubte Laufweiten-Bereiche je Schriftform und Schreibung (`Ct`). */
 export function trackingRanges(
   font: FontRef,
   kase: string | undefined,
@@ -192,6 +193,7 @@ export function defaultTracking(font: FontRef, kase?: string) {
   return Math.min(i![1]!, Math.max(i![0]!, 0.15));
 }
 
+/** Laufweite auf eine erlaubte Stufe der Schriftform einrasten (`ae`). */
 export function snapTracking(
   font: FontRef,
   kase: string | undefined,
@@ -221,6 +223,7 @@ export function snapTracking(
   return o!;
 }
 
+/** Laufweite des Zusatzes (Versalien 0,10 bis 0,30 em, grosser Zusatz 0,04 bis 0,20 em) (`mn`). */
 export function suffixTracking(
   kase: string | undefined,
   value: unknown,

@@ -55,6 +55,7 @@ function fontCategory(key: string) {
   }
 }
 
+/** Symbol (Icon oder Monogramm, auch gezeichnet) mit Rahmen als SVG-Teil (`IL`, Export `bi`). */
 export function renderSymbol(
   symbol: any,
   colors: any,

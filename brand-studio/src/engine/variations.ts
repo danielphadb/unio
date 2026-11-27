@@ -44,6 +44,7 @@ function sharedTraits(first: LogoConcept, second: LogoConcept) {
   return r.filter((a, s) => a === i[s]).length;
 }
 
+/** Varianten im Editor (Schrift, Zeichen, Layout und Kombinationen) (`Lm`, Export `v`). */
 export function editorVariants(
   concept: LogoConcept,
   input: LogoInput,
@@ -102,6 +103,7 @@ function sameJson(a: any, b: any) {
   return JSON.stringify(a) === JSON.stringify(b);
 }
 
+/** "Aehnlich wie": Varianten entlang einer Achse (font, symbol, layout, palette, typo) (`Cr`, Export `o`). */
 export function similarConcepts(
   concept: LogoConcept,
   input: LogoInput,

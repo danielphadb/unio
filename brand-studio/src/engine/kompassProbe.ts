@@ -19,6 +19,7 @@ export interface ShownSoFar {
   fonts: Set<string>;
 }
 
+/** Route auf eine Eingabe anwenden (Stile, Farben, Themen, Route) (`je`, Export `d`). */
 export function applyRouteToInput(input: any, route: any) {
   const r = routeToBrandInputPatch(route);
   return withRoute(
@@ -72,6 +73,7 @@ function freshestConcept(concepts: LogoConcept[], shown: ShownSoFar) {
   );
 }
 
+/** Logos je Route: mit Namen drei Konzepte, ohne Namen Namen mit Karten (`tr`, Export `a`). */
 export function routeLogos(
   routes: any,
   brief: any,

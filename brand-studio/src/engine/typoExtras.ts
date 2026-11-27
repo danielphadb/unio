@@ -86,6 +86,7 @@ export function typoExtrasFit(extras: any, input: LogoInput) {
     : true;
 }
 
+/** Extras eines Rezepts anwenden: Hochzahl (Stern, Grad, Bezirk), Fussnote, Klammer, Trenner (`Wu`). */
 export function applyTypoExtras(
   concept: LogoConcept,
   extras: any,
@@ -223,6 +224,7 @@ function syllableJoint(word: string) {
   return r >= 2 && r <= Array.from(word).length - 2 ? r : undefined;
 }
 
+/** Moegliche Typo-Varianten fuer Name, Stil und Layout mit Gewichten (`Ws`). */
 export function typoOptions(base: any, preferred?: any): TypoOption[] {
   const { input, style, layout, palette, colors, extra } = base;
   const l = base.upperFormat
@@ -691,6 +693,7 @@ export function pickTypo(
     : x;
 }
 
+/** Art des Typo-Details eines Konzepts (swap, rule, dot, italic ...) (`Ye`). */
 export function typoKind(concept: LogoConcept) {
   const n = concept.typo;
   if (n?.letterSwap) return "swap";
@@ -720,6 +723,7 @@ export function typoKind(concept: LogoConcept) {
         : "plain";
 }
 
+/** Optionen im Editor: Laufweite, Schreibung, Teilung, Akzent (`Am`, Export `x`). */
 export function editorOptions(concept: LogoConcept, input: LogoInput) {
   const t = getFont(concept.name.font.key);
   const r = t.cat === "script";

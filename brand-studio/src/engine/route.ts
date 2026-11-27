@@ -12,6 +12,7 @@ import { getFont } from "./fonts";
 import { moodOfPaletteId, paletteBaseId } from "./palettes";
 import { splitVariantId } from "../signature/varianten";
 
+/** Routen-Parameter einer Eingabe oder `undefined` (`se`). */
 export function routeOf(input: any): RouteParams | undefined {
   const n = input?.route;
   return n && typeof n == "object" ? n : undefined;
@@ -28,6 +29,7 @@ const ALL_MOODS = [
   "sand",
 ];
 
+/** Eingabe mit Stilen, Farben und Themen der Route, wo die Eingabe nichts vorgibt (`gr`, Export `L`). */
 export function routedInput(input: LogoInput) {
   const n = routeOf(input);
   if (!n) return input;
@@ -101,12 +103,14 @@ export function containerBlocked(container: string, input: LogoInput) {
 
 export const templateBaseId = (id: string) => splitVariantId(id)[0];
 
+/** Gehoert die Vorlage (oder ihre Basis) zu den Vorlagen der Route? Ohne Liste passt jede (`Is`). */
 export function templateInRoute(template: any, input: LogoInput) {
-  const t = routeOf(input)?.signatureIds;
-  return t
-    ? t.includes(templateBaseId(template.id)) ||
-        (!!template.variante && t.includes(template.variante.basis))
-    : true;
+  const ids = routeOf(input)?.signatureIds;
+  if (!ids) return true;
+  return (
+    ids.includes(templateBaseId(template.id)) ||
+    (!!template.variante && ids.includes(template.variante.basis))
+  );
 }
 
 const THEME_SIGNS = {
@@ -116,6 +120,7 @@ const THEME_SIGNS = {
   haus: ["bogen", "fenster"],
 };
 
+/** Ist die Vorlage durch die Route gesperrt (Liste, Rahmen, Themen, Schriftformen)? (`Os`, Export `X`). */
 export function templateBlocked(template: any, input: LogoInput) {
   const t = routeOf(input);
   if (!t) return false;
@@ -429,6 +434,7 @@ const artOf = (concept: LogoConcept) =>
       ? "zeichen"
       : "wortmarke";
 
+/** Leit-Merkmale der Route: Schriftklasse, Farbfamilie, Logo-Art (`Ks`). */
 export function leitMerkmale(input: any): LeitMerkmale {
   const n = routeOf(input);
   if (!n) return {};
@@ -452,6 +458,7 @@ export function leitMerkmale(input: any): LeitMerkmale {
   return t;
 }
 
+/** Wie weit eine Seite von den Leit-Merkmalen entfernt ist (0 = erfuellt) (`Gr`). */
 export function leitAbstand(concepts: LogoConcept[], leit: any) {
   const t = (r: any, i: any) => {
     if (!r) return 0;

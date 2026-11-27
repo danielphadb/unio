@@ -49,6 +49,7 @@ export function fontFamilies(concept: LogoConcept, input: LogoInput) {
   return t;
 }
 
+/** Regelverstoesse hochwertiger Marken mit Regel-Code und Hinweis (`Ai`). */
 export function antiPatterns(concept: LogoConcept, input: LogoInput) {
   if (concept.signature) return [];
   const { concept: t, input: r } = applyNameFormat(concept, input);
@@ -250,10 +251,12 @@ const corpusIndex = () =>
 const trackingClass = (tracking: number) =>
   tracking < 0.03 ? 0 : tracking < 0.09 ? 1 : 2;
 
+/** Marke aus dem Korpus, der das Konzept in allen Merkmalen gleicht (`Ei`). */
 export function corpusTwin(concept: LogoConcept, input: LogoInput) {
   return corpusMatch(concept, input)?.twin ?? null;
 }
 
+/** Rechtliche Naehe: Korpus-Marke mit gleichem Namen und aehnlichem Auftritt (`Ml`). */
 export function legalProximity(concept: LogoConcept, input: LogoInput) {
   const t = corpusMatch(concept, input);
   return t && !t.twin ? t.near : null;
@@ -335,6 +338,7 @@ function corpusMatch(concept: LogoConcept, input: LogoInput) {
     : null;
 }
 
+/** Sperre fuer Vorlagen: Korpus-Marke mit gleichem Namen und gleicher Schrift/Schreibung (`Al`). */
 export function corpusTwinName(template: any, input: Pick<LogoInput, "name">) {
   const t = foldName(cleanText(input.name));
   if (t.length < 2) return null;

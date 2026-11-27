@@ -179,6 +179,7 @@ export function scoreFeatures(features: any, model = QUALITY_MODEL) {
   return Math.max(0, Math.min(100, Math.round(t * 20)));
 }
 
+/** Qualitaetswert 0 bis 100 eines Konzepts (Modell aus Merkmalen) (`_n`, Export `a6`). */
 export function qualityScore(concept: LogoConcept, input: LogoInput) {
   return scoreFeatures(qualityFeatures(concept, input));
 }

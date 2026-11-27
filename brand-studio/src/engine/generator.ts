@@ -858,6 +858,7 @@ function primaryCardReadable(palette: Palette) {
   );
 }
 
+/** Kartenflaeche eines Konzepts: Hintergrund, Variante und Grund (`qs`, Export `h`). */
 export function cardFace(concept: LogoConcept) {
   const n = sanitizePalette(concept.palette);
   return concept.cardBackground === "ink"
@@ -884,6 +885,7 @@ export function cardFace(concept: LogoConcept) {
         };
 }
 
+/** Ein Konzept aus Stil, Layout, Schriften, Zeichen, Palette und Typo-Detail bauen, danach reparieren (`Zi`). */
 export function buildConcept(input: LogoInput, seed: number, options: any) {
   const rnd = rng(seed);
   const style = options.style;
@@ -1241,6 +1243,7 @@ function recipeColors(recipe: any, colors: any, palette: Palette) {
       : colors;
 }
 
+/** Regeln nach dem Bau: Layout, Schreibschrift, scharfes S, Laufweiten, Farben hochwertiger Marken (`pr`). */
 export function repairConcept(
   concept: LogoConcept,
   input: LogoInput,
@@ -1849,6 +1852,7 @@ export function dropInvisibleAccents(concept: LogoConcept) {
   return i;
 }
 
+/** Rezept-Konzepte einer Seite: Stile reihum, Arten (Wortmarke, Monogramm, Icon) nach Themen oder Route, Schriftplan, Rezepte, Paletten und Typo-Details; IDs ohne Seed (`Ga`, Export `g`). */
 export function generateConcepts(
   rawInput: LogoInput,
   options: GenerateOptions,
@@ -2372,6 +2376,7 @@ export function pickRecipe(rnd: Rng, slot: any) {
   });
 }
 
+/** Hat das Konzept ein sichtbares Zeichen (keine Vorlage, kein reiner Schriftzug)? (`yt`, Export `a5`). */
 export const hasSymbol = (concept: LogoConcept) =>
   !concept.signature && concept.layout !== "wordmark" && !!concept.symbol;
 
@@ -2386,7 +2391,8 @@ function medianQuality(
   return t.length ? t[Math.floor(t.length / 2)]! : null;
 }
 
-function qualityThreshold(
+/** Qualitaetsschwelle: Konzepte mit Zeichen muessen mindestens den Median der Wortmarken erreichen (`Kc`). */
+export function qualityThreshold(
   concepts: LogoConcept[],
   input: LogoInput,
   pinned: any,
@@ -2658,6 +2664,7 @@ function planNameFormats(
   return kinds.map((x) => (x === "monogram" ? "monogram" : g[w++]));
 }
 
+/** Alle Schnitte, die die Konzepte brauchen (`logo`: ohne Fliesstext und Tagline) (`Xe`, Export `r`). */
 export function fontsNeeded(
   concepts: LogoConcept[],
   scope = "all",
@@ -2736,6 +2743,7 @@ function curationFacts(
 
 let shortNameMode = false;
 
+/** Schluessel fuer den Look (Schriftklasse, Schreibung, Laufweite, Detail), fuer Vielfalt auf einer Seite (`xe`). */
 export function lookKey(concept: LogoConcept, short: boolean = false) {
   if (concept.signature) return `sig|${templateBaseId(concept.signature.id)}`;
   if (shortNameMode && short) return shortLookKey(concept);
@@ -2980,6 +2988,7 @@ function mixOk(
   );
 }
 
+/** Kuratierung einer Seite aus dem Pool: Mischung nach Route (kindMix), Qualitaetsschwelle, Vielfalt, danach `leitPass` (`Rm`, Export `b`). */
 export function curateConcepts(
   pool: LogoConcept[],
   rawInput: LogoInput,
@@ -3019,7 +3028,8 @@ export function curateConcepts(
   }
 }
 
-function leitPass(
+/** Tauscht Konzepte gegen Pool-Konzepte, bis die Seite die Leit-Merkmale der Route (Schriftklasse, Farbfamilie, Logo-Art) zeigt, ohne Qualitaet und Vielfalt zu verlieren (`tm`). */
+export function leitPass(
   page: LogoConcept[],
   pool: LogoConcept[],
   input: LogoInput,
@@ -3708,7 +3718,8 @@ function balanceFontGroups(
 
 const SIGNATURE_PER_PACKAGE = [12, 8];
 
-function signatureConcepts(
+/** Signature-Vorlagen eines Pakets als Konzepte (12, dann 8): passende Vorlagen, Variante, Palette und Stil gewichtet (`am`). */
+export function signatureConcepts(
   input: LogoInput,
   pkg: number,
   entwuerfe: boolean = false,
@@ -3933,6 +3944,7 @@ export function rankTemplates(
     .map((o: any) => o.t);
 }
 
+/** Galerie-Seite -> Paket und Schritt (Seite 0 und 1 sind Paket 0) (`cm`, Export `k`). */
 export function curatedPackage(page: number) {
   return page <= 1
     ? {
@@ -3945,6 +3957,7 @@ export function curatedPackage(page: number) {
       };
 }
 
+/** Pool einer Galerie-Seite: Rezept-Konzepte, gezeichnete Monogramme und Eingriffe, Signature-Vorlagen; mit Route gefiltert und abgedunkelt (`Tm`, Export `d`). */
 export function curationCandidates(
   input: LogoInput,
   options: CandidateOptions = {},
@@ -4102,6 +4115,7 @@ function drawnRenders(
   return true;
 }
 
+/** Passt das Konzept zur Route (Palette, Schriften, Vorlage, Zeichen)? (`gm`, Export `a4`). */
 export function fitsRoute(concept: LogoConcept, input: LogoInput) {
   if (!routeOf(input)) return true;
   if (
@@ -4180,6 +4194,7 @@ function hasOutlinedText(concept: LogoConcept) {
   return !!n?.elemente.some((t) => t.typ === "text" && !!t.kontur);
 }
 
+/** Konzept auf andere Kartenflaeche setzen; Akzente, die dort nicht sichtbar waeren, fallen weg (`eo`, Export `R`). */
 export function withCardBackground(concept: LogoConcept, background: any) {
   const t = hasOutlinedText(concept) ? "paper" : background;
   const r = contrast(concept.palette.primary, concept.palette.paper) >= 4.5;

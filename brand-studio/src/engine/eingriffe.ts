@@ -22,6 +22,14 @@ import {
 import { fontForm } from "./tracking";
 import { getFont } from "./fonts";
 
+/** Konstruktionen gezeichneter Monogramme, die in der gesicherten Fassung abgeschaltet sind. */
+export { KONSTRUKTIONEN_AUS } from "../symbols/drawnMonogram";
+
+/**
+ * Schalter: gezeichnete Monogramme, Buchstaben-Eingriffe und Markierung nach Wortsinn.
+ * Alle aus; mit der Einstellung `signatureEntwuerfe` erscheinen Monogramme und Eingriffe
+ * trotzdem in der Galerie (siehe `curationCandidates`).
+ */
 export const GEZEICHNET = {
   monogramme: false,
   eingriffe: false,

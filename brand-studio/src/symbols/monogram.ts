@@ -174,6 +174,7 @@ function firstTwoLetters(text: string) {
     .join("");
 }
 
+/** Monogramm aus Schrift: Buchstaben optisch unterschnitten, in die Box eingepasst (`p4`, Export `b0`). */
 export function fontMonogramSvg(
   font: Font,
   letters: string,

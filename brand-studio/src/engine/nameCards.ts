@@ -99,6 +99,7 @@ function cutForStyle(meta: FontMeta, style: string, rnd: Rng): FontRef {
             : lightest(meta);
 }
 
+/** Schriften einer Seite: Namensschriften reihum ueber die Stile (Rotation), Zusatz und Zweitschnitt (`Xt`). */
 export function fontPlan(
   input: LogoInput,
   seed: number,
@@ -233,6 +234,7 @@ export function fontPlan(
   return o;
 }
 
+/** Konzepte fuer einen Namen (Namenskarten, Routen) (`Nm`, Export `af`). */
 export function nameCardConcepts(
   name: string,
   input: LogoInput,
@@ -344,6 +346,7 @@ export function cardVariant(concept: LogoConcept, input: LogoInput) {
   });
 }
 
+/** Schriftplan der Namenskarten mit Budget `count` (`Om`, Export `$`). */
 export function nameCardFonts(
   input: LogoInput,
   seed: number,
@@ -365,6 +368,7 @@ export function nameCardFonts(
   };
 }
 
+/** Ein Konzept fuer eine Namenskarte nach Art (Wortmarke, Monogramm, Icon, Linie, Siegel) (`Bm`, Export `a2`). */
 export function nameCardConcept(input: LogoInput, seed: number, options: any) {
   const r = rng(mixSeed(seed, 51837));
   const i = [...options.plan.names, options.plan.suffix];

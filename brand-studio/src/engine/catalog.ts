@@ -37,6 +37,7 @@ export const mixSeed = (...parts: number[]) =>
     625341585,
   ) >>> 0;
 
+/** Gewichtete Zufallsauswahl (`Be`). */
 export function weightedPick<T>(
   rnd: Rng,
   items: readonly T[],
@@ -66,6 +67,7 @@ export const heaviest = (font: FontMeta): FontRef => ({
   weight: Math.max(...font.weights),
 });
 
+/** Seed aus Name, Zusatz, Stilen, Farben, Themen (`dt`, Export `i`). */
 export function inputSeed(input: LogoInput) {
   return hash(
     [
@@ -78,6 +80,7 @@ export function inputSeed(input: LogoInput) {
   );
 }
 
+/** ID eines Konzepts: `c` + Hash ohne Seed (`tc`, Export `p`). */
 export function conceptId(concept: any) {
   const { seed, ...t } = concept;
   const r = {

@@ -251,6 +251,62 @@ Bleiben bei der Logo-Engine (hängen an Route und Galerie): `am`, `om`, `sm`, `l
 `Qs`, `Hr` (Auswahl und Gewichtung der Vorlagen je Seite), Konzept-Ähnlichkeit `bs`, `Ei`, `Ml`
 und die Ähnlichkeitssperre `Al` (highend.ts). `similarity.ts` entfällt deshalb in src/signature.
 
+### Logo-Engine (src/engine, src/symbols, Entwickler "Logo-Engine")
+
+Abgleich: tests/golden/logo bitgenau (8 Marken, ohne und mit Route, 3 Seeds: `generateConcepts`,
+Galerie-Pools der ersten drei Seiten, Kuratierung, die ersten sechs SVGs je Lauf) und tests/golden/names
+(Namenskarten mit SVG). Dazu Vergleiche Modul für Modul mit den alten Funktionen (`recovered("engine")`,
+`recovered("index")`, `recovered("nameFinder")`, `recovered("kompass")`). Keine Abweichung.
+
+Entstehung: Die Module sind aus dem engine-Chunk (und den Symbol-Teilen des index-Chunks, den Namenskarten
+des nameFinder-Chunks, `tr`/`je` aus dem kompass-Chunk) maschinell rückübersetzt (Babel: Minify-Muster
+zurück, z. B. optionale Ketten, `if` statt `&&`, eine Deklaration je Zeile; Namen für alle Bindungen der
+obersten Ebene und alle Parameter; Typen an den Schnittstellen), danach von Hand typisiert und dokumentiert.
+Lokale Variablen in den großen Funktionen tragen teils noch die kurzen Namen der gesicherten Fassung
+(ausgeschrieben in `generateConcepts`, `buildConcept`, `curationCandidates`, `curateConcepts`, `renderLogo`,
+`resolveColors`, `applyNameFormat`, `cardSet`, `routeLogos`). Innen sind Werte teils `any`, die Schnittstellen
+sind typisiert (`LogoConcept`, `LogoInput`, `FontStore`, Optionen in logoTypes.ts).
+
+Abweichungen von der Modulkarte: `logoSvg.ts` (SVG-Cache, Render-Warteschlange, Hooks, `fontStore`),
+`variations.ts`, `nameCardSet.ts` (Namenskarten aus dem nameFinder-Chunk), `cleanText.ts` (eigene Datei gegen
+Import-Kreise mit src/signature), `logoTypes.ts`. Die Eingabe der Engine ist `LogoInput` (nur Name, Stile,
+Farbstimmungen und Themen Pflicht). `KONSTRUKTIONEN_AUS` liegt in src/symbols/drawnMonogram.ts und wird aus
+eingriffe.ts weitergereicht. Signature-Teile importiert die Engine aus src/signature (index, varianten, render,
+nameParts); Signature bekommt `cleanText`, `resolveColors`, `corpusTwinName`, `fontMonogramSvg` von hier.
+
+| Modul | Stand | Exporte (alter Name im Bundle) | Tests |
+|---|---|---|---|
+| src/engine/index.ts | fertig | öffentliche API der Logo-Engine (reicht alle Module unten weiter) | |
+| src/engine/generator.ts | fertig, bitgenau | `conceptKey` (`Gn`), `typography` (`$s`), `isClicheIcon` (`Cs`), `FILLED_CHANCE` (`Ki`), `initialIconFits` (`ai`), `iconsForInput` (`pt`), `containersForInput` (`si`), `monogramFont` (`oi`), `pickDivider` (`li`), `pickColors` (`Hs`), `monogramLetters` (`Ln`), `isShortBrandName` (`Pe`), `cardFace` (`qs`), `buildConcept` (`Zi`), `finishConcept` (`Us`), `withLegalProximity` (`Qt`), `repairConcept` (`pr`), `allowsRule` (`js`), `accentsVisible` (`kt`), `dropInvisibleAccents` (`$i`), `generateConcepts` (`Ga`), `RECIPE_EXTRA_STYLE` (`Ci`), `pickRecipe` (`ci`), `hasSymbol` (`yt`), `qualityThreshold` (`Kc`), `serifDecided` (`_s`), `routeFontFactor` (`Zc`), `fontsNeeded` (`Xe`), `PAGE_SIZE` (`kr`), `lookKey` (`xe`), `curateConcepts` (`Rm`), `leitPass` (`tm`), `signatureConcepts` (`am`), `pickTemplateVariant` (`sm`), `templateWeight` (`lm`), `templateConcept` (`Js`), `rankTemplates` (`um`), `curatedPackage` (`cm`), `curationCandidates` (`Tm`), `fitsRoute` (`gm`), `withCardBackground` (`eo`) | tests/engine/logo/golden.test.ts (48 Läufe: generateConcepts Seite 0 und 1, Galerie-Pools, Kuratierung, SVG byte-gleich), vergleich.test.ts (Geschmack, spätere Seiten, ohne Entwürfe, pinFirst) |
+| src/engine/renderLogo.ts | fertig, bitgenau | `CAP` (`Z`), `resolveColors` (`Nn`), `SEPARATOR_RE` (`Ms`), `initials` (`sn`), `splitLabels` (`ku`), `displayName` (`Kn`), `applyNameFormat` (`kn`), `renderLogo` (`Un`), `renderTagline` (`yu`), `conceptFonts` (`wu`), `typoFonts` (`Ti`) | golden.test.ts (SVG), vergleich.test.ts (alle Varianten, Teile, Anordnungen, Verstärkung, Tagline) |
+| src/engine/logoSvg.ts | fertig, bitgenau | `fontStore` (`pn`), `fontsForConcepts` (`no`), `fontsLoaded` (`Gt`), `loadFonts` (`Fm`), `useFontsReady` (`Km`), `renderLogoSvg` (`zm`), `enqueueRender` (`xm`), `useLogoSvg` (`Gm`), `cancelLowPriority` (`Zm`), `perfMark` (`$m`), `perfMeasure` (`Cm`) | golden.test.ts, vergleich.test.ts (mit Tagline) |
+| src/engine/logoCheck.ts | fertig, bitgenau | `checkLogo` (`jn`), `isFineWeight` (`Lu`) | vergleich.test.ts |
+| src/engine/quality.ts | fertig, bitgenau | `scoreFeatures` (`Ns`), `qualityScore` (`_n`) | vergleich.test.ts |
+| src/engine/highend.ts | fertig, bitgenau | `HIGH_END_STYLES` (`Qe`), `NEUTRAL_ICONS` (`ps`), `BLOCKED_ICONS` (`wl`), `fontFamilies` (`Mi`), `antiPatterns` (`Ai`), `corpusTwin` (`Ei`), `legalProximity` (`Ml`), `corpusTwinName` (`Al`) | vergleich.test.ts |
+| src/engine/catalog.ts | fertig, bitgenau | `STYLES` (`Fi`), `LAYOUTS` (`Yt`), `mixSeed` (`pe`), `weightedPick` (`Be`), `round3` (`vn`), `randomIn` (`ue`), `lightest` (`de`), `heaviest` (`cn`), `inputSeed` (`dt`), `conceptId` (`tc`), `withId` (`be`), `fontWeightForStyle` (`Gs`), `SUFFIX_FONTS` (`ii`), `BODY_FONTS` (`ac`), `MONOGRAM_SERIFS` (`sc`), `fontFitsName` (`Zs`), `fontsForStyle` (`ut`), `coveringFonts` (`ct`) | vergleich.test.ts, über golden.test.ts |
+| src/engine/tracking.ts | fertig, bitgenau | `TRACKING_STEPS` (`zi`), `SUFFIX_CAPS_TRACKING` (`qr`), `SUFFIX_SCALE_STEPS` (`Mm`), `SUFFIX_SCALE_MIN` (`Ur`), `LARGE_SUFFIX_SCALE` (`rr`), `clampSuffixScale` (`ht`), `STACK_SYMBOL` (`Nr`), `INLINE_GAPS` (`On`), `fontForm` (`ne`), `isCaps` (`He`), `trackingRanges` (`Ct`), `defaultTracking` (`ir`), `snapTracking` (`ae`), `suffixTracking` (`mn`), `EDITOR_TRACKING_STEPS` (`ui`), `TRACKING_LEVELS` (`Et`), `nearestTrackingStep` (`zc`), `trackingStepIndex` (`Em`) | vergleich.test.ts (alle Schnitte, Schreibungen, Werte) |
+| src/engine/typoExtras.ts | fertig, bitgenau | `typoExtrasFit` (`Pu`), `applyTypoExtras` (`Wu`), `endingJoint` (`Ps`), `isLongWord` (`Jt`), `allLongWords` (`Gi`), `nameWords` (`Ee`), `typoOptions` (`Ws`), `pickTypo` (`wc`), `typoKind` (`Ye`), `editorOptions` (`Am`), `DETAIL_KINDS` (`bt`) | vergleich.test.ts (Editor-Optionen), über golden.test.ts |
+| src/engine/suffixPairings.ts | fertig, bitgenau | `suffixPairingOf` (`ti`), `applySuffixPairing` (`$u`), `suffixPairingsFor` (`Cu`) | vergleich.test.ts, über golden.test.ts |
+| src/engine/route.ts | fertig, bitgenau | `routeOf` (`se`), `routedInput` (`gr`), `allowedMoods` (`Oi`), `paletteBlocked` (`xn`), `themesBlocked` (`Rs`), `fontBlocked` (`gt`), `containerBlocked` (`Vt`), `templateBaseId` (`an`), `templateInRoute` (`Is`), `templateBlocked` (`Os`), `fontAxes` (`Bi`), `paletteAxes` (`dr`), `templateAxes` (`Vs`), `axisFit` (`Jn`), `routeFit` (`Yu`), `kindMixOf` (`Vi`), `splitByShares` (`Ju`), `LEIT_KLASSE` (`fn`), `leitMerkmale` (`Ks`), `leitAbstand` (`Gr`) | vergleich.test.ts, golden.test.ts (Läufe mit Route) |
+| src/engine/eingriffe.ts | fertig, bitgenau | `GEZEICHNET` (`Bt`), `EINGRIFFE_AUS` (`Xl`), `eingriffOf` (`Li`), `konstruktionOf` (`xs`), `possibleEingriffe` (`nu`), `applyEingriff` (`Ss`) | über golden.test.ts (Eingriffe in den Pools mit Entwürfen) |
+| src/engine/taste.ts | fertig, bitgenau | `tasteProfile` (`ni`), `tasteScore` (`Ou`), `tasteFactor` (`Dn`) | vergleich.test.ts |
+| src/engine/recipes.ts | fertig, bitgenau | `RECIPES` (`Ls`), `weightClass` (`_t`), `recipeAcceptsFont` (`Ii`), `getRecipe` (`Fu`) | über golden.test.ts |
+| src/engine/nameCards.ts | fertig, bitgenau | `NAME_FONTS_PER_PAGE` (`rn`), `extraCut` (`Hi`), `fontPlan` (`Xt`), `nameCardConcepts` (`Nm`), `cardVariant` (`Im`), `nameCardFonts` (`Om`), `nameCardConcept` (`Bm`), `nameCardKey` (`Vm`) | vergleich.test.ts, namenskarten.test.ts |
+| src/engine/nameCardSet.ts | fertig, bitgenau | `nameCards`, `fallbackCard`, `cardForms` | tests/engine/logo/namenskarten.test.ts (48 Läufe aus tests/golden/names: Karten und SVG byte-gleich, Ersatzkarte, Formen) |
+| src/engine/variations.ts | fertig, bitgenau | `editorVariants` (`Lm`), `similarConcepts` (`Cr`) | vergleich.test.ts |
+| src/engine/kompassProbe.ts | fertig, bitgenau | `ShownSoFar`, `applyRouteToInput`, `routeLogos` | tests/engine/logo/kompassProbe.test.ts (10 Briefs, 2 Seeds) |
+| src/engine/corpusMarks.ts | fertig, bitgenau | `CorpusMark`, `CORPUS_MARKS` (`gs`) | über highend |
+| src/engine/corpusTechMarks.ts | fertig, bitgenau | `CORPUS_TECH_MARKS` (`ds`) | über highend |
+| src/engine/cleanText.ts | fertig, bitgenau | `cleanText` (`$`) | über alle |
+| src/engine/logoTypes.ts | fertig, bitgenau | `ColorVariant`, `LogoPart`, `Lockup`, `RenderOptions`, `SvgOptions`, `Taste`, `GenerateOptions`, `CandidateOptions`, `CurateOptions`, `LogoPartSvg`, `TasteProfile`, `FontPlan`, `LeitMerkmale`, `TypoChoice`, `TypoOption`, `LogoInput` | Typprüfung |
+| src/symbols/geometry.ts | fertig, bitgenau | `num` (`M`), `polyPath` (`ur`), `roundedPolygon` (`ne`), `rectPath` (`we`), `circlePath` (`at`), `strokePath` (`G`), `fillPath` (`W`), `circleShape` (`Wn`), `add` (`ut`), `scale` (`rt`), `rotatePoint` (`NS`), `translatePoints` (`Jo`), `polar` (`ei`), `tiledPolygons` (`ca`), `thickPolyline` (`el`), `heartPath` (`PS`), `lensPath` (`cu`), `splitLensPath` (`DS`), `keyholePath` (`tl`), `housePoints` (`It`), `ringSegmentPath` (`US`), `archPath` (`nn`), `lineIntersection` (`vd`), `quadPoint` (`yd`), `wavePath` (`ms`), `CONTAINER_STROKE` (`gn`), `ALL_STYLES` (`AS`), `shieldPath` (`xd`), `hexagonPoints` (`kd`), `fillAttr` (`Yt`) | vergleich.test.ts (alle Icons mit allen Rahmen) |
+| src/symbols/containers.ts | fertig, bitgenau | `CONTAINERS` (`fu`) | dto. |
+| src/symbols/Icons.ts | fertig, bitgenau | `ALL_ICONS` (`qc`), `CONTAINER_KEYS` (`Eg`), `getIcon` (`ST`), `getContainer` (`wT`), `iconsFor` (`OL`), `renderSymbol` (`IL`) | dto. |
+| src/symbols/monogram.ts | fertig, bitgenau | `fontMonogramSvg` (`p4`), `initialsOf` (`ML`) | vergleich.test.ts (Monogramme, Initialen) |
+| src/symbols/boolean.ts | fertig, bitgenau | `pathToRings` (`G4`), `geomArea` (`Er`), `ringsToGeom` (`H4`), `textGeom` (`W4`), `union` (`xs`), `difference` (`br`), `intersection` (`Wi`), `xor` (`V4`), `rectGeom` (`bh`), `polygonGeom` (`NL`), `translateGeom` (`Ar`), `scaleGeom` (`K4`), `dilateGeom` (`Eh`), `geomBounds` (`ko`), `geomCentroid` (`q4`), `scanRow` (`li`), `minStroke` (`Th`), `geomToPath` (`wg`) | über drawnMonogram und Eingriffe |
+| src/symbols/drawnMonogram.ts | fertig, bitgenau | `KONSTRUKTIONEN` (`Y4`), `drawnMonogram` (`bg`), `KONSTRUKTIONEN_AUS` (`nT`), `availableKonstruktionen` (`RL`), `drawnMonogramSvg` (`rT`) | vergleich.test.ts (alle Konstruktionen) |
+| src/symbols/types.ts | fertig, bitgenau | `Pt`, `Ring`, `Polygon`, `Geom` | Typprüfung |
+
 ### Strategie (src/strategy, server, Entwickler "Strategie")
 
 Abgleich: `chooseRoutes` gegen tests/golden/strategy/routes.json (10 Briefe, Standard-Seed und

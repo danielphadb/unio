@@ -417,6 +417,7 @@ function withoutInlineSuffix(concept: LogoConcept) {
   });
 }
 
+/** Finale Logos fuer eine Charge Namen (Namensfinder, Routen) (`Yd`, Export `c`). */
 export function nameCards(
   names: any,
   seed: number,
@@ -446,6 +447,7 @@ export function nameCards(
   }).map(withoutInlineSuffix);
 }
 
+/** Ersatzkarte, falls kein finales Logo vorliegt (`Xd`, Export `b`). */
 export function fallbackCard(
   name: any,
   index: number,
@@ -470,6 +472,7 @@ const refreshId = (concept: any) => ({
   id: conceptId(concept),
 });
 
+/** Formen einer Karte: Schriftzug, mit Symbol, Emblem, Profilbild (`rl`, Export `l`). */
 export function cardForms(name: any, concept: LogoConcept, styles: any) {
   const a = nameInput(name, styles.length ? styles : [concept.style]);
   const u = generateConcepts(a, {

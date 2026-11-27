@@ -34,6 +34,7 @@ export function loadFonts(refs: FontRef[]) {
   return fontStore.ensure(refs);
 }
 
+/** React-Hook: sind alle Schriften der Konzepte geladen? (`Km`, Export `u`). */
 export function useFontsReady(concepts: LogoConcept[], input: any) {
   const t = fontsForConcepts(concepts, false, input);
   const r = t.map(refKey).sort().join(",");
@@ -162,6 +163,7 @@ function renderLogoDocument(
   };
 }
 
+/** Logo als SVG-Dokument (mit Rand, ohne Groesse), LRU-Zwischenspeicher mit 900 Eintraegen (`zm`, Export `l`). */
 export function renderLogoSvg(
   concept: LogoConcept,
   input: LogoInput,
@@ -253,6 +255,7 @@ export function enqueueRender(run: any, prio = "normal") {
   };
 }
 
+/** React-Hook: SVG eines Konzepts, gerendert in Leerlaufzeiten nach Prioritaet (`Gm`, Export `j`). */
 export function useLogoSvg(
   concept: LogoConcept | null | undefined,
   input: LogoInput,

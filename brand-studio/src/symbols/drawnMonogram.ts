@@ -100,6 +100,7 @@ const partCount = (geom: Geom) => geom.length;
 
 const ROUND_LETTERS = ["C", "D", "G", "O", "Q", "S", "U"];
 
+/** Gezeichnetes Monogramm aus zwei Initialen fuer eine Konstruktion, mit Mindestgroesse (`bg`). */
 export function drawnMonogram(
   font: Font,
   letters: string,

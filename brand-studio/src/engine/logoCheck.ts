@@ -90,6 +90,7 @@ function monogramPx(concept: LogoConcept) {
   return CHECK_SIZES.monogram * r * 0.9 * (i > 1 ? 0.7 : 1);
 }
 
+/** Logo-Check mit Punkten je Pruefung und Gesamtwert 0 bis 100 (`jn`, Export `K`). */
 export function checkLogo(
   concept: LogoConcept,
   input: LogoInput,

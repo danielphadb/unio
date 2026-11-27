@@ -109,6 +109,7 @@ function mostContrasting(palette: Palette, ground: string, light: string) {
   );
 }
 
+/** Farben je Rolle fuer eine Variante; im Farbmodus und umgekehrt mit Mindestkontrast 4,5 (Text) bzw. 3 (Zeichen, grosser Zusatz) (`Nn`, Export `al`). */
 export function resolveColors(
   concept: LogoConcept,
   variant: string = "color",
@@ -517,6 +518,7 @@ const OPEN_BOTTOM_LETTERS = "OCGQSUJVWYTocesuvwtÖÜöü";
 
 const OPEN_TOP_LETTERS = "OCGQSAocsaÖÄöä";
 
+/** Initialen eines Namens (1 oder 2 Buchstaben) (`sn`, Export `n`). */
 export function initials(name: string | undefined, count: number = 2) {
   const t = initialsOf(cleanText(name).normalize("NFC")) || "U";
   return count === 1 ? Array.from(t)[0] : t;
@@ -1960,12 +1962,14 @@ export function splitLabels(name: string, joint: number | undefined) {
       : ["Erster Teil", "Zweiter Teil"];
 }
 
-const displayName = (name: string | undefined) =>
+/** Name ohne vorangestellte Titel (Mag., Dr. ...), der letzte Teil bleibt (`Kn`). */
+export const displayName = (name: string | undefined) =>
   cleanText(name)
     .split(" ")
     .filter((n, t, r) => !(TITLE_RE.test(n) && t < r.length - 1))
     .join(" ");
 
+/** Namensformat anwenden (Versalien, Nachname mit Zusatz, Initial, gestapelt, Bezirk, Monogramm): angepasste Eingabe und Konzept (`kn`, Export `q`). */
 export function applyNameFormat(
   concept: LogoConcept,
   input: LogoInput,
@@ -2144,6 +2148,7 @@ export function applyNameFormat(
   }
 }
 
+/** Logo als Teil `{ body, width, height }`: Signature-Vorlage oder Layout des Konzepts, mit Zwischenspeicher je FontStore und Schriftversion (`Un`, Export `ai`). */
 export function renderLogo(
   concept: LogoConcept,
   input: LogoInput,
@@ -2280,6 +2285,7 @@ function renderUncached(
   }
 }
 
+/** Tagline als eigener Teil in der Farbe des Zusatzes (`yu`, Export `aj`). */
 export function renderTagline(
   concept: LogoConcept,
   input: LogoInput,
@@ -2329,6 +2335,7 @@ export function renderTagline(
   }
 }
 
+/** Alle Schnitte eines Konzepts inkl. Fliesstext, Tagline und Vorlage (`wu`, Export `ah`). */
 export function conceptFonts(
   concept: LogoConcept,
   input: LogoInput | undefined,
