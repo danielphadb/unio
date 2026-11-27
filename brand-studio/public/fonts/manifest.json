@@ -1,0 +1,1658 @@
+{
+  "fonts/brand/aboreto-latin-400-normal.woff": {
+    "bytes": 13256,
+    "sha256": "ea487a5dd91693813a7c40e2292dda28b49f19bba55ce3bd75f240ad34453d51"
+  },
+  "fonts/brand/aboreto-latin-ext-400-normal.woff": {
+    "bytes": 6248,
+    "sha256": "4d13aa06147a6d91a3342a9d481e0416b551622f079aaccca81404865dee5b52"
+  },
+  "fonts/brand/abril-fatface-latin-400-normal.woff": {
+    "bytes": 16884,
+    "sha256": "1ba2926a3629847973ed87f4e5d8a9600fd816ccc9722e102605edbaf805a477"
+  },
+  "fonts/brand/abril-fatface-latin-ext-400-normal.woff": {
+    "bytes": 10412,
+    "sha256": "68939d38aab7c228a51df2bc5a5051f27ce5d6ced7ced40225c41b541c161231"
+  },
+  "fonts/brand/afacad-latin-400-normal.woff": {
+    "bytes": 16628,
+    "sha256": "2b34e3bfc2c9ad93ffee0937548f6318cb13c32b2e4a754ff43ef9657fb931f9"
+  },
+  "fonts/brand/afacad-latin-600-normal.woff": {
+    "bytes": 17320,
+    "sha256": "81dd170a7a2e924b520189de26635f197eb4f452f5e2e2f5f89b270a719f1d28"
+  },
+  "fonts/brand/afacad-latin-ext-400-normal.woff": {
+    "bytes": 14660,
+    "sha256": "d7ae78cc26aa7b6789a36f9ba581549a8e58d066ecf605fe926b34d346216226"
+  },
+  "fonts/brand/afacad-latin-ext-600-normal.woff": {
+    "bytes": 15232,
+    "sha256": "e74573fc84a5075488c0a911cb3cb0a4ae1f17ef07ec5275aa5226f87008de08"
+  },
+  "fonts/brand/albert-sans-latin-400-normal.woff": {
+    "bytes": 13768,
+    "sha256": "18f0aec8b2e26d2874057e2f4b3c973df679f508e110f00dd175c4d4ebb6ff38"
+  },
+  "fonts/brand/albert-sans-latin-700-normal.woff": {
+    "bytes": 13880,
+    "sha256": "b33d62a2f3b284edbdfada9b3f2969e228343d36479c8b2317677921e9ccaf16"
+  },
+  "fonts/brand/albert-sans-latin-ext-400-normal.woff": {
+    "bytes": 10184,
+    "sha256": "036306820ba517d3013e735f6dd32ec5f43da6b04185af7430780e8327a40e03"
+  },
+  "fonts/brand/albert-sans-latin-ext-700-normal.woff": {
+    "bytes": 10320,
+    "sha256": "8bc2560013e9c00c5233f80a73922cba50e5063eb4d4aee42918a39922663087"
+  },
+  "fonts/brand/allura-latin-400-normal.woff": {
+    "bytes": 30868,
+    "sha256": "7507db0d0a02fb9259cdcab4e45295a4c053f8c7c8055009f257c698cedd4237"
+  },
+  "fonts/brand/allura-latin-ext-400-normal.woff": {
+    "bytes": 25532,
+    "sha256": "4ca580ea3881f476035ecc16d07687e6f158555c93966498e73aa40319aba90f"
+  },
+  "fonts/brand/antonio-latin-400-normal.woff": {
+    "bytes": 14444,
+    "sha256": "02f2541d2a7a6d5704acfa871968388780e7ef5078377d9c46695c15fc8dd8e8"
+  },
+  "fonts/brand/antonio-latin-700-normal.woff": {
+    "bytes": 14536,
+    "sha256": "01053e0c0093aedef4d8144a351ea7b5d7816d0b74cb0166d6ffdaac03ec6684"
+  },
+  "fonts/brand/antonio-latin-ext-400-normal.woff": {
+    "bytes": 10680,
+    "sha256": "a7193401dd9996d371ff46ec0c78ba53c9626988815768fd728a9e30ff3fa529"
+  },
+  "fonts/brand/antonio-latin-ext-700-normal.woff": {
+    "bytes": 10728,
+    "sha256": "a476e1d861ecc5d6475f03348171b3db30d86280ed2d1379777b0b29d5fe7f25"
+  },
+  "fonts/brand/archivo-latin-400-normal.woff": {
+    "bytes": 18972,
+    "sha256": "9c0a51442fdc30e015f734d04fd957ae00e3f39cc07817050735da301c0d7eda"
+  },
+  "fonts/brand/archivo-latin-800-normal.woff": {
+    "bytes": 18904,
+    "sha256": "585c9cce853f7140238c31f858aa01f8e913cd1ac88f7675f3f8ed26227f93c5"
+  },
+  "fonts/brand/archivo-latin-ext-400-normal.woff": {
+    "bytes": 17984,
+    "sha256": "c51b215300a784fd3f82f39fdf26b9aa8c800330c30aec63b81e69bd63523b90"
+  },
+  "fonts/brand/archivo-latin-ext-800-normal.woff": {
+    "bytes": 18568,
+    "sha256": "dc1aac130b2a44b075a68d55c8d5bfd03830db5a1f93b41d87d8c7c67b94b4a8"
+  },
+  "fonts/brand/archivo-narrow-latin-400-normal.woff": {
+    "bytes": 15280,
+    "sha256": "8c824ef3ef5fa1155da601a572e817a36e11f0c296fdd898dcc47b62b162f8d0"
+  },
+  "fonts/brand/archivo-narrow-latin-700-normal.woff": {
+    "bytes": 15196,
+    "sha256": "41d185818de0c98750d65149b4468c34f77ba99692812c31bae7109b08669413"
+  },
+  "fonts/brand/archivo-narrow-latin-ext-400-normal.woff": {
+    "bytes": 14768,
+    "sha256": "d80b7f4091da0ef2a7297045c61ed1731ecb9c9f00225b4d5b1c12e7d13cbd88"
+  },
+  "fonts/brand/archivo-narrow-latin-ext-700-normal.woff": {
+    "bytes": 14768,
+    "sha256": "0950c656a889dab2fd68a9e58eca363aecff36b1a5c01f5397e08e13feda22cc"
+  },
+  "fonts/brand/barlow-condensed-latin-500-normal.woff": {
+    "bytes": 18600,
+    "sha256": "a5c197a36d650b8bd6b153976aeb31f1ddd9e75f75e4165a6f3eb1e25f50ada6"
+  },
+  "fonts/brand/barlow-condensed-latin-700-normal.woff": {
+    "bytes": 18824,
+    "sha256": "bd414ee6698edb13ec58b3084b68c1804eeb55acb6b65f628822320dcd1e5431"
+  },
+  "fonts/brand/barlow-condensed-latin-ext-500-normal.woff": {
+    "bytes": 11864,
+    "sha256": "a77e06a3fc71666e6329b4843b40e63b3317a1c5e9bdd90108f1e13fa4c7ce06"
+  },
+  "fonts/brand/barlow-condensed-latin-ext-700-normal.woff": {
+    "bytes": 11988,
+    "sha256": "8d78002905fb21f0e72ec892f8d6d435a793991c480eb421901fd15046500470"
+  },
+  "fonts/brand/bebas-neue-latin-400-normal.woff": {
+    "bytes": 11180,
+    "sha256": "144f4a2feb4f333e5960703ef6a09bfe6633abbfe1b204e3ee512803eeffeb67"
+  },
+  "fonts/brand/bebas-neue-latin-ext-400-normal.woff": {
+    "bytes": 7520,
+    "sha256": "a46044b1f456faf89725dd42b7ac76d520196b76e6d427d8b3722a969c5fa215"
+  },
+  "fonts/brand/bellefair-latin-400-normal.woff": {
+    "bytes": 13832,
+    "sha256": "4763972ff637ede84058e53e92851f83ac31f4b956b8f6d9b0366c1e27a605de"
+  },
+  "fonts/brand/bellefair-latin-ext-400-normal.woff": {
+    "bytes": 9452,
+    "sha256": "f4fe338e016500c04bf06034b9e9dc4f03dd74786895ba908232b8d271b19f5f"
+  },
+  "fonts/brand/belleza-latin-400-normal.woff": {
+    "bytes": 13788,
+    "sha256": "7572dcb518d1df3c74a33823d1537dacf7561ac9cc1a85d68827c0053d8ba191"
+  },
+  "fonts/brand/belleza-latin-ext-400-normal.woff": {
+    "bytes": 9684,
+    "sha256": "713fa40a0a167f19a958592b20e558d3b2ce8a069f811f2c29e7813bbf43a79c"
+  },
+  "fonts/brand/big-shoulders-display-latin-500-normal.woff": {
+    "bytes": 17740,
+    "sha256": "6400cb598b42a16981fb18277ece8681d7454a583e71c6841708bd4d47fafd9c"
+  },
+  "fonts/brand/big-shoulders-display-latin-800-normal.woff": {
+    "bytes": 17648,
+    "sha256": "542e0d0647543f2abdcde9e60dc0c002b69d097c19b5f0e7c0eee91deaf358ca"
+  },
+  "fonts/brand/big-shoulders-display-latin-ext-500-normal.woff": {
+    "bytes": 16956,
+    "sha256": "76e7a224c9d1e7574f173eea87b07334aa8087a30f71ab9261c796a472b3bc11"
+  },
+  "fonts/brand/big-shoulders-display-latin-ext-800-normal.woff": {
+    "bytes": 16816,
+    "sha256": "cbc342f3006bcc65c78559a7c706cf6be8ca32940560a882c35c1370cb71a1bb"
+  },
+  "fonts/brand/big-shoulders-stencil-display-latin-700-normal.woff": {
+    "bytes": 18220,
+    "sha256": "b12bd4d40a68c72c7d34fa9f35422699d54939087a8ca8fed245c90d89404a39"
+  },
+  "fonts/brand/big-shoulders-stencil-display-latin-ext-700-normal.woff": {
+    "bytes": 17056,
+    "sha256": "fea438c545e33df106515a3e203ffc39c6c7ec7be8c4f80104218f2177657b89"
+  },
+  "fonts/brand/bodoni-moda-latin-500-italic.woff": {
+    "bytes": 21548,
+    "sha256": "d4c7e288502c060bb47e60408647a107a6da97656a6f656bb319011f61355649"
+  },
+  "fonts/brand/bodoni-moda-latin-500-normal.woff": {
+    "bytes": 19320,
+    "sha256": "daa9a4fbbf09c948595c202fe9fb4130658ca1a323bba3bdb9c7e4d02199e598"
+  },
+  "fonts/brand/bodoni-moda-latin-700-normal.woff": {
+    "bytes": 19260,
+    "sha256": "dd9bf43c5b95f291d9e3f9661ad18ade5eb7ad1398f2efa56c08d9821f515f89"
+  },
+  "fonts/brand/bodoni-moda-latin-ext-500-italic.woff": {
+    "bytes": 12132,
+    "sha256": "1922455bc336d99d1c99d3be9fae1b24b2c7024e15f84395750d23b1605152bc"
+  },
+  "fonts/brand/bodoni-moda-latin-ext-500-normal.woff": {
+    "bytes": 11104,
+    "sha256": "e37130f36ec126f26bd656065fe43d8d52b444b282856a87ce38e9bfdfbdaeb8"
+  },
+  "fonts/brand/bodoni-moda-latin-ext-700-normal.woff": {
+    "bytes": 11020,
+    "sha256": "ea10f03af3cf7696bd707b98568e628342652f6fe3a6372dc1a37d5abded3e2b"
+  },
+  "fonts/brand/bodoni-moda-sc-latin-500-normal.woff": {
+    "bytes": 22572,
+    "sha256": "ac134275c05e3a9a6ccdf46c065625de43e12c8609e438580412c2ca5ee88607"
+  },
+  "fonts/brand/bodoni-moda-sc-latin-ext-500-normal.woff": {
+    "bytes": 13184,
+    "sha256": "e4df4dc95f5e457866faa0a7114738e18245f770d6bc21c8622c80ef21818d17"
+  },
+  "fonts/brand/bona-nova-latin-400-italic.woff": {
+    "bytes": 26352,
+    "sha256": "a8f5ddd4ae16a66c64246d0a0952b3cd9f9b4fb5e20f97f84b0781ea1fb4155d"
+  },
+  "fonts/brand/bona-nova-latin-400-normal.woff": {
+    "bytes": 21876,
+    "sha256": "80f567af61e28721f471594258e4e6d9978c0e437b69d25cdb33a068d18d3c9e"
+  },
+  "fonts/brand/bona-nova-latin-700-normal.woff": {
+    "bytes": 21448,
+    "sha256": "8efb84b3d20e03a16c80876cb7b12e753f60d27711d865e46bd6b885e195fac4"
+  },
+  "fonts/brand/bona-nova-latin-ext-400-italic.woff": {
+    "bytes": 30936,
+    "sha256": "a61bc0a5c35971126d49365e68128a0522ec64a28d8a6a9fe8978012f549536e"
+  },
+  "fonts/brand/bona-nova-latin-ext-400-normal.woff": {
+    "bytes": 29664,
+    "sha256": "b6eb64a8d8116d62d68fb3a38879e8e594282953364747c1ac6283c1bfb6acf0"
+  },
+  "fonts/brand/bona-nova-latin-ext-700-normal.woff": {
+    "bytes": 29256,
+    "sha256": "96224ce42140e36d89a4367436160f97040ca110d033d922f3fe0c0124895130"
+  },
+  "fonts/brand/bricolage-grotesque-latin-400-normal.woff": {
+    "bytes": 27264,
+    "sha256": "59227a70849faa99613b6ef4cd0e602534027b42c6182127a54f17d948da70df"
+  },
+  "fonts/brand/bricolage-grotesque-latin-700-normal.woff": {
+    "bytes": 27044,
+    "sha256": "77b16e49fd9b26fd9150c33f2015ba1d10f8c075f98f36c4a44eee68394747cc"
+  },
+  "fonts/brand/bricolage-grotesque-latin-ext-400-normal.woff": {
+    "bytes": 13724,
+    "sha256": "8e102488be3dd8f5becca2ba3f684d090b887f30e8e5ba32e3bc9d723bba38ce"
+  },
+  "fonts/brand/bricolage-grotesque-latin-ext-700-normal.woff": {
+    "bytes": 13704,
+    "sha256": "9680f8b4e07280387600891f519e0c7c73edc7af7685a0e22cb59e710ef5bc9e"
+  },
+  "fonts/brand/brygada-1918-latin-400-italic.woff": {
+    "bytes": 18588,
+    "sha256": "6add1cff415ef9a8fd1892f62607f70951f42dd533dc7571543841f5a2a89d56"
+  },
+  "fonts/brand/brygada-1918-latin-400-normal.woff": {
+    "bytes": 17612,
+    "sha256": "dfb9b8c8444b2e4adda38d3a3dfbc4d1163bcf96ce9db84f84533bd514477c7f"
+  },
+  "fonts/brand/brygada-1918-latin-600-normal.woff": {
+    "bytes": 18288,
+    "sha256": "7a687065bd1196049ad96395830b03c78fa4c5e7a4ed0712e9f22176b647519f"
+  },
+  "fonts/brand/brygada-1918-latin-ext-400-italic.woff": {
+    "bytes": 26732,
+    "sha256": "470e0a134d1c8c8813c36e0c283f55d973b51099fed0122238f07a2edef06e88"
+  },
+  "fonts/brand/brygada-1918-latin-ext-400-normal.woff": {
+    "bytes": 25644,
+    "sha256": "ca7dd7184218b913fd0bbc06c7e3d8b8c7a57790cd566b5d5bc4bba1d75724ec"
+  },
+  "fonts/brand/brygada-1918-latin-ext-600-normal.woff": {
+    "bytes": 26728,
+    "sha256": "d47b918dbee8aa43b32e2e62e1859555c5196b280e137dffb9bd13a65d1c0998"
+  },
+  "fonts/brand/castoro-latin-400-italic.woff": {
+    "bytes": 25384,
+    "sha256": "b3e6d7c414afa8752518ebf2d00808af7f39b807853929b7d89452646ce936d3"
+  },
+  "fonts/brand/castoro-latin-400-normal.woff": {
+    "bytes": 24596,
+    "sha256": "b708ca0f98c395cbb50810b16655dafc976a4c592aa6900feb65343edc6cc747"
+  },
+  "fonts/brand/castoro-latin-ext-400-italic.woff": {
+    "bytes": 15964,
+    "sha256": "887f24bc14a783ed287a7fa94024ec846ac2c510282b85366d62531fc1b6fd71"
+  },
+  "fonts/brand/castoro-latin-ext-400-normal.woff": {
+    "bytes": 15736,
+    "sha256": "10bd90bcf1bfdbc239ac5c93f2aa171617350530fde9d3ea8dfbe45652e834c9"
+  },
+  "fonts/brand/cinzel-latin-500-normal.woff": {
+    "bytes": 17392,
+    "sha256": "9a9d232ab20440ff2571ebd2ef69ef562ff16b85af6a4c4eb62c1a75f986fa0f"
+  },
+  "fonts/brand/cinzel-latin-700-normal.woff": {
+    "bytes": 17524,
+    "sha256": "83ea41e439a253b4d436cc895d07a0d47f714c4816a23e86df35c442eddffafb"
+  },
+  "fonts/brand/cinzel-latin-ext-500-normal.woff": {
+    "bytes": 9672,
+    "sha256": "e3585dcfc461b5af11b925c720977a07af166a5b7058038b6ef008c3460f4d2a"
+  },
+  "fonts/brand/cinzel-latin-ext-700-normal.woff": {
+    "bytes": 9812,
+    "sha256": "dd34984698f3fa925365b89530fdfdfe9fa70ee2f681b233f267491145c8ecbd"
+  },
+  "fonts/brand/comfortaa-latin-400-normal.woff": {
+    "bytes": 17372,
+    "sha256": "956ac799174f494b9e67e7ba97e4e95eea4b2b6942c3a3fda5f637f2f3798f66"
+  },
+  "fonts/brand/comfortaa-latin-700-normal.woff": {
+    "bytes": 17188,
+    "sha256": "7548c64efc0f0e2e345b444a93848032991eec2f1c94752f7249d137b7d234ae"
+  },
+  "fonts/brand/comfortaa-latin-ext-400-normal.woff": {
+    "bytes": 15880,
+    "sha256": "ac9b0ff2ca87f8b0a7ef235ce425d667fc7bead3cc5a7374229312fb2028d53e"
+  },
+  "fonts/brand/comfortaa-latin-ext-700-normal.woff": {
+    "bytes": 15980,
+    "sha256": "369ec2e2cd6b16da75f16e74c9d7e01fa8d965341d179500b8067e36d44a88a1"
+  },
+  "fonts/brand/cormorant-garamond-latin-500-italic.woff": {
+    "bytes": 33176,
+    "sha256": "3847cec631ad84b191104d37f112809d1f39df4e5b7e04bae0a2ab77bb8c033d"
+  },
+  "fonts/brand/cormorant-garamond-latin-500-normal.woff": {
+    "bytes": 31372,
+    "sha256": "314ee3edd5ddcdef5cf2374c1126b8be9f7f1ebd6c5c66a23c237f3b836a3ec1"
+  },
+  "fonts/brand/cormorant-garamond-latin-700-normal.woff": {
+    "bytes": 30248,
+    "sha256": "19812cffd2e85fbf08d1b49adf35d3331bff4922d03847922e18e4ce81b3eff8"
+  },
+  "fonts/brand/cormorant-garamond-latin-ext-500-italic.woff": {
+    "bytes": 28864,
+    "sha256": "4e5ff6fedbe381bc68f1ea8f985eb380e7589a6f4d9ea3e8144596375e1dc2e0"
+  },
+  "fonts/brand/cormorant-garamond-latin-ext-500-normal.woff": {
+    "bytes": 28280,
+    "sha256": "08ef933798b9939e6c79d08b68c0aad8c0024d5ea25c2c1b00da51aa5ffb38c3"
+  },
+  "fonts/brand/cormorant-garamond-latin-ext-700-normal.woff": {
+    "bytes": 27040,
+    "sha256": "0aef139d390bb53077afd128065c78772b59fa1dde7677d1d6187955e71f4fa6"
+  },
+  "fonts/brand/cormorant-sc-latin-500-normal.woff": {
+    "bytes": 26724,
+    "sha256": "e8b786115d983cdf8d915c569e0a53eb0726fd9b039cdfff4ba7033fe47ee168"
+  },
+  "fonts/brand/cormorant-sc-latin-ext-500-normal.woff": {
+    "bytes": 25692,
+    "sha256": "720157c3c03e2f01f1f517977d0f16f26bd406435ad249997ba02848b190a1fc"
+  },
+  "fonts/brand/courier-prime-latin-400-normal.woff": {
+    "bytes": 14380,
+    "sha256": "eef1a8c90dd3e7c8ebcc79b6404e8b45fa7760b211d1e41af545f4f4076560d2"
+  },
+  "fonts/brand/courier-prime-latin-700-normal.woff": {
+    "bytes": 14676,
+    "sha256": "d6ad67763840787d840fc035f814826739be14c024ad25a75446fc2459c559d5"
+  },
+  "fonts/brand/courier-prime-latin-ext-400-normal.woff": {
+    "bytes": 9044,
+    "sha256": "d8a1479fe57eb811b430248d152fc4a1c88e753bfd27cd60f7e0b5554c8d8611"
+  },
+  "fonts/brand/courier-prime-latin-ext-700-normal.woff": {
+    "bytes": 9280,
+    "sha256": "c2390f14d965bf416a168ed83877fe6a387ddb8cc82e2d0775104b2ec19e456e"
+  },
+  "fonts/brand/crimson-pro-latin-400-italic.woff": {
+    "bytes": 24060,
+    "sha256": "58ef66d4a83daf7450f5ac97edf5f1cc048c90c26a9f96e0d66f6e214dd3e9cc"
+  },
+  "fonts/brand/crimson-pro-latin-400-normal.woff": {
+    "bytes": 22932,
+    "sha256": "94d4c8515bdefad72f0df38ef7fc1f42253b60ef5722075b4df6c65ad9b92f94"
+  },
+  "fonts/brand/crimson-pro-latin-600-normal.woff": {
+    "bytes": 23360,
+    "sha256": "33ab73313a9c4ac3040abfe33dbd6f830e17018f1deefbef7d488e733339e22d"
+  },
+  "fonts/brand/crimson-pro-latin-ext-400-italic.woff": {
+    "bytes": 21156,
+    "sha256": "9d8b04a9897478d0b4a11af098b4f53f5342115e63542eb6b798aff577880e05"
+  },
+  "fonts/brand/crimson-pro-latin-ext-400-normal.woff": {
+    "bytes": 20460,
+    "sha256": "76e8d7de1ce49881d69ba3121882742336f615c38ed2c869b1a670b26cabd5aa"
+  },
+  "fonts/brand/crimson-pro-latin-ext-600-normal.woff": {
+    "bytes": 20680,
+    "sha256": "25c8b5e635e72fe5ca28909d85cae6da2e5d2669b3204509547cb6dd652e2b89"
+  },
+  "fonts/brand/dm-mono-latin-300-normal.woff": {
+    "bytes": 11212,
+    "sha256": "97e1d58eea97fba6f26bf132aae36a42a0669e2aa01e1c0b6ac2d91d4e4e83bb"
+  },
+  "fonts/brand/dm-mono-latin-500-normal.woff": {
+    "bytes": 11248,
+    "sha256": "f9fbeef336ab52ff50c455d34ba361b686d4dc5f32b17e4ac5181606ff132e6b"
+  },
+  "fonts/brand/dm-mono-latin-ext-300-normal.woff": {
+    "bytes": 7504,
+    "sha256": "0f961a5fc85da7cf32fb88d3e33968c738d42ec2ba484d1aa17f7d15e6f89afa"
+  },
+  "fonts/brand/dm-mono-latin-ext-500-normal.woff": {
+    "bytes": 7488,
+    "sha256": "244d27dd594826258c14fcfcc786e72af979448594887ff2c3f9553ab2f282a1"
+  },
+  "fonts/brand/dm-sans-latin-400-italic.woff": {
+    "bytes": 19600,
+    "sha256": "78d6ec1c2107f3e489d1c93f8b4b398041d9c3aa261425e629cbde4f24724db6"
+  },
+  "fonts/brand/dm-sans-latin-400-normal.woff": {
+    "bytes": 18356,
+    "sha256": "38702875fe179437d200e7ba6f7fab4d497ffe48117ef332029b2081751186ad"
+  },
+  "fonts/brand/dm-sans-latin-700-normal.woff": {
+    "bytes": 18504,
+    "sha256": "af422a448ac00679a8dbb13532db3616829c5a35b58d3eeea5903ce17ad2e36a"
+  },
+  "fonts/brand/dm-sans-latin-ext-400-italic.woff": {
+    "bytes": 10972,
+    "sha256": "cf81289625f97d1cde0b055011a11a869a1d6e15487c503149a1a62c32258c00"
+  },
+  "fonts/brand/dm-sans-latin-ext-400-normal.woff": {
+    "bytes": 9976,
+    "sha256": "3d63423c3204f61bb196d1ae3729b7f2871d87abd4403d198f4810923888c016"
+  },
+  "fonts/brand/dm-sans-latin-ext-700-normal.woff": {
+    "bytes": 10012,
+    "sha256": "56084e69490970432de58b4a2406ee4daa1f58d90f9600ae3fda0e895a6355e7"
+  },
+  "fonts/brand/dm-serif-display-latin-400-italic.woff": {
+    "bytes": 21620,
+    "sha256": "10f9e1ab0365175c16e8752acea5cb0228d92d2131378d5ee2849ff57baa84d3"
+  },
+  "fonts/brand/dm-serif-display-latin-400-normal.woff": {
+    "bytes": 21804,
+    "sha256": "1b81107f3d9a44a99991606475201ac3b97033e4035df2f3b0858433f663cfda"
+  },
+  "fonts/brand/dm-serif-display-latin-ext-400-italic.woff": {
+    "bytes": 9136,
+    "sha256": "d7145bb29ce0a39a83e6a4499b1b4c575189c571b71ddade2ef99e55410fa2e9"
+  },
+  "fonts/brand/dm-serif-display-latin-ext-400-normal.woff": {
+    "bytes": 8644,
+    "sha256": "b8f76796e73a271ad015112701e7c89dfc7f6e68826746170b9e640910cd08ed"
+  },
+  "fonts/brand/eb-garamond-latin-400-italic.woff": {
+    "bytes": 30864,
+    "sha256": "ee21466cc9fc9b46c76ccd9dc92eb23cfe91c39f1d625a60a894c8037ca657fb"
+  },
+  "fonts/brand/eb-garamond-latin-400-normal.woff": {
+    "bytes": 28608,
+    "sha256": "4667d9135a659b8fae5b5d74eac679150d12dd0e72196fc120f94c0d676568c5"
+  },
+  "fonts/brand/eb-garamond-latin-600-normal.woff": {
+    "bytes": 30400,
+    "sha256": "f13dee5df7bc1212dd8d9229d0cceb6ba93ff4d51f9d52d8d791c02bfa9d3aba"
+  },
+  "fonts/brand/eb-garamond-latin-ext-400-italic.woff": {
+    "bytes": 62904,
+    "sha256": "bee53427f35bd74d7829fe393b8d014e1deea5b480233bc2484b453292277fe9"
+  },
+  "fonts/brand/eb-garamond-latin-ext-400-normal.woff": {
+    "bytes": 76612,
+    "sha256": "d33cc209c6bfa128ddfc8834c80888be8ffe7cdc2c56555e9cde22740f646e08"
+  },
+  "fonts/brand/eb-garamond-latin-ext-600-normal.woff": {
+    "bytes": 84184,
+    "sha256": "8511f67fade1bd18c0f58ee6b07558b17500a70c162dc2495f94608ff2f7125f"
+  },
+  "fonts/brand/epilogue-latin-300-normal.woff": {
+    "bytes": 18692,
+    "sha256": "cc94a7e0ee06d9c8c8492c6e8fedeaf6cd8692d5e003d169776aeb150e39f7c7"
+  },
+  "fonts/brand/epilogue-latin-700-normal.woff": {
+    "bytes": 18720,
+    "sha256": "24afc2245418b94c713b6fcb4d84f78cef9a87de72dcedee543fab85111c32da"
+  },
+  "fonts/brand/epilogue-latin-ext-300-normal.woff": {
+    "bytes": 19708,
+    "sha256": "cc915737ae04076f31fae30b88d2d8beef806a41f5a0fadec525624a0aa3f354"
+  },
+  "fonts/brand/epilogue-latin-ext-700-normal.woff": {
+    "bytes": 19908,
+    "sha256": "6ad725392792057d7ec19e7784c12c6b5045cf91b3461e15513284fcff968a42"
+  },
+  "fonts/brand/familjen-grotesk-latin-400-normal.woff": {
+    "bytes": 15080,
+    "sha256": "5e5ac6617f255932c0e842465960cd8d10531258fe1e6a09ca55fc705a664f69"
+  },
+  "fonts/brand/familjen-grotesk-latin-700-normal.woff": {
+    "bytes": 15220,
+    "sha256": "a6f34cd9c7fd63a0a0eabde57219a4572229c88cea03ccb5957e64a2e586ef49"
+  },
+  "fonts/brand/familjen-grotesk-latin-ext-400-normal.woff": {
+    "bytes": 13492,
+    "sha256": "51a331f5eddc72bddc89cba7e1525a60ce072d1730e24cfecccbb0ba58ee2787"
+  },
+  "fonts/brand/familjen-grotesk-latin-ext-700-normal.woff": {
+    "bytes": 13572,
+    "sha256": "60848d0d2e8aa9574ba2b73748597da2acebaeb254957f199e21d8be644be432"
+  },
+  "fonts/brand/figtree-latin-400-normal.woff": {
+    "bytes": 15036,
+    "sha256": "e75c125ab5ed44c6e11792d60d8e414ab905b3b46712919d977cf54aaf3e64a2"
+  },
+  "fonts/brand/figtree-latin-700-normal.woff": {
+    "bytes": 15164,
+    "sha256": "6463c3f07ef0c1e91438aad4f84c249bd2c23a2f7ef426d072df8df8d14ebc48"
+  },
+  "fonts/brand/figtree-latin-ext-400-normal.woff": {
+    "bytes": 8336,
+    "sha256": "490b9a9482d8c192ef2009bf13ceb657bc28133a45267b31d8ccbacb742ee979"
+  },
+  "fonts/brand/figtree-latin-ext-700-normal.woff": {
+    "bytes": 8356,
+    "sha256": "37091f80ae1d439a0480485c6a299a7dc06a6feb38ff3e363479ae9d6405a72a"
+  },
+  "fonts/brand/fjalla-one-latin-400-normal.woff": {
+    "bytes": 45856,
+    "sha256": "994f04ea5654867cbd92e09b0d4c25f174c91f5d85c6f82cb0f8103b595aea19"
+  },
+  "fonts/brand/fjalla-one-latin-ext-400-normal.woff": {
+    "bytes": 23876,
+    "sha256": "82b68234b67d14c9d5388d249d8e4258ae566d9d6b0d9a881e3de06b9b861817"
+  },
+  "fonts/brand/forum-latin-400-normal.woff": {
+    "bytes": 17272,
+    "sha256": "8781c8237a79b5ccfdf1547dd0582861f65cf6b2f8821c59d9ba912fa0732b5f"
+  },
+  "fonts/brand/forum-latin-ext-400-normal.woff": {
+    "bytes": 13032,
+    "sha256": "073b91243e7f2499e95e312c9188913973a6fbd0cbc0eba81de00cde229f3348"
+  },
+  "fonts/brand/fraunces-latin-400-italic.woff": {
+    "bytes": 28208,
+    "sha256": "72d11200925b4a71aec864f6c62501ad8b9a5d787aecd8bb3740000a5eeb1891"
+  },
+  "fonts/brand/fraunces-latin-400-normal.woff": {
+    "bytes": 22480,
+    "sha256": "695442434f77c44190b48a022f943e052bb60d49ed3c7940ea60a16ac3faf8b3"
+  },
+  "fonts/brand/fraunces-latin-600-normal.woff": {
+    "bytes": 22512,
+    "sha256": "d78e988f844f474ce9b1cc10c72501add6c5056763bfe83ff2a8e2fcb6708ad0"
+  },
+  "fonts/brand/fraunces-latin-800-normal.woff": {
+    "bytes": 22384,
+    "sha256": "bf9a2ea38f0a63bc13d2e508a72cff5b1e90ef8dae559e36f336da90d6660af3"
+  },
+  "fonts/brand/fraunces-latin-ext-400-italic.woff": {
+    "bytes": 26732,
+    "sha256": "69976961d197f4d113b2fb492f0fd927497bb7aa12b5435a5972a01a0e2da879"
+  },
+  "fonts/brand/fraunces-latin-ext-400-normal.woff": {
+    "bytes": 22368,
+    "sha256": "6ea9935870863c9f04a8731afadcd1960ea3143a9ab5221f780ce7755822891a"
+  },
+  "fonts/brand/fraunces-latin-ext-600-normal.woff": {
+    "bytes": 22364,
+    "sha256": "7fce30e29ffbe3d6703a4bc2ab7dd832f50f979fc8a7efdc738d5e8023f0489a"
+  },
+  "fonts/brand/fraunces-latin-ext-800-normal.woff": {
+    "bytes": 22504,
+    "sha256": "ab7c8f0e9190be893e6d493ed66d6e5aa1c053962b2dc7d2784dfe69c3cdf2f7"
+  },
+  "fonts/brand/funnel-display-latin-400-normal.woff": {
+    "bytes": 13632,
+    "sha256": "af8d108a15d17f2f1178d83708dfcfd20aca7c9d3f390b1b9943ff019c3d1594"
+  },
+  "fonts/brand/funnel-display-latin-700-normal.woff": {
+    "bytes": 13664,
+    "sha256": "d52fbddd4f606377a1bf12564e6d76fca16ddfa0285662c0814be276cd309779"
+  },
+  "fonts/brand/funnel-display-latin-ext-400-normal.woff": {
+    "bytes": 8184,
+    "sha256": "a4cc42f09c80767c006faaf082f8a69b8332df2163ec308d96f14e9b39a65343"
+  },
+  "fonts/brand/funnel-display-latin-ext-700-normal.woff": {
+    "bytes": 8172,
+    "sha256": "83165d9625cee9b5765c39e00585aa1c0df09f1ada6282cc7107aa6b73957361"
+  },
+  "fonts/brand/geist-latin-300-normal.woff": {
+    "bytes": 16996,
+    "sha256": "c947ab6f76999f62c783aca9142adc171fdd48ebd96f22dca1bc19b5a0ace442"
+  },
+  "fonts/brand/geist-latin-600-normal.woff": {
+    "bytes": 17148,
+    "sha256": "a08b94ffdc16be071cc85ace7ea5884463fc05775346ec2a292be651b3665a25"
+  },
+  "fonts/brand/geist-latin-ext-300-normal.woff": {
+    "bytes": 10764,
+    "sha256": "4116fa65dedcc1a2f1769132c115f2618d02ec791bde6aaff1093580e798a5a4"
+  },
+  "fonts/brand/geist-latin-ext-600-normal.woff": {
+    "bytes": 10868,
+    "sha256": "558a2a706b6a7a50979f200c0bf9ecd086a52a886671938657b32bed56d2e865"
+  },
+  "fonts/brand/geist-mono-latin-300-normal.woff": {
+    "bytes": 13296,
+    "sha256": "2e69cfad41a55e81593f736813cfbf5efa1e6dd617a61700fdae23811a18204f"
+  },
+  "fonts/brand/geist-mono-latin-600-normal.woff": {
+    "bytes": 13328,
+    "sha256": "0b8148ae59799737964430c2d4f0656e65f8a190185ce7dc2d1094d69bce5202"
+  },
+  "fonts/brand/geist-mono-latin-ext-300-normal.woff": {
+    "bytes": 9776,
+    "sha256": "c740ac2fa16c9866457e4e0d5d2d84817c8503ac59de2e988f871f42db58088d"
+  },
+  "fonts/brand/geist-mono-latin-ext-600-normal.woff": {
+    "bytes": 9852,
+    "sha256": "6e789bb466097760c973646bcb90b20acc7da304bb6c8f052f64525217e38eba"
+  },
+  "fonts/brand/gilda-display-latin-400-normal.woff": {
+    "bytes": 16260,
+    "sha256": "5dd1675230d52dc8bb12a853b63e1308471f1da73f2162b1082ae773be6f9dc8"
+  },
+  "fonts/brand/gilda-display-latin-ext-400-normal.woff": {
+    "bytes": 11228,
+    "sha256": "3bc02811bb2845b2b87c1b3b7774c21b15d71df505e4c400bd09e79f41c05607"
+  },
+  "fonts/brand/gloock-latin-400-normal.woff": {
+    "bytes": 21848,
+    "sha256": "fac36a3f81f24a2a12db38cb8ed33265018193812181e17ffd6475d7454522f1"
+  },
+  "fonts/brand/gloock-latin-ext-400-normal.woff": {
+    "bytes": 11516,
+    "sha256": "13234ca368d80e9a09ec0228b6d26f49d74cc6cd31146d6439e13829d3d284ac"
+  },
+  "fonts/brand/great-vibes-latin-400-normal.woff": {
+    "bytes": 34852,
+    "sha256": "70db84ec82761fa328d65649439e2f9603ecbdaf0a397863875f62c43158a523"
+  },
+  "fonts/brand/great-vibes-latin-ext-400-normal.woff": {
+    "bytes": 56112,
+    "sha256": "2a9bd45cbab3eafe12b95a526a8dc75320b9c1c2a622dc1abb670fd3e9648c77"
+  },
+  "fonts/brand/hanken-grotesk-latin-400-italic.woff": {
+    "bytes": 17928,
+    "sha256": "830fb335d9d5b7394299972eea1f006de5d67aa02b2e3babce5c93706fccc9ce"
+  },
+  "fonts/brand/hanken-grotesk-latin-400-normal.woff": {
+    "bytes": 17240,
+    "sha256": "041f2ae9a922ae10dd0c605cf6d5f35714a64079285f64d3895d02ad99af1443"
+  },
+  "fonts/brand/hanken-grotesk-latin-700-normal.woff": {
+    "bytes": 17540,
+    "sha256": "9549ba2591409cc3908d54b33363e0529f3905e6c8eb90ee27f78c5eab022132"
+  },
+  "fonts/brand/hanken-grotesk-latin-ext-400-italic.woff": {
+    "bytes": 12764,
+    "sha256": "d25245f24f1b755ae95aa3f0fb6432fe76028ea4a83de14b6ee187c0a17ef5ad"
+  },
+  "fonts/brand/hanken-grotesk-latin-ext-400-normal.woff": {
+    "bytes": 12552,
+    "sha256": "14aef5e705988e7685aed4dcdcf703742665cad32abb00ca91f886f4b38db7a5"
+  },
+  "fonts/brand/hanken-grotesk-latin-ext-700-normal.woff": {
+    "bytes": 12484,
+    "sha256": "91ddbdf731785654c6b826d10d087bac35205212d424f58c72cbf7a2fbd59854"
+  },
+  "fonts/brand/host-grotesk-latin-400-normal.woff": {
+    "bytes": 18288,
+    "sha256": "62d4f638dd8e063b22f8677a03f96f68f0931ed76b48292e2430f6d1e2cf2f92"
+  },
+  "fonts/brand/host-grotesk-latin-700-normal.woff": {
+    "bytes": 18288,
+    "sha256": "2d6390c62744431c7d92683f2d226508d0b086cf90b56754f5171a35b552732e"
+  },
+  "fonts/brand/host-grotesk-latin-ext-400-normal.woff": {
+    "bytes": 10804,
+    "sha256": "31f253e2ecfe0bb6affd043e4227ecfb828425aeab566dda3f89283af9a37047"
+  },
+  "fonts/brand/host-grotesk-latin-ext-700-normal.woff": {
+    "bytes": 10800,
+    "sha256": "7666c2c8ff59bb5405e9fc3c5f46e882407c3fc8f60495ba36a61f4e9077cff9"
+  },
+  "fonts/brand/ibarra-real-nova-latin-400-italic.woff": {
+    "bytes": 23940,
+    "sha256": "bd1eb742bf3feb182fb5fe8f8891c0de910d37f817c89c13e93178c8944d31be"
+  },
+  "fonts/brand/ibarra-real-nova-latin-400-normal.woff": {
+    "bytes": 22272,
+    "sha256": "2cbfa54cecb487d190412973d80d64f7cd5d0de594c0fd21236b835d3e7fe84a"
+  },
+  "fonts/brand/ibarra-real-nova-latin-600-normal.woff": {
+    "bytes": 22868,
+    "sha256": "2bee993b2ccac876f4374bf9dd5ee0d32569562d596e183248cd0ff81cef0f14"
+  },
+  "fonts/brand/ibarra-real-nova-latin-ext-400-italic.woff": {
+    "bytes": 14324,
+    "sha256": "75d6558e4f7b16091521a55374f1d99901c141cb8f3dd8a9660783d8051fd921"
+  },
+  "fonts/brand/ibarra-real-nova-latin-ext-400-normal.woff": {
+    "bytes": 13172,
+    "sha256": "f16e1b5d47a37a51b448f020a02d40dba5232fd72f2cc8ae0031d46c0128dcca"
+  },
+  "fonts/brand/ibarra-real-nova-latin-ext-600-normal.woff": {
+    "bytes": 13432,
+    "sha256": "be0a8dd337631c731292299855aad5d1fdbffef41bc566c871c2ebdcb55627bf"
+  },
+  "fonts/brand/ibm-plex-mono-latin-400-normal.woff": {
+    "bytes": 13144,
+    "sha256": "328d50b6ece9ca25c46eea3e885ba497f6237f2fb84ef7b92f88e14a1a25e381"
+  },
+  "fonts/brand/ibm-plex-mono-latin-600-normal.woff": {
+    "bytes": 13208,
+    "sha256": "cb96282f22c6f19112856fd6e0b34e2baefaf4ca6551e851d58c5ab0aabcd2be"
+  },
+  "fonts/brand/ibm-plex-mono-latin-ext-400-normal.woff": {
+    "bytes": 11768,
+    "sha256": "f8ddaa0ab9d3c052c9fe035751c8214b7e0d59e6e7b69b045f8659c2fe4dced2"
+  },
+  "fonts/brand/ibm-plex-mono-latin-ext-600-normal.woff": {
+    "bytes": 11832,
+    "sha256": "46249f4bc59bb78b3893d3a4ad39226d2f3fb66dfa21ccc21bda044a4a3c78c9"
+  },
+  "fonts/brand/instrument-sans-latin-400-normal.woff": {
+    "bytes": 21240,
+    "sha256": "797bd3eaa70edbd4757650ab44dad75fbfbfdf18bacedb4b71022c04621d30ad"
+  },
+  "fonts/brand/instrument-sans-latin-600-normal.woff": {
+    "bytes": 21676,
+    "sha256": "9b4ce1f2b26be7cb087fd87d6f99a202136292ec820af75bd38ab9e53895cf28"
+  },
+  "fonts/brand/instrument-sans-latin-ext-400-normal.woff": {
+    "bytes": 8960,
+    "sha256": "70972e3355cd7613dd08b9fb8fb07d4a88092722897f0d8aa076f3a8d40dbaa6"
+  },
+  "fonts/brand/instrument-sans-latin-ext-600-normal.woff": {
+    "bytes": 9104,
+    "sha256": "b17c67a2824f9c3271867e5c9313de0b6a897d1434dec12e181ff18e2e8d68f8"
+  },
+  "fonts/brand/instrument-serif-latin-400-italic.woff": {
+    "bytes": 19264,
+    "sha256": "9bc25f743ba6bf9091d37de465dedb2d2cb0c0614738bec1c551922fb2794d1d"
+  },
+  "fonts/brand/instrument-serif-latin-400-normal.woff": {
+    "bytes": 18336,
+    "sha256": "6d0b022af858becb27f1a033de5d3c0604fc6f2191a7f3ff4dba5d3515e95051"
+  },
+  "fonts/brand/instrument-serif-latin-ext-400-italic.woff": {
+    "bytes": 10508,
+    "sha256": "f393f76db28120fbfee2844ba6ca2be0fa3e28ecd27f72dcc1c00045e32e377b"
+  },
+  "fonts/brand/instrument-serif-latin-ext-400-normal.woff": {
+    "bytes": 9860,
+    "sha256": "1719ae18b98d033d2555f5a5971a30f5bb610ed849fc5a1119fe39db6d40eb3e"
+  },
+  "fonts/brand/inter-latin-400-normal.woff": {
+    "bytes": 30696,
+    "sha256": "e20fa0b4fd2dd26e4d14b3ac3cc922509c3a63fa5e910e90c614544aa042dd45"
+  },
+  "fonts/brand/inter-latin-600-normal.woff": {
+    "bytes": 31260,
+    "sha256": "6a9cb3a509b4eeaf12b7dda6c4aacac3e85d07f4201bf4dd716e332e692b87bd"
+  },
+  "fonts/brand/inter-latin-ext-400-normal.woff": {
+    "bytes": 47560,
+    "sha256": "22ae8360fbad24d2af7c6c9898a346c881774dc87f7cf94bd262c48ad58d7116"
+  },
+  "fonts/brand/inter-latin-ext-600-normal.woff": {
+    "bytes": 48668,
+    "sha256": "22ff20a6170674fb9637c2a072227be86303bb6ec52b829b9d7077405f7196a6"
+  },
+  "fonts/brand/inter-tight-latin-400-normal.woff": {
+    "bytes": 28248,
+    "sha256": "d31e5249a330dd72303ae493d7a3cd0d50b1bbda58a677d31105205af253902b"
+  },
+  "fonts/brand/inter-tight-latin-800-normal.woff": {
+    "bytes": 29036,
+    "sha256": "7c932d45dc8827853d43a51fb9feea60ce16d7a12c50d8eb21f776296189534d"
+  },
+  "fonts/brand/inter-tight-latin-ext-400-normal.woff": {
+    "bytes": 49180,
+    "sha256": "96dc974cdd007eed83b86a3b193fdd8536bf79bb622779c9f66429af4f0faffd"
+  },
+  "fonts/brand/inter-tight-latin-ext-800-normal.woff": {
+    "bytes": 51128,
+    "sha256": "3fceacfdf5c551d2eff22430ddc953639485772b9340f1f3439815591eca5607"
+  },
+  "fonts/brand/italiana-latin-400-normal.woff": {
+    "bytes": 13480,
+    "sha256": "a81ca5f3d340cd84e6017f251f1fc4e398a5a414d910421eed7e7efb199c51f3"
+  },
+  "fonts/brand/italianno-latin-400-normal.woff": {
+    "bytes": 31968,
+    "sha256": "4c93311e355d0ffab55fed06847d08d79bb9aa286ee9652e2998bd40a92519d6"
+  },
+  "fonts/brand/italianno-latin-ext-400-normal.woff": {
+    "bytes": 14668,
+    "sha256": "5aa7393713265fd711882052104fe2545fad036c02d02270773d95d894c52b55"
+  },
+  "fonts/brand/josefin-sans-latin-400-normal.woff": {
+    "bytes": 16156,
+    "sha256": "db6e9fefa6a3e47ff6dab5cbda2cc8f24a94a7b631f1f4fb8b5dce1b31008352"
+  },
+  "fonts/brand/josefin-sans-latin-600-normal.woff": {
+    "bytes": 16076,
+    "sha256": "927144efdabc615938338a1b5b12060646563de0f1793fbc06ce269c123ae773"
+  },
+  "fonts/brand/josefin-sans-latin-ext-400-normal.woff": {
+    "bytes": 13420,
+    "sha256": "b8a520b7a71eda1ce3d7c4f785a4ec5792a1f24c7b1f3b0d49c2b3060ce06688"
+  },
+  "fonts/brand/josefin-sans-latin-ext-600-normal.woff": {
+    "bytes": 13432,
+    "sha256": "1197fdbec8b2504d6de0a2cff6f7680beec29cf624e90a4344c618db303b6410"
+  },
+  "fonts/brand/jost-latin-300-normal.woff": {
+    "bytes": 13732,
+    "sha256": "5bba3dbb37ae1645257730b64a9be090b5ce55309bdb9ef0a213896d7f3c5df3"
+  },
+  "fonts/brand/jost-latin-500-normal.woff": {
+    "bytes": 14220,
+    "sha256": "c0392893e6302205d14cf0fc0cfda86cea1b7cffcc315993d45b05c350008fdf"
+  },
+  "fonts/brand/jost-latin-ext-300-normal.woff": {
+    "bytes": 9308,
+    "sha256": "925f83173e4d348dd04c922c84ff6856c8a5ee74709ac08a4ec7746ceb3341a5"
+  },
+  "fonts/brand/jost-latin-ext-500-normal.woff": {
+    "bytes": 9524,
+    "sha256": "89e27887afba65dc3fa2f83e09e453718ff7dccf5a95a118c503973dfec6917e"
+  },
+  "fonts/brand/julius-sans-one-latin-400-normal.woff": {
+    "bytes": 14376,
+    "sha256": "fea2851c071f23cdfa45cc6bc91c371245d8d0d626e182eef5e2c382928e48aa"
+  },
+  "fonts/brand/julius-sans-one-latin-ext-400-normal.woff": {
+    "bytes": 1780,
+    "sha256": "f275a1260821f547e60e9755ded56b539bb3ddba8e3a2aba875b3bdba8faebf1"
+  },
+  "fonts/brand/karla-latin-400-normal.woff": {
+    "bytes": 17332,
+    "sha256": "ab7cfc2a46ab3c5744c559629bf50d640be7fb7965aeca0b84fe47f7f60b5cf7"
+  },
+  "fonts/brand/karla-latin-700-normal.woff": {
+    "bytes": 17340,
+    "sha256": "3f4350421bde430ee44498fc837fcac16e449add5b1326e54c69dbcc01eda7c8"
+  },
+  "fonts/brand/karla-latin-ext-400-normal.woff": {
+    "bytes": 9324,
+    "sha256": "50cb2183b0887f3f6db75e3d70313eb43b5199e0defba50c4f5be3b5b23ea9df"
+  },
+  "fonts/brand/karla-latin-ext-700-normal.woff": {
+    "bytes": 9368,
+    "sha256": "4569100121e9d17765bb70373bbbf386949889c155cf00aad69d88b6ac36c1ea"
+  },
+  "fonts/brand/krona-one-latin-400-normal.woff": {
+    "bytes": 12632,
+    "sha256": "c40c3543ae34caff670c073ec430b69e9c89bbd7c0303a2e67ea7990c7c75daf"
+  },
+  "fonts/brand/krona-one-latin-ext-400-normal.woff": {
+    "bytes": 9424,
+    "sha256": "60a5877972138e508edc0cbac7397bac0b97798fbd5aeb25116f707bf03645f2"
+  },
+  "fonts/brand/kumbh-sans-latin-400-normal.woff": {
+    "bytes": 16604,
+    "sha256": "35d95407f2eb51b3c216a5672718b156c9e9cede89a054093ffc88cb09dbdaa2"
+  },
+  "fonts/brand/kumbh-sans-latin-600-normal.woff": {
+    "bytes": 16832,
+    "sha256": "9f9899bc6615cce25f2b7a62a3a8554606a0e3cc4dcef65aaa571c9a8147e25d"
+  },
+  "fonts/brand/kumbh-sans-latin-ext-400-normal.woff": {
+    "bytes": 9964,
+    "sha256": "b06cc1ed420fb0772fcedb24231c4d344c1485639b91734d413113332c736ab7"
+  },
+  "fonts/brand/kumbh-sans-latin-ext-600-normal.woff": {
+    "bytes": 10040,
+    "sha256": "fac920802d867f75ce922a1e4eb8041eb7c759630d170f1b45594eeacc883431"
+  },
+  "fonts/brand/lexend-latin-400-normal.woff": {
+    "bytes": 18336,
+    "sha256": "58a869122f3728f254bbfc0dbbf5f5acaeac6c2d3fee6f97143a315883640344"
+  },
+  "fonts/brand/lexend-latin-600-normal.woff": {
+    "bytes": 18652,
+    "sha256": "d48c9618387d633580883d52438c047a2a63bef042ea5d4a235893bdf7526f63"
+  },
+  "fonts/brand/lexend-latin-ext-400-normal.woff": {
+    "bytes": 18248,
+    "sha256": "c3cfeb22d3697c514191164ce678ed662b186d08aad7bfbcb3ee3b0c1b1bfd83"
+  },
+  "fonts/brand/lexend-latin-ext-600-normal.woff": {
+    "bytes": 18688,
+    "sha256": "aef4974fbd9888658df5602e19c0ee7847014ca653a02184de0eefd0e830598a"
+  },
+  "fonts/brand/lexend-zetta-latin-300-normal.woff": {
+    "bytes": 19220,
+    "sha256": "1a92e1ec4836fd4442ad0798ca5c7299fd7be5a9b9fc93d6b1952b11e1adb3ba"
+  },
+  "fonts/brand/lexend-zetta-latin-600-normal.woff": {
+    "bytes": 19032,
+    "sha256": "59df019e1f8e16ae958291652782fe94d6f6978257445646be1dd4382029329c"
+  },
+  "fonts/brand/lexend-zetta-latin-ext-300-normal.woff": {
+    "bytes": 18976,
+    "sha256": "5615c35bf5905b8748a571b8d46ff3bb9f1aa3e07846e84c48369e1577df8af1"
+  },
+  "fonts/brand/lexend-zetta-latin-ext-600-normal.woff": {
+    "bytes": 18836,
+    "sha256": "682bf2f68487ad046e37b6c9f5cc4396b56d14fd9b01a011b6014926a37959f0"
+  },
+  "fonts/brand/libre-baskerville-latin-400-italic.woff": {
+    "bytes": 26384,
+    "sha256": "67431ee9cf055c785b9c155c6d867ac8a23078a41e654612503d7dd354a0b8c5"
+  },
+  "fonts/brand/libre-baskerville-latin-400-normal.woff": {
+    "bytes": 24300,
+    "sha256": "b8d4d041270ccde9d545fbd465f49a1226abfd17ed1dcdaa9748bcb0ec13cac0"
+  },
+  "fonts/brand/libre-baskerville-latin-700-normal.woff": {
+    "bytes": 24948,
+    "sha256": "46ef30a54b56f9ef9f6a649a92eedeb6a9c4c6ba32b8fe5a346e9bf502e05140"
+  },
+  "fonts/brand/libre-baskerville-latin-ext-400-italic.woff": {
+    "bytes": 31580,
+    "sha256": "c5be2b9dc19cffed9d3083122b8592c59f5d2bc92ff15cedd613d2b12fcdfd1c"
+  },
+  "fonts/brand/libre-baskerville-latin-ext-400-normal.woff": {
+    "bytes": 29228,
+    "sha256": "96f816262fc291b53e2b0bf3fdf6cdb55fc9ba1e4b5af2aab68ca0a47c556a90"
+  },
+  "fonts/brand/libre-baskerville-latin-ext-700-normal.woff": {
+    "bytes": 29548,
+    "sha256": "1f0aa5ac15b5aad1c09b33ce2cbf0e252f00e8c647eda3ce9cc8822b7216ee00"
+  },
+  "fonts/brand/libre-bodoni-latin-500-italic.woff": {
+    "bytes": 21612,
+    "sha256": "35b048cedc01e328558fb005085c72ceaff78310341f4d6a73319956a8883f3d"
+  },
+  "fonts/brand/libre-bodoni-latin-500-normal.woff": {
+    "bytes": 20240,
+    "sha256": "6bdffc8a80d907a4388717b662577710d4d2a70887d6248e9c91a1d1c2cb0b88"
+  },
+  "fonts/brand/libre-bodoni-latin-700-normal.woff": {
+    "bytes": 19512,
+    "sha256": "2628fc18f01934272065f1997832742b3c22247e78f15cd10fe9b58b101b7587"
+  },
+  "fonts/brand/libre-bodoni-latin-ext-500-italic.woff": {
+    "bytes": 16908,
+    "sha256": "368e2ef688a5048bfd3824ac56119e6affe7cb16c54c48ec61c877b94f383bdf"
+  },
+  "fonts/brand/libre-bodoni-latin-ext-500-normal.woff": {
+    "bytes": 15476,
+    "sha256": "af15c84172fc85135884d69ce80f1b146b8094d877053ce408aea24dd8850119"
+  },
+  "fonts/brand/libre-bodoni-latin-ext-700-normal.woff": {
+    "bytes": 15008,
+    "sha256": "a1fed817e75de4f246d39da43e0ba334e7bb7884a581eef617317b2045ee451f"
+  },
+  "fonts/brand/libre-caslon-display-latin-400-normal.woff": {
+    "bytes": 20048,
+    "sha256": "db2f5a4930e4cda519d4213d587afdbef5670ce031287b04f6d7c9f84e9386f0"
+  },
+  "fonts/brand/libre-caslon-display-latin-ext-400-normal.woff": {
+    "bytes": 13648,
+    "sha256": "0ecb7d8434a4fe09e2330d7fd8669d83835ee5368e7fcab834998639029cbceb"
+  },
+  "fonts/brand/libre-caslon-text-latin-400-italic.woff": {
+    "bytes": 24460,
+    "sha256": "a108bc0c6987ee6d9cc3891c9ba20c15fba1f6f5f28996462b98ec0acf7b6a19"
+  },
+  "fonts/brand/libre-caslon-text-latin-400-normal.woff": {
+    "bytes": 21400,
+    "sha256": "1159271eb21da7b488d0c84cc6045bf758cf555040708781d7b195773fd30c65"
+  },
+  "fonts/brand/libre-caslon-text-latin-700-normal.woff": {
+    "bytes": 21536,
+    "sha256": "456922a45d5534163d1257741d3ba96eb60675a5efbbc02ea528ea6c422b5475"
+  },
+  "fonts/brand/libre-caslon-text-latin-ext-400-italic.woff": {
+    "bytes": 13400,
+    "sha256": "1fc1f2e63d842d645bf11143958ea1a803d59e1d600894c90c1a2f93c7c69d7f"
+  },
+  "fonts/brand/libre-caslon-text-latin-ext-400-normal.woff": {
+    "bytes": 12216,
+    "sha256": "d03aa8c5b4d134338449e30166a4b855c40ae609b7a42714b00d99cece2f9ce9"
+  },
+  "fonts/brand/libre-caslon-text-latin-ext-700-normal.woff": {
+    "bytes": 12176,
+    "sha256": "097174739d5c43f5c203bb54d102b823bf1f7a1a6e4b5041616ec9cadd7e573a"
+  },
+  "fonts/brand/linden-hill-latin-400-italic.woff": {
+    "bytes": 30368,
+    "sha256": "92af8f30df7d80f46c43aade806d783d01b57da144acfb6cf8970a6f263279d0"
+  },
+  "fonts/brand/linden-hill-latin-400-normal.woff": {
+    "bytes": 30488,
+    "sha256": "d7bd1d8707cd057109d78bbe2f6452ef155ec75a51685cc7f5d5e7cc402d65d6"
+  },
+  "fonts/brand/linden-hill-latin-ext-400-italic.woff": {
+    "bytes": 13544,
+    "sha256": "8746fc6d525826eafede170d9bab918f9f1959b6a73e78da523e91e16302012c"
+  },
+  "fonts/brand/linden-hill-latin-ext-400-normal.woff": {
+    "bytes": 13860,
+    "sha256": "4dd56250fd3eca57c1a94448aa14e5b3e6ab5b0c7d231fd458c4719b44b6480e"
+  },
+  "fonts/brand/lora-latin-400-italic.woff": {
+    "bytes": 27728,
+    "sha256": "76be671f89ee79e378064c08e112fec82b4fc573958f9e876fd4a9a82a3bedc2"
+  },
+  "fonts/brand/lora-latin-400-normal.woff": {
+    "bytes": 25960,
+    "sha256": "5c813f4975bc7267f6b5a2086370e8651144b26b107a1d71c3f4ba287ad143f1"
+  },
+  "fonts/brand/lora-latin-600-normal.woff": {
+    "bytes": 26812,
+    "sha256": "e395f87029ff87a7850f15959c4e64dc941c90df34efb3aea1ac8624aa3327b7"
+  },
+  "fonts/brand/lora-latin-ext-400-italic.woff": {
+    "bytes": 16220,
+    "sha256": "c0886a8ef98e17817a83bbd8b521e4c9d0f562e3eaf648fa756ca820174fe8f0"
+  },
+  "fonts/brand/lora-latin-ext-400-normal.woff": {
+    "bytes": 15692,
+    "sha256": "7abb485f6f7c64a7e7514129b25a81e3a17bd5c4ae482de2c720fe18e0fdd1bd"
+  },
+  "fonts/brand/lora-latin-ext-600-normal.woff": {
+    "bytes": 15964,
+    "sha256": "101819c7b38bc1d256b3c8e6f087f8fd7125f7a0473f86484615c98237d04c34"
+  },
+  "fonts/brand/manrope-latin-400-normal.woff": {
+    "bytes": 18292,
+    "sha256": "1bf66c29a29f1b71d507cb97fc138cd130b856ed05b55decd3a2944b413cb636"
+  },
+  "fonts/brand/manrope-latin-700-normal.woff": {
+    "bytes": 18412,
+    "sha256": "e5d35fda4759b0d63ebcc6cca0627d98d9208254ce851c85df29e4d12aeafb61"
+  },
+  "fonts/brand/manrope-latin-ext-400-normal.woff": {
+    "bytes": 11316,
+    "sha256": "143798f65cc631e6af5a77f0d34a2597bbef1ff1b24b73f6e6b12c2a79ebeb14"
+  },
+  "fonts/brand/manrope-latin-ext-700-normal.woff": {
+    "bytes": 11352,
+    "sha256": "b707ffc6454e54831a69d6c7db32d427b4a2bb914153c1f850fc4f888be7c35f"
+  },
+  "fonts/brand/marcellus-latin-400-normal.woff": {
+    "bytes": 17176,
+    "sha256": "7083fa63e075a796f4beef9293fbc29a80be738d84bbfd89a20ddcdfc5c82198"
+  },
+  "fonts/brand/marcellus-latin-ext-400-normal.woff": {
+    "bytes": 10704,
+    "sha256": "49f576474f6fd788afc306ae219e828d9333a86a17ead9aba8f8fc3d4b9d78a8"
+  },
+  "fonts/brand/michroma-latin-400-normal.woff": {
+    "bytes": 14672,
+    "sha256": "bd6218f6b39b65298b2eff876d99f15bbb0181c813f1fa9bb823bc095fc80c9c"
+  },
+  "fonts/brand/michroma-latin-ext-400-normal.woff": {
+    "bytes": 12268,
+    "sha256": "fc7fed159f4e57918641e8f530e7aa227062667bb68906b5093d854af739a60f"
+  },
+  "fonts/brand/mona-sans-latin-400-normal.woff": {
+    "bytes": 26164,
+    "sha256": "ac71bccb6fd62dfff262a9be60b39e1601dcf82216f055d84cf3b5af0874169d"
+  },
+  "fonts/brand/mona-sans-latin-700-normal.woff": {
+    "bytes": 26052,
+    "sha256": "3d21b5ce10fc3a8ba8504922989a3348613e5081817abb08d1f5d589017447c2"
+  },
+  "fonts/brand/mona-sans-latin-ext-400-normal.woff": {
+    "bytes": 11720,
+    "sha256": "01095363db58d8a547ef3abedd262244f174e3f91c1ccac4c93515b1b9090f6d"
+  },
+  "fonts/brand/mona-sans-latin-ext-700-normal.woff": {
+    "bytes": 11680,
+    "sha256": "c68a946c86bcbc63b93ef9e701e7ba745780057da93fd722d617bde6c2e111c6"
+  },
+  "fonts/brand/montserrat-latin-400-normal.woff": {
+    "bytes": 20648,
+    "sha256": "6a7d6a30d2b8cdc9dd4092918ad2d9a45006f19987300b6a1c1f7a2bde5b0ea3"
+  },
+  "fonts/brand/montserrat-latin-600-normal.woff": {
+    "bytes": 20548,
+    "sha256": "97ec588256114183969b5f3d3a53ce26d9beb1f04c8373c866f318afc85638c0"
+  },
+  "fonts/brand/montserrat-latin-ext-400-normal.woff": {
+    "bytes": 40368,
+    "sha256": "6459fd9979e99ccdafaef9fbde04b183c825ae089a5771ca78907bb32561085f"
+  },
+  "fonts/brand/montserrat-latin-ext-600-normal.woff": {
+    "bytes": 41036,
+    "sha256": "519a67a81579600b703ed5fc636a2c48b21085d948c3c7c667136b91c831b7f5"
+  },
+  "fonts/brand/newsreader-latin-400-italic.woff": {
+    "bytes": 30876,
+    "sha256": "ab00ea8fdff77ad93c0c1e71ec9404366e166ff26346064605cbfba34b9b46bc"
+  },
+  "fonts/brand/newsreader-latin-400-normal.woff": {
+    "bytes": 28288,
+    "sha256": "76e600318cebb11dd31d917fe621d2b79cfa4be0830d035fcb125f9db44e69c9"
+  },
+  "fonts/brand/newsreader-latin-600-normal.woff": {
+    "bytes": 29784,
+    "sha256": "9351807747be49c454126c69b1904674de240085d170524caa5983b06451a76a"
+  },
+  "fonts/brand/newsreader-latin-ext-400-italic.woff": {
+    "bytes": 19812,
+    "sha256": "b775ddf12ec400d5a87d26a8f83771ae3f01a6766488fd24f13bd31efb5c11f9"
+  },
+  "fonts/brand/newsreader-latin-ext-400-normal.woff": {
+    "bytes": 18376,
+    "sha256": "71a53423ccc6b2a1d7d73c8ade3979b824cb7e7de056765efdc31ac954aa5894"
+  },
+  "fonts/brand/newsreader-latin-ext-600-normal.woff": {
+    "bytes": 19392,
+    "sha256": "70f857b5005a901dbf8ce2065101fce684ac3a0cb7beba86321452430780226d"
+  },
+  "fonts/brand/noto-serif-display-latin-400-italic.woff": {
+    "bytes": 20240,
+    "sha256": "6d350111383b8043db896a974d709031451e649f2070bd22f6bbc378ce677644"
+  },
+  "fonts/brand/noto-serif-display-latin-400-normal.woff": {
+    "bytes": 17640,
+    "sha256": "a8295fe3945b044e2e23c7e81e7d193b4d9b7baa12b49954e113a9fcbba71455"
+  },
+  "fonts/brand/noto-serif-display-latin-600-normal.woff": {
+    "bytes": 18192,
+    "sha256": "e21f8eb4064a557163d38114a1ecbf61695a74c680fd0bab064627647117e8f1"
+  },
+  "fonts/brand/noto-serif-display-latin-ext-400-italic.woff": {
+    "bytes": 89064,
+    "sha256": "1e82f28839e05712e3ab87051691403f7581835a05182d4e284c2932f4f6779f"
+  },
+  "fonts/brand/noto-serif-display-latin-ext-400-normal.woff": {
+    "bytes": 83540,
+    "sha256": "355b3720ea89c1737a5c1324afb68a621ce9f97c7fdb1a3f688e61e54aaae5e9"
+  },
+  "fonts/brand/noto-serif-display-latin-ext-600-normal.woff": {
+    "bytes": 81832,
+    "sha256": "0009489d7939836b0004aef083c706d2907589fc6814178643992aad1231edd1"
+  },
+  "fonts/brand/nunito-latin-400-normal.woff": {
+    "bytes": 20332,
+    "sha256": "b51e76356535ea73d5701b541f89a4f062a4d6c829c7d2d237ceb8a0a8f77123"
+  },
+  "fonts/brand/nunito-latin-800-normal.woff": {
+    "bytes": 20360,
+    "sha256": "0ca02785f0bf8aaabada9adc9b4e2bb4952e1c641fea02d12f34608ca89fe904"
+  },
+  "fonts/brand/nunito-latin-ext-400-normal.woff": {
+    "bytes": 21288,
+    "sha256": "d7e2415e278145c408defb928138fb93ad5efe94969fe7c1f19864f882ba9253"
+  },
+  "fonts/brand/nunito-latin-ext-800-normal.woff": {
+    "bytes": 21424,
+    "sha256": "466d02116226ea4d5b3dd06ed52ca38bdde9ccdcfdfd9496c423c9abcfa3b08d"
+  },
+  "fonts/brand/old-standard-tt-latin-400-italic.woff": {
+    "bytes": 18900,
+    "sha256": "817fb863475531254e0c1b1e060c8e2550ef3d17707aff34e5cc51ebd528e1da"
+  },
+  "fonts/brand/old-standard-tt-latin-400-normal.woff": {
+    "bytes": 17432,
+    "sha256": "c2e4acb213fdbd08576434d36c9bc94ff76dfe83284d89d93fac7b103694b770"
+  },
+  "fonts/brand/old-standard-tt-latin-700-normal.woff": {
+    "bytes": 17416,
+    "sha256": "ac0079d4d78dbbc676fa602d5075d3eab2a3c997ea15166df611f46b68201f44"
+  },
+  "fonts/brand/old-standard-tt-latin-ext-400-italic.woff": {
+    "bytes": 17700,
+    "sha256": "902c1d1e9f58ffcfd8278e36433c7adee5c04ad10ae839fc7a1ef0ff75e3c339"
+  },
+  "fonts/brand/old-standard-tt-latin-ext-400-normal.woff": {
+    "bytes": 16756,
+    "sha256": "927c2ab2fc34d594c3c694a6a8ef04c138766605d44cf079083d54d2a2275a36"
+  },
+  "fonts/brand/old-standard-tt-latin-ext-700-normal.woff": {
+    "bytes": 16736,
+    "sha256": "110ad39f4ce4f5076138f5c1b170b0e2ddbd77f5d06caf1b25e12ba7a12f8747"
+  },
+  "fonts/brand/oswald-latin-500-normal.woff": {
+    "bytes": 16156,
+    "sha256": "0fd5341046b3a1514321c9274d782d111a187fb4033e15aa16319bce46a504f0"
+  },
+  "fonts/brand/oswald-latin-700-normal.woff": {
+    "bytes": 16076,
+    "sha256": "c11372171aeba96be006be958454d0a5556793eb3cdd526f421813c28a88d99a"
+  },
+  "fonts/brand/oswald-latin-ext-500-normal.woff": {
+    "bytes": 16184,
+    "sha256": "9e775e361a2f1f515ec84d40e51becf3d768a33bd01e1fcbccbb671acecc9e47"
+  },
+  "fonts/brand/oswald-latin-ext-700-normal.woff": {
+    "bytes": 16132,
+    "sha256": "14ab2734e4abadbd069a9f05ad8ddea1aa8761fe8bf20a0cef539059208d9fcc"
+  },
+  "fonts/brand/outfit-latin-400-normal.woff": {
+    "bytes": 18232,
+    "sha256": "f329dc36d2d9285431fb8322f5e951def9cac4a42c1cada679747f7c64b04916"
+  },
+  "fonts/brand/outfit-latin-600-normal.woff": {
+    "bytes": 18412,
+    "sha256": "3d1cd1b42cb525acde934764b2adec41dddf7932e1a965392d285efd56f2c148"
+  },
+  "fonts/brand/outfit-latin-ext-400-normal.woff": {
+    "bytes": 8640,
+    "sha256": "a6697dab76ab8386fc4244f9f6d3ed8639fce59e3be228c146d6c4586c835022"
+  },
+  "fonts/brand/outfit-latin-ext-600-normal.woff": {
+    "bytes": 8752,
+    "sha256": "a0c20185e588d3dd8f6d5557c3499a0e3c95f463a555ebe1bf7e233263972749"
+  },
+  "fonts/brand/parisienne-latin-400-normal.woff": {
+    "bytes": 26224,
+    "sha256": "d566d44ead5b2531660c561b8488d850e7ed3de2967fd79ac86bb334d1bddec3"
+  },
+  "fonts/brand/parisienne-latin-ext-400-normal.woff": {
+    "bytes": 16468,
+    "sha256": "cdd1f5b04f769490078c15835622fa432d8bf848f45770568db176da816d6602"
+  },
+  "fonts/brand/pinyon-script-latin-400-normal.woff": {
+    "bytes": 32736,
+    "sha256": "691d0ee84337b51a6eb54d93b1b6b78aba889ac90aac606c7153358294088d56"
+  },
+  "fonts/brand/pinyon-script-latin-ext-400-normal.woff": {
+    "bytes": 32404,
+    "sha256": "9a453d8ca910312c8360eb759ff2347f2cb429e1ecabd9c6df167d492d710e3a"
+  },
+  "fonts/brand/playfair-display-latin-400-italic.woff": {
+    "bytes": 27268,
+    "sha256": "cc638df9f516b3cbfd87d5012d0b657c81dec4e52dd5a8c9e0b87a2b39697bd9"
+  },
+  "fonts/brand/playfair-display-latin-400-normal.woff": {
+    "bytes": 26900,
+    "sha256": "3afd64d114a27e2f6604684c30f72d6dbb6ba3e6f6b1675f15a942efc7a56410"
+  },
+  "fonts/brand/playfair-display-latin-700-normal.woff": {
+    "bytes": 28296,
+    "sha256": "648a046ddf99139a09b0ef25eb21890ea95c6323eead5285fdb4c9797a0bfc18"
+  },
+  "fonts/brand/playfair-display-latin-ext-400-italic.woff": {
+    "bytes": 17444,
+    "sha256": "8a2b40aad8d339ee5a19974b33f4b4ae3e340bfa0996ad65cf8060cc5462f628"
+  },
+  "fonts/brand/playfair-display-latin-ext-400-normal.woff": {
+    "bytes": 15868,
+    "sha256": "e5fb3069334a8d37927d192f0bfc55983a788dd7905876321fda576a6a4a7bc2"
+  },
+  "fonts/brand/playfair-display-latin-ext-700-normal.woff": {
+    "bytes": 16472,
+    "sha256": "d784356c3a7aefa42abd0eaa8873d55585aca0fe60b55ca9012a9ce3ee564d22"
+  },
+  "fonts/brand/playfair-display-sc-latin-400-normal.woff": {
+    "bytes": 21284,
+    "sha256": "cfdefb4e8836ddf43dd74bc7aed1373c31ed8e1c6d4cd95e300b8935e3dec148"
+  },
+  "fonts/brand/playfair-display-sc-latin-700-normal.woff": {
+    "bytes": 22996,
+    "sha256": "450273ffdaf52ab97a9309c9379dcb4b9aaf6506836eb323616f573a26888df3"
+  },
+  "fonts/brand/playfair-display-sc-latin-ext-400-normal.woff": {
+    "bytes": 13976,
+    "sha256": "4a3828ebd179af3c9ddd7a83950a772fd42d391a59495f97376935802309ec54"
+  },
+  "fonts/brand/playfair-display-sc-latin-ext-700-normal.woff": {
+    "bytes": 14672,
+    "sha256": "58b0f5e35687e06f14d2ec0a20eaa1ceada43161216cb1e8ef8eb60282f53370"
+  },
+  "fonts/brand/plus-jakarta-sans-latin-400-normal.woff": {
+    "bytes": 15728,
+    "sha256": "9709167175cee7dcd331a7ed95be1182a5d5f00715b67a02107ecc80a55f490d"
+  },
+  "fonts/brand/plus-jakarta-sans-latin-700-normal.woff": {
+    "bytes": 16136,
+    "sha256": "6188f593f250aa25137865e8d07373fd0f585f5920a496c73ede84dbbdff7a92"
+  },
+  "fonts/brand/plus-jakarta-sans-latin-ext-400-normal.woff": {
+    "bytes": 15312,
+    "sha256": "d0a823b74d65410a8faaf5efb1232813197cdc898d9191e5997428b42aa4cafd"
+  },
+  "fonts/brand/plus-jakarta-sans-latin-ext-700-normal.woff": {
+    "bytes": 15616,
+    "sha256": "aaa9d5f7040bcf5ee2c9569f6c54aaf8327ee769fd2d02764a858f450a8fbf13"
+  },
+  "fonts/brand/poiret-one-latin-400-normal.woff": {
+    "bytes": 10952,
+    "sha256": "c7427c7de0b4181b16462610c043bc4b577fd7b52625bdbc24845f2bf9e0763b"
+  },
+  "fonts/brand/poiret-one-latin-ext-400-normal.woff": {
+    "bytes": 7488,
+    "sha256": "9c745e9fbe5ca3f7d80438d25c781a500299dad675d0a7331d9184006b03efcd"
+  },
+  "fonts/brand/poppins-latin-400-normal.woff": {
+    "bytes": 10532,
+    "sha256": "6076b418803564833cde2aece96c51b29927ab0a98dfbe727774d1a6c6e6c445"
+  },
+  "fonts/brand/poppins-latin-600-normal.woff": {
+    "bytes": 10600,
+    "sha256": "55fffef7b100460605349fa5215eb7dcd6e558e195d08e43eddc64c4b27d43b3"
+  },
+  "fonts/brand/poppins-latin-ext-400-normal.woff": {
+    "bytes": 7460,
+    "sha256": "fd2179b8cd8fa95b866f0d6521c100bacac3b89e90e223125d750a57bef33b5f"
+  },
+  "fonts/brand/poppins-latin-ext-600-normal.woff": {
+    "bytes": 7432,
+    "sha256": "c90f6a00b43727786577d5e89cdd335b5946ae9325d9d1959e2fce39ecf78caf"
+  },
+  "fonts/brand/quicksand-latin-500-normal.woff": {
+    "bytes": 20048,
+    "sha256": "5ddcec20fe9ee5ccf7b67d18d40cd59947194d759188dcbba33d530698590f01"
+  },
+  "fonts/brand/quicksand-latin-700-normal.woff": {
+    "bytes": 18992,
+    "sha256": "4fc2dd512b5c9bbfebba245fcd2c04a1209381b5f1836020b048b8810d0196be"
+  },
+  "fonts/brand/quicksand-latin-ext-500-normal.woff": {
+    "bytes": 20576,
+    "sha256": "9514ec6d7a64eb54af743c6ad30e46cfb5250a61f763592c6c212206d297da15"
+  },
+  "fonts/brand/quicksand-latin-ext-700-normal.woff": {
+    "bytes": 19772,
+    "sha256": "310e78ecc709c5a2b5dffdceaca409f378565ca768debec28ea5256f8c661a2a"
+  },
+  "fonts/brand/raleway-latin-400-normal.woff": {
+    "bytes": 22460,
+    "sha256": "b57c24f082aec6ab1daa4aec034e79b95a0381bd929f03baf4795d724650c2bb"
+  },
+  "fonts/brand/raleway-latin-600-normal.woff": {
+    "bytes": 22792,
+    "sha256": "ca1e651abac1cc932f45a8dafaf7b7c312d63ebc314a3a26fb2dad8888edd54b"
+  },
+  "fonts/brand/raleway-latin-ext-400-normal.woff": {
+    "bytes": 16672,
+    "sha256": "15f05025b909fa0577ba9fa927bdc7758610596a2697e1902ebb9191646a7892"
+  },
+  "fonts/brand/raleway-latin-ext-600-normal.woff": {
+    "bytes": 16828,
+    "sha256": "c2798da4a623569b0ade531426a0e45e1bcfeb05f86f2ef6162afb7d60c109eb"
+  },
+  "fonts/brand/red-hat-display-latin-400-normal.woff": {
+    "bytes": 17640,
+    "sha256": "016e39537399f4ec70ac20af90d0c9078c2c1a3c950e3de40b4df1efa5c45b44"
+  },
+  "fonts/brand/red-hat-display-latin-700-normal.woff": {
+    "bytes": 18400,
+    "sha256": "f83259e7ce3c30983b198197e22d1f46c987c98e6ad449bd67fe41aa6ed81c74"
+  },
+  "fonts/brand/red-hat-display-latin-ext-400-normal.woff": {
+    "bytes": 8756,
+    "sha256": "8efb75cb39ab6fd50dc34c92ade53fafda7dde69b01ef4bf44671141632cae23"
+  },
+  "fonts/brand/red-hat-display-latin-ext-700-normal.woff": {
+    "bytes": 8896,
+    "sha256": "ed18ade649c7c9491c66b446948b633f74cf9cc50bc46af769c504d3b9c2eb18"
+  },
+  "fonts/brand/rokkitt-latin-400-normal.woff": {
+    "bytes": 16372,
+    "sha256": "5f759c36bf1adfb7665a9ccfca88b281e04b8f16140b3efbbe4b5fc49edbcc3a"
+  },
+  "fonts/brand/rokkitt-latin-700-normal.woff": {
+    "bytes": 16448,
+    "sha256": "1bbdbd2c1a3aa89002a08ccee7ad087750b78ca3f343117a390b78b64445923a"
+  },
+  "fonts/brand/rokkitt-latin-ext-400-normal.woff": {
+    "bytes": 17412,
+    "sha256": "ccbfe008a504cfb2bf43a8bb3e83955f0a2857c383b755b71d80ff75f439bcd8"
+  },
+  "fonts/brand/rokkitt-latin-ext-700-normal.woff": {
+    "bytes": 17600,
+    "sha256": "f1fadb6861b143297233ee8981c095f97a8e78f7739bb533dfaaf7916efd95d5"
+  },
+  "fonts/brand/rozha-one-latin-400-normal.woff": {
+    "bytes": 13484,
+    "sha256": "c59b2b0931b494382f3dd5d3e746c7e1852075356baf295e34b4cf9a511030ab"
+  },
+  "fonts/brand/rozha-one-latin-ext-400-normal.woff": {
+    "bytes": 8864,
+    "sha256": "b19ad189f2d3bc74b047d5af51c94cb58d2003ec7cad7a533940855eacd551a4"
+  },
+  "fonts/brand/rufina-latin-400-normal.woff": {
+    "bytes": 16688,
+    "sha256": "4a7b2f55cbd0a80461fb28217257811c3f82b865087fc5c124be20458f5d220e"
+  },
+  "fonts/brand/rufina-latin-700-normal.woff": {
+    "bytes": 16700,
+    "sha256": "45d03b8f8af549503f789a99ba22c91a689bf5b2bffe0571d6554f0ce2427018"
+  },
+  "fonts/brand/rufina-latin-ext-400-normal.woff": {
+    "bytes": 1904,
+    "sha256": "0d1a49127a049c5e10a2be873fdcaa264a320e0371188ef62869904a0344f8ee"
+  },
+  "fonts/brand/rufina-latin-ext-700-normal.woff": {
+    "bytes": 1904,
+    "sha256": "4830eb419d383f8cf5138dbf1bea2fa45e7fdb0ba07e10f79d0f754c306b65a2"
+  },
+  "fonts/brand/saira-stencil-one-latin-400-normal.woff": {
+    "bytes": 17428,
+    "sha256": "a9dac1468207c3951c8dbf344bf79f4337a589df78effdcbec365016c4b26ef0"
+  },
+  "fonts/brand/saira-stencil-one-latin-ext-400-normal.woff": {
+    "bytes": 15388,
+    "sha256": "6691292ffbef9e5ce4956a55ddea615e61bce076ff800c33fafb0969bd95fe67"
+  },
+  "fonts/brand/schibsted-grotesk-latin-400-normal.woff": {
+    "bytes": 29928,
+    "sha256": "9d78d3131c3eea961075fb408021e6d06cb92726d04dfa73ef1c911ecbbcf116"
+  },
+  "fonts/brand/schibsted-grotesk-latin-700-italic.woff": {
+    "bytes": 32496,
+    "sha256": "7b5efc3873700ec810723468fd8ab079aca23dce778a2321f3fc8b2bd3d3045e"
+  },
+  "fonts/brand/schibsted-grotesk-latin-700-normal.woff": {
+    "bytes": 30768,
+    "sha256": "bb65563dcf6fed433358721d5dea39144e17855ccf1a8aa76bc622e26fcedf38"
+  },
+  "fonts/brand/schibsted-grotesk-latin-ext-400-normal.woff": {
+    "bytes": 15360,
+    "sha256": "af231b4d1aa2c08b67c8ce8565af8f0e84b977d17d5c80ed0bbb5e5551d80ee8"
+  },
+  "fonts/brand/schibsted-grotesk-latin-ext-700-italic.woff": {
+    "bytes": 16292,
+    "sha256": "3883bf69a31eb78d0d3ec5288b5144e9df48a159ce977d5a782aabec8f7c5b6d"
+  },
+  "fonts/brand/schibsted-grotesk-latin-ext-700-normal.woff": {
+    "bytes": 15624,
+    "sha256": "a04d918bb5424d2c9bcb2036914da147e5e50db07051a315f180220df575ecf5"
+  },
+  "fonts/brand/sora-latin-400-normal.woff": {
+    "bytes": 18540,
+    "sha256": "1f37dad58662a5d5aba86a5bb8127e56726bebb0d7c17bf842634bcb2692eaca"
+  },
+  "fonts/brand/sora-latin-600-normal.woff": {
+    "bytes": 18856,
+    "sha256": "0f54f64e7e937c760a41c40d4a8402eb3f5d93021b603fd1bab937f86dc53c42"
+  },
+  "fonts/brand/sora-latin-ext-400-normal.woff": {
+    "bytes": 9672,
+    "sha256": "a04bdd5aebe003363f11159b94739f5924db41880698ea8542ad2d1742619dd7"
+  },
+  "fonts/brand/sora-latin-ext-600-normal.woff": {
+    "bytes": 9820,
+    "sha256": "b9acb1ebf7dc1bc83c46fa5a17204aa649f337e4c3bda9bcba5a6cf087ca6874"
+  },
+  "fonts/brand/sorts-mill-goudy-latin-400-italic.woff": {
+    "bytes": 29360,
+    "sha256": "997b29785c3c789297a8d17861fbd6098f18bd1a76466ec863a308909bee8504"
+  },
+  "fonts/brand/sorts-mill-goudy-latin-400-normal.woff": {
+    "bytes": 27100,
+    "sha256": "45b98cff9441bf9d91788b4cd283ef0b13ee1afd766bc584ea4cb8ee6f6ada50"
+  },
+  "fonts/brand/sorts-mill-goudy-latin-ext-400-italic.woff": {
+    "bytes": 12904,
+    "sha256": "698c672f5763e454eaf7d804cb3c5cd71d8f7b28cdf917e8691a3371fba56728"
+  },
+  "fonts/brand/sorts-mill-goudy-latin-ext-400-normal.woff": {
+    "bytes": 12168,
+    "sha256": "fa1d498e7a69dabea57fd1db74fb574d0758ec966b9319f63524947f47b536c2"
+  },
+  "fonts/brand/space-grotesk-latin-500-normal.woff": {
+    "bytes": 16988,
+    "sha256": "aa3f2941f6db6ca253c9f55bb173e1a1ade690dcc50e501119814a4414027df3"
+  },
+  "fonts/brand/space-grotesk-latin-700-normal.woff": {
+    "bytes": 16416,
+    "sha256": "145016049aa47932e2d116f70151edc5a53df894cb367514c52ea2d11289bee7"
+  },
+  "fonts/brand/space-grotesk-latin-ext-500-normal.woff": {
+    "bytes": 16788,
+    "sha256": "b1faf7147e8b2fd11385c78412b2ba9d120645e68336ec9982d2e0f645accd7a"
+  },
+  "fonts/brand/space-grotesk-latin-ext-700-normal.woff": {
+    "bytes": 16460,
+    "sha256": "215b0cac2778da21525aab1d204b59b4261099b64afd010864f73ec9613ec5ba"
+  },
+  "fonts/brand/spectral-latin-300-italic.woff": {
+    "bytes": 19440,
+    "sha256": "549489d327011575cacee0ee4a01aadf55131dfcedfca42ff4826e2ee0f52fc1"
+  },
+  "fonts/brand/spectral-latin-300-normal.woff": {
+    "bytes": 18200,
+    "sha256": "b566a88d38baec0c5276bc5f4919b5840fb17f8267a5818af87dfaee73b7cba2"
+  },
+  "fonts/brand/spectral-latin-600-normal.woff": {
+    "bytes": 18516,
+    "sha256": "0342dd9cbdac8d90b7c0a22f49030c2ce0a671f9cd6c6f7fa96de8a09f8fd6ee"
+  },
+  "fonts/brand/spectral-latin-ext-300-italic.woff": {
+    "bytes": 18432,
+    "sha256": "84813ae852e3a02618fcec59340106e84aaba779f8d81095afc27bee963cf3f3"
+  },
+  "fonts/brand/spectral-latin-ext-300-normal.woff": {
+    "bytes": 17032,
+    "sha256": "903fc2c0f172714d00b3965b25b27d1ebbf0ac192fe269570900810a8d15573e"
+  },
+  "fonts/brand/spectral-latin-ext-600-normal.woff": {
+    "bytes": 17104,
+    "sha256": "3e058c66edc21f37fcc35a18e0128e2ecbee1eb79d89534f57ed75b2b4afece0"
+  },
+  "fonts/brand/syne-latin-600-normal.woff": {
+    "bytes": 18236,
+    "sha256": "be6cb05d0ee32df16bdd938604afff069c75593617ac9891e2fc71946e9df8b5"
+  },
+  "fonts/brand/syne-latin-800-normal.woff": {
+    "bytes": 17420,
+    "sha256": "c1ea128f1d5149a082d0f40c3d6855a74c2e01d8f213e4ded030d6e5a703f1d3"
+  },
+  "fonts/brand/syne-latin-ext-600-normal.woff": {
+    "bytes": 8492,
+    "sha256": "e5929a8ba7ab70da908e92cf006363fe0a28b1d06eabd01ab39532f206436fc6"
+  },
+  "fonts/brand/syne-latin-ext-800-normal.woff": {
+    "bytes": 8492,
+    "sha256": "f996c4d5e67db5c5e24be366c3500dddcbc30e945d676bb1ffcc7f0b06096cbf"
+  },
+  "fonts/brand/tenor-sans-latin-400-normal.woff": {
+    "bytes": 12872,
+    "sha256": "026f78ffe6a832dbb4c78c1b7a8db1677918b4a5849031ba3198df5a84536a2c"
+  },
+  "fonts/brand/tenor-sans-latin-ext-400-normal.woff": {
+    "bytes": 8948,
+    "sha256": "b43a2132ef1e248c01fab201c2bdf63fff48e6606e284233f4a1254af234ca44"
+  },
+  "fonts/brand/unbounded-latin-400-normal.woff": {
+    "bytes": 25432,
+    "sha256": "6636464d4b639b81c9e1e93b941270bf69e0e2691ecd1d061bc199ad3b993d1a"
+  },
+  "fonts/brand/unbounded-latin-700-normal.woff": {
+    "bytes": 26544,
+    "sha256": "171109b72cd86f29b99c50d96f0c12aab109080adb1d56998f8289e0c13b8c07"
+  },
+  "fonts/brand/unbounded-latin-ext-400-normal.woff": {
+    "bytes": 61864,
+    "sha256": "97d0acab1ef62b4fd22887e832a8278b6b0180e504dddacf2c217c0efc7994fd"
+  },
+  "fonts/brand/unbounded-latin-ext-700-normal.woff": {
+    "bytes": 68956,
+    "sha256": "b77a7b31af0cca41ef5afff0170ec91749421e13b6a73ba5e1a8e49c39b40aa3"
+  },
+  "fonts/brand/urbanist-latin-500-normal.woff": {
+    "bytes": 15160,
+    "sha256": "4798ad903bd1dc9414b5718d5a689dd4cf6a5acff0838f996080a6381adaccc7"
+  },
+  "fonts/brand/urbanist-latin-700-normal.woff": {
+    "bytes": 15056,
+    "sha256": "3ab248fab79d0b6aacd3abe3310cb2418cd7ba3afee04b313187a8585366ecff"
+  },
+  "fonts/brand/urbanist-latin-ext-500-normal.woff": {
+    "bytes": 10976,
+    "sha256": "09b058f2ad2309d70509550c49167eb3dfa7da6ff8e7445fdc1a5748d17639cd"
+  },
+  "fonts/brand/urbanist-latin-ext-700-normal.woff": {
+    "bytes": 10940,
+    "sha256": "dbb52775059ea6daf98968f82cc09cddb361304ef32d755f215397b64550d737"
+  },
+  "fonts/brand/wix-madefor-display-latin-400-normal.woff": {
+    "bytes": 15320,
+    "sha256": "09dfafe033355f1c664dfe53f37fb9c0dfd48122b850deed1722ec3252fd4c52"
+  },
+  "fonts/brand/wix-madefor-display-latin-700-normal.woff": {
+    "bytes": 16016,
+    "sha256": "39b46936be49f9b745479d1e2c1e1b3a0ce62d46584f304b5530f94a2bfa345f"
+  },
+  "fonts/brand/wix-madefor-display-latin-ext-400-normal.woff": {
+    "bytes": 9968,
+    "sha256": "52f07160b4f61238f45a99f0dfa8c118d7f923873f4253b678a98b5a9a7c5ced"
+  },
+  "fonts/brand/wix-madefor-display-latin-ext-700-normal.woff": {
+    "bytes": 10308,
+    "sha256": "08290bb000979a392104e75a2413fd8d5770206574fae62ada07cde23051a107"
+  },
+  "fonts/brand/work-sans-latin-400-normal.woff": {
+    "bytes": 25240,
+    "sha256": "facad8d73150d94fa019a8535f4e7dfc18424e31f4510e78f415778a25b753c0"
+  },
+  "fonts/brand/work-sans-latin-600-normal.woff": {
+    "bytes": 26312,
+    "sha256": "045abebf91357e32567aafc748aee7f73c2d6601d34344ad45403ec33eb9927f"
+  },
+  "fonts/brand/work-sans-latin-ext-400-normal.woff": {
+    "bytes": 21116,
+    "sha256": "f6a1556cade62e1d995df243b82c1dfa3c16dd37e23308916c12accaf17ea06a"
+  },
+  "fonts/brand/work-sans-latin-ext-600-normal.woff": {
+    "bytes": 21996,
+    "sha256": "4560d8bc16bcfacd03a8a9b9634a6e4e7f316add4626c75b52170a6328dfca71"
+  },
+  "fonts/brand/yeseva-one-latin-400-normal.woff": {
+    "bytes": 14000,
+    "sha256": "145e95b4c9321daea96c1fd59fa262535bc6ff470c67d778f510b958e5151ad6"
+  },
+  "fonts/brand/yeseva-one-latin-ext-400-normal.woff": {
+    "bytes": 10164,
+    "sha256": "bb9dc99ce98bf52be33b53e839f4b44a11e292ac54ff1f0239cdb0bf3437cb53"
+  },
+  "fonts/brand/young-serif-latin-400-normal.woff": {
+    "bytes": 22240,
+    "sha256": "c91c5b9bd9a7cbfbf8c11d3edbee236fce8b7ac82009c725e9a3933a0ff8c5cf"
+  },
+  "fonts/brand/young-serif-latin-ext-400-normal.woff": {
+    "bytes": 14716,
+    "sha256": "466dd8a98bfa5a0b784cf246f12ca7d8d179c532f0b09a8c7b2722f08834a81d"
+  },
+  "fonts/brand/zilla-slab-latin-400-italic.woff": {
+    "bytes": 23052,
+    "sha256": "54bc2739f6a6ff45f99139fd8c2e8ccb1fe96b4254ed2e70970c930014858f5e"
+  },
+  "fonts/brand/zilla-slab-latin-400-normal.woff": {
+    "bytes": 21948,
+    "sha256": "b11a6d5148e03e77c4058e7e2f247997a023c7a24ae6ed3fa880c6841cfc85a5"
+  },
+  "fonts/brand/zilla-slab-latin-700-normal.woff": {
+    "bytes": 21644,
+    "sha256": "d88f22598a1248c4fe5f960432c58ff242a4b7fcddc08bae07c18b5a3ea5b231"
+  },
+  "fonts/brand/zilla-slab-latin-ext-400-italic.woff": {
+    "bytes": 13536,
+    "sha256": "f5b6ca5c90e2051c06b6b4c150d6b0f39e425220937838811ebe55b5867b9d25"
+  },
+  "fonts/brand/zilla-slab-latin-ext-400-normal.woff": {
+    "bytes": 12544,
+    "sha256": "c9408e40e12db16b3f8b9a641584062312ec97f851b7b8f2c5fed250bc45eba6"
+  },
+  "fonts/brand/zilla-slab-latin-ext-700-normal.woff": {
+    "bytes": 12448,
+    "sha256": "c2d6ca8b1931518f0bbdd3fa532dc52977bd75e74d3fc504156986337564803f"
+  },
+  "fonts/ui/PowerGrotesk-Bold.woff": {
+    "bytes": 30084,
+    "sha256": "86fba5bb157c8377bcd2c2f6951019510b9b1e9f3dcdc753ad9e605948f3ef13"
+  },
+  "fonts/ui/PowerGrotesk-Bold.woff2": {
+    "bytes": 26744,
+    "sha256": "98c6d09c005c93558e4eb584ed4ee9451a1d37d9e0b333dae9227d11e69cd2c6"
+  },
+  "fonts/ui/PowerGrotesk-Light.woff2": {
+    "bytes": 25924,
+    "sha256": "e6c5822df26ebd3ff853a8b2ca8fc5a19ab0a9de197ae8b4e96f4e341427df2c"
+  },
+  "fonts/ui/PowerGrotesk-Medium.woff2": {
+    "bytes": 26480,
+    "sha256": "0f14d2a73ed6f55ac5d18d0ad23b8ad5a2eb3ce2267b5a911383dfec2a3fa9ab"
+  },
+  "fonts/ui/PowerGrotesk-Regular.woff": {
+    "bytes": 29100,
+    "sha256": "c5e4f7eb4493a1dcf57f35951bcd194cff6bf452d73cd03c53251f06d6295987"
+  },
+  "fonts/ui/PowerGrotesk-Regular.woff2": {
+    "bytes": 25972,
+    "sha256": "1490ffcbf7b7373f0c35eb00da655e8711acb77aef7dc8f942e8498c3dd164c7"
+  },
+  "fonts/ui/jetbrains-mono-latin-400-normal.woff2": {
+    "bytes": 21168,
+    "sha256": "14425ba9c695763c1547f48a206b7aa60350a33ae23de09f0407877f3fcd89eb"
+  },
+  "fonts/ui/jetbrains-mono-latin-500-normal.woff2": {
+    "bytes": 21832,
+    "sha256": "cb182feeed4d798ff6961d3c79f7026279448fca0676438aaecb21f3fc39553a"
+  },
+  "fonts/ui/outfit-latin-100-900.woff2": {
+    "bytes": 39388,
+    "sha256": "350d6c487e58bf182769eb4c75ca92534836849d0ac954740048cb70bc3cefba"
+  }
+}
