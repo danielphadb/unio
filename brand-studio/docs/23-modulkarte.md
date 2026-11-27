@@ -221,6 +221,27 @@ Nicht im Fundament (bleiben bei der Logo-Engine): Symbole, Icons und Rahmen (`iT
 `ST`, `wT`, `OL`, `IL`), Monogramm aus Schrift (`p4`, `ML`), Polygon-Operationen (`xs`, `br`, ...).
 Bei der Oberfläche: Projekt-Typ und Prüfungen (`Ik`, `PL`, `DL`, migrate `C`), Namens-Prüfung (`Tk`, `ou`).
 
+### Signature-Vorlagen (src/signature, Entwickler "Signature")
+
+Stand: in Arbeit. Die Logo-Engine importiert nur aus `src/signature` (index.ts bündelt alles).
+Geplante Exporte (alter Name im engine-Chunk, Export-Buchstabe):
+
+| Modul | Stand | Exporte (alter Name im Bundle) | Tests |
+|---|---|---|---|
+| src/signature/types.ts | in Arbeit | `SignatureTemplate`, `Element` (`TextElement`, `LinieElement`, `ZugElement`, `RechteckElement`, `KreisElement`, `BogenElement`, `PfadElement`, `ReiheElement`), `Passt` (inkl. `partnerArten`, `nameZuInitial`), `Freigabe`, `Merkmale`, `SignatureFields`, `SignatureLayout`, `SignatureOp`, `SignatureBox`, `SignatureColors`, `FitResult`, `Variante`; `SignatureParams` aus src/types.ts | |
+| src/signature/orte.ts | in Arbeit | `ORTE` (`ns`), `findOrt` (`xi`), `koordinaten` (`Bo`), `postleitzahl` (`Vo`), `bezirksnummer` (`Fo`), `bezirkAusText` (`Hu`, für die Hochzahl der Logo-Engine) | |
+| src/signature/partner.ts | in Arbeit | `partnerName` (`vi`), `PARTNER_LABEL` (`$o`) | |
+| src/signature/render.ts | in Arbeit | `fieldTexts` (`Mn`, Export `ae`), `splitSyllable` (`ts`), `signatureFonts` (`sr`, `H`), `signatureFontRefs` (`rs`), `ZUSATZ_FELDER` (`ur`, `Z`), `zusatzSchreibungen` (`qo`, `I`), `layoutSignature` (`ft`), `signatureColors` (`tl`), `renderSignature` (`il`), `checkFit` (`hl`) | |
+| src/signature/similarity.ts | in Arbeit | `aehnlichkeitsSperre` (`Al`), `markenNaehe` (`bs`), `namensZwilling` (`Ei`), `naheMarken` (`Ml`), `normMarke` (`hn`) | |
+| src/signature/varianten.ts | in Arbeit | `FEINHEIT` (`ls`), `STRUKTUR` (`ms`), `STRUKTUR_FREIGEGEBEN` (`gl`), `splitVariantId` (`hs`, `Y`), `buildVariant` (`fs`), `variantsOf` (`bl`), `varianteUeberlappt` (`Yl`) | |
+| src/signature/index.ts | in Arbeit | `SIGNATURE_TEMPLATES` (`cr`, `V`), `ZURUECKGEZOGEN` (`jl`), `KURZNAMEN` (`ws`, `ad`), `getSignatureTemplate` (`Ae`, `G`), `fits` (`qt`, `W`), `signatureConcept` (`ba`, `J`), `renderConceptSignature` (`Ql`), `conceptSignatureFonts` (`Ni`) | |
+
+Für die Signature nötig und deshalb von "Signature" mitgeschrieben (die Logo-Engine nutzt sie bitte
+mit, statt sie doppelt zu bauen): `src/engine/resolveColors.ts` mit `resolveColors` (engine `Nn`,
+Export `al`) und `src/symbols/fontMonogram.ts` mit `fontMonogramSvg` (index `p4`, Export `b0`).
+Bleiben bei der Logo-Engine (hängen an Route und Galerie): `am`, `om`, `sm`, `lm`, `Js`, `um`,
+`Qs`, `Hr` (Auswahl und Gewichtung der Vorlagen je Seite).
+
 <!-- status-w3:end -->
 
 ## 5. Anhang: alle Exporte und größte Funktionen je Chunk
