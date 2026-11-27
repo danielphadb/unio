@@ -262,7 +262,7 @@ Seed 7) bitgenau; dazu 1650 erfundene Briefe gegen die gesicherte Fassung (`Dn`,
 
 Abweichung zur Modulkarte oben: `K` und `re` liegen in `params.ts` (nicht in axes.ts oder
 territories.ts), damit territories.ts reine Daten bleibt und kein Kreis entsteht.
-Erwartete Schnittstellen anderer Bereiche: `SIGNATURE_TEMPLATES`, `fits`, Typ `SignatureTemplate`
+Erwartete Schnittstellen anderer Bereiche: `ALL_TEMPLATES` (alt `cr`), `fits`, Typ `SignatureTemplate`
 aus `src/signature` (Signature), `templateBlocked(template, input)` aus `src/engine/route.ts`
 (Logo-Engine, alt `Os`, Export `X`), `keywordFieldsFor(text)` aus `src/engine/names/kwFields.ts`
 (Namen, alt `nn`, Export `o`, Ergebnis Cluster mit `id`). Nicht in der Strategie (Oberfläche oder

@@ -14,7 +14,7 @@
  * nur einen Zusatz-Seed und aendert damit die offenen Achsen.
  */
 import { hash } from "../engine/rng";
-import { SIGNATURE_TEMPLATES, fits, type SignatureTemplate } from "../signature";
+import { ALL_TEMPLATES, fits, type SignatureTemplate } from "../signature";
 import { templateBlocked } from "../engine/route";
 import { axisDistance, briefSeed, briefToAxes } from "./axes";
 import { TERRITORIES, VORLAGEN_GESPERRT } from "./territories";
@@ -90,7 +90,7 @@ const serifSign = (params: RouteParams): number =>
   Math.sign(FONT_FORM_AXES[params.fontForms[0] as keyof typeof FONT_FORM_AXES]?.serif ?? 0);
 
 /** Freigegebene Vorlagen, die gemischt werden duerfen und nicht gesperrt sind (`se`). */
-const FREIE_VORLAGEN: readonly SignatureTemplate[] = SIGNATURE_TEMPLATES.filter(
+const FREIE_VORLAGEN: readonly SignatureTemplate[] = ALL_TEMPLATES.filter(
   (t) => t.freigabe === "freigegeben" && t.mischung !== false && !VORLAGEN_GESPERRT.includes(t.id),
 );
 const FREIE_VORLAGEN_BY_ID = new Map(FREIE_VORLAGEN.map((t) => [t.id, t]));

@@ -18,7 +18,7 @@ import {
   routeToBrandInputPatch,
   routeToNameInput,
 } from "../../src/strategy";
-import { SIGNATURE_TEMPLATES } from "../../src/signature";
+import { ALL_TEMPLATES } from "../../src/signature";
 import type { BrandBrief, BrandRoute } from "../../src/strategy/types";
 
 interface GoldenLauf {
@@ -129,7 +129,7 @@ describe("Eigenschaften", () => {
   });
 
   it("Vorlagen je Route: freigegeben, nicht gesperrt, keine doppelt", () => {
-    const freigegeben = new Set(SIGNATURE_TEMPLATES.filter((t) => t.freigabe === "freigegeben").map((t) => t.id));
+    const freigegeben = new Set(ALL_TEMPLATES.filter((t) => t.freigabe === "freigegeben").map((t) => t.id));
     for (const routes of alle) {
       const ids = routes.flatMap((r) => r.params.signatureIds ?? []);
       expect(new Set(ids).size).toBe(ids.length);
