@@ -8,6 +8,7 @@ import {
   readdirSync,
   writeFileSync,
   existsSync,
+  renameSync,
 } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -16,7 +17,8 @@ import * as acorn from "acorn";
 const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, "..", "..");
 const build = join(root, "recovered", "build", "assets");
-const cache = join(root, "recovered", "harness", ".cache", "vitest");
+// Neuer Ordnername, wenn sich die Aufbereitung aendert (alte Kopien bleiben unbenutzt).
+const cache = join(root, "recovered", "harness", ".cache", "vitest-2");
 
 function bindings(src: string): string[] {
   const ast = acorn.parse(src, {
@@ -78,7 +80,12 @@ function prepare(): void {
     if (!f.endsWith(".js")) continue;
     const target = join(cache, f);
     if (existsSync(target)) continue;
-    const src = readFileSync(join(build, f), "utf8");
+    // Den App-Start (React-Render in #root) weglassen: im Test nur die Funktionen,
+    // sonst rendert React nach dem Ende der Testumgebung weiter.
+    const src = readFileSync(join(build, f), "utf8").replace(
+      /\w+\(document\.getElementById\("root"\)\)\.render\([^;]*\);/,
+      "/* App-Start im Test abgeschaltet */",
+    );
     let extra = "";
     try {
       const names = bindings(src);
@@ -88,7 +95,11 @@ function prepare(): void {
     } catch {
       // klassischer Worker oder nicht parsebar: unveraendert
     }
-    writeFileSync(target, src + extra);
+    // Testdateien laufen parallel: erst unter eigenem Namen schreiben, dann umbenennen,
+    // damit nie eine halb geschriebene Datei geladen wird.
+    const tmp = `${target}.${process.pid}.tmp`;
+    writeFileSync(tmp, src + extra);
+    renameSync(tmp, target);
   }
 }
 
