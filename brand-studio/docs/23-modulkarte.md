@@ -269,6 +269,50 @@ aus `src/signature` (Signature), `templateBlocked(template, input)` aus `src/eng
 Engine): `routeLogos` (`tr`), `projectFromRoute` (`nr`), `nameFinderFromRoute` (`rr`),
 `previewInput` (`Zn`, `Xn`), `applyRouteToInput` (`je`), `routesForState` (`Yn`), `shiftMutiger` (`er`).
 
+### Namen (src/engine/names.ts, src/engine/names/**, src/namen, server, Entwickler "Namen")
+
+Abgleich: tests/golden/names bitgenau (8 Marken, 3 Seeds, ohne und mit Route: Profil, alle
+Chargen, `pruefeEigenenNamen`, `alternativenFuer` (12), Vergleich über JSON samt Feldreihenfolge);
+dazu 63 Vergleiche mit der gesicherten Fassung (`kt` mit Kreativität, Chips, Vorlieben, Filtern;
+`Id`, `Zd`, `_d`, `wd`, `nn`, Formular-Helfer) ohne Abweichung. Tempo: eine Charge mit 24 Namen
+im Median etwa 37 ms (Node, warm; alte Fassung etwa 55 ms). Namenskarten (`Yd`, `Xd`, `rl`, `Sd`) liegen bei der
+Logo-Engine (src/engine/nameCards.ts) und nutzen `nameInput`, `inputNameKind`, `batchSeed` aus
+names/finder.ts.
+
+| Modul | Stand | Exporte (alter Name im Bundle) | Tests |
+|---|---|---|---|
+| src/engine/names.ts | fertig, bitgenau | `generateNames` (`kt`, Export `q`), `similarNames` (`Id`, `m`), `alternativenFuer` (`_d`, `a`), Typ `NameOptions`; reicht weiter: `NAME_KINDS` (`ti`), `NameInput`, `NameSuggestion`, `pruefeEigenenNamen` (`Zd`, `p`), `NamensPunkt`, `NamensPruefung`, `pruefeFremdnamen` (`wd`), `parsePerson` (`rr`), `parseCompany` (`Hn`), `shortForm` (`ad`), `keywordFieldsFor` (`nn`, `o`), `NAME_STYLES` (`Pa`), `CREATIVITY` (`Od`, `C`), `domainsFor` (`fn`) | tests/engine/names/golden.test.ts, vergleich.test.ts, regeln.test.ts |
+| src/engine/names/profile.ts | fertig, bitgenau | `buildProfile` (`nr`), `NAME_KINDS` (`ti`), Typen `NameInput`, `NameRoute`, `NameAnchor`, `NameProfile` | dto. |
+| src/engine/names/person.ts | fertig, bitgenau | `parsePerson` (`rr`), `parseCompany` (`Hn`, `$n`), `shortForm` (`ad`), `usableInitials` (`Za`), `PLACE_TOKENS` (`ze`), `TITLE_RE` (`Va`), `PARTICLES` (`gr`), `MAX_NAME_LENGTH` (`xe`) | regeln.test.ts |
+| src/engine/names/candidate.ts | fertig, bitgenau | `makeCandidate` (`re`), `suffixFor` (`_`), `tagAllowed` (`Se`), `tagFit` (`ln`), `toneOf` (`qe`), `displayKind` (`Jn`), `inSlot` (`xr`), `chance` (`Ce`), `lucky` (`tr`), `profileKey` (`hr`), `stylesFit` (`ur`), `estateFits` (`sr`), `fitsPlace` (`nt`), `partsOf` (`je`), `KNOWN_WORDS` (`ir`), `REJECTED_NAMES` (`Ca`) | dto. |
+| src/engine/names/generators.ts | fertig, bitgenau | `GENERATORS` (`Ze`), `personNames` (`Ya`, `Li`), `initialNames` (`Xa`), `placeNames` (`Fr`), `classicNames` (`Fi`), `wordNames` (`ut`, `$i`), `freeNames` (`et`), `ownBrandNames` (`lt`), `ESTATE_WORDS` (`Xn`); intern `Yn`, `Pi`, `Kr`, `at`, `Ci`, `tt`, `Ji`, `Qi`, `Xi`, `rd`, `td` | dto. |
+| src/engine/names/batch.ts | fertig, bitgenau | `createStream` (`on`), `toSuggestion` (`gt`), `inputSeed` (`Yr`), `routeSeed` (`bt`), `styleOfName` (`ct`), `PAGE_SIZE` (`ae`), Typen `NameSuggestion`, `NameStream`, `StreamOptions` | dto. |
+| src/engine/names/check.ts | fertig, bitgenau | `pruefeEigenenNamen` (`Zd`), `pruefeFremdnamen` (`wd`, `gd`), `looksLikePersonName` (`vt`), `brandPart` (`Wt`), `GATTUNGSWOERTER` (`xn`), `FLOSKEL` (`zt`) | dto. |
+| src/engine/names/finder.ts | fertig, bitgenau | `inputFromForm` (`Rd`, `t`), `generateBatches` (`jd`, `e`), `generateBatch` (`Td`), `batchOptions` (`Kd`), `splitList` (index `_L`), `BATCH_SIZE` (`ha`, `B`), `LEARN_AFTER` (`Ud`, `A`), `NAME_CHIPS` (`Ht`, `N`), `DISLIKE_REASONS` (`Cd`, `H`), `kindLabel` (`$d`, `s`), `fromSaved` (`Jd`, `g`), `toSaved` (`Qd`, `i`), `nameInput` (`Gt`, `w`), `withRoute` (`Fd`, `r`), `inputNameKind` (`xt`, `d`), `batchSeed` (`el`, `h`), `umlautDomain` (`nl`, `u`), `domainKey` (`al`, `j`), `naeheHint` (`tl`, `n`) | dto. |
+| src/engine/names/rules.ts | fertig, bitgenau | `HANDEL_AMT` (`Mu`), `protectedTermOf` (`Te`), `KONZERNE` (`Hu`), `HANDELSKETTEN` (`ka`), `tradeBrandOf` (`Ue`), `isRetailBrand` (`va`), `CLICHES` (`fu`), `clicheOf` (`Ge`), `COMPETITORS` (`Su`), `competitorMatch` (`$e`), `OFFENSIVE` (`Eu`), `offensiveOf` (`wr`), `corpusMatch` (`_r`), `corpusMatchLabel` (`Tu`), `techMatch` (`Du`) | regeln.test.ts |
+| src/engine/names/quality.ts | fertig, bitgenau | Wortfelder `placeFieldOf` (`pa`), `fieldFit` (`cn`), `wordClassOf` (`bu`); Laut `syllables` (`Le`), `pronounceable` (`lr`), `softness` (`Or`), `maxConsonantRun` (`Ve`), `maxVowelRun` (`Bn`), `nameWords` (`Na`); Sperren `wordWeakness` (`Da`, Maengelwoerter und -werck-Regel), `SPERRWOERTER` (`In`), `SCHWACHE_WOERTER` (`Zn`), `isGenericWord` (`Vr`), `isStrongCoinage` (`ai`) | dto. |
+| src/engine/names/tech.ts | fertig, bitgenau | `TECH_RULES` (`dr`), `readTechRules` (`us`), `appRuleOf` (`is`), `techScore` (`ds`), `vowelPattern` (`Dn`), `hardCount` (`Aa`) | dto. |
+| src/engine/names/brandable.ts | fertig, bitgenau | `BRAND_RULES` (`Ne`), `brandableFrom` (`$s`), `isBrandableWord` (`_s`), `hasBadEnding` (`Wn`), `negativePattern` (`vr`), `letterVariant` (`js`), `endingKey` (`On`) | über golden/vergleich |
+| src/engine/names/styles.ts | fertig | `BILDWOERTER` (`zr`), `BILDWORT` (`mn`), `SAETZE` (`pn`), `ECHTE_WOERTER` (`Cr`), `FOREIGN` (`$r`), `COMPOUND_HEADS` (`ar`), `COMPOUND_TAILS` (`pr`), `ROOTS` (`kr`), `COINED` (`wn`), `OLD_SPELLINGS` (`Fn`), `NAME_STYLES` (`Pa`), `CREATIVITY` (`Od`), `WORD_ORIGIN` (`Fe`), `LEXICON_BY_KEY` (`Br`), `isCompound` (`Hr`), `placeFieldOfName` (`Gn`) | dto. |
+| src/engine/names/kwFields.ts | fertig, bitgenau | `KEYWORD_FIELDS` (`vn`), `keywordFieldsFor` (`nn`), `keywordFieldById` (`mi`) | vergleich.test.ts |
+| src/engine/names/lexicon.ts | fertig | `LEXICON` (`Sn`), `lexSkip` (Filter von `Sn`), `isTabu` (`Sr`), `isCommonWord` (`ks`), `LANG_NAMES` (`ms`), `FIELD_STYLES` (`qn`) | regeln.test.ts |
+| src/engine/names/wordsDb.ts, wordsDbFormat.ts | fertig | `WORDS_DB` (`kn`), Typ `WordsDbRow`, `FLAG` (`Ea` ... `ws`), `level`, `isKeywordOnly`, `BIO_RE` (`fs`) | regeln.test.ts |
+| src/engine/names/corpusNames.ts | fertig | `CORPUS_BRANDS` (`mu`), `TECH_BRANDS` (`pu`) | |
+| src/engine/names/rating.ts | fertig, bitgenau | `highendScore` (`Hi`), `features` (`$a`, `Wi`), `highendFromFeatures` (`ja`), `FEATURES` (`Si`) | über golden |
+| src/engine/names/fold.ts, domains.ts | fertig, bitgenau | `fold` (`g`), `flat` (`oe`), `letters` (`La`), `letterCount` (`ge`), `levenshtein` (`Bu`), `levenshteinMax` (`fa`), `memo` (`Jr`); `domainsFor` (`fn`), `slug` (`Pn`) | dto. |
+| src/engine/orte.ts | fertig | aus index: `PLACES` (`uC`), `DISTRICTS` (`Yc`), `CITIES` (`oC`), `STATES` (`aC`), `REGIONS` (`lC`), `resolvePlace` (`GL`), `placeClass` (`HL`), `isWineRegion` (`WL`), `keywordsFromText` (`nC`), `PLACE_SUGGESTIONS` (`Nu`), `suggestedPlace` (`VL`) | über golden |
+| src/namen/kiNamen.ts | fertig, bitgenau | `kiNamen` (`sl`, Export `f`), `fetchKiNamen` (`Md`), `requestFromForm` (`ul`, `k`), `normalizeRequest` (`Ad`), `parseResponse` (`Ed`), `inputFromRequest` (`Ld`), `KI_NAMEN_ENDPOINT` (`Hd`), `KI_NAMEN_TIMEOUT_MS` (`Gd`), `KI_NAMEN_ARTEN` (`Bt`) | tests/namen/kiNamen.test.ts |
+| server/brand-namen.js (+ .d.ts) | neu (fehlte in der Sicherung) | Vercel-Function `/api/brand-namen`: `createHandler`, `readConfig`, `validateRequest`, `bereinigeNamen`, `testAntwort`, `bremse`, `rufeModell`, `LEITFADEN`, `ANTWORT_SCHEMA`; Standard-Export ist der Handler | tests/namen/kiNamen.test.ts |
+| scripts/names-db.ts | fertig | erzeugt `wordsDb.data.json`, `corpusNames.data.json`, `corpusTechMarks.data.json` byte-gleich aus src/engine/reference; `--check` vergleicht (`npx vite-node scripts/names-db.ts`) | |
+
+Abweichungen zur Modulkarte oben: `kt` ist `generateNames` (nicht "brandable"), `Id` sind ähnliche
+Namen (nicht Stil-Namen). Zusätzliche Dateien gegenüber der Liste: profile, person, candidate,
+generators, batch, check, finder, fold, domains (die frühere names.ts war ein großer Block).
+`src/engine/orte.ts` (eigentlich index-Chunk) ist hier entstanden, weil der Namensfinder ihn
+braucht; die Oberfläche nutzt ihn mit. Offen: `reference/names.json` hat nur die 9 Spalten der
+verdichteten Datenbank (id, typ, position, stichwort_felder des Originals fehlen, Spalte 6 wird
+nicht gelesen).
+
 <!-- status-w3:end -->
 
 ## 5. Anhang: alle Exporte und größte Funktionen je Chunk

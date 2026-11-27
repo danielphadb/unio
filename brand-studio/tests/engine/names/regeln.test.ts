@@ -17,6 +17,9 @@ import {
 } from "../../../src/engine/names/rules";
 import { appRuleOf } from "../../../src/engine/names/tech";
 import { wordWeakness } from "../../../src/engine/names/quality";
+import { WORDS_DB } from "../../../src/engine/names/wordsDb";
+import { level } from "../../../src/engine/names/wordsDbFormat";
+import { LEXICON, lexSkip } from "../../../src/engine/names/lexicon";
 import { batchOptions, generateBatch, type NameFinderForm } from "../../../src/engine/names/finder";
 
 const WIEN: NameInput = {
@@ -103,6 +106,19 @@ describe("Sperren", () => {
         // eigene Namen duerfen einer Marke gleichen (mit Hinweis), alles andere nicht
         if (s.kind !== "person") expect(s.naehe?.art).not.toBe("gleich");
       }
+  });
+});
+
+describe("Wortdatenbank und Lexikon", () => {
+  it("Stufen und Lexikon passen zusammen", () => {
+    const stufen = WORDS_DB.map(level);
+    expect(stufen.filter((s) => s === "gesperrt").length).toBe(
+      WORDS_DB.filter((r) => r[8] & 1).length,
+    );
+    expect(LEXICON.length).toBe(WORDS_DB.filter((r) => !lexSkip(r)).length);
+    for (const [i, row] of WORDS_DB.entries())
+      if (!lexSkip(row)) expect(["frei", "stichwort"]).toContain(stufen[i]);
+    expect(LEXICON.filter((w) => w.kwOnly).length).toBeGreaterThan(0);
   });
 });
 

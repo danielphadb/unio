@@ -12,7 +12,7 @@
  * baut `nameCards.ts` (Logo-Engine); dieser Teil kommt ohne Logo-Engine aus.
  */
 import type { NameKind } from "../types";
-import { flat } from "./names/fold";
+import { flat, fold } from "./names/fold";
 import {
   createStream,
   inputSeed,
@@ -45,7 +45,6 @@ import {
   protectedTermOf,
   tradeBrandOf,
 } from "./names/rules";
-import { fold } from "./names/fold";
 import { PLACE_TOKENS } from "./names/person";
 import { hash } from "./rng";
 
