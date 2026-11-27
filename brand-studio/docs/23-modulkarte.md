@@ -242,6 +242,33 @@ Export `al`) und `src/symbols/fontMonogram.ts` mit `fontMonogramSvg` (index `p4`
 Bleiben bei der Logo-Engine (hängen an Route und Galerie): `am`, `om`, `sm`, `lm`, `Js`, `um`,
 `Qs`, `Hr` (Auswahl und Gewichtung der Vorlagen je Seite).
 
+### Strategie (src/strategy, server, Entwickler "Strategie")
+
+Abgleich: `chooseRoutes` gegen tests/golden/strategy/routes.json (10 Briefe, Standard-Seed und
+Seed 7) bitgenau; dazu 1650 erfundene Briefe gegen die gesicherte Fassung (`Dn`, `Pe`, `Qn`,
+`Oe`, `re`, `le`, `Fe`, Routes `Me`, `Ae`) ohne Abweichung.
+
+| Modul | Stand | Exporte (alter Name im Bundle) | Tests |
+|---|---|---|---|
+| src/strategy/catalog.ts | fertig, bitgenau | `KOMPASS_INTRO` (`Re`), `KOMPASS` (`R`), `ONLYNESS_KARTEN` (`I`), `ALTERNATIVEN` (`V`), `REFERENZ_WELTEN` (`Z`), `KLISCHEES` (`_`), `STIMM_PAARE` (`C`), `LOGO_PAARE` (`U`), `FARB_PAARE` (`J`), `FARB_WELTEN` (`q`), `FOKUS_OPTIONEN` (`Y`), `ARCHITEKTUR_OPTIONEN` (`X`), `ERFAHRUNG_OPTIONEN` (`Q`), `SEGMENT_OPTIONEN` (`ee`), `WUNSCHKUNDEN` (`K`), `WERTE` (`L`), `PERSOENLICHKEIT` (`y`), `FORMATE` (`T`), `KANAELE` (`ie`), `frageById` (`F`), `frageSichtbar` (`re`), `antwortSetzen` (`Fe`), `antwortLesen` (`le`), `kompassFortschritt` (`Oe`) | tests/strategy/catalog.test.ts |
+| src/strategy/texts.ts | fertig, bitgenau | `routeTexts` (`xe`), `socialKit` (`Pe`), `persoenlichkeit` (`ye`), `wunschkunde` (`Te`), `versprechen` (`Ke`), `formate` (`Ie`), `findCliche` (`ce`), `countWords` (`A`), `cleanText` (`v`), `isValidClaim` (`ge`), `GEDANKENSTRICH` (`de`), `KLISCHEE_MUSTER` (`he`), `fillTemplate` (`z`), `mitPraeposition` (`W`) | tests/strategy/texts.test.ts |
+| src/strategy/territories.ts | fertig | `TERRITORIES` (`ee`), `territoryById` (`_n`), `VORLAGEN_GESPERRT` (`fn`) | |
+| src/strategy/params.ts | fertig, bitgenau | `resolveRouteParams` (`K`), `territoryFit` (`re`), `avoidFromBrief` (`cn`), `goldPaletteIds` (`dn`), `clearlyDifferent` (`vn`), `fontClassOf` (`U`), `colorFamilyOf` (`ne`), `mainKindOf` (`ye`), `fontCategoryOf` (`zn`), `FONT_FORM_AXES` (`C`) | über routes/axes |
+| src/strategy/axes.ts | fertig, bitgenau | `briefToAxes` (`Pe`), `briefSeed` (`Ke`), `stableKey` (`ie`), `axisDistance` (`Me`), `briefPreviewParams` (`Qn`), `AXIS_WEIGHTS` (`x`) | tests/strategy/axes.test.ts |
+| src/strategy/routes.ts | fertig, bitgenau | `chooseRoutes` (`Dn` mit `Rn`, `Gn`, `Fn`, `Nn`, `In`, `Pn`), `routeToBrandInputPatch` (`Tn`), `routeToNameInput` (`Ln`) | tests/strategy/routes.test.ts |
+| src/strategy/kiTexte.ts | fertig, bitgenau | `kiTexte` (Routes `Fe`), `buildStrategieRequest` (`Me`), `pruefeKiTexte` (`Oe`), `mergeKiTexte` (`Ae`), `hatKontaktdaten` (`De`), `KI_TEXTE_ENDPOINT` (`Re`), `KI_TEXTE_TIMEOUT_MS` (`Ke`) | tests/strategy/kiTexte.test.ts |
+| src/strategy/index.ts | fertig | öffentliche API: `emptyBrief`, `briefToAxes`, `briefPreviewParams`, `chooseRoutes`, `routeToBrandInputPatch`, `routeToNameInput`, Katalog, Texte, KI-Texte | |
+| server/brand-strategie.js (+ .d.ts) | neu (fehlte in der Sicherung) | Vercel-Function: `createHandler`, `readConfig`, `validateRequest`, `testAntwort`, `bremse`, `rufeModell`, `LEITFADEN`, `ANTWORT_SCHEMA`; Standard-Export ist der Handler | tests/strategy/server.test.ts |
+
+Abweichung zur Modulkarte oben: `K` und `re` liegen in `params.ts` (nicht in axes.ts oder
+territories.ts), damit territories.ts reine Daten bleibt und kein Kreis entsteht.
+Erwartete Schnittstellen anderer Bereiche: `SIGNATURE_TEMPLATES`, `fits`, Typ `SignatureTemplate`
+aus `src/signature` (Signature), `templateBlocked(template, input)` aus `src/engine/route.ts`
+(Logo-Engine, alt `Os`, Export `X`), `keywordFieldsFor(text)` aus `src/engine/names/kwFields.ts`
+(Namen, alt `nn`, Export `o`, Ergebnis Cluster mit `id`). Nicht in der Strategie (Oberfläche oder
+Engine): `routeLogos` (`tr`), `projectFromRoute` (`nr`), `nameFinderFromRoute` (`rr`),
+`previewInput` (`Zn`, `Xn`), `applyRouteToInput` (`je`), `routesForState` (`Yn`), `shiftMutiger` (`er`).
+
 <!-- status-w3:end -->
 
 ## 5. Anhang: alle Exporte und größte Funktionen je Chunk

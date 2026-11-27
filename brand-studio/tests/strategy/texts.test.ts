@@ -29,7 +29,7 @@ const BRIEFE: BrandBrief[] = [
     architecture: "person",
     person: "Clara Wimmer",
     place: "Weinviertel",
-    proof: "„Haus“ in Mistelbach – 3 Angebote! In 9 Wochen verkauft.",
+    proof: "„Haus“ in Mistelbach \u2013 3 Angebote! In 9 Wochen verkauft.",
     wunschkunde: ["familie", "landwunsch"],
     werte: ["naehe", "mut"],
     wirkung: ["herzlich"],
@@ -73,12 +73,12 @@ describe("Textregeln", () => {
     expect(isValidClaim("Erst fragen, dann bauen")).toBe(false);
     expect(isValidClaim("Seit 1990 da")).toBe(false);
     expect(isValidClaim("Gut verkauft!")).toBe(false);
-    expect(isValidClaim("Ruhig – genau")).toBe(false);
+    expect(isValidClaim("Ruhig \u2013 genau")).toBe(false);
   });
 
   it("Glaetten ersetzt Gedankenstriche und Ausrufezeichen", () => {
-    expect(cleanText("Ruhig — genau!!  Und  gut ,, fertig .")).toBe("Ruhig, genau. Und gut, fertig.");
-    expect(countWords("Ein Satz – mit 3 Teilen.")).toBe(5);
+    expect(cleanText("Ruhig \u2014 genau!!  Und  gut ,, fertig .")).toBe("Ruhig, genau. Und gut, fertig.");
+    expect(countWords("Ein Satz \u2013 mit 3 Teilen.")).toBe(5);
   });
 
   it("Klischee-Pruefung", () => {

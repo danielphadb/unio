@@ -117,7 +117,7 @@ describe("Pruefung der KI-Texte", () => {
   });
 
   it("Gedankenstriche und Ausrufezeichen werden geglaettet", () => {
-    const geprueft = pruefeKiTexte({ kernidee: "Ruhig – und genau!" }, fall.brief);
+    const geprueft = pruefeKiTexte({ kernidee: "Ruhig \u2013 und genau!" }, fall.brief);
     expect(geprueft.kernidee).toBe("Ruhig, und genau.");
   });
 
