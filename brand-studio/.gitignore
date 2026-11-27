@@ -1,0 +1,7 @@
+node_modules/
+dist/
+recovered/harness/instrumented/
+recovered/harness/.cache/
+test-results/
+playwright-report/
+*.tsbuildinfo

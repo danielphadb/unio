@@ -1,0 +1,99 @@
+import { r as m } from "./index-BER2gtDe.js";
+const b = "unio-brand-photos",
+  h = "photos",
+  s = new Map(),
+  g = /^data:image\/(png|jpe?g|webp);base64,[A-Za-z0-9+/=]+$/;
+let f = null;
+function y() {
+  return (
+    f ||
+    ((f = new Promise((t) => {
+      try {
+        if (typeof indexedDB > "u") return t(null);
+        const e = indexedDB.open(b, 1);
+        ((e.onupgradeneeded = () => e.result.createObjectStore(h)),
+          (e.onsuccess = () => t(e.result)),
+          (e.onerror = () => t(null)),
+          (e.onblocked = () => t(null)));
+      } catch {
+        t(null);
+      }
+    })),
+    f)
+  );
+}
+function d(t, e) {
+  return y().then(
+    (o) =>
+      new Promise((n) => {
+        if (!o) return n(void 0);
+        try {
+          const r = e(o.transaction(h, t).objectStore(h));
+          ((r.onsuccess = () => n(r.result)), (r.onerror = () => n(void 0)));
+        } catch {
+          n(void 0);
+        }
+      }),
+  );
+}
+const x = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
+async function E(t, e) {
+  if (!g.test(e)) throw new Error("Kein gültiges Bild");
+  return (s.set(t, e), (await d("readwrite", (n) => n.put(e, t))) !== void 0);
+}
+async function P(t) {
+  const e = s.get(t);
+  if (e) return e;
+  const o = await d("readonly", (n) => n.get(t));
+  return typeof o == "string" && g.test(o) ? (s.set(t, o), o) : null;
+}
+async function M(t) {
+  (s.delete(t), await d("readwrite", (e) => e.delete(t)));
+}
+function R(t) {
+  const e = t.join(","),
+    [o, n] = m.useState(() =>
+      Object.fromEntries(t.filter((r) => s.has(r)).map((r) => [r, s.get(r)])),
+    );
+  return (
+    m.useEffect(() => {
+      let r = !0;
+      return (
+        Promise.all(t.map(async (a) => [a, await P(a)])).then((a) => {
+          r && n(Object.fromEntries(a.filter(([, c]) => !!c)));
+        }),
+        () => {
+          r = !1;
+        }
+      );
+    }, [e]),
+    o
+  );
+}
+async function O(t, e = 3e3) {
+  const o = URL.createObjectURL(t);
+  try {
+    const n = await new Promise((w, p) => {
+        const l = new Image();
+        ((l.onload = () => w(l)),
+          (l.onerror = () => p(new Error("Bild nicht lesbar"))),
+          (l.src = o));
+      }),
+      r = Math.min(1, e / Math.max(n.naturalWidth, n.naturalHeight)),
+      a = Math.max(1, Math.round(n.naturalWidth * r)),
+      c = Math.max(1, Math.round(n.naturalHeight * r)),
+      i = document.createElement("canvas");
+    ((i.width = a), (i.height = c));
+    const u = i.getContext("2d");
+    if (!u) throw new Error("Canvas nicht verfügbar");
+    return (
+      (u.fillStyle = "#ffffff"),
+      u.fillRect(0, 0, a, c),
+      u.drawImage(n, 0, 0, a, c),
+      i.toDataURL("image/jpeg", 0.85)
+    );
+  } finally {
+    URL.revokeObjectURL(o);
+  }
+}
+export { M as d, P as g, x as n, E as p, O as r, R as u };

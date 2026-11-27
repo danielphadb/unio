@@ -1,0 +1,3148 @@
+import {
+  a as de,
+  k as gs,
+  l as js,
+  r as u,
+  j as s,
+  m as Ke,
+  T as W,
+  D as ye,
+  G as re,
+  p as bs,
+  L as ee,
+  M as Bs,
+  q as oe,
+  S as He,
+  c as Ds,
+  v as Qe,
+  C as rt,
+  w as Ks,
+  P as xe,
+  x as Gs,
+  i as Hs,
+  u as Zs,
+  F as ot,
+  y as ct,
+  z as Ze,
+  A as ut,
+  o as dt,
+  B as mt,
+  E as Ns,
+  H as ht,
+  I as ft,
+  J as gt,
+  K as bt,
+  g as xt,
+  N as pt,
+  f as yt,
+  O as kt,
+  Q as ne,
+  R as St,
+  e as vt,
+  U as jt,
+} from "./index-BER2gtDe.js";
+import {
+  u as Us,
+  j as _s,
+  n as Ws,
+  o as ie,
+  a as Nt,
+  p as xs,
+  q as wt,
+  s as Ue,
+  t as cs,
+  w as Ge,
+  x as Ct,
+  y as Et,
+  T as be,
+  z as ae,
+  A as Tt,
+  B as Ft,
+  D as At,
+  E as ps,
+  F as ys,
+  S as us,
+  G as $t,
+  H as Lt,
+  Z as Ot,
+  I as It,
+  J as Mt,
+  f as ze,
+  K as Xe,
+  m as zt,
+  v as Rt,
+} from "./engine-BhDRZEfO.js";
+import { e as Y, c as Vs, a as Pt, b as Te, m as ws, d as Cs, h as ds } from "./svg-CrwnZnJY.js";
+import {
+  N as es,
+  L as ss,
+  a as Bt,
+  T as Es,
+  Q as Dt,
+  f as Kt,
+  d as Gt,
+} from "./describe-CrBWccON.js";
+import {
+  u as Ht,
+  a as Zt,
+  d as Re,
+  b as Pe,
+  h as Js,
+  f as Ut,
+  c as _t,
+  m as Wt,
+  e as Vt,
+} from "./kitAssets-CN7deWlx.js";
+import { c as Jt } from "./objectData-DW9yI24T.js";
+import { u as qt } from "./photoStore-D5-LfIN5.js";
+import { p as Yt } from "./prewarm-B0dvGBZL.js";
+import { L as qs } from "./LogoView-CG3DXWdO.js";
+import "./imagesize-BHC6N02v.js";
+import "./energy-DRQ_36b-.js";
+const Qt = 50;
+function Xt(e) {
+  return { past: [], present: e, label: "", future: [] };
+}
+function en(e, t, n, a = !1) {
+  if (a && e.past.length) return { ...e, present: t, label: n, future: [] };
+  const l = [...e.past, { value: e.present, label: e.label }];
+  for (; l.length > Qt; ) l.shift();
+  return { past: l, present: t, label: n, future: [] };
+}
+function sn(e) {
+  const t = e.past[e.past.length - 1];
+  return t
+    ? {
+        label: e.label,
+        state: {
+          past: e.past.slice(0, -1),
+          present: t.value,
+          label: t.label,
+          future: [{ value: e.present, label: e.label }, ...e.future],
+        },
+      }
+    : null;
+}
+function tn(e) {
+  const t = e.future[0];
+  return t
+    ? {
+        label: t.label,
+        state: {
+          past: [...e.past, { value: e.present, label: e.label }],
+          present: t.value,
+          label: t.label,
+          future: e.future.slice(1),
+        },
+      }
+    : null;
+}
+function Ys(e, t) {
+  const n = (t ?? "").normalize("NFC");
+  if (!n.trim() || gs(e, n)) return [];
+  const a = js(n, e);
+  return a.length ? a : js(`${n.toLocaleUpperCase("de-AT")}${n.toLocaleLowerCase("de-AT")}`, e);
+}
+const ms = (e) => e.slice(0, 3).join(" ") + (e.length > 3 ? " …" : "");
+function nn(e, t) {
+  var l;
+  const n = [],
+    a = (i, m, h) => {
+      const x = Ys(m, h);
+      x.length && n.push({ part: i, family: de(m).family, chars: x });
+    };
+  return (
+    a("name", e.name.font.key, t.name),
+    a("suffix", e.suffix.font.key, t.suffix),
+    ((l = e.symbol) == null ? void 0 : l.kind) === "monogram" &&
+      a("monogram", e.symbol.font.key, e.symbol.letters),
+    n
+  );
+}
+function Qs(e) {
+  const t = `„${ms(e.chars)}“`;
+  return e.part === "name"
+    ? `Die Schrift ${e.family} kann ${t} aus deinem Namen nicht darstellen. Wähl eine andere Schrift.`
+    : e.part === "suffix"
+      ? `Die Schrift des Zusatzes (${e.family}) kann ${t} nicht darstellen. Ändere den Zusatz oder nimm einen anderen Vorschlag.`
+      : `Die Schrift des Monogramms (${e.family}) kann ${t} nicht darstellen. Wähl im Tab Symbol ein anderes Zeichen.`;
+}
+const ts = [
+  { value: "logo", label: "Logo" },
+  { value: "visitenkarte", label: "Karte" },
+  { value: "instagram", label: "Instagram" },
+  { value: "schild", label: "Schild" },
+];
+function _e({ concept: e, input: t, opts: n, className: a, label: l }) {
+  const { ready: i } = Us([e], t),
+    { svg: m } = _s(e, t, n, i),
+    h = u.useRef(null);
+  m && (h.current = m);
+  const x = m ?? h.current,
+    g = l ? { role: "img", "aria-label": l } : { "aria-hidden": !0 };
+  return s.jsx("div", {
+    className: `logo-svg ${a ?? ""}`,
+    ...g,
+    dangerouslySetInnerHTML: { __html: x ?? "" },
+  });
+}
+function ns({ svg: e, className: t = "" }) {
+  const n = u.useRef(null);
+  e && (n.current = e);
+  const a = u.useMemo(() => (n.current ? Ut(n.current) : ""), [n.current]);
+  return s.jsx("div", { className: `mock-svg ${t}`, dangerouslySetInnerHTML: { __html: a } });
+}
+function as({ show: e, glass: t }) {
+  return e
+    ? s.jsx("span", { className: t ? "glass-pill" : "example-tag", children: "BEISPIELDATEN" })
+    : null;
+}
+function an({
+  concept: e,
+  input: t,
+  tagline: n,
+  mode: a,
+  onMode: l,
+  dark: i,
+  onDark: m,
+  assets: h,
+  kitReady: x,
+  sample: g,
+  label: d,
+  portrait: c,
+  templateSet: f = "unio",
+  onEditText: y,
+}) {
+  var Q;
+  const o = Js() && f === "unio",
+    p = a === "unio-flyer" ? "logo" : a,
+    k = Ht(o && p !== "logo"),
+    E = Zt(!o && p !== "logo"),
+    T = x && (o ? k.ready : E),
+    I = Re("business-card", o),
+    A = Re("sign", o),
+    v = Re("social-new", o),
+    G = Re("social-sold", o),
+    j = Pe(p === "visitenkarte" ? I : void 0, h, T, !0),
+    R = Pe(p === "schild" ? A : void 0, h, T),
+    F = Pe(p === "instagram" ? v : void 0, h, T),
+    $ = Pe(p === "instagram" ? G : void 0, h, T),
+    P = i ? e.palette.ink : e.palette.paper,
+    [U, B] = u.useState(!1),
+    O = `${((Q = ts.find((M) => M.value === p)) == null ? void 0 : Q.label) ?? "Logo"}${p === "logo" ? (i ? ", dunkel" : ", hell") : ""}`;
+  let H;
+  if (p === "logo")
+    H = s.jsx(
+      "div",
+      {
+        className: "stage-inner",
+        style: { background: P },
+        children: s.jsx("div", {
+          className: `stage-edit${y ? " is-click" : ""}`,
+          onClick: y,
+          title: y ? "Texte ändern" : void 0,
+          children: s.jsx(_e, {
+            concept: e,
+            input: t,
+            opts: { variant: i ? "reverse" : "color", tagline: n },
+            className: "stage-logo",
+            label: d,
+          }),
+        }),
+      },
+      "logo",
+    );
+  else if (p === "visitenkarte") {
+    const M = j.pages ?? (j.svg ? [{ label: "Vorderseite", svg: j.svg }] : []);
+    H = s.jsxs(
+      "div",
+      {
+        className: "stage-inner",
+        role: "img",
+        "aria-label": "Vorschau Visitenkarte mit deinem Logo",
+        children: [
+          s.jsx("div", { className: "mock-scene", "aria-hidden": "true" }),
+          s.jsx(as, { show: g, glass: !0 }),
+          s.jsx("div", {
+            className: "mock-cards",
+            children: M.length
+              ? M.slice(0, 2).map((D, K) => s.jsx(ns, { svg: D.svg }, K))
+              : s.jsx("div", {
+                  className: "riffel skeleton",
+                  style: { width: "60%", aspectRatio: "85 / 55" },
+                }),
+          }),
+        ],
+      },
+      "card",
+    );
+  } else
+    p === "schild"
+      ? (H = s.jsxs(
+          "div",
+          {
+            className: "stage-inner",
+            role: "img",
+            "aria-label": "Vorschau Verkaufsschild mit deinem Logo",
+            children: [
+              s.jsx("div", { className: "mock-scene is-wall", "aria-hidden": "true" }),
+              s.jsx(as, { show: g, glass: !0 }),
+              s.jsx("div", {
+                className: "mock-sign",
+                children: R.svg
+                  ? s.jsx(ns, { svg: R.svg })
+                  : s.jsx("div", { className: "riffel skeleton", style: { aspectRatio: "3 / 2" } }),
+              }),
+            ],
+          },
+          "sign",
+        ))
+      : (H = s.jsxs(
+          "div",
+          {
+            className: "stage-inner",
+            role: "img",
+            "aria-label": "Vorschau Instagram-Profil mit deinem Logo",
+            style: { background: "var(--paper-3)" },
+            children: [
+              s.jsx(as, { show: g }),
+              s.jsxs("div", {
+                className: "mock-phone",
+                children: [
+                  s.jsxs("div", {
+                    className: "ph-head",
+                    children: [
+                      s.jsx("div", {
+                        className: "ph-avatar",
+                        style: { background: e.palette.ink },
+                        children: c
+                          ? s.jsx("img", {
+                              src: c,
+                              alt: "",
+                              style: {
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
+                                objectPosition: "50% 27%",
+                              },
+                            })
+                          : s.jsx(Xs, { concept: e, input: t }),
+                      }),
+                      s.jsxs("div", {
+                        children: [
+                          s.jsx("div", { className: "ph-name", children: t.name }),
+                          s.jsx("div", { className: "ph-sub", children: t.suffix || "Immobilien" }),
+                        ],
+                      }),
+                    ],
+                  }),
+                  s.jsx("div", {
+                    className: "ph-grid",
+                    children: [F.svg, $.svg, null, null, F.svg, null, $.svg, null, F.svg].map(
+                      (M, D) =>
+                        M
+                          ? s.jsx(ns, { svg: M }, D)
+                          : s.jsx(
+                              "div",
+                              {
+                                style: {
+                                  background: D % 2 ? e.palette.secondary : e.palette.primary,
+                                  opacity: 0.85,
+                                },
+                              },
+                              D,
+                            ),
+                    ),
+                  }),
+                ],
+              }),
+            ],
+          },
+          "insta",
+        ));
+  return s.jsxs(s.Fragment, {
+    children: [
+      s.jsx("div", {
+        className: "stage-switch desk-only",
+        children: s.jsx(Ke, { options: ts, value: p, onChange: l, label: "Vorschau" }),
+      }),
+      s.jsx("div", {
+        className: "stage-view mobile-only",
+        children: s.jsxs(W, {
+          onClick: () => B(!0),
+          "aria-haspopup": "dialog",
+          children: ["Ansicht: ", O],
+        }),
+      }),
+      s.jsx(ye, {
+        open: U,
+        onClose: () => B(!1),
+        title: "Ansicht",
+        size: "mid",
+        children: s.jsxs("div", {
+          className: "stack",
+          children: [
+            s.jsx(Ke, {
+              options: ts,
+              value: p,
+              onChange: (M) => {
+                (l(M), B(!1));
+              },
+              label: "Vorschau",
+            }),
+            p === "logo" &&
+              s.jsx(Ke, {
+                options: [
+                  { value: "hell", label: "Hell" },
+                  { value: "dunkel", label: "Dunkel" },
+                ],
+                value: i ? "dunkel" : "hell",
+                onChange: (M) => {
+                  (m(M === "dunkel"), B(!1));
+                },
+                label: "Hintergrund",
+              }),
+          ],
+        }),
+      }),
+      s.jsx("div", {
+        className: "stage",
+        style: p === "logo" ? { background: P } : void 0,
+        children: H,
+      }),
+      p === "logo" && s.jsx(rn, { concept: e, input: t, dark: i, onDark: m }),
+    ],
+  });
+}
+function ln({ concept: e, input: t, dark: n, tagline: a }) {
+  const l = u.useMemo(() => ({ variant: n ? "reverse" : "color", tagline: a }), [n, a]);
+  return s.jsx("div", {
+    className: "stage-mini",
+    "aria-hidden": "true",
+    style: { background: n ? e.palette.ink : e.palette.paper },
+    children: s.jsx(_e, { concept: e, input: t, opts: l }),
+  });
+}
+function Xs({ concept: e, input: t }) {
+  const n = u.useMemo(() => ({ variant: "reverse", part: "symbol" }), []),
+    { ready: a } = Us([e], t),
+    { svg: l } = _s(e.symbol ? e : null, t, n, a);
+  return l
+    ? s.jsx("div", {
+        className: "logo-svg",
+        "aria-hidden": "true",
+        dangerouslySetInnerHTML: { __html: l },
+      })
+    : s.jsx("span", {
+        "aria-hidden": "true",
+        style: { color: "var(--paper)", fontWeight: 500, fontSize: 17 },
+        children: Ws(t.name, 2),
+      });
+}
+function rn({ concept: e, input: t, dark: n, onDark: a }) {
+  const l = e.palette;
+  return s.jsxs("div", {
+    className: "mini-row",
+    "aria-label": "Hintergrund und Profilbild",
+    role: "group",
+    children: [
+      s.jsx("button", {
+        type: "button",
+        className: "mini-pick",
+        "aria-pressed": !n,
+        onClick: () => a(!1),
+        style: { background: l.paper },
+        "aria-label": "Auf hellem Grund zeigen",
+        children: s.jsx(_e, { concept: e, input: t, opts: { variant: "color" } }),
+      }),
+      s.jsx("button", {
+        type: "button",
+        className: "mini-pick",
+        "aria-pressed": n,
+        onClick: () => a(!0),
+        style: { background: l.ink },
+        "aria-label": "Auf dunklem Grund zeigen",
+        children: s.jsx(_e, { concept: e, input: t, opts: { variant: "reverse" } }),
+      }),
+      s.jsx("div", {
+        className: "icon-box",
+        role: "img",
+        "aria-label": "Logo als Profilbild",
+        children: s.jsx("span", {
+          className: "app-icon round",
+          style: { width: 48, height: 48, background: l.ink, padding: 8 },
+          children: s.jsx(Xs, { concept: e, input: t }),
+        }),
+      }),
+    ],
+  });
+}
+function on({ result: e, onFix: t, fixing: n }) {
+  const [a, l] = u.useState(!1),
+    i = u.useRef(""),
+    [m, h] = u.useState(""),
+    x = (e == null ? void 0 : e.items.length) ?? 0,
+    g = (e == null ? void 0 : e.items.filter((f) => f.pass).length) ?? 0,
+    d = x - g,
+    c = e
+      ? `${g} von ${x} passen${d ? ` · ${d} ${d === 1 ? "Hinweis" : "Hinweise"}` : ""}`
+      : "wird geprüft";
+  return (
+    u.useEffect(() => {
+      if (!e) return;
+      const f = `${g} von ${x} passen`;
+      (i.current && i.current !== f && h(`Logo-Check: ${f}.`), (i.current = f));
+    }, [e, g, x]),
+    s.jsxs("div", {
+      className: "logo-check",
+      children: [
+        s.jsxs("div", {
+          className: "check-row",
+          children: [
+            s.jsx("span", { className: "label", children: "LOGO-CHECK" }),
+            s.jsx("span", { className: "summary", children: c }),
+            s.jsx(W, {
+              "aria-expanded": a,
+              "aria-controls": "logo-check-list",
+              onClick: () => l((f) => !f),
+              children: a ? "Schließen" : "Details",
+            }),
+          ],
+        }),
+        s.jsx("span", { className: "sr-only", "aria-live": "polite", children: m }),
+        a &&
+          e &&
+          s.jsx("ul", {
+            className: "check-list",
+            id: "logo-check-list",
+            tabIndex: 0,
+            "aria-label": "Logo-Check im Detail",
+            children: e.items.map((f) =>
+              s.jsxs(
+                "li",
+                {
+                  children: [
+                    s.jsxs("span", {
+                      className: "status",
+                      children: [
+                        f.pass
+                          ? s.jsx("span", { className: "ring-dot", "aria-hidden": "true" })
+                          : s.jsx("span", { className: "dot", "aria-hidden": "true" }),
+                        f.pass ? "Passt" : "Hinweis",
+                      ],
+                    }),
+                    s.jsxs("span", {
+                      children: [
+                        s.jsx("span", { className: "title", children: f.label }),
+                        s.jsx("br", {}),
+                        s.jsx("span", { className: "hint", children: f.hint }),
+                      ],
+                    }),
+                    !f.pass &&
+                      s.jsx("span", {
+                        className: "fix",
+                        children: s.jsx(re, {
+                          onClick: () => t(f.key),
+                          "aria-disabled": n === f.key,
+                          children: n === f.key ? "Wird gesucht ..." : "Automatisch beheben",
+                        }),
+                      }),
+                  ],
+                },
+                f.key,
+              ),
+            ),
+          }),
+      ],
+    })
+  );
+}
+function Ts(e) {
+  const t = e.trim().replace(/^#/, "");
+  return /^([0-9a-f]{3}|[0-9a-f]{6})$/i.test(t)
+    ? `#${(t.length === 3
+        ? t
+            .split("")
+            .map((a) => a + a)
+            .join("")
+        : t
+      ).toUpperCase()}`
+    : null;
+}
+const cn = "Das ist kein gültiger Farbcode. Beispiel: 1F4D3A",
+  et = [
+    { name: "Tannengrün", hex: "#1F4D3A" },
+    { name: "Salbei", hex: "#6B7F5E" },
+    { name: "Oliv", hex: "#5D6A3C" },
+    { name: "Petrol", hex: "#1D5C63" },
+    { name: "Waldgrün", hex: "#2F4A3A" },
+    { name: "Moos", hex: "#4E5B31" },
+    { name: "Nachtblau", hex: "#1B2A41" },
+    { name: "Marine", hex: "#25406A" },
+    { name: "Stahlblau", hex: "#2D5A86" },
+    { name: "Taubenblau", hex: "#4A6580" },
+    { name: "Rauchblau", hex: "#5E7A8E" },
+    { name: "Tinte", hex: "#202A3A" },
+    { name: "Bordeaux", hex: "#6E1E2B" },
+    { name: "Weinrot", hex: "#7A2433" },
+    { name: "Terrakotta", hex: "#B0603A" },
+    { name: "Rost", hex: "#9C4F2C" },
+    { name: "Ziegel", hex: "#9E4A33" },
+    { name: "Kupfer", hex: "#B06B3E" },
+    { name: "Gold", hex: "#A6852F" },
+    { name: "Champagner", hex: "#A88B5C" },
+    { name: "Sand", hex: "#B9A27F" },
+    { name: "Taupe", hex: "#7E6E62" },
+    { name: "Anthrazit", hex: "#2E2E2E" },
+    { name: "Schwarz", hex: "#151515" },
+  ],
+  un = (e) => {
+    var t;
+    return (
+      ((t = et.find((n) => n.hex === e.toUpperCase())) == null ? void 0 : t.name) ?? e.toUpperCase()
+    );
+  },
+  dn = (e, t = "#FFFFFF") => Vs(e, t) < 3;
+function mn(e, t = {}) {
+  const n = Pt(e),
+    a = n.h > 30 && n.h < 90 ? "#FAF7F1" : "#F8F7F4";
+  if (t.asBackground) {
+    const m = e.toUpperCase(),
+      h = Y(Te({ h: n.h, s: Math.min(0.35, n.s), l: 0.14 }), m, 7.2),
+      x = Y(Te({ h: n.h, s: Math.min(0.6, n.s), l: 0.28 }), m, 4.5);
+    return {
+      id: `eigen-${m.slice(1)}-bg`,
+      name: "Eigene Farbe",
+      primary: x,
+      secondary: ws(m, "#FFFFFF", 0.5),
+      accent: Y(Te({ h: n.h + 25, s: n.s * 0.8, l: 0.38 }), m, 2.2),
+      ink: h,
+      paper: m,
+    };
+  }
+  const l = t.forceText ? e.toUpperCase() : Y(e, a, 3.1),
+    i = Y(Te({ h: n.h, s: Math.min(0.3, n.s), l: 0.13 }), a, 7.2);
+  return {
+    id: `eigen-${e.slice(1).toUpperCase()}${t.forceText ? "-t" : ""}`,
+    name: "Eigene Farbe",
+    primary: l,
+    secondary: ws(e, a, 0.78),
+    accent: Y(Te({ h: n.h + 28, s: Math.min(0.5, n.s), l: Math.min(0.5, n.l + 0.08) }), a, 2.2),
+    ink: i,
+    paper: a,
+  };
+}
+function hn(e) {
+  const { symbol: t, name: n, suffix: a } = e.colors;
+  if (t !== n && ["primary", "ink"].includes(t))
+    return { ...e, colors: { symbol: n, name: t, suffix: a } };
+  const i = e.palette,
+    m = Y(i.accent, i.paper, 3.1),
+    h = Y(i.primary, i.paper, 2.2);
+  return {
+    ...e,
+    palette: {
+      ...i,
+      id: i.id.endsWith("-t") ? i.id.slice(0, -2) : `${i.id}-t`,
+      primary: m,
+      accent: h,
+    },
+  };
+}
+const Fs = 5,
+  fn = [
+    "ihr partner für",
+    "ihr traum vom",
+    "traumimmobilie",
+    "kompetent",
+    "zuverlässig",
+    "leidenschaft",
+    "seit jahren",
+    "immobilienprofi",
+    "maßgeschneidert",
+    "rundum sorglos",
+    "auf augenhöhe",
+    "mehrwert",
+    "ganzheitlich",
+    "individuelle lösungen",
+    "seriös",
+    "experte an ihrer seite",
+    "einzigartig",
+  ],
+  gn = (e) =>
+    e
+      .trim()
+      .split(/\s+/)
+      .filter((t) => /[\p{L}\p{N}]/u.test(t)).length;
+function As(e) {
+  const t = e.trim();
+  if (!t) return [];
+  const n = [],
+    a = gn(t);
+  (a > Fs &&
+    n.push({
+      kind: "length",
+      text: `Kurz wirkt stärker: höchstens ${Fs} Wörter. Dein Slogan hat ${a}.`,
+    }),
+    t.includes("!") &&
+      n.push({
+        kind: "exclamation",
+        text: "Ohne Ausrufezeichen wirkt der Slogan ruhiger und souveräner.",
+      }));
+  const l = t.toLocaleLowerCase("de-AT"),
+    i = fn.find((m) => l.includes(m));
+  if (i) {
+    const m = t.slice(l.indexOf(i), l.indexOf(i) + i.length);
+    n.push({
+      kind: "cliche",
+      text: `„${m}“ liest man bei vielen Maklern. Was macht dich anders? Probier einen konkreten Ort, eine Haltung oder einen der Vorschläge unten.`,
+    });
+  }
+  return n;
+}
+const bn = ["full", "upper", "surname", "stacked", "initial", "monogram", "district"];
+function $s(e, t) {
+  const n = wt(e, t),
+    a = { ...n.concept, id: "" };
+  return (delete a.nameFormat, JSON.stringify([n.input.name, n.input.suffix ?? "", a]));
+}
+function xn(e, t) {
+  var i;
+  const n = { ...e };
+  (delete n.nameFormat,
+    ((i = n.symbol) == null ? void 0 : i.kind) === "monogram" &&
+      e.nameFormat === "monogram" &&
+      ((n.symbol = null), (n.layout = "wordmark")));
+  const a = $s(n, t),
+    l = [];
+  for (const m of bn) {
+    let h;
+    if (m === "monogram") {
+      if (!Hs(t)) continue;
+      h = {
+        ...n,
+        nameFormat: "monogram",
+        layout: n.layout === "wordmark" || n.layout === "badge" ? "inline" : n.layout,
+        symbol: {
+          kind: "monogram",
+          letters: Ws(t.name, 2),
+          container: "circle",
+          font: n.name.font,
+        },
+      };
+    } else if (((h = m === "full" ? n : { ...n, nameFormat: m }), m !== "full" && $s(h, t) === a))
+      continue;
+    l.push({ key: m, concept: m === (e.nameFormat ?? "full") ? e : { ...h, id: xs(h) } });
+  }
+  return l;
+}
+const pn = { symbol: "Symbol", schrift: "Schrift", farbe: "Farbe", aufbau: "Aufbau" };
+function yn(e) {
+  const [t, n] = u.useState(2);
+  return (
+    u.useEffect(() => {
+      const a = e.current;
+      if (!a) return;
+      const l = () =>
+        n(getComputedStyle(a).gridTemplateColumns.split(" ").filter(Boolean).length || 1);
+      l();
+      const i = new ResizeObserver(l);
+      return (i.observe(a), () => i.disconnect());
+    }, [e]),
+    t
+  );
+}
+function me({ items: e, activeKey: t, onSelect: n, input: a, label: l, twoCols: i, tagline: m }) {
+  const h = u.useRef(null),
+    x = yn(h);
+  u.useEffect(() => {
+    requestAnimationFrame(() => Nt("editor:alternatives", "editor:tab"));
+  }, []);
+  const g = e.map((o) => o.key),
+    d = t && g.includes(t) ? t : g[0],
+    c = (o) => {
+      var p, k;
+      return (k = (p = h.current) == null ? void 0 : p.querySelectorAll('[role="radio"]')[o]) ==
+        null
+        ? void 0
+        : k.focus();
+    },
+    f = (o) => {
+      const p = e.find((k) => k.key === o);
+      p && n(p);
+    };
+  let y;
+  return s.jsx("div", {
+    ref: h,
+    className: `tile-grid${i ? " cols-2" : ""}`,
+    role: "radiogroup",
+    "aria-label": l,
+    children: e.map((o) => {
+      const p = o.group && o.group !== y ? o.group : null;
+      y = o.group ?? y;
+      const k = o.key === t;
+      return [
+        p &&
+          s.jsx(
+            "span",
+            { className: "label tile-group-title", "aria-hidden": "true", children: p },
+            `g-${p}`,
+          ),
+        s.jsxs(
+          "button",
+          {
+            type: "button",
+            role: "radio",
+            "aria-checked": k,
+            "aria-label": o.label,
+            tabIndex: o.key === d ? 0 : -1,
+            className: `tile${o.name ? " has-name" : ""}`,
+            onClick: () => n(o),
+            onKeyDown: (E) => Gs(E, g, d, f, x, c),
+            children: [
+              s.jsx("span", {
+                className: "tile-face",
+                style: { background: o.concept ? o.concept.palette.paper : "var(--paper-2)" },
+                children:
+                  o.concept && !o.plain
+                    ? s.jsx(qs, { concept: o.concept, input: a, tagline: m })
+                    : s.jsx("span", { className: "tile-plain", children: o.plain }),
+              }),
+              o.name && s.jsx("span", { className: "tile-name", children: o.name }),
+              o.badge && s.jsx("span", { className: "tile-badge label", children: o.badge }),
+              s.jsx("span", { className: "tile-dot", "aria-hidden": "true" }),
+              k && s.jsx("span", { className: "sr-only", children: "AKTIV" }),
+            ],
+          },
+          o.key,
+        ),
+      ];
+    }),
+  });
+}
+const kn = (e, t) => {
+  const n = (a) => JSON.stringify({ ...a, id: "", seed: 0 });
+  return n(e) === n(t);
+};
+function Sn({ main: e, motifs: t, value: n, onChange: a }) {
+  var x;
+  const [l, i] = u.useState(!1),
+    m = ((x = [...e, ...t].find((g) => g.value === n)) == null ? void 0 : x.label) ?? "Alle",
+    h = (g) =>
+      s.jsx(
+        "button",
+        {
+          type: "button",
+          className: "option-row",
+          "aria-pressed": g.value === n,
+          onClick: () => a(g.value),
+          children: s.jsx("span", { className: "opt-main", children: g.label }),
+        },
+        g.value,
+      );
+  return s.jsxs("div", {
+    className: "tool-bar",
+    children: [
+      s.jsxs(W, { onClick: () => i(!0), "aria-haspopup": "dialog", children: ["Thema: ", m] }),
+      s.jsxs(ye, {
+        open: l,
+        onClose: () => i(!1),
+        title: "Thema",
+        size: "mid",
+        footer: s.jsx(xe, { onClick: () => i(!1), children: "Fertig" }),
+        children: [
+          s.jsx("div", {
+            className: "option-list",
+            role: "group",
+            "aria-label": "Thema",
+            children: e.map(h),
+          }),
+          s.jsx("p", { className: "small sheet-sub", children: "Mit Bildmarke" }),
+          s.jsx("div", {
+            className: "option-list",
+            role: "group",
+            "aria-label": "Thema mit Bildmarke",
+            children: t.map(h),
+          }),
+        ],
+      }),
+    ],
+  });
+}
+const Ls = (e) => !!e.symbol && e.layout !== "wordmark";
+function vn(e) {
+  var n;
+  if (!e.symbol) return "alle";
+  if (e.symbol.kind === "monogram") return "initialen";
+  const t = e.symbol.id;
+  return ((n = bs.find((a) => a.id === t)) == null ? void 0 : n.themes[0]) ?? "alle";
+}
+function ls(e) {
+  var n;
+  if (!e.symbol || e.layout === "wordmark") return "Ohne Symbol";
+  if (e.symbol.kind === "monogram") return `Initialen ${e.symbol.letters}`;
+  const t = e.symbol.id;
+  return ((n = bs.find((a) => a.id === t)) == null ? void 0 : n.label) ?? "Symbol";
+}
+const Os = [
+  { value: "none", label: "Ohne" },
+  { value: "circle", label: "Kreis" },
+  { value: "square", label: "Quadrat" },
+  { value: "arch", label: "Bogen" },
+];
+function st() {
+  const e = "(max-width: 759px)",
+    [t, n] = u.useState(() => typeof matchMedia < "u" && matchMedia(e).matches);
+  return (
+    u.useEffect(() => {
+      const a = matchMedia(e),
+        l = () => n(a.matches);
+      return (a.addEventListener("change", l), () => a.removeEventListener("change", l));
+    }, []),
+    t ? 4 : 6
+  );
+}
+function jn({ concept: e, input: t, onChange: n, tagline: a, highlight: l }) {
+  var I, A;
+  const [i, m] = u.useState(() => vn(e)),
+    [h, x] = u.useState(1),
+    g = st(),
+    d = u.useRef(e);
+  u.useEffect(() => {
+    d.current = e;
+  }, [i]);
+  const c = u.useMemo(() => {
+      const v = d.current,
+        G = i === "alle" ? [] : [i],
+        j = (Ls(v) ? g - 2 : g - 1) + (h - 1) * g,
+        R = ie(v, { ...t, themes: G }, "symbol", j * 2);
+      let F = R;
+      if (i === "initialen")
+        F = R.filter(($) => {
+          var P;
+          return ((P = $.symbol) == null ? void 0 : P.kind) === "monogram";
+        });
+      else if (i !== "alle") {
+        const $ = R.filter((U) => {
+            var B, O;
+            return (
+              ((B = U.symbol) == null ? void 0 : B.kind) === "icon" &&
+              ((O = bs.find((H) => H.id === U.symbol.id)) == null ? void 0 : O.themes.includes(i))
+            );
+          }),
+          P = ie(v, { ...t, themes: [] }, "symbol", 12).filter(
+            (U) => !$.some((B) => B.id === U.id),
+          );
+        F = [...$.slice(0, g - 3 + (h - 1) * (g - 1)), ...P.slice(0, 1 + (h - 1))];
+      }
+      return F.slice(0, j);
+    }, [i, h, g, t.name, t.suffix]),
+    f = d.current,
+    o = [
+      {
+        key: "ohne",
+        concept: { ...e, layout: "wordmark", symbol: null, id: `${e.id}-ohne` },
+        label: "Ohne Symbol",
+        plain: void 0,
+      },
+      ...(Ls(f) ? [{ key: f.id, concept: f, label: `Aktuelles Symbol: ${ls(f)}` }] : []),
+      ...c.map((v) => ({ key: v.id, concept: v, label: `Symbol ${ls(v)}` })),
+    ],
+    p =
+      !e.symbol || e.layout === "wordmark"
+        ? "ohne"
+        : (((I = o.find((v) => v.concept && v.key !== "ohne" && kn(v.concept, e))) == null
+            ? void 0
+            : I.key) ?? e.id),
+    k = [{ value: "alle", label: "Alle" }, ...Dt.map((v) => ({ value: v, label: Es[v] }))],
+    E = Bt.map((v) => ({ value: v, label: Es[v] })),
+    T =
+      ((A = e.symbol) == null ? void 0 : A.kind) === "monogram" && e.layout !== "wordmark"
+        ? e.symbol
+        : null;
+  return s.jsxs("div", {
+    className: "tab-panel-inner stack",
+    style: l ? { outline: "2px solid var(--ink)", outlineOffset: 8, borderRadius: 20 } : void 0,
+    children: [
+      s.jsx(Sn, { main: k, motifs: E, value: i, onChange: (v) => (m(v), x(1)) }),
+      s.jsx(me, {
+        items: o,
+        activeKey: p,
+        input: t,
+        tagline: a,
+        label: "Symbol wählen",
+        onSelect: (v) => {
+          v.concept &&
+            (v.key === "ohne"
+              ? n({ ...e, layout: "wordmark", symbol: null }, "Ohne Symbol")
+              : n(v.concept, `Symbol ${ls(v.concept)}`));
+        },
+      }),
+      s.jsxs(re, { onClick: () => x((v) => v + 1), children: [g, " weitere Symbole"] }),
+      T &&
+        s.jsx(ee, {
+          title: "RAHMEN",
+          options: Os,
+          value: ["none", "circle", "square", "arch"].includes(T.container) ? T.container : "none",
+          onChange: (v) => {
+            var G;
+            return n(
+              { ...e, symbol: { ...T, container: v } },
+              `Rahmen ${(G = Os.find((j) => j.value === v)) == null ? void 0 : G.label}`,
+            );
+          },
+        }),
+    ],
+  });
+}
+function Nn({ concept: e, input: t, onChange: n, tagline: a }) {
+  var G;
+  const [l, i] = u.useState(1),
+    m = st(),
+    h = u.useRef(e),
+    x = u.useMemo(() => ie(h.current, t, "palette", l * m - 1), [l, m, t.name]),
+    d = [h.current, ...x].map((j) => ({
+      key: j.id,
+      concept: j,
+      name: j.palette.name,
+      label: `Farben ${j.palette.name}`,
+    })),
+    c =
+      ((G = d.find(
+        (j) =>
+          j.concept &&
+          j.concept.palette.id === e.palette.id &&
+          JSON.stringify(j.concept.colors) === JSON.stringify(e.colors),
+      )) == null
+        ? void 0
+        : G.key) ?? null,
+    [f, y] = u.useState(!1),
+    [o, p] = u.useState(""),
+    [k, E] = u.useState(null),
+    [T, I] = u.useState(null),
+    A = u.useId(),
+    v = (j, R = {}) => {
+      const F = Ts(j);
+      if (!F) {
+        E(cn);
+        return;
+      }
+      E(null);
+      const $ = dn(F);
+      I($ && !R.forceText ? F : null);
+      const P = mn(F, { asBackground: $ && !R.forceText, forceText: R.forceText }),
+        U = {
+          ...e.colors,
+          symbol: "primary",
+          name: Vs(P.primary, P.paper) >= 4.5 || R.forceText ? "primary" : "ink",
+        };
+      n({ ...e, palette: P, colors: U }, `Farbe ${un(F)}`);
+    };
+  return s.jsxs("div", {
+    className: "stack",
+    children: [
+      s.jsx(me, {
+        items: d,
+        activeKey: c,
+        input: t,
+        tagline: a,
+        label: "Farben wählen",
+        onSelect: (j) => j.concept && n(j.concept, `Farbe ${j.concept.palette.name}`),
+      }),
+      s.jsxs("div", {
+        className: "row tool-more",
+        children: [
+          s.jsxs(re, { onClick: () => i((j) => j + 1), children: [m, " weitere Farben"] }),
+          s.jsx(Bs, {
+            label: "Mehr zu Farben",
+            placement: "below-start",
+            items: [{ label: "Farben tauschen", run: () => n(hn(e), "Farben getauscht") }],
+            children: "Mehr",
+          }),
+        ],
+      }),
+      s.jsxs("details", {
+        className: "disclosure",
+        onToggle: (j) => y(j.currentTarget.open),
+        children: [
+          s.jsx("summary", { children: "Eigene Farbe" }),
+          f &&
+            s.jsxs("div", {
+              className: "disclosure-body",
+              children: [
+                s.jsx("div", {
+                  className: "swatch-grid",
+                  role: "radiogroup",
+                  "aria-label": "Kuratierte Farben",
+                  children: et.map((j) =>
+                    s.jsx(
+                      "button",
+                      {
+                        type: "button",
+                        role: "radio",
+                        "aria-checked": e.palette.id.startsWith(`eigen-${j.hex.slice(1)}`),
+                        className: "swatch",
+                        style: { background: j.hex },
+                        "aria-label": j.name,
+                        title: j.name,
+                        onClick: () => v(j.hex),
+                      },
+                      j.hex,
+                    ),
+                  ),
+                }),
+                s.jsxs("form", {
+                  className: "row",
+                  style: { alignItems: "flex-end" },
+                  onSubmit: (j) => {
+                    (j.preventDefault(), v(o));
+                  },
+                  children: [
+                    s.jsx("div", {
+                      style: { flex: "1 1 200px" },
+                      children: s.jsx(oe, {
+                        id: A,
+                        label: "HEX-CODE",
+                        placeholder: "z. B. 1F4D3A",
+                        value: o,
+                        onChange: (j) => p(j.target.value),
+                        onBlur: () => o && v(o),
+                        error: k,
+                        autoComplete: "off",
+                        spellCheck: !1,
+                      }),
+                    }),
+                    s.jsx(re, {
+                      type: "submit",
+                      style: { marginBottom: k ? 36 : 0 },
+                      children: "Übernehmen",
+                    }),
+                  ],
+                }),
+                s.jsxs("label", {
+                  className: "row",
+                  style: { gap: 12 },
+                  children: [
+                    s.jsx("input", {
+                      type: "color",
+                      className: "color-input",
+                      value: Ts(o) ?? e.palette.primary,
+                      onChange: (j) => (
+                        p(j.target.value.slice(1).toUpperCase()),
+                        v(j.target.value)
+                      ),
+                    }),
+                    s.jsx("span", { children: "Farbe wählen" }),
+                  ],
+                }),
+                T &&
+                  s.jsxs("div", {
+                    className: "inline-note",
+                    role: "status",
+                    children: [
+                      s.jsx("p", {
+                        children:
+                          "Diese Farbe ist auf weißem Papier schwer zu erkennen. Wir verwenden sie als Hintergrund und setzen dein Logo hell darauf.",
+                      }),
+                      s.jsx(re, {
+                        onClick: () => v(T, { forceText: !0 }),
+                        children: "Trotzdem als Schriftfarbe",
+                      }),
+                    ],
+                  }),
+              ],
+            }),
+        ],
+      }),
+    ],
+  });
+}
+const wn = ["inline", "stacked", "wordmark", "badge"];
+function Cn({ concept: e, input: t, onChange: n, tagline: a }) {
+  var y;
+  const l = t.name.trim().length > 22,
+    i = l ? ["stacked", "inline", "wordmark", "badge"] : wn,
+    m = e.symbol ? e : { ...e, symbol: null },
+    h = (o, p) => {
+      const k = { ...o };
+      return (
+        k.symbolPosition === "right" && p !== "inline" && delete k.symbolPosition,
+        k.symbolPosition === "below" && p !== "stacked" && delete k.symbolPosition,
+        k.symbolSize && p !== "stacked" && delete k.symbolSize,
+        k
+      );
+    },
+    x = !!e.symbol && e.layout !== "wordmark",
+    g = (o, p) => {
+      const k = { ...e };
+      (o === "default" ? delete k.symbolPosition : (k.symbolPosition = o), n(k, `Symbol ${p}`));
+    },
+    d = (o, p) => {
+      const k = { ...e };
+      (o === "normal" ? delete k.symbolSize : (k.symbolSize = o), n(k, `Symbolgröße ${p}`));
+    },
+    c = i.map((o) => {
+      const p =
+        o === e.layout
+          ? e
+          : {
+              ...h(m, o),
+              id: `${e.id}-${o}`,
+              layout: o,
+              ...(o === "badge" ? { badge: e.badge ?? "frame" } : {}),
+            };
+      return {
+        key: o,
+        concept: p,
+        name: ss[o],
+        badge: l && o === "stacked" ? "EMPFOHLEN" : void 0,
+        label: `Anordnung ${ss[o]}`,
+      };
+    }),
+    f = !!((y = t.suffix) != null && y.trim());
+  return s.jsxs("div", {
+    className: "stack",
+    children: [
+      s.jsx(me, {
+        items: c,
+        activeKey: e.layout,
+        input: t,
+        tagline: a,
+        label: "Anordnung wählen",
+        twoCols: !0,
+        onSelect: (o) => o.concept && n(o.concept, `Anordnung ${ss[o.key]}`),
+      }),
+      x &&
+        e.layout === "inline" &&
+        s.jsx(ee, {
+          title: "SYMBOL",
+          options: [
+            { value: "default", label: "Links" },
+            { value: "right", label: "Rechts" },
+          ],
+          value: e.symbolPosition === "right" ? "right" : "default",
+          onChange: (o) => g(o, o === "right" ? "rechts" : "links"),
+        }),
+      x &&
+        e.layout === "stacked" &&
+        s.jsxs(s.Fragment, {
+          children: [
+            s.jsx(ee, {
+              title: "SYMBOL",
+              options: [
+                { value: "default", label: "Oben" },
+                { value: "below", label: "Unten" },
+              ],
+              value: e.symbolPosition === "below" ? "below" : "default",
+              onChange: (o) => g(o, o === "below" ? "unten" : "oben"),
+            }),
+            s.jsx(ee, {
+              title: "SYMBOLGRÖSSE",
+              options: [
+                { value: "small", label: "Klein" },
+                { value: "normal", label: "Normal" },
+                { value: "large", label: "Groß" },
+              ],
+              value: e.symbolSize ?? "normal",
+              onChange: (o) => d(o, o === "small" ? "klein" : o === "large" ? "groß" : "normal"),
+            }),
+          ],
+        }),
+      e.layout === "badge" &&
+        s.jsx(ee, {
+          title: "EMBLEM",
+          options: [
+            { value: "frame", label: "Rahmen" },
+            { value: "arch", label: "Bogen" },
+            ...(f ? [{ value: "seal", label: "Siegel" }] : []),
+          ],
+          value: e.badge ?? "frame",
+          onChange: (o) =>
+            n(
+              { ...e, badge: o },
+              `Emblem ${o === "frame" ? "Rahmen" : o === "arch" ? "Bogen" : "Siegel"}`,
+            ),
+        }),
+      f &&
+        s.jsx(He, {
+          checked: e.divider === "line",
+          onChange: (o) =>
+            n({ ...e, divider: o ? "line" : "none" }, o ? "Feine Linie an" : "Feine Linie aus"),
+          children: "Trennlinie zum Zusatz",
+        }),
+    ],
+  });
+}
+const Is = [
+    "Persönlich. Klar. Regional.",
+    "Immobilien mit Handschlagqualität.",
+    "Ihr Zuhause in guten Händen.",
+    "Wohnen mit Weitblick.",
+    "Ehrlich beraten. Gut verkauft.",
+    "Ihre Immobilie. Mein Auftrag.",
+    "Mit Herz und Verstand.",
+  ],
+  En = [
+    { value: "Immobilien", label: "Immobilien" },
+    { value: "Real Estate", label: "Real Estate", lang: "en" },
+    { value: "Immobilienberatung", label: "Immobilienberatung" },
+    { value: "none", label: "Kein Zusatz" },
+    { value: "custom", label: "Eigener Zusatz" },
+  ];
+function Tn({
+  values: e,
+  onChange: t,
+  city: n,
+  nameError: a,
+  candidates: l = [],
+  gaps: i = [],
+  onGap: m,
+}) {
+  const h = n ? [...Is, `Zuhause in ${n}.`] : Is,
+    x = u.useId(),
+    g = u.useId(),
+    d = u.useId();
+  return s.jsxs("div", {
+    className: "stack",
+    style: { gap: 24 },
+    children: [
+      l.length > 0 &&
+        s.jsxs("div", {
+          className: "tool-section",
+          children: [
+            s.jsx("span", { className: "label", id: g, children: "DEINE GEMERKTEN NAMEN" }),
+            s.jsx("div", {
+              className: "chips",
+              role: "group",
+              "aria-labelledby": g,
+              children: l.map((c) => {
+                const f =
+                  e.rawName === c.name &&
+                  (e.suffixChoice === "custom"
+                    ? e.customSuffix
+                    : e.suffixChoice === "none"
+                      ? ""
+                      : e.suffixChoice) === c.descriptor;
+                return s.jsxs(
+                  "button",
+                  {
+                    type: "button",
+                    className: "chip",
+                    "aria-pressed": f,
+                    onClick: () => {
+                      const y = Ds(c.descriptor);
+                      t(
+                        { ...e, rawName: c.name, suffixChoice: y.choice, customSuffix: y.custom },
+                        `Name ${c.name}`,
+                      );
+                    },
+                    children: [c.name, c.descriptor ? ` ${c.descriptor}` : ""],
+                  },
+                  `${c.name}|${c.descriptor}`,
+                );
+              }),
+            }),
+          ],
+        }),
+      s.jsx(oe, {
+        label: "NAME IM LOGO",
+        value: e.rawName,
+        autoComplete: "name",
+        onChange: (c) => t({ ...e, rawName: Qe(c.target.value) }, "Name", !0),
+        error: a,
+      }),
+      i.map((c) =>
+        s.jsxs(
+          "div",
+          {
+            className: "inline-note",
+            role: "status",
+            children: [
+              s.jsx("p", { children: Qs(c) }),
+              m &&
+                c.part !== "suffix" &&
+                s.jsx(W, {
+                  onClick: () => m(c),
+                  children: c.part === "name" ? "Schrift wählen" : "Symbol wählen",
+                }),
+            ],
+          },
+          c.part,
+        ),
+      ),
+      s.jsxs("fieldset", {
+        className: "field",
+        children: [
+          s.jsx("legend", { className: "label field-label", children: "ZUSATZ" }),
+          s.jsx(rt, {
+            options: En,
+            value: e.suffixChoice,
+            onChange: (c) => t({ ...e, suffixChoice: c }, "Zusatz"),
+            label: "Zusatz",
+          }),
+        ],
+      }),
+      e.suffixChoice === "custom" &&
+        s.jsx(oe, {
+          label: "EIGENER ZUSATZ",
+          placeholder: "z. B. Wohnen & Leben",
+          maxLength: 30,
+          value: e.customSuffix,
+          onChange: (c) => t({ ...e, customSuffix: Qe(c.target.value) }, "Zusatz", !0),
+          error: Ks(e.customSuffix),
+        }),
+      s.jsx(oe, {
+        label: "SLOGAN (OPTIONAL)",
+        list: d,
+        placeholder: "z. B. Persönlich. Klar. Regional.",
+        maxLength: 50,
+        value: e.tagline,
+        onChange: (c) => t({ ...e, tagline: Qe(c.target.value) }, "Slogan", !0),
+      }),
+      As(e.tagline).length > 0 &&
+        s.jsx("div", {
+          className: "inline-note",
+          role: "status",
+          children: As(e.tagline).map((c) =>
+            s.jsxs(
+              "p",
+              {
+                children: [
+                  s.jsx("span", { className: "label label-strong", children: "TIPP " }),
+                  c.text,
+                ],
+              },
+              c.kind,
+            ),
+          ),
+        }),
+      s.jsx("datalist", { id: d, children: h.map((c) => s.jsx("option", { value: c }, c)) }),
+      s.jsx(He, {
+        checked: e.showTagline,
+        onChange: (c) => t({ ...e, showTagline: c }, c ? "Slogan im Logo" : "Slogan nicht im Logo"),
+        describedBy: x,
+        children: "Slogan im Logo zeigen",
+      }),
+      s.jsx("p", {
+        className: "small",
+        id: x,
+        children:
+          "Der Slogan erscheint auf Visitenkarte, Briefpapier und Exposé. Im Logo selbst nur, wenn du es einschaltest.",
+      }),
+    ],
+  });
+}
+function Fn({ concept: e, input: t, tagline: n, onChange: a }) {
+  const l = u.useMemo(() => xn(e, t), [e, t]);
+  if (l.length < 2) return null;
+  const i = e.nameFormat ?? "full";
+  return s.jsxs("div", {
+    className: "tool-section",
+    children: [
+      s.jsx("span", { className: "label tile-group-title", children: "NAMENSFORM" }),
+      s.jsx(me, {
+        twoCols: !0,
+        label: "Namensform",
+        input: t,
+        tagline: n,
+        activeKey: i,
+        items: l.map((m) => ({
+          key: m.key,
+          concept: m.concept,
+          name: es[m.key],
+          label: `Namensform ${es[m.key]}`,
+        })),
+        onSelect: (m) => {
+          const h = l.find((x) => x.key === m.key);
+          h && h.key !== i && a(h.concept, `Namensform ${es[h.key]}`);
+        },
+      }),
+    ],
+  });
+}
+const An = 4;
+let is = 0;
+const Ms = [];
+function $n(e) {
+  return Ue(e)
+    ? Promise.resolve()
+    : new Promise((t, n) => {
+        const a = () => {
+          (is++,
+            cs(e)
+              .then(t, n)
+              .finally(() => {
+                var l;
+                (is--, (l = Ms.shift()) == null || l());
+              }));
+        };
+        is < An ? a() : Ms.push(a);
+      });
+}
+const rs = ot
+    .map((e) => ({ ...e, fonts: e.fonts.filter((t) => !t.nurVorlage) }))
+    .filter((e) => e.fonts.length > 0),
+  Fe = {
+    serif: { chip: "Klassisch", title: "KLASSISCH", all: (e) => `Alle ${e} zeigen` },
+    grotesk: { chip: "Modern", title: "MODERN", all: (e) => `Alle ${e} zeigen` },
+    display: { chip: "Auffällig", title: "AUFFÄLLIG", all: (e) => `Alle ${e} zeigen` },
+    script: { chip: "Handschrift", title: "HANDSCHRIFT", all: (e) => `Alle ${e} zeigen` },
+  },
+  Be = 8;
+function Ln(e) {
+  const t = e.slice(0, 3),
+    n = e.length - t.length;
+  return n > 0
+    ? `${t.join(", ")} und ${n} weitere`
+    : t.length > 1
+      ? `${t.slice(0, -1).join(", ")} und ${t[t.length - 1]}`
+      : (t[0] ?? "");
+}
+const zs = 4;
+function We(e) {
+  return e.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/ß/g, "ss").trim();
+}
+function On(e, t) {
+  const n = We(e);
+  if (!n) return [];
+  const a = n.split(/\s+/);
+  return t.filter((l) => {
+    const i = We(
+      [l.family, l.key, ...(l.tags ?? []), Fe[l.cat === "sans" ? "grotesk" : l.cat].chip].join(" "),
+    );
+    return a.every((m) => i.includes(m));
+  });
+}
+function In(e, t) {
+  var d, c, f, y, o;
+  if (e.name.font.key === t.key) return e;
+  const n = [...t.weights].sort((p, k) => p - k),
+    a = e.name.font.weight,
+    l = n.reduce((p, k) => (Math.abs(k - a) < Math.abs(p - a) ? k : p), n[0]);
+  let i = e.name.case;
+  t.capsOnly ? (i = "upper") : (t.noCaps || t.cat === "script") && i === "upper" && (i = "asis");
+  const m = t.cat === "script" ? 0 : e.name.tracking,
+    h = e.name.font.style === "italic" && ((d = t.italics) == null ? void 0 : d.includes(l)),
+    x = {
+      ...e,
+      name: {
+        font: h ? { key: t.key, weight: l, style: "italic" } : { key: t.key, weight: l },
+        case: i,
+        tracking: m,
+      },
+    },
+    g = (f = (c = e.typo) == null ? void 0 : c.split) == null ? void 0 : f.font;
+  if ((y = e.typo) != null && y.split && g && g.key === e.name.font.key) {
+    const p = n.reduce((A, v) => (Math.abs(v - g.weight) < Math.abs(A - g.weight) ? v : A), n[0]),
+      k = g.style === "italic" && ((o = t.italics) == null ? void 0 : o.includes(p)),
+      { font: E, ...T } = e.typo.split,
+      I =
+        g.style === "italic" && !k
+          ? T
+          : {
+              ...T,
+              font: k ? { key: t.key, weight: p, style: "italic" } : { key: t.key, weight: p },
+            };
+    x.typo = { ...e.typo, split: I };
+  }
+  return { ...x, id: xs(x) };
+}
+function Mn({
+  font: e,
+  concept: t,
+  input: n,
+  checked: a,
+  focusable: l,
+  tagline: i,
+  onSelect: m,
+  onKeyDown: h,
+  badge: x,
+  eager: g,
+}) {
+  const d = u.useRef(null),
+    c = u.useMemo(() => Ge([t], !1, n), [t, n]),
+    [f, y] = u.useState(() => Ue(c)),
+    [o, p] = u.useState(!1);
+  return (
+    u.useEffect(() => {
+      if (Ue(c)) {
+        y(!0);
+        return;
+      }
+      y(!1);
+      const k = d.current;
+      if (!k) return;
+      let E = !0;
+      const T = () =>
+        $n(c).then(
+          () => E && y(!0),
+          () => E && p(!0),
+        );
+      if (g)
+        return (
+          T(),
+          () => {
+            E = !1;
+          }
+        );
+      const I = new IntersectionObserver(
+        (A) => {
+          A.some((v) => v.isIntersecting) && (I.disconnect(), T());
+        },
+        { rootMargin: "200px" },
+      );
+      return (
+        I.observe(k),
+        () => {
+          ((E = !1), I.disconnect());
+        }
+      );
+    }, [c, g]),
+    s.jsxs("button", {
+      ref: d,
+      type: "button",
+      role: "radio",
+      "aria-checked": a,
+      "aria-label": `Schrift ${e.family}`,
+      tabIndex: l ? 0 : -1,
+      className: "tile has-name",
+      onClick: m,
+      onKeyDown: h,
+      "data-font": e.key,
+      children: [
+        s.jsx("span", {
+          className: `tile-face${f ? "" : " riffel"}`,
+          style: { background: f ? t.palette.paper : void 0 },
+          children: f
+            ? s.jsx(qs, { concept: t, input: n, tagline: i })
+            : o
+              ? s.jsx("span", { className: "small", children: "Nicht geladen" })
+              : null,
+        }),
+        s.jsx("span", { className: "tile-name tile-font", children: e.family }),
+        x && s.jsx("span", { className: "tile-badge label", children: x }),
+        s.jsx("span", { className: "tile-dot", "aria-hidden": "true" }),
+        a && s.jsx("span", { className: "sr-only", children: "AKTIV" }),
+      ],
+    })
+  );
+}
+function zn({
+  concept: e,
+  input: t,
+  onChange: n,
+  tagline: a,
+  italicFirst: l,
+  details: i,
+  detailsOpen: m,
+  suffixTool: h,
+}) {
+  var we, Ie;
+  const { announce: x } = Zs(),
+    [g, d] = u.useState("alle"),
+    [c, f] = u.useState(!l),
+    [y, o] = u.useState(!!l),
+    [p, k] = u.useState(""),
+    [E, T] = u.useState(!1),
+    [I, A] = u.useState(!1),
+    [v, G] = u.useState(!!m),
+    [j, R] = u.useState(!1),
+    [F, $] = u.useState(1),
+    P = u.useId(),
+    U = u.useRef(null),
+    B = e.style,
+    O = de(e.name.font.key),
+    H = u.useMemo(() => rs.flatMap((r) => r.fonts), []),
+    Q = u.useMemo(() => new Map(H.map((r) => [r.key, Ys(r.key, t.name)])), [H, t.name]),
+    M = (r) => {
+      var C;
+      return !((C = Q.get(r)) != null && C.length);
+    },
+    D = u.useMemo(
+      () =>
+        rs.map((r) => {
+          const C = (c ? r.fonts.filter((L) => L.styles.includes(B)) : r.fonts).filter((L) => {
+            var _;
+            return L.key !== O.key && (!y || !!((_ = L.italics) != null && _.length));
+          });
+          return {
+            ...r,
+            fonts: C.filter((L) => {
+              var _;
+              return !((_ = Q.get(L.key)) != null && _.length);
+            }),
+            hidden: C.filter((L) => {
+              var _;
+              return (_ = Q.get(L.key)) == null ? void 0 : _.length;
+            }),
+          };
+        }),
+      [c, y, B, O.key, Q],
+    ),
+    K = u.useMemo(() => (p.trim() ? On(p, H).filter((r) => r.key !== O.key) : null), [p, H, O.key]),
+    V = (K == null ? void 0 : K.filter((r) => M(r.key))) ?? null,
+    J = K
+      ? K.filter((r) => !M(r.key))
+      : g === "alle"
+        ? D.flatMap((r) => r.hidden)
+        : (((we = D.find((r) => r.key === g)) == null ? void 0 : we.hidden) ?? []),
+    Ae = [...new Set(J.flatMap((r) => Q.get(r.key) ?? []))],
+    ke = Q.get(O.key) ?? [];
+  u.useEffect(() => {
+    V && x(`${V.length} Schriften gefunden.`);
+  }, [V == null ? void 0 : V.length, p]);
+  const se = [];
+  if (V)
+    se.push({
+      key: "suche",
+      fonts: V.slice(0, F * Be),
+      more:
+        V.length > F * Be ? { label: "8 weitere Schriften", run: () => $((r) => r + 1) } : void 0,
+    });
+  else if (g === "alle")
+    for (const r of D)
+      r.fonts.length &&
+        se.push({
+          key: r.key,
+          title: `${Fe[r.key].title} · ${r.fonts.length}`,
+          hint:
+            r.key === "script"
+              ? "Schreibschriften wirken persönlich, sind klein aber schwerer zu lesen. Nimm sie am besten nur für deinen Namen."
+              : void 0,
+          fonts: r.fonts.slice(0, zs),
+          more:
+            r.fonts.length > zs
+              ? { label: Fe[r.key].all(r.fonts.length), run: () => (d(r.key), $(1)) }
+              : void 0,
+        });
+  else {
+    const r = D.find((L) => L.key === g),
+      C = (r == null ? void 0 : r.fonts) ?? [];
+    se.push({
+      key: g,
+      title: `${Fe[g].title} · ${C.length}`,
+      hint:
+        g === "script"
+          ? "Schreibschriften wirken persönlich, sind klein aber schwerer zu lesen. Nimm sie am besten nur für deinen Namen."
+          : void 0,
+      fonts: C.slice(0, F * Be),
+      more:
+        C.length > F * Be ? { label: "8 weitere Schriften", run: () => $((L) => L + 1) } : void 0,
+    });
+  }
+  const le = [{ font: O, c: e, section: "aktuell" }];
+  for (const r of se) for (const C of r.fonts) le.push({ font: C, c: In(e, C), section: r.key });
+  const Se = le.map((r) => r.font.key),
+    [he, ve] = u.useState(O.key),
+    je = Se.includes(he) ? he : O.key,
+    $e = (r) => {
+      var C, L;
+      return (L = (C = U.current) == null ? void 0 : C.querySelectorAll('[role="radio"]')[r]) ==
+        null
+        ? void 0
+        : L.focus();
+    },
+    Le = (r) => {
+      const C = le.find((L) => L.font.key === r);
+      C && (ve(r), r !== O.key && n(C.c, `Schrift ${Kt(r)}`));
+    },
+    Ve = (r) => Gs(r, Se, je, Le, 1, $e),
+    te = (r) =>
+      s.jsx(
+        Mn,
+        {
+          eager: le.indexOf(r) < 4,
+          font: r.font,
+          concept: r.c,
+          input: t,
+          checked: r.font.key === O.key,
+          focusable: r.font.key === je,
+          tagline: a,
+          badge: r.badge,
+          onSelect: () => Le(r.font.key),
+          onKeyDown: Ve,
+        },
+        `${r.section}-${r.font.key}`,
+      ),
+    Oe = [
+      { value: "alle", label: "Alle" },
+      ...rs.map((r) => ({ value: r.key, label: Fe[r.key].chip })),
+    ],
+    Ne = ((Ie = Oe.find((r) => r.value === g)) == null ? void 0 : Ie.label) ?? "Alle",
+    fe = O,
+    q = [...fe.weights].sort((r, C) => r - C),
+    ce =
+      q.length >= 3
+        ? [
+            { value: String(q[0]), label: "Leicht" },
+            { value: String(q[Math.floor(q.length / 2)]), label: "Normal" },
+            { value: String(q[q.length - 1]), label: "Kräftig" },
+          ]
+        : q.length === 2
+          ? [
+              { value: String(q[0]), label: "Normal" },
+              { value: String(q[1]), label: "Kräftig" },
+            ]
+          : [],
+    Je = s.jsxs("div", {
+      className: "font-search",
+      children: [
+        s.jsx(oe, {
+          id: P,
+          label: "SCHRIFT SUCHEN",
+          placeholder: "z. B. Playfair oder rund",
+          value: p,
+          autoComplete: "off",
+          spellCheck: !1,
+          onChange: (r) => {
+            (k(r.target.value), $(1));
+          },
+        }),
+        p &&
+          s.jsxs(W, {
+            onClick: () => k(""),
+            children: [
+              s.jsx("span", { className: "glyph", "aria-hidden": "true", children: "×" }),
+              " ",
+              "Suche löschen",
+            ],
+          }),
+      ],
+    });
+  return s.jsxs("div", {
+    className: "stack font-tool",
+    children: [
+      s.jsxs("div", {
+        className: "font-bar",
+        children: [
+          !K &&
+            s.jsxs(W, {
+              onClick: () => A(!0),
+              "aria-haspopup": "dialog",
+              children: ["Gruppe: ", Ne],
+            }),
+          !(E || p) && s.jsx(W, { onClick: () => T(!0), "aria-expanded": !1, children: "Suchen" }),
+        ],
+      }),
+      (E || p) && Je,
+      s.jsxs("div", {
+        ref: U,
+        role: "radiogroup",
+        "aria-label": "Schrift wählen",
+        className: "font-list",
+        children: [
+          s.jsx("span", { className: "label tile-group-title", children: "AKTUELL" }),
+          s.jsx("div", { className: "tile-grid cols-2", children: te(le[0]) }),
+          ke.length > 0 &&
+            s.jsx("div", {
+              className: "inline-note",
+              role: "status",
+              children: s.jsx("p", { children: Qs({ part: "name", family: O.family, chars: ke }) }),
+            }),
+          V &&
+            !V.length &&
+            !J.length &&
+            s.jsxs("div", {
+              className: "inline-note",
+              children: [
+                s.jsx("p", {
+                  children:
+                    "Keine Schrift gefunden. Probier ein anderes Wort, z. B. „rund“ oder „edel“.",
+                }),
+                s.jsxs(W, {
+                  onClick: () => k(""),
+                  children: [
+                    s.jsx("span", { className: "glyph", "aria-hidden": "true", children: "×" }),
+                    " ",
+                    "Suche löschen",
+                  ],
+                }),
+              ],
+            }),
+          !K &&
+            se.every((r) => !r.fonts.length) &&
+            s.jsx("div", {
+              className: "inline-note",
+              children: s.jsx("p", {
+                children:
+                  "Zu deinem Stil gibt es hier keine weitere Schrift. Schalte „Nur passend zu deinem Stil“ aus, dann siehst du alle.",
+              }),
+            }),
+          se.map((r) =>
+            r.fonts.length
+              ? s.jsxs(
+                  "div",
+                  {
+                    className: "font-section",
+                    children: [
+                      r.title &&
+                        s.jsx("span", { className: "label tile-group-title", children: r.title }),
+                      r.hint && s.jsx("p", { className: "small", children: r.hint }),
+                      s.jsx("div", {
+                        className: "tile-grid cols-2",
+                        children: le.filter((C) => C.section === r.key).map(te),
+                      }),
+                      r.more &&
+                        s.jsxs(re, {
+                          onClick: r.more.run,
+                          children: [
+                            r.more.label.startsWith("8") &&
+                              s.jsxs("span", {
+                                className: "glyph",
+                                "aria-hidden": "true",
+                                children: ["+", " "],
+                              }),
+                            r.more.label,
+                          ],
+                        }),
+                    ],
+                  },
+                  r.key,
+                )
+              : null,
+          ),
+        ],
+      }),
+      J.length > 0 &&
+        s.jsx("p", {
+          className: "small font-hidden-note",
+          children: K
+            ? `${Ln(J.map((r) => r.family))} ${J.length === 1 ? "ist" : "sind"} ausgeblendet, weil sie „${ms(Ae)}“ aus deinem Namen nicht darstellen ${J.length === 1 ? "kann" : "können"}.`
+            : `${J.length === 1 ? "1 Schrift ist" : `${J.length} Schriften sind`} ausgeblendet, weil sie „${ms(Ae)}“ aus deinem Namen nicht darstellen ${J.length === 1 ? "kann" : "können"}.`,
+        }),
+      ce.length > 1 &&
+        s.jsx(ee, {
+          title: "STÄRKE",
+          options: ce,
+          value: String(
+            ce.some((r) => r.value === String(e.name.font.weight))
+              ? e.name.font.weight
+              : ce[0].value,
+          ),
+          onChange: (r) => {
+            var _, Ce;
+            const C = Number(r),
+              L =
+                e.name.font.style === "italic" &&
+                ((_ = fe.italics) == null ? void 0 : _.includes(C));
+            n(
+              {
+                ...e,
+                name: {
+                  ...e.name,
+                  font: L
+                    ? { key: fe.key, weight: C, style: "italic" }
+                    : { key: fe.key, weight: C },
+                },
+              },
+              `Stärke ${(Ce = ce.find((qe) => qe.value === r)) == null ? void 0 : Ce.label}`,
+            );
+          },
+        }),
+      h &&
+        s.jsxs("details", {
+          className: "disclosure suffix-details",
+          onToggle: (r) => R(r.currentTarget.open),
+          children: [
+            s.jsx("summary", { children: "Zusatz" }),
+            j && s.jsx("div", { className: "disclosure-body", children: h }),
+          ],
+        }),
+      i &&
+        s.jsxs("details", {
+          className: "disclosure fine-details",
+          open: v,
+          onToggle: (r) => G(r.currentTarget.open),
+          children: [
+            s.jsx("summary", { children: "Feinheiten" }),
+            v && s.jsx("div", { className: "disclosure-body", children: i }),
+          ],
+        }),
+      s.jsxs(ye, {
+        open: I,
+        onClose: () => A(!1),
+        title: "Schriftgruppe",
+        size: "mid",
+        footer: s.jsx(xe, { onClick: () => A(!1), children: "Fertig" }),
+        children: [
+          s.jsx("div", {
+            className: "option-list",
+            role: "group",
+            "aria-label": "Schriftgruppe",
+            children: Oe.map((r) =>
+              s.jsx(
+                "button",
+                {
+                  type: "button",
+                  className: "option-row",
+                  "aria-pressed": g === r.value,
+                  onClick: () => {
+                    (d(r.value), $(1));
+                  },
+                  children: s.jsx("span", { className: "opt-main", children: r.label }),
+                },
+                r.value,
+              ),
+            ),
+          }),
+          s.jsxs("div", {
+            className: "stack font-switches",
+            children: [
+              s.jsx(He, {
+                checked: c,
+                onChange: (r) => (f(r), $(1)),
+                children: "Nur passend zu deinem Stil",
+              }),
+              s.jsx(He, {
+                checked: y,
+                onChange: (r) => (o(r), $(1)),
+                children: "Nur Schriften mit Kursive",
+              }),
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+}
+const Rs = (e) => e.charAt(0) + e.slice(1).toLocaleLowerCase("de-AT"),
+  Rn = ae.map((e) =>
+    e < be.eng - 0.015
+      ? "sehr eng"
+      : [
+          ["eng", be.eng],
+          ["normal", be.normal],
+          ["weit", be.weit],
+          ["sehr weit", be.sehrWeit],
+        ].reduce((n, a) => (Math.abs(a[1] - e) < Math.abs(n[1] - e) ? a : n))[0],
+  );
+function Pn({ concept: e, input: t, onChange: n, onShowFonts: a }) {
+  var f;
+  const l = !!((f = t.suffix) != null && f.trim()),
+    i = u.useMemo(
+      () =>
+        Ct(e, t).map((y) =>
+          y.key === "accent" && l ? { ...y, choices: y.choices.filter((o) => o.key !== "dot") } : y,
+        ),
+      [e, t, l],
+    ),
+    [m, h] = u.useState(!1),
+    x = u.useId(),
+    g = Et(e.name.tracking),
+    d = Object.values(be).some((y) => Math.abs(y - e.name.tracking) < 0.015),
+    c = (y) => {
+      const o = Math.max(0, Math.min(ae.length - 1, y)),
+        p = ae[o];
+      Math.abs(p - e.name.tracking) < 0.001 ||
+        n({ ...e, name: { ...e.name, tracking: p } }, `Laufweite Stufe ${o + 1}`);
+    };
+  return s.jsx("div", {
+    className: "typo-tool",
+    children: i.map((y) => {
+      var o;
+      return s.jsxs(
+        "div",
+        {
+          className: "tool-section",
+          children: [
+            s.jsx("span", { className: "fine-title", id: `typo-${y.key}`, children: Rs(y.label) }),
+            y.choices.length > 0 &&
+              s.jsx("div", {
+                className: "fine-seg",
+                children: s.jsx(Ke, {
+                  labelledBy: `typo-${y.key}`,
+                  options: y.choices.map((p) => ({ value: p.key, label: p.label })),
+                  value: ((o = y.choices.find((p) => p.active)) == null ? void 0 : o.key) ?? "",
+                  onChange: (p) => {
+                    const k = y.choices.find((E) => E.key === p);
+                    k && !k.active && n(k.concept, `${Rs(y.label)}: ${k.label}`);
+                  },
+                }),
+              }),
+            y.note && s.jsx("p", { className: "small typo-note", children: y.note }),
+            y.key === "italic" &&
+              !y.choices.length &&
+              a &&
+              s.jsx(W, { onClick: a, children: "Schriften mit Kursive zeigen" }),
+            y.key === "tracking" &&
+              s.jsxs(s.Fragment, {
+                children: [
+                  !d && s.jsx("p", { className: "small typo-own", children: "Eigene Stufe" }),
+                  m
+                    ? s.jsxs("div", {
+                        className: "field typo-fine",
+                        children: [
+                          s.jsxs("label", {
+                            className: "label field-label",
+                            htmlFor: x,
+                            children: ["LAUFWEITE · STUFE ", g + 1, " VON ", ae.length],
+                          }),
+                          s.jsxs("div", {
+                            className: "nf-length-row",
+                            children: [
+                              s.jsx(W, {
+                                onClick: () => c(g - 1),
+                                disabled: g <= 0,
+                                children: "Enger",
+                              }),
+                              s.jsx("input", {
+                                id: x,
+                                type: "range",
+                                min: 0,
+                                max: ae.length - 1,
+                                step: 1,
+                                list: `${x}-marks`,
+                                value: g,
+                                "aria-valuetext": `Laufweite Stufe ${g + 1} von ${ae.length}, ${Rn[g]}`,
+                                onChange: (p) => c(Number(p.target.value)),
+                              }),
+                              s.jsx(W, {
+                                onClick: () => c(g + 1),
+                                disabled: g >= ae.length - 1,
+                                children: "Weiter",
+                              }),
+                            ],
+                          }),
+                          s.jsx("datalist", {
+                            id: `${x}-marks`,
+                            children: ae.map((p, k) => s.jsx("option", { value: k }, p)),
+                          }),
+                          s.jsx("div", {
+                            className: "typo-marks",
+                            "aria-hidden": "true",
+                            children: ae.map((p) =>
+                              s.jsx(
+                                "i",
+                                { className: Tt(e.name.tracking) === p ? "is-on" : void 0 },
+                                p,
+                              ),
+                            ),
+                          }),
+                        ],
+                      })
+                    : s.jsx(W, {
+                        onClick: () => h(!0),
+                        "aria-expanded": !1,
+                        children: "Genauer einstellen",
+                      }),
+                ],
+              }),
+          ],
+        },
+        y.key,
+      );
+    }),
+  });
+}
+function Bn({ input: e, onChange: t }) {
+  const [n, a] = u.useState(e.ort2 ?? ""),
+    [l, i] = u.useState(e.jahr ?? ""),
+    [m, h] = u.useState(null);
+  (u.useEffect(() => a(e.ort2 ?? ""), [e.ort2]), u.useEffect(() => i(e.jahr ?? ""), [e.jahr]));
+  const x = () => {
+      const d = n.trim().slice(0, 60);
+      d !== (e.ort2 ?? "") &&
+        t({ ort2: d || void 0 }, d ? "Zweiter Ort gespeichert" : "Zweiter Ort entfernt");
+    },
+    g = (d, c) => {
+      if (!d) {
+        (h(null), e.jahr && t({ jahr: void 0 }, "Gründungsjahr entfernt"));
+        return;
+      }
+      ct(d)
+        ? (h(null), d !== e.jahr && t({ jahr: d }, "Gründungsjahr gespeichert"))
+        : (c || d.length >= 4) && h("Bitte ein echtes Jahr mit vier Ziffern, zum Beispiel 1998.");
+    };
+  return s.jsxs("details", {
+    className: "disclosure extra-info",
+    open: !!(e.ort2 || e.jahr) || void 0,
+    children: [
+      s.jsx("summary", { children: "Weitere Angaben (optional)" }),
+      s.jsxs("div", {
+        className: "disclosure-body stack",
+        children: [
+          s.jsx(oe, {
+            label: "ZWEITER ORT (OPTIONAL)",
+            value: n,
+            maxLength: 60,
+            placeholder: "z. B. Graz",
+            help: "Zum Beispiel Herkunft und Wirkungsort. Manche Gestaltungen zeigen zwei Orte.",
+            onChange: (d) => a(d.target.value),
+            onBlur: x,
+            onKeyDown: (d) => d.key === "Enter" && x(),
+          }),
+          s.jsx(oe, {
+            label: "GRÜNDUNGSJAHR (OPTIONAL)",
+            value: l,
+            inputMode: "numeric",
+            maxLength: 4,
+            placeholder: "z. B. 1998",
+            help: "Nur ein echtes Jahr angeben.",
+            error: m,
+            onChange: (d) => {
+              const c = d.target.value.replace(/\D/g, "").slice(0, 4);
+              (i(c), g(c, !1));
+            },
+            onBlur: () => g(l, !0),
+          }),
+        ],
+      }),
+    ],
+  });
+}
+const Ps = ["Klein", "Normal", "Groß", "Gleich"],
+  Dn = {
+    standard: "Grotesk",
+    mono: "Mono",
+    kursiv: "Kursiv",
+    gross: "Zweite Zeile",
+    "fett-klein": "Fett und klein",
+    kapitaelchen: "Kapitälchen",
+  },
+  os = [
+    { value: "upper", label: "Versalien" },
+    { value: "asis", label: "Normal" },
+    { value: "lower", label: "Klein" },
+  ];
+function Kn(e) {
+  var a;
+  const t = ps((a = e.typo) == null ? void 0 : a.suffixScale) ?? 0.4;
+  let n = 0;
+  return (
+    us.forEach((l, i) => {
+      Math.abs(l - t) < Math.abs(us[n] - t) && (n = i);
+    }),
+    n
+  );
+}
+function Gn(e, t) {
+  const n = ys(e.suffix.case, e.suffix.tracking, e.suffix.font, t);
+  return {
+    ...e,
+    suffix: { ...e.suffix, tracking: n },
+    typo: { ...(e.typo ?? {}), suffixScale: t },
+  };
+}
+function Hn(e, t) {
+  var i;
+  const n = e.suffix.case === "upper",
+    a = t === "upper" && !n ? 0.18 : e.suffix.tracking,
+    l = ys(t, a, e.suffix.font, ps((i = e.typo) == null ? void 0 : i.suffixScale));
+  return { ...e, suffix: { ...e.suffix, case: t, tracking: l } };
+}
+function Zn(e, t) {
+  var i;
+  const n = de(t).weights.reduce((m, h) => (Math.abs(h - 400) < Math.abs(m - 400) ? h : m)),
+    a = { key: t, weight: n },
+    l = ys(e.suffix.case, e.suffix.tracking, a, ps((i = e.typo) == null ? void 0 : i.suffixScale));
+  return { ...e, suffix: { ...e.suffix, font: a, tracking: l } };
+}
+function Un({ concept: e, input: t, tagline: n, onChange: a }) {
+  const [l, i] = u.useState(!1),
+    [m, h] = u.useState(""),
+    x = t.suffix ?? "",
+    g = u.useMemo(() => {
+      const f = Cs(ds(e.id)),
+        y = Ft(e, x, null, f).slice(0, 4),
+        o = {
+          key: "aktuell",
+          concept: e,
+          name: "Aktuell",
+          label: `Zusatz aktuell: ${de(e.suffix.font.key).family}`,
+        },
+        p = y.map(({ p: k, font: E }) => {
+          const T = At(e, k, E, Cs(ds(`${e.id}|${k.id}`)));
+          return {
+            key: `${k.id}-${Ze(E)}`,
+            concept: T,
+            name: Dn[k.id] ?? de(E.key).family,
+            label: `Zusatz: ${k.titel}, ${de(E.key).family}`,
+          };
+        });
+      return [o, ...p];
+    }, [e.name.font.key, e.name.font.weight, e.style, x]),
+    d = u.useMemo(() => {
+      const f = We(m.trim());
+      return ut
+        .filter((y) => gs(y.key, x) && (!f || We(y.family).includes(f)))
+        .sort((y, o) => y.family.localeCompare(o.family, "de"));
+    }, [m, x]),
+    c = Kn(e);
+  return s.jsxs("div", {
+    className: "stack suffix-tool",
+    children: [
+      s.jsx(ee, {
+        title: "GRÖSSE",
+        options: Ps.map((f, y) => ({ value: String(y), label: f })),
+        value: String(c),
+        onChange: (f) =>
+          a(Gn(e, us[Number(f)]), `Zusatz ${Ps[Number(f)].toLocaleLowerCase("de-AT")}`),
+      }),
+      s.jsx(ee, {
+        title: "SCHREIBUNG",
+        options: os,
+        value: os.some((f) => f.value === e.suffix.case) ? e.suffix.case : "asis",
+        onChange: (f) => {
+          var y;
+          return a(
+            Hn(e, f),
+            `Zusatz ${(y = os.find((o) => o.value === f)) == null ? void 0 : y.label}`,
+          );
+        },
+      }),
+      g.length > 1 &&
+        s.jsx(me, {
+          items: g,
+          activeKey: "aktuell",
+          input: t,
+          tagline: n,
+          label: "Schrift für den Zusatz",
+          onSelect: (f) => f.concept && f.key !== "aktuell" && a(f.concept, `Zusatz in ${f.name}`),
+        }),
+      s.jsx("div", {
+        className: "row",
+        children: s.jsx(re, { onClick: () => i(!0), children: "Alle Schriften" }),
+      }),
+      s.jsxs(ye, {
+        open: l,
+        onClose: () => i(!1),
+        title: "Schrift für den Zusatz",
+        size: "mid",
+        footer: s.jsx(xe, { onClick: () => i(!1), children: "Fertig" }),
+        children: [
+          s.jsx(oe, {
+            label: "SCHRIFT SUCHEN",
+            value: m,
+            onChange: (f) => h(f.target.value),
+            placeholder: "z. B. Inter",
+          }),
+          s.jsx("div", {
+            className: "option-list",
+            role: "group",
+            "aria-label": "Schrift für den Zusatz",
+            children: d.map((f) =>
+              s.jsx(
+                "button",
+                {
+                  type: "button",
+                  className: "option-row",
+                  "aria-pressed": e.suffix.font.key === f.key,
+                  onClick: () => a(Zn(e, f.key), `Zusatz in ${f.family}`),
+                  children: f.family,
+                },
+                f.key,
+              ),
+            ),
+          }),
+        ],
+      }),
+    ],
+  });
+}
+function pe(e) {
+  return e.signature ? $t(e.signature.id) : void 0;
+}
+const _n = [
+  { rolle: "haupt", titel: "SCHRIFT DES NAMENS" },
+  { rolle: "neben", titel: "SCHRIFT FÜR ZUSATZ UND ORT" },
+  { rolle: "akzent", titel: "SCHRIFT DER AKZENTE" },
+];
+function Wn(e) {
+  const t = new Set();
+  for (const n of e.elemente) n.typ === "text" && t.add(n.schrift);
+  return t;
+}
+function Vn(e, t, n) {
+  const a = e.schriften[n] ?? [],
+    l = new Set();
+  return a.filter((i) => {
+    const m = Ze(i);
+    return l.has(m) ? !1 : (l.add(m), gs(i.key, t.name, t.suffix, t.place));
+  });
+}
+function hs(e, t, n) {
+  var h;
+  const a = pe(e);
+  if (!a) return e;
+  const l = { ...(((h = e.signature) == null ? void 0 : h.params) ?? {}), ...n };
+  for (const x of Object.keys(l)) l[x] === void 0 && delete l[x];
+  const i = Mt(a, t, e.palette, l, e.style),
+    m = { id: a.id };
+  return (Object.keys(l).length && (m.params = l), { ...i, signature: m });
+}
+function Jn(e, t, n, a) {
+  return hs(e, t, { [n]: a });
+}
+const ge = [
+    { label: "Klein", factor: 0.8 },
+    { label: "Normal", factor: 1 },
+    { label: "Groß", factor: 1.25 },
+    { label: "Gleich", factor: 1.6 },
+  ],
+  De = { upper: "Versalien", title: "Normal", asis: "Normal", lower: "Klein" };
+function tt(e, t) {
+  var a, l, i, m;
+  return (
+    e.elemente.some((h) => h.typ === "text" && h.schrift === "neben" && Ot.includes(h.feld)) &&
+    !!(
+      ((a = t.suffix) != null && a.trim()) ||
+      ((l = t.place) != null && l.trim()) ||
+      ((i = t.ort2) != null && i.trim()) ||
+      ((m = t.jahr) != null && m.trim())
+    )
+  );
+}
+function qn({ concept: e, input: t, onChange: n }) {
+  var g;
+  const a = pe(e);
+  if (!a || !tt(a, t)) return null;
+  const l = ((g = e.signature) == null ? void 0 : g.params) ?? {},
+    i = l.zusatzMassstab ?? 1,
+    m = ge.reduce((d, c, f) => (Math.abs(c.factor - i) < Math.abs(ge[d].factor - i) ? f : d), 0),
+    h = It(a).filter((d, c, f) => f.findIndex((y) => De[y] === De[d]) === c),
+    x = l.zusatzSchreibung && h.includes(l.zusatzSchreibung) ? l.zusatzSchreibung : h[0];
+  return s.jsxs("div", {
+    className: "stack suffix-tool",
+    children: [
+      s.jsx(ee, {
+        title: "GRÖSSE DES ZUSATZES",
+        options: ge.map((d, c) => ({ value: String(c), label: d.label })),
+        value: String(m),
+        onChange: (d) =>
+          n(
+            hs(e, t, {
+              zusatzMassstab: ge[Number(d)].factor === 1 ? void 0 : ge[Number(d)].factor,
+            }),
+            `Zusatz ${ge[Number(d)].label.toLocaleLowerCase("de-AT")}`,
+          ),
+      }),
+      h.length > 1 &&
+        x &&
+        s.jsx(ee, {
+          title: "SCHREIBUNG DES ZUSATZES",
+          options: h.map((d) => ({ value: d, label: De[d] })),
+          value: x,
+          onChange: (d) => n(hs(e, t, { zusatzSchreibung: d }), `Zusatz ${De[d]}`),
+        }),
+    ],
+  });
+}
+function Yn(e) {
+  if (!e.signature) return e;
+  const { signature: t, id: n, ...a } = e;
+  return { ...a, id: xs(a) };
+}
+function fs({ onFree: e, text: t }) {
+  return s.jsxs("div", {
+    className: "stack signature-note",
+    children: [
+      s.jsx("p", {
+        className: "small",
+        children:
+          t ??
+          "Dieses Logo folgt einer festen Gestaltung. Farbe und Schrift wählst du aus passenden Varianten.",
+      }),
+      s.jsx("div", {
+        className: "row",
+        children: s.jsx(re, { onClick: e, children: "Frei bearbeiten" }),
+      }),
+      s.jsx("p", {
+        className: "small muted",
+        children:
+          "Frei bearbeiten öffnet alle Werkzeuge. Die feste Gestaltung geht dabei verloren, Rückgängig holt sie zurück.",
+      }),
+    ],
+  });
+}
+function Qn({ concept: e, input: t, tagline: n, onChange: a, onFree: l }) {
+  const i = pe(e),
+    m = u.useMemo(() => {
+      var g;
+      if (!i) return [];
+      const h = Lt(i, t, (g = e.signature) == null ? void 0 : g.params),
+        x = Wn(i);
+      return _n
+        .filter((d) => x.has(d.rolle))
+        .map((d) => {
+          const f = Vn(i, t, d.rolle).map((y) => {
+            const p = `${de(y.key).family}${y.style === "italic" ? " Kursiv" : ""}`;
+            return {
+              key: Ze(y),
+              concept: Jn(e, t, d.rolle, y),
+              name: p,
+              label: `${d.titel.charAt(0)}${d.titel.slice(1).toLocaleLowerCase("de-AT")}: ${p}`,
+            };
+          });
+          return { ...d, items: f, active: Ze(h[d.rolle]) };
+        })
+        .filter((d) => d.items.length > 1);
+    }, [i, e, t]);
+  return i
+    ? s.jsxs("div", {
+        className: "stack",
+        children: [
+          m.map((h) =>
+            s.jsxs(
+              "div",
+              {
+                className: "stack",
+                children: [
+                  s.jsx("p", { className: "label", children: h.titel }),
+                  s.jsx(me, {
+                    items: h.items,
+                    activeKey: h.active,
+                    input: t,
+                    tagline: n,
+                    label: h.titel.charAt(0) + h.titel.slice(1).toLocaleLowerCase("de-AT"),
+                    onSelect: (x) => x.concept && a(x.concept, `Schrift ${x.name ?? ""}`.trim()),
+                  }),
+                ],
+              },
+              h.rolle,
+            ),
+          ),
+          pe(e) &&
+            tt(pe(e), t) &&
+            s.jsxs("details", {
+              className: "disclosure suffix-details",
+              children: [
+                s.jsx("summary", { children: "Zusatz" }),
+                s.jsx("div", {
+                  className: "disclosure-body",
+                  children: s.jsx(qn, { concept: e, input: t, onChange: a }),
+                }),
+              ],
+            }),
+          s.jsx(fs, {
+            onFree: l,
+            text: m.length
+              ? void 0
+              : "Für diese Gestaltung passt nur eine Schrift. Andere Schriften gibt es mit Frei bearbeiten.",
+          }),
+        ],
+      })
+    : null;
+}
+const nt = (e, t) => `unio-brand:history:${e}:${t}`;
+function Xn(e, t) {
+  try {
+    const n = sessionStorage.getItem(nt(e, t));
+    return n ? JSON.parse(n) : null;
+  } catch {
+    return null;
+  }
+}
+function ea(e, t, n) {
+  try {
+    sessionStorage.setItem(nt(e, t), JSON.stringify(n));
+  } catch {}
+}
+function sa(e) {
+  const t = Ds(e.input.suffix);
+  return {
+    rawName: e.rawName,
+    suffixChoice: t.choice,
+    customSuffix: t.custom,
+    tagline: e.input.tagline ?? "",
+    showTagline: e.showTaglineInLogo,
+  };
+}
+function ta(e, t, n) {
+  switch (e) {
+    case "kontrast": {
+      const a = t.palette,
+        l = a.paper;
+      return [
+        {
+          ...t,
+          id: `${t.id}-k`,
+          palette: {
+            ...a,
+            id: `${a.id.replace(/(-k)+$/, "")}-k`,
+            primary: Y(a.primary, l, 4.5),
+            secondary:
+              t.colors.suffix === "secondary" || t.colors.symbol === "secondary"
+                ? Y(a.secondary, l, 4.5)
+                : a.secondary,
+            accent:
+              t.colors.suffix === "accent" || t.colors.symbol === "accent"
+                ? Y(a.accent, l, 4.5)
+                : a.accent,
+            ink: Y(a.ink, l, 7.2),
+          },
+        },
+        ...ie(t, n, "palette", 12),
+      ];
+    }
+    case "komplexitaet":
+      return ie(t, n, "symbol", 16);
+    case "schriften":
+      return ie(t, n, "font", 12);
+    case "highend":
+      return [
+        {
+          ...t,
+          id: `${t.id}-h`,
+          typo: void 0,
+          name: {
+            ...t.name,
+            tracking: t.name.case === "upper" ? Math.max(0.06, Math.min(0.14, t.name.tracking)) : 0,
+          },
+        },
+        ...ie(t, n, "font", 12),
+      ];
+    default:
+      return [{ ...t, id: `${t.id}-s`, layout: "stacked" }, ...ie(t, n, "layout", 12)];
+  }
+}
+function ba({ projectId: e, conceptId: t, tab: n, texte: a, feinheiten: l }) {
+  const { state: i, update: m, navigate: h, toast: x, announce: g, setHelpOpen: d } = Zs(),
+    c = i.projects[e],
+    f = c.editing && c.editing.baseId === t;
+  return (
+    u.useEffect(() => {
+      if (f) return;
+      const y = c.favorites.find((k) => k.id === t),
+        o =
+          c.selected && c.selectedBaseId === t
+            ? (c.favorites.find((k) => k.id === t) ?? c.selected)
+            : null,
+        p = y ?? o;
+      p
+        ? m(e, (k) => dt(k, p, k.numbers[p.id] ?? 0), !1)
+        : (x("Dieses Logo gibt es nicht mehr. Hier sind deine Vorschläge."),
+          h({ name: "auswahl", id: e, gemerkt: !1 }, { replace: !0 }));
+    }, [f]),
+    !f || !c.editing
+      ? null
+      : s.jsx(na, {
+          project: c,
+          tab: n,
+          texte: !!a,
+          feinheiten: !!l,
+          update: m,
+          navigate: h,
+          toast: x,
+          announce: g,
+          openHelp: () => d(!0),
+        })
+  );
+}
+function na({
+  project: e,
+  tab: t,
+  texte: n,
+  feinheiten: a,
+  update: l,
+  navigate: i,
+  toast: m,
+  announce: h,
+}) {
+  var Ss, vs;
+  const x = e.editing,
+    g = e.id,
+    d = x.concept,
+    c = e.input,
+    [f, y] = u.useState(() => {
+      const b = Xn(g, x.baseId);
+      return b && b.present && JSON.stringify(b.present.concept) === JSON.stringify(d)
+        ? b
+        : Xt({ concept: d, text: sa(e) });
+    });
+  u.useEffect(() => ea(g, x.baseId, f), [f, g, x.baseId]);
+  const o = u.useMemo(() => nn(d, c), [d, c]),
+    [p, k] = u.useState(!1);
+  u.useEffect(() => {
+    t !== "schrift" && k(!1);
+  }, [t]);
+  const E = u.useRef(0),
+    [T, I] = u.useState(null),
+    A = u.useCallback(
+      (b) => {
+        l(g, (S) => {
+          var z, Z, X;
+          let w = S;
+          if (
+            JSON.stringify(b.concept) !==
+            JSON.stringify((z = S.editing) == null ? void 0 : z.concept)
+          ) {
+            const Ye =
+              !((Z = S.editing) != null && Z.edited) &&
+              b.concept.id !== ((X = S.editing) == null ? void 0 : X.baseId);
+            ((w = mt(w, b.concept)),
+              Ye &&
+                !S.firstEditToastShown &&
+                (m("Dein bearbeitetes Logo ist gemerkt."),
+                (w = { ...w, firstEditToastShown: !0 })));
+          }
+          const N = b.text;
+          return (
+            !Ns(N.rawName) &&
+              !(N.suffixChoice === "custom" && Ks(N.customSuffix)) &&
+              (w = ht(w, {
+                rawName: N.rawName,
+                suffixChoice: N.suffixChoice,
+                customSuffix: N.customSuffix,
+                keepLegalForm: S.legalFormInLogo,
+              })),
+            (w.input.tagline ?? "") !== N.tagline &&
+              (w = { ...w, input: { ...w.input, tagline: N.tagline } }),
+            w.showTaglineInLogo !== N.showTagline &&
+              (w = { ...w, showTaglineInLogo: N.showTagline }),
+            w
+          );
+        });
+      },
+      [g, l, m],
+    ),
+    v = u.useCallback(
+      (b, S, w = !1) => {
+        const N = Date.now(),
+          z = w && N - E.current < 800;
+        ((E.current = w ? N : 0), y((Z) => en(Z, b, S, z && Z.label === S)), A(b));
+      },
+      [A],
+    ),
+    G = u.useCallback(
+      (b) => {
+        const S = x.base,
+          w = (N) => JSON.stringify({ ...N, id: "", seed: 0 });
+        return w(b) === w(S)
+          ? S
+          : { ...b, id: `${x.baseId.slice(0, 40)}e${ds(w(b)).toString(36)}` };
+      },
+      [x.base, x.baseId],
+    ),
+    j = u.useCallback(
+      (b, S) => v({ concept: G(b), text: f.present.text }, S),
+      [v, f.present.text, G],
+    ),
+    R = u.useCallback(
+      (b, S, w) => {
+        const N = Ns(b.rawName);
+        (I(N ? ft(N, b.rawName) : null), v({ concept: f.present.concept, text: b }, S, w));
+      },
+      [v, f.present.concept],
+    ),
+    F = u.useCallback(() => {
+      const b = sn(f);
+      b && (y(b.state), A(b.state.present), h(`Rückgängig: ${b.label}.`));
+    }, [f, A, h]),
+    $ = u.useCallback(() => {
+      const b = tn(f);
+      b && (y(b.state), A(b.state.present), h(`Wiederholen: ${b.label}.`));
+    }, [f, A, h]);
+  u.useEffect(() => {
+    const b = (S) => {
+      if (!(S.ctrlKey || S.metaKey) || S.target.closest("input, textarea, [contenteditable]"))
+        return;
+      const N = S.key.toLowerCase();
+      N === "z" && !S.shiftKey
+        ? (S.preventDefault(), F())
+        : ((N === "z" && S.shiftKey) || N === "y") && (S.preventDefault(), $());
+    };
+    return (window.addEventListener("keydown", b), () => window.removeEventListener("keydown", b));
+  }, [F, $]);
+  const [P, U] = u.useState(null);
+  u.useEffect(() => {
+    const b = Ge([d], !1, c);
+    let S = !0;
+    const w = () => {
+      try {
+        S && U(Xe(d, c, ze));
+      } catch (N) {
+        console.warn("Logo-Check fehlgeschlagen", N);
+      }
+    };
+    return (
+      Ue(b) ? w() : cs(b).then(w, () => {}),
+      () => {
+        S = !1;
+      }
+    );
+  }, [d, c]);
+  const [B, O] = u.useState(null),
+    [H, Q] = u.useState(!1),
+    M = async (b) => {
+      var S;
+      if (!B) {
+        O(b);
+        try {
+          const w = ta(b, d, c);
+          await cs(Ge(w, !1, c));
+          const N = Xe(d, c, ze).score;
+          let z = null;
+          for (const Z of w) {
+            let X;
+            try {
+              X = Xe(Z, c, ze);
+            } catch {
+              continue;
+            }
+            if (
+              (S = X.items.find((Ye) => Ye.key === b)) != null &&
+              S.pass &&
+              ((!z || X.score > z.score) && (z = { c: Z, score: X.score }), X.score >= N)
+            )
+              break;
+          }
+          z
+            ? (j(z.c, "Automatisch behoben"), h("Automatisch behoben. Rückgängig ist möglich."))
+            : b === "komplexitaet"
+              ? (D("symbol"), Q(!0))
+              : m(
+                  "Dafür haben wir keine automatische Lösung gefunden. Probier eine andere Option im Werkzeug.",
+                );
+        } finally {
+          O(null);
+        }
+      }
+    },
+    D = (b) => {
+      (zt("editor:tab"),
+        l(g, (S) => ({ ...S, ui: { ...S.ui, editorTab: b } }), !1),
+        i({ name: "logo", id: g, conceptId: x.baseId, tab: b }, { replace: !0 }));
+    },
+    K = e.ui.previewMode,
+    V = (b) => l(g, (S) => ({ ...S, ui: { ...S.ui, previewMode: b } }), !1),
+    [J, Ae] = u.useState(!1),
+    ke = u.useMemo(() => gt(e), [e.contact, e.legalForm, e.legalFormInLogo, e.rawName]),
+    se = !bt(e.contact),
+    le = _t(K === "logo" ? null : d, c),
+    Se = qt(((Ss = e.object) == null ? void 0 : Ss.photoIds) ?? []),
+    he = u.useMemo(() => Jt(e.object, Se), [e.object, Se]),
+    ve = u.useMemo(() => ({ ...Wt(d, c, ke), ...(he ? { object: he } : {}) }), [d, c, ke, he]),
+    je = Js() && e.templateSet === "unio";
+  u.useEffect(() => {
+    const b = new AbortController(),
+      S = window.setTimeout(() => {
+        ze.ensure([...Ge([d], !1, c), ...Vt([d])]).then(
+          () => {
+            b.signal.aborted || Yt(ve, { includeContact: !se, unio: je }, b.signal).catch(() => {});
+          },
+          () => {},
+        );
+      }, 4e3);
+    return () => {
+      (b.abort(), window.clearTimeout(S));
+    };
+  }, [ve, se, je]);
+  const $e = () => {
+      (l(g, (b) => {
+        var S;
+        return (S = b.editing) != null && S.edited ? b : jt(b);
+      }),
+        i({ name: "kit", id: g }));
+    },
+    Le = () => i({ name: "auswahl", id: g, gemerkt: !1 }),
+    [Ve, te] = u.useState(n),
+    [Oe, Ne] = u.useState(!1);
+  u.useEffect(() => {
+    n && te(!0);
+  }, [n]);
+  const fe = () => {
+      (j(x.base, "Auf Vorschlag zurückgesetzt"),
+        m("Zurückgesetzt.", { label: "Rückgängig", run: q.current }));
+    },
+    q = u.useRef(F);
+  q.current = F;
+  const ce = () => {
+      (l(g, (b) => {
+        const S = Object.values(b.numbers),
+          w = Math.max(b.ui.galleryCount, ...S) + 1,
+          N = { ...d, id: `${d.id}v${w}` };
+        return vt(b, N.id)
+          ? b
+          : { ...b, favorites: [...b.favorites, N], numbers: { ...b.numbers, [N.id]: w } };
+      }),
+        m("Als neue Variante gemerkt."));
+    },
+    Je = x.edited ? "DEIN LOGO" : `KONZEPT ${xt(x.baseNo)}`,
+    we = f.past.length > 0,
+    Ie = f.future.length > 0,
+    r = u.useRef(null),
+    C = u.useRef(null),
+    [L, _] = u.useState(!1);
+  u.useEffect(() => {
+    var Z;
+    const b = (Z = r.current) == null ? void 0 : Z.querySelector(".stage");
+    if (!b) return;
+    const S = matchMedia("(max-width: 759px), (max-height: 699px)");
+    let w = !1;
+    const N = () => _(w && S.matches),
+      z = new IntersectionObserver(([X]) => {
+        ((w = !X.isIntersecting && X.boundingClientRect.top < 0), N());
+      });
+    return (
+      z.observe(b),
+      S.addEventListener("change", N),
+      () => {
+        (z.disconnect(), S.removeEventListener("change", N));
+      }
+    );
+  }, [K]);
+  const Ce = u.useRef({}),
+    qe = (b) => {
+      var z, Z;
+      const S = (z = b.target.closest('[role="tab"]')) == null ? void 0 : z.id.replace("tab-", ""),
+        w = ne.indexOf(S && ne.includes(S) ? S : t);
+      let N = w;
+      if (b.key === "ArrowRight") N = (w + 1) % ne.length;
+      else if (b.key === "ArrowLeft") N = (w - 1 + ne.length) % ne.length;
+      else if (b.key === "Home") N = 0;
+      else if (b.key === "End") N = ne.length - 1;
+      else return;
+      (b.preventDefault(), D(ne[N]), (Z = Ce.current[ne[N]]) == null || Z.focus());
+    },
+    ue = { concept: d, input: c, onChange: j, tagline: e.showTaglineInLogo },
+    Ee = pe(d),
+    Me = () => {
+      (j(Yn(d), "Frei bearbeiten"),
+        m("Feste Gestaltung gelöst: Alle Werkzeuge sind jetzt frei. Rückgängig holt sie zurück."));
+    },
+    at = pt(e.contact.city ?? ""),
+    lt = s.jsx(W, {
+      onClick: F,
+      "aria-disabled": !we,
+      title: we ? void 0 : "Nichts rückgängig zu machen",
+      children: "Rückgängig",
+    }),
+    it = [
+      { label: "Wiederholen", run: $, show: Ie },
+      { label: "Texte ändern", run: () => te(!0) },
+      { label: "Ähnliche Vorschläge", run: () => Ne(!0) },
+      { label: "Als neue Variante merken", run: ce },
+      { label: "Auf Vorschlag zurücksetzen", run: fe, show: x.edited },
+      { label: "Frei bearbeiten", run: Me, show: !!Ee },
+    ],
+    ks = s.jsx(on, { result: P, onFix: M, fixing: B });
+  return s.jsxs("div", {
+    ref: C,
+    children: [
+      s.jsx("header", {
+        className: "editor-header",
+        children: s.jsxs("div", {
+          className: "container",
+          children: [
+            s.jsx("a", {
+              className: "btn btn-text",
+              href: yt({ name: "auswahl", id: g, gemerkt: !1 }),
+              onClick: (b) => {
+                (b.preventDefault(), Le());
+              },
+              children: "← Vorschläge",
+            }),
+            s.jsx("h1", {
+              className: "label label-strong title",
+              "data-title": "Feinschliff",
+              tabIndex: -1,
+              children: Je,
+            }),
+            s.jsxs("div", {
+              className: "row editor-actions",
+              style: { flexWrap: "nowrap" },
+              children: [
+                lt,
+                s.jsx(Bs, { label: "Mehr", items: it, menuLabel: "Mehr zum Logo" }),
+                s.jsx(kt, { changedAt: e.updatedAt }),
+                s.jsx("span", {
+                  className: "desk-flex",
+                  children: s.jsx(xe, { onClick: $e, children: "Weiter zum Brand Kit" }),
+                }),
+              ],
+            }),
+          ],
+        }),
+      }),
+      s.jsxs("div", {
+        className: "container editor-grid",
+        style: { paddingBottom: "calc(var(--bar-h) + 48px)" },
+        children: [
+          L && s.jsx(ln, { concept: d, input: c, dark: J, tagline: e.showTaglineInLogo }),
+          s.jsxs("div", {
+            className: "stage-wrap",
+            ref: r,
+            children: [
+              s.jsx(an, {
+                concept: d,
+                input: c,
+                tagline: e.showTaglineInLogo,
+                mode: K,
+                onMode: V,
+                dark: J,
+                onDark: Ae,
+                assets: K === "logo" ? null : ve,
+                kitReady: le,
+                sample: se,
+                portrait: e.contact.photo,
+                label: Gt(d, x.edited ? void 0 : x.baseNo),
+                templateSet: e.templateSet,
+                onEditText: () => te(!0),
+              }),
+              s.jsx("div", { className: "desk-only", children: ks }),
+            ],
+          }),
+          s.jsxs("div", {
+            className: "tool",
+            children: [
+              s.jsx("div", {
+                className: "tabs",
+                role: "tablist",
+                "aria-label": "Werkzeuge",
+                onKeyDown: qe,
+                children: ne.map((b) =>
+                  s.jsxs(
+                    "button",
+                    {
+                      ref: (S) => (Ce.current[b] = S),
+                      type: "button",
+                      role: "tab",
+                      id: `tab-${b}`,
+                      className: "tab",
+                      "aria-selected": b === t,
+                      "aria-controls": `panel-${b}`,
+                      tabIndex: b === t ? 0 : -1,
+                      onClick: () => D(b),
+                      children: [s.jsx("span", { className: "dot", "aria-hidden": "true" }), pn[b]],
+                    },
+                    b,
+                  ),
+                ),
+              }),
+              s.jsxs("div", {
+                className: "tab-panel",
+                role: "tabpanel",
+                id: `panel-${t}`,
+                "aria-labelledby": `tab-${t}`,
+                children: [
+                  t === "symbol" &&
+                    (Ee
+                      ? s.jsx(fs, {
+                          onFree: Me,
+                          text: "Das Zeichen gehört zur festen Gestaltung dieses Logos. Ein anderes Symbol gibt es mit Frei bearbeiten.",
+                        })
+                      : s.jsx(jn, { ...ue, highlight: H }, `s-${x.baseId}`)),
+                  t === "schrift" && Ee && s.jsx(Qn, { ...ue, onFree: Me }, `sf-${x.baseId}`),
+                  t === "schrift" &&
+                    !Ee &&
+                    s.jsx(
+                      zn,
+                      {
+                        ...ue,
+                        italicFirst: p,
+                        details: s.jsx(Pn, { ...ue, onShowFonts: () => k(!0) }),
+                        suffixTool:
+                          (vs = c.suffix) != null && vs.trim() ? s.jsx(Un, { ...ue }) : void 0,
+                        detailsOpen: a,
+                      },
+                      `f-${x.baseId}-${p ? "i" : ""}`,
+                    ),
+                  t === "farbe" && s.jsx(Nn, { ...ue }, `c-${x.baseId}`),
+                  t === "aufbau" &&
+                    s.jsxs("div", {
+                      className: "stack aufbau",
+                      children: [
+                        Ee
+                          ? s.jsx(fs, {
+                              onFree: Me,
+                              text: "Der Aufbau gehört zur festen Gestaltung dieses Logos. Namensform und Anordnung änderst du mit Frei bearbeiten.",
+                            })
+                          : s.jsxs(s.Fragment, {
+                              children: [
+                                s.jsx(Fn, {
+                                  concept: f.present.concept,
+                                  input: c,
+                                  tagline: e.showTaglineInLogo,
+                                  onChange: j,
+                                }),
+                                s.jsx(Cn, { ...ue }),
+                              ],
+                            }),
+                        s.jsx(ee, {
+                          title: "DEIN NAME IST",
+                          options: [
+                            { value: "person", label: "Personenname" },
+                            { value: "company", label: "Firmenname" },
+                          ],
+                          value: Hs(e.input) ? "person" : "company",
+                          onChange: (b) => {
+                            (l(g, (S) => ({ ...S, input: { ...S.input, nameKind: b } })),
+                              h(
+                                b === "person"
+                                  ? "Als Personenname behandelt."
+                                  : "Als Firmenname behandelt.",
+                              ));
+                          },
+                        }),
+                        s.jsx(Bn, {
+                          input: e.input,
+                          onChange: (b, S) => {
+                            (l(g, (w) => {
+                              const N = { ...w.input, ...b };
+                              return (
+                                N.ort2 || delete N.ort2,
+                                N.jahr || delete N.jahr,
+                                { ...w, input: N }
+                              );
+                            }),
+                              h(`${S}.`));
+                          },
+                        }),
+                      ],
+                    }),
+                ],
+              }),
+              s.jsx("div", { className: "mobile-only", style: { marginTop: 16 }, children: ks }),
+            ],
+          }),
+        ],
+      }),
+      s.jsx(ye, {
+        open: Ve,
+        onClose: () => te(!1),
+        title: "Texte ändern",
+        footer: s.jsx(xe, { onClick: () => te(!1), children: "Fertig" }),
+        children: s.jsx(Tn, {
+          values: f.present.text,
+          onChange: R,
+          city: at,
+          nameError: T,
+          candidates: e.nameCandidates,
+          gaps: o,
+          onGap: (b) => {
+            (te(!1), D(b.part === "name" ? "schrift" : "symbol"));
+          },
+        }),
+      }),
+      s.jsx(aa, {
+        open: Oe,
+        onClose: () => Ne(!1),
+        concept: d,
+        input: c,
+        onPick: (b) => (Ne(!1), j(b, "Ähnlicher Vorschlag")),
+      }),
+      s.jsx(St, { children: s.jsx(xe, { onClick: $e, children: "Weiter zum Brand Kit" }) }),
+    ],
+  });
+}
+function aa({ open: e, onClose: t, concept: n, input: a, onPick: l }) {
+  const i = u.useMemo(() => (e ? Rt(n, a, 6) : []), [e, n, a]);
+  return s.jsx(ye, {
+    open: e,
+    onClose: t,
+    title: "Ähnliche Vorschläge",
+    size: "mid",
+    children: s.jsx(me, {
+      twoCols: !0,
+      label: "Ähnliche Vorschläge",
+      input: a,
+      activeKey: null,
+      items: i.map((m, h) => ({ key: m.id, concept: m, label: `Ähnlicher Vorschlag ${h + 1}` })),
+      onSelect: (m) => {
+        const h = i.find((x) => x.id === m.key);
+        h && l(h);
+      },
+    }),
+  });
+}
+export { ba as default };

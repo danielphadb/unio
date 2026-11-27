@@ -1,0 +1,192 @@
+import { o as h } from "./objectData-DW9yI24T.js";
+import { l as y } from "./library-D1LkGQVN.js";
+import {
+  aD as E,
+  aE as F,
+  aF as j,
+  aG as c,
+  aH as O,
+  aI as g,
+  aJ as l,
+  aK as x,
+  aL as d,
+  aM as N,
+  aN as T,
+  aO as v,
+  aP as _,
+  aQ as m,
+  aR as k,
+  aS as f,
+  aT as D,
+  aU as M,
+  aV as R,
+  Q as $,
+  aW as B,
+  aX as P,
+  aY as z,
+  aZ as K,
+  a_ as L,
+} from "./index-BER2gtDe.js";
+import "./energy-DRQ_36b-.js";
+const b = /^[A-Za-z0-9_@.-]{1,160}$/;
+function V(r, e) {
+  const n = r === void 0 ? "unio" : k(r, ["own", "unio"], "projekt.templateSet");
+  return e === !0 ? n : "unio";
+}
+function C(r) {
+  const e = j(r, "projekt"),
+    n = c(e.id, "projekt.id", 64, { pattern: /^[A-Za-z0-9_-]{1,64}$/ }),
+    i = Date.now(),
+    a = O(e.input),
+    o = (t, s, u) => (t == null ? u : s(t)),
+    I = o(
+      e.favorites,
+      (t) => {
+        if (!Array.isArray(t) || t.length > 500) throw new g("projekt.favorites");
+        return t.map((s, u) => m(s, `projekt.favorites[${u}]`));
+      },
+      [],
+    ),
+    w = {};
+  for (const [t, s] of Object.entries(o(e.numbers, (u) => j(u, "projekt.numbers"), {}))) {
+    if (!b.test(t)) throw new g("projekt.numbers");
+    w[t] = l(s, `projekt.numbers.${t}`, 0, 1e6);
+  }
+  const S = o(
+      e.editing,
+      (t) => {
+        const s = j(t, "projekt.editing");
+        return {
+          baseId: c(s.baseId, "projekt.editing.baseId", 160, { pattern: b }),
+          baseNo: l(s.baseNo, "projekt.editing.baseNo", 0, 1e6),
+          base: m(s.base, "projekt.editing.base"),
+          concept: m(s.concept, "projekt.editing.concept"),
+          edited: d(s.edited, "projekt.editing.edited"),
+        };
+      },
+      null,
+    ),
+    p = o(e.ui, (t) => j(t, "projekt.ui"), {}),
+    A =
+      typeof p.route == "string" &&
+      /^#\/p\/[A-Za-z0-9_-]{1,64}\/(name|stil|auswahl|kit|postings|objekte|logo\/[A-Za-z0-9_@.%-]{1,200})(\?[a-z0-9=&-]{0,60})?$/.test(
+        p.route,
+      ) &&
+      p.route.startsWith(`#/p/${n}/`)
+        ? p.route
+        : `#/p/${n}/stil`;
+  return {
+    schemaVersion: x,
+    createdAt: o(e.createdAt, (t) => l(t, "projekt.createdAt", 0, 1e14), i),
+    updatedAt: o(e.updatedAt, (t) => l(t, "projekt.updatedAt", 0, 1e14), i),
+    id: n,
+    input: a,
+    contact: _(e.contact),
+    favorites: I,
+    selected: o(e.selected, (t) => m(t, "projekt.selected"), null),
+    rawName: o(e.rawName, (t) => c(t, "projekt.rawName", 80), a.name),
+    legalForm: o(e.legalForm, (t) => c(t, "projekt.legalForm", 30), null),
+    legalFormInLogo: d(e.legalFormInLogo, "projekt.legalFormInLogo"),
+    suffixChoice: o(e.suffixChoice, (t) => k(t, L, "projekt.suffixChoice"), "Immobilien"),
+    styleChoice: o(
+      e.styleChoice,
+      (t) =>
+        k(
+          t,
+          ["elegant", "modern", "luxus", "warm", "mutig", "natur", "mix"],
+          "projekt.styleChoice",
+        ),
+      null,
+    ),
+    seed: o(e.seed, (t) => l(t, "projekt.seed", 0, 2 ** 32), 1),
+    showTaglineInLogo: d(e.showTaglineInLogo, "projekt.showTaglineInLogo"),
+    wordmarkOnly: d(e.wordmarkOnly, "projekt.wordmarkOnly"),
+    nameFormats: o(e.nameFormats, (t) => [...new Set(z(t, K, "projekt.nameFormats"))], []),
+    templateSet: V(e.templateSet, e.templateChosen),
+    templateChosen: d(e.templateChosen, "projekt.templateChosen"),
+    object: h(e.object),
+    ...Z(e.library, e.object),
+    nameCandidates: o(e.nameCandidates, (t) => P(t, "projekt.nameCandidates"), []),
+    ...(e.nameContext !== void 0 && e.nameContext !== null
+      ? { nameContext: v(e.nameContext, "projekt.nameContext") }
+      : {}),
+    ...(e.fromFinder === !0 ? { fromFinder: !0 } : {}),
+    ...(e.brief !== void 0 && e.brief !== null ? { brief: T(e.brief, "projekt.brief") } : {}),
+    ...(e.route !== void 0 && e.route !== null ? { route: N(e.route, "projekt.route") } : {}),
+    pinned: o(e.pinned, (t) => m(t, "projekt.pinned"), null),
+    numbers: w,
+    editing: S,
+    selectedBaseId: o(
+      e.selectedBaseId,
+      (t) => c(t, "projekt.selectedBaseId", 160, { pattern: b }),
+      null,
+    ),
+    kitDone: d(e.kitDone, "projekt.kitDone"),
+    contactSaved: d(e.contactSaved, "projekt.contactSaved"),
+    firstEditToastShown: d(e.firstEditToastShown, "projekt.firstEditToastShown"),
+    persistRequested: d(e.persistRequested, "projekt.persistRequested"),
+    ui: {
+      route: A,
+      editorTab: o(
+        p.editorTab,
+        (t) => k(B(typeof t == "string" ? t : null).tab, $, "projekt.ui.editorTab"),
+        "symbol",
+      ),
+      galleryCount: Math.round(
+        o(p.galleryCount, (t) => l(t, "projekt.ui.galleryCount", 6, 600), 6),
+      ),
+      previewMode: o(p.previewMode, (t) => k(t, R, "projekt.ui.previewMode"), "logo"),
+      lastConceptIndex: Math.round(
+        o(p.lastConceptIndex, (t) => l(t, "projekt.ui.lastConceptIndex", 0, 1e5), 0),
+      ),
+    },
+  };
+}
+function Z(r, e) {
+  return r == null && e == null ? {} : { library: y(r, h(e)) };
+}
+function J(r) {
+  return C(JSON.parse(r));
+}
+function X(r) {
+  const e = E(r),
+    n = [],
+    i = [];
+  for (const a of e) {
+    const o = r.getItem(F + a);
+    if (o)
+      try {
+        n.push(J(o));
+      } catch {
+        i.push(a);
+      }
+  }
+  return (n.sort((a, o) => o.updatedAt - a.updatedAt), { projects: n, broken: i });
+}
+function Q(r, e = []) {
+  let n;
+  try {
+    n = JSON.parse(r);
+  } catch {
+    throw new f("Keine JSON-Datei");
+  }
+  const i = n;
+  if (!i || i.kind !== D || !i.project) throw new f("Keine Brand-Studio-Sicherung");
+  let a;
+  try {
+    a = C(i.project);
+  } catch (o) {
+    throw new f(o instanceof g ? "invalid" : "Projekt unvollständig");
+  }
+  if (e.includes(a.id)) {
+    const o = M();
+    a = {
+      ...a,
+      id: o,
+      rawName: `${a.rawName} (Kopie)`,
+      ui: { ...a.ui, route: a.ui.route.replace(`/p/${i.project.id}/`, `/p/${o}/`) },
+    };
+  }
+  return { ...a, updatedAt: Date.now() };
+}
+export { J as deserializeProject, X as loadAll, C as migrateProject, Q as readBackup };

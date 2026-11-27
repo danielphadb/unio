@@ -1,0 +1,801 @@
+import {
+  j as e,
+  A as ae,
+  ak as te,
+  k as I,
+  u as ne,
+  r as N,
+  al as le,
+  am as re,
+  T as $,
+  an as R,
+  q as Q,
+  P as D,
+  R as ie,
+  v as X,
+  ah as V,
+  m as ce,
+  ae as oe,
+  x as de,
+} from "./index-BER2gtDe.js";
+import { d as he, h as Y, f as pe, g as q, C as me } from "./svg-CrwnZnJY.js";
+import { k as J, b as xe, p as ue } from "./kompass-bTkyDSpk.js";
+import {
+  K,
+  f as ke,
+  a as je,
+  k as ge,
+  b as O,
+  c as be,
+  L as fe,
+  F as ve,
+  S as Me,
+  R as ye,
+  d as Ne,
+  e as Ee,
+} from "./texts-B92agAAM.js";
+import {
+  L as we,
+  M as z,
+  N as Ce,
+  O as Fe,
+  P as Se,
+  n as Ae,
+  Q as Re,
+  R as Te,
+  U as Le,
+  g as Be,
+  h as Oe,
+} from "./engine-BhDRZEfO.js";
+import { L as ze } from "./LogoView-CG3DXWdO.js";
+import "./nameFinder-CLppxXuz.js";
+const ee = "var(--ink)",
+  v = "var(--ink-3)",
+  y = "var(--signal)",
+  Ie = "var(--paper)",
+  r = {
+    fill: "none",
+    stroke: ee,
+    strokeWidth: 1.5,
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+  },
+  We = {
+    verlag: e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("path", { d: "M20 18h38v46H20zM62 18h38v46H62z", ...r }),
+        e.jsx("path", { d: "M26 28h24M26 34h20M68 28h26", ...r, strokeWidth: 3 }),
+        e.jsx("path", { d: "M26 42h26M26 47h26M26 52h18", ...r, stroke: v, strokeWidth: 1 }),
+        e.jsx("rect", { x: "68", y: "36", width: "26", height: "20", fill: v, opacity: "0.35" }),
+        e.jsx("circle", { cx: "94", cy: "24", r: "2.4", fill: y }),
+      ],
+    }),
+    uhrmacher: e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("circle", { cx: "60", cy: "40", r: "24", ...r }),
+        e.jsx("circle", { cx: "60", cy: "40", r: "19", ...r, stroke: v, strokeWidth: 1 }),
+        Array.from({ length: 12 }, (s, t) => {
+          const c = (t / 12) * Math.PI * 2;
+          return e.jsx(
+            "path",
+            {
+              d: `M${60 + Math.sin(c) * 16} ${40 - Math.cos(c) * 16}L${60 + Math.sin(c) * 19} ${40 - Math.cos(c) * 19}`,
+              ...r,
+              strokeWidth: 1,
+            },
+            t,
+          );
+        }),
+        e.jsx("path", { d: "M60 40V27M60 40l9 6", ...r }),
+        e.jsx("circle", { cx: "60", cy: "40", r: "2.4", fill: y }),
+      ],
+    }),
+    architektur: e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("path", { d: "M18 62V20h84v42z", ...r, stroke: v, strokeWidth: 1 }),
+        e.jsx("path", {
+          d: "M18 34h84M18 48h84M46 20v42M74 20v42",
+          ...r,
+          stroke: v,
+          strokeWidth: 0.75,
+        }),
+        e.jsx("path", { d: "M30 56V30h32v12h22v14z", ...r }),
+        e.jsx("circle", { cx: "84", cy: "30", r: "2.4", fill: y }),
+      ],
+    }),
+    privatbank: e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("path", { d: "M24 64h72M30 58h60M60 16 28 30h64z", ...r }),
+        e.jsx("path", { d: "M38 34v22M50 34v22M70 34v22M82 34v22", ...r }),
+        e.jsx("circle", { cx: "60", cy: "25", r: "2.4", fill: y }),
+      ],
+    }),
+    hotel: e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("path", { d: "M36 52a24 24 0 0 1 48 0z", ...r }),
+        e.jsx("path", { d: "M28 56h64M60 28v-6M56 22h8", ...r }),
+        e.jsx("circle", { cx: "60", cy: "40", r: "2.4", fill: y }),
+      ],
+    }),
+    cafe: e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("path", { d: "M38 32h36v14a18 18 0 0 1-36 0z", ...r }),
+        e.jsx("path", { d: "M74 36h6a6 6 0 0 1 0 12h-7M30 66h52", ...r }),
+        e.jsx("path", {
+          d: "M48 24c0-4 4-4 4-8M58 24c0-4 4-4 4-8",
+          ...r,
+          stroke: v,
+          strokeWidth: 1,
+        }),
+        e.jsx("circle", { cx: "56", cy: "44", r: "2.4", fill: y }),
+      ],
+    }),
+    galerie: e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("path", { d: "M14 66h92", ...r, stroke: v, strokeWidth: 1 }),
+        e.jsx("rect", { x: "44", y: "20", width: "32", height: "26", ...r }),
+        e.jsx("rect", { x: "50", y: "26", width: "20", height: "14", fill: v, opacity: "0.35" }),
+        e.jsx("path", { d: "M80 52h8", ...r, strokeWidth: 1 }),
+        e.jsx("circle", { cx: "60", cy: "33", r: "2.4", fill: y }),
+      ],
+    }),
+    tech: e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("rect", { x: "26", y: "16", width: "68", height: "44", rx: "6", ...r }),
+        e.jsx("path", { d: "M34 28h24M34 36h40M34 44h16", ...r, stroke: v, strokeWidth: 1.5 }),
+        e.jsx("path", { d: "M50 66h20", ...r }),
+        e.jsx("circle", { cx: "82", cy: "28", r: "2.4", fill: y }),
+      ],
+    }),
+    manufaktur: e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("path", { d: "M30 60 58 32M54 28l10 10-6 6-10-10z", ...r }),
+        e.jsx("path", { d: "M70 60h26M74 52h18M78 44h10", ...r, stroke: v, strokeWidth: 1 }),
+        e.jsx("circle", { cx: "36", cy: "54", r: "2.4", fill: y }),
+      ],
+    }),
+    weingut: e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("path", {
+          d: "M14 62c20-14 40-14 46-24s26-12 46-14",
+          ...r,
+          stroke: v,
+          strokeWidth: 1,
+        }),
+        e.jsx("path", {
+          d: "M22 66v-8M34 64v-10M46 60v-12M58 54v-12M70 48v-12M82 44v-12M94 42v-12",
+          ...r,
+        }),
+        e.jsx("circle", { cx: "96", cy: "20", r: "2.4", fill: y }),
+      ],
+    }),
+    sport: e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("path", { d: "M14 62c24-30 68-30 92 0M26 62c18-20 50-20 68 0", ...r }),
+        e.jsx("path", { d: "M38 62c12-10 32-10 44 0", ...r, stroke: v, strokeWidth: 1 }),
+        e.jsx("circle", { cx: "60", cy: "38", r: "2.4", fill: y }),
+      ],
+    }),
+    mode: e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("path", { d: "M48 18h24l6 12-8 4v30H50V34l-8-4z", ...r }),
+        e.jsx("path", { d: "M60 18v46", ...r, stroke: v, strokeWidth: 1, strokeDasharray: "2 3" }),
+        e.jsx("circle", { cx: "66", cy: "26", r: "2.4", fill: y }),
+      ],
+    }),
+  };
+function Pe({ id: s }) {
+  return e.jsxs("svg", {
+    className: "kp-art",
+    viewBox: "0 0 120 80",
+    "aria-hidden": "true",
+    focusable: "false",
+    children: [e.jsx("rect", { width: "120", height: "80", fill: Ie }), We[s]],
+  });
+}
+const $e = {
+  "gold-schwarz": e.jsxs(e.Fragment, {
+    children: [
+      e.jsx("rect", { width: "80", height: "48", fill: ee }),
+      e.jsx("path", { d: "M24 26h32", stroke: "#C9A55A", strokeWidth: 3, strokeLinecap: "round" }),
+      e.jsx("path", {
+        d: "M30 33h20",
+        stroke: "#C9A55A",
+        strokeWidth: 1.2,
+        strokeLinecap: "round",
+      }),
+    ],
+  }),
+  "haus-icon": e.jsx("path", { d: "M26 36V24l14-11 14 11v12zM36 36v-7h8v7", ...r }),
+  skyline: e.jsx("path", { d: "M12 38V26h8v-6h6v18h6V14h6v24h6V22h8v8h6v8h6", ...r }),
+  schluessel: e.jsxs(e.Fragment, {
+    children: [
+      e.jsx("circle", { cx: "28", cy: "24", r: "7", ...r }),
+      e.jsx("path", { d: "M35 24h22M51 24v6M45 24v4", ...r }),
+    ],
+  }),
+  schreibschrift: e.jsx("path", {
+    d: "M18 30c6-14 10-14 8 0s6-10 10-6-2 8 4 6 6-10 10-6 0 8 6 6 6-6 8-4",
+    ...r,
+  }),
+  "monogramm-kreis": e.jsxs(e.Fragment, {
+    children: [
+      e.jsx("circle", { cx: "40", cy: "24", r: "14", ...r }),
+      e.jsx("path", { d: "M33 30V18l7 8 7-8v12", ...r }),
+    ],
+  }),
+};
+function De({ id: s }) {
+  return e.jsx("svg", {
+    className: "kp-cliche-art",
+    viewBox: "0 0 80 48",
+    "aria-hidden": "true",
+    focusable: "false",
+    children: $e[s],
+  });
+}
+const h = (s, t) => ({ key: s, weight: t }),
+  S = {
+    grotesk: [h("hanken", 400), h("instrumentsans", 400), h("geist", 300), h("albertsans", 400)],
+    antiqua: [h("ebgaramond", 400), h("newsreader", 400), h("crimson", 400), h("cormorant", 500)],
+    ruhig: [h("lora", 400), h("brygada", 400), h("castoro", 400), h("bonanova", 400)],
+    didone: [h("bodoni", 500), h("playfair", 400), h("notoserifdisplay", 400), h("gilda", 400)],
+    schmal: [
+      h("archivonarrow", 400),
+      h("barlowcondensed", 500),
+      h("oswald", 500),
+      h("antonio", 400),
+    ],
+    breit: [h("montserrat", 400), h("sora", 400), h("mona", 400), h("epilogue", 300)],
+    neutral: [h("ebgaramond", 400), h("jost", 300), h("cormorant", 500), h("hanken", 400)],
+  },
+  _ = [h("albertsans", 400), h("jost", 300), h("hanken", 400), h("manrope", 400)],
+  Ve = {
+    serif: "modern",
+    contrast: "elegant",
+    caps: "elegant",
+    width: "modern",
+    symbol: "elegant",
+    dark: "elegant",
+  },
+  L = (s, t, c) => ae.some((o) => o.key === s.key) && te(s) && I(s.key, ...c) && !Le(s, t);
+function B(s, t, c, o, n) {
+  const p = Math.min(s.length, t.length);
+  for (let i = 0; i < p; i++) {
+    const m = (c + i) % p;
+    if (L(s[m], o, n) && L(t[m], o, n)) return [s[m], t[m]];
+  }
+  const l = s.find((i) => L(i, o, n)) ?? s.find((i) => I(i.key, ...n)) ?? s[0],
+    d = t.find((i) => L(i, o, n)) ?? t.find((i) => I(i.key, ...n)) ?? t[0];
+  return [l, d];
+}
+function H(s, t, c, o) {
+  const n = we({ ...s, name: z(s.name) || "Marke" }),
+    p = he((o ^ Y(`kompass|${t}`)) >>> 0),
+    l = n.styles[0] ?? Ve[t],
+    d = [n.name, z(n.suffix)],
+    i = p.int(0, 3),
+    m = Ce(pe(n, l), n);
+  let b = q(p.pick(m), l, p);
+  for (let u = 0; u < 8 && Fe(b, n); u++) b = q(p.pick(m), l, p);
+  const f = _.find((u) => L(u, n, [z(n.suffix), n.name])) ?? _[0];
+  let g,
+    k = "title",
+    A = 0;
+  if (t === "serif") {
+    const [u, C] = B(S.grotesk, S.antiqua, i, n, d);
+    g = c === "a" ? u : C;
+  } else if (t === "contrast") {
+    const [u, C] = B(S.ruhig, S.didone, i, n, d);
+    g = c === "a" ? u : C;
+  } else if (t === "width") {
+    const [u, C] = B(S.schmal, S.breit, i, n, d);
+    ((g = c === "a" ? u : C), (k = "upper"), (A = 0.06));
+  } else {
+    const [u] = B(S.neutral, S.neutral, i, n, d);
+    ((g = u), t === "caps" && c === "b" && ((k = "upper"), (A = 0.16)));
+  }
+  const E = t === "symbol" && c === "b",
+    x = Se(n) ?? Ae(n.name, 1),
+    M = Re(
+      {
+        seed: o,
+        style: l,
+        layout: E ? "stacked" : "wordmark",
+        symbol: E ? { kind: "monogram", letters: x, container: "none", font: g } : null,
+        name: { font: g, case: k, tracking: A },
+        suffix: { font: f, case: "upper", tracking: 0.2 },
+        tagline: { font: f, case: "asis", tracking: 0 },
+        body: f,
+        palette: b,
+        colors: { symbol: "primary", name: "ink", suffix: "ink" },
+        divider: "none",
+        cardBackground: "paper",
+        ...(E ? { symbolSize: "small" } : {}),
+      },
+      n,
+    );
+  return t === "dark" && c === "b" ? Te(M, "ink") : M;
+}
+function T({ choices: s, value: t, onChange: c, labelledBy: o, className: n = "" }) {
+  const p = N.useRef(null),
+    l = s.map((m) => m.id),
+    d = t && l.includes(t) ? t : l[0],
+    i = (m) => {
+      var b, f;
+      return (f = (b = p.current) == null ? void 0 : b.querySelectorAll('[role="radio"]')[m]) ==
+        null
+        ? void 0
+        : f.focus();
+    };
+  return e.jsx("div", {
+    ref: p,
+    className: `kp-cards ${n}`,
+    role: "radiogroup",
+    "aria-labelledby": o,
+    children: s.map((m) =>
+      e.jsx(
+        "button",
+        {
+          type: "button",
+          role: "radio",
+          className: "kp-card",
+          "aria-checked": m.id === t,
+          "aria-label": m.label,
+          tabIndex: m.id === d ? 0 : -1,
+          onClick: () => c(m.id),
+          onKeyDown: (b) => de(b, l, d, c, 1, i),
+          children: m.content,
+        },
+        m.id,
+      ),
+    ),
+  });
+}
+function U({ choices: s, values: t, max: c, onToggle: o, labelledBy: n, className: p = "" }) {
+  const l = !!c && t.length >= c;
+  return e.jsx("div", {
+    className: `kp-cards ${p}`,
+    role: "group",
+    "aria-labelledby": n,
+    children: s.map((d) => {
+      const i = t.includes(d.id);
+      return e.jsx(
+        "button",
+        {
+          type: "button",
+          className: "kp-card",
+          "aria-pressed": i,
+          "aria-label": d.label,
+          "aria-disabled": !i && l ? !0 : void 0,
+          onClick: () => (!i && l ? void 0 : o(d.id)),
+          children: d.content,
+        },
+        d.id,
+      );
+    }),
+  });
+}
+const Z = (s) =>
+    e.jsxs(e.Fragment, {
+      children: [
+        e.jsx("span", { className: "kp-opt", children: s.label }),
+        s.hint && e.jsx("span", { className: "small kp-hint", children: s.hint }),
+      ],
+    }),
+  W = N.memo(function ({ concept: t, input: c, className: o = "" }) {
+    const n = Oe(t);
+    return e.jsx("div", {
+      className: `kp-logo ${o}`,
+      style: { background: n.background },
+      children: e.jsx(ze, {
+        concept: t,
+        input: c,
+        variant: n.variant,
+        ground: n.ground,
+        fallbackText: !0,
+      }),
+    });
+  });
+function qe({ f: s, brief: t, setAnswer: c }) {
+  var x, M, u, C, P;
+  const o = N.useId(),
+    n = N.useId(),
+    p = be(t, s.id),
+    l = typeof p == "string" ? p : void 0,
+    d = Array.isArray(p) ? p : [],
+    i = (a) => c(s.id, a),
+    m = (a) => i(d.includes(a) ? d.filter((j) => j !== a) : [...d, a]),
+    [b, f] = (s.pfad ?? s.feld).split("."),
+    g = s.optionen ?? [];
+  let k = null;
+  if (s.typ === "paar" && b === "logoPairs") {
+    const a = fe.find((se) => se.id === f),
+      j = J(t),
+      w = Y(`kompass|${j.name}`),
+      F = a ? { a: H(j, a.id, "a", w), b: H(j, a.id, "b", w) } : null;
+    k =
+      a &&
+      F &&
+      e.jsx(T, {
+        labelledBy: o,
+        className: "kp-pair",
+        value: l,
+        onChange: i,
+        choices: [
+          {
+            id: "a",
+            label: a.a,
+            content: e.jsxs(e.Fragment, {
+              children: [
+                e.jsx(W, { concept: F.a, input: j }),
+                e.jsx("span", { className: "kp-opt", children: a.a }),
+              ],
+            }),
+          },
+          {
+            id: "b",
+            label: a.b,
+            content: e.jsxs(e.Fragment, {
+              children: [
+                e.jsx(W, { concept: F.b, input: j }),
+                e.jsx("span", { className: "kp-opt", children: a.b }),
+              ],
+            }),
+          },
+          {
+            id: "egal",
+            label: "Egal",
+            content: e.jsx("span", { className: "kp-opt", children: "Egal" }),
+          },
+        ],
+      });
+  } else if (s.typ === "paar" && b === "colorPairs") {
+    const a = ve.find((w) => w.id === f),
+      j = (w) =>
+        e.jsx("span", {
+          className: "kp-palette",
+          "aria-hidden": "true",
+          children: w.map((F) => e.jsx("i", { style: { background: F } }, F)),
+        });
+    k =
+      a &&
+      e.jsx(T, {
+        labelledBy: o,
+        className: "kp-pair",
+        value: l,
+        onChange: i,
+        choices: [
+          {
+            id: "a",
+            label: a.a,
+            content: e.jsxs(e.Fragment, {
+              children: [j(a.farben.a), e.jsx("span", { className: "kp-opt", children: a.a })],
+            }),
+          },
+          {
+            id: "b",
+            label: a.b,
+            content: e.jsxs(e.Fragment, {
+              children: [j(a.farben.b), e.jsx("span", { className: "kp-opt", children: a.b })],
+            }),
+          },
+          {
+            id: "egal",
+            label: "Egal",
+            content: e.jsx("span", { className: "kp-opt", children: "Egal" }),
+          },
+        ],
+      });
+  } else if (s.typ === "paar") {
+    const a = Me.find((F) => F.pol === f),
+      j = (a == null ? void 0 : a.a) ?? ((x = g[0]) == null ? void 0 : x.label) ?? "",
+      w = (a == null ? void 0 : a.b) ?? ((M = g[1]) == null ? void 0 : M.label) ?? "";
+    k = e.jsx(T, {
+      labelledBy: o,
+      className: "kp-pair kp-voice",
+      value: l,
+      onChange: i,
+      choices: [
+        {
+          id: "a",
+          label: j,
+          content: e.jsxs("span", { className: "kp-quote", children: ["„", j, "“"] }),
+        },
+        {
+          id: "b",
+          label: w,
+          content: e.jsxs("span", { className: "kp-quote", children: ["„", w, "“"] }),
+        },
+        {
+          id: "egal",
+          label: ((u = g[2]) == null ? void 0 : u.label) ?? "Beides",
+          content: e.jsx("span", {
+            className: "kp-opt",
+            children: ((C = g[2]) == null ? void 0 : C.label) ?? "Beides",
+          }),
+        },
+      ],
+    });
+  } else if (s.typ === "wahl" && s.feld === "reference")
+    k = e.jsx(T, {
+      labelledBy: o,
+      className: "kp-worlds",
+      value: l,
+      onChange: i,
+      choices: ye.map((a) => ({
+        id: a.id,
+        label: `${a.label}: ${a.hint ?? ""}`,
+        content: e.jsxs(e.Fragment, {
+          children: [
+            e.jsx(Pe, { id: a.id }),
+            e.jsx("span", { className: "kp-opt", children: a.label }),
+            e.jsx("span", { className: "small kp-hint", children: a.hint }),
+          ],
+        }),
+      })),
+    });
+  else if (s.typ === "wahl")
+    k = e.jsx(T, {
+      labelledBy: o,
+      className: g.length > 4 ? "kp-list" : "kp-list kp-few",
+      value: l,
+      onChange: i,
+      choices: g.map((a) => ({ id: a.id, label: a.label, content: Z(a) })),
+    });
+  else if (s.typ === "mehrfach" && s.feld === "avoidCliches")
+    k = e.jsx(U, {
+      labelledBy: o,
+      className: "kp-cliches",
+      values: d,
+      max: s.max,
+      onToggle: m,
+      choices: Ne.map((a) => ({
+        id: a.id,
+        label: a.label,
+        content: e.jsxs(e.Fragment, {
+          children: [
+            e.jsx(De, { id: a.id }),
+            e.jsx("span", { className: "kp-opt", children: a.label }),
+          ],
+        }),
+      })),
+    });
+  else if (s.typ === "mehrfach" && s.feld === "avoidColors")
+    k = e.jsx(V, {
+      label: s.titel,
+      values: d,
+      onToggle: (a) => (!d.includes(a) && s.max && d.length >= s.max ? void 0 : m(a)),
+      options: Ee.map((a) => {
+        var j;
+        return {
+          value: a.id,
+          ariaLabel: a.label,
+          label: e.jsxs(e.Fragment, {
+            children: [
+              e.jsx("span", {
+                className: "swatches",
+                "aria-hidden": "true",
+                children: e.jsx("i", {
+                  style: { background: (j = me[a.id]) == null ? void 0 : j.swatch },
+                }),
+              }),
+              a.label,
+            ],
+          }),
+        };
+      }),
+    });
+  else if (s.typ === "mehrfach") {
+    const a = s.feld === "fremdbild" || s.feld === "wirkung";
+    k = e.jsx(U, {
+      labelledBy: o,
+      className: a ? "kp-list kp-quotes" : "kp-list",
+      values: d,
+      max: s.max,
+      onToggle: m,
+      choices: g.map((j) => ({ id: j.id, label: j.label, content: Z(j) })),
+    });
+  } else
+    s.typ === "chips"
+      ? (k = e.jsx(V, {
+          label: s.titel,
+          values: d,
+          onToggle: (a) => (!d.includes(a) && s.max && d.length >= s.max ? void 0 : m(a)),
+          options: g.map((a) => ({ value: a.id, label: a.label })),
+        }))
+      : s.typ === "skala"
+        ? (k = e.jsx(ce, {
+            labelledBy: o,
+            options: g.map((a) => ({ value: a.id, label: a.label })),
+            value: l ?? "",
+            onChange: i,
+            scroll: !0,
+          }))
+        : s.typ === "text" && s.feld === "place"
+          ? (k = e.jsx(oe, {
+              label: "BEZIRK, ORT ODER REGION",
+              placeholder: s.platzhalter ? `z. B. ${s.platzhalter}` : void 0,
+              value: l ?? "",
+              onChange: (a) => i(a),
+            }))
+          : s.typ === "text" &&
+            (k = e.jsx(Q, {
+              label: s.optional ? "DEINE ANTWORT (OPTIONAL)" : "DEINE ANTWORT",
+              placeholder: s.platzhalter ? `z. B. ${s.platzhalter}` : void 0,
+              maxLength: s.feld === "person" ? 80 : 300,
+              value: l ?? "",
+              onChange: (a) => i(X(a.target.value)),
+            }));
+  const A = s.max && (s.typ === "mehrfach" || s.typ === "chips") ? `Höchstens ${s.max}.` : "",
+    E = [s.hilfe, (P = s.hilfe) != null && P.includes("öchstens") ? "" : A]
+      .filter(Boolean)
+      .join(" ");
+  return e.jsxs("section", {
+    className: "kp-q",
+    "aria-labelledby": o,
+    children: [
+      e.jsxs("h2", {
+        className: "kp-q-title",
+        id: o,
+        children: [
+          s.titel,
+          s.optional && e.jsx("span", { className: "small kp-optional", children: " (optional)" }),
+        ],
+      }),
+      E && e.jsx("p", { className: "small kp-q-help", id: n, children: E }),
+      k,
+    ],
+  });
+}
+function Ke({ brief: s, seed: t }) {
+  const c = N.useDeferredValue(s),
+    { input: o, concepts: n } = N.useMemo(() => {
+      try {
+        const p = xe(c),
+          l = ue(c, p);
+        return { input: l, concepts: Be(l, { count: 4, page: 0, seed: t }) };
+      } catch (p) {
+        return (console.warn("Vorschau ohne Logos", p), { input: J(c), concepts: [] });
+      }
+    }, [c, t]);
+  return e.jsxs("aside", {
+    className: "kp-preview",
+    "aria-label": "Vorschau deiner Richtung",
+    children: [
+      e.jsx("span", { className: "label kp-preview-label", children: "SO KÖNNTE ES AUSSEHEN" }),
+      e.jsx("div", {
+        className: "kp-preview-row",
+        "aria-hidden": "true",
+        children: Array.from({ length: 4 }, (p, l) =>
+          n[l]
+            ? e.jsx(W, { concept: n[l], input: o, className: "kp-mini" }, n[l].id)
+            : e.jsx("div", { className: "kp-logo kp-mini riffel" }, `s${l}`),
+        ),
+      }),
+    ],
+  });
+}
+const G = 6;
+function Ye({ step: s }) {
+  const { navigate: t, announce: c } = ne(),
+    [o, n] = N.useState(le),
+    p = N.useCallback((x) => {
+      n((M) => {
+        const u = x(M);
+        return (re(u), u);
+      });
+    }, []),
+    l = o.brief,
+    d = K[Math.max(0, Math.min(K.length, s) - 1)],
+    i = d.fragen.filter((x) => ke(x, l));
+  N.useEffect(() => {
+    s > o.schritt && p((x) => ({ ...x, schritt: s }));
+  }, [s]);
+  const m = N.useCallback((x, M) => p((u) => ({ ...u, brief: je(u.brief, x, M) })), [p]),
+    b = (x) => p((M) => ({ ...M, brief: { ...M.brief, hasName: !0, name: X(x).slice(0, 80) } })),
+    f = () => {
+      (c("Deine drei Richtungen werden zusammengestellt."), t({ name: "routen" }));
+    },
+    g = () => (s >= R ? f() : t({ name: "kompass", step: s + 1 })),
+    k = () =>
+      s > 1
+        ? t({ name: "kompass", step: s - 1 })
+        : t(l.hasName ? { name: "new" } : { name: "names", gemerkt: !1, kinds: [] }),
+    A = Math.round(ge(l) * 100),
+    E = s >= R;
+  return e.jsxs("div", {
+    className: "container screen kp-screen",
+    children: [
+      e.jsxs("div", {
+        className: "kp-top",
+        children: [
+          e.jsx("a", {
+            className: "back-link",
+            href: "#/",
+            onClick: (x) => {
+              (x.preventDefault(), k());
+            },
+            children: "← Zurück",
+          }),
+          e.jsx($, { onClick: f, children: "Direkt zu den Richtungen" }),
+        ],
+      }),
+      e.jsxs("p", {
+        className: "label kp-step",
+        children: [
+          "SCHRITT ",
+          s,
+          " VON ",
+          R,
+          " · ",
+          d.dauer.toLocaleUpperCase("de-AT"),
+          d.optional ? " · OPTIONAL" : "",
+        ],
+      }),
+      e.jsx("div", {
+        className: "kp-progress",
+        role: "progressbar",
+        "aria-label": "Fortschritt im Markenkompass",
+        "aria-valuemin": 0,
+        "aria-valuemax": R,
+        "aria-valuenow": s,
+        "aria-valuetext": `Schritt ${s} von ${R}, ${A} Prozent beantwortet`,
+        children: e.jsx("span", { style: { width: `${(s / R) * 100}%` } }),
+      }),
+      e.jsx("h1", { className: "h1 kp-title", "data-title": "Markenkompass", children: d.titel }),
+      s === 1 &&
+        e.jsxs("div", {
+          className: "kp-intro",
+          children: [
+            e.jsx("p", { className: "lead kp-lead", children: O.text }),
+            e.jsxs("p", {
+              className: "small kp-hinweis",
+              children: [
+                O.dauer.replace(/^./, (x) => x.toLocaleUpperCase("de-AT")),
+                ". ",
+                O.hinweis,
+              ],
+            }),
+          ],
+        }),
+      e.jsxs("div", {
+        className: `kp-body${s >= G ? " has-preview" : ""}`,
+        children: [
+          e.jsxs("div", {
+            className: "kp-questions",
+            children: [
+              s === 1 &&
+                l.hasName &&
+                e.jsx("section", {
+                  className: "kp-q",
+                  children: e.jsx(Q, {
+                    label: "DEIN NAME ODER FIRMENNAME",
+                    autoComplete: "organization",
+                    placeholder: "z. B. Anna Berger",
+                    maxLength: 80,
+                    value: l.name ?? "",
+                    onChange: (x) => b(x.target.value),
+                    help: "Die Logo-Beispiele zeigen diesen Namen.",
+                  }),
+                }),
+              i.map((x) => e.jsx(qe, { f: x, brief: l, setAnswer: m }, x.id)),
+            ],
+          }),
+          s >= G && e.jsx(Ke, { brief: l, seed: o.seed }),
+        ],
+      }),
+      e.jsxs("div", {
+        className: "kp-nav desk-flex",
+        children: [
+          e.jsx($, { onClick: k, children: "Zurück" }),
+          e.jsx(D, { onClick: g, children: E ? "Zu deinen Richtungen" : "Weiter" }),
+        ],
+      }),
+      e.jsx(ie, {
+        children: e.jsx(D, { onClick: g, children: E ? "Zu deinen Richtungen" : "Weiter" }),
+      }),
+    ],
+  });
+}
+export { Ye as default };

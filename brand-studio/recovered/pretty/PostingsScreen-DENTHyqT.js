@@ -1,0 +1,2829 @@
+import {
+  av as qt,
+  u as Ut,
+  r as F,
+  J as Kt,
+  j as f,
+  T as ce,
+  C as Vt,
+  m as ot,
+  q as Q,
+  S as Se,
+  G as Be,
+  P as ze,
+  R as Gt,
+} from "./index-BER2gtDe.js";
+import {
+  C as _t,
+  D as A,
+  E as Jt,
+  F as lt,
+  G as ct,
+  H as Qt,
+  I as Xt,
+  J as Yt,
+  K as en,
+  L as wt,
+  c as tn,
+  u as nn,
+  m as an,
+  M as pe,
+  f as rn,
+} from "./kitAssets-CN7deWlx.js";
+import { a as Ee, S as sn } from "./library-D1LkGQVN.js";
+import {
+  e as on,
+  a as ln,
+  b as cn,
+  c as vt,
+  p as Ce,
+  d as dn,
+  v as Te,
+  t as E,
+  s as U,
+  f as Y,
+  g as R,
+  h as C,
+  i as Ke,
+  j as xt,
+  k as yt,
+  m as $t,
+  l as jt,
+  r as Ae,
+  n as un,
+  o as St,
+  q as be,
+  u as dt,
+  w as mn,
+  x as hn,
+  y as gn,
+  O as fn,
+  z as pn,
+} from "./ObjectEditor-2EvMWoQa.js";
+import { j as bn, h as kn } from "./texts-B92agAAM.js";
+import { n as O } from "./svg-CrwnZnJY.js";
+import { c as Z, b as se, i as X, a as Le, s as wn } from "./imagesize-BHC6N02v.js";
+import "./engine-BhDRZEfO.js";
+/* empty css                 */ import "./energy-DRQ_36b-.js";
+import "./objectData-DW9yI24T.js";
+import "./photoStore-D5-LfIN5.js";
+const vn = [
+    {
+      id: "neu",
+      label: "Neu aufgenommen",
+      hint: "Stell ein neues Objekt vor.",
+      kicker: "Neu im Angebot",
+      needsObject: !0,
+      energy: "pflicht",
+      defaults: { price: !0, address: !1 },
+    },
+    {
+      id: "reserviert",
+      label: "Reserviert",
+      hint: "Zeig, dass es vorangeht.",
+      kicker: "Reserviert",
+      needsObject: !0,
+      energy: "pflicht",
+      defaults: { price: !1, address: !1 },
+    },
+    {
+      id: "verkauft",
+      label: "Verkauft",
+      hint: "Zeig, was du vermittelt hast.",
+      kicker: "Verkauft",
+      needsObject: !0,
+      energy: "optional",
+      defaults: { price: !1, address: !1 },
+    },
+    {
+      id: "vermietet",
+      label: "Vermietet",
+      hint: "Zeig, was du vermietet hast.",
+      kicker: "Vermietet",
+      needsObject: !0,
+      energy: "optional",
+      defaults: { price: !1, address: !1 },
+    },
+    {
+      id: "preis",
+      label: "Preis angepasst",
+      hint: "Mach auf den neuen Preis aufmerksam.",
+      kicker: "Neuer Preis",
+      needsObject: !0,
+      energy: "pflicht",
+      defaults: { price: !0, address: !1 },
+    },
+    {
+      id: "besichtigung",
+      label: "Besichtigung",
+      hint: "Lade zu einem Termin ein.",
+      kicker: "Besichtigung",
+      needsObject: !0,
+      energy: "pflicht",
+      defaults: { price: !0, address: !0 },
+    },
+    {
+      id: "markt",
+      label: "Marktupdate",
+      hint: "Teile Zahlen aus deiner Gegend.",
+      kicker: "Marktupdate",
+      needsObject: !1,
+      energy: "keine",
+      defaults: { price: !1, address: !1 },
+    },
+    {
+      id: "ueber-mich",
+      label: "Über mich",
+      hint: "Stell dich persönlich vor.",
+      kicker: "Über mich",
+      needsObject: !1,
+      energy: "keine",
+      defaults: { price: !1, address: !1 },
+    },
+    {
+      id: "kundenstimme",
+      label: "Kundenstimme",
+      hint: "Lass zufriedene Kunden sprechen.",
+      kicker: "Kundenstimme",
+      needsObject: !1,
+      energy: "keine",
+      defaults: { price: !1, address: !1 },
+    },
+  ],
+  q = (e) => vn.find((t) => t.id === e),
+  De = [
+    {
+      id: "post",
+      label: "Post 4:5",
+      use: "Instagram und Facebook",
+      w: 1080,
+      h: 1350,
+      file: "post-4x5",
+    },
+    {
+      id: "quadrat",
+      label: "Post 1:1",
+      use: "LinkedIn, Facebook und Instagram",
+      w: 1080,
+      h: 1080,
+      file: "post-1x1",
+    },
+    {
+      id: "story",
+      label: "Story 9:16",
+      use: "Instagram und Facebook Story",
+      w: 1080,
+      h: 1920,
+      file: "story",
+    },
+    {
+      id: "karussell",
+      label: "Karussell",
+      use: "Instagram und LinkedIn, 5 bis 8 Bilder",
+      w: 1080,
+      h: 1350,
+      file: "karussell",
+    },
+    {
+      id: "reel",
+      label: "Reel-Cover",
+      use: "Titelbild für Reels",
+      w: 1080,
+      h: 1920,
+      file: "reel-cover",
+    },
+  ],
+  Ve = (e) => De.find((t) => t.id === e),
+  xn = {
+    neu: { a: "Rahmen", b: "Vollbild" },
+    reserviert: { a: "Rahmen", b: "Vollbild" },
+    verkauft: { a: "Rahmen", b: "Vollbild" },
+    vermietet: { a: "Rahmen", b: "Vollbild" },
+    preis: { a: "Rahmen", b: "Vollbild" },
+    besichtigung: { a: "Rahmen", b: "Vollbild" },
+    markt: { a: "Kennzahl", b: "Dunkel" },
+    "ueber-mich": { a: "Porträt", b: "Haltung" },
+    kundenstimme: { a: "Zitat", b: "Bild" },
+  },
+  yn = () => ({
+    termin: { datum: "", von: "", bis: "" },
+    markt: { region: "", zeitraum: "", werte: [{ label: "", value: "" }], satz: "", quelle: "" },
+    stimme: { text: "", wer: "", einwilligung: !1 },
+  });
+function Bt(e) {
+  const t = q(e);
+  return {
+    showPrice: t.defaults.price,
+    showAddress: t.defaults.address,
+    showCommission: !1,
+    showEnergy: t.energy === "pflicht",
+  };
+}
+const Ge = (e, t) => {
+    const n = q(e).energy;
+    return n === "pflicht" || (n === "optional" && t.showEnergy);
+  },
+  $n = {
+    neu: "neu",
+    reserviert: "reserviert",
+    verkauft: "verkauft",
+    vermietet: "vermietet",
+    "preis-angepasst": "preis",
+  };
+function Nt(e) {
+  if (!e) return ["ueber-mich", "markt", "kundenstimme"];
+  const t = $n[e.status],
+    n = e.status === "neu" || e.status === "preis-angepasst" ? ["besichtigung"] : [],
+    r = [
+      "neu",
+      "preis",
+      "besichtigung",
+      "reserviert",
+      e.kind === "miete" ? "vermietet" : "verkauft",
+    ];
+  return [...new Set([t, ...n, ...r])];
+}
+function ut(e) {
+  return e ? Nt(e) : ["ueber-mich", "markt", "kundenstimme"];
+}
+function Pe(e, t = "unio") {
+  const n = Nt(e)[0];
+  return {
+    occasion: n,
+    look: t,
+    variant: "a",
+    objectId: (e == null ? void 0 : e.id) ?? null,
+    options: Bt(n),
+    extras: yn(),
+  };
+}
+function mt(e, t) {
+  return e.occasion === t
+    ? e
+    : { ...e, occasion: t, options: { ...Bt(t), showCommission: e.options.showCommission } };
+}
+function jn(e, t, n) {
+  const r = q(e.occasion),
+    s = [];
+  if (r.needsObject && !t)
+    return (
+      s.push({
+        label: "Objekt fehlt",
+        text: "Wähl ein Objekt aus deiner Bibliothek oder leg eines an.",
+      }),
+      s
+    );
+  if (t && Ge(e.occasion, e.options) && on(t.energy) !== "voll") {
+    const a = ln(t.energy);
+    s.push({
+      label: "Energieausweis fehlt",
+      text: `Trag ${a.length ? a.join(", ") : "die Werte"} aus dem Energieausweis ein. Sie sind in Objektwerbung Pflicht.`,
+    });
+  }
+  if (
+    (t &&
+      r.needsObject &&
+      !t.photos.length &&
+      s.push({ label: "Foto fehlt", text: "Lade mindestens ein Foto zu diesem Objekt hoch." }),
+    t)
+  ) {
+    const a = new Set(n),
+      i = t.photos.filter((o) => a.has(o.id) && !o.rights).length;
+    i &&
+      s.push({
+        label: "Bildrechte offen",
+        text: `Bestätige die Bildrechte für ${i === 1 ? "1 Foto" : `${i} Fotos`}, auch für Social Media.`,
+      });
+  }
+  if (
+    (e.occasion === "besichtigung" &&
+      !e.extras.termin.datum &&
+      s.push({ label: "Termin fehlt", text: "Trag Datum und Uhrzeit der Besichtigung ein." }),
+    e.occasion === "markt")
+  ) {
+    const a = e.extras.markt;
+    (a.werte.some((i) => i.label.trim() && i.value.trim()) ||
+      s.push({ label: "Zahlen fehlen", text: "Trag mindestens eine Zahl mit Bezeichnung ein." }),
+      a.quelle.trim() ||
+        s.push({
+          label: "Quelle fehlt",
+          text: "Nenn die Quelle deiner Zahlen, z. B. eigene Auswertung oder ein Marktbericht.",
+        }));
+  }
+  if (e.occasion === "kundenstimme") {
+    const a = e.extras.stimme;
+    (a.text.trim() ||
+      s.push({
+        label: "Zitat fehlt",
+        text: "Trag die Worte deiner Kundin oder deines Kunden ein.",
+      }),
+      a.einwilligung ||
+        s.push({
+          label: "Einwilligung fehlt",
+          text: "Bestätige, dass du das Zitat veröffentlichen darfst.",
+        }));
+  }
+  return s;
+}
+function Lt(e) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(e.datum)) return "";
+  const [t, n, r] = e.datum.split("-").map(Number),
+    s = new Date(Date.UTC(t, n - 1, r)),
+    a = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"][
+      s.getUTCDay()
+    ],
+    i = [
+      "Jänner",
+      "Februar",
+      "März",
+      "April",
+      "Mai",
+      "Juni",
+      "Juli",
+      "August",
+      "September",
+      "Oktober",
+      "November",
+      "Dezember",
+    ][n - 1],
+    o = (g) =>
+      /^\d{2}:\d{2}$/.test(g)
+        ? g.endsWith(":00")
+          ? String(Number(g.slice(0, 2)))
+          : `${Number(g.slice(0, 2))}.${g.slice(3)}`
+        : "",
+    l = o(e.von),
+    c = o(e.bis),
+    u = l && c ? `, ${l} bis ${c} Uhr` : l ? `, ab ${l} Uhr` : "";
+  return `${a}, ${r}. ${i}${u}`;
+}
+const Sn = new RegExp("\\s*[–—]\\s*", "g"),
+  Ot = /[\p{Extended_Pictographic}\u{FE0F}\u{200D}\u{20E3}\u{1F1E6}-\u{1F1FF}]/gu;
+function w(e) {
+  return (e ?? "")
+    .replace(Ot, "")
+    .replace(Sn, ", ")
+    .replace(/!+/g, ".")
+    .replace(/\.{2,}(?!\.)/g, ".")
+    .replace(/\s+/g, " ")
+    .replace(/\s+([,.;:])/g, "$1")
+    .replace(/,\s*,/g, ",")
+    .replace(/^[,\s]+|[,\s]+$/g, "")
+    .trim();
+}
+const Et = {
+    neu: {
+      head: "Besichtigung vereinbaren.",
+      sub: "Schreiben Sie mir oder rufen Sie an, ich zeige Ihnen gern alles vor Ort.",
+    },
+    reserviert: {
+      head: "Etwas Ähnliches gesucht?",
+      sub: "Ich sage Ihnen gern, was demnächst in diese Richtung kommt.",
+    },
+    verkauft: {
+      head: "Sie denken an einen Verkauf?",
+      sub: "Ich schätze Ihre Immobilie ein und sage Ihnen ehrlich, was möglich ist.",
+    },
+    vermietet: {
+      head: "Sie möchten vermieten?",
+      sub: "Ich finde passende Mieter und kümmere mich um den Ablauf.",
+    },
+    preis: {
+      head: "Jetzt besichtigen.",
+      sub: "Schreiben Sie mir oder rufen Sie an, ich nehme mir Zeit für Ihre Fragen.",
+    },
+    besichtigung: {
+      head: "Bitte melden Sie sich an.",
+      sub: "So kann ich mir für jede Besichtigung genug Zeit nehmen.",
+    },
+    markt: {
+      head: "Was ist Ihre Immobilie wert?",
+      sub: "Ich ordne die Zahlen für Ihre Lage ein, unverbindlich und persönlich.",
+    },
+    "ueber-mich": {
+      head: "Lernen wir uns kennen.",
+      sub: "Ein erstes Gespräch kostet nichts und klärt viel.",
+    },
+    kundenstimme: {
+      head: "Sprechen wir über Ihre Immobilie.",
+      sub: "Ich nehme mir Zeit für Ihre Fragen und Ihre Pläne.",
+    },
+  },
+  Bn =
+    "Ich begleite Eigentümer beim Verkauf und bei der Vermietung, von der ersten Einschätzung bis zur Übergabe.";
+function _e(e) {
+  var n, r;
+  const t = e == null ? void 0 : e.texte;
+  return w(
+    (t == null ? void 0 : t.versprechen) ||
+      ((r = (n = t == null ? void 0 : t.persoenlichkeit) == null ? void 0 : n[0]) == null
+        ? void 0
+        : r.satz) ||
+      Bn,
+  );
+}
+function Re(e) {
+  const t = (e == null ? void 0 : e.texte.persoenlichkeit) ?? [];
+  return t.length >= 3
+    ? t.slice(0, 3).map((n) => ({ eigenschaft: w(n.eigenschaft), satz: w(n.satz) }))
+    : [
+        { eigenschaft: "Klar", satz: "Sie wissen immer, wo Ihr Verkauf gerade steht." },
+        {
+          eigenschaft: "Gründlich",
+          satz: "Unterlagen, Preis und Präsentation sind vor dem ersten Inserat geklärt.",
+        },
+        {
+          eigenschaft: "Persönlich",
+          satz: "Sie haben eine Ansprechperson, vom ersten Termin bis zur Übergabe.",
+        },
+      ];
+}
+const Nn = /fläche|grund|garten|terrasse|balkon|loggia/i;
+function Ct(e) {
+  const t = w(e.label),
+    n = w(e.value);
+  return /^zimmer$/i.test(t)
+    ? `${n} Zimmer`
+    : /^wohnfläche$/i.test(t)
+      ? n
+      : /^baujahr$/i.test(t)
+        ? `Baujahr ${n}`
+        : Nn.test(t) && /m²|m2/.test(n)
+          ? `${t} ${n.replace("m2", "m²")}`
+          : n.length <= 3
+            ? `${t} ${n}`
+            : n;
+}
+function Ln(e, t) {
+  const n = q(e.occasion),
+    r = e.options,
+    s = w(t == null ? void 0 : t.title) || "Objekttitel",
+    a = e.occasion === "verkauft" ? "Verkauft." : e.occasion === "vermietet" ? "Vermietet." : "",
+    i = t ? w(r.showAddress && t.address ? t.address : Ee(t)) : "",
+    o =
+      (t && r.showPrice && e.occasion !== "preis") || (t && e.occasion === "preis")
+        ? w(t.price)
+        : "",
+    l = !!t && Ge(e.occasion, r);
+  return {
+    kicker: n.kicker,
+    head: a || s,
+    dot: !!a,
+    place: i,
+    facts: ((t == null ? void 0 : t.facts) ?? [])
+      .filter((c) => c.label.trim() && c.value.trim())
+      .slice(0, 3)
+      .map(Ct),
+    price: o,
+    oldPrice: t && e.occasion === "preis" ? w(t.previousPrice) : "",
+    termin: e.occasion === "besichtigung" ? Lt(e.extras.termin) || "Termin folgt" : "",
+    energy: l && t ? vt(t.energy) : "",
+    energyParts: l && t ? cn(t.energy) : [],
+    commission: t && r.showCommission && t.commission.trim() ? `Provision ${w(t.commission)}` : "",
+  };
+}
+function Tt(e) {
+  const t = (e.web ?? "").replace(/^https?:\/\//, "").replace(/\/$/, "");
+  return [e.phone, e.email || t].map((n) => w(n)).filter(Boolean);
+}
+const On = [
+  /\bihr partner\b/i,
+  /\btraum(wohnung|haus|immobilie|lage)/i,
+  /\bein muss\b/i,
+  /\bnicht verpassen\b/i,
+  /\bzuschlagen\b/i,
+  /\bwow\b/i,
+  /\bunschlagbar/i,
+];
+function En(e) {
+  const t = [];
+  (bn.test(e) && t.push("Gedankenstrich"),
+    /!/.test(e) && t.push("Ausrufezeichen"),
+    new RegExp(Ot.source, "u").test(e) && t.push("Emoji"));
+  const n = kn(e.replace(/#\S+/g, ""));
+  n && t.push(`Floskel: ${n}`);
+  for (const r of On) {
+    const s = e.match(r);
+    s && t.push(`Floskel: ${s[0]}`);
+  }
+  return t;
+}
+const Ht = {
+    1: "innerestadt",
+    2: "leopoldstadt",
+    3: "landstraße",
+    4: "wieden",
+    5: "margareten",
+    6: "mariahilf",
+    7: "neubau",
+    8: "josefstadt",
+    9: "alsergrund",
+    10: "favoriten",
+    11: "simmering",
+    12: "meidling",
+    13: "hietzing",
+    14: "penzing",
+    15: "rudolfsheimfünfhaus",
+    16: "ottakring",
+    17: "hernals",
+    18: "währing",
+    19: "döbling",
+    20: "brigittenau",
+    21: "floridsdorf",
+    22: "donaustadt",
+    23: "liesing",
+  },
+  Cn = new Map(Object.entries(Ht).map(([e, t]) => [t, Number(e)])),
+  Tn = [
+    [/penthouse/i, "penthouse"],
+    [/dachgeschoss|\bdg\b/i, "dachgeschosswohnung"],
+    [/gartenwohnung/i, "gartenwohnung"],
+    [/villa/i, "villa"],
+    [/reihenhaus/i, "reihenhaus"],
+    [/einfamilienhaus|\bhaus\b/i, "haus"],
+    [/altbau/i, "altbau"],
+    [/grundstück|baugrund/i, "grundstück"],
+    [/loft/i, "loft"],
+    [/büro|geschäftslokal|gewerbe/i, "gewerbeimmobilie"],
+    [/wohnung|zimmer/i, "wohnung"],
+  ],
+  Hn = (e) => `#${e.toLocaleLowerCase("de-AT").replace(/[^a-zäöüß0-9]/g, "")}`;
+function Wn(e) {
+  const t = [],
+    n = e.toLocaleLowerCase("de-AT"),
+    r = n.match(/\b1(\d{2})0\b/);
+  if (r && /wien|^\s*1\d{2}0\b/.test(n) && Number(r[1]) >= 1 && Number(r[1]) <= 23) {
+    const a = Number(r[1]);
+    return (t.push("#wien", `#wien${a}`, `#${Ht[a]}`), t);
+  }
+  for (const [a, i] of Cn)
+    if (n.replace(/[\s-]/g, "").includes(a)) return ["#wien", `#wien${i}`, `#${a}`];
+  /\bwien\b/.test(n) && t.push("#wien");
+  const s = e
+    .replace(/\b\d{4,5}\b/g, "")
+    .split(/[,]/)
+    .map((a) => a.trim())
+    .filter(Boolean)
+    .pop();
+  return (s && !/wien/i.test(s) && s.length <= 30 && t.push(Hn(s)), t);
+}
+function In(e) {
+  var a;
+  const { sel: t, object: n } = e,
+    r = n ? `${Ee(n)} ${n.address}` : (e.place ?? ""),
+    s = [...Wn(r)];
+  if (n) {
+    const i = (a = Tn.find(([o]) => o.test(n.title))) == null ? void 0 : a[1];
+    (i === "wohnung"
+      ? s.push(n.kind === "miete" ? "#mietwohnung" : "#eigentumswohnung")
+      : i && s.push(`#${i}`),
+      t.occasion === "verkauft" && s.push("#verkauft"));
+  }
+  (t.occasion === "markt" && s.push("#immobilienmarkt"),
+    (t.occasion === "ueber-mich" || t.occasion === "kundenstimme") && s.push("#immobilienmakler"),
+    s.push("#immobilien"));
+  for (const i of ["#immobilienmakler", "#wohnen"]) s.length < 3 && s.push(i);
+  return [...new Set(s.filter((i) => i.length > 2))].slice(0, 6);
+}
+function Fn(e, t, n) {
+  var o, l;
+  const r = ((o = e == null ? void 0 : e.texte.socialKit) == null ? void 0 : o.saeulen) ?? [];
+  if (!r.length) return "";
+  const s =
+      t === "ueber-mich" || t === "kundenstimme"
+        ? 0
+        : t === "markt"
+          ? Math.min(1, r.length - 1)
+          : r.length - 1,
+    a = ((l = r[s]) == null ? void 0 : l.hooks) ?? [];
+  if (!a.length) return "";
+  let i = 0;
+  for (const c of n) i = (i * 31 + c.charCodeAt(0)) >>> 0;
+  return w(a[i % a.length]);
+}
+const ht = (e) => {
+    const t = w(e);
+    return t && !/[.?:]$/.test(t) ? `${t}.` : t;
+  },
+  zn = (e, t) => w(e).split(new RegExp("(?<=[.?])\\s+")).slice(0, t).join(" ");
+function Pn(e) {
+  const t = ((e == null ? void 0 : e.texte.vermeiden) ?? [])
+    .map((n) => n.toLocaleLowerCase("de-AT").trim())
+    .filter((n) => n.length > 3);
+  return (n) => !t.some((r) => n.toLocaleLowerCase("de-AT").includes(r));
+}
+function Mn(e, t) {
+  const n = Tt(e),
+    r = w(e.person) || w(t);
+  return n.length ? `${r}, ${n.join(", ")}` : r;
+}
+function An(e) {
+  var d;
+  const { sel: t, object: n, contact: r, route: s } = e,
+    a = q(t.occasion),
+    i = Pn(s),
+    o = [],
+    l = (...b) => {
+      const h = b.map(ht).filter(Boolean).join(" ");
+      h && o.push(h);
+    },
+    c = Fn(s, t.occasion, `${(n == null ? void 0 : n.id) ?? t.occasion}:${t.occasion}`);
+  if (a.needsObject && n) {
+    const b = w(n.title),
+      h = w(t.options.showAddress && n.address ? n.address : Ee(n)),
+      k = n.facts
+        .filter((S) => S.label.trim() && S.value.trim())
+        .slice(0, 4)
+        .map(Ct),
+      x = k.length ? k.join(", ") : "";
+    switch (t.occasion) {
+      case "neu":
+        (c && i(c) && l(c), l(`Neu im Angebot: ${b}${h ? ` in ${h}` : ""}`, x));
+        break;
+      case "reserviert":
+        l(`Reserviert: ${b}${h ? ` in ${h}` : ""}`, "Danke für das große Interesse");
+        break;
+      case "verkauft":
+        l(
+          `Verkauft: ${b}${h ? ` in ${h}` : ""}`,
+          "Danke an alle Beteiligten für das Vertrauen und die gute Zusammenarbeit",
+        );
+        break;
+      case "vermietet":
+        l(
+          `Vermietet: ${b}${h ? ` in ${h}` : ""}`,
+          "Danke an Eigentümer und neue Mieter für das Vertrauen",
+        );
+        break;
+      case "preis":
+        l(`Neuer Preis: ${b}${h ? ` in ${h}` : ""}`, x);
+        break;
+      case "besichtigung":
+        l(`Besichtigung: ${b}${h ? ` in ${h}` : ""}`, x);
+        break;
+    }
+    if (
+      (t.occasion !== "verkauft" &&
+        t.occasion !== "vermietet" &&
+        t.occasion !== "reserviert" &&
+        n.description.trim() &&
+        l(zn(n.description, 2)),
+      t.occasion === "preis" && n.price.trim()
+        ? l(
+            `${n.kind === "miete" ? "Miete" : "Kaufpreis"} jetzt ${w(n.price)}${n.previousPrice.trim() ? `, bisher ${w(n.previousPrice)}` : ""}`,
+          )
+        : t.options.showPrice &&
+          n.price.trim() &&
+          l(`${n.kind === "miete" ? "Miete" : "Kaufpreis"}: ${w(n.price)}`),
+      t.occasion === "besichtigung")
+    ) {
+      const S = Lt(t.extras.termin);
+      l(S ? `Termin: ${S}` : "Termin folgt", "Bitte melden Sie sich vorher an");
+    }
+    const v = [];
+    (Ge(t.occasion, t.options) && v.push(`Energieausweis: ${vt(n.energy)}.`),
+      t.options.showCommission && n.commission.trim() && v.push(`Provision: ${w(n.commission)}.`),
+      v.length &&
+        o.push(
+          v.join(`
+`),
+        ));
+    const j = new Set(e.usedPhotoIds ?? n.photos.map((S) => S.id)),
+      B = n.photos.filter((S) => j.has(S.id)),
+      N = [];
+    B.some((S) => S.virtual) &&
+      N.push(
+        `${B.filter((S) => S.virtual).length === 1 ? "Ein Bild ist" : "Einzelne Bilder sind"} virtuell möbliert.`,
+      );
+    const L = [
+      ...new Set(
+        B.map((S) => w(S.credit).replace(/^(fotos?|bild|bildnachweis)\s*:\s*/i, "")).filter(
+          Boolean,
+        ),
+      ),
+    ];
+    (L.length && N.push(`Fotos: ${L.join(", ")}.`), N.length && o.push(N.join(" ")));
+  } else if (t.occasion === "markt") {
+    const b = t.extras.markt;
+    (c && i(c) && l(c),
+      l(`Marktupdate ${[w(b.region), w(b.zeitraum)].filter(Boolean).join(", ")}`));
+    const h = b.werte
+      .filter((k) => k.label.trim() && k.value.trim())
+      .map((k) => `${w(k.label)}: ${w(k.value)}`);
+    (h.length &&
+      o.push(
+        h.join(`
+`),
+      ),
+      b.satz.trim() && l(b.satz),
+      b.quelle.trim() && l(`Quelle: ${w(b.quelle)}`));
+  } else if (t.occasion === "ueber-mich") {
+    const b = w(r.person) || w(e.brandName);
+    l(`${b}${w(r.role) ? `, ${w(r.role)}` : ""}`, _e(s));
+    const h = Re(s).map((x) => `${x.eigenschaft}: ${ht(x.satz)}`);
+    o.push(
+      h.join(`
+`),
+    );
+    const k = w((d = s == null ? void 0 : s.texte.socialKit) == null ? void 0 : d.profiltext);
+    k && i(k) && l(k);
+  } else if (t.occasion === "kundenstimme") {
+    const b = t.extras.stimme;
+    (l(`„${w(b.text) || "..."}“`),
+      b.wer.trim() && o.push(w(b.wer)),
+      l("Danke für das Vertrauen und dafür, dass ich diese Worte teilen darf"));
+  }
+  const u = Et[t.occasion];
+  (l(u.sub),
+    l(`Kontakt: ${Mn(r, e.brandName)}`),
+    n != null &&
+      n.url &&
+      a.needsObject &&
+      t.occasion !== "verkauft" &&
+      t.occasion !== "vermietet" &&
+      l(`Mehr zum Objekt: ${n.url.replace(/^https?:\/\//, "")}`));
+  const g = o.join(`
+
+`),
+    p = In(e);
+  return {
+    body: g,
+    hashtags: p,
+    text: `${g}
+
+${p.join(" ")}`,
+    source: "regel",
+  };
+}
+const P = {
+    post: {
+      m: 72,
+      logoH: 60,
+      kicker: 22,
+      head: 62,
+      word: 128,
+      meta: 27,
+      price: 40,
+      energy: 21,
+      partner: 16,
+      body: 30,
+    },
+    karussell: {
+      m: 72,
+      logoH: 60,
+      kicker: 22,
+      head: 62,
+      word: 128,
+      meta: 27,
+      price: 40,
+      energy: 21,
+      partner: 16,
+      body: 30,
+    },
+    quadrat: {
+      m: 60,
+      logoH: 52,
+      kicker: 20,
+      head: 46,
+      word: 96,
+      meta: 23,
+      price: 34,
+      energy: 20,
+      partner: 15,
+      body: 26,
+    },
+    story: {
+      m: 80,
+      logoH: 64,
+      kicker: 24,
+      head: 74,
+      word: 140,
+      meta: 29,
+      price: 44,
+      energy: 22,
+      partner: 17,
+      body: 32,
+    },
+    reel: {
+      m: 80,
+      logoH: 64,
+      kicker: 24,
+      head: 92,
+      word: 150,
+      meta: 29,
+      price: 44,
+      energy: 22,
+      partner: 17,
+      body: 32,
+    },
+  },
+  ee = (e, t) => (typeof e == "function" ? e(t) : e);
+function ie(e, t, n, r, s, a, i, o, l = "start") {
+  return t.trim()
+    ? {
+        h: Z(e.L.bodyBold, r),
+        gap: i,
+        draw: (c) =>
+          void E(e.fr, e.L.bodyBold, t, n, c, r, {
+            fill: s,
+            ground: ee(a, c - r * 0.3),
+            caps: !0,
+            tracking: 0.16,
+            maxWidth: o,
+            anchor: l,
+          }),
+      }
+    : null;
+}
+function Je(e, t, n, r, s, a, i, o, l, c = "start") {
+  const u = e.L.bodyBold,
+    g = t.toLocaleUpperCase("de-AT"),
+    p = n.toLocaleUpperCase("de-AT"),
+    d = Math.min(s, (s * l) / Math.max(1, X(u, g, s, 0.16))),
+    b = X(u, g, d, 0.16),
+    h = d * 1.1,
+    k = X(u, "·", d),
+    x = p ? X(u, p, d, 0.16) : 0,
+    y = !p || b + 2 * h + k + x <= l,
+    v = d * 1.7;
+  return {
+    h: Z(u, d) + (y ? 0 : v),
+    gap: o,
+    draw: (j) => {
+      const B = ee(i, j - s * 0.3);
+      if (y) {
+        const N = b + (p ? 2 * h + k + x : 0),
+          L = c === "middle" ? r - N / 2 : r;
+        if ((E(e.fr, u, g, L, j, d, { fill: a[0], ground: B, tracking: 0.16 }), !p)) return;
+        (E(e.fr, u, "·", L + b + h, j, d, { fill: a[1], ground: B }),
+          E(e.fr, u, p, L + b + 2 * h + k, j, d, { fill: a[1], ground: B, tracking: 0.16 }));
+        return;
+      }
+      (E(e.fr, u, g, r, j, d, { fill: a[0], ground: B, tracking: 0.16, anchor: c }),
+        E(e.fr, u, p, r, j + v, d, {
+          fill: a[1],
+          ground: ee(i, j + v - s * 0.3),
+          tracking: 0.16,
+          anchor: c,
+          maxWidth: l,
+          minScale: 0.85,
+        }));
+    },
+  };
+}
+function Wt(e, t, n, r, s, a, i) {
+  const o = e.L,
+    l = P[e.fmt];
+  return {
+    h: r,
+    gap: a,
+    draw: (c) => {
+      const u = ee(s, c);
+      (o.logo(e.fr, t, c, o.id === "eigen" ? n - 330 : n * 0.8, r, u),
+        o.id === "eigen" &&
+          o.partner(
+            e.fr,
+            t + n,
+            c + (r - Z(o.bodyBold, l.partner)) / 2,
+            l.partner,
+            i,
+            ee(s, c + r * 0.3),
+            "end",
+          ));
+    },
+  };
+}
+function z(e, t, n, r, s, a, i, o, l, c = {}) {
+  const u = w(t);
+  if (!u) return null;
+  const g = e.L,
+    p = !!c.dot && g.dot && u.endsWith("."),
+    d = p ? u.slice(0, -1) : u,
+    b = {
+      maxWidth: s,
+      maxLines: a,
+      lh: c.lh ?? 1.04,
+      tracking: g.headTrack,
+      caps: g.headCaps,
+      minScale: c.minScale ?? 0.72,
+    },
+    h = $t(g.head, d, r, b);
+  return {
+    h: h.h,
+    gap: l,
+    draw: (k) => {
+      const x = ee(o, k - r * 0.25);
+      if (c.anchor === "middle") {
+        h.rows.forEach((v, j) => {
+          const B = E(e.fr, g.head, v, n, k + j * b.lh * h.size, h.size, {
+            fill: i,
+            ground: x,
+            tracking: g.headTrack,
+            caps: g.headCaps,
+            anchor: "middle",
+          });
+          p &&
+            j === h.rows.length - 1 &&
+            gt(e, n + B.w / 2, B.baseline, h.size, c.dotColor ?? g.accent);
+        });
+        return;
+      }
+      const y = jt(e.fr, g.head, d, n, k, r, { ...b, fill: i, ground: x });
+      p && gt(e, n + y.lastW, y.baseline, y.size, c.dotColor ?? g.accent);
+    },
+  };
+}
+function gt(e, t, n, r, s) {
+  const a = r * 0.085;
+  C(
+    e.fr,
+    `<circle data-role="punkt" cx="${O(t + r * 0.06 + a, 2)}" cy="${O(n - a, 2)}" r="${O(a, 2)}" fill="${s}"/>`,
+  );
+}
+function D(e, t, n, r, s, a, i, o, l, c = {}) {
+  const u = w(t);
+  if (!u) return null;
+  const g = c.bold ? e.L.bodyBold : e.L.body,
+    p = { maxWidth: s, maxLines: a, lh: c.lh ?? 1.38, minScale: 0.85 },
+    d = $t(g, u, r, p);
+  return {
+    h: d.h,
+    gap: l,
+    draw: (b) => {
+      const h = ee(o, b - r * 0.3);
+      if (c.anchor === "middle") {
+        d.rows.forEach(
+          (k, x) =>
+            void E(e.fr, g, k, n, b + x * p.lh * d.size, d.size, {
+              fill: i,
+              ground: h,
+              anchor: "middle",
+            }),
+        );
+        return;
+      }
+      jt(e.fr, g, u, n, b, r, { ...p, fill: i, ground: h });
+    },
+  };
+}
+function It(e, t, n, r, s, a, i, o = "start") {
+  const { price: l, oldPrice: c } = e.c;
+  if (!l) return null;
+  const u = e.L;
+  return {
+    h: Z(u.head, n),
+    gap: i,
+    draw: (g) => {
+      const p = ee(a, g - n * 0.25),
+        d = n * 0.62,
+        b = c ? X(u.body, c, d) : 0,
+        h = Math.min(r - (b ? b + n * 0.6 : 0), X(u.head, l, n, u.headTrack)),
+        k = (b ? b + n * 0.6 : 0) + h;
+      let x = o === "middle" ? t - k / 2 : t;
+      if (c) {
+        const y = g + Z(u.head, n) - Z(u.body, d),
+          v = E(e.fr, u.body, c, x, y, d, { fill: s[1], ground: p }),
+          j = y + Z(u.body, d) * 0.5;
+        (C(
+          e.fr,
+          `<line data-role="vorpreis" x1="${O(x - 2, 2)}" y1="${O(j, 2)}" x2="${O(x + v.w + 2, 2)}" y2="${O(j, 2)}" stroke="${s[1]}" stroke-width="${O(Math.max(1.5, d * 0.07), 2)}"/>`,
+        ),
+          (x += v.w + n * 0.6));
+      }
+      E(e.fr, u.head, l, x, g, n, {
+        fill: s[0],
+        ground: p,
+        tracking: u.headTrack,
+        maxWidth: r - (x - t),
+        minScale: 0.6,
+      });
+    },
+  };
+}
+function Dn(e, t, n, r, s, a, i, o = "start", l = []) {
+  const c = [...l, ...e.c.facts].filter(Boolean);
+  if (!c.length) return null;
+  const u = e.L.body;
+  let g = c;
+  for (; g.length > 1 && X(u, g.join("   ·   "), n * 0.9) > r; ) g = g.slice(0, -1);
+  const p = g.join("   ·   ");
+  return {
+    h: Z(u, n),
+    gap: i,
+    draw: (d) =>
+      void E(e.fr, u, p, t, d, n, {
+        fill: s,
+        ground: ee(a, d - n * 0.3),
+        maxWidth: r,
+        minScale: 0.85,
+        anchor: o,
+      }),
+  };
+}
+function ke(e, t, n, r, s, a, i, o = "start") {
+  const l = [e.c.energy, e.c.commission].filter(Boolean).join("  |  ");
+  if (!l) return null;
+  const c = e.L.body,
+    u = X(c, l, n) <= r,
+    g = e.c.energyParts,
+    d = u
+      ? [l]
+      : [
+          g.length ? `${g.slice(0, 2).join(", ")},` : "",
+          g.slice(2).join(", "),
+          e.c.commission,
+        ].filter(Boolean),
+    b = 1.32;
+  return {
+    h: (d.length - 1) * b * n + Z(c, n),
+    gap: i,
+    draw: (h) => {
+      (C(e.fr, '<g data-role="energieausweis">'),
+        d.forEach(
+          (k, x) =>
+            void E(e.fr, c, k, t, h + x * b * n, n, {
+              fill: s,
+              ground: ee(a, h - n * 0.3),
+              maxWidth: r,
+              minScale: 0.8,
+              anchor: o,
+            }),
+        ),
+        C(e.fr, "</g>"));
+    },
+  };
+}
+function ve(e, t, n, r = !1, s) {
+  const { fr: a, L: i } = e,
+    o = P[e.fmt],
+    l = i.id === "eigen" ? 330 : 0;
+  (i.logo(a, o.m, t, a.W - 2 * o.m - l, o.logoH, n),
+    i.id === "eigen" &&
+      i.partner(
+        a,
+        a.W - o.m,
+        t + (o.logoH - Z(i.bodyBold, o.partner)) / 2,
+        o.partner,
+        r ? i.onDark : i.muted,
+        n,
+        "end",
+      ));
+}
+const Oe = (e, t) => (e.photos.length ? e.photos[Math.min(t, e.photos.length - 1)] : void 0);
+function we(e, t, n, r, s, a, i, o = "bl") {
+  (Ce(e.fr, t, n, r, s, a, {
+    r: i,
+    base: e.L.photoBase,
+    label: e.L.bodyBold,
+    labelFill: e.L.muted,
+  }),
+    t != null &&
+      t.virtual &&
+      Te(e.fr, e.L.bodyBold, n, r, s, a, o, { size: e.fmt === "quadrat" ? 17 : 19 }));
+}
+function ue(e, t, n, r, s, a, i = {}) {
+  var d;
+  const o = P[e.fmt],
+    l = e.c,
+    c = l.dot,
+    u = i.anchor ?? "start",
+    g = i.headSize ?? (c ? o.word : o.head),
+    p = [Je(e, l.kicker, c ? "" : l.place, t, o.kicker, [r.accent, r.muted], s, 0, n, u)];
+  if (
+    (p.push(
+      z(e, l.head, t, g, n, c ? 1 : a, r.ink, s, o.kicker * 1.3, {
+        dot: c,
+        anchor: u,
+        minScale: c ? 0.6 : 0.72,
+      }),
+    ),
+    c)
+  ) {
+    const b = [w((d = e.d.object) == null ? void 0 : d.title), l.place].filter(Boolean).join(", ");
+    p.push(D(e, b, t, o.meta * 1.08, n, 2, r.ink, s, o.head * 0.42, { anchor: u }));
+  }
+  return (
+    l.termin &&
+      p.push(
+        z(e, l.termin, t, o.price * 0.9, n, 2, r.ink, s, o.head * 0.42, { anchor: u, lh: 1.15 }),
+      ),
+    i.withFacts !== !1 &&
+      p.push(Dn(e, t, o.meta, n, r.muted, s, c ? o.meta * 0.9 : o.head * 0.42, u)),
+    i.withPrice !== !1 && p.push(It(e, t, o.price, n, [r.ink, r.muted], s, o.meta * 1.15, u)),
+    p
+  );
+}
+function Ze(e, t) {
+  for (const n of e) {
+    const r = n(0);
+    if (U(r) <= t) return r;
+  }
+  return e[e.length - 1](0);
+}
+function Rn(e, t = {}) {
+  const { fr: n, L: r, fmt: s } = e,
+    a = P[s],
+    o = { ink: r.ink, muted: r.muted, accent: r.accentText },
+    l = r.paperWorst;
+  if ((r.background(n), s === "quadrat")) {
+    const j = Math.round(n.W * 0.53);
+    we(e, Oe(e.d, 0), a.m, a.m, j, n.H - 2 * a.m, r.radius);
+    const B = a.m + j + 48,
+      N = n.W - a.m - B;
+    r.logo(n, B, a.m, r.id === "eigen" ? Math.min(N, 300) : N, a.logoH, r.paper);
+    let L = a.m + a.logoH + 26;
+    r.id === "eigen" && (r.partner(n, B, L, a.partner, r.muted, l), (L += 40));
+    const S = n.H - a.m,
+      T = ke(e, B, a.energy, N, r.muted, l, 0),
+      I = T ? U([T]) : 0,
+      K = S - (I ? I + 34 : 0) - (L + 60),
+      ne = Ze(
+        [3, 2, 1]
+          .map((_) => () => ue(e, B, N, o, l, _))
+          .concat([() => ue(e, B, N, o, l, 1, { withFacts: !1 })]),
+        K,
+      );
+    (R(ne, S - (I ? I + 34 : 0)), T && R([T], S));
+    return;
+  }
+  const c = s === "story" || s === "reel",
+    u = c ? n.safe.y0 : 52;
+  ve(e, u, r.paper);
+  const g = u + a.logoH + (c ? 44 : 32),
+    p = s === "post" || s === "karussell" ? 712 : s === "reel" ? 820 : 900,
+    d = n.W - 2 * a.m;
+  we(e, Oe(e.d, 0), a.m, g, d, p, r.radius);
+  const b = c ? n.safe.y1 : n.H - 56,
+    h = ke(e, a.m, a.energy, t.carouselHook ? d - 90 : d, r.muted, l, 0),
+    k = h ? U([h]) : 0,
+    x = g + p + (c ? 52 : 40),
+    y = b - (k ? k + 30 : 0),
+    v = Ze(
+      [2, 1]
+        .map((j) => () => ue(e, a.m, d, o, l, j))
+        .concat([() => ue(e, a.m, d, o, l, 1, { withFacts: !1 })]),
+      y - x,
+    );
+  (Y(v, x), h && R([h], b), t.carouselHook && C(n, xt(n.W - a.m - 56, b - 12, 56, r.ink)));
+}
+function Zn(e, t = {}) {
+  const { fr: n, L: r, fmt: s } = e,
+    a = P[s],
+    i = Oe(e.d, 0);
+  Ce(n, i, 0, 0, n.W, n.H, { base: r.dark, label: r.bodyBold, labelFill: r.mutedOnDark });
+  const o = s === "story" || s === "reel",
+    l = s === "reel";
+  i != null &&
+    i.virtual &&
+    Te(n, r.bodyBold, 0, o ? n.safe.y0 - 24 : 28, n.W, 200, "tr", { inset: a.m, size: 19 });
+  const c = n.W - 2 * a.m,
+    u = o ? n.safe.y1 : n.H - 60,
+    g = r.onDark,
+    p = { ink: g, muted: g, accent: g };
+  let d = null;
+  const b = (L) => (d ? St(d, L) : r.scrim),
+    h = ke(e, a.m, a.energy, t.carouselHook ? c - 90 : c, g, b, 0),
+    k = h ? U([h]) : 0,
+    x = n.H * (l ? 0.5 : 0.48),
+    y = Wt(e, a.m, c, Math.round(a.logoH * 0.85), b, 0, g),
+    v = Ze(
+      [2, 1]
+        .map((L) => () => [
+          y,
+          ...ue(e, a.m, c, p, b, L, { headSize: l && !e.c.dot ? a.head : void 0 }).map((S, T) =>
+            T === 0 && S ? { ...S, gap: a.logoH * 0.75 } : S,
+          ),
+        ])
+        .concat([
+          () => [
+            y,
+            ...ue(e, a.m, c, p, b, 1, { withFacts: !1 }).map((L, S) =>
+              S === 0 && L ? { ...L, gap: a.logoH * 0.75 } : L,
+            ),
+          ],
+        ]),
+      x,
+    ),
+    j = U(v) + (k ? k + 34 : 0),
+    B = u - j,
+    N = Math.max(n.H * 0.3, B - 300);
+  ((d = yt(n, 0, N, n.W, n.H, r.scrim, [
+    [N, 0],
+    [B - 40, 0.68],
+    [n.H, 0.88],
+  ])),
+    R(v, u - (k ? k + 34 : 0)),
+    h && R([h], u),
+    t.carouselHook && C(n, xt(n.W - a.m - 56, u - 12, 56, g)));
+}
+function qn(e) {
+  const { fr: t, L: n } = e,
+    r = P.reel;
+  (n.background(t), ve(e, t.safe.y0, n.paper));
+  const s = t.W - 2 * r.m,
+    a = n.paperWorst,
+    i = { ink: n.ink, muted: n.muted, accent: n.accentText },
+    o = [
+      Je(
+        e,
+        e.c.kicker,
+        e.c.dot ? "" : e.c.place,
+        t.W / 2,
+        r.kicker,
+        [i.accent, i.muted],
+        a,
+        0,
+        s,
+        "middle",
+      ),
+      z(e, e.c.head, t.W / 2, e.c.dot ? r.word : r.head, s, 3, n.ink, a, 34, {
+        dot: e.c.dot,
+        anchor: "middle",
+      }),
+    ],
+    l = t.safe.y0 + r.logoH + 110,
+    c = Y(o, l),
+    u = ke(e, t.W / 2, r.energy, s, n.muted, a, 0, "middle"),
+    g = u ? U([u]) : 0,
+    p = t.safe.y1,
+    d = c + 70,
+    b = p - (g ? g + 36 : 0) - d;
+  (we(e, Oe(e.d, 0), r.m, d, s, b, n.radius), u && R([u], p));
+}
+function ft(e, t, n, r) {
+  const { fr: s, L: a } = e,
+    i = P.karussell;
+  if (e.d.sel.variant === "b") {
+    (Ce(s, t, 0, 0, s.W, s.H, { base: a.dark, label: a.bodyBold, labelFill: a.mutedOnDark }),
+      dn(s, a.bodyBold, n, r, s.W - i.m, 52, a.scrim, "#FFFFFF"),
+      t != null && t.virtual && Te(s, a.bodyBold, 0, 0, s.W, s.H, "bl", { inset: i.m, size: 19 }));
+    return;
+  }
+  a.background(s);
+  const o = s.H - 2 * i.m - 70;
+  we(e, t, i.m, i.m, s.W - 2 * i.m, o, a.radius);
+  const l = i.m + o + 34;
+  (E(s, a.bodyBold, e.c.place || e.c.kicker, i.m, l, i.kicker, {
+    fill: a.muted,
+    ground: a.paperWorst,
+    caps: !0,
+    tracking: 0.16,
+    maxWidth: s.W - 2 * i.m - 200,
+  }),
+    E(
+      s,
+      a.bodyBold,
+      `${String(n).padStart(2, "0")} / ${String(r).padStart(2, "0")}`,
+      s.W - i.m,
+      l,
+      i.kicker,
+      { fill: a.muted, ground: a.paperWorst, tracking: 0.12, anchor: "end" },
+    ));
+}
+function xe(e) {
+  const t = e.L;
+  return e.d.sel.variant === "b"
+    ? {
+        ground: t.darkWorst,
+        ink: t.onDark,
+        muted: t.mutedOnDark,
+        accent: t.onDark,
+        hair: se(t.dark, t.onDark, 0.25),
+        bg: () => t.darkBackground(e.fr),
+      }
+    : {
+        ground: t.paperWorst,
+        ink: t.ink,
+        muted: t.muted,
+        accent: t.accentText,
+        hair: t.hairline,
+        bg: () => t.background(e.fr),
+      };
+}
+function Un(e, t, n) {
+  var h, k;
+  const { fr: r, L: s } = e,
+    a = P.karussell,
+    i = xe(e);
+  i.bg();
+  const o = r.W - 2 * a.m;
+  (E(r, s.bodyBold, "Das Wichtigste", a.m, a.m + 6, a.kicker, {
+    fill: i.accent,
+    ground: i.ground,
+    caps: !0,
+    tracking: 0.16,
+  }),
+    E(
+      r,
+      s.bodyBold,
+      `${String(t).padStart(2, "0")} / ${String(n).padStart(2, "0")}`,
+      r.W - a.m,
+      a.m + 6,
+      a.kicker,
+      { fill: i.muted, ground: i.ground, tracking: 0.12, anchor: "end" },
+    ));
+  const c = (((h = e.d.object) == null ? void 0 : h.facts) ?? [])
+      .filter((x) => x.label.trim() && x.value.trim())
+      .slice(0, 6),
+    u = (o - 48) / 2;
+  let g = a.m + 120;
+  const p = 168;
+  (c.forEach((x, y) => {
+    const v = a.m + (y % 2) * (u + 48),
+      j = g + Math.floor(y / 2) * p;
+    (C(r, Ke(v, j, u, i.hair)),
+      E(r, s.bodyBold, w(x.label), v, j + 28, 20, {
+        fill: i.muted,
+        ground: i.ground,
+        caps: !0,
+        tracking: 0.16,
+        maxWidth: u,
+      }),
+      E(r, s.head, w(x.value), v, j + 72, 56, {
+        fill: i.ink,
+        ground: i.ground,
+        tracking: s.headTrack,
+        maxWidth: u,
+        minScale: 0.55,
+      }));
+  }),
+    (g += Math.ceil(c.length / 2) * p + 10),
+    c.length || (g = a.m + 260));
+  const d = [];
+  (e.c.price &&
+    (d.push(
+      ie(
+        e,
+        e.d.sel.occasion === "preis"
+          ? "Neuer Preis"
+          : ((k = e.d.object) == null ? void 0 : k.kind) === "miete"
+            ? "Miete"
+            : "Kaufpreis",
+        a.m,
+        20,
+        i.muted,
+        i.ground,
+        0,
+        o,
+      ),
+    ),
+    d.push(It(e, a.m, 64, o, [i.ink, i.muted], i.ground, 26))),
+    Y(d, g + 20));
+  const b = ke(e, a.m, a.energy, o, i.muted, i.ground, 0);
+  b && R([b], r.H - a.m);
+}
+function Kn(e, t, n) {
+  const { fr: r, L: s } = e,
+    a = P.karussell,
+    i = xe(e);
+  i.bg();
+  const o = r.W - 2 * a.m;
+  (E(r, s.bodyBold, "Lage", a.m, a.m + 6, a.kicker, {
+    fill: i.accent,
+    ground: i.ground,
+    caps: !0,
+    tracking: 0.16,
+  }),
+    E(
+      r,
+      s.bodyBold,
+      `${String(t).padStart(2, "0")} / ${String(n).padStart(2, "0")}`,
+      r.W - a.m,
+      a.m + 6,
+      a.kicker,
+      { fill: i.muted, ground: i.ground, tracking: 0.12, anchor: "end" },
+    ));
+  const l = e.d.object,
+    c = e.c.place || (l ? Ee(l) : "") || "Lage auf Anfrage",
+    u = w(l == null ? void 0 : l.description) || "Mehr zur Lage erzähle ich Ihnen gern persönlich.",
+    g = e.d.photos.length > 2 ? e.d.photos[e.d.photos.length - 1] : void 0;
+  let p = a.m + 150;
+  g && (we(e, g, a.m, a.m + 70, o, 380, s.radius, "tr"), (p = a.m + 70 + 380 + 70));
+  const d = [
+    z(e, c, a.m, 76, o, 2, i.ink, i.ground, 0),
+    D(e, u, a.m, a.body, o, g ? 6 : 11, i.ink, i.ground, 40, { lh: 1.45 }),
+  ];
+  (Y(d, p),
+    e.L.logo(
+      r,
+      a.m,
+      r.H - a.m - a.logoH,
+      o * 0.6,
+      a.logoH,
+      e.d.sel.variant === "b" ? s.dark : s.paper,
+    ));
+}
+function Vn(e, t, n) {
+  const { fr: r, L: s } = e,
+    a = P.karussell,
+    i = xe(e);
+  i.bg();
+  const o = r.W - 2 * a.m,
+    l = e.d.sel.occasion;
+  (E(r, s.bodyBold, q(l).kicker, a.m, a.m + 6, a.kicker, {
+    fill: i.accent,
+    ground: i.ground,
+    caps: !0,
+    tracking: 0.16,
+    maxWidth: o - 160,
+  }),
+    E(
+      r,
+      s.bodyBold,
+      `${String(t).padStart(2, "0")} / ${String(n).padStart(2, "0")}`,
+      r.W - a.m,
+      a.m + 6,
+      a.kicker,
+      { fill: i.muted, ground: i.ground, tracking: 0.12, anchor: "end" },
+    ));
+  const c = Et[l],
+    u = e.d.contact,
+    g = [
+      z(e, c.head, a.m, 84, o, 3, i.ink, i.ground, 0, {
+        dot: !0,
+        dotColor: e.d.sel.variant === "b" ? s.accentOnDark : s.accent,
+      }),
+      D(e, c.sub, a.m, a.body, o, 3, i.ink, i.ground, 44, { lh: 1.42 }),
+    ];
+  Y(g, a.m + 200);
+  const p = Tt(u),
+    d = [
+      z(e, u.person || e.d.brandName, a.m, 40, o, 1, i.ink, i.ground, 0),
+      ...p.map((k, x) => D(e, k, a.m, 28, o, 1, i.muted, i.ground, x ? 14 : 24)),
+    ],
+    b = r.H - a.m - a.logoH;
+  (R(d, b - 70), C(r, Ke(a.m, b - 34, o, i.hair)));
+  const h = e.d.sel.variant === "b" ? s.dark : s.paper;
+  (s.logo(r, a.m, b, o - 330, a.logoH, h),
+    s.partner(
+      r,
+      r.W - a.m,
+      b + (a.logoH - Z(s.bodyBold, a.partner)) / 2,
+      a.partner,
+      i.muted,
+      i.ground,
+      "end",
+    ));
+}
+function Gn(e) {
+  const t = e.photos.length,
+    n = Math.max(1, Math.min(4, t - 1)),
+    r = Array.from({ length: n }, (s, a) => ({ kind: "foto", photo: t > 1 ? a + 1 : 0 }));
+  return [{ kind: "hook" }, ...r, { kind: "fakten" }, { kind: "lage" }, { kind: "aufruf" }];
+}
+function Ft(e) {
+  const t = e.d.sel.extras.markt,
+    n = t.werte.filter((r) => r.label.trim() && r.value.trim()).slice(0, 3);
+  return { m: t, werte: n.length ? n : [{ label: "Bezeichnung der Zahl", value: "..." }] };
+}
+function _n(e, t) {
+  const { fr: n, L: r, fmt: s } = e,
+    a = P[s],
+    i = xe(e);
+  i.bg();
+  const o = s === "story" || s === "reel",
+    l = o ? n.safe.y0 : 52;
+  ve(e, l, e.d.sel.variant === "b" ? r.dark : r.paper, e.d.sel.variant === "b");
+  const { m: c, werte: u } = Ft(e),
+    g = n.W - 2 * a.m,
+    p = s === "quadrat" ? 0.8 : o ? 1.1 : 1,
+    d = [w(c.region), w(c.zeitraum)].filter(Boolean).join("  ·  "),
+    b = u[0],
+    h = [
+      Je(e, "Marktupdate", d, a.m, a.kicker, [i.accent, i.muted], i.ground, 0, g),
+      z(e, w(b.value), a.m, 168 * p, g, 1, i.ink, i.ground, 40 * p, { minScale: 0.45 }),
+      D(e, b.label, a.m, a.body * 1.05, g, 2, i.ink, i.ground, 22 * p),
+    ],
+    k = u.slice(1),
+    x = o ? n.safe.y1 : n.H - 56,
+    y = w(c.quelle) ? `Quelle: ${w(c.quelle)}` : "Quelle: ...",
+    v = [
+      D(e, c.satz, a.m, a.meta, g, s === "quadrat" ? 2 : 3, i.ink, i.ground, 0, { lh: 1.4 }),
+      D(e, y, a.m, a.energy, g, 2, i.muted, i.ground, 26),
+    ],
+    j = U(v),
+    B = l + a.logoH + (s === "quadrat" ? 56 : 90) * p,
+    N = U(h) + (k.length ? 40 * p + k.length * 96 * p : 0),
+    L = x - j - 60 - B,
+    S = B + Math.max(0, (L - N) * 0.42);
+  let T = Y(h, S);
+  if (k.length) {
+    T += 40 * p;
+    for (const I of k)
+      (C(n, Ke(a.m, T, g, i.hair)),
+        E(n, r.body, w(I.label), a.m, T + 30 * p, a.meta, {
+          fill: i.muted,
+          ground: i.ground,
+          maxWidth: g * 0.58,
+        }),
+        E(n, r.head, w(I.value), n.W - a.m, T + 24 * p, 40 * p, {
+          fill: i.ink,
+          ground: i.ground,
+          tracking: r.headTrack,
+          anchor: "end",
+          maxWidth: g * 0.38,
+          minScale: 0.6,
+        }),
+        (T += 96 * p));
+  }
+  x - j > T + 30 ? R(v, x) : R([v[1]], x);
+}
+function Me(e, t, n, r, s, a, i, o) {
+  const { fr: l, L: c } = e,
+    u = e.d.portrait;
+  if ((C(l, Ae(t, n, r, s, i, a)), u && /^data:image\/(png|jpe?g|webp);base64,/.test(u))) {
+    C(l, `<g data-role="portraet">${un(u, t, n, r, s, { x: 0.5, y: 0.3, zoom: 1 }, a)}</g>`);
+    return;
+  }
+  const g = _t(e.d.contact.person) || e.d.brandName.charAt(0).toLocaleUpperCase("de-AT"),
+    p = Math.min(r, s) * 0.32;
+  (C(l, '<g data-role="portraet">'),
+    E(l, c.head, g, t + r / 2, n + s / 2 - Z(c.head, p) / 2, p, {
+      fill: o,
+      ground: i,
+      anchor: "middle",
+      tracking: c.headTrack,
+    }),
+    C(l, "</g>"));
+}
+function Jn(e) {
+  const { fr: t, L: n, fmt: r } = e,
+    s = P[r];
+  n.background(t);
+  const a = r === "story" || r === "reel",
+    i = a ? t.safe.y0 : 52;
+  ve(e, i, n.paper);
+  const o = t.W - 2 * s.m,
+    l = e.d.contact,
+    c = w(l.person) || e.d.brandName,
+    u = w(l.role),
+    g = _e(e.d.route),
+    p = n.paperWorst,
+    d = a ? t.safe.y1 : t.H - 56,
+    b = se(n.paper, n.ink, 0.12);
+  if (e.d.sel.variant === "a") {
+    if (r === "quadrat") {
+      const S = Math.round(t.W * 0.46),
+        T = i + s.logoH + 36;
+      Me(e, s.m, T, S, t.H - T - s.m, n.radius, b, n.ink);
+      const I = s.m + S + 48,
+        K = t.W - s.m - I;
+      R(
+        [
+          ie(e, "Über mich", I, s.kicker, n.accentText, p, 0, K),
+          z(e, c, I, 52, K, 2, n.ink, p, 24),
+          D(e, u, I, s.meta, K, 2, n.muted, p, 14),
+          D(e, g, I, s.meta, K, 7, n.ink, p, 30, { lh: 1.42 }),
+        ],
+        d,
+      );
+      return;
+    }
+    const j = i + s.logoH + (a ? 50 : 34),
+      B = [
+        ie(e, "Über mich", s.m, s.kicker, n.accentText, p, 0, o),
+        z(e, c, s.m, s.head, o, 1, n.ink, p, 26),
+        D(e, u, s.m, s.meta, o, 1, n.muted, p, 14),
+        D(e, g, s.m, s.meta, o, 3, n.ink, p, 26, { lh: 1.42 }),
+      ],
+      N = a ? 56 : 40,
+      L = Math.min(r === "post" || r === "karussell" ? 720 : 960, d - j - N - U(B));
+    (Me(e, s.m, j, o, L, n.radius, b, n.ink), Y(B, j + L + N));
+    return;
+  }
+  const h = r === "quadrat" ? 0.78 : a ? 1.1 : 1;
+  Y(
+    [
+      ie(e, "Über mich", s.m, s.kicker, n.accentText, p, 0, o),
+      z(e, g, s.m, 64 * h, o, r === "quadrat" ? 5 : 6, n.ink, p, 40 * h, {
+        lh: 1.12,
+        minScale: 0.6,
+      }),
+    ],
+    i + s.logoH + (a ? 180 : 110) * h,
+  );
+  const k = 132 * h,
+    x = d - k,
+    y = `ap${Math.round(x)}`;
+  (C(
+    t,
+    `<defs><clipPath id="${y}"><circle cx="${O(s.m + k / 2, 2)}" cy="${O(x + k / 2, 2)}" r="${O(k / 2, 2)}"/></clipPath></defs><g clip-path="url(#${y})">`,
+  ),
+    Me(e, s.m, x, k, k, 0, b, n.ink),
+    C(t, "</g>"));
+  const v = s.m + k + 32;
+  R(
+    [
+      z(e, c, v, 38 * h, t.W - s.m - v, 1, n.ink, p, 0),
+      D(e, u, v, s.meta * 0.95, t.W - s.m - v, 1, n.muted, p, 14),
+    ],
+    x + k / 2 + 26 * h,
+  );
+}
+function Qn(e, t = !0) {
+  const { fr: n, L: r, fmt: s } = e,
+    a = P[s],
+    i = s === "story" || s === "reel",
+    o = i ? n.safe.y0 : 52,
+    l = e.d.sel.extras.stimme,
+    c = w(l.text) || "Hier steht das Zitat deiner Kundin oder deines Kunden.",
+    u = c.split(/\s+/),
+    g =
+      t || u.length <= 12
+        ? c
+        : `${u
+            .slice(0, 12)
+            .join(" ")
+            .replace(/[.,;:]+$/, "")} ...`,
+    p = w(l.wer),
+    d = n.W - 2 * a.m,
+    b = s === "quadrat" ? 0.8 : i ? 1.08 : 1,
+    h = i ? n.safe.y1 : n.H - 56,
+    k = e.d.photos[0];
+  if (e.d.sel.variant === "b" && k) {
+    (Ce(n, k, 0, 0, n.W, n.H, { base: r.dark, label: r.bodyBold, labelFill: r.mutedOnDark }),
+      k.virtual &&
+        Te(n, r.bodyBold, 0, i ? n.safe.y0 - 24 : 28, n.W, 200, "tr", { inset: a.m, size: 19 }));
+    let S = null;
+    const T = (_) => (S ? St(S, _) : r.scrim),
+      I = [
+        Wt(e, a.m, d, Math.round(a.logoH * 0.85), T, 0, r.onDark),
+        ie(e, "Kundenstimme", a.m, a.kicker, r.onDark, T, a.logoH * 0.75, d),
+        z(e, `„${g}“`, a.m, 52 * b, d, 6, r.onDark, T, 30, { lh: 1.14, minScale: 0.6 }),
+        ie(e, p, a.m, a.kicker, r.onDark, T, 34, d),
+      ],
+      K = U(I),
+      ne = h - K;
+    ((S = yt(n, 0, Math.max(n.H * 0.2, ne - 300), n.W, n.H, r.scrim, [
+      [Math.max(n.H * 0.2, ne - 300), 0],
+      [ne - 40, 0.68],
+      [n.H, 0.88],
+    ])),
+      R(I, h));
+    return;
+  }
+  const x = e.d.sel.variant === "b",
+    y = x
+      ? { ground: r.darkWorst, ink: r.onDark, muted: r.mutedOnDark, accent: r.accentOnDark }
+      : { ground: r.paperWorst, ink: r.ink, muted: r.muted, accent: r.accent };
+  (x ? r.darkBackground(n) : r.background(n), ve(e, o, x ? r.dark : r.paper, x));
+  const v = 220 * b,
+    j = [
+      z(e, g, a.m, 56 * b, d, s === "quadrat" ? 6 : 8, y.ink, y.ground, 0, {
+        lh: 1.16,
+        minScale: 0.58,
+      }),
+      ie(e, p || "Name, Ort", a.m, a.kicker, y.muted, y.ground, 44, d),
+    ],
+    B = o + a.logoH + (i ? 120 : 60) * b,
+    N = v * 0.72 + U(j),
+    L = B + Math.max(0, (h - B - N) * 0.4);
+  (C(
+    n,
+    `<g data-role="zitatzeichen" fill="${y.accent}"><circle cx="${O(a.m + v * 0.16, 2)}" cy="${O(L + v * 0.2, 2)}" r="${O(v * 0.13, 2)}"/><circle cx="${O(a.m + v * 0.5, 2)}" cy="${O(L + v * 0.2, 2)}" r="${O(v * 0.13, 2)}"/><path d="M${O(a.m + v * 0.03, 2)} ${O(L + v * 0.22, 2)}q${O(v * 0.02, 2)} ${O(v * 0.3, 2)} ${O(v * 0.2, 2)} ${O(v * 0.38, 2)}" stroke="${y.accent}" stroke-width="${O(v * 0.07, 2)}" fill="none" stroke-linecap="round"/><path d="M${O(a.m + v * 0.37, 2)} ${O(L + v * 0.22, 2)}q${O(v * 0.02, 2)} ${O(v * 0.3, 2)} ${O(v * 0.2, 2)} ${O(v * 0.38, 2)}" stroke="${y.accent}" stroke-width="${O(v * 0.07, 2)}" fill="none" stroke-linecap="round"/></g>`,
+  ),
+    Y(j, L + v * 0.72));
+}
+function de(e, t, n, r, s, a, i = !1) {
+  const { fr: o, L: l } = e,
+    c = P.karussell,
+    u = xe(e);
+  u.bg();
+  const g = o.W - 2 * c.m;
+  (E(o, l.bodyBold, t, c.m, c.m + 6, c.kicker, {
+    fill: u.accent,
+    ground: u.ground,
+    caps: !0,
+    tracking: 0.16,
+    maxWidth: g - 160,
+  }),
+    E(
+      o,
+      l.bodyBold,
+      `${String(s).padStart(2, "0")} / ${String(a).padStart(2, "0")}`,
+      o.W - c.m,
+      c.m + 6,
+      c.kicker,
+      { fill: u.muted, ground: u.ground, tracking: 0.12, anchor: "end" },
+    ));
+  const p = [
+      z(e, n, c.m, i ? 150 : 76, g, i ? 2 : 4, u.ink, u.ground, 0, { lh: 1.08 }),
+      D(e, r, c.m, c.body, g, 8, u.ink, u.ground, 44, { lh: 1.45 }),
+    ],
+    d = U(p);
+  (Y(p, Math.max(c.m + 150, (o.H - d) / 2 - 40)),
+    l.logo(
+      o,
+      c.m,
+      o.H - c.m - c.logoH,
+      g * 0.6,
+      c.logoH,
+      e.d.sel.variant === "b" ? l.dark : l.paper,
+    ));
+}
+function Qe(e) {
+  if (q(e.sel.occasion).needsObject) return Gn(e);
+  if (e.sel.occasion === "markt") {
+    const n = Math.max(
+      1,
+      e.sel.extras.markt.werte.filter((r) => r.label.trim() && r.value.trim()).slice(0, 3).length,
+    );
+    return [
+      { kind: "hook" },
+      ...Array.from({ length: n }, (r, s) => ({ kind: "wert", i: s })),
+      { kind: "einordnung" },
+      { kind: "frage" },
+      { kind: "aufruf" },
+    ];
+  }
+  return e.sel.occasion === "ueber-mich"
+    ? [
+        { kind: "hook" },
+        { kind: "eigenschaft", i: 0 },
+        { kind: "eigenschaft", i: 1 },
+        { kind: "eigenschaft", i: 2 },
+        { kind: "aufruf" },
+      ]
+    : [
+        { kind: "hook" },
+        { kind: "zitat" },
+        { kind: "kontext" },
+        { kind: "eigenschaft", i: 0 },
+        { kind: "aufruf" },
+      ];
+}
+function zt(e, t = !1) {
+  const n = q(e.d.sel.occasion),
+    r = e.d.sel.variant;
+  if (n.needsObject)
+    return e.fmt === "reel" && r === "a"
+      ? qn(e)
+      : r === "a"
+        ? Rn(e, { carouselHook: t })
+        : Zn(e, { carouselHook: t });
+  e.d.sel.occasion === "markt" ? _n(e) : e.d.sel.occasion === "ueber-mich" ? Jn(e) : Qn(e, !t);
+}
+function Xn(e, t, n, r) {
+  var a;
+  const s = e.d;
+  switch (t.kind) {
+    case "hook":
+      return zt(e, !0);
+    case "foto":
+      return ft(e, s.photos[t.photo], n, r);
+    case "fakten":
+      return Un(e, n, r);
+    case "lage":
+      return Kn(e, n, r);
+    case "aufruf":
+      return Vn(e, n, r);
+    case "wert": {
+      const { m: i, werte: o } = Ft(e),
+        l = o[t.i] ?? o[0];
+      return de(
+        e,
+        ["Marktupdate", w(i.region)].filter(Boolean).join("  ·  "),
+        w(l.value),
+        [w(l.label), w(i.zeitraum)].filter(Boolean).join(", ") + ".",
+        n,
+        r,
+        !0,
+      );
+    }
+    case "einordnung": {
+      const i = s.sel.extras.markt;
+      return de(
+        e,
+        "Einordnung",
+        "Was die Zahlen zeigen.",
+        `${w(i.satz) || "Hier ordnest du die Zahlen in zwei, drei Sätzen ein."} Quelle: ${w(i.quelle) || "..."}`,
+        n,
+        r,
+      );
+    }
+    case "frage":
+      return de(
+        e,
+        "Ihre Immobilie",
+        "Jede Lage ist anders.",
+        "Zahlen für eine ganze Region sagen wenig über ein einzelnes Haus. Ich sehe mir Ihre Immobilie an und ordne sie ein.",
+        n,
+        r,
+      );
+    case "eigenschaft": {
+      const i = Re(s.route)[t.i] ?? Re(s.route)[0];
+      return de(
+        e,
+        s.sel.occasion === "kundenstimme" ? "So arbeite ich" : "Über mich",
+        `${i.eigenschaft}.`,
+        i.satz,
+        n,
+        r,
+      );
+    }
+    case "zitat": {
+      const i = s.sel.extras.stimme;
+      return de(e, "Kundenstimme", `„${w(i.text) || "Zitat"}“`, w(i.wer), n, r);
+    }
+    case "kontext": {
+      const i = s.photos[0];
+      return i
+        ? ft(e, i, n, r)
+        : de(
+            e,
+            "Worum es ging",
+            w((a = s.object) == null ? void 0 : a.title) || "Ein Verkauf mit Ruhe.",
+            _e(s.route),
+            n,
+            r,
+          );
+    }
+  }
+}
+const pt = 0.55,
+  Yn = { 1350: "Post", 1080: "Quadrat", 1920: "Story" };
+function ea(e) {
+  const t = Xt();
+  if (!t) return null;
+  const n = se(A.bg, A.amber, 0.42 * pt),
+    r = A.ink,
+    s = se(r, A.amber, 0.42 * 0.22);
+  return {
+    id: "unio",
+    head: t.head,
+    headTrack: -0.02,
+    headCaps: !1,
+    body: t.body,
+    bodyBold: t.bodyBold,
+    paper: A.bg,
+    paperWorst: n,
+    ink: A.ink,
+    muted: be(A.muted, n),
+    accent: A.amber,
+    accentText: be("#8A5700", n),
+    dark: r,
+    darkWorst: s,
+    onDark: A.bg,
+    mutedOnDark: "#B9B2A8",
+    accentOnDark: A.amber,
+    hairline: "#D9D3C8",
+    photoBase: A.photo,
+    radius: 22,
+    scrim: "#141210",
+    dot: !0,
+    background: (a) => C(a, ct(a.W, a.H, 0, A.bg, pt)),
+    darkBackground: (a) => C(a, ct(a.W, a.H, 0, r, 0.22)),
+    logo: (a, i, o, l, c, u, g = "start") => {
+      const p = Jt(e, Yn[String(a.H)] ?? "Post", !1);
+      if (!p) return 0;
+      const d = Le(u, "#FFFFFF") > Le(u, A.ink) ? "white" : "black",
+        b = Math.max(16, c * 0.33),
+        h = lt(p, 0, 0, c, l, u, b, d),
+        k = g === "end" ? l - h.w : g === "middle" ? (l - h.w) / 2 : 0;
+      return (C(a, lt(p, i + Math.max(0, k), o, c, l, u, b, d).svg), h.w);
+    },
+    partner: (a, i, o, l, c, u, g = "start") => {
+      (C(a, '<g data-role="unio-circle">'),
+        E(a, t.bodyBold, "Partner im UNIO CIRCLE", i, o, l, {
+          fill: c,
+          ground: u,
+          caps: !0,
+          tracking: 0.16,
+          anchor: g,
+        }),
+        C(a, "</g>"));
+    },
+  };
+}
+function ta(e) {
+  const t = e.paper,
+    n = be(e.p.ink, t, 7),
+    r = dt(e.dark, e.onDark, 7),
+    s = Le(e.onDark, r) >= 4.6 ? e.onDark : "#FFFFFF",
+    a = se(s, r, 0.28);
+  return {
+    id: "eigen",
+    head: e.head,
+    headTrack: e.headCaps ? 0.06 : -0.01,
+    headCaps: e.headCaps,
+    body: e.body,
+    bodyBold: e.bodyBold,
+    paper: t,
+    paperWorst: t,
+    ink: n,
+    muted: be(e.muted, t),
+    accent: e.accentOnPaper,
+    accentText: be(e.accentOnPaper, t),
+    dark: r,
+    darkWorst: r,
+    onDark: s,
+    mutedOnDark: Le(a, r) >= 4.6 ? a : s,
+    accentOnDark: e.accentOnDark,
+    hairline: e.hairline,
+    photoBase: se(t, n, 0.1),
+    radius: 0,
+    scrim: dt(se(e.dark, "#000000", 0.35), "#FFFFFF", 12),
+    dot: !1,
+    background: (i) => C(i, Ae(0, 0, i.W, i.H, t)),
+    darkBackground: (i) => C(i, Ae(0, 0, i.W, i.H, r)),
+    logo: (i, o, l, c, u, g, p = "start") => {
+      const d = Qt(e, {
+        x: o,
+        y: l,
+        w: c,
+        h: u,
+        ground: g,
+        align: p,
+        valign: "middle",
+        minSuffix: 9,
+      });
+      return (C(i, d.svg), d.w);
+    },
+    partner: (i, o, l, c, u, g, p = "start") => {
+      const d = X(e.body, "PARTNER IM", c, 0.16) + c * 0.62,
+        b = X(e.bodyBold, "UNIO CIRCLE", c, 0.16),
+        h = p === "middle" ? o - (d + b) / 2 : p === "end" ? o - d - b : o;
+      (C(i, '<g data-role="unio-circle">'),
+        E(i, e.body, "Partner im", h, l, c, { fill: u, ground: g, caps: !0, tracking: 0.16 }),
+        E(i, e.bodyBold, "UNIO CIRCLE", h + d, l, c, { fill: u, ground: g, tracking: 0.16 }),
+        C(i, "</g>"));
+    },
+  };
+}
+function na(e, t) {
+  return t === "unio" ? ea(e) : ta(e);
+}
+function aa(e) {
+  return e === "story" ? { y0: 220, y1: 1640 } : e === "reel" ? { y0: 250, y1: 1600 } : {};
+}
+function qe(e, t) {
+  return e === "karussell" ? Qe(t).length : 1;
+}
+function ra(e, t) {
+  if (e !== "karussell") return [Ve(e).label];
+  const n = {
+    hook: "Einstieg",
+    foto: "Foto",
+    fakten: "Kennzahlen",
+    lage: "Lage",
+    aufruf: "Aufruf",
+    wert: "Zahl",
+    einordnung: "Einordnung",
+    frage: "Frage",
+    eigenschaft: "Haltung",
+    zitat: "Zitat",
+    kontext: "Kontext",
+  };
+  return Qe(t).map((r, s) => `${s + 1}. ${n[r.kind]}`);
+}
+function bt(e, t, n, r = 0) {
+  const s = na(e, t.sel.look);
+  if (!s) return null;
+  const a = Ve(n),
+    i = mn(a.w, a.h, aa(n)),
+    o = { fr: i, L: s, fmt: n, d: t, c: Ln(t.sel, t.object) };
+  if (n === "karussell") {
+    const c = Qe(t),
+      u = Math.max(0, Math.min(c.length - 1, r));
+    Xn(o, c[u], u + 1, c.length);
+  } else zt(o);
+  const l = `${q(t.sel.occasion).label} · ${a.label}${n === "karussell" ? ` · Seite ${r + 1}` : ""}`;
+  return {
+    svg: hn(i, l),
+    W: a.w,
+    H: a.h,
+    checks: i.checks,
+    safe: i.safe,
+    usedPhotos: [...i.usedPhotos],
+    notes: [...i.notes],
+  };
+}
+function sa(e) {
+  return new Promise((t, n) => {
+    const r = new Image();
+    ((r.decoding = "async"),
+      (r.onload = () => t(r)),
+      (r.onerror = () => n(new Error("SVG konnte nicht gerastert werden"))),
+      (r.src = e));
+  });
+}
+async function ia(e, t, n, r = 0.92, s = "#FFFFFF") {
+  if (typeof document > "u") throw new Error("svgToJpeg braucht einen Browser (Canvas)");
+  const a = Math.max(1, Math.round(t)),
+    i = Math.max(1, Math.round(n)),
+    o = URL.createObjectURL(new Blob([wn(e, a, i)], { type: "image/svg+xml;charset=utf-8" }));
+  try {
+    const l = await sa(o),
+      c = document.createElement("canvas");
+    ((c.width = a), (c.height = i));
+    const u = c.getContext("2d");
+    if (!u) throw new Error("Canvas nicht verfügbar");
+    ((u.fillStyle = s),
+      u.fillRect(0, 0, a, i),
+      (u.imageSmoothingQuality = "high"),
+      u.drawImage(l, 0, 0, a, i));
+    const g = await new Promise((p) => c.toBlob(p, "image/jpeg", r));
+    if (!g) throw new Error("JPEG konnte nicht erstellt werden");
+    return g;
+  } finally {
+    URL.revokeObjectURL(o);
+  }
+}
+const oa = (e, t, n, r) => (r === "jpg" ? ia(e, t, n) : en(e, t, n));
+function la(e, t) {
+  return [
+    "BILDTEXT",
+    "",
+    e,
+    "",
+    "",
+    "DATEIEN",
+    "",
+    ...t,
+    "",
+    "Bilder in der Reihenfolge des Karussells hochladen (Dateinamen mit Nummer).",
+  ].join(`\r
+`);
+}
+async function Pt(e, t) {
+  const n = new Yt();
+  for (const r of e)
+    n.file(`${r.dir ? `${r.dir}/` : ""}${r.name}`, r.blob, { compression: "STORE", binary: !0 });
+  return (
+    n.file(
+      "bildtext.txt",
+      la(
+        t,
+        e.map((r) => `${r.dir ? `${r.dir}/` : ""}${r.name}`),
+      ),
+    ),
+    n.generateAsync({ type: "blob", mimeType: "application/zip" })
+  );
+}
+const Ue = (e, t) => qt(e, t);
+function Mt(e) {
+  const t = typeof navigator < "u" ? navigator : null;
+  if (!(t != null && t.share) || !t.canShare) return !1;
+  try {
+    return t.canShare({
+      files: e ?? [
+        new File([new Blob(["x"], { type: "image/jpeg" })], "test.jpg", { type: "image/jpeg" }),
+      ],
+    });
+  } catch {
+    return !1;
+  }
+}
+async function ca(e, t, n) {
+  const r = e.map((s) => new File([s.blob], s.name, { type: s.blob.type || "image/jpeg" }));
+  if (Mt(r))
+    try {
+      return (await navigator.share({ files: r, text: t }), "geteilt");
+    } catch (s) {
+      if ((s == null ? void 0 : s.name) === "AbortError") return "abgebrochen";
+    }
+  return (await Ue(n, await Pt(e, t)), "download");
+}
+function da(e, t, n, r, s) {
+  var o;
+  const a = qe(n, t);
+  return `${`${e}_${wt(((o = t.object) == null ? void 0 : o.title) ?? "", "")}${t.object ? "_" : ""}${t.sel.occasion}_${Ve(n).file}`.replace(/_+/g, "_").replace(/^_/, "")}${a > 1 ? `-${String(r + 1).padStart(2, "0")}` : ""}.${s}`;
+}
+const Ne = "persoenlich";
+function ua(e) {
+  var r, s, a, i, o;
+  const t = (((r = e.route) == null ? void 0 : r.texte.formate) ?? []).map((l) =>
+      l.format.toLocaleLowerCase("de-AT"),
+    ),
+    n = ["post", "karussell", "story", "quadrat", "reel"];
+  return (s = t[0]) != null && s.includes("karussell")
+    ? ["karussell", "post", "story", "quadrat", "reel"]
+    : ((a = t[0]) != null && a.includes("video")) || ((i = t[0]) != null && i.includes("reel"))
+      ? ["reel", "story", "post", "karussell", "quadrat"]
+      : (o = t[0]) != null && o.includes("story")
+        ? ["story", "post", "karussell", "quadrat", "reel"]
+        : n;
+}
+function kt(e, t) {
+  return e
+    ? e.photos
+        .filter((n) => t[n.id])
+        .map((n) => ({ id: n.id, href: t[n.id], focus: n.focus, virtual: n.virtual }))
+    : [];
+}
+function ja({ projectId: e, objekt: t, anlass: n }) {
+  var st;
+  const { state: r, navigate: s, toast: a, announce: i } = Ut(),
+    o = r.projects[e],
+    l = o.selected,
+    c = ((st = o.library) == null ? void 0 : st.objects) ?? [],
+    u = F.useId();
+  F.useEffect(() => {
+    l || s({ name: "auswahl", id: e, gemerkt: !1 }, { replace: !0 });
+  }, [l, s, e]);
+  const g = (t && c.find((m) => m.id === t)) || c[0] || null,
+    p = o.templateSet === "own" ? "eigen" : "unio",
+    [d, b] = F.useState(() => {
+      const m = Pe(g, p),
+        $ = n;
+      return $ && ut(g).includes($) ? mt(m, $) : m;
+    }),
+    h = (d.objectId && c.find((m) => m.id === d.objectId)) || null,
+    [k, x] = F.useState(null),
+    [y, v] = F.useState(null),
+    [j, B] = F.useState(!1),
+    [N, L] = F.useState(null),
+    S = F.useRef(null);
+  F.useEffect(() => {
+    var m;
+    d.objectId && !h && T(((m = c[0]) == null ? void 0 : m.id) ?? Ne);
+  }, [d.objectId, h]);
+  const T = (m) => {
+      const $ = m === Ne ? null : (c.find((W) => W.id === m) ?? null),
+        H = Pe($, d.look);
+      (b({ ...H, variant: d.variant, extras: d.extras }),
+        s({ name: "postings", id: e, ...($ ? { objekt: $.id } : {}) }, { replace: !0 }));
+    },
+    I = tn(l, o.input),
+    K = nn(d.look === "unio"),
+    ne = I && (d.look !== "unio" || K.ready),
+    _ = F.useMemo(() => Kt(o), [o]),
+    M = F.useMemo(() => (l ? an(l, o.input, _) : null), [l, o.input, _]),
+    Xe = gn((h == null ? void 0 : h.photos.map((m) => m.id)) ?? []),
+    ae = F.useMemo(
+      () =>
+        M
+          ? {
+              sel: d,
+              object: h,
+              photos: kt(h, Xe),
+              contact: pe(M).contact,
+              brandName: pe(M).brandName,
+              route: o.route,
+              portrait: _.photo,
+            }
+          : null,
+      [M, d, h, Xe, o.route, _],
+    ),
+    oe = F.useMemo(() => ua(o), [o]),
+    ye = F.useMemo(() => {
+      if (!ne || !M || !ae) return null;
+      const m = pe(M),
+        $ = oe.filter((W) => W !== "karussell");
+      return (oe[0] === "karussell" ? ["karussell", ...$] : [...$, "karussell"]).map((W) => {
+        const G = qe(W, ae),
+          le = ra(W, ae),
+          te = Array.from({ length: G }, (J, fe) => bt(m, ae, W, fe));
+        return {
+          f: W,
+          pages: te.map((J, fe) => ({
+            svg: (J == null ? void 0 : J.svg) ?? "",
+            used: (J == null ? void 0 : J.usedPhotos) ?? [],
+            label: le[fe],
+          })),
+        };
+      });
+    }, [ne, M, ae, oe]),
+    He = F.useMemo(
+      () => [...new Set((ye ?? []).flatMap((m) => m.pages.flatMap(($) => $.used)))],
+      [ye],
+    ),
+    me = jn(d, h, He),
+    $e = JSON.stringify([d, h == null ? void 0 : h.updatedAt, h == null ? void 0 : h.id]),
+    At = F.useMemo(
+      () =>
+        An({
+          sel: d,
+          object: h,
+          contact: _,
+          brandName: M ? pe(M).brandName : o.input.name,
+          route: o.route,
+          place: o.input.place,
+          usedPhotoIds: He,
+        }),
+      [d, h, _, M, o.route, o.input, He],
+    ),
+    he = (N == null ? void 0 : N.key) === $e ? N.text : At.text,
+    Ye = En(he),
+    Dt = ut(h),
+    ge = q(d.occasion),
+    et = (m) => b(($) => ({ ...$, ...m })),
+    je = (m) => b(($) => ({ ...$, options: { ...$.options, ...m } })),
+    V = (m, $) => b((H) => ({ ...H, extras: { ...H.extras, [m]: { ...H.extras[m], ...$ } } })),
+    We = async (m, $) => {
+      if (!M || !ae) return [];
+      const H = pe(M),
+        W = await pn((h == null ? void 0 : h.photos.map((te) => te.id)) ?? []),
+        G = { ...ae, photos: kt(h, W) },
+        le = [];
+      for (const te of m ? [m] : oe) {
+        const J = De.find((re) => re.id === te),
+          fe = qe(te, G);
+        for (let re = 0; re < fe; re++) {
+          if ($ !== void 0 && re !== $) continue;
+          const it = bt(H, G, te, re);
+          it &&
+            le.push({
+              name: da(H.slug, G, te, re, "jpg"),
+              dir: te === "karussell" && !m ? "karussell" : "",
+              blob: await oa(it.svg, J.w, J.h, "jpg"),
+            });
+        }
+      }
+      return le;
+    },
+    tt = () =>
+      `${wt(`${o.input.name} ${(h == null ? void 0 : h.title) ?? ""}`)}_${d.occasion}_postings.zip`,
+    Ie = () => {
+      var m;
+      return me.length
+        ? (i(`Noch nicht bereit: ${me.map(($) => $.label).join(", ")}.`, !0),
+          (m = S.current) == null || m.focus(),
+          !1)
+        : !0;
+    },
+    Fe = async () => {
+      if (!(y || !Ie())) {
+        v("zip");
+        try {
+          const m = await We();
+          (await Ue(tt(), await Pt(m, he)),
+            a("Fertig. Die ZIP-Datei mit Bildern und Bildtext liegt in deinen Downloads."));
+        } catch (m) {
+          (console.error(m),
+            a("Die Bilder konnten nicht erstellt werden. Versuch es noch einmal."));
+        } finally {
+          v(null);
+        }
+      }
+    },
+    nt = async () => {
+      if (!(y || !Ie())) {
+        v("share");
+        try {
+          const m = await We(oe[0]);
+          (await ca(m, he, tt())) === "download" &&
+            a("Teilen geht hier nicht. Wir haben die Bilder als ZIP heruntergeladen.");
+        } catch (m) {
+          (console.error(m), a("Teilen hat nicht geklappt. Lade die Bilder als ZIP herunter."));
+        } finally {
+          v(null);
+        }
+      }
+    },
+    Rt = async (m, $) => {
+      if (!(y || !Ie())) {
+        v(`${m}-${$}`);
+        try {
+          const [H] = await We(m, $);
+          H && (await Ue(H.name, H.blob));
+        } catch (H) {
+          (console.error(H), a("Dieses Bild konnte nicht erstellt werden."));
+        } finally {
+          v(null);
+        }
+      }
+    },
+    Zt = async () => {
+      try {
+        (await navigator.clipboard.writeText(he),
+          B(!0),
+          i("Bildtext kopiert."),
+          setTimeout(() => B(!1), 2e3));
+      } catch {
+        a("Kopieren ging nicht. Markier den Text und kopier ihn selbst.");
+      }
+    };
+  if (!l || !M) return null;
+  const at = Mt(),
+    rt = y === "zip" ? "Wird erstellt ..." : "Alles herunterladen";
+  return f.jsxs("div", {
+    className: "container screen ps-screen",
+    children: [
+      f.jsx("a", { className: "back-link", href: `#/p/${e}/kit`, children: "← Brand Kit" }),
+      f.jsx("div", {
+        className: "ps-head",
+        children: f.jsxs("div", {
+          children: [
+            f.jsx("h1", { className: "h1", "data-title": "Postings", children: "Postings" }),
+            f.jsx("p", {
+              className: "lead",
+              children: "Fertige Bilder und Bildtext für Instagram, Facebook und LinkedIn.",
+            }),
+          ],
+        }),
+      }),
+      f.jsxs("div", {
+        className: "ps-layout",
+        children: [
+          f.jsxs("section", {
+            className: "ps-controls",
+            "aria-label": "Einstellungen",
+            children: [
+              f.jsxs("div", {
+                className: "field",
+                children: [
+                  f.jsx("label", {
+                    className: "label field-label",
+                    htmlFor: `${u}-obj`,
+                    children: "WORUM GEHT ES?",
+                  }),
+                  f.jsxs("select", {
+                    id: `${u}-obj`,
+                    className: "input",
+                    value: (h == null ? void 0 : h.id) ?? Ne,
+                    onChange: (m) => T(m.target.value),
+                    children: [
+                      c.map((m) =>
+                        f.jsxs(
+                          "option",
+                          { value: m.id, children: [m.title, " (", sn[m.status], ")"] },
+                          m.id,
+                        ),
+                      ),
+                      f.jsx("option", { value: Ne, children: "Persönlich (ohne Objekt)" }),
+                    ],
+                  }),
+                  f.jsxs("p", {
+                    className: "field-help row",
+                    children: [
+                      h ? f.jsx(ce, { onClick: () => x("edit"), children: "Objekt ändern" }) : null,
+                      f.jsx(ce, { onClick: () => x("neu"), children: "Neues Objekt" }),
+                      f.jsx(ce, {
+                        onClick: () => s({ name: "objekte", id: e }),
+                        children: "Alle Objekte",
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+              f.jsxs("div", {
+                className: "field",
+                children: [
+                  f.jsx("span", {
+                    className: "label field-label",
+                    id: `${u}-occ`,
+                    children: "ANLASS",
+                  }),
+                  f.jsx(Vt, {
+                    labelledBy: `${u}-occ`,
+                    value: d.occasion,
+                    onChange: (m) => {
+                      (b(($) => mt($, m)),
+                        s(
+                          { name: "postings", id: e, ...(h ? { objekt: h.id } : {}), anlass: m },
+                          { replace: !0 },
+                        ));
+                    },
+                    options: Dt.map((m, $) => ({
+                      value: m,
+                      label: $ === 0 ? `${q(m).label} · Empfohlen` : q(m).label,
+                    })),
+                  }),
+                  f.jsx("p", { className: "field-help", children: ge.hint }),
+                ],
+              }),
+              f.jsxs("div", {
+                className: "field",
+                children: [
+                  f.jsx("span", {
+                    className: "label field-label",
+                    id: `${u}-look`,
+                    children: "LOOK",
+                  }),
+                  f.jsx(ot, {
+                    labelledBy: `${u}-look`,
+                    value: d.look,
+                    onChange: (m) => et({ look: m }),
+                    options: [
+                      { value: "unio", label: "UNIO-Design" },
+                      { value: "eigen", label: "Eigene Marke" },
+                    ],
+                  }),
+                  f.jsx("p", {
+                    className: "field-help",
+                    children:
+                      d.look === "unio"
+                        ? "Mit deinem Logo und dem UNIO-Zeichen."
+                        : "In deinen Farben und Schriften, mit dem Hinweis „Partner im UNIO CIRCLE“.",
+                  }),
+                ],
+              }),
+              f.jsxs("div", {
+                className: "field",
+                children: [
+                  f.jsx("span", {
+                    className: "label field-label",
+                    id: `${u}-var`,
+                    children: "GESTALTUNG",
+                  }),
+                  f.jsx(ot, {
+                    labelledBy: `${u}-var`,
+                    value: d.variant,
+                    onChange: (m) => et({ variant: m }),
+                    options: ["a", "b"].map((m) => ({ value: m, label: xn[d.occasion][m] })),
+                  }),
+                ],
+              }),
+              d.occasion === "besichtigung" &&
+                f.jsxs("fieldset", {
+                  className: "field",
+                  children: [
+                    f.jsx("legend", { className: "label field-label", children: "TERMIN" }),
+                    f.jsxs("div", {
+                      className: "ps-three",
+                      children: [
+                        f.jsx(Q, {
+                          label: "DATUM",
+                          type: "date",
+                          value: d.extras.termin.datum,
+                          onChange: (m) => V("termin", { datum: m.target.value }),
+                        }),
+                        f.jsx(Q, {
+                          label: "VON",
+                          type: "time",
+                          value: d.extras.termin.von,
+                          onChange: (m) => V("termin", { von: m.target.value }),
+                        }),
+                        f.jsx(Q, {
+                          label: "BIS",
+                          type: "time",
+                          value: d.extras.termin.bis,
+                          onChange: (m) => V("termin", { bis: m.target.value }),
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+              d.occasion === "markt" &&
+                f.jsxs("fieldset", {
+                  className: "field",
+                  children: [
+                    f.jsx("legend", { className: "label field-label", children: "ZAHLEN" }),
+                    f.jsxs("div", {
+                      className: "ps-two",
+                      children: [
+                        f.jsx(Q, {
+                          label: "REGION",
+                          placeholder: "z. B. Wien Döbling",
+                          maxLength: 60,
+                          value: d.extras.markt.region,
+                          onChange: (m) => V("markt", { region: m.target.value }),
+                        }),
+                        f.jsx(Q, {
+                          label: "ZEITRAUM",
+                          placeholder: "z. B. 3. Quartal 2026",
+                          maxLength: 40,
+                          value: d.extras.markt.zeitraum,
+                          onChange: (m) => V("markt", { zeitraum: m.target.value }),
+                        }),
+                      ],
+                    }),
+                    [0, 1, 2].map((m) => {
+                      const $ = d.extras.markt.werte[m] ?? { label: "", value: "" },
+                        H = (W) =>
+                          V("markt", {
+                            werte: [0, 1, 2]
+                              .map((G) =>
+                                G === m
+                                  ? { ...$, ...W }
+                                  : (d.extras.markt.werte[G] ?? { label: "", value: "" }),
+                              )
+                              .filter((G, le) => le <= m || G.label || G.value),
+                          });
+                      return f.jsxs(
+                        "div",
+                        {
+                          className: "ps-two",
+                          children: [
+                            f.jsx(Q, {
+                              label: `ZAHL ${m + 1}`,
+                              placeholder: m === 0 ? "z. B. € 6.850" : "Wert",
+                              maxLength: 20,
+                              value: $.value,
+                              onChange: (W) => H({ value: W.target.value }),
+                            }),
+                            f.jsx(Q, {
+                              label: "BEZEICHNUNG",
+                              placeholder: m === 0 ? "z. B. Median je m² Wohnung" : "Bezeichnung",
+                              maxLength: 70,
+                              value: $.label,
+                              onChange: (W) => H({ label: W.target.value }),
+                            }),
+                          ],
+                        },
+                        m,
+                      );
+                    }),
+                    f.jsx(Q, {
+                      label: "EINORDNUNG (EIN SATZ)",
+                      maxLength: 200,
+                      value: d.extras.markt.satz,
+                      onChange: (m) => V("markt", { satz: m.target.value }),
+                    }),
+                    f.jsx(Q, {
+                      label: "QUELLE",
+                      placeholder: "z. B. eigene Auswertung",
+                      maxLength: 80,
+                      value: d.extras.markt.quelle,
+                      onChange: (m) => V("markt", { quelle: m.target.value }),
+                      help: "Pflicht: Zahlen brauchen eine Quelle.",
+                    }),
+                  ],
+                }),
+              d.occasion === "kundenstimme" &&
+                f.jsxs("fieldset", {
+                  className: "field",
+                  children: [
+                    f.jsx("legend", { className: "label field-label", children: "ZITAT" }),
+                    f.jsxs("div", {
+                      className: "field",
+                      children: [
+                        f.jsx("label", {
+                          className: "label field-label",
+                          htmlFor: `${u}-q`,
+                          children: "WORTE DEINER KUNDEN",
+                        }),
+                        f.jsx("textarea", {
+                          id: `${u}-q`,
+                          className: "input",
+                          rows: 4,
+                          maxLength: 400,
+                          value: d.extras.stimme.text,
+                          onChange: (m) => V("stimme", { text: m.target.value }),
+                        }),
+                      ],
+                    }),
+                    f.jsx(Q, {
+                      label: "VON WEM",
+                      placeholder: "z. B. Familie K., Döbling",
+                      maxLength: 60,
+                      value: d.extras.stimme.wer,
+                      onChange: (m) => V("stimme", { wer: m.target.value }),
+                      help: "Abgekürzt genügt. Ohne vollen Namen, wenn nicht ausdrücklich gewünscht.",
+                    }),
+                    f.jsxs("label", {
+                      className: "ps-check",
+                      children: [
+                        f.jsx("input", {
+                          type: "checkbox",
+                          checked: d.extras.stimme.einwilligung,
+                          onChange: (m) => V("stimme", { einwilligung: m.target.checked }),
+                        }),
+                        f.jsx("span", {
+                          children:
+                            "Ich darf dieses Zitat veröffentlichen (Einwilligung liegt vor).",
+                        }),
+                      ],
+                    }),
+                  ],
+                }),
+              ge.needsObject &&
+                h &&
+                f.jsxs("fieldset", {
+                  className: "field ps-switches",
+                  children: [
+                    f.jsx("legend", { className: "label field-label", children: "ANGABEN" }),
+                    f.jsx(Se, {
+                      checked: d.options.showPrice,
+                      onChange: (m) => je({ showPrice: m }),
+                      children: "Preis zeigen",
+                    }),
+                    f.jsx(Se, {
+                      checked: d.options.showAddress,
+                      onChange: (m) => je({ showAddress: m }),
+                      children: "Genaue Adresse statt Lage",
+                    }),
+                    ge.energy === "optional" &&
+                      f.jsx(Se, {
+                        checked: d.options.showEnergy,
+                        onChange: (m) => je({ showEnergy: m }),
+                        children: "Energieausweis zeigen",
+                      }),
+                    h.commission.trim() &&
+                      f.jsx(Se, {
+                        checked: d.options.showCommission,
+                        onChange: (m) => je({ showCommission: m }),
+                        children: "Provision zeigen",
+                      }),
+                    (d.occasion === "verkauft" || d.occasion === "vermietet") &&
+                      (d.options.showPrice || d.options.showAddress) &&
+                      f.jsx("p", {
+                        className: "field-help",
+                        children: "Preis und Adresse nur mit Zustimmung der Eigentümer zeigen.",
+                      }),
+                  ],
+                }),
+            ],
+          }),
+          f.jsxs("section", {
+            className: "ps-result",
+            "aria-label": "Vorschau und Download",
+            children: [
+              f.jsx("div", {
+                ref: S,
+                tabIndex: -1,
+                className: me.length ? "inline-note ps-blocks" : "ps-blocks is-ok",
+                "aria-live": "polite",
+                children: me.length
+                  ? f.jsxs(f.Fragment, {
+                      children: [
+                        f.jsx("p", {
+                          children: f.jsx("strong", {
+                            children: "Noch nicht bereit zum Herunterladen.",
+                          }),
+                        }),
+                        f.jsx("ul", {
+                          children: me.map((m) =>
+                            f.jsxs(
+                              "li",
+                              {
+                                children: [
+                                  f.jsxs("strong", { children: [m.label, ":"] }),
+                                  " ",
+                                  m.text,
+                                ],
+                              },
+                              m.label,
+                            ),
+                          ),
+                        }),
+                        h && f.jsx(Be, { onClick: () => x("edit"), children: "Objekt ergänzen" }),
+                        !h &&
+                          ge.needsObject &&
+                          f.jsx(Be, { onClick: () => x("neu"), children: "Objekt anlegen" }),
+                      ],
+                    })
+                  : null,
+              }),
+              f.jsx("div", {
+                className: "ps-previews",
+                children: ye
+                  ? ye.map((m) => {
+                      const $ = De.find((H) => H.id === m.f);
+                      return f.jsxs(
+                        "figure",
+                        {
+                          className: `ps-prev is-${m.f}`,
+                          children: [
+                            f.jsxs("figcaption", {
+                              children: [
+                                f.jsx("span", { className: "ps-prev-title", children: $.label }),
+                                f.jsx("span", {
+                                  className: "small",
+                                  children:
+                                    m.f === "karussell"
+                                      ? `${m.pages.length} Bilder · ${$.use}`
+                                      : $.use,
+                                }),
+                              ],
+                            }),
+                            f.jsx("div", {
+                              className: m.f === "karussell" ? "ps-strip" : "ps-single",
+                              tabIndex: m.f === "karussell" ? 0 : void 0,
+                              "aria-label":
+                                m.f === "karussell" ? "Karussell, seitlich wischen" : void 0,
+                              children: m.pages.map((H, W) =>
+                                f.jsxs(
+                                  "div",
+                                  {
+                                    className: "ps-img",
+                                    children: [
+                                      f.jsx("div", {
+                                        className: "mock-svg",
+                                        role: "img",
+                                        "aria-label": `${ge.label}, ${$.label}${m.pages.length > 1 ? `, ${H.label}` : ""}`,
+                                        dangerouslySetInnerHTML: { __html: rn(H.svg) },
+                                      }),
+                                      f.jsx(ce, {
+                                        className: "ps-one",
+                                        onClick: () => Rt(m.f, W),
+                                        "aria-label": `${$.label}${m.pages.length > 1 ? ` ${H.label}` : ""} herunterladen`,
+                                        "aria-disabled": !!y || void 0,
+                                        children:
+                                          y === `${m.f}-${W}`
+                                            ? "Wird erstellt ..."
+                                            : m.pages.length > 1
+                                              ? `${W + 1} laden`
+                                              : "Bild laden",
+                                      }),
+                                    ],
+                                  },
+                                  W,
+                                ),
+                              ),
+                            }),
+                          ],
+                        },
+                        m.f,
+                      );
+                    })
+                  : oe.map((m) =>
+                      f.jsx(
+                        "div",
+                        { className: `ps-prev is-${m} riffel skeleton`, style: { minHeight: 280 } },
+                        m,
+                      ),
+                    ),
+              }),
+              K.error &&
+                d.look === "unio" &&
+                f.jsx("p", {
+                  className: "small",
+                  children: "Die UNIO-Schriften konnten nicht geladen werden. Lade die Seite neu.",
+                }),
+              f.jsxs("div", {
+                className: "field ps-caption",
+                children: [
+                  f.jsxs("div", {
+                    className: "ps-caption-head",
+                    children: [
+                      f.jsx("label", {
+                        className: "label field-label",
+                        htmlFor: `${u}-cap`,
+                        children: "BILDTEXT UND HASHTAGS",
+                      }),
+                      f.jsx(ce, { onClick: Zt, children: j ? "Kopiert" : "Kopieren" }),
+                    ],
+                  }),
+                  f.jsx("textarea", {
+                    id: `${u}-cap`,
+                    className: "input",
+                    rows: 12,
+                    value: he,
+                    onChange: (m) => L({ key: $e, text: m.target.value }),
+                  }),
+                  f.jsxs("p", {
+                    className: "field-help",
+                    children: [
+                      Ye.length
+                        ? `Bitte prüfen: ${Ye.join(", ")}.`
+                        : (N == null ? void 0 : N.key) === $e
+                          ? "Deine Änderungen gelten für dieses Posting."
+                          : o.route
+                            ? "Aus deiner Markenrichtung und den Objektangaben. Du kannst alles ändern."
+                            : "Aus den Objektangaben. Du kannst alles ändern.",
+                      " ",
+                      (N == null ? void 0 : N.key) === $e &&
+                        f.jsx(ce, {
+                          onClick: () => L(null),
+                          children: "Vorschlag wiederherstellen",
+                        }),
+                    ],
+                  }),
+                ],
+              }),
+              f.jsxs("div", {
+                className: "actions ps-actions desk-flex",
+                children: [
+                  f.jsx(ze, {
+                    onClick: Fe,
+                    busy: y === "zip",
+                    "aria-describedby": `${u}-zipnote`,
+                    children: rt,
+                  }),
+                  at &&
+                    f.jsx(Be, {
+                      onClick: nt,
+                      children: y === "share" ? "Wird vorbereitet ..." : "Teilen",
+                    }),
+                ],
+              }),
+              f.jsx("p", {
+                className: "small",
+                id: `${u}-zipnote`,
+                children: "ZIP mit allen Bildern als JPEG und bildtext.txt.",
+              }),
+            ],
+          }),
+        ],
+      }),
+      f.jsx(fn, {
+        open: !!k,
+        object: k === "edit" ? h : null,
+        project: o,
+        onClose: () => x(null),
+        onSaved: (m) => {
+          k === "neu" &&
+            (b({ ...Pe(m, d.look), variant: d.variant, extras: d.extras }),
+            s({ name: "postings", id: e, objekt: m.id }, { replace: !0 }));
+        },
+      }),
+      f.jsx(Gt, {
+        children: at
+          ? f.jsxs(f.Fragment, {
+              children: [
+                f.jsx(Be, { onClick: Fe, children: "ZIP" }),
+                f.jsx(ze, {
+                  onClick: nt,
+                  busy: y === "share",
+                  children: y === "share" ? "Wird vorbereitet ..." : "Teilen",
+                }),
+              ],
+            })
+          : f.jsx(ze, { onClick: Fe, busy: y === "zip", children: rt }),
+      }),
+    ],
+  });
+}
+export { ja as default };

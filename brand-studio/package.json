@@ -1,0 +1,56 @@
+{
+  "name": "unio-brand-studio",
+  "private": true,
+  "version": "0.6.0",
+  "type": "module",
+  "description": "UNIO Brand Studio (Wiederaufbau aus der gebauten Fassung vom 27.10.2026)",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
+    "recovered:pretty": "prettier --write --print-width 100 \"recovered/pretty/*.{js,css}\"",
+    "recovered:instrument": "node recovered/harness/instrument.mjs",
+    "recovered:extract": "node recovered/harness/extract-data.mjs",
+    "recovered:fonts": "node recovered/harness/copy-fonts.mjs",
+    "golden": "node recovered/harness/golden.mjs",
+    "golden:check": "node recovered/harness/golden.mjs --check"
+  },
+  "dependencies": {
+    "jspdf": "4.2.1",
+    "jszip": "3.10.1",
+    "opentype.js": "1.3.4",
+    "polygon-clipping": "0.15.7",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "svg2pdf.js": "2.8.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/opentype.js": "1.3.8",
+    "@types/react": "18.3.32",
+    "@types/react-dom": "18.3.7",
+    "@vitejs/plugin-react": "4.7.0",
+    "acorn": "8.15.0",
+    "acorn-walk": "8.3.4",
+    "astring": "1.9.0",
+    "jsdom": "25.0.1",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3",
+    "vite": "5.4.21",
+    "vitest": "2.1.9"
+  },
+  "overrides": {
+    "canvg": "3.0.11",
+    "core-js": "3.50.0",
+    "dompurify": "3.4.17",
+    "html2canvas": "1.4.1"
+  }
+}

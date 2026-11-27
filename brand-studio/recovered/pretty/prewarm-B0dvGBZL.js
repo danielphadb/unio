@@ -1,0 +1,95 @@
+import { w as h, x as b, y, g as x, z as d, A as C } from "./kitAssets-CN7deWlx.js";
+import "./svg-CrwnZnJY.js";
+import "./index-BER2gtDe.js";
+const f = 1200,
+  I = 200,
+  k = ["pointerdown", "keydown", "wheel", "touchstart", "scroll"];
+let l = 0;
+const m = new Set();
+let w = !1;
+function g() {
+  if (w || typeof window > "u") return;
+  w = !0;
+  const r = () => {
+    l = performance.now();
+    for (const n of m) n();
+  };
+  for (const n of k) window.addEventListener(n, r, { capture: !0, passive: !0 });
+}
+const v = (r) => /^image\/|^application\/pdf/.test(r.mime) && r.path !== "LIESMICH.txt";
+function M(r) {
+  return new Promise((n) => {
+    const o = () => {
+      if (r.aborted) return n(!1);
+      const s = f - (performance.now() - l);
+      if (s > 0) return void window.setTimeout(o, s + 20);
+      const c = window,
+        i = () => {
+          var t, a;
+          if (r.aborted) return n(!1);
+          if (
+            (((a = (t = navigator.scheduling) == null ? void 0 : t.isInputPending) == null
+              ? void 0
+              : a.call(t)) ??
+              !1) ||
+            performance.now() - l < f
+          )
+            return void window.setTimeout(o, 100);
+          n(!0);
+        };
+      c.requestIdleCallback ? c.requestIdleCallback(i, { timeout: 1e3 }) : window.setTimeout(i, 50);
+    };
+    o();
+  });
+}
+async function E(r, n, o) {
+  if (await h()) return b(r, { ...n, signal: o });
+  g();
+  let s;
+  try {
+    s = await y(n.unio);
+  } catch {
+    return;
+  }
+  const c = s
+    .map((e) => {
+      let t = [];
+      try {
+        t = x([e], r, n.includeContact).filter(v);
+      } catch {
+        t = [];
+      }
+      return {
+        d: e,
+        plans: t,
+        max: Math.max(0, ...t.map(d)),
+        sum: t.reduce((a, u) => a + d(u), 0),
+      };
+    })
+    .filter((e) => e.plans.length)
+    .sort((e, t) => e.max - t.max || e.sum - t.sum);
+  let i = 0;
+  for (const e of c) {
+    if (o.aborted) return;
+    if (i && e.max * i > I) continue;
+    if (!(await M(o))) return;
+    const t = new AbortController(),
+      a = () => t.abort();
+    (o.addEventListener("abort", a), m.add(a));
+    const u = performance.now();
+    try {
+      await C([e.d], r, { includeContact: n.includeContact, signal: t.signal });
+    } catch {
+    } finally {
+      try {
+        performance.measure(`zip:prewarm:${e.d.id}`, { start: u, end: performance.now() });
+      } catch {}
+      (m.delete(a), o.removeEventListener("abort", a));
+    }
+    if (!t.signal.aborted && e.sum > 0) {
+      const p = (performance.now() - u) / e.sum;
+      i = Math.max(i * 0.7, p);
+    }
+  }
+}
+export { E as p };

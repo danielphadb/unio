@@ -1,0 +1,66 @@
+import { p as i, a as n } from "./index-BER2gtDe.js";
+const l = {
+    inline: "Symbol links",
+    stacked: "Symbol oben",
+    wordmark: "Nur Schriftzug",
+    badge: "Emblem",
+  },
+  o = { serif: "Serif", sans: "Grotesk", display: "Display", script: "Schreibschrift" },
+  h = {
+    haus: "Haus",
+    dach: "Dach",
+    schluessel: "Schlüssel",
+    tuer: "Tür & Fenster",
+    stadt: "Stadt",
+    natur: "Natur",
+    initialen: "Initialen",
+    abstrakt: "Abstrakt",
+  },
+  b = ["initialen", "abstrakt", "natur"],
+  f = ["haus", "dach", "schluessel", "tuer", "stadt"],
+  y = [
+    { key: "elegant", title: "Zeitlos-elegant", desc: "Klassisch, ruhig, vertrauensvoll." },
+    { key: "modern", title: "Modern-klar", desc: "Reduziert, sachlich, präzise." },
+    { key: "luxus", title: "Luxus", desc: "Exklusiv und edel, für Premium-Objekte." },
+    { key: "warm", title: "Warm-nahbar", desc: "Freundlich, persönlich, offen." },
+    { key: "mutig", title: "Mutig-urban", desc: "Kräftig, selbstbewusst, städtisch." },
+    { key: "natur", title: "Natürlich-regional", desc: "Bodenständig, ländlich, verwurzelt." },
+  ],
+  k = { title: "Überrasch mich", desc: "Bunt gemischt aus allen Stilen." };
+function u(t) {
+  var a;
+  if (!t.symbol || t.layout === "wordmark") return "ohne Symbol";
+  if (t.symbol.kind === "monogram") return `Initialen ${t.symbol.letters}`;
+  const e = t.symbol.id;
+  return ((a = i.find((s) => s.id === e)) == null ? void 0 : a.label) ?? "Symbol";
+}
+function m(t) {
+  try {
+    return o[n(t.name.font.key).cat] ?? "Grotesk";
+  } catch {
+    return "Grotesk";
+  }
+}
+function S(t) {
+  try {
+    return n(t).family;
+  } catch {
+    return t;
+  }
+}
+const c = {
+  full: "Vor- und Nachname",
+  upper: "In Versalien",
+  surname: "Nachname und Zusatz",
+  stacked: "Zweizeilig",
+  initial: "Initial und Nachname",
+  monogram: "Monogramm",
+  district: "Mit Bezirk",
+};
+function g(t, e) {
+  const a = e ? `Logo-Konzept ${e}` : "Dein Logo",
+    s = t.symbol && t.layout !== "wordmark" ? `Symbol ${u(t)}` : "nur Schriftzug",
+    r = t.nameFormat && t.nameFormat !== "full" ? `, Namensform ${c[t.nameFormat]}` : "";
+  return `${a}: ${s}, Schrift ${m(t)}, Farben ${t.palette.name}, ${l[t.layout]}${r}.`;
+}
+export { l as L, k as M, c as N, b as Q, y as S, h as T, f as a, g as d, S as f };
