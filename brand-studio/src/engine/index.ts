@@ -25,3 +25,4 @@ export * from "./taste";
 export * from "./recipes";
 export { cleanText } from "./cleanText";
 export * from "./nameCardSet";
+export * from "./kompassProbe";
